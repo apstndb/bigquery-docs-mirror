@@ -90,30 +90,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create the remote model
 
@@ -125,14 +119,12 @@ Create a remote model that represents a hosted Vertex AI model:
 
 <!-- end list -->
 
-``` notranslate
-CREATE OR REPLACE MODEL `bqml_tutorial.gemma_model`
-  REMOTE WITH CONNECTION DEFAULT
-  OPTIONS (
-    MODEL_GARDEN_MODEL_NAME = 'publishers/google/models/gemma3@gemma-3-270m-it',
-    MACHINE_TYPE = 'g2-standard-12'
-  );
-```
+    CREATE OR REPLACE MODEL `bqml_tutorial.gemma_model`
+      REMOTE WITH CONNECTION DEFAULT
+      OPTIONS (
+        MODEL_GARDEN_MODEL_NAME = 'publishers/google/models/gemma3@gemma-3-270m-it',
+        MACHINE_TYPE = 'g2-standard-12'
+      );
 
 The query takes up to 20 minutes to complete, after which the `gemma_model` model appears in the `bqml_tutorial` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -144,25 +136,23 @@ Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 2.  In the query editor, enter the following statement to perform keyword extraction on 10 movie reviews:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `bqml_tutorial.gemma_model`,
-        (
-          SELECT
-            'Extract the key words from the movie review below: ' || review
-              AS prompt,
-            *
-          FROM
-            `bigquery-public-data.imdb.reviews`
-          LIMIT 10
-        ),
-        STRUCT(
-          0.2 AS temperature,
-          100 AS max_output_tokens));
-    ```
+        SELECT
+          *
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `bqml_tutorial.gemma_model`,
+            (
+              SELECT
+                'Extract the key words from the movie review below: ' || review
+                  AS prompt,
+                *
+              FROM
+                `bigquery-public-data.imdb.reviews`
+              LIMIT 10
+            ),
+            STRUCT(
+              0.2 AS temperature,
+              100 AS max_output_tokens));
     
     The output is similar to the following, with non-generated columns omitted for clarity:
     
@@ -201,25 +191,23 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 2.  In the query editor, run the following statement to perform sentiment analysis on 10 movie reviews:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `bqml_tutorial.gemma_model`,
-        (
-          SELECT
-            'Analyze the sentiment of the following movie review and classify it as either POSITIVE or NEGATIVE. \nMovie Review: '
-              || review AS prompt,
-            *
-          FROM
-            `bigquery-public-data.imdb.reviews`
-          LIMIT 10
-        ),
-        STRUCT(
-          0.2 AS temperature,
-          128 AS max_output_tokens));
-    ```
+        SELECT
+          *
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `bqml_tutorial.gemma_model`,
+            (
+              SELECT
+                'Analyze the sentiment of the following movie review and classify it as either POSITIVE or NEGATIVE. \nMovie Review: '
+                  || review AS prompt,
+                *
+              FROM
+                `bigquery-public-data.imdb.reviews`
+              LIMIT 10
+            ),
+            STRUCT(
+              0.2 AS temperature,
+              128 AS max_output_tokens));
     
     The output is similar to the following, with non-generated columns omitted for clarity:
     
@@ -249,10 +237,8 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 If you choose not to [delete your project as recommended](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma#clean_up) , you must undeploy the Gemma model in Vertex AI to avoid continued billing for it. BigQuery automatically undeploys the model after a specified period of idleness (6.5 hours by default). Alternatively, you can immediately undeploy the model by using the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) , as shown in the following example:
 
-``` notranslate
-ALTER MODEL `bqml_tutorial.gemma_model`
-SET OPTIONS (deploy_model = false);
-```
+    ALTER MODEL `bqml_tutorial.gemma_model`
+    SET OPTIONS (deploy_model = false);
 
 For more information, see [Automatic or immediate open model undeployment](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-model-undeployment) .
 

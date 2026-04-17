@@ -299,15 +299,13 @@ Add Salesforce data into BigQuery by setting up a transfer configuration using o
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-``` notranslate
-bq mk
-    --transfer_config
-    --project_id=PROJECT_ID
-    --data_source=DATA_SOURCE
-    --display_name=NAME
-    --target_dataset=DATASET
-    --params='PARAMETERS'
-```
+    bq mk
+        --transfer_config
+        --project_id=PROJECT_ID
+        --data_source=DATA_SOURCE
+        --display_name=NAME
+        --target_dataset=DATASET
+        --params='PARAMETERS'
 
 Where:
 
@@ -324,7 +322,7 @@ Where:
       - `connector.authentication.oauth.clientId` : the Consumer Key of the Salesforce connected application.
       - `connector.authentication.oauth.clientSecret` : OAuth Client Secret or Consumer Secret of the Salesforce connected application.
       - `connector.authentication.oauth.myDomain` : the [Salesforce My Domain](https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm) . For example, if your domain URL is `example.my.salesforce.com` , then the value is `example` .
-      - `ingestionType` : specify either `FULL` or `INCREMENTAL` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#full_or_incremental_transfers) .
+      - `ingestionType` : specify either `full` or `incremental` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#full_or_incremental_transfers) .
       - `writeMode` : specify either `WRITE_MODE_APPEND` or `WRITE_MODE_UPSERT` .
       - `watermarkColumns` : specify columns in your table as watermark columns. This field is required for incremental transfers.
       - `primaryKeys` : specify columns in your table as primary keys. This field is required for incremental transfers.
@@ -332,7 +330,7 @@ Where:
 
 When specifying multiple assets during an incremental transfer, the values of the `watermarkColumns` and `primaryKeys` fields correspond to the position of values in the `assets` field. In the following example, `Id` corresponds to the table `Account` , while `master_label` and `type` corresponds to the table `CaseHistory` .
 
-``` notranslate
+``` 
       "primaryKeys":[['Id'], ['master_label','type']],
       "assets":["Account","CaseHistory"],
   
@@ -340,23 +338,21 @@ When specifying multiple assets during an incremental transfer, the values of th
 
 The following command creates an incremental Salesforce data transfer in the default project, and uses the `APPEND` write mode.
 
-``` notranslate
-bq mk
-    --transfer_config
-    --target_dataset=mydataset
-    --data_source=salesforce
-    --display_name='My Transfer'
-    --params='{"assets": ["Account", "CaseHistory"]
-        "connector.authentication.oauth.clientId": "1234567890",
-        "connector.authentication.oauth.clientSecret":"ABC12345",
-        "connector.authentication.oauth.myDomain":"MyDomainName",
-        "connector.authentication.username":"user1@force.com",
-        "connector.authentication.password":"abcdef1234",
-        "ingestionType":"incremental",
-        "writeMode":"WRITE_MODE_UPSERT",
-        "watermarkColumns":["SystemModstamp","CreatedDate"]
-        "primaryKeys":[['Id'], ['master_label','type']]}'
-```
+    bq mk
+        --transfer_config
+        --target_dataset=mydataset
+        --data_source=salesforce
+        --display_name='My Transfer'
+        --params='{"assets": ["Account", "CaseHistory"]
+            "connector.authentication.oauth.clientId": "1234567890",
+            "connector.authentication.oauth.clientSecret":"ABC12345",
+            "connector.authentication.oauth.myDomain":"MyDomainName",
+            "connector.authentication.username":"user1@force.com",
+            "connector.authentication.password":"abcdef1234",
+            "ingestionType":"incremental",
+            "writeMode":"WRITE_MODE_UPSERT",
+            "watermarkColumns":["SystemModstamp","CreatedDate"]
+            "primaryKeys":[['Id'], ['master_label','type']]}'
 
 ### API
 

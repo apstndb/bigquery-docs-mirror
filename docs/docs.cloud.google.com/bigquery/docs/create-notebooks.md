@@ -14,17 +14,14 @@ For more information about BigQuery Identity and Access Management (IAM), see [A
 
 #### Permissions to create notebooks
 
-To get the permissions that you need to create and run notebooks, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to create and run notebooks, ask your administrator to grant you the following IAM roles on the project:
 
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [BigQuery Studio User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioUser) ( `roles/bigquery.studioUser` )
 
-  - [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` )
-    
-    The BigQuery Studio User role combines the following IAM roles:
-    
-      - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-      - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
-      - [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `roles/dataform.codeCreator` )
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 > **Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
 
@@ -82,21 +79,23 @@ Use the following sections to learn how to create a notebook.
 
 ### Set the default region for code assets
 
-If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
+All new code assets in your Google Cloud project use a default region. After the asset is created, you can't change its region.
 
-> **Note:** If you create a notebook and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that notebook and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+> **Important:** If you change the region while creating a code asset, that region becomes the default for all subsequent code assets. Existing code assets are not affected.
 
-All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
+To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, find the project in which you have enabled code assets.
+2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Click more\_vert **View actions** next to the project, and then click **Change my default code region** .
+3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
 
-4.  For **Region** , select the region that you want to use for code assets.
+4.  Select the code region that you want to use as a default.
 
-5.  Click **Select** .
+5.  Click **Save** .
 
 For a list of supported regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
 

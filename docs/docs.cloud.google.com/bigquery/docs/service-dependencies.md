@@ -277,8 +277,8 @@ You must manually enable the following services for the corresponding capabiliti
 <li><a href="https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads">Schedule workloads</a></li>
 </ul></td>
 <td><ul>
-<li>Existing Cloud Composer DAGs aren't listed on the Scheduling page and stop.</li>
-<li>Existing Cloud Composer environments become inoperative, stop working, and return an error state.</li>
+<li>Existing Managed Service for Apache Airflow DAGs aren't listed on the Scheduling page and stop.</li>
+<li>Existing Managed Airflow environments become inoperative, stop working, and return an error state.</li>
 </ul></td>
 </tr>
 <tr class="odd">

@@ -75,12 +75,10 @@ Replace the following:
 
 The following example retrieves the routine options for all routines in `mydataset` in your default project ( `myproject` ) by querying the `INFORMATION_SCHEMA.ROUTINE_OPTIONS` view:
 
-``` notranslate
-SELECT
-  *
-FROM
-  mydataset.INFORMATION_SCHEMA.ROUTINE_OPTIONS;
-```
+    SELECT
+      *
+    FROM
+      mydataset.INFORMATION_SCHEMA.ROUTINE_OPTIONS;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

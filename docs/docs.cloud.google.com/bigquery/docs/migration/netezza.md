@@ -103,10 +103,8 @@ In secure erase mode, you don't need an authentication key or password to decryp
 
 Netezza uses symmetric encryption; if your data is field-level encrypted, the following decrypt function can help you to read and export data:
 
-``` notranslate
-varchar = decrypt(varchar text, varchar key [, int algorithm [, varchar IV]]);
-nvarchar = decrypt(nvarchar text, nvarchar key [, int algorithm[, varchar IV]]);
-```
+    varchar = decrypt(varchar text, varchar key [, int algorithm [, varchar IV]]);
+    nvarchar = decrypt(nvarchar text, nvarchar key [, int algorithm[, varchar IV]]);
 
 All data stored within BigQuery is encrypted at rest. If you want to control encryption yourself, you can use customer-managed encryption keys (CMEK) for BigQuery. With CMEK, instead of Google managing the key encryption keys that protect your data, you control and manage key encryption keys in [Cloud Key Management Service](https://docs.cloud.google.com/kms/docs) . For more information, see [Encryption at rest](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) .
 
@@ -204,22 +202,20 @@ GoogleSQL supports compliance with the SQL 2011 standard and has extensions that
 
 Netezza treats the days in a month as 31. The following custom UDF recreates the Netezza function with close accuracy, which you can call from your queries:
 
-``` notranslate
-CREATE TEMP FUNCTION months_between(date_1 DATE, date_2 DATE)
-AS (
-  CASE
-    WHEN date_1 = date_2
-      THEN 0
-    WHEN EXTRACT(DAY FROM DATE_ADD(date_1, INTERVAL 1 DAY)) = 1
-      AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
-      THEN date_diff(date_1,date_2, MONTH)
-    WHEN EXTRACT(DAY FROM date_1) = 1
-      AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
-      THEN date_diff(DATE_ADD(date_1, INTERVAL -1 DAY), date_2, MONTH) + 1/31
-    ELSE date_diff(date_1, date_2, MONTH) - 1 + ((EXTRACT(DAY FROM date_1) + (31 - EXTRACT(DAY FROM date_2))) / 31)
-    END
-);
-```
+    CREATE TEMP FUNCTION months_between(date_1 DATE, date_2 DATE)
+    AS (
+      CASE
+        WHEN date_1 = date_2
+          THEN 0
+        WHEN EXTRACT(DAY FROM DATE_ADD(date_1, INTERVAL 1 DAY)) = 1
+          AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
+          THEN date_diff(date_1,date_2, MONTH)
+        WHEN EXTRACT(DAY FROM date_1) = 1
+          AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
+          THEN date_diff(DATE_ADD(date_1, INTERVAL -1 DAY), date_2, MONTH) + 1/31
+        ELSE date_diff(date_1, date_2, MONTH) - 1 + ((EXTRACT(DAY FROM date_1) + (31 - EXTRACT(DAY FROM date_2))) / 31)
+        END
+    );
 
 #### Migrate Netezza stored procedures
 
@@ -229,10 +225,8 @@ If you use Netezza stored procedures in ETL workloads to construct fact tables, 
 
 The following custom UDF for BigQuery corrects encoding errors in columns:
 
-``` notranslate
-CREATE TEMP FUNCTION ascii(X STRING)
-AS (TO_CODE_POINTS(x)[ OFFSET (0)]);
-```
+    CREATE TEMP FUNCTION ascii(X STRING)
+    AS (TO_CODE_POINTS(x)[ OFFSET (0)]);
 
 ## What's next
 

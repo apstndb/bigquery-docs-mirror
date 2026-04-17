@@ -63,7 +63,7 @@ You can optionally visualize the function output by using [Vertex AI model monit
 
   - `visualization_link` : a URL that links to a Vertex AI visualization of the results for the given feature. The URL is formatted as follows:
     
-    ``` console
+    ```console
     https://console.cloud.google.com/vertex-ai/model-monitoring/locations/region/model-monitors/vertex_model_monitor_id/model-monitoring-jobs/vertex_model_monitoring_job_id/feature-drift?project=project_id&featureName=feature_name
     ```
     
@@ -83,14 +83,12 @@ The following examples show how to use the `ML.VALIDATE_DATA_DRIFT` function.
 
 The following example computes data drift between a snapshot of the serving data table and the current serving data table, with a categorical feature threshold of `0.2` :
 
-``` notranslate
-SELECT *
-FROM ML.VALIDATE_DATA_DRIFT(
-  TABLE `myproject.mydataset.previous_serving_data`,
-  TABLE `myproject.mydataset.serving`,
-  STRUCT(0.2 AS categorical_default_threshold)
-);
-```
+    SELECT *
+    FROM ML.VALIDATE_DATA_DRIFT(
+      TABLE `myproject.mydataset.previous_serving_data`,
+      TABLE `myproject.mydataset.serving`,
+      STRUCT(0.2 AS categorical_default_threshold)
+    );
 
 The output looks similar to the following:
 
@@ -106,15 +104,13 @@ The output looks similar to the following:
 
 The following example computes data drift between a snapshot of the serving data table and the current serving data table, with a categorical feature threshold of `0.2` :
 
-``` notranslate
-SELECT *
-FROM ML.VALIDATE_DATA_DRIFT(
-  TABLE `myproject.mydataset.previous_serving_data`,
-  TABLE `myproject.mydataset.serving`,
-  STRUCT(0.2 AS categorical_default_threshold),
-  MODEL `myproject.mydataset.registered_model`
-);
-```
+    SELECT *
+    FROM ML.VALIDATE_DATA_DRIFT(
+      TABLE `myproject.mydataset.previous_serving_data`,
+      TABLE `myproject.mydataset.serving`,
+      STRUCT(0.2 AS categorical_default_threshold),
+      MODEL `myproject.mydataset.registered_model`
+    );
 
 The output looks similar to the following:
 

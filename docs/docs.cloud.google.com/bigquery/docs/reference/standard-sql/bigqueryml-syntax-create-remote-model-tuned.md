@@ -17,7 +17,7 @@ After you create a tuned model, use the [`EVALUATE` function](https://docs.cloud
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}

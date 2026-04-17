@@ -336,16 +336,14 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_BY_FOLDER `` .
 
 The following query displays the job ID, creation time, and state ( `PENDING` , `RUNNING` , or `DONE` ) of all interactive jobs in the designated project's folder:
 
-``` notranslate
-SELECT
-  job_id,
-  creation_time,
-  state
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_FOLDER
-WHERE
-  priority = 'INTERACTIVE';
-```
+    SELECT
+      job_id,
+      creation_time,
+      state
+    FROM
+      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_FOLDER
+    WHERE
+      priority = 'INTERACTIVE';
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

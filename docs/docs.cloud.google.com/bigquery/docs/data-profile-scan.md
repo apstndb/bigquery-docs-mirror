@@ -71,6 +71,7 @@ To ensure that the Knowledge Catalog service account has the necessary permissio
   - Run data profile scans for BigQuery external tables that use Cloud Storage data:
       - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on Cloud Storage bucket
       - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `roles/storage.legacyBucketReader` ) on Cloud Storage bucket
+  - Run data profile scans for Iceberg REST Catalog tables on Google Cloud Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on Iceberg Rest Catalog tables being scanned
   - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -147,7 +148,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
 
 5.  Optional: Enter a **Description** .
 
-6.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** .
+6.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** . Only standard BigQuery and Iceberg REST Catalog tables are supported.
     
     For tables in multi-region datasets, choose a region where to create the data scan.
     

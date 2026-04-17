@@ -162,7 +162,7 @@ Enter the `bq mk` command and supply the transfer creation flag — `--transfer_
 
 <!-- end list -->
 
-``` notranslate
+``` 
   bq mk --transfer_config \
   --project_id=PROJECT_ID \
   --target_dataset=DATASET \
@@ -183,7 +183,7 @@ For example, the following command creates a Google Analytics 4 data transfer na
 
 The data transfer is created in the default project:
 
-``` notranslate
+``` 
   bq mk --transfer_config
   --project_id=your_project
   --target_dataset=mydataset

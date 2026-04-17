@@ -6,19 +6,15 @@ This document describes how to load data into partitioned tables.
 
 You can load data to a specific partition by using the [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command with a partition decorator. The following example appends data into the `20160501` (May 1, 2016) partition of an existing table, assuming the table is already partitioned by date:
 
-``` notranslate
-bq load --source_format=CSV 'my_dataset.my_table$20160501' data.csv
-```
+    bq load --source_format=CSV 'my_dataset.my_table$20160501' data.csv
 
 You can also write the results of a query to a specific partition:
 
-``` notranslate
-bq query \
-  --use_legacy_sql=false  \
-  --destination_table='my_table$20160501' \
-  --append_table=true \
-  'SELECT * FROM my_dataset.another_table'
-```
+    bq query \
+      --use_legacy_sql=false  \
+      --destination_table='my_table$20160501' \
+      --append_table=true \
+      'SELECT * FROM my_dataset.another_table'
 
 With ingestion-time partitioning, you can use this technique to load older data into the partition that corresponds to the time when the data was originally created.
 

@@ -8,7 +8,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -824,39 +824,35 @@ For information about supported locations, see [Locations for non-remote models]
 
 The following example trains a boosted trees classifier model against `'mytable'` with `'mylabel'` as the label column.
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
-OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
-        BOOSTER_TYPE = 'GBTREE',
-        NUM_PARALLEL_TREE = 1,
-        MAX_ITERATIONS = 50,
-        TREE_METHOD = 'HIST',
-        EARLY_STOP = FALSE,
-        SUBSAMPLE = 0.85,
-        INPUT_LABEL_COLS = ['mylabel'])
-AS SELECT * FROM `project_id.mydataset.mytable`;
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+    OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
+            BOOSTER_TYPE = 'GBTREE',
+            NUM_PARALLEL_TREE = 1,
+            MAX_ITERATIONS = 50,
+            TREE_METHOD = 'HIST',
+            EARLY_STOP = FALSE,
+            SUBSAMPLE = 0.85,
+            INPUT_LABEL_COLS = ['mylabel'])
+    AS SELECT * FROM `project_id.mydataset.mytable`;
 
 ### Train a boosted trees regression model with hyperparameter tuning
 
 The following example creates and trains a boosted trees regression model. It uses hyperparameter tuning to improve model performance.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='BOOSTED_TREE_REGRESSOR',
-    num_trials=10,
-    max_parallel_trials=2,
-    HPARAM_TUNING_OBJECTIVES=['R2_SCORE'] ) AS
-SELECT
-  column1,
-  column2,
-  column3,
-  label
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='BOOSTED_TREE_REGRESSOR',
+        num_trials=10,
+        max_parallel_trials=2,
+        HPARAM_TUNING_OBJECTIVES=['R2_SCORE'] ) AS
+    SELECT
+      column1,
+      column2,
+      column3,
+      label
+    FROM
+      `mydataset.mytable`
 
 ## Supported regions
 

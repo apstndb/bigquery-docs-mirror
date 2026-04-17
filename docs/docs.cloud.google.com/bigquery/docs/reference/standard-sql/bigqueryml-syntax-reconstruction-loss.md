@@ -4,7 +4,7 @@ This document describes the `ML.RECONSTRUCTION_LOSS` function, which you can use
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.RECONSTRUCTION_LOSS(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }
@@ -47,17 +47,15 @@ ML.RECONSTRUCTION_LOSS(
 
 The following query computes reconstruction losses for the model `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT *
-FROM ML.RECONSTRUCTION_LOSS(
-  MODEL `mydataset.mymodel`,
-  (SELECT column1,
-          column2,
-          column3,
-          column4
-   FROM `mydataset.mytable`)
-)
-```
+    SELECT *
+    FROM ML.RECONSTRUCTION_LOSS(
+      MODEL `mydataset.mymodel`,
+      (SELECT column1,
+              column2,
+              column3,
+              column4
+       FROM `mydataset.mytable`)
+    )
 
 ## What's next
 

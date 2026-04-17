@@ -69,30 +69,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Prepare the training data
 
@@ -109,44 +103,42 @@ The new table has daily data from August 11, 2009 to January 31, 2022.
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE TABLE `bqml_tutorial.seattle_air_quality_daily`
-    AS
-    WITH
-      pm25_daily AS (
+        CREATE TABLE `bqml_tutorial.seattle_air_quality_daily`
+        AS
+        WITH
+          pm25_daily AS (
+            SELECT
+              avg(arithmetic_mean) AS pm25, date_local AS date
+            FROM
+              `bigquery-public-data.epa_historical_air_quality.pm25_nonfrm_daily_summary`
+            WHERE
+              city_name = 'Seattle'
+              AND parameter_name = 'Acceptable PM2.5 AQI & Speciation Mass'
+            GROUP BY date_local
+          ),
+          wind_speed_daily AS (
+            SELECT
+              avg(arithmetic_mean) AS wind_speed, date_local AS date
+            FROM
+              `bigquery-public-data.epa_historical_air_quality.wind_daily_summary`
+            WHERE
+              city_name = 'Seattle' AND parameter_name = 'Wind Speed - Resultant'
+            GROUP BY date_local
+          ),
+          temperature_daily AS (
+            SELECT
+              avg(first_max_value) AS temperature, date_local AS date
+            FROM
+              `bigquery-public-data.epa_historical_air_quality.temperature_daily_summary`
+            WHERE
+              city_name = 'Seattle' AND parameter_name = 'Outdoor Temperature'
+            GROUP BY date_local
+          )
         SELECT
-          avg(arithmetic_mean) AS pm25, date_local AS date
-        FROM
-          `bigquery-public-data.epa_historical_air_quality.pm25_nonfrm_daily_summary`
-        WHERE
-          city_name = 'Seattle'
-          AND parameter_name = 'Acceptable PM2.5 AQI & Speciation Mass'
-        GROUP BY date_local
-      ),
-      wind_speed_daily AS (
-        SELECT
-          avg(arithmetic_mean) AS wind_speed, date_local AS date
-        FROM
-          `bigquery-public-data.epa_historical_air_quality.wind_daily_summary`
-        WHERE
-          city_name = 'Seattle' AND parameter_name = 'Wind Speed - Resultant'
-        GROUP BY date_local
-      ),
-      temperature_daily AS (
-        SELECT
-          avg(first_max_value) AS temperature, date_local AS date
-        FROM
-          `bigquery-public-data.epa_historical_air_quality.temperature_daily_summary`
-        WHERE
-          city_name = 'Seattle' AND parameter_name = 'Outdoor Temperature'
-        GROUP BY date_local
-      )
-    SELECT
-      pm25_daily.date AS date, pm25, wind_speed, temperature
-    FROM pm25_daily
-    JOIN wind_speed_daily USING (date)
-    JOIN temperature_daily USING (date)
-    ```
+          pm25_daily.date AS date, pm25, wind_speed, temperature
+        FROM pm25_daily
+        JOIN wind_speed_daily USING (date)
+        JOIN temperature_daily USING (date)
 
 ## Create the model
 
@@ -156,22 +148,20 @@ Create a multivariate time series model, using the data from `bqml_tutorial.seat
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.arimax_model`
-      OPTIONS (
-        model_type = 'ARIMA_PLUS_XREG',
-        auto_arima=TRUE,
-        time_series_data_col = 'temperature',
-        time_series_timestamp_col = 'date'
-        )
-    AS
-    SELECT
-      *
-    FROM
-      `bqml_tutorial.seattle_air_quality_daily`
-    WHERE
-      date < "2023-02-01";
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.arimax_model`
+          OPTIONS (
+            model_type = 'ARIMA_PLUS_XREG',
+            auto_arima=TRUE,
+            time_series_data_col = 'temperature',
+            time_series_timestamp_col = 'date'
+            )
+        AS
+        SELECT
+          *
+        FROM
+          `bqml_tutorial.seattle_air_quality_daily`
+        WHERE
+          date < "2023-02-01";
     
     The query takes several seconds to complete, after which the model `arimax_model` appears in the `bqml_tutorial` dataset and can be accessed in the **Explorer** pane.
     
@@ -185,17 +175,15 @@ Run anomaly detection against the historical data that you used to train the mod
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.DETECT_ANOMALIES (
-       MODEL `bqml_tutorial.arimax_model`,
-       STRUCT(0.6 AS anomaly_prob_threshold)
-      )
-    ORDER BY
-      date ASC;
-    ```
+        SELECT
+          *
+        FROM
+          ML.DETECT_ANOMALIES (
+           MODEL `bqml_tutorial.arimax_model`,
+           STRUCT(0.6 AS anomaly_prob_threshold)
+          )
+        ORDER BY
+          date ASC;
     
     The results look similar to the following:
     
@@ -217,35 +205,33 @@ Run anomaly detection on the new data that you generate.
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.DETECT_ANOMALIES (
-       MODEL `bqml_tutorial.arimax_model`,
-       STRUCT(0.6 AS anomaly_prob_threshold),
-       (
-         SELECT
-           *
-         FROM
-           UNNEST(
-             [
-               STRUCT<date TIMESTAMP, pm25 FLOAT64, wind_speed FLOAT64, temperature FLOAT64>
-               ('2023-02-01 00:00:00 UTC', 8.8166665, 1.6525, 44.0),
-               ('2023-02-02 00:00:00 UTC', 11.8354165, 1.558333, 40.5),
-               ('2023-02-03 00:00:00 UTC', 10.1395835, 1.6895835, 46.5),
-               ('2023-02-04 00:00:00 UTC', 11.439583500000001, 2.0854165, 45.0),
-               ('2023-02-05 00:00:00 UTC', 9.7208335, 1.7083335, 46.0),
-               ('2023-02-06 00:00:00 UTC', 13.3020835, 2.23125, 43.5),
-               ('2023-02-07 00:00:00 UTC', 5.7229165, 2.377083, 47.5),
-               ('2023-02-08 00:00:00 UTC', 7.6291665, 2.24375, 44.5),
-               ('2023-02-09 00:00:00 UTC', 8.5208335, 2.2541665, 40.5),
-               ('2023-02-10 00:00:00 UTC', 9.9086955, 7.333335, 39.5)
-             ]
-           )
-         )
-       );
-    ```
+        SELECT
+          *
+        FROM
+          ML.DETECT_ANOMALIES (
+           MODEL `bqml_tutorial.arimax_model`,
+           STRUCT(0.6 AS anomaly_prob_threshold),
+           (
+             SELECT
+               *
+             FROM
+               UNNEST(
+                 [
+                   STRUCT<date TIMESTAMP, pm25 FLOAT64, wind_speed FLOAT64, temperature FLOAT64>
+                   ('2023-02-01 00:00:00 UTC', 8.8166665, 1.6525, 44.0),
+                   ('2023-02-02 00:00:00 UTC', 11.8354165, 1.558333, 40.5),
+                   ('2023-02-03 00:00:00 UTC', 10.1395835, 1.6895835, 46.5),
+                   ('2023-02-04 00:00:00 UTC', 11.439583500000001, 2.0854165, 45.0),
+                   ('2023-02-05 00:00:00 UTC', 9.7208335, 1.7083335, 46.0),
+                   ('2023-02-06 00:00:00 UTC', 13.3020835, 2.23125, 43.5),
+                   ('2023-02-07 00:00:00 UTC', 5.7229165, 2.377083, 47.5),
+                   ('2023-02-08 00:00:00 UTC', 7.6291665, 2.24375, 44.5),
+                   ('2023-02-09 00:00:00 UTC', 8.5208335, 2.2541665, 40.5),
+                   ('2023-02-10 00:00:00 UTC', 9.9086955, 7.333335, 39.5)
+                 ]
+               )
+             )
+           );
     
     The results look similar to the following:
     

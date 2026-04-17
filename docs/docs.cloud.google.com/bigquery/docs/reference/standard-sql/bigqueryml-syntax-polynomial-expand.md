@@ -9,7 +9,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.POLYNOMIAL_EXPAND(struct_numerical_features [, degree])
 ```
 
@@ -28,14 +28,12 @@ ML.POLYNOMIAL_EXPAND(struct_numerical_features [, degree])
 
 The following example calculates the polynomial expansion of two numerical features:
 
-``` notranslate
-SELECT
-  ML.POLYNOMIAL_EXPAND(STRUCT(2 AS f1, 3 AS f2)) AS output;
-```
+    SELECT
+      ML.POLYNOMIAL_EXPAND(STRUCT(2 AS f1, 3 AS f2)) AS output;
 
 The output looks similar to the following:
 
-``` console
+```console
 +-------------------------------------------------------------------+
 |                              output                               |
 +-------------------------------------------------------------------+

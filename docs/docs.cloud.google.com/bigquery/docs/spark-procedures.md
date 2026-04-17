@@ -313,9 +313,7 @@ To call a stored procedure, use the [`CALL PROCEDURE` statement](https://docs.cl
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CALL `PROJECT_ID`.DATASET.PROCEDURE_NAME()
-    ```
+        CALL `PROJECT_ID`.DATASET.PROCEDURE_NAME()
 
 3.  Click play\_circle **Run** .
 
@@ -391,64 +389,56 @@ The following example shows how to create a stored procedure for Spark by using 
 
 ### Python
 
-``` notranslate
-CREATE PROCEDURE my_bq_project.my_dataset.spark_proc()
-WITH CONNECTION `my-project-id.us.my-connection`
-OPTIONS(engine="SPARK", runtime_version="2.2", main_file_uri="gs://my-bucket/my-pyspark-main.py")
-LANGUAGE PYTHON
-```
+    CREATE PROCEDURE my_bq_project.my_dataset.spark_proc()
+    WITH CONNECTION `my-project-id.us.my-connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2", main_file_uri="gs://my-bucket/my-pyspark-main.py")
+    LANGUAGE PYTHON
 
 ### Java or Scala
 
 Use `main_file_uri` to create a stored procedure:
 
-``` notranslate
-CREATE PROCEDURE my_bq_project.my_dataset.scala_proc_wtih_main_jar()
-WITH CONNECTION `my-project-id.us.my-connection`
-OPTIONS(engine="SPARK", runtime_version="2.2", main_file_uri="gs://my-bucket/my-scala-main.jar")
-LANGUAGE SCALA
-```
+    CREATE PROCEDURE my_bq_project.my_dataset.scala_proc_wtih_main_jar()
+    WITH CONNECTION `my-project-id.us.my-connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2", main_file_uri="gs://my-bucket/my-scala-main.jar")
+    LANGUAGE SCALA
 
 Use `main_class` to create a stored procedure:
 
-``` notranslate
-CREATE PROCEDURE my_bq_project.my_dataset.scala_proc_with_main_class()
-WITH CONNECTION `my-project-id.us.my-connection`
-OPTIONS(engine="SPARK", runtime_version="2.2",
-main_class="com.example.wordcount", jar_uris=["gs://my-bucket/wordcount.jar"])
-LANGUAGE SCALA
-```
+    CREATE PROCEDURE my_bq_project.my_dataset.scala_proc_with_main_class()
+    WITH CONNECTION `my-project-id.us.my-connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2",
+    main_class="com.example.wordcount", jar_uris=["gs://my-bucket/wordcount.jar"])
+    LANGUAGE SCALA
 
 ### Use inline code
 
 The following example shows how to create a stored procedure for Spark by using the connection `my-project-id.us.my-connection` and inline PySpark code:
 
-``` notranslate
-CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc()
-WITH CONNECTION `my-project-id.us.my-connection`
-OPTIONS(engine="SPARK", runtime_version="2.2")
-LANGUAGE PYTHON AS R"""
-from pyspark.sql import SparkSession
-
-spark = SparkSession.builder.appName("spark-bigquery-demo").getOrCreate()
-
-# Load data from BigQuery.
-words = spark.read.format("bigquery") \
-  .option("table", "bigquery-public-data:samples.shakespeare") \
-  .load()
-words.createOrReplaceTempView("words")
-
-# Perform word count.
-word_count = words.select('word', 'word_count').groupBy('word').sum('word_count').withColumnRenamed("sum(word_count)", "sum_word_count")
-word_count.show()
-word_count.printSchema()
-
-# Saving the data to BigQuery
-word_count.write.format("bigquery") \
-  .option("writeMethod", "direct") \
-  .save("wordcount_dataset.wordcount_output")
-"""
-```
+    CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc()
+    WITH CONNECTION `my-project-id.us.my-connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2")
+    LANGUAGE PYTHON AS R"""
+    from pyspark.sql import SparkSession
+    
+    spark = SparkSession.builder.appName("spark-bigquery-demo").getOrCreate()
+    
+    # Load data from BigQuery.
+    words = spark.read.format("bigquery") \
+      .option("table", "bigquery-public-data:samples.shakespeare") \
+      .load()
+    words.createOrReplaceTempView("words")
+    
+    # Perform word count.
+    word_count = words.select('word', 'word_count').groupBy('word').sum('word_count').withColumnRenamed("sum(word_count)", "sum_word_count")
+    word_count.show()
+    word_count.printSchema()
+    
+    # Saving the data to BigQuery
+    word_count.write.format("bigquery") \
+      .option("writeMethod", "direct") \
+      .save("wordcount_dataset.wordcount_output")
+    """
 
 ### Pass a value as an input parameter
 
@@ -460,23 +450,21 @@ In the PySpark code, you can obtain the input parameters of the stored procedure
 
 The following example shows how to get the value of an input parameter of type `INT64` into your PySpark code:
 
-``` notranslate
-CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc(num INT64)
-WITH CONNECTION `my-project-id.us.my-connection`
-OPTIONS(engine="SPARK", runtime_version="2.2")
-LANGUAGE PYTHON AS R"""
-from pyspark.sql import SparkSession
-import os
-import json
-
-spark = SparkSession.builder.appName("spark-bigquery-demo").getOrCreate()
-sc = spark.sparkContext
-
-# Get the input parameter num in JSON string and convert to a Python variable
-num = int(json.loads(os.environ["BIGQUERY_PROC_PARAM.num"]))
-
-"""
-```
+    CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc(num INT64)
+    WITH CONNECTION `my-project-id.us.my-connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2")
+    LANGUAGE PYTHON AS R"""
+    from pyspark.sql import SparkSession
+    import os
+    import json
+    
+    spark = SparkSession.builder.appName("spark-bigquery-demo").getOrCreate()
+    sc = spark.sparkContext
+    
+    # Get the input parameter num in JSON string and convert to a Python variable
+    num = int(json.loads(os.environ["BIGQUERY_PROC_PARAM.num"]))
+    
+    """
 
 #### Method 2: Use a built-in library
 
@@ -503,35 +491,33 @@ In the PySpark code, you can simply import a built-in library and use it to popu
 
 The following example shows how to import the built-in library and use it to populate an input parameter of type INT64 and an input parameter of type ARRAY\<STRUCT\<a INT64, b STRING\>\> into your PySpark code:
 
-``` notranslate
-CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc(num INT64, info ARRAY<STRUCT<a INT64, b STRING>>)
-WITH CONNECTION `my-project-id.us.my-connection`
-OPTIONS(engine="SPARK", runtime_version="2.2")
-LANGUAGE PYTHON AS R"""
-from pyspark.sql import SparkSession
-from bigquery.spark.procedure import SparkProcParamContext
-
-def check_in_param(x, num):
-  return x['a'] + num
-
-def main():
-  spark = SparkSession.builder.appName("spark-bigquery-demo").getOrCreate()
-  sc=spark.sparkContext
-  spark_proc_param_context = SparkProcParamContext.getOrCreate(spark)
-
-  # Get the input parameter num of type INT64
-  num = spark_proc_param_context.num
-
-  # Get the input parameter info of type ARRAY<STRUCT<a INT64, b STRING>>
-  info = spark_proc_param_context.info
-
-  # Pass the parameter to executors
-  df = sc.parallelize(info)
-  value = df.map(lambda x : check_in_param(x, num)).sum()
-
-main()
-"""
-```
+    CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc(num INT64, info ARRAY<STRUCT<a INT64, b STRING>>)
+    WITH CONNECTION `my-project-id.us.my-connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2")
+    LANGUAGE PYTHON AS R"""
+    from pyspark.sql import SparkSession
+    from bigquery.spark.procedure import SparkProcParamContext
+    
+    def check_in_param(x, num):
+      return x['a'] + num
+    
+    def main():
+      spark = SparkSession.builder.appName("spark-bigquery-demo").getOrCreate()
+      sc=spark.sparkContext
+      spark_proc_param_context = SparkProcParamContext.getOrCreate(spark)
+    
+      # Get the input parameter num of type INT64
+      num = spark_proc_param_context.num
+    
+      # Get the input parameter info of type ARRAY<STRUCT<a INT64, b STRING>>
+      info = spark_proc_param_context.info
+    
+      # Pass the parameter to executors
+      df = sc.parallelize(info)
+      value = df.map(lambda x : check_in_param(x, num)).sum()
+    
+    main()
+    """
 
 In the Java or Scala code, you can obtain the input parameters of the stored procedure for Spark through environment variables in the Spark driver and executors. The name of the environment variable has the format of `BIGQUERY_PROC_PARAM.PARAMETER_NAME` , where `PARAMETER_NAME` is the name of the input parameter. For example, if the name of the input parameter is var, the name of the corresponding environment variable is `BIGQUERY_PROC_PARAM.var` . In your Java or Scala code, you can get the input parameter value from the environment variable.
 
@@ -547,66 +533,62 @@ The following example shows getting input parameters from environment variables 
 
 Output parameters return the value from the Spark procedure, whereas the `INOUT` parameter accepts a value for the procedure and returns a value from the procedure. To use the `OUT` and `INOUT` parameters, add the `OUT` or `INOUT` keyword before the parameter name when creating the Spark procedure. In the PySpark code, you use the built-in library to return a value as an `OUT` or an `INOUT` parameter. Same as input parameters, the built-in library supports most of the BigQuery data types except `INTERVAL` , `GEOGRAPHY` , `NUMERIC` , and `BIGNUMERIC` . The `TIME` and `DATETIME` type values are converted to the UTC timezone when returning as the `OUT` or `INOUT` parameters.
 
-``` notranslate
-CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.pyspark_proc(IN int INT64, INOUT datetime DATETIME,OUT b BOOL, OUT info ARRAY<STRUCT<a INT64, b STRING>>, OUT time TIME, OUT f FLOAT64, OUT bs BYTES, OUT date DATE, OUT ts TIMESTAMP, OUT js JSON)
-WITH CONNECTION `my_bq_project.my_dataset.my_connection`
-OPTIONS(engine="SPARK", runtime_version="2.2") LANGUAGE PYTHON AS
-R"""
-from pyspark.sql.session import SparkSession
-import datetime
-from bigquery.spark.procedure import SparkProcParamContext
-
-spark = SparkSession.builder.appName("bigquery-pyspark-demo").getOrCreate()
-spark_proc_param_context = SparkProcParamContext.getOrCreate(spark)
-
-# Reading the IN and INOUT parameter values.
-int = spark_proc_param_context.int
-dt = spark_proc_param_context.datetime
-print("IN parameter value: ", int, ", INOUT parameter value: ", dt)
-
-# Returning the value of the OUT and INOUT parameters.
-spark_proc_param_context.datetime = datetime.datetime(1970, 1, 1, 0, 20, 0, 2, tzinfo=datetime.timezone.utc)
-spark_proc_param_context.b = True
-spark_proc_param_context.info = [{"a":2, "b":"dd"}, {"a":2, "b":"dd"}]
-spark_proc_param_context.time = datetime.time(23, 20, 50, 520000)
-spark_proc_param_context.f = 20.23
-spark_proc_param_context.bs = b"hello"
-spark_proc_param_context.date = datetime.date(1985, 4, 12)
-spark_proc_param_context.ts = datetime.datetime(1970, 1, 1, 0, 20, 0, 2, tzinfo=datetime.timezone.utc)
-spark_proc_param_context.js = {"name": "Alice", "age": 30}
-""";
-```
+    CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.pyspark_proc(IN int INT64, INOUT datetime DATETIME,OUT b BOOL, OUT info ARRAY<STRUCT<a INT64, b STRING>>, OUT time TIME, OUT f FLOAT64, OUT bs BYTES, OUT date DATE, OUT ts TIMESTAMP, OUT js JSON)
+    WITH CONNECTION `my_bq_project.my_dataset.my_connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2") LANGUAGE PYTHON AS
+    R"""
+    from pyspark.sql.session import SparkSession
+    import datetime
+    from bigquery.spark.procedure import SparkProcParamContext
+    
+    spark = SparkSession.builder.appName("bigquery-pyspark-demo").getOrCreate()
+    spark_proc_param_context = SparkProcParamContext.getOrCreate(spark)
+    
+    # Reading the IN and INOUT parameter values.
+    int = spark_proc_param_context.int
+    dt = spark_proc_param_context.datetime
+    print("IN parameter value: ", int, ", INOUT parameter value: ", dt)
+    
+    # Returning the value of the OUT and INOUT parameters.
+    spark_proc_param_context.datetime = datetime.datetime(1970, 1, 1, 0, 20, 0, 2, tzinfo=datetime.timezone.utc)
+    spark_proc_param_context.b = True
+    spark_proc_param_context.info = [{"a":2, "b":"dd"}, {"a":2, "b":"dd"}]
+    spark_proc_param_context.time = datetime.time(23, 20, 50, 520000)
+    spark_proc_param_context.f = 20.23
+    spark_proc_param_context.bs = b"hello"
+    spark_proc_param_context.date = datetime.date(1985, 4, 12)
+    spark_proc_param_context.ts = datetime.datetime(1970, 1, 1, 0, 20, 0, 2, tzinfo=datetime.timezone.utc)
+    spark_proc_param_context.js = {"name": "Alice", "age": 30}
+    """;
 
 ### Read from a Hive Metastore table and write results to BigQuery
 
 The following example shows how to transform a Hive Metastore table and write the results to BigQuery:
 
-``` notranslate
-CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc()
-WITH CONNECTION `my-project-id.us.my-connection`
-OPTIONS(engine="SPARK", runtime_version="2.2")
-LANGUAGE PYTHON AS R"""
-from pyspark.sql import SparkSession
-
-spark = SparkSession \
-   .builder \
-   .appName("Python Spark SQL Managed Service for Apache Spark Hive Metastore integration test example") \
-   .enableHiveSupport() \
-   .getOrCreate()
-
-spark.sql("CREATE DATABASE IF NOT EXISTS records")
-
-spark.sql("CREATE TABLE IF NOT EXISTS records.student (eid int, name String, score int)")
-
-spark.sql("INSERT INTO records.student VALUES (1000000, 'AlicesChen', 10000)")
-
-df = spark.sql("SELECT * FROM records.student")
-
-df.write.format("bigquery") \
-  .option("writeMethod", "direct") \
-  .save("records_dataset.student")
-"""
-```
+    CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc()
+    WITH CONNECTION `my-project-id.us.my-connection`
+    OPTIONS(engine="SPARK", runtime_version="2.2")
+    LANGUAGE PYTHON AS R"""
+    from pyspark.sql import SparkSession
+    
+    spark = SparkSession \
+       .builder \
+       .appName("Python Spark SQL Managed Service for Apache Spark Hive Metastore integration test example") \
+       .enableHiveSupport() \
+       .getOrCreate()
+    
+    spark.sql("CREATE DATABASE IF NOT EXISTS records")
+    
+    spark.sql("CREATE TABLE IF NOT EXISTS records.student (eid int, name String, score int)")
+    
+    spark.sql("INSERT INTO records.student VALUES (1000000, 'AlicesChen', 10000)")
+    
+    df = spark.sql("SELECT * FROM records.student")
+    
+    df.write.format("bigquery") \
+      .option("writeMethod", "direct") \
+      .save("records_dataset.student")
+    """
 
 ## View log filters
 

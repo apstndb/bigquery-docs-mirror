@@ -44,17 +44,15 @@ Formulate your Spanner query in either GoogleSQL or PostgreSQL, depending on the
 
 The following example makes a federated query to a Spanner database named `orders` and joins the results with a BigQuery table named `mydataset.customers` .
 
-``` notranslate
-SELECT c.customer_id, c.name, rq.first_order_date
-FROM mydataset.customers AS c
-LEFT OUTER JOIN EXTERNAL_QUERY(
-  'my-project.us.example-db',
-  '''SELECT customer_id, MIN(order_date) AS first_order_date
-  FROM orders
-  GROUP BY customer_id''') AS rq
-  ON rq.customer_id = c.customer_id
-GROUP BY c.customer_id, c.name, rq.first_order_date;
-```
+    SELECT c.customer_id, c.name, rq.first_order_date
+    FROM mydataset.customers AS c
+    LEFT OUTER JOIN EXTERNAL_QUERY(
+      'my-project.us.example-db',
+      '''SELECT customer_id, MIN(order_date) AS first_order_date
+      FROM orders
+      GROUP BY customer_id''') AS rq
+      ON rq.customer_id = c.customer_id
+    GROUP BY c.customer_id, c.name, rq.first_order_date;
 
 ## Spanner Data Boost
 
@@ -88,15 +86,13 @@ To enable parallel reads when using the [`EXTERNAL_QUERY`](https://docs.cloud.go
 
 When you run federated queries with an `EXTERNAL_QUERY` function, you can assign priority ( `high` , `medium` , or `low` ) to individual queries by specifying the `query_execution_priority` option:
 
-``` notranslate
-SELECT *
-FROM EXTERNAL_QUERY(
-  'my-project.us.example-db',
-  '''SELECT customer_id, MIN(order_date) AS first_order_date
-  FROM orders
-  GROUP BY customer_id''',
-  '{"query_execution_priority":"high"}');
-```
+    SELECT *
+    FROM EXTERNAL_QUERY(
+      'my-project.us.example-db',
+      '''SELECT customer_id, MIN(order_date) AS first_order_date
+      FROM orders
+      GROUP BY customer_id''',
+      '{"query_execution_priority":"high"}');
 
 The default priority is `medium` .
 
@@ -114,32 +110,28 @@ However, you can also see the schemas without defining external datasets. You ca
 
 ### Google SQL database
 
-``` notranslate
-SELECT *
-FROM EXTERNAL_QUERY(
-  'my-project.us.example-db',
-  '''SELECT t.column_name, t.spanner_type, t.is_nullable
-    FROM information_schema.columns AS t
-    WHERE
-      t.table_catalog = ''
-      AND t.table_schema = ''
-     AND t.table_name = 'MyTable'
-    ORDER BY t.ordinal_position
-  ''');
-```
+    SELECT *
+    FROM EXTERNAL_QUERY(
+      'my-project.us.example-db',
+      '''SELECT t.column_name, t.spanner_type, t.is_nullable
+        FROM information_schema.columns AS t
+        WHERE
+          t.table_catalog = ''
+          AND t.table_schema = ''
+         AND t.table_name = 'MyTable'
+        ORDER BY t.ordinal_position
+      ''');
 
 ### PostgreSQL database
 
-``` notranslate
-SELECT * from EXTERNAL_QUERY(
- 'my-project.us.postgresql.example-db',
-  '''SELECT t.column_name, t.data_type, t.is_nullable
-    FROM information_schema.columns AS t
-    WHERE
-      t.table_schema = 'public' and t.table_name='MyTable'
-    ORDER BY t.ordinal_position
-  ''');
-```
+    SELECT * from EXTERNAL_QUERY(
+     'my-project.us.postgresql.example-db',
+      '''SELECT t.column_name, t.data_type, t.is_nullable
+        FROM information_schema.columns AS t
+        WHERE
+          t.table_schema = 'public' and t.table_name='MyTable'
+        ORDER BY t.ordinal_position
+      ''');
 
 For more information, see the following information schema references in the Spanner documentation:
 

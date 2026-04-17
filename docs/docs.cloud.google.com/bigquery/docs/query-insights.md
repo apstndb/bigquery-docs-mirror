@@ -99,38 +99,36 @@ For any query that has performance regression issues, performance insights are a
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      `bigquery-public-data`.persistent_udfs.job_url(
-        project_id || ':us.' || job_id) AS job_url,
-      query_info.performance_insights
-    FROM
-      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE
-      DATE(creation_time) >= CURRENT_DATE - 30 -- scan 30 days of query history
-      AND job_type = 'QUERY'
-      AND state = 'DONE'
-      AND error_result IS NULL
-      AND statement_type != 'SCRIPT'
-      AND EXISTS ( -- Only include queries which had performance insights
-        SELECT 1
-        FROM UNNEST(
-          query_info.performance_insights.stage_performance_standalone_insights
-        )
+        SELECT
+          `bigquery-public-data`.persistent_udfs.job_url(
+            project_id || ':us.' || job_id) AS job_url,
+          query_info.performance_insights
+        FROM
+          `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
         WHERE
-          slot_contention
-          OR insufficient_shuffle_quota
-          OR bi_engine_reasons IS NOT NULL
-          OR high_cardinality_joins IS NOT NULL
-          OR partition_skew IS NOT NULL
-        UNION ALL
-        SELECT 1
-        FROM UNNEST(
-          query_info.performance_insights.stage_performance_change_insights
-        )
-        WHERE input_data_change.records_read_diff_percentage IS NOT NULL
-      );
-    ```
+          DATE(creation_time) >= CURRENT_DATE - 30 -- scan 30 days of query history
+          AND job_type = 'QUERY'
+          AND state = 'DONE'
+          AND error_result IS NULL
+          AND statement_type != 'SCRIPT'
+          AND EXISTS ( -- Only include queries which had performance insights
+            SELECT 1
+            FROM UNNEST(
+              query_info.performance_insights.stage_performance_standalone_insights
+            )
+            WHERE
+              slot_contention
+              OR insufficient_shuffle_quota
+              OR bi_engine_reasons IS NOT NULL
+              OR high_cardinality_joins IS NOT NULL
+              OR partition_skew IS NOT NULL
+            UNION ALL
+            SELECT 1
+            FROM UNNEST(
+              query_info.performance_insights.stage_performance_change_insights
+            )
+            WHERE input_data_change.records_read_diff_percentage IS NOT NULL
+          );
 
 3.  Click play\_circle **Run** .
 

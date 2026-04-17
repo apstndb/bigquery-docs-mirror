@@ -77,38 +77,32 @@ The following datasets store additional objects:
 
 Using BigQuery Omni, you can run ad-hoc queries to analyze the Data Cloud data through the subscribed dataset. The following example shows a simple query that queries the customers table from Data Cloud.
 
-``` notranslate
-SELECT name__c, age__c
-  FROM `listing_nto_john.nto_customers__dll`
-  WHERE age > 40
-  LIMIT 1000;
-```
+    SELECT name__c, age__c
+      FROM `listing_nto_john.nto_customers__dll`
+      WHERE age > 40
+      LIMIT 1000;
 
 ### Run cross-cloud queries
 
 Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](https://docs.cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `john` .
 
-``` notranslate
--- Get combined sales for a customer from both offline and online sales
-USING (
-  SELECT total_price FROM `listing_nto_john.nto_orders__dll`
-       WHERE customer_name = 'john'
-  UNION ALL
-  SELECT total_price FROM `listing_nto_john.nto_orders__dll`
-       WHERE customer_name = 'john'
-) a SELECT SUM(total_price);
-```
+    -- Get combined sales for a customer from both offline and online sales
+    USING (
+      SELECT total_price FROM `listing_nto_john.nto_orders__dll`
+           WHERE customer_name = 'john'
+      UNION ALL
+      SELECT total_price FROM `listing_nto_john.nto_orders__dll`
+           WHERE customer_name = 'john'
+    ) a SELECT SUM(total_price);
 
 ### Cross Cloud Data Transfer through CTAS
 
 You can use Create Table As Select (CTAS) to move data from Data Cloud tables in the BigQuery Omni region to the `US` region.
 
-``` notranslate
--- Move all the orders for March to the US region
-CREATE OR REPLACE TABLE us_data.online_orders_march
-  AS SELECT * FROM listing_nto_john.nto_orders__dll
-    WHERE EXTRACT(MONTH FROM order_time) = 3
-```
+    -- Move all the orders for March to the US region
+    CREATE OR REPLACE TABLE us_data.online_orders_march
+      AS SELECT * FROM listing_nto_john.nto_orders__dll
+        WHERE EXTRACT(MONTH FROM order_time) = 3
 
 The destination table is a BigQuery managed table in the `US` region. This table can be joined with other tables. This operation incurs AWS egress costs based on how much data is transferred.
 
@@ -124,15 +118,13 @@ You can access CCMVs from Ads Data Hub and join it with other Ads Data Hub data.
 
 To create a local materialized view:
 
-``` notranslate
--- Create a local materialized view that keeps track of total sales by day
-
-CREATE MATERIALIZED VIEW `aws_data.total_sales`
-  OPTIONS (enable_refresh = true, refresh_interval_minutes = 60)
-  AS SELECT EXTRACT(DAY FROM order_time) AS date, SUM(order_total) as sales
-    FROM `listing_nto_john.nto_orders__dll`
-    GROUP BY 1;
-```
+    -- Create a local materialized view that keeps track of total sales by day
+    
+    CREATE MATERIALIZED VIEW `aws_data.total_sales`
+      OPTIONS (enable_refresh = true, refresh_interval_minutes = 60)
+      AS SELECT EXTRACT(DAY FROM order_time) AS date, SUM(order_total) as sales
+        FROM `listing_nto_john.nto_orders__dll`
+        GROUP BY 1;
 
 #### Authorize the materialized view
 
@@ -150,24 +142,20 @@ You must authorize materialized views to create a CCMV. You can either authorize
 
 Create a new replica materialized view in the `US` region. The materialized view periodically replicates whenever there is a source data change to keep the replica up to date.
 
-``` notranslate
--- Create a replica MV in the us region.
-CREATE MATERIALIZED VIEW `us_data.total_sales_replica`
-  AS REPLICA OF `aws_data.total_sales`;
-```
+    -- Create a replica MV in the us region.
+    CREATE MATERIALIZED VIEW `us_data.total_sales_replica`
+      AS REPLICA OF `aws_data.total_sales`;
 
 #### Run a query on a replica materialized view
 
 The following example runs a query on a replica materialized view:
 
-``` notranslate
--- Find total sales for the current month for the dashboard
-
-SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
-  FROM us_data.total_sales_replica
-  WHERE month = EXTRACT(MONTH FROM date)
-  GROUP BY 1
-```
+    -- Find total sales for the current month for the dashboard
+    
+    SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
+      FROM us_data.total_sales_replica
+      WHERE month = EXTRACT(MONTH FROM date)
+      GROUP BY 1
 
 ## Using Data Cloud data with `INFORMATION_SCHEMA`
 

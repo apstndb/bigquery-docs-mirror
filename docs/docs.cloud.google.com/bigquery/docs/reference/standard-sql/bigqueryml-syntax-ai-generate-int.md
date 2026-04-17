@@ -153,7 +153,7 @@ To determine the population of each city, you can call the `AI.GENERATE_INT` fun
 
 The result is similar to the following:
 
-``` console
+```console
 +---------+----------+
 | city    | result   |
 +---------+----------+

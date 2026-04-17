@@ -10,25 +10,21 @@ In BigQuery, you can use the [`REGEXP_CONTAINS`](https://docs.cloud.google.com/b
 
 Consider the following use of the `REGEXP_CONTAINS` function:
 
-``` notranslate
-SELECT
-  dim1
-FROM
-  `dataset.table1`
-WHERE
-  REGEXP_CONTAINS(dim1, '.*test.*');
-```
+    SELECT
+      dim1
+    FROM
+      `dataset.table1`
+    WHERE
+      REGEXP_CONTAINS(dim1, '.*test.*');
 
 You can optimize this query as follows:
 
-``` notranslate
-SELECT
-  dim1
-FROM
-  `dataset.table`
-WHERE
-  dim1 LIKE '%test%';
-```
+    SELECT
+      dim1
+    FROM
+      `dataset.table`
+    WHERE
+      dim1 LIKE '%test%';
 
 ## Optimize aggregation functions
 
@@ -40,25 +36,21 @@ You can also use `HyperLogLog++` functions to do approximations (including custo
 
 Consider the following use of the `COUNT` function:
 
-``` notranslate
-SELECT
-  dim1,
-  COUNT(DISTINCT dim2)
-FROM
-  `dataset.table`
-GROUP BY 1;
-```
+    SELECT
+      dim1,
+      COUNT(DISTINCT dim2)
+    FROM
+      `dataset.table`
+    GROUP BY 1;
 
 You can optimize this query as follows:
 
-``` notranslate
-SELECT
-  dim1,
-  APPROX_COUNT_DISTINCT(dim2)
-FROM
-  `dataset.table`
-GROUP BY 1;
-```
+    SELECT
+      dim1,
+      APPROX_COUNT_DISTINCT(dim2)
+    FROM
+      `dataset.table`
+    GROUP BY 1;
 
 ### Optimize quantile functions
 
@@ -70,36 +62,32 @@ Try using [`APPROX_QUANTILES`](https://docs.cloud.google.com/bigquery/docs/refer
 
 Consider the following use of the `NTILE` function:
 
-``` notranslate
-SELECT
-  individual_id,
-  NTILE(nbuckets) OVER (ORDER BY sales desc) AS sales_third
-FROM
-  `dataset.table`;
-```
+    SELECT
+      individual_id,
+      NTILE(nbuckets) OVER (ORDER BY sales desc) AS sales_third
+    FROM
+      `dataset.table`;
 
 You can optimize this query as follows:
 
-``` notranslate
-WITH QuantInfo AS (
-  SELECT
-    o, qval
-  FROM UNNEST((
-     SELECT APPROX_QUANTILES(sales, nbuckets)
-     FROM `dataset.table`
-    )) AS qval
-  WITH offset o
-  WHERE o > 0
-)
-SELECT
-  individual_id,
-  (SELECT
-     (nbuckets + 1) - MIN(o)
-   FROM QuantInfo
-   WHERE sales <= QuantInfo.qval
-  ) AS sales_third
-FROM `dataset.table`;
-```
+    WITH QuantInfo AS (
+      SELECT
+        o, qval
+      FROM UNNEST((
+         SELECT APPROX_QUANTILES(sales, nbuckets)
+         FROM `dataset.table`
+        )) AS qval
+      WITH offset o
+      WHERE o > 0
+    )
+    SELECT
+      individual_id,
+      (SELECT
+         (nbuckets + 1) - MIN(o)
+       FROM QuantInfo
+       WHERE sales <= QuantInfo.qval
+      ) AS sales_third
+    FROM `dataset.table`;
 
 The optimized version gives similar but not identical results to the original query, because `APPROX_QUANTILES` :
 
@@ -118,35 +106,31 @@ It is better to create persistent user-defined SQL and JavaScript functions in a
 
 The following example shows how a temporary UDF is invoked in a query:
 
-``` notranslate
-CREATE TEMP FUNCTION addFourAndDivide(x INT64, y INT64) AS ((x + 4) / y);
-
-WITH numbers AS
-  (SELECT 1 as val
-  UNION ALL
-  SELECT 3 as val
-  UNION ALL
-  SELECT 4 as val
-  UNION ALL
-  SELECT 5 as val)
-SELECT val, addFourAndDivide(val, 2) AS result
-FROM numbers;
-```
+    CREATE TEMP FUNCTION addFourAndDivide(x INT64, y INT64) AS ((x + 4) / y);
+    
+    WITH numbers AS
+      (SELECT 1 as val
+      UNION ALL
+      SELECT 3 as val
+      UNION ALL
+      SELECT 4 as val
+      UNION ALL
+      SELECT 5 as val)
+    SELECT val, addFourAndDivide(val, 2) AS result
+    FROM numbers;
 
 You can optimize this query by replacing the temporary UDF with a persistent one:
 
-``` notranslate
-WITH numbers AS
-  (SELECT 1 as val
-  UNION ALL
-  SELECT 3 as val
-  UNION ALL
-  SELECT 4 as val
-  UNION ALL
-  SELECT 5 as val)
-SELECT val, `your_project.your_dataset.addFourAndDivide`(val, 2) AS result
-FROM numbers;
-```
+    WITH numbers AS
+      (SELECT 1 as val
+      UNION ALL
+      SELECT 3 as val
+      UNION ALL
+      SELECT 4 as val
+      UNION ALL
+      SELECT 5 as val)
+    SELECT val, `your_project.your_dataset.addFourAndDivide`(val, 2) AS result
+    FROM numbers;
 
 ## Optimize AI costs
 

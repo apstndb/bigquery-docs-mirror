@@ -64,17 +64,13 @@ Use the [`UNDROP SCHEMA` data definition language (DDL) statement](https://docs.
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    UNDROP SCHEMA DATASET_ID;
-    ```
+        UNDROP SCHEMA DATASET_ID;
     
     Replace `  DATASET_ID  ` with the dataset that you want to undelete.
 
 3.  [Specify the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) of the dataset that you want to undelete. To specify the location part of the SQL statement use `location` options
     
-    ``` notranslate
-    UNDROP SCHEMA DATASET_ID OPTIONS (location=location);
-    ```
+        UNDROP SCHEMA DATASET_ID OPTIONS (location=location);
 
 4.  Click play\_circle **Run** .
 

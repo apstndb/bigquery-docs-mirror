@@ -49,9 +49,7 @@ Go to the **Identity and Access Management (IAM) API** page and enable the API.
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
-``` notranslate
-gcloud services enable iam.googleapis.com
-```
+    gcloud services enable iam.googleapis.com
 
 ## View conditional access policy on a dataset
 
@@ -79,9 +77,7 @@ To view or update conditional access policies in Cloud Shell, you must be using 
 
 To get an existing access policy and output it to a local file in JSON, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) in Cloud Shell:
 
-``` notranslate
-bq show --format=prettyjson PROJECT_ID:DATASET > PATH_TO_FILE
-```
+    bq show --format=prettyjson PROJECT_ID:DATASET > PATH_TO_FILE
 
 Replace the following:
 
@@ -141,19 +137,17 @@ To grant conditional access to a dataset using Cloud Shell, follow the direction
 
 For example, the following addition to the `access` section of a dataset's JSON file would grant the `roles/bigquery.dataViewer` role to `cloudysanfrancisco@gmail.com` until December 31, 2032:
 
-``` notranslate
-"access": [
-  {
-    "role": "roles/bigquery.dataViewer",
-    "userByEmail": "cloudysanfrancisco@gmail.com",
-    "condition": {
-      "title": "Grant roles/bigquery.dataViewer until 2033",
-      "description": "Role expires on December 31, 2032.",
-      "expression": "request.time < timestamp('2032-12-31T12:00:00Z')"
-    }
-  }
-]
-```
+    "access": [
+      {
+        "role": "roles/bigquery.dataViewer",
+        "userByEmail": "cloudysanfrancisco@gmail.com",
+        "condition": {
+          "title": "Grant roles/bigquery.dataViewer until 2033",
+          "description": "Role expires on December 31, 2032.",
+          "expression": "request.time < timestamp('2032-12-31T12:00:00Z')"
+        }
+      }
+    ]
 
 ### API
 
@@ -293,95 +287,87 @@ The following are examples of use cases for IAM Conditions in BigQuery.
 
 This example grants `cloudysanfrancisco@gmail.com` the BigQuery Data Viewer role for the `table_1` table in the `dataset_1` dataset. With this role, the user can query the table and access it through the bq tool. The user can't view the table in the Google Cloud console because they don't have the `bigquery.tables.list` permission on the dataset.
 
-``` notranslate
-{
-  "members": [cloudysanfrancisco@gmail.com],
-  "role": roles/bigquery.dataViewer,
-  "condition": {
-    "title": "Table dataset_1.table_1",
-    "description": "Allowed to read table with name table_1 in dataset_1 dataset",
-    "expression":
-resource.name == projects/project_1/datasets/dataset_1/tables/table_1
-&& resource.type == bigquery.googleapis.com/Table
-  }
-}
-```
+    {
+      "members": [cloudysanfrancisco@gmail.com],
+      "role": roles/bigquery.dataViewer,
+      "condition": {
+        "title": "Table dataset_1.table_1",
+        "description": "Allowed to read table with name table_1 in dataset_1 dataset",
+        "expression":
+    resource.name == projects/project_1/datasets/dataset_1/tables/table_1
+    && resource.type == bigquery.googleapis.com/Table
+      }
+    }
 
 ### Grant list access to a specific dataset
 
 This example grants `cloudysanfrancisco@gmail.com` the BigQuery Metadata Viewer role on the `dataset_2` dataset. With this role, the user can list all the resources in the dataset, but they can't perform any queries on those resources.
 
-``` notranslate
-{
-  "members": [cloudysanfrancisco@gmail.com],
-  "role": roles/bigquery.metadataViewer,
-  "condition": {
-    "title": "Dataset dataset_2",
-    "description": "Allowed to list resources in dataset_2 dataset",
-    "expression":
-resource.name == projects/project_2/datasets/dataset_2
-&& resource.type == bigquery.googleapis.com/Dataset
-  }
-}
-```
+    {
+      "members": [cloudysanfrancisco@gmail.com],
+      "role": roles/bigquery.metadataViewer,
+      "condition": {
+        "title": "Dataset dataset_2",
+        "description": "Allowed to list resources in dataset_2 dataset",
+        "expression":
+    resource.name == projects/project_2/datasets/dataset_2
+    && resource.type == bigquery.googleapis.com/Dataset
+      }
+    }
 
 ### Grant owner access to all tables in all datasets with a specific prefix
 
 This example grants `cloudysanfrancisco@gmail.com` the BigQuery Data Owner role on all tables in all datasets that start with the `public_` prefix:
 
-``` notranslate
-{
-  "members": [cloudysanfrancisco@gmail.com],
-  "role": roles/bigquery.dataOwner,
-  "condition": {
-    "title": "Tables public_",
-    "description": "Allowed owner access to tables in datasets with public_ prefix",
-    "expression":
-resource.name.startsWith("projects/project_3/datasets/public_")
-&& resource.type == bigquery.googleapis.com/Table
-  }
-}
-```
+    {
+      "members": [cloudysanfrancisco@gmail.com],
+      "role": roles/bigquery.dataOwner,
+      "condition": {
+        "title": "Tables public_",
+        "description": "Allowed owner access to tables in datasets with public_ prefix",
+        "expression":
+    resource.name.startsWith("projects/project_3/datasets/public_")
+    && resource.type == bigquery.googleapis.com/Table
+      }
+    }
 
 ### Grant owner access to all tables, models, and routines in all datasets that have a specific prefix
 
 This example grants `cloudysanfrancisco@gmail.com` the BigQuery Data Owner role on all tables, models, and routines in all datasets that start with the `general_` prefix:
 
-``` notranslate
-{
-  "members": [cloudysanfrancisco@gmail.com],
-  "role": roles/bigquery.dataOwner,
-  "condition": {
-    "title": "Tables general_",
-    "description": "Allowed owner access to tables in datasets with general_ prefix",
-    "expression":
-resource.name.startsWith("projects/project_4/datasets/general_")
-&& resource.type == bigquery.googleapis.com/Table
-  }
-},
-{
-  "members": [cloudysanfrancisco@gmail.com],
-  "role": roles/bigquery.dataOwner,
-  "condition": {
-    "title": "Models general_",
-    "description": "Allowed owner access to models in datasets with general_ prefix",
-    "expression":
-resource.name.startsWith("projects/project_4/datasets/general_")
-&& resource.type == bigquery.googleapis.com/Model
-  }
-},
-{
-  "members": [cloudysanfrancisco@gmail.com],
-  "role": roles/bigquery.dataOwner,
-  "condition": {
-    "title": "Routines general_",
-    "description": "Allowed owner access to routines in datasets with general_ prefix",
-    "expression":
-resource.name.startsWith("projects/project_4/datasets/general_")
-&& resource.type == bigquery.googleapis.com/Routine
-  }
-}
-```
+    {
+      "members": [cloudysanfrancisco@gmail.com],
+      "role": roles/bigquery.dataOwner,
+      "condition": {
+        "title": "Tables general_",
+        "description": "Allowed owner access to tables in datasets with general_ prefix",
+        "expression":
+    resource.name.startsWith("projects/project_4/datasets/general_")
+    && resource.type == bigquery.googleapis.com/Table
+      }
+    },
+    {
+      "members": [cloudysanfrancisco@gmail.com],
+      "role": roles/bigquery.dataOwner,
+      "condition": {
+        "title": "Models general_",
+        "description": "Allowed owner access to models in datasets with general_ prefix",
+        "expression":
+    resource.name.startsWith("projects/project_4/datasets/general_")
+    && resource.type == bigquery.googleapis.com/Model
+      }
+    },
+    {
+      "members": [cloudysanfrancisco@gmail.com],
+      "role": roles/bigquery.dataOwner,
+      "condition": {
+        "title": "Routines general_",
+        "description": "Allowed owner access to routines in datasets with general_ prefix",
+        "expression":
+    resource.name.startsWith("projects/project_4/datasets/general_")
+    && resource.type == bigquery.googleapis.com/Routine
+      }
+    }
 
 ## What's next
 

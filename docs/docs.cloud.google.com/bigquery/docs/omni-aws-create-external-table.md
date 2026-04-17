@@ -55,11 +55,9 @@ Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SCHEMA mydataset
-    OPTIONS (
-      location = 'aws-us-east-1');
-    ```
+        CREATE SCHEMA mydataset
+        OPTIONS (
+          location = 'aws-us-east-1');
 
 3.  Click play\_circle **Run** .
 
@@ -69,11 +67,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 In a command-line environment, create a dataset using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
 
-``` notranslate
-bq --location=LOCATION mk \
-    --dataset \
-PROJECT_ID:DATASET_NAME
-```
+    bq --location=LOCATION mk \
+        --dataset \
+    PROJECT_ID:DATASET_NAME
 
 The `--project_id` parameter overrides the default project.
 
@@ -178,15 +174,13 @@ To create a BigLake table, use the [`CREATE EXTERNAL TABLE` statement](https://d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE DATASET_NAME.TABLE_NAME
-      WITH CONNECTION `AWS_LOCATION.CONNECTION_NAME`
-      OPTIONS (
-        format = "DATA_FORMAT",
-        uris = ["S3_URI"],
-        max_staleness = STALENESS_INTERVAL,
-        metadata_cache_mode = 'CACHE_MODE');
-    ```
+        CREATE EXTERNAL TABLE DATASET_NAME.TABLE_NAME
+          WITH CONNECTION `AWS_LOCATION.CONNECTION_NAME`
+          OPTIONS (
+            format = "DATA_FORMAT",
+            uris = ["S3_URI"],
+            max_staleness = STALENESS_INTERVAL,
+            metadata_cache_mode = 'CACHE_MODE');
     
     Replace the following:
     
@@ -235,13 +229,11 @@ Example:
 
 Create a [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) :
 
-``` notranslate
-bq mkdef  \
---source_format=DATA_FORMAT \
---connection_id=AWS_LOCATION.CONNECTION_NAME \
---metadata_cache_mode=CACHE_MODE \
-S3_URI > table_def
-```
+    bq mkdef  \
+    --source_format=DATA_FORMAT \
+    --connection_id=AWS_LOCATION.CONNECTION_NAME \
+    --metadata_cache_mode=CACHE_MODE \
+    S3_URI > table_def
 
 Replace the following:
 
@@ -263,9 +255,7 @@ Replace the following:
 
 Next, create the BigLake table:
 
-``` notranslate
-bq mk --max_staleness=STALENESS_INTERVAL --external_table_definition=table_def DATASET_NAME.TABLE_NAME
-```
+    bq mk --max_staleness=STALENESS_INTERVAL --external_table_definition=table_def DATASET_NAME.TABLE_NAME
 
 Replace the following:
 
@@ -281,17 +271,15 @@ Replace the following:
 
 For example, the following command creates a new BigLake table, `awsdataset.awstable` , which can query your Amazon S3 data that's stored at the path `s3://s3-bucket/path/file.csv` and has a read connection in the location `aws-us-east-1` :
 
-``` notranslate
-bq mkdef  \
---autodetect \
---source_format=CSV \
---connection_id=aws-us-east-1.s3-read-connection \
---metadata_cache_mode=AUTOMATIC \
-s3://s3-bucket/path/file.csv > table_def
-
-bq mk --max_staleness=INTERVAL "1" HOUR \
---external_table_definition=table_def awsdataset.awstable
-```
+    bq mkdef  \
+    --autodetect \
+    --source_format=CSV \
+    --connection_id=aws-us-east-1.s3-read-connection \
+    --metadata_cache_mode=AUTOMATIC \
+    s3://s3-bucket/path/file.csv > table_def
+    
+    bq mk --max_staleness=INTERVAL "1" HOUR \
+    --external_table_definition=table_def awsdataset.awstable
 
 ### API
 
@@ -431,21 +419,19 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-    WITH PARTITION COLUMNS
-    (
-      PARTITION_COLUMN PARTITION_COLUMN_TYPE,
-    )
-    WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
-    OPTIONS (
-      hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
-      uris=['FILE_PATH'],
-      format ="TABLE_FORMAT"
-      max_staleness = STALENESS_INTERVAL,
-      metadata_cache_mode = 'CACHE_MODE'
-    );
-    ```
+        CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+        WITH PARTITION COLUMNS
+        (
+          PARTITION_COLUMN PARTITION_COLUMN_TYPE,
+        )
+        WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
+        OPTIONS (
+          hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
+          uris=['FILE_PATH'],
+          format ="TABLE_FORMAT"
+          max_staleness = STALENESS_INTERVAL,
+          metadata_cache_mode = 'CACHE_MODE'
+        );
     
     Replace the following:
     
@@ -491,35 +477,31 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The following example creates a BigLake table over partitioned data in Amazon S3. The schema is autodetected.
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.my_table`
-WITH PARTITION COLUMNS
-(
-  sku STRING,
-)
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  hive_partition_uri_prefix = "s3://mybucket/products",
-  uris = ['s3://mybucket/products/*']
-  max_staleness = INTERVAL 1 DAY,
-  metadata_cache_mode = 'AUTOMATIC'
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.my_table`
+    WITH PARTITION COLUMNS
+    (
+      sku STRING,
+    )
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      hive_partition_uri_prefix = "s3://mybucket/products",
+      uris = ['s3://mybucket/products/*']
+      max_staleness = INTERVAL 1 DAY,
+      metadata_cache_mode = 'AUTOMATIC'
+    );
 
 ### bq
 
 First, use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) command to create a table definition file:
 
-``` notranslate
-bq mkdef \
---source_format=SOURCE_FORMAT \
---connection_id=REGION.CONNECTION_ID \
---hive_partitioning_mode=PARTITIONING_MODE \
---hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX \
---require_hive_partition_filter=BOOLEAN \
---metadata_cache_mode=CACHE_MODE \
- URIS > DEFINITION_FILE
-```
+    bq mkdef \
+    --source_format=SOURCE_FORMAT \
+    --connection_id=REGION.CONNECTION_ID \
+    --hive_partitioning_mode=PARTITIONING_MODE \
+    --hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX \
+    --require_hive_partition_filter=BOOLEAN \
+    --metadata_cache_mode=CACHE_MODE \
+     URIS > DEFINITION_FILE
 
 Replace the following:
 
@@ -551,18 +533,14 @@ Replace the following:
 
 If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the source URI prefix, using the following format:
 
-``` notranslate
---hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
-```
+    --hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 
 After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
 
-``` notranslate
-bq mk --max_staleness=STALENESS_INTERVAL \
---external_table_definition=DEFINITION_FILE \
-DATASET_NAME.TABLE_NAME \
-SCHEMA
-```
+    bq mk --max_staleness=STALENESS_INTERVAL \
+    --external_table_definition=DEFINITION_FILE \
+    DATASET_NAME.TABLE_NAME \
+    SCHEMA
 
 Replace the following:
 
@@ -628,7 +606,7 @@ Delta Lake maintains a canonical schema as part of its metadata. You can't updat
 
 1.  Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--autodetect_schema` flag:
     
-    ``` lang-sh
+    ```sh
     bq update --autodetect_schema
     PROJECT_ID:DATASET.TABLE
     ```
@@ -680,7 +658,7 @@ The following limitations apply to Delta Lake tables:
 
 The following example creates an external table by using the [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) statement with the Delta Lake format:
 
-``` lang-googlesql
+```googlesql
 CREATE [OR REPLACE] EXTERNAL TABLE table_name
 WITH CONNECTION connection_name
 OPTIONS (
@@ -701,7 +679,7 @@ Replace the following:
 
 The following example uses the [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) statement to load data to the appropriate table:
 
-``` lang-googlesql
+```googlesql
 LOAD DATA [INTO | OVERWRITE] table_name
 FROM FILES (
         format = 'DELTA_LAKE',
@@ -758,17 +736,15 @@ If you are [running jobs programmatically](https://docs.cloud.google.com/bigquer
 
 The following example lists the metadata refresh jobs in last six hours:
 
-``` notranslate
-SELECT
- *
-FROM
- `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE
- job_id LIKE '%metadata_cache_refresh%'
- AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-ORDER BY start_time desc
-LIMIT 10;
-```
+    SELECT
+     *
+    FROM
+     `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE
+     job_id LIKE '%metadata_cache_refresh%'
+     AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+    ORDER BY start_time desc
+    LIMIT 10;
 
 Replace REGION\_NAME with your region.
 
@@ -944,7 +920,7 @@ To apply an S3 bucket policy, use the AWS CLI or Terraform:
 
 Run the following command to apply an S3 bucket policy that includes a condition using the `aws:SourceVpc` attribute:
 
-``` notranslate
+``` 
   aws s3api put-bucket-policy \
     --bucket=BUCKET_NAME \
     --policy "{
@@ -977,7 +953,7 @@ Replace the following:
 
 Add the following to your Terraform configuration file:
 
-``` notranslate
+``` 
   resource "aws_s3_bucket" "example" {
     bucket = "BUCKET_NAME"
   }

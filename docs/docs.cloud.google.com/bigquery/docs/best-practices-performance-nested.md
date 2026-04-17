@@ -52,11 +52,9 @@ Consider an `Orders` table with a row for each line item sold:
 
 If you wanted to analyze data from this table, you would need to use a `GROUP BY` clause, similar to the following:
 
-``` notranslate
-SELECT COUNT (Item_Name)
-FROM Orders
-GROUP BY Order_Id;
-```
+    SELECT COUNT (Item_Name)
+    FROM Orders
+    GROUP BY Order_Id;
 
 The `GROUP BY` clause involves additional computation overhead, but this can be avoided by nesting repeated data. You can avoid using a `GROUP BY` clause by creating a table with one order per row, where the order line items are in a nested field:
 
@@ -89,15 +87,13 @@ C1</td>
 
 In BigQuery, you typically specify a nested schema as an `ARRAY` of `STRUCT` objects. You use the [`UNNEST` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) to [flatten the nested data](https://docs.cloud.google.com/bigquery/docs/arrays#flattening_arrays) , as shown in the following query:
 
-``` notranslate
-SELECT *
-FROM UNNEST(
-  [
-    STRUCT('001' AS Order_Id, ['A1', 'B1'] AS Item_Name),
-    STRUCT('002' AS Order_Id, ['A1', 'C1'] AS Item_Name)
-  ]
-);
-```
+    SELECT *
+    FROM UNNEST(
+      [
+        STRUCT('001' AS Order_Id, ['A1', 'B1'] AS Item_Name),
+        STRUCT('002' AS Order_Id, ['A1', 'C1'] AS Item_Name)
+      ]
+    );
 
 This query yields results similar to the following:
 
@@ -111,56 +107,48 @@ You can see the performance difference in queries that use nested fields as comp
 
 1.  Create a table based on the `bigquery-public-data.stackoverflow.comments` public dataset:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `PROJECT.DATASET.stackoverflow`
-    AS (
-    SELECT
-      user_id,
-      post_id,
-      creation_date
-    FROM
-      `bigquery-public-data.stackoverflow.comments`
-    );
-    ```
+        CREATE OR REPLACE TABLE `PROJECT.DATASET.stackoverflow`
+        AS (
+        SELECT
+          user_id,
+          post_id,
+          creation_date
+        FROM
+          `bigquery-public-data.stackoverflow.comments`
+        );
 
 2.  Using the `stackoverflow` table, run the following query to see the earliest comment for each user:
     
-    ``` notranslate
-    SELECT
-      user_id,
-      ARRAY_AGG(STRUCT(post_id, creation_date AS earliest_comment) ORDER BY creation_date ASC LIMIT 1)[OFFSET(0)].*
-    FROM
-      `PROJECT.DATASET.stackoverflow`
-    GROUP BY user_id
-    ORDER BY user_id ASC;
-    ```
+        SELECT
+          user_id,
+          ARRAY_AGG(STRUCT(post_id, creation_date AS earliest_comment) ORDER BY creation_date ASC LIMIT 1)[OFFSET(0)].*
+        FROM
+          `PROJECT.DATASET.stackoverflow`
+        GROUP BY user_id
+        ORDER BY user_id ASC;
     
     This query takes about 25 seconds to run and processes 1.88 GB of data.
 
 3.  Create a second table with identical data that creates a `comments` field using a `STRUCT` type to store the `post_id` and `creation_date` data, instead of two individual fields:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `PROJECT.DATASET.stackoverflow_nested`
-    AS (
-    SELECT
-      user_id,
-      ARRAY_AGG(STRUCT(post_id, creation_date) ORDER BY creation_date ASC) AS comments
-    FROM
-      `bigquery-public-data.stackoverflow.comments`
-    GROUP BY user_id
-    );
-    ```
+        CREATE OR REPLACE TABLE `PROJECT.DATASET.stackoverflow_nested`
+        AS (
+        SELECT
+          user_id,
+          ARRAY_AGG(STRUCT(post_id, creation_date) ORDER BY creation_date ASC) AS comments
+        FROM
+          `bigquery-public-data.stackoverflow.comments`
+        GROUP BY user_id
+        );
 
 4.  Using the `stackoverflow_nested` table, run the following query to see the earliest comment for each user:
     
-    ``` notranslate
-    SELECT
-      user_id,
-      (SELECT AS STRUCT post_id, creation_date as earliest_comment FROM UNNEST(comments) ORDER BY creation_date ASC LIMIT 1).*
-    FROM
-      `PROJECT.DATASET.stackoverflow_nested`
-    ORDER BY user_id ASC;
-    ```
+        SELECT
+          user_id,
+          (SELECT AS STRUCT post_id, creation_date as earliest_comment FROM UNNEST(comments) ORDER BY creation_date ASC LIMIT 1).*
+        FROM
+          `PROJECT.DATASET.stackoverflow_nested`
+        ORDER BY user_id ASC;
     
     This query takes about 10 seconds to run and processes 1.28 GB of data.
 

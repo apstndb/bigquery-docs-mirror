@@ -103,13 +103,11 @@ This document describes the `ML.DESCRIBE_DATA` function, which you can use to ge
 
 The following example returns statistics for a table with five quantiles calculated for numeric columns and three top values returned for non-numeric columns:
 
-``` notranslate
-SELECT *
-FROM ML.DESCRIBE_DATA(
-  TABLE `myproject.mydataset.mytable`,
-  STRUCT(5 AS num_quantiles, 3 AS top_k)
-);
-```
+    SELECT *
+    FROM ML.DESCRIBE_DATA(
+      TABLE `myproject.mydataset.mytable`,
+      STRUCT(5 AS num_quantiles, 3 AS top_k)
+    );
 
 ## Limitations
 

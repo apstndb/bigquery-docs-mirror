@@ -1,11 +1,5 @@
 # Organize code assets with folders
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To give feedback or request support for this feature, send an email to <bigquery-explorer-feedback@google.com> .
-
 The following document describes how BigQuery folders work. You can use folders to organize code assets in a hierarchical structure, similar to that used by operating systems. For example, you could create a folder to organize code assets for sales analysis, with subfolders for each fiscal year. You can also use folders to manage access to code assets. Folders offer Identity and Access Management (IAM) policy inheritance, which you can use to control access to code assets more efficiently. Policy inheritance lets subfolders and files inherit the permissions of their parent folder.
 
 BigQuery folders are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .

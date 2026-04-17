@@ -39,25 +39,23 @@ Follow these steps to forecast data with the TimesFM model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      AI.FORECAST(
-        (
-          SELECT TIMESTAMP_TRUNC(start_date, HOUR) as trip_hour, COUNT(*) as num_trips
-    FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
-    WHERE subscriber_type = 'Subscriber' AND start_date >= TIMESTAMP('2018-01-01')
-    GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
-        ),
-        horizon => 720,
-        confidence_level => 0.95,
-        timestamp_col => 'trip_hour',
-        data_col => 'num_trips');
-    ```
+        SELECT *
+        FROM
+          AI.FORECAST(
+            (
+              SELECT TIMESTAMP_TRUNC(start_date, HOUR) as trip_hour, COUNT(*) as num_trips
+        FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
+        WHERE subscriber_type = 'Subscriber' AND start_date >= TIMESTAMP('2018-01-01')
+        GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
+            ),
+            horizon => 720,
+            confidence_level => 0.95,
+            timestamp_col => 'trip_hour',
+            data_col => 'num_trips');
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-------------------------+-------------------+------------------+---------------------------------+---------------------------------+--------------------+
     | forecast_timestamp      | forecast_value    | confidence_level | prediction_interval_lower_bound | prediction_interval_upper_bound | ai_forecast_status |
     +-------------------------+-------------------+------------------+---------------------------------+---------------------------------+--------------------+
@@ -81,22 +79,20 @@ Follow these steps to chart the function output:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      AI.FORECAST(
-        (
-          SELECT TIMESTAMP_TRUNC(start_date, HOUR) as trip_hour, COUNT(*) as num_trips
-          FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
-          WHERE subscriber_type = 'Subscriber' AND start_date >= TIMESTAMP('2018-01-01')
-          GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
-        ),
-        horizon => 720,
-        confidence_level => 0.95,
-        timestamp_col => 'trip_hour',
-        data_col => 'num_trips',
-        output_historical_time_series => true);
-    ```
+        SELECT *
+        FROM
+          AI.FORECAST(
+            (
+              SELECT TIMESTAMP_TRUNC(start_date, HOUR) as trip_hour, COUNT(*) as num_trips
+              FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
+              WHERE subscriber_type = 'Subscriber' AND start_date >= TIMESTAMP('2018-01-01')
+              GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
+            ),
+            horizon => 720,
+            confidence_level => 0.95,
+            timestamp_col => 'trip_hour',
+            data_col => 'num_trips',
+            output_historical_time_series => true);
 
 3.  When the query is finished running, click the **Visualization** tab in the **Query results** pane. For **Visualization type** , select **Line** . For **Dimension** , select `time_series_timestamp` . For **Measures** , select `time_series_data` , `prediction_interval_lower_bound` , and `prediction_interval_upper_bound` . The resulting chart looks similar to the following:
     
@@ -114,26 +110,24 @@ Follow these steps to forecast data with the TimesFM model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      AI.FORECAST(
-        (
-          SELECT TIMESTAMP_TRUNC(start_date, HOUR) as trip_hour, subscriber_type, COUNT(*) as num_trips
-          FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
-          WHERE start_date >= TIMESTAMP('2018-01-01')
-          GROUP BY TIMESTAMP_TRUNC(start_date, HOUR), subscriber_type
-        ),
-        horizon => 720,
-        confidence_level => 0.95,
-        timestamp_col => 'trip_hour',
-        data_col => 'num_trips',
-        id_cols => ['subscriber_type']);
-    ```
+        SELECT *
+        FROM
+          AI.FORECAST(
+            (
+              SELECT TIMESTAMP_TRUNC(start_date, HOUR) as trip_hour, subscriber_type, COUNT(*) as num_trips
+              FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
+              WHERE start_date >= TIMESTAMP('2018-01-01')
+              GROUP BY TIMESTAMP_TRUNC(start_date, HOUR), subscriber_type
+            ),
+            horizon => 720,
+            confidence_level => 0.95,
+            timestamp_col => 'trip_hour',
+            data_col => 'num_trips',
+            id_cols => ['subscriber_type']);
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +---------------------+--------------------------+------------------+------------------+---------------------------------+---------------------------------+--------------------+
     | subscriber_type     | forecast_timestamp       | forecast_value   | confidence_level | prediction_interval_lower_bound | prediction_interval_upper_bound | ai_forecast_status |
     +---------------------+--------------------------+------------------+------------------+---------------------------------+---------------------------------+--------------------+

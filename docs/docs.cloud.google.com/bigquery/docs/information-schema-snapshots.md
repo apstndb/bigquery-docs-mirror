@@ -57,11 +57,9 @@ Replace the following:
 
 The following query retrieves metadata for the table snapshots in the `mydataset` dataset. In this example, it displays the table snapshot `myproject.mydataset.mytablesnapshot` , which was taken from the base table `myproject.mydataset.mytable` on May 14, 2021, at 12 PM UTC.
 
-``` notranslate
-SELECT *
-FROM
-  `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_SNAPSHOTS;
-```
+    SELECT *
+    FROM
+      `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_SNAPSHOTS;
 
 The result is similar to the following:
 

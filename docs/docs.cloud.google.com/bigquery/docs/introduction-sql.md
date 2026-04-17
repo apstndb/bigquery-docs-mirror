@@ -53,17 +53,15 @@ The default SQL dialect is GoogleSQL. You can set the SQL dialect by including t
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    #legacySQL
-    SELECT
-      weight_pounds, state, year, gestation_weeks
-    FROM
-      [bigquery-public-data:samples.natality]
-    ORDER BY
-      weight_pounds DESC
-    LIMIT
-      10;
-    ```
+        #legacySQL
+        SELECT
+          weight_pounds, state, year, gestation_weeks
+        FROM
+          [bigquery-public-data:samples.natality]
+        ORDER BY
+          weight_pounds DESC
+        LIMIT
+          10;
 
 3.  Click play\_circle **Run** .
 

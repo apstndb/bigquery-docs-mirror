@@ -105,9 +105,7 @@ Create a BigQuery dataset to contain your resources:
 
 1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
-    ``` notranslate
-    bq --location=LOCATION mk -d DATASET_ID
-    ```
+        bq --location=LOCATION mk -d DATASET_ID
     
     Replace the following:
     
@@ -116,9 +114,7 @@ Create a BigQuery dataset to contain your resources:
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ## Create a connection
 
@@ -162,14 +158,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -185,10 +179,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -202,19 +194,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -336,7 +326,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 

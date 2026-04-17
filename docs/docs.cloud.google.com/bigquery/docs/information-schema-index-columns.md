@@ -54,18 +54,16 @@ Replace the following:
 
 The following example creates a search index on all columns of `my_table` .
 
-``` notranslate
-CREATE TABLE dataset.my_table(
-  a STRING,
-  b INT64,
-  c STRUCT <d INT64,
-            e ARRAY<STRING>,
-            f STRUCT<g STRING, h INT64>>) AS
-SELECT 'hello' AS a, 10 AS b, (20, ['x', 'y'], ('z', 30)) AS c;
-
-CREATE SEARCH INDEX my_index
-ON dataset.my_table(ALL COLUMNS);
-```
+    CREATE TABLE dataset.my_table(
+      a STRING,
+      b INT64,
+      c STRUCT <d INT64,
+                e ARRAY<STRING>,
+                f STRUCT<g STRING, h INT64>>) AS
+    SELECT 'hello' AS a, 10 AS b, (20, ['x', 'y'], ('z', 30)) AS c;
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.my_table(ALL COLUMNS);
 
 The following query extracts information on which fields are indexed. The `index_field_path` indicates which field of a column is indexed. This differs from the `index_column_name` only in the case of a `STRUCT` , where the full path to the indexed field is given. In this example, column `c` contains an `ARRAY<STRING>` field `e` and another `STRUCT` called `f` which contains a `STRING` field `g` , each of which is indexed.
 
@@ -84,36 +82,34 @@ The result is similar to the following:
 
 The following query joins the `INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS` view with the `INFORMATION_SCHEMA.SEARCH_INDEXES` and `INFORMATION_SCHEMA.COLUMNS` views to include the search index status and the data type of each column:
 
-``` notranslate
-SELECT
-  index_columns_view.index_catalog AS project_name,
-  index_columns_view.index_SCHEMA AS dataset_name,
-  indexes_view.TABLE_NAME AS table_name,
-  indexes_view.INDEX_NAME AS index_name,
-  indexes_view.INDEX_STATUS AS status,
-  index_columns_view.INDEX_COLUMN_NAME AS column_name,
-  index_columns_view.INDEX_FIELD_PATH AS field_path,
-  columns_view.DATA_TYPE AS data_type
-FROM
-  mydataset.INFORMATION_SCHEMA.SEARCH_INDEXES indexes_view
-INNER JOIN
-  mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS index_columns_view
-  ON
-    indexes_view.TABLE_NAME = index_columns_view.TABLE_NAME
-    AND indexes_view.INDEX_NAME = index_columns_view.INDEX_NAME
-LEFT OUTER JOIN
-  mydataset.INFORMATION_SCHEMA.COLUMNS columns_view
-  ON
-    indexes_view.INDEX_CATALOG = columns_view.TABLE_CATALOG
-    AND indexes_view.INDEX_SCHEMA = columns_view.TABLE_SCHEMA
-    AND index_columns_view.TABLE_NAME = columns_view.TABLE_NAME
-    AND index_columns_view.INDEX_COLUMN_NAME = columns_view.COLUMN_NAME
-ORDER BY
-  project_name,
-  dataset_name,
-  table_name,
-  column_name;
-```
+    SELECT
+      index_columns_view.index_catalog AS project_name,
+      index_columns_view.index_SCHEMA AS dataset_name,
+      indexes_view.TABLE_NAME AS table_name,
+      indexes_view.INDEX_NAME AS index_name,
+      indexes_view.INDEX_STATUS AS status,
+      index_columns_view.INDEX_COLUMN_NAME AS column_name,
+      index_columns_view.INDEX_FIELD_PATH AS field_path,
+      columns_view.DATA_TYPE AS data_type
+    FROM
+      mydataset.INFORMATION_SCHEMA.SEARCH_INDEXES indexes_view
+    INNER JOIN
+      mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS index_columns_view
+      ON
+        indexes_view.TABLE_NAME = index_columns_view.TABLE_NAME
+        AND indexes_view.INDEX_NAME = index_columns_view.INDEX_NAME
+    LEFT OUTER JOIN
+      mydataset.INFORMATION_SCHEMA.COLUMNS columns_view
+      ON
+        indexes_view.INDEX_CATALOG = columns_view.TABLE_CATALOG
+        AND indexes_view.INDEX_SCHEMA = columns_view.TABLE_SCHEMA
+        AND index_columns_view.TABLE_NAME = columns_view.TABLE_NAME
+        AND index_columns_view.INDEX_COLUMN_NAME = columns_view.COLUMN_NAME
+    ORDER BY
+      project_name,
+      dataset_name,
+      table_name,
+      column_name;
 
 The result is similar to the following:
 

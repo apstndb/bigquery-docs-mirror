@@ -44,15 +44,13 @@ To diagnose issues, do the following:
     
     For example, the following query uses the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view to list all quota-related errors within the past day:
     
-    ``` notranslate
-    SELECT
-    job_id,
-    creation_time,
-    error_result
-    FROM  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-    WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY) AND
-        error_result.reason IN ('rateLimitExceeded', 'quotaExceeded')
-    ```
+        SELECT
+        job_id,
+        creation_time,
+        error_result
+        FROM  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+        WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY) AND
+            error_result.reason IN ('rateLimitExceeded', 'quotaExceeded')
     
     Replace `  REGION_NAME  ` with the region of the project. It must be preceded by `region-` . For example, for the `US` multi-region, use `region-us` .
 
@@ -118,22 +116,20 @@ Depending on the specific quota limit that was reached, look at `total_rows` or 
 
 For example, the following query shows total bytes ingested per minute, and the total number of quota errors:
 
-``` notranslate
-SELECT
- start_timestamp,
- error_code,
- SUM(total_input_bytes) as sum_input_bytes,
- SUM(IF(error_code IN ('QUOTA_EXCEEDED', 'RATE_LIMIT_EXCEEDED'),
-     total_requests, 0)) AS quota_error
-FROM
- `region-REGION_NAME`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT
-WHERE
-  start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
-GROUP BY
- start_timestamp,
- error_code
-ORDER BY 1 DESC
-```
+    SELECT
+     start_timestamp,
+     error_code,
+     SUM(total_input_bytes) as sum_input_bytes,
+     SUM(IF(error_code IN ('QUOTA_EXCEEDED', 'RATE_LIMIT_EXCEEDED'),
+         total_requests, 0)) AS quota_error
+    FROM
+     `region-REGION_NAME`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT
+    WHERE
+      start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
+    GROUP BY
+     start_timestamp,
+     error_code
+    ORDER BY 1 DESC
 
 #### Resolution
 
@@ -202,15 +198,13 @@ If you'd like to gather more data about where the copy jobs are coming from, you
 
   - If your copy jobs are located in a single or only a few regions, you can try querying the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
     
-    ``` notranslate
-    SELECT
-    creation_time, job_id, user_email, destination_table.project_id, destination_table.dataset_id, destination_table.table_id
-    FROM `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-    WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type = "COPY"
-    order by creation_time DESC
-    ```
+        SELECT
+        creation_time, job_id, user_email, destination_table.project_id, destination_table.dataset_id, destination_table.table_id
+        FROM `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+        WHERE
+        creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY) AND CURRENT_TIMESTAMP()
+        AND job_type = "COPY"
+        order by creation_time DESC
     
     You can also adjust the time interval depending on the time range you're interested in.
 
@@ -243,36 +237,32 @@ If you would like to gather usages of exports data over recent days, you can try
 
   - Alternatively you can query [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see your total extract bytes over a few days. For example, the following query returns the daily total bytes processed by `EXTRACT` jobs in the past seven days.
     
-    ``` notranslate
-    SELECT
-    TIMESTAMP_TRUNC(creation_time, DAY) AS day,
-    SUM ( total_bytes_processed ) / POW(1024, 3) AS total_gibibytes_processed
-    FROM
-    `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type = "EXTRACT"
-    GROUP BY 1
-    ORDER BY 2 DESC
-    ```
+        SELECT
+        TIMESTAMP_TRUNC(creation_time, DAY) AS day,
+        SUM ( total_bytes_processed ) / POW(1024, 3) AS total_gibibytes_processed
+        FROM
+        `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+        WHERE
+        creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
+        AND job_type = "EXTRACT"
+        GROUP BY 1
+        ORDER BY 2 DESC
 
   - You can then further refine the results by identifying the specific jobs that are consuming more bytes than expected. The following example returns the top 100 `EXTRACT` jobs which are consuming more than 100 GB processed over the past seven days.
     
-    ``` notranslate
-    SELECT
-    creation_time,
-    job_id,
-    total_bytes_processed/POW(1024, 3) AS total_gigabytes_processed
-    FROM
-    `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type="EXTRACT"
-    AND total_bytes_processed > (POW(1024, 3) * 100)
-    ORDER BY
-    total_bytes_processed DESC
-    LIMIT 100
-    ```
+        SELECT
+        creation_time,
+        job_id,
+        total_bytes_processed/POW(1024, 3) AS total_gigabytes_processed
+        FROM
+        `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+        WHERE
+        creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
+        AND job_type="EXTRACT"
+        AND total_bytes_processed > (POW(1024, 3) * 100)
+        ORDER BY
+        total_bytes_processed DESC
+        LIMIT 100
 
 You can alternatively use the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) with filters like `Bytes processed more than` to filter for high processing jobs for a specified period of time.
 
@@ -526,17 +516,15 @@ Metadata table updates can originate from *API calls* that modify a table's meta
 
 The following query returns a list of jobs that modify the affected table in the project within the past day. If you expect multiple projects in an organization to write to the table, replace `JOBS_BY_PROJECT` with `JOBS_BY_ORGANIZATION` .
 
-``` notranslate
-SELECT
- job_id,
- user_email,
- query
-FROM  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
-AND destination_table.project_id = "my-project-id"
-AND destination_table.dataset_id = "my_dataset"
-AND destination_table.table_id = "my_table"
-```
+    SELECT
+     job_id,
+     user_email,
+     query
+    FROM  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
+    AND destination_table.project_id = "my-project-id"
+    AND destination_table.dataset_id = "my_dataset"
+    AND destination_table.table_id = "my_table"
 
 For more information, see [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
 
@@ -586,19 +574,17 @@ If you have not identified the source from where most table operations are origi
     
     The following example finds the hourly count of jobs grouped by job type for the last 24-hour period using `JOBS_BY_PROJECT` . If you expect multiple projects to write to the table, replace `JOBS_BY_PROJECT` with `JOBS_BY_ORGANIZATION` .
     
-    ``` notranslate
-    SELECT
-    TIMESTAMP_TRUNC(creation_time, HOUR),
-    job_type,
-    count(1)
-    FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
-    AND destination_table.project_id = "my-project-id"
-    AND destination_table.dataset_id = "my_dataset"
-    AND destination_table.table_id = "my_table"
-    GROUP BY 1, 2
-    ORDER BY 1 DESC
-    ```
+        SELECT
+        TIMESTAMP_TRUNC(creation_time, HOUR),
+        job_type,
+        count(1)
+        FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+        WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
+        AND destination_table.project_id = "my-project-id"
+        AND destination_table.dataset_id = "my_dataset"
+        AND destination_table.table_id = "my_table"
+        GROUP BY 1, 2
+        ORDER BY 1 DESC
 
 #### Resolution
 
@@ -696,7 +682,7 @@ For long-term fixes, see [Long-term resolution](https://docs.cloud.google.com/bi
     
     The following is an example of a DataHub configuration snippet:
     
-    ``` notranslate
+    ``` 
       source:
       type: "bigquery"
       config:
@@ -747,11 +733,16 @@ During a low-usage period, the Power BI administrator updates the ODBC DSN confi
 
 ##### Phase 3: Verification and monitoring
 
-To verify and monitor effects of the fixes, the Power BI and DataHub administrators perform the following steps:
+To verify and monitor the effects of the fixes, the Power BI and DataHub administrators perform the following steps:
 
 1.  Manually trigger a refresh for a few key Power BI reports and a new ingestion run in DataHub. Confirm that these jobs complete successfully without incurring quota errors.
-2.  In the Google Cloud console, navigate to the **IAM & Admin \> Quotas** page.
-3.  Filter for the **BigQuery API** service.
-4.  Find the quota named **Concurrent `project.lists` requests** and click the graph icon to view usage over time.
+
+2.  To ensure the `Quota exceeded: Your user exceeded quota for concurrent project.lists requests` error no longer occurs, monitor your application logs or business intelligence tool run histories.
+
+3.  Optional: verify that the overall volume of `projects.list` API calls or related `403` errors has decreased for the associated service accounts:
+    
+    1.  In the Google Cloud console, go to the BigQuery API **API/Service Details** page
+    
+    2.  View the dashboards on the **Metrics** tab to verify the decrease in call volume and related 403 errors.
 
 Administrators should see a dramatic and permanent drop in the usage of this specific API call, confirming that the fix was successful.

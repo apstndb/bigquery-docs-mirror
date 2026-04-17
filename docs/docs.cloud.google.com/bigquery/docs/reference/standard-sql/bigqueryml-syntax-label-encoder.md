@@ -13,7 +13,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.LABEL_ENCODER(string_expression [, top_k] [, frequency_threshold]) OVER()
 ```
 
@@ -31,15 +31,13 @@ ML.LABEL_ENCODER(string_expression [, top_k] [, frequency_threshold]) OVER()
 
 The following example performs label encoding on a set of string expressions. It limits the encoding vocabulary to the two categories that occur the most frequently in the data and that also occur two or more times.
 
-``` notranslate
-SELECT f, ML.LABEL_ENCODER(f, 2, 2) OVER () AS output
-FROM UNNEST([NULL, 'a', 'b', 'b', 'c', 'c', 'c', 'd', 'd']) AS f
-ORDER BY f;
-```
+    SELECT f, ML.LABEL_ENCODER(f, 2, 2) OVER () AS output
+    FROM UNNEST([NULL, 'a', 'b', 'b', 'c', 'c', 'c', 'd', 'd']) AS f
+    ORDER BY f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +------+--------+
 |  f   | output |
 +------+--------+

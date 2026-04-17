@@ -108,9 +108,7 @@ To specify the job location, supply the `--location` flag and set the value to y
 
 The following command requests information about a job:
 
-``` notranslate
-bq --location=LOCATION show --job=true JOB_ID
-```
+    bq --location=LOCATION show --job=true JOB_ID
 
 Replace the following:
 
@@ -354,13 +352,11 @@ Issue the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli
 
 <!-- end list -->
 
-``` notranslate
-bq ls --jobs=true --all=true \
-    --min_creation_time=MIN_TIME \
-    --max_creation_time=MAX_TIME \
-    --max_results=MAX_RESULTS \
-    PROJECT_ID
-```
+    bq ls --jobs=true --all=true \
+        --min_creation_time=MIN_TIME \
+        --max_creation_time=MAX_TIME \
+        --max_results=MAX_RESULTS \
+        PROJECT_ID
 
 Replace the following:
 
@@ -562,7 +558,7 @@ To cancel a job, follow these steps:
 
 Use the `BQ.JOBS.CANCEL` system procedure:
 
-``` notranslate
+``` 
   CALL BQ.JOBS.CANCEL('JOB_ID');
 ```
 
@@ -570,7 +566,7 @@ Replace JOB\_ID with the ID of the job you're canceling.
 
 If you are in a different project but in the same region as the job you want to cancel, you must also include the project ID:
 
-``` notranslate
+``` 
   CALL BQ.JOBS.CANCEL('PROJECT_ID.JOB_ID');
 ```
 
@@ -597,15 +593,11 @@ To specify the job location, supply the `--location` flag and set the value to y
 
 The following command requests job cancellation and waits for completion. If the fully qualified job ID is supplied, the `--location` flag is ignored:
 
-``` notranslate
-bq --location=LOCATION cancel JOB_ID
-```
+    bq --location=LOCATION cancel JOB_ID
 
 The following command requests job cancellation and returns immediately. If the fully qualified job ID is supplied, the `--location` flag is ignored:
 
-``` notranslate
-bq --location=LOCATION --nosync cancel JOB_ID
-```
+    bq --location=LOCATION --nosync cancel JOB_ID
 
 Replace the following:
 
@@ -783,11 +775,9 @@ To specify the job location, supply the `--location` flag and set the value to y
 
 The following command deletes a job:
 
-``` notranslate
-bq --location=location \
-    --project_id=project_id \
-    rm -j job_id
-```
+    bq --location=location \
+        --project_id=project_id \
+        rm -j job_id
 
 ### Python
 

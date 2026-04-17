@@ -6,7 +6,7 @@ After you create a remote model, you can use it with the [`ML.PREDICT` function]
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 [INPUT (field_name field_type)]

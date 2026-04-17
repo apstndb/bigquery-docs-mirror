@@ -55,59 +55,55 @@ Wildcard tables are useful when a dataset contains multiple, similarly named tab
 
 A query that scans all the table IDs from 1929 through 1940 would be very long if you have to name all 12 tables in the `FROM` clause (most of the tables are omitted in this sample):
 
-``` no translate
-#standardSQL
-SELECT
-  max,
-  ROUND((max-32)*5/9,1) celsius,
-  mo,
-  da,
-  year
-FROM (
-  SELECT
-    *
-  FROM
-    `bigquery-public-data.noaa_gsod.gsod1929` UNION ALL
-  SELECT
-    *
-  FROM
-    `bigquery-public-data.noaa_gsod.gsod1930` UNION ALL
-  SELECT
-    *
-  FROM
-    `bigquery-public-data.noaa_gsod.gsod1931` UNION ALL
-
-  # ... Tables omitted for brevity
-
-  SELECT
-    *
-  FROM
-    `bigquery-public-data.noaa_gsod.gsod1940` )
-WHERE
-  max != 9999.9 # code for missing data
-ORDER BY
-  max DESC
-```
+    #standardSQL
+    SELECT
+      max,
+      ROUND((max-32)*5/9,1) celsius,
+      mo,
+      da,
+      year
+    FROM (
+      SELECT
+        *
+      FROM
+        `bigquery-public-data.noaa_gsod.gsod1929` UNION ALL
+      SELECT
+        *
+      FROM
+        `bigquery-public-data.noaa_gsod.gsod1930` UNION ALL
+      SELECT
+        *
+      FROM
+        `bigquery-public-data.noaa_gsod.gsod1931` UNION ALL
+    
+      # ... Tables omitted for brevity
+    
+      SELECT
+        *
+      FROM
+        `bigquery-public-data.noaa_gsod.gsod1940` )
+    WHERE
+      max != 9999.9 # code for missing data
+    ORDER BY
+      max DESC
 
 The same query using a wildcard table is much more concise:
 
-``` notranslate
-#standardSQL
-SELECT
-  max,
-  ROUND((max-32)*5/9,1) celsius,
-  mo,
-  da,
-  year
-FROM
-  `bigquery-public-data.noaa_gsod.gsod19*`
-WHERE
-  max != 9999.9 # code for missing data
-  AND _TABLE_SUFFIX BETWEEN '29'
-  AND '40'
-ORDER BY
-  max DESC
-```
+    #standardSQL
+    SELECT
+      max,
+      ROUND((max-32)*5/9,1) celsius,
+      mo,
+      da,
+      year
+    FROM
+      `bigquery-public-data.noaa_gsod.gsod19*`
+    WHERE
+      max != 9999.9 # code for missing data
+      AND _TABLE_SUFFIX BETWEEN '29'
+      AND '40'
+    ORDER BY
+      max DESC
 
 Wildcard tables support built-in BigQuery storage only. You cannot use wildcards when querying an [external table](https://docs.cloud.google.com/bigquery/external-data-sources) or a [view](https://docs.cloud.google.com/bigquery/docs/views) .
 
@@ -363,33 +359,29 @@ If the schema is inconsistent across the tables matched by the wildcard query, t
 
   - Longer prefixes generally perform better than shorter prefixes. For example, the following query uses a long prefix ( `gsod200` ):
     
-    ``` notranslate
-    #standardSQL
-    SELECT
-    max
-    FROM
-    `bigquery-public-data.noaa_gsod.gsod200*`
-    WHERE
-    max != 9999.9 # code for missing data
-    AND _TABLE_SUFFIX BETWEEN '0' AND '1'
-    ORDER BY
-    max DESC
-    ```
+        #standardSQL
+        SELECT
+        max
+        FROM
+        `bigquery-public-data.noaa_gsod.gsod200*`
+        WHERE
+        max != 9999.9 # code for missing data
+        AND _TABLE_SUFFIX BETWEEN '0' AND '1'
+        ORDER BY
+        max DESC
     
     The following query generally performs worse because it uses an empty prefix:
     
-    ``` notranslate
-    #standardSQL
-    SELECT
-    max
-    FROM
-    `bigquery-public-data.noaa_gsod.*`
-    WHERE
-    max != 9999.9 # code for missing data
-    AND _TABLE_SUFFIX BETWEEN 'gsod2000' AND 'gsod2001'
-    ORDER BY
-    max DESC
-    ```
+        #standardSQL
+        SELECT
+        max
+        FROM
+        `bigquery-public-data.noaa_gsod.*`
+        WHERE
+        max != 9999.9 # code for missing data
+        AND _TABLE_SUFFIX BETWEEN 'gsod2000' AND 'gsod2001'
+        ORDER BY
+        max DESC
 
   - Partitioning is recommended over sharding, because partitioned tables perform better. Sharding reduces performance while creating more tables to manage. For more information, see [Partitioning versus sharding](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#dt_partition_shard) .
 

@@ -72,17 +72,13 @@ To install the `dwh-migration-dumper` tool, follow these steps:
     
     ### Bash
     
-    ``` notranslate
-    sha256sum --check SHA256SUMS.txt
-    ```
+        sha256sum --check SHA256SUMS.txt
     
     If verification fails, see [Troubleshooting](https://docs.cloud.google.com/bigquery/docs/generate-metadata#corrupted_zip_file) .
     
     ### Windows PowerShell
     
-    ``` notranslate
-    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-    ```
+        (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
     
     Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
     
@@ -1260,9 +1256,7 @@ You can increase maximum memory by exporting the `JAVA_OPTS` environment variabl
 
 You can reduce the number of processing threads (default is 32) by including the `--thread-pool-size` flag. This option is supported for `hiveql` and `redshift*` connectors only.
 
-``` notranslate
-dwh-migration-dumper --thread-pool-size=1
-```
+    dwh-migration-dumper --thread-pool-size=1
 
 ### Handling a `WARN...Task failed` error
 
@@ -1274,9 +1268,7 @@ To validate the `dwh-migration-dumper` tool zip file, download the [`SHA256SUMS.
 
 ### Bash
 
-``` notranslate
-sha256sum --check SHA256SUMS.txt
-```
+    sha256sum --check SHA256SUMS.txt
 
 The `OK` result confirms successful checksum verification. Any other message indicates verification error:
 
@@ -1285,9 +1277,7 @@ The `OK` result confirms successful checksum verification. Any other message ind
 
 ### Windows PowerShell
 
-``` notranslate
-(Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-```
+    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 
 Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
@@ -1303,21 +1293,17 @@ Example:
 
 ### Bash
 
-``` notranslate
-dwh-migration-dumper \
-  -Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV \
-  -Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl \
-  -Dteradata-logs.log-date-column=ArchiveLogDate
-```
+    dwh-migration-dumper \
+      -Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV \
+      -Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl \
+      -Dteradata-logs.log-date-column=ArchiveLogDate
 
 ### Windows PowerShell
 
-``` notranslate
-dwh-migration-dumper `
-  "-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV" `
-  "-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl" `
-  "-Dteradata-logs.log-date-column=ArchiveLogDate"
-```
+    dwh-migration-dumper `
+      "-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV" `
+      "-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl" `
+      "-Dteradata-logs.log-date-column=ArchiveLogDate"
 
 ### Teradata row size limit exceeded
 
@@ -1332,37 +1318,29 @@ The following command shows the usage of the `-Dteradata.metadata.max-text-lengt
 
 ### Bash
 
-``` notranslate
-dwh-migration-dumper \
-  --connector teradata \
-  -Dteradata.metadata.max-text-length=10000
-```
+    dwh-migration-dumper \
+      --connector teradata \
+      -Dteradata.metadata.max-text-length=10000
 
 ### Windows PowerShell
 
-``` notranslate
-dwh-migration-dumper `
-  --connector teradata `
-  "-Dteradata.metadata.max-text-length=10000"
-```
+    dwh-migration-dumper `
+      --connector teradata `
+      "-Dteradata.metadata.max-text-length=10000"
 
 The following command shows the usage of the `-Dteradata-logs.max-sql-length` flag to split the long query text into multiple rows of at most 10000 characters each:
 
 ### Bash
 
-``` notranslate
-dwh-migration-dumper \
-  --connector teradata-logs \
-  -Dteradata-logs.max-sql-length=10000
-```
+    dwh-migration-dumper \
+      --connector teradata-logs \
+      -Dteradata-logs.max-sql-length=10000
 
 ### Windows PowerShell
 
-``` notranslate
-dwh-migration-dumper `
-  --connector teradata-logs `
-  "-Dteradata-logs.max-sql-length=10000"
-```
+    dwh-migration-dumper `
+      --connector teradata-logs `
+      "-Dteradata-logs.max-sql-length=10000"
 
 ### Oracle connection issue
 

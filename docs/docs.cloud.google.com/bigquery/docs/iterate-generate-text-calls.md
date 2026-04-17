@@ -93,11 +93,9 @@ Create a remote model that represents a hosted Vertex AI `gemini-2.5-flash` mode
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `sample.generate_text`
-      REMOTE WITH CONNECTION DEFAULT
-      OPTIONS (ENDPOINT = 'gemini-2.5-flash');
-    ```
+        CREATE OR REPLACE MODEL `sample.generate_text`
+          REMOTE WITH CONNECTION DEFAULT
+          OPTIONS (ENDPOINT = 'gemini-2.5-flash');
     
     The query takes several seconds to complete, after which the `generate_text` model appears in the `sample` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -109,16 +107,14 @@ Run the `bqutil.procedure.bqml_generate_text` stored procedure, which iterates t
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CALL `bqutil.procedure.bqml_generate_text`(
-        "bigquery-public-data.bbc_news.fulltext",   -- source table
-        "PROJECT_ID.sample.news_generated_text",  -- destination table
-        "PROJECT_ID.sample.generate_text",        -- model
-        "body",                                     -- content column
-        ["filename"],                               -- key columns
-        '{}'                                        -- optional arguments
-    );
-    ```
+        CALL `bqutil.procedure.bqml_generate_text`(
+            "bigquery-public-data.bbc_news.fulltext",   -- source table
+            "PROJECT_ID.sample.news_generated_text",  -- destination table
+            "PROJECT_ID.sample.generate_text",        -- model
+            "body",                                     -- content column
+            ["filename"],                               -- key columns
+            '{}'                                        -- optional arguments
+        );
     
     Replace `  PROJECT_ID  ` with the project ID of the project you are using for this tutorial.
     
@@ -126,11 +122,9 @@ Run the `bqutil.procedure.bqml_generate_text` stored procedure, which iterates t
 
 3.  When the query is finished running, confirm that there are no rows in the `sample.news_generated_text` table that contain a retryable error. In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT *
-    FROM `sample.news_generated_text`
-    WHERE ml_generate_text_status LIKE '%A retryable error occurred%';
-    ```
+        SELECT *
+        FROM `sample.news_generated_text`
+        WHERE ml_generate_text_status LIKE '%A retryable error occurred%';
     
     The query returns the message `No data to display` .
 

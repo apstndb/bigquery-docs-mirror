@@ -71,14 +71,12 @@ The following example retrieves all the unhealthy materialized views from the `I
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` .
 
-``` notranslate
-SELECT
-  table_name, last_refresh_status
-FROM
-  mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
-WHERE
-  last_refresh_status IS NOT NULL;
-```
+    SELECT
+      table_name, last_refresh_status
+    FROM
+      mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
+    WHERE
+      last_refresh_status IS NOT NULL;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -99,14 +97,12 @@ The following example retrieves the `last_refresh_time` and `refresh_watermark` 
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` .
 
-``` notranslate
-SELECT
-  table_name, last_refresh_time, refresh_watermark
-FROM
-  mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
-WHERE
-  table_name = 'myview';
-```
+    SELECT
+      table_name, last_refresh_time, refresh_watermark
+    FROM
+      mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
+    WHERE
+      table_name = 'myview';
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

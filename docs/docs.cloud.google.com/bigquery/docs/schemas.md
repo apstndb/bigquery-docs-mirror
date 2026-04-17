@@ -196,17 +196,15 @@ You cannot set the `rounding_mode` option for a column that is not a `NUMERIC` o
 
 The following example creates a table and inserts values that are rounded based on the rounding mode of the column:
 
-``` notranslate
-CREATE TABLE mydataset.mytable (
-  x NUMERIC(5,2) OPTIONS (rounding_mode='ROUND_HALF_EVEN'),
-  y NUMERIC(5,2) OPTIONS (rounding_mode='ROUND_HALF_AWAY_FROM_ZERO')
-);
-INSERT mydataset.mytable (x, y)
-VALUES (NUMERIC "1.025", NUMERIC "1.025"),
-       (NUMERIC "1.0251", NUMERIC "1.0251"),
-       (NUMERIC "1.035", NUMERIC "1.035"),
-       (NUMERIC "-1.025", NUMERIC "-1.025");
-```
+    CREATE TABLE mydataset.mytable (
+      x NUMERIC(5,2) OPTIONS (rounding_mode='ROUND_HALF_EVEN'),
+      y NUMERIC(5,2) OPTIONS (rounding_mode='ROUND_HALF_AWAY_FROM_ZERO')
+    );
+    INSERT mydataset.mytable (x, y)
+    VALUES (NUMERIC "1.025", NUMERIC "1.025"),
+           (NUMERIC "1.0251", NUMERIC "1.0251"),
+           (NUMERIC "1.035", NUMERIC "1.035"),
+           (NUMERIC "-1.025", NUMERIC "-1.025");
 
 The table `mytable` looks like the following:
 
@@ -270,11 +268,9 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE IF NOT EXISTS mydataset.newtable (x INT64, y STRING, z BOOL)
-      OPTIONS(
-        description = 'My example table');
-    ```
+        CREATE TABLE IF NOT EXISTS mydataset.newtable (x INT64, y STRING, z BOOL)
+          OPTIONS(
+            description = 'My example table');
 
 3.  Click play\_circle **Run** .
 
@@ -293,13 +289,11 @@ To load data into a table using an inline schema definition, enter the `load` co
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-``` notranslate
-bq --location=location load \
---source_format=format \
-project_id:dataset.table_name \
-path_to_source \
-schema
-```
+    bq --location=location load \
+    --source_format=format \
+    project_id:dataset.table_name \
+    path_to_source \
+    schema
 
 Replace the following:
 
@@ -325,9 +319,7 @@ For more information about loading data into BigQuery, see [Introduction to load
 
 To specify an inline schema definition when you create an empty table, enter the `bq mk` command with the `--table` or `-t` flag. If you are creating a table in a project other than your default project, add the project ID to the command in the following format: `  project_id : dataset . table  ` .
 
-``` notranslate
-bq mk --table project_id:dataset.table schema
-```
+    bq mk --table project_id:dataset.table schema
 
 Replace the following:
 
@@ -693,52 +685,48 @@ If you prefer, you can specify the schema using a JSON schema file instead of us
 
 To create a JSON schema file, enter a [`TableFieldSchema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema) for each column. The `name` and `type` fields are required. All other fields are optional.
 
-``` notranslate
-[
-  {
-    "name": string,
-    "type": string,
-    "mode": string,
-    "fields": [
+    [
       {
-        object (TableFieldSchema)
+        "name": string,
+        "type": string,
+        "mode": string,
+        "fields": [
+          {
+            object (TableFieldSchema)
+          }
+        ],
+        "description": string,
+        "policyTags": {
+          "names": [
+            string
+          ]
+        },
+        "maxLength": string,
+        "precision": string,
+        "scale": string,
+        "collation": string,
+        "defaultValueExpression": string,
+        "roundingMode": string
+      },
+      {
+        "name": string,
+        "type": string,
+        ...
       }
-    ],
-    "description": string,
-    "policyTags": {
-      "names": [
-        string
-      ]
-    },
-    "maxLength": string,
-    "precision": string,
-    "scale": string,
-    "collation": string,
-    "defaultValueExpression": string,
-    "roundingMode": string
-  },
-  {
-    "name": string,
-    "type": string,
-    ...
-  }
-]
-```
+    ]
 
 If the column is a `RANGE<T>` type, use the `rangeElementType` field to describe `T` , where `T` must be one of `DATE` , `DATETIME` , or `TIMESTAMP` .
 
-``` notranslate
-[
-  {
-    "name": "duration",
-    "type": "RANGE",
-    "mode": "NULLABLE",
-    "rangeElementType": {
-      "type": "DATE"
-    }
-  }
-]
-```
+    [
+      {
+        "name": "duration",
+        "type": "RANGE",
+        "mode": "NULLABLE",
+        "rangeElementType": {
+          "type": "DATE"
+        }
+      }
+    ]
 
 The JSON array is indicated by the beginning and ending brackets `[]` . Each column entry must be separated by a comma: `},` .
 
@@ -746,12 +734,10 @@ To write an existing table schema to a local file, do the following:
 
 ### bq
 
-``` notranslate
-bq show \
---schema \
---format=prettyjson \
-project_id:dataset.table > path_to_file
-```
+    bq show \
+    --schema \
+    --format=prettyjson \
+    project_id:dataset.table > path_to_file
 
 Replace the following:
 
@@ -795,28 +781,26 @@ You can use the output file as a starting point for your own JSON schema file. I
 
 For example, the following JSON array represents a basic table schema. This schema has three columns: `qtr` ( `REQUIRED` `STRING` ), `rep` ( `NULLABLE` `STRING` ), and `sales` ( `NULLABLE` `FLOAT` ).
 
-``` notranslate
-[
-  {
-    "name": "qtr",
-    "type": "STRING",
-    "mode": "REQUIRED",
-    "description": "quarter"
-  },
-  {
-    "name": "rep",
-    "type": "STRING",
-    "mode": "NULLABLE",
-    "description": "sales representative"
-  },
-  {
-    "name": "sales",
-    "type": "FLOAT",
-    "mode": "NULLABLE",
-    "defaultValueExpression": "2.55"
-  }
-]
-```
+    [
+      {
+        "name": "qtr",
+        "type": "STRING",
+        "mode": "REQUIRED",
+        "description": "quarter"
+      },
+      {
+        "name": "rep",
+        "type": "STRING",
+        "mode": "NULLABLE",
+        "description": "sales representative"
+      },
+      {
+        "name": "sales",
+        "type": "FLOAT",
+        "mode": "NULLABLE",
+        "defaultValueExpression": "2.55"
+      }
+    ]
 
 ### Using a JSON schema file
 
@@ -835,13 +819,11 @@ To load data into a table using a JSON schema definition, do the following:
 
 ### bq
 
-``` notranslate
-bq --location=location load \
---source_format=format \
-project_id:dataset.table \
-path_to_data_file \
-path_to_schema_file
-```
+    bq --location=location load \
+    --source_format=format \
+    project_id:dataset.table \
+    path_to_data_file \
+    path_to_schema_file
 
 Replace the following:
 
@@ -857,9 +839,7 @@ Example:
 
 Enter the following command to load data from a local CSV file named `myfile.csv` into `mydataset.mytable` in your default project. The schema is specified in `myschema.json` in the current directory.
 
-``` notranslate
-bq load --source_format=CSV mydataset.mytable ./myfile.csv ./myschema.json
-```
+    bq load --source_format=CSV mydataset.mytable ./myfile.csv ./myschema.json
 
 ### Python
 
@@ -907,9 +887,7 @@ To create an empty table in an existing dataset using a JSON schema file, do the
 
 ### bq
 
-``` notranslate
-bq mk --table project_id:dataset.table path_to_schema_file
-```
+    bq mk --table project_id:dataset.table path_to_schema_file
 
 Replace the following:
 
@@ -920,9 +898,7 @@ Replace the following:
 
 For example, the following command creates a table named `mytable` in `mydataset` in your default project. The schema is specified in `myschema.json` in the current directory:
 
-``` notranslate
-bq mk --table mydataset.mytable ./myschema.json
-```
+    bq mk --table mydataset.mytable ./myschema.json
 
 ### Python
 

@@ -58,7 +58,7 @@ In the **Create table** pane, specify the following details:
 3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. The schema must include a `DATE` , `TIMESTAMP` , or `DATETIME` column for the partitioning column. For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) . You can enter schema information manually by using one of the following methods:
       - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
         
-        ``` notranslate
+        ``` 
             bq show --format=prettyjson dataset.table
             
         ```
@@ -82,15 +82,13 @@ The following example creates a table with daily partitions based on the `transa
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE
-      mydataset.newtable (transaction_id INT64, transaction_date DATE)
-    PARTITION BY
-      transaction_date
-      OPTIONS (
-        partition_expiration_days = 3,
-        require_partition_filter = TRUE);
-    ```
+        CREATE TABLE
+          mydataset.newtable (transaction_id INT64, transaction_date DATE)
+        PARTITION BY
+          transaction_date
+          OPTIONS (
+            partition_expiration_days = 3,
+            require_partition_filter = TRUE);
     
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
@@ -100,27 +98,23 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The default partitioning type for `DATE` columns is daily partitioning. To specify a different partitioning type, include the [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc) function in the `PARTITION BY` clause. For example, the following query creates a table with monthly partitions:
 
-``` notranslate
-CREATE TABLE
-  mydataset.newtable (transaction_id INT64, transaction_date DATE)
-PARTITION BY
-  DATE_TRUNC(transaction_date, MONTH)
-  OPTIONS (
-    partition_expiration_days = 3,
-    require_partition_filter = TRUE);
-```
+    CREATE TABLE
+      mydataset.newtable (transaction_id INT64, transaction_date DATE)
+    PARTITION BY
+      DATE_TRUNC(transaction_date, MONTH)
+      OPTIONS (
+        partition_expiration_days = 3,
+        require_partition_filter = TRUE);
 
 You can also specify a `TIMESTAMP` or `DATETIME` column as the partitioning column. In that case, include the `TIMESTAMP_TRUNC` or `DATETIME_TRUNC` function in the `PARTITION BY` clause to specify the partition type. For example, the following statement creates a table with daily partitions based on a `TIMESTAMP` column:
 
-``` notranslate
-CREATE TABLE
-  mydataset.newtable (transaction_id INT64, transaction_ts TIMESTAMP)
-PARTITION BY
-  TIMESTAMP_TRUNC(transaction_ts, DAY)
-  OPTIONS (
-    partition_expiration_days = 3,
-    require_partition_filter = TRUE);
-```
+    CREATE TABLE
+      mydataset.newtable (transaction_id INT64, transaction_ts TIMESTAMP)
+    PARTITION BY
+      TIMESTAMP_TRUNC(transaction_ts, DAY)
+      OPTIONS (
+        partition_expiration_days = 3,
+        require_partition_filter = TRUE);
 
 ### bq
 
@@ -130,16 +124,14 @@ PARTITION BY
 
 2.  Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `--table` flag (or `-t` shortcut):
     
-    ``` notranslate
-    bq mk \
-       --table \
-       --schema SCHEMA \
-       --time_partitioning_field COLUMN \
-       --time_partitioning_type UNIT_TIME \
-       --time_partitioning_expiration EXPIRATION_TIME \
-       --require_partition_filter=BOOLEAN
-       PROJECT_ID:DATASET.TABLE
-    ```
+        bq mk \
+           --table \
+           --schema SCHEMA \
+           --time_partitioning_field COLUMN \
+           --time_partitioning_type UNIT_TIME \
+           --time_partitioning_expiration EXPIRATION_TIME \
+           --require_partition_filter=BOOLEAN
+           PROJECT_ID:DATASET.TABLE
     
     Replace the following:
     
@@ -156,15 +148,13 @@ PARTITION BY
     
     The following example creates a table named `mytable` that is partitioned on the `ts` column, using hourly partitioning. The partition expiration is 259,200 seconds (3 days).
     
-    ``` notranslate
-    bq mk \
-       -t \
-       --schema 'ts:TIMESTAMP,qtr:STRING,sales:FLOAT' \
-       --time_partitioning_field ts \
-       --time_partitioning_type HOUR \
-       --time_partitioning_expiration 259200  \
-       mydataset.mytable
-    ```
+        bq mk \
+           -t \
+           --schema 'ts:TIMESTAMP,qtr:STRING,sales:FLOAT' \
+           --time_partitioning_field ts \
+           --time_partitioning_type HOUR \
+           --time_partitioning_expiration 259200  \
+           mydataset.mytable
 
 ### Terraform
 
@@ -176,7 +166,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a table named `mytable` that is partitioned by day:
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -507,15 +497,13 @@ The following example creates a table with daily partitions:
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE
-      mydataset.newtable (transaction_id INT64)
-    PARTITION BY
-      _PARTITIONDATE
-      OPTIONS (
-        partition_expiration_days = 3,
-        require_partition_filter = TRUE);
-    ```
+        CREATE TABLE
+          mydataset.newtable (transaction_id INT64)
+        PARTITION BY
+          _PARTITIONDATE
+          OPTIONS (
+            partition_expiration_days = 3,
+            require_partition_filter = TRUE);
     
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
@@ -525,15 +513,13 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The default partitioning type for ingestion-time partitioning is daily partitioning. To specify a different partitioning type, include the [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc) function in the `PARTITION BY` clause. For example, the following query creates a table with monthly partitions:
 
-``` notranslate
-CREATE TABLE
-  mydataset.newtable (transaction_id INT64)
-PARTITION BY
-  DATE_TRUNC(_PARTITIONTIME, MONTH)
-  OPTIONS (
-    partition_expiration_days = 3,
-    require_partition_filter = TRUE);
-```
+    CREATE TABLE
+      mydataset.newtable (transaction_id INT64)
+    PARTITION BY
+      DATE_TRUNC(_PARTITIONTIME, MONTH)
+      OPTIONS (
+        partition_expiration_days = 3,
+        require_partition_filter = TRUE);
 
 ### bq
 
@@ -543,15 +529,13 @@ PARTITION BY
 
 2.  Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `--table` flag (or `-t` shortcut):
     
-    ``` notranslate
-    bq mk \
-       --table \
-       --schema SCHEMA \
-       --time_partitioning_type UNIT_TIME \
-       --time_partitioning_expiration EXPIRATION_TIME \
-       --require_partition_filter=BOOLEAN  \
-       PROJECT_ID:DATASET.TABLE
-    ```
+        bq mk \
+           --table \
+           --schema SCHEMA \
+           --time_partitioning_type UNIT_TIME \
+           --time_partitioning_expiration EXPIRATION_TIME \
+           --require_partition_filter=BOOLEAN  \
+           PROJECT_ID:DATASET.TABLE
     
     Replace the following:
     
@@ -567,14 +551,12 @@ PARTITION BY
     
     The following example creates an ingestion-time partitioned table named `mytable` . The table has daily partitioning, with a partition expiration of 259,200 seconds (3 days).
     
-    ``` notranslate
-    bq mk \
-       -t \
-       --schema qtr:STRING,sales:FLOAT,year:STRING \
-       --time_partitioning_type DAY \
-       --time_partitioning_expiration 259200 \
-       mydataset.mytable
-    ```
+        bq mk \
+           -t \
+           --schema qtr:STRING,sales:FLOAT,year:STRING \
+           --time_partitioning_type DAY \
+           --time_partitioning_expiration 259200 \
+           mydataset.mytable
 
 ### Terraform
 
@@ -586,7 +568,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a table named `mytable` that is partitioned by ingestion time:
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -742,13 +724,11 @@ The following example creates a table that is partitioned on the `customer_id` c
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.newtable (customer_id INT64, date1 DATE)
-    PARTITION BY
-      RANGE_BUCKET(customer_id, GENERATE_ARRAY(0, 100, 10))
-      OPTIONS (
-        require_partition_filter = TRUE);
-    ```
+        CREATE TABLE mydataset.newtable (customer_id INT64, date1 DATE)
+        PARTITION BY
+          RANGE_BUCKET(customer_id, GENERATE_ARRAY(0, 100, 10))
+          OPTIONS (
+            require_partition_filter = TRUE);
     
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
@@ -764,13 +744,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 2.  Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command with the `--table` flag (or `-t` shortcut):
     
-    ``` notranslate
-    bq mk \
-       --schema schema \
-       --range_partitioning=COLUMN_NAME,START,END,INTERVAL \
-       --require_partition_filter=BOOLEAN  \
-       PROJECT_ID:DATASET.TABLE
-    ```
+        bq mk \
+           --schema schema \
+           --range_partitioning=COLUMN_NAME,START,END,INTERVAL \
+           --require_partition_filter=BOOLEAN  \
+           PROJECT_ID:DATASET.TABLE
     
     Replace the following:
     
@@ -790,13 +768,11 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     The following example creates a table named `mytable` that is partitioned on the `customer_id` column.
     
-    ``` notranslate
-    bq mk \
-       -t \
-       --schema 'customer_id:INTEGER,qtr:STRING,sales:FLOAT' \
-       --range_partitioning=customer_id,0,100,10 \
-       mydataset.mytable
-    ```
+        bq mk \
+           -t \
+           --schema 'customer_id:INTEGER,qtr:STRING,sales:FLOAT' \
+           --range_partitioning=customer_id,0,100,10 \
+           mydataset.mytable
 
 ### Terraform
 
@@ -808,7 +784,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a table named `mytable` that is partitioned by integer range:
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -1093,18 +1069,16 @@ The following example creates a table that is partitioned on the `transaction_da
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE
-      mydataset.newtable (transaction_id INT64, transaction_date DATE)
-    PARTITION BY
-      transaction_date
-    AS (
-      SELECT
-        transaction_id, transaction_date
-      FROM
-        mydataset.mytable
-    );
-    ```
+        CREATE TABLE
+          mydataset.newtable (transaction_id INT64, transaction_date DATE)
+        PARTITION BY
+          transaction_date
+        AS (
+          SELECT
+            transaction_id, transaction_date
+          FROM
+            mydataset.mytable
+        );
     
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
@@ -1122,34 +1096,28 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     Time-unit column-partitioning:
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --destination_table TABLE_NAME \
-       --time_partitioning_field COLUMN \
-       --time_partitioning_type UNIT_TIME \
-       'QUERY_STATEMENT'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --destination_table TABLE_NAME \
+           --time_partitioning_field COLUMN \
+           --time_partitioning_type UNIT_TIME \
+           'QUERY_STATEMENT'
     
     Ingestion-time partitioning:
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --destination_table TABLE_NAME \
-       --time_partitioning_type UNIT_TIME \
-       'QUERY_STATEMENT'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --destination_table TABLE_NAME \
+           --time_partitioning_type UNIT_TIME \
+           'QUERY_STATEMENT'
     
     Integer-range partitioning:
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --destination_table PROJECT_ID:DATASET.TABLE \
-       --range_partitioning COLUMN,START,END,INTERVAL \
-       'QUERY_STATEMENT'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --destination_table PROJECT_ID:DATASET.TABLE \
+           --range_partitioning COLUMN,START,END,INTERVAL \
+           'QUERY_STATEMENT'
     
     Replace the following:
     
@@ -1165,34 +1133,28 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     The following example creates a table that is partitioned on the `transaction_date` column, using monthly partitioning.
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --destination_table mydataset.newtable \
-       --time_partitioning_field transaction_date \
-       --time_partitioning_type MONTH \
-       'SELECT transaction_id, transaction_date FROM mydataset.mytable'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --destination_table mydataset.newtable \
+           --time_partitioning_field transaction_date \
+           --time_partitioning_type MONTH \
+           'SELECT transaction_id, transaction_date FROM mydataset.mytable'
     
     The following example creates a table that is partitioned on the `customer_id` column, using integer-range partitioning.
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --destination_table mydataset.newtable \
-       --range_partitioning customer_id,0,100,10 \
-       'SELECT * FROM mydataset.ponies'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --destination_table mydataset.newtable \
+           --range_partitioning customer_id,0,100,10 \
+           'SELECT * FROM mydataset.ponies'
     
     For ingestion-time partitioned tables, you can also load data into a specific partition by using a [partition decorator](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#write-to-partition) . The following example creates a new ingestion-time partitioned table and loads data into the `20180201` (February 1, 2018) partition:
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false  \
-       --time_partitioning_type=DAY \
-       --destination_table='newtable$20180201' \
-       'SELECT * FROM mydataset.mytable'
-    ```
+        bq query \
+           --use_legacy_sql=false  \
+           --time_partitioning_type=DAY \
+           --destination_table='newtable$20180201' \
+           'SELECT * FROM mydataset.mytable'
 
 ### API
 
@@ -1202,13 +1164,11 @@ To save query results to a partitioned table, call the [`jobs.insert`](https://d
 
 If you previously created date-sharded tables, you can convert the entire set of related tables into a single ingestion-time partitioned table by using the [`partition`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_partition) command in the bq command-line tool.
 
-``` notranslate
-bq --location=LOCATION partition \
-    --time_partitioning_type=PARTITION_TYPE \
-    --time_partitioning_expiration INTEGER \
-    PROJECT_ID:SOURCE_DATASET.SOURCE_TABLE \
-    PROJECT_ID:DESTINATION_DATASET.DESTINATION_TABLE
-```
+    bq --location=LOCATION partition \
+        --time_partitioning_type=PARTITION_TYPE \
+        --time_partitioning_expiration INTEGER \
+        PROJECT_ID:SOURCE_DATASET.SOURCE_TABLE \
+        PROJECT_ID:DESTINATION_DATASET.DESTINATION_TABLE
 
 Replace the following:
 

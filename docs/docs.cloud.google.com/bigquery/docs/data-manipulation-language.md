@@ -161,38 +161,30 @@ To enable fine-grained DML, set the [`enable_fine_grained_mutations` table optio
 
 To create a new table with fine-grained DML, use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) :
 
-``` notranslate
-CREATE TABLE mydataset.mytable (
-  product STRING,
-  inventory INT64)
-OPTIONS(enable_fine_grained_mutations = TRUE);
-```
+    CREATE TABLE mydataset.mytable (
+      product STRING,
+      inventory INT64)
+    OPTIONS(enable_fine_grained_mutations = TRUE);
 
 To alter an existing table with fine-grained DML, use the [`ALTER TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-SET OPTIONS(enable_fine_grained_mutations = TRUE);
-```
+    ALTER TABLE mydataset.mytable
+    SET OPTIONS(enable_fine_grained_mutations = TRUE);
 
 To alter all existing tables in a dataset with fine-grained DML, use the [`ALTER TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) :
 
-``` notranslate
-FOR record IN (SELECT CONCAT(table_schema, '.', table_name) AS table_path FROM mydataset.INFORMATION_SCHEMA.TABLES)DO EXECUTE IMMEDIATE   "ALTER TABLE " || record.table_path || " SET OPTIONS(enable_fine_grained_mutations = TRUE)";END FOR;
-```
+    FOR record IN (SELECT CONCAT(table_schema, '.', table_name) AS table_path FROM mydataset.INFORMATION_SCHEMA.TABLES)DO EXECUTE IMMEDIATE   "ALTER TABLE " || record.table_path || " SET OPTIONS(enable_fine_grained_mutations = TRUE)";END FOR;
 
 After the `enable_fine_grained_mutations` option is set to `TRUE` , mutating DML statements are run with fine-grained DML capabilities enabled and use existing [DML statement syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
 
 To determine if a table has been enabled with fine-grained DML, query the [`INFORMATION_SCHEMA.TABLES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) . The following example checks which tables within a dataset have been enabled with this feature:
 
-``` notranslate
-SELECT
-  table_schema AS datasetId,
-  table_name AS tableId,
-  is_fine_grained_mutations_enabled
-FROM
-  DATASET_NAME.INFORMATION_SCHEMA.TABLES;
-```
+    SELECT
+      table_schema AS datasetId,
+      table_name AS tableId,
+      is_fine_grained_mutations_enabled
+    FROM
+      DATASET_NAME.INFORMATION_SCHEMA.TABLES;
 
 Replace `  DATASET_NAME  ` with the name of the dataset in which to check if any tables have fine-grained DML enabled.
 
@@ -200,10 +192,8 @@ Replace `  DATASET_NAME  ` with the name of the dataset in which to check if any
 
 To disable fine-grained DML from an existing table, use the [`ALTER TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) .
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-SET OPTIONS(enable_fine_grained_mutations = FALSE);
-```
+    ALTER TABLE mydataset.mytable
+    SET OPTIONS(enable_fine_grained_mutations = FALSE);
 
 When disabling fine-grained DML, it may take some time for all deleted data to be fully processed, see [Deleted data considerations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#deleted_data_considerations) . As a result, [fine-grained DML limitations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained-dml-limitations) may persist until this has occurred.
 
@@ -264,14 +254,12 @@ The timing of offloaded garbage collection tasks is determined by the frequency 
 
 To identify offloaded fine-grained DML deleted data processing jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) :
 
-``` notranslate
-SELECT
-  *
-FROM
-  region-us.INFORMATION_SCHEMA.JOBS
-WHERE
-  job_id LIKE "%fine_grained_mutation_garbage_collection%"
-```
+    SELECT
+      *
+    FROM
+      region-us.INFORMATION_SCHEMA.JOBS
+    WHERE
+      job_id LIKE "%fine_grained_mutation_garbage_collection%"
 
 ### Limitations
 
@@ -301,19 +289,15 @@ For best performance, Google recommends the following patterns:
 
   - If you often update rows where one or more columns fall within a narrow range of values, consider using [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . Clustering ensures that changes are limited to specific sets of blocks, reducing the amount of data that needs to be read and written. The following is an example of an `UPDATE` statement that filters on a range of column values:
     
-    ``` notranslate
-    UPDATE mydataset.mytable
-    SET string_col = 'some string'
-    WHERE id BETWEEN 54 AND 75;
-    ```
+        UPDATE mydataset.mytable
+        SET string_col = 'some string'
+        WHERE id BETWEEN 54 AND 75;
     
     Here is a similar example that filters on a small list of column values:
     
-    ``` notranslate
-    UPDATE mydataset.mytable
-    SET string_col = 'some string'
-    WHERE id IN (54, 57, 60);
-    ```
+        UPDATE mydataset.mytable
+        SET string_col = 'some string'
+        WHERE id IN (54, 57, 60);
     
     Consider clustering on the `id` column in these cases.
 

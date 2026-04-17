@@ -6,7 +6,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(MODEL_TYPE = 'TENSORFLOW', MODEL_PATH = string_value
@@ -141,8 +141,6 @@ Imported TensorFlow models have the following limitations:
 
 The following example imports a TensorFlow model into BigQuery ML as a BigQuery ML model. The example assumes that there is an existing TensorFlow model located at `gs://bucket/path/to/saved_model/*` .
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='TENSORFLOW',
-         MODEL_PATH="gs://bucket/path/to/saved_model/*")
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='TENSORFLOW',
+             MODEL_PATH="gs://bucket/path/to/saved_model/*")

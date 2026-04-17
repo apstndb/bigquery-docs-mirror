@@ -765,16 +765,14 @@ Enter the `bq mk` command and supply the transfer creation flag `--transfer_conf
 
 <!-- end list -->
 
-``` notranslate
-bq mk \
-    --transfer_config \
-    --project_id=project_id \
-    --data_source=data_source \
-    --target_dataset=dataset \
-    --display_name=name \
-    --service_account_name=service_account \
-    --params='parameters'
-```
+    bq mk \
+        --transfer_config \
+        --project_id=project_id \
+        --data_source=data_source \
+        --target_dataset=dataset \
+        --display_name=name \
+        --service_account_name=service_account \
+        --params='parameters'
 
 Where:
 

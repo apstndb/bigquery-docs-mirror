@@ -330,7 +330,7 @@ Run the query in Teradata:
     
     The result looks similar to the following:
     
-    ``` console
+    ```console
     L_RETURNFLAG  L_LINESTATUS            sum_qty     sum_base_price     sum_disc_price         sum_charge            avg_qty          avg_price           avg_disc  count_order
     ------------  ------------  -----------------  -----------------  -----------------  -----------------  -----------------  -----------------  -----------------  -----------
     N             O                     629900.00       943154565.63     896323924.4600   932337245.114003              25.45           38113.41                .05        24746

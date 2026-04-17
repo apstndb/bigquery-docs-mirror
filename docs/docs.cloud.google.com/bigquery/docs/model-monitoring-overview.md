@@ -53,23 +53,21 @@ Typical steps for this use case are as follows:
 
 2.  Run the `ML.TFDV_VALIDATE` function on your training and serving data statistics, or on two sets of serving data statistics, to evaluate data skew or feature drift, respectively. The training and serving data must be provided as a TensorFlow [`DatasetFeatureStatisticsList` protocol buffer](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto/statistics_pb2/DatasetFeatureStatisticsList) in JSON format. You can generate a protocol buffer in the correct format by running the `ML.TFDV_DESCRIBE` function, or you can load it from outside of BigQuery. The following example shows how to evaluate feature skew:
     
-    ``` notranslate
-    DECLARE stats1 JSON;
-    DECLARE stats2 JSON;
-    
-    SET stats1 = (
-      SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.training`)
-    );
-    SET stats2 = (
-      SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`)
-    );
-    
-    SELECT ML.TFDV_VALIDATE(stats1, stats2, 'SKEW');
-    
-    INSERT `myproject.mydataset.serve_stats`
-      (t, dataset_feature_statistics_list)
-    SELECT CURRENT_TIMESTAMP() AS t, stats1;
-    ```
+        DECLARE stats1 JSON;
+        DECLARE stats2 JSON;
+        
+        SET stats1 = (
+          SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.training`)
+        );
+        SET stats2 = (
+          SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`)
+        );
+        
+        SELECT ML.TFDV_VALIDATE(stats1, stats2, 'SKEW');
+        
+        INSERT `myproject.mydataset.serve_stats`
+          (t, dataset_feature_statistics_list)
+        SELECT CURRENT_TIMESTAMP() AS t, stats1;
 
 3.  If there is data skew or data drift, investigate the root cause, adjust the training data appropriately, and then retrain the model.
 

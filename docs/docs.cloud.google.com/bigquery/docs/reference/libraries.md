@@ -8,17 +8,13 @@ Read more about the Cloud Client Libraries and the older Google API Client Libra
 
 ### C\#
 
-``` notranslate
-Install-Package Google.Cloud.BigQuery.V2 -Pre
-```
+    Install-Package Google.Cloud.BigQuery.V2 -Pre
 
 For more information, see [Setting Up a C\# Development Environment](https://docs.cloud.google.com/dotnet/docs/setup) .
 
 ### Go
 
-``` notranslate
-go get cloud.google.com/go/bigquery
-```
+    go get cloud.google.com/go/bigquery
 
 For more information, see [Setting Up a Go Development Environment](https://docs.cloud.google.com/go/docs/setup) .
 
@@ -70,33 +66,25 @@ For more information, see [Setting Up a Java Development Environment](https://do
 
 ### Node.js
 
-``` notranslate
-npm install @google-cloud/bigquery
-```
+    npm install @google-cloud/bigquery
 
 For more information, see [Setting Up a Node.js Development Environment](https://docs.cloud.google.com/nodejs/docs/setup) .
 
 ### PHP
 
-``` notranslate
-composer require google/cloud-bigquery
-```
+    composer require google/cloud-bigquery
 
 For more information, see [Using PHP on Google Cloud](https://docs.cloud.google.com/php/docs) .
 
 ### Python
 
-``` notranslate
-pip install --upgrade google-cloud-bigquery
-```
+    pip install --upgrade google-cloud-bigquery
 
 For more information, see [Setting Up a Python Development Environment](https://docs.cloud.google.com/python/docs/setup) .
 
 ### Ruby
 
-``` notranslate
-gem install google-cloud-bigquery
-```
+    gem install google-cloud-bigquery
 
 For more information, see [Setting Up a Ruby Development Environment](https://docs.cloud.google.com/ruby/docs/setup) .
 
@@ -478,9 +466,7 @@ The following list contains links to more resources related to the client librar
 
 To get started with BigQuery DataFrames, install the library:
 
-``` notranslate
-pip install --upgrade bigframes
-```
+    pip install --upgrade bigframes
 
 The following example shows how to initialize BigQuery DataFrames and perform a simple query.
 

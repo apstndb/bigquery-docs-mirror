@@ -33,10 +33,8 @@ Projection refers to the number of columns that are read by your query. Projecti
 
   - **Use `SELECT * EXCEPT`** . Querying a subset of data or using `SELECT * EXCEPT` can greatly reduce the amount of data that is read by a query. In addition to the cost savings, performance is improved by reducing the amount of data I/O and the amount of materialization that is required for the query results.
     
-    ``` notranslate
-    SELECT * EXCEPT (col1, col2, col5)
-    FROM mydataset.newtable
-    ```
+        SELECT * EXCEPT (col1, col2, col5)
+        FROM mydataset.newtable
 
 ### Avoid excessive wildcard tables
 
@@ -94,56 +92,52 @@ Using a [`GROUP BY` clause](https://docs.cloud.google.com/bigquery/docs/referenc
 
 For queries with `GROUP BY` and `JOIN` , perform aggregation earlier in the query to reduce the amount of data processed. For example, the following query performs a `JOIN` on two large tables without any filtering beforehand:
 
-``` notranslate
-WITH
-  users_posts AS (
-  SELECT *
-  FROM
-    `bigquery-public-data`.stackoverflow.comments AS c
-  JOIN
-    `bigquery-public-data`.stackoverflow.users AS u
-  ON
-    c.user_id = u.id
-  )
-SELECT
-  user_id,
-  ANY_VALUE(display_name) AS display_name,
-  ANY_VALUE(reputation) AS reputation,
-  COUNT(text) AS comments_count
-FROM users_posts
-GROUP BY user_id
-ORDER BY comments_count DESC
-LIMIT 20;
-```
+    WITH
+      users_posts AS (
+      SELECT *
+      FROM
+        `bigquery-public-data`.stackoverflow.comments AS c
+      JOIN
+        `bigquery-public-data`.stackoverflow.users AS u
+      ON
+        c.user_id = u.id
+      )
+    SELECT
+      user_id,
+      ANY_VALUE(display_name) AS display_name,
+      ANY_VALUE(reputation) AS reputation,
+      COUNT(text) AS comments_count
+    FROM users_posts
+    GROUP BY user_id
+    ORDER BY comments_count DESC
+    LIMIT 20;
 
 This query pre-aggregates the comment counts which reduces the amount of data read for the `JOIN` :
 
-``` notranslate
-WITH
-  comments AS (
-  SELECT
-    user_id,
-    COUNT(text) AS comments_count
-  FROM
-    `bigquery-public-data`.stackoverflow.comments
-  WHERE
-    user_id IS NOT NULL
-  GROUP BY user_id
-  ORDER BY comments_count DESC
-  LIMIT 20
-  )
-SELECT
-  user_id,
-  display_name,
-  reputation,
-  comments_count
-FROM comments
-JOIN
-  `bigquery-public-data`.stackoverflow.users AS u
-ON
-  user_id = u.id
-ORDER BY comments_count DESC;
-```
+    WITH
+      comments AS (
+      SELECT
+        user_id,
+        COUNT(text) AS comments_count
+      FROM
+        `bigquery-public-data`.stackoverflow.comments
+      WHERE
+        user_id IS NOT NULL
+      GROUP BY user_id
+      ORDER BY comments_count DESC
+      LIMIT 20
+      )
+    SELECT
+      user_id,
+      display_name,
+      reputation,
+      comments_count
+    FROM comments
+    JOIN
+      `bigquery-public-data`.stackoverflow.users AS u
+    ON
+      user_id = u.id
+    ORDER BY comments_count DESC;
 
 > **Note:** `WITH` clauses with common table expressions (CTEs) are used for query readability, not performance. There is no guarantee that adding a `WITH` clause causes BigQuery to materialize temporary intermediate tables and reuse the temporary result for multiple references. The `WITH` clause might be evaluated multiple times within a query, depending on query optimizer decisions.
 
@@ -225,62 +219,54 @@ BigQuery doesn't automatically check for data integrity, so you must ensure that
 
   - **Use a `LIMIT` clause.** If you are ordering a very large number of values but don't need to have all of them returned, use a `LIMIT` clause. For example, the following query orders a very large result set and throws a `Resources exceeded` error. The query sorts by the `title` column in `mytable` . The `title` column contains millions of values.
     
-    ``` notranslate
-    SELECT
-    title
-    FROM
-    `my-project.mydataset.mytable`
-    ORDER BY
-    title;
-    ```
+        SELECT
+        title
+        FROM
+        `my-project.mydataset.mytable`
+        ORDER BY
+        title;
     
     To remove the error, use a query like the following:
     
-    ``` notranslate
-    SELECT
-    title
-    FROM
-    `my-project.mydataset.mytable`
-    ORDER BY
-    title DESC
-    LIMIT
-    1000;
-    ```
+        SELECT
+        title
+        FROM
+        `my-project.mydataset.mytable`
+        ORDER BY
+        title DESC
+        LIMIT
+        1000;
 
   - **Use a window function.** If you are ordering a very large number of values, use a window function, and limit data before calling the window function. For example, the following query lists the ten oldest Stack Overflow users and their ranking, with the oldest account being ranked lowest:
     
-    ``` notranslate
-    SELECT
-    id,
-    reputation,
-    creation_date,
-    DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
-    FROM bigquery-public-data.stackoverflow.users
-    ORDER BY user_rank ASC
-    LIMIT 10;
-    ```
+        SELECT
+        id,
+        reputation,
+        creation_date,
+        DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
+        FROM bigquery-public-data.stackoverflow.users
+        ORDER BY user_rank ASC
+        LIMIT 10;
     
     This query takes approximately 15 seconds to run. This query uses `LIMIT` at the end of the query, but not in the `DENSE_RANK() OVER` window function. Because of this, the query requires all of the data to be sorted on a single worker node.
     
     Instead, you should limit the dataset before computing the window function in order to improve performance:
     
-    ``` notranslate
-    WITH users AS (
-    SELECT
-    id,
-    reputation,
-    creation_date,
-    FROM bigquery-public-data.stackoverflow.users
-    ORDER BY creation_date ASC
-    LIMIT 10)
-    SELECT
-    id,
-    reputation,
-    creation_date,
-    DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
-    FROM users
-    ORDER BY user_rank;
-    ```
+        WITH users AS (
+        SELECT
+        id,
+        reputation,
+        creation_date,
+        FROM bigquery-public-data.stackoverflow.users
+        ORDER BY creation_date ASC
+        LIMIT 10)
+        SELECT
+        id,
+        reputation,
+        creation_date,
+        DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
+        FROM users
+        ORDER BY user_rank;
     
     This query takes approximately 2 seconds to run, while returning the same results as the previous query.
     
@@ -363,16 +349,14 @@ If batching your `UPDATE` statements yields many tuples in very long queries, yo
 
 For example, you could load your set of replacement records into another table, then write the DML statement to update all values in the original table if the non-updated columns match. For example, if the original data is in table `t` and the updates are staged in table `u` , the query would look like the following:
 
-``` notranslate
-UPDATE
-  dataset.t t
-SET
-  my_column = u.my_column
-FROM
-  dataset.u u
-WHERE
-  t.my_key = u.my_key
-```
+    UPDATE
+      dataset.t t
+    SET
+      my_column = u.my_column
+    FROM
+      dataset.u u
+    WHERE
+      t.my_key = u.my_key
 
 ### Use alias names for similarly named columns
 

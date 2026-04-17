@@ -96,13 +96,11 @@ If your query references external user-defined function resources stored in Clou
 
 If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
-``` notranslate
-bq update \
-    --use_legacy_sql=false \
-    --view_udf_resource=path_to_file \
-    --view='query' \
-    project_id:dataset.view
-```
+    bq update \
+        --use_legacy_sql=false \
+        --view_udf_resource=path_to_file \
+        --view='query' \
+        project_id:dataset.view
 
 Replace the following:
 
@@ -350,7 +348,7 @@ Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/b
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
      ALTER VIEW DATASET_ID.MY_VIEW
      SET OPTIONS (
       expiration_timestamp = TIMESTAMP('NEW_TIMESTAMP'));
@@ -370,11 +368,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq update` command with the `--expiration` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
-``` notranslate
-bq update \
-    --expiration integer \
-    project_id:dataset.view
-```
+    bq update \
+        --expiration integer \
+        project_id:dataset.view
 
 Replace the following::
 
@@ -554,7 +550,7 @@ Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/b
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
      ALTER VIEW DATASET_ID.MY_VIEW
      SET OPTIONS (
       description = 'NEW_DESCRIPTION');
@@ -574,11 +570,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq update` command with the `--description` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `[PROJECT_ID]:[DATASET]` .
 
-``` notranslate
-bq update \
-    --description "description" \
-    project_id:dataset.view
-```
+    bq update \
+        --description "description" \
+        project_id:dataset.view
 
 Replace the following:
 
@@ -844,9 +838,7 @@ Use the [`DROP VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP VIEW mydataset.myview;
-    ```
+        DROP VIEW mydataset.myview;
     
     Replace the following:
     
@@ -864,12 +856,10 @@ Use the `bq rm` command with the `--table` flag (or `-t` shortcut) to delete a v
 
 If the view is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
 
-``` notranslate
-bq rm \
--f \
--t \
-project_id:dataset.view
-```
+    bq rm \
+    -f \
+    -t \
+    project_id:dataset.view
 
 Where:
 

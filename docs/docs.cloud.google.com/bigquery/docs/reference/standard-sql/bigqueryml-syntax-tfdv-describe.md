@@ -34,12 +34,10 @@ This document describes the `ML.TFDV_DESCRIBE` function, which you can use to ge
 
 The following example returns statistics for the `penguins` public dataset and uses 20 buckets for rank histograms for string values:
 
-``` notranslate
-SELECT * FROM ML.TFDV_DESCRIBE(
-  TABLE `bigquery-public-data.ml_datasets.penguins`,
-  STRUCT(20 AS num_rank_histogram_buckets)
-);
-```
+    SELECT * FROM ML.TFDV_DESCRIBE(
+      TABLE `bigquery-public-data.ml_datasets.penguins`,
+      STRUCT(20 AS num_rank_histogram_buckets)
+    );
 
 ## Limitations
 

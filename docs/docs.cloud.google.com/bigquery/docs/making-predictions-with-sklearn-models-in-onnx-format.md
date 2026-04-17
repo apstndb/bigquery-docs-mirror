@@ -169,30 +169,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -217,7 +211,7 @@ To import the ONNX model into your dataset, select one of the following options:
 
 2.  In the query editor, enter the following `CREATE MODEL` statement.
     
-    ``` notranslate
+    ``` 
      CREATE OR REPLACE MODEL `bqml_tutorial.imported_onnx_model`
       OPTIONS (MODEL_TYPE='ONNX',
        MODEL_PATH='BUCKET_PATH')
@@ -235,14 +229,12 @@ To import the ONNX model into your dataset, select one of the following options:
 
 1.  Import the ONNX model from Cloud Storage by entering the following `CREATE MODEL` statement.
     
-    ``` notranslate
-    bq query --use_legacy_sql=false \
-    "CREATE OR REPLACE MODEL
-    `bqml_tutorial.imported_onnx_model`
-    OPTIONS
-    (MODEL_TYPE='ONNX',
-      MODEL_PATH='BUCKET_PATH')"
-    ```
+        bq query --use_legacy_sql=false \
+        "CREATE OR REPLACE MODEL
+        `bqml_tutorial.imported_onnx_model`
+        OPTIONS
+        (MODEL_TYPE='ONNX',
+          MODEL_PATH='BUCKET_PATH')"
     
     Replace `  BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/pipeline_rf.onnx` .
     
@@ -250,17 +242,13 @@ To import the ONNX model into your dataset, select one of the following options:
 
 2.  After you import the model, verify that the model appears in the dataset.
     
-    ``` notranslate
-    bq ls -m bqml_tutorial
-    ```
+        bq ls -m bqml_tutorial
     
     The output is similar to the following:
     
-    ``` notranslate
-    tableId               Type
-    --------------------- -------
-    imported_onnx_model  MODEL
-    ```
+        tableId               Type
+        --------------------- -------
+        imported_onnx_model  MODEL
 
 ### BigQuery DataFrames
 
@@ -306,14 +294,12 @@ To make predictions with the imported ONNX model, choose one of the following op
 
 2.  In the query editor, enter this query that uses the `ML.PREDICT` function.
     
-    ``` notranslate
-    SELECT *
-      FROM ML.PREDICT(MODEL `bqml_tutorial.imported_onnx_model`,
-        (
-        SELECT * FROM `bigquery-public-data.ml_datasets.iris`
+        SELECT *
+          FROM ML.PREDICT(MODEL `bqml_tutorial.imported_onnx_model`,
+            (
+            SELECT * FROM `bigquery-public-data.ml_datasets.iris`
+            )
         )
-    )
-    ```
     
     The query results are similar to the following:
     
@@ -323,13 +309,11 @@ To make predictions with the imported ONNX model, choose one of the following op
 
 Run the query that uses `ML.PREDICT` .
 
-``` notranslate
-bq query --use_legacy_sql=false \
-'SELECT *
-FROM ML.PREDICT(
-MODEL `example_dataset.imported_onnx_model`,
-(SELECT * FROM `bigquery-public-data.ml_datasets.iris`))'
-```
+    bq query --use_legacy_sql=false \
+    'SELECT *
+    FROM ML.PREDICT(
+    MODEL `example_dataset.imported_onnx_model`,
+    (SELECT * FROM `bigquery-public-data.ml_datasets.iris`))'
 
 ### BigQuery DataFrames
 

@@ -110,53 +110,45 @@ The following examples show common use cases for exporting to Cloud Storage, Ama
 
 The following example exports data to a CSV file. It includes options to overwrite the destination location, write header rows, and use `';'` as a delimiter.
 
-``` notranslate
-EXPORT DATA OPTIONS(
-  uri='gs://bucket/folder/*.csv',
-  format='CSV',
-  overwrite=true,
-  header=true,
-  field_delimiter=';') AS
-SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
-```
+    EXPORT DATA OPTIONS(
+      uri='gs://bucket/folder/*.csv',
+      format='CSV',
+      overwrite=true,
+      header=true,
+      field_delimiter=';') AS
+    SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 #### Export data to Cloud Storage in Avro format
 
 The following example exports data to Avro format using Snappy compression.
 
-``` notranslate
-EXPORT DATA OPTIONS(
-  uri='gs://bucket/folder/*',
-  format='AVRO',
-  compression='SNAPPY') AS
-SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
-```
+    EXPORT DATA OPTIONS(
+      uri='gs://bucket/folder/*',
+      format='AVRO',
+      compression='SNAPPY') AS
+    SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 #### Export data to Cloud Storage in Parquet format
 
 The following example exports data to Parquet format. It includes the option to overwrite the destination location.
 
-``` notranslate
-EXPORT DATA OPTIONS(
-  uri='gs://bucket/folder/*',
-  format='PARQUET',
-  overwrite=true) AS
-SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
-```
+    EXPORT DATA OPTIONS(
+      uri='gs://bucket/folder/*',
+      format='PARQUET',
+      overwrite=true) AS
+    SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 #### Export data to Amazon S3 in JSON format
 
 The following example [exports query results](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) that run against a BigLake table based on Amazon S3 to your Amazon S3 bucket:
 
-``` notranslate
-EXPORT DATA
-  WITH CONNECTION myproject.us.myconnection
-  OPTIONS(
-  uri='s3://bucket/folder/*',
-  format='JSON',
-  overwrite=true) AS
-SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
-```
+    EXPORT DATA
+      WITH CONNECTION myproject.us.myconnection
+      OPTIONS(
+      uri='s3://bucket/folder/*',
+      format='JSON',
+      overwrite=true) AS
+    SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 ## Export to Bigtable
 
@@ -212,28 +204,26 @@ If `true` , allows export to create missing column families in the target table.
 
 The following example exports data to a Bigtable table. Data in `field1` becomes a row key in Bigtable destination table. The fields `field2` , `field3` and `field4` are written as columns `cbtFeld2` , `cbtField3` and `cbtField4` into column family `column_family` .
 
-``` notranslate
-EXPORT DATA OPTIONS (
-uri="https://bigtable.googleapis.com/projects/my-project/instances/my-instance/tables/my-table",
-format="CLOUD_BIGTABLE",
-bigtable_options="""{
-   "columnFamilies" : [
-      {
-        "familyId": "column_family",
-        "columns": [
-           {"qualifierString": "cbtField2", "fieldName": "field2"},
-           {"qualifierString": "cbtField3", "fieldName": "field3"},
-           {"qualifierString": "cbtField4", "fieldName": "field4"},
-        ]
-      }
-   ]
-}"""
-) AS
-SELECT
-CAST(field1 as STRING) as rowkey,
-STRUCT(field2, field3, field4) as column_family
-FROM `bigquery_table`
-```
+    EXPORT DATA OPTIONS (
+    uri="https://bigtable.googleapis.com/projects/my-project/instances/my-instance/tables/my-table",
+    format="CLOUD_BIGTABLE",
+    bigtable_options="""{
+       "columnFamilies" : [
+          {
+            "familyId": "column_family",
+            "columns": [
+               {"qualifierString": "cbtField2", "fieldName": "field2"},
+               {"qualifierString": "cbtField3", "fieldName": "field3"},
+               {"qualifierString": "cbtField4", "fieldName": "field4"},
+            ]
+          }
+       ]
+    }"""
+    ) AS
+    SELECT
+    CAST(field1 as STRING) as rowkey,
+    STRUCT(field2, field3, field4) as column_family
+    FROM `bigquery_table`
 
 ## Export to Pub/Sub
 
@@ -263,23 +253,21 @@ Required. The destination URI for the export. The `uri` option for a Pub/Sub exp
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data to a Pub/Sub topic in real time:
 
-``` notranslate
-EXPORT DATA
-  OPTIONS (
-    format = 'CLOUD_PUBSUB',
-    uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
-AS (
-  SELECT
-    TO_JSON_STRING(
-      STRUCT(
-        ride_id,
-        timestamp,
-        latitude,
-        longitude)) AS message
-  FROM `myproject.real_time_taxi_streaming.taxi_rides`
-  WHERE ride_status = 'enroute'
-);
-```
+    EXPORT DATA
+      OPTIONS (
+        format = 'CLOUD_PUBSUB',
+        uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
+    AS (
+      SELECT
+        TO_JSON_STRING(
+          STRUCT(
+            ride_id,
+            timestamp,
+            latitude,
+            longitude)) AS message
+      FROM `myproject.real_time_taxi_streaming.taxi_rides`
+      WHERE ride_status = 'enroute'
+    );
 
 ## Export to Spanner
 
@@ -315,14 +303,12 @@ Required. A JSON string containing configurations related to mapping exported fi
 
 The following example exports data to a Spanner table:
 
-``` notranslate
-EXPORT DATA OPTIONS (
-  uri="https://spanner.googleapis.com/projects/my-project/instances/my-instance/databases/my-database",
-  format="CLOUD_SPANNER",
-  spanner_options="""{ "table": "my_table" }"""
-)
-AS SELECT * FROM `bigquery_table`
-```
+    EXPORT DATA OPTIONS (
+      uri="https://spanner.googleapis.com/projects/my-project/instances/my-instance/databases/my-database",
+      format="CLOUD_SPANNER",
+      spanner_options="""{ "table": "my_table" }"""
+    )
+    AS SELECT * FROM `bigquery_table`
 
 For more Spanner export examples and configuration options, see [Export data to Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) .
 
@@ -360,7 +346,7 @@ Required. The destination URI for the export. For AlloyDB, the URI must be provi
 
 `STRING`
 
-Required. A JSON string containing configurations related to mapping exported fields to AlloyDB columns. For more information, see [Configure exports with `alloydb_options` option.](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#alloydb_options)
+Required. A JSON string containing configurations related to mapping exported fields to AlloyDB columns. For more information, see [Configure exports with `alloydb_options` .](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#configure_exports_with_alloydb_options)
 
 ### Example
 
@@ -368,21 +354,19 @@ Required. A JSON string containing configurations related to mapping exported fi
 
 The following example exports data to an AlloyDB table:
 
-``` notranslate
-EXPORT DATA
-  WITH CONNECTION `myproject.us-central1.my-alloydb-conn`
-  OPTIONS (
-    format='ALLOYDB',
-    uri="https://alloydb.googleapis.com/v1/projects/myproject/locations/us-central1/clusters/my-cluster/instances/my-instance",
-    alloydb_options="""{
-      "schema": "public",
-      "table": "my_target_table"
-    }"""
-  )
-AS SELECT
-  col1 AS id,
-  col2 AS name,
-  col3 AS value
-FROM
-  `mydataset.table1`;
-```
+    EXPORT DATA
+      WITH CONNECTION `myproject.us-central1.my-alloydb-conn`
+      OPTIONS (
+        format='ALLOYDB',
+        uri="https://alloydb.googleapis.com/v1/projects/myproject/locations/us-central1/clusters/my-cluster/instances/my-instance",
+        alloydb_options="""{
+          "schema": "public",
+          "table": "my_target_table"
+        }"""
+      )
+    AS SELECT
+      col1 AS id,
+      col2 AS name,
+      col3 AS value
+    FROM
+      `mydataset.table1`;

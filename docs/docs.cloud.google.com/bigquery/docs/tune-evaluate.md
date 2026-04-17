@@ -98,30 +98,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create test tables
 
@@ -153,11 +147,9 @@ Create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/st
 
 2.  In the query editor, run the following statement to create a remote model:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.gemini_baseline`
-    REMOTE WITH CONNECTION DEFAULT
-    OPTIONS (ENDPOINT ='gemini-2.0-flash-001');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.gemini_baseline`
+        REMOTE WITH CONNECTION DEFAULT
+        OPTIONS (ENDPOINT ='gemini-2.0-flash-001');
     
     The query takes several seconds to complete, after which the `gemini_baseline` model appears in the `bqml_tutorial` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -169,18 +161,16 @@ Run the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/doc
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT result, ground_truth
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `bqml_tutorial.gemini_baseline`,
-        (
-          SELECT
-            input AS prompt, output AS ground_truth
-          FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
-          LIMIT 10
-        ));
-    ```
+        SELECT result, ground_truth
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `bqml_tutorial.gemini_baseline`,
+            (
+              SELECT
+                input AS prompt, output AS ground_truth
+              FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
+              LIMIT 10
+            ));
     
     If you examine the output data and compare the `result` and `ground_truth` values, you see that while the baseline model generates text that accurately reflects the facts provided in the ground truth content, the style of the text is fairly different.
 
@@ -192,22 +182,20 @@ To perform a more detailed evaluation of the model performance, use the [`ML.EVA
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.EVALUATE(
-        MODEL `bqml_tutorial.gemini_baseline`,
-        (
-          SELECT
-            input AS input_text, output AS output_text
-          FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
-        ),
-        STRUCT('text_generation' AS task_type));
-    ```
+        SELECT *
+        FROM
+          ML.EVALUATE(
+            MODEL `bqml_tutorial.gemini_baseline`,
+            (
+              SELECT
+                input AS input_text, output AS output_text
+              FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
+            ),
+            STRUCT('text_generation' AS task_type));
 
 The output looks similar to the following:
 
-``` console
+```console
    +---------------------+---------------------+-------------------------------------------+--------------------------------------------+
    | bleu4_score         | rouge-l_precision   | rouge-l_recall      | rouge-l_f1_score    | evaluation_status                          |
    +---------------------+---------------------+---------------------+---------------------+--------------------------------------------+
@@ -229,19 +217,17 @@ Create a remote model very similar to the one you created in [Create a model](ht
 
 2.  In the query editor, run the following statement to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.gemini_tuned`
-      REMOTE
-        WITH CONNECTION DEFAULT
-      OPTIONS (
-        endpoint = 'gemini-2.0-flash-001',
-        max_iterations = 500,
-        data_split_method = 'no_split')
-    AS
-    SELECT
-      input AS prompt, output AS label
-    FROM `bqml_tutorial.wiki_auto_style_transfer_train`;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.gemini_tuned`
+          REMOTE
+            WITH CONNECTION DEFAULT
+          OPTIONS (
+            endpoint = 'gemini-2.0-flash-001',
+            max_iterations = 500,
+            data_split_method = 'no_split')
+        AS
+        SELECT
+          input AS prompt, output AS label
+        FROM `bqml_tutorial.wiki_auto_style_transfer_train`;
     
     The query takes a few minutes to complete, after which the `gemini_tuned` model appears in the `bqml_tutorial` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -253,18 +239,16 @@ Run the `AI.GENERATE_TEXT` function to see how the tuned model performs on the e
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT result, ground_truth
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `bqml_tutorial.gemini_tuned`,
-        (
-          SELECT
-            input AS prompt, output AS ground_truth
-          FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
-          LIMIT 10
-        ));
-    ```
+        SELECT result, ground_truth
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `bqml_tutorial.gemini_tuned`,
+            (
+              SELECT
+                input AS prompt, output AS ground_truth
+              FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
+              LIMIT 10
+            ));
     
     If you examine the output data, you see that the tuned model produces text that is much more similar in style to the ground truth content.
 
@@ -276,22 +260,20 @@ Use the `ML.EVALUATE` function to see how the tuned model's responses compare to
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.EVALUATE(
-        MODEL `bqml_tutorial.gemini_tuned`,
-        (
-          SELECT
-            input AS prompt, output AS label
-          FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
-        ),
-        STRUCT('text_generation' AS task_type));
-    ```
+        SELECT *
+        FROM
+          ML.EVALUATE(
+            MODEL `bqml_tutorial.gemini_tuned`,
+            (
+              SELECT
+                input AS prompt, output AS label
+              FROM `bqml_tutorial.wiki_auto_style_transfer_valid`
+            ),
+            STRUCT('text_generation' AS task_type));
 
 The output looks similar to the following:
 
-``` console
+```console
    +---------------------+---------------------+-------------------------------------------+--------------------------------------------+
    | bleu4_score         | rouge-l_precision   | rouge-l_recall      | rouge-l_f1_score    | evaluation_status                          |
    +---------------------+---------------------+---------------------+---------------------+--------------------------------------------+

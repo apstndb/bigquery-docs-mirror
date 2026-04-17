@@ -641,10 +641,8 @@ You can express additional filters based on the fields within the log messages. 
 
 The following example command line shows how you can use the Google Cloud CLI to [create a logging sink](https://docs.cloud.google.com/sdk/gcloud/reference/logging/sinks/create) in a dataset named `  auditlog_dataset  ` that only includes `BigQueryAuditMetadata` messages. The dataset must already exist before you create the logging sink.
 
-``` notranslate
-gcloud logging sinks create my-example-sink bigquery.googleapis.com/projects/my-project-id/datasets/auditlog_dataset \
-    --log-filter='protoPayload.metadata."@type"="type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"'
-```
+    gcloud logging sinks create my-example-sink bigquery.googleapis.com/projects/my-project-id/datasets/auditlog_dataset \
+        --log-filter='protoPayload.metadata."@type"="type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"'
 
 After the sink is created, give the service account created by the previous command [access to the dataset](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls#granting_access_to_a_dataset) .
 
@@ -660,7 +658,7 @@ The following examples show how you can use `BigQueryAuditMetadata` messages to 
 
 `BigQueryAuditMetadata` messages log when a table is deleted because its expiration time was reached. The following sample query shows when these messages occur and includes a URI that references the table resource that was removed.
 
-``` notranslate
+``` 
   #standardSQL
   SELECT
     protopayload_auditlog.resourceName AS resourceName,
@@ -675,7 +673,7 @@ The following examples show how you can use `BigQueryAuditMetadata` messages to 
 
 This query shows coarse, per-dataset statistics about table reads and table modifications. Before you run this example, [define a log sink](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs#defining_a_bigquery_log_sink_using_gcloud) with an existing dataset.
 
-``` notranslate
+``` 
   #standardSQL
   SELECT
     REGEXP_EXTRACT(protopayload_auditlog.resourceName, '^projects/[^/]+/datasets/([^/]+)/tables') AS datasetRef,

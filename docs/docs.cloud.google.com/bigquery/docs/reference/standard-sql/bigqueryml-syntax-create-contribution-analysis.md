@@ -8,7 +8,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-googlesql
+```googlesql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} 
 `project_id.dataset.model_name`
 OPTIONS(
@@ -179,14 +179,14 @@ The [GoogleSQL query](https://docs.cloud.google.com/bigquery/docs/reference/stan
 
 ## Choose test and control data
 
-Contribution analysis models require test and control data in a single table as input. The control set is used as a baseline to compare against the test set, which contains the data points of interest. The following are examples of test and control sets:
+Contribution analysis requires test (interest) and control (reference) data in a single table as input. The control set is used as a baseline to compare against the test set, which contains the data points of interest. The following are examples of test and control sets:
 
   - **Periods of time:** Compare two different months of revenue data.
   - **Geographic regions:** Compare retention rate across different countries.
   - **Product types:** Compare sales per user across different product types.
   - **Campaign or promotion:** Compare website engagement across different ad campaigns.
 
-To set up the input data, you can create tables of test and control data separately and take the union of the two tables. The final input table must contain your dimension columns, numeric metric columns, and a categorical column if you're using a summable by category metric. For best results, we recommend having roughly equal numbers of test and control rows when using the summable and summable ratio metrics to avoid biased results. If the number of test and control rows are unbalanced, then the [summable by category metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) might reduce bias by normalizing the numeric metric against categorical values, allowing for easier comparisons between contributors.
+To set up the input data, you can create tables of test and control data separately and take the union of the two tables. The final input table must contain your dimension columns, numeric metric columns, and a categorical column if you're using a summable by category metric. For best results, we recommend having roughly equal numbers of test and control rows when using the summable or summable ratio metric to avoid biased results. If the number of test and control rows are unbalanced, then the [summable by category metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) might reduce bias by normalizing the numeric metric against categorical values, allowing for easier comparisons between contributors.
 
 ## Use a summable metric
 
@@ -275,53 +275,47 @@ The following examples show how to create contribution analysis models.
 
 The following example creates a contribution analysis model that uses a summable metric:
 
-``` notranslate
-CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
-  OPTIONS(
-    MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
-    CONTRIBUTION_METRIC = 'SUM(house_price)',
-    DIMENSION_ID_COLS = ['city', 'floor_space'],
-    IS_TEST_COL = 'dataset_type'
-) AS
-SELECT * FROM mydataset.house_sales WHERE state = 'WA';
-```
+    CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
+      OPTIONS(
+        MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
+        CONTRIBUTION_METRIC = 'SUM(house_price)',
+        DIMENSION_ID_COLS = ['city', 'floor_space'],
+        IS_TEST_COL = 'dataset_type'
+    ) AS
+    SELECT * FROM mydataset.house_sales WHERE state = 'WA';
 
 **Example 2**
 
 The following example creates a contribution analysis model that uses a summable ratio metric:
 
-``` notranslate
-CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
-  OPTIONS(
-    MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
-    CONTRIBUTION_METRIC = 'SUM(concessions_sold)/SUM(attendee_count)',
-    DIMENSION_ID_COLS = ['venue_ID','event_date','concession_type'],
-    IS_TEST_COL = 'test_col',
-    MIN_APRIORI_SUPPORT = .08
-) AS
-SELECT concessions_sold, attendee_count, venue_ID,
-  event_date, concession_type, test_col
-FROM mydataset.regional_sales;
-```
+    CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
+      OPTIONS(
+        MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
+        CONTRIBUTION_METRIC = 'SUM(concessions_sold)/SUM(attendee_count)',
+        DIMENSION_ID_COLS = ['venue_ID','event_date','concession_type'],
+        IS_TEST_COL = 'test_col',
+        MIN_APRIORI_SUPPORT = .08
+    ) AS
+    SELECT concessions_sold, attendee_count, venue_ID,
+      event_date, concession_type, test_col
+    FROM mydataset.regional_sales;
 
 **Example 3**
 
 The following example creates a contribution analysis model that uses a summable by category metric:
 
-``` notranslate
-CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
-  OPTIONS(
-    MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
-    CONTRIBUTION_METRIC = 'SUM(concessions_sold)/COUNT(DISTINCT sales_date)',
-    DIMENSION_ID_COLS = ['venue_ID','event_date', 'attendee_count', 'concession_type'],
-    IS_TEST_COL = 'test_col',
-    TOP_K_INSIGHTS_BY_APRIORI_SUPPORT = 25,
-    PRUNING_METHOD = 'PRUNE_REDUNDANT_INSIGHTS'
-) AS
-SELECT concessions_sold, attendee_count, venue_ID,
-  event_date, concession_type, test_col, sales_date
-FROM mydataset.regional_sales;
-```
+    CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
+      OPTIONS(
+        MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
+        CONTRIBUTION_METRIC = 'SUM(concessions_sold)/COUNT(DISTINCT sales_date)',
+        DIMENSION_ID_COLS = ['venue_ID','event_date', 'attendee_count', 'concession_type'],
+        IS_TEST_COL = 'test_col',
+        TOP_K_INSIGHTS_BY_APRIORI_SUPPORT = 25,
+        PRUNING_METHOD = 'PRUNE_REDUNDANT_INSIGHTS'
+    ) AS
+    SELECT concessions_sold, attendee_count, venue_ID,
+      event_date, concession_type, test_col, sales_date
+    FROM mydataset.regional_sales;
 
 ## What's next
 

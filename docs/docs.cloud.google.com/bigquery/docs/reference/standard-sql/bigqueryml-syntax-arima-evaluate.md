@@ -4,7 +4,7 @@ This document describes the `ML.ARIMA_EVALUATE` function, which you can use to e
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ARIMA_EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   [, STRUCT(SHOW_ALL_CANDIDATE_MODELS AS show_all_candidate_models)])
@@ -84,12 +84,10 @@ When the `non_seasonal_d` value is not `1` , `has_drift` is set to `FALSE` by de
 
 The following example retrieves the evaluation metrics of the best model from the model `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.ARIMA_EVALUATE(MODEL `mydataset.mymodel`, STRUCT(FALSE AS show_all_candidate_models))
-```
+    SELECT
+      *
+    FROM
+      ML.ARIMA_EVALUATE(MODEL `mydataset.mymodel`, STRUCT(FALSE AS show_all_candidate_models))
 
 ## What's next
 

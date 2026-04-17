@@ -31,18 +31,14 @@ To ensure the app accesses only BigQuery tables that are available to the end us
     
     Install the [oauthlib integration for Google Auth](https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth-oauthlib) .
     
-    ``` notranslate
-    pip install --upgrade google-auth-oauthlib
-    ```
+        pip install --upgrade google-auth-oauthlib
     
     ### Node.js
     
     Install the [oauthlib integration for Google Auth](https://github.com/googleapis/google-auth-library-nodejs) .
     
-    ``` notranslate
-    npm install google-auth-library
-    npm install readline-promise
-    ```
+        npm install google-auth-library
+        npm install readline-promise
 
 ## Set up your client credentials
 

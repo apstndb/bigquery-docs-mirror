@@ -8,20 +8,18 @@ SQL queries return correct results from all ingested data, even if some of the d
 
 The following table called `Logs` is used to show different ways of using the `SEARCH` function. This example table is quite small, but in practice the performance gains you get with `SEARCH` improve with the size of the table.
 
-``` notranslate
-CREATE TABLE my_dataset.Logs (Level STRING, Source STRING, Message STRING)
-AS (
-  SELECT 'INFO' as Level, '65.177.8.234' as Source, 'Entry Foo-Bar created' as Message
-  UNION ALL
-  SELECT 'WARNING', '132.249.240.10', 'Entry Foo-Bar already exists, created by 65.177.8.234'
-  UNION ALL
-  SELECT 'INFO', '94.60.64.181', 'Entry Foo-Bar deleted'
-  UNION ALL
-  SELECT 'SEVERE', '4.113.82.10', 'Entry Foo-Bar does not exist, deleted by 94.60.64.181'
-  UNION ALL
-  SELECT 'INFO', '181.94.60.64', 'Entry Foo-Baz created'
-);
-```
+    CREATE TABLE my_dataset.Logs (Level STRING, Source STRING, Message STRING)
+    AS (
+      SELECT 'INFO' as Level, '65.177.8.234' as Source, 'Entry Foo-Bar created' as Message
+      UNION ALL
+      SELECT 'WARNING', '132.249.240.10', 'Entry Foo-Bar already exists, created by 65.177.8.234'
+      UNION ALL
+      SELECT 'INFO', '94.60.64.181', 'Entry Foo-Bar deleted'
+      UNION ALL
+      SELECT 'SEVERE', '4.113.82.10', 'Entry Foo-Bar does not exist, deleted by 94.60.64.181'
+      UNION ALL
+      SELECT 'INFO', '181.94.60.64', 'Entry Foo-Baz created'
+    );
 
 The table looks like the following:
 
@@ -37,9 +35,7 @@ The table looks like the following:
 
 Create a search index on the `Logs` table using the default text analyzer:
 
-``` notranslate
-CREATE SEARCH INDEX my_index ON my_dataset.Logs(ALL COLUMNS);
-```
+    CREATE SEARCH INDEX my_index ON my_dataset.Logs(ALL COLUMNS);
 
 For more information about search indexes, see [Manage search indexes](https://docs.cloud.google.com/bigquery/docs/search-index) .
 
@@ -51,9 +47,7 @@ The `SEARCH` function provides tokenized search on data. `SEARCH` is designed to
 
 The following query searches across all columns of the `Logs` table for the value `bar` and returns the rows that contain this value, regardless of capitalization. Since the search index uses the default text analyzer, you don't need to specify it in the `SEARCH` function.
 
-``` notranslate
-SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, 'bar');
-```
+    SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, 'bar');
 
     +---------+----------------+-------------------------------------------------------+
     | Level   | Source         | Message                                               |
@@ -66,9 +60,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, 'bar');
 
 The following query searches across all columns of the `Logs` table for the value `` `94.60.64.181` `` and returns the rows that contain this value. The backticks allow for an exact search, which is why the last row of the `Logs` table which contains `181.94.60.64` is omitted.
 
-``` notranslate
-SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, '`94.60.64.181`');
-```
+    SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, '`94.60.64.181`');
 
     +---------+----------------+-------------------------------------------------------+
     | Level   | Source         | Message                                               |
@@ -81,9 +73,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH(Logs, '`94.60.64.181`');
 
 `SEARCH` makes it easy to specify a subset of columns within which to search for data. The following query searches the `Message` column of the `Logs` table for the value `94.60.64.181` and returns the rows that contain this value.
 
-``` notranslate
-SELECT * FROM my_dataset.Logs WHERE SEARCH(Message, '`94.60.64.181`');
-```
+    SELECT * FROM my_dataset.Logs WHERE SEARCH(Message, '`94.60.64.181`');
 
     +---------+----------------+-------------------------------------------------------+
     | Level   | Source         | Message                                               |
@@ -93,9 +83,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH(Message, '`94.60.64.181`');
 
 The following query searches both the `Source` and `Message` columns of the `Logs` table. It returns the rows that contain the value `94.60.64.181` from either column.
 
-``` notranslate
-SELECT * FROM my_dataset.Logs WHERE SEARCH((Source, Message), '`94.60.64.181`');
-```
+    SELECT * FROM my_dataset.Logs WHERE SEARCH((Source, Message), '`94.60.64.181`');
 
     +---------+----------------+-------------------------------------------------------+
     | Level   | Source         | Message                                               |
@@ -108,12 +96,10 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH((Source, Message), '`94.60.64.181`');
 
 If a table has many columns and you want to search most of them, it may be easier to specify only the columns to exclude from the search. The following query searches across all columns of the `Logs` table except for the `Message` column. It returns the rows of any columns other than `Message` that contains the value `94.60.64.181` .
 
-``` notranslate
-SELECT *
-FROM my_dataset.Logs
-WHERE SEARCH(
-  (SELECT AS STRUCT Logs.* EXCEPT (Message)), '`94.60.64.181`');
-```
+    SELECT *
+    FROM my_dataset.Logs
+    WHERE SEARCH(
+      (SELECT AS STRUCT Logs.* EXCEPT (Message)), '`94.60.64.181`');
 
     +---------+----------------+---------------------------------------------------+
     | Level   | Source         | Message                                           |
@@ -125,18 +111,16 @@ WHERE SEARCH(
 
 The following example creates a table called `contact_info` with an index that uses the `NO_OP_ANALYZER` [text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) :
 
-``` notranslate
-CREATE TABLE my_dataset.contact_info (name STRING, email STRING)
-AS (
-  SELECT 'Kim Lee' AS name, 'kim.lee@example.com' AS email
-  UNION ALL
-  SELECT 'Kim' AS name, 'kim@example.com' AS email
-  UNION ALL
-  SELECT 'Sasha' AS name, 'sasha@example.com' AS email
-);
-CREATE SEARCH INDEX noop_index ON my_dataset.contact_info(ALL COLUMNS)
-OPTIONS (analyzer = 'NO_OP_ANALYZER');
-```
+    CREATE TABLE my_dataset.contact_info (name STRING, email STRING)
+    AS (
+      SELECT 'Kim Lee' AS name, 'kim.lee@example.com' AS email
+      UNION ALL
+      SELECT 'Kim' AS name, 'kim@example.com' AS email
+      UNION ALL
+      SELECT 'Sasha' AS name, 'sasha@example.com' AS email
+    );
+    CREATE SEARCH INDEX noop_index ON my_dataset.contact_info(ALL COLUMNS)
+    OPTIONS (analyzer = 'NO_OP_ANALYZER');
 
     +---------+---------------------+
     | name    | email               |
@@ -148,15 +132,13 @@ OPTIONS (analyzer = 'NO_OP_ANALYZER');
 
 The following query searches for `Kim` in the `name` column and `kim` in the `email` column. Since the search index doesn't use the default text analyzer, you must pass the name of the analyzer to the `SEARCH` function.
 
-``` notranslate
-SELECT
-  name,
-  SEARCH(name, 'Kim', analyzer=>'NO_OP_ANALYZER') AS name_Kim,
-  email,
-  SEARCH(email, 'kim', analyzer=>'NO_OP_ANALYZER') AS email_kim
-FROM
-  my_dataset.contact_info;
-```
+    SELECT
+      name,
+      SEARCH(name, 'Kim', analyzer=>'NO_OP_ANALYZER') AS name_Kim,
+      email,
+      SEARCH(email, 'kim', analyzer=>'NO_OP_ANALYZER') AS email_kim
+    FROM
+      my_dataset.contact_info;
 
 The `NO_OP_ANALYZER` doesn't modify the text, so the `SEARCH` function only returns `TRUE` for exact matches:
 
@@ -174,23 +156,21 @@ The `LOG_ANALYZER` and `PATTERN_ANALYZER` [text analyzers](https://docs.cloud.go
 
 The following example creates a table called `complex_table` with an index that uses the `LOG_ANALYZER` text analyzer. It uses a JSON-formatted string to configure the analyzer options:
 
-``` notranslate
-CREATE TABLE dataset.complex_table(
-  a STRING,
-  my_struct STRUCT<string_field STRING, int_field INT64>,
-  b ARRAY<STRING>
-);
-
-CREATE SEARCH INDEX my_index
-ON dataset.complex_table(a, my_struct, b)
-OPTIONS (analyzer = 'LOG_ANALYZER', analyzer_options = '''{
-  "token_filters": [
-    {
-      "normalization": {"mode": "NONE"}
-    }
-  ]
-}''');
-```
+    CREATE TABLE dataset.complex_table(
+      a STRING,
+      my_struct STRUCT<string_field STRING, int_field INT64>,
+      b ARRAY<STRING>
+    );
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.complex_table(a, my_struct, b)
+    OPTIONS (analyzer = 'LOG_ANALYZER', analyzer_options = '''{
+      "token_filters": [
+        {
+          "normalization": {"mode": "NONE"}
+        }
+      ]
+    }''');
 
 The following table shows examples of calls to the `SEARCH` function with different text analyzers and their results. The first table calls the `SEARCH` function using the default text analyzer, the `LOG_ANALYZER` :
 
@@ -287,15 +267,11 @@ For example, suppose you have the following indexed table called `dataset.person
 
 The following queries are eligible for optimization:
 
-``` notranslate
-SELECT * FROM dataset.person_data
-WHERE SAFE.STRING(json_column.email) = 'cloudysanfrancisco@gmail.com';
-```
+    SELECT * FROM dataset.person_data
+    WHERE SAFE.STRING(json_column.email) = 'cloudysanfrancisco@gmail.com';
 
-``` notranslate
-SELECT * FROM dataset.person_data
-WHERE JSON_VALUE(string_column, '$.job') IN ('doctor', 'lawyer', 'teacher');
-```
+    SELECT * FROM dataset.person_data
+    WHERE JSON_VALUE(string_column, '$.job') IN ('doctor', 'lawyer', 'teacher');
 
 Combinations of these functions are also optimized, such as `UPPER(JSON_VALUE(json_string_expression)) = 'FOO'` .
 
@@ -319,9 +295,7 @@ When `indexUsageMode` is `UNUSED` or `PARTIALLY_USED` , the `indexUnusedReasons`
 
 To view `searchStatistics` for a query, run the `bq show` command.
 
-``` notranslate
-bq show --format=prettyjson -j JOB_ID
-```
+    bq show --format=prettyjson -j JOB_ID
 
 #### Example
 
@@ -357,14 +331,12 @@ You can also see search index usage for multiple jobs in a region in the followi
 
 The following query shows information about index usage for all search index optimizable queries in the past 7 days:
 
-``` notranslate
-SELECT
-  job_id, search_statistics.index_usage_mode, index_unused_reason.code, index_unused_reason.base_table.table_id, index_unused_reason.index_name
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS, UNNEST(search_statistics.index_unused_reasons) AS index_unused_reason
-WHERE
-  end_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP();
-```
+    SELECT
+      job_id, search_statistics.index_usage_mode, index_unused_reason.code, index_unused_reason.base_table.table_id, index_unused_reason.index_name
+    FROM
+      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS, UNNEST(search_statistics.index_unused_reasons) AS index_unused_reason
+    WHERE
+      end_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP();
 
 The result is similar to the following:
 
@@ -387,17 +359,15 @@ Searching works best when your search has few results. Make your searches as spe
 
 Queries that use `SEARCH` , `=` , `IN` , `LIKE` or `STARTS_WITH` on a very large [partitioned](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) table can be optimized when you use an `ORDER BY` clause on the partitioned field and a `LIMIT` clause. For queries that don't contain the `SEARCH` function, you can use the [other operators and functions](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) to take advantage of the optimization. The optimization is applied whether or not the table is indexed. This works well if you're searching for a common term. For example, suppose the `Logs` table created earlier is partitioned on an additional `DATE` type column called `day` . The following query is optimized:
 
-``` notranslate
-SELECT
-  Level, Source, Message
-FROM
-  my_dataset.Logs
-WHERE
-  SEARCH(Message, "foo")
-ORDER BY
-  day
-LIMIT 10;
-```
+    SELECT
+      Level, Source, Message
+    FROM
+      my_dataset.Logs
+    WHERE
+      SEARCH(Message, "foo")
+    ORDER BY
+      day
+    LIMIT 10;
 
 ### Scope your search
 

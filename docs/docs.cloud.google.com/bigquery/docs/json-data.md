@@ -29,12 +29,10 @@ Use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/s
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.table1(
-      id INT64,
-      cart JSON
-    );
-    ```
+        CREATE TABLE mydataset.table1(
+          id INT64,
+          cart JSON
+        );
 
 3.  Click play\_circle **Run** .
 
@@ -44,9 +42,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command and provide a table schema with a `JSON` data type.
 
-``` notranslate
-bq mk --table mydataset.table1 id:INT64,cart:JSON
-```
+    bq mk --table mydataset.table1 id:INT64,cart:JSON
 
 You can't partition or cluster a table on `JSON` columns, because the equality and comparison operators are not defined on the `JSON` type.
 
@@ -64,26 +60,22 @@ You can create `JSON` values in the following ways:
 
 The following example inserts `JSON` values into a table:
 
-``` notranslate
-INSERT INTO mydataset.table1 VALUES
-(1, JSON '{"name": "Alice", "age": 30}'),
-(2, JSON_ARRAY(10, ['foo', 'bar'], [20, 30])),
-(3, JSON_OBJECT('foo', 10, 'bar', ['a', 'b']));
-```
+    INSERT INTO mydataset.table1 VALUES
+    (1, JSON '{"name": "Alice", "age": 30}'),
+    (2, JSON_ARRAY(10, ['foo', 'bar'], [20, 30])),
+    (3, JSON_OBJECT('foo', 10, 'bar', ['a', 'b']));
 
 ### Convert a `STRING` type to `JSON` type
 
 The following example converts a JSON-formatted `STRING` value by using the [`PARSE_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#parse_json) function. The example converts a column from an existing table to a `JSON` type and saves the results in a new table.
 
-``` notranslate
-CREATE OR REPLACE TABLE mydataset.table_new
-AS (
-  SELECT
-    id, SAFE.PARSE_JSON(cart) AS cart_json
-  FROM
-    mydataset.old_table
-);
-```
+    CREATE OR REPLACE TABLE mydataset.table_new
+    AS (
+      SELECT
+        id, SAFE.PARSE_JSON(cart) AS cart_json
+      FROM
+        mydataset.old_table
+    );
 
 The [`SAFE` prefix](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) used in this example ensures that any conversion errors are returned as `NULL` values.
 
@@ -91,18 +83,16 @@ The [`SAFE` prefix](https://docs.cloud.google.com/bigquery/docs/reference/standa
 
 The following example converts key-value pairs to JSON using the [`JSON_OBJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_object) function.
 
-``` notranslate
-WITH Fruits AS (
-SELECT 0 AS id, 'color' AS k, 'Red' AS v UNION ALL
-SELECT 0, 'fruit', 'apple' UNION ALL
-SELECT 1, 'fruit','banana' UNION ALL
-SELECT 1, 'ripe', 'true'
-)
-
-SELECT JSON_OBJECT(ARRAY_AGG(k), ARRAY_AGG(v)) AS json_data
-FROM Fruits
-GROUP BY id
-```
+    WITH Fruits AS (
+    SELECT 0 AS id, 'color' AS k, 'Red' AS v UNION ALL
+    SELECT 0, 'fruit', 'apple' UNION ALL
+    SELECT 1, 'fruit','banana' UNION ALL
+    SELECT 1, 'ripe', 'true'
+    )
+    
+    SELECT JSON_OBJECT(ARRAY_AGG(k), ARRAY_AGG(v)) AS json_data
+    FROM Fruits
+    GROUP BY id
 
 The result is the following:
 
@@ -117,9 +107,7 @@ The result is the following:
 
 The following example converts a SQL `STRUCT` value to a `JSON` value by using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function:
 
-``` notranslate
-SELECT TO_JSON(STRUCT(1 AS id, [10,20] AS coordinates)) AS pt;
-```
+    SELECT TO_JSON(STRUCT(1 AS id, [10,20] AS coordinates)) AS pt;
 
 The result is the following:
 
@@ -257,33 +245,29 @@ This section describes how to use GoogleSQL to extract values from JSON. JSON is
 
 The examples in this section use the following table:
 
-``` notranslate
-CREATE OR REPLACE TABLE mydataset.table1(id INT64, cart JSON);
-
-INSERT INTO mydataset.table1 VALUES
-(1, JSON """{
-        "name": "Alice",
-        "items": [
-            {"product": "book", "price": 10},
-            {"product": "food", "price": 5}
-        ]
-    }"""),
-(2, JSON """{
-        "name": "Bob",
-        "items": [
-            {"product": "pen", "price": 20}
-        ]
-    }""");
-```
+    CREATE OR REPLACE TABLE mydataset.table1(id INT64, cart JSON);
+    
+    INSERT INTO mydataset.table1 VALUES
+    (1, JSON """{
+            "name": "Alice",
+            "items": [
+                {"product": "book", "price": 10},
+                {"product": "food", "price": 5}
+            ]
+        }"""),
+    (2, JSON """{
+            "name": "Bob",
+            "items": [
+                {"product": "pen", "price": 20}
+            ]
+        }""");
 
 ### Extract values as JSON
 
 Given a `JSON` type in BigQuery, you can access the fields in a JSON expression by using the [field access operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator) . The following example returns the `name` field of the `cart` column.
 
-``` notranslate
-SELECT cart.name
-FROM mydataset.table1;
-```
+    SELECT cart.name
+    FROM mydataset.table1;
 
     +---------+
     |  name   |
@@ -294,11 +278,9 @@ FROM mydataset.table1;
 
 To access an array element, use the [JSON subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#json_subscript_operator) . The following example returns the first element of the `items` array:
 
-``` notranslate
-SELECT
-  cart.items[0] AS first_item
-FROM mydataset.table1
-```
+    SELECT
+      cart.items[0] AS first_item
+    FROM mydataset.table1
 
     +-------------------------------+
     |          first_item           |
@@ -309,10 +291,8 @@ FROM mydataset.table1
 
 You can also use the JSON subscript operator to reference the members of a JSON object by name:
 
-``` notranslate
-SELECT cart['name']
-FROM mydataset.table1;
-```
+    SELECT cart['name']
+    FROM mydataset.table1;
 
     +---------+
     |  name   |
@@ -323,13 +303,11 @@ FROM mydataset.table1;
 
 For subscript operations, the expression inside the brackets can be any arbitrary string or integer expression, including non-constant expressions:
 
-``` notranslate
-DECLARE int_val INT64 DEFAULT 0;
-
-SELECT
-  cart[CONCAT('it','ems')][int_val + 1].product AS item
-FROM mydataset.table1;
-```
+    DECLARE int_val INT64 DEFAULT 0;
+    
+    SELECT
+      cart[CONCAT('it','ems')][int_val + 1].product AS item
+    FROM mydataset.table1;
 
     +--------+
     |  item  |
@@ -344,13 +322,11 @@ These operators improve readability for the basic functionality of the [`JSON_QU
 
 If a member with the specified name is not found in the JSON object, or if the JSON array doesn't have an element with the specified position, then these operators return SQL `NULL` .
 
-``` notranslate
-SELECT
-  cart.address AS address,
-  cart.items[1].price AS item1_price
-FROM
-  mydataset.table1;
-```
+    SELECT
+      cart.address AS address,
+      cart.items[1].price AS item1_price
+    FROM
+      mydataset.table1;
 
     +---------+-------------+
     | address | item1_price |
@@ -365,10 +341,8 @@ The equality and comparison operators are not defined on the `JSON` data type. T
 
 The [`JSON_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value) function extracts a scalar value and returns it as a SQL string. It returns SQL `NULL` if `cart.name` doesn't point to a scalar value in the JSON.
 
-``` notranslate
-SELECT JSON_VALUE(cart.name) AS name
-FROM mydataset.table1;
-```
+    SELECT JSON_VALUE(cart.name) AS name
+    FROM mydataset.table1;
 
     +-------+
     | name  |
@@ -378,14 +352,12 @@ FROM mydataset.table1;
 
 You can use the `JSON_VALUE` function in contexts that require equality or comparison, such as `WHERE` clauses and `GROUP BY` clauses. The following example shows a `WHERE` clause that filters against a `JSON` value:
 
-``` notranslate
-SELECT
-  cart.items[0] AS first_item
-FROM
-  mydataset.table1
-WHERE
-  JSON_VALUE(cart.name) = 'Alice';
-```
+    SELECT
+      cart.items[0] AS first_item
+    FROM
+      mydataset.table1
+    WHERE
+      JSON_VALUE(cart.name) = 'Alice';
 
     +-------------------------------+
     | first_item                    |
@@ -395,9 +367,7 @@ WHERE
 
 Alternatively, you can use the [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#string_for_json) function which extracts a JSON string and returns that value as a SQL `STRING` . For example:
 
-``` notranslate
-SELECT STRING(JSON '"purple"') AS color;
-```
+    SELECT STRING(JSON '"purple"') AS color;
 
     +--------+
     | color  |
@@ -420,9 +390,7 @@ You can convert a `JSON` value to a scalar SQL value flexibly with [`LAX convers
 
 The following example uses the [`LAX_INT64` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#lax_int64) to extract an `INT64` value from a `JSON` value.
 
-``` notranslate
-SELECT LAX_INT64(JSON '"10"') AS id;
-```
+    SELECT LAX_INT64(JSON '"10"') AS id;
 
     +----+
     | id |
@@ -446,10 +414,8 @@ JSON can contain JSON arrays, which are not directly equivalent to an `ARRAY<JSO
 
 The following example uses `JSON_QUERY_ARRAY` to extract JSON arrays:
 
-``` notranslate
-SELECT JSON_QUERY_ARRAY(cart.items) AS items
-FROM mydataset.table1;
-```
+    SELECT JSON_QUERY_ARRAY(cart.items) AS items
+    FROM mydataset.table1;
 
     +----------------------------------------------------------------+
     | items                                                          |
@@ -460,14 +426,12 @@ FROM mydataset.table1;
 
 To split an array into its individual elements, use the [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) operator, which returns a table with one row for each element in the array. The following example selects the `product` member from each member of the `items` array:
 
-``` notranslate
-SELECT
-  id,
-  JSON_VALUE(item.product) AS product
-FROM
-  mydataset.table1, UNNEST(JSON_QUERY_ARRAY(cart.items)) AS item
-ORDER BY id;
-```
+    SELECT
+      id,
+      JSON_VALUE(item.product) AS product
+    FROM
+      mydataset.table1, UNNEST(JSON_QUERY_ARRAY(cart.items)) AS item
+    ORDER BY id;
 
     +----+---------+
     | id | product |
@@ -479,15 +443,13 @@ ORDER BY id;
 
 The next example is similar but uses the [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg) function to aggregate the values back into a SQL array.
 
-``` notranslate
-SELECT
-  id,
-  ARRAY_AGG(JSON_VALUE(item.product)) AS products
-FROM
-  mydataset.table1, UNNEST(JSON_QUERY_ARRAY(cart.items)) AS item
-GROUP BY id
-ORDER BY id;
-```
+    SELECT
+      id,
+      ARRAY_AGG(JSON_VALUE(item.product)) AS products
+    FROM
+      mydataset.table1, UNNEST(JSON_QUERY_ARRAY(cart.items)) AS item
+    GROUP BY id
+    ORDER BY id;
 
     +----+-----------------+
     | id | products        |
@@ -502,9 +464,7 @@ For more information about arrays, see [Working with arrays in GoogleSQL](https:
 
 The `JSON` type has a special `null` value that is different from the SQL `NULL` . A JSON `null` is not treated as a SQL `NULL` value, as the following example shows.
 
-``` notranslate
-SELECT JSON 'null' IS NULL;
-```
+    SELECT JSON 'null' IS NULL;
 
     +-------+
     | f0_   |
@@ -519,12 +479,10 @@ When you extract a JSON field with a `null` value, the behavior depends on the f
 
 The following example shows the different behaviors:
 
-``` notranslate
-SELECT
-  json.a AS json_query, -- Equivalent to JSON_QUERY(json, '$.a')
-  JSON_VALUE(json, '$.a') AS json_value
-FROM (SELECT JSON '{"a": null}' AS json);
-```
+    SELECT
+      json.a AS json_query, -- Equivalent to JSON_QUERY(json, '$.a')
+      JSON_VALUE(json, '$.a') AS json_value
+    FROM (SELECT JSON '{"a": null}' AS json);
 
     +------------+------------+
     | json_query | json_value |

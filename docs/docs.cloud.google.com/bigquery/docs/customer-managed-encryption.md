@@ -58,17 +58,13 @@ Make sure your service account has been created, and then use the Google Cloud c
 
 Your BigQuery service account is not initially created when you create a project. To trigger the creation of your service account, enter a command that uses it, such as the [`bq show --encryption_service_account`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#encryption_service_account_flag) command, or call the [projects.getServiceAccount](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/getServiceAccount) API method. For example:
 
-``` notranslate
-bq show --encryption_service_account --project_id=PROJECT_ID
-```
+    bq show --encryption_service_account --project_id=PROJECT_ID
 
 ### Determine the service account ID
 
 The BigQuery service account ID is of the form:
 
-``` notranslate
-bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
-```
+    bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 The following techniques show how you can determine the BigQuery service account ID for your project.
 
@@ -84,21 +80,17 @@ The following techniques show how you can determine the BigQuery service account
 
 4.  In the following string, replace PROJECT\_NUMBER with your project number. The new string identifies your BigQuery service account ID.
     
-    ``` notranslate
-    bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
-    ```
+        bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 ### bq
 
 Use the `bq show` command with the `--encryption_service_account` flag to determine the service account ID:
 
-``` notranslate
-bq show --encryption_service_account
-```
+    bq show --encryption_service_account
 
 The command displays the service account ID:
 
-``` notranslate
+``` 
                   ServiceAccountID
 -------------------------------------------------------------
 bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
@@ -108,9 +100,7 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 Assign the Cloud KMS CryptoKey Encrypter/Decrypter [role](https://docs.cloud.google.com/kms/docs/reference/permissions-and-roles#predefined_roles) to the BigQuery system service account that you copied to your clipboard. This account is of the form:
 
-``` notranslate
-bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
-```
+    bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 ### Console
 
@@ -134,15 +124,13 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 You can use the Google Cloud CLI to assign the role:
 
-``` notranslate
-gcloud kms keys add-iam-policy-binding \
---project=KMS_PROJECT_ID \
---member serviceAccount:bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com \
---role roles/cloudkms.cryptoKeyEncrypterDecrypter \
---location=KMS_KEY_LOCATION \
---keyring=KMS_KEY_RING \
-KMS_KEY
-```
+    gcloud kms keys add-iam-policy-binding \
+    --project=KMS_PROJECT_ID \
+    --member serviceAccount:bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com \
+    --role roles/cloudkms.cryptoKeyEncrypterDecrypter \
+    --location=KMS_KEY_LOCATION \
+    --keyring=KMS_KEY_RING \
+    KMS_KEY
 
 Replace the following:
 
@@ -156,9 +144,7 @@ Replace the following:
 
 The resource ID for the Cloud KMS key is required for CMEK use, as shown in the examples. This key is case-sensitive and in the form:
 
-``` notranslate
-projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
-```
+    projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 
 > **Note:** You cannot specify a key resource ID that includes the `/cryptoKeyVersions/` token. BigQuery always uses the key version marked as `primary` to protect a table when it is created.
 
@@ -206,13 +192,11 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE DATASET_ID.TABLE_ID (
-      name STRING, value INT64
-    ) OPTIONS (
-        kms_key_name
-          = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
-    ```
+        CREATE TABLE DATASET_ID.TABLE_ID (
+          name STRING, value INT64
+        ) OPTIONS (
+            kms_key_name
+              = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
 
 3.  Click play\_circle **Run** .
 
@@ -224,19 +208,15 @@ You can use the bq command-line tool with the `--destination_kms_key` flag to cr
 
 To create an empty table with a schema:
 
-``` notranslate
-bq mk --schema name:string,value:integer -t \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-DATASET_ID.TABLE_ID
-```
+    bq mk --schema name:string,value:integer -t \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    DATASET_ID.TABLE_ID
 
 To create a table from a query:
 
-``` notranslate
-bq query --destination_table=DATASET_ID.TABLE_ID \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-"SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
-```
+    bq query --destination_table=DATASET_ID.TABLE_ID \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 
 For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
@@ -250,7 +230,7 @@ The following example creates a table named `mytable` , and also uses the [`goog
 
 To run this example, you must enable the [Cloud Resource Manager API](https://console.cloud.google.com/flows/enableapi?apiid=cloudresourcemanager.googleapis.com) and the [Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com) .
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -536,12 +516,10 @@ Optionally use the `--destination_table` flag to specify the destination for que
 
 To query a table:
 
-``` notranslate
-bq query \
---destination_table=DATASET_ID.TABLE_ID \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-"SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
-```
+    bq query \
+    --destination_table=DATASET_ID.TABLE_ID \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 
 For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
@@ -734,25 +712,21 @@ Protect a load job destination table with a customer-managed encryption key by s
 
 Protect a load job destination table with a customer-managed encryption key by setting the `--destination_kms_key` flag.
 
-``` notranslate
-bq --location=LOCATION load \
---autodetect \
---source_format=FORMAT \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-DATASET.TABLE \
-path_to_source
-```
+    bq --location=LOCATION load \
+    --autodetect \
+    --source_format=FORMAT \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    DATASET.TABLE \
+    path_to_source
 
 For example:
 
-``` notranslate
-bq load \
---autodetect \
---source_format=NEWLINE_DELIMITED_JSON \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-test2.table4 \
-gs://cloud-samples-data/bigquery/us-states/us-states.json
-```
+    bq load \
+    --autodetect \
+    --source_format=NEWLINE_DELIMITED_JSON \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    test2.table4 \
+    gs://cloud-samples-data/bigquery/us-states/us-states.json
 
 ### Go
 
@@ -933,19 +907,15 @@ You can use the `bq cp` command with the `--destination_kms_key` flag to copy a 
 
 To copy a table that has default encryption to a new table that has Cloud KMS protection:
 
-``` notranslate
-bq cp \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-SOURCE_DATASET_ID.SOURCE_TABLE_ID DESTINATION_DATASET_ID.DESTINATION_TABLE_ID
-```
+    bq cp \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    SOURCE_DATASET_ID.SOURCE_TABLE_ID DESTINATION_DATASET_ID.DESTINATION_TABLE_ID
 
 If you want to copy a table that has default encryption to the same table with Cloud KMS protection:
 
-``` notranslate
-bq cp -f \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-DATASET_ID.TABLE_ID DATASET_ID.TABLE_ID
-```
+    bq cp -f \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    DATASET_ID.TABLE_ID DATASET_ID.TABLE_ID
 
 If you want to change a table from Cloud KMS protection to default encryption, copy the file to itself by running `bq cp` without using the `--destination_kms_key` flag.
 
@@ -1139,12 +1109,10 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE DATASET_ID.mytable
-    SET OPTIONS (
-      kms_key_name
-        = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
-    ```
+        ALTER TABLE DATASET_ID.mytable
+        SET OPTIONS (
+          kms_key_name
+            = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
 
 3.  Click play\_circle **Run** .
 
@@ -1154,11 +1122,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 You can use the `bq cp` command with the `--destination_kms_key` flag to change the key for a table protected by Cloud KMS. The `--destination_kms_key` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the table.
 
-``` notranslate
-bq update \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
--t DATASET_ID.TABLE_ID
-```
+    bq update \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    -t DATASET_ID.TABLE_ID
 
 ### Go
 
@@ -1278,23 +1244,62 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 You can set a dataset-wide default Cloud KMS key that applies to all newly created tables within the dataset, unless a different Cloud KMS key is specified when you create the table. The default key does not apply to existing tables. Changing the default key does not modify any existing tables and applies only to new tables created after the change.
 
-You can apply, change, or remove a dataset default key by
+To apply, change, or remove a dataset default key, select one of the following options:
 
-  - specifying the default key in the [`EncryptionConfiguration.kmsKeyName`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name) field when you call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) or [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) methods
+### SQL
 
-  - specifying the default key in the `--default_kms_key` flag when you run the [`bq mk --dataset`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command.
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter one of the following statements:
     
-    ``` notranslate
-    bq mk \
-    --default_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-    --dataset DATASET_ID
-    ```
+      - To set the default key when creating a dataset, use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) with the `default_kms_key_name` option:
+        
+            CREATE SCHEMA PROJECT_ID.DATASET_ID
+            OPTIONS (
+              default_kms_key_name = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY',
+              location = 'LOCATION');
     
-    ``` notranslate
-    bq update \
-    --default_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-    --dataset DATASET_ID
-    ```
+      - To change the default key for a dataset, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_statement) :
+        
+            ALTER SCHEMA PROJECT_ID.DATASET_ID
+            SET OPTIONS (
+              default_kms_key_name = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
+    
+      - To remove the default key from a dataset, set `default_kms_key_name` to `NULL` :
+        
+            ALTER SCHEMA PROJECT_ID.DATASET_ID
+            SET OPTIONS (
+              default_kms_key_name = NULL);
+
+3.  Click **Run** .
+
+### bq
+
+To set the default key when creating a dataset, use the `bq mk` command with the `--dataset` and `--default_kms_key` flags:
+
+    bq mk --dataset 
+    
+    --default_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY 
+    
+    PROJECT_ID:DATASET_ID
+
+To set or change the default key for an existing dataset, use the `bq update` command with the `--dataset` and `--default_kms_key` flags:
+
+    bq update --dataset 
+    
+    --default_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY 
+    
+    PROJECT_ID:DATASET_ID
+
+To remove the default key from a dataset, use the `bq update` command with the `--dataset` flag and set `--default_kms_key` to `""` :
+
+    bq update --dataset --default_kms_key="" PROJECT_ID:DATASET_ID
+
+### API
+
+To set or change the default key, specify the default key in the [`EncryptionConfiguration.kmsKeyName`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name) field when you call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) or [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) methods.
+
+To remove the default key, set [`EncryptionConfiguration.kmsKeyName`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name) to null when calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) method.
 
 > **Note:** Within a dataset that has a default Cloud KMS key applied, it is not possible to encrypt new tables with a key other than a customer-managed encryption key. That is, if the dataset has a default Cloud KMS key, you cannot use a non-customer-managed encryption key to encrypt new tables in the dataset.
 
@@ -1312,12 +1317,10 @@ Use the [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER PROJECT PROJECT_ID
-    SET OPTIONS (
-      `region-LOCATION.default_kms_key_name`
-        = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
-    ```
+        ALTER PROJECT PROJECT_ID
+        SET OPTIONS (
+          `region-LOCATION.default_kms_key_name`
+            = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
 
 3.  Click play\_circle **Run** .
 
@@ -1327,13 +1330,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 You can use the `bq` command to run an [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `default_kms_key_name` field for a project:
 
-``` notranslate
-bq query --nouse_legacy_sql \
-  'ALTER PROJECT PROJECT_ID
-  SET OPTIONS (
-  `region-LOCATION.default_kms_key_name`
-    ="projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY");'
-```
+    bq query --nouse_legacy_sql \
+      'ALTER PROJECT PROJECT_ID
+      SET OPTIONS (
+      `region-LOCATION.default_kms_key_name`
+        ="projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY");'
 
 ## Use CMEK to protect BigQuery ML models
 
@@ -1390,26 +1391,20 @@ You can use the [`bq cp` command](https://docs.cloud.google.com/bigquery/docs/re
 
 To copy a model that has default encryption to a new model that has Cloud KMS protection:
 
-``` notranslate
-bq cp \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-SOURCE_DATASET_ID.SOURCE_MODEL_ID DESTINATION_DATASET_ID.DESTINATION_MODEL_ID
-```
+    bq cp \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    SOURCE_DATASET_ID.SOURCE_MODEL_ID DESTINATION_DATASET_ID.DESTINATION_MODEL_ID
 
 To overwrite a model that has default encryption to the same model with Cloud KMS protection:
 
-``` notranslate
-bq cp -f \
---destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
-DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
-```
+    bq cp -f \
+    --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
+    DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
 
 To change a model from Cloud KMS protection to default encryption:
 
-``` notranslate
-bq cp -f \
-DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
-```
+    bq cp -f \
+    DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
 
 For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
@@ -1417,9 +1412,7 @@ For more information about the bq command-line tool, see [Using the bq command-l
 
 Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) to see if a model is protected by Cloud KMS key. The encryption key is in the `kmsKeyName` field.
 
-``` notranslate
-bq show -m my_dataset.my_model
-```
+    bq show -m my_dataset.my_model
 
 You can also use the Google Cloud console to find the Cloud KMS key for an encrypted model. CMEK information is in the **Customer-managed key** field in the **Model Details** section of the model's **Details** pane.
 
@@ -1427,11 +1420,9 @@ You can also use the Google Cloud console to find the Cloud KMS key for an encry
 
 Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--destination_kms_key` flag to change the key for a model protected by Cloud KMS:
 
-``` notranslate
-bq update --destination_kms_key \
-projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key \
--t my_dataset.my_model
-```
+    bq update --destination_kms_key \
+    projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key \
+    -t my_dataset.my_model
 
 ### Use default project or dataset keys
 
@@ -1514,7 +1505,7 @@ After you set this policy, it applies only to new resources in the project. Any 
 
 ### gcloud
 
-``` notranslate lang-sh
+```sh
   gcloud resource-manager org-policies --project=PROJECT_ID \
     deny gcp.restrictNonCmekServices is:bigquery.googleapis.com
 ```
@@ -1547,7 +1538,7 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 
 ### gcloud
 
-``` notranslate lang-sh
+```sh
   gcloud resource-manager org-policies --project=PROJECT_ID \
     allow gcp.restrictCmekCryptoKeyProjects under:projects/KMS_PROJECT_ID
 ```

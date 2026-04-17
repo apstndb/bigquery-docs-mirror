@@ -84,35 +84,29 @@ Some commands require the use of quotes around arguments. If quotes are required
 
 This example shows how to run a GoogleSQL query on the command line:
 
-``` notranslate
-bq query --nouse_legacy_sql \
-'SELECT
-   COUNT(*)
- FROM
-   `bigquery-public-data`.samples.shakespeare'
-```
+    bq query --nouse_legacy_sql \
+    'SELECT
+       COUNT(*)
+     FROM
+       `bigquery-public-data`.samples.shakespeare'
 
 Flags with boolean values can be specified without an argument. If you specify `true` or `false` , then you must use the format `  FLAG = ARGUMENT  ` .
 
 For example, this command specifies false for the boolean flag `--use_legacy_sql` by placing `no` at the front of the flag:
 
-``` notranslate
-bq query --nouse_legacy_sql \
-'SELECT
-   COUNT(*)
- FROM
-   `bigquery-public-data`.samples.shakespeare'
-```
+    bq query --nouse_legacy_sql \
+    'SELECT
+       COUNT(*)
+     FROM
+       `bigquery-public-data`.samples.shakespeare'
 
 Alternatively, to specify `false` as the flag's argument, you can enter the following:
 
-``` notranslate
-bq query --use_legacy_sql=false \
-'SELECT
-   COUNT(*)
- FROM
-   `bigquery-public-data`.samples.shakespeare'
-```
+    bq query --use_legacy_sql=false \
+    'SELECT
+       COUNT(*)
+     FROM
+       `bigquery-public-data`.samples.shakespeare'
 
 ### Run commands in a script
 
@@ -137,9 +131,7 @@ You can use a [service account](https://docs.cloud.google.com/bigquery/docs/use-
 
 To start running `bq` commands using [service account impersonation](https://docs.cloud.google.com/iam/docs/impersonating-service-accounts) , run the following command:
 
-``` notranslate
-gcloud config set auth/impersonate_service_account SERVICE_ACCOUNT_NAME
-```
+    gcloud config set auth/impersonate_service_account SERVICE_ACCOUNT_NAME
 
 Replace `  SERVICE_ACCOUNT_NAME  ` with your service account name.
 
@@ -147,9 +139,7 @@ Replace `  SERVICE_ACCOUNT_NAME  ` with your service account name.
 
 To stop running `bq` commands from a service account, run the following command:
 
-``` notranslate
-gcloud config unset auth/impersonate_service_account
-```
+    gcloud config unset auth/impersonate_service_account
 
 ## Set default values for command-line flags
 
@@ -168,19 +158,17 @@ To add default values for command-line flags to `.bigqueryrc` :
 
 For example:
 
-``` notranslate
---apilog=stdout
---format=prettyjson
---location=US
-
-[query]
---use_legacy_sql=false
---max_rows=100
---maximum_bytes_billed=10000000
-
-[load]
---destination_kms_key=projects/myproject/locations/mylocation/keyRings/myRing/cryptoKeys/myKey
-```
+    --apilog=stdout
+    --format=prettyjson
+    --location=US
+    
+    [query]
+    --use_legacy_sql=false
+    --max_rows=100
+    --maximum_bytes_billed=10000000
+    
+    [load]
+    --destination_kms_key=projects/myproject/locations/mylocation/keyRings/myRing/cryptoKeys/myKey
 
 The preceding example sets default values for the following flags:
 

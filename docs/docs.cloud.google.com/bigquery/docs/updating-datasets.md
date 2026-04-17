@@ -65,7 +65,7 @@ The following example sets the description on a dataset named `mydataset` :
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
      ALTER SCHEMA mydataset
      SET OPTIONS (
          description = 'Description of mydataset');
@@ -80,11 +80,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq update` command with the `--description` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
 
-``` notranslate
-bq update \
---description "string" \
-project_id:dataset
-```
+    bq update \
+    --description "string" \
+    project_id:dataset
 
 Replace the following:
 
@@ -286,7 +284,7 @@ The following example updates the default table expiration for a dataset named `
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
      ALTER SCHEMA mydataset
      SET OPTIONS(
          default_table_expiration_days = 3.75);
@@ -301,11 +299,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update the default expiration time for newly created tables in a dataset, enter the `bq update` command with the `--default_table_expiration` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
 
-``` notranslate
-bq update \
---default_table_expiration integer \
-project_id:dataset
-```
+    bq update \
+    --default_table_expiration integer \
+    project_id:dataset
 
 Replace the following:
 
@@ -515,7 +511,7 @@ The following example updates the default partition expiration for a dataset nam
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
      ALTER SCHEMA mydataset
      SET OPTIONS(
          default_partition_expiration_days = 3.75);
@@ -530,11 +526,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update the default expiration time for a dataset, enter the `bq update` command with the `--default_partition_expiration` flag. If you are updating a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
 
-``` notranslate
-bq update \
---default_partition_expiration integer \
-project_id:dataset
-```
+    bq update \
+    --default_partition_expiration integer \
+    project_id:dataset
 
 Replace the following:
 
@@ -560,11 +554,9 @@ Call [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/re
 
 You can update a dataset's default [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) by using the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) . The following example updates the default rounding mode for `mydataset` to `ROUND_HALF_EVEN` .
 
-``` notranslate
-ALTER SCHEMA mydataset
-SET OPTIONS (
-  default_rounding_mode = "ROUND_HALF_EVEN");
-```
+    ALTER SCHEMA mydataset
+    SET OPTIONS (
+      default_rounding_mode = "ROUND_HALF_EVEN");
 
 This sets the default rounding mode for new tables created in the dataset. It has no impact on new columns added to existing tables. Setting the default rounding mode on a table in the dataset overrides this option.
 
@@ -603,11 +595,9 @@ Use the [`ALTER SCHEMA SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA DATASET_NAME
-    SET OPTIONS(
-      max_time_travel_hours = HOURS);
-    ```
+        ALTER SCHEMA DATASET_NAME
+        SET OPTIONS(
+          max_time_travel_hours = HOURS);
     
     Replace the following:
     
@@ -668,11 +658,9 @@ To update the billing model for a dataset, use the [`ALTER SCHEMA SET OPTIONS` s
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA DATASET_NAME
-    SET OPTIONS(
-     storage_billing_model = 'BILLING_MODEL');
-    ```
+        ALTER SCHEMA DATASET_NAME
+        SET OPTIONS(
+         storage_billing_model = 'BILLING_MODEL');
     
     Replace the following:
     
@@ -685,15 +673,13 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update the storage billing model for all datasets in a project, use the following SQL query for every region, where datasets are located:
 
-``` notranslate
-FOR record IN
- (SELECT CONCAT(catalog_name, '.', schema_name) AS dataset_path
- FROM PROJECT_ID.region-REGION.INFORMATION_SCHEMA.SCHEMATA)
-DO
- EXECUTE IMMEDIATE
-   "ALTER SCHEMA `" || record.dataset_path || "` SET OPTIONS(storage_billing_model = 'BILLING_MODEL')";
-END FOR;
-```
+    FOR record IN
+     (SELECT CONCAT(catalog_name, '.', schema_name) AS dataset_path
+     FROM PROJECT_ID.region-REGION.INFORMATION_SCHEMA.SCHEMATA)
+    DO
+     EXECUTE IMMEDIATE
+       "ALTER SCHEMA `" || record.dataset_path || "` SET OPTIONS(storage_billing_model = 'BILLING_MODEL')";
+    END FOR;
 
 Replace the following:
 
@@ -705,9 +691,7 @@ Replace the following:
 
 To update the billing model for a dataset, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and set the `--storage_billing_model` flag:
 
-``` notranslate
-bq update -d --storage_billing_model=BILLING_MODEL PROJECT_ID:DATASET_NAME
-```
+    bq update -d --storage_billing_model=BILLING_MODEL PROJECT_ID:DATASET_NAME
 
 Replace the following:
 
@@ -721,9 +705,7 @@ Call the [`datasets.update` method](https://docs.cloud.google.com/bigquery/docs/
 
 The following example shows how to call `datasets.update` using `curl` :
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID -d '{"datasetReference": {"projectId": "PROJECT_ID", "datasetId": "DATASET_NAME"}, "storageBillingModel": "BILLING_MODEL"}'
-```
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET_ID -d '{"datasetReference": {"projectId": "PROJECT_ID", "datasetId": "DATASET_NAME"}, "storageBillingModel": "BILLING_MODEL"}'
 
 Replace the following:
 

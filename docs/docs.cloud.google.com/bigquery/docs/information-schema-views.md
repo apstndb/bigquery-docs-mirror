@@ -70,12 +70,10 @@ The following example retrieves all columns from the `INFORMATION_SCHEMA.VIEWS` 
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.VIEWS `` .
 
-``` notranslate
-SELECT
-  * EXCEPT (check_option)
-FROM
-  mydataset.INFORMATION_SCHEMA.VIEWS;
-```
+    SELECT
+      * EXCEPT (check_option)
+    FROM
+      mydataset.INFORMATION_SCHEMA.VIEWS;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -98,14 +96,12 @@ The following example retrieves the SQL query and query syntax used to define `m
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.VIEWS `` .
 
-``` notranslate
-SELECT
-  table_name, view_definition, use_standard_sql
-FROM
-  mydataset.INFORMATION_SCHEMA.VIEWS
-WHERE
-  table_name = 'myview';
-```
+    SELECT
+      table_name, view_definition, use_standard_sql
+    FROM
+      mydataset.INFORMATION_SCHEMA.VIEWS
+    WHERE
+      table_name = 'myview';
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

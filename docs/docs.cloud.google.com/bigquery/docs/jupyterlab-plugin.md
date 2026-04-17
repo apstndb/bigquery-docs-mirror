@@ -10,7 +10,7 @@ This document shows you how to install and use the BigQuery JupyterLab plugin to
 
   - Explore your BigQuery data.
   - Use the BigQuery DataFrames API.
-  - Deploy a BigQuery DataFrames notebook to [Cloud Composer](https://docs.cloud.google.com/composer/docs/concepts/overview) .
+  - Deploy a BigQuery DataFrames notebook to [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer/docs/concepts/overview) .
 
 The BigQuery JupyterLab plugin includes all the functionality of the [Managed Service for Apache Spark JupyterLab plugin](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions) , such as creating a Managed Service for Apache Spark Serverless runtime template, launching and managing notebooks, developing with Apache Spark, deploying your code, and managing your resources.
 
@@ -94,13 +94,13 @@ BigQuery DataFrames notebooks support Python development in a local Python kerne
 
 ## Deploy a BigQuery DataFrames notebook
 
-You can deploy a BigQuery DataFrames notebook to Cloud Composer by using a [Managed Service for Apache Spark Serverless runtime template](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions#create_a_serverless_runtime_template) . You must use runtime version 2.1 or later.
+You can deploy a BigQuery DataFrames notebook to Managed Airflow by using a [Managed Service for Apache Spark Serverless runtime template](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions#create_a_serverless_runtime_template) . You must use runtime version 2.1 or later.
 
 1.  In your JupyterLab notebook, click calendar\_month **Job Scheduler** .
 
 2.  For **Job name** , enter a unique name for your job.
 
-3.  For **Environment** , enter the name of the Cloud Composer environment to which you want to deploy the job.
+3.  For **Environment** , enter the name of the Managed Airflow environment to which you want to deploy the job.
 
 4.  If your notebook is parameterized, add parameters.
 
@@ -116,7 +116,7 @@ You can deploy a BigQuery DataFrames notebook to Cloud Composer by using a [Mana
 
 9.  Click **Create** .
 
-When you successfully schedule your notebook, it appears on the list of scheduled jobs in your selected Cloud Composer environment.
+When you successfully schedule your notebook, it appears on the list of scheduled jobs in your selected Managed Airflow environment.
 
 ## What's next
 

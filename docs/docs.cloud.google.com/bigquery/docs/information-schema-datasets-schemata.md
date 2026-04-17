@@ -65,12 +65,10 @@ To run the query against a project other than your default project, add the proj
 
 for example, `` `myproject`.INFORMATION_SCHEMA.SCHEMATA `` .
 
-``` notranslate
-SELECT
-  * EXCEPT (schema_owner)
-FROM
-  INFORMATION_SCHEMA.SCHEMATA;
-```
+    SELECT
+      * EXCEPT (schema_owner)
+    FROM
+      INFORMATION_SCHEMA.SCHEMATA;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

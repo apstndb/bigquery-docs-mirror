@@ -58,9 +58,7 @@ This section lists examples to query the `INFORMATION_SCHEMA.SCHEMATA_LINKS` vie
 
 The following example lists all the linked datasets against another project named `otherproject` within the `EU` multi-region:
 
-``` notranslate
-SELECT * FROM `otherproject`.`region-eu`.INFORMATION_SCHEMA.SCHEMATA_LINKS;
-```
+    SELECT * FROM `otherproject`.`region-eu`.INFORMATION_SCHEMA.SCHEMATA_LINKS;
 
 The output is similar to the following. Some columns are omitted to simplify the output.
 
@@ -75,9 +73,7 @@ The output is similar to the following. Some columns are omitted to simplify the
 
 The following example lists all the linked datasets by a shared dataset named `sharedataset` in the `US` multi-region:
 
-``` notranslate
-SELECT * FROM INFORMATION_SCHEMA.SCHEMATA_LINKS WHERE schema_name = 'sharedataset';
-```
+    SELECT * FROM INFORMATION_SCHEMA.SCHEMATA_LINKS WHERE schema_name = 'sharedataset';
 
 The output is similar to the following. Some columns are omitted to simplify the output.
 
@@ -92,9 +88,7 @@ The output is similar to the following. Some columns are omitted to simplify the
 
 The following example lists all the individual resources, such as tables or views, that are shared using a data clean room from another project named `otherproject` within the `EU` multi-region:
 
-``` notranslate
-SELECT * FROM `otherproject`.`region-eu`.INFORMATION_SCHEMA.SCHEMATA_LINKS where link_type='DCR';
-```
+    SELECT * FROM `otherproject`.`region-eu`.INFORMATION_SCHEMA.SCHEMATA_LINKS where link_type='DCR';
 
 The output is similar to the following. Some columns are omitted to simplify the output.
 

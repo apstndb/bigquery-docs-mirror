@@ -173,12 +173,10 @@ To run the query against a project other than your default project, add the proj
 
 The following example retrieves all columns from the `INFORMATION_SCHEMA.ROUTINES` view. The metadata returned is for all routines in `mydataset` in your default project — `myproject` . The dataset `mydataset` contains a routine named `myroutine1` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  mydataset.INFORMATION_SCHEMA.ROUTINES;
-```
+    SELECT
+      *
+    FROM
+      mydataset.INFORMATION_SCHEMA.ROUTINES;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

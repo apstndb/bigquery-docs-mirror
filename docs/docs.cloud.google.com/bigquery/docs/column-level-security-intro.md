@@ -58,20 +58,18 @@ To set up column level security, a data steward, who has the [appropriate permis
     
     Alternatively, you can set the policy tag using the `bq update` command. The `names` field of `policyTags` includes the ID of the **High** policy tag, ` projects/ project-id /locations/ location /taxonomies/ taxonomy-id /policyTags/ policytag-id  ` :
     
-    ``` notranslate
-    [
-     ...
-     {
-       "name": "ssn",
-       "type": "STRING",
-       "mode": "REQUIRED",
-       "policyTags": {
-         "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
-       }
-     },
-     ...
-    ]
-    ```
+        [
+         ...
+         {
+           "name": "ssn",
+           "type": "STRING",
+           "mode": "REQUIRED",
+           "policyTags": {
+             "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
+           }
+         },
+         ...
+        ]
     
     For details on using the `bq update` command to set a policy tag, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
     
@@ -224,9 +222,7 @@ If a user has dataset access but does not have the Data Catalog Fine-Grained Rea
 
   - Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `ssn` column, but does have access to the remaining columns, the user can run the following query:
     
-    ``` notranslate
-    SELECT * EXCEPT (ssn) FROM ...
-    ```
+        SELECT * EXCEPT (ssn) FROM ...
     
     In the preceding example, the `EXCEPT` clause excludes the `ssn` column.
 

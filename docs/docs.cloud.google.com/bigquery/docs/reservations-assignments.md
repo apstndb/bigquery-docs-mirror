@@ -78,13 +78,11 @@ To assign an organization to a reservation, use the [`CREATE ASSIGNMENT` DDL sta
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-    OPTIONS (
-      assignee = 'organizations/ORGANIZATION_ID',
-      job_type = 'JOB_TYPE');
-    ```
+        CREATE ASSIGNMENT
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+        OPTIONS (
+          assignee = 'organizations/ORGANIZATION_ID',
+          job_type = 'JOB_TYPE');
     
     Replace the following:
     
@@ -110,16 +108,14 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To assign an organization's jobs to a reservation, use the `bq mk` command with the `--reservation_assignment` flag:
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_assignment \
-    --reservation_id=RESERVATION_NAME \
-    --assignee_id=ORGANIZATION_ID \
-    --job_type=JOB_TYPE \
-    --assignee_type=ORGANIZATION
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --reservation_id=RESERVATION_NAME \
+        --assignee_id=ORGANIZATION_ID \
+        --job_type=JOB_TYPE \
+        --assignee_type=ORGANIZATION
 
 Replace the following:
 
@@ -173,13 +169,11 @@ To assign a project to a reservation, use the [`CREATE ASSIGNMENT` DDL statement
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-    OPTIONS(
-      assignee="projects/PROJECT_ID",
-      job_type="JOB_TYPE");
-    ```
+        CREATE ASSIGNMENT
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+        OPTIONS(
+          assignee="projects/PROJECT_ID",
+          job_type="JOB_TYPE");
     
     Replace the following:
     
@@ -205,16 +199,14 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To assign jobs to a reservation, use the `bq mk` command with the `--reservation_assignment` flag:
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_assignment \
-    --reservation_id=RESERVATION_NAME \
-    --assignee_id=PROJECT_ID \
-    --job_type=JOB_TYPE \
-    --assignee_type=PROJECT
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --reservation_id=RESERVATION_NAME \
+        --assignee_id=PROJECT_ID \
+        --job_type=JOB_TYPE \
+        --assignee_type=PROJECT
 
 Replace the following:
 
@@ -234,7 +226,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example assigns a project to the reservation named `my-reservation` :
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_reservation" "default" {
   name              = "my-reservation"
   location          = "us-central1"
@@ -334,13 +326,11 @@ To assign a project to `none` , use the [`CREATE ASSIGNMENT` DDL statement](http
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.none.ASSIGNMENT_ID`
-    OPTIONS(
-      assignee="projects/PROJECT_ID",
-      job_type="QUERY");
-    ```
+        CREATE ASSIGNMENT
+          `ADMIN_PROJECT_ID.region-LOCATION.none.ASSIGNMENT_ID`
+        OPTIONS(
+          assignee="projects/PROJECT_ID",
+          job_type="QUERY");
     
     Replace the following:
     
@@ -360,15 +350,13 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To assign a project to `none` , use the `bq mk` command with the `--reservation_assignment` flag:
 
-``` notranslate
-bq mk \
-    --location=LOCATION \
-    --reservation_assignment \
-    --reservation_id=none \
-    --job_type=QUERY \
-    --assignee_id=PROJECT_ID \
-    --assignee_type=PROJECT
-```
+    bq mk \
+        --location=LOCATION \
+        --reservation_assignment \
+        --reservation_id=none \
+        --job_type=QUERY \
+        --assignee_id=PROJECT_ID \
+        --assignee_type=PROJECT
 
 Replace the following:
 
@@ -385,7 +373,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example assigns a project to `none` :
 
-``` lang-terraform
+```terraform
 data "google_project" "project" {}
 
 resource "google_bigquery_reservation_assignment" "default" {
@@ -487,10 +475,8 @@ Set the `@@reservation` system variable in the session to assign the reservation
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SET @@reservation='RESERVATION';
-    SELECT QUERY;
-    ```
+        SET @@reservation='RESERVATION';
+        SELECT QUERY;
     
     Replace the following:
     
@@ -504,10 +490,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 For example, the following query uses the [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#set) statement to set the reservation to the `test-reservation` in the `US` multi-region, then calls a basic query:
 
-``` notranslate
-SET @@reservation='projects/project1/locations/US/reservations/test-reservation';
-SELECT 42;
-```
+    SET @@reservation='projects/project1/locations/US/reservations/test-reservation';
+    SELECT 42;
 
 ### bq
 
@@ -517,10 +501,8 @@ SELECT 42;
 
 2.  In Cloud Shell, run the query by using the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) with the `--reservation_id` flag:
     
-    ``` notranslate
-    bq query --use_legacy_sql=false --reservation_id=RESERVATION_ID
-    'QUERY'
-    ```
+        bq query --use_legacy_sql=false --reservation_id=RESERVATION_ID
+        'QUERY'
     
     Replace the following:
     
@@ -530,9 +512,7 @@ SELECT 42;
     
     For example, the following query runs in the `test-reservation` reservation in the `US` multi-region:
     
-    ``` notranslate
-    bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
-    ```
+        bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
 
 ### API
 
@@ -607,7 +587,7 @@ To find which reservation your project's query jobs are assigned to, query the [
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
       SELECT
         assignment_id
       FROM `region-LOCATION`.INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT
@@ -633,15 +613,13 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To find which reservation your project's query jobs are assigned to, use the `bq show` command with the `--reservation_assignment` flag:
 
-``` notranslate
-bq show \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_assignment \
-    --job_type=JOB_TYPE \
-    --assignee_id=PROJECT_ID \
-    --assignee_type=PROJECT
-```
+    bq show \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --job_type=JOB_TYPE \
+        --assignee_id=PROJECT_ID \
+        --assignee_type=PROJECT
 
 Replace the following:
 
@@ -671,14 +649,12 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 To move an assignment, use the `bq update` command:
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_assignment \
-    --destination_reservation_id=DESTINATION_RESERVATION \
-    ADMIN_PROJECT_ID:LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --destination_reservation_id=DESTINATION_RESERVATION \
+        ADMIN_PROJECT_ID:LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
 
 Replace the following:
 
@@ -740,10 +716,8 @@ Use the [`DROP ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`;
-    ```
+        DROP ASSIGNMENT
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`;
     
     Replace the following:
     
@@ -765,12 +739,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To remove a project from a reservation, use the `bq rm` command with the `--reservation_assignment` flag:
 
-``` notranslate
-bq rm \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_assignment RESERVATION_NAME.ASSIGNMENT_ID
-```
+    bq rm \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment RESERVATION_NAME.ASSIGNMENT_ID
 
 Replace the following:
 

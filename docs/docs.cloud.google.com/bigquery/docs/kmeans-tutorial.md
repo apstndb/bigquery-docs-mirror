@@ -102,48 +102,46 @@ Follow these steps to examine the training data:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    WITH
-    hs AS (
-      SELECT
-        h.start_station_name AS station_name,
-        IF(
-          EXTRACT(DAYOFWEEK FROM h.start_date) = 1
-            OR EXTRACT(DAYOFWEEK FROM h.start_date) = 7,
-          'weekend',
-          'weekday') AS isweekday,
-        h.duration,
-        ST_DISTANCE(ST_GEOGPOINT(s.longitude, s.latitude), ST_GEOGPOINT(-0.1, 51.5)) / 1000
-          AS distance_from_city_center
-      FROM
-        `bigquery-public-data.london_bicycles.cycle_hire` AS h
-      JOIN
-        `bigquery-public-data.london_bicycles.cycle_stations` AS s
-        ON
-          h.start_station_id = s.id
-      WHERE
-        h.start_date
-        BETWEEN CAST('2015-01-01 00:00:00' AS TIMESTAMP)
-        AND CAST('2016-01-01 00:00:00' AS TIMESTAMP)
-    ),
-    stationstats AS (
-      SELECT
-        station_name,
-        isweekday,
-        AVG(duration) AS duration,
-        COUNT(duration) AS num_trips,
-        MAX(distance_from_city_center) AS distance_from_city_center
-      FROM
-        hs
-      GROUP BY
-        station_name, isweekday
-    )
-    SELECT *
-    FROM
-    stationstats
-    ORDER BY
-    distance_from_city_center ASC;
-    ```
+        WITH
+        hs AS (
+          SELECT
+            h.start_station_name AS station_name,
+            IF(
+              EXTRACT(DAYOFWEEK FROM h.start_date) = 1
+                OR EXTRACT(DAYOFWEEK FROM h.start_date) = 7,
+              'weekend',
+              'weekday') AS isweekday,
+            h.duration,
+            ST_DISTANCE(ST_GEOGPOINT(s.longitude, s.latitude), ST_GEOGPOINT(-0.1, 51.5)) / 1000
+              AS distance_from_city_center
+          FROM
+            `bigquery-public-data.london_bicycles.cycle_hire` AS h
+          JOIN
+            `bigquery-public-data.london_bicycles.cycle_stations` AS s
+            ON
+              h.start_station_id = s.id
+          WHERE
+            h.start_date
+            BETWEEN CAST('2015-01-01 00:00:00' AS TIMESTAMP)
+            AND CAST('2016-01-01 00:00:00' AS TIMESTAMP)
+        ),
+        stationstats AS (
+          SELECT
+            station_name,
+            isweekday,
+            AVG(duration) AS duration,
+            COUNT(duration) AS num_trips,
+            MAX(distance_from_city_center) AS distance_from_city_center
+          FROM
+            hs
+          GROUP BY
+            station_name, isweekday
+        )
+        SELECT *
+        FROM
+        stationstats
+        ORDER BY
+        distance_from_city_center ASC;
 
 The results should look similar to the following:
 
@@ -266,52 +264,50 @@ Follow these steps to create a k-means model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.london_station_clusters`
-    OPTIONS (
-      model_type = 'kmeans',
-      num_clusters = 4)
-    AS
-    WITH
-    hs AS (
-      SELECT
-        h.start_station_name AS station_name,
-        IF(
-          EXTRACT(DAYOFWEEK FROM h.start_date) = 1
-            OR EXTRACT(DAYOFWEEK FROM h.start_date) = 7,
-          'weekend',
-          'weekday') AS isweekday,
-        h.duration,
-        ST_DISTANCE(ST_GEOGPOINT(s.longitude, s.latitude), ST_GEOGPOINT(-0.1, 51.5)) / 1000
-          AS distance_from_city_center
-      FROM
-        `bigquery-public-data.london_bicycles.cycle_hire` AS h
-      JOIN
-        `bigquery-public-data.london_bicycles.cycle_stations` AS s
-        ON
-          h.start_station_id = s.id
-      WHERE
-        h.start_date
-        BETWEEN CAST('2015-01-01 00:00:00' AS TIMESTAMP)
-        AND CAST('2016-01-01 00:00:00' AS TIMESTAMP)
-    ),
-    stationstats AS (
-      SELECT
-        station_name,
-        isweekday,
-        AVG(duration) AS duration,
-        COUNT(duration) AS num_trips,
-        MAX(distance_from_city_center) AS distance_from_city_center
-      FROM
-        hs
-      GROUP BY
-        station_name, isweekday
-    )
-    SELECT *
-    EXCEPT (station_name, isweekday)
-    FROM
-    stationstats;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.london_station_clusters`
+        OPTIONS (
+          model_type = 'kmeans',
+          num_clusters = 4)
+        AS
+        WITH
+        hs AS (
+          SELECT
+            h.start_station_name AS station_name,
+            IF(
+              EXTRACT(DAYOFWEEK FROM h.start_date) = 1
+                OR EXTRACT(DAYOFWEEK FROM h.start_date) = 7,
+              'weekend',
+              'weekday') AS isweekday,
+            h.duration,
+            ST_DISTANCE(ST_GEOGPOINT(s.longitude, s.latitude), ST_GEOGPOINT(-0.1, 51.5)) / 1000
+              AS distance_from_city_center
+          FROM
+            `bigquery-public-data.london_bicycles.cycle_hire` AS h
+          JOIN
+            `bigquery-public-data.london_bicycles.cycle_stations` AS s
+            ON
+              h.start_station_id = s.id
+          WHERE
+            h.start_date
+            BETWEEN CAST('2015-01-01 00:00:00' AS TIMESTAMP)
+            AND CAST('2016-01-01 00:00:00' AS TIMESTAMP)
+        ),
+        stationstats AS (
+          SELECT
+            station_name,
+            isweekday,
+            AVG(duration) AS duration,
+            COUNT(duration) AS num_trips,
+            MAX(distance_from_city_center) AS distance_from_city_center
+          FROM
+            hs
+          GROUP BY
+            station_name, isweekday
+        )
+        SELECT *
+        EXCEPT (station_name, isweekday)
+        FROM
+        stationstats;
 
 ### BigQuery DataFrames
 
@@ -381,55 +377,53 @@ Follow these steps to predict the cluster of every station that has the string `
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    WITH
-    hs AS (
-      SELECT
-        h.start_station_name AS station_name,
-        IF(
-          EXTRACT(DAYOFWEEK FROM h.start_date) = 1
-            OR EXTRACT(DAYOFWEEK FROM h.start_date) = 7,
-          'weekend',
-          'weekday') AS isweekday,
-        h.duration,
-        ST_DISTANCE(ST_GEOGPOINT(s.longitude, s.latitude), ST_GEOGPOINT(-0.1, 51.5)) / 1000
-          AS distance_from_city_center
-      FROM
-        `bigquery-public-data.london_bicycles.cycle_hire` AS h
-      JOIN
-        `bigquery-public-data.london_bicycles.cycle_stations` AS s
-        ON
-          h.start_station_id = s.id
-      WHERE
-        h.start_date
-        BETWEEN CAST('2015-01-01 00:00:00' AS TIMESTAMP)
-        AND CAST('2016-01-01 00:00:00' AS TIMESTAMP)
-    ),
-    stationstats AS (
-      SELECT
-        station_name,
-        isweekday,
-        AVG(duration) AS duration,
-        COUNT(duration) AS num_trips,
-        MAX(distance_from_city_center) AS distance_from_city_center
-      FROM
-        hs
-      GROUP BY
-        station_name, isweekday
-    )
-    SELECT *
-    EXCEPT (nearest_centroids_distance)
-    FROM
-    ML.PREDICT(
-      MODEL `bqml_tutorial.london_station_clusters`,
-      (
+        WITH
+        hs AS (
+          SELECT
+            h.start_station_name AS station_name,
+            IF(
+              EXTRACT(DAYOFWEEK FROM h.start_date) = 1
+                OR EXTRACT(DAYOFWEEK FROM h.start_date) = 7,
+              'weekend',
+              'weekday') AS isweekday,
+            h.duration,
+            ST_DISTANCE(ST_GEOGPOINT(s.longitude, s.latitude), ST_GEOGPOINT(-0.1, 51.5)) / 1000
+              AS distance_from_city_center
+          FROM
+            `bigquery-public-data.london_bicycles.cycle_hire` AS h
+          JOIN
+            `bigquery-public-data.london_bicycles.cycle_stations` AS s
+            ON
+              h.start_station_id = s.id
+          WHERE
+            h.start_date
+            BETWEEN CAST('2015-01-01 00:00:00' AS TIMESTAMP)
+            AND CAST('2016-01-01 00:00:00' AS TIMESTAMP)
+        ),
+        stationstats AS (
+          SELECT
+            station_name,
+            isweekday,
+            AVG(duration) AS duration,
+            COUNT(duration) AS num_trips,
+            MAX(distance_from_city_center) AS distance_from_city_center
+          FROM
+            hs
+          GROUP BY
+            station_name, isweekday
+        )
         SELECT *
+        EXCEPT (nearest_centroids_distance)
         FROM
-          stationstats
-        WHERE
-          REGEXP_CONTAINS(station_name, 'Kennington')
-      ));
-    ```
+        ML.PREDICT(
+          MODEL `bqml_tutorial.london_station_clusters`,
+          (
+            SELECT *
+            FROM
+              stationstats
+            WHERE
+              REGEXP_CONTAINS(station_name, 'Kennington')
+          ));
 
 The results should look similar to the following.
 

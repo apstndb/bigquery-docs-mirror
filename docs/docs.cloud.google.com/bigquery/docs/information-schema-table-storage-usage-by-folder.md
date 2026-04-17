@@ -165,25 +165,23 @@ To retrieve storage information for tables in the specified project's parent fol
 
 The following query shows usage for all tables in the folder on the most recent date:
 
-``` notranslate
-SELECT
-  usage_date,
-  project_id,
-  table_schema,
-  table_name,
-  billable_total_logical_usage,
-  billable_total_physical_usage
-FROM
-  (
     SELECT
-      *,
-      ROW_NUMBER()
-        OVER (PARTITION BY project_id, table_schema, table_name ORDER BY usage_date DESC) AS rank
+      usage_date,
+      project_id,
+      table_schema,
+      table_name,
+      billable_total_logical_usage,
+      billable_total_physical_usage
     FROM
-      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_FOLDER
-  )
-WHERE rank = 1;
-```
+      (
+        SELECT
+          *,
+          ROW_NUMBER()
+            OVER (PARTITION BY project_id, table_schema, table_name ORDER BY usage_date DESC) AS rank
+        FROM
+          `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_FOLDER
+      )
+    WHERE rank = 1;
 
 The result is similar to the following:
 

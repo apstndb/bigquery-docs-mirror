@@ -37,7 +37,7 @@ You can run DDL statements by using the Google Cloud console, by using the bq co
 
 3.  Enter the DDL statement into the **Query editor** text area. For example:
     
-    ``` notranslate
+    ``` 
      CREATE TABLE mydataset.newtable ( x INT64 )
      
     ```
@@ -48,10 +48,8 @@ You can run DDL statements by using the Google Cloud console, by using the bq co
 
 Enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` .
 
-``` notranslate
-bq query --use_legacy_sql=false \
-  'CREATE TABLE mydataset.newtable ( x INT64 )'
-```
+    bq query --use_legacy_sql=false \
+      'CREATE TABLE mydataset.newtable ( x INT64 )'
 
 ### API
 
@@ -256,12 +254,10 @@ Creates a new dataset.
 
 ### Syntax
 
-``` notranslate
-CREATE SCHEMA [ IF NOT EXISTS ]
-[project_name.]dataset_name
-[DEFAULT COLLATE collate_specification]
-[OPTIONS(schema_option_list)]
-```
+    CREATE SCHEMA [ IF NOT EXISTS ]
+    [project_name.]dataset_name
+    [DEFAULT COLLATE collate_specification]
+    [OPTIONS(schema_option_list)]
 
 ### Arguments
 
@@ -407,34 +403,28 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example creates a dataset with a default table expiration and a set of labels.
 
-``` notranslate
-CREATE SCHEMA mydataset
-OPTIONS(
-  location="us",
-  default_table_expiration_days=3.75,
-  labels=[("label1","value1"),("label2","value2")]
-  )
-```
+    CREATE SCHEMA mydataset
+    OPTIONS(
+      location="us",
+      default_table_expiration_days=3.75,
+      labels=[("label1","value1"),("label2","value2")]
+      )
 
 #### Creating a case-insensitive dataset
 
 The following example creates a case-insensitive dataset. Both the dataset name and table names inside the dataset are case-insensitive.
 
-``` notranslate
-CREATE SCHEMA mydataset
-OPTIONS(
-  is_case_insensitive=TRUE
-)
-```
+    CREATE SCHEMA mydataset
+    OPTIONS(
+      is_case_insensitive=TRUE
+    )
 
 #### Creating a dataset with collation support
 
 The following example creates a dataset with a collation specification.
 
-``` notranslate
-CREATE SCHEMA mydataset
-DEFAULT COLLATE 'und:ci'
-```
+    CREATE SCHEMA mydataset
+    DEFAULT COLLATE 'und:ci'
 
 ## `CREATE TABLE` statement
 
@@ -442,35 +432,33 @@ Creates a new table.
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] [ TEMP | TEMPORARY ] TABLE [ IF NOT EXISTS ]
-table_name
-[(
-  column | constraint_definition[, ...]
-)]
-[DEFAULT COLLATE collate_specification]
-[PARTITION BY partition_expression]
-[CLUSTER BY clustering_column_list]
-[WITH CONNECTION connection_name]
-[OPTIONS(table_option_list)]
-[AS query_statement]
-
-column:=
-column_definition
-
-constraint_definition:=
-[primary_key]
-| [[CONSTRAINT constraint_name] foreign_key, ...]
-
-primary_key :=
-PRIMARY KEY (column_name[, ...]) NOT ENFORCED
-
-foreign_key :=
-FOREIGN KEY (column_name[, ...]) foreign_reference
-
-foreign_reference :=
-REFERENCES primary_key_table(column_name[, ...]) NOT ENFORCED
-```
+    CREATE [ OR REPLACE ] [ TEMP | TEMPORARY ] TABLE [ IF NOT EXISTS ]
+    table_name
+    [(
+      column | constraint_definition[, ...]
+    )]
+    [DEFAULT COLLATE collate_specification]
+    [PARTITION BY partition_expression]
+    [CLUSTER BY clustering_column_list]
+    [WITH CONNECTION connection_name]
+    [OPTIONS(table_option_list)]
+    [AS query_statement]
+    
+    column:=
+    column_definition
+    
+    constraint_definition:=
+    [primary_key]
+    | [[CONSTRAINT constraint_name] foreign_key, ...]
+    
+    primary_key :=
+    PRIMARY KEY (column_name[, ...]) NOT ENFORCED
+    
+    foreign_key :=
+    FOREIGN KEY (column_name[, ...]) foreign_reference
+    
+    foreign_reference :=
+    REFERENCES primary_key_table(column_name[, ...]) NOT ENFORCED
 
 ### Arguments
 
@@ -879,23 +867,21 @@ If the `OPTIONS` clause includes any expiration options, then the `bigquery.tabl
 
 The following example creates a partitioned table named `newtable` in `mydataset` :
 
-``` notranslate
-CREATE TABLE mydataset.newtable
-(
-  x INT64 OPTIONS(description="An optional INTEGER field"),
-  y STRUCT <
-    a ARRAY <STRING> OPTIONS(description="A repeated STRING field"),
-    b BOOL
-  >
-)
-PARTITION BY _PARTITIONDATE
-OPTIONS(
-  expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
-  partition_expiration_days=1,
-  description="a table that expires in 2025, with each partition living for 24 hours",
-  labels=[("org_unit", "development")]
-)
-```
+    CREATE TABLE mydataset.newtable
+    (
+      x INT64 OPTIONS(description="An optional INTEGER field"),
+      y STRUCT <
+        a ARRAY <STRING> OPTIONS(description="A repeated STRING field"),
+        b BOOL
+      >
+    )
+    PARTITION BY _PARTITIONDATE
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
+      partition_expiration_days=1,
+      description="a table that expires in 2025, with each partition living for 24 hours",
+      labels=[("org_unit", "development")]
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.newtable` , your table qualifier might be `` `myproject.mydataset.newtable` `` .
 
@@ -927,17 +913,15 @@ The table option list specifies the:
 
 The following example creates a table named `top_words` in `mydataset` from a query:
 
-``` notranslate
-CREATE TABLE mydataset.top_words
-OPTIONS(
-  description="Top ten words per Shakespeare corpus"
-) AS
-SELECT
-  corpus,
-  ARRAY_AGG(STRUCT(word, word_count) ORDER BY word_count DESC LIMIT 10) AS top_words
-FROM `bigquery-public-data`.samples.shakespeare
-GROUP BY corpus;
-```
+    CREATE TABLE mydataset.top_words
+    OPTIONS(
+      description="Top ten words per Shakespeare corpus"
+    ) AS
+    SELECT
+      corpus,
+      ARRAY_AGG(STRUCT(word, word_count) ORDER BY word_count DESC LIMIT 10) AS top_words
+    FROM `bigquery-public-data`.samples.shakespeare
+    GROUP BY corpus;
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.top_words` , your table qualifier might be `` `myproject.mydataset.top_words` `` .
 
@@ -961,14 +945,12 @@ The table option list specifies the:
 
 The following example creates a table named `newtable` in `mydataset` only if no table named `newtable` exists in `mydataset` . If the table name exists in the dataset, no error is returned, and no action is taken.
 
-``` notranslate
-CREATE TABLE IF NOT EXISTS mydataset.newtable (x INT64, y STRUCT <a ARRAY <STRING>, b BOOL>)
-OPTIONS(
-  expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
-  description="a table that expires in 2025",
-  labels=[("org_unit", "development")]
-)
-```
+    CREATE TABLE IF NOT EXISTS mydataset.newtable (x INT64, y STRUCT <a ARRAY <STRING>, b BOOL>)
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
+      description="a table that expires in 2025",
+      labels=[("org_unit", "development")]
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.newtable` , your table qualifier might be `` `myproject.mydataset.newtable` `` .
 
@@ -990,14 +972,12 @@ The table option list specifies the:
 
 The following example creates a table named `newtable` in `mydataset` , and if `newtable` exists in `mydataset` , it is overwritten with an empty table.
 
-``` notranslate
-CREATE OR REPLACE TABLE mydataset.newtable (x INT64, y STRUCT <a ARRAY <STRING>, b BOOL>)
-OPTIONS(
-  expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
-  description="a table that expires in 2025",
-  labels=[("org_unit", "development")]
-)
-```
+    CREATE OR REPLACE TABLE mydataset.newtable (x INT64, y STRUCT <a ARRAY <STRING>, b BOOL>)
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
+      description="a table that expires in 2025",
+      labels=[("org_unit", "development")]
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.newtable` , your table qualifier might be `` `myproject.mydataset.newtable` `` .
 
@@ -1019,17 +999,15 @@ The table option list specifies the:
 
 The following example creates a table named `newtable` in `mydataset` . The `NOT NULL` modifier in the column definition list of a `CREATE TABLE` statement specifies that a column or field is created in `REQUIRED` mode.
 
-``` notranslate
-CREATE TABLE mydataset.newtable (
-  x INT64 NOT NULL,
-  y STRUCT <
-    a ARRAY <STRING>,
-    b BOOL NOT NULL,
-    c FLOAT64
-  > NOT NULL,
-  z STRING
-)
-```
+    CREATE TABLE mydataset.newtable (
+      x INT64 NOT NULL,
+      y STRUCT <
+        a ARRAY <STRING>,
+        b BOOL NOT NULL,
+        c FLOAT64
+      > NOT NULL,
+      z STRING
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.newtable` , your table qualifier might be `` `myproject.mydataset.newtable` `` .
 
@@ -1053,46 +1031,40 @@ The following examples create a table named `newtable` in `mydataset` with colum
 
 All `STRING` column schemas in this table are collated with `'und:ci'` :
 
-``` notranslate
-CREATE TABLE mydataset.newtable (
-  a STRING,
-  b STRING,
-  c STRUCT <
-    x FLOAT64
-    y ARRAY <STRING>
-  >
-)
-DEFAULT COLLATE 'und:ci';
-```
+    CREATE TABLE mydataset.newtable (
+      a STRING,
+      b STRING,
+      c STRUCT <
+        x FLOAT64
+        y ARRAY <STRING>
+      >
+    )
+    DEFAULT COLLATE 'und:ci';
 
 Only `b` and `y` are collated with `'und:ci'` :
 
-``` notranslate
-CREATE TABLE mydataset.newtable (
-  a STRING,
-  b STRING COLLATE 'und:ci',
-  c STRUCT <
-    x FLOAT64
-    y ARRAY <STRING COLLATE 'und:ci'>
-  >
-);
-```
+    CREATE TABLE mydataset.newtable (
+      a STRING,
+      b STRING COLLATE 'und:ci',
+      c STRUCT <
+        x FLOAT64
+        y ARRAY <STRING COLLATE 'und:ci'>
+      >
+    );
 
 #### Creating a table with parameterized data types
 
 The following example creates a table named `newtable` in `mydataset` . The parameters in parentheses specify that the column contains a parameterized data type. See [Parameterized Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) for more information about parameterized types.
 
-``` notranslate
-CREATE TABLE mydataset.newtable (
-  x STRING(10),
-  y STRUCT <
-    a ARRAY <BYTES(5)>,
-    b NUMERIC(15, 2) OPTIONS(rounding_mode = 'ROUND_HALF_EVEN'),
-    c FLOAT64
-  >,
-  z BIGNUMERIC(35)
-)
-```
+    CREATE TABLE mydataset.newtable (
+      x STRING(10),
+      y STRUCT <
+        a ARRAY <BYTES(5)>,
+        b NUMERIC(15, 2) OPTIONS(rounding_mode = 'ROUND_HALF_EVEN'),
+        c FLOAT64
+      >,
+      z BIGNUMERIC(35)
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . Instead of `mydataset.newtable` , your table qualifier should be `` `myproject.mydataset.newtable` `` .
 
@@ -1110,14 +1082,12 @@ The table schema contains 3 columns:
 
 The following example creates a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) named `newtable` in `mydataset` using a `DATE` column:
 
-``` notranslate
-CREATE TABLE mydataset.newtable (transaction_id INT64, transaction_date DATE)
-PARTITION BY transaction_date
-OPTIONS(
-  partition_expiration_days=3,
-  description="a table partitioned by transaction_date"
-)
-```
+    CREATE TABLE mydataset.newtable (transaction_id INT64, transaction_date DATE)
+    PARTITION BY transaction_date
+    OPTIONS(
+      partition_expiration_days=3,
+      description="a table partitioned by transaction_date"
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.newtable` , your table qualifier might be `` `myproject.mydataset.newtable` `` .
 
@@ -1169,20 +1139,18 @@ The table option list specifies the:
 
 The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `myclusteredtable` in `mydataset` . The table is a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , partitioned by a truncated `TIMESTAMP` column and clustered by a `STRING` column named `customer_id` .
 
-``` notranslate
-CREATE TABLE mydataset.myclusteredtable
-(
-  input_timestamp TIMESTAMP,
-  customer_id STRING,
-  transaction_amount NUMERIC
-)
-PARTITION BY TIMESTAMP_TRUNC(input_timestamp, HOUR)
-CLUSTER BY customer_id
-OPTIONS (
-  partition_expiration_days=3,
-  description="a table clustered by customer_id"
-)
-```
+    CREATE TABLE mydataset.myclusteredtable
+    (
+      input_timestamp TIMESTAMP,
+      customer_id STRING,
+      transaction_amount NUMERIC
+    )
+    PARTITION BY TIMESTAMP_TRUNC(input_timestamp, HOUR)
+    CLUSTER BY customer_id
+    OPTIONS (
+      partition_expiration_days=3,
+      description="a table clustered by customer_id"
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.myclusteredtable` , your table qualifier might be `` `myproject.mydataset.myclusteredtable` `` .
 
@@ -1201,20 +1169,18 @@ The table option list specifies the:
 
 The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `myclusteredtable` in `mydataset` . The table is an [ingestion-time partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
 
-``` notranslate
-CREATE TABLE mydataset.myclusteredtable
-(
-  customer_id STRING,
-  transaction_amount NUMERIC
-)
-PARTITION BY DATE(_PARTITIONTIME)
-CLUSTER BY
-  customer_id
-OPTIONS (
-  partition_expiration_days=3,
-  description="a table clustered by customer_id"
-)
-```
+    CREATE TABLE mydataset.myclusteredtable
+    (
+      customer_id STRING,
+      transaction_amount NUMERIC
+    )
+    PARTITION BY DATE(_PARTITIONTIME)
+    CLUSTER BY
+      customer_id
+    OPTIONS (
+      partition_expiration_days=3,
+      description="a table clustered by customer_id"
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.myclusteredtable` , your table qualifier might be `` `myproject.mydataset.myclusteredtable` `` .
 
@@ -1232,18 +1198,16 @@ The table option list specifies the:
 
 The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `myclusteredtable` in `mydataset` . The table is not partitioned.
 
-``` notranslate
-CREATE TABLE mydataset.myclusteredtable
-(
-  customer_id STRING,
-  transaction_amount NUMERIC
-)
-CLUSTER BY
-  customer_id
-OPTIONS (
-  description="a table clustered by customer_id"
-)
-```
+    CREATE TABLE mydataset.myclusteredtable
+    (
+      customer_id STRING,
+      transaction_amount NUMERIC
+    )
+    CLUSTER BY
+      customer_id
+    OPTIONS (
+      description="a table clustered by customer_id"
+    )
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.myclusteredtable` , your table qualifier might be `` `myproject.mydataset.myclusteredtable` `` .
 
@@ -1264,20 +1228,18 @@ The table option list specifies the:
 
 The following example creates a table named `embedded_table` in `mydataset` with an [automatically generated embedding](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `embedding` that generates embeddings from the `content` column:
 
-``` notranslate
-CREATE TABLE mydataset.embedded_table (
-  id INT64,
-  content STRING,
-  embedding STRUCT, status STRING>
-    GENERATED ALWAYS AS (
-      AI.EMBED(
-        content,
-        connection_id => "US.embed_connection",
-        endpoint => "text-embedding-005")
-    )
-    STORED OPTIONS (asynchronous = true)
-);
-```
+    CREATE TABLE mydataset.embedded_table (
+      id INT64,
+      content STRING,
+      embedding STRUCT, status STRING>
+        GENERATED ALWAYS AS (
+          AI.EMBED(
+            content,
+            connection_id => "US.embed_connection",
+            endpoint => "text-embedding-005")
+        )
+        STORED OPTIONS (asynchronous = true)
+    );
 
 #### Creating a clustered table from the result of a query
 
@@ -1285,22 +1247,20 @@ CREATE TABLE mydataset.embedded_table (
 
 The following example creates a partitioned and [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `myclusteredtable` in `mydataset` using the result of a query.
 
-``` notranslate
-CREATE TABLE mydataset.myclusteredtable
-(
-  input_timestamp TIMESTAMP,
-  customer_id STRING,
-  transaction_amount NUMERIC
-)
-PARTITION BY DATE(input_timestamp)
-CLUSTER BY
-  customer_id
-OPTIONS (
-  partition_expiration_days=3,
-  description="a table clustered by customer_id"
-)
-AS SELECT * FROM mydataset.myothertable
-```
+    CREATE TABLE mydataset.myclusteredtable
+    (
+      input_timestamp TIMESTAMP,
+      customer_id STRING,
+      transaction_amount NUMERIC
+    )
+    PARTITION BY DATE(input_timestamp)
+    CLUSTER BY
+      customer_id
+    OPTIONS (
+      partition_expiration_days=3,
+      description="a table clustered by customer_id"
+    )
+    AS SELECT * FROM mydataset.myothertable
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.myclusteredtable` , your table qualifier might be `` `myproject.mydataset.myclusteredtable` `` .
 
@@ -1319,19 +1279,17 @@ The table option list specifies the:
 
 The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `myclusteredtable` in `mydataset` using the result of a query. The table is not partitioned.
 
-``` notranslate
-CREATE TABLE mydataset.myclusteredtable
-(
-  customer_id STRING,
-  transaction_amount NUMERIC
-)
-CLUSTER BY
-  customer_id
-OPTIONS (
-  description="a table clustered by customer_id"
-)
-AS SELECT * FROM mydataset.myothertable
-```
+    CREATE TABLE mydataset.myclusteredtable
+    (
+      customer_id STRING,
+      transaction_amount NUMERIC
+    )
+    CLUSTER BY
+      customer_id
+    OPTIONS (
+      description="a table clustered by customer_id"
+    )
+    AS SELECT * FROM mydataset.myothertable
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `project_id` contains special characters: `` ` project_id.dataset.table ` `` . So, instead of `mydataset.myclusteredtable` , your table qualifier might be `` `myproject.mydataset.myclusteredtable` `` .
 
@@ -1348,22 +1306,20 @@ The table option list specifies the:
 
 The following example creates a temporary table named `Example` and inserts values into it.
 
-``` notranslate
-CREATE TEMP TABLE Example
-(
-  x INT64,
-  y STRING
-);
-
-INSERT INTO Example
-VALUES (5, 'foo');
-
-INSERT INTO Example
-VALUES (6, 'bar');
-
-SELECT *
-FROM Example;
-```
+    CREATE TEMP TABLE Example
+    (
+      x INT64,
+      y STRING
+    );
+    
+    INSERT INTO Example
+    VALUES (5, 'foo');
+    
+    INSERT INTO Example
+    VALUES (6, 'bar');
+    
+    SELECT *
+    FROM Example;
 
 This script returns the following output:
 
@@ -1496,13 +1452,11 @@ Creates a new table with all of the same metadata of another table.
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ]
-table_name
-LIKE [[project_name.]dataset_name.]source_table_name
-...
-[OPTIONS(table_option_list)]
-```
+    CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ]
+    table_name
+    LIKE [[project_name.]dataset_name.]source_table_name
+    ...
+    [OPTIONS(table_option_list)]
 
 ### Details
 
@@ -1533,20 +1487,16 @@ If the `OPTIONS` clause includes any expiration options, then the `bigquery.tabl
 
 The following example creates a new table named `newtable` in `mydataset` with the same metadata as `sourcetable` :
 
-``` notranslate
-CREATE TABLE mydataset.newtable
-LIKE mydataset.sourcetable
-```
+    CREATE TABLE mydataset.newtable
+    LIKE mydataset.sourcetable
 
 #### Example 2
 
 The following example creates a new table named `newtable` in `mydataset` with the same metadata as `sourcetable` and the data from the `SELECT` statement:
 
-``` notranslate
-CREATE TABLE mydataset.newtable
-LIKE mydataset.sourcetable
-AS SELECT * FROM mydataset.myothertable
-```
+    CREATE TABLE mydataset.newtable
+    LIKE mydataset.sourcetable
+    AS SELECT * FROM mydataset.myothertable
 
 ## `CREATE TABLE COPY` statement
 
@@ -1554,12 +1504,10 @@ Creates a table that has the same metadata and data as another table. The source
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] table_name
-COPY source_table_name
-...
-[OPTIONS(table_option_list)]
-```
+    CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] table_name
+    COPY source_table_name
+    ...
+    [OPTIONS(table_option_list)]
 
 ### Details
 
@@ -1591,12 +1539,10 @@ Creates a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-sna
 
 ### Syntax
 
-``` notranslate
-CREATE SNAPSHOT TABLE [ IF NOT EXISTS ] table_snapshot_name
-CLONE source_table_name
-[FOR SYSTEM_TIME AS OF time_expression]
-[OPTIONS(snapshot_option_list)]
-```
+    CREATE SNAPSHOT TABLE [ IF NOT EXISTS ] table_snapshot_name
+    CLONE source_table_name
+    [FOR SYSTEM_TIME AS OF time_expression]
+    [OPTIONS(snapshot_option_list)]
 
 ### Arguments
 
@@ -1718,16 +1664,14 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example creates a table snapshot of the table `myproject.mydataset.mytable` . The table snapshot is created in the dataset `mydataset` and is named `mytablesnapshot` :
 
-``` notranslate
-CREATE SNAPSHOT TABLE `myproject.mydataset.mytablesnapshot`
-CLONE `myproject.mydataset.mytable`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-  friendly_name="my_table_snapshot",
-  description="A table snapshot that expires in 2 days",
-  labels=[("org_unit", "development")]
-)
-```
+    CREATE SNAPSHOT TABLE `myproject.mydataset.mytablesnapshot`
+    CLONE `myproject.mydataset.mytable`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+      friendly_name="my_table_snapshot",
+      description="A table snapshot that expires in 2 days",
+      labels=[("org_unit", "development")]
+    )
 
 If the table snapshot name already exists in the dataset, then the following error is returned:
 
@@ -1744,16 +1688,14 @@ The table snapshot option list specifies the following:
 
 The following example creates a table snapshot of the table `myproject.mydataset.mytable` . The table snapshot is created in the dataset `mydataset` and is named `mytablesnapshot` :
 
-``` notranslate
-CREATE SNAPSHOT TABLE IF NOT EXISTS `myproject.mydataset.mytablesnapshot`
-CLONE `myproject.mydataset.mytable`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-  friendly_name="my_table_snapshot",
-  description="A table snapshot that expires in 2 days"
-  labels=[("org_unit", "development")]
-)
-```
+    CREATE SNAPSHOT TABLE IF NOT EXISTS `myproject.mydataset.mytablesnapshot`
+    CLONE `myproject.mydataset.mytable`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+      friendly_name="my_table_snapshot",
+      description="A table snapshot that expires in 2 days"
+      labels=[("org_unit", "development")]
+    )
 
 The table snapshot option list specifies the following:
 
@@ -1774,13 +1716,11 @@ Creates a [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones
 
 ### Syntax
 
-``` notranslate
-CREATE TABLE [ IF NOT EXISTS ]
-destination_table_name
-CLONE source_table_name [FOR SYSTEM_TIME AS OF time_expression]
-...
-[OPTIONS(table_option_list)]
-```
+    CREATE TABLE [ IF NOT EXISTS ]
+    destination_table_name
+    CLONE source_table_name [FOR SYSTEM_TIME AS OF time_expression]
+    ...
+    [OPTIONS(table_option_list)]
 
 ### Details
 
@@ -1827,16 +1767,14 @@ If the `OPTIONS` clause includes any expiration options, then the `bigquery.tabl
 
 The following example creates the table `myproject.mydataset.mytable` from the table snapshot `myproject.mydataset.mytablesnapshot` :
 
-``` notranslate
-CREATE TABLE `myproject.mydataset.mytable`
-CLONE `myproject.mydataset.mytablesnapshot`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 365 DAY),
-  friendly_name="my_table",
-  description="A table that expires in 1 year",
-  labels=[("org_unit", "development")]
-)
-```
+    CREATE TABLE `myproject.mydataset.mytable`
+    CLONE `myproject.mydataset.mytablesnapshot`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 365 DAY),
+      friendly_name="my_table",
+      description="A table that expires in 1 year",
+      labels=[("org_unit", "development")]
+    )
 
 If the table name exists in the dataset, then the following error is returned:
 
@@ -1853,16 +1791,14 @@ The table option list specifies the following:
 
 The following example creates the table clone `myproject.mydataset.mytableclone` based on the table `myproject.mydataset.mytable` :
 
-``` notranslate
-CREATE TABLE IF NOT EXISTS `myproject.mydataset.mytableclone`
-CLONE `myproject.mydataset.mytable`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 365 DAY),
-  friendly_name="my_table",
-  description="A table that expires in 1 year",
-  labels=[("org_unit", "development")]
-)
-```
+    CREATE TABLE IF NOT EXISTS `myproject.mydataset.mytableclone`
+    CLONE `myproject.mydataset.mytable`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 365 DAY),
+      friendly_name="my_table",
+      description="A table that expires in 1 year",
+      labels=[("org_unit", "development")]
+    )
 
 The table option list specifies the following:
 
@@ -1883,18 +1819,16 @@ Creates a new view.
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] VIEW [ IF NOT EXISTS ] view_name
-[(view_column_name_list)]
-[OPTIONS(view_option_list)]
-AS query_expression
-
-view_column_name_list :=
-  view_column[, ...]
-
-view_column :=
-  column_name [OPTIONS(view_column_option_list)]
-```
+    CREATE [ OR REPLACE ] VIEW [ IF NOT EXISTS ] view_name
+    [(view_column_name_list)]
+    [OPTIONS(view_option_list)]
+    AS query_expression
+    
+    view_column_name_list :=
+      view_column[, ...]
+    
+    view_column :=
+      column_name [OPTIONS(view_column_option_list)]
 
 ### Arguments
 
@@ -2197,16 +2131,14 @@ The view option list specifies the:
 
 The following example creates a view named `newview` in `mydataset` , and if `newview` exists in `mydataset` , it is overwritten using the specified query expression.
 
-``` notranslate
-CREATE OR REPLACE VIEW `myproject.mydataset.newview`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-  friendly_name="newview",
-  description="a view that expires in 2 days",
-  labels=[("org_unit", "development")]
-)
-AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
-```
+    CREATE OR REPLACE VIEW `myproject.mydataset.newview`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+      friendly_name="newview",
+      description="a view that expires in 2 days",
+      labels=[("org_unit", "development")]
+    )
+    AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
 
 The view is defined using the following GoogleSQL query:
 
@@ -2223,14 +2155,12 @@ The view option list specifies the:
 
 The following example creates a view named `newview` in `mydataset` . This view definition provides the column description for each column in `mytable` . You can rename columns from the original query.
 
-``` notranslate
-CREATE VIEW `myproject.mydataset.newview` (
-  column_1_new_name OPTIONS (DESCRIPTION='Description of the column 1 contents'),
-  column_2_new_name OPTIONS (DESCRIPTION='Description of the column 2 contents'),
-  column_3_new_name OPTIONS (DESCRIPTION='Description of the column 3 contents')
-)
-AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
-```
+    CREATE VIEW `myproject.mydataset.newview` (
+      column_1_new_name OPTIONS (DESCRIPTION='Description of the column 1 contents'),
+      column_2_new_name OPTIONS (DESCRIPTION='Description of the column 2 contents'),
+      column_3_new_name OPTIONS (DESCRIPTION='Description of the column 3 contents')
+    )
+    AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
 
 ## `CREATE MATERIALIZED VIEW` statement
 
@@ -2238,13 +2168,11 @@ Creates a new materialized view.
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] MATERIALIZED VIEW [ IF NOT EXISTS ] materialized_view_name
-[PARTITION BY partition_expression]
-[CLUSTER BY clustering_column_list]
-[OPTIONS(materialized_view_option_list)]
-AS query_expression
-```
+    CREATE [ OR REPLACE ] MATERIALIZED VIEW [ IF NOT EXISTS ] materialized_view_name
+    [PARTITION BY partition_expression]
+    [CLUSTER BY clustering_column_list]
+    [OPTIONS(materialized_view_option_list)]
+    AS query_expression
 
 ### Arguments
 
@@ -2387,20 +2315,18 @@ If the `OPTIONS` clause includes any expiration options, then the `bigquery.tabl
 
 The following example creates a materialized view named `new_mv` in `mydataset` :
 
-``` notranslate
-CREATE MATERIALIZED VIEW `myproject.mydataset.new_mv`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-  friendly_name="new_mv",
-  description="a materialized view that expires in 2 days",
-  labels=[("org_unit", "development")],
-  enable_refresh=true,
-  refresh_interval_minutes=20
-)
-AS SELECT column_1, SUM(column_2) AS sum_2, AVG(column_3) AS avg_3
-FROM `myproject.mydataset.mytable`
-GROUP BY column_1
-```
+    CREATE MATERIALIZED VIEW `myproject.mydataset.new_mv`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+      friendly_name="new_mv",
+      description="a materialized view that expires in 2 days",
+      labels=[("org_unit", "development")],
+      enable_refresh=true,
+      refresh_interval_minutes=20
+    )
+    AS SELECT column_1, SUM(column_2) AS sum_2, AVG(column_3) AS avg_3
+    FROM `myproject.mydataset.mytable`
+    GROUP BY column_1
 
 If the materialized view name exists in the dataset, the following error is returned:
 
@@ -2425,17 +2351,15 @@ The materialized view option list specifies the:
 
 The following example creates a materialized view named `new_mv` in `mydataset` only if no materialized view named `new_mv` exists in `mydataset` . If the materialized view name exists in the dataset, no error is returned, and no action is taken.
 
-``` notranslate
-CREATE MATERIALIZED VIEW IF NOT EXISTS `myproject.mydataset.new_mv`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-  friendly_name="new_mv",
-  description="a view that expires in 2 days",
-  labels=[("org_unit", "development")],
-  enable_refresh=false
-)
-AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
-```
+    CREATE MATERIALIZED VIEW IF NOT EXISTS `myproject.mydataset.new_mv`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+      friendly_name="new_mv",
+      description="a view that expires in 2 days",
+      labels=[("org_unit", "development")],
+      enable_refresh=false
+    )
+    AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
 
 The materialized view is defined using the following GoogleSQL query:
 
@@ -2453,14 +2377,12 @@ The materialized view option list specifies the:
 
 The following example creates a materialized view named `new_mv` in `mydataset` , partitioned by the `col_datetime` column and clustered by the `col_int` column:
 
-``` notranslate
-CREATE MATERIALIZED VIEW `myproject.mydataset.new_mv`
-PARTITION BY DATE(col_datetime)
-CLUSTER BY col_int
-AS SELECT col_int, col_datetime, COUNT(1) as cnt
-   FROM `myproject.mydataset.mv_base_table`
-   GROUP BY col_int, col_datetime
-```
+    CREATE MATERIALIZED VIEW `myproject.mydataset.new_mv`
+    PARTITION BY DATE(col_datetime)
+    CLUSTER BY col_int
+    AS SELECT col_int, col_datetime, COUNT(1) as cnt
+       FROM `myproject.mydataset.mv_base_table`
+       GROUP BY col_int, col_datetime
 
 The base table, `mv_base_table` , must also be partitioned by the `col_datetime` column. For more information, see [Working with partitioned and clustered tables](https://docs.cloud.google.com/bigquery/docs/materialized-views#partition_cluster) .
 
@@ -2472,11 +2394,9 @@ For more information, see [Create materialized view replicas](https://docs.cloud
 
 ### Syntax
 
-``` notranslate
-CREATE MATERIALIZED VIEW replica_name
-[OPTIONS(materialized_view_replica_option_list)]
-AS REPLICA OF source_materialized_view_name
-```
+    CREATE MATERIALIZED VIEW replica_name
+    [OPTIONS(materialized_view_replica_option_list)]
+    AS REPLICA OF source_materialized_view_name
 
 ### Arguments
 
@@ -2533,13 +2453,11 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example creates a materialized view replica named `mv_replica` in `bq_dataset` :
 
-``` notranslate
-CREATE MATERIALIZED VIEW `myproject.bq_dataset.mv_replica`
-OPTIONS(
-  replication_interval_seconds=600
-)
-AS REPLICA OF `myproject.s3_dataset.my_s3_mv`
-```
+    CREATE MATERIALIZED VIEW `myproject.bq_dataset.mv_replica`
+    OPTIONS(
+      replication_interval_seconds=600
+    )
+    AS REPLICA OF `myproject.s3_dataset.my_s3_mv`
 
 ## `CREATE EXTERNAL SCHEMA` statement
 
@@ -2552,11 +2470,9 @@ A federated dataset is a connection between BigQuery and an external data source
 
 ### Syntax
 
-``` notranslate
-CREATE EXTERNAL SCHEMA [ IF NOT EXISTS ] dataset_name
-[WITH CONNECTION connection_name]
-[OPTIONS(external_schema_option_list)]
-```
+    CREATE EXTERNAL SCHEMA [ IF NOT EXISTS ] dataset_name
+    [WITH CONNECTION connection_name]
+    [OPTIONS(external_schema_option_list)]
 
 ### Arguments
 
@@ -2617,24 +2533,22 @@ External tables let BigQuery query data that is stored outside of BigQuery stora
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] EXTERNAL TABLE [ IF NOT EXISTS ] table_name
-[(
-  column_name column_schema,
-  ...
-)]
-[WITH CONNECTION {connection_name | DEFAULT}]
-[WITH PARTITION COLUMNS
-  [(
-      partition_column_name partition_column_type,
+    CREATE [ OR REPLACE ] EXTERNAL TABLE [ IF NOT EXISTS ] table_name
+    [(
+      column_name column_schema,
       ...
-  )]
-]
-OPTIONS (
-  external_table_option_list,
-  ...
-);
-```
+    )]
+    [WITH CONNECTION {connection_name | DEFAULT}]
+    [WITH PARTITION COLUMNS
+      [(
+          partition_column_name partition_column_type,
+          ...
+      )]
+    ]
+    OPTIONS (
+      external_table_option_list,
+      ...
+    );
 
 ### Arguments
 
@@ -3071,29 +2985,25 @@ The following example creates an external table from a CSV file and explicitly s
 
 The following example creates an externally partitioned table. It uses schema auto-detection to detect both the file schema and the hive partitioning layout. If the external path is `gs://bucket/path/field_1=first/field_2=1/data.parquet` , the partition columns are detected as `field_1` ( `STRING` ) and `field_2` ( `INT64` ).
 
-``` notranslate
-CREATE EXTERNAL TABLE dataset.AutoHivePartitionedTable
-WITH PARTITION COLUMNS
-OPTIONS (
-  uris = ['gs://bucket/path/*'],
-  format = 'PARQUET',
-  hive_partition_uri_prefix = 'gs://bucket/path',
-  require_hive_partition_filter = false);
-```
+    CREATE EXTERNAL TABLE dataset.AutoHivePartitionedTable
+    WITH PARTITION COLUMNS
+    OPTIONS (
+      uris = ['gs://bucket/path/*'],
+      format = 'PARQUET',
+      hive_partition_uri_prefix = 'gs://bucket/path',
+      require_hive_partition_filter = false);
 
 The following example creates an externally partitioned table by explicitly specifying the partition columns. This example assumes that the external file path has the pattern `gs://bucket/path/field_1=first/field_2=1/data.parquet` .
 
-``` notranslate
-CREATE EXTERNAL TABLE dataset.CustomHivePartitionedTable
-WITH PARTITION COLUMNS (
-  field_1 STRING, -- column order must match the external path
-  field_2 INT64)
-OPTIONS (
-  uris = ['gs://bucket/path/*'],
-  format = 'PARQUET',
-  hive_partition_uri_prefix = 'gs://bucket/path',
-  require_hive_partition_filter = false);
-```
+    CREATE EXTERNAL TABLE dataset.CustomHivePartitionedTable
+    WITH PARTITION COLUMNS (
+      field_1 STRING, -- column order must match the external path
+      field_2 INT64)
+    OPTIONS (
+      uris = ['gs://bucket/path/*'],
+      format = 'PARQUET',
+      hive_partition_uri_prefix = 'gs://bucket/path',
+      require_hive_partition_filter = false);
 
 ## `CREATE FUNCTION` statement
 
@@ -3103,37 +3013,33 @@ Creates a new [user-defined function](https://docs.cloud.google.com/bigquery/doc
 
 To create a SQL UDF, use the following syntax:
 
-``` notranslate
-CREATE [ OR REPLACE ] [ TEMPORARY | TEMP ] FUNCTION [ IF NOT EXISTS ]
-    [[project_name.]dataset_name.]function_name
-    ([named_parameter[, ...]])
-     ([named_parameter[, ...]])
-  [RETURNS data_type]
-  AS (sql_expression)
-  [OPTIONS (function_option_list)]
-
-named_parameter:
-  param_name param_type
-```
+    CREATE [ OR REPLACE ] [ TEMPORARY | TEMP ] FUNCTION [ IF NOT EXISTS ]
+        [[project_name.]dataset_name.]function_name
+        ([named_parameter[, ...]])
+         ([named_parameter[, ...]])
+      [RETURNS data_type]
+      AS (sql_expression)
+      [OPTIONS (function_option_list)]
+    
+    named_parameter:
+      param_name param_type
 
 To create a JavaScript UDF, use the following syntax:
 
-``` notranslate
-CREATE [OR REPLACE] [TEMPORARY | TEMP] FUNCTION [IF NOT EXISTS]
-    [[project_name.]dataset_name.]function_name
-    ([named_parameter[, ...]])
-  RETURNS data_type
-  [determinism_specifier]
-  LANGUAGE js
-  [OPTIONS (function_option_list)]
-  AS javascript_code
-
-named_parameter:
-  param_name param_type
-
-determinism_specifier:
-  { DETERMINISTIC | NOT DETERMINISTIC }
-```
+    CREATE [OR REPLACE] [TEMPORARY | TEMP] FUNCTION [IF NOT EXISTS]
+        [[project_name.]dataset_name.]function_name
+        ([named_parameter[, ...]])
+      RETURNS data_type
+      [determinism_specifier]
+      LANGUAGE js
+      [OPTIONS (function_option_list)]
+      AS javascript_code
+    
+    named_parameter:
+      param_name param_type
+    
+    determinism_specifier:
+      { DETERMINISTIC | NOT DETERMINISTIC }
 
 To create a Python UDF, use the following syntax:
 
@@ -3143,33 +3049,29 @@ To create a Python UDF, use the following syntax:
 
 > **Note:** For support during the preview, email <bq-python-udf-feedback@google.com> .
 
-``` notranslate
-CREATE [OR REPLACE] FUNCTION [IF NOT EXISTS]
-    [project_name.]dataset_name.function_name
-    ([named_parameter[, ...]])
-  RETURNS data_type
-  LANGUAGE python
-  [WITH CONNECTION connection_path]
-  OPTIONS (function_option_list)
-  AS python_code
-
-named_parameter:
-  param_name param_type
-```
+    CREATE [OR REPLACE] FUNCTION [IF NOT EXISTS]
+        [project_name.]dataset_name.function_name
+        ([named_parameter[, ...]])
+      RETURNS data_type
+      LANGUAGE python
+      [WITH CONNECTION connection_path]
+      OPTIONS (function_option_list)
+      AS python_code
+    
+    named_parameter:
+      param_name param_type
 
 To create a remote function, use the following syntax:
 
-``` notranslate
-CREATE [OR REPLACE] [TEMPORARY | TEMP] FUNCTION [IF NOT EXISTS]
-    [[project_name.]dataset_name.]function_name
-    ([named_parameter[, ...]])
-  RETURNS data_type
-  REMOTE WITH CONNECTION connection_path
-  [OPTIONS (function_option_list)]
-
-named_parameter:
-  param_name param_type
-```
+    CREATE [OR REPLACE] [TEMPORARY | TEMP] FUNCTION [IF NOT EXISTS]
+        [[project_name.]dataset_name.]function_name
+        ([named_parameter[, ...]])
+      RETURNS data_type
+      REMOTE WITH CONNECTION connection_path
+      [OPTIONS (function_option_list)]
+    
+    named_parameter:
+      param_name param_type
 
 Routine names must contain only letters, numbers, and underscores, and be at most 256 characters long.
 
@@ -3377,25 +3279,23 @@ Creates a new SQL [user-defined aggregate function](https://docs.cloud.google.co
 
 To create a SQL UDAF, use the following syntax:
 
-``` notranslate
-CREATE
-  [ OR REPLACE ]
-  [ { TEMPORARY | TEMP } ]
-  AGGREGATE FUNCTION
-  [ IF NOT EXISTS ]
-  function_path ( [ function_parameter[, ...] ] )
-  [ RETURNS data_type ]
-  AS ( sql_function_body )
-  [ OPTIONS ( function_option_list ) ]
-
-function_path:
-  [[project_name.]dataset_name.]function_name
-
-function_parameter:
-  parameter_name
-  data_type
-  [ NOT AGGREGATE ]
-```
+    CREATE
+      [ OR REPLACE ]
+      [ { TEMPORARY | TEMP } ]
+      AGGREGATE FUNCTION
+      [ IF NOT EXISTS ]
+      function_path ( [ function_parameter[, ...] ] )
+      [ RETURNS data_type ]
+      AS ( sql_function_body )
+      [ OPTIONS ( function_option_list ) ]
+    
+    function_path:
+      [[project_name.]dataset_name.]function_name
+    
+    function_parameter:
+      parameter_name
+      data_type
+      [ NOT AGGREGATE ]
 
 ### Arguments
 
@@ -3438,29 +3338,27 @@ In addition, the `OR REPLACE` clause requires the `bigquery.routines.update` per
 
 The following example shows a persistent SQL UDAF that includes a non-aggregate function parameter. Inside the function definition, the aggregate `SUM` method takes the aggregate function parameter dividend, while the non-aggregate division operator ( `/` ) takes the non-aggregate function parameter divisor.
 
-``` notranslate
-CREATE AGGREGATE FUNCTION myProject.myDataset.ScaledSum(
-  dividend FLOAT64,
-  divisor FLOAT64 NOT AGGREGATE)
-RETURNS FLOAT64
-AS (
-  SUM(dividend) / divisor
-);
-
--- Call the SQL UDAF.
-SELECT ScaledSum(col1, 2) AS scaled_sum
-FROM (
-  SELECT 1 AS col1 UNION ALL
-  SELECT 3 AS col1 UNION ALL
-  SELECT 5 AS col1
-);
-
-/*------------*
- | scaled_sum |
- +------------+
- | 4.5        |
- *------------*/
-```
+    CREATE AGGREGATE FUNCTION myProject.myDataset.ScaledSum(
+      dividend FLOAT64,
+      divisor FLOAT64 NOT AGGREGATE)
+    RETURNS FLOAT64
+    AS (
+      SUM(dividend) / divisor
+    );
+    
+    -- Call the SQL UDAF.
+    SELECT ScaledSum(col1, 2) AS scaled_sum
+    FROM (
+      SELECT 1 AS col1 UNION ALL
+      SELECT 3 AS col1 UNION ALL
+      SELECT 5 AS col1
+    );
+    
+    /*------------*
+     | scaled_sum |
+     +------------+
+     | 4.5        |
+     *------------*/
 
 ## `CREATE AGGREGATE FUNCTION` statement (JavaScript)
 
@@ -3470,24 +3368,22 @@ Creates a new [JavaScript user-defined aggregate function](https://docs.cloud.go
 
 To create a JavaScript UDAF, use the following syntax:
 
-``` notranslate
-CREATE
-  [ OR REPLACE ]
-  [ { TEMPORARY | TEMP } ]
-  AGGREGATE FUNCTION
-  [ IF NOT EXISTS ]
-  function_path([ function_parameter[, ...] ])
-  RETURNS return_data_type
-  LANGUAGE js
-  [ OPTIONS ( function_option_list ) ]
-  AS function_body
-
-function_path:
-  [[project_name.]dataset_name.]function_name
-
-function_parameter:
-  parameter_name parameter_data_type [ NOT AGGREGATE ]
-```
+    CREATE
+      [ OR REPLACE ]
+      [ { TEMPORARY | TEMP } ]
+      AGGREGATE FUNCTION
+      [ IF NOT EXISTS ]
+      function_path([ function_parameter[, ...] ])
+      RETURNS return_data_type
+      LANGUAGE js
+      [ OPTIONS ( function_option_list ) ]
+      AS function_body
+    
+    function_path:
+      [[project_name.]dataset_name.]function_name
+    
+    function_parameter:
+      parameter_name parameter_data_type [ NOT AGGREGATE ]
 
 ### Arguments
 
@@ -3763,81 +3659,77 @@ In addition, the `OR REPLACE` clause requires the `bigquery.routines.update` per
 
 A JavaScript UDAF is similar to a JavaScript UDF, but defines an aggregate function instead of a scalar function. In the following example, a temporary JavaScript UDAF calculates the sum of all rows that have a positive value. The JavaScript UDAF body is quoted within a raw string:
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r'''
-  export function initialState() {
-    return {sum: 0}
-  }
-  export function aggregate(state, x) {
-    if (x > 0) {
-      state.sum += x;
-    }
-  }
-  export function merge(state, partialState) {
-    state.sum += partialState.sum;
-  }
-  export function finalize(state) {
-    return state.sum;
-  }
-''';
-
--- Call the JavaScript UDAF.
-WITH numbers AS (
-  SELECT * FROM UNNEST([1.0, -1.0, 3.0, -3.0, 5.0, -5.0]) AS x)
-SELECT SumPositive(x) AS sum
-FROM numbers;
-
-/*-----*
- | sum |
- +-----+
- | 9.0 |
- *-----*/
-```
+    CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r'''
+      export function initialState() {
+        return {sum: 0}
+      }
+      export function aggregate(state, x) {
+        if (x > 0) {
+          state.sum += x;
+        }
+      }
+      export function merge(state, partialState) {
+        state.sum += partialState.sum;
+      }
+      export function finalize(state) {
+        return state.sum;
+      }
+    ''';
+    
+    -- Call the JavaScript UDAF.
+    WITH numbers AS (
+      SELECT * FROM UNNEST([1.0, -1.0, 3.0, -3.0, 5.0, -5.0]) AS x)
+    SELECT SumPositive(x) AS sum
+    FROM numbers;
+    
+    /*-----*
+     | sum |
+     +-----+
+     | 9.0 |
+     *-----*/
 
 #### Get the weighted average of all rows
 
 A JavaScript UDAF can have aggregate and non-aggregate parameters. In the following example, the JavaScript UDAF calculates the weighted average for `x` after starting with an initial sum ( `initialSum` ). `x` and `weight` are aggregate parameters, and `initialSum` is a non-aggregate parameter:
 
-``` notranslate
-CREATE OR REPLACE AGGREGATE FUNCTION my_project.my_dataset.WeightedAverage(
-    x INT64,
-    weight FLOAT64,
-    initialSum FLOAT64 NOT AGGREGATE)
-RETURNS INT64
-LANGUAGE js
-AS '''
-   export function initialState(initialSum) {
-     return {count: 0, sum: initialSum}
-   }
-   export function aggregate(state, x, weight) {
-     state.count += 1;
-     state.sum += Number(x) * weight;
-   }
-   export function merge(state, partialState) {
-     state.sum += partialState.sum;
-     state.count += partialState.count;
-   }
-   export function finalize(state) {
-     return state.sum / state.count;
-   }
-''';
-
-SELECT my_project.my_dataset.WeightedAverage(item, weight, 2) AS weighted_average
-FROM (
-  SELECT 1 AS item, 2.45 AS weight UNION ALL
-  SELECT 3 AS item, 0.11 AS weight UNION ALL
-  SELECT 5 AS item, 7.02 AS weight
-);
-
-/*------------------*
- | weighted_average |
- +------------------+
- | 13               |
- *------------------*/
-```
+    CREATE OR REPLACE AGGREGATE FUNCTION my_project.my_dataset.WeightedAverage(
+        x INT64,
+        weight FLOAT64,
+        initialSum FLOAT64 NOT AGGREGATE)
+    RETURNS INT64
+    LANGUAGE js
+    AS '''
+       export function initialState(initialSum) {
+         return {count: 0, sum: initialSum}
+       }
+       export function aggregate(state, x, weight) {
+         state.count += 1;
+         state.sum += Number(x) * weight;
+       }
+       export function merge(state, partialState) {
+         state.sum += partialState.sum;
+         state.count += partialState.count;
+       }
+       export function finalize(state) {
+         return state.sum / state.count;
+       }
+    ''';
+    
+    SELECT my_project.my_dataset.WeightedAverage(item, weight, 2) AS weighted_average
+    FROM (
+      SELECT 1 AS item, 2.45 AS weight UNION ALL
+      SELECT 3 AS item, 0.11 AS weight UNION ALL
+      SELECT 5 AS item, 7.02 AS weight
+    );
+    
+    /*------------------*
+     | weighted_average |
+     +------------------+
+     | 13               |
+     *------------------*/
 
 ## `CREATE TABLE FUNCTION` statement
 
@@ -3845,20 +3737,18 @@ Creates a new [table function](https://docs.cloud.google.com/bigquery/docs/table
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] TABLE FUNCTION [ IF NOT EXISTS ]
-  [[project_name.]dataset_name.]function_name
-  ( [ function_parameter [, ...] ] )
-  [RETURNS TABLE < column_declaration [, ...] > ]
-  [OPTIONS (table_function_options_list) ]
-  AS sql_query
-
-function_parameter:
-  parameter_name { data_type | ANY TYPE | TABLE < column_declaration [, ...] > }
-
-column_declaration:
-  column_name data_type
-```
+    CREATE [ OR REPLACE ] TABLE FUNCTION [ IF NOT EXISTS ]
+      [[project_name.]dataset_name.]function_name
+      ( [ function_parameter [, ...] ] )
+      [RETURNS TABLE < column_declaration [, ...] > ]
+      [OPTIONS (table_function_options_list) ]
+      AS sql_query
+    
+    function_parameter:
+      parameter_name { data_type | ANY TYPE | TABLE < column_declaration [, ...] > }
+    
+    column_declaration:
+      column_name data_type
 
 ### Arguments
 
@@ -3899,39 +3789,33 @@ In addition, the `OR REPLACE` clause requires `bigquery.routines.update` permiss
 
 The following table function takes an `INT64` parameter that is used to filter the results of a query:
 
-``` notranslate
-CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
-AS
-  SELECT year, name, SUM(number) AS total
-  FROM `bigquery-public-data.usa_names.usa_1910_current`
-  WHERE year = y
-  GROUP BY year, name
-```
+    CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
+    AS
+      SELECT year, name, SUM(number) AS total
+      FROM `bigquery-public-data.usa_names.usa_1910_current`
+      WHERE year = y
+      GROUP BY year, name
 
 The following example specifies the return `TABLE` type in the `RETURNS` clause:
 
-``` notranslate
-CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
-RETURNS TABLE<name STRING, year INT64, total INT64>
-AS
-  SELECT year, name, SUM(number) AS total
-  FROM `bigquery-public-data.usa_names.usa_1910_current`
-  WHERE year = y
-  GROUP BY year, name
-```
+    CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
+    RETURNS TABLE<name STRING, year INT64, total INT64>
+    AS
+      SELECT year, name, SUM(number) AS total
+      FROM `bigquery-public-data.usa_names.usa_1910_current`
+      WHERE year = y
+      GROUP BY year, name
 
 The following example computes total sales for items with the name `item_name` from the `orders` table:
 
-``` notranslate
-CREATE TABLE FUNCTION mydataset.compute_sales (
-  orders TABLE<item STRING, sales INT64>, item_name STRING)
-AS (
-  SELECT SUM(sales) AS total_sales, item
-  FROM orders
-  WHERE item = item_name
-  GROUP BY item
-);
-```
+    CREATE TABLE FUNCTION mydataset.compute_sales (
+      orders TABLE<item STRING, sales INT64>, item_name STRING)
+    AS (
+      SELECT SUM(sales) AS total_sales, item
+      FROM orders
+      WHERE item = item_name
+      GROUP BY item
+    );
 
 ## `CREATE PROCEDURE` statement
 
@@ -3941,35 +3825,31 @@ Creates a new [procedure](https://docs.cloud.google.com/bigquery/docs/procedures
 
 To create a [GoogleSQL stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) , use the following syntax:
 
-``` notranslate
-CREATE [OR REPLACE] PROCEDURE [IF NOT EXISTS]
-[[project_name.]dataset_name.]procedure_name (procedure_argument[, ...] )
-[OPTIONS(procedure_option_list)]
-BEGIN
-multi_statement_query
-END;
-
-procedure_argument: [procedure_argument_mode] argument_name argument_type
-
-procedure_argument_mode: IN | OUT | INOUT
-```
+    CREATE [OR REPLACE] PROCEDURE [IF NOT EXISTS]
+    [[project_name.]dataset_name.]procedure_name (procedure_argument[, ...] )
+    [OPTIONS(procedure_option_list)]
+    BEGIN
+    multi_statement_query
+    END;
+    
+    procedure_argument: [procedure_argument_mode] argument_name argument_type
+    
+    procedure_argument_mode: IN | OUT | INOUT
 
 To create a [stored procedure for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) , use the following syntax:
 
-``` notranslate
-CREATE [OR REPLACE] PROCEDURE [IF NOT EXISTS]
-[[project_name.]dataset_name.]procedure_name (procedure_argument[, ...] )
-[EXTERNAL SECURITY external_security]
-WITH CONNECTION connection_project_id.connection_region.connection_id
-[OPTIONS(procedure_option_list)]
-LANGUAGE language [AS pyspark_code]
-
-procedure_argument: [procedure_argument_mode] argument_name argument_type
-
-procedure_argument_mode: IN | OUT | INOUT
-
-external_security: INVOKER
-```
+    CREATE [OR REPLACE] PROCEDURE [IF NOT EXISTS]
+    [[project_name.]dataset_name.]procedure_name (procedure_argument[, ...] )
+    [EXTERNAL SECURITY external_security]
+    WITH CONNECTION connection_project_id.connection_region.connection_id
+    [OPTIONS(procedure_option_list)]
+    LANGUAGE language [AS pyspark_code]
+    
+    procedure_argument: [procedure_argument_mode] argument_name argument_type
+    
+    procedure_argument_mode: IN | OUT | INOUT
+    
+    external_security: INVOKER
 
 ### Arguments
 
@@ -4297,11 +4177,9 @@ Purchases [slots](https://docs.cloud.google.com/bigquery/docs/slots) by creating
 
 ### Syntax
 
-``` notranslate
-CREATE CAPACITY
-`project_id.location_id.commitment_id`
-OPTIONS (capacity_commitment_option_list);
-```
+    CREATE CAPACITY
+    `project_id.location_id.commitment_id`
+    OPTIONS (capacity_commitment_option_list);
 
 ### Arguments
 
@@ -4335,12 +4213,10 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example creates a capacity commitment of 100 annual slots that are located in the `region-us` region and managed by a project `admin_project` :
 
-``` notranslate
-CREATE CAPACITY `admin_project.region-us.my-commitment`
-OPTIONS (
-  slot_count = 100,
-  plan = 'ANNUAL');
-```
+    CREATE CAPACITY `admin_project.region-us.my-commitment`
+    OPTIONS (
+      slot_count = 100,
+      plan = 'ANNUAL');
 
 ## `CREATE RESERVATION` statement
 
@@ -4348,11 +4224,9 @@ Creates a reservation. For more information, see [Introduction to Reservations](
 
 ### Syntax
 
-``` notranslate
-CREATE RESERVATION
-`project_id.location_id.reservation_id`
-OPTIONS (reservation_option_list);
-```
+    CREATE RESERVATION
+    `project_id.location_id.reservation_id`
+    OPTIONS (reservation_option_list);
 
 ### Arguments
 
@@ -4391,11 +4265,9 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example creates a reservation of 100 slots in the project `admin_project` :
 
-``` notranslate
-CREATE RESERVATION `admin_project.region-us.prod`
-OPTIONS (
-  slot_capacity = 100);
-```
+    CREATE RESERVATION `admin_project.region-us.prod`
+    OPTIONS (
+      slot_capacity = 100);
 
 ## `CREATE ASSIGNMENT` statement
 
@@ -4403,11 +4275,9 @@ Assigns a project, folder, or organization to a reservation.
 
 ### Syntax
 
-``` notranslate
-CREATE ASSIGNMENT
-`project_id.location_id.reservation_id.assignment_id`
-OPTIONS (assignment_option_list)
-```
+    CREATE ASSIGNMENT
+    `project_id.location_id.reservation_id.assignment_id`
+    OPTIONS (assignment_option_list)
 
 ### Arguments
 
@@ -4442,21 +4312,17 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example assigns the project `my_project` to the `prod` reservation for query jobs:
 
-``` notranslate
-CREATE ASSIGNMENT `admin_project.region-us.prod.my_assignment`
-OPTIONS (
-  assignee = 'projects/my_project',
-  job_type = 'QUERY');
-```
+    CREATE ASSIGNMENT `admin_project.region-us.prod.my_assignment`
+    OPTIONS (
+      assignee = 'projects/my_project',
+      job_type = 'QUERY');
 
 The following example assigns an organization to the `prod` reservation for pipeline jobs, such as load and extract jobs:
 
-``` notranslate
-CREATE ASSIGNMENT `admin_project.region-us.prod.my_assignment`
-OPTIONS (
-  assignee = 'organizations/1234',
-  job_type = 'PIPELINE');
-```
+    CREATE ASSIGNMENT `admin_project.region-us.prod.my_assignment`
+    OPTIONS (
+      assignee = 'organizations/1234',
+      job_type = 'PIPELINE');
 
 ## `CREATE SEARCH INDEX` statement
 
@@ -4466,14 +4332,12 @@ A search index enables efficient queries using the [`SEARCH`](https://docs.cloud
 
 ### Syntax
 
-``` notranslate
-CREATE SEARCH INDEX [ IF NOT EXISTS ] index_name
-ON table_name({ALL COLUMNS [WITH COLUMN OPTIONS(column [, ...])] | column [, ...]})
-[OPTIONS(index_option_list)]
-
-column:=
-column_name [OPTIONS(index_column_option_list)]
-```
+    CREATE SEARCH INDEX [ IF NOT EXISTS ] index_name
+    ON table_name({ALL COLUMNS [WITH COLUMN OPTIONS(column [, ...])] | column [, ...]})
+    [OPTIONS(index_option_list)]
+    
+    column:=
+    column_name [OPTIONS(index_column_option_list)]
 
 ### Arguments
 
@@ -4594,31 +4458,27 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example creates a search index called `my_index` on all string columns of `my_table` . In this case, the index is only created on column `a` .
 
-``` notranslate
-CREATE TABLE dataset.my_table(a STRING, b INT64);
-
-CREATE SEARCH INDEX my_index
-ON dataset.my_table(ALL COLUMNS);
-```
+    CREATE TABLE dataset.my_table(a STRING, b INT64);
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.my_table(ALL COLUMNS);
 
 The following example creates a search index on columns `a` , `my_struct.string_field` , and `b` that uses the `NO_OP_ANALYZER` text analyzer. It sets the default index column granularity to `COLUMN` and overrides the setting for column `a` to `GLOBAL` .
 
-``` notranslate
-CREATE TABLE dataset.complex_table(
-  a STRING,
-  my_struct STRUCT <string_field STRING, int_field INT64>,
-  b ARRAY <STRING>
-);
-
-CREATE SEARCH INDEX my_index
-ON dataset.complex_table(
-  a OPTIONS(index_granularity = 'GLOBAL'),
-  my_struct,
-  b)
-OPTIONS (
-  analyzer = 'NO_OP_ANALYZER',
-  default_index_column_granularity = 'COLUMN');
-```
+    CREATE TABLE dataset.complex_table(
+      a STRING,
+      my_struct STRUCT <string_field STRING, int_field INT64>,
+      b ARRAY <STRING>
+    );
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.complex_table(
+      a OPTIONS(index_granularity = 'GLOBAL'),
+      my_struct,
+      b)
+    OPTIONS (
+      analyzer = 'NO_OP_ANALYZER',
+      default_index_column_granularity = 'COLUMN');
 
 ## `CREATE VECTOR INDEX` statement
 
@@ -4628,13 +4488,11 @@ A vector index lets you perform a [vector search](https://docs.cloud.google.com/
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] index_name
-ON table_name(column_name)
-[STORING(stored_column_name [, ...])]
-[PARTITION BY partition_expression]
-OPTIONS(index_option_list);
-```
+    CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] index_name
+    ON table_name(column_name)
+    [STORING(stored_column_name [, ...])]
+    [PARTITION BY partition_expression]
+    OPTIONS(index_option_list);
 
 ### Arguments
 
@@ -4734,30 +4592,24 @@ The following examples show how to create vector indexes with different options.
 
 This example creates a vector index of type `IVF` on the `embedding` column of `my_table` :
 
-``` notranslate
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
-OPTIONS (index_type = 'IVF');
-```
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
+    OPTIONS (index_type = 'IVF');
 
 The following example creates a vector index on the `embedding` column of `my_table` , and specifies the distance type to use and the IVF options:
 
-``` notranslate
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
-OPTIONS (
-  index_type = 'IVF',
-  distance_type = 'COSINE',
-  ivf_options = '{"num_lists":2500}');
-```
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
+    OPTIONS (
+      index_type = 'IVF',
+      distance_type = 'COSINE',
+      ivf_options = '{"num_lists":2500}');
 
 The following example creates a vector index on the `embedding` column of `my_table` , and specifies the distance type to use and the `TREE_AH` options:
 
-``` notranslate
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
-OPTIONS (
-  index_type = 'TREE_AH',
-  distance_type = 'EUCLIDEAN',
-  tree_ah_options = '{"normalization_type": "L2"}');
-```
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
+    OPTIONS (
+      index_type = 'TREE_AH',
+      distance_type = 'EUCLIDEAN',
+      tree_ah_options = '{"normalization_type": "L2"}');
 
 ## `CREATE DATA_POLICY` statement
 
@@ -4771,10 +4623,8 @@ Creates or replaces a [data policy](https://docs.cloud.google.com/bigquery/docs/
 
 ### Syntax
 
-``` notranslate
-CREATE [ OR REPLACE ] DATA_POLICY [ IF NOT EXISTS ] `project_id.region-location_id.data_policy_id`
-OPTIONS(index_option_list);
-```
+    CREATE [ OR REPLACE ] DATA_POLICY [ IF NOT EXISTS ] `project_id.region-location_id.data_policy_id`
+    OPTIONS(index_option_list);
 
 ### Arguments
 
@@ -4840,10 +4690,8 @@ Creates a connection. For more information, see [Introduction to connections](ht
 
 ### Syntax
 
-``` notranslate
-CREATE CONNECTION [IF NOT EXISTS] `[[project_id.]location.]connection_id`
-OPTIONS (connection_option_list);
-```
+    CREATE CONNECTION [IF NOT EXISTS] `[[project_id.]location.]connection_id`
+    OPTIONS (connection_option_list);
 
 ### Arguments
 
@@ -4903,14 +4751,12 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` :
 
-``` notranslate
-CREATE CONNECTION IF NOT EXISTS `us.my_cloud_resource_connection`
-OPTIONS (
-  connection_type = "CLOUD_RESOURCE",
-  friendly_name = "My Resource Connection",
-  description = "Connection to access Cloud resources"
-  );
-```
+    CREATE CONNECTION IF NOT EXISTS `us.my_cloud_resource_connection`
+    OPTIONS (
+      connection_type = "CLOUD_RESOURCE",
+      friendly_name = "My Resource Connection",
+      description = "Connection to access Cloud resources"
+      );
 
 ## `ALTER SCHEMA SET DEFAULT COLLATE` statement
 
@@ -4918,11 +4764,9 @@ Sets [collation specifications](https://docs.cloud.google.com/bigquery/docs/refe
 
 ### Syntax
 
-``` notranslate
-ALTER SCHEMA [IF EXISTS]
-[project_name.]dataset_name
-SET DEFAULT COLLATE collate_specification
-```
+    ALTER SCHEMA [IF EXISTS]
+    [project_name.]dataset_name
+    SET DEFAULT COLLATE collate_specification
 
 ### Arguments
 
@@ -4951,17 +4795,13 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 Assume you have an existing table, `mytable_a` , in a dataset called `mydataset` . For example:
 
-``` notranslate
-CREATE SCHEMA mydataset
-```
+    CREATE SCHEMA mydataset
 
-``` notranslate
-CREATE TABLE mydataset.mytable_a
-(
-  number INT64,
-  word STRING
-)
-```
+    CREATE TABLE mydataset.mytable_a
+    (
+      number INT64,
+      word STRING
+    )
 
     +----------------------+
     | mydataset.mytable_a  |
@@ -4971,20 +4811,16 @@ CREATE TABLE mydataset.mytable_a
 
 At a later time, you decide to add a collation specification to your dataset. For example:
 
-``` notranslate
-ALTER SCHEMA mydataset
-SET DEFAULT COLLATE 'und:ci'
-```
+    ALTER SCHEMA mydataset
+    SET DEFAULT COLLATE 'und:ci'
 
 If you create a new table for your dataset, it inherits `COLLATE 'und:ci'` for all `STRING` columns. For example, collation is added to `characters` when you create the `mytable_b` table in the `mydataset` dataset:
 
-``` notranslate
-CREATE TABLE mydataset.mytable_b
-(
-  amount INT64,
-  characters STRING
-)
-```
+    CREATE TABLE mydataset.mytable_b
+    (
+      amount INT64,
+      characters STRING
+    )
 
     +--------------------------------------+
     | mydataset.mytable_b                  |
@@ -5008,11 +4844,9 @@ The statement runs in the location of the dataset if the dataset exists, unless 
 
 ### Syntax
 
-``` notranslate
-ALTER SCHEMA [IF EXISTS]
-[project_name.]dataset_name
-SET OPTIONS(schema_set_options_list)
-```
+    ALTER SCHEMA [IF EXISTS]
+    [project_name.]dataset_name
+    SET OPTIONS(schema_set_options_list)
 
 ### Arguments
 
@@ -5144,23 +4978,19 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example sets the default table expiration.
 
-``` notranslate
-ALTER SCHEMA mydataset
-SET OPTIONS(
-  default_table_expiration_days=3.75
-  )
-```
+    ALTER SCHEMA mydataset
+    SET OPTIONS(
+      default_table_expiration_days=3.75
+      )
 
 #### Turning on case insensitivity for a dataset
 
 The following example turns on case insensitivity for the name of a dataset and the table names within that dataset.
 
-``` notranslate
-ALTER SCHEMA mydataset
-SET OPTIONS(
-  is_case_insensitive=TRUE
-)
-```
+    ALTER SCHEMA mydataset
+    SET OPTIONS(
+      is_case_insensitive=TRUE
+    )
 
 ## `ALTER SCHEMA ADD REPLICA` statement
 
@@ -5168,11 +4998,9 @@ Adds a replica to a schema ( [preview](https://cloud.google.com/products/#produc
 
 ### Syntax
 
-``` notranslate
-ALTER SCHEMA [IF EXISTS]
-[project_name.]dataset_name
-ADD REPLICA replica_name [OPTIONS(add_replica_options_list)]
-```
+    ALTER SCHEMA [IF EXISTS]
+    [project_name.]dataset_name
+    ADD REPLICA replica_name [OPTIONS(add_replica_options_list)]
 
 ### Arguments
 
@@ -5202,10 +5030,8 @@ You might also be able to get the required permissions through [custom roles](ht
 
 The following example adds a secondary replica that is named `EU` in the `EU` multi-region to a schema that is named `cross_region_dataset` :
 
-``` notranslate
-ALTER SCHEMA cross_region_dataset
-ADD REPLICA `EU` OPTIONS(location=`eu`);
-```
+    ALTER SCHEMA cross_region_dataset
+    ADD REPLICA `EU` OPTIONS(location=`eu`);
 
 ## `ALTER SCHEMA DROP REPLICA` statement
 
@@ -5213,10 +5039,8 @@ Drops a replica from a schema ( [preview](https://cloud.google.com/products/#pro
 
 ### Syntax
 
-``` notranslate
-ALTER SCHEMA [IF EXISTS] dataset_name
-DROP REPLICA replica_name
-```
+    ALTER SCHEMA [IF EXISTS] dataset_name
+    DROP REPLICA replica_name
 
   - `IF EXISTS` : If no dataset exists with that name, the statement has no effect.
   - `dataset_name` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
@@ -5232,10 +5056,8 @@ You might also be able to get the required permissions through [custom roles](ht
 
 The following example removes a replica that is located in the `us-east4` region from the `cross_region_dataset` dataset:
 
-``` notranslate
-ALTER SCHEMA [IF EXISTS] cross_region_dataset
-DROP REPLICA `us-east4`
-```
+    ALTER SCHEMA [IF EXISTS] cross_region_dataset
+    DROP REPLICA `us-east4`
 
 ## `ALTER TABLE SET OPTIONS` statement
 
@@ -5243,10 +5065,8 @@ Sets the options on a table.
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [IF EXISTS] table_name
-SET OPTIONS(table_set_options_list)
-```
+    ALTER TABLE [IF EXISTS] table_name
+    SET OPTIONS(table_set_options_list)
 
 ### Arguments
 
@@ -5436,22 +5256,18 @@ If the `OPTIONS` clause includes any expiration options, then the `bigquery.tabl
 
 The following example sets the expiration timestamp on a table to seven days from the execution time of the `ALTER TABLE` statement, and sets the description as well:
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-SET OPTIONS (
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 7 DAY),
-  description="Table that expires seven days from now"
-)
-```
+    ALTER TABLE mydataset.mytable
+    SET OPTIONS (
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 7 DAY),
+      description="Table that expires seven days from now"
+    )
 
 #### Setting the require partition filter attribute on a partitioned table
 
 The following example sets the [`timePartitioning.requirePartitionFilter`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning) attribute on a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) :
 
-``` notranslate
-ALTER TABLE mydataset.mypartitionedtable
-SET OPTIONS (require_partition_filter=true)
-```
+    ALTER TABLE mydataset.mypartitionedtable
+    SET OPTIONS (require_partition_filter=true)
 
 Queries that reference this table must use a filter on the partitioning column, or else BigQuery returns an error. Setting this option to `true` can help prevent mistakes in querying more data than intended.
 
@@ -5459,10 +5275,8 @@ Queries that reference this table must use a filter on the partitioning column, 
 
 The following example clears the expiration timestamp on a table so that it will not expire:
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-SET OPTIONS (expiration_timestamp=NULL)
-```
+    ALTER TABLE mydataset.mytable
+    SET OPTIONS (expiration_timestamp=NULL)
 
 ## `ALTER TABLE ADD COLUMN` statement
 
@@ -5559,10 +5373,8 @@ The new `STRUCT` named `A` is nullable, but the nested column `D` within `A` is 
 
 When you create a new column for your table, you can specifically assign a new collation specification to that column.
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-ADD COLUMN word STRING COLLATE 'und:ci'
-```
+    ALTER TABLE mydataset.mytable
+    ADD COLUMN word STRING COLLATE 'und:ci'
 
 #### Adding an automatically generated embedding column
 
@@ -5572,19 +5384,17 @@ ADD COLUMN word STRING COLLATE 'und:ci'
 
 The following example adds an [automatically generated embedding](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `embedding` that generates embeddings from `content` column to the existing table `embedded_table` in `mydataset` :
 
-``` notranslate
-ALTER TABLE mydataset.embedded_table
-  ADD COLUMN embedding
-    STRUCT, status STRING>
-    GENERATED ALWAYS AS (
-      AI.EMBED(
-        content,
-        connection_id => "US.embed_connection",
-        endpoint => "text-embedding-005")
-    )
-    STORED OPTIONS (asynchronous = TRUE)
-;
-```
+    ALTER TABLE mydataset.embedded_table
+      ADD COLUMN embedding
+        STRUCT, status STRING>
+        GENERATED ALWAYS AS (
+          AI.EMBED(
+            content,
+            connection_id => "US.embed_connection",
+            endpoint => "text-embedding-005")
+        )
+        STORED OPTIONS (asynchronous = TRUE)
+    ;
 
 ## `ALTER TABLE ADD FOREIGN KEY` statement
 
@@ -5592,12 +5402,10 @@ Adds a [foreign key constraint](https://docs.cloud.google.com/bigquery/docs/prim
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [[project_name.]dataset_name.]fk_table_name
-ADD [CONSTRAINT [IF NOT EXISTS] constraint_name] FOREIGN KEY (fk_column_name[, ...])
-REFERENCES pk_table_name(pk_column_name[,...]) NOT ENFORCED
-[ADD...];
-```
+    ALTER TABLE [[project_name.]dataset_name.]fk_table_name
+    ADD [CONSTRAINT [IF NOT EXISTS] constraint_name] FOREIGN KEY (fk_column_name[, ...])
+    REFERENCES pk_table_name(pk_column_name[,...]) NOT ENFORCED
+    [ADD...];
 
 ### Arguments
 
@@ -5625,48 +5433,36 @@ The following example adds the `my_fk_name` foreign key constraint to the `fk_ta
 
 1.  Add a primary key to the `pk_table` table:
     
-    ``` notranslate
-    ALTER TABLE pk_table
-    ADD PRIMARY KEY (x,y) NOT ENFORCED;
-    ```
+        ALTER TABLE pk_table
+        ADD PRIMARY KEY (x,y) NOT ENFORCED;
 
 2.  Create a table named `fk_table` for the foreign key.
     
-    ``` notranslate
-    CREATE TABLE fk_table(x int64, y int64, i int64, j int64, u int64, v int64);
-    ```
+        CREATE TABLE fk_table(x int64, y int64, i int64, j int64, u int64, v int64);
 
 3.  Add the `my_fk_name` foreign key constraint to the `fk_table` .
     
-    ``` notranslate
-    ALTER TABLE fk_table
-    ADD CONSTRAINT my_fk_name FOREIGN KEY (u, v)
-    REFERENCES pk_table(x, y) NOT ENFORCED
-    ```
+        ALTER TABLE fk_table
+        ADD CONSTRAINT my_fk_name FOREIGN KEY (u, v)
+        REFERENCES pk_table(x, y) NOT ENFORCED
 
 The following example adds the `fk` and `fk2` foreign key constraints to the `fk_table` table in a single statement. This example depends on an existing table, `pk_table` .
 
 1.  Add a primary key to the `pk_table` table:
     
-    ``` notranslate
-    ALTER TABLE pk_table
-    ADD PRIMARY KEY (x,y) NOT ENFORCED;
-    ```
+        ALTER TABLE pk_table
+        ADD PRIMARY KEY (x,y) NOT ENFORCED;
 
 2.  Create a table named `fk_table` for multiple foreign key constraints.
     
-    ``` notranslate
-    CREATE TABLE fk_table(x int64, y int64, i int64, j int64, u int64, v int64);
-    ```
+        CREATE TABLE fk_table(x int64, y int64, i int64, j int64, u int64, v int64);
 
 3.  Add the `fk` and `fk2` constraints to `fk_table` in one statement.
     
-    ``` notranslate
-    ALTER TABLE fk_table
-    ADD PRIMARY KEY (x,y) NOT ENFORCED,
-    ADD CONSTRAINT fk FOREIGN KEY (u, v) REFERENCES pk_table(x, y) NOT ENFORCED,
-    ADD CONSTRAINT fk2 FOREIGN KEY (i, j) REFERENCES pk_table(x, y) NOT ENFORCED;
-    ```
+        ALTER TABLE fk_table
+        ADD PRIMARY KEY (x,y) NOT ENFORCED,
+        ADD CONSTRAINT fk FOREIGN KEY (u, v) REFERENCES pk_table(x, y) NOT ENFORCED,
+        ADD CONSTRAINT fk2 FOREIGN KEY (i, j) REFERENCES pk_table(x, y) NOT ENFORCED;
 
 ## `ALTER TABLE ADD PRIMARY KEY` statement
 
@@ -5674,10 +5470,8 @@ Adds a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreign
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [[project_name.]dataset_name.]table_name
-ADD PRIMARY KEY(column_list) NOT ENFORCED;
-```
+    ALTER TABLE [[project_name.]dataset_name.]table_name
+    ADD PRIMARY KEY(column_list) NOT ENFORCED;
 
 ### Arguments
 
@@ -5699,9 +5493,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example adds the primary key constraint of `x` and `y` to the `pk_table` table.
 
-``` notranslate
-ALTER TABLE pk_table ADD PRIMARY KEY (x,y) NOT ENFORCED;
-```
+    ALTER TABLE pk_table ADD PRIMARY KEY (x,y) NOT ENFORCED;
 
 ## `ALTER TABLE RENAME TO` statement
 
@@ -5713,10 +5505,8 @@ The `ALTER TABLE RENAME TO` statement recreates the table in the destination dat
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [IF EXISTS] table_name
-RENAME TO new_table_name
-```
+    ALTER TABLE [IF EXISTS] table_name
+    RENAME TO new_table_name
 
 ### Arguments
 
@@ -5751,9 +5541,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example renames the table `mydataset.mytable` to `mydataset.mynewtable` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable RENAME TO mynewtable
-```
+    ALTER TABLE mydataset.mytable RENAME TO mynewtable
 
 ## `ALTER TABLE RENAME COLUMN` statement
 
@@ -5763,13 +5551,11 @@ Renames one or more columns in an existing table schema.
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [IF EXISTS] table_name
-RENAME COLUMN [IF EXISTS] column_to_column[, ...]
-
-column_to_column :=
-    column_name TO new_column_name
-```
+    ALTER TABLE [IF EXISTS] table_name
+    RENAME COLUMN [IF EXISTS] column_to_column[, ...]
+    
+    column_to_column :=
+        column_name TO new_column_name
 
 ### Arguments
 
@@ -5830,22 +5616,18 @@ The following example renames columns from an existing table named `mytable` :
 
 <!-- end list -->
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-  RENAME COLUMN A TO columnA,
-  RENAME COLUMN IF EXISTS B TO columnB
-```
+    ALTER TABLE mydataset.mytable
+      RENAME COLUMN A TO columnA,
+      RENAME COLUMN IF EXISTS B TO columnB
 
 If column `A` does not exist, then the statement fails. If column `B` does not exist, then the statement still succeeds because of the `IF EXISTS` clause.
 
 The following example swaps the names of `columnA` and `columnB` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-  RENAME COLUMN columnA TO temp_col,
-  RENAME COLUMN columnB TO columnA,
-  RENAME COLUMN temp_col TO columnB
-```
+    ALTER TABLE mydataset.mytable
+      RENAME COLUMN columnA TO temp_col,
+      RENAME COLUMN columnB TO columnA,
+      RENAME COLUMN temp_col TO columnB
 
 ## `ALTER TABLE DROP COLUMN` statement
 
@@ -5936,10 +5718,8 @@ Drops a constraint from an existing table. You can use this statement to drop [f
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [[project_name.]dataset_name.]table_name
-DROP CONSTRAINT [IF EXISTS] constraint_name;
-```
+    ALTER TABLE [[project_name.]dataset_name.]table_name
+    DROP CONSTRAINT [IF EXISTS] constraint_name;
 
 ### Arguments
 
@@ -5962,9 +5742,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example drops the constraint `myConstraint` from the existing table `myTable` .
 
-``` notranslate
-ALTER TABLE mytable DROP CONSTRAINT myConstraint;
-```
+    ALTER TABLE mytable DROP CONSTRAINT myConstraint;
 
 ## `ALTER TABLE DROP PRIMARY KEY` statement
 
@@ -5972,10 +5750,8 @@ Drops a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreig
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [[project_name.]dataset_name.]table_name
-DROP PRIMARY KEY [IF EXISTS];
-```
+    ALTER TABLE [[project_name.]dataset_name.]table_name
+    DROP PRIMARY KEY [IF EXISTS];
 
 ### Arguments
 
@@ -5997,10 +5773,8 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example drops all primary keys from the existing table `myTable` .
 
-``` notranslate
-ALTER TABLE myTable
-DROP PRIMARY KEY;
-```
+    ALTER TABLE myTable
+    DROP PRIMARY KEY;
 
 ## `ALTER TABLE SET DEFAULT COLLATE` statement
 
@@ -6008,11 +5782,9 @@ Sets [collation specifications](https://docs.cloud.google.com/bigquery/docs/refe
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE
-  table_name
-  SET DEFAULT COLLATE collate_specification
-```
+    ALTER TABLE
+      table_name
+      SET DEFAULT COLLATE collate_specification
 
 ### Arguments
 
@@ -6035,13 +5807,11 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 Assume you have an existing table, `mytable` , in a schema called `mydataset` .
 
-``` notranslate
-CREATE TABLE mydataset.mytable
-(
-  number INT64,
-  word STRING
-) DEFAULT COLLATE 'und:ci'
-```
+    CREATE TABLE mydataset.mytable
+    (
+      number INT64,
+      word STRING
+    ) DEFAULT COLLATE 'und:ci'
 
 When you create `mytable` , all `STRING` columns inherit `COLLATE 'und:ci'` . The resulting table has this structure:
 
@@ -6053,10 +5823,8 @@ When you create `mytable` , all `STRING` columns inherit `COLLATE 'und:ci'` . Th
 
 At a later time, you decide to change the collation specification for your table.
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-SET DEFAULT COLLATE ''
-```
+    ALTER TABLE mydataset.mytable
+    SET DEFAULT COLLATE ''
 
 Although you have updated the collation specification, your existing column, `word` , continues to use the previous collation specification.
 
@@ -6068,10 +5836,8 @@ Although you have updated the collation specification, your existing column, `wo
 
 However, if you create a new column for your table, the new column includes the new collation specification. In the following example a column called `name` is added. Because the new collation specification is empty, the default collation specification is used.
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-ADD COLUMN name STRING
-```
+    ALTER TABLE mydataset.mytable
+    ADD COLUMN name STRING
 
     +--------------------------------+
     | mydataset.mytable              |
@@ -6086,11 +5852,9 @@ Sets options, such as the column description, on a column in a table or view in 
 
 ### Syntax
 
-``` notranslate
-ALTER { TABLE | VIEW } [IF EXISTS] name
-ALTER COLUMN [IF EXISTS] column_name
-SET OPTIONS({ column_set_options_list | view_column_set_options_list })
-```
+    ALTER { TABLE | VIEW } [IF EXISTS] name
+    ALTER COLUMN [IF EXISTS] column_name
+    SET OPTIONS({ column_set_options_list | view_column_set_options_list })
 
 ### Arguments
 
@@ -6203,19 +5967,15 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example sets a new description on a table column called `price` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-ALTER COLUMN price
-SET OPTIONS (description = 'Price per unit');
-```
+    ALTER TABLE mydataset.mytable
+    ALTER COLUMN price
+    SET OPTIONS (description = 'Price per unit');
 
 The following example sets a new description on a view column called `total` :
 
-``` notranslate
-ALTER VIEW mydataset.myview
-ALTER COLUMN total
-SET OPTIONS (description = 'Total sales of the product');
-```
+    ALTER VIEW mydataset.myview
+    ALTER COLUMN total
+    SET OPTIONS (description = 'Total sales of the product');
 
 ## `ALTER COLUMN DROP NOT NULL` statement
 
@@ -6223,10 +5983,8 @@ Removes a `NOT NULL` constraint from a column in a table in BigQuery.
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [IF EXISTS] table_name
-ALTER COLUMN [IF EXISTS] column DROP NOT NULL
-```
+    ALTER TABLE [IF EXISTS] table_name
+    ALTER COLUMN [IF EXISTS] column DROP NOT NULL
 
 ### Arguments
 
@@ -6257,11 +6015,9 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example removes the `NOT NULL` constraint from a column called `mycolumn` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-ALTER COLUMN mycolumn
-DROP NOT NULL
-```
+    ALTER TABLE mydataset.mytable
+    ALTER COLUMN mycolumn
+    DROP NOT NULL
 
 ## `ALTER COLUMN SET DATA TYPE` statement
 
@@ -6269,10 +6025,8 @@ Changes the data type of a column in a table in BigQuery to a less restrictive d
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [IF EXISTS] table_name
-ALTER COLUMN [IF EXISTS] column_name SET DATA TYPE column_schema
-```
+    ALTER TABLE [IF EXISTS] table_name
+    ALTER COLUMN [IF EXISTS] column_name SET DATA TYPE column_schema
 
 ### Arguments
 
@@ -6320,34 +6074,28 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example changes the data type of column `c1` from an `INT64` to `NUMERIC` :
 
-``` notranslate
-CREATE TABLE dataset.my_table(c1 INT64);
-
-ALTER TABLE dataset.my_table ALTER COLUMN c1 SET DATA TYPE NUMERIC;
-```
+    CREATE TABLE dataset.my_table(c1 INT64);
+    
+    ALTER TABLE dataset.my_table ALTER COLUMN c1 SET DATA TYPE NUMERIC;
 
 #### Changing the data type for a field
 
 The following example changes the data type of one of the fields in the `s1` column:
 
-``` notranslate
-CREATE TABLE dataset.my_table(s1 STRUCT <a INT64, b STRING>);
-
-ALTER TABLE dataset.my_table ALTER COLUMN s1
-SET DATA TYPE STRUCT <a NUMERIC, b STRING>;
-```
+    CREATE TABLE dataset.my_table(s1 STRUCT <a INT64, b STRING>);
+    
+    ALTER TABLE dataset.my_table ALTER COLUMN s1
+    SET DATA TYPE STRUCT <a NUMERIC, b STRING>;
 
 #### Changing precision
 
 The following example changes the precision of a parameterized data type column:
 
-``` notranslate
-CREATE TABLE dataset.my_table (pt NUMERIC(7,2));
-
-ALTER TABLE dataset.my_table
-ALTER COLUMN pt
-SET DATA TYPE NUMERIC(8,2);
-```
+    CREATE TABLE dataset.my_table (pt NUMERIC(7,2));
+    
+    ALTER TABLE dataset.my_table
+    ALTER COLUMN pt
+    SET DATA TYPE NUMERIC(8,2);
 
 ## `ALTER COLUMN SET DEFAULT` statement
 
@@ -6355,10 +6103,8 @@ Sets the [default value](https://docs.cloud.google.com/bigquery/docs/default-val
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
-SET DEFAULT default_expression;
-```
+    ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
+    SET DEFAULT default_expression;
 
 ### Arguments
 
@@ -6404,11 +6150,9 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example sets the default value of the column `mycolumn` to the current time:
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-ALTER COLUMN mycolumn
-SET DEFAULT CURRENT_TIME();
-```
+    ALTER TABLE mydataset.mytable
+    ALTER COLUMN mycolumn
+    SET DEFAULT CURRENT_TIME();
 
 ## `ALTER COLUMN DROP DEFAULT` statement
 
@@ -6416,10 +6160,8 @@ Removes the [default value](https://docs.cloud.google.com/bigquery/docs/default-
 
 ### Syntax
 
-``` notranslate
-ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
-DROP DEFAULT;
-```
+    ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
+    DROP DEFAULT;
 
 ### Arguments
 
@@ -6444,11 +6186,9 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example removes the default value from the column `mycolumn` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-ALTER COLUMN mycolumn
-DROP DEFAULT;
-```
+    ALTER TABLE mydataset.mytable
+    ALTER COLUMN mycolumn
+    DROP DEFAULT;
 
 ## `ALTER VIEW SET OPTIONS` statement
 
@@ -6456,10 +6196,8 @@ Sets the options on a [view](https://docs.cloud.google.com/bigquery/docs/views) 
 
 ### Syntax
 
-``` notranslate
-ALTER VIEW [IF EXISTS] view_name
-SET OPTIONS(view_set_options_list)
-```
+    ALTER VIEW [IF EXISTS] view_name
+    SET OPTIONS(view_set_options_list)
 
 ### Arguments
 
@@ -6572,13 +6310,11 @@ If the `OPTIONS` clause includes any expiration options, then the `bigquery.tabl
 
 The following example sets the expiration timestamp on a view to seven days from the execution time of the `ALTER VIEW` statement, and sets the description as well:
 
-``` notranslate
-ALTER VIEW mydataset.myview
-SET OPTIONS (
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 7 DAY),
-  description="View that expires seven days from now"
-)
-```
+    ALTER VIEW mydataset.myview
+    SET OPTIONS (
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 7 DAY),
+      description="View that expires seven days from now"
+    )
 
 ## `ALTER MATERIALIZED VIEW SET OPTIONS` statement
 
@@ -6586,10 +6322,8 @@ Sets the options on a materialized view.
 
 ### Syntax
 
-``` notranslate
-ALTER MATERIALIZED VIEW [IF EXISTS] materialized_view_name
-SET OPTIONS(materialized_view_set_options_list)
-```
+    ALTER MATERIALIZED VIEW [IF EXISTS] materialized_view_name
+    SET OPTIONS(materialized_view_set_options_list)
 
 ### Arguments
 
@@ -6705,13 +6439,11 @@ If the `OPTIONS` clause includes any expiration options, then the `bigquery.tabl
 
 The following example enables refresh and sets the refresh interval to 20 minutes on a materialized view:
 
-``` notranslate
-ALTER MATERIALIZED VIEW mydataset.my_mv
-SET OPTIONS (
-  enable_refresh=true,
-  refresh_interval_minutes=20
-)
-```
+    ALTER MATERIALIZED VIEW mydataset.my_mv
+    SET OPTIONS (
+      enable_refresh=true,
+      refresh_interval_minutes=20
+    )
 
 ## `ALTER ORGANIZATION SET OPTIONS` statement
 
@@ -6719,11 +6451,9 @@ Sets the options on an organization.
 
 ### Syntax
 
-``` notranslate
-ALTER ORGANIZATION
-SET OPTIONS (
-  organization_set_options_list);
-```
+    ALTER ORGANIZATION
+    SET OPTIONS (
+      organization_set_options_list);
 
 ### Arguments
 
@@ -6810,6 +6540,23 @@ The following options are supported:
 <p>Example: <code dir="ltr" translate="no">`region-us.enable_global_queries_data_access` = true</code> .</p></td>
 </tr>
 <tr class="even">
+<td><code dir="ltr" translate="no">reservation_override_mode</code> (Preview)</td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td><p>Specifies how query reservations can be overridden in the region. This option can be one of the following:</p>
+<ul>
+<li><code dir="ltr" translate="no">'ALLOW_ANY_OVERRIDE'</code> : Allows all reservation overrides, including forcing on-demand billing ( <code dir="ltr" translate="no">'none'</code> ).</li>
+<li><code dir="ltr" translate="no">'DENY_OVERRIDE_TO_NONE'</code> (default): Allows overrides to other existing reservations, but explicit on-demand overrides ( <code dir="ltr" translate="no">'none'</code> ) fail.</li>
+<li><code dir="ltr" translate="no">'DENY_ANY_OVERRIDE'</code> : Any attempt to override an assigned reservation fails.</li>
+</ul>
+<p>Example: <code dir="ltr" translate="no">`region-us.reservation_override_mode` = 'ALLOW_ANY_OVERRIDE'</code></p></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">disable_on_demand_billing</code></td>
+<td><code dir="ltr" translate="no">BOOL</code></td>
+<td><p>Determines whether on-demand billing is disabled for the organization in the region. If <code dir="ltr" translate="no">true</code> , all queries must use an assigned reservation or they fail.</p>
+<p>Example: <code dir="ltr" translate="no">`region-us.disable_on_demand_billing` = true</code></p></td>
+</tr>
+<tr class="even">
 <td><code dir="ltr" translate="no">default_location</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the query doesn't contain references to any datasets or connections. This setting can only be applied globally.</p>
@@ -6832,25 +6579,21 @@ The `ALTER ORGANIZATION SET OPTIONS` statement requires the following [IAM permi
 
 The following example sets the default time zone to America/Chicago and the default query job timeout to one hour for an organization in the US region:
 
-``` notranslate
-ALTER ORGANIZATION
-SET OPTIONS (
-  `region-us.default_time_zone` = "America/Chicago",
-  `region-us.default_job_query_timeout_ms` = 3600000
-);
-```
+    ALTER ORGANIZATION
+    SET OPTIONS (
+      `region-us.default_time_zone` = "America/Chicago",
+      `region-us.default_job_query_timeout_ms` = 3600000
+    );
 
 The following example sets the default time zone, the default query job timeout, the default interactive and batch queue timeouts, and the default Cloud KMS key, clearing the organization level default settings:
 
-``` notranslate
-ALTER ORGANIZATION
-SET OPTIONS (
-  `region-us.default_time_zone` = NULL,
-  `region-us.default_kms_key_name` = NULL,
-  `region-us.default_query_job_timeout_ms` = NULL,
-  `region-us.default_interactive_query_queue_timeout_ms` = NULL,
-  `region-us.default_batch_query_queue_timeout_ms` = NULL);
-```
+    ALTER ORGANIZATION
+    SET OPTIONS (
+      `region-us.default_time_zone` = NULL,
+      `region-us.default_kms_key_name` = NULL,
+      `region-us.default_query_job_timeout_ms` = NULL,
+      `region-us.default_interactive_query_queue_timeout_ms` = NULL,
+      `region-us.default_batch_query_queue_timeout_ms` = NULL);
 
 ## `ALTER PROJECT SET OPTIONS` statement
 
@@ -6858,10 +6601,8 @@ Sets the options on a project.
 
 ### Syntax
 
-``` notranslate
-ALTER PROJECT project_id
-SET OPTIONS (project_set_options_list);
-```
+    ALTER PROJECT project_id
+    SET OPTIONS (project_set_options_list);
 
 ### Arguments
 
@@ -6973,6 +6714,23 @@ The following options are supported:
 <p>Example: <code dir="ltr" translate="no">`region-us.enable_global_queries_data_access` = true</code> .</p></td>
 </tr>
 <tr class="odd">
+<td><code dir="ltr" translate="no">reservation_override_mode</code> (Preview)</td>
+<td><code dir="ltr" translate="no">STRING</code></td>
+<td><p>Specifies how query reservations can be overridden in the region. This option can be one of the following:</p>
+<ul>
+<li><code dir="ltr" translate="no">'ALLOW_ANY_OVERRIDE'</code> : Allows all reservation overrides, including forcing on-demand billing ( <code dir="ltr" translate="no">'none'</code> ).</li>
+<li><code dir="ltr" translate="no">'DENY_OVERRIDE_TO_NONE'</code> (default): Allows overrides to other existing reservations, but explicit on-demand overrides ( <code dir="ltr" translate="no">'none'</code> ) fail.</li>
+<li><code dir="ltr" translate="no">'DENY_ANY_OVERRIDE'</code> : Any attempt to override an assigned reservation fails.</li>
+</ul>
+<p>Example: <code dir="ltr" translate="no">`region-us.reservation_override_mode` = 'ALLOW_ANY_OVERRIDE'</code></p></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">disable_on_demand_billing</code></td>
+<td><code dir="ltr" translate="no">BOOL</code></td>
+<td><p>Determines whether on-demand billing is disabled for the project in the region. If <code dir="ltr" translate="no">true</code> , all queries must use an assigned reservation or they fail.</p>
+<p>Example: <code dir="ltr" translate="no">`region-us.disable_on_demand_billing` = true</code></p></td>
+</tr>
+<tr class="odd">
 <td><code dir="ltr" translate="no">default_location</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined. This setting can only be applied globally.</p>
@@ -6995,26 +6753,22 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example sets the default time zone to `America/New_York` and the default query job timeout to 30 minutes for a project in the `us` region.
 
-``` notranslate
-ALTER PROJECT project_id
-SET OPTIONS (
-  `region-us.default_time_zone` = "America/New_York",
-  `region-us.default_job_query_timeout_ms` = 1800000
-);
-```
+    ALTER PROJECT project_id
+    SET OPTIONS (
+      `region-us.default_time_zone` = "America/New_York",
+      `region-us.default_job_query_timeout_ms` = 1800000
+    );
 
 The following example sets the default time zone, the default query job timeout, the default Cloud KMS key to `NULL` , and the default interactive and batch queue timeouts and default sql dialect, clearing the project level default settings:
 
-``` notranslate
-ALTER PROJECT project_id
-SET OPTIONS (
-  `region-us.default_time_zone` = NULL,
-  `region-us.default_kms_key_name` = NULL,
-  `region-us.default_query_job_timeout_ms` = NULL,
-  `region-us.default_interactive_query_queue_timeout_ms` = NULL,
-  `region-us.default_batch_query_queue_timeout_ms` = NULL,
-  `region-us.default_sql_dialect_option` = NULL);
-```
+    ALTER PROJECT project_id
+    SET OPTIONS (
+      `region-us.default_time_zone` = NULL,
+      `region-us.default_kms_key_name` = NULL,
+      `region-us.default_query_job_timeout_ms` = NULL,
+      `region-us.default_interactive_query_queue_timeout_ms` = NULL,
+      `region-us.default_batch_query_queue_timeout_ms` = NULL,
+      `region-us.default_sql_dialect_option` = NULL);
 
 ## `ALTER BI_CAPACITY SET OPTIONS` statement
 
@@ -7022,10 +6776,8 @@ Sets the options on BigQuery BI Engine capacity.
 
 ### Syntax
 
-``` notranslate
-ALTER BI_CAPACITY `project_id.location_id.default`
-SET OPTIONS(bi_capacity_options_list)
-```
+    ALTER BI_CAPACITY `project_id.location_id.default`
+    SET OPTIONS(bi_capacity_options_list)
 
 ### Arguments
 
@@ -7064,51 +6816,41 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 #### Allocating BI Engine capacity without preferred tables
 
-``` notranslate
-ALTER BI_CAPACITY `my-project.region-us.default`
-SET OPTIONS(
-  size_gb = 250
-)
-```
+    ALTER BI_CAPACITY `my-project.region-us.default`
+    SET OPTIONS(
+      size_gb = 250
+    )
 
 #### Deallocating BI capacity
 
-``` notranslate
-ALTER BI_CAPACITY `my-project.region-us.default`
-SET OPTIONS(
-  size_gb = 0
-)
-```
+    ALTER BI_CAPACITY `my-project.region-us.default`
+    SET OPTIONS(
+      size_gb = 0
+    )
 
 #### Removing a set of preferred tables from reservation
 
-``` notranslate
-ALTER BI_CAPACITY `my-project.region-us.default`
-SET OPTIONS(
-  preferred_tables = NULL
-)
-```
+    ALTER BI_CAPACITY `my-project.region-us.default`
+    SET OPTIONS(
+      preferred_tables = NULL
+    )
 
 #### Allocating BI Capacity with preferred tables list
 
-``` notranslate
-ALTER BI_CAPACITY `my-project.region-us.default`
-SET OPTIONS(
-  size_gb = 250,
-  preferred_tables = ["data_project1.dataset1.table1",
-                      "data_project2.dataset2.table2"]
-)
-```
+    ALTER BI_CAPACITY `my-project.region-us.default`
+    SET OPTIONS(
+      size_gb = 250,
+      preferred_tables = ["data_project1.dataset1.table1",
+                          "data_project2.dataset2.table2"]
+    )
 
 #### Overwriting list of preferred tables without changing the size
 
-``` notranslate
-ALTER BI_CAPACITY `region-us.default`
-SET OPTIONS(
-  preferred_tables = ["dataset1.table1",
-                      "data_project2.dataset2.table2"]
-)
-```
+    ALTER BI_CAPACITY `region-us.default`
+    SET OPTIONS(
+      preferred_tables = ["dataset1.table1",
+                          "data_project2.dataset2.table2"]
+    )
 
 ## `ALTER CAPACITY SET OPTIONS` statement
 
@@ -7116,10 +6858,8 @@ Alters an existing capacity commitment.
 
 ### Syntax
 
-``` notranslate
-ALTER CAPACITY `project_id.location_id.commitment_id`
-SET OPTIONS (alter_capacity_commitment_option_list);
-```
+    ALTER CAPACITY `project_id.location_id.commitment_id`
+    SET OPTIONS (alter_capacity_commitment_option_list);
 
 ### Arguments
 
@@ -7151,11 +6891,9 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example changes a capacity commitment to a three-year plan that is located in the `region-us` region and managed by a project `admin_project` :
 
-``` notranslate
-ALTER CAPACITY `admin_project.region-us.my-commitment`
-SET OPTIONS (
-  plan = 'THREE_YEAR');
-```
+    ALTER CAPACITY `admin_project.region-us.my-commitment`
+    SET OPTIONS (
+      plan = 'THREE_YEAR');
 
 ## `ALTER RESERVATION SET OPTIONS` statement
 
@@ -7163,10 +6901,8 @@ Alters an existing reservation.
 
 ### Syntax
 
-``` notranslate
-ALTER RESERVATION `project_id.location_id.reservation_id`
-SET OPTIONS (alter_reservation_option_list);
-```
+    ALTER RESERVATION `project_id.location_id.reservation_id`
+    SET OPTIONS (alter_reservation_option_list);
 
 ### Arguments
 
@@ -7205,12 +6941,10 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example changes an autoscaling reservation to 300 baseline slots and 400 autoscaling slots for a max reservation size of 700. These slots are located in the `region-us` region and managed by a project `admin_project` :
 
-``` notranslate
-ALTER RESERVATION `admin_project.region-us.my-reservation`
-SET OPTIONS (
-  slot_capacity = 300,
-  autoscale_max_slots = 400);
-```
+    ALTER RESERVATION `admin_project.region-us.my-reservation`
+    SET OPTIONS (
+      slot_capacity = 300,
+      autoscale_max_slots = 400);
 
 ## `ALTER VECTOR INDEX REBUILD` statement
 
@@ -7224,11 +6958,9 @@ Rebuild a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-inde
 
 ### Syntax
 
-``` notranslate
-ALTER VECTOR INDEX [ IF EXISTS ] index_name
-ON table_name
-REBUILD;
-```
+    ALTER VECTOR INDEX [ IF EXISTS ] index_name
+    ON table_name
+    REBUILD;
 
 ### Arguments
 
@@ -7260,11 +6992,9 @@ You might also be able to get the required permissions through [custom roles](ht
 
 The following example rebuilds the `index1` vector index on the `sales` table:
 
-``` notranslate
-ALTER VECTOR INDEX IF EXISTS index1
-ON mydataset.sales
-REBUILD;
-```
+    ALTER VECTOR INDEX IF EXISTS index1
+    ON mydataset.sales
+    REBUILD;
 
 ## `ALTER DATA_POLICY` statement
 
@@ -7276,10 +7006,8 @@ REBUILD;
 
 ### Syntax
 
-``` notranslate
-ALTER DATA_POLICY [ IF EXISTS ] `project_id.region-location_id.data_policy_id`
-SET OPTIONS (alter_option_list);
-```
+    ALTER DATA_POLICY [ IF EXISTS ] `project_id.region-location_id.data_policy_id`
+    SET OPTIONS (alter_option_list);
 
 ### Arguments
 
@@ -7316,10 +7044,8 @@ Modifies an existing connection.
 
 ### Syntax
 
-``` notranslate
-ALTER CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`
-SET OPTIONS (alter_connection_option_list);
-```
+    ALTER CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`
+    SET OPTIONS (alter_connection_option_list);
 
 ### Arguments
 
@@ -7349,12 +7075,10 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example modifies the description of the `my_cloud_resource_connection` connection:
 
-``` notranslate
-ALTER CONNECTION `us.my_cloud_resource_connection`
-SET OPTIONS (
-  description = "Updated description for my Cloud resource connection"
-  );
-```
+    ALTER CONNECTION `us.my_cloud_resource_connection`
+    SET OPTIONS (
+      description = "Updated description for my Cloud resource connection"
+      );
 
 ## `DROP SCHEMA` statement
 
@@ -7475,9 +7199,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example deletes a table named `mytable` in the `mydataset` :
 
-``` notranslate
-DROP TABLE mydataset.mytable
-```
+    DROP TABLE mydataset.mytable
 
 If the table name does not exist in the dataset, the following error is returned:
 
@@ -7487,9 +7209,7 @@ If the table name does not exist in the dataset, the following error is returned
 
 The following example deletes a table named `mytable` in `mydataset` only if the table exists. If the table name does not exist in the dataset, no error is returned, and no action is taken.
 
-``` notranslate
-DROP TABLE IF EXISTS mydataset.mytable
-```
+    DROP TABLE IF EXISTS mydataset.mytable
 
 ## `DROP SNAPSHOT TABLE` statement
 
@@ -7519,9 +7239,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example deletes the table snapshot named `mytablesnapshot` in the `mydataset` dataset:
 
-``` notranslate
-DROP SNAPSHOT TABLE mydataset.mytablesnapshot
-```
+    DROP SNAPSHOT TABLE mydataset.mytablesnapshot
 
 If the table snapshot does not exist in the dataset, then the following error is returned:
 
@@ -7531,9 +7249,7 @@ If the table snapshot does not exist in the dataset, then the following error is
 
 The following example deletes the table snapshot named `mytablesnapshot` in the `mydataset` dataset.
 
-``` notranslate
-DROP SNAPSHOT TABLE IF EXISTS mydataset.mytablesnapshot
-```
+    DROP SNAPSHOT TABLE IF EXISTS mydataset.mytablesnapshot
 
 If the table snapshot doesn't exist in the dataset, then no action is taken, and no error is returned.
 
@@ -7611,9 +7327,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example deletes a view named `myview` in `mydataset` :
 
-``` notranslate
-DROP VIEW mydataset.myview
-```
+    DROP VIEW mydataset.myview
 
 If the view name does not exist in the dataset, the following error is returned:
 
@@ -7623,9 +7337,7 @@ If the view name does not exist in the dataset, the following error is returned:
 
 The following example deletes a view named `myview` in `mydataset` only if the view exists. If the view name does not exist in the dataset, no error is returned, and no action is taken.
 
-``` notranslate
-DROP VIEW IF EXISTS mydataset.myview
-```
+    DROP VIEW IF EXISTS mydataset.myview
 
 ## `DROP MATERIALIZED VIEW` statement
 
@@ -7656,9 +7368,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example deletes a materialized view named `my_mv` in `mydataset` :
 
-``` notranslate
-DROP MATERIALIZED VIEW mydataset.my_mv
-```
+    DROP MATERIALIZED VIEW mydataset.my_mv
 
 If the materialized view name does not exist in the dataset, the following error is returned:
 
@@ -7670,9 +7380,7 @@ If you are deleting a materialized view in another project, you must specify the
 
 The following example deletes a materialized view named `my_mv` in `mydataset` only if the materialized view exists. If the materialized view name does not exist in the dataset, no error is returned, and no action is taken.
 
-``` notranslate
-DROP MATERIALIZED VIEW IF EXISTS mydataset.my_mv
-```
+    DROP MATERIALIZED VIEW IF EXISTS mydataset.my_mv
 
 If you are deleting a materialized view in another project, you must specify the project, dataset, and materialized view in the following format: `` ` project_id.dataset.materialized_view `, `` (including the backticks if `project_id` contains special characters); for example, `` `myproject.mydataset.my_mv` `` .
 
@@ -7722,9 +7430,7 @@ Deletes a [table function](https://docs.cloud.google.com/bigquery/docs/table-fun
 
 ### Syntax
 
-``` notranslate
-DROP TABLE FUNCTION [IF EXISTS] [[project_name.]dataset_name.]function_name
-```
+    DROP TABLE FUNCTION [IF EXISTS] [[project_name.]dataset_name.]function_name
 
 ### Arguments
 
@@ -7821,15 +7527,11 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 Delete a row-level access policy from a table:
 
-``` notranslate
-DROP ROW ACCESS POLICY my_row_filter ON project.dataset.my_table;
-```
+    DROP ROW ACCESS POLICY my_row_filter ON project.dataset.my_table;
 
 Delete all the row-level access policies from a table:
 
-``` notranslate
-DROP ALL ROW ACCESS POLICIES ON project.dataset.my_table;
-```
+    DROP ALL ROW ACCESS POLICIES ON project.dataset.my_table;
 
 ## `DROP CAPACITY` statement
 
@@ -8016,9 +7718,7 @@ Deletes an existing connection.
 
 ### Syntax
 
-``` notranslate
-DROP CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`;
-```
+    DROP CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`;
 
 ### Arguments
 
@@ -8038,9 +7738,7 @@ This statement requires the following [IAM permissions](https://docs.cloud.googl
 
 The following example deletes the `my_cloud_resource_connection` connection:
 
-``` notranslate
-DROP CONNECTION IF EXISTS `us.my_cloud_resource_connection`;
-```
+    DROP CONNECTION IF EXISTS `us.my_cloud_resource_connection`;
 
 ## Table path syntax
 

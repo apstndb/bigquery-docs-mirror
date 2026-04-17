@@ -14,18 +14,16 @@ For information on UDFs in legacy SQL, see [User-defined functions in legacy SQL
 
 The following example creates a temporary SQL UDF named `AddFourAndDivide` and calls the UDF from within a `SELECT` statement:
 
-``` notranslate
-CREATE TEMP FUNCTION AddFourAndDivide(x INT64, y INT64)
-RETURNS FLOAT64
-AS (
-  (x + 4) / y
-);
-
-SELECT
-  val, AddFourAndDivide(val, 2)
-FROM
-  UNNEST([2,3,5,8]) AS val;
-```
+    CREATE TEMP FUNCTION AddFourAndDivide(x INT64, y INT64)
+    RETURNS FLOAT64
+    AS (
+      (x + 4) / y
+    );
+    
+    SELECT
+      val, AddFourAndDivide(val, 2)
+    FROM
+      UNNEST([2,3,5,8]) AS val;
 
 This example produces the following output:
 
@@ -40,22 +38,18 @@ This example produces the following output:
 
 The next example creates the same function as a persistent UDF:
 
-``` notranslate
-CREATE FUNCTION mydataset.AddFourAndDivide(x INT64, y INT64)
-RETURNS FLOAT64
-AS (
-  (x + 4) / y
-);
-```
+    CREATE FUNCTION mydataset.AddFourAndDivide(x INT64, y INT64)
+    RETURNS FLOAT64
+    AS (
+      (x + 4) / y
+    );
 
 Because this UDF is persistent, you must specify a dataset for the function ( `mydataset` in this example). After you run the `CREATE FUNCTION` statement, you can call the function from a query:
 
-``` notranslate
-SELECT
-  val, mydataset.AddFourAndDivide(val, 2)
-FROM
-  UNNEST([2,3,5,8,12]) AS val;
-```
+    SELECT
+      val, mydataset.AddFourAndDivide(val, 2)
+    FROM
+      UNNEST([2,3,5,8,12]) AS val;
 
 ### Templated SQL UDF parameters
 
@@ -67,16 +61,14 @@ A parameter with a type equal to `ANY TYPE` can match more than one argument typ
 
 The following example shows a SQL UDF that uses a templated parameter.
 
-``` notranslate
-CREATE TEMP FUNCTION addFourAndDivideAny(x ANY TYPE, y ANY TYPE)
-AS (
-  (x + 4) / y
-);
-
-SELECT
-  addFourAndDivideAny(3, 4) AS integer_input,
-  addFourAndDivideAny(1.59, 3.14) AS floating_point_input;
-```
+    CREATE TEMP FUNCTION addFourAndDivideAny(x ANY TYPE, y ANY TYPE)
+    AS (
+      (x + 4) / y
+    );
+    
+    SELECT
+      addFourAndDivideAny(3, 4) AS integer_input,
+      addFourAndDivideAny(1.59, 3.14) AS floating_point_input;
 
 This example produces the following output:
 
@@ -88,18 +80,16 @@ This example produces the following output:
 
 The next example uses a templated parameter to return the last element of an array of any type:
 
-``` notranslate
-CREATE TEMP FUNCTION lastArrayElement(arr ANY TYPE)
-AS (
-  arr[ORDINAL(ARRAY_LENGTH(arr))]
-);
-
-SELECT
-  lastArrayElement(x) AS last_element
-FROM (
-  SELECT [2,3,5,8,13] AS x
-);
-```
+    CREATE TEMP FUNCTION lastArrayElement(arr ANY TYPE)
+    AS (
+      arr[ORDINAL(ARRAY_LENGTH(arr))]
+    );
+    
+    SELECT
+      lastArrayElement(x) AS last_element
+    FROM (
+      SELECT [2,3,5,8,13] AS x
+    );
 
 This example produces the following output:
 
@@ -115,29 +105,27 @@ A SQL UDF can return the value of a [scalar subquery](https://docs.cloud.google.
 
 The following example shows a SQL UDF that uses a scalar subquery to count the number of users with a given age in a user table:
 
-``` notranslate
-CREATE TEMP TABLE users
-AS (
-  SELECT
-    1 AS id, 10 AS age
-  UNION ALL
-  SELECT
-    2 AS id, 30 AS age
-  UNION ALL
-  SELECT
-    3 AS id, 10 AS age
-);
-
-CREATE TEMP FUNCTION countUserByAge(userAge INT64)
-AS (
-  (SELECT COUNT(1) FROM users WHERE age = userAge)
-);
-
-SELECT
-  countUserByAge(10) AS count_user_age_10,
-  countUserByAge(20) AS count_user_age_20,
-  countUserByAge(30) AS count_user_age_30;
-```
+    CREATE TEMP TABLE users
+    AS (
+      SELECT
+        1 AS id, 10 AS age
+      UNION ALL
+      SELECT
+        2 AS id, 30 AS age
+      UNION ALL
+      SELECT
+        3 AS id, 10 AS age
+    );
+    
+    CREATE TEMP FUNCTION countUserByAge(userAge INT64)
+    AS (
+      (SELECT COUNT(1) FROM users WHERE age = userAge)
+    );
+    
+    SELECT
+      countUserByAge(10) AS count_user_age_10,
+      countUserByAge(20) AS count_user_age_20,
+      countUserByAge(30) AS count_user_age_30;
 
 This example produces the following output:
 
@@ -153,30 +141,24 @@ In the body of a SQL UDF, any references to BigQuery entities, such as tables or
 
 For example, consider the following statement:
 
-``` notranslate
-CREATE FUNCTION project1.mydataset.myfunction()
-AS (
-  (SELECT COUNT(*) FROM mydataset.mytable)
-);
-```
+    CREATE FUNCTION project1.mydataset.myfunction()
+    AS (
+      (SELECT COUNT(*) FROM mydataset.mytable)
+    );
 
 If you run this statement from `project1` and `mydataset.mytable` exists in `project1` , then the statement succeeds. However, if you run this statement from a different project, then the statement fails. To correct the error, include the project ID in the table reference:
 
-``` notranslate
-CREATE FUNCTION project1.mydataset.myfunction()
-AS (
-  (SELECT COUNT(*) FROM project1.mydataset.mytable)
-);
-```
+    CREATE FUNCTION project1.mydataset.myfunction()
+    AS (
+      (SELECT COUNT(*) FROM project1.mydataset.mytable)
+    );
 
 You can also reference an entity in a different project or dataset from the one where you create the function:
 
-``` notranslate
-CREATE FUNCTION project1.mydataset.myfunction()
-AS (
-  (SELECT COUNT(*) FROM project2.another_dataset.another_table)
-);
-```
+    CREATE FUNCTION project1.mydataset.myfunction()
+    AS (
+      (SELECT COUNT(*) FROM project2.another_dataset.another_table)
+    );
 
 ### Use system variables with SQL UDFs
 
@@ -188,23 +170,21 @@ A JavaScript UDF lets you call code written in JavaScript from a SQL query. Java
 
 The following example shows a JavaScript UDF. The JavaScript code is quoted within a [raw string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) .
 
-``` notranslate
-CREATE TEMP FUNCTION multiplyInputs(x FLOAT64, y FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r"""
-  return x*y;
-""";
-
-WITH numbers AS
-  (SELECT 1 AS x, 5 as y
-  UNION ALL
-  SELECT 2 AS x, 10 as y
-  UNION ALL
-  SELECT 3 as x, 15 as y)
-SELECT x, y, multiplyInputs(x, y) AS product
-FROM numbers;
-```
+    CREATE TEMP FUNCTION multiplyInputs(x FLOAT64, y FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r"""
+      return x*y;
+    """;
+    
+    WITH numbers AS
+      (SELECT 1 AS x, 5 as y
+      UNION ALL
+      SELECT 2 AS x, 10 as y
+      UNION ALL
+      SELECT 3 as x, 15 as y)
+    SELECT x, y, multiplyInputs(x, y) AS product
+    FROM numbers;
 
 This example produces the following output:
 
@@ -218,46 +198,44 @@ This example produces the following output:
 
 The next example sums the values of all fields named `foo` in the given JSON string.
 
-``` notranslate
-CREATE TEMP FUNCTION SumFieldsNamedFoo(json_row STRING)
-RETURNS FLOAT64
-LANGUAGE js
-AS r"""
-  function SumFoo(obj) {
-    var sum = 0;
-    for (var field in obj) {
-      if (obj.hasOwnProperty(field) && obj[field] != null) {
-        if (typeof obj[field] == "object") {
-          sum += SumFoo(obj[field]);
-        } else if (field == "foo") {
-          sum += obj[field];
+    CREATE TEMP FUNCTION SumFieldsNamedFoo(json_row STRING)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r"""
+      function SumFoo(obj) {
+        var sum = 0;
+        for (var field in obj) {
+          if (obj.hasOwnProperty(field) && obj[field] != null) {
+            if (typeof obj[field] == "object") {
+              sum += SumFoo(obj[field]);
+            } else if (field == "foo") {
+              sum += obj[field];
+            }
+          }
         }
+        return sum;
       }
-    }
-    return sum;
-  }
-  var row = JSON.parse(json_row);
-  return SumFoo(row);
-""";
-
-WITH Input AS (
-  SELECT
-    STRUCT(1 AS foo, 2 AS bar, STRUCT('foo' AS x, 3.14 AS foo) AS baz) AS s,
-    10 AS foo
-  UNION ALL
-  SELECT
-    NULL,
-    4 AS foo
-  UNION ALL
-  SELECT
-    STRUCT(NULL, 2 AS bar, STRUCT('fizz' AS x, 1.59 AS foo) AS baz) AS s,
-    NULL AS foo
-)
-SELECT
-  TO_JSON_STRING(t) AS json_row,
-  SumFieldsNamedFoo(TO_JSON_STRING(t)) AS foo_sum
-FROM Input AS t;
-```
+      var row = JSON.parse(json_row);
+      return SumFoo(row);
+    """;
+    
+    WITH Input AS (
+      SELECT
+        STRUCT(1 AS foo, 2 AS bar, STRUCT('foo' AS x, 3.14 AS foo) AS baz) AS s,
+        10 AS foo
+      UNION ALL
+      SELECT
+        NULL,
+        4 AS foo
+      UNION ALL
+      SELECT
+        STRUCT(NULL, 2 AS bar, STRUCT('fizz' AS x, 1.59 AS foo) AS baz) AS s,
+        NULL AS foo
+    )
+    SELECT
+      TO_JSON_STRING(t) AS json_row,
+      SumFieldsNamedFoo(TO_JSON_STRING(t)) AS foo_sum
+    FROM Input AS t;
 
 The example produces the following output:
 
@@ -339,15 +317,13 @@ If the return value of the JavaScript UDF is a [`Promise`](https://tc39.es/ecma2
 
 You must enclose JavaScript code in quotes. For one line code snippets, you can use a standard quoted string:
 
-``` notranslate
-CREATE TEMP FUNCTION plusOne(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS "return x+1;";
-
-SELECT val, plusOne(val) AS result
-FROM UNNEST([1, 2, 3, 4, 5]) AS val;
-```
+    CREATE TEMP FUNCTION plusOne(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS "return x+1;";
+    
+    SELECT val, plusOne(val) AS result
+    FROM UNNEST([1, 2, 3, 4, 5]) AS val;
 
 This example produces the following output:
 
@@ -363,22 +339,20 @@ This example produces the following output:
 
 In cases where the snippet contains quotes, or consists of multiple lines, use triple-quoted blocks:
 
-``` notranslate
-CREATE TEMP FUNCTION customGreeting(a STRING)
-RETURNS STRING
-LANGUAGE js
-AS r"""
-  var d = new Date();
-  if (d.getHours() < 12) {
-    return 'Good Morning, ' + a + '!';
-  } else {
-    return 'Good Evening, ' + a + '!';
-  }
-""";
-
-SELECT customGreeting(names) AS everyone
-FROM UNNEST(['Hannah', 'Max', 'Jakob']) AS names;
-```
+    CREATE TEMP FUNCTION customGreeting(a STRING)
+    RETURNS STRING
+    LANGUAGE js
+    AS r"""
+      var d = new Date();
+      if (d.getHours() < 12) {
+        return 'Good Morning, ' + a + '!';
+      } else {
+        return 'Good Evening, ' + a + '!';
+      }
+    """;
+    
+    SELECT customGreeting(names) AS everyone
+    FROM UNNEST(['Hannah', 'Max', 'Jakob']) AS names;
 
 This example produces the following output:
 
@@ -394,19 +368,17 @@ This example produces the following output:
 
 You can extend your JavaScript UDFs using the `OPTIONS` section. This section lets you specify external code libraries for the UDF.
 
-``` notranslate
-CREATE TEMP FUNCTION myFunc(a FLOAT64, b STRING)
-RETURNS STRING
-LANGUAGE js
-  OPTIONS (
-    library=['gs://my-bucket/path/to/lib1.js', 'gs://my-bucket/path/to/lib2.js'])
-AS r"""
-  // Assumes 'doInterestingStuff' is defined in one of the library files.
-  return doInterestingStuff(a, b);
-""";
-
-SELECT myFunc(3.14, 'foo');
-```
+    CREATE TEMP FUNCTION myFunc(a FLOAT64, b STRING)
+    RETURNS STRING
+    LANGUAGE js
+      OPTIONS (
+        library=['gs://my-bucket/path/to/lib1.js', 'gs://my-bucket/path/to/lib2.js'])
+    AS r"""
+      // Assumes 'doInterestingStuff' is defined in one of the library files.
+      return doInterestingStuff(a, b);
+    """;
+    
+    SELECT myFunc(3.14, 'foo');
 
 In the preceding example, code in `lib1.js` and `lib2.js` is available to any code in the `[external_code]` section of the UDF.
 
@@ -420,19 +392,17 @@ If your input can be filtered down before being passed to a JavaScript UDF, your
 
 Don't store or access mutable state across JavaScript UDF calls. For example, avoid the following pattern:
 
-``` notranslate
--- Avoid this pattern
-CREATE FUNCTION temp.mutable()
-RETURNS INT64
-LANGUAGE js
-AS r"""
-  var i = 0; // Mutable state
-  function dontDoThis() {
-    return ++i;
-  }
-  return dontDoThis()
-""";
-```
+    -- Avoid this pattern
+    CREATE FUNCTION temp.mutable()
+    RETURNS INT64
+    LANGUAGE js
+    AS r"""
+      var i = 0; // Mutable state
+      function dontDoThis() {
+        return ++i;
+      }
+      return dontDoThis()
+    """;
 
 **Use memory efficiently**
 
@@ -474,14 +444,12 @@ To update the description of a function, recreate your function using the [`CREA
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE FUNCTION mydataset.my_function(...)
-    AS (
-      ...
-    ) OPTIONS (
-      description = 'DESCRIPTION'
-    );
-    ```
+        CREATE OR REPLACE FUNCTION mydataset.my_function(...)
+        AS (
+          ...
+        ) OPTIONS (
+          description = 'DESCRIPTION'
+        );
 
 3.  Click play\_circle **Run** .
 
@@ -549,31 +517,27 @@ You can create UDFs for use with [custom masking routines](https://docs.cloud.go
 
 For example, a masking routine that replaces a user's social security number with `XXX-XX-XXXX` might look as follows:
 
-``` notranslate
+``` 
   CREATE OR REPLACE FUNCTION SSN_Mask(ssn STRING) RETURNS STRING  OPTIONS (data_governance_type="DATA_MASKING") AS (  SAFE.REGEXP_REPLACE(ssn, '[0-9]', 'X') # 123-45-6789 -> XXX-XX-XXXX  );
 ```
 
 The following example hashes with user provided [salt](https://en.wikipedia.org/wiki/Salt_\(cryptography\)) , using the [`SHA256`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256) function:
 
-``` notranslate
-CREATE OR REPLACE FUNCTION `project.dataset.masking_routine1`(
-  ssn STRING)
-RETURNS STRING OPTIONS (data_governance_type = 'DATA_MASKING')
-AS (
-  CAST(SHA256(CONCAT(ssn, 'salt')) AS STRING format 'HEX')
-);
-```
+    CREATE OR REPLACE FUNCTION `project.dataset.masking_routine1`(
+      ssn STRING)
+    RETURNS STRING OPTIONS (data_governance_type = 'DATA_MASKING')
+    AS (
+      CAST(SHA256(CONCAT(ssn, 'salt')) AS STRING format 'HEX')
+    );
 
 The following example masks a `DATETIME` column with a constant value:
 
-``` notranslate
-CREATE OR REPLACE FUNCTION `project.dataset.masking_routine2`(
-  column DATETIME)
-RETURNS DATETIME OPTIONS (data_governance_type = 'DATA_MASKING')
-AS (
-  SAFE_CAST('2023-09-07' AS DATETIME)
-);
-```
+    CREATE OR REPLACE FUNCTION `project.dataset.masking_routine2`(
+      column DATETIME)
+    RETURNS DATETIME OPTIONS (data_governance_type = 'DATA_MASKING')
+    AS (
+      SAFE_CAST('2023-09-07' AS DATETIME)
+    );
 
 **As a best practise, use the [`SAFE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) prefix wherever possible to avoid exposing raw data through error messages.**
 
@@ -615,7 +579,7 @@ To use UDFs in queries across multiple regions, the UDF must be available in eve
 
 A query in `EU` multi-region:
 
-``` notranslate
+``` 
   SELECT
     id,
     europe_dataset.my_function(value)
@@ -625,7 +589,7 @@ A query in `EU` multi-region:
 
 A query in `US` multi-region:
 
-``` notranslate
+``` 
   SELECT
     id,
     us_dataset.my_function(value)
@@ -643,7 +607,7 @@ To make your UDFs region-independent, you can use [cross-region dataset replicat
 
 When you run a query, BigQuery automatically uses the local version of the UDF from the local dataset replica without your specifying the region where the function is defined, making your queries portable across different locations. For example:
 
-``` notranslate
+``` 
   SELECT
     id,
     my_utils.my_function(value)

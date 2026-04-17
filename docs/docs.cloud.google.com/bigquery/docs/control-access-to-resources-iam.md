@@ -93,11 +93,9 @@ To grant principals access to datasets, use the [`GRANT` DCL statement](https://
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    GRANT `ROLE_LIST`
-    ON SCHEMA RESOURCE_NAME
-    TO "USER_LIST"
-    ```
+        GRANT `ROLE_LIST`
+        ON SCHEMA RESOURCE_NAME
+        TO "USER_LIST"
     
     Replace the following:
     
@@ -127,11 +125,9 @@ The following example grants the BigQuery Data Viewer role to `myDataset` :
 
 2.  To write the existing dataset information (including access controls) to a JSON file, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
     
-    ``` notranslate
-    bq show \
-        --format=prettyjson \
-        PROJECT_ID:DATASET > PATH_TO_FILE
-    ```
+        bq show \
+            --format=prettyjson \
+            PROJECT_ID:DATASET > PATH_TO_FILE
     
     Replace the following:
     
@@ -143,47 +139,45 @@ The following example grants the BigQuery Data Viewer role to `myDataset` :
     
     For example, the `access` section of a dataset's JSON file would look like the following:
     
-    ``` notranslate
-    {
-     "access": [
-      {
-       "role": "READER",
-       "specialGroup": "projectReaders"
-      },
-      {
-       "role": "WRITER",
-       "specialGroup": "projectWriters"
-      },
-      {
-       "role": "OWNER",
-       "specialGroup": "projectOwners"
-      },
-      {
-       "role": "READER",
-       "specialGroup": "allAuthenticatedUsers"
-      },
-      {
-       "role": "READER",
-       "domain": "domain_name"
-      },
-      {
-       "role": "WRITER",
-       "userByEmail": "user_email"
-      },
-      {
-       "role": "READER",
-       "groupByEmail": "group_email"
-      }
-     ],
-     ...
-    }
-    ```
+        {
+         "access": [
+          {
+           "role": "READER",
+           "specialGroup": "projectReaders"
+          },
+          {
+           "role": "WRITER",
+           "specialGroup": "projectWriters"
+          },
+          {
+           "role": "OWNER",
+           "specialGroup": "projectOwners"
+          },
+          {
+           "role": "READER",
+           "specialGroup": "allAuthenticatedUsers"
+          },
+          {
+           "role": "READER",
+           "domain": "domain_name"
+          },
+          {
+           "role": "WRITER",
+           "userByEmail": "user_email"
+          },
+          {
+           "role": "READER",
+           "groupByEmail": "group_email"
+          }
+         ],
+         ...
+        }
 
 4.  When your edits are complete, use the `bq update` command and include the JSON file using the `--source` flag. If the dataset is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` .
     
     > **Caution:** When you apply the JSON file that contains the access controls, the existing access controls are overwritten.
     
-    ``` notranslate
+    ``` 
       bq update 
     
       --source PATH_TO_FILE 
@@ -194,9 +188,7 @@ The following example grants the BigQuery Data Viewer role to `myDataset` :
 
 5.  To verify your access control changes, use the `bq show` command again without writing the information to a file:
     
-    ``` notranslate
-    bq show --format=prettyjson PROJECT_ID:DATASET
-    ```
+        bq show --format=prettyjson PROJECT_ID:DATASET
 
 ### Terraform
 
@@ -208,79 +200,73 @@ Use the [`google_bigquery_dataset_iam`](https://registry.terraform.io/providers/
 
 The following example shows how to use the [`google_bigquery_dataset_iam_policy` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_policy) to set the IAM policy for the `mydataset` dataset. This replaces any existing policy already attached to the dataset:
 
-``` notranslate
-# This file sets the IAM policy for the dataset created by
-# https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_dataset/main.tf.
-# You must place it in the same local directory as that main.tf file,
-# and you must have already applied that main.tf file to create
-# the "default" dataset resource with a dataset_id of "mydataset".
-
-data "google_iam_policy" "iam_policy" {
-  binding {
-    role = "roles/bigquery.admin"
-    members = [
-      "user:user@example.com",
-    ]
-  }
-  binding {
-    role = "roles/bigquery.dataOwner"
-    members = [
-      "group:data.admin@example.com",
-    ]
-  }
-  binding {
-    role = "roles/bigquery.dataEditor"
-    members = [
-      "serviceAccount:bqcx-1234567891011-12a3@gcp-sa-bigquery-condel.iam.gserviceaccount.com",
-    ]
-  }
-}
-
-resource "google_bigquery_dataset_iam_policy" "dataset_iam_policy" {
-  dataset_id  = google_bigquery_dataset.default.dataset_id
-  policy_data = data.google_iam_policy.iam_policy.policy_data
-}
-```
+    # This file sets the IAM policy for the dataset created by
+    # https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_dataset/main.tf.
+    # You must place it in the same local directory as that main.tf file,
+    # and you must have already applied that main.tf file to create
+    # the "default" dataset resource with a dataset_id of "mydataset".
+    
+    data "google_iam_policy" "iam_policy" {
+      binding {
+        role = "roles/bigquery.admin"
+        members = [
+          "user:user@example.com",
+        ]
+      }
+      binding {
+        role = "roles/bigquery.dataOwner"
+        members = [
+          "group:data.admin@example.com",
+        ]
+      }
+      binding {
+        role = "roles/bigquery.dataEditor"
+        members = [
+          "serviceAccount:bqcx-1234567891011-12a3@gcp-sa-bigquery-condel.iam.gserviceaccount.com",
+        ]
+      }
+    }
+    
+    resource "google_bigquery_dataset_iam_policy" "dataset_iam_policy" {
+      dataset_id  = google_bigquery_dataset.default.dataset_id
+      policy_data = data.google_iam_policy.iam_policy.policy_data
+    }
 
 **Set role membership for a dataset**
 
 The following example shows how to use the [`google_bigquery_dataset_iam_binding` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_binding) to set membership in a given role for the `mydataset` dataset. This replaces any existing membership in that role. Other roles within the IAM policy for the dataset are preserved:
 
-``` notranslate
-# This file sets membership in an IAM role for the dataset created by
-# https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_dataset/main.tf.
-# You must place it in the same local directory as that main.tf file,
-# and you must have already applied that main.tf file to create
-# the "default" dataset resource with a dataset_id of "mydataset".
-
-resource "google_bigquery_dataset_iam_binding" "dataset_iam_binding" {
-  dataset_id = google_bigquery_dataset.default.dataset_id
-  role       = "roles/bigquery.jobUser"
-
-  members = [
-    "user:user@example.com",
-    "group:group@example.com"
-  ]
-}
-```
+    # This file sets membership in an IAM role for the dataset created by
+    # https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_dataset/main.tf.
+    # You must place it in the same local directory as that main.tf file,
+    # and you must have already applied that main.tf file to create
+    # the "default" dataset resource with a dataset_id of "mydataset".
+    
+    resource "google_bigquery_dataset_iam_binding" "dataset_iam_binding" {
+      dataset_id = google_bigquery_dataset.default.dataset_id
+      role       = "roles/bigquery.jobUser"
+    
+      members = [
+        "user:user@example.com",
+        "group:group@example.com"
+      ]
+    }
 
 **Set role membership for a single principal**
 
 The following example shows how to use the [`google_bigquery_dataset_iam_member` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_iam#google_bigquery_dataset_iam_member) to update the IAM policy for the `mydataset` dataset to grant a role to one principal. Updating this IAM policy does not affect access for any other principals that have been granted that role for the dataset.
 
-``` notranslate
-# This file adds a member to an IAM role for the dataset created by
-# https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_dataset/main.tf.
-# You must place it in the same local directory as that main.tf file,
-# and you must have already applied that main.tf file to create
-# the "default" dataset resource with a dataset_id of "mydataset".
-
-resource "google_bigquery_dataset_iam_member" "dataset_iam_member" {
-  dataset_id = google_bigquery_dataset.default.dataset_id
-  role       = "roles/bigquery.user"
-  member     = "user:user@example.com"
-}
-```
+    # This file adds a member to an IAM role for the dataset created by
+    # https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_dataset/main.tf.
+    # You must place it in the same local directory as that main.tf file,
+    # and you must have already applied that main.tf file to create
+    # the "default" dataset resource with a dataset_id of "mydataset".
+    
+    resource "google_bigquery_dataset_iam_member" "dataset_iam_member" {
+      dataset_id = google_bigquery_dataset.default.dataset_id
+      role       = "roles/bigquery.user"
+      member     = "user:user@example.com"
+    }
 
 To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
 
@@ -757,11 +743,9 @@ You can view the explicitly set access controls for a dataset by choosing one of
 
 2.  To get an existing policy and output it to a local file in JSON, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) in Cloud Shell:
     
-    ``` notranslate
-    bq show \
-       --format=prettyjson \
-       PROJECT_ID:DATASET > PATH_TO_FILE
-    ```
+        bq show \
+           --format=prettyjson \
+           PROJECT_ID:DATASET > PATH_TO_FILE
     
     Replace the following:
     
@@ -781,14 +765,12 @@ Query the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.googl
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-    COLUMN_LIST
-    FROM
-      PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
-    WHERE
-    object_name = "DATASET";
-    ```
+        SELECT
+        COLUMN_LIST
+        FROM
+          PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
+        WHERE
+        object_name = "DATASET";
     
     Replace the following:
     
@@ -805,14 +787,12 @@ Example:
 
 This query gets access controls for `mydataset` .
 
-``` notranslate
-SELECT
-object_name, privilege_type, grantee
-FROM
-my_project.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
-WHERE
-object_name = "mydataset";
-```
+    SELECT
+    object_name, privilege_type, grantee
+    FROM
+    my_project.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
+    WHERE
+    object_name = "mydataset";
 
 The output should look like the following:
 
@@ -1038,11 +1018,9 @@ To remove a principal's access to a dataset, use the [`REVOKE` DCL statement](ht
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    REVOKE `ROLE_LIST`
-    ON SCHEMA RESOURCE_NAME
-    FROM "USER_LIST"
-    ```
+        REVOKE `ROLE_LIST`
+        ON SCHEMA RESOURCE_NAME
+        FROM "USER_LIST"
     
     Replace the following:
     
@@ -1072,11 +1050,9 @@ The following example revokes the BigQuery Data Owner role from `myDataset` :
 
 2.  To write the existing dataset information (including access controls) to a JSON file, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
     
-    ``` notranslate
-    bq show \
-        --format=prettyjson \
-        PROJECT_ID:DATASET > PATH_TO_FILE
-    ```
+        bq show \
+            --format=prettyjson \
+            PROJECT_ID:DATASET > PATH_TO_FILE
     
     Replace the following:
     
@@ -1088,47 +1064,45 @@ The following example revokes the BigQuery Data Owner role from `myDataset` :
     
     For example, the `access` section of a dataset's JSON file would look like the following:
     
-    ``` notranslate
-    {
-     "access": [
-      {
-       "role": "READER",
-       "specialGroup": "projectReaders"
-      },
-      {
-       "role": "WRITER",
-       "specialGroup": "projectWriters"
-      },
-      {
-       "role": "OWNER",
-       "specialGroup": "projectOwners"
-      },
-      {
-       "role": "READER",
-       "specialGroup": "allAuthenticatedUsers"
-      },
-      {
-       "role": "READER",
-       "domain": "domain_name"
-      },
-      {
-       "role": "WRITER",
-       "userByEmail": "user_email"
-      },
-      {
-       "role": "READER",
-       "groupByEmail": "group_email"
-      }
-     ],
-     ...
-    }
-    ```
+        {
+         "access": [
+          {
+           "role": "READER",
+           "specialGroup": "projectReaders"
+          },
+          {
+           "role": "WRITER",
+           "specialGroup": "projectWriters"
+          },
+          {
+           "role": "OWNER",
+           "specialGroup": "projectOwners"
+          },
+          {
+           "role": "READER",
+           "specialGroup": "allAuthenticatedUsers"
+          },
+          {
+           "role": "READER",
+           "domain": "domain_name"
+          },
+          {
+           "role": "WRITER",
+           "userByEmail": "user_email"
+          },
+          {
+           "role": "READER",
+           "groupByEmail": "group_email"
+          }
+         ],
+         ...
+        }
 
 4.  When your edits are complete, use the `bq update` command and include the JSON file using the `--source` flag. If the dataset is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET  ` .
     
     > **Caution:** When you apply the JSON file that contains the access controls, the existing access controls are overwritten.
     
-    ``` notranslate
+    ``` 
       bq update 
     
           --source PATH_TO_FILE 
@@ -1139,9 +1113,7 @@ The following example revokes the BigQuery Data Owner role from `myDataset` :
 
 5.  To verify your access control changes, use the `show` command without writing the information to a file:
     
-    ``` notranslate
-    bq show --format=prettyjson PROJECT_ID:DATASET
-    ```
+        bq show --format=prettyjson PROJECT_ID:DATASET
 
 ### API
 
@@ -1444,11 +1416,9 @@ To grant principals access to tables or views, use the [`GRANT` DCL statement](h
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    GRANT `ROLE_LIST`
-    ON RESOURCE_TYPE RESOURCE_NAME
-    TO "USER_LIST"
-    ```
+        GRANT `ROLE_LIST`
+        ON RESOURCE_TYPE RESOURCE_NAME
+        TO "USER_LIST"
     
     Replace the following:
     
@@ -1482,10 +1452,8 @@ The following example grants the BigQuery Data Viewer role on `myTable` :
 
 2.  To grant access to a table or view, use the [`bq add-iam-policy-binding` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_add-iam-policy-binding) :
     
-    ``` notranslate
-    bq add-iam-policy-binding --member=MEMBER_TYPE:MEMBER --role=ROLE
-      --table=true RESOURCE
-    ```
+        bq add-iam-policy-binding --member=MEMBER_TYPE:MEMBER --role=ROLE
+          --table=true RESOURCE
     
     Replace the following:
     
@@ -1504,69 +1472,63 @@ Use the [`google_bigquery_table_iam`](https://registry.terraform.io/providers/ha
 
 The following example shows how to use the [`google_bigquery_table_iam_policy` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_policy) to set the IAM policy for the `mytable` table. This replaces any existing policy already attached to the table:
 
-``` notranslate
-# This file sets the IAM policy for the table created by
-# https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_table/main.tf.
-# You must place it in the same local directory as that main.tf file,
-# and you must have already applied that main.tf file to create
-# the "default" table resource with a table_id of "mytable".
-
-data "google_iam_policy" "iam_policy" {
-  binding {
-    role = "roles/bigquery.dataOwner"
-    members = [
-      "user:user@example.com",
-    ]
-  }
-}
-
-resource "google_bigquery_table_iam_policy" "table_iam_policy" {
-  dataset_id  = google_bigquery_table.default.dataset_id
-  table_id    = google_bigquery_table.default.table_id
-  policy_data = data.google_iam_policy.iam_policy.policy_data
-}
-```
+    # This file sets the IAM policy for the table created by
+    # https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_table/main.tf.
+    # You must place it in the same local directory as that main.tf file,
+    # and you must have already applied that main.tf file to create
+    # the "default" table resource with a table_id of "mytable".
+    
+    data "google_iam_policy" "iam_policy" {
+      binding {
+        role = "roles/bigquery.dataOwner"
+        members = [
+          "user:user@example.com",
+        ]
+      }
+    }
+    
+    resource "google_bigquery_table_iam_policy" "table_iam_policy" {
+      dataset_id  = google_bigquery_table.default.dataset_id
+      table_id    = google_bigquery_table.default.table_id
+      policy_data = data.google_iam_policy.iam_policy.policy_data
+    }
 
 **Set role membership for a table**
 
 The following example shows how to use the [`google_bigquery_table_iam_binding` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_binding) to set membership in a given role for the `mytable` table. This replaces any existing membership in that role. Other roles within the IAM policy for the table are preserved.
 
-``` notranslate
-# This file sets membership in an IAM role for the table created by
-# https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_table/main.tf.
-# You must place it in the same local directory as that main.tf file,
-# and you must have already applied that main.tf file to create
-# the "default" table resource with a table_id of "mytable".
-
-resource "google_bigquery_table_iam_binding" "table_iam_binding" {
-  dataset_id = google_bigquery_table.default.dataset_id
-  table_id   = google_bigquery_table.default.table_id
-  role       = "roles/bigquery.dataOwner"
-
-  members = [
-    "group:group@example.com",
-  ]
-}
-```
+    # This file sets membership in an IAM role for the table created by
+    # https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_table/main.tf.
+    # You must place it in the same local directory as that main.tf file,
+    # and you must have already applied that main.tf file to create
+    # the "default" table resource with a table_id of "mytable".
+    
+    resource "google_bigquery_table_iam_binding" "table_iam_binding" {
+      dataset_id = google_bigquery_table.default.dataset_id
+      table_id   = google_bigquery_table.default.table_id
+      role       = "roles/bigquery.dataOwner"
+    
+      members = [
+        "group:group@example.com",
+      ]
+    }
 
 **Set role membership for a single principal**
 
 The following example shows how to use the [`google_bigquery_table_iam_member` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_member) to update the IAM policy for the `mytable` table to grant a role to one principal. Updating this IAM policy does not affect access for any other principals that have been granted that role for the dataset.
 
-``` notranslate
-# This file adds a member to an IAM role for the table created by
-# https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_table/main.tf.
-# You must place it in the same local directory as that main.tf file,
-# and you must have already applied that main.tf file to create
-# the "default" table resource with a table_id of "mytable".
-
-resource "google_bigquery_table_iam_member" "table_iam_member" {
-  dataset_id = google_bigquery_table.default.dataset_id
-  table_id   = google_bigquery_table.default.table_id
-  role       = "roles/bigquery.dataEditor"
-  member     = "serviceAccount:bqcx-1234567891011-12a3@gcp-sa-bigquery-condel.iam.gserviceaccount.com"
-}
-```
+    # This file adds a member to an IAM role for the table created by
+    # https://github.com/terraform-google-modules/terraform-docs-samples/blob/main/bigquery/bigquery_create_table/main.tf.
+    # You must place it in the same local directory as that main.tf file,
+    # and you must have already applied that main.tf file to create
+    # the "default" table resource with a table_id of "mytable".
+    
+    resource "google_bigquery_table_iam_member" "table_iam_member" {
+      dataset_id = google_bigquery_table.default.dataset_id
+      table_id   = google_bigquery_table.default.table_id
+      role       = "roles/bigquery.dataEditor"
+      member     = "serviceAccount:bqcx-1234567891011-12a3@gcp-sa-bigquery-condel.iam.gserviceaccount.com"
+    }
 
 To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
 
@@ -2020,11 +1982,9 @@ To view the access controls for a table or view, choose one of the following opt
 
 2.  To get an existing access policy and output it to a local file in JSON, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) in Cloud Shell:
     
-    ``` notranslate
-    bq get-iam-policy \
-        --table=true \
-        PROJECT_ID:DATASET.RESOURCE > PATH_TO_FILE
-    ```
+        bq get-iam-policy \
+            --table=true \
+            PROJECT_ID:DATASET.RESOURCE > PATH_TO_FILE
     
     Replace the following:
     
@@ -2045,14 +2005,12 @@ Query the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.googl
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-    COLUMN_LIST
-    FROM
-      PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
-    WHERE
-    object_schema = "DATASET" AND object_name = "TABLE";
-    ```
+        SELECT
+        COLUMN_LIST
+        FROM
+          PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
+        WHERE
+        object_schema = "DATASET" AND object_name = "TABLE";
     
     Replace the following:
     
@@ -2068,14 +2026,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Example:
 
-``` notranslate
-SELECT
-object_name, privilege_type, grantee
-FROM
-my_project.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
-WHERE
-object_schema = "mydataset" AND object_name = "mytable";
-```
+    SELECT
+    object_name, privilege_type, grantee
+    FROM
+    my_project.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
+    WHERE
+    object_schema = "mydataset" AND object_name = "mytable";
 
     +------------------+-----------------------------+--------------------------+
     |   object_name    |  privilege_type             | grantee                  |
@@ -2269,11 +2225,9 @@ To remove access to tables or views from principals, use the [`REVOKE` DCL state
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    REVOKE `ROLE_LIST`
-    ON RESOURCE_TYPE RESOURCE_NAME
-    FROM "USER_LIST"
-    ```
+        REVOKE `ROLE_LIST`
+        ON RESOURCE_TYPE RESOURCE_NAME
+        FROM "USER_LIST"
     
     Replace the following:
     
@@ -2307,10 +2261,8 @@ The following example revokes the BigQuery Data Owner role on `myTable` :
 
 2.  To revoke access to a table or view, use the [`bq remove-iam-policy-binding` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_remove-iam-policy-binding) :
     
-    ``` notranslate
-    bq remove-iam-policy-binding --member=MEMBER_TYPE:MEMBER --role=ROLE
-    --table=true RESOURCE
-    ```
+        bq remove-iam-policy-binding --member=MEMBER_TYPE:MEMBER --role=ROLE
+        --table=true RESOURCE
     
     Replace the following:
     
@@ -2633,11 +2585,9 @@ Select one of the following options:
 
 2.  To write the existing routine information (including access controls) to a JSON file, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) :
     
-    ``` notranslate
-    bq get-iam-policy \
-        PROJECT_ID:DATASET.ROUTINE \
-        > PATH_TO_FILE
-    ```
+        bq get-iam-policy \
+            PROJECT_ID:DATASET.ROUTINE \
+            > PATH_TO_FILE
     
     Replace the following:
     
@@ -2652,37 +2602,31 @@ Select one of the following options:
 
 3.  Make changes to the `bindings` section of the JSON file. A binding binds one or more principals to a single `role` . Principals can be user accounts, service accounts, Google groups, and domains. For example, the `bindings` section of a routine's JSON file would look like the following:
     
-    ``` notranslate
-    {
-      "bindings": [
         {
-          "role": "roles/bigquery.dataViewer",
-          "members": [
-            "user:user@example.com",
-            "group:group@example.com",
-            "domain:example.com",
-          ]
-        },
-      ],
-      "etag": "BwWWja0YfJA=",
-      "version": 1
-    }
-    ```
+          "bindings": [
+            {
+              "role": "roles/bigquery.dataViewer",
+              "members": [
+                "user:user@example.com",
+                "group:group@example.com",
+                "domain:example.com",
+              ]
+            },
+          ],
+          "etag": "BwWWja0YfJA=",
+          "version": 1
+        }
     
     > **Note:** Empty bindings with no members are not allowed and result in an error.
 
 4.  To update the access policy, use the `bq set-iam-policy` command:
     
-    ``` notranslate
-    bq set-iam-policy PROJECT_ID:DATASET.ROUTINE PATH_TO_FILE
-    ```
+        bq set-iam-policy PROJECT_ID:DATASET.ROUTINE PATH_TO_FILE
 
 5.  To verify your access control changes, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) again without writing the information to a file:
     
-    ``` notranslate
-    bq get-iam-policy --format=prettyjson \\
-        PROJECT_ID:DATASET.ROUTINE
-    ```
+        bq get-iam-policy --format=prettyjson \\
+            PROJECT_ID:DATASET.ROUTINE
 
 ### API
 
@@ -2850,9 +2794,7 @@ To revoke access to a routine, select one of the following options:
 
 2.  To write the existing routine information (including access controls) to a JSON file, use the [`bq get-iam-policy` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) :
     
-    ``` notranslate
-    bq get-iam-policy --routine PROJECT_ID:DATASET.ROUTINE > PATH_TO_FILE
-    ```
+        bq get-iam-policy --routine PROJECT_ID:DATASET.ROUTINE > PATH_TO_FILE
     
     Replace the following:
     
@@ -2869,36 +2811,30 @@ To revoke access to a routine, select one of the following options:
     
     For example, the `access` section of a routine's JSON file would look like the following:
     
-    ``` notranslate
-    {
-     "bindings": [
-       {
-         "role": "roles/bigquery.dataViewer",
-         "members": [
-           "user:user@example.com",
-           "group:group@example.com",
-           "domain:google.com",
-         ]
-       },
-     ],
-     "etag": "BwWWja0YfJA=",
-     "version": 1
-    }
-    ```
+        {
+         "bindings": [
+           {
+             "role": "roles/bigquery.dataViewer",
+             "members": [
+               "user:user@example.com",
+               "group:group@example.com",
+               "domain:google.com",
+             ]
+           },
+         ],
+         "etag": "BwWWja0YfJA=",
+         "version": 1
+        }
     
     > **Note:** Empty bindings with no members are not allowed and result in an error.
 
 4.  To update the access policy, use the `bq set-iam-policy` command:
     
-    ``` notranslate
-    bq set-iam-policy --routine PROJECT_ID:DATASET.ROUTINE PATH_TO_FILE
-    ```
+        bq set-iam-policy --routine PROJECT_ID:DATASET.ROUTINE PATH_TO_FILE
 
 5.  To verify your access control changes, use the `get-iam-policy` command again without writing the information to a file:
     
-    ``` notranslate
-    bq get-iam-policy --routine --format=prettyjson PROJECT_ID:DATASET.ROUTINE
-    ```
+        bq get-iam-policy --routine --format=prettyjson PROJECT_ID:DATASET.ROUTINE
 
 ### API
 

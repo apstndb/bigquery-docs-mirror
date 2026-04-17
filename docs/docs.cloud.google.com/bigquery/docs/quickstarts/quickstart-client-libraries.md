@@ -79,7 +79,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     Updated property [core/project].
     ```
 
@@ -91,13 +91,11 @@ Select one of the following languages:
 
 1.  In Cloud Shell, create a new C\# project and file:
     
-    ``` notranslate
-    dotnet new console -n BigQueryCsharpDemo
-    ```
+        dotnet new console -n BigQueryCsharpDemo
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
-    ``` console
+    ```console
     Welcome to .NET 6.0!
     ---------------------
     SDK Version: 6.0.407
@@ -110,27 +108,21 @@ Select one of the following languages:
 
 2.  Open the Cloud Shell Editor:
     
-    ``` notranslate
-    cloudshell workspace BigQueryCsharpDemo
-    ```
+        cloudshell workspace BigQueryCsharpDemo
 
 3.  To open a terminal in the Cloud Shell Editor, click **Open Terminal** .
 
 4.  Open your project directory:
     
-    ``` notranslate
-    cd BigQueryCsharpDemo
-    ```
+        cd BigQueryCsharpDemo
 
 5.  Install the BigQuery client library for C\#:
     
-    ``` notranslate
-    dotnet add package Google.Cloud.BigQuery.V2
-    ```
+        dotnet add package Google.Cloud.BigQuery.V2
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
-    ``` console
+    ```console
     Determining projects to restore...
     Writing /tmp/tmpF7EKSd.tmp
     ...
@@ -140,9 +132,7 @@ Select one of the following languages:
 
 6.  Set the variable `GOOGLE_PROJECT_ID` to the value `GOOGLE_CLOUD_PROJECT` and export the variable:
     
-    ``` notranslate
-    export GOOGLE_PROJECT_ID=$GOOGLE_CLOUD_PROJECT
-    ```
+        export GOOGLE_PROJECT_ID=$GOOGLE_CLOUD_PROJECT
 
 7.  Click **Open Editor** .
 
@@ -185,13 +175,11 @@ Select one of the following languages:
 
 12. In the terminal, run the `Program.cs` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` notranslate
-    dotnet run
-    ```
+        dotnet run
     
     The result is similar to the following:
     
-    ``` console
+    ```console
     Query Results:
     ------------
     https://stackoverflow.com/questions/35159967: 170023 views
@@ -212,37 +200,29 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 1.  In Cloud Shell, create a new Go project and file:
     
-    ``` notranslate
-    mkdir bigquery-go-quickstart \
-        && touch \
-        bigquery-go-quickstart/app.go
-    ```
+        mkdir bigquery-go-quickstart \
+            && touch \
+            bigquery-go-quickstart/app.go
     
     This command creates a Go project that's named `bigquery-go-quickstart` and a file that's named `app.go` .
 
 2.  Open the Cloud Shell Editor:
     
-    ``` notranslate
-    cloudshell workspace bigquery-go-quickstart
-    ```
+        cloudshell workspace bigquery-go-quickstart
 
 3.  To open a terminal in the Cloud Shell Editor, click **Open Terminal** .
 
 4.  Open your project directory:
     
-    ``` notranslate
-    cd bigquery-go-quickstart
-    ```
+        cd bigquery-go-quickstart
 
 5.  Create a `go.mod` file:
     
-    ``` notranslate
-    go mod init quickstart
-    ```
+        go mod init quickstart
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     go: creating new go.mod: module quickstart
     go: to add module requirements and sums:
             go mod tidy
@@ -250,13 +230,11 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 6.  Install the BigQuery client library for Go:
     
-    ``` notranslate
-    go get cloud.google.com/go/bigquery
-    ```
+        go get cloud.google.com/go/bigquery
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
-    ``` console
+    ```console
     go: downloading cloud.google.com/go/bigquery v1.49.0
     go: downloading cloud.google.com/go v0.110.0
     ...
@@ -352,13 +330,11 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 12. In the terminal, run the `app.go` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` notranslate
-    go run app.go
-    ```
+        go run app.go
     
     The result is similar to the following:
     
-    ``` console
+    ```console
     https://stackoverflow.com/questions/35159967 : 170023 views
     https://stackoverflow.com/questions/22879669 : 142581 views
     https://stackoverflow.com/questions/10604135 : 132406 views
@@ -377,18 +353,16 @@ You have successfully queried a public dataset with the BigQuery Go client libra
 
 1.  In Cloud Shell, create a new Java project using Apache Maven:
     
-    ``` notranslate
-    mvn archetype:generate \
-        -DgroupId=com.google.app \
-        -DartifactId=bigquery-java-quickstart \
-        -DinteractiveMode=false
-    ```
+        mvn archetype:generate \
+            -DgroupId=com.google.app \
+            -DartifactId=bigquery-java-quickstart \
+            -DinteractiveMode=false
     
     This command creates a Maven project that's named `bigquery-java-quickstart` .
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
-    ``` console
+    ```console
     [INFO] Scanning for projects...
     ...
     [INFO] Building Maven Stub Project (No POM) 1
@@ -401,17 +375,13 @@ You have successfully queried a public dataset with the BigQuery Go client libra
 
 2.  Rename the `App.java` file that Maven creates by default:
     
-    ``` notranslate
-    mv \
-        bigquery-java-quickstart/src/main/java/com/google/app/App.java \
-        bigquery-java-quickstart/src/main/java/com/google/app/SimpleApp.java
-    ```
+        mv \
+            bigquery-java-quickstart/src/main/java/com/google/app/App.java \
+            bigquery-java-quickstart/src/main/java/com/google/app/SimpleApp.java
 
 3.  Open the Cloud Shell Editor:
     
-    ``` notranslate
-    cloudshell workspace bigquery-java-quickstart
-    ```
+        cloudshell workspace bigquery-java-quickstart
 
 4.  If you are prompted whether to synchronize the Java classpath or configuration, click **Always** .
     
@@ -524,7 +494,7 @@ You have successfully queried a public dataset with the BigQuery Go client libra
     
     The result is similar to the following:
     
-    ``` console
+    ```console
     https://stackoverflow.com/questions/35159967 : 170023 views
     https://stackoverflow.com/questions/22879669 : 142581 views
     https://stackoverflow.com/questions/10604135 : 132406 views
@@ -543,37 +513,29 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 1.  In Cloud Shell, create a new Node.js project and file:
     
-    ``` notranslate
-    mkdir bigquery-node-quickstart \
-        && touch \
-        bigquery-node-quickstart/app.js
-    ```
+        mkdir bigquery-node-quickstart \
+            && touch \
+            bigquery-node-quickstart/app.js
     
     This command creates a Node.js project that's named `bigquery-node-quickstart` and a file that's named `app.js` .
 
 2.  Open the Cloud Shell Editor:
     
-    ``` notranslate
-    cloudshell workspace bigquery-node-quickstart
-    ```
+        cloudshell workspace bigquery-node-quickstart
 
 3.  To open a terminal in the Cloud Shell Editor, click **Open Terminal** .
 
 4.  Open your project directory:
     
-    ``` notranslate
-    cd bigquery-node-quickstart
-    ```
+        cd bigquery-node-quickstart
 
 5.  Install the BigQuery client library for Node.js:
     
-    ``` notranslate
-    npm install @google-cloud/bigquery
-    ```
+        npm install @google-cloud/bigquery
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     added 63 packages in 2s
     ```
 
@@ -627,13 +589,11 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 11. In the terminal, run the `app.js` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` notranslate
-    node app.js
-    ```
+        node app.js
     
     The result is similar to the following:
     
-    ``` console
+    ```console
     Query Results:
     url: https://stackoverflow.com/questions/35159967, 170023 views
     url: https://stackoverflow.com/questions/22879669, 142581 views
@@ -653,37 +613,29 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 1.  In Cloud Shell, create a new PHP project and file:
     
-    ``` notranslate
-    mkdir bigquery-php-quickstart \
-        && touch \
-        bigquery-php-quickstart/app.php
-    ```
+        mkdir bigquery-php-quickstart \
+            && touch \
+            bigquery-php-quickstart/app.php
     
     This command creates a PHP project that's named `bigquery-php-quickstart` and a file that's named `app.php` .
 
 2.  Open the Cloud Shell Editor:
     
-    ``` notranslate
-    cloudshell workspace bigquery-php-quickstart
-    ```
+        cloudshell workspace bigquery-php-quickstart
 
 3.  To open a terminal in the Cloud Shell Editor, click **Open Terminal** .
 
 4.  Open your project directory:
     
-    ``` notranslate
-    cd bigquery-php-quickstart
-    ```
+        cd bigquery-php-quickstart
 
 5.  Install the BigQuery client library for PHP:
     
-    ``` notranslate
-    composer require google/cloud-bigquery
-    ```
+        composer require google/cloud-bigquery
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
-    ``` console
+    ```console
     Running composer update google/cloud-bigquery
     Loading composer repositories with package information
     Updating dependencies
@@ -739,13 +691,11 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 11. In the terminal, run the `app.php` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` notranslate
-    php app.php
-    ```
+        php app.php
     
     The result is similar to the following:
     
-    ``` console
+    ```console
     --- Row 1 ---
     url: https://stackoverflow.com/questions/35159967, 170023 views
     --- Row 2 ---
@@ -775,37 +725,29 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 1.  In Cloud Shell, create a new Python project and file:
     
-    ``` notranslate
-    mkdir bigquery-python-quickstart \
-        && touch \
-        bigquery-python-quickstart/app.py
-    ```
+        mkdir bigquery-python-quickstart \
+            && touch \
+            bigquery-python-quickstart/app.py
     
     This command creates a Python project that's named `bigquery-python-quickstart` and a file that's named `app.py` .
 
 2.  Open the Cloud Shell Editor:
     
-    ``` notranslate
-    cloudshell workspace bigquery-python-quickstart
-    ```
+        cloudshell workspace bigquery-python-quickstart
 
 3.  To open a terminal in the Cloud Shell Editor, click **Open Terminal** .
 
 4.  Open your project directory:
     
-    ``` notranslate
-    cd bigquery-python-quickstart
-    ```
+        cd bigquery-python-quickstart
 
 5.  Install the BigQuery client library for Python:
     
-    ``` notranslate
-    pip install --upgrade google-cloud-bigquery
-    ```
+        pip install --upgrade google-cloud-bigquery
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
-    ``` console
+    ```console
     Installing collected packages: google-cloud-bigquery
     ...
     Successfully installed google-cloud-bigquery-3.9.0
@@ -850,13 +792,11 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 11. In the terminal, run the `app.py` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` notranslate
-    python app.py
-    ```
+        python app.py
     
     The result is similar to the following:
     
-    ``` console
+    ```console
     https://stackoverflow.com/questions/35159967 : 170023 views
     https://stackoverflow.com/questions/22879669 : 142581 views
     https://stackoverflow.com/questions/10604135 : 132406 views
@@ -875,37 +815,29 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 1.  In Cloud Shell, create a new Ruby project and file:
     
-    ``` notranslate
-    mkdir bigquery-ruby-quickstart \
-        && touch \
-        bigquery-ruby-quickstart/app.rb
-    ```
+        mkdir bigquery-ruby-quickstart \
+            && touch \
+            bigquery-ruby-quickstart/app.rb
     
     This command creates a Ruby project that's named `bigquery-ruby-quickstart` and a file that's named `app.rb` .
 
 2.  Open the Cloud Shell Editor:
     
-    ``` notranslate
-    cloudshell workspace bigquery-ruby-quickstart
-    ```
+        cloudshell workspace bigquery-ruby-quickstart
 
 3.  To open a terminal in the Cloud Shell Editor, click **Open Terminal** .
 
 4.  Open your project directory:
     
-    ``` notranslate
-    cd bigquery-ruby-quickstart
-    ```
+        cd bigquery-ruby-quickstart
 
 5.  Install the BigQuery client library for Ruby:
     
-    ``` notranslate
-    gem install google-cloud-bigquery
-    ```
+        gem install google-cloud-bigquery
     
     The output is similar to the following. Several lines are omitted to simplify the output.
     
-    ``` console
+    ```console
     23 gems installed
     ```
 
@@ -938,13 +870,11 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 11. In the terminal, run the `app.rb` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` notranslate
-    ruby app.rb
-    ```
+        ruby app.rb
     
     The result is similar to the following:
     
-    ``` console
+    ```console
     https://stackoverflow.com/questions/35159967: 170023 views
     https://stackoverflow.com/questions/22879669: 142581 views
     https://stackoverflow.com/questions/10604135: 132406 views
@@ -990,15 +920,11 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` notranslate
-    cd ..
-    ```
+        cd ..
 
 2.  Delete the `BigQueryCsharpDemo` folder that you created:
     
-    ``` notranslate
-    rm -R BigQueryCsharpDemo
-    ```
+        rm -R BigQueryCsharpDemo
     
     The `-R` flag deletes all assets in a folder.
 
@@ -1006,15 +932,11 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` notranslate
-    cd ..
-    ```
+        cd ..
 
 2.  Delete the `bigquery-go-quickstart` folder that you created:
     
-    ``` notranslate
-    rm -R bigquery-go-quickstart
-    ```
+        rm -R bigquery-go-quickstart
     
     The `-R` flag deletes all assets in a folder.
 
@@ -1022,15 +944,11 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` notranslate
-    cd ..
-    ```
+        cd ..
 
 2.  Delete the `bigquery-java-quickstart` folder that you created:
     
-    ``` notranslate
-    rm -R bigquery-java-quickstart
-    ```
+        rm -R bigquery-java-quickstart
     
     The `-R` flag deletes all assets in a folder.
 
@@ -1038,15 +956,11 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` notranslate
-    cd ..
-    ```
+        cd ..
 
 2.  Delete the `bigquery-node-quickstart` folder that you created:
     
-    ``` notranslate
-    rm -R bigquery-node-quickstart
-    ```
+        rm -R bigquery-node-quickstart
     
     The `-R` flag deletes all assets in a folder.
 
@@ -1054,15 +968,11 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` notranslate
-    cd ..
-    ```
+        cd ..
 
 2.  Delete the `bigquery-php-quickstart` folder that you created:
     
-    ``` notranslate
-    rm -R bigquery-php-quickstart
-    ```
+        rm -R bigquery-php-quickstart
     
     The `-R` flag deletes all assets in a folder.
 
@@ -1070,15 +980,11 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` notranslate
-    cd ..
-    ```
+        cd ..
 
 2.  Delete the `bigquery-python-quickstart` folder that you created:
     
-    ``` notranslate
-    rm -R bigquery-python-quickstart
-    ```
+        rm -R bigquery-python-quickstart
     
     The `-R` flag deletes all assets in a folder.
 
@@ -1086,15 +992,11 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` notranslate
-    cd ..
-    ```
+        cd ..
 
 2.  Delete the `bigquery-ruby-quickstart` folder that you created:
     
-    ``` notranslate
-    rm -R bigquery-ruby-quickstart
-    ```
+        rm -R bigquery-ruby-quickstart
     
     The `-R` flag deletes all assets in a folder.
 

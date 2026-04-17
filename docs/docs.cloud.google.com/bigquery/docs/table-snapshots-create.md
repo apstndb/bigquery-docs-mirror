@@ -146,12 +146,10 @@ Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SNAPSHOT TABLE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
-    CLONE TABLE_PROJECT_ID.TABLE_DATASET_NAME.TABLE_NAME
-      OPTIONS (
-        expiration_timestamp = TIMESTAMP 'TIMESTAMP_VALUE');
-    ```
+        CREATE SNAPSHOT TABLE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
+        CLONE TABLE_PROJECT_ID.TABLE_DATASET_NAME.TABLE_NAME
+          OPTIONS (
+            expiration_timestamp = TIMESTAMP 'TIMESTAMP_VALUE');
     
     Replace the following:
     
@@ -173,14 +171,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq cp \
---snapshot \
---no_clobber \
---expiration=86400 \
-TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME \
-SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
-```
+    bq cp \
+    --snapshot \
+    --no_clobber \
+    --expiration=86400 \
+    TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME \
+    SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 
@@ -217,7 +213,7 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [
@@ -290,12 +286,10 @@ Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SNAPSHOT TABLE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
-    CLONE TABLE_PROJECT_ID.TABLE_DATASET_NAME.TABLE_NAME
-    FOR SYSTEM_TIME AS OF
-      TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR);
-    ```
+        CREATE SNAPSHOT TABLE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
+        CLONE TABLE_PROJECT_ID.TABLE_DATASET_NAME.TABLE_NAME
+        FOR SYSTEM_TIME AS OF
+          TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR);
     
     Replace the following:
     
@@ -314,13 +308,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq cp \
---no_clobber \
---snapshot \
-TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME@-3600000 \
-SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
-```
+    bq cp \
+    --no_clobber \
+    --snapshot \
+    TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME@-3600000 \
+    SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 
@@ -355,7 +347,7 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [

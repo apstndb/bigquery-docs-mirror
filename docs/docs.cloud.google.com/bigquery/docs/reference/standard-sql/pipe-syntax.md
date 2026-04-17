@@ -148,10 +148,8 @@ GoogleSQL supports the following pipe operators. For operators that correspond o
 
 ### `SELECT` pipe operator
 
-``` no-copy
-|> SELECT expression [[AS] alias] [, ...]
-   [WINDOW name AS window_spec, ...]
-```
+    |> SELECT expression [[AS] alias] [, ...]
+       [WINDOW name AS window_spec, ...]
 
 **Description**
 
@@ -195,10 +193,8 @@ For cases where `SELECT` would be used in standard syntax to rearrange columns, 
 
 ### `EXTEND` pipe operator
 
-``` no-copy
-|> EXTEND expression [[AS] alias] [, ...]
-   [WINDOW name AS window_spec, ...]
-```
+    |> EXTEND expression [[AS] alias] [, ...]
+       [WINDOW name AS window_spec, ...]
 
 **Description**
 
@@ -254,9 +250,7 @@ Propagates the existing table and adds computed columns, similar to [`SELECT *, 
 
 ### `SET` pipe operator
 
-``` no-copy
-|> SET column = expression [, ...]
-```
+    |> SET column = expression [, ...]
 
 **Description**
 
@@ -292,9 +286,7 @@ After a `SET` operation, the referenced top-level columns (like `x` ) are update
 
 ### `DROP` pipe operator
 
-``` no-copy
-|> DROP column [, ...]
-```
+    |> DROP column [, ...]
 
 **Description**
 
@@ -325,9 +317,7 @@ After a `DROP` operation, the referenced top-level columns (like `x` ) are remov
 
 ### `RENAME` pipe operator
 
-``` no-copy
-|> RENAME old_column_name [AS] new_column_name [, ...]
-```
+    |> RENAME old_column_name [AS] new_column_name [, ...]
 
 **Description**
 
@@ -350,9 +340,7 @@ After a `RENAME` operation, the referenced top-level columns (like `x` ) are ren
 
 ### `AS` pipe operator
 
-``` no-copy
-|> AS alias
-```
+    |> AS alias
 
 **Description**
 
@@ -383,9 +371,7 @@ The `AS` operator can be useful after operators like [`SELECT`](https://docs.clo
 
 ### `WHERE` pipe operator
 
-``` no-copy
-|> WHERE boolean_expression
-```
+    |> WHERE boolean_expression
 
 **Description**
 
@@ -413,16 +399,12 @@ In pipe syntax, the `WHERE` operator also replaces the [`HAVING` clause](https:/
 
 ### `AGGREGATE` pipe operator
 
-``` no-copy
--- Full-table aggregation
-|> AGGREGATE aggregate_expression [[AS] alias] [, ...]
-```
+    -- Full-table aggregation
+    |> AGGREGATE aggregate_expression [[AS] alias] [, ...]
 
-``` no-copy
--- Aggregation with grouping
-|> AGGREGATE [aggregate_expression [[AS] alias] [, ...]]
-   GROUP BY groupable_items [[AS] alias] [, ...]
-```
+    -- Aggregation with grouping
+    |> AGGREGATE [aggregate_expression [[AS] alias] [, ...]]
+       GROUP BY groupable_items [[AS] alias] [, ...]
 
     -- Aggregation with grouping and shorthand ordering syntax
     |> AGGREGATE [aggregate_expression [[AS] alias] [order_suffix] [, ...]]
@@ -572,9 +554,7 @@ The previous query is equivalent to the following:
 
 ### `DISTINCT` pipe operator
 
-``` no-copy
-|> DISTINCT
-```
+    |> DISTINCT
 
 **Description**
 
@@ -682,9 +662,7 @@ The following examples show equivalent ways to generate the same results with di
 
 ### `JOIN` pipe operator
 
-``` no-copy
-|> [join_type] JOIN from_item [[AS] alias] [{on_clause | using_clause}]
-```
+    |> [join_type] JOIN from_item [[AS] alias] [{on_clause | using_clause}]
 
 **Description**
 
@@ -716,9 +694,7 @@ An alias can be assigned to the input table on the right side of the join, but n
 
 ### `CALL` pipe operator
 
-``` no-copy
-|> CALL table_function (argument [, ...]) [[AS] alias]
-```
+    |> CALL table_function (argument [, ...]) [[AS] alias]
 
 **Description**
 
@@ -751,9 +727,7 @@ The following examples compare calling both TVFs on an input table by using stan
 
 ### `ORDER BY` pipe operator
 
-``` no-copy
-|> ORDER BY expression [sort_options] [, ...]
-```
+    |> ORDER BY expression [sort_options] [, ...]
 
 **Description**
 
@@ -782,9 +756,7 @@ In pipe syntax, the [`AGGREGATE` operator](https://docs.cloud.google.com/bigquer
 
 ### `LIMIT` pipe operator
 
-``` no-copy
-|> LIMIT count [OFFSET skip_rows]
-```
+    |> LIMIT count [OFFSET skip_rows]
 
 **Description**
 
@@ -826,10 +798,8 @@ Limits the number of rows to return in a query, with an optional `OFFSET` clause
 
 ### `UNION` pipe operator
 
-``` no-copy
-query
-|> UNION {ALL | DISTINCT} (query) [, (query), ...]
-```
+    query
+    |> UNION {ALL | DISTINCT} (query) [, (query), ...]
 
 **Description**
 
@@ -923,10 +893,8 @@ Without the `BY NAME` modifier, the results are matched by column position in th
 
 ### `INTERSECT` pipe operator
 
-``` no-copy
-query
-|> INTERSECT DISTINCT (query) [, (query), ...]
-```
+    query
+    |> INTERSECT DISTINCT (query) [, (query), ...]
 
 **Description**
 
@@ -1018,10 +986,8 @@ Without the `BY NAME` modifier, the same columns in differing order are consider
 
 ### `EXCEPT` pipe operator
 
-``` no-copy
-query
-|> EXCEPT DISTINCT (query) [, (query), ...]
-```
+    query
+    |> EXCEPT DISTINCT (query) [, (query), ...]
 
 **Description**
 
@@ -1170,9 +1136,7 @@ Without the `BY NAME` modifier, the same columns in differing order are consider
 
 > **Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@google.com> .
 
-``` no-copy
-|> TABLESAMPLE SYSTEM (percent PERCENT)
-```
+    |> TABLESAMPLE SYSTEM (percent PERCENT)
 
 **Description**
 
@@ -1187,9 +1151,7 @@ The following example samples approximately 1% of data from a table called `Larg
 
 ### `WITH` pipe operator
 
-``` no-copy
-|> WITH alias AS query, ...
-```
+    |> WITH alias AS query, ...
 
 **Description**
 
@@ -1246,9 +1208,7 @@ The pipe `WITH` operator allows a trailing comma:
 
 ### `PIVOT` pipe operator
 
-``` no-copy
-|> PIVOT (aggregate_expression FOR input_column IN (pivot_column [, ...])) [[AS] alias]
-```
+    |> PIVOT (aggregate_expression FOR input_column IN (pivot_column [, ...])) [[AS] alias]
 
 **Description**
 
@@ -1278,9 +1238,7 @@ Rotates rows into columns. The `PIVOT` pipe operator behaves the same as the [`P
 
 ### `UNPIVOT` pipe operator
 
-``` no-copy
-|> UNPIVOT (values_column FOR name_column IN (column_to_unpivot [, ...])) [[AS] alias]
-```
+    |> UNPIVOT (values_column FOR name_column IN (column_to_unpivot [, ...])) [[AS] alias]
 
 **Description**
 
@@ -1306,17 +1264,15 @@ Rotates columns into rows. The `UNPIVOT` pipe operator behaves the same as the [
 
 ### `MATCH_RECOGNIZE` pipe operator
 
-``` no-copy
-|> MATCH_RECOGNIZE (
-   [ PARTITION BY partition_expr [, ... ] ]
-   ORDER BY order_expr [ { ASC | DESC } ] [ { NULLS FIRST | NULLS LAST } ] [, ...]
-   MEASURES { measures_expr [AS] alias } [, ... ]
-   [ AFTER MATCH SKIP { PAST LAST ROW | TO NEXT ROW } ]
-   PATTERN (pattern)
-   DEFINE symbol AS boolean_expr [, ... ]
-   [ OPTIONS ( [ use_longest_match = { TRUE | FALSE } ] ) ]
-)
-```
+    |> MATCH_RECOGNIZE (
+       [ PARTITION BY partition_expr [, ... ] ]
+       ORDER BY order_expr [ { ASC | DESC } ] [ { NULLS FIRST | NULLS LAST } ] [, ...]
+       MEASURES { measures_expr [AS] alias } [, ... ]
+       [ AFTER MATCH SKIP { PAST LAST ROW | TO NEXT ROW } ]
+       PATTERN (pattern)
+       DEFINE symbol AS boolean_expr [, ... ]
+       [ OPTIONS ( [ use_longest_match = { TRUE | FALSE } ] ) ]
+    )
 
 **Description**
 

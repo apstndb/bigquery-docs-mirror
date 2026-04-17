@@ -16,7 +16,7 @@ The `ML.EVALUATE` function syntax differs depending on the type of model that yo
 
 ### Times series
 
-``` lang-sql
+```sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -78,7 +78,7 @@ ML.EVALUATE(
 
 ### Classification & regression
 
-``` lang-sql
+```sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -128,7 +128,7 @@ ML.EVALUATE(
 
 ### Remote over Gemini
 
-``` lang-sql
+```sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -223,17 +223,15 @@ ML.EVALUATE(
 
 ### Remote over Claude
 
-``` notranslate
-ML.EVALUATE(
-  MODEL `PROJECT_ID.DATASET.MODEL`
-  [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
-    STRUCT(
-      [TASK_TYPE AS task_type]
-      [, MAX_OUTPUT_TOKENS AS max_output_tokens]
-      [, TOP_K AS top_k]
-      [, TOP_P AS top_k])
-)
-```
+    ML.EVALUATE(
+      MODEL `PROJECT_ID.DATASET.MODEL`
+      [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
+        STRUCT(
+          [TASK_TYPE AS task_type]
+          [, MAX_OUTPUT_TOKENS AS max_output_tokens]
+          [, TOP_K AS top_k]
+          [, TOP_P AS top_k])
+    )
 
 ### Arguments
 
@@ -298,7 +296,7 @@ ML.EVALUATE(
 
 ### Remote over Llama or Mistral AI
 
-``` lang-sql
+```sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -373,7 +371,7 @@ ML.EVALUATE(
 
 ### Remote over open
 
-``` lang-sql
+```sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -457,7 +455,7 @@ ML.EVALUATE(
 
 ### All other models
 
-``` lang-sql
+```sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -745,107 +743,95 @@ The following examples show how to use `ML.EVALUATE` .
 
 The following query evaluates a model with no input data specified:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EVALUATE(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.EVALUATE(MODEL `mydataset.mymodel`)
 
 ### `ML.EVALUATE` with a custom threshold and input data
 
 The following query evaluates a model with input data and a custom threshold of `0.55` :
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EVALUATE(MODEL `mydataset.mymodel`,
-    (
     SELECT
-      custom_label,
-      column1,
-      column2
+      *
     FROM
-      `mydataset.mytable`),
-    STRUCT(0.55 AS threshold))
-```
+      ML.EVALUATE(MODEL `mydataset.mymodel`,
+        (
+        SELECT
+          custom_label,
+          column1,
+          column2
+        FROM
+          `mydataset.mytable`),
+        STRUCT(0.55 AS threshold))
 
 ### `ML.EVALUATE` to calculate forecasting accuracy of a time series
 
 The following query evaluates the 30-point forecasting accuracy for a time series model:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EVALUATE(MODEL `mydataset.my_arima_model`,
-    (
     SELECT
-      timeseries_date,
-      timeseries_metric
+      *
     FROM
-      `mydataset.mytable`),
-    STRUCT(TRUE AS perform_aggregation, 30 AS horizon))
-```
+      ML.EVALUATE(MODEL `mydataset.my_arima_model`,
+        (
+        SELECT
+          timeseries_date,
+          timeseries_metric
+        FROM
+          `mydataset.mytable`),
+        STRUCT(TRUE AS perform_aggregation, 30 AS horizon))
 
 ### `ML.EVALUATE` to calculate ARIMA\_PLUS forecasting accuracy for each forecasted timestamp
 
 The following query evaluates the forecasting accuracy for each of the 30 forecasted points of a time series model. It also computes the prediction interval based on a confidence level of `0.9` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EVALUATE(MODEL `mydataset.my_arima_model`,
-    (
     SELECT
-      timeseries_date,
-      timeseries_metric
+      *
     FROM
-      `mydataset.mytable`),
-    STRUCT(FALSE AS perform_aggregation, 0.9 AS confidence_level,
-    30 AS horizon))
-```
+      ML.EVALUATE(MODEL `mydataset.my_arima_model`,
+        (
+        SELECT
+          timeseries_date,
+          timeseries_metric
+        FROM
+          `mydataset.mytable`),
+        STRUCT(FALSE AS perform_aggregation, 0.9 AS confidence_level,
+        30 AS horizon))
 
 ### `ML.EVALUATE` to calculate ARIMA\_PLUS\_XREG forecasting accuracy for each forecasted timestamp
 
 The following query evaluates the forecasting accuracy for each of the 30 forecasted points of a time series model. It also computes the prediction interval based on a confidence level of `0.9` . Note that you need to include the side features for the evaluation data.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EVALUATE(MODEL `mydataset.my_arima_xreg_model`,
-    (
     SELECT
-      timeseries_date,
-      timeseries_metric,
-      feature1,
-      feature2
+      *
     FROM
-      `mydataset.mytable`),
-    STRUCT(FALSE AS perform_aggregation, 0.9 AS confidence_level,
-    30 AS horizon))
-```
+      ML.EVALUATE(MODEL `mydataset.my_arima_xreg_model`,
+        (
+        SELECT
+          timeseries_date,
+          timeseries_metric,
+          feature1,
+          feature2
+        FROM
+          `mydataset.mytable`),
+        STRUCT(FALSE AS perform_aggregation, 0.9 AS confidence_level,
+        30 AS horizon))
 
 ### `ML.EVALUATE` to calculate LLM text generation accuracy
 
 The following query evaluates the LLM text generation accuracy for the classification task type for each label from the evaluation table.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EVALUATE(MODEL `mydataset.my_llm`,
-    (
     SELECT
-      prompt,
-      label
+      *
     FROM
-      `mydataset.mytable`),
-    STRUCT('classification' AS task_type))
-```
+      ML.EVALUATE(MODEL `mydataset.my_llm`,
+        (
+        SELECT
+          prompt,
+          label
+        FROM
+          `mydataset.mytable`),
+        STRUCT('classification' AS task_type))
 
 ## What's next
 

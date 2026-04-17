@@ -10,9 +10,7 @@ Contribution analysis is a form of [augmented analytics](https://en.wikipedia.or
 
 ## Contribution analysis with BigQuery ML
 
-To use contribution analysis in BigQuery ML, create a contribution analysis model with the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
-
-A contribution analysis model detects segments of data that show changes in a given metric by comparing a test set of data to a control set of data. For example, you might use a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of sales data taken at the end of 2023 as your test data and a table snapshot taken at the end of 2022 as your control data, and compare them to see how your sales changed over time. A contribution analysis model could show you which segment of data, such as online customers in a particular region, drove the biggest change in sales from one year to the next.
+Contribution analysis detects segments of data that show changes in a given metric by comparing a test set of data to a control set of data. For example, you might use a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of sales data taken at the end of 2023 as your test data and a table snapshot taken at the end of 2022 as your control data, and compare them to see how your sales changed over time. Contribution analysis can show you which segment of data, such as online customers in a particular region, drove the biggest change in sales from one year to the next.
 
 A *metric* is the numerical value that contribution analysis models use to measure and compare the changes between the test and control data. You can specify the following types of metrics with a contribution analysis model:
 
@@ -31,13 +29,21 @@ A *segment* is a slice of the data identified by a given combination of dimensio
 | store 1            | customer 2        |           |
 | store 2            |                   |           |
 
+### Analyze data without a model
+
+If you have fewer than 12 dimensions and are using a summable metric, then you can perform contribution analysis by using the [`AI.KEY_DRIVERS` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers) . For most applications, we recommend using the `AI.KEY_DRIVERS` function over creating a model because it offers a simplified syntax, faster results, and automatic pruning. The function output consists of rows of insights, where each insight corresponds to a segment and provides the segment's corresponding metrics.
+
+### Use a contribution analysis model
+
+For repeated analysis, or if you require more than 12 dimensions or other types of metrics, you can create a contribution analysis model with the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
+
 To reduce model creation time, specify an [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) . An apriori support threshold lets you prune small and less relevant segments so that the model uses only the largest and most relevant segments.
 
-After you have created a contribution analysis model, you can use the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model. The model output consists of rows of insights, where each insight corresponds to a segment and provides the segment's corresponding metrics.
+After you have created a contribution analysis model, you can use the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model. The function output consists of rows of insights, where each insight corresponds to a segment and provides the segment's corresponding metrics.
 
 ## Contribution analysis user journey
 
-The following table describes the statements and functions you can use with contribution analysis models:
+The following table describes the statements and functions you can use with contribution analysis:
 
 <table>
 <colgroup>
@@ -48,7 +54,7 @@ The following table describes the statements and functions you can use with cont
 </colgroup>
 <thead>
 <tr class="header">
-<th>Model creation</th>
+<th>Statement or function</th>
 <th><a href="https://docs.cloud.google.com/bigquery/docs/preprocess-overview">Feature preprocessing</a></th>
 <th>Insights generation</th>
 <th>Tutorials</th>
@@ -56,6 +62,12 @@ The following table describes the statements and functions you can use with cont
 </thead>
 <tbody>
 <tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers"><code dir="ltr" translate="no">AI.KEY_DRIVERS</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>
+<td>N/A</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers#example">Example of contribution analysis on Iowa liquor sale data</a></td>
+</tr>
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights"><code dir="ltr" translate="no">ML.GET_INSIGHTS</code></a></td>

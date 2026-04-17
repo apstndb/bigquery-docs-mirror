@@ -10,7 +10,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(model_option_list)
@@ -279,37 +279,33 @@ The following example creates a model named `mymodel` in `mydataset` in your def
 
 Create the model:
 
-``` notranslate
-CREATE OR REPLACE MODEL `project_id.mydataset.mymodel`
-       OPTIONS(model_type='AUTOML_REGRESSOR',
-               input_label_cols=['fare_amount'],
-               budget_hours=1.0)
-AS SELECT
-  (tolls_amount + fare_amount) AS fare_amount,
-  pickup_longitude,
-  pickup_latitude,
-  dropoff_longitude,
-  dropoff_latitude,
-  passenger_count
-FROM `nyc-tlc.yellow.trips`
-WHERE ABS(MOD(FARM_FINGERPRINT(CAST(pickup_datetime AS STRING)), 100000)) = 1
-AND
-  trip_distance > 0
-  AND fare_amount >= 2.5 AND fare_amount <= 100.0
-  AND pickup_longitude > -78
-  AND pickup_longitude < -70
-  AND dropoff_longitude > -78
-  AND dropoff_longitude < -70
-  AND pickup_latitude > 37
-  AND pickup_latitude < 45
-  AND dropoff_latitude > 37
-  AND dropoff_latitude < 45
-  AND passenger_count > 0
-```
+    CREATE OR REPLACE MODEL `project_id.mydataset.mymodel`
+           OPTIONS(model_type='AUTOML_REGRESSOR',
+                   input_label_cols=['fare_amount'],
+                   budget_hours=1.0)
+    AS SELECT
+      (tolls_amount + fare_amount) AS fare_amount,
+      pickup_longitude,
+      pickup_latitude,
+      dropoff_longitude,
+      dropoff_latitude,
+      passenger_count
+    FROM `nyc-tlc.yellow.trips`
+    WHERE ABS(MOD(FARM_FINGERPRINT(CAST(pickup_datetime AS STRING)), 100000)) = 1
+    AND
+      trip_distance > 0
+      AND fare_amount >= 2.5 AND fare_amount <= 100.0
+      AND pickup_longitude > -78
+      AND pickup_longitude < -70
+      AND dropoff_longitude > -78
+      AND dropoff_longitude < -70
+      AND pickup_latitude > 37
+      AND pickup_latitude < 45
+      AND dropoff_latitude > 37
+      AND dropoff_latitude < 45
+      AND passenger_count > 0
 
 Run predictions:
 
-``` notranslate
-SELECT * FROM ML.PREDICT(MODEL `project_id.mydataset.mymodel`, (
-    SELECT * FROM `nyc-tlc.yellow.trips` LIMIT 100))
-```
+    SELECT * FROM ML.PREDICT(MODEL `project_id.mydataset.mymodel`, (
+        SELECT * FROM `nyc-tlc.yellow.trips` LIMIT 100))

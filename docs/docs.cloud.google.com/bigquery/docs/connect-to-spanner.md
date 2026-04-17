@@ -48,15 +48,13 @@ Select one of the following options:
 
 To create the connection, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) command with the `--connection` flag.
 
-``` notranslate
-bq mk --connection \
-    --connection_type=CLOUD_SPANNER \
-    --properties='PROPERTIES' \
-    --location=LOCATION \
-    --display_name='FRIENDLY_NAME' \
-    --description 'DESCRIPTION' \
-    CONNECTION_ID
-```
+    bq mk --connection \
+        --connection_type=CLOUD_SPANNER \
+        --properties='PROPERTIES' \
+        --location=LOCATION \
+        --display_name='FRIENDLY_NAME' \
+        --description 'DESCRIPTION' \
+        CONNECTION_ID
 
 Replace the following:
 
@@ -88,14 +86,12 @@ Replace the following:
     
     The following example creates a new connection resource named `my_connection_id` .
     
-    ``` notranslate
-    bq mk --connection \
-      --connection_type='CLOUD_SPANNER' \
-      --properties='{"database":"projects/my_project/instances/my_instance/databases/database1"}' \
-      --project_id=federation-test \
-      --location=us \
-      my_connection_id
-    ```
+        bq mk --connection \
+          --connection_type='CLOUD_SPANNER' \
+          --properties='{"database":"projects/my_project/instances/my_instance/databases/database1"}' \
+          --project_id=federation-test \
+          --location=us \
+          my_connection_id
 
 ### API
 

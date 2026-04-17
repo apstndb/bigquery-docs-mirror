@@ -76,9 +76,7 @@ Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SCHEMA `PROJECT_ID.tf_models_tutorial`;
-    ```
+        CREATE SCHEMA `PROJECT_ID.tf_models_tutorial`;
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -92,9 +90,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 2.  To create the dataset, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
     
-    ``` notranslate
-    bq mk --dataset --location=us PROJECT_ID:tf_models_tutorial
-    ```
+        bq mk --dataset --location=us PROJECT_ID:tf_models_tutorial
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -210,9 +206,7 @@ Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/r
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL tf_models_tutorial.nnlm_modelOPTIONS (  model_type = 'TENSORFLOW',  model_path = 'gs://BUCKET_NAME/nnlm_model/*');
-    ```
+        CREATE OR REPLACE MODEL tf_models_tutorial.nnlm_modelOPTIONS (  model_type = 'TENSORFLOW',  model_path = 'gs://BUCKET_NAME/nnlm_model/*');
     
     Replace `  BUCKET_NAME  ` with the name of the bucket that you previously created.
 
@@ -228,9 +222,7 @@ Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/r
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL tf_models_tutorial.swivel_modelOPTIONS (  model_type = 'TENSORFLOW',  model_path = 'gs://BUCKET_NAME/swivel_model/*');
-    ```
+        CREATE OR REPLACE MODEL tf_models_tutorial.swivel_modelOPTIONS (  model_type = 'TENSORFLOW',  model_path = 'gs://BUCKET_NAME/swivel_model/*');
     
     Replace `  BUCKET_NAME  ` with the name of the bucket that you previously created.
 
@@ -284,10 +276,8 @@ To create a remote model based on the Vertex AI endpoint, use the [`CREATE MODEL
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL tf_models_tutorial.bert_modelINPUT(content STRING)OUTPUT(embedding ARRAY<FLOAT64>)REMOTE WITH CONNECTION `PROJECT_ID.CONNECTION_LOCATION.CONNECTION_ID`
-    OPTIONS (  ENDPOINT = "https://ENDPOINT_LOCATION-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/ENDPOINT_LOCATION/endpoints/ENDPOINT_ID");
-    ```
+        CREATE OR REPLACE MODEL tf_models_tutorial.bert_modelINPUT(content STRING)OUTPUT(embedding ARRAY<FLOAT64>)REMOTE WITH CONNECTION `PROJECT_ID.CONNECTION_LOCATION.CONNECTION_ID`
+        OPTIONS (  ENDPOINT = "https://ENDPOINT_LOCATION-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/ENDPOINT_LOCATION/endpoints/ENDPOINT_ID");
     
     Replace the following:
     
@@ -313,21 +303,19 @@ In this section, you use the [`ML.PREDICT()` inference function](https://docs.cl
 
 ### NNLM
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.PREDICT(
-    MODEL `tf_models_tutorial.nnlm_model`,
-    (
     SELECT
-      review AS content
+      *
     FROM
-      `bigquery-public-data.imdb.reviews`
-    LIMIT
-      500)
-  );
-```
+      ML.PREDICT(
+        MODEL `tf_models_tutorial.nnlm_model`,
+        (
+        SELECT
+          review AS content
+        FROM
+          `bigquery-public-data.imdb.reviews`
+        LIMIT
+          500)
+      );
 
 The result is similar to the following:
 
@@ -343,21 +331,19 @@ The result is similar to the following:
 
 ### SWIVEL
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.PREDICT(
-    MODEL `tf_models_tutorial.swivel_model`,
-    (
     SELECT
-      review AS content
+      *
     FROM
-      `bigquery-public-data.imdb.reviews`
-    LIMIT
-      500)
-  );
-```
+      ML.PREDICT(
+        MODEL `tf_models_tutorial.swivel_model`,
+        (
+        SELECT
+          review AS content
+        FROM
+          `bigquery-public-data.imdb.reviews`
+        LIMIT
+          500)
+      );
 
 The result is similar to the following:
 
@@ -373,21 +359,19 @@ The result is similar to the following:
 
 ### BERT
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.PREDICT(
-    MODEL `tf_models_tutorial.bert_model`,
-    (
     SELECT
-      review AS content
+      *
     FROM
-      `bigquery-public-data.imdb.reviews`
-    LIMIT
-      500)
-  );
-```
+      ML.PREDICT(
+        MODEL `tf_models_tutorial.bert_model`,
+        (
+        SELECT
+          review AS content
+        FROM
+          `bigquery-public-data.imdb.reviews`
+        LIMIT
+          500)
+      );
 
 The result is similar to the following:
 

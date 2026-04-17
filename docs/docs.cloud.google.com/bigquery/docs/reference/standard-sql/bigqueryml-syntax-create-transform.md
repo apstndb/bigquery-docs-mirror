@@ -15,7 +15,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 TRANSFORM (select_list)
 OPTIONS(MODEL_TYPE = 'TRANSFORM_ONLY')
@@ -104,39 +104,35 @@ The following examples show how to create and use transform-only models.
 
 The following example creates a model named `transform_model` in `mydataset` in your default project. The model transforms several columns from the BigQuery public table `bigquery-public-data.ml_datasets.penguins` :
 
-``` notranslate
-CREATE MODEL `mydataset.transform_model`
-  TRANSFORM(
-    species,
-    island,
-    ML.MAX_ABS_SCALER(culmen_length_mm) OVER () AS culmen_length_mm,
-    ML.MAX_ABS_SCALER(culmen_depth_mm) OVER () AS culmen_depth_mm,
-    ML.MAX_ABS_SCALER(flipper_length_mm) OVER () AS flipper_length_mm,
-    sex,
-    body_mass_g)
-  OPTIONS (
-    model_type = 'transform_only')
-AS (
-  SELECT *
-  FROM `bigquery-public-data.ml_datasets.penguins`
-);
-```
+    CREATE MODEL `mydataset.transform_model`
+      TRANSFORM(
+        species,
+        island,
+        ML.MAX_ABS_SCALER(culmen_length_mm) OVER () AS culmen_length_mm,
+        ML.MAX_ABS_SCALER(culmen_depth_mm) OVER () AS culmen_depth_mm,
+        ML.MAX_ABS_SCALER(flipper_length_mm) OVER () AS flipper_length_mm,
+        sex,
+        body_mass_g)
+      OPTIONS (
+        model_type = 'transform_only')
+    AS (
+      SELECT *
+      FROM `bigquery-public-data.ml_datasets.penguins`
+    );
 
 **Example 2**
 
 The following example creates a model named `mymodel` in `mydataset` in your default project. The model is trained on data that is preprocessed by using a transform-only model:
 
-``` notranslate
-CREATE MODEL `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE = 'LINEAR_REG',
-    MAX_ITERATIONS = 5,
-    INPUT_LABEL_COLS = ['body_mass_g'] ) AS
-SELECT
-  *
-FROM
-  ML.TRANSFORM(
-    MODEL `mydataset.transform_model`,
-    TABLE `bigquery-public-data.ml_datasets.penguins`)
-WHERE body_mass_g IS NOT NULL;
-```
+    CREATE MODEL `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE = 'LINEAR_REG',
+        MAX_ITERATIONS = 5,
+        INPUT_LABEL_COLS = ['body_mass_g'] ) AS
+    SELECT
+      *
+    FROM
+      ML.TRANSFORM(
+        MODEL `mydataset.transform_model`,
+        TABLE `bigquery-public-data.ml_datasets.penguins`)
+    WHERE body_mass_g IS NOT NULL;

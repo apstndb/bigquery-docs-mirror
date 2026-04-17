@@ -214,7 +214,7 @@ To export a BigQuery ML model in the Google Cloud console by using the `EXPORT M
     
     The following query exports a model named `myproject.mydataset.mymodel` to a Cloud Storage bucket with [URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) `gs://bucket/path/to/saved_model/` .
     
-    ``` notranslate
+    ``` 
      EXPORT MODEL `myproject.mydataset.mymodel`
      OPTIONS(URI = 'gs://bucket/path/to/saved_model/')
      
@@ -249,22 +249,18 @@ Examples:
 
 For example, the following command exports `mydataset.mymodel` in TensorFlow SavedModel format to a Cloud Storage bucket named `mymodel_folder` .
 
-``` notranslate
-bq extract --model \
-'mydataset.mymodel' \
-gs://example-bucket/mymodel_folder
-```
+    bq extract --model \
+    'mydataset.mymodel' \
+    gs://example-bucket/mymodel_folder
 
 The default value of destination\_format is `ML_TF_SAVED_MODEL` .
 
 The following command exports `mydataset.mymodel` in XGBoost Booster format to a Cloud Storage bucket named `mymodel_folder` .
 
-``` notranslate
-bq extract --model \
---destination_format ML_XGBOOST_BOOSTER \
-'mydataset.mytable' \
-gs://example-bucket/mymodel_folder
-```
+    bq extract --model \
+    --destination_format ML_XGBOOST_BOOSTER \
+    'mydataset.mytable' \
+    gs://example-bucket/mymodel_folder
 
 ### API
 
@@ -441,13 +437,13 @@ This section provides the prediction output format of the exported models for ea
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+------------------------+------------------------+------------------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+------------------------+------------------------+------------------------+
 |      LATENT_COL_1      |      LATENT_COL_2      |           ...          |
 +------------------------+------------------------+------------------------+
 |       [FLOAT]          |         [FLOAT]        |           ...          |
 +------------------------+------------------------+------------------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+------------------+------------------+------------------+------------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+------------------+------------------+------------------+------------------+
 |   LATENT_COL_1   |   LATENT_COL_2   |   LATENT_COL_3   |   LATENT_COL_4   |
 +------------------------+------------+------------------+------------------+
 |    0.21384512    |    0.93457112    |    0.64978097    |    0.00480489    |
@@ -463,7 +459,7 @@ Prediction output format
 
 Output sample
 
-``` notranslate
+``` 
 +------------------------------------------+
 | predictions                              |
 +------------------------------------------+
@@ -472,7 +468,7 @@ Output sample
         
 ```
 
-``` notranslate
+``` 
 +---------------------------------------------+
 | predictions                                 |
 +---------------------------------------------+
@@ -497,13 +493,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | predictions     |
 +-----------------+
 | [FLOAT]         |
 +-----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | predictions     |
 +-----------------+
 | [1.8, 2.46]     |
@@ -528,13 +524,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
 | LABEL_PROBS | LABEL_VALUES | PREDICTED_LABEL |
 +-------------+--------------+-----------------+
 | [FLOAT]     | [STRING]     | STRING          |
 +-------------+--------------+-----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
 | LABEL_PROBS | LABEL_VALUES | PREDICTED_LABEL |
 +-------------+--------------+-----------------+
 | [0.1, 0.9]  | [&#39;a&#39;, &#39;b&#39;]   | [&#39;b&#39;]           |
@@ -561,13 +557,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | predicted_label |
 +-----------------+
 | FLOAT           |
 +-----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | predicted_label |
 +-----------------+
 | [1.8]           |
@@ -594,13 +590,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | ALL_CLASS_IDS | ALL_CLASSES | CLASS_IDS | CLASSES | LOGISTIC (binary only) | LOGITS | PROBABILITIES |
 +---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | [INT64]       | [STRING]    | INT64     | STRING  | FLOAT                  | [FLOAT]| [FLOAT]       |
 +---------------+-------------+-----------+---------+------------------------+--------+---------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | ALL_CLASS_IDS | ALL_CLASSES | CLASS_IDS | CLASSES | LOGISTIC (binary only) | LOGITS | PROBABILITIES |
 +---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | [0, 1]        | [&#39;a&#39;, &#39;b&#39;]  | [0]       | [&#39;a&#39;]   | [0.36]                 | [-0.53]| [0.64, 0.36]  |
@@ -627,13 +623,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | PREDICTED_LABEL |
 +-----------------+
 | FLOAT           |
 +-----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | PREDICTED_LABEL |
 +-----------------+
 | [1.8]           |
@@ -660,13 +656,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | ALL_CLASS_IDS | ALL_CLASSES | CLASS_IDS | CLASSES | LOGISTIC (binary only) | LOGITS | PROBABILITIES |
 +---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | [INT64]       | [STRING]    | INT64     | STRING  | FLOAT                  | [FLOAT]| [FLOAT]       |
 +---------------+-------------+-----------+---------+------------------------+--------+---------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | ALL_CLASS_IDS | ALL_CLASSES | CLASS_IDS | CLASSES | LOGISTIC (binary only) | LOGITS | PROBABILITIES |
 +---------------+-------------+-----------+---------+------------------------+--------+---------------+
 | [0, 1]        | [&#39;a&#39;, &#39;b&#39;]  | [0]       | [&#39;a&#39;]   | [0.36]                 | [-0.53]| [0.64, 0.36]  |
@@ -693,13 +689,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | PREDICTED_LABEL |
 +-----------------+
 | FLOAT           |
 +-----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | PREDICTED_LABEL |
 +-----------------+
 | [1.8]           |
@@ -726,13 +722,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+---------------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+---------------------+
 | CENTROID_DISTANCES | CENTROID_IDS | NEAREST_CENTROID_ID |
 +--------------------+--------------+---------------------+
 | [FLOAT]            | [INT64]      | INT64               |
 +--------------------+--------------+---------------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+---------------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+---------------------+
 | CENTROID_DISTANCES | CENTROID_IDS | NEAREST_CENTROID_ID |
 +--------------------+--------------+---------------------+
 | [1.2, 1.3]         | [1, 2]       | [1]                 |
@@ -759,13 +755,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | PREDICTED_LABEL |
 +-----------------+
 | FLOAT           |
 +-----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-----------------+
 | PREDICTED_LABEL |
 +-----------------+
 | [1.8]           |
@@ -792,13 +788,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
 | LABEL_PROBS | LABEL_VALUES | PREDICTED_LABEL |
 +-------------+--------------+-----------------+
 | [FLOAT]     | [STRING]     | STRING          |
 +-------------+--------------+-----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-------------+--------------+-----------------+
 | LABEL_PROBS | LABEL_VALUES | PREDICTED_LABEL |
 +-------------+--------------+-----------------+
 | [0.1, 0.9]  | [&#39;a&#39;, &#39;b&#39;]   | [&#39;b&#39;]           |
@@ -827,13 +823,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+
 | PREDICTED_RATING | PREDICTED_ITEM |
 +------------------+----------------+
 | [FLOAT]          | [STRING]       |
 +------------------+----------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+--------------------+--------------+
 | PREDICTED_RATING | PREDICTED_ITEM |
 +------------------+----------------+
 | [5.5, 1.7]       | [&#39;A&#39;, &#39;B&#39;]     |
@@ -866,13 +862,13 @@ Output sample
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-------------------------+---------------------------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-------------------------+---------------------------------+
 | PRINCIPAL_COMPONENT_IDS | PRINCIPAL_COMPONENT_PROJECTIONS |
 +-------------------------+---------------------------------+
 |       [INT64]           |             [FLOAT]             |
 +-------------------------+---------------------------------+
         </code></pre></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded=""><code>+-------------------------+---------------------------------+
+<td><pre dir="ltr" data-is-upgraded=""><code>+-------------------------+---------------------------------+
 | PRINCIPAL_COMPONENT_IDS | PRINCIPAL_COMPONENT_PROJECTIONS |
 +-------------------------+---------------------------------+
 |       [1, 2]            |             [1.2, 5.0]          |

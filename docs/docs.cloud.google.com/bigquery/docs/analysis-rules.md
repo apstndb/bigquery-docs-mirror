@@ -28,22 +28,20 @@ A view that includes this analysis rule must include the [aggregation threshold 
 
 You can define an aggregation threshold analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `CREATE VIEW` statement:
 
-``` notranslate
-CREATE OR REPLACE VIEW VIEW_NAME
-  OPTIONS (
-    privacy_policy= '''{
-      "aggregation_threshold_policy": {
-        "threshold" : THRESHOLD,
-        "privacy_unit_column": "PRIVACY_UNIT_COLUMN"
-      },
-      "join_restriction_policy": {
-        "join_condition": "JOIN_CONDITION",
-        "join_allowed_columns": JOIN_ALLOWED_COLUMNS
-      }
-    }'''
-  )
-  AS QUERY;
-```
+    CREATE OR REPLACE VIEW VIEW_NAME
+      OPTIONS (
+        privacy_policy= '''{
+          "aggregation_threshold_policy": {
+            "threshold" : THRESHOLD,
+            "privacy_unit_column": "PRIVACY_UNIT_COLUMN"
+          },
+          "join_restriction_policy": {
+            "join_condition": "JOIN_CONDITION",
+            "join_allowed_columns": JOIN_ALLOWED_COLUMNS
+          }
+        }'''
+      )
+      AS QUERY;
 
 Definitions:
 
@@ -91,17 +89,15 @@ To review the `privacy_policy` syntax for `CREATE VIEW` , see the `OPTIONS` list
 
 You can change the aggregation threshold analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `ALTER VIEW` statement:
 
-``` notranslate
-ALTER VIEW VIEW_NAME
-SET OPTIONS (
-  privacy_policy= '''{
-    "aggregation_threshold_policy": {
-      "threshold" : THRESHOLD,
-      "privacy_unit_column": "PRIVACY_UNIT_COLUMN"
-    }
-  }'''
-)
-```
+    ALTER VIEW VIEW_NAME
+    SET OPTIONS (
+      privacy_policy= '''{
+        "aggregation_threshold_policy": {
+          "threshold" : THRESHOLD,
+          "privacy_unit_column": "PRIVACY_UNIT_COLUMN"
+        }
+      }'''
+    )
 
 For more information about the values you can set for the privacy policies in the preceding syntax, see [Define an aggregation threshold analysis rule for a view](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) .
 
@@ -160,26 +156,24 @@ A view that includes this analysis rule must include the [differential privacy p
 
 You can define a differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `CREATE VIEW` statement:
 
-``` notranslate
-CREATE OR REPLACE VIEW VIEW_NAME
-  OPTIONS (
-    privacy_policy= '''{
-      "differential_privacy_policy": {
-        "privacy_unit_column": "PRIVACY_UNIT_COLUMN",
-        "max_epsilon_per_query": MAX_EPSILON_PER_QUERY,
-        "epsilon_budget": EPSILON_BUDGET,
-        "delta_per_query": DELTA_PER_QUERY,
-        "delta_budget": DELTA_BUDGET,
-        "max_groups_contributed": MAX_GROUPS_CONTRIBUTED
-      },
-      "join_restriction_policy": {
-        "join_condition": "JOIN_CONDITION",
-        "join_allowed_columns": JOIN_ALLOWED_COLUMNS
-      }
-    }'''
-  )
-  AS QUERY;
-```
+    CREATE OR REPLACE VIEW VIEW_NAME
+      OPTIONS (
+        privacy_policy= '''{
+          "differential_privacy_policy": {
+            "privacy_unit_column": "PRIVACY_UNIT_COLUMN",
+            "max_epsilon_per_query": MAX_EPSILON_PER_QUERY,
+            "epsilon_budget": EPSILON_BUDGET,
+            "delta_per_query": DELTA_PER_QUERY,
+            "delta_budget": DELTA_BUDGET,
+            "max_groups_contributed": MAX_GROUPS_CONTRIBUTED
+          },
+          "join_restriction_policy": {
+            "join_condition": "JOIN_CONDITION",
+            "join_allowed_columns": JOIN_ALLOWED_COLUMNS
+          }
+        }'''
+      )
+      AS QUERY;
 
 Definitions:
 
@@ -234,21 +228,19 @@ To review the `privacy_policy` syntax for `CREATE VIEW` , see the `OPTIONS` list
 
 You can change the differential privacy analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `ALTER VIEW` statement:
 
-``` notranslate
-ALTER VIEW VIEW_NAME
-SET OPTIONS (
-  privacy_policy= '''{
-    "differential_privacy_policy": {
-      "privacy_unit_column": "PRIVACY_UNIT_COLUMN",
-      "max_epsilon_per_query": MAX_EPSILON_PER_QUERY,
-      "epsilon_budget": EPSILON_BUDGET,
-      "delta_per_query": DELTA_PER_QUERY,
-      "delta_budget": DELTA_BUDGET,
-      "max_groups_contributed": MAX_GROUPS_CONTRIBUTED
-    }
-  }'''
-)
-```
+    ALTER VIEW VIEW_NAME
+    SET OPTIONS (
+      privacy_policy= '''{
+        "differential_privacy_policy": {
+          "privacy_unit_column": "PRIVACY_UNIT_COLUMN",
+          "max_epsilon_per_query": MAX_EPSILON_PER_QUERY,
+          "epsilon_budget": EPSILON_BUDGET,
+          "delta_per_query": DELTA_PER_QUERY,
+          "delta_budget": DELTA_BUDGET,
+          "max_groups_contributed": MAX_GROUPS_CONTRIBUTED
+        }
+      }'''
+    )
 
 For more information about the values you can set for the privacy policies in the preceding syntax, see [Define a differential privacy analysis rule for a view](https://docs.cloud.google.com/bigquery/docs/analysis-rules#dp_analysis_rules) .
 
@@ -374,18 +366,16 @@ A view that includes this analysis rule must only include the [join restriction 
 
 You can define a list overlap analysis rule for a view in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `CREATE VIEW` statement:
 
-``` notranslate
-CREATE OR REPLACE VIEW VIEW_NAME
-  OPTIONS (
-    privacy_policy= '''{
-      "join_restriction_policy": {
-        "join_condition": "JOIN_CONDITION",
-        "join_allowed_columns": JOIN_ALLOWED_COLUMNS
-      }
-    }'''
-  )
-  AS QUERY;
-```
+    CREATE OR REPLACE VIEW VIEW_NAME
+      OPTIONS (
+        privacy_policy= '''{
+          "join_restriction_policy": {
+            "join_condition": "JOIN_CONDITION",
+            "join_allowed_columns": JOIN_ALLOWED_COLUMNS
+          }
+        }'''
+      )
+      AS QUERY;
 
 Definitions:
 
@@ -416,17 +406,15 @@ In the following example, a list overlap analysis rule is created on a view call
 
 You can change the list overlap analysis rule for a view with a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) or with the `ALTER VIEW` statement:
 
-``` notranslate
-ALTER VIEW VIEW_NAME
-SET OPTIONS (
-  privacy_policy= '''{
-    "join_restriction_policy": {
-      "join_condition": "JOIN_CONDITION",
-      "join_allowed_columns": JOIN_ALLOWED_COLUMNS
-    }
-  }'''
-)
-```
+    ALTER VIEW VIEW_NAME
+    SET OPTIONS (
+      privacy_policy= '''{
+        "join_restriction_policy": {
+          "join_condition": "JOIN_CONDITION",
+          "join_allowed_columns": JOIN_ALLOWED_COLUMNS
+        }
+      }'''
+    )
 
 For more information about the values you can set for the privacy policy in the preceding syntax, see [Define a list overlap analysis rule for a view](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_list_overlap_view) .
 
@@ -513,12 +501,10 @@ In the following example, a join restriction policy is used in an aggregation th
 
 You can block a join operation if it doesn't include at least one required column. To do this include the following parts in your list overlap analysis rule:
 
-``` notranslate
-"join_restriction_policy": {
-  "join_condition": "JOIN_ANY",
-  "join_allowed_columns": ["column_name", ...]
-}
-```
+    "join_restriction_policy": {
+      "join_condition": "JOIN_ANY",
+      "join_allowed_columns": ["column_name", ...]
+    }
 
 Example:
 
@@ -542,18 +528,14 @@ To get the preceding query to run, in the `USING` clause, replace `last_name` wi
 
 If the query must have a join operation, you can block the query if no join operation is present by using one of the following list overlap analysis rules:
 
-``` notranslate
-"join_restriction_policy": {
-  "join_condition": "JOIN_NOT_REQUIRED"
-}
-```
+    "join_restriction_policy": {
+      "join_condition": "JOIN_NOT_REQUIRED"
+    }
 
-``` notranslate
-"join_restriction_policy": {
-  "join_condition": "JOIN_NOT_REQUIRED",
-  "join_allowed_columns": []
-}
-```
+    "join_restriction_policy": {
+      "join_condition": "JOIN_NOT_REQUIRED",
+      "join_allowed_columns": []
+    }
 
 Example:
 
@@ -575,12 +557,10 @@ In the following query, the query is blocked because there is no join operation 
 
 If the query must have a join operation and the join operation must have at least one required column, include the following parts in your list overlap analysis rule:
 
-``` notranslate
-"join_restriction_policy": {
-  "join_condition": "JOIN_NOT_REQUIRED",
-  "join_allowed_columns": ["column_name", ...]
-}
-```
+    "join_restriction_policy": {
+      "join_condition": "JOIN_NOT_REQUIRED",
+      "join_allowed_columns": ["column_name", ...]
+    }
 
 Example:
 
@@ -603,11 +583,9 @@ To get the preceding query to run, in the `USING` clause, replace `last_name` wi
 
 You can block all join operations. To do this, only include the following parts in your list overlap analysis rule:
 
-``` notranslate
-"join_restriction_policy": {
-  "join_condition": "JOIN_BLOCKED",
-}
-```
+    "join_restriction_policy": {
+      "join_condition": "JOIN_BLOCKED",
+    }
 
 Example:
 
@@ -630,12 +608,10 @@ To get the preceding query to run, remove the `INNER JOIN` operation.
 
 You can block an inner join operation if it doesn't include all required columns. To do this, include the following parts in your list overlap analysis rule:
 
-``` notranslate
-"join_restriction_policy": {
-  "join_condition": "JOIN_ALL",
-  "join_allowed_columns": ["column_name", ...]
-}
-```
+    "join_restriction_policy": {
+      "join_condition": "JOIN_ALL",
+      "join_allowed_columns": ["column_name", ...]
+    }
 
 Example:
 

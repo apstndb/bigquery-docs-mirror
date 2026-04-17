@@ -80,30 +80,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a time series model
 
@@ -121,29 +115,27 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast`
-      OPTIONS (
-        MODEL_TYPE = 'ARIMA_PLUS',
-        TIME_SERIES_TIMESTAMP_COL = 'date',
-        TIME_SERIES_DATA_COL = 'total_bottles_sold',
-        TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
-        HOLIDAY_REGION = 'US')
-    AS
-    SELECT
-      store_number,
-      zip_code,
-      city,
-      county,
-      date,
-      SUM(bottles_sold) AS total_bottles_sold
-    FROM
-      `bigquery-public-data.iowa_liquor_sales.sales`
-    WHERE
-      date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
-      AND county IN ('POLK', 'LINN', 'SCOTT')
-    GROUP BY store_number, date, city, zip_code, county;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast`
+          OPTIONS (
+            MODEL_TYPE = 'ARIMA_PLUS',
+            TIME_SERIES_TIMESTAMP_COL = 'date',
+            TIME_SERIES_DATA_COL = 'total_bottles_sold',
+            TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
+            HOLIDAY_REGION = 'US')
+        AS
+        SELECT
+          store_number,
+          zip_code,
+          city,
+          county,
+          date,
+          SUM(bottles_sold) AS total_bottles_sold
+        FROM
+          `bigquery-public-data.iowa_liquor_sales.sales`
+        WHERE
+          date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
+          AND county IN ('POLK', 'LINN', 'SCOTT')
+        GROUP BY store_number, date, city, zip_code, county;
     
     The query takes approximately 37 seconds to complete, after which you can access the `liquor_forecast` model. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -159,14 +151,12 @@ Follow these steps to forecast data with the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.FORECAST(
-        MODEL `bqml_tutorial.liquor_forecast`,
-        STRUCT(20 AS horizon, 0.8 AS confidence_level))
-    ORDER BY store_number, county, city, zip_code, forecast_timestamp;
-    ```
+        SELECT *
+        FROM
+          ML.FORECAST(
+            MODEL `bqml_tutorial.liquor_forecast`,
+            STRUCT(20 AS horizon, 0.8 AS confidence_level))
+        ORDER BY store_number, county, city, zip_code, forecast_timestamp;
     
     The results should look similar to the following:
     
@@ -188,30 +178,28 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast_hierarchical`
-      OPTIONS (
-        MODEL_TYPE = 'ARIMA_PLUS',
-        TIME_SERIES_TIMESTAMP_COL = 'date',
-        TIME_SERIES_DATA_COL = 'total_bottles_sold',
-        TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
-        HIERARCHICAL_TIME_SERIES_COLS = ['zip_code', 'store_number'],
-        HOLIDAY_REGION = 'US')
-    AS
-    SELECT
-      store_number,
-      zip_code,
-      city,
-      county,
-      date,
-      SUM(bottles_sold) AS total_bottles_sold
-    FROM
-      `bigquery-public-data.iowa_liquor_sales.sales`
-    WHERE
-      date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
-      AND county IN ('POLK', 'LINN', 'SCOTT')
-    GROUP BY store_number, date, city, zip_code, county;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast_hierarchical`
+          OPTIONS (
+            MODEL_TYPE = 'ARIMA_PLUS',
+            TIME_SERIES_TIMESTAMP_COL = 'date',
+            TIME_SERIES_DATA_COL = 'total_bottles_sold',
+            TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
+            HIERARCHICAL_TIME_SERIES_COLS = ['zip_code', 'store_number'],
+            HOLIDAY_REGION = 'US')
+        AS
+        SELECT
+          store_number,
+          zip_code,
+          city,
+          county,
+          date,
+          SUM(bottles_sold) AS total_bottles_sold
+        FROM
+          `bigquery-public-data.iowa_liquor_sales.sales`
+        WHERE
+          date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
+          AND county IN ('POLK', 'LINN', 'SCOTT')
+        GROUP BY store_number, date, city, zip_code, county;
     
     The query takes approximately 45 seconds to complete, after which the `bqml_tutorial.liquor_forecast_hierarchical` model can be accessed in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -225,16 +213,14 @@ Follow these steps to forecast data with the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.FORECAST(
-        MODEL `bqml_tutorial.liquor_forecast_hierarchical`,
-        STRUCT(30 AS horizon, 0.8 AS confidence_level))
-    WHERE city = 'LECLAIRE'
-    ORDER BY county, city, zip_code, store_number, forecast_timestamp;
-    ```
+        SELECT
+          *
+        FROM
+          ML.FORECAST(
+            MODEL `bqml_tutorial.liquor_forecast_hierarchical`,
+            STRUCT(30 AS horizon, 0.8 AS confidence_level))
+        WHERE city = 'LECLAIRE'
+        ORDER BY county, city, zip_code, store_number, forecast_timestamp;
     
     The results should look similar to the following:
     

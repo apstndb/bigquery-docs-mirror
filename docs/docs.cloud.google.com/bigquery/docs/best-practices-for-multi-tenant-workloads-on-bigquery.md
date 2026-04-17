@@ -170,7 +170,7 @@ The project configuration in figure 4 includes the following projects.
 
 If your organization needs more flexibility, the following options are available:
 
-  - **Cloud Composer jobs** : you can schedule [Cloud Composer](https://docs.cloud.google.com/composer) jobs to issue ETL jobs that create regional subsets before triggering the BigQuery Data Transfer Service through its [client API](https://docs.cloud.google.com/bigquery/docs/reference/libraries) . If your organization can support additional latency, we recommend this option.
+  - **Managed Service for Apache Airflow jobs** : you can schedule [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer) jobs to issue ETL jobs that create regional subsets before triggering the BigQuery Data Transfer Service through its [client API](https://docs.cloud.google.com/bigquery/docs/reference/libraries) . If your organization can support additional latency, we recommend this option.
   - **ETL infrastructure** : ETL infrastructure, such as Dataflow, can dual-write regional subsets into target regions. If your organization requires minimal data latency between regions, we recommend this option.
 
 ## Data marts with decentralized authority

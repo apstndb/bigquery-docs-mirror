@@ -15,31 +15,23 @@ The Google Cloud [Visual Studio Code (VS Code)](https://code.visualstudio.com/) 
 
 1.  In your local terminal, check to make sure you have [Python 3.11](https://www.python.org/downloads/) or later installed on your system:
     
-    ``` notranslate
-    python3 --version
-    ```
+        python3 --version
 
 2.  [Install the Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install) .
 
 3.  In your local terminal, [initialize the gcloud CLI](https://docs.cloud.google.com/sdk/docs/initializing) :
     
-    ``` notranslate
-    gcloud init
-    ```
+        gcloud init
 
 4.  Configure a default project:
     
-    ``` notranslate
-    gcloud config set project PROJECT_ID
-    ```
+        gcloud config set project PROJECT_ID
     
     Replace `PROJECT_ID` with your default project.
 
 5.  Set up [Application Default Credentials](https://docs.cloud.google.com/bigquery/docs/authentication) :
     
-    ``` notranslate
-    gcloud auth application-default login
-    ```
+        gcloud auth application-default login
 
 6.  [Download and install VS Code](https://code.visualstudio.com/download) .
 

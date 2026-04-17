@@ -4,7 +4,7 @@ This document describes the `ML.ARIMA_COEFFICIENTS` function, which lets you see
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ARIMA_COEFFICIENTS(
   MODEL `PROJECT_ID.DATASET.MODEL`
 )
@@ -37,12 +37,10 @@ ML.ARIMA_COEFFICIENTS(
 
 The following example retrieves the model coefficients information from the model `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.ARIMA_COEFFICIENTS(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.ARIMA_COEFFICIENTS(MODEL `mydataset.mymodel`)
 
 ## What's next
 

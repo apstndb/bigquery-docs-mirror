@@ -336,16 +336,14 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_BY_USER `` .
 
 The following query displays the job ID, creation time, and query of all pending or running jobs submitted by the current user in the designated project:
 
-``` notranslate
-SELECT
-  job_id,
-  creation_time,
-  query
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_USER
-WHERE
-  state != 'DONE';
-```
+    SELECT
+      job_id,
+      creation_time,
+      query
+    FROM
+      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_USER
+    WHERE
+      state != 'DONE';
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

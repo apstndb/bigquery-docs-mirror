@@ -74,9 +74,7 @@ Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SCHEMA github_source_data;
-    ```
+        CREATE SCHEMA github_source_data;
 
 3.  Click play\_circle **Run** .
 
@@ -227,9 +225,7 @@ Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SCHEMA shared_views;
-    ```
+        CREATE SCHEMA shared_views;
 
 3.  Click play\_circle **Run** .
 
@@ -272,15 +268,13 @@ To create the view in the new dataset, choose one of the following options:
 
 2.  In the query editor, enter the following query.
     
-    ``` notranslate
-    SELECT
-    commit,
-    author.name AS author,
-    committer.name AS committer,
-    repo_name
-    FROM
-    `PROJECT_ID.github_source_data.github_contributors`;
-    ```
+        SELECT
+        commit,
+        author.name AS author,
+        committer.name AS committer,
+        repo_name
+        FROM
+        `PROJECT_ID.github_source_data.github_contributors`;
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -304,18 +298,16 @@ Use the [`CREATE VIEW` DDL statement](https://docs.cloud.google.com/bigquery/doc
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE VIEW shared_views.github_analyst_view
-    AS (
-      SELECT
-        commit,
-        author.name AS author,
-        committer.name AS committer,
-        repo_name
-      FROM
-        `PROJECT_ID.github_source_data.github_contributors`
-    );
-    ```
+        CREATE VIEW shared_views.github_analyst_view
+        AS (
+          SELECT
+            commit,
+            author.name AS author,
+            committer.name AS committer,
+            repo_name
+          FROM
+            `PROJECT_ID.github_source_data.github_contributors`
+        );
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -497,9 +489,7 @@ To verify the configuration, a data analyst should run the following query:
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT  *FROM  `PROJECT_ID.shared_views.github_analyst_view`;
-    ```
+        SELECT  *FROM  `PROJECT_ID.shared_views.github_analyst_view`;
     
     Replace `  PROJECT_ID  ` with your project ID.
 

@@ -640,22 +640,20 @@ Depending on the specific quota limit that was reached, look at `total_rows` or 
 
 For example, the following query shows total bytes ingested per minute, and the total number of quota errors:
 
-``` notranslate
-SELECT
- start_timestamp,
- error_code,
- SUM(total_input_bytes) as sum_input_bytes,
- SUM(IF(error_code IN ('QUOTA_EXCEEDED', 'RATE_LIMIT_EXCEEDED'),
-     total_requests, 0)) AS quota_error
-FROM
- `region-REGION_NAME`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT
-WHERE
-  start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
-GROUP BY
- start_timestamp,
- error_code
-ORDER BY 1 DESC
-```
+    SELECT
+     start_timestamp,
+     error_code,
+     SUM(total_input_bytes) as sum_input_bytes,
+     SUM(IF(error_code IN ('QUOTA_EXCEEDED', 'RATE_LIMIT_EXCEEDED'),
+         total_requests, 0)) AS quota_error
+    FROM
+     `region-REGION_NAME`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT
+    WHERE
+      start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
+    GROUP BY
+     start_timestamp,
+     error_code
+    ORDER BY 1 DESC
 
 #### Resolution
 

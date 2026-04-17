@@ -69,30 +69,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Prepare the time-series data
 
@@ -102,21 +96,19 @@ Aggregate the Wikipedia page view data for the [Google I/O](https://en.wikipedia
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.googleio_page_views`
-    AS
-    SELECT
-      DATETIME_TRUNC(datehour, DAY) AS date,
-      SUM(views) AS views
-    FROM
-      `bigquery-public-data.wikipedia.pageviews_*`
-    WHERE
-      datehour >= '2017-01-01'
-      AND datehour < '2023-01-01'
-      AND title = 'Google_I/O'
-    GROUP BY
-      DATETIME_TRUNC(datehour, DAY)
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.googleio_page_views`
+        AS
+        SELECT
+          DATETIME_TRUNC(datehour, DAY) AS date,
+          SUM(views) AS views
+        FROM
+          `bigquery-public-data.wikipedia.pageviews_*`
+        WHERE
+          datehour >= '2017-01-01'
+          AND datehour < '2023-01-01'
+          AND title = 'Google_I/O'
+        GROUP BY
+          DATETIME_TRUNC(datehour, DAY)
 
 ## Create a time-series forecasting model that uses built-in holidays
 
@@ -126,23 +118,21 @@ Create a model that forecasts daily page views for the Wikipedia "Google I/O" pa
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.forecast_googleio`
-      OPTIONS (
-        model_type = 'ARIMA_PLUS',
-        holiday_region = 'US',
-        time_series_timestamp_col = 'date',
-        time_series_data_col = 'views',
-        data_frequency = 'DAILY',
-        horizon = 365)
-    AS
-    SELECT
-      *
-    FROM
-      `bqml_tutorial.googleio_page_views`
-    WHERE
-      date < '2022-01-01';
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.forecast_googleio`
+          OPTIONS (
+            model_type = 'ARIMA_PLUS',
+            holiday_region = 'US',
+            time_series_timestamp_col = 'date',
+            time_series_data_col = 'views',
+            data_frequency = 'DAILY',
+            horizon = 365)
+        AS
+        SELECT
+          *
+        FROM
+          `bqml_tutorial.googleio_page_views`
+        WHERE
+          date < '2022-01-01';
 
 ## Visualize the forecasted results
 
@@ -152,29 +142,27 @@ After you create the model using built-in holidays, join the original data from 
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT
-      original.date,
-      original.views AS original_views,
-      explain_forecast.time_series_adjusted_data
-        AS adjusted_views_without_custom_holiday,
-    FROM
-      `bqml_tutorial.googleio_page_views` original
-    INNER JOIN
-      (
         SELECT
-          *
+          original.date,
+          original.views AS original_views,
+          explain_forecast.time_series_adjusted_data
+            AS adjusted_views_without_custom_holiday,
         FROM
-          ML.EXPLAIN_FORECAST(
-            MODEL `bqml_tutorial.forecast_googleio`,
-            STRUCT(365 AS horizon))
-      ) explain_forecast
-      ON
-        TIMESTAMP(original.date)
-        = explain_forecast.time_series_timestamp
-    ORDER BY
-      original.date;
-    ```
+          `bqml_tutorial.googleio_page_views` original
+        INNER JOIN
+          (
+            SELECT
+              *
+            FROM
+              ML.EXPLAIN_FORECAST(
+                MODEL `bqml_tutorial.forecast_googleio`,
+                STRUCT(365 AS horizon))
+          ) explain_forecast
+          ON
+            TIMESTAMP(original.date)
+            = explain_forecast.time_series_timestamp
+        ORDER BY
+          original.date;
 
 3.  In the **Query results** pane, click **Open in** \> **Data Studio** . Data Studio opens in a new tab.
 
@@ -204,44 +192,42 @@ As you can see in [Google I/O history](https://en.wikipedia.org/wiki/Google_I/O#
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.forecast_googleio_with_custom_holiday`
-      OPTIONS (
-        model_type = 'ARIMA_PLUS',
-        holiday_region = 'US',
-        time_series_timestamp_col = 'date',
-        time_series_data_col = 'views',
-        data_frequency = 'DAILY',
-        horizon = 365)
-    AS (
-      training_data AS (
-          SELECT
-            *
-          FROM
-            `bqml_tutorial.googleio_page_views`
-          WHERE
-            date < '2022-01-01'
-        ),
-      custom_holiday AS (
-          SELECT
-            'US' AS region,
-            'GoogleIO' AS holiday_name,
-            primary_date,
-            1 AS preholiday_days,
-            2 AS postholiday_days
-          FROM
-            UNNEST(
-              [
-                DATE('2017-05-17'),
-                DATE('2018-05-08'),
-                DATE('2019-05-07'),
-                -- cancelled in 2020 due to pandemic
-                DATE('2021-05-18'),
-                DATE('2022-05-11')])
-              AS primary_date
-        )
-    );
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.forecast_googleio_with_custom_holiday`
+          OPTIONS (
+            model_type = 'ARIMA_PLUS',
+            holiday_region = 'US',
+            time_series_timestamp_col = 'date',
+            time_series_data_col = 'views',
+            data_frequency = 'DAILY',
+            horizon = 365)
+        AS (
+          training_data AS (
+              SELECT
+                *
+              FROM
+                `bqml_tutorial.googleio_page_views`
+              WHERE
+                date < '2022-01-01'
+            ),
+          custom_holiday AS (
+              SELECT
+                'US' AS region,
+                'GoogleIO' AS holiday_name,
+                primary_date,
+                1 AS preholiday_days,
+                2 AS postholiday_days
+              FROM
+                UNNEST(
+                  [
+                    DATE('2017-05-17'),
+                    DATE('2018-05-08'),
+                    DATE('2019-05-07'),
+                    -- cancelled in 2020 due to pandemic
+                    DATE('2021-05-18'),
+                    DATE('2022-05-11')])
+                  AS primary_date
+            )
+        );
 
 ## Visualize the forecasted results
 
@@ -251,30 +237,28 @@ After you create the model using custom holidays, join the original data from th
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT
-      original.date,
-      original.views AS original_views,
-      explain_forecast.time_series_adjusted_data
-        AS adjusted_views_with_custom_holiday,
-    FROM
-      `bqml_tutorial.googleio_page_views` original
-    INNER JOIN
-      (
         SELECT
-          *
+          original.date,
+          original.views AS original_views,
+          explain_forecast.time_series_adjusted_data
+            AS adjusted_views_with_custom_holiday,
         FROM
-          ML.EXPLAIN_FORECAST(
-            MODEL
-              `bqml_tutorial.forecast_googleio_with_custom_holiday`,
-            STRUCT(365 AS horizon))
-      ) explain_forecast
-      ON
-        TIMESTAMP(original.date)
-        = explain_forecast.time_series_timestamp
-    ORDER BY
-      original.date;
-    ```
+          `bqml_tutorial.googleio_page_views` original
+        INNER JOIN
+          (
+            SELECT
+              *
+            FROM
+              ML.EXPLAIN_FORECAST(
+                MODEL
+                  `bqml_tutorial.forecast_googleio_with_custom_holiday`,
+                STRUCT(365 AS horizon))
+          ) explain_forecast
+          ON
+            TIMESTAMP(original.date)
+            = explain_forecast.time_series_timestamp
+        ORDER BY
+          original.date;
 
 3.  In the **Query results** pane, click **Explore data** , and then click **Explore with Data Studio** . Data Studio opens in a new tab.
 
@@ -296,12 +280,10 @@ Inspect the list of holidays that were taken into account during modeling by usi
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.HOLIDAY_INFO(
-        MODEL `bqml_tutorial.forecast_googleio_with_custom_holiday`);
-    ```
+        SELECT *
+        FROM
+          ML.HOLIDAY_INFO(
+            MODEL `bqml_tutorial.forecast_googleio_with_custom_holiday`);
     
     The results show both Google I/O and the built-in holidays in the list of holidays:
     
@@ -315,20 +297,18 @@ Evaluate the effects of the custom holidays on the forecasted results by using t
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT
-      time_series_timestamp,
-      holiday_effect_GoogleIO,
-      holiday_effect_US_Juneteenth,
-      holiday_effect_Christmas,
-      holiday_effect_NewYear
-    FROM
-      ML.EXPLAIN_FORECAST(
-        model
-          `bqml_tutorial.forecast_googleio_with_custom_holiday`,
-        STRUCT(365 AS horizon))
-    WHERE holiday_effect != 0;
-    ```
+        SELECT
+          time_series_timestamp,
+          holiday_effect_GoogleIO,
+          holiday_effect_US_Juneteenth,
+          holiday_effect_Christmas,
+          holiday_effect_NewYear
+        FROM
+          ML.EXPLAIN_FORECAST(
+            model
+              `bqml_tutorial.forecast_googleio_with_custom_holiday`,
+            STRUCT(365 AS horizon))
+        WHERE holiday_effect != 0;
     
     The results show that Google I/O contributes a large amount of holiday effect to the forecasted results:
     
@@ -342,46 +322,44 @@ Use the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/ref
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT
-      "original" AS model_type,
-      *
-    FROM
-      ml.evaluate(
-        MODEL `bqml_tutorial.forecast_googleio`,
-        (
-          SELECT
-            *
-          FROM
-            `bqml_tutorial.googleio_page_views`
-          WHERE
-            date >= '2022-05-08'
-            AND date < '2022-05-12'
-        ),
-        STRUCT(
-          365 AS horizon,
-          TRUE AS perform_aggregation))
-    UNION ALL
-    SELECT
-      "with_custom_holiday" AS model_type,
-      *
-    FROM
-      ml.evaluate(
-        MODEL
-          `bqml_tutorial.forecast_googleio_with_custom_holiday`,
-        (
-          SELECT
-            *
-          FROM
-            `bqml_tutorial.googleio_page_views`
-          WHERE
-            date >= '2022-05-08'
-            AND date < '2022-05-12'
-        ),
-        STRUCT(
-          365 AS horizon,
-          TRUE AS perform_aggregation));
-    ```
+        SELECT
+          "original" AS model_type,
+          *
+        FROM
+          ml.evaluate(
+            MODEL `bqml_tutorial.forecast_googleio`,
+            (
+              SELECT
+                *
+              FROM
+                `bqml_tutorial.googleio_page_views`
+              WHERE
+                date >= '2022-05-08'
+                AND date < '2022-05-12'
+            ),
+            STRUCT(
+              365 AS horizon,
+              TRUE AS perform_aggregation))
+        UNION ALL
+        SELECT
+          "with_custom_holiday" AS model_type,
+          *
+        FROM
+          ml.evaluate(
+            MODEL
+              `bqml_tutorial.forecast_googleio_with_custom_holiday`,
+            (
+              SELECT
+                *
+              FROM
+                `bqml_tutorial.googleio_page_views`
+              WHERE
+                date >= '2022-05-08'
+                AND date < '2022-05-12'
+            ),
+            STRUCT(
+              365 AS horizon,
+              TRUE AS perform_aggregation));
     
     The results show that the second model offers a significant performance improvement:
     

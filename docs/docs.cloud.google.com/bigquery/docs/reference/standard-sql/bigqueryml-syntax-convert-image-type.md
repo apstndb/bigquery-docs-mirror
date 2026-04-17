@@ -4,7 +4,7 @@ This document describes the `ML.CONVERT_IMAGE_TYPE` scalar function, which lets 
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.CONVERT_IMAGE_TYPE(image)
 ```
 
@@ -32,20 +32,18 @@ The first array in the struct represents the dimensions of the image, and the se
 
 The [SSD Mobilenet V2 Object detection model](https://tfhub.dev/tensorflow/ssd_mobilenet_v2/2) model requires input to be in `tf.uint8` . The following example changes the pixel values for the input images from floating point numbers to integers so that they work with this model:
 
-``` notranslate
-CREATE OR REPLACE TABLE mydataset.detections
-AS (
-  SELECT uri, detection_scores
-  FROM
-    ML.PREDICT(
-      MODEL `mydataset.mobilenet`,
-      SELECT
-        ML.CONVERT_IMAGE_TYPE(ML.DECODE_IMAGE(data))
-          AS image,
-        uri
-      FROM `mydataset.images`)
-);
-```
+    CREATE OR REPLACE TABLE mydataset.detections
+    AS (
+      SELECT uri, detection_scores
+      FROM
+        ML.PREDICT(
+          MODEL `mydataset.mobilenet`,
+          SELECT
+            ML.CONVERT_IMAGE_TYPE(ML.DECODE_IMAGE(data))
+              AS image,
+            uri
+          FROM `mydataset.images`)
+    );
 
 ## What's next
 

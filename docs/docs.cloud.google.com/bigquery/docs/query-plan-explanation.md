@@ -1,5 +1,3 @@
-∏
-
 Embedded within query jobs, BigQuery includes diagnostic query plan and timing information. This is similar to the information provided by statements such as `EXPLAIN` in other database and analytical systems. This information can be retrieved from the API responses of methods such as [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) .
 
 For long running queries, BigQuery will periodically update these statistics. These updates happen independently of the rate at which the job status is polled, but typically won't happen more frequently than every 30 seconds. Additionally, query jobs that don't use execution resources, such as dry run requests or results that can be served from cached results, won't include the additional diagnostic information, though other statistics may be present.
@@ -398,7 +396,7 @@ For more information about interpreting and addressing errors, see the [troubles
 
 Query plan information is embedded in the job response information, and you can retrieve it by calling [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) . For example, the following excerpt of a JSON response for a job returning the sample hamlet query shows both the query plan and timeline information.
 
-``` console
+```console
 "statistics": {
   "creationTime": "1576544129234",
   "startTime": "1576544129348",

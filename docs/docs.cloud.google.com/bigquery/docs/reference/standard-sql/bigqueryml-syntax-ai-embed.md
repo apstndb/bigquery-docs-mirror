@@ -204,29 +204,27 @@ The following example queries the table that you just created for the five artic
 
 The following query creates an external table from images of pet products stored in a publicly available Cloud Storage bucket. Then, it generates embeddings for two of the images:
 
-``` notranslate
-# Create a dataset
-CREATE SCHEMA IF NOT EXISTS cymbal_pets;
-
-# Create an object table
-CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
-WITH CONNECTION DEFAULT
-OPTIONS (
-  object_metadata = 'SIMPLE',
-  uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png']
-);
-
-SELECT
-  ref.uri,
-  OBJ.GET_READ_URL(ref) AS signed_url,
-  AI.EMBED(
-    (OBJ.GET_ACCESS_URL(ref, 'r')),
-    connection_id => 'us.example_connection',
-    endpoint => 'multimodalembedding@001') AS embedding
-FROM
-  `cymbal_pets.product_images`
-LIMIT 2;
-```
+    # Create a dataset
+    CREATE SCHEMA IF NOT EXISTS cymbal_pets;
+    
+    # Create an object table
+    CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
+    WITH CONNECTION DEFAULT
+    OPTIONS (
+      object_metadata = 'SIMPLE',
+      uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png']
+    );
+    
+    SELECT
+      ref.uri,
+      OBJ.GET_READ_URL(ref) AS signed_url,
+      AI.EMBED(
+        (OBJ.GET_ACCESS_URL(ref, 'r')),
+        connection_id => 'us.example_connection',
+        endpoint => 'multimodalembedding@001') AS embedding
+    FROM
+      `cymbal_pets.product_images`
+    LIMIT 2;
 
 ## Choose a model
 

@@ -78,30 +78,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a table of training data
 
@@ -113,16 +107,14 @@ Follow these steps to create the table:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.taxi_tip_input`
-    AS
-    SELECT * EXCEPT (tip_amount), tip_amount AS label
-    FROM
-      `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2018`
-    WHERE
-      tip_amount IS NOT NULL
-    LIMIT 100000;
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.taxi_tip_input`
+        AS
+        SELECT * EXCEPT (tip_amount), tip_amount AS label
+        FROM
+          `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2018`
+        WHERE
+          tip_amount IS NOT NULL
+        LIMIT 100000;
 
 ## Create a baseline linear regression model
 
@@ -134,17 +126,15 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.baseline_taxi_tip_model`
-      OPTIONS (
-        MODEL_TYPE = 'LINEAR_REG'
-      )
-    AS
-    SELECT
-      *
-    FROM
-      `bqml_tutorial.taxi_tip_input`;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.baseline_taxi_tip_model`
+          OPTIONS (
+            MODEL_TYPE = 'LINEAR_REG'
+          )
+        AS
+        SELECT
+          *
+        FROM
+          `bqml_tutorial.taxi_tip_input`;
     
     The query takes about 2 minutes to complete.
 
@@ -158,15 +148,13 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.EVALUATE(MODEL `bqml_tutorial.baseline_taxi_tip_model`);
-    ```
+        SELECT *
+        FROM
+          ML.EVALUATE(MODEL `bqml_tutorial.baseline_taxi_tip_model`);
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
     | mean_absolute_error | mean_squared_error | mean_squared_log_error | median_absolute_error |      r2_score       | explained_variance  |
     +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
@@ -198,19 +186,17 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.hp_taxi_tip_model`
-      OPTIONS (
-        MODEL_TYPE = 'LINEAR_REG',
-        NUM_TRIALS = 20,
-        MAX_PARALLEL_TRIALS = 2,
-        L1_REG = HPARAM_RANGE(0, 5))
-    AS
-    SELECT
-      *
-    FROM
-      `bqml_tutorial.taxi_tip_input`;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.hp_taxi_tip_model`
+          OPTIONS (
+            MODEL_TYPE = 'LINEAR_REG',
+            NUM_TRIALS = 20,
+            MAX_PARALLEL_TRIALS = 2,
+            L1_REG = HPARAM_RANGE(0, 5))
+        AS
+        SELECT
+          *
+        FROM
+          `bqml_tutorial.taxi_tip_input`;
     
     The query takes approximately 20 minutes to complete.
 
@@ -224,16 +210,14 @@ Follow these steps to get trial information:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.TRIAL_INFO(MODEL `bqml_tutorial.hp_taxi_tip_model`)
-    ORDER BY is_optimal DESC;
-    ```
+        SELECT *
+        FROM
+          ML.TRIAL_INFO(MODEL `bqml_tutorial.hp_taxi_tip_model`)
+        ORDER BY is_optimal DESC;
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +----------+-------------------------------------+-----------------------------------+--------------------+--------------------+-----------+---------------+------------+
     | trial_id |           hyperparameters           | hparam_tuning_evaluation_metrics  |   training_loss    |     eval_loss      |  status   | error_message | is_optimal |
     +----------+-------------------------------------+-----------------------------------+--------------------+--------------------+-----------+---------------+------------+
@@ -257,16 +241,14 @@ Follow these steps to evaluate the model trials:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.EVALUATE(MODEL `bqml_tutorial.hp_taxi_tip_model`)
-    ORDER BY r2_score DESC;
-    ```
+        SELECT *
+        FROM
+          ML.EVALUATE(MODEL `bqml_tutorial.hp_taxi_tip_model`)
+        ORDER BY r2_score DESC;
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +----------+---------------------+--------------------+------------------------+-----------------------+--------------------+--------------------+
     | trial_id | mean_absolute_error | mean_squared_error | mean_squared_log_error | median_absolute_error |      r2_score      | explained_variance |
     +----------+---------------------+--------------------+------------------------+-----------------------+--------------------+--------------------+
@@ -294,23 +276,21 @@ Follow these steps to get predictions:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.PREDICT(
-        MODEL `bqml_tutorial.hp_taxi_tip_model`,
-        (
-          SELECT
-            *
-          FROM
-            `bqml_tutorial.taxi_tip_input`
-          LIMIT 5
-        ));
-    ```
+        SELECT *
+        FROM
+          ML.PREDICT(
+            MODEL `bqml_tutorial.hp_taxi_tip_model`,
+            (
+              SELECT
+                *
+              FROM
+                `bqml_tutorial.taxi_tip_input`
+              LIMIT 5
+            ));
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +----------+--------------------+-----------+---------------------+---------------------+-----------------+---------------+-----------+--------------------+--------------+-------------+-------+---------+--------------+---------------+--------------+--------------------+---------------------+----------------+-----------------+-------+
     | trial_id |  predicted_label   | vendor_id |   pickup_datetime   |  dropoff_datetime   | passenger_count | trip_distance | rate_code | store_and_fwd_flag | payment_type | fare_amount | extra | mta_tax | tolls_amount | imp_surcharge | total_amount | pickup_location_id | dropoff_location_id | data_file_year | data_file_month | label |
     +----------+--------------------+-----------+---------------------+---------------------+-----------------+---------------+-----------+--------------------+--------------+-------------+-------+---------+--------------+---------------+--------------+--------------------+---------------------+----------------+-----------------+-------+

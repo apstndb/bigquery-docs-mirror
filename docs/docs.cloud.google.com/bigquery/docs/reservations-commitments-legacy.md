@@ -91,13 +91,11 @@ To create a capacity commitment, use the [`CREATE CAPACITY` DDL statement](https
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CAPACITY
-      `ADMIN_PROJECT_ID.region-LOCATION.COMMITMENT_ID`
-    OPTIONS (
-      slot_count = NUMBER_OF_SLOTS,
-      plan = 'PLAN_TYPE');
-    ```
+        CREATE CAPACITY
+          `ADMIN_PROJECT_ID.region-LOCATION.COMMITMENT_ID`
+        OPTIONS (
+          slot_count = NUMBER_OF_SLOTS,
+          plan = 'PLAN_TYPE');
     
     Replace the following:
     
@@ -121,14 +119,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) with the [`--capacity_commitment` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-capacity-commitment) to purchase slots.
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --capacity_commitment=true \
-    --plan=PLAN_TYPE \
-    --slots=NUMBER_OF_SLOTS
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --capacity_commitment=true \
+        --plan=PLAN_TYPE \
+        --slots=NUMBER_OF_SLOTS
 
 Replace the following:
 
@@ -173,15 +169,13 @@ To view the commitments for an administration project, query the [`INFORMATION_S
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      capacity_commitment_id
-    FROM
-      `region-LOCATION`.INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT
-    WHERE
-      project_id = 'ADMIN_PROJECT_ID'
-      AND slot_count = 100;
-    ```
+        SELECT
+          capacity_commitment_id
+        FROM
+          `region-LOCATION`.INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT
+        WHERE
+          project_id = 'ADMIN_PROJECT_ID'
+          AND slot_count = 100;
     
     Replace the following:
     
@@ -196,12 +190,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq ls` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) with the [`--capacity_commitment` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#ls-capacity_commitment-flag) to list the commitments for an administration project.
 
-``` notranslate
-bq ls \
-    --capacity_commitment=true \
-    --location=LOCATION \
-    --project_id=ADMIN_PROJECT_ID
-```
+    bq ls \
+        --capacity_commitment=true \
+        --location=LOCATION \
+        --project_id=ADMIN_PROJECT_ID
 
 Replace the following:
 
@@ -254,14 +246,12 @@ You can change your renewal plan for an annual commitment as follows:
 
 To change the renewal plan choice for an annual commitment, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the [`--capacity_commitment` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#update-capacity-commitment-flag) and the [`--renewal_plan` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#renewal_plan_flag) .
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --renewal_plan=PLAN_TYPE \
-    --capacity_commitment=true \
-    COMMITMENT_ID
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --renewal_plan=PLAN_TYPE \
+        --capacity_commitment=true \
+        COMMITMENT_ID
 
 Replace the following:
 
@@ -286,15 +276,13 @@ As soon as you update your commitment, you are charged the rate associated with 
 
 To convert a commitment, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the [`--plan` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#update-plan-flag) .
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --plan=PLAN_TYPE \
-    --renewal_plan=RENEWAL_PLAN \
-    --capacity_commitment=true \
-    COMMITMENT_ID
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --plan=PLAN_TYPE \
+        --renewal_plan=RENEWAL_PLAN \
+        --capacity_commitment=true \
+        COMMITMENT_ID
 
 Replace the following:
 
@@ -338,15 +326,13 @@ When you split a commitment, the new commitment has the same plan and the same c
 
 To split commitments, use the `bq update` command.
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --split \
-    --slots=SLOTS_TO_SPLIT \
-    --capacity_commitment=true \
-    COMMITMENT_ID
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --split \
+        --slots=SLOTS_TO_SPLIT \
+        --capacity_commitment=true \
+        COMMITMENT_ID
 
 Replace the following:
 
@@ -382,14 +368,12 @@ You can merge multiple commitments into one commitment. The merging commitments 
 
 To merge two commitments into one commitment, use the `bq update` command:
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --merge=true \
-    --capacity_commitment=true \
-    COMMITMENT1,COMMITMENT2
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --merge=true \
+        --capacity_commitment=true \
+        COMMITMENT1,COMMITMENT2
 
 Replace the following:
 
@@ -447,10 +431,8 @@ To delete a capacity commitment, use the [`DROP CAPACITY` DDL statement](https:/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP CAPACITY
-      `ADMIN_PROJECT_ID.region-LOCATION.COMMITMENT_ID`;
-    ```
+        DROP CAPACITY
+          `ADMIN_PROJECT_ID.region-LOCATION.COMMITMENT_ID`;
     
     Replace the following:
     
@@ -470,13 +452,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To delete a capacity commitment, use the `bq rm` command with the `--capacity_commitment` flag:
 
-``` notranslate
-bq rm \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --capacity_commitment=true \
-    COMMITMENT_ID
-```
+    bq rm \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --capacity_commitment=true \
+        COMMITMENT_ID
 
 Replace the following:
 

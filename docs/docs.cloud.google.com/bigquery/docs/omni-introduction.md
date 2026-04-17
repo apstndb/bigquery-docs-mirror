@@ -143,14 +143,12 @@ You should consider how the staleness interval and metadata caching mode values 
 
 To find information about metadata refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
-``` notranslate
-SELECT *
-FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
-WHERE job_id LIKE '%metadata_cache_refresh%'
-AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-ORDER BY start_time DESC
-LIMIT 10;
-```
+    SELECT *
+    FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
+    WHERE job_id LIKE '%metadata_cache_refresh%'
+    AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+    ORDER BY start_time DESC
+    LIMIT 10;
 
 For more information, see [Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) .
 

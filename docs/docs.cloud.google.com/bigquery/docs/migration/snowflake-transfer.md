@@ -6,9 +6,13 @@ The Snowflake connector provided by the BigQuery Data Transfer Service lets you 
 
 The Snowflake connector engages migration agents in the Google Kubernetes Engine and triggers a load operation from Snowflake to a staging area within the same cloud provider where Snowflake is hosted.
 
-  - For AWS-hosted Snowflake accounts, the data is first staged in your Amazon S3 bucket, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
+  - For Amazon Web Services (AWS)-hosted Snowflake accounts, the data is first staged in your Amazon S3 bucket, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
   - For Google Cloud-hosted Snowflake accounts, the data is first staged in your Cloud Storage bucket, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
   - For Azure-hosted Snowflake accounts, the data is first staged in your Azure Blob Storage container, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
+
+The following diagram compares data transfers from Snowflake accounts hosted on other cloud providers, and Snowflake accounts hosted on Google Cloud.
+
+![Data transfers from AWS or Azure-hosted Snowflake accounts and Google Cloud-hosted Snowflake accounts to BigQuery](https://docs.cloud.google.com/static/bigquery/images/snowflake-dts-overview-diagram.png)
 
 ## Limitations
 
@@ -301,16 +305,14 @@ Enter the `bq mk` command and supply the transfer creation flag `--transfer_conf
 
 <!-- end list -->
 
-``` notranslate
-bq mk \
-    --transfer_config \
-    --project_id=project_id \
-    --data_source=data_source \
-    --target_dataset=dataset \
-    --display_name=name \
-    --service_account_name=service_account \
-    --params='parameters'
-```
+    bq mk \
+        --transfer_config \
+        --project_id=project_id \
+        --data_source=data_source \
+        --target_dataset=dataset \
+        --display_name=name \
+        --service_account_name=service_account \
+        --params='parameters'
 
 Replace the following:
 
@@ -385,7 +387,7 @@ You can configure the following parameters for your Snowflake transfer configura
 
 For example, for an AWS-hosted Snowflake account, the following command creates a Snowflake transfer named `Snowflake transfer config` with a target dataset named `your_bq_dataset` and a project with the ID of `your_project_id` .
 
-``` notranslate
+``` 
   PARAMS='{
   "account_identifier": "your_account_identifier",
   "auth_mechanism": "KEY_PAIR",

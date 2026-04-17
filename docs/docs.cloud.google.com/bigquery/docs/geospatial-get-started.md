@@ -55,14 +55,12 @@ In this section of the tutorial, you run a GoogleSQL query that finds all the Ci
 
 The following GoogleSQL query is used to find the Citi Bike stations with more than 30 bikes.
 
-``` notranslate
-SELECT
-  ST_GeogPoint(longitude, latitude)  AS WKT,
-  num_bikes_available
-FROM
-  `bigquery-public-data.new_york.citibike_stations`
-WHERE num_bikes_available > 30
-```
+    SELECT
+      ST_GeogPoint(longitude, latitude)  AS WKT,
+      num_bikes_available
+    FROM
+      `bigquery-public-data.new_york.citibike_stations`
+    WHERE num_bikes_available > 30
 
 The query clauses do the following:
 
@@ -83,15 +81,13 @@ To run the query by using the Google Cloud console:
 
 2.  Enter the following GoogleSQL query in the **Query editor** text area.
     
-    ``` notranslate
-    -- Finds Citi Bike stations with > 30 bikes
-    SELECT
-      ST_GeogPoint(longitude, latitude)  AS WKT,
-      num_bikes_available
-    FROM
-      `bigquery-public-data.new_york.citibike_stations`
-    WHERE num_bikes_available > 30
-    ```
+        -- Finds Citi Bike stations with > 30 bikes
+        SELECT
+          ST_GeogPoint(longitude, latitude)  AS WKT,
+          num_bikes_available
+        FROM
+          `bigquery-public-data.new_york.citibike_stations`
+        WHERE num_bikes_available > 30
 
 3.  Click **Run** .
     
@@ -155,15 +151,13 @@ To run the query:
 
 2.  In the query window, enter the following GoogleSQL query.
     
-    ``` notranslate
-    -- Finds Citi Bike stations with > 30 bikes
-    SELECT
-      ST_GeogPoint(longitude, latitude)  AS WKT,
-      num_bikes_available
-    FROM
-      `bigquery-public-data.new_york.citibike_stations`
-    WHERE num_bikes_available > 30
-    ```
+        -- Finds Citi Bike stations with > 30 bikes
+        SELECT
+          ST_GeogPoint(longitude, latitude)  AS WKT,
+          num_bikes_available
+        FROM
+          `bigquery-public-data.new_york.citibike_stations`
+        WHERE num_bikes_available > 30
 
 3.  Click **Run** .
 

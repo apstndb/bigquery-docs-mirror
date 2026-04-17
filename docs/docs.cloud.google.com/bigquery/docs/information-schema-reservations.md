@@ -152,33 +152,31 @@ To join between the reservation views and the job views, you can join between th
 
 The following example shows slot usage, slot capacity, and assigned reservation for a project with a reservation assignment, over the past hour. Slot usage is given in units of slot milliseconds per second.
 
-``` notranslate
-WITH
-  job_data AS (
-  SELECT
-    job.period_start,
-    job.reservation_id,
-    job.period_slot_ms,
-    job.job_id,
-    job.job_type
-  FROM
-    `my-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE AS job
-  WHERE
-    job.period_start > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR))
-SELECT
-  reservation.reservation_name AS reservation_name,
-  job.period_start,
-  reservation.slot_capacity,
-  job.period_slot_ms,
-  job.job_id,
-  job.job_type
-FROM
-  job_data AS job
-INNER JOIN
-  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.RESERVATIONS AS reservation
-ON
-  (job.reservation_id = CONCAT(reservation.project_id, ":", "US", ".", reservation.reservation_name));
-```
+    WITH
+      job_data AS (
+      SELECT
+        job.period_start,
+        job.reservation_id,
+        job.period_slot_ms,
+        job.job_id,
+        job.job_type
+      FROM
+        `my-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE AS job
+      WHERE
+        job.period_start > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR))
+    SELECT
+      reservation.reservation_name AS reservation_name,
+      job.period_start,
+      reservation.slot_capacity,
+      job.period_slot_ms,
+      job.job_id,
+      job.job_type
+    FROM
+      job_data AS job
+    INNER JOIN
+      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.RESERVATIONS AS reservation
+    ON
+      (job.reservation_id = CONCAT(reservation.project_id, ":", "US", ".", reservation.reservation_name));
 
 The output is similar to the following:
 

@@ -4,7 +4,7 @@ This document describes the `ML.RESIZE_IMAGE` scalar function, which lets you re
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.RESIZE_IMAGE(image, target_height, target_width, preserve_aspect_ratio)
 ```
 
@@ -45,39 +45,35 @@ The first array in the struct represents the dimensions of the image, and the se
 
 The following example resizes input images to have a height and width of 240 pixels:
 
-``` notranslate
-CREATE OR REPLACE TABLE `mydataset.results`
-AS (
-  SELECT uri, prediction_results
-  FROM
-    ML.PREDICT(
-      MODEL `mydataset.mymodel`,
-      SELECT
-        ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 240, 240, FALSE)
-        AS image,
-        uri
-      FROM `mydataset.images`)
-);
-```
+    CREATE OR REPLACE TABLE `mydataset.results`
+    AS (
+      SELECT uri, prediction_results
+      FROM
+        ML.PREDICT(
+          MODEL `mydataset.mymodel`,
+          SELECT
+            ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 240, 240, FALSE)
+            AS image,
+            uri
+          FROM `mydataset.images`)
+    );
 
 **Example 2**
 
 The following example resizes input images while preserving the aspect ratio. With the settings shown, the function returns an image with dimensions of `(10, 100)` for an input image with dimensions of `(20, 200)` .
 
-``` notranslate
-CREATE OR REPLACE TABLE `mydataset.results`
-AS (
-  SELECT uri, prediction_results
-  FROM
-    ML.PREDICT(
-      MODEL `mydataset.mymodel`,
-      SELECT
-        ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 10, 120, TRUE)
-        AS image,
-        uri
-      FROM `mydataset.images`)
-);
-```
+    CREATE OR REPLACE TABLE `mydataset.results`
+    AS (
+      SELECT uri, prediction_results
+      FROM
+        ML.PREDICT(
+          MODEL `mydataset.mymodel`,
+          SELECT
+            ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 10, 120, TRUE)
+            AS image,
+            uri
+          FROM `mydataset.images`)
+    );
 
 ## What's next
 

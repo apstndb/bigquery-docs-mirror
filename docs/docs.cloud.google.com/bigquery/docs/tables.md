@@ -110,7 +110,7 @@ In the **Create table** pane, specify the following details:
 3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. You can enter schema information manually by using one of the following methods:
       - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
         
-        ``` notranslate
+        ``` 
             bq show --format=prettyjson dataset.table
             
         ```
@@ -130,18 +130,16 @@ The following example creates a table named `newtable` that expires on January 1
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.newtable (
-      x INT64 OPTIONS (description = 'An optional INTEGER field'),
-      y STRUCT <
-        a ARRAY <STRING> OPTIONS (description = 'A repeated STRING field'),
-        b BOOL
-      >
-    ) OPTIONS (
-        expiration_timestamp = TIMESTAMP '2023-01-01 00:00:00 UTC',
-        description = 'a table that expires in 2023',
-        labels = [('org_unit', 'development')]);
-    ```
+        CREATE TABLE mydataset.newtable (
+          x INT64 OPTIONS (description = 'An optional INTEGER field'),
+          y STRUCT <
+            a ARRAY <STRING> OPTIONS (description = 'A repeated STRING field'),
+            b BOOL
+          >
+        ) OPTIONS (
+            expiration_timestamp = TIMESTAMP '2023-01-01 00:00:00 UTC',
+            description = 'a table that expires in 2023',
+            labels = [('org_unit', 'development')]);
 
 3.  Click play\_circle **Run** .
 
@@ -174,17 +172,15 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     To create an empty table in an existing dataset with a schema definition, enter the following:
     
-    ``` notranslate
-    bq mk \
-    --table \
-    --expiration=integer \
-    --description=description \
-    --label=key_1:value_1 \
-    --label=key_2:value_2 \
-    --add_tags=key_3:value_3[,...] \
-    project_id:dataset.table \
-    schema
-    ```
+        bq mk \
+        --table \
+        --expiration=integer \
+        --description=description \
+        --label=key_1:value_1 \
+        --label=key_2:value_2 \
+        --add_tags=key_3:value_3[,...] \
+        project_id:dataset.table \
+        schema
     
     Replace the following:
     
@@ -203,39 +199,33 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     Enter the following command to create a table using an inline schema definition. This command creates a table named `mytable` in `mydataset` in your default project. The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The command uses the `-t` shortcut instead of `--table` . The schema is specified inline as: `qtr:STRING,sales:FLOAT,year:STRING` .
     
-    ``` notranslate
-    bq mk \
-     -t \
-     --expiration 3600 \
-     --description "This is my table" \
-     --label organization:development \
-     mydataset.mytable \
-     qtr:STRING,sales:FLOAT,year:STRING
-    ```
+        bq mk \
+         -t \
+         --expiration 3600 \
+         --description "This is my table" \
+         --label organization:development \
+         mydataset.mytable \
+         qtr:STRING,sales:FLOAT,year:STRING
     
     Enter the following command to create a table using a JSON schema file. This command creates a table named `mytable` in `mydataset` in your default project. The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The path to the schema file is `/tmp/myschema.json` .
     
-    ``` notranslate
-    bq mk \
-     --table \
-     --expiration 3600 \
-     --description "This is my table" \
-     --label organization:development \
-     mydataset.mytable \
-     /tmp/myschema.json
-    ```
+        bq mk \
+         --table \
+         --expiration 3600 \
+         --description "This is my table" \
+         --label organization:development \
+         mydataset.mytable \
+         /tmp/myschema.json
     
     Enter the following command to create a table using an JSON schema file. This command creates a table named `mytable` in `mydataset` in `myotherproject` . The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The path to the schema file is `/tmp/myschema.json` .
     
-    ``` notranslate
-    bq mk \
-     --table \
-     --expiration 3600 \
-     --description "This is my table" \
-     --label organization:development \
-     myotherproject:mydataset.mytable \
-     /tmp/myschema.json
-    ```
+        bq mk \
+         --table \
+         --expiration 3600 \
+         --description "This is my table" \
+         --label organization:development \
+         myotherproject:mydataset.mytable \
+         /tmp/myschema.json
     
     After the table is created, you can [update](https://docs.cloud.google.com/bigquery/docs/managing-tables) the table's expiration, description, and labels. You can also [modify the schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
@@ -251,7 +241,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a table named `mytable` :
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -293,7 +283,7 @@ EOF
 
 The following example creates a table named `mytable` , then uses the [`google_bigquery_table_iam_policy`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table_iam#google_bigquery_table_iam_policy) resource to grant access to it. Take this step only if you want to grant access to the table to principals who don't have access to the dataset in which the table resides.
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -350,7 +340,7 @@ resource "google_bigquery_table_iam_policy" "policy" {
 
 The following example creates a table named `mytable` , and also uses the [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for the table. You must [enable the Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&redirect=https://console.cloud.google.com/) before running this example.
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -805,16 +795,14 @@ The following example uses the [`CREATE TABLE` statement](https://docs.cloud.goo
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.trips AS (
-      SELECT
-        bike_id,
-        start_time,
-        duration_minutes
-      FROM
-        bigquery-public-data.austin_bikeshare.bikeshare_trips
-    );
-    ```
+        CREATE TABLE mydataset.trips AS (
+          SELECT
+            bike_id,
+            start_time,
+            duration_minutes
+          FROM
+            bigquery-public-data.austin_bikeshare.bikeshare_trips
+        );
 
 3.  Click play\_circle **Run** .
 
@@ -838,11 +826,9 @@ For more information, see [Creating a new table from an existing table](https://
     
       - `--replace` : If the destination table exists, it is overwritten with the query results.
         
-        ``` notranslate
-        bq --location=location query \
-        --destination_table project_id:dataset.table \
-        --use_legacy_sql=false 'query'
-        ```
+            bq --location=location query \
+            --destination_table project_id:dataset.table \
+            --use_legacy_sql=false 'query'
         
         Replace the following:
     
@@ -864,56 +850,50 @@ For more information, see [Creating a new table from an existing table](https://
         
         Enter the following command to write query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
         
-        ``` notranslate
-        bq query \
-        --destination_table mydataset.mytable \
-        --use_legacy_sql=false \
-        'SELECT
-        name,
-        number
-        FROM
-        `bigquery-public-data`.usa_names.usa_1910_current
-        WHERE
-        gender = "M"
-        ORDER BY
-        number DESC'
-        ```
+            bq query \
+            --destination_table mydataset.mytable \
+            --use_legacy_sql=false \
+            'SELECT
+            name,
+            number
+            FROM
+            `bigquery-public-data`.usa_names.usa_1910_current
+            WHERE
+            gender = "M"
+            ORDER BY
+            number DESC'
         
         Enter the following command to use query results to overwrite a destination table named `mytable` in `mydataset` . The dataset is in your default project. The command uses the `--replace` flag to overwrite the destination table.
         
-        ``` notranslate
-        bq query \
-        --destination_table mydataset.mytable \
-        --replace \
-        --use_legacy_sql=false \
-        'SELECT
-        name,
-        number
-        FROM
-        `bigquery-public-data`.usa_names.usa_1910_current
-        WHERE
-        gender = "M"
-        ORDER BY
-        number DESC'
-        ```
+            bq query \
+            --destination_table mydataset.mytable \
+            --replace \
+            --use_legacy_sql=false \
+            'SELECT
+            name,
+            number
+            FROM
+            `bigquery-public-data`.usa_names.usa_1910_current
+            WHERE
+            gender = "M"
+            ORDER BY
+            number DESC'
         
         Enter the following command to append query results to a destination table named `mytable` in `mydataset` . The dataset is in `my-other-project` , not your default project. The command uses the `--append_table` flag to append the query results to the destination table.
         
-        ``` notranslate
-        bq query \
-        --append_table \
-        --use_legacy_sql=false \
-        --destination_table my-other-project:mydataset.mytable \
-        'SELECT
-        name,
-        number
-        FROM
-        `bigquery-public-data`.usa_names.usa_1910_current
-        WHERE
-        gender = "M"
-        ORDER BY
-        number DESC'
-        ```
+            bq query \
+            --append_table \
+            --use_legacy_sql=false \
+            --destination_table my-other-project:mydataset.mytable \
+            'SELECT
+            name,
+            number
+            FROM
+            `bigquery-public-data`.usa_names.usa_1910_current
+            WHERE
+            gender = "M"
+            ORDER BY
+            number DESC'
         
         The output for each of these examples looks like the following. For readability, some output is truncated.
         
@@ -1214,12 +1194,10 @@ To get information about tables:
     
     If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
     
-    ``` notranslate
-    bq show \
-    --schema \
-    --format=prettyjson \
-    project_id:dataset.table
-    ```
+        bq show \
+        --schema \
+        --format=prettyjson \
+        project_id:dataset.table
     
     Where:
     
@@ -1231,21 +1209,15 @@ To get information about tables:
     
     Enter the following command to display all information about `mytable` in `mydataset` . `mydataset` is in your default project.
     
-    ``` notranslate
-    bq show --format=prettyjson mydataset.mytable
-    ```
+        bq show --format=prettyjson mydataset.mytable
     
     Enter the following command to display all information about `mytable` in `mydataset` . `mydataset` is in `myotherproject` , not your default project.
     
-    ``` notranslate
-    bq show --format=prettyjson myotherproject:mydataset.mytable
-    ```
+        bq show --format=prettyjson myotherproject:mydataset.mytable
     
     Enter the following command to display only schema information about `mytable` in `mydataset` . `mydataset` is in `myotherproject` , not your default project.
     
-    ``` notranslate
-    bq show --schema --format=prettyjson myotherproject:mydataset.mytable
-    ```
+        bq show --schema --format=prettyjson myotherproject:mydataset.mytable
 
 ### API
 
@@ -1584,13 +1556,11 @@ To run the query against a project other than your default project, add the proj
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
-SELECT
-  table_catalog, table_schema, table_name, table_type,
-  is_insertable_into, creation_time, ddl
-FROM
-  mydataset.INFORMATION_SCHEMA.TABLES;
-```
+    SELECT
+      table_catalog, table_schema, table_name, table_type,
+      is_insertable_into, creation_time, ddl
+    FROM
+      mydataset.INFORMATION_SCHEMA.TABLES;
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
@@ -1611,7 +1581,7 @@ The following example retrieves table metadata for all tables of type `CLONE` or
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLES `` .
 
-``` notranslate
+``` 
   SELECT
     table_name, table_type, base_table_catalog,
     base_table_schema, base_table_name, snapshot_time_ms
@@ -1640,14 +1610,12 @@ The following example retrieves `table_name` and `ddl` columns from the `INFORMA
 
 Because the table you're querying is in another project, you add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` . In this example, the value is `` `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES `` .
 
-``` notranslate
-SELECT
-  table_name, ddl
-FROM
-  `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES
-WHERE
-  table_name = 'population_by_zip_2010';
-```
+    SELECT
+      table_name, ddl
+    FROM
+      `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES
+    WHERE
+      table_name = 'population_by_zip_2010';
 
 The result is similar to the following:
 
@@ -2085,7 +2053,7 @@ To run the query against a project other than your default project, add the proj
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
+``` 
   SELECT
     *
   FROM
@@ -2114,7 +2082,7 @@ The following example retrieves metadata about all tables in `mydataset` that co
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
 
-``` notranslate
+``` 
   SELECT
     *
   FROM
@@ -2273,7 +2241,7 @@ The following column is excluded from the query results:
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
+``` 
   SELECT
     * EXCEPT(is_updatable)
   FROM
@@ -2395,15 +2363,13 @@ To view metadata about the `author` and `difference` columns, run the following 
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
-SELECT
-  *
-FROM
-  `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
-WHERE
-  table_name = 'commits'
-  AND (column_name = 'author' OR column_name = 'difference');
-```
+    SELECT
+      *
+    FROM
+      `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
+    WHERE
+      table_name = 'commits'
+      AND (column_name = 'author' OR column_name = 'difference');
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
@@ -2582,12 +2548,10 @@ The `TABLE_STORAGE` and `TABLE_STORAGE_BY_ORGANIZATION` views have the following
 
 The following example shows you the total logical bytes billed for the current project.
 
-``` notranslate
-SELECT
-  SUM(total_logical_bytes) AS total_logical_bytes
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE;
-```
+    SELECT
+      SUM(total_logical_bytes) AS total_logical_bytes
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE;
 
 The result is similar to the following:
 
@@ -2601,29 +2565,27 @@ The result is similar to the following:
 
 The following example shows different storage bytes in GiB at the dataset(s) level for current project.
 
-``` notranslate
-SELECT
-  table_schema AS dataset_name,
-  -- Logical
-  SUM(total_logical_bytes) / power(1024, 3) AS total_logical_gib,
-  SUM(active_logical_bytes) / power(1024, 3) AS active_logical_gib,
-  SUM(long_term_logical_bytes) / power(1024, 3) AS long_term_logical_gib,
-  -- Physical
-  SUM(total_physical_bytes) / power(1024, 3) AS total_physical_gib,
-  SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
-  SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
-  SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
-  SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
-  SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
-WHERE
-  table_type ='BASE TABLE'
-GROUP BY
-  table_schema
-ORDER BY
-  dataset_name
-```
+    SELECT
+      table_schema AS dataset_name,
+      -- Logical
+      SUM(total_logical_bytes) / power(1024, 3) AS total_logical_gib,
+      SUM(active_logical_bytes) / power(1024, 3) AS active_logical_gib,
+      SUM(long_term_logical_bytes) / power(1024, 3) AS long_term_logical_gib,
+      -- Physical
+      SUM(total_physical_bytes) / power(1024, 3) AS total_physical_gib,
+      SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
+      SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
+      SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
+      SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
+      SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
+    WHERE
+      table_type ='BASE TABLE'
+    GROUP BY
+      table_schema
+    ORDER BY
+      dataset_name
 
 ##### Example 3:
 
@@ -2635,60 +2597,58 @@ The prices used in the pricing variables for this query are for the `us-central1
 
 2.  Enter the following GoogleSQL query in the **Query editor** box. `INFORMATION_SCHEMA` requires GoogleSQL syntax. GoogleSQL is the default syntax in the Google Cloud console.
     
-    ``` notranslate
-    DECLARE active_logical_gib_price FLOAT64 DEFAULT 0.02;
-    DECLARE long_term_logical_gib_price FLOAT64 DEFAULT 0.01;
-    DECLARE active_physical_gib_price FLOAT64 DEFAULT 0.04;
-    DECLARE long_term_physical_gib_price FLOAT64 DEFAULT 0.02;
-    
-    WITH
-     storage_sizes AS (
-       SELECT
-         table_schema AS dataset_name,
-         -- Logical
-         SUM(IF(deleted=false, active_logical_bytes, 0)) / power(1024, 3) AS active_logical_gib,
-         SUM(IF(deleted=false, long_term_logical_bytes, 0)) / power(1024, 3) AS long_term_logical_gib,
-         -- Physical
-         SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
-         SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
-         SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
-         -- Restorable previously deleted physical
-         SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
-         SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib,
-       FROM
-         `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_PROJECT
-       WHERE total_physical_bytes + fail_safe_physical_bytes > 0
-         -- Base the forecast on base tables only for highest precision results
-         AND table_type  = 'BASE TABLE'
-         GROUP BY 1
-     )
-    SELECT
-      dataset_name,
-      -- Logical
-      ROUND(active_logical_gib, 2) AS active_logical_gib,
-      ROUND(long_term_logical_gib, 2) AS long_term_logical_gib,
-      -- Physical
-      ROUND(active_physical_gib, 2) AS active_physical_gib,
-      ROUND(long_term_physical_gib, 2) AS long_term_physical_gib,
-      ROUND(time_travel_physical_gib, 2) AS time_travel_physical_gib,
-      ROUND(fail_safe_physical_gib, 2) AS fail_safe_physical_gib,
-      -- Compression ratio
-      ROUND(SAFE_DIVIDE(active_logical_gib, active_no_tt_physical_gib), 2) AS active_compression_ratio,
-      ROUND(SAFE_DIVIDE(long_term_logical_gib, long_term_physical_gib), 2) AS long_term_compression_ratio,
-      -- Forecast costs logical
-      ROUND(active_logical_gib * active_logical_gib_price, 2) AS forecast_active_logical_cost,
-      ROUND(long_term_logical_gib * long_term_logical_gib_price, 2) AS forecast_long_term_logical_cost,
-      -- Forecast costs physical
-      ROUND((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price, 2) AS forecast_active_physical_cost,
-      ROUND(long_term_physical_gib * long_term_physical_gib_price, 2) AS forecast_long_term_physical_cost,
-      -- Forecast costs total
-      ROUND(((active_logical_gib * active_logical_gib_price) + (long_term_logical_gib * long_term_logical_gib_price)) -
-         (((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price) + (long_term_physical_gib * long_term_physical_gib_price)), 2) AS forecast_total_cost_difference
-    FROM
-      storage_sizes
-    ORDER BY
-      (forecast_active_logical_cost + forecast_active_physical_cost) DESC;
-    ```
+        DECLARE active_logical_gib_price FLOAT64 DEFAULT 0.02;
+        DECLARE long_term_logical_gib_price FLOAT64 DEFAULT 0.01;
+        DECLARE active_physical_gib_price FLOAT64 DEFAULT 0.04;
+        DECLARE long_term_physical_gib_price FLOAT64 DEFAULT 0.02;
+        
+        WITH
+         storage_sizes AS (
+           SELECT
+             table_schema AS dataset_name,
+             -- Logical
+             SUM(IF(deleted=false, active_logical_bytes, 0)) / power(1024, 3) AS active_logical_gib,
+             SUM(IF(deleted=false, long_term_logical_bytes, 0)) / power(1024, 3) AS long_term_logical_gib,
+             -- Physical
+             SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
+             SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
+             SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
+             -- Restorable previously deleted physical
+             SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
+             SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib,
+           FROM
+             `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_PROJECT
+           WHERE total_physical_bytes + fail_safe_physical_bytes > 0
+             -- Base the forecast on base tables only for highest precision results
+             AND table_type  = 'BASE TABLE'
+             GROUP BY 1
+         )
+        SELECT
+          dataset_name,
+          -- Logical
+          ROUND(active_logical_gib, 2) AS active_logical_gib,
+          ROUND(long_term_logical_gib, 2) AS long_term_logical_gib,
+          -- Physical
+          ROUND(active_physical_gib, 2) AS active_physical_gib,
+          ROUND(long_term_physical_gib, 2) AS long_term_physical_gib,
+          ROUND(time_travel_physical_gib, 2) AS time_travel_physical_gib,
+          ROUND(fail_safe_physical_gib, 2) AS fail_safe_physical_gib,
+          -- Compression ratio
+          ROUND(SAFE_DIVIDE(active_logical_gib, active_no_tt_physical_gib), 2) AS active_compression_ratio,
+          ROUND(SAFE_DIVIDE(long_term_logical_gib, long_term_physical_gib), 2) AS long_term_compression_ratio,
+          -- Forecast costs logical
+          ROUND(active_logical_gib * active_logical_gib_price, 2) AS forecast_active_logical_cost,
+          ROUND(long_term_logical_gib * long_term_logical_gib_price, 2) AS forecast_long_term_logical_cost,
+          -- Forecast costs physical
+          ROUND((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price, 2) AS forecast_active_physical_cost,
+          ROUND(long_term_physical_gib * long_term_physical_gib_price, 2) AS forecast_long_term_physical_cost,
+          -- Forecast costs total
+          ROUND(((active_logical_gib * active_logical_gib_price) + (long_term_logical_gib * long_term_logical_gib_price)) -
+             (((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price) + (long_term_physical_gib * long_term_physical_gib_price)), 2) AS forecast_total_cost_difference
+        FROM
+          storage_sizes
+        ORDER BY
+          (forecast_active_logical_cost + forecast_active_physical_cost) DESC;
     
     > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -2767,12 +2727,10 @@ To list the tables in a dataset:
     
     <!-- end list -->
     
-    ``` notranslate
-    bq ls \
-    --format=pretty \
-    --max_results integer \
-    project_id:dataset
-    ```
+        bq ls \
+        --format=pretty \
+        --max_results integer \
+        project_id:dataset
     
     Where:
     
@@ -2793,19 +2751,19 @@ To list the tables in a dataset:
     
     Enter the following command to list tables in dataset `mydataset` in your default project.
     
-    ``` notranslate
+    ``` 
        bq ls --format=pretty mydataset
     ```
     
     Enter the following command to return more than the default output of 50 tables from `mydataset` . `mydataset` is in your default project.
     
-    ``` notranslate
+    ``` 
        bq ls --format=pretty --max_results 60 mydataset
     ```
     
     Enter the following command to list tables in dataset `mydataset` in `myotherproject` .
     
-    ``` notranslate
+    ``` 
        bq ls --format=pretty myotherproject:mydataset
     ```
 

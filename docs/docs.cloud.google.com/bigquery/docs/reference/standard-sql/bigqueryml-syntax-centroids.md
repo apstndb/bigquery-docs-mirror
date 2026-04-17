@@ -4,7 +4,7 @@ This document describes the `ML.CENTROIDS` function, which lets you return infor
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.CENTROIDS(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   STRUCT([, STANDARDIZE AS standardize]))
@@ -50,16 +50,14 @@ The following examples show how to use `ML.CENTROIDS` with and without the `stan
 
 The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. This model only contains numerical features.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
-```
+    SELECT
+      *
+    FROM
+      ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
 
 This query returns results like the following:
 
-``` console
+```console
 +-------------+-------------------+----------------------+---------------------+
 | centroid_id | feature           | numerical_value      | categorical_value   |
 +-------------+-------------------+----------------------+---------------------+
@@ -78,18 +76,16 @@ This query returns results like the following:
 
 The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. This model contains categorical features.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
-ORDER BY
-  centroid_id;
-```
+    SELECT
+      *
+    FROM
+      ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
+    ORDER BY
+      centroid_id;
 
 This query returns results like the following:
 
-``` console
+```console
 +-------------+-------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | centroid_id | feature           |numerical_value| categorical_value                                                                                                                                                                                                                                              |
 +-------------+-------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -110,7 +106,7 @@ This query returns results like the following:
 
 The following are the results from the same query against a k-means model with both numerical and categorical features.
 
-``` console
+```console
 +-------------+--------------------+-------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | centroid_id |      feature       |  numerical_value  | categorical_value                                                                                                                                                                                                                                                                 |
 +-------------+--------------------+-------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -125,13 +121,11 @@ The following are the results from the same query against a k-means model with b
 
 The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. The query in this example assumes that all features have a mean of `0` and a standard deviation of `1` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`,
-    STRUCT(TRUE AS standardize))
-```
+    SELECT
+      *
+    FROM
+      ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`,
+        STRUCT(TRUE AS standardize))
 
 ## What's next
 

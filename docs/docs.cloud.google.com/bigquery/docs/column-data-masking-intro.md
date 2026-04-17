@@ -637,15 +637,11 @@ Partially compatible. You can call the [`SEARCH`](https://docs.cloud.google.com/
 
 When you call the `SEARCH` function on columns that have data masking applied, you must use search criteria compatible with your level of access. For example, if you have Masked Reader access with a Hash (SHA-256) data masking rule, you would use the hash value in your `SEARCH` clause, similar to the following:
 
-``` notranslate
-SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "sg172y34shw94fujaweu");
-```
+    SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "sg172y34shw94fujaweu");
 
 If you have Fine-Grained Reader access, you would use the actual column value in your `SEARCH` clause, similar to the following:
 
-``` notranslate
-SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "jane.doe@example.com");
-```
+    SELECT * FROM myDataset.Customers WHERE SEARCH(Email, "jane.doe@example.com");
 
 Searching is less likely to be useful if you have Masked Reader access to a column where the data masking rule used is Nullify or Default Masking Value. This is because the masked results you would use as search criteria, such as `NULL` or `""` , aren't sufficiently unique to be useful.
 

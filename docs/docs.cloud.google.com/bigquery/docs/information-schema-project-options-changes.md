@@ -46,12 +46,10 @@ Replace the following:
 
 The following example retrieves all columns from the `INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES` view.
 
-``` notranslate
-SELECT
-  *
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES;
-```
+    SELECT
+      *
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

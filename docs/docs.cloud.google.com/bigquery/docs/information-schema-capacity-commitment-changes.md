@@ -64,18 +64,16 @@ Replace the following:
 
 The following query displays the user who has made the latest capacity commitment update to the current project within the specified date.
 
-``` notranslate
-SELECT
-  user_email,
-  change_timestamp
-FROM
-  `region-us`.INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES
-WHERE
-  change_timestamp BETWEEN '2021-09-30' AND '2021-10-01'
-ORDER BY
-  change_timestamp DESC
-LIMIT 1;
-```
+    SELECT
+      user_email,
+      change_timestamp
+    FROM
+      `region-us`.INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES
+    WHERE
+      change_timestamp BETWEEN '2021-09-30' AND '2021-10-01'
+    ORDER BY
+      change_timestamp DESC
+    LIMIT 1;
 
 The result is similar to the following:
 

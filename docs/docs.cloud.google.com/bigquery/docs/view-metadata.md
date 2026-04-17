@@ -49,10 +49,8 @@ Use the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT table_name
-    FROM DATASET_ID.INFORMATION_SCHEMA.VIEWS;
-    ```
+        SELECT table_name
+        FROM DATASET_ID.INFORMATION_SCHEMA.VIEWS;
     
     Replace `  DATASET_ID  ` with the name of the dataset.
 
@@ -64,9 +62,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq ls` command. The `--format` flag can be used to control the output. If you are listing views in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
-``` notranslate
-bq ls --format=pretty project_id:dataset
-```
+    bq ls --format=pretty project_id:dataset
 
 Where:
 
@@ -200,7 +196,7 @@ Query the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigque
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
       SELECT
         * EXCEPT (check_option)
       FROM

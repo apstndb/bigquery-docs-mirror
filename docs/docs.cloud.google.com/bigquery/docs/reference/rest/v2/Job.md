@@ -32,6 +32,8 @@
   - [ComputeMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ComputeMode)
   - [QueryTimelineSample](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample.SCHEMA_REPRESENTATION)
+  - [PropertyGraphReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PropertyGraphReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PropertyGraphReference.SCHEMA_REPRESENTATION)
   - [MlStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MlStatistics)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MlStatistics.SCHEMA_REPRESENTATION)
   - [TrainingType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TrainingType)
@@ -1369,7 +1371,7 @@ Statistics for a query job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;queryPlan&quot;: [{object (ExplainQueryStage)}],&quot;estimatedBytesProcessed&quot;: string,&quot;timeline&quot;: [{object (QueryTimelineSample)}],&quot;totalPartitionsProcessed&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;totalBytesProcessedAccuracy&quot;: string,&quot;totalBytesBilled&quot;: string,&quot;billingTier&quot;: integer,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{&quot;name&quot;: string,&quot;slotMs&quot;: string}],&quot;cacheHit&quot;: boolean,&quot;referencedTables&quot;: [{object (TableReference)}],&quot;referencedRoutines&quot;: [{object (RoutineReference)}],&quot;schema&quot;: {object (TableSchema)},&quot;numDmlAffectedRows&quot;: string,&quot;dmlStats&quot;: {object (DmlStats)},&quot;undeclaredQueryParameters&quot;: [{object (QueryParameter)}],&quot;statementType&quot;: string,&quot;ddlOperationPerformed&quot;: string,&quot;ddlTargetTable&quot;: {object (TableReference)},&quot;ddlDestinationTable&quot;: {object (TableReference)},&quot;ddlTargetRowAccessPolicy&quot;: {object (RowAccessPolicyReference)},&quot;ddlAffectedRowAccessPolicyCount&quot;: string,&quot;ddlTargetRoutine&quot;: {object (RoutineReference)},&quot;ddlTargetDataset&quot;: {object (DatasetReference)},&quot;mlStatistics&quot;: {object (MlStatistics)},&quot;exportDataStatistics&quot;: {object (ExportDataStatistics)},&quot;externalServiceCosts&quot;: [{object (ExternalServiceCost)}],&quot;biEngineStatistics&quot;: {object (BiEngineStatistics)},&quot;loadQueryStatistics&quot;: {object (LoadQueryStatistics)},&quot;dclTargetTable&quot;: {object (TableReference)},&quot;dclTargetView&quot;: {object (TableReference)},&quot;dclTargetDataset&quot;: {object (DatasetReference)},&quot;searchStatistics&quot;: {object (SearchStatistics)},&quot;vectorSearchStatistics&quot;: {object (VectorSearchStatistics)},&quot;performanceInsights&quot;: {object (PerformanceInsights)},&quot;queryInfo&quot;: {object (QueryInfo)},&quot;sparkStatistics&quot;: {object (SparkStatistics)},&quot;transferredBytes&quot;: string,&quot;materializedViewStatistics&quot;: {object (MaterializedViewStatistics)},&quot;metadataCacheStatistics&quot;: {object (MetadataCacheStatistics)},&quot;totalServicesSkuSlotMs&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;queryPlan&quot;: [{object (ExplainQueryStage)}],&quot;estimatedBytesProcessed&quot;: string,&quot;timeline&quot;: [{object (QueryTimelineSample)}],&quot;totalPartitionsProcessed&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;totalBytesProcessedAccuracy&quot;: string,&quot;totalBytesBilled&quot;: string,&quot;billingTier&quot;: integer,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{&quot;name&quot;: string,&quot;slotMs&quot;: string}],&quot;cacheHit&quot;: boolean,&quot;referencedTables&quot;: [{object (TableReference)}],&quot;referencedRoutines&quot;: [{object (RoutineReference)}],&quot;referencedPropertyGraphs&quot;: [{object (PropertyGraphReference)}],&quot;schema&quot;: {object (TableSchema)},&quot;numDmlAffectedRows&quot;: string,&quot;dmlStats&quot;: {object (DmlStats)},&quot;undeclaredQueryParameters&quot;: [{object (QueryParameter)}],&quot;statementType&quot;: string,&quot;ddlOperationPerformed&quot;: string,&quot;ddlTargetTable&quot;: {object (TableReference)},&quot;ddlDestinationTable&quot;: {object (TableReference)},&quot;ddlTargetRowAccessPolicy&quot;: {object (RowAccessPolicyReference)},&quot;ddlAffectedRowAccessPolicyCount&quot;: string,&quot;ddlTargetRoutine&quot;: {object (RoutineReference)},&quot;ddlTargetDataset&quot;: {object (DatasetReference)},&quot;mlStatistics&quot;: {object (MlStatistics)},&quot;exportDataStatistics&quot;: {object (ExportDataStatistics)},&quot;externalServiceCosts&quot;: [{object (ExternalServiceCost)}],&quot;biEngineStatistics&quot;: {object (BiEngineStatistics)},&quot;loadQueryStatistics&quot;: {object (LoadQueryStatistics)},&quot;dclTargetTable&quot;: {object (TableReference)},&quot;dclTargetView&quot;: {object (TableReference)},&quot;dclTargetDataset&quot;: {object (DatasetReference)},&quot;searchStatistics&quot;: {object (SearchStatistics)},&quot;vectorSearchStatistics&quot;: {object (VectorSearchStatistics)},&quot;performanceInsights&quot;: {object (PerformanceInsights)},&quot;queryInfo&quot;: {object (QueryInfo)},&quot;sparkStatistics&quot;: {object (SparkStatistics)},&quot;transferredBytes&quot;: string,&quot;materializedViewStatistics&quot;: {object (MaterializedViewStatistics)},&quot;metadataCacheStatistics&quot;: {object (MetadataCacheStatistics)},&quot;totalServicesSkuSlotMs&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1467,6 +1469,12 @@ Output only. Referenced tables for the job.
 ` object ( RoutineReference  ` )
 
 Output only. Referenced routines for the job.
+
+`referencedPropertyGraphs[]`
+
+` object ( PropertyGraphReference  ` )
+
+Output only. Referenced property graphs for the job. Queries that reference more than 50 property graphs will not have a complete list.
 
 `schema`
 
@@ -2013,6 +2021,50 @@ Total number of active workers. This does not correspond directly to slot usage.
 `string ( Int64Value format)`
 
 Units of work that can be scheduled immediately. Providing additional slots for these units of work will accelerate the query, if no other query in the reservation needs additional slots.
+
+## PropertyGraphReference
+
+Id path of a property graph.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;projectId&quot;: string,
+  &quot;datasetId&quot;: string,
+  &quot;propertyGraphId&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`projectId`
+
+`string`
+
+Required. The ID of the project containing this property graph.
+
+`datasetId`
+
+`string`
+
+Required. The ID of the dataset containing this property graph.
+
+`propertyGraphId`
+
+`string`
+
+Required. The ID of the property graph. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum length is 256 characters.
 
 ## MlStatistics
 

@@ -96,9 +96,7 @@ Create a BigQuery dataset to contain your resources:
 
 1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
-    ``` notranslate
-    bq --location=LOCATION mk -d DATASET_ID
-    ```
+        bq --location=LOCATION mk -d DATASET_ID
     
     Replace the following:
     
@@ -107,9 +105,7 @@ Create a BigQuery dataset to contain your resources:
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ## Create a connection
 
@@ -153,14 +149,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -176,10 +170,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -193,19 +185,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -327,7 +317,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -523,12 +513,10 @@ Create a remote model:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (ENDPOINT = 'ENDPOINT');
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (ENDPOINT = 'ENDPOINT');
     
     Replace the following:
     
@@ -560,23 +548,21 @@ Create a remote model:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (
-      {HUGGING_FACE_MODEL_ID = 'HUGGING_FACE_MODEL_ID' |
-         MODEL_GARDEN_MODEL_NAME = 'MODEL_GARDEN_MODEL_NAME'}
-      [, HUGGING_FACE_TOKEN = 'HUGGING_FACE_TOKEN' ]
-      [, MACHINE_TYPE = 'MACHINE_TYPE' ]
-      [, MIN_REPLICA_COUNT = MIN_REPLICA_COUNT ]
-      [, MAX_REPLICA_COUNT = MAX_REPLICA_COUNT ]
-      [, RESERVATION_AFFINITY_TYPE = {'NO_RESERVATION' | 'ANY_RESERVATION' | 'SPECIFIC_RESERVATION'} ]
-      [, RESERVATION_AFFINITY_KEY = 'compute.googleapis.com/reservation-name' ]
-      [, RESERVATION_AFFINITY_VALUES = RESERVATION_AFFINITY_VALUES ]
-      [, ENDPOINT_IDLE_TTL = ENDPOINT_IDLE_TTL ]
-    );
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (
+          {HUGGING_FACE_MODEL_ID = 'HUGGING_FACE_MODEL_ID' |
+             MODEL_GARDEN_MODEL_NAME = 'MODEL_GARDEN_MODEL_NAME'}
+          [, HUGGING_FACE_TOKEN = 'HUGGING_FACE_TOKEN' ]
+          [, MACHINE_TYPE = 'MACHINE_TYPE' ]
+          [, MIN_REPLICA_COUNT = MIN_REPLICA_COUNT ]
+          [, MAX_REPLICA_COUNT = MAX_REPLICA_COUNT ]
+          [, RESERVATION_AFFINITY_TYPE = {'NO_RESERVATION' | 'ANY_RESERVATION' | 'SPECIFIC_RESERVATION'} ]
+          [, RESERVATION_AFFINITY_KEY = 'compute.googleapis.com/reservation-name' ]
+          [, RESERVATION_AFFINITY_VALUES = RESERVATION_AFFINITY_VALUES ]
+          [, ENDPOINT_IDLE_TTL = ENDPOINT_IDLE_TTL ]
+        );
     
     Replace the following:
     
@@ -661,14 +647,12 @@ Create a remote model:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (
-      ENDPOINT = 'https://ENDPOINT_REGION-aiplatform.googleapis.com/v1/projects/ENDPOINT_PROJECT_ID/locations/ENDPOINT_REGION/endpoints/ENDPOINT_ID'
-    );
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (
+          ENDPOINT = 'https://ENDPOINT_REGION-aiplatform.googleapis.com/v1/projects/ENDPOINT_PROJECT_ID/locations/ENDPOINT_REGION/endpoints/ENDPOINT_ID'
+        );
     
     Replace the following:
     
@@ -696,27 +680,25 @@ Generate text by using the [`AI.GENERATE_TEXT` function](https://docs.cloud.goog
 
 ### Gemini
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
-  STRUCT(
-  {
-    {
-      [MAX_OUTPUT_TOKENS AS max_output_tokens]
-      [, TOP_P AS top_p]
-      [, TEMPERATURE AS temperature]
-      [, STOP_SEQUENCES AS stop_sequences]
-      [, GROUND_WITH_GOOGLE_SEARCH AS ground_with_google_search]
-      [, SAFETY_SETTINGS AS safety_settings]
-    }
-    |
-    [, MODEL_PARAMS AS model_params]
-  }
-  [, REQUEST_TYPE AS request_type])
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
+      STRUCT(
+      {
+        {
+          [MAX_OUTPUT_TOKENS AS max_output_tokens]
+          [, TOP_P AS top_p]
+          [, TEMPERATURE AS temperature]
+          [, STOP_SEQUENCES AS stop_sequences]
+          [, GROUND_WITH_GOOGLE_SEARCH AS ground_with_google_search]
+          [, SAFETY_SETTINGS AS safety_settings]
+        }
+        |
+        [, MODEL_PARAMS AS model_params]
+      }
+      [, REQUEST_TYPE AS request_type])
+    );
 
 Replace the following:
 
@@ -785,16 +767,14 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT('Summarize this text', body) AS prompt
-      FROM mydataset.articles
-    ));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT('Summarize this text', body) AS prompt
+          FROM mydataset.articles
+        ));
 
 **Example 2**
 
@@ -805,18 +785,16 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
-      FROM mydataset.input_table
-    ),
-    STRUCT(
-      100 AS max_output_tokens));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
+          FROM mydataset.input_table
+        ),
+        STRUCT(
+          100 AS max_output_tokens));
 
 **Example 3**
 
@@ -826,13 +804,11 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    TABLE mydataset.prompts);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        TABLE mydataset.prompts);
 
 **Example 4**
 
@@ -845,20 +821,18 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    TABLE mydataset.prompts,
-    STRUCT(
-      100 AS max_output_tokens, 0.5 AS top_p,
-      TRUE AS ground_with_google_search,
-      [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
-        'BLOCK_LOW_AND_ABOVE' AS threshold),
-      STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
-        'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        TABLE mydataset.prompts,
+        STRUCT(
+          100 AS max_output_tokens, 0.5 AS top_p,
+          TRUE AS ground_with_google_search,
+          [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
+            'BLOCK_LOW_AND_ABOVE' AS threshold),
+          STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
+            'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
 
 **Example 5**
 
@@ -869,15 +843,13 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.flash_2_model`,
-    TABLE mydataset.prompts,
-    STRUCT(
-      0.4 AS temperature, 8192 AS max_output_tokens));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.flash_2_model`,
+        TABLE mydataset.prompts,
+        STRUCT(
+          0.4 AS temperature, 8192 AS max_output_tokens));
 
 **Example 6**
 
@@ -889,43 +861,39 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT('Summarize this text', body) AS prompt
-      FROM mydataset.articles
-    ),
-    STRUCT(
-      .1 AS TEMPERATURE,
-      TRUE AS ground_with_google_search,
-      [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
-        'BLOCK_LOW_AND_ABOVE' AS threshold),
-      STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
-        'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT('Summarize this text', body) AS prompt
+          FROM mydataset.articles
+        ),
+        STRUCT(
+          .1 AS TEMPERATURE,
+          TRUE AS ground_with_google_search,
+          [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
+            'BLOCK_LOW_AND_ABOVE' AS threshold),
+          STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
+            'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
 
 ### Claude
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
-  STRUCT(
-  {
-    {
-      [MAX_OUTPUT_TOKENS AS max_output_tokens]
-      [, TOP_K AS top_k]
-      [, TOP_P AS top_p]
-    }
-    |
-    [, MODEL_PARAMS AS model_params]
-  })
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
+      STRUCT(
+      {
+        {
+          [MAX_OUTPUT_TOKENS AS max_output_tokens]
+          [, TOP_K AS top_k]
+          [, TOP_P AS top_p]
+        }
+        |
+        [, MODEL_PARAMS AS model_params]
+      })
+    );
 
 Replace the following:
 
@@ -959,16 +927,14 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT('Summarize this text', body) AS prompt
-      FROM mydataset.articles
-    ));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT('Summarize this text', body) AS prompt
+          FROM mydataset.articles
+        ));
 
 **Example 2**
 
@@ -979,18 +945,16 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
-      FROM mydataset.input_table
-    ),
-    STRUCT(
-      100 AS max_output_tokens));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
+          FROM mydataset.input_table
+        ),
+        STRUCT(
+          100 AS max_output_tokens));
 
 **Example 3**
 
@@ -1000,34 +964,30 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    TABLE mydataset.prompts);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        TABLE mydataset.prompts);
 
 ### Llama
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
-  STRUCT(
-  {
-    {
-      [MAX_OUTPUT_TOKENS AS max_output_tokens]
-      [, TOP_P AS top_p]
-      [, TEMPERATURE AS temperature]
-      [, STOP_SEQUENCES AS stop_sequences]
-    |
-    }
-    [, MODEL_PARAMS AS model_params]
-  })
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
+      STRUCT(
+      {
+        {
+          [MAX_OUTPUT_TOKENS AS max_output_tokens]
+          [, TOP_P AS top_p]
+          [, TEMPERATURE AS temperature]
+          [, STOP_SEQUENCES AS stop_sequences]
+        |
+        }
+        [, MODEL_PARAMS AS model_params]
+      })
+    );
 
 Replace the following:
 
@@ -1065,16 +1025,14 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT('Summarize this text', body) AS prompt
-      FROM mydataset.articles
-    ));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT('Summarize this text', body) AS prompt
+          FROM mydataset.articles
+        ));
 
 **Example 2**
 
@@ -1085,18 +1043,16 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
-      FROM mydataset.input_table
-    ),
-    STRUCT(
-      100 AS max_output_tokens));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
+          FROM mydataset.input_table
+        ),
+        STRUCT(
+          100 AS max_output_tokens));
 
 **Example 3**
 
@@ -1106,34 +1062,30 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    TABLE mydataset.prompts);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        TABLE mydataset.prompts);
 
 ### Mistral AI
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
-  STRUCT(
-  {
-    {
-      [MAX_OUTPUT_TOKENS AS max_output_tokens]
-      [, TOP_P AS top_p]
-      [, TEMPERATURE AS temperature]
-      [, STOP_SEQUENCES AS stop_sequences]
-    |
-    }
-    [, MODEL_PARAMS AS model_params]
-  })
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
+      STRUCT(
+      {
+        {
+          [MAX_OUTPUT_TOKENS AS max_output_tokens]
+          [, TOP_P AS top_p]
+          [, TEMPERATURE AS temperature]
+          [, STOP_SEQUENCES AS stop_sequences]
+        |
+        }
+        [, MODEL_PARAMS AS model_params]
+      })
+    );
 
 Replace the following:
 
@@ -1171,16 +1123,14 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT('Summarize this text', body) AS prompt
-      FROM mydataset.articles
-    ));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT('Summarize this text', body) AS prompt
+          FROM mydataset.articles
+        ));
 
 **Example 2**
 
@@ -1191,18 +1141,16 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
-      FROM mydataset.input_table
-    ),
-    STRUCT(
-      100 AS max_output_tokens));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
+          FROM mydataset.input_table
+        ),
+        STRUCT(
+          100 AS max_output_tokens));
 
 **Example 3**
 
@@ -1212,36 +1160,32 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    TABLE mydataset.prompts);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        TABLE mydataset.prompts);
 
 ### Open models
 
 > **Note:** You must deploy open models in Vertex AI before you can use them. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
-  STRUCT(
-  {
-    {
-      [MAX_OUTPUT_TOKENS AS max_output_tokens]
-      [, TOP_K AS top_k]
-      [, TOP_P AS top_p]
-      [, TEMPERATURE AS temperature]
-    }
-    |
-    [, MODEL_PARAMS AS model_params]
-  })
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (PROMPT_QUERY)},
+      STRUCT(
+      {
+        {
+          [MAX_OUTPUT_TOKENS AS max_output_tokens]
+          [, TOP_K AS top_k]
+          [, TOP_P AS top_p]
+          [, TEMPERATURE AS temperature]
+        }
+        |
+        [, MODEL_PARAMS AS model_params]
+      })
+    );
 
 Replace the following:
 
@@ -1279,16 +1223,14 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT('Summarize this text', body) AS prompt
-      FROM mydataset.articles
-    ));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT('Summarize this text', body) AS prompt
+          FROM mydataset.articles
+        ));
 
 **Example 2**
 
@@ -1299,18 +1241,16 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    (
-      SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
-      FROM mydataset.input_table
-    ),
-    STRUCT(
-      100 AS max_output_tokens));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        (
+          SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
+          FROM mydataset.input_table
+        ),
+        STRUCT(
+          100 AS max_output_tokens));
 
 **Example 3**
 
@@ -1320,38 +1260,34 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.text_model`,
-    TABLE mydataset.prompts);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.text_model`,
+        TABLE mydataset.prompts);
 
 ## Generate text from object table data
 
 Generate text by using the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with a Gemini model to analyze unstructured data from an object table. You provide the prompt data in the `prompt` parameter.
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-MODEL `PROJECT_ID.DATASET.MODEL`,
-{ TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
-STRUCT(
-  PROMPT AS prompt
-  {
-    {
-      [, MAX_OUTPUT_TOKENS AS max_output_tokens]
-      [, TOP_P AS top_p]
-      [, TEMPERATURE AS temperature]
-      [, STOP_SEQUENCES AS stop_sequences]
-      [, SAFETY_SETTINGS AS safety_settings]
-    }
-    |
-    [, MODEL_PARAMS AS model_params]
-  })
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+    MODEL `PROJECT_ID.DATASET.MODEL`,
+    { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
+    STRUCT(
+      PROMPT AS prompt
+      {
+        {
+          [, MAX_OUTPUT_TOKENS AS max_output_tokens]
+          [, TOP_P AS top_p]
+          [, TEMPERATURE AS temperature]
+          [, STOP_SEQUENCES AS stop_sequences]
+          [, SAFETY_SETTINGS AS safety_settings]
+        }
+        |
+        [, MODEL_PARAMS AS model_params]
+      })
+    );
 
 Replace the following:
 
@@ -1408,20 +1344,16 @@ Replace the following:
 
 This example translates and transcribes audio content from an object table that's named `feedback` :
 
-``` notranslate
-SELECT * FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.audio_model`,
-    TABLE `mydataset.feedback`,
-      STRUCT('What is the content of this audio clip, translated into Spanish?' AS PROMPT));
-```
+    SELECT * FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.audio_model`,
+        TABLE `mydataset.feedback`,
+          STRUCT('What is the content of this audio clip, translated into Spanish?' AS PROMPT));
 
 This example classifies PDF content from an object table that's named `invoices` :
 
-``` notranslate
-SELECT * FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.classify_model`,
-    TABLE `mydataset.invoices`,
-      STRUCT('Classify this document based on the invoice total, using the following categories: 0 to 100, 101 to 200, greater than 200' AS PROMPT));
-```
+    SELECT * FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.classify_model`,
+        TABLE `mydataset.invoices`,
+          STRUCT('Classify this document based on the invoice total, using the following categories: 0 to 100, 101 to 200, greater than 200' AS PROMPT));

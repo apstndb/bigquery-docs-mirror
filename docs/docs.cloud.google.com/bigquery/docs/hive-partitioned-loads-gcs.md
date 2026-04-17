@@ -55,34 +55,26 @@ For an example, see [Load a file that is externally partitioned](https://docs.cl
 
 Load Hive partitioned data using automatic partition key type detection:
 
-``` notranslate
-bq load --source_format=ORC --hive_partitioning_mode=AUTO \
---hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix \
-dataset.table gcs_uris
-```
+    bq load --source_format=ORC --hive_partitioning_mode=AUTO \
+    --hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix \
+    dataset.table gcs_uris
 
 Load Hive partitioned data using string-typed partition key detection:
 
-``` notranslate
-bq load --source_format=CSV --autodetect \
---hive_partitioning_mode=STRINGS \
---hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix \
-dataset.table gcs_uris
-```
+    bq load --source_format=CSV --autodetect \
+    --hive_partitioning_mode=STRINGS \
+    --hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix \
+    dataset.table gcs_uris
 
 Load Hive partitioned data using a custom partition key schema that is encoded using the `source\_uri\_prefix` field:
 
-``` notranslate
-bq load --source_format=JSON --hive_partitioning_mode=CUSTOM \
---hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix/partition_key_schema \
-dataset.table gcs_uris file_schema
-```
+    bq load --source_format=JSON --hive_partitioning_mode=CUSTOM \
+    --hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix/partition_key_schema \
+    dataset.table gcs_uris file_schema
 
 The partition key schema is encoded immediately following the source URI prefix. Use the following format to specify `--hive_partitioning_source_uri_prefix` :
 
-``` notranslate
---hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix/{key1:TYPE1}/{key2:TYPE2}/{key3:TYPE3}
-```
+    --hive_partitioning_source_uri_prefix=gcs_uri_shared_prefix/{key1:TYPE1}/{key2:TYPE2}/{key3:TYPE3}
 
 ### API
 

@@ -10,7 +10,7 @@ You can automatically deploy the open model at the same time that you create the
 
 ### Automatically deployed
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}
@@ -247,7 +247,7 @@ To modify this option after the model has been created, use the [`ALTER MODEL` s
 
 ### Manually deployed
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}

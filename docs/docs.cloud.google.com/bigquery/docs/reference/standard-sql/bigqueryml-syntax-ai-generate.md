@@ -192,7 +192,7 @@ The following query extracts information about a person from an unstructured des
 
 The result is similar to the following:
 
-``` console
+```console
 +------------+----------+-----------------------------+-------------------+-----+
 | info.name  | info.age | info.address.street_address | info.address.city | ... |
 +------------+----------+-----------------------------+-------------------+-----+
@@ -220,7 +220,7 @@ The following query extracts information about customer complaints. The query us
 
 The result is similar to the following:
 
-``` console
+```console
 +--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | complaint_id | complaint_type  |                                                                                      grievance_subject                                                                                       |
 +--------------+-----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

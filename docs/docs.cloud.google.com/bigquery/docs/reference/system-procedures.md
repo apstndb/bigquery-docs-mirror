@@ -46,9 +46,7 @@ You must run this procedure in the same location as the indexed table. To set th
 
 **Example**
 
-``` notranslate
-CALL BQ.CANCEL_INDEX_ALTERATION('my_project.my_dataset.indexed_table', 'my_index');
-```
+    CALL BQ.CANCEL_INDEX_ALTERATION('my_project.my_dataset.indexed_table', 'my_index');
 
 ## BQ.REFRESH\_EXTERNAL\_METADATA\_CACHE
 
@@ -70,15 +68,11 @@ For BigLake tables, you can optionally specify one or more subdirectories of the
 
 To refresh all of the metadata for a table:
 
-``` notranslate
-CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table')
-```
+    CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table')
 
 To selectively refresh the metadata for a BigLake table:
 
-``` notranslate
-CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table', ['gs://source/uri/sub/path/d1/*', 'gs://source/uri/sub/path/d2/*'])
-```
+    CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table', ['gs://source/uri/sub/path/d1/*', 'gs://source/uri/sub/path/d2/*'])
 
 **Limitation**
 

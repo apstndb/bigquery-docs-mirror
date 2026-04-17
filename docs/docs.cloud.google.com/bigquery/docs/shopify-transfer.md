@@ -106,15 +106,13 @@ Add Shopify data into BigQuery by setting up a transfer configuration using one 
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-``` notranslate
-bq mk
-    --transfer_config
-    --project_id=PROJECT_ID
-    --data_source=DATA_SOURCE
-    --display_name=NAME
-    --target_dataset=DATASET
-    --params='PARAMETERS'
-```
+    bq mk
+        --transfer_config
+        --project_id=PROJECT_ID
+        --data_source=DATA_SOURCE
+        --display_name=NAME
+        --target_dataset=DATASET
+        --params='PARAMETERS'
 
 Where:
 
@@ -134,16 +132,14 @@ Where:
 
 The following command creates an incremental Shopify data transfer in the default project.
 
-``` notranslate
-bq mk
-    --transfer_config
-    --target_dataset=mydataset
-    --data_source=shopify
-    --display_name='My Transfer'
-    --params='{"assets": ["Orders"]
-        "connector.shopName": "storename",
-        "connector.authentication.accessToken":"sk_test_123456789"}'
-```
+    bq mk
+        --transfer_config
+        --target_dataset=mydataset
+        --data_source=shopify
+        --display_name='My Transfer'
+        --params='{"assets": ["Orders"]
+            "connector.shopName": "storename",
+            "connector.authentication.accessToken":"sk_test_123456789"}'
 
 When you save the transfer configuration, the Shopify connector automatically triggers a transfer run according to your schedule option. With every transfer run, the Shopify connector transfers all available data from Shopify into BigQuery.
 

@@ -225,13 +225,11 @@ Use the `bq load` command, specify the `source_format` , and include the path to
 
 If you are loading data in a project other than your default project, add the project ID to the dataset in the following format: `  PROJECT_ID:DATASET  ` .
 
-``` notranslate
-bq --location=LOCATION load \
---source_format=FORMAT \
-PROJECT_ID:DATASET.TABLE \
-PATH_TO_SOURCE \
-SCHEMA
-```
+    bq --location=LOCATION load \
+    --source_format=FORMAT \
+    PROJECT_ID:DATASET.TABLE \
+    PATH_TO_SOURCE \
+    SCHEMA
 
 Replace the following:
 
@@ -593,15 +591,13 @@ For information about the quota policy for batch loading data, see [Load jobs](h
 
 You can view your current usage of query, load, extract, or copy jobs by running an `INFORMATION_SCHEMA` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `INFORMATION_SCHEMA.JOBS` view to list the number of query, load, extract, and copy jobs by project:
 
-``` notranslate
-SELECT
-  sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
-  sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
-  sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
-  sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
-FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE date(creation_time)= CURRENT_DATE()
-```
+    SELECT
+      sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
+      sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
+      sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
+      sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
+    FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE date(creation_time)= CURRENT_DATE()
 
 ## Pricing
 

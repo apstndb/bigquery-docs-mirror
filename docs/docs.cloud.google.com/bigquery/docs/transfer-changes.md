@@ -120,9 +120,7 @@ By April 3, 2026, the Google Ads connector will add the columns `campaign_start_
 
 For each pair of columns, only one column is populated with values from the Google Ads API while the other is populated with `null` . To prepare for the Google Ads API v23 update, update your queries to specify one of the two columns. If your SQL query selects the deprecated columns, update the query so that it specifies the correct column, for example:
 
-``` notranslate
-IFNULL(DATE(campaign_start_date_time), campaign_start_date)
-```
+    IFNULL(DATE(campaign_start_date_time), campaign_start_date)
 
 ### June 8, 2026
 
@@ -214,9 +212,7 @@ By Jan 16, 2026, the Google Ads connector will add the columns `metrics_trueview
 
 For each pair of columns, only one column is populated with values from the Google Ads API while the other is populated with `null` . In response to the Google Ads API v22 update, update your queries to specify one of the two columns. For example, if your SQL query selects the column `metrics_average_cpv` , update the query so that it specifies the correct column:
 
-``` notranslate
-IFNULL(metrics_average_cpv, metrics_trueview_average_cpv)
-```
+    IFNULL(metrics_average_cpv, metrics_trueview_average_cpv)
 
 If you use [custom reports](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) , see the [Google Ads API v22 reference page](https://developers.google.com/google-ads/api/fields/v22/overview) and the [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) to update impacted GAQL queries after the [Google Ads connector](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) is upgraded to Google Ads v22 API. If you use [custom reports](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) , see the [Google Ads API v22 reference page](https://developers.google.com/google-ads/api/fields/v22/overview) and the [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) to update impacted GAQL queries after the [Google Ads connector](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) is upgraded to Google Ads v22 API.
 
@@ -291,17 +287,13 @@ This update for the Google Ads connector started on January 20, 2025, and was co
 
 To ensure your queries work after the update, change your queries to select both old and new values. For example, if you have the following `WHERE` condition in your SQL query:
 
-``` notranslate
-WHERE asset_type='DISCOVERY_CAROUSEL_CARD'
-```
+    WHERE asset_type='DISCOVERY_CAROUSEL_CARD'
 
 Replace with the following statement:
 
-``` notranslate
-WHERE
-  asset_type='DISCOVERY_CAROUSEL_CARD'
-  OR asset_type='DEMAND_GEN_CAROUSEL_CARD'
-```
+    WHERE
+      asset_type='DISCOVERY_CAROUSEL_CARD'
+      OR asset_type='DEMAND_GEN_CAROUSEL_CARD'
 
 ### June 24, 2024
 
@@ -366,15 +358,11 @@ With Google Ads API v14, new columns, such as `segments_product_category_level1`
 
 For each pair of columns, only one column is populated with values from the Google Ads API while the other will be populated with `null` . To ensure your existing queries keep working after the update, update your queries to choose one of the two columns. For example, if you have the following statement in your SQL query:
 
-``` notranslate
-segments_product_bidding_category_level1
-```
+    segments_product_bidding_category_level1
 
 Replace with the following statement that specifies the correct column:
 
-``` notranslate
-IFNULL(segments_product_category_level1, segments_product_bidding_category_level1)
-```
+    IFNULL(segments_product_category_level1, segments_product_bidding_category_level1)
 
 Transfer configurations that are created after June 24th 2024 will always use the new columns. Deprecated columns will still remain in the table schema but populated with `null` .
 

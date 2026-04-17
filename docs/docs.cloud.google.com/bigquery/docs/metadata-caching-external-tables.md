@@ -49,14 +49,12 @@ For more information on setting metadata caching options for object tables, see 
 
 To find information about metadata cache refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
-``` notranslate
-SELECT *
-FROM `region-us.INFORMATION_SCHEMA.JOBS`
-WHERE job_id LIKE '%metadata_cache_refresh%'
-AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-ORDER BY start_time DESC
-LIMIT 10;
-```
+    SELECT *
+    FROM `region-us.INFORMATION_SCHEMA.JOBS`
+    WHERE job_id LIKE '%metadata_cache_refresh%'
+    AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+    ORDER BY start_time DESC
+    LIMIT 10;
 
 ## Use customer-managed encryption keys with cached metadata
 

@@ -559,18 +559,16 @@ You may need to adjust your autoscaling `max_slots` to avoid higher costs. The f
 
 The following query provides details on your reservations past job performance:
 
-``` notranslate
-SELECT
-    AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
-    SUM(total_bytes_processed) as total_bytes,
-    COUNT(*) as query_numbers,
-FROM
-    `PROJECT_ID.region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
-WHERE creation_time >= START_TIME
-    AND creation_time < END_TIME
-    AND (statement_type != "SCRIPT" OR statement_type IS NULL)
-    AND reservation_id = RESERVATION_ID
-```
+    SELECT
+        AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
+        SUM(total_bytes_processed) as total_bytes,
+        COUNT(*) as query_numbers,
+    FROM
+        `PROJECT_ID.region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
+    WHERE creation_time >= START_TIME
+        AND creation_time < END_TIME
+        AND (statement_type != "SCRIPT" OR statement_type IS NULL)
+        AND reservation_id = RESERVATION_ID
 
 Replace the following:
 
@@ -582,18 +580,16 @@ Replace the following:
 
 The following example gets the job details over a five day period:
 
-``` notranslate
-SELECT
-    AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
-    SUM(total_bytes_processed) as total_bytes,
-    COUNT(*) as query_numbers,
-FROM
-    `myproject.region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
-WHERE creation_time >= '2024-06-25 00:00:00-07'
-    AND creation_time < '2024-06-30 00:00:00-07'
-    AND (statement_type != "SCRIPT" OR statement_type IS NULL)
-    AND reservation_id = reservationID
-```
+    SELECT
+        AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
+        SUM(total_bytes_processed) as total_bytes,
+        COUNT(*) as query_numbers,
+    FROM
+        `myproject.region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
+    WHERE creation_time >= '2024-06-25 00:00:00-07'
+        AND creation_time < '2024-06-30 00:00:00-07'
+        AND (statement_type != "SCRIPT" OR statement_type IS NULL)
+        AND reservation_id = reservationID
 
 ## Troubleshoot slot contention
 

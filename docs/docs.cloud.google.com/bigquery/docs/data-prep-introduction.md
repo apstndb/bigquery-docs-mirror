@@ -224,19 +224,27 @@ Data preparation is available with the following limitations:
 
 ## Locations
 
-You can use data preparation in any supported [BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations) . Your data processing jobs are executed and stored in the location of your source datasets. If a [repository location](https://docs.cloud.google.com/dataform/docs/manage-repository#configure-workflow-settings) is specified, then it must be the same as the source datasets location. The data preparation code storage region can be different from the job execution region.
+Your data processing jobs are executed and stored in the location of your source datasets. If a [repository location](https://docs.cloud.google.com/dataform/docs/manage-repository#configure-workflow-settings) is specified, then it must be the same as the source datasets location.
 
-All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
+The data preparation code storage region can be different from the job execution region.
+
+All new code assets in your Google Cloud project use a default region. After the asset is created, you can't change its region.
+
+> **Important:** If you change the region while creating a code asset, that region becomes the default for all subsequent code assets. Existing code assets are not affected.
+
+To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, find the project in which you have enabled code assets.
+2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Click more\_vert **View actions** next to the project, and then click **Change my default code region** .
+3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
 
-4.  For **Region** , select the region that you want to use for code assets.
+4.  Select the code region that you want to use as a default.
 
-5.  Click **Select** .
+5.  Click **Save** .
 
 For a list of supported regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
 

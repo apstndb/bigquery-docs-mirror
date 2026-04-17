@@ -15,8 +15,8 @@ Before customizing an agent, it's recommended that you first work with the conte
 
 Some examples of context and instructions that you provide to the agent are the following:
 
-  - **Context.** A data agent for sales analysis can be configured to understand that "top performers" refers to sales representatives with the highest revenue, rather than just the most closed deals.
-  - **Instructions.** You can instruct a data agent to always filter data to the most recent quarter when asked about "trends," or to group results by "product category" by default.
+  - **Context** . A data agent for sales analysis can be configured to understand that "top performers" refers to sales representatives with the highest revenue, rather than just the most closed deals.
+  - **Instructions** . You can instruct a data agent to always filter data to the most recent quarter when asked about "trends," or to group results by "product category" by default.
 
 After creating data agents, you can then have [conversations](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#conversations) with them to ask questions about BigQuery data by using natural language. You can also create [direct conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) with one or more data sources to answer basic, one-off questions.
 
@@ -30,12 +30,12 @@ Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.g
 
 Data agents consist of one or more knowledge sources, and a set of instructions specific to a use case for processing that data. When you create a data agent, you can configure it using the following options:
 
-  - Use *knowledge sources* such as tables, views, and UDFs with a data agent.
+  - Use *knowledge sources* such as tables, views, and UDFs with a data agent. You can also connect to Lakehouse tables as sources. For more information, see [Query Lakehouse data with natural language](https://docs.cloud.google.com/biglake/docs/conversational-analytics) .
   - Provide custom table and field metadata to describe the data in the most appropriate way for the given use case.
   - Provide instructions for interpreting and querying the data, such as defining the following:
       - Synonyms and business terms for field names
       - Most important fields and defaults for filtering and grouping
-  - Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) .
+  - Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) and support [query parameters](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) .
   - Create BigQuery custom glossary terms for each agent or import business glossary terms from Knowledge Catalog. These terms help an agent interpret user prompts. For advice on when to use each type, see [Create or review glossary terms](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-review-glossary-terms) .
 
 ### Manage data agents
@@ -48,7 +48,7 @@ You can create, manage, and work with the following types of data agents in the 
 
 For more information, see [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
 
-Other services in the project that support data agents, such as the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) and [Looker Studio](https://docs.cloud.google.com/looker/docs/studio/conversational-analytics-looker-studio) Pro, can access data agents that you create in BigQuery. You can also access an agent created in the Google Cloud console by calling it using the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+Other services in the project that support data agents, such as the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) and [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-overview) , can access data agents that you create in BigQuery. You can also access an agent created in the Google Cloud console by calling it using the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
 
 ## Conversations
 
@@ -125,3 +125,4 @@ Performance, such as latency, can vary depending on the overall system load. Dur
   - Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
   - [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
   - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
+  - [Use conversational Analytics with Lakehouse](https://docs.cloud.google.com/biglake/docs/conversational-analytics)

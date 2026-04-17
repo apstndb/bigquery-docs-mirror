@@ -71,12 +71,10 @@ Query the [`INFORMATION_SCHEMA.TABLE_SNAPSHOTS` view](https://docs.cloud.google.
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      PROJECT_ID.DATASET_NAME.INFORMATION_SCHEMA.TABLE_SNAPSHOTS;
-    ```
+        SELECT
+          *
+        FROM
+          PROJECT_ID.DATASET_NAME.INFORMATION_SCHEMA.TABLE_SNAPSHOTS;
     
     Replace the following:
     
@@ -99,10 +97,8 @@ The result looks similar to the following:
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq ls \
-PROJECT_ID:DATASET_NAME
-```
+    bq ls \
+    PROJECT_ID:DATASET_NAME
 
 Replace the following:
 
@@ -130,7 +126,7 @@ Call the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/r
 
 You can list the table snapshots of a specified base table by querying the `INFORMATION_SCHEMA.TABLE_SNAPSHOTS` view:
 
-``` notranslate
+``` 
 SELECT
   *
 FROM

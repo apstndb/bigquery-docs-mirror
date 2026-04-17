@@ -9,7 +9,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.BAG_OF_WORDS(
   tokenized_document
   [, top_k]

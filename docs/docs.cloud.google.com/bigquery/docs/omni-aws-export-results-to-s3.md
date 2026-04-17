@@ -39,7 +39,7 @@ In the **Query editor** field, enter a GoogleSQL export query. GoogleSQL is the 
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
+    ``` 
        EXPORT DATA WITH CONNECTION `CONNECTION_REGION.CONNECTION_NAME`
        OPTIONS(uri="s3://BUCKET_NAME/PATH", format="FORMAT", ...)
        AS QUERY

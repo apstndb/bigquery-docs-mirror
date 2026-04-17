@@ -6,7 +6,7 @@ This document describes the `ML.RECOMMEND` function, which lets you generate a p
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.RECOMMEND(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }]
@@ -67,29 +67,25 @@ The following examples show how to use the `ML.RECOMMEND` function.
 
 The following example generates predicted ratings for every user-item pair in the inputs of `mymodel` because there is no input data specified.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.RECOMMEND(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.RECOMMEND(MODEL `mydataset.mymodel`)
 
 ### With input data
 
 The following example generates predicted ratings for each user-item row in `mydataset.mytable` assuming that `mydataset.mymodel` was trained using the user column `user` and item column `item` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.RECOMMEND(MODEL `mydataset.mymodel`,
-      (
-      SELECT
-        user,
-        item
-      FROM
-        `mydataset.mytable`))
-```
+    SELECT
+      *
+    FROM
+      ML.RECOMMEND(MODEL `mydataset.mymodel`,
+          (
+          SELECT
+            user,
+            item
+          FROM
+            `mydataset.mytable`))
 
 ## What's next
 

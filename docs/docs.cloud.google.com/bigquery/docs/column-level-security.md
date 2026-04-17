@@ -175,10 +175,8 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 
 1.  Write the schema to a local file.
     
-    ``` notranslate
-    bq show --schema --format=prettyjson \
-       project-id:dataset.table > schema.json
-    ```
+        bq show --schema --format=prettyjson \
+           project-id:dataset.table > schema.json
     
     where:
     
@@ -188,27 +186,23 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 
 2.  Modify schema.json to set a policy tag on a column. For the value of the `names` field of `policyTags` , use the [policy tag resource name](https://docs.cloud.google.com/bigquery/docs/column-level-security#retrieve_policy_tag_name) .
     
-    ``` notranslate
-    [
-     ...
-     {
-       "name": "ssn",
-       "type": "STRING",
-       "mode": "REQUIRED",
-       "policyTags": {
-         "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
-       }
-     },
-     ...
-    ]
-    ```
+        [
+         ...
+         {
+           "name": "ssn",
+           "type": "STRING",
+           "mode": "REQUIRED",
+           "policyTags": {
+             "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
+           }
+         },
+         ...
+        ]
 
 3.  Update the schema.
     
-    ``` notranslate
-    bq update \
-       project-id:dataset.table schema.json
-    ```
+        bq update \
+           project-id:dataset.table schema.json
 
 ### API
 
@@ -787,10 +781,8 @@ In the **Current schema** page, under **Policy tags** , click **X** .
 
 1.  Retrieve the schema and save it to a local file.
     
-    ``` notranslate
-    bq show --schema --format=prettyjson \
-       project-id:dataset.table > schema.json
-    ```
+        bq show --schema --format=prettyjson \
+           project-id:dataset.table > schema.json
     
     where:
     
@@ -800,27 +792,23 @@ In the **Current schema** page, under **Policy tags** , click **X** .
 
 2.  Modify schema.json to clear a policy tag from a column.
     
-    ``` notranslate
-    [
-     ...
-     {
-       "name": "ssn",
-       "type": "STRING",
-       "mode": "REQUIRED",
-       "policyTags": {
-         "names": []
-       }
-     },
-     ...
-    ]
-    ```
+        [
+         ...
+         {
+           "name": "ssn",
+           "type": "STRING",
+           "mode": "REQUIRED",
+           "policyTags": {
+             "names": []
+           }
+         },
+         ...
+        ]
 
 3.  Update the schema.
     
-    ``` notranslate
-    bq update \
-       project-id:dataset.table schema.json
-    ```
+        bq update \
+           project-id:dataset.table schema.json
 
 ### API
 
@@ -860,9 +848,7 @@ If a user has dataset access but does not have the Data Catalog Fine-Grained Rea
 
   - Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `ssn` column, but does have access to the remaining columns, the user can run the following query:
     
-    ``` notranslate
-    SELECT * EXCEPT (ssn) FROM ...
-    ```
+        SELECT * EXCEPT (ssn) FROM ...
     
     In the preceding example, the `EXCEPT` clause excludes the `ssn` column.
 
@@ -948,9 +934,7 @@ To troubleshoot this issue, confirm the following details:
 
   - Ensure that your queries are not using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use `bq` command-line interface tool to test your queries, then you should use the `--nouse_cache flag` to disable the query cache. For example:
     
-    ``` notranslate
-    bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"
-    ```
+        bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"
 
 ### Project migration considerations
 

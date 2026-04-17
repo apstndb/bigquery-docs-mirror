@@ -6,7 +6,7 @@ Using the `AI.FORECAST` function with the built-in TimesFM model lets you perfor
 
 ## Syntax
 
-``` lang-sql
+```sql
 SELECT
   *
 FROM

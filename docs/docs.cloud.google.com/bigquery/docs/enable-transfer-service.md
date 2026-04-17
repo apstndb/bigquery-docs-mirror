@@ -62,11 +62,9 @@ The service agent is created automatically on your behalf after you enable the B
 
 If you authorize the data transfer using a service account from a project that is different from the project with the BigQuery Data Transfer Service enabled, you must grant the `roles/iam.serviceAccountTokenCreator` role to the service agent using the following Google Cloud CLI command:
 
-``` notranslate
-gcloud iam service-accounts add-iam-policy-binding service_account \
---member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
---role roles/iam.serviceAccountTokenCreator
-```
+    gcloud iam service-accounts add-iam-policy-binding service_account \
+    --member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
+    --role roles/iam.serviceAccountTokenCreator
 
 Where:
 
@@ -91,11 +89,9 @@ If you want to trigger service agent creation before you interact with the API, 
 
 When you manually trigger service agent creation, Google doesn't grant the predefined [service agent role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) automatically. You must manually grant the service agent the predefined role using the following Google Cloud CLI command:
 
-``` notranslate
-gcloud projects add-iam-policy-binding project_number \
---member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
---role roles/bigquerydatatransfer.serviceAgent
-```
+    gcloud projects add-iam-policy-binding project_number \
+    --member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
+    --role roles/bigquerydatatransfer.serviceAgent
 
 Where:
 
@@ -153,11 +149,9 @@ You can use the Google Cloud CLI to grant a user or group the `bigquery.admin` r
 
 To add a single binding to your project's IAM policy, type the following command. To add a user, supply the `--member` flag in the format `user:user@example.com` . To add a group, supply the `--member` flag in the format `group:group@example.com` .
 
-``` notranslate
-gcloud projects add-iam-policy-binding project_id \
---member principal:address \
---role roles/bigquery.admin
-```
+    gcloud projects add-iam-policy-binding project_id \
+    --member principal:address \
+    --role roles/bigquery.admin
 
 Where:
 

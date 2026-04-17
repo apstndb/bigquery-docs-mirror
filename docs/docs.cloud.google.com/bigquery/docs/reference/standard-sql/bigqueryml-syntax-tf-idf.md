@@ -25,7 +25,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.TF_IDF(
   tokenized_document
   [, top_k]

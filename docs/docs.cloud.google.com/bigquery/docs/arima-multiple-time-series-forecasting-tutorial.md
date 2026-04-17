@@ -81,30 +81,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -131,14 +125,12 @@ Follow these steps to visualize the time series data:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-     EXTRACT(DATE from starttime) AS date,
-     COUNT(*) AS num_trips
-    FROM
-    `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date;
-    ```
+        SELECT
+         EXTRACT(DATE from starttime) AS date,
+         COUNT(*) AS num_trips
+        FROM
+        `bigquery-public-data.new_york.citibike_trips`
+        GROUP BY date;
 
 3.  When the query completes, click **Open in** \> **Data Studio** . Data Studio opens in a new tab. Complete the following steps in the new tab.
 
@@ -219,24 +211,22 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_group`
-    OPTIONS
-    (model_type = 'ARIMA_PLUS',
-     time_series_timestamp_col = 'date',
-     time_series_data_col = 'num_trips',
-     time_series_id_col = 'start_station_name',
-     auto_arima_max_order = 5
-    ) AS
-    SELECT
-     start_station_name,
-     EXTRACT(DATE from starttime) AS date,
-     COUNT(*) AS num_trips
-    FROM
-    `bigquery-public-data.new_york.citibike_trips`
-    WHERE start_station_name LIKE '%Central Park%'
-    GROUP BY start_station_name, date;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_group`
+        OPTIONS
+        (model_type = 'ARIMA_PLUS',
+         time_series_timestamp_col = 'date',
+         time_series_data_col = 'num_trips',
+         time_series_id_col = 'start_station_name',
+         auto_arima_max_order = 5
+        ) AS
+        SELECT
+         start_station_name,
+         EXTRACT(DATE from starttime) AS date,
+         COUNT(*) AS num_trips
+        FROM
+        `bigquery-public-data.new_york.citibike_trips`
+        WHERE start_station_name LIKE '%Central Park%'
+        GROUP BY start_station_name, date;
     
     The query takes approximately 24 seconds to complete, after which you can access the `nyc_citibike_arima_model_group` model. Because the query uses a `CREATE MODEL` statement, you don't see query results.
 
@@ -313,12 +303,10 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.ARIMA_EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`);
-    ```
+        SELECT
+        *
+        FROM
+        ML.ARIMA_EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`);
     
     The results should look like the following:
     
@@ -368,12 +356,10 @@ Follow these steps to retrieve the model's coefficients:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`);
-    ```
+        SELECT
+        *
+        FROM
+        ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`);
     
     The query takes less than a second to complete. The results should look similar to the following:
     
@@ -418,13 +404,11 @@ Follow these steps to forecast data with the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.FORECAST(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`,
-     STRUCT(3 AS horizon, 0.9 AS confidence_level))
-    ```
+        SELECT
+        *
+        FROM
+        ML.FORECAST(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`,
+         STRUCT(3 AS horizon, 0.9 AS confidence_level))
 
 3.  Click **Run** .
     
@@ -471,13 +455,11 @@ Follow these steps to explain the model's results:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.EXPLAIN_FORECAST(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`,
-     STRUCT(3 AS horizon, 0.9 AS confidence_level));
-    ```
+        SELECT
+        *
+        FROM
+        ML.EXPLAIN_FORECAST(MODEL `bqml_tutorial.nyc_citibike_arima_model_group`,
+         STRUCT(3 AS horizon, 0.9 AS confidence_level));
     
     The query takes less than a second to complete. The results should look like the following:
     

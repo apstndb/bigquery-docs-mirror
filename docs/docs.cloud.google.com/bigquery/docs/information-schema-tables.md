@@ -220,13 +220,11 @@ To run the query against a project other than your default project, add the proj
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
-SELECT
-  table_catalog, table_schema, table_name, table_type,
-  is_insertable_into, creation_time, ddl
-FROM
-  mydataset.INFORMATION_SCHEMA.TABLES;
-```
+    SELECT
+      table_catalog, table_schema, table_name, table_type,
+      is_insertable_into, creation_time, ddl
+    FROM
+      mydataset.INFORMATION_SCHEMA.TABLES;
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
@@ -247,7 +245,7 @@ The following example retrieves table metadata for all tables of type `CLONE` or
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLES `` .
 
-``` notranslate
+``` 
   SELECT
     table_name, table_type, base_table_catalog,
     base_table_schema, base_table_name, snapshot_time_ms
@@ -276,14 +274,12 @@ The following example retrieves `table_name` and `ddl` columns from the `INFORMA
 
 Because the table you're querying is in another project, you add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` . In this example, the value is `` `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES `` .
 
-``` notranslate
-SELECT
-  table_name, ddl
-FROM
-  `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES
-WHERE
-  table_name = 'population_by_zip_2010';
-```
+    SELECT
+      table_name, ddl
+    FROM
+      `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES
+    WHERE
+      table_name = 'population_by_zip_2010';
 
 The result is similar to the following:
 

@@ -102,23 +102,21 @@ To prevent infinite recursion, make sure the recursive term is able to produce a
 
 One way to check for infinite recursion is to convert your recursive CTE to a `TEMP TABLE` with a `REPEAT` loop for the first `100` iterations, as follows:
 
-``` notranslate
-DECLARE current_iteration INT64 DEFAULT 0;
-
-CREATE TEMP TABLE recursive_cte_name AS
-SELECT base_expression, current_iteration AS iteration;
-
-REPEAT
-  SET current_iteration = current_iteration + 1;
-  INSERT INTO recursive_cte_name
-    SELECT recursive_expression, current_iteration
-    FROM recursive_cte_name
-    WHERE termination_condition_expression
-      AND iteration = current_iteration - 1
-      AND current_iteration < 100;
-  UNTIL NOT EXISTS(SELECT * FROM recursive_cte_name WHERE iteration = current_iteration)
-END REPEAT;
-```
+    DECLARE current_iteration INT64 DEFAULT 0;
+    
+    CREATE TEMP TABLE recursive_cte_name AS
+    SELECT base_expression, current_iteration AS iteration;
+    
+    REPEAT
+      SET current_iteration = current_iteration + 1;
+      INSERT INTO recursive_cte_name
+        SELECT recursive_expression, current_iteration
+        FROM recursive_cte_name
+        WHERE termination_condition_expression
+          AND iteration = current_iteration - 1
+          AND current_iteration < 100;
+      UNTIL NOT EXISTS(SELECT * FROM recursive_cte_name WHERE iteration = current_iteration)
+    END REPEAT;
 
 Replace the following values:
 
@@ -145,38 +143,36 @@ This example uses the following values:
 
 The following code would therefore test the `TestCTE` for infinite recursion:
 
-``` notranslate
-DECLARE current_iteration INT64 DEFAULT 0;
-
-CREATE TEMP TABLE TestCTE AS
-SELECT 1 AS n, current_iteration AS iteration;
-
-REPEAT
-SET current_iteration = current_iteration + 1;
-
-INSERT INTO TestCTE
-SELECT n + 3, current_iteration
-FROM TestCTE
-WHERE
-  MOD(n, 6) != 0
-  AND iteration = current_iteration - 1
-  AND current_iteration < 10;
-
-UNTIL
-  NOT EXISTS(SELECT * FROM TestCTE WHERE iteration = current_iteration)
-    END REPEAT;
-
--- Print the number of rows produced by each iteration
-
-SELECT iteration, COUNT(1) AS num_rows
-FROM TestCTE
-GROUP BY iteration
-ORDER BY iteration;
-
--- Examine the actual result produced for a specific iteration
-
-SELECT * FROM TestCTE WHERE iteration = 2;
-```
+    DECLARE current_iteration INT64 DEFAULT 0;
+    
+    CREATE TEMP TABLE TestCTE AS
+    SELECT 1 AS n, current_iteration AS iteration;
+    
+    REPEAT
+    SET current_iteration = current_iteration + 1;
+    
+    INSERT INTO TestCTE
+    SELECT n + 3, current_iteration
+    FROM TestCTE
+    WHERE
+      MOD(n, 6) != 0
+      AND iteration = current_iteration - 1
+      AND current_iteration < 10;
+    
+    UNTIL
+      NOT EXISTS(SELECT * FROM TestCTE WHERE iteration = current_iteration)
+        END REPEAT;
+    
+    -- Print the number of rows produced by each iteration
+    
+    SELECT iteration, COUNT(1) AS num_rows
+    FROM TestCTE
+    GROUP BY iteration
+    ORDER BY iteration;
+    
+    -- Examine the actual result produced for a specific iteration
+    
+    SELECT * FROM TestCTE WHERE iteration = 2;
 
 The preceding example produces the following results that include the iteration ID and the number of rows that were produced during that iteration:
 
@@ -216,29 +212,27 @@ If you think your recursive CTE needs more than the maximum allowed iterations, 
 
 You can split a recursive CTE with a query structure similar to the following:
 
-``` notranslate
-WITH RECURSIVE
-  CTE_1 AS (
-    SELECT base_expression
-    UNION ALL
-    SELECT recursive_expression FROM CTE_1 WHERE iteration < 500
-  ),
-  CTE_2 AS (
-    SELECT * FROM CTE_1 WHERE iteration = 500
-    UNION ALL
-    SELECT recursive_expression FROM CTE_2 WHERE iteration < 500 * 2
-  ),
-  CTE_3 AS (
-    SELECT * FROM CTE_2 WHERE iteration = 500 * 2
-    UNION ALL
-    SELECT recursive_expression FROM CTE_3 WHERE iteration < 500 * 3
-  ),
-  [, ...]
-SELECT * FROM CTE_1
-UNION ALL SELECT * FROM CTE_2 WHERE iteration > 500
-UNION ALL SELECT * FROM CTE_3 WHERE iteration > 500 * 2
-[...]
-```
+    WITH RECURSIVE
+      CTE_1 AS (
+        SELECT base_expression
+        UNION ALL
+        SELECT recursive_expression FROM CTE_1 WHERE iteration < 500
+      ),
+      CTE_2 AS (
+        SELECT * FROM CTE_1 WHERE iteration = 500
+        UNION ALL
+        SELECT recursive_expression FROM CTE_2 WHERE iteration < 500 * 2
+      ),
+      CTE_3 AS (
+        SELECT * FROM CTE_2 WHERE iteration = 500 * 2
+        UNION ALL
+        SELECT recursive_expression FROM CTE_3 WHERE iteration < 500 * 3
+      ),
+      [, ...]
+    SELECT * FROM CTE_1
+    UNION ALL SELECT * FROM CTE_2 WHERE iteration > 500
+    UNION ALL SELECT * FROM CTE_3 WHERE iteration > 500 * 2
+    [...]
 
 Replace the following values:
 

@@ -9,7 +9,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.NORMALIZER(array_expression [, p])
 ```
 
@@ -28,13 +28,11 @@ ML.NORMALIZER(array_expression [, p])
 
 The following example normalizes a set of numerical expressions using a p-norm of `2` :
 
-``` notranslate
-SELECT ML.NORMALIZER([4.0, 1.0, 2.0, 2.0, 0.0]) AS output;
-```
+    SELECT ML.NORMALIZER([4.0, 1.0, 2.0, 2.0, 0.0]) AS output;
 
 The output looks similar to the following:
 
-``` console
+```console
 +--------+
 | output |
 +--------+

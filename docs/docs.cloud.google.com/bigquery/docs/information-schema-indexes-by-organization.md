@@ -138,35 +138,33 @@ This section includes example queries of the `INFORMATION_SCHEMA.SEARCH_INDEXES_
 
 The following example illustrates if the total indexed base table size across an organization, utilizing shared slots within the US multi-region, exceeds 100 TB:
 
-``` notranslate
-WITH
- indexed_base_table_size AS (
- SELECT
-   SUM(base_table.total_logical_bytes) AS total_logical_bytes
- FROM
-   `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
- JOIN
-   `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
- ON
-   (search_index.table_name = base_table.table_name
-     AND search_index.project_id = base_table.project_id
-     AND search_index.index_schema = base_table.table_schema)
- WHERE
-   TRUE
-   -- Excludes search indexes that are permanently disabled.
-   AND search_index.index_status != 'PERMANENTLY DISABLED'
-   -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
-   -- less than 10 GB. These tables don't count toward the limit.
-   AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
-   -- Excludes search indexes whose project has BACKGROUND reservation purchased
-   -- for search indexes.
-   AND search_index.use_background_reservation = false
- -- Outputs the total indexed base table size if it exceeds 100 TB,
- -- otherwise, doesn't return any output.
-)
-SELECT * FROM indexed_base_table_size
-WHERE total_logical_bytes >= 109951162777600 -- 100 TB
-```
+    WITH
+     indexed_base_table_size AS (
+     SELECT
+       SUM(base_table.total_logical_bytes) AS total_logical_bytes
+     FROM
+       `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
+     JOIN
+       `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
+     ON
+       (search_index.table_name = base_table.table_name
+         AND search_index.project_id = base_table.project_id
+         AND search_index.index_schema = base_table.table_schema)
+     WHERE
+       TRUE
+       -- Excludes search indexes that are permanently disabled.
+       AND search_index.index_status != 'PERMANENTLY DISABLED'
+       -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
+       -- less than 10 GB. These tables don't count toward the limit.
+       AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
+       -- Excludes search indexes whose project has BACKGROUND reservation purchased
+       -- for search indexes.
+       AND search_index.use_background_reservation = false
+     -- Outputs the total indexed base table size if it exceeds 100 TB,
+     -- otherwise, doesn't return any output.
+    )
+    SELECT * FROM indexed_base_table_size
+    WHERE total_logical_bytes >= 109951162777600 -- 100 TB
 
 The result is similar to the following:
 
@@ -180,28 +178,26 @@ The result is similar to the following:
 
 The following example gives the breakdown on each project in a US multi-region with the total size of indexed base tables:
 
-``` notranslate
-SELECT
- search_index.project_id,
- search_index.use_background_reservation,
- SUM(base_table.total_logical_bytes) AS total_logical_bytes
-FROM
- `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
-JOIN
- `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
-ON
- (search_index.table_name = base_table.table_name
-   AND search_index.project_id = base_table.project_id
-   AND search_index.index_schema = base_table.table_schema)
-WHERE
- TRUE
-  -- Excludes search indexes that are permanently disabled.
-  AND search_index.index_status != 'PERMANENTLY DISABLED'
-  -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
-  -- less than 10 GB. These tables don't count toward limit.
- AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
-GROUP BY search_index.project_id, search_index.use_background_reservation
-```
+    SELECT
+     search_index.project_id,
+     search_index.use_background_reservation,
+     SUM(base_table.total_logical_bytes) AS total_logical_bytes
+    FROM
+     `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
+    JOIN
+     `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
+    ON
+     (search_index.table_name = base_table.table_name
+       AND search_index.project_id = base_table.project_id
+       AND search_index.index_schema = base_table.table_schema)
+    WHERE
+     TRUE
+      -- Excludes search indexes that are permanently disabled.
+      AND search_index.index_status != 'PERMANENTLY DISABLED'
+      -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
+      -- less than 10 GB. These tables don't count toward limit.
+     AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
+    GROUP BY search_index.project_id, search_index.use_background_reservation
 
 The result is similar to the following:
 
@@ -219,15 +215,13 @@ The result is similar to the following:
 
 This following example returns all search indexes that are throttled within the organization and region:
 
-``` notranslate
-SELECT project_id, index_schema, table_name, index_name
-FROM
- `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION
-WHERE
- -- Excludes search indexes that are permanently disabled.
- index_status != 'PERMANENTLY DISABLED'
- AND index_status_details.throttle_status IN ('ORGANIZATION_LIMIT_EXCEEDED', 'BASE_TABLE_TOO_LARGE')
-```
+    SELECT project_id, index_schema, table_name, index_name
+    FROM
+     `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION
+    WHERE
+     -- Excludes search indexes that are permanently disabled.
+     index_status != 'PERMANENTLY DISABLED'
+     AND index_status_details.throttle_status IN ('ORGANIZATION_LIMIT_EXCEEDED', 'BASE_TABLE_TOO_LARGE')
 
 The result is similar to the following:
 

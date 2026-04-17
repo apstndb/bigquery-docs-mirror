@@ -290,28 +290,28 @@ Examples:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
- r&#39;\n&#39; /*Only the prev is raw!*/ &#39;\n&#39; &quot;b&quot; &quot;&quot;&quot;c&quot;d&quot;e&quot;&quot;&quot; &#39;&#39;&#39;f&#39;g&#39;h&#39;&#39;&#39; &quot;1&quot; &quot;2&quot;,
- br&#39;\n&#39;/*Only the prev is raw!*/ b&#39;\n&#39; b&quot;b&quot; b&quot;&quot;&quot;c&quot;d&quot;e&quot;&quot;&quot; b&#39;&#39;&#39;f&#39;g&#39;h&#39;&#39;&#39; b&quot;1&quot; b&quot;2&quot;,
-  NUMERIC &quot;1&quot; r&#39;2&#39;,
-  DECIMAL /*whole:*/ &#39;1&#39; /*fractional:*/ &quot;.23&quot; /*exponent=*/ &quot;e+6&quot;,
-  BIGNUMERIC &#39;1&#39; r&quot;2&quot;,
-  BIGDECIMAL /*sign*/ &#39;-&#39; /*whole:*/ &#39;1&#39; /*fractional:*/ &quot;.23&quot; /*exponent=*/ &quot;e+6&quot;,
-  RANGE&lt;DATE&gt; &#39;[2014-01-01,&#39; /*comment*/ &quot;2015-01-01)&quot;,
-  DATE &#39;2014&#39; &quot;-01-01&quot;,
-  DATETIME &#39;2016-01-01 &#39; r&quot;12:00:00&quot;,
-  TIMESTAMP &#39;2018-10-01 &#39; &quot;12:00:00+08&quot;</code></pre></td>
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
- &quot;\\n\nbc\&quot;d\&quot;ef&#39;g&#39;h12&quot;,
- b&quot;\\n\nbc\&quot;d\&quot;ef&#39;g&#39;h12&quot;,
-  NUMERIC &quot;12&quot;,
-  DECIMAL &#39;1.23e+6&#39;,
-  BIGNUMERIC &#39;12&#39;,
-  BIGDECIMAL &quot;-1.23e+6&quot;,
-  RANGE&lt;DATE&gt; &#39;[2014-01-01 2015-01-01)&#39;,
-  DATE &#39;2014-01-01&#39;,
-  DATETIME &#39;2016-01-01 12:00:00&#39;,
-  TIMESTAMP &quot;2018-10-01 12:00:00+08&quot;</code></pre></td>
+<td><div class="sourceCode" id="cb1" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a> r<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span> <span class="co">/*Only the prev is raw!*/</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span> <span class="ot">&quot;b&quot;</span> <span class="ot">&quot;&quot;&quot;c&quot;</span>d<span class="ot">&quot;e&quot;&quot;&quot;</span> <span class="st">&#39;</span><span class="ch">&#39;&#39;</span><span class="st">f&#39;</span>g<span class="st">&#39;h</span><span class="ch">&#39;&#39;</span><span class="st">&#39;</span> <span class="ot">&quot;1&quot;</span> <span class="ot">&quot;2&quot;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3"></a> br<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span><span class="co">/*Only the prev is raw!*/</span> b<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span> b<span class="ot">&quot;b&quot;</span> b<span class="ot">&quot;&quot;&quot;c&quot;</span>d<span class="ot">&quot;e&quot;&quot;&quot;</span> b<span class="st">&#39;</span><span class="ch">&#39;&#39;</span><span class="st">f&#39;</span>g<span class="st">&#39;h</span><span class="ch">&#39;&#39;</span><span class="st">&#39;</span> b<span class="ot">&quot;1&quot;</span> b<span class="ot">&quot;2&quot;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="dt">NUMERIC</span> <span class="ot">&quot;1&quot;</span> r<span class="st">&#39;2&#39;</span>,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="dt">DECIMAL</span> <span class="co">/*whole:*/</span> <span class="st">&#39;1&#39;</span> <span class="co">/*fractional:*/</span> <span class="ot">&quot;.23&quot;</span> <span class="co">/*exponent=*/</span> <span class="ot">&quot;e+6&quot;</span>,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  BIGNUMERIC <span class="st">&#39;1&#39;</span> r<span class="ot">&quot;2&quot;</span>,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  BIGDECIMAL <span class="co">/*sign*/</span> <span class="st">&#39;-&#39;</span> <span class="co">/*whole:*/</span> <span class="st">&#39;1&#39;</span> <span class="co">/*fractional:*/</span> <span class="ot">&quot;.23&quot;</span> <span class="co">/*exponent=*/</span> <span class="ot">&quot;e+6&quot;</span>,</span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">RANGE</span><span class="op">&lt;</span><span class="dt">DATE</span><span class="op">&gt;</span> <span class="st">&#39;[2014-01-01,&#39;</span> <span class="co">/*comment*/</span> <span class="ot">&quot;2015-01-01)&quot;</span>,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="dt">DATE</span> <span class="st">&#39;2014&#39;</span> <span class="ot">&quot;-01-01&quot;</span>,</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  DATETIME <span class="st">&#39;2016-01-01 &#39;</span> r<span class="ot">&quot;12:00:00&quot;</span>,</span>
+<span id="cb1-11"><a href="#cb1-11"></a>  <span class="dt">TIMESTAMP</span> <span class="st">&#39;2018-10-01 &#39;</span> <span class="ot">&quot;12:00:00+08&quot;</span></span></code></pre></div></td>
+<td><div class="sourceCode" id="cb2" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a> <span class="ot">&quot;\\n\nbc\&quot;</span>d\<span class="ot">&quot;ef&#39;g&#39;h12&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a> b<span class="ot">&quot;\\n\nbc\&quot;</span>d\<span class="ot">&quot;ef&#39;g&#39;h12&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">NUMERIC</span> <span class="ot">&quot;12&quot;</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">DECIMAL</span> <span class="st">&#39;1.23e+6&#39;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  BIGNUMERIC <span class="st">&#39;12&#39;</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  BIGDECIMAL <span class="ot">&quot;-1.23e+6&quot;</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="kw">RANGE</span><span class="op">&lt;</span><span class="dt">DATE</span><span class="op">&gt;</span> <span class="st">&#39;[2014-01-01 2015-01-01)&#39;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="dt">DATE</span> <span class="st">&#39;2014-01-01&#39;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  DATETIME <span class="st">&#39;2016-01-01 12:00:00&#39;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="dt">TIMESTAMP</span> <span class="ot">&quot;2018-10-01 12:00:00+08&quot;</span></span></code></pre></div></td>
 </tr>
 </tbody>
 </table>

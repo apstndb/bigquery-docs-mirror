@@ -49,7 +49,7 @@ You can try these best practices by following the [Scalable forecasting with mil
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(model_option_list)
@@ -621,13 +621,13 @@ A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
 All time series forecasting models support the following `AS` clause syntax for specifying the training data:
 
-``` lang-googlesql
+```googlesql
 AS query_statement
 ```
 
 For time series forecasting models that have a `DATA_FREQUENCY` value of either `DAILY` or `AUTO_FREQUENCY` , you can optionally use the following `AS` clause syntax to perform [custom holiday modeling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) in addition to specifying the training data:
 
-``` lang-googlesql
+```googlesql
 AS (
   training_data AS (query_statement),
   custom_holiday AS (holiday_statement)
@@ -664,32 +664,30 @@ The `preholiday_days` and `postholiday_days` arguments together describe the hol
 
 To achieve the best holiday modeling result, provide as much historical and forecast information about the occurrences of each included holiday as possible. For example, if you have time series data from 2018 to 2022 and would like to forecast for 2023, you get the best result by providing the custom holiday information for all of those years, similar to the following:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.arima_model`
-  OPTIONS (
-    model_type = 'ARIMA_PLUS',
-    holiday_region = 'US',...) AS (
-        training_data AS (SELECT * FROM `mydataset.timeseries_data`),
-        custom_holiday AS (
-            SELECT
-              'US' AS region,
-              'Halloween' AS holiday_name,
-              primary_date,
-              5 AS preholiday_days,
-              1 AS postholiday_days
-            FROM
-              UNNEST(
-                [
-                  DATE('2018-10-31'),
-                  DATE('2019-10-31'),
-                  DATE('2020-10-31'),
-                  DATE('2021-10-31'),
-                  DATE('2022-10-31'),
-                  DATE('2023-10-31')])
-                AS primary_date
+    CREATE OR REPLACE MODEL `mydataset.arima_model`
+      OPTIONS (
+        model_type = 'ARIMA_PLUS',
+        holiday_region = 'US',...) AS (
+            training_data AS (SELECT * FROM `mydataset.timeseries_data`),
+            custom_holiday AS (
+                SELECT
+                  'US' AS region,
+                  'Halloween' AS holiday_name,
+                  primary_date,
+                  5 AS preholiday_days,
+                  1 AS postholiday_days
+                FROM
+                  UNNEST(
+                    [
+                      DATE('2018-10-31'),
+                      DATE('2019-10-31'),
+                      DATE('2020-10-31'),
+                      DATE('2021-10-31'),
+                      DATE('2022-10-31'),
+                      DATE('2023-10-31')])
+                    AS primary_date
+              )
           )
-      )
-```
 
 ## Holiday data
 
@@ -785,29 +783,27 @@ To model one or more custom holidays in addition to a region's built-in holidays
 
 The following example models all built-in holidays for the `US` holiday region, and additionally models the custom holiday `members_day` :
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.arima_model`
-  OPTIONS (
-    model_type = 'ARIMA_PLUS',
-    holiday_region = 'US',...) AS (
-        training_data AS (SELECT * FROM `mydataset`.timeseries_data`),
-        custom_holiday AS (
-            SELECT
-              'US' AS region,
-              'members_day' AS holiday_name,
-              primary_date,
-              2 AS preholiday_days,
-              2 AS postholiday_days
-            FROM
-              UNNEST(
-                [
-                  DATE('2016-06-15'),
-                  DATE('2017-06-07'),
-                  DATE('2018-06-06')])
-                AS primary_date
-          )
-      );
-```
+    CREATE OR REPLACE MODEL `mydataset.arima_model`
+      OPTIONS (
+        model_type = 'ARIMA_PLUS',
+        holiday_region = 'US',...) AS (
+            training_data AS (SELECT * FROM `mydataset`.timeseries_data`),
+            custom_holiday AS (
+                SELECT
+                  'US' AS region,
+                  'members_day' AS holiday_name,
+                  primary_date,
+                  2 AS preholiday_days,
+                  2 AS postholiday_days
+                FROM
+                  UNNEST(
+                    [
+                      DATE('2016-06-15'),
+                      DATE('2017-06-07'),
+                      DATE('2018-06-06')])
+                    AS primary_date
+              )
+          );
 
 ### Model only custom holidays
 
@@ -815,30 +811,28 @@ To model only custom holidays, don't specify a value for the `HOLIDAY_REGION` op
 
 The following example models only the custom holiday `members_day` for the `US` holiday region:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.arima_model`
-  OPTIONS (
-    model_type = 'ARIMA_PLUS',
-    -- Don't specify HOLIDAY_REGION
-    ...) AS (
-        training_data AS (SELECT * FROM `mydataset.timeseries_data`),
-        custom_holiday AS (
-            SELECT
-              'US' AS region,
-              'members_day' AS holiday_name,
-              primary_date,
-              2 AS preholiday_days,
-              2 AS postholiday_days
-            FROM
-              UNNEST(
-                [
-                  DATE('2016-06-15'),
-                  DATE('2017-06-07'),
-                  DATE('2018-06-06')])
-                AS primary_date
-          )
-      );
-```
+    CREATE OR REPLACE MODEL `mydataset.arima_model`
+      OPTIONS (
+        model_type = 'ARIMA_PLUS',
+        -- Don't specify HOLIDAY_REGION
+        ...) AS (
+            training_data AS (SELECT * FROM `mydataset.timeseries_data`),
+            custom_holiday AS (
+                SELECT
+                  'US' AS region,
+                  'members_day' AS holiday_name,
+                  primary_date,
+                  2 AS preholiday_days,
+                  2 AS postholiday_days
+                FROM
+                  UNNEST(
+                    [
+                      DATE('2016-06-15'),
+                      DATE('2017-06-07'),
+                      DATE('2018-06-06')])
+                    AS primary_date
+              )
+          );
 
 ### Change the metadata for built-in holidays
 
@@ -846,7 +840,7 @@ You can change the primary date and holiday effect window used by the model for 
 
 The following example models all built-in holidays for the `US` holiday region, but models 3 years of the `EasterMonday` holiday with a 3-day holiday effect window instead of the default 9-day holiday effect window:
 
-``` notranslate
+``` 
   OPTIONS (
     model_type = 'ARIMA_PLUS',
     holiday_region = 'US',...) AS (
@@ -875,22 +869,20 @@ To model only a subset of built-in holidays, don't specify a value for the `HOLI
 
 The following example models all built-in holidays for the `US` holiday region except for the `Christmas` and `NewYears` holidays:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.arima_model`
-  OPTIONS (
-    model_type = 'ARIMA_PLUS',
-    -- Don't specify HOLIDAY_REGION
-    ...) AS (
-        training_data AS (SELECT * FROM `mydataset.timeseries_data`),
-        custom_holiday AS (
-            SELECT *
-            FROM `bigquery-public-data.ml_datasets.holiday`
-            WHERE
-              region = 'US'
-              AND (holiday_name != 'Christmas' OR holiday_name != 'NewYear')
-          )
-      );
-```
+    CREATE OR REPLACE MODEL `mydataset.arima_model`
+      OPTIONS (
+        model_type = 'ARIMA_PLUS',
+        -- Don't specify HOLIDAY_REGION
+        ...) AS (
+            training_data AS (SELECT * FROM `mydataset.timeseries_data`),
+            custom_holiday AS (
+                SELECT *
+                FROM `bigquery-public-data.ml_datasets.holiday`
+                WHERE
+                  region = 'US'
+                  AND (holiday_name != 'Christmas' OR holiday_name != 'NewYear')
+              )
+          );
 
 ### Custom holiday limitations
 
@@ -939,95 +931,85 @@ The following examples show how to create different types of `ARIMA_PLUS` time s
 
 This example shows how to create a time series model that forecasts a single time series:
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='ARIMA_PLUS',
-         time_series_timestamp_col='date',
-         time_series_data_col='transaction') AS
-SELECT
-  date,
-  transaction
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='ARIMA_PLUS',
+             time_series_timestamp_col='date',
+             time_series_data_col='transaction') AS
+    SELECT
+      date,
+      transaction
+    FROM
+      `mydataset.mytable`
 
 ### Forecast multiple time series
 
 This example shows how to create multiple time series models, one for each input time series:
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='ARIMA_PLUS',
-         time_series_timestamp_col='date',
-         time_series_data_col='transaction',
-         time_series_id_col='company_name') AS
-SELECT
-  date,
-  transaction,
-  company_name
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='ARIMA_PLUS',
+             time_series_timestamp_col='date',
+             time_series_data_col='transaction',
+             time_series_id_col='company_name') AS
+    SELECT
+      date,
+      transaction,
+      company_name
+    FROM
+      `mydataset.mytable`
 
 ### Forecast multiple time series using multiple time series ID columns
 
 This example shows how to create multiple time series models for multiple IDs:
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='ARIMA_PLUS',
-         time_series_timestamp_col='date',
-         time_series_data_col='transaction',
-         time_series_id_col=['company_name', 'department_name']) AS
-SELECT
-  date,
-  transaction,
-  company_name,
-  department_name
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='ARIMA_PLUS',
+             time_series_timestamp_col='date',
+             time_series_data_col='transaction',
+             time_series_id_col=['company_name', 'department_name']) AS
+    SELECT
+      date,
+      transaction,
+      company_name,
+      department_name
+    FROM
+      `mydataset.mytable`
 
 ### Forecast multiple time series more quickly by using a fraction of the time points
 
 This example shows how to create multiple time series models while improving training speed by using the `TIME_SERIES_LENGTH_FRACTION` and `MIN_TIME_SERIES_LENGTH` options:
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='ARIMA_PLUS',
-         time_series_timestamp_col='date',
-         time_series_data_col='transaction',
-         time_series_id_col=['company_name', 'department_name'],
-         time_series_length_fraction=0.5,
-         min_time_series_length=30) AS
-SELECT
-  date,
-  transaction,
-  company_name,
-  department_name
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='ARIMA_PLUS',
+             time_series_timestamp_col='date',
+             time_series_data_col='transaction',
+             time_series_id_col=['company_name', 'department_name'],
+             time_series_length_fraction=0.5,
+             min_time_series_length=30) AS
+    SELECT
+      date,
+      transaction,
+      company_name,
+      department_name
+    FROM
+      `mydataset.mytable`
 
 ### Forecast multiple time series more quickly by defining a maximum number of time points
 
 This example shows how to create multiple time series models while improving training speed by using `MAX_TIME_SERIES_LENGTH` option:
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='ARIMA_PLUS',
-         time_series_timestamp_col='date',
-         time_series_data_col='transaction',
-         time_series_id_col=['company_name', 'department_name'],
-         max_time_series_length=50) AS
-SELECT
-  date,
-  transaction,
-  company_name,
-  department_name
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='ARIMA_PLUS',
+             time_series_timestamp_col='date',
+             time_series_data_col='transaction',
+             time_series_id_col=['company_name', 'department_name'],
+             max_time_series_length=50) AS
+    SELECT
+      date,
+      transaction,
+      company_name,
+      department_name
+    FROM
+      `mydataset.mytable`
 
 ## What's next
 

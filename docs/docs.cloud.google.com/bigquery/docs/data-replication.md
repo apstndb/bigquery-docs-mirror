@@ -255,15 +255,13 @@ You can add a replica to any dataset that's located in a region or multi-region 
 
 The following example creates a dataset named `my_dataset` in the `us-central1` region and then adds a replica in the `us-east4` region:
 
-``` notranslate
--- Create the primary replica in the us-central1 region.
-CREATE SCHEMA my_dataset OPTIONS(location='us-central1');
-
--- Create a replica in the secondary region.
-ALTER SCHEMA my_dataset
-ADD REPLICA `my_replica`
-OPTIONS(location='us-east4');
-```
+    -- Create the primary replica in the us-central1 region.
+    CREATE SCHEMA my_dataset OPTIONS(location='us-central1');
+    
+    -- Create a replica in the secondary region.
+    ALTER SCHEMA my_dataset
+    ADD REPLICA `my_replica`
+    OPTIONS(location='us-east4');
 
 To confirm when the secondary replica has successfully been created, you can query the `creation_complete` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
@@ -302,9 +300,7 @@ Note the following:
 
 The following example promotes the `us-east4` replica to be the primary:
 
-``` notranslate
-ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4');
-```
+    ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4');
 
 To confirm when the secondary replica has successfully been promoted, you can query the `replica_primary_assignment_complete` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
@@ -330,10 +326,8 @@ To remove a replica and stop replicating the dataset, use the [`ALTER SCHEMA DRO
 
 The following example removes the `us` replica:
 
-``` notranslate
-ALTER SCHEMA my_dataset
-DROP REPLICA IF EXISTS `us`;
-```
+    ALTER SCHEMA my_dataset
+    DROP REPLICA IF EXISTS `us`;
 
 You must first drop any secondary replicas to delete the entire dataset. If you delete the entire dataset—for example, by using the [`DROP SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement) —without dropping all secondary replicas, you receive the following error:
 
@@ -396,12 +390,10 @@ You can use cross-region dataset replication to migrate your datasets from one r
 
 To begin the migration process, first replicate the dataset in the region that you want to migrate the data to. In this scenario, you are migrating the `my_migration` dataset to the `EU` multi-region.
 
-``` notranslate
--- Create a replica in the secondary region.
-ALTER SCHEMA my_migration
-ADD REPLICA `eu`
-OPTIONS(location='eu');
-```
+    -- Create a replica in the secondary region.
+    ALTER SCHEMA my_migration
+    ADD REPLICA `eu`
+    OPTIONS(location='eu');
 
 This creates a secondary replica named `eu` in the `EU` multi-region. The primary replica is the `my_migration` dataset in the `US` multi-region.
 
@@ -409,9 +401,7 @@ This creates a secondary replica named `eu` in the `EU` multi-region. The primar
 
 To continue migrating the dataset to the `EU` multi-region, promote the secondary replica:
 
-``` notranslate
-ALTER SCHEMA my_migration SET OPTIONS(primary_replica = 'eu')
-```
+    ALTER SCHEMA my_migration SET OPTIONS(primary_replica = 'eu')
 
 After the promotion is complete, `eu` is the primary replica. It is a writable replica.
 
@@ -419,10 +409,8 @@ After the promotion is complete, `eu` is the primary replica. It is a writable r
 
 To complete the migration from the `US` multi-region to the `EU` multi-region, delete the `us` replica. This step is not required but is useful if you don't need a dataset replica beyond your migration needs.
 
-``` notranslate
-ALTER SCHEMA my_migration
-DROP REPLICA IF EXISTS us;
-```
+    ALTER SCHEMA my_migration
+    DROP REPLICA IF EXISTS us;
 
 Your dataset is located in the `EU` multi-region and there are no replicas of the `my_migration` dataset. You have successfully migrated your dataset to the `EU` multi-region. The complete list of resources that are migrated can be found in [Resource behavior](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
 
@@ -454,13 +442,11 @@ Replicating datasets with CMEK behaves as described in the following scenarios:
 
 The following example creates a replica in the `us-west1` region with a `replica_kms_key` value set. For CMEK key, grant the [BigQuery service account permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) to encrypt and decrypt.
 
-``` notranslate
--- Create a replica in the secondary region.
-ALTER SCHEMA my_dataset
-ADD REPLICA `us-west1`
-OPTIONS(location='us-west1',
-  replica_kms_key='my_us_west1_kms_key_name');
-```
+    -- Create a replica in the secondary region.
+    ALTER SCHEMA my_dataset
+    ADD REPLICA `us-west1`
+    OPTIONS(location='us-west1',
+      replica_kms_key='my_us_west1_kms_key_name');
 
 ### CMEK limitations
 

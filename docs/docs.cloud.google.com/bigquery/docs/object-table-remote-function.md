@@ -72,14 +72,12 @@ Deployed, this function would have an endpoint similar to `https://us-central1-m
 
 The following example shows how to create a BigQuery remote function based on this Cloud Run functions function:
 
-``` notranslate
-CREATE FUNCTION mydataset.object_length(signed_url STRING) RETURNS INT64
-REMOTE WITH CONNECTION `us.myconnection`
-OPTIONS(
-  endpoint = "https://us-central1-myproject.cloudfunctions.net/object_length",
-  max_batching_rows = 1
-);
-```
+    CREATE FUNCTION mydataset.object_length(signed_url STRING) RETURNS INT64
+    REMOTE WITH CONNECTION `us.myconnection`
+    OPTIONS(
+      endpoint = "https://us-central1-myproject.cloudfunctions.net/object_length",
+      max_batching_rows = 1
+    );
 
 For step-by-step guidance, see [Tutorial: Analyze an object table with a remote function](https://docs.cloud.google.com/bigquery/docs/remote-function-tutorial) .
 
@@ -91,19 +89,15 @@ To call a remote function on object table data, reference the remote function in
 
 The following example shows typical statement syntax:
 
-``` notranslate
-SELECT uri, function_name(signed_url) AS function_output
-FROM EXTERNAL_OBJECT_TRANSFORM(TABLE my_dataset.object_table, ["SIGNED_URL"])
-LIMIT 10000;
-```
+    SELECT uri, function_name(signed_url) AS function_output
+    FROM EXTERNAL_OBJECT_TRANSFORM(TABLE my_dataset.object_table, ["SIGNED_URL"])
+    LIMIT 10000;
 
 The following example shows how to process only a subset of the object table contents with a remote function:
 
-``` notranslate
-SELECT uri, function_name(signed_url) AS function_output
-FROM EXTERNAL_OBJECT_TRANSFORM(TABLE my_dataset.object_table, ["SIGNED_URL"])
-WHERE content_type = "application/pdf";
-```
+    SELECT uri, function_name(signed_url) AS function_output
+    FROM EXTERNAL_OBJECT_TRANSFORM(TABLE my_dataset.object_table, ["SIGNED_URL"])
+    WHERE content_type = "application/pdf";
 
 ## What's next
 

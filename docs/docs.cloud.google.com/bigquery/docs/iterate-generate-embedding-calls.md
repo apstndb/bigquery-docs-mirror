@@ -93,11 +93,9 @@ Create a remote model that represents a hosted Vertex AI `text-embedding-005` mo
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `target_dataset.embedding_model`
-      REMOTE WITH CONNECTION DEFAULT
-      OPTIONS (ENDPOINT = 'text-embedding-005');
-    ```
+        CREATE OR REPLACE MODEL `target_dataset.embedding_model`
+          REMOTE WITH CONNECTION DEFAULT
+          OPTIONS (ENDPOINT = 'text-embedding-005');
     
     The query takes several seconds to complete, after which the `embedding` model appears in the `sample` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -109,16 +107,14 @@ Run the `bqutil.procedure.bqml_generate_embeddings` stored procedure, which iter
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CALL `bqutil.procedure.bqml_generate_embeddings`(
-        "bigquery-public-data.bbc_news.fulltext",            -- source table
-        "PROJECT_ID.target_dataset.news_body_embeddings",  -- destination table
-        "PROJECT_ID.target_dataset.embedding_model",       -- model
-        "body",                                              -- content column
-        ["filename"],                                        -- key columns
-        '{}'                                                 -- optional arguments encoded as a JSON string
-    );
-    ```
+        CALL `bqutil.procedure.bqml_generate_embeddings`(
+            "bigquery-public-data.bbc_news.fulltext",            -- source table
+            "PROJECT_ID.target_dataset.news_body_embeddings",  -- destination table
+            "PROJECT_ID.target_dataset.embedding_model",       -- model
+            "body",                                              -- content column
+            ["filename"],                                        -- key columns
+            '{}'                                                 -- optional arguments encoded as a JSON string
+        );
     
     Replace `  PROJECT_ID  ` with the project ID of the project you are using for this tutorial.
     
@@ -126,11 +122,9 @@ Run the `bqutil.procedure.bqml_generate_embeddings` stored procedure, which iter
 
 3.  When the query is finished running, confirm that there are no rows in the `target_dataset.news_body_embeddings` table that contain a retryable error. In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT *
-    FROM `target_dataset.news_body_embeddings`
-    WHERE ml_generate_embedding_status LIKE '%A retryable error occurred%';
-    ```
+        SELECT *
+        FROM `target_dataset.news_body_embeddings`
+        WHERE ml_generate_embedding_status LIKE '%A retryable error occurred%';
     
     The query returns the message `No data to display` .
 

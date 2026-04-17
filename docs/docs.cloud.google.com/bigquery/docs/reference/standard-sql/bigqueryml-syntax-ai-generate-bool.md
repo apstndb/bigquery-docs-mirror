@@ -149,7 +149,7 @@ To determine whether each city is located in the US, call the `AI.GENERATE_BOOL`
 
 The result is similar to the following:
 
-``` console
+```console
 +---------+--------+
 | city    | result |
 +---------+--------+
@@ -176,7 +176,7 @@ You can use the `AI.GENERATE_BOOL` function in a `WHERE` clause to filter rows b
 
 The result is similar to the following:
 
-``` console
+```console
 +-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |               title               |                                                                          result                                                                          |
 +-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+

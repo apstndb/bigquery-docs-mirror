@@ -88,30 +88,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Import a TensorFlow model
 
@@ -131,7 +125,7 @@ To import the TensorFlow model into your dataset, follow these steps.
 
 3.  In the query editor, enter this `CREATE MODEL` statement, and then click **Run** .
     
-    ``` notranslate
+    ``` 
       CREATE OR REPLACE MODEL `bqml_tutorial.imported_tf_model`
       OPTIONS (MODEL_TYPE='TENSORFLOW',
         MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')
@@ -149,38 +143,30 @@ To import the TensorFlow model into your dataset, follow these steps.
 
 1.  Import the TensorFlow model from Cloud Storage by entering the following `CREATE MODEL` statement.
     
-    ``` notranslate
-    bq query --use_legacy_sql=false \
-    "CREATE OR REPLACE MODEL
-      `bqml_tutorial.imported_tf_model`
-    OPTIONS
-      (MODEL_TYPE='TENSORFLOW',
-        MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
-    ```
+        bq query --use_legacy_sql=false \
+        "CREATE OR REPLACE MODEL
+          `bqml_tutorial.imported_tf_model`
+        OPTIONS
+          (MODEL_TYPE='TENSORFLOW',
+            MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
 
 2.  After you import the model, verify that the model appears in the dataset.
     
-    ``` notranslate
-    bq ls -m bqml_tutorial
-    ```
+        bq ls -m bqml_tutorial
     
     The output is similar to the following:
     
-    ``` notranslate
-    tableId             Type
-    ------------------- -------
-    imported_tf_model   MODEL
-    ```
+        tableId             Type
+        ------------------- -------
+        imported_tf_model   MODEL
 
 ### API
 
 [Insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the [jobs\#configuration.query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) property in the request body.
 
-``` notranslate
-{
-  "query": "CREATE MODEL `PROJECT_ID:bqml_tutorial.imported_tf_model` OPTIONS(MODEL_TYPE='TENSORFLOW' MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
-}
-```
+    {
+      "query": "CREATE MODEL `PROJECT_ID:bqml_tutorial.imported_tf_model` OPTIONS(MODEL_TYPE='TENSORFLOW' MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
+    }
 
 Replace `  PROJECT_ID  ` with the name of your project and dataset.
 
@@ -221,15 +207,13 @@ To make predictions with the imported TensorFlow model, follow these steps.
 
 3.  In the query editor, enter this query that uses the `ML.PREDICT` function.
     
-    ``` notranslate
-    SELECT *
-      FROM ML.PREDICT(MODEL `bqml_tutorial.imported_tf_model`,
-        (
-         SELECT title AS input
-         FROM bigquery-public-data.hacker_news.full
+        SELECT *
+          FROM ML.PREDICT(MODEL `bqml_tutorial.imported_tf_model`,
+            (
+             SELECT title AS input
+             FROM bigquery-public-data.hacker_news.full
+            )
         )
-    )
-    ```
     
     The query results should look like this:
     
@@ -239,18 +223,16 @@ To make predictions with the imported TensorFlow model, follow these steps.
 
 Enter this command to run the query that uses `ML.PREDICT` .
 
-``` notranslate
-bq query \
---use_legacy_sql=false \
-'SELECT *
-FROM ML.PREDICT(
-  MODEL `bqml_tutorial.imported_tf_model`,
-  (SELECT title AS input FROM `bigquery-public-data.hacker_news.full`))'
-```
+    bq query \
+    --use_legacy_sql=false \
+    'SELECT *
+    FROM ML.PREDICT(
+      MODEL `bqml_tutorial.imported_tf_model`,
+      (SELECT title AS input FROM `bigquery-public-data.hacker_news.full`))'
 
 The results should look like this:
 
-``` console
+```console
 +------------------------------------------------------------------------+----------------------------------------------------------------------------------+
 |                               dense_1                                  |                                       input                                      |
 +------------------------------------------------------------------------+----------------------------------------------------------------------------------+
@@ -265,11 +247,9 @@ The results should look like this:
 
 [Insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the [jobs\#configuration.query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) property as in the request body. Replace `project_id` with the name of your project.
 
-``` notranslate
-{
-  "query": "SELECT * FROM ML.PREDICT(MODEL `project_id.bqml_tutorial.imported_tf_model`, (SELECT * FROM input_data))"
-}
-```
+    {
+      "query": "SELECT * FROM ML.PREDICT(MODEL `project_id.bqml_tutorial.imported_tf_model`, (SELECT * FROM input_data))"
+    }
 
 ### BigQuery DataFrames
 

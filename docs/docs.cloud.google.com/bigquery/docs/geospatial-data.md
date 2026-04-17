@@ -129,14 +129,12 @@ If the feature object contains other members that are not listed here, then BigQ
 
 You can load a newline-delimited GeoJSON file by using the bq command-line tool's `bq load` command, as follows:
 
-``` notranslate
-bq load \
- --source_format=NEWLINE_DELIMITED_JSON \
- --json_extension=GEOJSON \
- --autodetect \
- DATASET.TABLE \
- FILE_PATH_OR_URI
-```
+    bq load \
+     --source_format=NEWLINE_DELIMITED_JSON \
+     --json_extension=GEOJSON \
+     --autodetect \
+     DATASET.TABLE \
+     FILE_PATH_OR_URI
 
 Replace the following:
 
@@ -265,15 +263,13 @@ To avoid formatting issues, you can use a function that generates standards-comp
 
 To find or to ignore the improperly formatted data, use the `SAFE` function prefix to output the problematic data. For example, the following query uses the `SAFE` prefix to retrieve improperly formatted spatial data.
 
-``` notranslate
-SELECT
-  geojson AS bad_geojson
-FROM
-  mytable
-WHERE
-  geojson IS NOT NULL
-  AND SAFE.ST_GEOGFROMGEOJSON(geojson) IS NULL
-```
+    SELECT
+      geojson AS bad_geojson
+    FROM
+      mytable
+    WHERE
+      geojson IS NOT NULL
+      AND SAFE.ST_GEOGFROMGEOJSON(geojson) IS NULL
 
 ### Constraints
 
@@ -295,13 +291,11 @@ For information about exporting Earth Engine data to BigQuery, see [Exporting to
 
 If your table contains separate columns for longitude and latitude, you can transform the values into geographies by using GoogleSQL [geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) such as [`ST_GEOGPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) . For example, if you have two `DOUBLE` columns for longitude and latitude, you can create a geography column with the following query:
 
-``` notranslate
-SELECT
-  *,
-  ST_GEOGPOINT(longitude, latitude) AS g
-FROM
-  mytable
-```
+    SELECT
+      *,
+      ST_GEOGPOINT(longitude, latitude) AS g
+    FROM
+      mytable
 
 BigQuery can convert WKT and GeoJSON strings to geography types. If your data is in another format such as Shapefiles, use an external tool to convert the data to a supported input file format, such as a CSV file, with `GEOGRAPHY` columns encoded as WKT or GeoJSON strings.
 
@@ -311,42 +305,36 @@ You can [partition](https://docs.cloud.google.com/bigquery/docs/partitioned-tabl
 
 If you store `GEOGRAPHY` data in a table and your queries filter data by using a spatial predicate, ensure that the table is clustered by the `GEOGRAPHY` column. This typically improves query performance and might reduce cost. A spatial predicate calls a boolean geography function and has a `GEOGRAPHY` column as one of the arguments. The following sample shows a spatial predicate that uses the `ST_DWITHIN` function:
 
-``` notranslate
-WHERE ST_DWITHIN(geo, ST_GeogPoint(longitude, latitude), 100)
-```
+    WHERE ST_DWITHIN(geo, ST_GeogPoint(longitude, latitude), 100)
 
 ## Using JOINs with spatial data
 
 Spatial JOINs are joins of two tables with a predicate geographic function in the `WHERE` clause. For example:
 
-``` notranslate
--- how many stations within 1 mile range of each zip code?
-SELECT
-    zip_code AS zip,
-    ANY_VALUE(zip_code_geom) AS polygon,
-    COUNT(*) AS bike_stations
-FROM
-    `bigquery-public-data.new_york.citibike_stations` AS bike_stations,
-    `bigquery-public-data.geo_us_boundaries.zip_codes` AS zip_codes
-WHERE ST_DWITHIN(
-         zip_codes.zip_code_geom,
-         ST_GEOGPOINT(bike_stations.longitude, bike_stations.latitude),
-         1609.34)
-GROUP BY zip
-ORDER BY bike_stations DESC
-```
+    -- how many stations within 1 mile range of each zip code?
+    SELECT
+        zip_code AS zip,
+        ANY_VALUE(zip_code_geom) AS polygon,
+        COUNT(*) AS bike_stations
+    FROM
+        `bigquery-public-data.new_york.citibike_stations` AS bike_stations,
+        `bigquery-public-data.geo_us_boundaries.zip_codes` AS zip_codes
+    WHERE ST_DWITHIN(
+             zip_codes.zip_code_geom,
+             ST_GEOGPOINT(bike_stations.longitude, bike_stations.latitude),
+             1609.34)
+    GROUP BY zip
+    ORDER BY bike_stations DESC
 
 Spatial joins perform better when your geography data is persisted. The example above creates the geography values in the query. It is more performant to store the geography values in a BigQuery table.
 
 For example, the following query retrieves longitude, latitude pairs and converts them to geographic points. When you run this query, you specify a new destination table to store the query results:
 
-``` notranslate
-SELECT
-  *,
-  ST_GEOGPOINT(pLongitude, pLatitude) AS p
-FROM
-  mytable
-```
+    SELECT
+      *,
+      ST_GEOGPOINT(pLongitude, pLatitude) AS p
+    FROM
+      mytable
 
 BigQuery implements optimized spatial JOINs for INNER JOIN and CROSS JOIN operators with the following GoogleSQL predicate functions:
 
@@ -375,16 +363,12 @@ If the tools you're using to analyze the exported data don't understand the `GEO
 
 For example, the following query uses `ST_ASGEOJSON` to convert GeoJSON values to strings.
 
-``` notranslate
-SELECT
-  ST_ASGEOJSON(ST_MAKELINE(ST_GEOGPOINT(1,1), ST_GEOGPOINT(3,2)))
-```
+    SELECT
+      ST_ASGEOJSON(ST_MAKELINE(ST_GEOGPOINT(1,1), ST_GEOGPOINT(3,2)))
 
 The resulting data would look like the following:
 
-``` notranslate
-{ "type": "LineString", "coordinates": [ [1, 1], [1.99977145571783, 1.50022838764041], [2.49981908082299, 1.75018082434274], [3, 2] ] }
-```
+    { "type": "LineString", "coordinates": [ [1, 1], [1.99977145571783, 1.50022838764041], [2.49981908082299, 1.75018082434274], [3, 2] ] }
 
 The GeoJSON line has two additional points. Geospatial analytics adds these points so that the GeoJSON line closely follows the same path on the ground as the original line.
 

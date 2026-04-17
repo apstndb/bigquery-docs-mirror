@@ -8,7 +8,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -360,17 +360,15 @@ The following examples create models named `mymodel` in `mydataset` in your defa
 
 This example creates a k-means model with four clusters using the default `distance_type` value of `euclidean_distance` .
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='KMEANS',
-    NUM_CLUSTERS=4 ) AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='KMEANS',
+        NUM_CLUSTERS=4 ) AS
+    SELECT
+      *
+    FROM
+      `mydataset.mytable`
 
 > **Note:** Changing the order of columns in the `SELECT` statement can affect the centroids in the final model.
 
@@ -378,52 +376,46 @@ FROM
 
 This example creates a k-means model with three clusters using the random cluster initialization method.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='KMEANS',
-    NUM_CLUSTERS=3,
-    KMEANS_INIT_METHOD='RANDOM') AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='KMEANS',
+        NUM_CLUSTERS=3,
+        KMEANS_INIT_METHOD='RANDOM') AS
+    SELECT
+      *
+    FROM
+      `mydataset.mytable`
 
 ### Train a k-means model with custom cluster initialization method
 
 This example creates a k-means model with three clusters using the custom cluster initialization method. `init_col` identifies the column of type `BOOL` that contains the values which specify whether a given row is an initial centroid. This column should only contain three rows with the value `TRUE` .
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='KMEANS',
-    NUM_CLUSTERS=3,
-    KMEANS_INIT_METHOD='CUSTOM',
-    KMEANS_INIT_COL='init_col') AS
-SELECT
-  init_col,
-  features
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='KMEANS',
+        NUM_CLUSTERS=3,
+        KMEANS_INIT_METHOD='CUSTOM',
+        KMEANS_INIT_COL='init_col') AS
+    SELECT
+      init_col,
+      features
+    FROM
+      `mydataset.mytable`
 
 ### Train a k-means model with hyperparameter tuning
 
 This example creates a k-means model and uses hyperparameter tuning to improve model performance.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='KMEANS',
-    num_trials=10,
-    max_parallel_trials=2,
-    HPARAM_TUNING_OBJECTIVES=['DAVIES_BOULDIN_INDEX'] ) AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='KMEANS',
+        num_trials=10,
+        max_parallel_trials=2,
+        HPARAM_TUNING_OBJECTIVES=['DAVIES_BOULDIN_INDEX'] ) AS
+    SELECT
+      *
+    FROM
+      `mydataset.mytable`

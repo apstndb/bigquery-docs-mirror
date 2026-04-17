@@ -190,12 +190,10 @@ You can refer to a temporary table by name for the duration of the current multi
 
 You can delete a temporary table explicitly before the multi-statement query completes by using the [`DROP TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement) statement:
 
-``` notranslate
-CREATE TEMP TABLE table1(x INT64);
-SELECT * FROM table1;  -- Succeeds
-DROP TABLE table1;
-SELECT * FROM table1;  -- Results in an error
-```
+    CREATE TEMP TABLE table1(x INT64);
+    SELECT * FROM table1;  -- Succeeds
+    DROP TABLE table1;
+    SELECT * FROM table1;  -- Results in an error
 
 After a multi-statement query finishes, the temporary table exists for up to 24 hours.
 
@@ -225,44 +223,38 @@ When temporary tables are used together with a default dataset, unqualified tabl
 
 For example, consider the following multi-statement query:
 
-``` notranslate
--- Create table t1 in the default dataset
-CREATE TABLE t1 (x INT64);
-
--- Create temporary table t1.
-CREATE TEMP TABLE t1 (x INT64);
-
--- This statement selects from the temporary table.
-SELECT * FROM t1;
-
--- Drop the temporary table
-DROP TABLE t1;
-
--- Now that the temporary table is dropped, this statement selects from the
--- table in the default dataset.
-SELECT * FROM t1;
-```
+    -- Create table t1 in the default dataset
+    CREATE TABLE t1 (x INT64);
+    
+    -- Create temporary table t1.
+    CREATE TEMP TABLE t1 (x INT64);
+    
+    -- This statement selects from the temporary table.
+    SELECT * FROM t1;
+    
+    -- Drop the temporary table
+    DROP TABLE t1;
+    
+    -- Now that the temporary table is dropped, this statement selects from the
+    -- table in the default dataset.
+    SELECT * FROM t1;
 
 You can explicitly indicate that you are referring to a temporary table by qualifying the table name with `_SESSION` :
 
-``` notranslate
--- Create a temp table
-CREATE TEMP TABLE t1 (x INT64);
-
--- Create a temp table using the `_SESSION` qualifier
-CREATE TEMP TABLE _SESSION.t2 (x INT64);
-
--- Select from a temporary table using the `_SESSION` qualifier
-SELECT * FROM _SESSION.t1;
-```
+    -- Create a temp table
+    CREATE TEMP TABLE t1 (x INT64);
+    
+    -- Create a temp table using the `_SESSION` qualifier
+    CREATE TEMP TABLE _SESSION.t2 (x INT64);
+    
+    -- Select from a temporary table using the `_SESSION` qualifier
+    SELECT * FROM _SESSION.t1;
 
 If you use the `_SESSION` qualifier for a query of a temporary table that does not exist, the multi-statement query throws an error indicating that the table does not exist. For example, if there is no temporary table named `t3` , the multi-statement query throws an error even if a table named `t3` exists in the default dataset.
 
 You cannot use `_SESSION` to create a non-temporary table:
 
-``` notranslate
-CREATE TABLE _SESSION.t4 (x INT64);  -- Fails
-```
+    CREATE TABLE _SESSION.t4 (x INT64);  -- Fails
 
 ## Collect information about a multi-statement query job
 

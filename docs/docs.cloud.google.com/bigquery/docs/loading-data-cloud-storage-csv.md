@@ -115,7 +115,7 @@ In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigq
 
   - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
     
-    ``` notranslate
+    ``` 
         bq show --format=prettyjson dataset.table
         
     ```
@@ -174,13 +174,11 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA OVERWRITE mydataset.mytable
-    (x INT64,y STRING)
-    FROM FILES (
-      format = 'CSV',
-      uris = ['gs://bucket/path/file.csv']);
-    ```
+        LOAD DATA OVERWRITE mydataset.mytable
+        (x INT64,y STRING)
+        FROM FILES (
+          format = 'CSV',
+          uris = ['gs://bucket/path/file.csv']);
 
 3.  Click play\_circle **Run** .
 
@@ -258,13 +256,11 @@ Other optional flags include:
 
 To load CSV data into BigQuery, enter the following command:
 
-``` notranslate
-bq --location=location load \
---source_format=format \
-dataset.table \
-path_to_source \
-schema
-```
+    bq --location=location load \
+    --source_format=format \
+    dataset.table \
+    path_to_source \
+    schema
 
 Where:
 
@@ -1015,7 +1011,7 @@ In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigq
 
   - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
     
-    ``` notranslate
+    ``` 
         bq show --format=prettyjson dataset.table
         
     ```
@@ -1070,12 +1066,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA INTO mydataset.mytable
-    FROM FILES (
-      format = 'CSV',
-      uris = ['gs://bucket/path/file.csv']);
-    ```
+        LOAD DATA INTO mydataset.mytable
+        FROM FILES (
+          format = 'CSV',
+          uris = ['gs://bucket/path/file.csv']);
 
 3.  Click play\_circle **Run** .
 
@@ -1115,14 +1109,12 @@ Other optional flags include:
 
 <!-- end list -->
 
-``` notranslate
-bq --location=location load \
---[no]replace \
---source_format=format \
-dataset.table \
-path_to_source \
-schema
-```
+    bq --location=location load \
+    --[no]replace \
+    --source_format=format \
+    dataset.table \
+    path_to_source \
+    schema
 
 where:
 
@@ -1596,7 +1588,7 @@ Generally, these errors identify the start of the problematic line with a byte o
 
 For example, you run the [`bq load` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) and receive an error:
 
-``` notranslate lang-sh
+```sh
 bq load
     --skip_leading_rows=1 \
     --source_format=CSV \
@@ -1607,7 +1599,7 @@ bq load
 
 The error in the output is similar to the following:
 
-``` notranslate lang-sh
+```sh
 Waiting on bqjob_r5268069f5f49c9bf_0000018632e903d7_1 ... (0s)
 Current status: DONE
 BigQuery error in load operation: Error processing job
@@ -1627,13 +1619,13 @@ percent: 0
 
 Based on the preceding error, there's a format error in the file. To view the file's content, run the [`gcloud storage cat` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cat) :
 
-``` notranslate lang-sh
+```sh
 gcloud storage cat 1405-1505 gs://my-bucket/mytable.csv --recursive
 ```
 
 The output is similar to the following:
 
-``` notranslate lang-sh
+```sh
 16,Abraham Lincoln,"March 4, 1861","April 15, "1865,Republican
 18,Ulysses S. Grant,"March 4, 1869",
 ...
@@ -1645,13 +1637,13 @@ Based on the output of the file, the problem is a misplaced quote in `"April 15,
 
 Debugging parsing errors is more challenging for compressed CSV files, since the reported byte offset refers to the location in the *uncompressed* file. The following [`gcloud storage cat` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cat) streams the file from Cloud Storage, decompresses the file, identifies the appropriate byte offset, and prints the line with the format error:
 
-``` notranslate lang-sh
+```sh
 gcloud storage cat gs://my-bucket/mytable.csv.gz | gunzip - | tail -c +1406 | head -n 1
 ```
 
 The output is similar to the following:
 
-``` notranslate lang-sh
+```sh
 16,Abraham Lincoln,"March 4, 1861","April 15, "1865,Republican
 ```
 

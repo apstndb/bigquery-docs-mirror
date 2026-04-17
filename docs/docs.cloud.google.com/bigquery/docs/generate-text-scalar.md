@@ -80,30 +80,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a connection
 
@@ -167,13 +161,11 @@ Follow these steps to generate text using the `AI.GENERATE` function, and output
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    WITH
-    bbc_news AS (
-      SELECT body FROM `bigquery-public-data.bbc_news.fulltext` LIMIT 5
-    )
-    SELECT AI.GENERATE(body) AS news FROM bbc_news;
-    ```
+        WITH
+        bbc_news AS (
+          SELECT body FROM `bigquery-public-data.bbc_news.fulltext` LIMIT 5
+        )
+        SELECT AI.GENERATE(body) AS news FROM bbc_news;
     
     The output is similar to the following:
     
@@ -199,22 +191,20 @@ Follow these steps to generate text using the `AI.GENERATE` function, and use th
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    WITH
-    bbc_news AS (
-      SELECT
-        body
-      FROM
-        `bigquery-public-data`.bbc_news.fulltext
-      LIMIT 5
-    )
-    SELECT
-    news.good_sentiment,
-    news.summary
-    FROM
-    bbc_news,
-    UNNEST(ARRAY[AI.GENERATE(body, output_schema  => 'summary STRING, good_sentiment BOOL')]) AS news;
-    ```
+        WITH
+        bbc_news AS (
+          SELECT
+            body
+          FROM
+            `bigquery-public-data`.bbc_news.fulltext
+          LIMIT 5
+        )
+        SELECT
+        news.good_sentiment,
+        news.summary
+        FROM
+        bbc_news,
+        UNNEST(ARRAY[AI.GENERATE(body, output_schema  => 'summary STRING, good_sentiment BOOL')]) AS news;
     
     The output is similar to the following:
     
@@ -240,29 +230,25 @@ Follow these steps to create an object table over public video content, and then
 
 2.  In the query editor, run the following query to create the object table:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.video`
-    WITH CONNECTION `us.test_connection`
-    OPTIONS (
-      object_metadata = 'SIMPLE',
-      uris =
-        ['gs://cloud-samples-data/generative-ai/video/*']);
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.video`
+        WITH CONNECTION `us.test_connection`
+        OPTIONS (
+          object_metadata = 'SIMPLE',
+          uris =
+            ['gs://cloud-samples-data/generative-ai/video/*']);
 
 3.  In the query editor, run the following query to transcribe and translate the `pixel8.mp4` file:
     
-    ``` notranslate
-    SELECT
-    AI.GENERATE(
-      (OBJ.GET_ACCESS_URL(ref, 'r'), 'Transcribe the video in Japanese and then translate to English.'),
-      endpoint => 'gemini-2.5-flash',
-      output_schema => 'japanese_transcript STRING, english_translation STRING'
-    ).* EXCEPT (full_response, status)
-    FROM
-    `bqml_tutorial.video`
-    WHERE
-    REGEXP_CONTAINS(uri, 'pixel8.mp4');
-    ```
+        SELECT
+        AI.GENERATE(
+          (OBJ.GET_ACCESS_URL(ref, 'r'), 'Transcribe the video in Japanese and then translate to English.'),
+          endpoint => 'gemini-2.5-flash',
+          output_schema => 'japanese_transcript STRING, english_translation STRING'
+        ).* EXCEPT (full_response, status)
+        FROM
+        `bqml_tutorial.video`
+        WHERE
+        REGEXP_CONTAINS(uri, 'pixel8.mp4');
     
     The output is similar to the following:
     
@@ -282,27 +268,23 @@ Follow these steps to create an object table over public audio content, and then
 
 2.  In the query editor, run the following query to create the object table:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.audio`
-      WITH CONNECTION `us.test_connection`
-      OPTIONS (
-        object_metadata = 'SIMPLE',
-        uris =
-          ['gs://cloud-samples-data/generative-ai/audio/*']);
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.audio`
+          WITH CONNECTION `us.test_connection`
+          OPTIONS (
+            object_metadata = 'SIMPLE',
+            uris =
+              ['gs://cloud-samples-data/generative-ai/audio/*']);
 
 3.  In the query editor, run the following query to analyze the audio files:
     
-    ``` notranslate
-    SELECT
-    AI.GENERATE(
-      (OBJ.GET_ACCESS_URL(ref, 'r'), 'Summarize the content of this audio file.'),
-      endpoint => 'gemini-2.5-flash',
-      output_schema => 'topic ARRAY<STRING>, summary STRING'
-    ).* EXCEPT (full_response, status), uri
-    FROM
-    `bqml_tutorial.audio`;
-    ```
+        SELECT
+        AI.GENERATE(
+          (OBJ.GET_ACCESS_URL(ref, 'r'), 'Summarize the content of this audio file.'),
+          endpoint => 'gemini-2.5-flash',
+          output_schema => 'topic ARRAY<STRING>, summary STRING'
+        ).* EXCEPT (full_response, status), uri
+        FROM
+        `bqml_tutorial.audio`;
     
     The results look similar to the following:
     

@@ -145,13 +145,11 @@ Jobs running in reservations with more than one project assigned can experience 
 
 To understand whether a job requested any additional slots, look at the estimated runnable units metric, which is [`estimatedRunnableUnits`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#querytimelinesample) from the Job API response, or `period_estimated_runnable_units` in the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) . If the value for this metric is more than 0, then the job could have benefited from additional slots at that time. To estimate the percentage of the job execution time where the job would have benefited from additional slots, run the following query against the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) :
 
-``` notranslate
-SELECT
-  ROUND(COUNTIF(period_estimated_runnable_units > 0) / COUNT(*) * 100, 1) AS execution_duration_percentage
-FROM `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
-WHERE job_id = 'my_job_id'
-GROUP BY job_id;
-```
+    SELECT
+      ROUND(COUNTIF(period_estimated_runnable_units > 0) / COUNT(*) * 100, 1) AS execution_duration_percentage
+    FROM `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
+    WHERE job_id = 'my_job_id'
+    GROUP BY job_id;
 
 The result is similar to the following:
 
@@ -204,7 +202,7 @@ You can [run `gcpdiag` using a wrapper](https://github.com/GoogleCloudPlatform/g
 
 1.  Copy and run the following command on your local workstation.
     
-    ``` lang-console
+    ```console
     curl https://gcpdiag.dev/gcpdiag.sh >gcpdiag && chmod +x gcpdiag
     ```
 
@@ -351,12 +349,10 @@ Error string: `Query fails due to reaching the execution time limit`
 
 If your query is hitting the [query execution time limit](https://docs.cloud.google.com/bigquery/quotas#query_jobs) , check the execution time of previous runs of the query by querying the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) with a query similar to the following example:
 
-``` notranslate
-SELECT TIMESTAMP_DIFF(end_time, start_time, SECOND) AS runtime_in_seconds
-FROM `region-us`.INFORMATION_SCHEMA.JOBS
-WHERE statement_type = 'QUERY'
-AND query = "my query string";
-```
+    SELECT TIMESTAMP_DIFF(end_time, start_time, SECOND) AS runtime_in_seconds
+    FROM `region-us`.INFORMATION_SCHEMA.JOBS
+    WHERE statement_type = 'QUERY'
+    AND query = "my query string";
 
 If previous runs of the query have taken significantly less time, use [query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) to determine and address the underlying issue.
 
@@ -545,7 +541,7 @@ Models that exceed the memory limit (typically 250 MB), particularly when using 
 
 To address this error, do the following:
 
-1.  *Use Vertex AI remote models* : For models that exceed memory limits, deploy your model to Vertex AI using the Vertex AI SDK for Python steps to [deploy a model](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-api) , and then access it using [Create and use remote models](https://docs.cloud.google.com/bigquery/docs/predictions/deploy-model-api) . This offloads the memory requirements to dedicated Vertex AI infrastructure.
+1.  *Use Vertex AI remote models* : For models that exceed memory limits, deploy your model to Vertex AI using the Vertex AI SDK for Python steps to [deploy a model](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-api) , and then access it using [remote models](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial) . This offloads the memory requirements to dedicated Vertex AI infrastructure.
 
 2.  *Optimize the model* : Reduce the model's RAM footprint by using architecture simplification, quantization, or pruning.
 
@@ -553,12 +549,10 @@ To address this error, do the following:
 
 4.  *Analyze input data size* : Large individual rows can contribute to memory exhaustion. Check the size of your largest rows using:
     
-    ``` notranslate
-    SELECT BYTE_LENGTH(TO_JSON_STRING(t)) AS row_size
-    FROM your_table AS t
-    ORDER BY row_size DESC
-    LIMIT 10
-    ```
+        SELECT BYTE_LENGTH(TO_JSON_STRING(t)) AS row_size
+        FROM your_table AS t
+        ORDER BY row_size DESC
+        LIMIT 10
 
 ### Query exceeds shuffle resources
 

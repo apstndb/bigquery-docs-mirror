@@ -83,30 +83,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -148,18 +142,16 @@ Run the query that creates your linear regression model:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
-    OPTIONS
-      (model_type='linear_reg',
-      input_label_cols=['body_mass_g']) AS
-    SELECT
-      *
-    FROM
-      `bigquery-public-data.ml_datasets.penguins`
-    WHERE
-      body_mass_g IS NOT NULL;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
+        OPTIONS
+          (model_type='linear_reg',
+          input_label_cols=['body_mass_g']) AS
+        SELECT
+          *
+        FROM
+          `bigquery-public-data.ml_datasets.penguins`
+        WHERE
+          body_mass_g IS NOT NULL;
 
 3.  It takes about 30 seconds to create the `penguins_model` model.
     
@@ -252,7 +244,7 @@ After creating the model, evaluate the model's performance by using the [`ML.EVA
 
 For input, the `ML.EVALUATE` function takes the trained model and a dataset that matches the schema of the data that you used to train the model. In a production environment, you should evaluate the model on different data than the data you used to train the model. If you run `ML.EVALUATE` without providing input data, the function retrieves the evaluation metrics calculated during training. These metrics are calculated by using the automatically reserved evaluation dataset:
 
-``` notranslate
+``` 
     SELECT      *    FROM      ML.EVALUATE(MODEL bqml_tutorial.penguins_model);    
 ```
 
@@ -262,7 +254,7 @@ Run the `ML.EVALUATE` query:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
+    ``` 
       SELECT
         *
       FROM
@@ -332,18 +324,16 @@ Run the `ML.PREDICT` query:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.PREDICT(MODEL `bqml_tutorial.penguins_model`,
-      (
-      SELECT
+        SELECT
         *
-      FROM
-        `bigquery-public-data.ml_datasets.penguins`
-      WHERE island = 'Biscoe'));
-    ```
+        FROM
+        ML.PREDICT(MODEL `bqml_tutorial.penguins_model`,
+          (
+          SELECT
+            *
+          FROM
+            `bigquery-public-data.ml_datasets.penguins`
+          WHERE island = 'Biscoe'));
 
 ### BigQuery DataFrames
 
@@ -396,19 +386,17 @@ Run the `ML.EXPLAIN_PREDICT` query:
 
 <!-- end list -->
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EXPLAIN_PREDICT(MODEL `bqml_tutorial.penguins_model`,
-    (
     SELECT
       *
     FROM
-      `bigquery-public-data.ml_datasets.penguins`
-    WHERE island = 'Biscoe'),
-    STRUCT(3 as top_k_features));
-```
+      ML.EXPLAIN_PREDICT(MODEL `bqml_tutorial.penguins_model`,
+        (
+        SELECT
+          *
+        FROM
+          `bigquery-public-data.ml_datasets.penguins`
+        WHERE island = 'Biscoe'),
+        STRUCT(3 as top_k_features));
 
 1.  The results should look similar to the following:
     
@@ -451,30 +439,26 @@ Retrain and get global explanations for the model:
 
 1.  In the query editor, run the following query to retrain the model:
     
-    ``` notranslate
-    #standardSQL
-    CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
-    OPTIONS (
-      model_type = 'linear_reg',
-      input_label_cols = ['body_mass_g'],
-      enable_global_explain = TRUE)
-    AS
-    SELECT
-    *
-    FROM
-    `bigquery-public-data.ml_datasets.penguins`
-    WHERE
-    body_mass_g IS NOT NULL;
-    ```
+        #standardSQL
+        CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
+        OPTIONS (
+          model_type = 'linear_reg',
+          input_label_cols = ['body_mass_g'],
+          enable_global_explain = TRUE)
+        AS
+        SELECT
+        *
+        FROM
+        `bigquery-public-data.ml_datasets.penguins`
+        WHERE
+        body_mass_g IS NOT NULL;
 
 2.  In the query editor, run the following query to get global explanations:
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.GLOBAL_EXPLAIN(MODEL `bqml_tutorial.penguins_model`)
-    ```
+        SELECT
+        *
+        FROM
+        ML.GLOBAL_EXPLAIN(MODEL `bqml_tutorial.penguins_model`)
 
 3.  The results should look similar to the following:
     

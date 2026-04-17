@@ -13,7 +13,7 @@ For example, imagine you have historical and current data about sales of a produ
 
 ## Syntax
 
-``` lang-sql
+```sql
 SELECT
   *
 FROM

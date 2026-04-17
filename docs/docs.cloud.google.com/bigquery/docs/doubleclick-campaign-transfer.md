@@ -198,14 +198,12 @@ Enter the `bq mk` command and supply the transfer creation flag — `--transfer_
 
 <!-- end list -->
 
-``` notranslate
-bq mk --transfer_config \
---project_id=project_id \
---target_dataset=dataset \
---display_name=name \
---params='parameters' \
---data_source=data_source
-```
+    bq mk --transfer_config \
+    --project_id=project_id \
+    --target_dataset=dataset \
+    --display_name=name \
+    --params='parameters' \
+    --data_source=data_source
 
 Where:
 
@@ -324,298 +322,286 @@ In each of the following queries, replace the variables like dataset with your v
 
 The following SQL sample query retrieves the latest campaigns.
 
-``` notranslate
-SELECT
-  Campaign,
-  Campaign_ID
-FROM
-  `dataset.match_table_campaigns_campaign_manager_id`
-WHERE
-  _DATA_DATE = _LATEST_DATE
-```
+    SELECT
+      Campaign,
+      Campaign_ID
+    FROM
+      `dataset.match_table_campaigns_campaign_manager_id`
+    WHERE
+      _DATA_DATE = _LATEST_DATE
 
 ### Impressions and distinct users by campaign
 
 The following SQL sample query analyzes the number of impressions and distinct users by campaign over the past 30 days.
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-  SELECT
-    Campaign_ID,
-    _DATA_DATE AS Date,
-    COUNT(*) AS count,
-    COUNT(DISTINCT User_ID) AS du
-  FROM
-    `dataset.impression_campaign_manager_id`
-  WHERE
-    _DATA_DATE BETWEEN start_date
-    AND end_date
-  GROUP BY
-    Campaign_ID,
-    Date
-```
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+      SELECT
+        Campaign_ID,
+        _DATA_DATE AS Date,
+        COUNT(*) AS count,
+        COUNT(DISTINCT User_ID) AS du
+      FROM
+        `dataset.impression_campaign_manager_id`
+      WHERE
+        _DATA_DATE BETWEEN start_date
+        AND end_date
+      GROUP BY
+        Campaign_ID,
+        Date
 
 ### Latest campaigns ordered by campaign and date
 
 The following SQL sample query analyzes the latest campaigns in the past 30 days, ordered by campaign and date.
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-SELECT
-  Campaign,
-  Campaign_ID,
-  Date
-FROM (
-  SELECT
-    Campaign,
-    Campaign_ID
-  FROM
-    `dataset.match_table_campaigns_campaign_manager_id`
-  WHERE
-    _DATA_DATE = _LATEST_DATE ),
-  (
-  SELECT
-    date AS Date
-  FROM
-    `bigquery-public-data.utility_us.date_greg`
-  WHERE
-    Date BETWEEN start_date
-    AND end_date )
-ORDER BY
-  Campaign_ID,
-  Date
-```
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+    SELECT
+      Campaign,
+      Campaign_ID,
+      Date
+    FROM (
+      SELECT
+        Campaign,
+        Campaign_ID
+      FROM
+        `dataset.match_table_campaigns_campaign_manager_id`
+      WHERE
+        _DATA_DATE = _LATEST_DATE ),
+      (
+      SELECT
+        date AS Date
+      FROM
+        `bigquery-public-data.utility_us.date_greg`
+      WHERE
+        Date BETWEEN start_date
+        AND end_date )
+    ORDER BY
+      Campaign_ID,
+      Date
 
 ### Impressions and distinct users by campaign within a date range
 
 The following SQL sample query analyzes the number of impressions and distinct users by campaign between start\_date and end\_date .
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-SELECT
-  base.*,
-  imp.count AS imp_count,
-  imp.du AS imp_du
-FROM (
-  SELECT
-    *
-  FROM (
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
     SELECT
-      Campaign,
-      Campaign_ID
-    FROM
-      `dataset.match_table_campaigns_campaign_manager_id`
+      base.*,
+      imp.count AS imp_count,
+      imp.du AS imp_du
+    FROM (
+      SELECT
+        *
+      FROM (
+        SELECT
+          Campaign,
+          Campaign_ID
+        FROM
+          `dataset.match_table_campaigns_campaign_manager_id`
+        WHERE
+          _DATA_DATE = _LATEST_DATE ),
+        (
+        SELECT
+          date AS Date
+        FROM
+          `bigquery-public-data.utility_us.date_greg`
+        WHERE
+          Date BETWEEN start_date
+          AND end_date ) ) AS base
+    LEFT JOIN (
+      SELECT
+        Campaign_ID,
+        _DATA_DATE AS Date,
+        COUNT(*) AS count,
+        COUNT(DISTINCT User_ID) AS du
+      FROM
+        `dataset.impression_campaign_manager_id`
+      WHERE
+        _DATA_DATE BETWEEN start_date
+        AND end_date
+      GROUP BY
+        Campaign_ID,
+        Date ) AS imp
+    ON
+      base.Campaign_ID = imp.Campaign_ID
+      AND base.Date = imp.Date
     WHERE
-      _DATA_DATE = _LATEST_DATE ),
-    (
-    SELECT
-      date AS Date
-    FROM
-      `bigquery-public-data.utility_us.date_greg`
-    WHERE
-      Date BETWEEN start_date
-      AND end_date ) ) AS base
-LEFT JOIN (
-  SELECT
-    Campaign_ID,
-    _DATA_DATE AS Date,
-    COUNT(*) AS count,
-    COUNT(DISTINCT User_ID) AS du
-  FROM
-    `dataset.impression_campaign_manager_id`
-  WHERE
-    _DATA_DATE BETWEEN start_date
-    AND end_date
-  GROUP BY
-    Campaign_ID,
-    Date ) AS imp
-ON
-  base.Campaign_ID = imp.Campaign_ID
-  AND base.Date = imp.Date
-WHERE
-  base.Campaign_ID = imp.Campaign_ID
-  AND base.Date = imp.Date
-ORDER BY
-  base.Campaign_ID,
-  base.Date
-```
+      base.Campaign_ID = imp.Campaign_ID
+      AND base.Date = imp.Date
+    ORDER BY
+      base.Campaign_ID,
+      base.Date
 
 ### Impressions, clicks, activities and distinct users by campaign
 
 The following SQL sample query analyzes the number of impressions, clicks, activities, and distinct users by campaign over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma-separated list of all the Campaign Manager campaigns of interest within the scope of the query.
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-SELECT
-  base.*,
-  imp.count AS imp_count,
-  imp.du AS imp_du,
-  click.count AS click_count,
-  click.du AS click_du,
-  activity.count AS activity_count,
-  activity.du AS activity_du
-FROM (
-  SELECT
-    *
-  FROM (
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
     SELECT
-      Campaign,
-      Campaign_ID
-    FROM
-      `dataset.match_table_campaigns_campaign_manager_id`
+      base.*,
+      imp.count AS imp_count,
+      imp.du AS imp_du,
+      click.count AS click_count,
+      click.du AS click_du,
+      activity.count AS activity_count,
+      activity.du AS activity_du
+    FROM (
+      SELECT
+        *
+      FROM (
+        SELECT
+          Campaign,
+          Campaign_ID
+        FROM
+          `dataset.match_table_campaigns_campaign_manager_id`
+        WHERE
+          _DATA_DATE = _LATEST_DATE ),
+        (
+        SELECT
+          date AS Date
+        FROM
+          `bigquery-public-data.utility_us.date_greg`
+        WHERE
+          Date BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+          AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY) ) ) AS base
+    LEFT JOIN (
+      SELECT
+        Campaign_ID,
+        _DATA_DATE AS Date,
+        COUNT(*) AS count,
+        COUNT(DISTINCT User_ID) AS du
+      FROM
+        `dataset.impression_campaign_manager_id`
+      WHERE
+        _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+        AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+      GROUP BY
+        Campaign_ID,
+        Date ) AS imp
+    ON
+      base.Campaign_ID = imp.Campaign_ID
+      AND base.Date = imp.Date
+    LEFT JOIN (
+      SELECT
+        Campaign_ID,
+        _DATA_DATE AS Date,
+        COUNT(*) AS count,
+        COUNT(DISTINCT User_ID) AS du
+      FROM
+        `dataset.click_campaign_manager_id`
+      WHERE
+        _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+        AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+      GROUP BY
+        Campaign_ID,
+        Date ) AS click
+    ON
+      base.Campaign_ID = click.Campaign_ID
+      AND base.Date = click.Date
+    LEFT JOIN (
+      SELECT
+        Campaign_ID,
+        _DATA_DATE AS Date,
+        COUNT(*) AS count,
+        COUNT(DISTINCT User_ID) AS du
+      FROM
+        `dataset.activity_campaign_manager_id`
+      WHERE
+        _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+        AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+      GROUP BY
+        Campaign_ID,
+        Date ) AS activity
+    ON
+      base.Campaign_ID = activity.Campaign_ID
+      AND base.Date = activity.Date
     WHERE
-      _DATA_DATE = _LATEST_DATE ),
-    (
-    SELECT
-      date AS Date
-    FROM
-      `bigquery-public-data.utility_us.date_greg`
-    WHERE
-      Date BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-      AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY) ) ) AS base
-LEFT JOIN (
-  SELECT
-    Campaign_ID,
-    _DATA_DATE AS Date,
-    COUNT(*) AS count,
-    COUNT(DISTINCT User_ID) AS du
-  FROM
-    `dataset.impression_campaign_manager_id`
-  WHERE
-    _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-  GROUP BY
-    Campaign_ID,
-    Date ) AS imp
-ON
-  base.Campaign_ID = imp.Campaign_ID
-  AND base.Date = imp.Date
-LEFT JOIN (
-  SELECT
-    Campaign_ID,
-    _DATA_DATE AS Date,
-    COUNT(*) AS count,
-    COUNT(DISTINCT User_ID) AS du
-  FROM
-    `dataset.click_campaign_manager_id`
-  WHERE
-    _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-  GROUP BY
-    Campaign_ID,
-    Date ) AS click
-ON
-  base.Campaign_ID = click.Campaign_ID
-  AND base.Date = click.Date
-LEFT JOIN (
-  SELECT
-    Campaign_ID,
-    _DATA_DATE AS Date,
-    COUNT(*) AS count,
-    COUNT(DISTINCT User_ID) AS du
-  FROM
-    `dataset.activity_campaign_manager_id`
-  WHERE
-    _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-  GROUP BY
-    Campaign_ID,
-    Date ) AS activity
-ON
-  base.Campaign_ID = activity.Campaign_ID
-  AND base.Date = activity.Date
-WHERE
-  base.Campaign_ID IN campaign_list
-  AND (base.Date = imp.Date
-    OR base.Date = click.Date
-    OR base.Date = activity.Date)
-ORDER BY
-  base.Campaign_ID,
-  base.Date
-```
+      base.Campaign_ID IN campaign_list
+      AND (base.Date = imp.Date
+        OR base.Date = click.Date
+        OR base.Date = activity.Date)
+    ORDER BY
+      base.Campaign_ID,
+      base.Date
 
 ### Campaign activity
 
 The following SQL sample query analyzes campaign activity over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma-separated list of all the Campaign Manager campaigns of interest within the scope of the query.
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-SELECT
-  base.*,
-  activity.count AS activity_count,
-  activity.du AS activity_du
-FROM (
-  SELECT
-    *
-  FROM (
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
     SELECT
-      Campaign,
-      Campaign_ID
-    FROM
-      `dataset.match_table_campaigns_campaign_manager_id`
-    WHERE
-      _DATA_DATE = _LATEST_DATE ),
-    (
-    SELECT
-      mt_at.Activity_Group,
-      mt_ac.Activity,
-      mt_ac.Activity_Type,
-      mt_ac.Activity_Sub_Type,
-      mt_ac.Activity_ID,
-      mt_ac.Activity_Group_ID
-    FROM
-      `dataset.match_table_activity_cats_campaign_manager_id` AS mt_ac
-    JOIN (
+      base.*,
+      activity.count AS activity_count,
+      activity.du AS activity_du
+    FROM (
       SELECT
-        Activity_Group,
-        Activity_Group_ID
+        *
+      FROM (
+        SELECT
+          Campaign,
+          Campaign_ID
+        FROM
+          `dataset.match_table_campaigns_campaign_manager_id`
+        WHERE
+          _DATA_DATE = _LATEST_DATE ),
+        (
+        SELECT
+          mt_at.Activity_Group,
+          mt_ac.Activity,
+          mt_ac.Activity_Type,
+          mt_ac.Activity_Sub_Type,
+          mt_ac.Activity_ID,
+          mt_ac.Activity_Group_ID
+        FROM
+          `dataset.match_table_activity_cats_campaign_manager_id` AS mt_ac
+        JOIN (
+          SELECT
+            Activity_Group,
+            Activity_Group_ID
+          FROM
+            `dataset.match_table_activity_types_campaign_manager_id`
+          WHERE
+            _DATA_DATE = _LATEST_DATE ) AS mt_at
+        ON
+          mt_at.Activity_Group_ID = mt_ac.Activity_Group_ID
+        WHERE
+          _DATA_DATE = _LATEST_DATE ),
+        (
+        SELECT
+          date AS Date
+        FROM
+          `bigquery-public-data.utility_us.date_greg`
+        WHERE
+          Date BETWEEN start_date
+          AND end_date ) ) AS base
+    LEFT JOIN (
+      SELECT
+        Campaign_ID,
+        Activity_ID,
+        _DATA_DATE AS Date,
+        COUNT(*) AS count,
+        COUNT(DISTINCT User_ID) AS du
       FROM
-        `dataset.match_table_activity_types_campaign_manager_id`
+        `dataset.activity_campaign_manager_id`
       WHERE
-        _DATA_DATE = _LATEST_DATE ) AS mt_at
+        _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+        AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+      GROUP BY
+        Campaign_ID,
+        Activity_ID,
+        Date ) AS activity
     ON
-      mt_at.Activity_Group_ID = mt_ac.Activity_Group_ID
+      base.Campaign_ID = activity.Campaign_ID
+      AND base.Activity_ID = activity.Activity_ID
+      AND base.Date = activity.Date
     WHERE
-      _DATA_DATE = _LATEST_DATE ),
-    (
-    SELECT
-      date AS Date
-    FROM
-      `bigquery-public-data.utility_us.date_greg`
-    WHERE
-      Date BETWEEN start_date
-      AND end_date ) ) AS base
-LEFT JOIN (
-  SELECT
-    Campaign_ID,
-    Activity_ID,
-    _DATA_DATE AS Date,
-    COUNT(*) AS count,
-    COUNT(DISTINCT User_ID) AS du
-  FROM
-    `dataset.activity_campaign_manager_id`
-  WHERE
-    _DATA_DATE BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-  GROUP BY
-    Campaign_ID,
-    Activity_ID,
-    Date ) AS activity
-ON
-  base.Campaign_ID = activity.Campaign_ID
-  AND base.Activity_ID = activity.Activity_ID
-  AND base.Date = activity.Date
-WHERE
-  base.Campaign_ID IN campaign_list
-  AND base.Activity_ID = activity.Activity_ID
-ORDER BY
-  base.Campaign_ID,
-  base.Activity_Group_ID,
-  base.Activity_ID,
-  base.Date
-```
+      base.Campaign_ID IN campaign_list
+      AND base.Activity_ID = activity.Activity_ID
+    ORDER BY
+      base.Campaign_ID,
+      base.Activity_Group_ID,
+      base.Activity_ID,
+      base.Date

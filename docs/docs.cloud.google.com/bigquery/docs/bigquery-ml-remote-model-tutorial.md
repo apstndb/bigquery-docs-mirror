@@ -182,30 +182,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a BigQuery Cloud resource connection
 
@@ -249,10 +243,8 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
 
 1.  Create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=US --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE bqml_tutorial
-    ```
+        bq mk --connection --location=US --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE bqml_tutorial
     
     Replace `  PROJECT_ID  ` with your Google Cloud project ID. The `--project_id` parameter overrides the default project.
     
@@ -260,19 +252,17 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.us.bqml_tutorial
-    ```
+        bq show --connection PROJECT_ID.us.bqml_tutorial
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -311,13 +301,11 @@ When you create the remote model, you need the endpoint ID that was generated wh
 
 3.  In the query editor, enter this `CREATE MODEL` statement, and then click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
-    INPUT (text STRING)
-    OUTPUT(scores ARRAY<FLOAT64>)
-    REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
-    OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')
-    ```
+        CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
+        INPUT (text STRING)
+        OUTPUT(scores ARRAY<FLOAT64>)
+        REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
+        OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')
     
     Replace the following:
     
@@ -334,14 +322,12 @@ When you create the remote model, you need the endpoint ID that was generated wh
 
 1.  Create the remote model by entering the following `CREATE MODEL` statement:
     
-    ``` notranslate
-    bq query --use_legacy_sql=false \
-    "CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
-    INPUT (text STRING)
-    OUTPUT(scores ARRAY<FLOAT64>)
-    REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
-    OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')"
-    ```
+        bq query --use_legacy_sql=false \
+        "CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
+        INPUT (text STRING)
+        OUTPUT(scores ARRAY<FLOAT64>)
+        REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
+        OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')"
     
     Replace the following:
     
@@ -350,17 +336,13 @@ When you create the remote model, you need the endpoint ID that was generated wh
 
 2.  After you create the model, verify that the model appears in the dataset:
     
-    ``` notranslate
-    bq ls -m bqml_tutorial
-    ```
+        bq ls -m bqml_tutorial
     
     The output is similar to the following:
     
-    ``` notranslate
-    Id               Model Type   Labels    Creation Time
-    ---------------- ------------ -------- -----------------
-    bert_sentiment                         28 Jan 17:39:43
-    ```
+        Id               Model Type   Labels    Creation Time
+        ---------------- ------------ -------- -----------------
+        bert_sentiment                         28 Jan 17:39:43
 
 ## Get predictions using `ML.PREDICT`
 
@@ -376,17 +358,15 @@ In this example, 10,000 records are selected and sent for prediction. The remote
 
 3.  In the query editor, enter this query that uses the `ML.PREDICT` function, and then click **Run** .
     
-    ``` notranslate
-    SELECT *
-    FROM ML.PREDICT (
-        MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
-        (
-            SELECT review as text
-            FROM `bigquery-public-data.imdb.reviews`
-            LIMIT 10000
+        SELECT *
+        FROM ML.PREDICT (
+            MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
+            (
+                SELECT review as text
+                FROM `bigquery-public-data.imdb.reviews`
+                LIMIT 10000
+            )
         )
-    )
-    ```
     
     The query results should look similar to the following:
     
@@ -396,18 +376,16 @@ In this example, 10,000 records are selected and sent for prediction. The remote
 
 Enter this command to run the query that uses `ML.PREDICT` .
 
-``` notranslate
-bq query --use_legacy_sql=false \
-'SELECT *
-FROM ML.PREDICT (
-MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
-  (
-    SELECT review as text
-    FROM `bigquery-public-data.imdb.reviews`
-    LIMIT 10000
-  )
-)'
-```
+    bq query --use_legacy_sql=false \
+    'SELECT *
+    FROM ML.PREDICT (
+    MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
+      (
+        SELECT review as text
+        FROM `bigquery-public-data.imdb.reviews`
+        LIMIT 10000
+      )
+    )'
 
 ## Clean up
 

@@ -138,15 +138,13 @@ To view metadata about the `author` and `difference` columns, run the following 
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
-SELECT
-  *
-FROM
-  `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
-WHERE
-  table_name = 'commits'
-  AND (column_name = 'author' OR column_name = 'difference');
-```
+    SELECT
+      *
+    FROM
+      `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
+    WHERE
+      table_name = 'commits'
+      AND (column_name = 'author' OR column_name = 'difference');
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 

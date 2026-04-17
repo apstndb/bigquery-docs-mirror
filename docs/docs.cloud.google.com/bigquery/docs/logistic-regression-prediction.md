@@ -98,21 +98,19 @@ Examine the dataset and identify which columns to use as training data for the l
 
 2.  In the query editor, run the following GoogleSQL query:
     
-    ``` notranslate
-    SELECT
-    age,
-    workclass,
-    marital_status,
-    education_num,
-    occupation,
-    hours_per_week,
-    income_bracket,
-    functional_weight
-    FROM
-    `bigquery-public-data.ml_datasets.census_adult_income`
-    LIMIT
-    100;
-    ```
+        SELECT
+        age,
+        workclass,
+        marital_status,
+        education_num,
+        occupation,
+        hours_per_week,
+        income_bracket,
+        functional_weight
+        FROM
+        `bigquery-public-data.ml_datasets.census_adult_income`
+        LIMIT
+        100;
 
 3.  The results look similar to the following:
     
@@ -176,31 +174,27 @@ Run the query that prepares the sample data:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE VIEW
-    `census.input_data` AS
-    SELECT
-    age,
-    workclass,
-    marital_status,
-    education_num,
-    occupation,
-    hours_per_week,
-    income_bracket,
-    CASE
-      WHEN MOD(functional_weight, 10) < 8 THEN 'training'
-      WHEN MOD(functional_weight, 10) = 8 THEN 'evaluation'
-      WHEN MOD(functional_weight, 10) = 9 THEN 'prediction'
-    END AS dataframe
-    FROM
-    `bigquery-public-data.ml_datasets.census_adult_income`;
-    ```
+        CREATE OR REPLACE VIEW
+        `census.input_data` AS
+        SELECT
+        age,
+        workclass,
+        marital_status,
+        education_num,
+        occupation,
+        hours_per_week,
+        income_bracket,
+        CASE
+          WHEN MOD(functional_weight, 10) < 8 THEN 'training'
+          WHEN MOD(functional_weight, 10) = 8 THEN 'evaluation'
+          WHEN MOD(functional_weight, 10) = 9 THEN 'prediction'
+        END AS dataframe
+        FROM
+        `bigquery-public-data.ml_datasets.census_adult_income`;
 
 3.  View the sample data:
     
-    ``` notranslate
-    SELECT * FROM `census.input_data`;
-    ```
+        SELECT * FROM `census.input_data`;
 
 ### BigQuery DataFrames
 
@@ -259,22 +253,20 @@ Run the query that creates your logistic regression model:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `census.census_model`
-    OPTIONS
-    ( model_type='LOGISTIC_REG',
-      auto_class_weights=TRUE,
-      enable_global_explain=TRUE,
-      data_split_method='NO_SPLIT',
-      input_label_cols=['income_bracket'],
-      max_iterations=15) AS
-    SELECT * EXCEPT(dataframe)
-    FROM
-    `census.input_data`
-    WHERE
-    dataframe = 'training'
-    ```
+        CREATE OR REPLACE MODEL
+        `census.census_model`
+        OPTIONS
+        ( model_type='LOGISTIC_REG',
+          auto_class_weights=TRUE,
+          enable_global_explain=TRUE,
+          data_split_method='NO_SPLIT',
+          input_label_cols=['income_bracket'],
+          max_iterations=15) AS
+        SELECT * EXCEPT(dataframe)
+        FROM
+        `census.input_data`
+        WHERE
+        dataframe = 'training'
 
 3.  In the left pane, click explore **Explorer** :
     
@@ -343,21 +335,19 @@ Run the `ML.EVALUATE` query:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.EVALUATE (MODEL `census.census_model`,
-      (
-      SELECT
+        SELECT
         *
-      FROM
-        `census.input_data`
-      WHERE
-        dataframe = 'evaluation'
-      )
-    );
-    ```
+        FROM
+        ML.EVALUATE (MODEL `census.census_model`,
+          (
+          SELECT
+            *
+          FROM
+            `census.input_data`
+          WHERE
+            dataframe = 'evaluation'
+          )
+        );
 
 3.  The results look similar to the following:
     
@@ -409,21 +399,19 @@ Run the `ML.PREDICT` query:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.PREDICT (MODEL `census.census_model`,
-      (
-      SELECT
+        SELECT
         *
-      FROM
-        `census.input_data`
-      WHERE
-        dataframe = 'prediction'
-      )
-    );
-    ```
+        FROM
+        ML.PREDICT (MODEL `census.census_model`,
+          (
+          SELECT
+            *
+          FROM
+            `census.input_data`
+          WHERE
+            dataframe = 'prediction'
+          )
+        );
 
 3.  The results look similar to the following:
     
@@ -471,20 +459,18 @@ Run the `ML.EXPLAIN_PREDICT` query:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.EXPLAIN_PREDICT(MODEL `census.census_model`,
-      (
-      SELECT
+        SELECT
         *
-      FROM
-        `census.input_data`
-      WHERE
-        dataframe = 'evaluation'),
-      STRUCT(3 as top_k_features));
-    ```
+        FROM
+        ML.EXPLAIN_PREDICT(MODEL `census.census_model`,
+          (
+          SELECT
+            *
+          FROM
+            `census.input_data`
+          WHERE
+            dataframe = 'evaluation'),
+          STRUCT(3 as top_k_features));
 
 3.  The results look similar to the following:
     
@@ -504,12 +490,10 @@ Get global explanations for the model:
 
 2.  In the query editor, run the following query to get global explanations:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.GLOBAL_EXPLAIN(MODEL `census.census_model`)
-    ```
+        SELECT
+          *
+        FROM
+          ML.GLOBAL_EXPLAIN(MODEL `census.census_model`)
 
 3.  The results look similar to the following:
     

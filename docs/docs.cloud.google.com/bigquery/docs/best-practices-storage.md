@@ -39,12 +39,10 @@ If your tables are partitioned by date, the dataset's default table expiration a
 
 For example, the following command expires partitions after three days:
 
-``` notranslate
-bq mk \
---time_partitioning_type=DAY \
---time_partitioning_expiration=259200 \
-project_id:dataset.table
-```
+    bq mk \
+    --time_partitioning_type=DAY \
+    --time_partitioning_expiration=259200 \
+    project_id:dataset.table
 
 ## Aggregate long-term data
 

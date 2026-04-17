@@ -45,7 +45,7 @@ For all other types of models, you can analyze text data from a standard table.
 
 ### Gemini
 
-``` lang-googlesql
+```googlesql
 ML.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -205,7 +205,7 @@ The model and input table must be in the same region.
 
 You must enable Claude models in Vertex AI before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
-``` lang-googlesql
+```googlesql
 ML.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -275,7 +275,7 @@ The model and input table must be in the same region.
 
 You must enable Llama models in Vertex AI before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
-``` lang-googlesql
+```googlesql
 ML.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -342,7 +342,7 @@ The model and input table must be in the same region.
 
 You must enable Mistral AI models in Vertex AI before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
-``` lang-googlesql
+```googlesql
 ML.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -407,7 +407,7 @@ The model and input table must be in the same region.
 
 ### Open models
 
-``` lang-sql
+```sql
 ML.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -489,7 +489,7 @@ The model and input table must be in the same region.
 
 Use the following syntax to use `ML.GENERATE_TEXT` with Gemini models and object table data.
 
-``` lang-googlesql
+```googlesql
 ML.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -613,60 +613,52 @@ The model and input table must be in the same region.
 
 This example shows a request to a Claude model that provides a single prompt.
 
-``` notranslate
-SELECT *
-FROM
-  ML.GENERATE_TEXT(
-    MODEL `mydataset.claude_model`,
-    (SELECT 'What is the purpose of dreams?' AS prompt));
-```
+    SELECT *
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL `mydataset.claude_model`,
+        (SELECT 'What is the purpose of dreams?' AS prompt));
 
 **Example 2**
 
 This example shows a request to a Gemini model that provides prompt data from a table column named `question` that is aliased as `prompt` .
 
-``` notranslate
-SELECT *
-FROM
-  ML.GENERATE_TEXT(
-    MODEL `mydataset.gemini_model`,
-    (SELECT question AS prompt FROM `mydataset.prompt_table`));
-```
+    SELECT *
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL `mydataset.gemini_model`,
+        (SELECT question AS prompt FROM `mydataset.prompt_table`));
 
 **Example 3**
 
 This example shows a request to a Gemini model that concatenates strings and a table column to provide the prompt data.
 
-``` notranslate
-SELECT *
-FROM
-  ML.GENERATE_TEXT(
-    MODEL `mydataset.gemini_model`,
-    (
-      SELECT
-        CONCAT(
-          'Classify the sentiment of the following text as positive or negative.Text:',
-          input_column,
-          'Sentiment:') AS prompt
-      FROM `mydataset.input_table`));
-```
+    SELECT *
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL `mydataset.gemini_model`,
+        (
+          SELECT
+            CONCAT(
+              'Classify the sentiment of the following text as positive or negative.Text:',
+              input_column,
+              'Sentiment:') AS prompt
+          FROM `mydataset.input_table`));
 
 **Example 4**
 
 This example shows a request a Gemini model that excludes model responses that contain the strings `Golf` or `football` .
 
-``` notranslate
-SELECT *
-FROM
-  ML.GENERATE_TEXT(
-    MODEL
-      `mydataset.gemini_model`,
-    TABLE `mydataset.prompt_table`,
-    STRUCT(
-      .15 AS TEMPERATURE,
-      TRUE AS flatten_json_output,
-      ['Golf', 'football'] AS stop_sequences));
-```
+    SELECT *
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL
+          `mydataset.gemini_model`,
+        TABLE `mydataset.prompt_table`,
+        STRUCT(
+          .15 AS TEMPERATURE,
+          TRUE AS flatten_json_output,
+          ['Golf', 'football'] AS stop_sequences));
 
 **Example 5**
 
@@ -678,17 +670,15 @@ This example shows a request to a Gemini model with the following characteristic
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  ML.GENERATE_TEXT(
-    MODEL
-      `mydataset.gemini_model`,
-    TABLE `mydataset.prompt_table`,
-    STRUCT(
-      TRUE AS flatten_json_output,
-      TRUE AS ground_with_google_search));
-```
+    SELECT *
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL
+          `mydataset.gemini_model`,
+        TABLE `mydataset.prompt_table`,
+        STRUCT(
+          TRUE AS flatten_json_output,
+          TRUE AS ground_with_google_search));
 
 **Example 6**
 
@@ -699,31 +689,29 @@ This example shows a request to a Gemini model with the following characteristic
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  ML.GENERATE_TEXT(
-    MODEL
-      `mydataset.gemini_model`,
-    TABLE `mydataset.prompt_table`,
-    STRUCT(
-      '''
-      {
-        "safety_settings": [
-          { "category": "HARM_CATEGORY_HATE_SPEECH",
-            "threshold": "BLOCK_LOW_AND_ABOVE" },
-          { "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-            "threshold": "BLOCK_MEDIUM_AND_ABOVE" }
-        ],
-        "generation_config": {
-          "max_output_tokens": 75,
-          "thinking_config": {"thinking_budget": 0}
-        }
-      }
-      ''' AS model_params
-    )
-  );
-```
+    SELECT *
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL
+          `mydataset.gemini_model`,
+        TABLE `mydataset.prompt_table`,
+        STRUCT(
+          '''
+          {
+            "safety_settings": [
+              { "category": "HARM_CATEGORY_HATE_SPEECH",
+                "threshold": "BLOCK_LOW_AND_ABOVE" },
+              { "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                "threshold": "BLOCK_MEDIUM_AND_ABOVE" }
+            ],
+            "generation_config": {
+              "max_output_tokens": 75,
+              "thinking_config": {"thinking_budget": 0}
+            }
+          }
+          ''' AS model_params
+        )
+      );
 
 ### Visual content analysis
 
@@ -731,85 +719,77 @@ FROM
 
 This example adds product description information to a table by analyzing the object data in an `ObjectRef` column named `image` :
 
-``` notranslate
-UPDATE mydataset.products
-SET
-  image_description = (
-    SELECT
-      ml_generate_text_llm_result
-    FROM
-      ML.GENERATE_TEXT(
-        MODEL `mydataset.gemini_model`,
-        (
-          SELECT
-            ('Can you describe the following image?', OBJ.GET_ACCESS_URL(image, 'r')) AS prompt
-        ),
-        STRUCT(
-          TRUE AS FLATTEN_JSON_OUTPUT))
-  )
-WHERE image IS NOT NULL;
-```
+    UPDATE mydataset.products
+    SET
+      image_description = (
+        SELECT
+          ml_generate_text_llm_result
+        FROM
+          ML.GENERATE_TEXT(
+            MODEL `mydataset.gemini_model`,
+            (
+              SELECT
+                ('Can you describe the following image?', OBJ.GET_ACCESS_URL(image, 'r')) AS prompt
+            ),
+            STRUCT(
+              TRUE AS FLATTEN_JSON_OUTPUT))
+      )
+    WHERE image IS NOT NULL;
 
 **Example 2**
 
 This example analyzes visual content from an object table that's named `dogs` and identifies the breed of dog contained in the content. The content returned is filtered by the specified safety settings:
 
-``` notranslate
-SELECT
-  uri,
-  ml_generate_text_llm_result
-FROM
-  ML.GENERATE_TEXT(
-    MODEL
-      `mydataset.dog_identifier_model`,
-    TABLE `mydataset.dogs`
-      STRUCT(
-        'What is the breed of the dog?' AS PROMPT,
-        .01 AS TEMPERATURE,
-        TRUE AS FLATTEN_JSON_OUTPUT,
-        [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
-          'BLOCK_LOW_AND_ABOVE' AS threshold),
-        STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
-          'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
-```
+    SELECT
+      uri,
+      ml_generate_text_llm_result
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL
+          `mydataset.dog_identifier_model`,
+        TABLE `mydataset.dogs`
+          STRUCT(
+            'What is the breed of the dog?' AS PROMPT,
+            .01 AS TEMPERATURE,
+            TRUE AS FLATTEN_JSON_OUTPUT,
+            [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
+              'BLOCK_LOW_AND_ABOVE' AS threshold),
+            STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
+              'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
 
 ### Audio content analysis
 
 This example translates and transcribes audio content from an object table that's named `feedback` :
 
-``` notranslate
-SELECT
-  uri,
-  ml_generate_text_llm_result
-FROM
-  ML.GENERATE_TEXT(
-    MODEL
-      `mydataset.audio_model`,
-        TABLE `mydataset.feedback`,
-          STRUCT(
-          'What is the content of this audio clip, translated into Spanish?' AS PROMPT,
-          .01 AS TEMPERATURE,
-          TRUE AS FLATTEN_JSON_OUTPUT));
-```
+    SELECT
+      uri,
+      ml_generate_text_llm_result
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL
+          `mydataset.audio_model`,
+            TABLE `mydataset.feedback`,
+              STRUCT(
+              'What is the content of this audio clip, translated into Spanish?' AS PROMPT,
+              .01 AS TEMPERATURE,
+              TRUE AS FLATTEN_JSON_OUTPUT));
 
 ### PDF content analysis
 
 This example classifies PDF content from an object table that's named `documents` :
 
-``` notranslate
-SELECT
-  uri,
-  ml_generate_text_llm_result
-FROM
-  ML.GENERATE_TEXT(
-    MODEL
-      `mydataset.classify_model`
-        TABLE `mydataset.documents`
-          STRUCT(
-          'Classify this document using the following categories: legal, tax-related, real estate' AS PROMPT,
-          .2 AS TEMPERATURE,
-          TRUE AS FLATTEN_JSON_OUTPUT));
-```
+    SELECT
+      uri,
+      ml_generate_text_llm_result
+    FROM
+      ML.GENERATE_TEXT(
+        MODEL
+          `mydataset.classify_model`
+            TABLE `mydataset.documents`
+              STRUCT(
+              'Classify this document using the following categories: legal, tax-related, real estate' AS PROMPT,
+              .2 AS TEMPERATURE,
+              TRUE AS FLATTEN_JSON_OUTPUT));
 
 ## Use Vertex AI Provisioned Throughput
 

@@ -24,7 +24,7 @@ When you analyze unstructured data, that data must meet the following requiremen
 
 ## Syntax
 
-``` lang-googlesql
+```googlesql
 AI.GENERATE_TABLE(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -172,29 +172,27 @@ The following examples demonstrate how to use `AI.GENERATE_TABLE` .
 
 The following example shows a request that provides a SQL schema to format the model's response. It specifies a description in the `OPTIONS` clause for the `weight` field to indicate that the result should be given in kilograms.
 
-``` notranslate
-SELECT
-  address,
-  age,
-  is_married,
-  name,
-  phone_number,
-  weight
-FROM
-AI.GENERATE_TABLE( MODEL `mydataset.gemini_model`,
-  (
-      SELECT
-        '''John Smith is a 20-year old single man living at 1234 NW 45th St, Kirkland WA, 98033.
-        He has two phone numbers 123-123-1234, and 234-234-2345. He is 200.5 pounds.''' AS prompt
-  ),
-  STRUCT('''address STRING, age INT64, is_married BOOL, name STRING, phone_number ARRAY<STRING>,
-            weight FLOAT64 OPTIONS(description = "in kilograms")''' AS output_schema,
-          8192 AS max_output_tokens));
-```
+    SELECT
+      address,
+      age,
+      is_married,
+      name,
+      phone_number,
+      weight
+    FROM
+    AI.GENERATE_TABLE( MODEL `mydataset.gemini_model`,
+      (
+          SELECT
+            '''John Smith is a 20-year old single man living at 1234 NW 45th St, Kirkland WA, 98033.
+            He has two phone numbers 123-123-1234, and 234-234-2345. He is 200.5 pounds.''' AS prompt
+      ),
+      STRUCT('''address STRING, age INT64, is_married BOOL, name STRING, phone_number ARRAY<STRING>,
+                weight FLOAT64 OPTIONS(description = "in kilograms")''' AS output_schema,
+              8192 AS max_output_tokens));
 
 The results look similar to the following:
 
-``` console
+```console
 +-------------------------------------+-----+------------+------------+---------------+-----------+
 | address                             | age | is_married | name       | phone_number  | weight    |
 +-------------------------------------+-----+------------+------------+---------------+-----------+
@@ -208,26 +206,24 @@ The results look similar to the following:
 
 The following example shows how to to create and populate an `image_description` column by analyzing a product image that is stored as an `ObjectRef` value in a standard table:
 
-``` notranslate
-CREATE OR REPLACE TABLE
-  `mydataset.products`
-AS
-  SELECT
-  product_id,
-  product_name,
-  image,
-  image_description
-FROM
-AI.GENERATE_TABLE( MODEL `mydataset.gemini`,
-  (
-  SELECT
-    ('Can you describe the following image?',
-      OBJ.GET_ACCESS_URL(image, 'r')) AS prompt,
-    *
-  FROM
-   `mydataset.products` ),
-  STRUCT ( "image_description STRING" AS output_schema ));
-```
+    CREATE OR REPLACE TABLE
+      `mydataset.products`
+    AS
+      SELECT
+      product_id,
+      product_name,
+      image,
+      image_description
+    FROM
+    AI.GENERATE_TABLE( MODEL `mydataset.gemini`,
+      (
+      SELECT
+        ('Can you describe the following image?',
+          OBJ.GET_ACCESS_URL(image, 'r')) AS prompt,
+        *
+      FROM
+       `mydataset.products` ),
+      STRUCT ( "image_description STRING" AS output_schema ));
 
 ## Details
 

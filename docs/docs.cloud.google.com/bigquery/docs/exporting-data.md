@@ -163,20 +163,18 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    EXPORT DATA
-      OPTIONS (
-        uri = 'gs://bucket/folder/*.csv',
-        format = 'CSV',
-        overwrite = true,
-        header = true,
-        field_delimiter = ';')
-    AS (
-      SELECT field1, field2
-      FROM mydataset.table1
-      ORDER BY field1
-    );
-    ```
+        EXPORT DATA
+          OPTIONS (
+            uri = 'gs://bucket/folder/*.csv',
+            format = 'CSV',
+            overwrite = true,
+            header = true,
+            field_delimiter = ';')
+        AS (
+          SELECT field1, field2
+          FROM mydataset.table1
+          ORDER BY field1
+        );
 
 3.  Click play\_circle **Run** .
 
@@ -223,40 +221,32 @@ Examples:
 
 For example, the following command exports `mydataset.mytable` into a gzip compressed file named `myfile.csv` . `myfile.csv` is stored in a Cloud Storage bucket named `example-bucket` .
 
-``` notranslate
-bq extract \
---compression GZIP \
-'mydataset.mytable' \
-gs://example-bucket/myfile.csv
-```
+    bq extract \
+    --compression GZIP \
+    'mydataset.mytable' \
+    gs://example-bucket/myfile.csv
 
 The default destination format is CSV. To export into JSON or Avro, use the `destination_format` flag and set it to either `NEWLINE_DELIMITED_JSON` or `AVRO` . For example:
 
-``` notranslate
-bq extract \
---destination_format NEWLINE_DELIMITED_JSON \
-'mydataset.mytable' \
-gs://example-bucket/myfile.json
-```
+    bq extract \
+    --destination_format NEWLINE_DELIMITED_JSON \
+    'mydataset.mytable' \
+    gs://example-bucket/myfile.json
 
 The following command exports `mydataset.mytable` into an Avro file that is compressed using Snappy. The file is named `myfile.avro` . `myfile.avro` is exported to a Cloud Storage bucket named `example-bucket` .
 
-``` notranslate
-bq extract \
---destination_format AVRO \
---compression SNAPPY \
-'mydataset.mytable' \
-gs://example-bucket/myfile.avro
-```
+    bq extract \
+    --destination_format AVRO \
+    --compression SNAPPY \
+    'mydataset.mytable' \
+    gs://example-bucket/myfile.avro
 
 The following command exports a single partition of `mydataset.my_partitioned_table` into a CSV file in Cloud Storage:
 
-``` notranslate
-bq extract \
---destination_format CSV \
-'mydataset.my_partitioned_table$0' \
-gs://example-bucket/single_partition.csv
-```
+    bq extract \
+    --destination_format CSV \
+    'mydataset.my_partitioned_table$0' \
+    gs://example-bucket/single_partition.csv
 
 ### API
 
@@ -581,9 +571,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To export table metadata from [Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) , use the following SQL statement:
 
-``` notranslate
-EXPORT TABLE METADATA FROM `[[PROJECT_NAME.]DATASET_NAME.]TABLE_NAME`;
-```
+    EXPORT TABLE METADATA FROM `[[PROJECT_NAME.]DATASET_NAME.]TABLE_NAME`;
 
 Replace the following:
 
@@ -731,23 +719,19 @@ When you export more than 1 GB of data in a single export, you must use a wildca
 
 2.  Create a new table that is partitioned and clustered by a new randomly generated column called `export_id` . The following example shows how to create a new `processed_table` from an existing table called `source_table` which requires `n` partitions to achieve the chosen file size:
     
-    ``` notranslate
-    CREATE TABLE my_dataset.processed_table
-    PARTITION BY RANGE_BUCKET(export_id, GENERATE_ARRAY(0, n, 1))
-    CLUSTER BY export_id
-    AS (
-      SELECT *, CAST(FLOOR(n*RAND()) AS INT64) AS export_id
-      FROM my_dataset.source_table
-    );
-    ```
+        CREATE TABLE my_dataset.processed_table
+        PARTITION BY RANGE_BUCKET(export_id, GENERATE_ARRAY(0, n, 1))
+        CLUSTER BY export_id
+        AS (
+          SELECT *, CAST(FLOOR(n*RAND()) AS INT64) AS export_id
+          FROM my_dataset.source_table
+        );
 
 3.  For each integer `i` between 0 and `n-1` , run an `EXPORT DATA` statement on the following query:
     
-    ``` notranslate
-    SELECT * EXCEPT(export_id)
-    FROM my_dataset.processed_table
-    WHERE export_id = i;
-    ```
+        SELECT * EXCEPT(export_id)
+        FROM my_dataset.processed_table
+        WHERE export_id = i;
 
 ### Extract compressed table
 
@@ -971,15 +955,13 @@ Usage for extract jobs are available in the `INFORMATION_SCHEMA` . The job entry
 
 You can view your current usage of query, load, extract, or copy jobs by running an `INFORMATION_SCHEMA` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `INFORMATION_SCHEMA.JOBS` view to list the number of query, load, extract, and copy jobs by project:
 
-``` notranslate
-SELECT
-  sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
-  sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
-  sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
-  sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
-FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE date(creation_time)= CURRENT_DATE()
-```
+    SELECT
+      sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
+      sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
+      sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
+      sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
+    FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE date(creation_time)= CURRENT_DATE()
 
 You can set up a [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) alerting policy that monitors the number of bytes exported.
 
@@ -1037,36 +1019,32 @@ If you would like to gather usages of exports data over recent days, you can try
 
   - Alternatively you can query [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see your total extract bytes over a few days. For example, the following query returns the daily total bytes processed by `EXTRACT` jobs in the past seven days.
     
-    ``` notranslate
-    SELECT
-    TIMESTAMP_TRUNC(creation_time, DAY) AS day,
-    SUM ( total_bytes_processed ) / POW(1024, 3) AS total_gibibytes_processed
-    FROM
-    `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type = "EXTRACT"
-    GROUP BY 1
-    ORDER BY 2 DESC
-    ```
+        SELECT
+        TIMESTAMP_TRUNC(creation_time, DAY) AS day,
+        SUM ( total_bytes_processed ) / POW(1024, 3) AS total_gibibytes_processed
+        FROM
+        `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+        WHERE
+        creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
+        AND job_type = "EXTRACT"
+        GROUP BY 1
+        ORDER BY 2 DESC
 
   - You can then further refine the results by identifying the specific jobs that are consuming more bytes than expected. The following example returns the top 100 `EXTRACT` jobs which are consuming more than 100 GB processed over the past seven days.
     
-    ``` notranslate
-    SELECT
-    creation_time,
-    job_id,
-    total_bytes_processed/POW(1024, 3) AS total_gigabytes_processed
-    FROM
-    `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type="EXTRACT"
-    AND total_bytes_processed > (POW(1024, 3) * 100)
-    ORDER BY
-    total_bytes_processed DESC
-    LIMIT 100
-    ```
+        SELECT
+        creation_time,
+        job_id,
+        total_bytes_processed/POW(1024, 3) AS total_gigabytes_processed
+        FROM
+        `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+        WHERE
+        creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) AND CURRENT_TIMESTAMP()
+        AND job_type="EXTRACT"
+        AND total_bytes_processed > (POW(1024, 3) * 100)
+        ORDER BY
+        total_bytes_processed DESC
+        LIMIT 100
 
 You can alternatively use the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) with filters like `Bytes processed more than` to filter for high processing jobs for a specified period of time.
 

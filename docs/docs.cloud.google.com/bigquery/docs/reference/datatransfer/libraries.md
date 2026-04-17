@@ -8,17 +8,13 @@ Read more about the Cloud Client Libraries and the older Google API Client Libra
 
 ### C\#
 
-``` notranslate
-Install-Package Google.Cloud.BigQuery.DataTransfer.V1 -Pre
-```
+    Install-Package Google.Cloud.BigQuery.DataTransfer.V1 -Pre
 
 For more information, see [Setting Up a C\# Development Environment](https://docs.cloud.google.com/dotnet/docs/setup) .
 
 ### Go
 
-``` notranslate
-go get cloud.google.com/go/bigquery/datatransfer/apiv1
-```
+    go get cloud.google.com/go/bigquery/datatransfer/apiv1
 
 For more information, see [Setting Up a Go Development Environment](https://docs.cloud.google.com/go/docs/setup) .
 
@@ -66,33 +62,25 @@ For more information, see [Setting Up a Java Development Environment](https://do
 
 ### Node.js
 
-``` notranslate
-npm install @google-cloud/bigquery-data-transfer
-```
+    npm install @google-cloud/bigquery-data-transfer
 
 For more information, see [Setting Up a Node.js Development Environment](https://docs.cloud.google.com/nodejs/docs/setup) .
 
 ### PHP
 
-``` notranslate
-composer require google/cloud-bigquerydatatransfer
-```
+    composer require google/cloud-bigquerydatatransfer
 
 For more information, see [Using PHP on Google Cloud](https://docs.cloud.google.com/php/docs) .
 
 ### Python
 
-``` notranslate
-pip install --upgrade google-cloud-bigquery-datatransfer
-```
+    pip install --upgrade google-cloud-bigquery-datatransfer
 
 For more information, see [Setting Up a Python Development Environment](https://docs.cloud.google.com/python/docs/setup) .
 
 ### Ruby
 
-``` notranslate
-gem install google-cloud-bigquery-data_transfer
-```
+    gem install google-cloud-bigquery-data_transfer
 
 For more information, see [Setting Up a Ruby Development Environment](https://docs.cloud.google.com/ruby/docs/setup) .
 

@@ -4,7 +4,7 @@ This document describes the `ML.ANNOTATE_IMAGE` function, which lets you annotat
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ANNOTATE_IMAGE(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   TABLE `PROJECT_ID.DATASET.OBJECT_TABLE`,
@@ -73,23 +73,19 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 The following example performs label detection on the object table `mytable` in `mydataset` :
 
-``` notranslate
-# Create model
-CREATE OR REPLACE MODEL
-`myproject.mydataset.myvisionmodel`
-REMOTE WITH CONNECTION `myproject.myregion.myconnection`
-OPTIONS (remote_service_type = 'cloud_ai_vision_v1');
-```
+    # Create model
+    CREATE OR REPLACE MODEL
+    `myproject.mydataset.myvisionmodel`
+    REMOTE WITH CONNECTION `myproject.myregion.myconnection`
+    OPTIONS (remote_service_type = 'cloud_ai_vision_v1');
 
-``` notranslate
-# Annotate image
-SELECT *
-FROM ML.ANNOTATE_IMAGE(
-  MODEL `mydataset.myvisionmodel`,
-  TABLE `mydataset.mytable`,
-  STRUCT(['label_detection'] AS vision_features)
-);
-```
+    # Annotate image
+    SELECT *
+    FROM ML.ANNOTATE_IMAGE(
+      MODEL `mydataset.myvisionmodel`,
+      TABLE `mydataset.mytable`,
+      STRUCT(['label_detection'] AS vision_features)
+    );
 
 The result is similar to the following:
 
@@ -101,29 +97,27 @@ The result is similar to the following:
 
 The following example annotates images in the object table `mytable` , selects the rows where the detected label is `food` and the score is higher than `0.97` , and then returns the results in separate columns:
 
-``` notranslate
-CREATE TABLE
-  `mydataset.label_score` AS (
-  SELECT
-    uri AS `Input image path`,
-    STRING(ml_annotate_image_result.label_annotations[0].description) AS `Detected label`,
-    FLOAT64(ml_annotate_image_result.label_annotations[0].score) AS Score,
-    FLOAT64(ml_annotate_image_result.label_annotations[0].topicality) AS Topicality,
-    ml_annotate_image_status AS Status
-  FROM
-    ML.ANNOTATE_IMAGE( MODEL `mydataset.myvisionmodel`,
-      TABLE `mydataset.mytable`,
-      STRUCT(['label_detection'] AS vision_features))
-  );
-
-SELECT
-  *
-FROM
-  `mydataset.label_score`
-WHERE
-  `Detected label` ='Food'
-  AND Score > 0.97;
-```
+    CREATE TABLE
+      `mydataset.label_score` AS (
+      SELECT
+        uri AS `Input image path`,
+        STRING(ml_annotate_image_result.label_annotations[0].description) AS `Detected label`,
+        FLOAT64(ml_annotate_image_result.label_annotations[0].score) AS Score,
+        FLOAT64(ml_annotate_image_result.label_annotations[0].topicality) AS Topicality,
+        ml_annotate_image_status AS Status
+      FROM
+        ML.ANNOTATE_IMAGE( MODEL `mydataset.myvisionmodel`,
+          TABLE `mydataset.mytable`,
+          STRUCT(['label_detection'] AS vision_features))
+      );
+    
+    SELECT
+      *
+    FROM
+      `mydataset.label_score`
+    WHERE
+      `Detected label` ='Food'
+      AND Score > 0.97;
 
 The result is similar to the following:
 
@@ -133,26 +127,24 @@ The result is similar to the following:
 
 If you get an error like `query limit exceeded` , you might have exceeded the [quota](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) for this function, which can leave you with unprocessed rows. Use the following query to complete processing the unprocessed rows:
 
-``` notranslate
-CREATE TABLE
-  `mydataset.label_score_next` AS (
-  SELECT
-    uri AS `Input image path`,
-    STRING(ml_annotate_image_result.label_annotations[0].description) AS `Detected label`,
-    FLOAT64(ml_annotate_image_result.label_annotations[0].score) AS Score,
-    FLOAT64(ml_annotate_image_result.label_annotations[0].topicality) AS Topicality,
-    ml_annotate_image_status AS Status
-  FROM
-    ML.ANNOTATE_IMAGE( MODEL `mydataset.myvisionmodel`,
-      TABLE `mydataset.mytable`,
-      STRUCT(['label_detection'] AS vision_features))
-  WHERE uri NOT IN (
-    SELECT `Input image path` FROM `mydataset.label_score`
-    WHERE STATUS = '')
-  );
-
-SELECT * FROM `mydataset.label_score_next`;
-```
+    CREATE TABLE
+      `mydataset.label_score_next` AS (
+      SELECT
+        uri AS `Input image path`,
+        STRING(ml_annotate_image_result.label_annotations[0].description) AS `Detected label`,
+        FLOAT64(ml_annotate_image_result.label_annotations[0].score) AS Score,
+        FLOAT64(ml_annotate_image_result.label_annotations[0].topicality) AS Topicality,
+        ml_annotate_image_status AS Status
+      FROM
+        ML.ANNOTATE_IMAGE( MODEL `mydataset.myvisionmodel`,
+          TABLE `mydataset.mytable`,
+          STRUCT(['label_detection'] AS vision_features))
+      WHERE uri NOT IN (
+        SELECT `Input image path` FROM `mydataset.label_score`
+        WHERE STATUS = '')
+      );
+    
+    SELECT * FROM `mydataset.label_score_next`;
 
 ## What's next
 

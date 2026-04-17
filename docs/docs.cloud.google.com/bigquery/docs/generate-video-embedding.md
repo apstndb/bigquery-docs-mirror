@@ -87,9 +87,7 @@ Create a BigQuery dataset to contain your resources:
 
 1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
-    ``` notranslate
-    bq --location=LOCATION mk -d DATASET_ID
-    ```
+        bq --location=LOCATION mk -d DATASET_ID
     
     Replace the following:
     
@@ -98,9 +96,7 @@ Create a BigQuery dataset to contain your resources:
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ## Create a connection
 
@@ -144,14 +140,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -167,10 +161,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -184,19 +176,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -318,7 +308,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -446,15 +436,13 @@ Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigque
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET_ID.TABLE_NAME`
-    WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID`| DEFAULT}
-    OPTIONS(
-      object_metadata = 'SIMPLE',
-      uris = ['BUCKET_PATH'[,...]],
-      max_staleness = STALENESS_INTERVAL,
-      metadata_cache_mode = 'CACHE_MODE');
-    ```
+        CREATE EXTERNAL TABLE `PROJECT_ID.DATASET_ID.TABLE_NAME`
+        WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID`| DEFAULT}
+        OPTIONS(
+          object_metadata = 'SIMPLE',
+          uris = ['BUCKET_PATH'[,...]],
+          max_staleness = STALENESS_INTERVAL,
+          metadata_cache_mode = 'CACHE_MODE');
     
     Replace the following:
     
@@ -498,14 +486,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
 
-``` notranslate
-bq mk --table \
---external_table_definition=BUCKET_PATH@REGION.CONNECTION_ID \
---object_metadata=SIMPLE \
---max_staleness=STALENESS_INTERVAL \
---metadata_cache_mode=CACHE_MODE \
-PROJECT_ID:DATASET_ID.TABLE_NAME
-```
+    bq mk --table \
+    --external_table_definition=BUCKET_PATH@REGION.CONNECTION_ID \
+    --object_metadata=SIMPLE \
+    --max_staleness=STALENESS_INTERVAL \
+    --metadata_cache_mode=CACHE_MODE \
+    PROJECT_ID:DATASET_ID.TABLE_NAME
 
 Replace the following:
 
@@ -545,11 +531,9 @@ Replace the following:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (ENDPOINT = 'ENDPOINT');
-    ```
+        CREATE OR REPLACE MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (ENDPOINT = 'ENDPOINT');
     
     Replace the following:
     
@@ -575,17 +559,15 @@ Replace the following:
 
 Generate video embeddings with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) by using video data from an object table:
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  TABLE PROJECT_ID.DATASET_ID.TABLE_NAME,
-  STRUCT(
-    START_SECOND AS start_second,
-    END_SECOND AS end_second,
-    INTERVAL_SECONDS AS interval_seconds)
-);
-```
+    SELECT *
+    FROM AI.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      TABLE PROJECT_ID.DATASET_ID.TABLE_NAME,
+      STRUCT(
+        START_SECOND AS start_second,
+        END_SECOND AS end_second,
+        INTERVAL_SECONDS AS interval_seconds)
+    );
 
 Replace the following:
 
@@ -601,18 +583,16 @@ Replace the following:
 
 The following example shows how to create embeddings for the videos in the `videos` object table. Embeddings are created for each 5 second interval between the 10 second and 40 second marks in each video.
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_EMBEDDING(
-    MODEL `mydataset.embedding_model`,
-    TABLE `mydataset.videos`,
-    STRUCT(
-    10 AS start_second,
-    40 AS end_second,
-    5 AS interval_seconds)
-  );
-```
+    SELECT *
+    FROM
+      AI.GENERATE_EMBEDDING(
+        MODEL `mydataset.embedding_model`,
+        TABLE `mydataset.videos`,
+        STRUCT(
+        10 AS start_second,
+        40 AS end_second,
+        5 AS interval_seconds)
+      );
 
 ## What's next
 

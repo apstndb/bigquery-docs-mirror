@@ -6,7 +6,7 @@ If you don't want to manage your own times series forecasting model, you can use
 
 ## Syntax
 
-``` lang-sql
+```sql
 # ARIMA_PLUS models:
 ML.FORECAST(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
@@ -76,26 +76,22 @@ The output of `ML.FORECAST` has the following properties:
 
 The following example forecasts 30 time points with a confidence level of `0.8` :
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.FORECAST(MODEL `mydataset.mymodel`,
-    STRUCT(30 AS horizon, 0.8 AS confidence_level))
-```
+    SELECT
+      *
+    FROM
+      ML.FORECAST(MODEL `mydataset.mymodel`,
+        STRUCT(30 AS horizon, 0.8 AS confidence_level))
 
 ## `ARIMA_PLUS_XREG` example
 
 The following example forecasts 30 time points with a confidence level of `0.8` with future features:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.FORECAST(MODEL `mydataset.mymodel`,
-    STRUCT(30 AS horizon, 0.8 AS confidence_level),
-    (SELECT * FROM `mydataset.mytable`))
-```
+    SELECT
+      *
+    FROM
+      ML.FORECAST(MODEL `mydataset.mymodel`,
+        STRUCT(30 AS horizon, 0.8 AS confidence_level),
+        (SELECT * FROM `mydataset.mytable`))
 
 ## Limitation
 

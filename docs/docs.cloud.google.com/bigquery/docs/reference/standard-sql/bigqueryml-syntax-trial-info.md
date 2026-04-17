@@ -6,7 +6,7 @@ You can use this function with models that support [hyperparameter tuning](https
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.TRIAL_INFO(MODEL `PROJECT_ID.DATASET.MODEL_NAME`)
 ```
 
@@ -46,12 +46,10 @@ ML.TRIAL_INFO(MODEL `PROJECT_ID.DATASET.MODEL_NAME`)
 
 The following query retrieves information of all trials for the model `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.TRIAL_INFO(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.TRIAL_INFO(MODEL `mydataset.mymodel`)
 
 ## What's next
 

@@ -51,27 +51,25 @@ In this section of the tutorial, you run a GoogleSQL query that finds the path o
 
 The following GoogleSQL query is used to find the path of hurricane Maria.
 
-``` notranslate
-SELECT
-  ST_GeogPoint(longitude, latitude) AS point,
-  name,
-  iso_time,
-  dist2land,
-  usa_wind,
-  usa_pressure,
-  usa_sshs,
-  (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
-  (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
-FROM
-  `bigquery-public-data.noaa_hurricanes.hurricanes`
-WHERE
-  name LIKE '%MARIA%'
-  AND season = '2017'
-  AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
-    ST_GeogPoint(longitude, latitude), 10)
-ORDER BY
-  iso_time ASC
-```
+    SELECT
+      ST_GeogPoint(longitude, latitude) AS point,
+      name,
+      iso_time,
+      dist2land,
+      usa_wind,
+      usa_pressure,
+      usa_sshs,
+      (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
+      (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
+    FROM
+      `bigquery-public-data.noaa_hurricanes.hurricanes`
+    WHERE
+      name LIKE '%MARIA%'
+      AND season = '2017'
+      AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
+        ST_GeogPoint(longitude, latitude), 10)
+    ORDER BY
+      iso_time ASC
 
 The query clauses do the following:
 
@@ -95,27 +93,25 @@ To run the query by using the Google Cloud console:
 
 2.  Enter the following GoogleSQL query in the **Query editor** text area.
     
-    ``` notranslate
-    SELECT
-      ST_GeogPoint(longitude, latitude) AS point,
-      name,
-      iso_time,
-      dist2land,
-      usa_wind,
-      usa_pressure,
-      usa_sshs,
-      (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
-      (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
-    FROM
-      `bigquery-public-data.noaa_hurricanes.hurricanes`
-    WHERE
-      name LIKE '%MARIA%'
-      AND season = '2017'
-      AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
-        ST_GeogPoint(longitude, latitude), 10)
-    ORDER BY
-      iso_time ASC
-    ```
+        SELECT
+          ST_GeogPoint(longitude, latitude) AS point,
+          name,
+          iso_time,
+          dist2land,
+          usa_wind,
+          usa_pressure,
+          usa_sshs,
+          (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
+          (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
+        FROM
+          `bigquery-public-data.noaa_hurricanes.hurricanes`
+        WHERE
+          name LIKE '%MARIA%'
+          AND season = '2017'
+          AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
+            ST_GeogPoint(longitude, latitude), 10)
+        ORDER BY
+          iso_time ASC
 
 3.  Click **Run** .
     
@@ -171,27 +167,25 @@ To run the query:
 
 2.  In the query window, enter the following GoogleSQL query.
     
-    ``` notranslate
-    SELECT
-      ST_GeogPoint(longitude, latitude) AS point,
-      name,
-      iso_time,
-      dist2land,
-      usa_wind,
-      usa_pressure,
-      usa_sshs,
-      (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
-      (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
-    FROM
-      `bigquery-public-data.noaa_hurricanes.hurricanes`
-    WHERE
-      name LIKE '%MARIA%'
-      AND season = '2017'
-      AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
-        ST_GeogPoint(longitude, latitude), 10)
-    ORDER BY
-      iso_time ASC
-    ```
+        SELECT
+          ST_GeogPoint(longitude, latitude) AS point,
+          name,
+          iso_time,
+          dist2land,
+          usa_wind,
+          usa_pressure,
+          usa_sshs,
+          (usa_r34_ne + usa_r34_nw + usa_r34_se + usa_r34_sw)/4 AS radius_34kt,
+          (usa_r50_ne + usa_r50_nw + usa_r50_se + usa_r50_sw)/4 AS radius_50kt
+        FROM
+          `bigquery-public-data.noaa_hurricanes.hurricanes`
+        WHERE
+          name LIKE '%MARIA%'
+          AND season = '2017'
+          AND ST_DWithin(ST_GeogFromText('POLYGON((-179 26, -179 48, -10 48, -10 26, -100 -10.1, -179 26))'),
+            ST_GeogPoint(longitude, latitude), 10)
+        ORDER BY
+          iso_time ASC
 
 3.  Click **Run** .
 

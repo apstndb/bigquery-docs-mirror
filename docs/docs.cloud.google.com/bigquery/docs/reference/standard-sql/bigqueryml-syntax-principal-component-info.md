@@ -4,7 +4,7 @@ This document describes the `ML.PRINCIPAL_COMPONENT_INFO` function, which lets y
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.PRINCIPAL_COMPONENT_INFO(
   MODEL `PROJECT_ID.DATASET.MODEL`
 )
@@ -31,12 +31,10 @@ ML.PRINCIPAL_COMPONENT_INFO(
 
 The following example retrieves the eigenvalue-related information of each principal component in the model `mydataset.mymodel` in your default project.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.PRINCIPAL_COMPONENT_INFO(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.PRINCIPAL_COMPONENT_INFO(MODEL `mydataset.mymodel`)
 
 ## What's next
 

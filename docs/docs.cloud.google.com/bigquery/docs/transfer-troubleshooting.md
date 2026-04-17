@@ -79,11 +79,9 @@ If your transfer configuration is correct, and the appropriate permissions are g
     
     **Resolution:** Grant the Service Account Token Creator role ( `roles/iam.serviceAccountTokenCreator` ) to the DTS service agent on the specific service account it needs to impersonate.
     
-    ``` notranslate
-    gcloud iam service-accounts add-iam-policy-binding service_account \
-    --member serviceAccount:service-destination_project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
-    --role roles/iam.serviceAccountTokenCreator
-    ```
+        gcloud iam service-accounts add-iam-policy-binding service_account \
+        --member serviceAccount:service-destination_project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
+        --role roles/iam.serviceAccountTokenCreator
     
     Where:
 
@@ -174,9 +172,7 @@ The following are some common permission errors that you can encounter when you 
     
     <!-- end list -->
     
-    ``` notranslate
-    gcloud resource-manager org-policies disable-enforce iam.disableCrossProjectServiceAccountUsage --project=[PROJECT-ID]
-    ```
+        gcloud resource-manager org-policies disable-enforce iam.disableCrossProjectServiceAccountUsage --project=[PROJECT-ID]
 
 ## Event-driven transfer configuration issues
 

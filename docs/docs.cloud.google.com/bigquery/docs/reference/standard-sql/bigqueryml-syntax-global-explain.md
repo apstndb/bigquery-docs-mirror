@@ -4,7 +4,7 @@ This document describes the `ML.GLOBAL_EXPLAIN` function, which lets you provide
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.GLOBAL_EXPLAIN(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   STRUCT(
@@ -50,23 +50,19 @@ The following examples assume your model is in your default project.
 
 This example gets global feature importance for the boosted tree regression model `mymodel` in `mydataset` . The dataset is in your default project.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.GLOBAL_EXPLAIN(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.GLOBAL_EXPLAIN(MODEL `mydataset.mymodel`)
 
 ### Classifier model
 
 This example gets global feature importance for the boosted tree classifier model `mymodel` in `mydataset` . The dataset is in your default project.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.GLOBAL_EXPLAIN(MODEL `mydataset.mymodel`, STRUCT(TRUE AS class_level_explain))
-```
+    SELECT
+      *
+    FROM
+      ML.GLOBAL_EXPLAIN(MODEL `mydataset.mymodel`, STRUCT(TRUE AS class_level_explain))
 
 ## What's next
 

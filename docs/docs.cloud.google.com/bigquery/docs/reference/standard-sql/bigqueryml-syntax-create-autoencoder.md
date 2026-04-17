@@ -8,7 +8,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -426,19 +426,17 @@ For information about supported locations, see [Locations for non-remote models]
 
 The following example trains an autoencoder model against the table `mytable` .
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
-OPTIONS(MODEL_TYPE='AUTOENCODER',
-        ACTIVATION_FN = 'RELU',
-        BATCH_SIZE = 16,
-        DROPOUT = 0.1,
-        EARLY_STOP = FALSE,
-        HIDDEN_UNITS = [128, 64, 8, 64, 128],
-        LEARN_RATE=0.001,
-        MAX_ITERATIONS = 50,
-        OPTIMIZER = 'ADAGRAD')
-AS SELECT * FROM `project_id.mydataset.mytable`;
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+    OPTIONS(MODEL_TYPE='AUTOENCODER',
+            ACTIVATION_FN = 'RELU',
+            BATCH_SIZE = 16,
+            DROPOUT = 0.1,
+            EARLY_STOP = FALSE,
+            HIDDEN_UNITS = [128, 64, 8, 64, 128],
+            LEARN_RATE=0.001,
+            MAX_ITERATIONS = 50,
+            OPTIMIZER = 'ADAGRAD')
+    AS SELECT * FROM `project_id.mydataset.mytable`;
 
 ## Pricing
 

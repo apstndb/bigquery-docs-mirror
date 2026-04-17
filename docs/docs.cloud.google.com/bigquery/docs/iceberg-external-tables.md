@@ -71,7 +71,7 @@ Select one of the following options:
 
 Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) . The following example creates an Iceberg external table named `myexternal-table` :
 
-``` lang-googlesql
+```googlesql
   CREATE EXTERNAL TABLE myexternal-table
   WITH CONNECTION `myproject.us.myconnection`
   OPTIONS (
@@ -88,15 +88,13 @@ You can enable the *require partition filter* by setting the `require_partition_
 
 In a command-line environment, use the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `@connection` decorator to specify the connection to use at the end of the `--external_table_definition` parameter. To enable the require partition filter, use `--require_partition_filter` .
 
-``` notranslate
-bq mk 
-
-    --table 
-
-    --external_table_definition=TABLE_FORMAT=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID 
-
-    PROJECT_ID:DATASET.EXTERNAL_TABLE
-```
+    bq mk 
+    
+        --table 
+    
+        --external_table_definition=TABLE_FORMAT=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID 
+    
+        PROJECT_ID:DATASET.EXTERNAL_TABLE
 
 Replace the following:
 
@@ -137,14 +135,14 @@ If you use a JSON metadata file to create an Iceberg external table, update the 
 
 1.  Create a table definition file:
     
-    ``` lang-sh
+    ```sh
     bq mkdef --source_format=ICEBERG \
     "URI" > TABLE_DEFINITION_FILE
     ```
 
 2.  Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--autodetect_schema` flag:
     
-    ``` lang-sh
+    ```sh
     bq update --autodetect_schema --external_table_definition=TABLE_DEFINITION_FILE
     PROJECT_ID:DATASET.TABLE
     ```
@@ -177,7 +175,7 @@ Replace the following:
 
 In the body of the request, specify the updated values for the following fields:
 
-``` lang-sh
+```sh
 {
      "externalDataConfiguration": {
       "sourceFormat": "ICEBERG",
@@ -273,7 +271,7 @@ You can enable the `require_partition_filter` in the following ways while creati
 
 Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) .The following example creates an Iceberg external table named `  TABLE  ` with require partition filter enabled:
 
-``` lang-googlesql
+```googlesql
   CREATE EXTERNAL TABLE TABLE
   WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
   OPTIONS (
@@ -306,13 +304,11 @@ Replace the following:
 
 Use the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `@connection` decorator to specify the connection to use at the end of the `--external_table_definition` parameter. Use `--require_partition_filter` to enable the require partition filter. The following example creates an Iceberg external table named `  TABLE  ` with require partition filter enabled:
 
-``` notranslate
-bq mk \
-    --table \
-    --external_table_definition=ICEBERG=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID \
-    PROJECT_ID:DATASET.EXTERNAL_TABLE \
-    --require_partition_filter
-```
+    bq mk \
+        --table \
+        --external_table_definition=ICEBERG=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID \
+        PROJECT_ID:DATASET.EXTERNAL_TABLE \
+        --require_partition_filter
 
 Replace the following:
 
@@ -353,9 +349,7 @@ For example:
 
 To update `mypartitionedtable` in `mydataset` in your default project, enter:
 
-``` notranslate
-bq update --require_partition_filter PROJECT_ID:DATASET.TABLE
-```
+    bq update --require_partition_filter PROJECT_ID:DATASET.TABLE
 
 ## What's next
 

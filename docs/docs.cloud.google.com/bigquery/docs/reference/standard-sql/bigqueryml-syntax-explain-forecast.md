@@ -4,7 +4,7 @@ This document describes the `ML.EXPLAIN_FORECAST` function, which lets you gener
 
 ## Syntax
 
-``` lang-sql
+```sql
 # `ARIMA_PLUS` models:
 ML.EXPLAIN_FORECAST(
   MODEL `PROJECT_ID.DATASET.MODEL`,
@@ -190,26 +190,22 @@ The ` holiday_effect_ holiday_name  ` value is a subcomponent . The `holiday_eff
 
 The following example forecasts 30 time points with a confidence level of `0.8` :
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EXPLAIN_FORECAST(MODEL `mydataset.mymodel`,
-    STRUCT(30 AS horizon, 0.8 AS confidence_level))
-```
+    SELECT
+      *
+    FROM
+      ML.EXPLAIN_FORECAST(MODEL `mydataset.mymodel`,
+        STRUCT(30 AS horizon, 0.8 AS confidence_level))
 
 ## `ARIMA_PLUS_XREG` example
 
 The following example forecasts 30 time points with a confidence level of `0.8` with future features:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.EXPLAIN_FORECAST(MODEL `mydataset.mymodel`,
-    STRUCT(30 AS horizon, 0.8 AS confidence_level),
-    (SELECT * FROM `mydataset.mytable`))
-```
+    SELECT
+      *
+    FROM
+      ML.EXPLAIN_FORECAST(MODEL `mydataset.mymodel`,
+        STRUCT(30 AS horizon, 0.8 AS confidence_level),
+        (SELECT * FROM `mydataset.mytable`))
 
 ## What's next
 

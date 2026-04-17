@@ -53,12 +53,10 @@ Replace the following:
 
 The following example retrieves the `property_graph_name` , `property_graph_metadata_json` , and `ddl` columns from the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view:
 
-``` notranslate
-SELECT
-  property_graph_name, property_graph_metadata_json, ddl
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.PROPERTY_GRAPHS;
-```
+    SELECT
+      property_graph_name, property_graph_metadata_json, ddl
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.PROPERTY_GRAPHS;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

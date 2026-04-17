@@ -57,14 +57,12 @@ Replace the following:
 
 The following query extracts information on columns that have vector indexes:
 
-``` notranslate
-SELECT table_name, index_name, index_column_name, index_field_path
-FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_COLUMNS;
-```
+    SELECT table_name, index_name, index_column_name, index_field_path
+    FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_COLUMNS;
 
 The result is similar to the following:
 
-``` console
+```console
 +------------+------------+-------------------+------------------+
 | table_name | index_name | index_column_name | index_field_path |
 +------------+------------+-------------------+------------------+

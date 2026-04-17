@@ -10,7 +10,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -583,32 +583,28 @@ The following example creates models named `mymodel` in dataset `mydataset` in y
 
 This example creates an explicit feedback matrix factorization model.
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION') AS
-SELECT
-  user,
-  item,
-  rating
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION') AS
+    SELECT
+      user,
+      item,
+      rating
+    FROM
+      `mydataset.mytable`
 
 ### Train a matrix factorization model with implicit feedback
 
 This example creates an implicit feedback matrix factorization model.
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION',
-         FEEDBACK_TYPE='IMPLICIT') AS
-SELECT
-  user,
-  item,
-  rating
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION',
+             FEEDBACK_TYPE='IMPLICIT') AS
+    SELECT
+      user,
+      item,
+      rating
+    FROM
+      `mydataset.mytable`
 
 ## What's next
 

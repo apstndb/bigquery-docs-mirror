@@ -58,9 +58,7 @@ Before configuring a Cloud Storage event-driven transfer, you must perform the f
 
 2.  Apply a notification configuration to your Cloud Storage bucket:
     
-    ``` click-to-copy
-    gcloud storage buckets notifications create gs://BUCKET_NAME --topic=TOPIC_NAME --event-types=OBJECT_FINALIZE
-    ```
+        gcloud storage buckets notifications create gs://BUCKET_NAME --topic=TOPIC_NAME --event-types=OBJECT_FINALIZE
     
     Replace the following:
     
@@ -75,20 +73,16 @@ Before configuring a Cloud Storage event-driven transfer, you must perform the f
     
     If successful, the response looks similar to the following:
     
-    ``` readonly
-    etag: '132'
-    id: '132'
-    kind: storage#notification
-    payload_format: JSON_API_V1
-    selfLink: https://www.googleapis.com/storage/v1/b/my-bucket/notificationConfigs/132
-    topic: //pubsub.googleapis.com/projects/my-project/topics/my-bucket
-    ```
+        etag: '132'
+        id: '132'
+        kind: storage#notification
+        payload_format: JSON_API_V1
+        selfLink: https://www.googleapis.com/storage/v1/b/my-bucket/notificationConfigs/132
+        topic: //pubsub.googleapis.com/projects/my-project/topics/my-bucket
 
 4.  Create a pull subscription for the topic:
     
-    ``` click-to-copy
-    gcloud pubsub subscriptions create SUBSCRIPTION_ID --topic=TOPIC_NAME
-    ```
+        gcloud pubsub subscriptions create SUBSCRIPTION_ID --topic=TOPIC_NAME
     
     Replace `  SUBSCRIPTION_ID  ` with the name or ID of your new Pub/Sub pull subscription.
     
@@ -120,13 +114,11 @@ Before configuring a Cloud Storage event-driven transfer, you must perform the f
     
     Follow the instructions in [Setting a policy](https://docs.cloud.google.com/pubsub/docs/access-control#setting_a_policy) to add the following binding:
     
-    ``` click-to-copy
-    {
-      "role": "roles/pubsub.subscriber",
-      "members": [
-        "serviceAccount:project-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
-    }
-    ```
+        {
+          "role": "roles/pubsub.subscriber",
+          "members": [
+            "serviceAccount:project-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+        }
     
     Replace `  PROJECT_NUMBER  ` with the [project ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) that is hosting the transfer resources are created and billed.
     
@@ -150,20 +142,18 @@ The following Google Cloud CLI commands includes all the necessary commands to s
 
 ### gcloud
 
-``` click-to-copy
-PROJECT_ID=project_id
-CONFIG_NAME=config_name
-RESOURCE_NAME="bqdts-event-driven-${CONFIG_NAME}"
-# Create a Pub/Sub topic.
-gcloud pubsub topics create "${RESOURCE_NAME}" --project="${PROJECT_ID}"
-# Create a Pub/Sub subscription.
-gcloud pubsub subscriptions create "${RESOURCE_NAME}" --project="${PROJECT_ID}" --topic="projects/${PROJECT_ID}/topics/${RESOURCE_NAME}"
-# Create a Pub/Sub notification.
-gcloud storage buckets notifications create gs://"${RESOURCE_NAME}" --topic="projects/${PROJECT_ID}/topics/${RESOURCE_NAME}" --event-types=OBJECT_FINALIZE
-# Grant roles/pubsub.subscriber permission to the DTS service agent.
-PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format='value(projectNumber)')
-gcloud pubsub subscriptions add-iam-policy-binding "${RESOURCE_NAME}"  --project="${PROJECT_ID}"  --member=serviceAccount:service-"${PROJECT_NUMBER}"@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com  --role=roles/pubsub.subscriber
-```
+    PROJECT_ID=project_id
+    CONFIG_NAME=config_name
+    RESOURCE_NAME="bqdts-event-driven-${CONFIG_NAME}"
+    # Create a Pub/Sub topic.
+    gcloud pubsub topics create "${RESOURCE_NAME}" --project="${PROJECT_ID}"
+    # Create a Pub/Sub subscription.
+    gcloud pubsub subscriptions create "${RESOURCE_NAME}" --project="${PROJECT_ID}" --topic="projects/${PROJECT_ID}/topics/${RESOURCE_NAME}"
+    # Create a Pub/Sub notification.
+    gcloud storage buckets notifications create gs://"${RESOURCE_NAME}" --topic="projects/${PROJECT_ID}/topics/${RESOURCE_NAME}" --event-types=OBJECT_FINALIZE
+    # Grant roles/pubsub.subscriber permission to the DTS service agent.
+    PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format='value(projectNumber)')
+    gcloud pubsub subscriptions add-iam-policy-binding "${RESOURCE_NAME}"  --project="${PROJECT_ID}"  --member=serviceAccount:service-"${PROJECT_NUMBER}"@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com  --role=roles/pubsub.subscriber
 
 Replace the following:
 

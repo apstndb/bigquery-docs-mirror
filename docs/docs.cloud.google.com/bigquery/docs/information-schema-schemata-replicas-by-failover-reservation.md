@@ -127,11 +127,9 @@ This section lists example queries of the `INFORMATION_SCHEMA.SCHEMATA_REPLICAS_
 
 The following example lists all the replicated datasets in the `US` region:
 
-``` notranslate
-SELECT *
-FROM `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS_BY_FAILOVER_RESERVATION
-WHERE failover_reservation_name = "failover_reservation";
-```
+    SELECT *
+    FROM `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS_BY_FAILOVER_RESERVATION
+    WHERE failover_reservation_name = "failover_reservation";
 
 The result is similar to the following:
 

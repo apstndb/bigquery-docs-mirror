@@ -62,17 +62,15 @@ You incur data transfer costs for data in the referenced BigLake tables. However
 
 Consider the following query as an example:
 
-``` notranslate
-SELECT *
-FROM bigquery_dataset.bigquery_table AS clients
-WHERE clients.sales_rep IN (
-  SELECT id
-  FROM aws_dataset.aws_table1 AS employees
-  INNER JOIN aws_dataset.aws_table2 AS active_employees
-    ON employees.id = active_employees.id
-  WHERE employees.level > 3
-);
-```
+    SELECT *
+    FROM bigquery_dataset.bigquery_table AS clients
+    WHERE clients.sales_rep IN (
+      SELECT id
+      FROM aws_dataset.aws_table1 AS employees
+      INNER JOIN aws_dataset.aws_table2 AS active_employees
+        ON employees.id = active_employees.id
+      WHERE employees.level > 3
+    );
 
 This example has two transfers: one from an employees table (with a level filter) and one from an active employees table. The join is performed in the BigQuery region after the transfer occurs. If one transfer fails and the other succeeds, data transfer charges are still applied for the successful transfer.
 
@@ -97,69 +95,61 @@ This example has two transfers: one from an employees table (with a level filter
 
 The following query joins an `orders` table in a BigQuery region with a `lineitem` table in a BigQuery Omni region:
 
-``` notranslate
-SELECT
-  l_shipmode,
-  o_orderpriority,
-  count(l_linenumber) AS num_lineitems
-FROM bigquery_dataset.orders
-JOIN aws_dataset.lineitem
-  ON orders.o_orderkey = lineitem.l_orderkey
-WHERE
-  l_shipmode IN ('AIR', 'REG AIR')
-  AND l_commitdate < l_receiptdate
-  AND l_shipdate < l_commitdate
-  AND l_receiptdate >= DATE '1997-01-01'
-  AND l_receiptdate < DATE '1997-02-01'
-GROUP BY l_shipmode, o_orderpriority
-ORDER BY l_shipmode, o_orderpriority;
-```
+    SELECT
+      l_shipmode,
+      o_orderpriority,
+      count(l_linenumber) AS num_lineitems
+    FROM bigquery_dataset.orders
+    JOIN aws_dataset.lineitem
+      ON orders.o_orderkey = lineitem.l_orderkey
+    WHERE
+      l_shipmode IN ('AIR', 'REG AIR')
+      AND l_commitdate < l_receiptdate
+      AND l_shipdate < l_commitdate
+      AND l_receiptdate >= DATE '1997-01-01'
+      AND l_receiptdate < DATE '1997-02-01'
+    GROUP BY l_shipmode, o_orderpriority
+    ORDER BY l_shipmode, o_orderpriority;
 
 This query is broken into local and remote parts. The following query is sent to the BigQuery Omni region to execute first. The result is a temporary table in the BigQuery region. You can view this child CTAS job and its metadata in your job history.
 
-``` notranslate
-CREATE OR REPLACE TABLE temp_table
-AS (
-  SELECT
-    l_shipmode,
-    l_linenumber,
-    l_orderkey
-  FROM aws_dataset.lineitem
-  WHERE
-    l_shipmode IN ('AIR', 'REG AIR')
-    AND l_commitdate < l_receiptdate
-    AND l_shipdate < l_commitdate
-    AND l_receiptdate >= DATE '1997-01-01'
-    AND l_receiptdate < DATE '1997-02-01'
-);
-```
+    CREATE OR REPLACE TABLE temp_table
+    AS (
+      SELECT
+        l_shipmode,
+        l_linenumber,
+        l_orderkey
+      FROM aws_dataset.lineitem
+      WHERE
+        l_shipmode IN ('AIR', 'REG AIR')
+        AND l_commitdate < l_receiptdate
+        AND l_shipdate < l_commitdate
+        AND l_receiptdate >= DATE '1997-01-01'
+        AND l_receiptdate < DATE '1997-02-01'
+    );
 
 After the temporary table is created, the `JOIN` operation completes, and the following query is run:
 
-``` notranslate
-SELECT
-  l_shipmode,
-  o_orderpriority,
-  count(l_linenumber) AS num_lineitems
-FROM bigquery_dataset.orders
-JOIN temp_table
-  ON orders.o_orderkey = lineitem.l_orderkey
-GROUP BY l_shipmode, o_orderpriority
-ORDER BY l_shipmode, o_orderpriority;
-```
+    SELECT
+      l_shipmode,
+      o_orderpriority,
+      count(l_linenumber) AS num_lineitems
+    FROM bigquery_dataset.orders
+    JOIN temp_table
+      ON orders.o_orderkey = lineitem.l_orderkey
+    GROUP BY l_shipmode, o_orderpriority
+    ORDER BY l_shipmode, o_orderpriority;
 
 As another example, consider the following cross-cloud join:
 
-``` notranslate
-SELECT c_mktsegment, c_name
-FROM bigquery_dataset.customer
-WHERE c_mktsegment = 'BUILDING'
-UNION ALL
-SELECT c_mktsegment, c_name
-FROM aws_dataset.customer
-WHERE c_mktsegment = 'FURNITURE'
-LIMIT 10;
-```
+    SELECT c_mktsegment, c_name
+    FROM bigquery_dataset.customer
+    WHERE c_mktsegment = 'BUILDING'
+    UNION ALL
+    SELECT c_mktsegment, c_name
+    FROM aws_dataset.customer
+    WHERE c_mktsegment = 'FURNITURE'
+    LIMIT 10;
 
 In this query, the `LIMIT` clause is not pushed down to the BigQuery Omni region. All customers in the `FURNITURE` market segment are transferred to the BigQuery region first, and then the limit of 10 is applied.
 
@@ -286,14 +276,12 @@ You should consider how the staleness interval and metadata caching mode values 
 
 To find information about metadata refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
-``` notranslate
-SELECT *
-FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
-WHERE job_id LIKE '%metadata_cache_refresh%'
-AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-ORDER BY start_time DESC
-LIMIT 10;
-```
+    SELECT *
+    FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
+    WHERE job_id LIKE '%metadata_cache_refresh%'
+    AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+    ORDER BY start_time DESC
+    LIMIT 10;
 
 For Cloud Storage BigLake tables that are based on Parquet files, [table statistics](https://docs.cloud.google.com/bigquery/docs/metadata-caching#table_statistics) are collected during the metadata cache refresh and used to improve query plans.
 

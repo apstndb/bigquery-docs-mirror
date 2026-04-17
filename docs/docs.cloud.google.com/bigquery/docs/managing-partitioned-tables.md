@@ -15,16 +15,14 @@ You can get information about partitioned tables in the following ways:
 
 When you query the `INFORMATION_SCHEMA.PARTITIONS` view, the query results contain one row for each partition. For example, the following query lists all of the partitions for a specific table within a dataset:
 
-``` notranslate
-#standardSQL
-SELECT
-  partition_id
-FROM
-  `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
-WHERE
-  table_name = 'TABLE_NAME'
-  AND partition_id IS NOT NULL --filter out non-partitioned tables
-```
+    #standardSQL
+    SELECT
+      partition_id
+    FROM
+      `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
+    WHERE
+      table_name = 'TABLE_NAME'
+      AND partition_id IS NOT NULL --filter out non-partitioned tables
 
 For more information, see [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) .
 
@@ -34,13 +32,11 @@ In legacy SQL, you can get metadata about table partitions by querying the `__PA
 
 Query the `__PARTITIONS_SUMMARY__` meta-table as follows:
 
-``` notranslate
-#legacySQL
-SELECT
-  partition_id
-FROM
-  [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__]
-```
+    #legacySQL
+    SELECT
+      partition_id
+    FROM
+      [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__]
 
 > **Note:** For migration to GoogleSQL refer to the [legacy SQL migration documentation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#migrating_partition_meta_table_decorator) .
 
@@ -93,12 +89,10 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-      SET OPTIONS (
-        -- Sets partition expiration to 5 days
-        partition_expiration_days = 5);
-    ```
+        ALTER TABLE mydataset.mytable
+          SET OPTIONS (
+            -- Sets partition expiration to 5 days
+            partition_expiration_days = 5);
 
 3.  Click play\_circle **Run** .
 
@@ -108,12 +102,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq update` command with the `--time_partitioning_expiration` flag. If you are updating a partitioned table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
 
-``` notranslate
-bq update \
---time_partitioning_expiration integer_in_seconds \
---time_partitioning_type unit_time \
-project_id:dataset.table
-```
+    bq update \
+    --time_partitioning_expiration integer_in_seconds \
+    --time_partitioning_type unit_time \
+    project_id:dataset.table
 
 Where:
 
@@ -167,11 +159,9 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mypartitionedtable
-      SET OPTIONS (
-        require_partition_filter = true);
-    ```
+        ALTER TABLE mydataset.mypartitionedtable
+          SET OPTIONS (
+            require_partition_filter = true);
 
 3.  Click play\_circle **Run** .
 
@@ -187,15 +177,11 @@ For example:
 
 To update `mypartitionedtable` in `mydataset` in your default project, enter:
 
-``` notranslate
-bq update --require_partition_filter mydataset.mytable
-```
+    bq update --require_partition_filter mydataset.mytable
 
 To update `mypartitionedtable` in `mydataset` in `myotherproject` , enter:
 
-``` notranslate
-bq update --require_partition_filter myotherproject:mydataset.mytable
-```
+    bq update --require_partition_filter myotherproject:mydataset.mytable
 
 ### API
 
@@ -297,12 +283,10 @@ If the source or destination dataset is in a project other than your default pro
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
-``` notranslate
-bq --location=location cp \
--a -f -n \
-project_id:dataset.source_table$source_partition \
-project_id:dataset.destination_table$destination_partition
-```
+    bq --location=location cp \
+    -a -f -n \
+    project_id:dataset.source_table$source_partition \
+    project_id:dataset.destination_table$destination_partition
 
 Where:
 
@@ -360,11 +344,9 @@ Enter the following command to copy the January 30, 2018 partition from `mydatas
 
 To copy multiple partitions, specify them as a comma-separated list:
 
-``` notranslate
-bq cp \
-'mydataset.mytable$20180130,mydataset.mytable$20180131' \
-myotherproject:mydataset.mytable2
-```
+    bq cp \
+    'mydataset.mytable$20180130,mydataset.mytable$20180131' \
+    myotherproject:mydataset.mytable2
 
 ### API
 
@@ -402,10 +384,8 @@ If a [qualifying `DELETE` statement](https://docs.cloud.google.com/bigquery/docs
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DELETE mydataset.mytable
-    WHERE _PARTITIONDATE IN ('2076-10-07', '2076-03-06');
-    ```
+        DELETE mydataset.mytable
+        WHERE _PARTITIONDATE IN ('2076-10-07', '2076-03-06');
 
 3.  Click play\_circle **Run** .
 
@@ -415,9 +395,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the `bq rm` command with the `--table` flag (or `-t` shortcut) and specify the partition decorator to delete a specific partition.
 
-``` notranslate
-bq rm --table project_id:dataset.table$partition
-```
+    bq rm --table project_id:dataset.table$partition
 
 Where:
 

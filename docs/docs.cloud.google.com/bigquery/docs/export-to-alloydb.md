@@ -72,9 +72,7 @@ You can use the `alloydb_options` option to specify the destination AlloyDB sche
 
 When configuring the export, the columns in the `SELECT` statement must have aliases that match the names of the columns in the target AlloyDB table.
 
-``` notranslate
-EXPORT DATA  WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_ID`  OPTIONS(    format='ALLOYDB',    uri="https://alloydb.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/clusters/CLUSTER_ID/instances/INSTANCE_ID",    alloydb_options="""{      "schema": "SCHEMA_NAME",      "table": "TABLE_NAME",      "max_parallel_connections": MAX_CONNECTIONS    }"""  )AS SELECT * FROM `mydataset.table1`;
-```
+    EXPORT DATA  WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_ID`  OPTIONS(    format='ALLOYDB',    uri="https://alloydb.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/clusters/CLUSTER_ID/instances/INSTANCE_ID",    alloydb_options="""{      "schema": "SCHEMA_NAME",      "table": "TABLE_NAME",      "max_parallel_connections": MAX_CONNECTIONS    }"""  )AS SELECT * FROM `mydataset.table1`;
 
 Replace the following:
 
@@ -93,24 +91,22 @@ You can use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery
 
 The following example exports selected fields from a table that's named `mydataset.table1` into an AlloyDB table named `my_target_table` :
 
-``` notranslate
-EXPORT DATA
-  WITH CONNECTION `myproject.us-central1.my-alloydb-conn`
-  OPTIONS (
-    format='ALLOYDB',
-    uri="https://alloydb.googleapis.com/v1/projects/myproject/locations/us-central1/clusters/my-cluster/instances/my-instance",
-    alloydb_options="""{
-      "schema": "public",
-      "table": "my_target_table"
-    }"""
-  )
-AS SELECT
-  col1 AS id,
-  col2 AS name,
-  col3 AS value
-FROM
-  `mydataset.table1`;
-```
+    EXPORT DATA
+      WITH CONNECTION `myproject.us-central1.my-alloydb-conn`
+      OPTIONS (
+        format='ALLOYDB',
+        uri="https://alloydb.googleapis.com/v1/projects/myproject/locations/us-central1/clusters/my-cluster/instances/my-instance",
+        alloydb_options="""{
+          "schema": "public",
+          "table": "my_target_table"
+        }"""
+      )
+    AS SELECT
+      col1 AS id,
+      col2 AS name,
+      col3 AS value
+    FROM
+      `mydataset.table1`;
 
 ## Pricing
 

@@ -63,14 +63,12 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    OPTIONS (
-      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-      edition = EDITION,
-      autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS);
-    ```
+        CREATE RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        OPTIONS (
+          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+          edition = EDITION,
+          autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS);
     
     Replace the following:
     
@@ -96,19 +94,17 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To create a reservation, use the `bq mk` command with the `--reservation` flag:
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation \
-    --slots=NUMBER_OF_BASELINE_SLOTS \
-    --ignore_idle_slots=false \
-    --edition=EDITION \
-    --autoscale_max_slots=NUMBER_OF_AUTOSCALING_SLOTS \
-    --max_slots=MAXIMUM_NUMBER_OF_SLOTS
-    --scaling_mode=SCALING_MODE
-    RESERVATION_NAME
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation \
+        --slots=NUMBER_OF_BASELINE_SLOTS \
+        --ignore_idle_slots=false \
+        --edition=EDITION \
+        --autoscale_max_slots=NUMBER_OF_AUTOSCALING_SLOTS \
+        --max_slots=MAXIMUM_NUMBER_OF_SLOTS
+        --scaling_mode=SCALING_MODE
+        RESERVATION_NAME
 
 Replace the following:
 
@@ -140,7 +136,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a reservation named `my-reservation` :
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_reservation" "default" {
   name              = "my-reservation"
   location          = "us-central1"
@@ -269,10 +265,8 @@ To update the reservation-based fairness on a project, you need the `bigquery.co
 
 For more information about updating the default configuration of a project, see [Manage configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#required_permissions) .
 
-``` notranslate
-ALTER PROJECT `PROJECT_NAME` SET OPTIONS (
-    `region-LOCATION.enable_reservation_based_fairness`= true);
-```
+    ALTER PROJECT `PROJECT_NAME` SET OPTIONS (
+        `region-LOCATION.enable_reservation_based_fairness`= true);
 
 Replace the following:
 
@@ -321,18 +315,16 @@ The new reservation is visible in the **Slot reservations** tab.
 
 To create a predictable reservation, use the `bq mk` command with the `--reservation` flag and set the value of `max_slots` and `scaling_mode` :
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation \
-    --slots=NUMBER_OF_BASELINE_SLOTS \
-    --ignore_idle_slots=false \
-    --edition=EDITION \
-    --max_slots=MAXIMUM_NUMBER_OF_SLOTS \
-    --scaling_mode=SCALING_MODE
-    RESERVATION_NAME
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation \
+        --slots=NUMBER_OF_BASELINE_SLOTS \
+        --ignore_idle_slots=false \
+        --edition=EDITION \
+        --max_slots=MAXIMUM_NUMBER_OF_SLOTS \
+        --scaling_mode=SCALING_MODE
+        RESERVATION_NAME
 
 Replace the following:
 
@@ -360,16 +352,14 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    OPTIONS (
-      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-      edition = EDITION,
-      ignore_idle_slots=IGNORE_IDLE_SLOTS
-      max_slots = MAX_NUMBER_OF_SLOTS,
-      scaling_mode = SCALING_MODE);
-    ```
+        CREATE RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        OPTIONS (
+          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+          edition = EDITION,
+          ignore_idle_slots=IGNORE_IDLE_SLOTS
+          max_slots = MAX_NUMBER_OF_SLOTS,
+          scaling_mode = SCALING_MODE);
     
     Replace the following:
     
@@ -456,13 +446,11 @@ To change the size of a reservation, use the [`ALTER RESERVATION SET OPTIONS` da
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    SET OPTIONS (
-      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-      autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS);
-    ```
+        ALTER RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        SET OPTIONS (
+          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+          autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS);
     
     Replace the following:
     
@@ -484,14 +472,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update the size of a reservation, use the `bq update` command with the `--reservation` flag:
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --slots=NUMBER_OF_BASELINE_SLOTS \
-    --autoscale_max_slots=NUMBER_OF_AUTOSCALING_SLOTS \
-    --reservation RESERVATION_NAME
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --slots=NUMBER_OF_BASELINE_SLOTS \
+        --autoscale_max_slots=NUMBER_OF_AUTOSCALING_SLOTS \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -557,13 +543,11 @@ The `--ignore_idle_slots` flag controls whether queries running in a reservation
 
 To update a reservation, use the `bq update` command with the `--reservation` flag . The following example sets `--ignore_idle_slots` to `true` , meaning the reservation will only use slots allocated to the reservation.
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --ignore_idle_slots=true \
-    --reservation RESERVATION_NAME
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --ignore_idle_slots=true \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -583,13 +567,11 @@ Query the `ignore_idle_slots` column of the [`INFORMATION_SCHEMA.RESERVATIONS_BY
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      reservation_name,
-      ignore_idle_slots
-    FROM
-      `ADMIN_PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT;
-    ```
+        SELECT
+          reservation_name,
+          ignore_idle_slots
+        FROM
+          `ADMIN_PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT;
     
     Replace the following:
     
@@ -604,11 +586,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the `bq ls` command with the `--reservation` flag:
 
-``` notranslate
-bq ls --reservation \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION
-```
+    bq ls --reservation \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION
 
 Replace the following:
 
@@ -663,10 +643,8 @@ To delete a reservation, use the [`DROP RESERVATION` DDL statement](https://docs
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`;
-    ```
+        DROP RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`;
     
     Replace the following:
     
@@ -682,12 +660,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To delete a reservation, use the `bq rm` command with the `--reservation` flag:
 
-``` notranslate
-bq rm \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation RESERVATION_NAME
-```
+    bq rm \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -800,7 +776,7 @@ In the bq command-line tool, you can grant access to an individual reservation r
 
 To grant access to a reservation, use the [`bq set-iam-policy`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command:
 
-``` lang-sh notranslate
+```sh
 bq set-iam-policy --reservation RESOURCE FILE_NAME
 ```
 
@@ -810,20 +786,18 @@ Replace the following:
 
   - `  FILE_NAME  ` : the file that contains the policy in JSON format. The format should follow the [IAM policy structure](https://docs.cloud.google.com/iam/docs/allow-policies#structure) for allow policies. For example:
     
-    ``` notranslate
-    {
-      "bindings": [
         {
-          "members": [
-            "user:my-user@example.com"
+          "bindings": [
+            {
+              "members": [
+                "user:my-user@example.com"
+              ],
+              "role": "roles/bigquery.resourceEditor"
+            }
           ],
-          "role": "roles/bigquery.resourceEditor"
+          "etag": "BwUjMhCsNvY=",
+          "version": 1
         }
-      ],
-      "etag": "BwUjMhCsNvY=",
-      "version": 1
-    }
-    ```
 
 For more information about IAM, see [Manage access to other resources](https://docs.cloud.google.com/iam/docs/manage-access-other-resources) .
 
@@ -871,13 +845,11 @@ The new reservation group is visible in the **Slot reservations** tab.
 
 To create a reservation, use the `bq mk` command with the `--reservation` flag:
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_group \
-    RESERVATION_GROUP_NAME
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_group \
+        RESERVATION_GROUP_NAME
 
 Replace the following:
 
@@ -909,13 +881,11 @@ The reservation group is updated with the latest member reservations.
 
 To update the reservation and set the reservation group, use the `bq update` command with the `--reservation` flag:
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_group_name=RESERVATION_GROUP_NAME \
-    --reservation RESERVATION_NAME
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_group_name=RESERVATION_GROUP_NAME \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -942,12 +912,10 @@ To list the reservation group information for your reservations, do the followin
 
 To list the reservations and include the reservation group information, use the `bq ls` command with the `--reservation` flag:
 
-``` notranslate
-bq ls \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation
-```
+    bq ls \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation
 
 Replace the following:
 
@@ -992,13 +960,11 @@ The reservation group is deleted.
 
 To remove the reservation from the reservation group, use the `bq update` command with the `--reservation` flag:
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_group_name="" \
-    --reservation RESERVATION_NAME
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_group_name="" \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -1029,12 +995,10 @@ A reservation group can only be deleted if it does not contain any member reserv
 
 To delete an empty reservation group, use the `bq rm` command with the `--reservation_group` flag:
 
-``` notranslate
-bq rm \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_group RESERVATION_GROUP_NAME
-```
+    bq rm \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_group RESERVATION_GROUP_NAME
 
 Replace the following:
 

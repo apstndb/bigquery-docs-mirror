@@ -36,24 +36,20 @@ To configure your development environment with the JDBC driver, add the driver a
 
 Add the following dependency to your `pom.xml` file:
 
-``` notranslate
-<dependency>
-    <groupId>com.google.cloud</groupId>
-    <artifactId>google-cloud-bigquery-jdbc</artifactId>
-    <version>0.3.0</version>
-</dependency>
-```
+    <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-bigquery-jdbc</artifactId>
+        <version>0.3.0</version>
+    </dependency>
 
 ### Gradle
 
 Add the following to your `build.gradle` file:
 
-``` notranslate
-dependencies {
-// ... other dependencies
-implementation("com.google.cloud:google-cloud-bigquery-jdbc:0.3.0")
-}
-```
+    dependencies {
+    // ... other dependencies
+    implementation("com.google.cloud:google-cloud-bigquery-jdbc:0.3.0")
+    }
 
 ### Other (Shaded Uber JAR)
 
@@ -65,9 +61,7 @@ To establish a connection between your Java application and BigQuery with the JD
 
 1.  Identify your connection string for the JDBC driver for BigQuery. This string captures all the required information to establish a connection between your Java application and BigQuery. The connection string has the following format:
     
-    ``` notranslate
-    jdbc:bigquery://HOST:PORT;ProjectId=PROJECT_ID;OAuthType=AUTH_TYPE;AUTH_PROPS;OTHER_PROPS
-    ```
+        jdbc:bigquery://HOST:PORT;ProjectId=PROJECT_ID;OAuthType=AUTH_TYPE;AUTH_PROPS;OTHER_PROPS
     
     Replace the following:
     
@@ -87,50 +81,44 @@ To establish a connection between your Java application and BigQuery with the JD
     
       - Connect with the `DriverManager` class:
         
-        ``` notranslate
-        import java.sql.Connection;
-        import java.sql.DriverManager;
-        
-        private static Connection getJdbcConnectionDM(){
-          Connection connection = DriverManager.getConnection(CONNECTION_STRING);
-          return connection;
-        }
-        ```
+            import java.sql.Connection;
+            import java.sql.DriverManager;
+            
+            private static Connection getJdbcConnectionDM(){
+              Connection connection = DriverManager.getConnection(CONNECTION_STRING);
+              return connection;
+            }
         
         Replace `CONNECTION_STRING` with the connection string from the previous step.
     
       - Connect with the `DataSource` class:
         
-        ``` notranslate
-        import com.google.cloud.bigquery.jdbc.DataSource;
-        import java.sql.Connection;
-        import java.sql.SQLException;
-        
-        private static public Connection getJdbcConnectionDS() throws SQLException {
-          Connection connection = null;
-          DataSource dataSource = new com.google.cloud.bigquery.jdbc.DataSource();
-          dataSource.setURL(CONNECTION_STRING);
-          connection = dataSource.getConnection();
-          return connection;
-        }
-        ```
+            import com.google.cloud.bigquery.jdbc.DataSource;
+            import java.sql.Connection;
+            import java.sql.SQLException;
+            
+            private static public Connection getJdbcConnectionDS() throws SQLException {
+              Connection connection = null;
+              DataSource dataSource = new com.google.cloud.bigquery.jdbc.DataSource();
+              dataSource.setURL(CONNECTION_STRING);
+              connection = dataSource.getConnection();
+              return connection;
+            }
         
         Replace `CONNECTION_STRING` with the connection string from the previous step.
         
         The `DataSource` class also has setter methods that you can use to set [connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) , rather than including them in the connection string. The following is an example:
         
-        ``` notranslate
-        private static Connection getConnection() throws SQLException {
-          DataSource ds = new DataSource();
-          ds.setURL(jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;);
-          ds.setAuthType(3);  // Application Default Credentials
-          ds.setProjectId("MyTestProject");
-          ds.setEnableHighThroughputAPI(true);
-          ds.setLogLevel("6");
-          ds.setUseQueryCache(false);
-          return ds.getConnection();
-        }
-        ```
+            private static Connection getConnection() throws SQLException {
+              DataSource ds = new DataSource();
+              ds.setURL(jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;);
+              ds.setAuthType(3);  // Application Default Credentials
+              ds.setProjectId("MyTestProject");
+              ds.setEnableHighThroughputAPI(true);
+              ds.setLogLevel("6");
+              ds.setUseQueryCache(false);
+              return ds.getConnection();
+            }
 
 ### Connection properties
 
@@ -839,108 +827,94 @@ The following sections provide examples that use BigQuery features through the J
 
 The following example runs a query with a [positional parameter](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) :
 
-``` notranslate
-PreparedStatement preparedStatement = connection.prepareStatement(
-    "SELECT * FROM MyTestTable where testColumn = ?");
-preparedStatement.setString(1, "string2");
-ResultSet resultSet = statement.executeQuery(selectQuery);
-```
+    PreparedStatement preparedStatement = connection.prepareStatement(
+        "SELECT * FROM MyTestTable where testColumn = ?");
+    preparedStatement.setString(1, "string2");
+    ResultSet resultSet = statement.executeQuery(selectQuery);
 
 #### Nested and repeated records
 
 The following example queries the base record of `Struct` data:
 
-``` notranslate
-ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
-    resultSet.next();
-    Struct obj = (Struct) resultSet.getObject(1);
-    System.out.println(obj.toString());
-```
+    ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
+        resultSet.next();
+        Struct obj = (Struct) resultSet.getObject(1);
+        System.out.println(obj.toString());
 
 The driver returns the base record as a struct object or a string representation of a JSON object. The result is similar to the following:
 
-``` notranslate
-{
-  "v": {
-    "f": [
-      {
-        "v": "Adam"
-      },
-      {
-        "v": "5"
+    {
+      "v": {
+        "f": [
+          {
+            "v": "Adam"
+          },
+          {
+            "v": "5"
+          }
+        ]
       }
-    ]
-  }
-}
-```
+    }
 
 The following example queries the subcomponents of a `Struct` object:
 
-``` notranslate
-ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
-    resultSet.next();
-    Struct structObject = (Struct) resultSet.getObject(1);
-    Object[] structComponents = structObject.getAttributes();
-    for (Object component : structComponents){
-      System.out.println(component.toString());
-    }
-```
+    ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
+        resultSet.next();
+        Struct structObject = (Struct) resultSet.getObject(1);
+        Object[] structComponents = structObject.getAttributes();
+        for (Object component : structComponents){
+          System.out.println(component.toString());
+        }
 
 The following example queries a standard array of repeated data, then verifies the result:
 
-``` notranslate
-// Execute Query
-ResultSet resultSet = statement.executeQuery("SELECT [1,2,3]");
-resultSet.next();
-Object[] arrayObject = (Object[]) resultSet.getArray(1).getArray();
-
-// Verify Result
-int count =0;
-for (; count < arrayObject.length; count++) {
-  System.out.println(arrayObject[count]);
-}
-```
+    // Execute Query
+    ResultSet resultSet = statement.executeQuery("SELECT [1,2,3]");
+    resultSet.next();
+    Object[] arrayObject = (Object[]) resultSet.getArray(1).getArray();
+    
+    // Verify Result
+    int count =0;
+    for (; count < arrayObject.length; count++) {
+      System.out.println(arrayObject[count]);
+    }
 
 The following example queries a `Struct` array of repeated data, then verifies the result:
 
-``` notranslate
-// Execute Query
-ResultSet resultSet = statement.executeQuery("SELECT "
-    + "[STRUCT(\"Adam\" as name, 12 as age), "
-    + "STRUCT(\"Lily\" as name, 17 as age)]");
-
-Struct[] arrayObject = (Struct[]) resultSet.getArray(1).getArray();
-
-// Verify Result
-for (int count =0; count < arrayObject.length; count++) {
-  System.out.println(arrayObject[count]);
-}
-```
+    // Execute Query
+    ResultSet resultSet = statement.executeQuery("SELECT "
+        + "[STRUCT(\"Adam\" as name, 12 as age), "
+        + "STRUCT(\"Lily\" as name, 17 as age)]");
+    
+    Struct[] arrayObject = (Struct[]) resultSet.getArray(1).getArray();
+    
+    // Verify Result
+    for (int count =0; count < arrayObject.length; count++) {
+      System.out.println(arrayObject[count]);
+    }
 
 #### Bulk-insert
 
 The following example performs a bulk-insert operation with the [`executeBatch` method](https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#executeBatch--) .
 
-``` notranslate
-Connection conn = DriverManager.getConnection(connectionUrl);
-PreparedStatement statement = null;
-Statement st = conn.createStatement();
-final String insertQuery = String.format(
-        "INSERT INTO `%s.%s.%s` "
-      + " (StringField, IntegerField, BooleanField) VALUES(?, ?, ?);",
-        DEFAULT_CATALOG, DATASET, TABLE_NAME);
-
-statement = conn.prepareStatement(insertQuery1);
-
-for (int i=0; i<2000; ++i) {
-      statement.setString(1, i+"StringField");
-      statement.setInt(2, i);
-      statement.setBoolean(3, true);
-      statement.addBatch();
-}
-
-statement.executeBatch();
-```
+    Connection conn = DriverManager.getConnection(connectionUrl);
+    PreparedStatement statement = null;
+    Statement st = conn.createStatement();
+    final String insertQuery = String.format(
+            "INSERT INTO `%s.%s.%s` "
+          + " (StringField, IntegerField, BooleanField) VALUES(?, ?, ?);",
+            DEFAULT_CATALOG, DATASET, TABLE_NAME);
+    
+    statement = conn.prepareStatement(insertQuery1);
+    
+    for (int i=0; i<2000; ++i) {
+          statement.setString(1, i+"StringField");
+          statement.setInt(2, i);
+          statement.setBoolean(3, true);
+          statement.addBatch();
+    }
+    
+    statement.executeBatch();
 
 ## Pricing
 

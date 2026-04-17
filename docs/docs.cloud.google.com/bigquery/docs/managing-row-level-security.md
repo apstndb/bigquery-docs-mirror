@@ -77,92 +77,76 @@ The following examples show you how to create and update row access policies for
 
 Create a new row access policy. Access to the table is restricted to the user `abc@example.com` . Only the rows where `region = 'APAC'` are visible:
 
-``` notranslate
-CREATE ROW ACCESS POLICY apac_filter
-ON project.dataset.my_table
-GRANT TO ('user:abc@example.com')
-FILTER USING (region = 'APAC');
-```
+    CREATE ROW ACCESS POLICY apac_filter
+    ON project.dataset.my_table
+    GRANT TO ('user:abc@example.com')
+    FILTER USING (region = 'APAC');
 
 #### Create a new policy and grant access to a single identity in a workforce identity pool
 
 Create a new row access policy. Access to the table is restricted to a single identity in a workforce identity pool using this format: ` principal://iam.googleapis.com/locations/global/workforcePools/ POOL_ID /subject/ IDENTITY  ` . Only the rows where `region = 'APAC'` are visible:
 
-``` notranslate
-CREATE ROW ACCESS POLICY apac_filter
-ON project.dataset.my_table
-GRANT TO ('principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/abc@example.com')
-FILTER USING (region = 'APAC');
-```
+    CREATE ROW ACCESS POLICY apac_filter
+    ON project.dataset.my_table
+    GRANT TO ('principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/abc@example.com')
+    FILTER USING (region = 'APAC');
 
 #### Update a policy to grant access to a service account
 
 Update the `apac_filter` access policy to apply to the service account `example@exampleproject.iam.gserviceaccount.com` :
 
-``` notranslate
-CREATE OR REPLACE ROW ACCESS POLICY apac_filter
-ON project.dataset.my_table
-GRANT TO ('serviceAccount:example@exampleproject.iam.gserviceaccount.com')
-FILTER USING (region = 'APAC');
-```
+    CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+    ON project.dataset.my_table
+    GRANT TO ('serviceAccount:example@exampleproject.iam.gserviceaccount.com')
+    FILTER USING (region = 'APAC');
 
 #### Create a policy and grant access to users and groups
 
 Create a row access policy that grants access to a user and two groups:
 
-``` notranslate
-CREATE ROW ACCESS POLICY sales_us_filter
-ON project.dataset.my_table
-GRANT TO ('user:john@example.com',
-          'group:sales-us@example.com',
-          'group:sales-managers@example.com')
-FILTER USING (region = 'US');
-```
+    CREATE ROW ACCESS POLICY sales_us_filter
+    ON project.dataset.my_table
+    GRANT TO ('user:john@example.com',
+              'group:sales-us@example.com',
+              'group:sales-managers@example.com')
+    FILTER USING (region = 'US');
 
 #### Create a policy and grant access to workforce identities in groups
 
 Create a row access policy that grants access to all workforce identities in groups using this format ` principal://iam.googleapis.com/locations/global/workforcePools/ POOL_ID /subject/ IDENTITY  ` :
 
-``` notranslate
-CREATE ROW ACCESS POLICY sales_us_filter
-ON project.dataset.my_table
-GRANT TO ('principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/sales-us@example.com',
-          'principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/sales-managers@example.com')
-FILTER USING (region = 'US');
-```
+    CREATE ROW ACCESS POLICY sales_us_filter
+    ON project.dataset.my_table
+    GRANT TO ('principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/sales-us@example.com',
+              'principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/sales-managers@example.com')
+    FILTER USING (region = 'US');
 
 #### Create a policy and grant access to all authenticated users
 
 Create a row access policy with `allAuthenticatedUsers` as the grantees:
 
-``` notranslate
-CREATE ROW ACCESS POLICY us_filter
-ON project.dataset.my_table
-GRANT TO ('allAuthenticatedUsers')
-FILTER USING (region = 'US');
-```
+    CREATE ROW ACCESS POLICY us_filter
+    ON project.dataset.my_table
+    GRANT TO ('allAuthenticatedUsers')
+    FILTER USING (region = 'US');
 
 #### Create a policy and filter based on the current user
 
 Create a row access policy with a filter based on the current user:
 
-``` notranslate
-CREATE ROW ACCESS POLICY my_row_filter
-ON dataset.my_table
-GRANT TO ('domain:example.com')
-FILTER USING (email = SESSION_USER());
-```
+    CREATE ROW ACCESS POLICY my_row_filter
+    ON dataset.my_table
+    GRANT TO ('domain:example.com')
+    FILTER USING (email = SESSION_USER());
 
 #### Create a policy and filter on a column
 
 Create a row access policy with a filter on a column with an `ARRAY` type:
 
-``` notranslate
-CREATE ROW ACCESS POLICY my_reports_filter
-ON project.dataset.my_table
-GRANT TO ('domain:example.com')
-FILTER USING (SESSION_USER() IN UNNEST(reporting_chain));
-```
+    CREATE ROW ACCESS POLICY my_reports_filter
+    ON project.dataset.my_table
+    GRANT TO ('domain:example.com')
+    FILTER USING (SESSION_USER() IN UNNEST(reporting_chain));
 
 #### Create a policy and use a region comparison
 
@@ -178,32 +162,28 @@ Consider the following table, `lookup_table` :
     | abc@example.com | us-west2     |
     +-----------------+--------------+
 
-``` notranslate
-CREATE OR REPLACE ROW ACCESS POLICY apac_filter
-ON project.dataset.my_table
-GRANT TO ('domain:example.com')
-FILTER USING (region IN (
-    SELECT
-      region
-    FROM
-      lookup_table
-    WHERE
-      email = SESSION_USER()));
-```
+    CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+    ON project.dataset.my_table
+    GRANT TO ('domain:example.com')
+    FILTER USING (region IN (
+        SELECT
+          region
+        FROM
+          lookup_table
+        WHERE
+          email = SESSION_USER()));
 
 Using the subquery on `lookup_table` lets you avoid creating multiple row access policies. For example, the preceding statement yields the same result as the following, with fewer queries:
 
-``` notranslate
-CREATE OR REPLACE ROW ACCESS POLICY apac_filter
-ON project.dataset.my_table
-GRANT TO ('user:abc@example.com')
-FILTER USING (region IN ('us-west1', 'us-west2'));
-
-CREATE OR REPLACE ROW ACCESS POLICY apac_filter
-ON project.dataset.my_table
-GRANT TO ('user:xyz@example.com')
-FILTER USING (region = 'europe-west1');
-```
+    CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+    ON project.dataset.my_table
+    GRANT TO ('user:abc@example.com')
+    FILTER USING (region IN ('us-west1', 'us-west2'));
+    
+    CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+    ON project.dataset.my_table
+    GRANT TO ('user:xyz@example.com')
+    FILTER USING (region = 'europe-west1');
 
 For more information on the syntax and available options, see the [`CREATE ROW ACCESS POLICY` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_row_access_policy_statement) reference.
 
@@ -211,39 +191,31 @@ For more information on the syntax and available options, see the [`CREATE ROW A
 
 If two or more row-level access policies grant a user or group access to the same table, then the user or group has access to all of the data covered by any of the policies. For example, the following policies grant the user `abc@example.com` access to specified rows in the `my_table` table:
 
-``` notranslate
-CREATE ROW ACCESS POLICY shoes
-ON project.dataset.my_table
-GRANT TO ('user:abc@example.com')
-FILTER USING (product_category = 'shoes');
-```
+    CREATE ROW ACCESS POLICY shoes
+    ON project.dataset.my_table
+    GRANT TO ('user:abc@example.com')
+    FILTER USING (product_category = 'shoes');
 
-``` notranslate
-CREATE OR REPLACE ROW ACCESS POLICY blue_products
-ON project.dataset.my_table
-GRANT TO ('user:abc@example.com')
-FILTER USING (color = 'blue');
-```
+    CREATE OR REPLACE ROW ACCESS POLICY blue_products
+    ON project.dataset.my_table
+    GRANT TO ('user:abc@example.com')
+    FILTER USING (color = 'blue');
 
 In the preceding example, the user `abc@example.com` has access to the rows in the `my_table` table that have the `product_category` field set to `shoes` , and `abc@example.com` also has access to the rows that have the `color` field set to `blue` . For example, `abc@example.com` would be able to access rows with information about red shoes and blue cars.
 
 This access is equivalent to the access provided by the following single row-level access policy:
 
-``` notranslate
-CREATE ROW ACCESS POLICY shoes_and_blue_products
-ON project.dataset.my_table
-GRANT TO ('user:abc@example.com')
-FILTER USING (product_category = 'shoes' OR color = 'blue');
-```
+    CREATE ROW ACCESS POLICY shoes_and_blue_products
+    ON project.dataset.my_table
+    GRANT TO ('user:abc@example.com')
+    FILTER USING (product_category = 'shoes' OR color = 'blue');
 
 On the other hand, to specify access that is dependent on more than one condition being true, use a filter with an `AND` operator. For example, the following row-level access policy grants `abc@example.com` access only to rows that have both the `product_category` field set to `shoes` and the `color` field set to `blue` :
 
-``` notranslate
-CREATE ROW ACCESS POLICY blue_shoes
-ON project.dataset.my_table
-GRANT TO ('user:abc@example.com')
-FILTER USING (product_category = 'shoes' AND color = 'blue');
-```
+    CREATE ROW ACCESS POLICY blue_shoes
+    ON project.dataset.my_table
+    GRANT TO ('user:abc@example.com')
+    FILTER USING (product_category = 'shoes' AND color = 'blue');
 
 With the preceding row-level access policy, `abc@example.com` would be able to access information about blue shoes, but not about red shoes or blue cars.
 
@@ -346,15 +318,11 @@ To delete a row access policy from a table, use the following DDL statements:
 
 Delete a row-level access policy from a table:
 
-``` notranslate
-DROP ROW ACCESS POLICY my_row_filter ON project.dataset.my_table;
-```
+    DROP ROW ACCESS POLICY my_row_filter ON project.dataset.my_table;
 
 Delete all the row-level access policies from a table:
 
-``` notranslate
-DROP ALL ROW ACCESS POLICIES ON project.dataset.my_table;
-```
+    DROP ALL ROW ACCESS POLICIES ON project.dataset.my_table;
 
 For more information about deleting a row-level access policy, see the [`DROP ROW ACCESS POLICY` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_row_access_policy_statement) reference.
 

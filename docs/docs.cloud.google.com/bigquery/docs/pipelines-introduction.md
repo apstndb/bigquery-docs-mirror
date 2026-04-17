@@ -34,29 +34,31 @@ Pipelines are subject to the following limitations:
   - You can grant users or groups access to a selected pipeline, but you can't grant them access to individual tasks within the pipeline.
   - If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
-### Set the default region for code assets
+## Set the default region for code assets
 
-If this is the first time you are creating a code asset, you should set the default region for code assets. You can't change the region for a code asset after it is created.
+All new code assets in your Google Cloud project use a default region. After the asset is created, you can't change its region.
 
-> **Note:** If you create a pipeline and choose a different default region than the one you have been using for code assets—for example, choosing `us-west1` when you have been using `us-central1` —then that pipeline and all code assets you create afterwards use that new region by default. Existing code assets continue to use the region they were assigned when they were created.
+> **Important:** If you change the region while creating a code asset, that region becomes the default for all subsequent code assets. Existing code assets are not affected.
 
-All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
+To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, find the project in which you have enabled code assets.
+2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Click more\_vert **View actions** next to the project, and then click **Change my default code region** .
+3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
 
-4.  For **Region** , select the region that you want to use for code assets.
+4.  Select the code region that you want to use as a default.
 
-5.  Click **Select** .
+5.  Click **Save** .
 
 For a list of supported regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
 
 ## Supported regions
 
-All code assets are stored in your [default region for code assets](https://docs.cloud.google.com/bigquery/docs/enable-assets#set_the_default_region_for_code_assets) . Updating the default region changes the region for all code assets created after that point.
+All code assets are stored in your [default region for code assets](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction#set_the_default_region_for_code_assets) . Updating the default region changes the region for all code assets created after that point.
 
 The following table lists the regions where pipelines are available:
 

@@ -4,7 +4,7 @@ This document describes the `ML.CONVERT_COLOR_SPACE` scalar function, which lets
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.CONVERT_COLOR_SPACE(image, target_color_space)
 ```
 
@@ -37,20 +37,18 @@ The first array in the struct represents the dimensions of the image, and the se
 
 The following example uses the `ML.CONVERT_COLOR_SPACE` function within the `ML.PREDICT` function to change the color space for input images from `RGB` to `GRAYSCALE` :
 
-``` notranslate
-CREATE OR REPLACE TABLE mydataset.model_output
-AS (
-  SELECT *
-  FROM
-    ML.PREDICT(
-      MODEL `mydataset.mymodel`,
-      SELECT
-        ML.CONVERT_COLOR_SPACE(ML.DECODE_IMAGE(data), 'GRAYSCALE')
-          AS image,
-        uri
-      FROM `mydataset.images`)
-);
-```
+    CREATE OR REPLACE TABLE mydataset.model_output
+    AS (
+      SELECT *
+      FROM
+        ML.PREDICT(
+          MODEL `mydataset.mymodel`,
+          SELECT
+            ML.CONVERT_COLOR_SPACE(ML.DECODE_IMAGE(data), 'GRAYSCALE')
+              AS image,
+            uri
+          FROM `mydataset.images`)
+    );
 
 ## What's next
 

@@ -82,13 +82,11 @@ Issue the `bq load` command with the `--autodetect` parameter.
 
 The following command loads a file using schema auto-detect:
 
-``` notranslate
-bq --location=LOCATION load \
---autodetect \
---source_format=FORMAT \
-DATASET.TABLE \
-PATH_TO_SOURCE
-```
+    bq --location=LOCATION load \
+    --autodetect \
+    --source_format=FORMAT \
+    DATASET.TABLE \
+    PATH_TO_SOURCE
 
 Replace the following:
 

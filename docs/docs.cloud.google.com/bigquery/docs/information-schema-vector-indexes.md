@@ -164,11 +164,9 @@ Replace the following:
 
 The following example shows all active vector indexes on tables in the dataset `my_dataset` , located in the project `my_project` . It includes their names, the DDL statements used to create them, and their coverage percentage. If an indexed base table is less than 10 MB, then its index is not populated, in which case the `coverage_percentage` value is 0.
 
-``` notranslate
-SELECT table_name, index_name, ddl, coverage_percentage
-FROM my_project.my_dataset.INFORMATION_SCHEMA.VECTOR_INDEXES
-WHERE index_status = 'ACTIVE';
-```
+    SELECT table_name, index_name, ddl, coverage_percentage
+    FROM my_project.my_dataset.INFORMATION_SCHEMA.VECTOR_INDEXES
+    WHERE index_status = 'ACTIVE';
 
 The result is similar to the following:
 

@@ -6,30 +6,26 @@ A table function, also called a table-valued function (TVF), is a user-defined f
 
 To create a table function, use the [`CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) statement. A table function contains a query that produces a table. The function returns the query result. The following table function takes an `INT64` parameter and uses this value inside a `WHERE` clause in a query over a [public dataset](https://docs.cloud.google.com/bigquery/public-data) called `bigquery-public-data.usa_names.usa_1910_current` :
 
-``` notranslate
-CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
-AS (
-  SELECT year, name, SUM(number) AS total
-  FROM `bigquery-public-data.usa_names.usa_1910_current`
-  WHERE year = y
-  GROUP BY year, name
-);
-```
+    CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
+    AS (
+      SELECT year, name, SUM(number) AS total
+      FROM `bigquery-public-data.usa_names.usa_1910_current`
+      WHERE year = y
+      GROUP BY year, name
+    );
 
 To filter in other ways, you can pass multiple parameters to a table function. The following table function filters the data by year and name prefix:
 
-``` notranslate
-CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year_and_prefix(
-  y INT64, z STRING)
-AS (
-  SELECT year, name, SUM(number) AS total
-  FROM `bigquery-public-data.usa_names.usa_1910_current`
-  WHERE
-    year = y
-    AND STARTS_WITH(name, z)
-  GROUP BY year, name
-);
-```
+    CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year_and_prefix(
+      y INT64, z STRING)
+    AS (
+      SELECT year, name, SUM(number) AS total
+      FROM `bigquery-public-data.usa_names.usa_1910_current`
+      WHERE
+        year = y
+        AND STARTS_WITH(name, z)
+      GROUP BY year, name
+    );
 
 ### Table parameters
 
@@ -43,16 +39,14 @@ You can set TVF parameters to be tables. Following the table parameter name, you
 
 The following table function returns a table that contains total sales for `item_name` from the `orders` table:
 
-``` notranslate
-CREATE TABLE FUNCTION mydataset.compute_sales (
-  orders TABLE<sales INT64, item STRING>, item_name STRING)
-AS (
-  SELECT SUM(sales) AS total_sales, item
-  FROM orders
-  WHERE item = item_name
-  GROUP BY item
-);
-```
+    CREATE TABLE FUNCTION mydataset.compute_sales (
+      orders TABLE<sales INT64, item STRING>, item_name STRING)
+    AS (
+      SELECT SUM(sales) AS total_sales, item
+      FROM orders
+      WHERE item = item_name
+      GROUP BY item
+    );
 
 ### Parameter names
 
@@ -94,31 +88,29 @@ You can also use a table function in a [subquery](https://docs.cloud.google.com/
 
 When you call a table function that has a table parameter, you must use the `TABLE` keyword before the name of the table argument. The table argument can have columns not listed in the table parameter schema:
 
-``` notranslate
-CREATE TABLE FUNCTION mydataset.compute_sales (
-  orders TABLE<sales INT64, item STRING>, item_name STRING)
-AS (
-  SELECT SUM(sales) AS total_sales, item
-  FROM orders
-  WHERE item = item_name
-  GROUP BY item
-);
-
-WITH my_orders AS (
-    SELECT 1 AS sales, "apple" AS item, 0.99 AS price
-    UNION ALL
-    SELECT 2, "banana", 0.49
-    UNION ALL
-    SELECT 5, "apple", 0.99)
-SELECT *
-FROM mydataset.compute_sales(TABLE my_orders, "apple");
-
-/*-------------+-------+
- | total_sales | item  |
- +-------------+-------+
- | 6           | apple |
- +-------------+-------*/
-```
+    CREATE TABLE FUNCTION mydataset.compute_sales (
+      orders TABLE<sales INT64, item STRING>, item_name STRING)
+    AS (
+      SELECT SUM(sales) AS total_sales, item
+      FROM orders
+      WHERE item = item_name
+      GROUP BY item
+    );
+    
+    WITH my_orders AS (
+        SELECT 1 AS sales, "apple" AS item, 0.99 AS price
+        UNION ALL
+        SELECT 2, "banana", 0.49
+        UNION ALL
+        SELECT 5, "apple", 0.99)
+    SELECT *
+    FROM mydataset.compute_sales(TABLE my_orders, "apple");
+    
+    /*-------------+-------+
+     | total_sales | item  |
+     +-------------+-------+
+     | 6           | apple |
+     +-------------+-------*/
 
 ### Use system variables with TVFs
 

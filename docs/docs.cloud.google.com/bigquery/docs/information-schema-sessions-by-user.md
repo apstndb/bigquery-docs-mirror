@@ -62,17 +62,15 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.SESSIONS_BY_USER `` .
 
 The following example lists sessions that were created by the current user:
 
-``` notranslate
-SELECT
-  session_id,
-  creation_time
-FROM
-  `region-us`.INFORMATION_SCHEMA.SESSIONS_BY_USER
-WHERE
-  creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-ORDER BY
-  creation_time DESC;
-```
+    SELECT
+      session_id,
+      creation_time
+    FROM
+      `region-us`.INFORMATION_SCHEMA.SESSIONS_BY_USER
+    WHERE
+      creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+    ORDER BY
+      creation_time DESC;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

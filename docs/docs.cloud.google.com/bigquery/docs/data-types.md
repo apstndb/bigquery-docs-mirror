@@ -85,26 +85,26 @@ Your data can include the following data types:
 <tbody>
 <tr class="odd">
 <td>Minor (M4.2) earthquake near Oklahoma City</td>
-<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>1408452095.220
-1408452095.220000</code></pre></td>
-<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>2014-08-19 07:41:35.220 -05:00
-2014-08-19 12:41:35.220 UTC
-2014-08-19 12:41:35.220
-2014-08-19 12:41:35.220000
-2014-08-19T12:41:35.220Z</code></pre></td>
+<td><div class="sourceCode" id="cb1" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">1408452095.220</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">1408452095.220000</span></span></code></pre></div></td>
+<td><div class="sourceCode" id="cb2" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">2014-08-19</span> 07:41:35.220 -05:00</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="ex">2014-08-19</span> 12:41:35.220 UTC</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="ex">2014-08-19</span> 12:41:35.220</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="ex">2014-08-19</span> 12:41:35.220000</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">2014-08-19T12</span>:41:35.220Z</span></code></pre></div></td>
 </tr>
 <tr class="even">
 <td>Neil Armstrong sets foot on the moon</td>
-<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>-14182916</code></pre></td>
-<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>1969-07-20 20:18:04
-1969-07-20 20:18:04 UTC
-1969-07-20T20:18:04</code></pre></td>
+<td><div class="sourceCode" id="cb3" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">-14182916</span></span></code></pre></div></td>
+<td><div class="sourceCode" id="cb4" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">1969-07-20</span> 20:18:04</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">1969-07-20</span> 20:18:04 UTC</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">1969-07-20T20</span>:18:04</span></code></pre></div></td>
 </tr>
 <tr class="odd">
 <td>Deadline for fixing <a href="https://en.wikipedia.org/wiki/Year_10,000_problem">Y10k bug</a></td>
-<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>253402300800
-2.53402300800e11</code></pre></td>
-<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>10000-01-01 00:00</code></pre></td>
+<td><div class="sourceCode" id="cb5" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">253402300800</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">2.53402300800e11</span></span></code></pre></div></td>
+<td><div class="sourceCode" id="cb6" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">10000-01-01</span> 00:00</span></code></pre></div></td>
 </tr>
 </tbody>
 </table></td>

@@ -38,23 +38,19 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 
 1.  Use the `bq show` command to get the JSON representation of the dataset that you want the routine to access. The output from the command is a JSON representation of the [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource. Save the result to a local file.
     
-    ``` notranslate
-    bq show --format=prettyjson TARGET_DATASET > dataset.json
-    ```
+        bq show --format=prettyjson TARGET_DATASET > dataset.json
     
     Replace `  TARGET_DATASET  ` with the name of the dataset that the routine can access.
 
 2.  Edit the file to add the following JSON object to the `access` array in the `Dataset` resource:
     
-    ``` notranslate
-    {
-     "routine": {
-       "datasetId": "DATASET_NAME",
-       "projectId": "PROJECT_ID",
-       "routineId": "ROUTINE_NAME"
-     }
-    }
-    ```
+        {
+         "routine": {
+           "datasetId": "DATASET_NAME",
+           "projectId": "PROJECT_ID",
+           "routineId": "ROUTINE_NAME"
+         }
+        }
     
     Replace the following:
     
@@ -64,16 +60,14 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 
 3.  Optional: If you are authorizing a stored procedure, attach an IAM role. This role restricts access to the authorized procedure based on its permissions. To do this, add `"role"` to the JSON object:
     
-    ``` notranslate
-    {
-     "role": "ROLE_NAME",
-     "routine": {
-       "datasetId": "DATASET_NAME",
-       "projectId": "PROJECT_ID",
-       "routineId": "ROUTINE_NAME"
-     }
-    }
-    ```
+        {
+         "role": "ROLE_NAME",
+         "routine": {
+           "datasetId": "DATASET_NAME",
+           "projectId": "PROJECT_ID",
+           "routineId": "ROUTINE_NAME"
+         }
+        }
     
     Replace `  ROLE_NAME  ` with the name of the role that you want to attach. You can attach the following roles to a stored procedure:
     
@@ -86,9 +80,7 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 
 4.  Use the `bq update` command to update the dataset:
     
-    ``` notranslate
-    bq update --source dataset.json TARGET_DATASET
-    ```
+        bq update --source dataset.json TARGET_DATASET
 
 ### API
 
@@ -96,15 +88,13 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 
 2.  Add the following JSON object to the `access` array in the `Dataset` resource:
     
-    ``` notranslate
-    {
-     "routine": {
-       "datasetId": "DATASET_NAME",
-       "projectId": "PROJECT_ID",
-       "routineId": "ROUTINE_NAME"
-     }
-    }
-    ```
+        {
+         "routine": {
+           "datasetId": "DATASET_NAME",
+           "projectId": "PROJECT_ID",
+           "routineId": "ROUTINE_NAME"
+         }
+        }
     
     Replace the following:
     
@@ -114,16 +104,14 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 
 3.  Optional: If you are authorizing a stored procedure, attach an IAM role. This role restricts access to the authorized procedure based on its permissions. To do this, add `"role"` to the JSON object:
     
-    ``` notranslate
-    {
-     "role": "ROLE_NAME",
-     "routine": {
-       "datasetId": "DATASET_NAME",
-       "projectId": "PROJECT_ID",
-       "routineId": "ROUTINE_NAME"
-     }
-    }
-    ```
+        {
+         "role": "ROLE_NAME",
+         "routine": {
+           "datasetId": "DATASET_NAME",
+           "projectId": "PROJECT_ID",
+           "routineId": "ROUTINE_NAME"
+         }
+        }
     
     Replace `  ROLE_NAME  ` with the name of the role that you want to attach. You can attach the following roles to a stored procedure:
     
@@ -173,31 +161,25 @@ The following is an end-to-end example of creating and using an authorized UDF.
 
 6.  Using the bq command-line tool, run the `show` command as follows:
     
-    ``` notranslate
-    bq show --format=prettyjson private_dataset > dataset.json
-    ```
+        bq show --format=prettyjson private_dataset > dataset.json
     
     The output is saved to a local file named `dataset.json` .
 
 7.  Edit `dataset.json` to add the following JSON object to the `access` array:
     
-    ``` notranslate
-    {
-     "routine": {
-       "datasetId": "public_dataset",
-       "projectId": "PROJECT_ID",
-       "routineId": "count_key"
-     }
-    }
-    ```
+        {
+         "routine": {
+           "datasetId": "public_dataset",
+           "projectId": "PROJECT_ID",
+           "routineId": "count_key"
+         }
+        }
     
     Replace `  PROJECT_ID  ` with the project ID for `public_dataset` .
 
 8.  Using the bq command-line tool, run the `update` command as follows:
     
-    ``` notranslate
-    bq update --source dataset.json private_dataset
-    ```
+        bq update --source dataset.json private_dataset
 
 9.  To verify that the UDF has access to `private_dataset` , the user can run the following query:
     

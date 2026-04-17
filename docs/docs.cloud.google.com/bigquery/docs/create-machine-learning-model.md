@@ -70,30 +70,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -116,20 +110,18 @@ Create a logistic regression model using the Analytics sample dataset for BigQue
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.sample_model`
-    OPTIONS(model_type='logistic_reg') AS
-    SELECT
-    IF(totals.transactions IS NULL, 0, 1) AS label,
-    IFNULL(device.operatingSystem, "") AS os,
-    device.isMobile AS is_mobile,
-    IFNULL(geoNetwork.country, "") AS country,
-    IFNULL(totals.pageviews, 0) AS pageviews
-    FROM
-    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-    WHERE
-    _TABLE_SUFFIX BETWEEN '20160801' AND '20170630'
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.sample_model`
+        OPTIONS(model_type='logistic_reg') AS
+        SELECT
+        IF(totals.transactions IS NULL, 0, 1) AS label,
+        IFNULL(device.operatingSystem, "") AS os,
+        device.isMobile AS is_mobile,
+        IFNULL(geoNetwork.country, "") AS country,
+        IFNULL(totals.pageviews, 0) AS pageviews
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        WHERE
+        _TABLE_SUFFIX BETWEEN '20160801' AND '20170630'
     
     The query takes several minutes to complete. After the first iteration is complete, your model ( `sample_model` ) appears in the navigation panel. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -266,22 +258,20 @@ In this tutorial, you are using a binary classification model that detects trans
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.EVALUATE(MODEL `bqml_tutorial.sample_model`, (
-    SELECT
-    IF(totals.transactions IS NULL, 0, 1) AS label,
-    IFNULL(device.operatingSystem, "") AS os,
-    device.isMobile AS is_mobile,
-    IFNULL(geoNetwork.country, "") AS country,
-    IFNULL(totals.pageviews, 0) AS pageviews
-    FROM
-    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-    WHERE
-    _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
-    ```
+        SELECT
+        *
+        FROM
+        ML.EVALUATE(MODEL `bqml_tutorial.sample_model`, (
+        SELECT
+        IF(totals.transactions IS NULL, 0, 1) AS label,
+        IFNULL(device.operatingSystem, "") AS os,
+        device.isMobile AS is_mobile,
+        IFNULL(geoNetwork.country, "") AS country,
+        IFNULL(totals.pageviews, 0) AS pageviews
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        WHERE
+        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
     
     The results should look like the following:
     
@@ -400,25 +390,23 @@ Use the model to predict the number of transactions made by website visitors fro
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT
-    country,
-    SUM(predicted_label) as total_predicted_purchases
-    FROM
-    ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
-    SELECT
-    IFNULL(device.operatingSystem, "") AS os,
-    device.isMobile AS is_mobile,
-    IFNULL(totals.pageviews, 0) AS pageviews,
-    IFNULL(geoNetwork.country, "") AS country
-    FROM
-    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-    WHERE
-    _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
-    GROUP BY country
-    ORDER BY total_predicted_purchases DESC
-    LIMIT 10
-    ```
+        SELECT
+        country,
+        SUM(predicted_label) as total_predicted_purchases
+        FROM
+        ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
+        SELECT
+        IFNULL(device.operatingSystem, "") AS os,
+        device.isMobile AS is_mobile,
+        IFNULL(totals.pageviews, 0) AS pageviews,
+        IFNULL(geoNetwork.country, "") AS country
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        WHERE
+        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
+        GROUP BY country
+        ORDER BY total_predicted_purchases DESC
+        LIMIT 10
     
     The results should look like the following:
     
@@ -536,26 +524,24 @@ This query is identical to the query in the previous section except for the `GRO
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT
-    fullVisitorId,
-    SUM(predicted_label) as total_predicted_purchases
-    FROM
-    ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
-    SELECT
-    IFNULL(device.operatingSystem, "") AS os,
-    device.isMobile AS is_mobile,
-    IFNULL(totals.pageviews, 0) AS pageviews,
-    IFNULL(geoNetwork.country, "") AS country,
-    fullVisitorId
-    FROM
-    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-    WHERE
-    _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
-    GROUP BY fullVisitorId
-    ORDER BY total_predicted_purchases DESC
-    LIMIT 10
-    ```
+        SELECT
+        fullVisitorId,
+        SUM(predicted_label) as total_predicted_purchases
+        FROM
+        ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
+        SELECT
+        IFNULL(device.operatingSystem, "") AS os,
+        device.isMobile AS is_mobile,
+        IFNULL(totals.pageviews, 0) AS pageviews,
+        IFNULL(geoNetwork.country, "") AS country,
+        fullVisitorId
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        WHERE
+        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
+        GROUP BY fullVisitorId
+        ORDER BY total_predicted_purchases DESC
+        LIMIT 10
     
     The results should look like the following:
     

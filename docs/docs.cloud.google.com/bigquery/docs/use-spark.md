@@ -495,9 +495,9 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
     
     1.  After testing your batch workload code, you can commit the `.ipynb` or `.py` file to your repository using your `git` client, such as GitHub, GitLab, or Bitbucket, as part of your CI/CD pipeline.
 
-6.  Schedule your batch workload with Cloud Composer.
+6.  Schedule your batch workload with Managed Service for Apache Airflow.
     
-    1.  See [Run Managed Service for Apache Spark workloads with Cloud Composer](https://docs.cloud.google.com/composer/docs/composer-2/run-dataproc-workloads) for instructions.
+    1.  See [Run Managed Service for Apache Spark workloads with Managed Airflow](https://docs.cloud.google.com/composer/docs/composer-2/run-dataproc-workloads) for instructions.
 
 ## Troubleshoot notebook errors
 

@@ -72,6 +72,7 @@ https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity
 https://docs.cloud.google.com/bigquery/docs/biglake-audit-logging
 https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery
 https://docs.cloud.google.com/bigquery/docs/biglake-intro
+https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics
 https://docs.cloud.google.com/bigquery/docs/bigquery-cud
 https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction
 https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial
@@ -101,6 +102,7 @@ https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview
 https://docs.cloud.google.com/bigquery/docs/clustered-tables
 https://docs.cloud.google.com/bigquery/docs/clustering-overview
 https://docs.cloud.google.com/bigquery/docs/code-asset-folders
+https://docs.cloud.google.com/bigquery/docs/colab-data-apps
 https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent
 https://docs.cloud.google.com/bigquery/docs/column-data-masking
 https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging
@@ -476,7 +478,6 @@ https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials
 https://docs.cloud.google.com/bigquery/docs/migration/teradata
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-migration-intro
-https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-sql
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial
 https://docs.cloud.google.com/bigquery/docs/ml-pipelines-overview
@@ -1046,6 +1047,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity

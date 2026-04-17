@@ -63,30 +63,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a table of input data
 
@@ -105,60 +99,58 @@ Follow these steps to create the input data table:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE
-      `bqml_tutorial.iowa_liquor_sales_with_weather` AS
-    WITH
-      sales AS (
+        CREATE OR REPLACE TABLE
+          `bqml_tutorial.iowa_liquor_sales_with_weather` AS
+        WITH
+          sales AS (
+            SELECT
+              DATE,
+              store_number,
+              item_number,
+              bottles_sold,
+              SAFE_CAST(SAFE_CAST(zip_code AS FLOAT64) AS INT64) AS zip_code
+            FROM
+              `bigquery-public-data.iowa_liquor_sales.sales` AS sales
+            WHERE
+              SAFE_CAST(zip_code AS FLOAT64) IS NOT NULL
+          ),
+          aggregated_sales AS (
+            SELECT
+              DATE,
+              store_number,
+              item_number,
+              ANY_VALUE(zip_code) AS zip_code,
+              SUM(bottles_sold) AS bottles_sold,
+            FROM
+              sales
+            GROUP BY
+              DATE,
+              store_number,
+              item_number
+          ),
+          weather AS (
+            SELECT
+              DATE,
+              SAFE_CAST(postal_code AS INT64) AS zip_code,
+              avg_temperature_air_2m_f AS temperature,
+              avg_humidity_specific_2m_gpkg AS humidity,
+            FROM
+              `bigquery-public-data.covid19_weathersource_com.postal_code_day_history`
+            WHERE
+              country = 'US' AND
+              SAFE_CAST(postal_code AS INT64) IS NOT NULL
+          )
         SELECT
-          DATE,
-          store_number,
-          item_number,
-          bottles_sold,
-          SAFE_CAST(SAFE_CAST(zip_code AS FLOAT64) AS INT64) AS zip_code
+          aggregated_sales.date,
+          aggregated_sales.store_number,
+          aggregated_sales.item_number,
+          aggregated_sales.bottles_sold,
+          weather.temperature AS temperature,
+          weather.humidity AS humidity
         FROM
-          `bigquery-public-data.iowa_liquor_sales.sales` AS sales
-        WHERE
-          SAFE_CAST(zip_code AS FLOAT64) IS NOT NULL
-      ),
-      aggregated_sales AS (
-        SELECT
-          DATE,
-          store_number,
-          item_number,
-          ANY_VALUE(zip_code) AS zip_code,
-          SUM(bottles_sold) AS bottles_sold,
-        FROM
-          sales
-        GROUP BY
-          DATE,
-          store_number,
-          item_number
-      ),
-      weather AS (
-        SELECT
-          DATE,
-          SAFE_CAST(postal_code AS INT64) AS zip_code,
-          avg_temperature_air_2m_f AS temperature,
-          avg_humidity_specific_2m_gpkg AS humidity,
-        FROM
-          `bigquery-public-data.covid19_weathersource_com.postal_code_day_history`
-        WHERE
-          country = 'US' AND
-          SAFE_CAST(postal_code AS INT64) IS NOT NULL
-      )
-    SELECT
-      aggregated_sales.date,
-      aggregated_sales.store_number,
-      aggregated_sales.item_number,
-      aggregated_sales.bottles_sold,
-      weather.temperature AS temperature,
-      weather.humidity AS humidity
-    FROM
-      aggregated_sales
-      LEFT JOIN weather ON aggregated_sales.zip_code=weather.zip_code
-      AND aggregated_sales.DATE=weather.DATE;
-    ```
+          aggregated_sales
+          LEFT JOIN weather ON aggregated_sales.zip_code=weather.zip_code
+          AND aggregated_sales.DATE=weather.DATE;
 
 ## Create the time series model
 
@@ -170,22 +162,20 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE
-    OR REPLACE MODEL `bqml_tutorial.multi_time_series_arimax_model`
-    OPTIONS(
-      model_type = 'ARIMA_PLUS_XREG',
-      time_series_id_col = ['store_number', 'item_number'],
-      time_series_data_col = 'bottles_sold',
-      time_series_timestamp_col = 'date'
-    )
-    AS SELECT
-      *
-    FROM
-      `bqml_tutorial.iowa_liquor_sales_with_weather`
-    WHERE
-      DATE < DATE('2022-09-01');
-    ```
+        CREATE
+        OR REPLACE MODEL `bqml_tutorial.multi_time_series_arimax_model`
+        OPTIONS(
+          model_type = 'ARIMA_PLUS_XREG',
+          time_series_id_col = ['store_number', 'item_number'],
+          time_series_data_col = 'bottles_sold',
+          time_series_timestamp_col = 'date'
+        )
+        AS SELECT
+          *
+        FROM
+          `bqml_tutorial.iowa_liquor_sales_with_weather`
+        WHERE
+          DATE < DATE('2022-09-01');
     
     The query takes approximately 38 minutes to complete, after which you can access the `multi_time_series_arimax_model` model. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -203,23 +193,21 @@ Follow these steps to forecast data with the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.FORECAST (
-        model `bqml_tutorial.multi_time_series_arimax_model`,
-        STRUCT (5 AS horizon, 0.8 AS confidence_level),
-        (
-          SELECT
-            * EXCEPT (bottles_sold)
-          FROM
-            `bqml_tutorial.iowa_liquor_sales_with_weather`
-          WHERE
-            DATE>=DATE('2022-09-01')
-        )
-      );
-    ```
+        SELECT
+          *
+        FROM
+          ML.FORECAST (
+            model `bqml_tutorial.multi_time_series_arimax_model`,
+            STRUCT (5 AS horizon, 0.8 AS confidence_level),
+            (
+              SELECT
+                * EXCEPT (bottles_sold)
+              FROM
+                `bqml_tutorial.iowa_liquor_sales_with_weather`
+              WHERE
+                DATE>=DATE('2022-09-01')
+            )
+          );
     
     The results should look similar to the following:
     
@@ -243,23 +231,21 @@ Follow these steps to explain the model's results:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.EXPLAIN_FORECAST (
-        model `bqml_tutorial.multi_time_series_arimax_model`,
-        STRUCT (5 AS horizon, 0.8 AS confidence_level),
-        (
-          SELECT
-            * EXCEPT (bottles_sold)
-          FROM
-            `bqml_tutorial.iowa_liquor_sales_with_weather`
-          WHERE
-            DATE >= DATE('2022-09-01')
-        )
-      );
-    ```
+        SELECT
+          *
+        FROM
+          ML.EXPLAIN_FORECAST (
+            model `bqml_tutorial.multi_time_series_arimax_model`,
+            STRUCT (5 AS horizon, 0.8 AS confidence_level),
+            (
+              SELECT
+                * EXCEPT (bottles_sold)
+              FROM
+                `bqml_tutorial.iowa_liquor_sales_with_weather`
+              WHERE
+                DATE >= DATE('2022-09-01')
+            )
+          );
     
     The results should look similar to the following:
     
@@ -281,22 +267,20 @@ Follow these steps to evaluate the model's accuracy:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.EVALUATE (
-        model `bqml_tutorial.multi_time_series_arimax_model`,
-        (
-          SELECT
-            *
-          FROM
-           `bqml_tutorial.iowa_liquor_sales_with_weather`
-          WHERE
-            DATE >= DATE('2022-09-01')
-        )
-      );
-    ```
+        SELECT
+          *
+        FROM
+          ML.EVALUATE (
+            model `bqml_tutorial.multi_time_series_arimax_model`,
+            (
+              SELECT
+                *
+              FROM
+               `bqml_tutorial.iowa_liquor_sales_with_weather`
+              WHERE
+                DATE >= DATE('2022-09-01')
+            )
+          );
     
     The results should look similar to the following:
     
@@ -316,15 +300,13 @@ Follow these steps to detect anomalies in the training data:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.DETECT_ANOMALIES (
-        model `bqml_tutorial.multi_time_series_arimax_model`,
-        STRUCT (0.95 AS anomaly_prob_threshold)
-      );
-    ```
+        SELECT
+          *
+        FROM
+          ML.DETECT_ANOMALIES (
+            model `bqml_tutorial.multi_time_series_arimax_model`,
+            STRUCT (0.95 AS anomaly_prob_threshold)
+          );
     
     The results should look similar to the following:
     
@@ -344,23 +326,21 @@ Follow these steps to detect anomalies in new data:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.DETECT_ANOMALIES (
-        model `bqml_tutorial.multi_time_series_arimax_model`,
-        STRUCT (0.95 AS anomaly_prob_threshold),
-        (
-          SELECT
-            *
-          FROM
-            `bqml_tutorial.iowa_liquor_sales_with_weather`
-          WHERE
-            DATE >= DATE('2022-09-01')
-        )
-      );
-    ```
+        SELECT
+          *
+        FROM
+          ML.DETECT_ANOMALIES (
+            model `bqml_tutorial.multi_time_series_arimax_model`,
+            STRUCT (0.95 AS anomaly_prob_threshold),
+            (
+              SELECT
+                *
+              FROM
+                `bqml_tutorial.iowa_liquor_sales_with_weather`
+              WHERE
+                DATE >= DATE('2022-09-01')
+            )
+          );
     
     The results should look similar to the following:
     

@@ -167,30 +167,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Import the ONNX model into BigQuery
 
@@ -202,11 +196,9 @@ The following steps show you how to import the sample ONNX model from Cloud Stor
 
 2.  In the query editor, enter the following [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) statement.
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.imported_onnx_model`
-     OPTIONS (MODEL_TYPE='ONNX',
-      MODEL_PATH='BUCKET_PATH')
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.imported_onnx_model`
+         OPTIONS (MODEL_TYPE='ONNX',
+          MODEL_PATH='BUCKET_PATH')
     
     Replace `  BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/resnet18.onnx` .
     
@@ -220,30 +212,24 @@ The following steps show you how to import the sample ONNX model from Cloud Stor
 
 1.  Import the ONNX model from Cloud Storage by entering the following `CREATE MODEL` statement.
     
-    ``` notranslate
-    bq query --use_legacy_sql=false \
-    "CREATE OR REPLACE MODEL
-      `bqml_tutorial.imported_onnx_model`
-    OPTIONS
-      (MODEL_TYPE='ONNX',
-       MODEL_PATH='BUCKET_PATH')"
-    ```
+        bq query --use_legacy_sql=false \
+        "CREATE OR REPLACE MODEL
+          `bqml_tutorial.imported_onnx_model`
+        OPTIONS
+          (MODEL_TYPE='ONNX',
+           MODEL_PATH='BUCKET_PATH')"
     
     Replace `  BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  BUCKET_PATH  ` with this value: `gs://cloud-samples-data/bigquery/ml/onnx/resnet18.onnx` .
 
 2.  After you import the model, verify that the model appears in the dataset.
     
-    ``` notranslate
-    bq ls -m bqml_tutorial
-    ```
+        bq ls -m bqml_tutorial
     
     The output is similar to the following:
     
-    ``` notranslate
-    tableId               Type
-    --------------------- -------
-    imported_onnx_model  MODEL
-    ```
+        tableId               Type
+        --------------------- -------
+        imported_onnx_model  MODEL
 
 For more information about importing ONNX models into BigQuery, including format and storage requirements, see [The `CREATE MODEL` statement for importing ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
 
@@ -388,10 +374,8 @@ Follow these steps to create your Cloud resource connection.
 
 1.  Create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=US --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE bqml_tutorial
-    ```
+        bq mk --connection --location=US --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE bqml_tutorial
     
     Replace `  PROJECT_ID  ` with your Google Cloud project ID. The `--project_id` parameter overrides the default project.
     
@@ -399,19 +383,17 @@ Follow these steps to create your Cloud resource connection.
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.us.bqml_tutorial
-    ```
+        bq show --connection PROJECT_ID.us.bqml_tutorial
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -444,15 +426,13 @@ Follow these steps to create an object table named `goldfish_image_table` using 
 
 2.  In the query editor, enter this query to create the object table.
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `bqml_tutorial.goldfish_image_table`
-    WITH CONNECTION `us.bqml_tutorial`
-    OPTIONS(
-    object_metadata = 'SIMPLE',
-    uris = ['gs://bqml_images/IMAGE_NAME'],
-    max_staleness = INTERVAL 1 DAY,
-    metadata_cache_mode = 'AUTOMATIC');
-    ```
+        CREATE EXTERNAL TABLE `bqml_tutorial.goldfish_image_table`
+        WITH CONNECTION `us.bqml_tutorial`
+        OPTIONS(
+        object_metadata = 'SIMPLE',
+        uris = ['gs://bqml_images/IMAGE_NAME'],
+        max_staleness = INTERVAL 1 DAY,
+        metadata_cache_mode = 'AUTOMATIC');
     
     Replace `  IMAGE_NAME  ` with the name of the image file—for example, `goldfish.jpg` .
     
@@ -462,32 +442,26 @@ Follow these steps to create an object table named `goldfish_image_table` using 
 
 1.  Create the object table by entering the following `CREATE EXTERNAL TABLE` statement.
     
-    ``` notranslate
-    bq query --use_legacy_sql=false \
-    "CREATE EXTERNAL TABLE `bqml_tutorial.goldfish_image_table`
-    WITH CONNECTION `us.bqml_tutorial`
-    OPTIONS(
-    object_metadata = 'SIMPLE',
-    uris = ['gs://bqml_images/IMAGE_NAME'],
-    max_staleness = INTERVAL 1 DAY,
-    metadata_cache_mode = 'AUTOMATIC')"
-    ```
+        bq query --use_legacy_sql=false \
+        "CREATE EXTERNAL TABLE `bqml_tutorial.goldfish_image_table`
+        WITH CONNECTION `us.bqml_tutorial`
+        OPTIONS(
+        object_metadata = 'SIMPLE',
+        uris = ['gs://bqml_images/IMAGE_NAME'],
+        max_staleness = INTERVAL 1 DAY,
+        metadata_cache_mode = 'AUTOMATIC')"
     
     Replace `  IMAGE_NAME  ` with the name of the image file—for example, `goldfish.jpg` .
 
 2.  After you create the object table, verify that it appears in the dataset.
     
-    ``` notranslate
-    bq ls bqml_tutorial
-    ```
+        bq ls bqml_tutorial
     
     The output is similar to the following:
     
-    ``` notranslate
-    tableId               Type
-    --------------------- --------
-    goldfish_image_table  EXTERNAL
-    ```
+        tableId               Type
+        --------------------- --------
+        goldfish_image_table  EXTERNAL
 
 For more information, see [Create object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) .
 
@@ -511,7 +485,7 @@ To make predictions from your image data, do the following.
 
 2.  In the query editor, enter the following `ML.PREDICT` query.
     
-    ``` notranslate
+    ``` 
      SELECT   class_label FROM   ML.PREDICT(MODEL bqml_tutorial.imported_onnx_model,     (     SELECT       ML.RESIZE_IMAGE(ML.DECODE_IMAGE(DATA),         224,         224,         FALSE) AS input     FROM       bqml_tutorial.goldfish_image_table)) 
     ```
     
@@ -523,21 +497,19 @@ To make predictions from your image data, do the following.
 
 Enter the following `bq query` command:
 
-``` notranslate
-bq query --use_legacy_sql=false \
-'SELECT
-  class_label
-FROM
-  ML.PREDICT(MODEL `bqml_tutorial.imported_onnx_model`,
-    (
-    SELECT
-      ML.RESIZE_IMAGE(ML.DECODE_IMAGE(DATA),
-        224,
-        224,
-        FALSE) AS input
+    bq query --use_legacy_sql=false \
+    'SELECT
+      class_label
     FROM
-      bqml_tutorial.goldfish_image_table))'
-```
+      ML.PREDICT(MODEL `bqml_tutorial.imported_onnx_model`,
+        (
+        SELECT
+          ML.RESIZE_IMAGE(ML.DECODE_IMAGE(DATA),
+            224,
+            224,
+            FALSE) AS input
+        FROM
+          bqml_tutorial.goldfish_image_table))'
 
 ## Clean up
 

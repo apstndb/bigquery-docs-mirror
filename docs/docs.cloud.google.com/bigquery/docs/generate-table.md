@@ -90,9 +90,7 @@ Create a BigQuery dataset to contain your resources:
 
 1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
-    ``` notranslate
-    bq --location=LOCATION mk -d DATASET_ID
-    ```
+        bq --location=LOCATION mk -d DATASET_ID
     
     Replace the following:
     
@@ -101,9 +99,7 @@ Create a BigQuery dataset to contain your resources:
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ## Create a connection
 
@@ -147,14 +143,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -170,10 +164,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -187,19 +179,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -321,7 +311,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -436,12 +426,10 @@ Replace the following:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (ENDPOINT = 'ENDPOINT');
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (ENDPOINT = 'ENDPOINT');
     
     Replace the following:
     
@@ -463,17 +451,15 @@ Replace the following:
 
 Generate structured data by using the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) with a remote model, and using prompt data from a table column:
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TABLE(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  [TABLE `PROJECT_ID.DATASET_ID.TABLE_NAME` / (PROMPT_QUERY)],
-  STRUCT(TOKENS AS max_output_tokens, TEMPERATURE AS temperature,
-  TOP_P AS top_p, STOP_SEQUENCES AS stop_sequences,
-  SAFETY_SETTINGS AS safety_settings,
-  OUTPUT_SCHEMA AS output_schema)
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TABLE(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      [TABLE `PROJECT_ID.DATASET_ID.TABLE_NAME` / (PROMPT_QUERY)],
+      STRUCT(TOKENS AS max_output_tokens, TEMPERATURE AS temperature,
+      TOP_P AS top_p, STOP_SEQUENCES AS stop_sequences,
+      SAFETY_SETTINGS AS safety_settings,
+      OUTPUT_SCHEMA AS output_schema)
+    );
 
 Replace the following:
 
@@ -535,9 +521,7 @@ Replace the following:
     
     Then you might create prompt text by running a query similar to the following:
     
-    ``` notranslate
-    UPDATE mydataset.movie_reviewSET prompt = CONCAT('Extract the key words and key sentiment from the text below: ', review)WHERE review IS NOT NULL;
-    ```
+        UPDATE mydataset.movie_reviewSET prompt = CONCAT('Extract the key words and key sentiment from the text below: ', review)WHERE review IS NOT NULL;
     
     And you might specify a `output_schema` value similar to `"keywords ARRAY<STRING>, sentiment STRING" AS output_schema` .
 
@@ -545,27 +529,23 @@ Replace the following:
 
 The following example shows a request that takes prompt data from a table and provides a SQL schema to format the model's response:
 
-``` notranslate
-SELECT
-*
-FROM
-AI.GENERATE_TABLE( MODEL `mydataset.gemini_model`,
-  TABLE `mydataset.mytable`,
-  STRUCT("keywords ARRAY<STRING>, sentiment STRING" AS output_schema));
-```
+    SELECT
+    *
+    FROM
+    AI.GENERATE_TABLE( MODEL `mydataset.gemini_model`,
+      TABLE `mydataset.mytable`,
+      STRUCT("keywords ARRAY<STRING>, sentiment STRING" AS output_schema));
 
 The following example shows a request that takes prompt data from a query and provides a SQL schema to format the model's response:
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TABLE(
-    MODEL `mydataset.gemini_model`,
-    (
-      SELECT
-        'John Smith is a 20-year old single man living at 1234 NW 45th St, Kirkland WA, 98033. He has two phone numbers 123-123-1234, and 234-234-2345. He is 200.5 pounds.'
-          AS prompt
-    ),
-    STRUCT("address STRUCT<street_address STRING, city STRING, state STRING, zip_code STRING>, age INT64, is_married BOOL, name STRING, phone_number ARRAY<STRING>, weight_in_pounds FLOAT64"
-        AS output_schema, 8192 AS max_output_tokens));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TABLE(
+        MODEL `mydataset.gemini_model`,
+        (
+          SELECT
+            'John Smith is a 20-year old single man living at 1234 NW 45th St, Kirkland WA, 98033. He has two phone numbers 123-123-1234, and 234-234-2345. He is 200.5 pounds.'
+              AS prompt
+        ),
+        STRUCT("address STRUCT<street_address STRING, city STRING, state STRING, zip_code STRING>, age INT64, is_married BOOL, name STRING, phone_number ARRAY<STRING>, weight_in_pounds FLOAT64"
+            AS output_schema, 8192 AS max_output_tokens));

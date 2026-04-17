@@ -168,25 +168,23 @@ The following example shows how to return storage information by project for tab
 
 The following example shows the usage for all tables in the organization for the most recent usage date.
 
-``` notranslate
-SELECT
-  usage_date,
-  project_id,
-  table_schema,
-  table_name,
-  billable_total_logical_usage,
-  billable_total_physical_usage
-FROM
-  (
     SELECT
-      *,
-      ROW_NUMBER()
-        OVER (PARTITION BY project_id, table_schema, table_name ORDER BY usage_date DESC) AS rank
+      usage_date,
+      project_id,
+      table_schema,
+      table_name,
+      billable_total_logical_usage,
+      billable_total_physical_usage
     FROM
-      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION
-  )
-WHERE rank = 1;
-```
+      (
+        SELECT
+          *,
+          ROW_NUMBER()
+            OVER (PARTITION BY project_id, table_schema, table_name ORDER BY usage_date DESC) AS rank
+        FROM
+          `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION
+      )
+    WHERE rank = 1;
 
 The result is similar to the following:
 

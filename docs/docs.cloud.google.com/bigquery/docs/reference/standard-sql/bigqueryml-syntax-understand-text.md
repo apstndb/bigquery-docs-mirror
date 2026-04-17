@@ -4,7 +4,7 @@ This document describes the `ML.UNDERSTAND_TEXT` function, which lets you analyz
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.UNDERSTAND_TEXT(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -26,7 +26,7 @@ ML.UNDERSTAND_TEXT(
 
   - `  TABLE  ` : the name of the BigQuery table that contains text data. The text analysis is applied on the column with name `text_content` in this table. If your table does not have `text_content` column, use a `SELECT` statement for this argument to provide an alias for an existing table column, as shown in the following example:
     
-    ``` lang-sql
+    ```sql
     SELECT * from ML.UNDERSTAND_TEXT(
       mydataset.mymodel,
       (SELECT comment AS text_content from mydataset.mytable),
@@ -99,22 +99,18 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 The following example applies classify\_text on the bq table `mybqtable` in `mydataset` .
 
-``` notranslate
-# Create Model
-CREATE OR REPLACE MODEL
-`myproject.mydataset.mynlpmodel`
-REMOTE WITH CONNECTION `myproject.myregion.myconnection`
-OPTIONS (remote_service_type ='cloud_ai_natural_language_v1');
-```
+    # Create Model
+    CREATE OR REPLACE MODEL
+    `myproject.mydataset.mynlpmodel`
+    REMOTE WITH CONNECTION `myproject.myregion.myconnection`
+    OPTIONS (remote_service_type ='cloud_ai_natural_language_v1');
 
-``` notranslate
-# Understand Text
-SELECT * FROM ML.UNDERSTAND_TEXT(
-  MODEL `mydataset.mynlpmodel`,
-  TABLE `mydataset.mybqtable`,
-  STRUCT('classify_text' AS nlu_option)
-);
-```
+    # Understand Text
+    SELECT * FROM ML.UNDERSTAND_TEXT(
+      MODEL `mydataset.mynlpmodel`,
+      TABLE `mydataset.mybqtable`,
+      STRUCT('classify_text' AS nlu_option)
+    );
 
 The output is similar to the following:
 
@@ -126,27 +122,25 @@ The output is similar to the following:
 
 The following example classify the text in the column `text_content` in the table `mybqtable` , selects the rows where confidence is higher than `0.5` , and then returns the results in separate columns.
 
-``` notranslate
-CREATE TABLE
-  `mydataset.classfied_result` AS (
-  SELECT
-    text_content AS `Original Input`,
-    STRING(ml_understand_text_result.categories[0].name) AS `Classified Name`,
-    FLOAT64(ml_understand_text_result.categories[0].confidence) AS `Confidence`,
-    ml_understand_text_status AS `Status`
-  FROM
-    ML.UNDERSTAND_TEXT( MODEL `mydataset.mynlpmodel`,
-      TABLE `mydataset.mybqtable`,
-      STRUCT('classify_text' AS nlu_option))
-  );
-
-SELECT
-  *
-FROM
-  `mydataset.classfied_result`
-WHERE
-  confidence > 0.5;
-```
+    CREATE TABLE
+      `mydataset.classfied_result` AS (
+      SELECT
+        text_content AS `Original Input`,
+        STRING(ml_understand_text_result.categories[0].name) AS `Classified Name`,
+        FLOAT64(ml_understand_text_result.categories[0].confidence) AS `Confidence`,
+        ml_understand_text_status AS `Status`
+      FROM
+        ML.UNDERSTAND_TEXT( MODEL `mydataset.mynlpmodel`,
+          TABLE `mydataset.mybqtable`,
+          STRUCT('classify_text' AS nlu_option))
+      );
+    
+    SELECT
+      *
+    FROM
+      `mydataset.classfied_result`
+    WHERE
+      confidence > 0.5;
 
 The output is similar to the following:
 
@@ -156,23 +150,21 @@ The output is similar to the following:
 
 If you get an error like `query limit exceeded` , you might have exceeded the [quota](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) for this function, which can leave you with unprocessed rows. Use the following query to complete processing the unprocessed rows:
 
-``` notranslate
-CREATE TABLE
-  `mydataset.classfied_result_next` AS (
-  SELECT
-    text_content AS `Original Input`,
-    STRING(ml_understand_text_result.categories[0].name) AS `Classified Name`,
-    FLOAT64(ml_understand_text_result.categories[0].confidence) AS `Confidence`,
-    ml_understand_text_status AS `Status`
-  FROM
-    ML.UNDERSTAND_TEXT( MODEL `mydataset.mynlpmodel`,
-      (SELECT `Original Input` as text_content FROM `mydataset.classfied_result`
-       WHERE Status != ''),
-      STRUCT('classify_text' AS nlu_option))
-  );
-
-SELECT * FROM `mydataset.classfied_result_next`;
-```
+    CREATE TABLE
+      `mydataset.classfied_result_next` AS (
+      SELECT
+        text_content AS `Original Input`,
+        STRING(ml_understand_text_result.categories[0].name) AS `Classified Name`,
+        FLOAT64(ml_understand_text_result.categories[0].confidence) AS `Confidence`,
+        ml_understand_text_status AS `Status`
+      FROM
+        ML.UNDERSTAND_TEXT( MODEL `mydataset.mynlpmodel`,
+          (SELECT `Original Input` as text_content FROM `mydataset.classfied_result`
+           WHERE Status != ''),
+          STRUCT('classify_text' AS nlu_option))
+      );
+    
+    SELECT * FROM `mydataset.classfied_result_next`;
 
 ## What's next
 

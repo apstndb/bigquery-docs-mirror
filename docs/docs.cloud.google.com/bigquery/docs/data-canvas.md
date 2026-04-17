@@ -301,19 +301,17 @@ To generate a SQL query for the `bigquery-public-data.chicago_taxi_trips.taxi_tr
     
     BigQuery data canvas generates a SQL query similar to the following:
     
-    ``` notranslate
-    SELECT
-      taxi_id,
-      trip_start_timestamp,
-      trip_end_timestamp,
-      trip_miles
-    FROM
-      `bigquery-public-data.chicago_taxi_trips.taxi_trips`
-    ORDER BY
-      trip_miles DESC
-    LIMIT
-      100;
-    ```
+        SELECT
+          taxi_id,
+          trip_start_timestamp,
+          trip_end_timestamp,
+          trip_miles
+        FROM
+          `bigquery-public-data.chicago_taxi_trips.taxi_trips`
+        ORDER BY
+          trip_miles DESC
+        LIMIT
+          100;
 
 #### Prompt 3: Edit the query
 
@@ -325,21 +323,19 @@ To edit the query that you generated, you can manually edit the query, or you ca
     
     BigQuery data canvas generates a SQL query similar to the following:
     
-    ``` notranslate
-    SELECT
-      taxi_id,
-      trip_start_timestamp,
-      trip_end_timestamp,
-      trip_miles
-    FROM
-      `PROJECT_ID.chicago_taxi_trips_123123.taxi_trips`
-    WHERE
-      payment_type = 'Cash'
-    ORDER BY
-      trip_miles DESC
-    LIMIT
-      100;
-    ```
+        SELECT
+          taxi_id,
+          trip_start_timestamp,
+          trip_end_timestamp,
+          trip_miles
+        FROM
+          `PROJECT_ID.chicago_taxi_trips_123123.taxi_trips`
+        WHERE
+          payment_type = 'Cash'
+        ORDER BY
+          trip_miles DESC
+        LIMIT
+          100;
     
     In the preceding example, `  PROJECT_ID  ` is the ID of your Google Cloud project.
 
@@ -401,16 +397,14 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
     
     BigQuery data canvas suggests the SQL query to join these two tables on their address:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      `bigquery-public-data.new_york_trees.tree_census_2015` AS t2015
-    JOIN
-      `bigquery-public-data.new_york_trees.tree_census_1995` AS t1995
-    ON
-      t2015.address = t1995.address;
-    ```
+        SELECT
+          *
+        FROM
+          `bigquery-public-data.new_york_trees.tree_census_2015` AS t2015
+        JOIN
+          `bigquery-public-data.new_york_trees.tree_census_1995` AS t1995
+        ON
+          t2015.address = t1995.address;
 
 8.  To run the query and view the results, click **Run** .
 
@@ -445,16 +439,14 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
     
     BigQuery data canvas generates a query similar to the following:
     
-    ``` notranslate
-    SELECT
-      state,
-      gender,
-      year,
-      name,
-      number
-    FROM
-      `bigquery-public-data.usa_names.usa_1910_current`
-    ```
+        SELECT
+          state,
+          gender,
+          year,
+          name,
+          number
+        FROM
+          `bigquery-public-data.usa_names.usa_1910_current`
 
 2.  Click **Run** . The query results are displayed.
 
@@ -468,21 +460,19 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
     
     BigQuery data canvas generates a query similar to the following:
     
-    ``` notranslate
-    SELECT
-      name,
-      SUM(number) AS total_count
-    FROM
-      `bigquery-public-data`.usa_names.usa_1910_current
-    WHERE
-      year = 1980
-    GROUP BY
-      name
-    ORDER BY
-      total_count DESC
-    LIMIT
-      10;
-    ```
+        SELECT
+          name,
+          SUM(number) AS total_count
+        FROM
+          `bigquery-public-data`.usa_names.usa_1910_current
+        WHERE
+          year = 1980
+        GROUP BY
+          name
+        ORDER BY
+          total_count DESC
+        LIMIT
+          10;
     
     When you run the query, you get a table with the ten most common names of children born in 1980.
 

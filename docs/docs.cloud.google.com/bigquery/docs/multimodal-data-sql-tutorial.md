@@ -185,14 +185,12 @@ Create a standard table that contains the Cymbal pets product information:
     
     ### SQL
     
-    ``` notranslate
-    LOAD DATA OVERWRITE cymbal_pets.products
-    FROM
-      FILES(
-        format = 'avro',
-        uris = [
-          'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/tables/products/products_*.avro']);
-    ```
+        LOAD DATA OVERWRITE cymbal_pets.products
+        FROM
+          FILES(
+            format = 'avro',
+            uris = [
+              'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/tables/products/products_*.avro']);
     
     ### BigQuery DataFrames
     
@@ -222,15 +220,13 @@ Create an object table that contains the Cymbal pets product images:
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
-      WITH CONNECTION `us.cymbal_conn`
-      OPTIONS (
-        object_metadata = 'SIMPLE',
-        uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png'],
-        max_staleness = INTERVAL 30 MINUTE,
-        metadata_cache_mode = AUTOMATIC);
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
+          WITH CONNECTION `us.cymbal_conn`
+          OPTIONS (
+            object_metadata = 'SIMPLE',
+            uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png'],
+            max_staleness = INTERVAL 30 MINUTE,
+            metadata_cache_mode = AUTOMATIC);
     
     ### BigQuery DataFrames
     
@@ -258,13 +254,11 @@ Create an object table that contains the Cymbal pets product manuals:
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_manuals
-      WITH CONNECTION `us.cymbal_conn`
-      OPTIONS (
-        object_metadata = 'SIMPLE',
-        uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf']);
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_manuals
+          WITH CONNECTION `us.cymbal_conn`
+          OPTIONS (
+            object_metadata = 'SIMPLE',
+            uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf']);
     
     ### BigQuery DataFrames
     
@@ -292,11 +286,9 @@ Create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `cymbal_pets.gemini`
-      REMOTE WITH CONNECTION `us.cymbal_conn`
-      OPTIONS (ENDPOINT = 'gemini-2.0-flash');
-    ```
+        CREATE OR REPLACE MODEL `cymbal_pets.gemini`
+          REMOTE WITH CONNECTION `us.cymbal_conn`
+          OPTIONS (ENDPOINT = 'gemini-2.0-flash');
     
     ### BigQuery DataFrames
     
@@ -319,11 +311,9 @@ Create a BigQuery ML remote model that represents a Vertex AI multimodal embeddi
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `cymbal_pets.embedding_model`
-      REMOTE WITH CONNECTION `us.cymbal_conn`
-      OPTIONS (ENDPOINT = 'multimodalembedding@001');
-    ```
+        CREATE OR REPLACE MODEL `cymbal_pets.embedding_model`
+          REMOTE WITH CONNECTION `us.cymbal_conn`
+          OPTIONS (ENDPOINT = 'multimodalembedding@001');
     
     ### BigQuery DataFrames
     
@@ -346,13 +336,11 @@ Create a `products_mm` table that contains an `image` column populated with prod
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE cymbal_pets.products_mm
-    AS
-    SELECT products.* EXCEPT (uri), ot.ref AS image FROM cymbal_pets.products
-    INNER JOIN cymbal_pets.product_images ot
-    ON ot.uri = products.uri;
-    ```
+        CREATE OR REPLACE TABLE cymbal_pets.products_mm
+        AS
+        SELECT products.* EXCEPT (uri), ot.ref AS image FROM cymbal_pets.products
+        INNER JOIN cymbal_pets.product_images ot
+        ON ot.uri = products.uri;
     
     ### BigQuery DataFrames
     
@@ -370,10 +358,8 @@ Create a `products_mm` table that contains an `image` column populated with prod
     
     ### SQL
     
-    ``` notranslate
-    SELECT product_name, image
-    FROM cymbal_pets.products_mm
-    ```
+        SELECT product_name, image
+        FROM cymbal_pets.products_mm
     
     ### BigQuery DataFrames
     
@@ -385,7 +371,7 @@ Create a `products_mm` table that contains an `image` column populated with prod
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +--------------------------------+--------------------------------------+-----------------------------------------------+------------------------------------------------+
     | product_name                   | image.uri                            | image.version | image.authorizer              | image.details                                  |
     +--------------------------------+--------------------------------------+-----------------------------------------------+------------------------------------------------+
@@ -415,36 +401,34 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE cymbal_pets.products_mm
-    AS
-    SELECT
-      product_id,
-      product_name,
-      brand,
-      category,
-      subcategory,
-      animal_type,
-      search_keywords,
-      price,
-      description,
-      inventory_level,
-      supplier_id,
-      average_rating,
-      image,
-      image_description
-    FROM
-      AI.GENERATE_TABLE(
-        MODEL `cymbal_pets.gemini`,
-        (
-          SELECT
-            ('Can you describe the following image? ', OBJ.GET_ACCESS_URL(image, 'r')) AS prompt,
-            *
-          FROM
-            cymbal_pets.products_mm
-        ),
-        STRUCT('image_description STRING' AS output_schema));
-    ```
+        CREATE OR REPLACE TABLE cymbal_pets.products_mm
+        AS
+        SELECT
+          product_id,
+          product_name,
+          brand,
+          category,
+          subcategory,
+          animal_type,
+          search_keywords,
+          price,
+          description,
+          inventory_level,
+          supplier_id,
+          average_rating,
+          image,
+          image_description
+        FROM
+          AI.GENERATE_TABLE(
+            MODEL `cymbal_pets.gemini`,
+            (
+              SELECT
+                ('Can you describe the following image? ', OBJ.GET_ACCESS_URL(image, 'r')) AS prompt,
+                *
+              FROM
+                cymbal_pets.products_mm
+            ),
+            STRUCT('image_description STRING' AS output_schema));
     
     ### BigQuery DataFrames
     
@@ -485,38 +469,36 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### SQL
     
-    ``` notranslate
-    UPDATE cymbal_pets.products_mm p
-    SET
-      p.animal_type = s.animal_type,
-      p.search_keywords = s.search_keywords,
-      p.subcategory = s.subcategory
-    FROM
-      (
-        SELECT
-          animal_type,
-          search_keywords,
-          subcategory,
-          uri
+        UPDATE cymbal_pets.products_mm p
+        SET
+          p.animal_type = s.animal_type,
+          p.search_keywords = s.search_keywords,
+          p.subcategory = s.subcategory
         FROM
-          AI.GENERATE_TABLE(
-            MODEL `cymbal_pets.gemini`,
-            (
-              SELECT
+          (
+            SELECT
+              animal_type,
+              search_keywords,
+              subcategory,
+              uri
+            FROM
+              AI.GENERATE_TABLE(
+                MODEL `cymbal_pets.gemini`,
                 (
-                  'For the image of a pet product, concisely generate the following metadata: '
-                  '1) animal_type and 2) 5 SEO search keywords, and 3) product subcategory. ',
-                  OBJ.GET_ACCESS_URL(image, 'r'),
-                  description) AS prompt,
-                image.uri AS uri,
-              FROM cymbal_pets.products_mm
-            ),
-            STRUCT(
-              'animal_type STRING, search_keywords ARRAY<STRING>, subcategory STRING' AS output_schema,
-              100 AS max_output_tokens))
-      ) s
-    WHERE p.image.uri = s.uri;
-    ```
+                  SELECT
+                    (
+                      'For the image of a pet product, concisely generate the following metadata: '
+                      '1) animal_type and 2) 5 SEO search keywords, and 3) product subcategory. ',
+                      OBJ.GET_ACCESS_URL(image, 'r'),
+                      description) AS prompt,
+                    image.uri AS uri,
+                  FROM cymbal_pets.products_mm
+                ),
+                STRUCT(
+                  'animal_type STRING, search_keywords ARRAY<STRING>, subcategory STRING' AS output_schema,
+                  100 AS max_output_tokens))
+          ) s
+        WHERE p.image.uri = s.uri;
     
     ### BigQuery DataFrames
     
@@ -544,15 +526,13 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### SQL
     
-    ``` notranslate
-    SELECT
-      product_name,
-      image_description,
-      animal_type,
-      search_keywords,
-      subcategory,
-    FROM cymbal_pets.products_mm;
-    ```
+        SELECT
+          product_name,
+          image_description,
+          animal_type,
+          search_keywords,
+          subcategory,
+        FROM cymbal_pets.products_mm;
     
     ### BigQuery DataFrames
     
@@ -572,7 +552,7 @@ Use a Gemini model to generate the following data for the pet store products:
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +--------------------------------+-------------------------------------+-------------+------------------------+------------------+
     | product_name                   | image.description                   | animal_type | search_keywords        | subcategory      |
     +--------------------------------+-------------------------------------+-------------+------------------------+------------------+
@@ -596,31 +576,29 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### SQL
     
-    ``` notranslate
-    SELECT
-      brand,
-      brand_description,
-      cnt
-    FROM
-      AI.GENERATE_TABLE(
-        MODEL `cymbal_pets.gemini`,
-        (
-          SELECT
-            brand,
-            COUNT(*) AS cnt,
+        SELECT
+          brand,
+          brand_description,
+          cnt
+        FROM
+          AI.GENERATE_TABLE(
+            MODEL `cymbal_pets.gemini`,
             (
-              'Use the images and text to give one concise brand description for a website brand page.'
-                'Return the description only. ',
-              ARRAY_AGG(OBJ.GET_ACCESS_URL(image, 'r')), ' ',
-              ARRAY_AGG(description), ' ',
-              ARRAY_AGG(category), ' ',
-              ARRAY_AGG(subcategory)) AS prompt
-          FROM cymbal_pets.products_mm
-          GROUP BY brand
-        ),
-        STRUCT('brand_description STRING' AS output_schema))
-    ORDER BY cnt DESC;
-    ```
+              SELECT
+                brand,
+                COUNT(*) AS cnt,
+                (
+                  'Use the images and text to give one concise brand description for a website brand page.'
+                    'Return the description only. ',
+                  ARRAY_AGG(OBJ.GET_ACCESS_URL(image, 'r')), ' ',
+                  ARRAY_AGG(description), ' ',
+                  ARRAY_AGG(category), ' ',
+                  ARRAY_AGG(subcategory)) AS prompt
+              FROM cymbal_pets.products_mm
+              GROUP BY brand
+            ),
+            STRUCT('brand_description STRING' AS output_schema))
+        ORDER BY cnt DESC;
     
     ### BigQuery DataFrames
     
@@ -654,7 +632,7 @@ Use a Gemini model to generate the following data for the pet store products:
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +--------------+-------------------------------------+-----+
     | brand        | brand.description                   | cnt |
     +--------------+-------------------------------------+-----+
@@ -680,45 +658,43 @@ The Python UDF uses open source libraries, and also uses parallel execution to t
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE FUNCTION cymbal_pets.to_grayscale(src_json STRING, dst_json STRING)
-    RETURNS STRING
-    LANGUAGE python
-    WITH CONNECTION `us.cymbal_conn`
-    OPTIONS (entry_point='to_grayscale', runtime_version='python-3.11', packages=['numpy', 'opencv-python'])
-    AS """
-    
-    import cv2 as cv
-    import numpy as np
-    from urllib.request import urlopen, Request
-    import json
-    
-    # Transform the image to grayscale.
-    def to_grayscale(src_ref, dst_ref):
-      src_json = json.loads(src_ref)
-      srcUrl = src_json["access_urls"]["read_url"]
-    
-      dst_json = json.loads(dst_ref)
-      dstUrl = dst_json["access_urls"]["write_url"]
-    
-      req = urlopen(srcUrl)
-      arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
-      img = cv.imdecode(arr, -1) # 'Load it as it is'
-    
-      # Convert the image to grayscale
-      gray_image = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    
-      # Send POST request to the URL
-      _, img_encoded = cv.imencode('.png', gray_image)
-    
-      req = Request(url=dstUrl, data=img_encoded.tobytes(), method='PUT', headers = {
-          "Content-Type": "image/png",
-      })
-      with urlopen(req) as f:
-          pass
-      return dst_ref
-    """;
-    ```
+        CREATE OR REPLACE FUNCTION cymbal_pets.to_grayscale(src_json STRING, dst_json STRING)
+        RETURNS STRING
+        LANGUAGE python
+        WITH CONNECTION `us.cymbal_conn`
+        OPTIONS (entry_point='to_grayscale', runtime_version='python-3.11', packages=['numpy', 'opencv-python'])
+        AS """
+        
+        import cv2 as cv
+        import numpy as np
+        from urllib.request import urlopen, Request
+        import json
+        
+        # Transform the image to grayscale.
+        def to_grayscale(src_ref, dst_ref):
+          src_json = json.loads(src_ref)
+          srcUrl = src_json["access_urls"]["read_url"]
+        
+          dst_json = json.loads(dst_ref)
+          dstUrl = dst_json["access_urls"]["write_url"]
+        
+          req = urlopen(srcUrl)
+          arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+          img = cv.imdecode(arr, -1) # 'Load it as it is'
+        
+          # Convert the image to grayscale
+          gray_image = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        
+          # Send POST request to the URL
+          _, img_encoded = cv.imencode('.png', gray_image)
+        
+          req = Request(url=dstUrl, data=img_encoded.tobytes(), method='PUT', headers = {
+              "Content-Type": "image/png",
+          })
+          with urlopen(req) as f:
+              pass
+          return dst_ref
+        """;
     
     ### BigQuery DataFrames
     
@@ -778,18 +754,16 @@ After you create the table, run the `to_grayscale` function to create the graysc
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE cymbal_pets.products_grayscale
-    AS
-    SELECT
-      product_id,
-      product_name,
-      image,
-      OBJ.MAKE_REF(
-        CONCAT('gs://BUCKET/cymbal-pets-images/grayscale/', REGEXP_EXTRACT(image.uri, r'([^/]+)$')),
-        'us.cymbal_conn') AS gray_image
-    FROM cymbal_pets.products_mm;
-    ```
+        CREATE OR REPLACE TABLE cymbal_pets.products_grayscale
+        AS
+        SELECT
+          product_id,
+          product_name,
+          image,
+          OBJ.MAKE_REF(
+            CONCAT('gs://BUCKET/cymbal-pets-images/grayscale/', REGEXP_EXTRACT(image.uri, r'([^/]+)$')),
+            'us.cymbal_conn') AS gray_image
+        FROM cymbal_pets.products_mm;
     
     ### BigQuery DataFrames
     
@@ -827,12 +801,10 @@ After you create the table, run the `to_grayscale` function to create the graysc
     
     ### SQL
     
-    ``` notranslate
-    SELECT cymbal_pets.to_grayscale(
-      TO_JSON_STRING(OBJ.GET_ACCESS_URL(image, 'r')),
-      TO_JSON_STRING(OBJ.GET_ACCESS_URL(gray_image, 'rw')))
-    FROM cymbal_pets.products_grayscale;
-    ```
+        SELECT cymbal_pets.to_grayscale(
+          TO_JSON_STRING(OBJ.GET_ACCESS_URL(image, 'r')),
+          TO_JSON_STRING(OBJ.GET_ACCESS_URL(gray_image, 'rw')))
+        FROM cymbal_pets.products_grayscale;
     
     ### BigQuery DataFrames
     
@@ -866,7 +838,7 @@ After you create the table, run the `to_grayscale` function to create the graysc
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | f0                                                                                                                                                                    |
     +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -894,53 +866,51 @@ PDFs are often very large and might not fit into a single call to a generative A
     
     ### SQL
     
-    ``` notranslate
-    -- This function chunks the product manual PDF into multiple parts.
-    -- The function accepts an ObjectRefRuntime value for the PDF file and the chunk size.
-    -- It then parses the PDF, chunks the contents, and returns an array of chunked text.
-    CREATE OR REPLACE FUNCTION cymbal_pets.chunk_pdf(src_json STRING, chunk_size INT64, overlap_size INT64)
-    RETURNS ARRAY<STRING>
-    LANGUAGE python
-    WITH CONNECTION `us.cymbal_conn`
-    OPTIONS (entry_point='chunk_pdf', runtime_version='python-3.11', packages=['pypdf'])
-    AS """
-    import io
-    import json
-    
-    from pypdf import PdfReader  # type: ignore
-    from urllib.request import urlopen, Request
-    
-    def chunk_pdf(src_ref: str, chunk_size: int, overlap_size: int) -> str:
-      src_json = json.loads(src_ref)
-      srcUrl = src_json["access_urls"]["read_url"]
-    
-      req = urlopen(srcUrl)
-      pdf_file = io.BytesIO(bytearray(req.read()))
-      reader = PdfReader(pdf_file, strict=False)
-    
-      # extract and chunk text simultaneously
-      all_text_chunks = []
-      curr_chunk = ""
-      for page in reader.pages:
-          page_text = page.extract_text()
-          if page_text:
-              curr_chunk += page_text
-              # split the accumulated text into chunks of a specific size with overlaop
-              # this loop implements a sliding window approach to create chunks
-              while len(curr_chunk) >= chunk_size:
-                  split_idx = curr_chunk.rfind(" ", 0, chunk_size)
-                  if split_idx == -1:
-                      split_idx = chunk_size
-                  actual_chunk = curr_chunk[:split_idx]
-                  all_text_chunks.append(actual_chunk)
-                  overlap = curr_chunk[split_idx + 1 : split_idx + 1 + overlap_size]
-                  curr_chunk = overlap + curr_chunk[split_idx + 1 + overlap_size :]
-      if curr_chunk:
-          all_text_chunks.append(curr_chunk)
-    
-      return all_text_chunks
-    """;
-    ```
+        -- This function chunks the product manual PDF into multiple parts.
+        -- The function accepts an ObjectRefRuntime value for the PDF file and the chunk size.
+        -- It then parses the PDF, chunks the contents, and returns an array of chunked text.
+        CREATE OR REPLACE FUNCTION cymbal_pets.chunk_pdf(src_json STRING, chunk_size INT64, overlap_size INT64)
+        RETURNS ARRAY<STRING>
+        LANGUAGE python
+        WITH CONNECTION `us.cymbal_conn`
+        OPTIONS (entry_point='chunk_pdf', runtime_version='python-3.11', packages=['pypdf'])
+        AS """
+        import io
+        import json
+        
+        from pypdf import PdfReader  # type: ignore
+        from urllib.request import urlopen, Request
+        
+        def chunk_pdf(src_ref: str, chunk_size: int, overlap_size: int) -> str:
+          src_json = json.loads(src_ref)
+          srcUrl = src_json["access_urls"]["read_url"]
+        
+          req = urlopen(srcUrl)
+          pdf_file = io.BytesIO(bytearray(req.read()))
+          reader = PdfReader(pdf_file, strict=False)
+        
+          # extract and chunk text simultaneously
+          all_text_chunks = []
+          curr_chunk = ""
+          for page in reader.pages:
+              page_text = page.extract_text()
+              if page_text:
+                  curr_chunk += page_text
+                  # split the accumulated text into chunks of a specific size with overlaop
+                  # this loop implements a sliding window approach to create chunks
+                  while len(curr_chunk) >= chunk_size:
+                      split_idx = curr_chunk.rfind(" ", 0, chunk_size)
+                      if split_idx == -1:
+                          split_idx = chunk_size
+                      actual_chunk = curr_chunk[:split_idx]
+                      all_text_chunks.append(actual_chunk)
+                      overlap = curr_chunk[split_idx + 1 : split_idx + 1 + overlap_size]
+                      curr_chunk = overlap + curr_chunk[split_idx + 1 + overlap_size :]
+          if curr_chunk:
+              all_text_chunks.append(curr_chunk)
+        
+          return all_text_chunks
+        """;
     
     ### BigQuery DataFrames
     
@@ -999,18 +969,16 @@ Run the `chunk_pdf` function to chunk the PDF data in the `product_manuals` tabl
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE cymbal_pets.product_manual_chunk_strings
-    AS
-    SELECT chunked
-    FROM cymbal_pets.product_manuals,
-    UNNEST (cymbal_pets.chunk_pdf(
-      TO_JSON_STRING(
-        OBJ.GET_ACCESS_URL(OBJ.MAKE_REF(uri, 'us.cymbal_conn'), 'r')),
-        1000,
-        100
-    )) as chunked;
-    ```
+        CREATE OR REPLACE TABLE cymbal_pets.product_manual_chunk_strings
+        AS
+        SELECT chunked
+        FROM cymbal_pets.product_manuals,
+        UNNEST (cymbal_pets.chunk_pdf(
+          TO_JSON_STRING(
+            OBJ.GET_ACCESS_URL(OBJ.MAKE_REF(uri, 'us.cymbal_conn'), 'r')),
+            1000,
+            100
+        )) as chunked;
     
     ### BigQuery DataFrames
     
@@ -1034,20 +1002,18 @@ Run the `chunk_pdf` function to chunk the PDF data in the `product_manuals` tabl
     
     ### SQL
     
-    ``` notranslate
-    SELECT
-      result
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `cymbal_pets.gemini`,
-        (
-          SELECT
+        SELECT
+          result
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `cymbal_pets.gemini`,
             (
-              'Can you summarize the product manual as bullet points? Highlight the legal clauses',
-              chunked) AS prompt,
-          FROM cymbal_pets.product_manual_chunk_strings
-        ));
-    ```
+              SELECT
+                (
+                  'Can you summarize the product manual as bullet points? Highlight the legal clauses',
+                  chunked) AS prompt,
+              FROM cymbal_pets.product_manual_chunk_strings
+            ));
     
     ### BigQuery DataFrames
     
@@ -1067,7 +1033,7 @@ Run the `chunk_pdf` function to chunk the PDF data in the `product_manuals` tabl
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-------------------------------------------------------------------------------------------------------------------------------------------+
     | result                                                                                                                                    |
     +-------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1111,18 +1077,16 @@ In a production scenario, we recommend creating a [vector index](https://docs.cl
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE cymbal_pets.products_embedding
-    AS
-    SELECT product_id, embedding, content as image
-    FROM AI.GENERATE_EMBEDDING(
-    MODEL `cymbal_pets.embedding_model`,
-      (
-        SELECT OBJ.GET_ACCESS_URL(image, 'r') as content, image, product_id
-        FROM cymbal_pets.products_mm
-      )
-    );
-    ```
+        CREATE OR REPLACE TABLE cymbal_pets.products_embedding
+        AS
+        SELECT product_id, embedding, content as image
+        FROM AI.GENERATE_EMBEDDING(
+        MODEL `cymbal_pets.embedding_model`,
+          (
+            SELECT OBJ.GET_ACCESS_URL(image, 'r') as content, image, product_id
+            FROM cymbal_pets.products_mm
+          )
+        );
     
     ### BigQuery DataFrames
     
@@ -1141,18 +1105,16 @@ In a production scenario, we recommend creating a [vector index](https://docs.cl
     
     ### SQL
     
-    ``` notranslate
-    SELECT *
-    FROM
-    VECTOR_SEARCH(
-      TABLE cymbal_pets.products_embedding,
-      'embedding',
-      (SELECT embedding FROM AI.GENERATE_EMBEDDING(
-        MODEL `cymbal_pets.embedding_model`,
-        (SELECT OBJ.MAKE_REF('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png', 'us.cymbal_conn') as content)
-      ))
-    );
-    ```
+        SELECT *
+        FROM
+        VECTOR_SEARCH(
+          TABLE cymbal_pets.products_embedding,
+          'embedding',
+          (SELECT embedding FROM AI.GENERATE_EMBEDDING(
+            MODEL `cymbal_pets.embedding_model`,
+            (SELECT OBJ.MAKE_REF('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png', 'us.cymbal_conn') as content)
+          ))
+        );
     
     ### BigQuery DataFrames
     
@@ -1180,7 +1142,7 @@ In a production scenario, we recommend creating a [vector index](https://docs.cl
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-----------------+-----------------+----------------+----------------------------------------------+--------------------+-------------------------------+------------------------------------------------+----------------+
     | query.embedding | base.product_id | base.embedding | base.image.uri                               | base.image.version | base.image.authorizer         | base.image.details                             | distance       |
     +-----------------+-----------------+----------------+----------------------------------------------+--------------------+-------------------------------+------------------------------------------------+----------------+
@@ -1223,15 +1185,13 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     ### SQL
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE `cymbal_pets.product_manuals`
-      WITH CONNECTION `us.cymbal_conn`
-      OPTIONS (
-        object_metadata = 'SIMPLE',
-        uris = [
-            'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf',
-            'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf']);
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE `cymbal_pets.product_manuals`
+          WITH CONNECTION `us.cymbal_conn`
+          OPTIONS (
+            object_metadata = 'SIMPLE',
+            uris = [
+                'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf',
+                'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf']);
     
     ### BigQuery DataFrames
     
@@ -1256,19 +1216,17 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     ### SQL
     
-    ``` notranslate
-    -- Extract the file and chunks into a single table.
-    -- Store the chunks in the chunks column as array of ObjectRefs (ordered by page number)
-    CREATE OR REPLACE TABLE cymbal_pets.map_manual_to_chunks
-    AS
-    SELECT ARRAY_AGG(m1.ref)[0] manual, ARRAY_AGG(m2.ref ORDER BY m2.ref.uri) chunks
-    FROM cymbal_pets.product_manuals m1
-    JOIN cymbal_pets.product_manuals m2
-      ON
-        REGEXP_EXTRACT(m1.uri, r'.*/([^.]*).[^/]+')
-        = REGEXP_EXTRACT(m2.uri, r'.*/([^.]*)_page[0-9]+.[^/]+')
-    GROUP BY m1.uri;
-    ```
+        -- Extract the file and chunks into a single table.
+        -- Store the chunks in the chunks column as array of ObjectRefs (ordered by page number)
+        CREATE OR REPLACE TABLE cymbal_pets.map_manual_to_chunks
+        AS
+        SELECT ARRAY_AGG(m1.ref)[0] manual, ARRAY_AGG(m2.ref ORDER BY m2.ref.uri) chunks
+        FROM cymbal_pets.product_manuals m1
+        JOIN cymbal_pets.product_manuals m2
+          ON
+            REGEXP_EXTRACT(m1.uri, r'.*/([^.]*).[^/]+')
+            = REGEXP_EXTRACT(m2.uri, r'.*/([^.]*)_page[0-9]+.[^/]+')
+        GROUP BY m1.uri;
     
     ### BigQuery DataFrames
     
@@ -1296,10 +1254,8 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     ### SQL
     
-    ``` notranslate
-    SELECT *
-    FROM cymbal_pets.map_manual_to_chunks;
-    ```
+        SELECT *
+        FROM cymbal_pets.map_manual_to_chunks;
     
     ### BigQuery DataFrames
     
@@ -1311,7 +1267,7 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-------------------------------------+--------------------------------+-----------------------------------+------------------------------------------------------+-------------------------------------------+---------------------------------+------------------------------------+-------------------------------------------------------+
     | manual.uri                          | manual.version                 | manual.authorizer                 | manual.details                                       | chunks.uri                                | chunks.version                  | chunks.authorizer                  | chunks.details                                        |
     +-------------------------------------+--------------------------------+-----------------------------------+------------------------------------------------------+-------------------------------------------+---------------------------------+------------------------------------+-------------------------------------------------------+
@@ -1331,30 +1287,28 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     ### SQL
     
-    ``` notranslate
-    WITH
-      manuals AS (
-        SELECT
-          OBJ.GET_ACCESS_URL(manual, 'r') AS manual,
-          ARRAY(
-            SELECT OBJ.GET_ACCESS_URL(chunk, 'r') AS chunk
-            FROM UNNEST(m1.chunks) AS chunk WITH OFFSET AS idx
-            ORDER BY idx
-          ) AS chunks
-        FROM cymbal_pets.map_manual_to_chunks AS m1
-      )
-    SELECT result AS Response
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `cymbal_pets.gemini`,
-        (
-          SELECT
+        WITH
+          manuals AS (
+            SELECT
+              OBJ.GET_ACCESS_URL(manual, 'r') AS manual,
+              ARRAY(
+                SELECT OBJ.GET_ACCESS_URL(chunk, 'r') AS chunk
+                FROM UNNEST(m1.chunks) AS chunk WITH OFFSET AS idx
+                ORDER BY idx
+              ) AS chunks
+            FROM cymbal_pets.map_manual_to_chunks AS m1
+          )
+        SELECT result AS Response
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `cymbal_pets.gemini`,
             (
-              'Can you provide a page by page summary for the first 3 pages of the attached manual? Only write one line for each page. The pages are provided in serial order',
-              manuals.chunks) AS prompt,
-          FROM manuals
-        ));
-    ```
+              SELECT
+                (
+                  'Can you provide a page by page summary for the first 3 pages of the attached manual? Only write one line for each page. The pages are provided in serial order',
+                  manuals.chunks) AS prompt,
+              FROM manuals
+            ));
     
     ### BigQuery DataFrames
     
@@ -1377,7 +1331,7 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-------------------------------------------+
     | Response                                  |
     +-------------------------------------------+
@@ -1396,49 +1350,47 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     ### SQL
     
-    ``` notranslate
-    WITH
-      input_chunked_objrefs AS (
-        SELECT row_id, offset, chunk_ref
+        WITH
+          input_chunked_objrefs AS (
+            SELECT row_id, offset, chunk_ref
+            FROM
+              (
+                SELECT ROW_NUMBER() OVER () AS row_id, * FROM `cymbal_pets.map_manual_to_chunks`
+              ) AS indexed_table
+            LEFT JOIN
+              UNNEST(indexed_table.chunks) AS chunk_ref
+              WITH OFFSET
+          ),
+          get_access_urls AS (
+            SELECT row_id, offset, chunk_ref, OBJ.GET_ACCESS_URL(chunk_ref, 'r') AS ObjectRefRuntime
+            FROM input_chunked_objrefs
+          ),
+          valid_get_access_urls AS (
+            SELECT *
+            FROM get_access_urls
+            WHERE ObjectRefRuntime['runtime_errors'] IS NULL
+          ),
+          ordered_output_objrefruntime_array AS (
+            SELECT ARRAY_AGG(ObjectRefRuntime ORDER BY offset) AS ObjectRefRuntimeArray
+            FROM valid_get_access_urls
+            GROUP BY row_id
+          )
+        SELECT
+          page1_summary,
+          page2_summary,
+          page3_summary
         FROM
-          (
-            SELECT ROW_NUMBER() OVER () AS row_id, * FROM `cymbal_pets.map_manual_to_chunks`
-          ) AS indexed_table
-        LEFT JOIN
-          UNNEST(indexed_table.chunks) AS chunk_ref
-          WITH OFFSET
-      ),
-      get_access_urls AS (
-        SELECT row_id, offset, chunk_ref, OBJ.GET_ACCESS_URL(chunk_ref, 'r') AS ObjectRefRuntime
-        FROM input_chunked_objrefs
-      ),
-      valid_get_access_urls AS (
-        SELECT *
-        FROM get_access_urls
-        WHERE ObjectRefRuntime['runtime_errors'] IS NULL
-      ),
-      ordered_output_objrefruntime_array AS (
-        SELECT ARRAY_AGG(ObjectRefRuntime ORDER BY offset) AS ObjectRefRuntimeArray
-        FROM valid_get_access_urls
-        GROUP BY row_id
-      )
-    SELECT
-      page1_summary,
-      page2_summary,
-      page3_summary
-    FROM
-      AI.GENERATE_TABLE(
-        MODEL `cymbal_pets.gemini`,
-        (
-          SELECT
+          AI.GENERATE_TABLE(
+            MODEL `cymbal_pets.gemini`,
             (
-              'Can you provide a page by page summary for the first 3 pages of the attached manual? Only write one line for each page. The pages are provided in serial order',
-              ObjectRefRuntimeArray) AS prompt,
-          FROM ordered_output_objrefruntime_array
-        ),
-        STRUCT(
-          'page1_summary STRING, page2_summary STRING, page3_summary STRING' AS output_schema));
-    ```
+              SELECT
+                (
+                  'Can you provide a page by page summary for the first 3 pages of the attached manual? Only write one line for each page. The pages are provided in serial order',
+                  ObjectRefRuntimeArray) AS prompt,
+              FROM ordered_output_objrefruntime_array
+            ),
+            STRUCT(
+              'page1_summary STRING, page2_summary STRING, page3_summary STRING' AS output_schema));
     
     ### BigQuery DataFrames
     
@@ -1459,7 +1411,7 @@ Follow these steps to process ordered multimodal data using arrays of `ObjectRef
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-----------------------------------------------+-------------------------------------------+----------------------------------------------------+
     | page1_summary                                 | page2_summary                             | page3_summary                                      |
     +-----------------------------------------------+-------------------------------------------+----------------------------------------------------+

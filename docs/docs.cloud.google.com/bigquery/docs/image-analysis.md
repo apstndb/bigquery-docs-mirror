@@ -95,30 +95,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create the object table
 
@@ -128,14 +122,12 @@ Create an object table over the movie poster images in the public Cloud Storage 
 
 2.  In the query editor, run the following query to create the object table:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.movie_posters`
-      WITH CONNECTION DEFAULT
-      OPTIONS (
-        object_metadata = 'SIMPLE',
-        uris =
-          ['gs://cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters/*']);
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.movie_posters`
+          WITH CONNECTION DEFAULT
+          OPTIONS (
+            object_metadata = 'SIMPLE',
+            uris =
+              ['gs://cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters/*']);
 
 ## Create the remote model
 
@@ -145,11 +137,9 @@ Create a remote model that represents a Vertex AI `gemini-2.5-flash` model:
 
 2.  In the query editor, run the following query to create the remote model:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.gemini-vision`
-      REMOTE WITH CONNECTION DEFAULT
-      OPTIONS (ENDPOINT = 'gemini-2.5-flash');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.gemini-vision`
+          REMOTE WITH CONNECTION DEFAULT
+          OPTIONS (ENDPOINT = 'gemini-2.5-flash');
     
     The query takes several seconds to complete, after which the `gemini-vision` model appears in the `bqml_tutorial` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -161,7 +151,7 @@ Use the remote model to analyze the movie posters and determine what movie each 
 
 2.  In the query editor, run the following query to analyze the movie poster images:
     
-    ``` notranslate
+    ``` 
     CREATE OR REPLACE TABLE
       `bqml_tutorial.movie_posters_results` AS (
       SELECT
@@ -177,13 +167,11 @@ Use the remote model to analyze the movie posters and determine what movie each 
 
 3.  In the query editor, run the following statement to view the table data:
     
-    ``` notranslate
-    SELECT * FROM `bqml_tutorial.movie_posters_results`;
-    ```
+        SELECT * FROM `bqml_tutorial.movie_posters_results`;
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     +--------------------------------------------+----------------------------------+
     | uri                                        | result                           |
     +--------------------------------------------+----------------------------------+
@@ -218,26 +206,22 @@ Format the movie analysis data returned by the model to make the movie title and
 
 2.  In the query editor, run the following query to format the data:
     
-    ```` notranslate
-    CREATE OR REPLACE TABLE
-      `bqml_tutorial.movie_posters_results_formatted` AS (
-      SELECT
-        uri,
-        JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.title") AS title,
-        JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.year") AS year
-      FROM
-        `bqml_tutorial.movie_posters_results` results );
-    ````
+        CREATE OR REPLACE TABLE
+          `bqml_tutorial.movie_posters_results_formatted` AS (
+          SELECT
+            uri,
+            JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.title") AS title,
+            JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.year") AS year
+          FROM
+            `bqml_tutorial.movie_posters_results` results );
 
 3.  In the query editor, run the following statement to view the table data:
     
-    ``` notranslate
-    SELECT * FROM `bqml_tutorial.movie_posters_results_formatted`;
-    ```
+        SELECT * FROM `bqml_tutorial.movie_posters_results_formatted`;
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     +--------------------------------------------+----------------------------+------+
     | uri                                        | title                      | year |
     +--------------------------------------------+----------------------------+------+

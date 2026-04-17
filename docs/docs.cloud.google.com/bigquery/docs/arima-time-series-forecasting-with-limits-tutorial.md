@@ -70,30 +70,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -116,15 +110,13 @@ In the following query, the `FROM bigquery-public-data.new_york.citibike_trips` 
 
 In the `SELECT` statement, the query uses the [`EXTRACT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#extract) to extract the date information from the `starttime` column. The query uses the `COUNT(*)` clause to get the daily total number of Citi Bike trips.
 
-``` notranslate
-#standardSQL
-SELECT
-  EXTRACT(DATE from starttime) AS date,
-  COUNT(*) AS num_trips
-FROM
-`bigquery-public-data`.new_york.citibike_trips
-GROUP BY date
-```
+    #standardSQL
+    SELECT
+      EXTRACT(DATE from starttime) AS date,
+      COUNT(*) AS num_trips
+    FROM
+    `bigquery-public-data`.new_york.citibike_trips
+    GROUP BY date
 
 To run the query, use the following steps:
 
@@ -132,15 +124,13 @@ To run the query, use the following steps:
 
 2.  Enter the following GoogleSQL query in the query editor.
     
-    ``` notranslate
-    #standardSQL
-    SELECT
-     EXTRACT(DATE from starttime) AS date,
-     COUNT(*) AS num_trips
-    FROM
-     `bigquery-public-data`.new_york.citibike_trips
-    GROUP BY date
-    ```
+        #standardSQL
+        SELECT
+         EXTRACT(DATE from starttime) AS date,
+         COUNT(*) AS num_trips
+        FROM
+         `bigquery-public-data`.new_york.citibike_trips
+        GROUP BY date
 
 3.  Click **Run** . The query results similar to the following.
     
@@ -180,24 +170,22 @@ Create a time series model, using the NYC Citi Bike trips data.
 
 The following GoogleSQL query creates a model that forecasts daily total bike trips. The [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement creates and trains a model named `bqml_tutorial.nyc_citibike_arima_model` .
 
-``` notranslate
-#standardSQL
-CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
-  OPTIONS (
-    model_type = 'ARIMA_PLUS',
-    time_series_timestamp_col = 'date',
-    time_series_data_col = 'num_trips',
-    time_series_id_col = 'start_station_id')
-AS
-SELECT
-  EXTRACT(DATE FROM starttime) AS date,
-  COUNT(*) AS num_trips,
-  start_station_id
-FROM
-  `bigquery-public-data`.new_york.citibike_trips
-WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
-GROUP BY date, start_station_id;
-```
+    #standardSQL
+    CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
+      OPTIONS (
+        model_type = 'ARIMA_PLUS',
+        time_series_timestamp_col = 'date',
+        time_series_data_col = 'num_trips',
+        time_series_id_col = 'start_station_id')
+    AS
+    SELECT
+      EXTRACT(DATE FROM starttime) AS date,
+      COUNT(*) AS num_trips,
+      start_station_id
+    FROM
+      `bigquery-public-data`.new_york.citibike_trips
+    WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
+    GROUP BY date, start_station_id;
 
 The `OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)` clause indicates that you are creating an [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) -based time series model. By default, [`auto_arima=TRUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima) , so the `auto.ARIMA` algorithm automatically tunes the hyperparameters in `ARIMA_PLUS` models. The algorithm fits dozens of candidate models and chooses the best one with the lowest [Akaike information criterion (AIC)](https://en.wikipedia.org/wiki/Akaike_information_criterion) . Additionally, because the default is `data_frequency='AUTO_FREQUENCY'` , the training process automatically infers the data frequency of the input time series. The `CREATE MODEL` statement uses [`decompose_time_series=TRUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) by default, so both the history and forecast parts of the time series are saved in the model. Setting the parameter `time_series_id_col = 'start_station_id'` causes the model to fit and forecast multiple time series using a single query based on the `start_station_id` . You can use this information to further understand how the time series is forecasted by fetching the separate time series components such as seasonal periods.
 
@@ -207,24 +195,22 @@ Run the `CREATE MODEL` query to create and train your model:
 
 2.  Enter the following GoogleSQL query in the query editor.
     
-    ``` notranslate
-    #standardSQL
-    CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
-    OPTIONS (
-      model_type = 'ARIMA_PLUS',
-      time_series_timestamp_col = 'date',
-      time_series_data_col = 'num_trips',
-      time_series_id_col = 'start_station_id')
-    AS
-    SELECT
-    EXTRACT(DATE FROM starttime) AS date,
-    COUNT(*) AS num_trips,
-    start_station_id
-    FROM
-    `bigquery-public-data`.new_york.citibike_trips
-    WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
-    GROUP BY date, start_station_id;
-    ```
+        #standardSQL
+        CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
+        OPTIONS (
+          model_type = 'ARIMA_PLUS',
+          time_series_timestamp_col = 'date',
+          time_series_data_col = 'num_trips',
+          time_series_id_col = 'start_station_id')
+        AS
+        SELECT
+        EXTRACT(DATE FROM starttime) AS date,
+        COUNT(*) AS num_trips,
+        start_station_id
+        FROM
+        `bigquery-public-data`.new_york.citibike_trips
+        WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
+        GROUP BY date, start_station_id;
 
 3.  Click **Run** .
     
@@ -242,55 +228,53 @@ To do this, follow these steps:
 
 2.  Enter the following GoogleSQL query in the query editor.
     
-    ``` notranslate
-    #standardSQL
-    SELECT
-    forecast_timestamp AS forecast_timestamp,
-    start_station_id AS start_station_id,
-    history_value AS history_value,
-    forecast_value AS forecast_value
-    FROM
-    (
-      (
-         SELECT
-         DATE(forecast_timestamp) AS forecast_timestamp,
-         NULL AS history_value,
-         forecast_value AS forecast_value,
-         start_station_id AS start_station_id,
-         FROM
-         ML.FORECAST(
-            MODEL bqml_tutorial.`nyc_citibike_arima_model`,
-            STRUCT(
-               365 AS horizon,
-               0.9 AS confidence_level))
-      )
-      UNION ALL
-      (
-         SELECT
-         DATE(date_name) AS forecast_timestamp,
-         num_trips AS history_value,
-         NULL AS forecast_value,
-         start_station_id AS start_station_id,
-         FROM
-         (
-            SELECT
-               EXTRACT(DATE FROM starttime) AS date_name,
-               COUNT(*) AS num_trips,
-               start_station_id AS start_station_id
-            FROM
-               `bigquery-public-data`.new_york.citibike_trips
-            WHERE
-               starttime > '2014-07-11'
-               AND starttime < '2015-02-11'
-            GROUP BY
-               date_name, start_station_id
-         )
-      )
-    )
-    WHERE start_station_id = 79
-    ORDER BY
-    forecast_timestamp, start_station_id
-    ```
+        #standardSQL
+        SELECT
+        forecast_timestamp AS forecast_timestamp,
+        start_station_id AS start_station_id,
+        history_value AS history_value,
+        forecast_value AS forecast_value
+        FROM
+        (
+          (
+             SELECT
+             DATE(forecast_timestamp) AS forecast_timestamp,
+             NULL AS history_value,
+             forecast_value AS forecast_value,
+             start_station_id AS start_station_id,
+             FROM
+             ML.FORECAST(
+                MODEL bqml_tutorial.`nyc_citibike_arima_model`,
+                STRUCT(
+                   365 AS horizon,
+                   0.9 AS confidence_level))
+          )
+          UNION ALL
+          (
+             SELECT
+             DATE(date_name) AS forecast_timestamp,
+             num_trips AS history_value,
+             NULL AS forecast_value,
+             start_station_id AS start_station_id,
+             FROM
+             (
+                SELECT
+                   EXTRACT(DATE FROM starttime) AS date_name,
+                   COUNT(*) AS num_trips,
+                   start_station_id AS start_station_id
+                FROM
+                   `bigquery-public-data`.new_york.citibike_trips
+                WHERE
+                   starttime > '2014-07-11'
+                   AND starttime < '2015-02-11'
+                GROUP BY
+                   date_name, start_station_id
+             )
+          )
+        )
+        WHERE start_station_id = 79
+        ORDER BY
+        forecast_timestamp, start_station_id
 
 3.  Click **Run** . The query results similar to the following:
     
@@ -308,25 +292,23 @@ Create a time series model with limits, using the NYC Citi Bike trips data.
 
 The following GoogleSQL query creates a model that forecasts daily total bike trips. The [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement creates and trains a model named `bqml_tutorial.nyc_citibike_arima_model_with_limits` . The key difference between this model and the [model you created previously](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-limits-tutorial#forecast_the_time_series_and_visualize_the_results) is the addition of the `forecast_limit_lower_bound=0` option. This option causes the model to only forecast values that are greater than 0, based on the values in the column specified by the `time_series_data_col` argument, in this case `num_trips` .
 
-``` notranslate
-#standardSQL
-CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
-   OPTIONS (
-      model_type = 'ARIMA_PLUS',
-      time_series_timestamp_col = 'date',
-      time_series_data_col = 'num_trips',
-      time_series_id_col = 'start_station_id',
-      forecast_limit_lower_bound = 0)
-   AS
-   SELECT
-   EXTRACT(DATE FROM starttime) AS date,
-   COUNT(*) AS num_trips,
-   start_station_id
-   FROM
-   `bigquery-public-data`.new_york.citibike_trips
-   WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
-   GROUP BY date, start_station_id;
-```
+    #standardSQL
+    CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
+       OPTIONS (
+          model_type = 'ARIMA_PLUS',
+          time_series_timestamp_col = 'date',
+          time_series_data_col = 'num_trips',
+          time_series_id_col = 'start_station_id',
+          forecast_limit_lower_bound = 0)
+       AS
+       SELECT
+       EXTRACT(DATE FROM starttime) AS date,
+       COUNT(*) AS num_trips,
+       start_station_id
+       FROM
+       `bigquery-public-data`.new_york.citibike_trips
+       WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
+       GROUP BY date, start_station_id;
 
 Run the `CREATE MODEL` query to create and train your model:
 
@@ -334,25 +316,23 @@ Run the `CREATE MODEL` query to create and train your model:
 
 2.  Enter the following GoogleSQL query in the query editor.
     
-    ``` notranslate
-    #standardSQL
-    CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
-    OPTIONS (
-      model_type = 'ARIMA_PLUS',
-      time_series_timestamp_col = 'date',
-      time_series_data_col = 'num_trips',
-      time_series_id_col = 'start_station_id',
-      forecast_limit_lower_bound = 0)
-    AS
-    SELECT
-    EXTRACT(DATE FROM starttime) AS date,
-    COUNT(*) AS num_trips,
-    start_station_id
-    FROM
-    `bigquery-public-data`.new_york.citibike_trips
-    WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
-    GROUP BY date, start_station_id;
-    ```
+        #standardSQL
+        CREATE OR REPLACE MODEL bqml_tutorial.nyc_citibike_arima_model
+        OPTIONS (
+          model_type = 'ARIMA_PLUS',
+          time_series_timestamp_col = 'date',
+          time_series_data_col = 'num_trips',
+          time_series_id_col = 'start_station_id',
+          forecast_limit_lower_bound = 0)
+        AS
+        SELECT
+        EXTRACT(DATE FROM starttime) AS date,
+        COUNT(*) AS num_trips,
+        start_station_id
+        FROM
+        `bigquery-public-data`.new_york.citibike_trips
+        WHERE starttime > '2014-07-11' AND starttime < '2015-02-11'
+        GROUP BY date, start_station_id;
 
 3.  Click **Run** .
     
@@ -366,54 +346,52 @@ Run the `CREATE MODEL` query to create and train your model:
 
 2.  Enter the following GoogleSQL query in the query editor.
     
-    ``` notranslate
-    #standardSQL
-    SELECT
-    forecast_timestamp AS forecast_timestamp,
-    start_station_id AS start_station_id,
-    history_value AS history_value,
-    forecast_value AS forecast_value
-    FROM
-    (
-      (
-         SELECT
-         DATE(forecast_timestamp) AS forecast_timestamp,
-         NULL AS history_value,
-         forecast_value AS forecast_value,
-         start_station_id AS start_station_id,
-         FROM
-         ML.FORECAST(
-            MODEL bqml_tutorial.`nyc_citibike_arima_model`,
-            STRUCT(
-               365 AS horizon,
-               0.9 AS confidence_level))
-      )
-      UNION ALL
-      (
-         SELECT
-         DATE(date_name) AS forecast_timestamp,
-         num_trips AS history_value,
-         NULL AS forecast_value,
-         start_station_id AS start_station_id,
-         FROM
-         (
-            SELECT
-               EXTRACT(DATE FROM starttime) AS date_name,
-               COUNT(*) AS num_trips,
-               start_station_id AS start_station_id
-            FROM
-               `bigquery-public-data`.new_york.citibike_trips
-            WHERE
-               starttime > '2014-07-11'
-               AND starttime < '2015-02-11'
-            GROUP BY
-               date_name, start_station_id
-         )
-      )
-    )
-    WHERE start_station_id = 79
-    ORDER BY forecast_timestamp, start_station_id
-    ```
+        #standardSQL
+        SELECT
+        forecast_timestamp AS forecast_timestamp,
+        start_station_id AS start_station_id,
+        history_value AS history_value,
+        forecast_value AS forecast_value
+        FROM
+        (
+          (
+             SELECT
+             DATE(forecast_timestamp) AS forecast_timestamp,
+             NULL AS history_value,
+             forecast_value AS forecast_value,
+             start_station_id AS start_station_id,
+             FROM
+             ML.FORECAST(
+                MODEL bqml_tutorial.`nyc_citibike_arima_model`,
+                STRUCT(
+                   365 AS horizon,
+                   0.9 AS confidence_level))
+          )
+          UNION ALL
+          (
+             SELECT
+             DATE(date_name) AS forecast_timestamp,
+             num_trips AS history_value,
+             NULL AS forecast_value,
+             start_station_id AS start_station_id,
+             FROM
+             (
+                SELECT
+                   EXTRACT(DATE FROM starttime) AS date_name,
+                   COUNT(*) AS num_trips,
+                   start_station_id AS start_station_id
+                FROM
+                   `bigquery-public-data`.new_york.citibike_trips
+                WHERE
+                   starttime > '2014-07-11'
+                   AND starttime < '2015-02-11'
+                GROUP BY
+                   date_name, start_station_id
+             )
+          )
+        )
+        WHERE start_station_id = 79
+        ORDER BY forecast_timestamp, start_station_id
 
 3.  Click **Run** .
     

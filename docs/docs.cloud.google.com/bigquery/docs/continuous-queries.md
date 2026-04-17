@@ -129,7 +129,7 @@ You can write data to a BigQuery table by using an [`INSERT` statement](https://
 
 ## Use AI functions
 
-Additional APIs, IAM permissions, and Google Cloud resources are required to use a [supported](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) AI function in a continuous query. For more information, see one of the following topics, based on your use case:
+Additional APIs, IAM permissions, and Google Cloud resources are required to use a [supported](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) AI function in a continuous query. For more information, see one of the following topics, based on your use case:
 
   - [Generate text by using the `AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial)
   - [Generate text embeddings by using the `AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
@@ -152,24 +152,22 @@ Don't provide an `end_timestamp` argument to the `APPENDS` function when you use
 
 The following example shows how to start a continuous query from a particular point in time by using the `APPENDS` function, when querying a BigQuery table that is receiving streaming taxi ride information:
 
-``` notranslate
-EXPORT DATA
-  OPTIONS (format = 'CLOUD_PUBSUB',
-    uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides') AS (
-  SELECT
-    TO_JSON_STRING(STRUCT(ride_id,
-        timestamp,
-        latitude,
-        longitude)) AS message
-  FROM
-    APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
-      -- Configure the APPENDS TVF start_timestamp to specify when you want to
-      -- start processing data using your continuous query.
-      -- This example starts processing at 10 minutes before the current time.
-      CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-  WHERE
-    ride_status = 'enroute');
-```
+    EXPORT DATA
+      OPTIONS (format = 'CLOUD_PUBSUB',
+        uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides') AS (
+      SELECT
+        TO_JSON_STRING(STRUCT(ride_id,
+            timestamp,
+            latitude,
+            longitude)) AS message
+      FROM
+        APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
+          -- Configure the APPENDS TVF start_timestamp to specify when you want to
+          -- start processing data using your continuous query.
+          -- This example starts processing at 10 minutes before the current time.
+          CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+      WHERE
+        ride_status = 'enroute');
 
 ### Specify a starting point earlier than the time travel window
 
@@ -179,47 +177,43 @@ The following example shows how to backfill older data from a BigQuery table rec
 
 1.  Run a standard query to backfill data up to a particular point in time:
     
-    ``` notranslate
-    INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
-    SELECT
-      timestamp,
-      meter_reading,
-      ride_status,
-      passenger_count,
-      ST_Distance(
-        ST_GeogPoint(pickup_longitude, pickup_latitude),
-        ST_GeogPoint(dropoff_longitude, dropoff_latitude)) AS euclidean_trip_distance,
-        SAFE_DIVIDE(meter_reading, passenger_count) AS cost_per_passenger
-    FROM `myproject.real_time_taxi_streaming.taxirides`
-      -- Include all data inserted into the table up to this handoff point.
-      -- This handoff timestamp must be within the time travel window.
-      FOR SYSTEM_TIME AS OF '2025-01-01 00:00:00 UTC'
-    WHERE
-      ride_status = 'dropoff';
-    ```
+        INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
+        SELECT
+          timestamp,
+          meter_reading,
+          ride_status,
+          passenger_count,
+          ST_Distance(
+            ST_GeogPoint(pickup_longitude, pickup_latitude),
+            ST_GeogPoint(dropoff_longitude, dropoff_latitude)) AS euclidean_trip_distance,
+            SAFE_DIVIDE(meter_reading, passenger_count) AS cost_per_passenger
+        FROM `myproject.real_time_taxi_streaming.taxirides`
+          -- Include all data inserted into the table up to this handoff point.
+          -- This handoff timestamp must be within the time travel window.
+          FOR SYSTEM_TIME AS OF '2025-01-01 00:00:00 UTC'
+        WHERE
+          ride_status = 'dropoff';
 
 2.  Run a continuous query from the point in time at which the query stopped:
     
-    ``` notranslate
-    INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
-    SELECT
-      timestamp,
-      meter_reading,
-      ride_status,
-      passenger_count,
-      ST_Distance(
-        ST_GeogPoint(pickup_longitude, pickup_latitude),
-        ST_GeogPoint(dropoff_longitude, dropoff_latitude)) AS euclidean_trip_distance,
-        SAFE_DIVIDE(meter_reading, passenger_count) AS cost_per_passenger
-    FROM
-      APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
-        -- Configure the APPENDS TVF start_timestamp to start processing
-        -- data right where the batch query left off + 1 microsecond.
-        -- This timestamp must be within the time travel window.
-        TIMESTAMP '2025-01-01 00:00:00 UTC' + INTERVAL 1 MICROSECOND)
-    WHERE
-      ride_status = 'dropoff';
-    ```
+        INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
+        SELECT
+          timestamp,
+          meter_reading,
+          ride_status,
+          passenger_count,
+          ST_Distance(
+            ST_GeogPoint(pickup_longitude, pickup_latitude),
+            ST_GeogPoint(dropoff_longitude, dropoff_latitude)) AS euclidean_trip_distance,
+            SAFE_DIVIDE(meter_reading, passenger_count) AS cost_per_passenger
+        FROM
+          APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
+            -- Configure the APPENDS TVF start_timestamp to start processing
+            -- data right where the batch query left off + 1 microsecond.
+            -- This timestamp must be within the time travel window.
+            TIMESTAMP '2025-01-01 00:00:00 UTC' + INTERVAL 1 MICROSECOND)
+        WHERE
+          ride_status = 'dropoff';
 
 ## Run a continuous query by using a user account
 
@@ -237,7 +231,7 @@ Follow these steps to run a continuous query:
     2.  Click **Confirm** .
     3.  Optional: To control how long the query runs, click **Query settings** and set the **Job timeout** in milliseconds.
 
-3.  In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
+3.  In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
 
 4.  Click **Run** .
 
@@ -249,30 +243,26 @@ Follow these steps to run a continuous query:
 
 2.  In Cloud Shell, run the continuous query by using the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) with the `--continuous` flag:
     
-    ``` notranslate
-    bq query --use_legacy_sql=false --continuous=true
-    'QUERY'
-    ```
+        bq query --use_legacy_sql=false --continuous=true
+        'QUERY'
     
-    Replace `  QUERY  ` with the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) . You can control how long the query runs by using the `--job_timeout_ms` flag.
+    Replace `  QUERY  ` with the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) . You can control how long the query runs by using the `--job_timeout_ms` flag.
 
 ### API
 
 Run the continuous query by calling the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) . You must set the `continuous` field to `true` in the [`JobConfigurationQuery`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery) of the [`Job` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) that you pass in. You can optionally control how long the query runs by setting the [`jobTimeoutMs` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.job_timeout_ms) .
 
-``` notranslate
-curl --request POST \
-  "https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs" \
-  --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-  --header "Content-Type: application/json; charset=utf-8" \
-  --data '{"configuration":{"query":{"query":"QUERY","useLegacySql":false,"continuous":true}}}' \
-  --compressed
-```
+    curl --request POST \
+      "https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs" \
+      --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+      --header "Content-Type: application/json; charset=utf-8" \
+      --data '{"configuration":{"query":{"query":"QUERY","useLegacySql":false,"continuous":true}}}' \
+      --compressed
 
 Replace the following:
 
   - `  PROJECT_ID  ` : your project ID.
-  - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
+  - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
 
 ## Run a continuous query by using a service account
 
@@ -302,7 +292,7 @@ Follow these steps to use a service account to run a continuous query:
 
 10. Click **Save** .
 
-11. In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
+11. In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
 
 12. Click **Run** .
 
@@ -324,17 +314,15 @@ Follow these steps to use a service account to run a continuous query:
     
     <!-- end list -->
     
-    ``` notranslate
-    bq query --project_id=PROJECT_ID --use_legacy_sql=false \
-    --continuous=true --connection_property=service_account=SERVICE_ACCOUNT_EMAIL \
-    'QUERY'
-    ```
+        bq query --project_id=PROJECT_ID --use_legacy_sql=false \
+        --continuous=true --connection_property=service_account=SERVICE_ACCOUNT_EMAIL \
+        'QUERY'
     
     Replace the following:
     
       - `  PROJECT_ID  ` : your project ID.
       - `  SERVICE_ACCOUNT_EMAIL  ` : the service account email. You can get the service account email from the [**Service accounts** page](https://console.cloud.google.com/iam-admin/serviceaccounts) of the Google Cloud console.
-      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
+      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
 
 ### API
 
@@ -349,19 +337,17 @@ Follow these steps to use a service account to run a continuous query:
     
     You can optionally control how long the query runs by setting the [`jobTimeoutMs` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.job_timeout_ms) in the [`JobConfiguration` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) .
     
-    ``` notranslate
-    curl --request POST \
-      "https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs" \
-      --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-      --header "Content-Type: application/json; charset=utf-8" \
-      --data '{"configuration":{"query":{"query":"QUERY","useLegacySql":false,"continuous":true,"connectionProperties":[{"key":"service_account","value":"SERVICE_ACCOUNT_EMAIL"}]}}}' \
-      --compressed
-    ```
+        curl --request POST \
+          "https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs" \
+          --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+          --header "Content-Type: application/json; charset=utf-8" \
+          --data '{"configuration":{"query":{"query":"QUERY","useLegacySql":false,"continuous":true,"connectionProperties":[{"key":"service_account","value":"SERVICE_ACCOUNT_EMAIL"}]}}}' \
+          --compressed
     
     Replace the following:
     
       - `  PROJECT_ID  ` : your project ID.
-      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
+      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
       - `  SERVICE_ACCOUNT_EMAIL  ` : the service account email. You can get the service account email on the [**Service accounts** page](https://console.cloud.google.com/iam-admin/serviceaccounts) of the Google Cloud console.
 
 ## Create a custom job ID
@@ -399,176 +385,166 @@ The following SQL examples show common use cases for continuous queries.
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data for cancelled rides to a Pub/Sub topic in real time with message attributes:
 
-``` notranslate
-EXPORT DATA
-  OPTIONS (
-    format = 'CLOUD_PUBSUB',
-    uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
-AS (
-  SELECT
-    TO_JSON_STRING(
-      STRUCT(
-        ride_id,
-        timestamp,
-        latitude,
-        longitude)) AS message,
-    TO_JSON(
-      STRUCT(
-        CAST(passenger_comment AS STRING) AS passenger_comment))
-  FROM
-    CHANGES(TABLE `myproject.real_time_taxi_streaming.taxi_rides`,
-      -- Configure the CHANGES TVF start_timestamp to specify when you want to
-      -- start processing data using your continuous query.
-      -- This example starts processing at 10 minutes before the current time.
-      CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-  WHERE _CHANGE_TYPE = 'DELETE'
-);
-```
+    EXPORT DATA
+      OPTIONS (
+        format = 'CLOUD_PUBSUB',
+        uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
+    AS (
+      SELECT
+        TO_JSON_STRING(
+          STRUCT(
+            ride_id,
+            timestamp,
+            latitude,
+            longitude)) AS message,
+        TO_JSON(
+          STRUCT(
+            CAST(passenger_comment AS STRING) AS passenger_comment))
+      FROM
+        CHANGES(TABLE `myproject.real_time_taxi_streaming.taxi_rides`,
+          -- Configure the CHANGES TVF start_timestamp to specify when you want to
+          -- start processing data using your continuous query.
+          -- This example starts processing at 10 minutes before the current time.
+          CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+      WHERE _CHANGE_TYPE = 'DELETE'
+    );
 
 ### Export data to a Bigtable table
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and exports the data into a Bigtable table in real time:
 
-``` notranslate
-EXPORT DATA
-  OPTIONS (
-    format = 'CLOUD_BIGTABLE',
-    truncate = TRUE,
-    overwrite = TRUE,
-    uri = 'https://bigtable.googleapis.com/projects/myproject/instances/mybigtableinstance/tables/taxi-real-time-rides')
-AS (
-  SELECT
-    CAST(CONCAT(ride_id, timestamp, latitude, longitude) AS STRING) AS rowkey,
-    STRUCT(
-      timestamp,
-      latitude,
-      longitude,
-      meter_reading,
-      ride_status,
-      passenger_count) AS features
-  FROM
-    APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
-      -- Configure the APPENDS TVF start_timestamp to specify when you want to
-      -- start processing data using your continuous query.
-      -- This example starts processing at 10 minutes before the current time.
-      CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-  WHERE ride_status = 'enroute'
-);
-```
+    EXPORT DATA
+      OPTIONS (
+        format = 'CLOUD_BIGTABLE',
+        truncate = TRUE,
+        overwrite = TRUE,
+        uri = 'https://bigtable.googleapis.com/projects/myproject/instances/mybigtableinstance/tables/taxi-real-time-rides')
+    AS (
+      SELECT
+        CAST(CONCAT(ride_id, timestamp, latitude, longitude) AS STRING) AS rowkey,
+        STRUCT(
+          timestamp,
+          latitude,
+          longitude,
+          meter_reading,
+          ride_status,
+          passenger_count) AS features
+      FROM
+        APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
+          -- Configure the APPENDS TVF start_timestamp to specify when you want to
+          -- start processing data using your continuous query.
+          -- This example starts processing at 10 minutes before the current time.
+          CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+      WHERE ride_status = 'enroute'
+    );
 
 ### Export data to a Spanner table
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and then exports the data into a Spanner table in real time:
 
-``` notranslate
-EXPORT DATA
- OPTIONS (
-   format = 'CLOUD_SPANNER',
-   uri = 'https://spanner.googleapis.com/projects/myproject/instances/myspannerinstance/databases/taxi-real-time-rides',
-   spanner_options ="""{
-      "table": "rides",
-      -- To ensure data is written to Spanner in the correct sequence
-      -- during a continuous export, use the change_timestamp_column
-      -- option. This should be mapped to a timestamp column from your
-      -- BigQuery data. If your source data lacks a timestamp, the
-      -- _CHANGE_TIMESTAMP pseudocolumn provided by the APPENDS function
-      -- will be automatically mapped to the "change_timestamp" column.
-      "change_timestamp_column": "change_timestamp"
-   }"""
-  )
-  AS (
-  SELECT
-    ride_id,
-    latitude,
-    longitude,
-    meter_reading,
-    ride_status,
-    passenger_count,
-    _CHANGE_TIMESTAMP as change_timestamp
-  FROM APPENDS(
-        TABLE `myproject.real_time_taxi_streaming.taxirides`,
-        -- Configure the APPENDS TVF start_timestamp to specify when you want to
-        -- start processing data using your continuous query.
-        -- This example starts processing at 10 minutes before the current time.
-        CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-  WHERE ride_status = 'enroute'
-  );
-```
+    EXPORT DATA
+     OPTIONS (
+       format = 'CLOUD_SPANNER',
+       uri = 'https://spanner.googleapis.com/projects/myproject/instances/myspannerinstance/databases/taxi-real-time-rides',
+       spanner_options ="""{
+          "table": "rides",
+          -- To ensure data is written to Spanner in the correct sequence
+          -- during a continuous export, use the change_timestamp_column
+          -- option. This should be mapped to a timestamp column from your
+          -- BigQuery data. If your source data lacks a timestamp, the
+          -- _CHANGE_TIMESTAMP pseudocolumn provided by the APPENDS function
+          -- will be automatically mapped to the "change_timestamp" column.
+          "change_timestamp_column": "change_timestamp"
+       }"""
+      )
+      AS (
+      SELECT
+        ride_id,
+        latitude,
+        longitude,
+        meter_reading,
+        ride_status,
+        passenger_count,
+        _CHANGE_TIMESTAMP as change_timestamp
+      FROM APPENDS(
+            TABLE `myproject.real_time_taxi_streaming.taxirides`,
+            -- Configure the APPENDS TVF start_timestamp to specify when you want to
+            -- start processing data using your continuous query.
+            -- This example starts processing at 10 minutes before the current time.
+            CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+      WHERE ride_status = 'enroute'
+      );
 
 ### Write data to a BigQuery table
 
 The following example shows a continuous query that filters and transforms data from a BigQuery table that is receiving streaming taxi ride information, and then writes the data to another BigQuery table in real time. This makes the data available for further downstream analysis.
 
-``` notranslate
-INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
-SELECT
-  timestamp,
-  meter_reading,
-  ride_status,
-  passenger_count,
-  ST_Distance(
-    ST_GeogPoint(pickup_longitude, pickup_latitude),
-    ST_GeogPoint(dropoff_longitude, dropoff_latitude)) AS euclidean_trip_distance,
-    SAFE_DIVIDE(meter_reading, passenger_count) AS cost_per_passenger
-FROM
-  APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
-    -- Configure the APPENDS TVF start_timestamp to specify when you want to
-    -- start processing data using your continuous query.
-    -- This example starts processing at 10 minutes before the current time.
-    CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-WHERE
-  ride_status = 'dropoff';
-```
+    INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
+    SELECT
+      timestamp,
+      meter_reading,
+      ride_status,
+      passenger_count,
+      ST_Distance(
+        ST_GeogPoint(pickup_longitude, pickup_latitude),
+        ST_GeogPoint(dropoff_longitude, dropoff_latitude)) AS euclidean_trip_distance,
+        SAFE_DIVIDE(meter_reading, passenger_count) AS cost_per_passenger
+    FROM
+      APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
+        -- Configure the APPENDS TVF start_timestamp to specify when you want to
+        -- start processing data using your continuous query.
+        -- This example starts processing at 10 minutes before the current time.
+        CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+    WHERE
+      ride_status = 'dropoff';
 
 ### Process data by using a Vertex AI model
 
 The following example shows a continuous query which uses a Vertex AI model to generate an advertisement for taxi riders based on their current latitude and longitude, and then exports the results into a Pub/Sub topic in real time:
 
-``` notranslate
-EXPORT DATA
-  OPTIONS (
-    format = 'CLOUD_PUBSUB',
-    uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
-AS (
-  SELECT
-    TO_JSON_STRING(
-      STRUCT(
-        ride_id,
-        timestamp,
-        latitude,
-        longitude,
-        prompt,
-        result)) AS message
-  FROM
-    AI.GENERATE_TEXT(
-      MODEL `myproject.real_time_taxi_streaming.taxi_ml_generate_model`,
-      (
-        SELECT
-          timestamp,
-          ride_id,
-          latitude,
-          longitude,
-          CONCAT(
-            'Generate an ad based on the current latitude of ',
+    EXPORT DATA
+      OPTIONS (
+        format = 'CLOUD_PUBSUB',
+        uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
+    AS (
+      SELECT
+        TO_JSON_STRING(
+          STRUCT(
+            ride_id,
+            timestamp,
             latitude,
-            ' and longitude of ',
-            longitude) AS prompt
-        FROM
-          APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
-            -- Configure the APPENDS TVF start_timestamp to specify when you
-            -- want to start processing data using your continuous query.
-            -- This example starts processing at 10 minutes before the current time.
-            CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-        WHERE ride_status = 'enroute'
-      ),
-      STRUCT(
-        50 AS max_output_tokens,
-        1.0 AS temperature,
-        40 AS top_k,
-        1.0 AS top_p))
-      AS ml_output
-);
-```
+            longitude,
+            prompt,
+            result)) AS message
+      FROM
+        AI.GENERATE_TEXT(
+          MODEL `myproject.real_time_taxi_streaming.taxi_ml_generate_model`,
+          (
+            SELECT
+              timestamp,
+              ride_id,
+              latitude,
+              longitude,
+              CONCAT(
+                'Generate an ad based on the current latitude of ',
+                latitude,
+                ' and longitude of ',
+                longitude) AS prompt
+            FROM
+              APPENDS(TABLE `myproject.real_time_taxi_streaming.taxirides`,
+                -- Configure the APPENDS TVF start_timestamp to specify when you
+                -- want to start processing data using your continuous query.
+                -- This example starts processing at 10 minutes before the current time.
+                CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+            WHERE ride_status = 'enroute'
+          ),
+          STRUCT(
+            50 AS max_output_tokens,
+            1.0 AS temperature,
+            40 AS top_k,
+            1.0 AS top_p))
+          AS ml_output
+    );
 
 ### Perform `JOIN` s and windowing aggregations
 
@@ -576,51 +552,49 @@ The following example shows a continuous query that performs a `JOIN` and window
 
 Suppose you want to join a taxi rides table to a taxi requests table to understand taxi health in each neighborhood every five minutes. Using aggregate functions, you can capture the taxi demand volume per neighborhood and the minimum, maximum, average, and standard deviation distance a rider was from a taxi when they requested a ride.
 
-``` notranslate
-INSERT INTO
- `real_time_taxi_streaming.neighborhood_taxi_health`
-WITH potential_matches AS (
- SELECT
-   requests._CHANGE_TIMESTAMP AS bq_changed_ts,
-   requests.geohash,
-   requests.latitude,
-   requests.longitude,
-   ST_DISTANCE(
-     ST_GEOGPOINT(requests.longitude, requests.latitude),
-     ST_GEOGPOINT(taxis.longitude, taxis.latitude)
-   ) AS distance_in_meters
- FROM
-   APPENDS(TABLE `real_time_taxi_streaming.ride_requests`,
-     CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE) AS requests
- INNER JOIN
-   APPENDS(TABLE `real_time_taxi_streaming.taxirides`,
-     CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE) AS taxis
- ON requests.geohash = taxis.geohash
- WHERE
-   taxis.ride_status = 'available'
-   AND taxis._CHANGE_TIMESTAMP BETWEEN (requests._CHANGE_TIMESTAMP - INTERVAL 5 MINUTE) AND requests._CHANGE_TIMESTAMP
-   AND ST_Dwithin(
-     ST_GEOGPOINT(requests.longitude, requests.latitude),
-     ST_GEOGPOINT(taxis.longitude, taxis.latitude),
-     2000 -- Distance in meters
-   )
-)
-SELECT
- window_end,
- geohash,
- ROUND(AVG(latitude), 6) AS avg_latitude,
- ROUND(AVG(longitude), 6) AS avg_longitude,
- COUNT(*) AS taxi_demand_volume,
- ROUND(AVG(distance_in_meters), 2) AS avg_proximity_meters,
- ROUND(MIN(distance_in_meters), 2) AS min_proximity_meters,
- ROUND(MAX(distance_in_meters), 2) AS max_proximity_meters,
- ROUND(STDDEV(distance_in_meters), 2) AS proximity_stddev
-FROM
- TUMBLE(TABLE potential_matches, "bq_changed_ts", INTERVAL 5 MINUTE)
-GROUP BY
- window_end,
- geohash;
-```
+    INSERT INTO
+     `real_time_taxi_streaming.neighborhood_taxi_health`
+    WITH potential_matches AS (
+     SELECT
+       requests._CHANGE_TIMESTAMP AS bq_changed_ts,
+       requests.geohash,
+       requests.latitude,
+       requests.longitude,
+       ST_DISTANCE(
+         ST_GEOGPOINT(requests.longitude, requests.latitude),
+         ST_GEOGPOINT(taxis.longitude, taxis.latitude)
+       ) AS distance_in_meters
+     FROM
+       APPENDS(TABLE `real_time_taxi_streaming.ride_requests`,
+         CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE) AS requests
+     INNER JOIN
+       APPENDS(TABLE `real_time_taxi_streaming.taxirides`,
+         CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE) AS taxis
+     ON requests.geohash = taxis.geohash
+     WHERE
+       taxis.ride_status = 'available'
+       AND taxis._CHANGE_TIMESTAMP BETWEEN (requests._CHANGE_TIMESTAMP - INTERVAL 5 MINUTE) AND requests._CHANGE_TIMESTAMP
+       AND ST_Dwithin(
+         ST_GEOGPOINT(requests.longitude, requests.latitude),
+         ST_GEOGPOINT(taxis.longitude, taxis.latitude),
+         2000 -- Distance in meters
+       )
+    )
+    SELECT
+     window_end,
+     geohash,
+     ROUND(AVG(latitude), 6) AS avg_latitude,
+     ROUND(AVG(longitude), 6) AS avg_longitude,
+     COUNT(*) AS taxi_demand_volume,
+     ROUND(AVG(distance_in_meters), 2) AS avg_proximity_meters,
+     ROUND(MIN(distance_in_meters), 2) AS min_proximity_meters,
+     ROUND(MAX(distance_in_meters), 2) AS max_proximity_meters,
+     ROUND(STDDEV(distance_in_meters), 2) AS proximity_stddev
+    FROM
+     TUMBLE(TABLE potential_matches, "bq_changed_ts", INTERVAL 5 MINUTE)
+    GROUP BY
+     window_end,
+     geohash;
 
 ## Modify the SQL of a continuous query
 
@@ -636,14 +610,12 @@ Follow these steps to modify the SQL used in a continuous query:
 
 4.  Get the `end_time` value for the original continuous query job by using the `INFORMATION_SCHEMA` [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) :
     
-    ``` notranslate
-    SELECT end_time
-    FROM `PROJECT_ID.region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE
-      EXTRACT(DATE FROM creation_time) = current_date()
-    AND error_result.reason = 'stopped'
-    AND job_id = 'JOB_ID';
-    ```
+        SELECT end_time
+        FROM `PROJECT_ID.region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+        WHERE
+          EXTRACT(DATE FROM creation_time) = current_date()
+        AND error_result.reason = 'stopped'
+        AND job_id = 'JOB_ID';
     
     Replace the following:
     

@@ -78,9 +78,7 @@ Create a dataset named `mobilenet_inference_test` :
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE SCHEMA `PROJECT_ID.mobilenet_inference_test`;
-    ```
+        CREATE SCHEMA `PROJECT_ID.mobilenet_inference_test`;
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -90,9 +88,7 @@ Create a dataset named `mobilenet_inference_test` :
 
 2.  Run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) to create the dataset:
     
-    ``` notranslate
-    bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
-    ```
+        bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -170,11 +166,9 @@ Create a connection named `lake-connection` :
 
 In Cloud Shell, run the [`gcloud storage buckets add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/add-iam-policy-binding) :
 
-``` notranslate
-gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
---member=serviceAccount:MEMBER \
---role=roles/storage.objectViewer
-```
+    gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
+    --member=serviceAccount:MEMBER \
+    --role=roles/storage.objectViewer
 
 Replace `  MEMBER  ` with the service account ID that you copied earlier. Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 
@@ -201,13 +195,11 @@ Create an object table named `sample_images` based on the flowers dataset you up
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE mobilenet_inference_test.sample_images
-    WITH CONNECTION `us.lake-connection`
-    OPTIONS(
-      object_metadata = 'SIMPLE',
-      uris = ['gs://BUCKET_NAME/flowers/*']);
-    ```
+        CREATE EXTERNAL TABLE mobilenet_inference_test.sample_images
+        WITH CONNECTION `us.lake-connection`
+        OPTIONS(
+          object_metadata = 'SIMPLE',
+          uris = ['gs://BUCKET_NAME/flowers/*']);
     
     Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 
@@ -215,12 +207,10 @@ Create an object table named `sample_images` based on the flowers dataset you up
 
 In Cloud Shell, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) to create the connection:
 
-``` notranslate
-bq mk --table \
---external_table_definition='gs://BUCKET_NAME/flowers/*@us.lake-connection' \
---object_metadata=SIMPLE \
-mobilenet_inference_test.sample_images
-```
+    bq mk --table \
+    --external_table_definition='gs://BUCKET_NAME/flowers/*@us.lake-connection' \
+    --object_metadata=SIMPLE \
+    mobilenet_inference_test.sample_images
 
 Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 
@@ -237,12 +227,10 @@ Get the model files and make them available in Cloud Storage:
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE MODEL `mobilenet_inference_test.mobilenet`
-    OPTIONS(
-      model_type = 'TENSORFLOW',
-      model_path = 'gs://BUCKET_NAME/mobilenet/*');
-    ```
+        CREATE MODEL `mobilenet_inference_test.mobilenet`
+        OPTIONS(
+          model_type = 'TENSORFLOW',
+          model_path = 'gs://BUCKET_NAME/mobilenet/*');
     
     Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 
@@ -276,14 +264,12 @@ Run inference on the `sample_images` object table using the `mobilenet` model:
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT *
-    FROM ML.PREDICT(
-      MODEL `mobilenet_inference_test.mobilenet`,
-      (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 224, FALSE) AS inputs
-      FROM mobilenet_inference_test.sample_images)
-    );
-    ```
+        SELECT *
+        FROM ML.PREDICT(
+          MODEL `mobilenet_inference_test.mobilenet`,
+          (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 224, FALSE) AS inputs
+          FROM mobilenet_inference_test.sample_images)
+        );
     
     The results should look similar to the following:
     

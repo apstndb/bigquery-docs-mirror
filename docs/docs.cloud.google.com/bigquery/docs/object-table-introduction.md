@@ -188,36 +188,28 @@ The following table describes the integration points you can use to do machine l
 
 You can create a view or table from the results of your analysis if you want to join your results with other structured data. For example, the following statement creates a table based on inference results:
 
-``` notranslate
-CREATE TABLE my_dataset.my_inference_results AS
-SELECT uri, content_type, vision_feature
-FROM ML.PREDICT(
-  MODEL my_dataset.vision_model,
-  SELECT ML.DECODE_IMAGE(data) AS vision_input
-  FROM my_dataset.object_table
-);
-```
+    CREATE TABLE my_dataset.my_inference_results AS
+    SELECT uri, content_type, vision_feature
+    FROM ML.PREDICT(
+      MODEL my_dataset.vision_model,
+      SELECT ML.DECODE_IMAGE(data) AS vision_input
+      FROM my_dataset.object_table
+    );
 
 After the table is created, you can join it with other tables based on either standard or custom metadata fields, as shown following:
 
-``` notranslate
-SELECT a.vision_feature, a.uri, b.description
-FROM my_dataset.my_inference_results a
-JOIN my_dataset.image_description b
-ON a.uri = b.uri;
-```
+    SELECT a.vision_feature, a.uri, b.description
+    FROM my_dataset.my_inference_results a
+    JOIN my_dataset.image_description b
+    ON a.uri = b.uri;
 
 You can also [create a search index](https://docs.cloud.google.com/bigquery/docs/search-index) to power searches over the results of your analysis. For example, the following statement creates a search index over data extracted from PDF files:
 
-``` notranslate
-CREATE SEARCH INDEX my_index ON pdf_text_extract(ALL COLUMNS);
-```
+    CREATE SEARCH INDEX my_index ON pdf_text_extract(ALL COLUMNS);
 
 You can then use the index to find what you need in those results:
 
-``` notranslate
-SELECT * FROM pdf_text_extract WHERE SEARCH(pdf_text, 'Google');
-```
+    SELECT * FROM pdf_text_extract WHERE SEARCH(pdf_text, 'Google');
 
 ## Benefits
 
@@ -233,10 +225,8 @@ To get access to the data represented by an object, generate a signed URL. You c
 
 Use the [`EXTERNAL_OBJECT_TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#external_object_transform) to generate signed URLs, as shown in the following example:
 
-``` notranslate
-SELECT uri, signed_url
-FROM EXTERNAL_OBJECT_TRANSFORM(TABLE `mydataset.myobjecttable`, ['SIGNED_URL']);
-```
+    SELECT uri, signed_url
+    FROM EXTERNAL_OBJECT_TRANSFORM(TABLE `mydataset.myobjecttable`, ['SIGNED_URL']);
 
 This returns results similar to the following:
 
@@ -258,12 +248,10 @@ Object tables vary from other tables that use access delegation, in that having 
 
 Setting a row-level access policy on an object table restricts a user or group's access to the object metadata in selected rows, and also to the objects represented by those rows. For example, the following statement grants the user Alice access only to rows that represent objects created before June 25, 2022:
 
-``` notranslate
-CREATE ROW ACCESS POLICY before_20220625
-ON my_dataset.my_object_table
-GRANT TO ("user:alice@example.com")
-FILTER USING (updated < TIMESTAMP("2022-06-25"));
-```
+    CREATE ROW ACCESS POLICY before_20220625
+    ON my_dataset.my_object_table
+    GRANT TO ("user:alice@example.com")
+    FILTER USING (updated < TIMESTAMP("2022-06-25"));
 
 With this row-level access policy in place, the following outcomes are true for Alice:
 
@@ -273,13 +261,11 @@ With this row-level access policy in place, the following outcomes are true for 
 
 You can also restrict access to object table rows by using custom metadata. For example, the following statement restricts the `users` group to only access rows where the object has been tagged as not containing any personally identifiable information:
 
-``` notranslate
-CREATE ROW ACCESS POLICY no_pii
-ON my_dataset.my_object_table
-GRANT TO ("group:users@example.com")
-FILTER USING (ARRAY_LENGTH(metadata)=1
-AND metadata[OFFSET(0)].name="no_pii")
-```
+    CREATE ROW ACCESS POLICY no_pii
+    ON my_dataset.my_object_table
+    GRANT TO ("group:users@example.com")
+    FILTER USING (ARRAY_LENGTH(metadata)=1
+    AND metadata[OFFSET(0)].name="no_pii")
 
 ## Security model
 
@@ -345,14 +331,12 @@ You should consider how the staleness interval and metadata caching mode values 
 
 To find information about metadata refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
-``` notranslate
-SELECT *
-FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
-WHERE job_id LIKE '%metadata_cache_refresh%'
-AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-ORDER BY start_time DESC
-LIMIT 10;
-```
+    SELECT *
+    FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
+    WHERE job_id LIKE '%metadata_cache_refresh%'
+    AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+    ORDER BY start_time DESC
+    LIMIT 10;
 
 To learn more, see [Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) .
 

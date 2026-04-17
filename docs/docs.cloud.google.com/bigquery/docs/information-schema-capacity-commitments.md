@@ -55,15 +55,13 @@ Replace the following:
 
 The following example returns a list of active capacity commitments for the current project:
 
-``` notranslate
-SELECT
-  capacity_commitment_id,
-  slot_count
-FROM
-  `region-us`.INFORMATION_SCHEMA.CAPACITY_COMMITMENTS
-WHERE
-  state = 'ACTIVE';
-```
+    SELECT
+      capacity_commitment_id,
+      slot_count
+    FROM
+      `region-us`.INFORMATION_SCHEMA.CAPACITY_COMMITMENTS
+    WHERE
+      state = 'ACTIVE';
 
 The result is similar to the following:
 

@@ -64,10 +64,8 @@ Use the [`ALTER TABLE ADD COLUMN` DDL statement](https://docs.cloud.google.com/b
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    ADD COLUMN new_column STRING;
-    ```
+        ALTER TABLE mydataset.mytable
+        ADD COLUMN new_column STRING;
 
 3.  Click play\_circle **Run** .
 
@@ -79,9 +77,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq update` command and provide a JSON schema file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
 
-``` notranslate
-bq update PROJECT_ID:DATASET.TABLE SCHEMA
-```
+    bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 Replace the following:
 
@@ -100,12 +96,10 @@ To add empty columns to a table's schema using a JSON schema file:
 
 1.  First, issue the `bq show` command with the `--schema` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
     
-    ``` notranslate
-    bq show \
-    --schema \
-    --format=prettyjson \
-    PROJECT_ID:DATASET.TABLE > SCHEMA
-    ```
+        bq show \
+        --schema \
+        --format=prettyjson \
+        PROJECT_ID:DATASET.TABLE > SCHEMA
     
     Replace the following:
     
@@ -178,9 +172,7 @@ To add empty columns to a table's schema using a JSON schema file:
 
 4.  After updating your schema file, issue the following command to update the table's schema. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
     
-    ``` notranslate
-    bq update PROJECT_ID:DATASET.TABLE SCHEMA
-    ```
+        bq update PROJECT_ID:DATASET.TABLE SCHEMA
     
     Replace the following:
     
@@ -378,9 +370,7 @@ Adding a new nested field to an existing `RECORD` column by using a SQL DDL stat
 
 Issue the `bq update` command and provide a JSON schema file that adds the nested field to the existing `RECORD` column's schema definition. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
 
-``` notranslate
-bq update PROJECT_ID:DATASET.TABLE SCHEMA
-```
+    bq update PROJECT_ID:DATASET.TABLE SCHEMA
 
 Replace the following:
 
@@ -395,12 +385,10 @@ To add a nested column to a `RECORD` using a JSON schema file:
 
 1.  First, issue the `bq show` command with the `--schema` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET.TABLE  ` .
     
-    ``` notranslate
-    bq show \
-    --schema \
-    --format=prettyjson \
-    PROJECT_ID:DATASET.TABLE > SCHEMA
-    ```
+        bq show \
+        --schema \
+        --format=prettyjson \
+        PROJECT_ID:DATASET.TABLE > SCHEMA
     
     Replace the following:
     
@@ -492,9 +480,7 @@ To add a nested column to a `RECORD` using a JSON schema file:
 
 4.  After updating your schema file, issue the following command to update the table's schema. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
     
-    ``` notranslate
-    bq update PROJECT_ID:DATASET.TABLE SCHEMA
-    ```
+        bq update PROJECT_ID:DATASET.TABLE SCHEMA
     
     Replace the following:
     
@@ -549,16 +535,14 @@ If the table you're appending is in a dataset in a project other than your defau
 
 Enter the `load` command as follows:
 
-``` notranslate
-bq --location=LOCATION load \
---noreplace \
---autodetect \
---schema_update_option=ALLOW_FIELD_ADDITION \
---source_format=FORMAT \
-PROJECT_ID:DATASET.TABLE \
-PATH_TO_SOURCE \
-SCHEMA
-```
+    bq --location=LOCATION load \
+    --noreplace \
+    --autodetect \
+    --schema_update_option=ALLOW_FIELD_ADDITION \
+    --source_format=FORMAT \
+    PROJECT_ID:DATASET.TABLE \
+    PATH_TO_SOURCE \
+    SCHEMA
 
 Replace the following:
 
@@ -897,14 +881,12 @@ If the table you're appending is in a dataset in a project other than your defau
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-``` notranslate
-bq --location=LOCATION query \
---destination_table PROJECT_ID:DATASET.TABLE \
---append_table \
---schema_update_option=ALLOW_FIELD_ADDITION \
---use_legacy_sql=false \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --destination_table PROJECT_ID:DATASET.TABLE \
+    --append_table \
+    --schema_update_option=ALLOW_FIELD_ADDITION \
+    --use_legacy_sql=false \
+    'QUERY'
 
 Replace the following:
 
@@ -1188,10 +1170,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To rename a column on a table, use the [`ALTER TABLE RENAME COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_column_statement) . The following example renames the column `old_name` to `new_name` on `mytable` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-  RENAME COLUMN old_name TO new_name;
-```
+    ALTER TABLE mydataset.mytable
+      RENAME COLUMN old_name TO new_name;
 
 For more information about `ALTER TABLE RENAME COLUMN` statements, see [DDL details](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_15) .
 
@@ -1205,21 +1185,17 @@ You can use GoogleSQL to make certain changes to the data type of a column. For 
 
 The following example creates a table with a column of type `INT64` , then updates the type to `NUMERIC` :
 
-``` notranslate
-CREATE TABLE mydataset.mytable(c1 INT64);
-
-ALTER TABLE mydataset.mytable
-ALTER COLUMN c1 SET DATA TYPE NUMERIC;
-```
+    CREATE TABLE mydataset.mytable(c1 INT64);
+    
+    ALTER TABLE mydataset.mytable
+    ALTER COLUMN c1 SET DATA TYPE NUMERIC;
 
 The following example creates a table with a nested column with two fields, and then updates the type of one of the columns from `INT` to `NUMERIC` :
 
-``` notranslate
-CREATE TABLE mydataset.mytable(s1 STRUCT<a INT64, b STRING>);
-
-ALTER TABLE mydataset.mytable ALTER COLUMN s1
-SET DATA TYPE STRUCT<a NUMERIC, b STRING>;
-```
+    CREATE TABLE mydataset.mytable(s1 STRUCT<a INT64, b STRING>);
+    
+    ALTER TABLE mydataset.mytable ALTER COLUMN s1
+    SET DATA TYPE STRUCT<a NUMERIC, b STRING>;
 
 ### Modify nested column types
 
@@ -1229,15 +1205,13 @@ The following example demonstrates how to transform a column within an array of 
 
 Consider a table `samples.test` with the following schema and data:
 
-``` notranslate
-CREATE OR REPLACE TABLE
-  samples.test(D STRUCT <L ARRAY<STRUCT<R STRING, U STRING, V STRING>>, F STRING>);
-
-INSERT INTO
-  samples.test(D)
-VALUES
-  (STRUCT([STRUCT("r1", "u1", "v1"), STRUCT("r2", "u2", "v2")], "f1"));
-```
+    CREATE OR REPLACE TABLE
+      samples.test(D STRUCT <L ARRAY<STRUCT<R STRING, U STRING, V STRING>>, F STRING>);
+    
+    INSERT INTO
+      samples.test(D)
+    VALUES
+      (STRUCT([STRUCT("r1", "u1", "v1"), STRUCT("r2", "u2", "v2")], "f1"));
 
 The result looks similar to the following:
 
@@ -1249,21 +1223,19 @@ The result looks similar to the following:
 
 Suppose you need to change the type of field `U` within the nested array of `STRUCT` s to `STRUCT<W STRING>` . The following SQL statement demonstrates how to accomplish this:
 
-``` notranslate
-CREATE OR REPLACE TABLE
-  samples.new_table AS
-SELECT
-  STRUCT(ARRAY(
+    CREATE OR REPLACE TABLE
+      samples.new_table AS
     SELECT
-      STRUCT(tmp.R,
-        STRUCT(tmp.U AS W) AS U,
-        tmp.V)
+      STRUCT(ARRAY(
+        SELECT
+          STRUCT(tmp.R,
+            STRUCT(tmp.U AS W) AS U,
+            tmp.V)
+        FROM
+          UNNEST(t.D.L) AS tmp) AS L,
+        t.D.F) AS D
     FROM
-      UNNEST(t.D.L) AS tmp) AS L,
-    t.D.F) AS D
-FROM
-  samples.test AS t
-```
+      samples.test AS t
 
 This statement creates a new table, `samples.new_table` , with the target schema. The `UNNEST` function expands the array of STRUCTs within `t.D.L` . The expression `STRUCT(tmp.U AS W) AS U` constructs the new STRUCT with field W, populated by the value from the original `U` field. The resulting table, `samples.new_table` , has the following schema and data:
 
@@ -1287,14 +1259,12 @@ When using `CAST` , a query can fail if BigQuery is unable to perform the cast. 
 
 2.  In the **Query editor** , enter the following query to select all of the data from `column_two` and `column_three` in `mydataset.mytable` and to cast `column_one` from `DATE` to `STRING` . The query uses an alias to cast `column_one` with the same name. `mydataset.mytable` is in your default project.
     
-    ``` notranslate
-    SELECT
-     column_two,
-     column_three,
-     CAST(column_one AS STRING) AS column_one
-    FROM
-     mydataset.mytable;
-    ```
+        SELECT
+         column_two,
+         column_three,
+         CAST(column_one AS STRING) AS column_one
+        FROM
+         mydataset.mytable;
 
 3.  Click **More** and select **Query settings** .
 
@@ -1385,11 +1355,9 @@ Use the [`ALTER COLUMN DROP NOT NULL` DDL statement](https://docs.cloud.google.c
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    ALTER COLUMN mycolumn
-    DROP NOT NULL;
-    ```
+        ALTER TABLE mydataset.mytable
+        ALTER COLUMN mycolumn
+        DROP NOT NULL;
 
 3.  Click play\_circle **Run** .
 
@@ -1399,12 +1367,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  First, issue the `bq show` command with the `--schema` flag and write the existing table schema to a file. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
     
-    ``` notranslate
-    bq show \
-    --schema \
-    --format=prettyjson \
-    PROJECT_ID:DATASET.TABLE > SCHEMA_FILE
-    ```
+        bq show \
+        --schema \
+        --format=prettyjson \
+        PROJECT_ID:DATASET.TABLE > SCHEMA_FILE
     
     Replace the following:
     
@@ -1466,9 +1432,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 4.  After updating your schema file, issue the following command to update the table's schema. If the table you're updating is in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID:DATASET  ` .
     
-    ``` notranslate
-    bq update PROJECT_ID:DATASET.TABLE SCHEMA
-    ```
+        bq update PROJECT_ID:DATASET.TABLE SCHEMA
     
     Replace the following:
     
@@ -1717,15 +1681,13 @@ If the table you're appending is in a dataset in a project other than your defau
 
 Enter the `load` command as follows:
 
-``` notranslate
-bq --location=LOCATION load \
---noreplace \
---schema_update_option=ALLOW_FIELD_RELAXATION \
---source_format=FORMAT \
-PROJECT_ID:DATASET.TABLE \
-PATH_TO_SOURCE \
-SCHEMA
-```
+    bq --location=LOCATION load \
+    --noreplace \
+    --schema_update_option=ALLOW_FIELD_RELAXATION \
+    --source_format=FORMAT \
+    PROJECT_ID:DATASET.TABLE \
+    PATH_TO_SOURCE \
+    SCHEMA
 
 Replace the following:
 
@@ -2058,14 +2020,12 @@ If the table you're appending is in a dataset in a project other than your defau
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-``` notranslate
-bq --location=LOCATION query \
---destination_table PROJECT_ID:DATASET.TABLE \
---append_table \
---schema_update_option=ALLOW_FIELD_RELAXATION \
---use_legacy_sql=false \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --destination_table PROJECT_ID:DATASET.TABLE \
+    --append_table \
+    --schema_update_option=ALLOW_FIELD_RELAXATION \
+    --use_legacy_sql=false \
+    'QUERY'
 
 Replace the following:
 
@@ -2325,10 +2285,8 @@ Use the [`ALTER COLUMN SET DEFAULT` DDL statement](https://docs.cloud.google.com
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    ALTER COLUMN column_name SET DEFAULT default_expression;
-    ```
+        ALTER TABLE mydataset.mytable
+        ALTER COLUMN column_name SET DEFAULT default_expression;
 
 3.  Click play\_circle **Run** .
 
@@ -2368,11 +2326,9 @@ Use the [`ALTER COLUMN SET OPTIONS` DDL statement](https://docs.cloud.google.com
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    ALTER COLUMN column_name
-    SET OPTIONS (description = 'This is a column description.');
-    ```
+        ALTER TABLE mydataset.mytable
+        ALTER COLUMN column_name
+        SET OPTIONS (description = 'This is a column description.');
 
 3.  Click play\_circle **Run** .
 

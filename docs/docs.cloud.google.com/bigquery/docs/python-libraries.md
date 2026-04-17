@@ -270,11 +270,9 @@ Error string: `Connection pool is full, discarding connection: bigquery.googleap
 
 If you use the default BigQuery client object in Python, you are limited to a maximum of 10 threads because the default pool size for the [Python HTTPAdapter](https://docs.python-requests.org/en/latest/api/#requests.adapters.HTTPAdapter) is 10. To use more than 10 connections, create a custom `requests.adapters.HTTPAdapter` object. For example:
 
-``` notranslate
-client = bigquery.Client()
-adapter = requests.adapters.HTTPAdapter(pool_connections=128,
-pool_maxsize=128,max_retries=3)
-client._http.mount("https://",adapter)
-client._http._auth_request.session.mount("https://",adapter)
-query_job = client.query(QUERY)
-```
+    client = bigquery.Client()
+    adapter = requests.adapters.HTTPAdapter(pool_connections=128,
+    pool_maxsize=128,max_retries=3)
+    client._http.mount("https://",adapter)
+    client._http._auth_request.session.mount("https://",adapter)
+    query_job = client.query(QUERY)

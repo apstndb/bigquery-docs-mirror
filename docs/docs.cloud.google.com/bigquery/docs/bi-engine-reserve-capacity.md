@@ -60,14 +60,12 @@ Use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.cloud.googl
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER BI_CAPACITY `PROJECT_ID.LOCATION_ID.default`
-    SET OPTIONS (
-      size_gb = VALUE,
-      preferred_tables =
-        ['TABLE_PROJECT_ID.DATASET.TABLE1',
-        'TABLE_PROJECT_ID.DATASET.TABLE2']);
-    ```
+        ALTER BI_CAPACITY `PROJECT_ID.LOCATION_ID.default`
+        SET OPTIONS (
+          size_gb = VALUE,
+          preferred_tables =
+            ['TABLE_PROJECT_ID.DATASET.TABLE1',
+            'TABLE_PROJECT_ID.DATASET.TABLE2']);
     
     Replace the following:
     
@@ -101,14 +99,12 @@ To estimate capacity requirements for a BI Engine reservation, follow these step
 
 1.  View the [`TOTAL_LOGICAL_BYTES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to determine the logical size of the table, and use that for your initial BI Engine reservation. For example:
     
-    ``` notranslate
-    SELECT
-      SUM(TOTAL_LOGICAL_BYTES) / 1024.0 / 1024.0 / 1024.0 AS logical_size_gb
-    FROM
-      `region-us.INFORMATION_SCHEMA.TABLE_STORAGE`
-    WHERE
-      TABLE_NAME IN UNNEST(["Table1", "Table2"]);
-    ```
+        SELECT
+          SUM(TOTAL_LOGICAL_BYTES) / 1024.0 / 1024.0 / 1024.0 AS logical_size_gb
+        FROM
+          `region-us.INFORMATION_SCHEMA.TABLE_STORAGE`
+        WHERE
+          TABLE_NAME IN UNNEST(["Table1", "Table2"]);
     
     For example, for queries against a set of tables that contain a total of 200GiB of data, as a best practice you can start with a 200GiB BI Engine reservation. More selective queries that only use a subset of available fields or partitions could start with a smaller reservation size.
 
@@ -166,14 +162,12 @@ You can use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.clo
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER BI_CAPACITY `PROJECT_ID.LOCATION_ID.default`
-    SET OPTIONS (
-      size_gb = VALUE,
-      preferred_tables =
-        [`TABLE_PROJECT_ID.DATASET.TABLE1`,
-        `TABLE_PROJECT_ID.DATASET.TABLE2`]);
-    ```
+        ALTER BI_CAPACITY `PROJECT_ID.LOCATION_ID.default`
+        SET OPTIONS (
+          size_gb = VALUE,
+          preferred_tables =
+            [`TABLE_PROJECT_ID.DATASET.TABLE1`,
+            `TABLE_PROJECT_ID.DATASET.TABLE2`]);
     
     Replace the following:
     
@@ -208,11 +202,9 @@ Sets the options on BI Engine capacity.
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER BI_CAPACITY `PROJECT_ID.LOCATION_ID.default`
-    SET OPTIONS (
-      size_gb = 0);
-    ```
+        ALTER BI_CAPACITY `PROJECT_ID.LOCATION_ID.default`
+        SET OPTIONS (
+          size_gb = 0);
     
     Replace the following:
     
@@ -247,12 +239,10 @@ You can get information about your BI Engine capacity by querying the [`INFORMAT
 
 To verify the status of your reservation, including a set of preferred tables, view the `INFORMATION_SCHEMA.BI_CAPACITIES` view using a SQL query. For example:
 
-``` notranslate
-SELECT
-  *
-FROM
-  `<PROJECT_ID>.region-<REGION>.INFORMATION_SCHEMA.BI_CAPACITIES`;
-```
+    SELECT
+      *
+    FROM
+      `<PROJECT_ID>.region-<REGION>.INFORMATION_SCHEMA.BI_CAPACITIES`;
 
 In the Google Cloud console, the result of this SQL query looks similar to the following:
 
@@ -262,15 +252,13 @@ In the Google Cloud console, the result of this SQL query looks similar to the f
 
 To view the history of changes for a particular reservation, use the `INFORMATION_SCHEMA.BI_CAPACITY_CHANGES` view using a SQL query. For example:
 
-``` notranslate
-SELECT
-  *
-FROM
-  `<PROJECT_ID>.region-<REGION>.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES`
-ORDER BY
-  change_timestamp DESC
-LIMIT 3;
-```
+    SELECT
+      *
+    FROM
+      `<PROJECT_ID>.region-<REGION>.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES`
+    ORDER BY
+      change_timestamp DESC
+    LIMIT 3;
 
 In the Google Cloud console, the result of this SQL query looks similar to the following:
 

@@ -262,10 +262,8 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 
 1.  Write the schema to a local file.
     
-    ``` notranslate
-    bq show --schema --format=prettyjson \
-       project-id:dataset.table > schema.json
-    ```
+        bq show --schema --format=prettyjson \
+           project-id:dataset.table > schema.json
     
     where:
     
@@ -275,27 +273,23 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 
 2.  Modify schema.json to set a policy tag on a column. For the value of the `names` field of `policyTags` , use the [policy tag resource name](https://docs.cloud.google.com/bigquery/docs/column-data-masking#retrieve_policy_tag_name) .
     
-    ``` notranslate
-    [
-     ...
-     {
-       "name": "ssn",
-       "type": "STRING",
-       "mode": "REQUIRED",
-       "policyTags": {
-         "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
-       }
-     },
-     ...
-    ]
-    ```
+        [
+         ...
+         {
+           "name": "ssn",
+           "type": "STRING",
+           "mode": "REQUIRED",
+           "policyTags": {
+             "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
+           }
+         },
+         ...
+        ]
 
 3.  Update the schema.
     
-    ``` notranslate
-    bq update \
-       project-id:dataset.table schema.json
-    ```
+        bq update \
+           project-id:dataset.table schema.json
 
 ### API
 
@@ -974,7 +968,7 @@ To create a data policy, call the [`create`](https://docs.cloud.google.com/bigqu
 
 To create a data policy with masked access, use the `CREATE DATA_POLICY` statement and set the value of `data_policy_type` to `DATA_MASKING_POLICY` :
 
-``` notranslate
+``` 
     CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] `myproject.region-us.data_policy_name`
     OPTIONS (
       data_policy_type="DATA_MASKING_POLICY",
@@ -984,14 +978,14 @@ To create a data policy with masked access, use the `CREATE DATA_POLICY` stateme
 
 To create a data policy with raw access, use the `CREATE DATA_POLICY` statement and set the value of `data_policy_type` to `RAW_DATA_ACCESS_POLICY` :
 
-``` notranslate
+``` 
     CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] `myproject.region-us.data_policy_name`
     OPTIONS (data_policy_type="RAW_DATA_ACCESS_POLICY");
 ```
 
 If the value of `data_policy_type` isn't specified, the default value is `RAW_DATA_ACCESS_POLICY` .
 
-``` notranslate
+``` 
     CREATE[ OR REPLACE] DATA_POLICY [IF NOT EXISTS] myproject.region-us.data_policy_name;
 ```
 
@@ -1012,7 +1006,7 @@ To change the data masking rule, call the [`patch`](https://docs.cloud.google.co
 
 Use the `ALTER DATA_POLICY` statement to update the data masking rules. For example:
 
-``` notranslate
+``` 
     ALTER DATA_POLICY `myproject.region-us.data_policy_name`
     SET OPTIONS (
       data_policy_type="DATA_MASKING_POLICY",
@@ -1034,14 +1028,14 @@ To grant fine-grained access control access to data policies, call the [`patch`]
 
 To grant fine-grained access control access to data policies, use the `GRANT FINE_GRAINED_READ` statement to add `grantees` . For example:
 
-``` notranslate
+``` 
     GRANT FINE_GRAINED_READ ON DATA_POLICY `myproject.region-us.data_policy_name`
     TO "principal://goog/subject/user1@example.com","principal://goog/subject/user2@example.com"
 ```
 
 To revoke fine-grained access control access from data policies, use the `REVOKE FINE_GRAINED_READ` statement to remove `grantees` . For example:
 
-``` notranslate
+``` 
     REVOKE FINE_GRAINED_READ ON DATA_POLICY `myproject.region-us.data_policy_name`
     FROM "principal://goog/subject/user1@example.com","principal://goog/subject/user2@example.com"
 ```
@@ -1058,7 +1052,7 @@ To delete a data policy, call the [`delete`](https://docs.cloud.google.com/bigqu
 
 Use `DROP DATA_POLICY` statement to delete a data policy:
 
-``` notranslate
+``` 
     DROP DATA_POLICY `myproject.region-us.data_policy_name`;
 ```
 
@@ -1092,7 +1086,7 @@ To attach a data policy to a column, use the [`CREATE TABLE`](https://docs.cloud
 
 The following example uses the `CREATE TABLE` statement and sets data policies on a column:
 
-``` notranslate
+``` 
     CREATE TABLE myproject.table1 (
     name INT64 OPTIONS (data_policies=["{'name':'myproject.region-us.data_policy_name1'}",
                                       "{'name':'myproject.region-us.data_policy_name2'}"])
@@ -1101,12 +1095,10 @@ The following example uses the `CREATE TABLE` statement and sets data policies o
 
 The following example uses the `ALTER COLUMN SET OPTIONS` to add a data policy to an existing column on a table:
 
-``` notranslate
-ALTER TABLE myproject.table1
-ALTER COLUMN column_name SET OPTIONS (
-  data_policies += ["{'name':'myproject.region-us.data_policy_name1'}",
-                    "{'name':'myproject.region-us.data_policy_name2'}"]);
-```
+    ALTER TABLE myproject.table1
+    ALTER COLUMN column_name SET OPTIONS (
+      data_policies += ["{'name':'myproject.region-us.data_policy_name1'}",
+                        "{'name':'myproject.region-us.data_policy_name2'}"]);
 
 ### API
 
@@ -1122,19 +1114,15 @@ To detach a data policy to a column, use the [`ALTER COLUMN SET OPTIONS`](https:
 
 The following example uses the `ALTER COLUMN SET OPTIONS` to remove all data policies from an existing column on a table:
 
-``` notranslate
-ALTER TABLE myproject.table1
-ALTER COLUMN column_name SET OPTIONS (
-  data_policies = []);
-```
+    ALTER TABLE myproject.table1
+    ALTER COLUMN column_name SET OPTIONS (
+      data_policies = []);
 
 The following example uses the `ALTER COLUMN SET OPTIONS` to replace data policies from an existing column on a table:
 
-``` notranslate
-ALTER TABLE myproject.table1
-ALTER COLUMN column_name SET OPTIONS (
-  data_policies = ["{'name':'myproject.region-us.new_data_policy_name'}"]);
-```
+    ALTER TABLE myproject.table1
+    ALTER COLUMN column_name SET OPTIONS (
+      data_policies = ["{'name':'myproject.region-us.new_data_policy_name'}"]);
 
 ### API
 

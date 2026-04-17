@@ -57,17 +57,15 @@ Replace the following:
 
 The following example creates three search index options for columns of `table1` and then extracts those options from fields that are indexed:
 
-``` notranslate
-CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS) OPTIONS (
-  analyzer = 'LOG_ANALYZER',
-  analyzer_options = '{ "delimiters" : [".", "-"] }',
-  data_types = ['STRING', 'INT64', 'TIMESTAMP']
-);
-
-SELECT index_name, option_name, option_type, option_value
-FROM mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS
-WHERE table_name='table1';
-```
+    CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS) OPTIONS (
+      analyzer = 'LOG_ANALYZER',
+      analyzer_options = '{ "delimiters" : [".", "-"] }',
+      data_types = ['STRING', 'INT64', 'TIMESTAMP']
+    );
+    
+    SELECT index_name, option_name, option_type, option_value
+    FROM mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS
+    WHERE table_name='table1';
 
 The result is similar to the following:
 
@@ -81,15 +79,13 @@ The result is similar to the following:
 
 The following example creates one search index option for columns of `table1` and then extracts those options from fields that are indexed. If an option doesn't exist, the default option is produced:
 
-``` notranslate
-CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS) OPTIONS (
-  analyzer = 'NO_OP_ANALYZER'
-);
-
-SELECT index_name, option_name, option_type, option_value
-FROM mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS
-WHERE table_name='table1';
-```
+    CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS) OPTIONS (
+      analyzer = 'NO_OP_ANALYZER'
+    );
+    
+    SELECT index_name, option_name, option_type, option_value
+    FROM mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS
+    WHERE table_name='table1';
 
 The result is similar to the following:
 
@@ -102,13 +98,11 @@ The result is similar to the following:
 
 The following example creates no search index options for columns of `table1` and then extracts the default options from fields that are indexed:
 
-``` notranslate
-CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS);
-
-SELECT index_name, option_name, option_type, option_value
-FROM mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS
-WHERE table_name='table1';
-```
+    CREATE SEARCH INDEX myIndex ON `mydataset.table1` (ALL COLUMNS);
+    
+    SELECT index_name, option_name, option_type, option_value
+    FROM mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS
+    WHERE table_name='table1';
 
 The result is similar to the following:
 

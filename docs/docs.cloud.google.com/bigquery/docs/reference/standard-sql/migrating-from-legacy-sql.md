@@ -1289,18 +1289,16 @@ However, longer prefixes perform better than empty prefixes, so the following ex
 
 In legacy SQL, you can query the [`__PARTITIONS_SUMMARY__` meta-table](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#get_partition_metadata) to get partition metadata for a specific table.
 
-``` notranslate
-#legacySQL
-SELECT
-  partition_id,
-  project_id,
-  dataset_id,
-  table_id,
-  creation_time,
-  last_modified_time
-FROM
-  [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__];
-```
+    #legacySQL
+    SELECT
+      partition_id,
+      project_id,
+      dataset_id,
+      table_id,
+      creation_time,
+      last_modified_time
+    FROM
+      [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__];
 
 In GoogleSQL, you can query the [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) view instead.
 
@@ -1308,20 +1306,18 @@ In GoogleSQL, you can query the [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.c
 
 To migrate a query that uses `__PARTITIONS_SUMMARY__` and keep the output schema and error handling consistent, use the following GoogleSQL query:
 
-``` notranslate
-#standardSQL
-SELECT
-  IF(partition_id IS NOT NULL, partition_id, ERROR('Table is not partitioned')) AS partition_id,
-  table_catalog AS project_id,
-  table_schema AS dataset_id,
-  table_name AS table_id,
-  NULL AS creation_time, -- Partition creation time not available
-  UNIX_MILLIS(last_modified_time) AS last_modified_time
-FROM
-  `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
-WHERE
-  table_name = 'TABLE_NAME';
-```
+    #standardSQL
+    SELECT
+      IF(partition_id IS NOT NULL, partition_id, ERROR('Table is not partitioned')) AS partition_id,
+      table_catalog AS project_id,
+      table_schema AS dataset_id,
+      table_name AS table_id,
+      NULL AS creation_time, -- Partition creation time not available
+      UNIX_MILLIS(last_modified_time) AS last_modified_time
+    FROM
+      `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
+    WHERE
+      table_name = 'TABLE_NAME';
 
 > **Warning:** Partition-level `creation_time` isn't available in `INFORMATION_SCHEMA.PARTITIONS` and is set to `NULL` in the example. For table-level creation time, use the [`INFORMATION_SCHEMA.TABLES` `creation_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#schema) field.
 

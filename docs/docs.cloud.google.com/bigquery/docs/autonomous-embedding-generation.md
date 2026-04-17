@@ -57,23 +57,21 @@ You can either create an automatically generated embedding column within a new t
 
 You can use autonomous embedding generation to generate embeddings by using the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) in a [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
 
-``` notranslate
-CREATE TABLE DATASET_ID.TABLE (
-  [COLUMN, ...]
-  STRING_COL STRING,
-  EMBEDDING_COL_NAME STRUCT<result ARRAY<FLOAT64>, status STRING>
-    GENERATED ALWAYS AS (
-      AI.EMBED(
-        STRING_COL,
-        {
-          connection_id => CONNECTION_ID,
-          endpoint => ENDPOINT |
-          model => MODEL
-        })
-    )
-    STORED OPTIONS (asynchronous = TRUE)
-);
-```
+    CREATE TABLE DATASET_ID.TABLE (
+      [COLUMN, ...]
+      STRING_COL STRING,
+      EMBEDDING_COL_NAME STRUCT<result ARRAY<FLOAT64>, status STRING>
+        GENERATED ALWAYS AS (
+          AI.EMBED(
+            STRING_COL,
+            {
+              connection_id => CONNECTION_ID,
+              endpoint => ENDPOINT |
+              model => MODEL
+            })
+        )
+        STORED OPTIONS (asynchronous = TRUE)
+    );
 
 Replace the following:
 
@@ -99,19 +97,17 @@ Replace the following:
 
 You can also add an automatically generated embedding column to an existing table by using an [`ALTER TABLE ADD COLUMN` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) .
 
-``` notranslate
-ALTER TABLE DATASET_ID.TABLE
-  ADD COLUMN EMBEDDING_COL_NAME
-    STRUCT<result ARRAY<FLOAT64>, status STRING>
-    GENERATED ALWAYS AS (
-      AI.EMBED(
-        STRING_COL,
-        connection_id => CONNECTION_ID,
-        endpoint => ENDPOINT)
-    )
-    STORED OPTIONS (asynchronous = TRUE)
-;
-```
+    ALTER TABLE DATASET_ID.TABLE
+      ADD COLUMN EMBEDDING_COL_NAME
+        STRUCT<result ARRAY<FLOAT64>, status STRING>
+        GENERATED ALWAYS AS (
+          AI.EMBED(
+            STRING_COL,
+            connection_id => CONNECTION_ID,
+            endpoint => ENDPOINT)
+        )
+        STORED OPTIONS (asynchronous = TRUE)
+    ;
 
 The background embedding generation job starts shortly after your table is created or altered, or after you update data in the source column.
 

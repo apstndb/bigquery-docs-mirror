@@ -62,15 +62,13 @@ To run the query against a project other than your default project, add the proj
 
 For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT `` . The following example lists all users or service accounts that created sessions for a given project within the last day:
 
-``` notranslate
-SELECT
-  DISTINCT(user_email) AS user
-FROM
-  `region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT
-WHERE
-  is_active = true
-  AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY);
-```
+    SELECT
+      DISTINCT(user_email) AS user
+    FROM
+      `region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT
+    WHERE
+      is_active = true
+      AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY);
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

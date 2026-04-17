@@ -4,7 +4,7 @@ This document describes the `ML.ROC_CURVE` function, which you can use to evalua
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ROC_CURVE(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -65,39 +65,33 @@ The following examples assume your model and input table are in your default pro
 
 The following query returns all of the output columns for `ML.ROC_CURVE` . You can graph the `recall` and `false_positive_rate` values for an ROC curve. The threshold values returned are chosen based on the percentile values of the prediction output.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.ROC_CURVE(MODEL `mydataset.mymodel`,
-    TABLE `mydataset.mytable`)
-```
+    SELECT
+      *
+    FROM
+      ML.ROC_CURVE(MODEL `mydataset.mymodel`,
+        TABLE `mydataset.mytable`)
 
 ### Evaluate an ROC curve with custom thresholds
 
 The following query returns all of the output columns for `ML.ROC_CURVE` . The threshold values returned are chosen based on the output of the `GENERATE_ARRAY` function.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.ROC_CURVE(MODEL `mydataset.mymodel`,
-    TABLE `mydataset.mytable`,
-    GENERATE_ARRAY(0.4,0.6,0.01))
-```
+    SELECT
+      *
+    FROM
+      ML.ROC_CURVE(MODEL `mydataset.mymodel`,
+        TABLE `mydataset.mytable`,
+        GENERATE_ARRAY(0.4,0.6,0.01))
 
 ### Evaluate the precision-recall curve
 
 Instead of getting an ROC curve (the recall versus false positive rate), the following query calculates a precision-recall curve by using the precision from the true and false positive counts:
 
-``` notranslate
-SELECT
-  recall,
-  true_positives / (true_positives + false_positives) AS precision
-FROM
-  ML.ROC_CURVE(MODEL `mydataset.mymodel`,
-    TABLE `mydataset.mytable`)
-```
+    SELECT
+      recall,
+      true_positives / (true_positives + false_positives) AS precision
+    FROM
+      ML.ROC_CURVE(MODEL `mydataset.mymodel`,
+        TABLE `mydataset.mytable`)
 
 ## What's next
 

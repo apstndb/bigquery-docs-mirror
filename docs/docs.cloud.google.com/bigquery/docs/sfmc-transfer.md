@@ -148,15 +148,13 @@ Add Salesforce Marketing Cloud data into BigQuery by setting up a transfer confi
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) and supply the transfer creation flag — `--transfer_config` .
 
-``` notranslate
-bq mk
-    --transfer_config
-    --project_id=PROJECT_ID
-    --data_source=DATA_SOURCE
-    --display_name=DISPLAY_NAME
-    --target_dataset=DATASET
-    --params='PARAMETERS'
-```
+    bq mk
+        --transfer_config
+        --project_id=PROJECT_ID
+        --data_source=DATA_SOURCE
+        --display_name=DISPLAY_NAME
+        --target_dataset=DATASET
+        --params='PARAMETERS'
 
 Replace the following:
 
@@ -173,7 +171,7 @@ Replace the following:
 
 For example, the following command creates a Salesforce Marketing Cloud data transfer in the default project with all the required parameters:
 
-``` notranslate
+``` 
   bq mk
       --transfer_config
       --target_dataset=mydataset

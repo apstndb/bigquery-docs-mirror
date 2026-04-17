@@ -48,14 +48,12 @@ To create an IVF vector index, use the [`CREATE VECTOR INDEX`](https://docs.clou
     
     To create a [IVF](https://docs.cloud.google.com/bigquery/docs/vector-index#ivf-index) vector index:
     
-    ``` notranslate
-    CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] INDEX_NAME
-    ON DATASET_NAME.TABLE_NAME(COLUMN_NAME)
-    STORING(STORED_COLUMN_NAME [, ...])
-    OPTIONS(index_type = 'IVF',
-      distance_type = 'DISTANCE_TYPE',
-      ivf_options = '{"num_lists":NUM_LISTS}')
-    ```
+        CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] INDEX_NAME
+        ON DATASET_NAME.TABLE_NAME(COLUMN_NAME)
+        STORING(STORED_COLUMN_NAME [, ...])
+        OPTIONS(index_type = 'IVF',
+          distance_type = 'DISTANCE_TYPE',
+          ivf_options = '{"num_lists":NUM_LISTS}')
     
     Replace the following:
     
@@ -85,37 +83,31 @@ To create an IVF vector index, use the [`CREATE VECTOR INDEX`](https://docs.clou
 
 The following example creates a vector index on the `embedding` column of `my_table` :
 
-``` notranslate
-CREATE TABLE my_dataset.my_table(embedding ARRAY<FLOAT64>);
-
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
-OPTIONS(index_type = 'IVF');
-```
+    CREATE TABLE my_dataset.my_table(embedding ARRAY<FLOAT64>);
+    
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
+    OPTIONS(index_type = 'IVF');
 
 The following example creates a vector index on the `embedding` column of `my_table` , and specifies the distance type to use and the IVF options:
 
-``` notranslate
-CREATE TABLE my_dataset.my_table(embedding ARRAY<FLOAT64>);
-
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
-OPTIONS(index_type = 'IVF', distance_type = 'COSINE',
-ivf_options = '{"num_lists": 2500}')
-```
+    CREATE TABLE my_dataset.my_table(embedding ARRAY<FLOAT64>);
+    
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
+    OPTIONS(index_type = 'IVF', distance_type = 'COSINE',
+    ivf_options = '{"num_lists": 2500}')
 
 The following example creates a table with [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled and creates a vector index on the table. The `description_embedding` embedding column is automatically generated based on the `description` column.
 
-``` notranslate
-CREATE TABLE mydataset.products (
-  description STRING,
-  description_embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
-    GENERATED ALWAYS AS (
-      AI.EMBED(description, connection_id => 'us.example_connection',
-        endpoint => 'text-embedding-005'))
-    STORED OPTIONS( asynchronous = TRUE ));
-
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(description_embedding)
-OPTIONS(index_type = 'IVF');
-```
+    CREATE TABLE mydataset.products (
+      description STRING,
+      description_embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
+        GENERATED ALWAYS AS (
+          AI.EMBED(description, connection_id => 'us.example_connection',
+            endpoint => 'text-embedding-005'))
+        STORED OPTIONS( asynchronous = TRUE ));
+    
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(description_embedding)
+    OPTIONS(index_type = 'IVF');
 
 ## Create a TreeAH vector index
 
@@ -125,15 +117,13 @@ To create a TreeAH vector index, use the [`CREATE VECTOR INDEX`](https://docs.cl
 
 2.  In the query editor, run the following SQL statement:
     
-    ``` notranslate
-    CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] INDEX_NAME
-    ON DATASET_NAME.TABLE_NAME(COLUMN_NAME)
-    STORING(STORED_COLUMN_NAME [, ...])
-    OPTIONS(index_type = 'TREE_AH',
-      distance_type = 'DISTANCE_TYPE',
-      tree_ah_options = '{"leaf_node_embedding_count":LEAF_NODE_EMBEDDING_COUNT,
-        "normalization_type":"NORMALIZATION_TYPE"}')
-    ```
+        CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] INDEX_NAME
+        ON DATASET_NAME.TABLE_NAME(COLUMN_NAME)
+        STORING(STORED_COLUMN_NAME [, ...])
+        OPTIONS(index_type = 'TREE_AH',
+          distance_type = 'DISTANCE_TYPE',
+          tree_ah_options = '{"leaf_node_embedding_count":LEAF_NODE_EMBEDDING_COUNT,
+            "normalization_type":"NORMALIZATION_TYPE"}')
     
     Replace the following:
     
@@ -163,13 +153,11 @@ To create a TreeAH vector index, use the [`CREATE VECTOR INDEX`](https://docs.cl
 
 The following example creates a vector index on the `embedding` column of `my_table` , and specifies the distance type to use and the TreeAH options:
 
-``` notranslate
-CREATE TABLE my_dataset.my_table(id INT64, embedding ARRAY<FLOAT64>);
-
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
-OPTIONS (index_type = 'TREE_AH', distance_type = 'EUCLIDEAN',
-tree_ah_options = '{"normalization_type": "L2"}');
-```
+    CREATE TABLE my_dataset.my_table(id INT64, embedding ARRAY<FLOAT64>);
+    
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
+    OPTIONS (index_type = 'TREE_AH', distance_type = 'EUCLIDEAN',
+    tree_ah_options = '{"normalization_type": "L2"}');
 
 ## Filtering
 
@@ -190,70 +178,66 @@ To create a pre-filter, the `WHERE` clause of the query must apply to the base t
 
 The following example shows how to create a pre-filter:
 
-``` notranslate
--- Pre-filter on a stored column. The index speeds up the query.
-SELECT *
-FROM
-  VECTOR_SEARCH(
-    (SELECT * FROM my_dataset.my_table WHERE type = 'animal'),
-    'embedding',
-    TABLE my_dataset.my_testdata);
-
-SELECT *
-FROM
-  AI.SEARCH(
-    (SELECT * FROM my_dataset.my_table WHERE type = 'animal'),
-    'content',
-    'dog');
-
--- Filter on a column that isn't stored. The index is used to search the
--- entire table, and then the results are post-filtered. You might see fewer
--- than 5 matches returned for some embeddings.
-SELECT query.test_id, base.type, distance
-FROM
-  VECTOR_SEARCH(
-    (SELECT * FROM my_dataset.my_table WHERE id = 123),
-    'embedding',
-    TABLE my_dataset.my_testdata,
-    top_k => 5);
-
--- Use pre-filters with brute force. The data is filtered and then searched
--- with brute force for exact results.
-SELECT query.test_id, base.type, distance
-FROM
-  VECTOR_SEARCH(
-    (SELECT * FROM my_dataset.my_table WHERE id = 123),
-    'embedding',
-    TABLE my_dataset.my_testdata,
-    options => '{"use_brute_force":true}');
-```
+    -- Pre-filter on a stored column. The index speeds up the query.
+    SELECT *
+    FROM
+      VECTOR_SEARCH(
+        (SELECT * FROM my_dataset.my_table WHERE type = 'animal'),
+        'embedding',
+        TABLE my_dataset.my_testdata);
+    
+    SELECT *
+    FROM
+      AI.SEARCH(
+        (SELECT * FROM my_dataset.my_table WHERE type = 'animal'),
+        'content',
+        'dog');
+    
+    -- Filter on a column that isn't stored. The index is used to search the
+    -- entire table, and then the results are post-filtered. You might see fewer
+    -- than 5 matches returned for some embeddings.
+    SELECT query.test_id, base.type, distance
+    FROM
+      VECTOR_SEARCH(
+        (SELECT * FROM my_dataset.my_table WHERE id = 123),
+        'embedding',
+        TABLE my_dataset.my_testdata,
+        top_k => 5);
+    
+    -- Use pre-filters with brute force. The data is filtered and then searched
+    -- with brute force for exact results.
+    SELECT query.test_id, base.type, distance
+    FROM
+      VECTOR_SEARCH(
+        (SELECT * FROM my_dataset.my_table WHERE id = 123),
+        'embedding',
+        TABLE my_dataset.my_testdata,
+        options => '{"use_brute_force":true}');
 
 To create a post-filter, the `WHERE` clause of the query must be applied outside of the `VECTOR_SEARCH` function, so that it filters the results returned by the search.
 
 The following example shows how to create a post-filter:
 
-``` notranslate
--- Use post-filters. The index is used, but the entire table is searched and
--- the post-filtering might reduce the number of results.
-SELECT query.test_id, base.type, distance
-FROM
-  VECTOR_SEARCH(
-    TABLE my_dataset.my_table,
-    'embedding',
-    TABLE my_dataset.my_testdata,
-    top_k => 5)
-WHERE base.type = 'animal';
-
-SELECT base.id, distance
-FROM
-  VECTOR_SEARCH(
-    TABLE mydataset.base_table,
-    'embedding',
-    (SELECT embedding FROM mydataset.query_table),
-    top_k => 10
-  )
-WHERE type = 'document' AND year > 2022
-```
+    -- Use post-filters. The index is used, but the entire table is searched and
+    -- the post-filtering might reduce the number of results.
+    SELECT query.test_id, base.type, distance
+    FROM
+      VECTOR_SEARCH(
+        TABLE my_dataset.my_table,
+        'embedding',
+        TABLE my_dataset.my_testdata,
+        top_k => 5)
+    WHERE base.type = 'animal';
+    
+    SELECT base.id, distance
+    FROM
+      VECTOR_SEARCH(
+        TABLE mydataset.base_table,
+        'embedding',
+        (SELECT embedding FROM mydataset.query_table),
+        top_k => 10
+      )
+    WHERE type = 'document' AND year > 2022
 
 When you use post-filtering, or when the base table filters you specify reference non-stored columns and thus act as post-filters, the final result set might contain fewer than `top_k` rows, potentially even zero rows, if the predicate is selective. If you require a specific number of results after filtering, consider specifying a larger `top_k` value or increasing the `fraction_lists_to_search` value in the search function call.
 
@@ -271,26 +255,24 @@ To store columns, list them in the `STORING` clause of the [`CREATE VECTOR INDEX
 
 The following example creates a vector index with stored columns, and then runs a vector search query that only selects stored columns:
 
-``` notranslate
--- Create a table that contains an embedding.
-CREATE TABLE my_dataset.my_table(embedding ARRAY<FLOAT64>, type STRING, creation_time DATETIME, id INT64);
-
--- Create a query table that contains an embedding.
-CREATE TABLE my_dataset.my_testdata(embedding ARRAY<FLOAT64>, test_id INT64);
-
--- Create a vector index with stored columns.
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
-STORING (type, creation_time)
-OPTIONS (index_type = 'IVF');
-
--- Select only stored columns from a vector search to avoid an expensive join.
-SELECT query, base.type, distance
-FROM
-  VECTOR_SEARCH(
-    TABLE my_dataset.my_table,
-    'embedding'
-    TABLE my_dataset.my_testdata);
-```
+    -- Create a table that contains an embedding.
+    CREATE TABLE my_dataset.my_table(embedding ARRAY<FLOAT64>, type STRING, creation_time DATETIME, id INT64);
+    
+    -- Create a query table that contains an embedding.
+    CREATE TABLE my_dataset.my_testdata(embedding ARRAY<FLOAT64>, test_id INT64);
+    
+    -- Create a vector index with stored columns.
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
+    STORING (type, creation_time)
+    OPTIONS (index_type = 'IVF');
+    
+    -- Select only stored columns from a vector search to avoid an expensive join.
+    SELECT query, base.type, distance
+    FROM
+      VECTOR_SEARCH(
+        TABLE my_dataset.my_table,
+        'embedding'
+        TABLE my_dataset.my_testdata);
 
 #### Stored column limitations
 
@@ -316,103 +298,91 @@ Partitioning a vector index is only recommended if you use pre-filtering to limi
 
 To create a partitioned index, use the `PARTITION BY` clause of the [`CREATE VECTOR INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) . The `PARTITION BY` clause that you specify in the `CREATE VECTOR INDEX` statement must be the same as the `PARTITION BY` clause specified in the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) of the table that you are creating the vector index on, as shown in the following example:
 
-``` notranslate
--- Create a date-partitioned table.
-CREATE TABLE my_dataset.my_table(
-  embeddings ARRAY
-  id INT64,
-  date DATE,
-)
-PARTITION BY date;
-
--- Create a partitioned vector index on the table.
-CREATE VECTOR INDEX my_index ON my_dataset.my_table(embeddings)
-PARTITION BY date
-OPTIONS(index_type='TREE_AH', distance_type='COSINE');
-```
+    -- Create a date-partitioned table.
+    CREATE TABLE my_dataset.my_table(
+      embeddings ARRAY
+      id INT64,
+      date DATE,
+    )
+    PARTITION BY date;
+    
+    -- Create a partitioned vector index on the table.
+    CREATE VECTOR INDEX my_index ON my_dataset.my_table(embeddings)
+    PARTITION BY date
+    OPTIONS(index_type='TREE_AH', distance_type='COSINE');
 
 If the table uses integer range or time-unit column partitioning, the partitioning column is stored in the vector index, which increases storage cost. If a table column is used in both the `STORING` and `PARTITION BY` clauses of the `CREATE VECTOR INDEX` statement, the column is stored only once.
 
 To use the vector index partition, filter on the partitioning column in the base table subquery of the `VECTOR_SEARCH` or `AI.SEARCH` call. In the following example, the `samples.items` table is partitioned by the `produced_date` column, so the base table subquery in the `VECTOR_SEARCH` statement filters on the `produced_date` column:
 
-``` notranslate
-SELECT query.id, base.id, distance
-FROM VECTOR_SEARCH(
-  (SELECT * FROM my_dataset.my_table WHERE produced_date = '2025-01-01'),
-  'embedding',
-  TABLE samples.test,
-  distance_type => 'COSINE',
-  top_k => 10
-);
-```
+    SELECT query.id, base.id, distance
+    FROM VECTOR_SEARCH(
+      (SELECT * FROM my_dataset.my_table WHERE produced_date = '2025-01-01'),
+      'embedding',
+      TABLE samples.test,
+      distance_type => 'COSINE',
+      top_k => 10
+    );
 
 #### Examples
 
 Create a partitioned vector index on a datetime-partitioned table:
 
-``` notranslate
--- Create a datetime-partitioned table.
-CREATE TABLE my_dataset.my_table(
-  id INT64,
-  produced_date DATETIME,
-  embeddings ARRAY
-)
-PARTITION BY produced_date;
-
--- Create a partitioned vector index on the table.
-CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
-PARTITION BY produced_date
-OPTIONS(index_type='TREE_AH', distance_type='COSINE');
-```
+    -- Create a datetime-partitioned table.
+    CREATE TABLE my_dataset.my_table(
+      id INT64,
+      produced_date DATETIME,
+      embeddings ARRAY
+    )
+    PARTITION BY produced_date;
+    
+    -- Create a partitioned vector index on the table.
+    CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
+    PARTITION BY produced_date
+    OPTIONS(index_type='TREE_AH', distance_type='COSINE');
 
 Create a partitioned vector index on a timestamp-partitioned table:
 
-``` notranslate
--- Create a timestamp-partitioned table.
-CREATE TABLE my_dataset.my_table(
-  id INT64,
-  produced_time TIMESTAMP,
-  embeddings ARRAY
-)
-PARTITION BY TIMESTAMP_TRUNC(produced_time, HOUR);
-
--- Create a partitioned vector index on the table.
-CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
-PARTITION BY TIMESTAMP_TRUNC(produced_time, HOUR)
-OPTIONS(index_type='TREE_AH', distance_type='COSINE');
-```
+    -- Create a timestamp-partitioned table.
+    CREATE TABLE my_dataset.my_table(
+      id INT64,
+      produced_time TIMESTAMP,
+      embeddings ARRAY
+    )
+    PARTITION BY TIMESTAMP_TRUNC(produced_time, HOUR);
+    
+    -- Create a partitioned vector index on the table.
+    CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
+    PARTITION BY TIMESTAMP_TRUNC(produced_time, HOUR)
+    OPTIONS(index_type='TREE_AH', distance_type='COSINE');
 
 Create a partitioned vector index on an integer range-partitioned table:
 
-``` notranslate
--- Create a integer range-partitioned table.
-CREATE TABLE my_dataset.my_table(
-  id INT64,
-  embeddings ARRAY
-)
-PARTITION BY RANGE_BUCKET(id, GENERATE_ARRAY(-100, 100, 20));
-
--- Create a partitioned vector index on the table.
-CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
-PARTITION BY RANGE_BUCKET(id, GENERATE_ARRAY(-100, 100, 20))
-OPTIONS(index_type='TREE_AH', distance_type='COSINE');
-```
+    -- Create a integer range-partitioned table.
+    CREATE TABLE my_dataset.my_table(
+      id INT64,
+      embeddings ARRAY
+    )
+    PARTITION BY RANGE_BUCKET(id, GENERATE_ARRAY(-100, 100, 20));
+    
+    -- Create a partitioned vector index on the table.
+    CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
+    PARTITION BY RANGE_BUCKET(id, GENERATE_ARRAY(-100, 100, 20))
+    OPTIONS(index_type='TREE_AH', distance_type='COSINE');
 
 Create a partitioned vector index on an ingestion time-partitioned table:
 
-``` notranslate
--- Create a ingestion time-partitioned table.
-CREATE TABLE my_dataset.my_table(
-  id INT64,
-  embeddings ARRAY
-)
-PARTITION BY TIMESTAMP_TRUNC(_PARTITIONTIME, DAY);
-
--- Create a partitioned vector index on the table.
-CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
-PARTITION BY TIMESTAMP_TRUNC(_PARTITIONTIME, DAY)
-OPTIONS(index_type='TREE_AH', distance_type='COSINE');
-```
+    -- Create a ingestion time-partitioned table.
+    CREATE TABLE my_dataset.my_table(
+      id INT64,
+      embeddings ARRAY
+    )
+    PARTITION BY TIMESTAMP_TRUNC(_PARTITIONTIME, DAY);
+    
+    -- Create a partitioned vector index on the table.
+    CREATE VECTOR INDEX index0 ON my_dataset.my_table(embeddings)
+    PARTITION BY TIMESTAMP_TRUNC(_PARTITIONTIME, DAY)
+    OPTIONS(index_type='TREE_AH', distance_type='COSINE');
 
 ### Pre-filtering limitations
 
@@ -447,11 +417,9 @@ You can monitor the health of your vector indexes by querying `INFORMATION_SCHEM
 
 The following example shows all active vector indexes on tables in the dataset `my_dataset` , located in the project `my_project` . It includes their names, the DDL statements used to create them, and their coverage percentage. If an indexed base table is less than 10 MB, then its index is not populated, in which case the `coverage_percentage` value is 0.
 
-``` notranslate
-SELECT table_name, index_name, ddl, coverage_percentage
-FROM my_project.my_dataset.INFORMATION_SCHEMA.VECTOR_INDEXES
-WHERE index_status = 'ACTIVE';
-```
+    SELECT table_name, index_name, ddl, coverage_percentage
+    FROM my_project.my_dataset.INFORMATION_SCHEMA.VECTOR_INDEXES
+    WHERE index_status = 'ACTIVE';
 
 The result is similar to the following:
 
@@ -473,14 +441,12 @@ The result is similar to the following:
 
 The following query extracts information on columns that have vector indexes:
 
-``` notranslate
-SELECT table_name, index_name, index_column_name, index_field_path
-FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_COLUMNS;
-```
+    SELECT table_name, index_name, index_column_name, index_field_path
+    FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_COLUMNS;
 
 The result is similar to the following:
 
-``` console
+```console
 +------------+------------+-------------------+------------------+
 | table_name | index_name | index_column_name | index_field_path |
 +------------+------------+-------------------+------------------+
@@ -494,14 +460,12 @@ The result is similar to the following:
 
 The following query extracts information on vector index options:
 
-``` notranslate
-SELECT table_name, index_name, option_name, option_type, option_value
-FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_OPTIONS;
-```
+    SELECT table_name, index_name, option_name, option_type, option_value
+    FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_OPTIONS;
 
 The result is similar to the following:
 
-``` console
+```console
 +------------+------------+------------------+------------------+-------------------------------------------------------------------+
 | table_name | index_name | option_name      | option_type      | option_value                                                      |
 +------------+------------+------------------+------------------+-------------------------------------------------------------------+
@@ -535,7 +499,7 @@ When the index usage mode value is `UNUSED` or `PARTIALLY_USED` , the index unus
 
 For example, the following results returned by `bq show --format=prettyjson -j my_job_id` shows that the index was not used because the `use_brute_force` option was specified in the `VECTOR_SEARCH` function:
 
-``` console
+```console
 "vectorSearchStatistics": {
   "indexUnusedReasons": [
     {
@@ -590,13 +554,11 @@ Use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigque
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-    OPTIONS (
-      assignee = 'projects/PROJECT_ID',
-      job_type = 'BACKGROUND');
-    ```
+        CREATE ASSIGNMENT
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+        OPTIONS (
+          assignee = 'projects/PROJECT_ID',
+          job_type = 'BACKGROUND');
     
     Replace the following:
     
@@ -620,16 +582,14 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the `bq mk` command:
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_assignment \
-    --reservation_id=RESERVATION_NAME \
-    --assignee_id=PROJECT_ID \
-    --job_type=BACKGROUND \
-    --assignee_type=PROJECT
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --reservation_id=RESERVATION_NAME \
+        --assignee_id=PROJECT_ID \
+        --job_type=BACKGROUND \
+        --assignee_type=PROJECT
 
 Replace the following:
 
@@ -642,18 +602,16 @@ Replace the following:
 
 A new indexing job is created every time an index is created or updated on a single table. To view information about the job, query the [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . You can filter for indexing jobs by setting ``job_type IS NULL AND SEARCH(job_id, '`search_index`')`` in the `WHERE` clause of your query. The following example lists the five most recent indexing jobs in the project `my_project` :
 
-``` notranslate
-SELECT *
-FROM
- region-us.INFORMATION_SCHEMA.JOBS
-WHERE
-  project_id  = 'my_project'
-  AND job_type IS NULL
-  AND SEARCH(job_id, '`search_index`')
-ORDER BY
- creation_time DESC
-LIMIT 5;
-```
+    SELECT *
+    FROM
+     region-us.INFORMATION_SCHEMA.JOBS
+    WHERE
+      project_id  = 'my_project'
+      AND job_type IS NULL
+      AND SEARCH(job_id, '`search_index`')
+    ORDER BY
+     creation_time DESC
+    LIMIT 5;
 
 > **Note:** You can't view information about indexing jobs run in the default shared slot pool.
 
@@ -678,25 +636,23 @@ The number of slots you need for an index-management job on a table depends on t
 
 The best way to assess the number of slots you need to efficiently run your index-management jobs is to monitor your slot utilization and adjust the reservation size accordingly. The following query produces the daily slot usage for index-management jobs. Only the past 30 days are included in the region `us-west1` :
 
-``` notranslate
-SELECT
-  TIMESTAMP_TRUNC(job.creation_time, DAY) AS usage_date,
-  -- Aggregate total_slots_ms used for index-management jobs in a day and divide
-  -- by the number of milliseconds in a day. This value is most accurate for
-  -- days with consistent slot usage.
-  SAFE_DIVIDE(SUM(job.total_slot_ms), (1000 * 60 * 60 * 24)) AS average_daily_slot_usage
-FROM
-  `region-us-west1`.INFORMATION_SCHEMA.JOBS job
-WHERE
-  project_id = 'my_project'
-  AND job_type IS NULL
-  AND SEARCH(job_id, '`search_index`')
-GROUP BY
-  usage_date
-ORDER BY
-  usage_date DESC
-limit 30;
-```
+    SELECT
+      TIMESTAMP_TRUNC(job.creation_time, DAY) AS usage_date,
+      -- Aggregate total_slots_ms used for index-management jobs in a day and divide
+      -- by the number of milliseconds in a day. This value is most accurate for
+      -- days with consistent slot usage.
+      SAFE_DIVIDE(SUM(job.total_slot_ms), (1000 * 60 * 60 * 24)) AS average_daily_slot_usage
+    FROM
+      `region-us-west1`.INFORMATION_SCHEMA.JOBS job
+    WHERE
+      project_id = 'my_project'
+      AND job_type IS NULL
+      AND SEARCH(job_id, '`search_index`')
+    GROUP BY
+      usage_date
+    ORDER BY
+      usage_date DESC
+    limit 30;
 
 When there are insufficient slots to run index-management jobs, an index can become out of sync with its table and indexing jobs might fail. In this case, BigQuery rebuilds the index from scratch. To avoid having an out-of-sync index, ensure you have enough slots to support index updates from data ingestion and optimization. For more information on monitoring slot usage, see [admin resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
@@ -712,11 +668,9 @@ When table data changes significantly after a vector index is created, the vecto
 
 If you want to improve recall without increasing search query latency, rebuild the vector index. Alternatively, you can increase the value of the vector search's `fraction_lists_to_search` option to improve recall, but this typically makes the search query slower. To find out when an index was last built, run the following query:
 
-``` notranslate
-SELECT last_model_build_time
-FROM DATASET_NAME.INFORMATION_SCHEMA.VECTOR_INDEXES
-WHERE table_name = TABLE_NAME;
-```
+    SELECT last_model_build_time
+    FROM DATASET_NAME.INFORMATION_SCHEMA.VECTOR_INDEXES
+    WHERE table_name = TABLE_NAME;
 
 You can use the [`VECTOR_INDEX.STATISTICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics) to calculate how much an indexed table's data has drifted between when a vector index was created and the present. If table data has changed enough to require a vector index rebuild, you can use the [`ALTER VECTOR INDEX REBUILD` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_vector_index_rebuild_statement) to rebuild the vector index.
 
@@ -726,9 +680,7 @@ Follow these steps to rebuild a vector index:
 
 2.  In the query editor, run the following SQL statement to check the indexed table's data drift:
     
-    ``` notranslate
-    SELECT * FROM VECTOR_INDEX.STATISTICS(TABLE DATASET_NAME.TABLE_NAME);
-    ```
+        SELECT * FROM VECTOR_INDEX.STATISTICS(TABLE DATASET_NAME.TABLE_NAME);
     
     Replace the following:
     
@@ -739,11 +691,9 @@ Follow these steps to rebuild a vector index:
 
 3.  If the `VECTOR_INDEX.STATISTICS` function indicates that table data drift is significant, run the following SQL statement to rebuild the vector index:
     
-    ``` notranslate
-    ALTER VECTOR INDEX IF EXISTS INDEX_NAME
-    ON DATASET_NAME.TABLE_NAME
-    REBUILD;
-    ```
+        ALTER VECTOR INDEX IF EXISTS INDEX_NAME
+        ON DATASET_NAME.TABLE_NAME
+        REBUILD;
     
     Replace the following:
     
@@ -783,9 +733,7 @@ When you no longer need a vector index or want to change which column is indexed
 
 2.  In the query editor, run the following SQL statement:
     
-    ``` notranslate
-    DROP VECTOR INDEX INDEX_NAME ON DATASET_NAME.TABLE_NAME;
-    ```
+        DROP VECTOR INDEX INDEX_NAME ON DATASET_NAME.TABLE_NAME;
     
     Replace the following:
     

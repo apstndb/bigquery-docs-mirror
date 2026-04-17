@@ -91,12 +91,10 @@ For example, you have the following Parquet files in Cloud Storage:
 
 Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `mybucket/01/b.parquet` :
 
-``` notranslate
-bq load \
---source_format=PARQUET \
-dataset.table \
-"gs://mybucket/00/*.parquet","gs://mybucket/01/*.parquet"
-```
+    bq load \
+    --source_format=PARQUET \
+    dataset.table \
+    "gs://mybucket/00/*.parquet","gs://mybucket/01/*.parquet"
 
 When you load multiple Parquet files that have different schemas, identical columns specified in multiple schemas must have the same [mode](https://docs.cloud.google.com/bigquery/docs/schemas#modes) in each schema definition.
 
@@ -168,12 +166,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA OVERWRITE mydataset.mytable
-    FROM FILES (
-      format = 'PARQUET',
-      uris = ['gs://bucket/path/file.parquet']);
-    ```
+        LOAD DATA OVERWRITE mydataset.mytable
+        FROM FILES (
+          format = 'PARQUET',
+          uris = ['gs://bucket/path/file.parquet']);
 
 3.  Click play\_circle **Run** .
 
@@ -215,12 +211,10 @@ Other optional flags include:
 
 To load Parquet data into BigQuery, enter the following command:
 
-``` notranslate
-bq --location=LOCATION load \
---source_format=FORMAT \
-DATASET.TABLE \
-PATH_TO_SOURCE
-```
+    bq --location=LOCATION load \
+    --source_format=FORMAT \
+    DATASET.TABLE \
+    PATH_TO_SOURCE
 
 Replace the following:
 
@@ -602,12 +596,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA INTO mydataset.mytable
-    FROM FILES (
-      format = 'PARQUET',
-      uris = ['gs://bucket/path/file.parquet']);
-    ```
+        LOAD DATA INTO mydataset.mytable
+        FROM FILES (
+          format = 'PARQUET',
+          uris = ['gs://bucket/path/file.parquet']);
 
 3.  Click play\_circle **Run** .
 
@@ -627,13 +619,11 @@ Other optional flags include:
 
 <!-- end list -->
 
-``` notranslate
-bq --location=LOCATION load \
---[no]replace \
---source_format=FORMAT \
-DATASET.TABLE \
-PATH_TO_SOURCE
-```
+    bq --location=LOCATION load \
+    --[no]replace \
+    --source_format=FORMAT \
+    DATASET.TABLE \
+    PATH_TO_SOURCE
 
 Replace the following:
 

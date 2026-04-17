@@ -129,13 +129,11 @@ You can create a permanent external table by running the [`CREATE EXTERNAL TABLE
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-      OPTIONS (
-        format ="TABLE_FORMAT",
-        uris = ['BUCKET_PATH'[,...]]
-        );
-    ```
+        CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+          OPTIONS (
+            format ="TABLE_FORMAT",
+            uris = ['BUCKET_PATH'[,...]]
+            );
     
     Replace the following:
     
@@ -171,25 +169,21 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The following example uses schema auto-detection to create an external table named `sales` that is linked to a CSV file stored in Cloud Storage:
 
-``` notranslate
-CREATE OR REPLACE EXTERNAL TABLE mydataset.sales
-  OPTIONS (
-  format = 'CSV',
-  uris = ['gs://mybucket/sales.csv']);
-```
+    CREATE OR REPLACE EXTERNAL TABLE mydataset.sales
+      OPTIONS (
+      format = 'CSV',
+      uris = ['gs://mybucket/sales.csv']);
 
 The next example specifies a schema explicitly and skips the first row in the CSV file:
 
-``` notranslate
-CREATE OR REPLACE EXTERNAL TABLE mydataset.sales (
-  Region STRING,
-  Quarter STRING,
-  Total_Sales INT64
-) OPTIONS (
-    format = 'CSV',
-    uris = ['gs://mybucket/sales.csv'],
-    skip_leading_rows = 1);
-```
+    CREATE OR REPLACE EXTERNAL TABLE mydataset.sales (
+      Region STRING,
+      Quarter STRING,
+      Total_Sales INT64
+    ) OPTIONS (
+        format = 'CSV',
+        uris = ['gs://mybucket/sales.csv'],
+        skip_leading_rows = 1);
 
 ### bq
 
@@ -199,15 +193,13 @@ To create an external table, use the [`bq mk` command](https://docs.cloud.google
 
 Use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) command to create a table definition file, and then pass the file path to the `bq mk` command as follows:
 
-``` notranslate
-bq mkdef --source_format=SOURCE_FORMAT \
-  BUCKET_PATH > DEFINITION_FILE
-
-bq mk --table \
-  --external_table_definition=DEFINITION_FILE \
-  DATASET_NAME.TABLE_NAME \
-  SCHEMA
-```
+    bq mkdef --source_format=SOURCE_FORMAT \
+      BUCKET_PATH > DEFINITION_FILE
+    
+    bq mk --table \
+      --external_table_definition=DEFINITION_FILE \
+      DATASET_NAME.TABLE_NAME \
+      SCHEMA
 
 Replace the following:
 
@@ -257,12 +249,10 @@ To use schema auto-detection, set the `--autodetect=true` flag in the `mkdef` co
 
 Instead of creating a table definition file, you can pass the table definition directly to the `bq mk` command:
 
-``` notranslate
-bq mk --table \
-  --external_table_definition=@SOURCE_FORMAT=BUCKET_PATH \
-  DATASET_NAME.TABLE_NAME \
-  SCHEMA
-```
+    bq mk --table \
+      --external_table_definition=@SOURCE_FORMAT=BUCKET_PATH \
+      DATASET_NAME.TABLE_NAME \
+      SCHEMA
 
 Replace the following:
 
@@ -523,15 +513,13 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 The following example uses automatic detection of Hive partition keys:
 
-``` notranslate
-CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-WITH PARTITION COLUMNS
-OPTIONS (
-format = 'SOURCE_FORMAT',
-uris = ['GCS_URIS'],
-hive_partition_uri_prefix = 'GCS_URI_SHARED_PREFIX',
-require_hive_partition_filter = BOOLEAN);
-```
+    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+    WITH PARTITION COLUMNS
+    OPTIONS (
+    format = 'SOURCE_FORMAT',
+    uris = ['GCS_URIS'],
+    hive_partition_uri_prefix = 'GCS_URI_SHARED_PREFIX',
+    require_hive_partition_filter = BOOLEAN);
 
 Replace the following:
 
@@ -542,15 +530,13 @@ Replace the following:
 
 The following example uses custom Hive partition keys and types by listing them in the `WITH PARTITION COLUMNS` clause:
 
-``` notranslate
-CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-WITH PARTITION COLUMNS (PARTITION_COLUMN_LIST)
-OPTIONS (
-format = 'SOURCE_FORMAT',
-uris = ['GCS_URIS'],
-hive_partition_uri_prefix = 'GCS_URI_SHARED_PREFIX',
-require_hive_partition_filter = BOOLEAN);
-```
+    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+    WITH PARTITION COLUMNS (PARTITION_COLUMN_LIST)
+    OPTIONS (
+    format = 'SOURCE_FORMAT',
+    uris = ['GCS_URIS'],
+    hive_partition_uri_prefix = 'GCS_URI_SHARED_PREFIX',
+    require_hive_partition_filter = BOOLEAN);
 
 Replace the following:
 
@@ -558,48 +544,40 @@ Replace the following:
 
 <!-- end list -->
 
-``` notranslate
-KEY1 TYPE1, KEY2 TYPE2
-```
+    KEY1 TYPE1, KEY2 TYPE2
 
 The following example creates an externally partitioned table. It uses schema auto-detection to detect both the file schema and the hive partitioning layout. If the external path is `gs://bucket/path/field_1=first/field_2=1/data.parquet` , the partition columns are detected as `field_1` ( `STRING` ) and `field_2` ( `INT64` ).
 
-``` notranslate
-CREATE EXTERNAL TABLE dataset.AutoHivePartitionedTable
-WITH PARTITION COLUMNS
-OPTIONS (
-uris = ['gs://bucket/path/*'],
-format = 'PARQUET',
-hive_partition_uri_prefix = 'gs://bucket/path',
-require_hive_partition_filter = false);
-```
+    CREATE EXTERNAL TABLE dataset.AutoHivePartitionedTable
+    WITH PARTITION COLUMNS
+    OPTIONS (
+    uris = ['gs://bucket/path/*'],
+    format = 'PARQUET',
+    hive_partition_uri_prefix = 'gs://bucket/path',
+    require_hive_partition_filter = false);
 
 The following example creates an externally partitioned table by explicitly specifying the partition columns. This example assumes that the external file path has the pattern `gs://bucket/path/field_1=first/field_2=1/data.parquet` .
 
-``` notranslate
-CREATE EXTERNAL TABLE dataset.CustomHivePartitionedTable
-WITH PARTITION COLUMNS (
-field_1 STRING, -- column order must match the external path
-field_2 INT64)
-OPTIONS (
-uris = ['gs://bucket/path/*'],
-format = 'PARQUET',
-hive_partition_uri_prefix = 'gs://bucket/path',
-require_hive_partition_filter = false);
-```
+    CREATE EXTERNAL TABLE dataset.CustomHivePartitionedTable
+    WITH PARTITION COLUMNS (
+    field_1 STRING, -- column order must match the external path
+    field_2 INT64)
+    OPTIONS (
+    uris = ['gs://bucket/path/*'],
+    format = 'PARQUET',
+    hive_partition_uri_prefix = 'gs://bucket/path',
+    require_hive_partition_filter = false);
 
 ### bq
 
 First, use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) command to create a table definition file:
 
-``` notranslate
-bq mkdef \
---source_format=SOURCE_FORMAT \
---hive_partitioning_mode=PARTITIONING_MODE \
---hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX \
---require_hive_partition_filter=BOOLEAN \
- GCS_URIS > DEFINITION_FILE
-```
+    bq mkdef \
+    --source_format=SOURCE_FORMAT \
+    --hive_partitioning_mode=PARTITIONING_MODE \
+    --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX \
+    --require_hive_partition_filter=BOOLEAN \
+     GCS_URIS > DEFINITION_FILE
 
 Replace the following:
 
@@ -615,17 +593,13 @@ Replace the following:
 
 If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the source URI prefix, using the following format:
 
-``` notranslate
---hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
-```
+    --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 
 After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the external table:
 
-``` notranslate
-bq mk --external_table_definition=DEFINITION_FILE \
-DATASET_NAME.TABLE_NAME \
-SCHEMA
-```
+    bq mk --external_table_definition=DEFINITION_FILE \
+    DATASET_NAME.TABLE_NAME \
+    SCHEMA
 
 Replace the following:
 
@@ -752,17 +726,15 @@ Use the [`CREATE OR REPLACE EXTERNAL TABLE` DDL statement](https://docs.cloud.go
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE
-      `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-      WITH CONNECTION {`REGION.CONNECTION_ID` | DEFAULT}
-      OPTIONS(
-        format ="TABLE_FORMAT",
-        uris = ['BUCKET_PATH'],
-        max_staleness = STALENESS_INTERVAL,
-        metadata_cache_mode = 'CACHE_MODE'
-        );
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE
+          `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+          WITH CONNECTION {`REGION.CONNECTION_ID` | DEFAULT}
+          OPTIONS(
+            format ="TABLE_FORMAT",
+            uris = ['BUCKET_PATH'],
+            max_staleness = STALENESS_INTERVAL,
+            metadata_cache_mode = 'CACHE_MODE'
+            );
     
     Replace the following:
     
@@ -826,12 +798,10 @@ Use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cl
 
 1.  Generate an [external table definition](https://docs.cloud.google.com/bigquery/external-table-definition#table-definition) , that describes the aspects of the table to change:
     
-    ``` notranslate
-    bq mkdef --connection_id=PROJECT_ID.REGION.CONNECTION_ID \
-    --source_format=TABLE_FORMAT \
-    --metadata_cache_mode=CACHE_MODE \
-    "BUCKET_PATH" > /tmp/DEFINITION_FILE
-    ```
+        bq mkdef --connection_id=PROJECT_ID.REGION.CONNECTION_ID \
+        --source_format=TABLE_FORMAT \
+        --metadata_cache_mode=CACHE_MODE \
+        "BUCKET_PATH" > /tmp/DEFINITION_FILE
     
     Replace the following:
     
@@ -871,11 +841,9 @@ Use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cl
 
 2.  Update the table using the new external table definition:
     
-    ``` notranslate
-    bq update --max_staleness=STALENESS_INTERVAL \
-    --external_table_definition=/tmp/DEFINITION_FILE \
-    PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME
-    ```
+        bq update --max_staleness=STALENESS_INTERVAL \
+        --external_table_definition=/tmp/DEFINITION_FILE \
+        PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME
     
     Replace the following:
     

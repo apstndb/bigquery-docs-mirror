@@ -232,17 +232,15 @@ The following example shows how to return storage information by project for tab
 
 The following example shows you which projects in an organization are currently using the most storage.
 
-``` notranslate
-SELECT
-  project_id,
-  SUM(total_logical_bytes) AS total_logical_bytes
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION
-GROUP BY
-  project_id
-ORDER BY
-  total_logical_bytes DESC;
-```
+    SELECT
+      project_id,
+      SUM(total_logical_bytes) AS total_logical_bytes
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION
+    GROUP BY
+      project_id
+    ORDER BY
+      total_logical_bytes DESC;
 
 The result is similar to the following:
 

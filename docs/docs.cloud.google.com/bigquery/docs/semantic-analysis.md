@@ -93,7 +93,7 @@ The following query shows how to use the `AI.CLASSIFY` function to classify revi
 
 The result looks similar to the following:
 
-``` console
+```console
 +-----------+------------------------------------------+-----------+
 | review_id | review_text                              | sentiment |
 +-----------+------------------------------------------+-----------+
@@ -160,7 +160,7 @@ The following example shows how to use the `AI.SCORE` function to rate user sent
 
 The result looks similar to the following:
 
-``` console
+```console
 +-----------+------------------------------------------+--------------+---------------+---------------+
 | review_id | review_text                              |  price_score | service_score | quality_score |
 +-----------+------------------------------------------+--------------+---------------+---------------+
@@ -197,7 +197,7 @@ In addition to positive or negative sentiment, you can classify text based on sp
 
 The result looks similar to the following:
 
-``` console
+```console
 +-----------+------------------------------------------+---------+
 | review_id | review_text                              | emotion |
 +-----------+------------------------------------------+---------+
@@ -264,7 +264,7 @@ The following example shows how to classify customer feedback into various types
 
 The result looks similar to the following:
 
-``` console
+```console
 +----------------+-------------------+
 | topic          | number_of_reviews |
 +----------------+-------------------+
@@ -298,7 +298,7 @@ The following query finds reviews that discuss difficulty setting up the product
 
 The result looks similar to the following:
 
-``` console
+```console
 +-----------+------------------------------------------+------------------+
 | review_id | review_text                              | setup_difficulty |
 +-----------+------------------------------------------+------------------+

@@ -171,10 +171,8 @@ BigQuery Data Transfer Service logs are indexed first by the transfer configurat
 
 To show only the log entries from a given transfer `run_id` , in the **Query builder** , add the following filters:
 
-``` notranslate
-resource.type="bigquery_dts_config"
-labels.run_id="transfer_run_id"
-```
+    resource.type="bigquery_dts_config"
+    labels.run_id="transfer_run_id"
 
 ![View run logs.](https://docs.cloud.google.com/static/bigquery/images/cloud-logging-view-run-logs.png)
 
@@ -182,10 +180,8 @@ labels.run_id="transfer_run_id"
 
 To show log entries from a given transfer `config_id` , in the **Query builder** , add the following filters:
 
-``` notranslate
-resource.type="bigquery_dts_config"
-resource.labels.config_id="transfer_config_id"
-```
+    resource.type="bigquery_dts_config"
+    resource.labels.config_id="transfer_config_id"
 
 #### View all logs
 
@@ -197,9 +193,7 @@ To see all BigQuery Data Transfer Service logs, do one of the following:
 
   - In the **Query builder** , add the following filter:
     
-    ``` notranslate
-    resource.type="bigquery_dts_config"
-    ```
+        resource.type="bigquery_dts_config"
 
 For more information about how to use the Log Explorer, see [Using the Log Explorer](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface) .
 
@@ -207,29 +201,27 @@ For more information about how to use the Log Explorer, see [Using the Log Explo
 
 BigQuery Data Transfer Service logs messages in the following format:
 
-``` notranslate
-{
-  "insertId": "0000000000",
-  "jsonPayload": {
-    "message": "DTS transfer run message."
-  },
-  "resource": {
-    "type": "bigquery_dts_config",
-    "labels": {
-      "project_id": "my_project_id",
-      "config_id": "transfer_config_id",
-      "location": "us"
+    {
+      "insertId": "0000000000",
+      "jsonPayload": {
+        "message": "DTS transfer run message."
+      },
+      "resource": {
+        "type": "bigquery_dts_config",
+        "labels": {
+          "project_id": "my_project_id",
+          "config_id": "transfer_config_id",
+          "location": "us"
+        }
+      },
+      "timestamp": "2020-11-25T04:45:48.545732221Z",
+      "severity": "INFO",
+      "labels": {
+        "run_id": "transfer_run_id"
+      },
+      "logName": "projects/your_project_id/logs/bigquerydatatransfer.googleapis.com%2Ftransfer_config",
+      "receiveTimestamp": "2020-11-25T04:45:48.960214929Z"
     }
-  },
-  "timestamp": "2020-11-25T04:45:48.545732221Z",
-  "severity": "INFO",
-  "labels": {
-    "run_id": "transfer_run_id"
-  },
-  "logName": "projects/your_project_id/logs/bigquerydatatransfer.googleapis.com%2Ftransfer_config",
-  "receiveTimestamp": "2020-11-25T04:45:48.960214929Z"
-}
-```
 
 ### What is logged
 

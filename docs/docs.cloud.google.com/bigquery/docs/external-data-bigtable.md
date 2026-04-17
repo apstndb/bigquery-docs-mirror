@@ -88,12 +88,10 @@ To query a temporary table using a table definition file, enter the `bq query` c
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-``` notranslate
-bq --location=LOCATION query \
---use_legacy_sql=false \
---external_table_definition=TABLE::DEFINITION_FILE \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --use_legacy_sql=false \
+    --external_table_definition=TABLE::DEFINITION_FILE \
+    'QUERY'
 
 Replace the following:
 
@@ -262,14 +260,12 @@ You can add query filters when querying an external table to reduce BigQuery res
 
 Queries with a row key equality filter only read that specific row. For example, in GoogleSQL syntax:
 
-``` notranslate
-SELECT
-  COUNT(follows.column.name)
-FROM
-  `dataset.table`
-WHERE
-  rowkey = "alice";
-```
+    SELECT
+      COUNT(follows.column.name)
+    FROM
+      `dataset.table`
+    WHERE
+      rowkey = "alice";
 
 Range filters such as `rowkey > '1'` and `rowkey < '8'` are also supported, but only when rowkey is read as a string with the `readRowkeyAsString` option.
 
@@ -279,18 +275,16 @@ Range filters such as `rowkey > '1'` and `rowkey < '8'` are also supported, but 
 
 You can also select a specific column family or a specific qualifier within a column family. To filter by column family, select the column family name, and the result includes only the selected column family. In the following example, `user_info` represents a column family:
 
-``` notranslate
+``` 
     SELECT      rowkey AS user_id,      user_info    FROM      project.dataset.table;
 ```
 
 To filter by a specific qualifier, you must first declare them in `"columns"` in the external table definition:
 
-``` notranslate
-CREATE OR REPLACE EXTERNAL TABLE project.dataset.table  OPTIONS (    format = 'CLOUD_BIGTABLE',    uris = ['https://googleapis.com/bigtable/projects/…/instances/…/tables/…'],    bigtable_options = '''{  "columnFamilies": [    {      "familyId": "user_info",      "columns": [        {          "qualifierString": "name"        },        {          "qualifierString": "email"        },        {          "qualifierString": "registered_at"        }      ]    },    {      "familyId": "session_data"    }  ],  "readRowkeyAsString": true,  "timestampSuffix": "_ts"}'''  );
-```
+    CREATE OR REPLACE EXTERNAL TABLE project.dataset.table  OPTIONS (    format = 'CLOUD_BIGTABLE',    uris = ['https://googleapis.com/bigtable/projects/…/instances/…/tables/…'],    bigtable_options = '''{  "columnFamilies": [    {      "familyId": "user_info",      "columns": [        {          "qualifierString": "name"        },        {          "qualifierString": "email"        },        {          "qualifierString": "registered_at"        }      ]    },    {      "familyId": "session_data"    }  ],  "readRowkeyAsString": true,  "timestampSuffix": "_ts"}'''  );
 
 After the external table is created, use a `SELECT` statement to query a specific qualifier. This ensures that BigQuery pushes down the filter to Bigtable and only loads the specified qualifiers when running a `SELECT` statement from BigQuery, not the entire column family's data. This reduces BigQuery resource consumption.
 
-``` notranslate
+``` 
     SELECT      rowkey AS user_id,      user_info.email.cell[SAFE_OFFSET(0)].value as email    FROM      project.dataset.table;
 ```

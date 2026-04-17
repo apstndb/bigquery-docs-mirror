@@ -57,12 +57,10 @@ Query the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/big
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      COLUMN_LIST
-    FROM
-       { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES;
-    ```
+        SELECT
+          COLUMN_LIST
+        FROM
+           { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES;
 
 3.  Click play\_circle **Run** .
 
@@ -76,12 +74,10 @@ Replace the following:
 
 Example:
 
-``` notranslate
-SELECT
-  routine_name, routine_type, routine_body
-FROM
-  mydataset.INFORMATION_SCHEMA.ROUTINES;
-```
+    SELECT
+      routine_name, routine_type, routine_body
+    FROM
+      mydataset.INFORMATION_SCHEMA.ROUTINES;
 
     +------------------+----------------+--------------+
     |   routine_name   |  routine_type  | routine_body |
@@ -95,9 +91,7 @@ FROM
 
 Use the [`bq ls` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) with the `--routines` flag:
 
-``` notranslate
-bq ls --routines DATASET
-```
+    bq ls --routines DATASET
 
 Replace the following:
 
@@ -105,9 +99,7 @@ Replace the following:
 
 Example:
 
-``` notranslate
-bq ls --routines mydataset
-```
+    bq ls --routines mydataset
 
 ``` 
          Id              Routine Type        Language    Creation Time    Last Modified Time
@@ -147,14 +139,12 @@ Select the `routine_definition` column of the [`INFORMATION_SCHEMA.ROUTINES` vie
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      routine_definition
-    FROM
-      { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES
-    WHERE
-      routine_name = ROUTINE_NAME;
-    ```
+        SELECT
+          routine_definition
+        FROM
+          { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES
+        WHERE
+          routine_name = ROUTINE_NAME;
 
 3.  Click play\_circle **Run** .
 
@@ -168,14 +158,12 @@ Replace the following:
 
 Example:
 
-``` notranslate
-SELECT
-  routine_definition
-FROM
-  mydataset.INFORMATION_SCHEMA.ROUTINES
-WHERE
-  routine_name = 'AddFourAndDivide';
-```
+    SELECT
+      routine_definition
+    FROM
+      mydataset.INFORMATION_SCHEMA.ROUTINES
+    WHERE
+      routine_name = 'AddFourAndDivide';
 
     +--------------------+
     | routine_definition |
@@ -187,9 +175,7 @@ WHERE
 
 Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) with the `--routine` flag:
 
-``` notranslate
-bq show --routine DATASET.ROUTINE_NAME
-```
+    bq show --routine DATASET.ROUTINE_NAME
 
 Replace the following:
 
@@ -198,9 +184,7 @@ Replace the following:
 
 Example:
 
-``` notranslate
-bq show --routine mydataset.AddFourAndDivide
-```
+    bq show --routine mydataset.AddFourAndDivide
 
 ``` 
          Id           Routine Type     Language             Signature             Definition     Creation Time    Last Modified Time
@@ -250,9 +234,7 @@ Example:
 
 Use the [`bq rm` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) with the `--routine` flag:
 
-``` notranslate
-bq rm --routine DATASET.ROUTINE_NAME
-```
+    bq rm --routine DATASET.ROUTINE_NAME
 
 Replace the following:
 

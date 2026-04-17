@@ -99,7 +99,7 @@ In the **Create table** pane, specify the following details:
 3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. You can enter schema information manually by using one of the following methods:
       - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
         
-        ``` notranslate
+        ``` 
             bq show --format=prettyjson dataset.table
             
         ```
@@ -117,17 +117,15 @@ Use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/do
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.myclusteredtable
-    (
-      customer_id STRING,
-      transaction_amount NUMERIC
-    )
-    CLUSTER BY
-      customer_id
-      OPTIONS (
-        description = 'a table clustered by customer_id');
-    ```
+        CREATE TABLE mydataset.myclusteredtable
+        (
+          customer_id STRING,
+          transaction_amount NUMERIC
+        )
+        CLUSTER BY
+          customer_id
+          OPTIONS (
+            description = 'a table clustered by customer_id');
 
 3.  Click play\_circle **Run** .
 
@@ -149,16 +147,14 @@ If you are creating a table in a project other than your default project, add th
 
 Enter the following command to create an empty clustered table with a schema definition:
 
-``` notranslate
-bq mk \
-    --table \
-    --expiration INTEGER1 \
-    --schema SCHEMA \
-    --clustering_fields CLUSTER_COLUMNS \
-    --description "DESCRIPTION" \
-    --label KEY:VALUE,KEY:VALUE \
-    PROJECT_ID:DATASET.TABLE
-```
+    bq mk \
+        --table \
+        --expiration INTEGER1 \
+        --schema SCHEMA \
+        --clustering_fields CLUSTER_COLUMNS \
+        --description "DESCRIPTION" \
+        --label KEY:VALUE,KEY:VALUE \
+        PROJECT_ID:DATASET.TABLE
 
 Replace the following:
 
@@ -213,7 +209,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a table named `mytable` that is clustered on the `ID` and `Created` columns:
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -479,18 +475,16 @@ To create a clustered table from a query result, use the [`CREATE TABLE` DDL sta
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.clustered_table
-    (
-      customer_id STRING,
-      transaction_amount NUMERIC
-    )
-    CLUSTER BY
-      customer_id
-    AS (
-      SELECT * FROM mydataset.unclustered_table
-    );
-    ```
+        CREATE TABLE mydataset.clustered_table
+        (
+          customer_id STRING,
+          transaction_amount NUMERIC
+        )
+        CLUSTER BY
+          customer_id
+        AS (
+          SELECT * FROM mydataset.unclustered_table
+        );
 
 3.  Click play\_circle **Run** .
 
@@ -500,10 +494,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command to create a new, clustered destination table from a query result:
 
-``` notranslate
-bq --location=LOCATION query \
-    --use_legacy_sql=false 'QUERY'
-```
+    bq --location=LOCATION query \
+        --use_legacy_sql=false 'QUERY'
 
 Replace the following:
 
@@ -550,16 +542,14 @@ Use the [`LOAD DATA` statement](https://docs.cloud.google.com/bigquery/docs/refe
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA INTO mydataset.mytable
-    PARTITION BY transaction_date
-    CLUSTER BY customer_id
-      OPTIONS (
-        partition_expiration_days = 3)
-    FROM FILES(
-      format = 'AVRO',
-      uris = ['gs://bucket/path/file.avro']);
-    ```
+        LOAD DATA INTO mydataset.mytable
+        PARTITION BY transaction_date
+        CLUSTER BY customer_id
+          OPTIONS (
+            partition_expiration_days = 3)
+        FROM FILES(
+          format = 'AVRO',
+          uris = ['gs://bucket/path/file.avro']);
 
 3.  Click play\_circle **Run** .
 

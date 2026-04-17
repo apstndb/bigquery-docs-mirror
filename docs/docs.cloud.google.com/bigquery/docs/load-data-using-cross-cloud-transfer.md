@@ -72,41 +72,35 @@ You can load data into BigQuery with the [`LOAD DATA [INTO|OVERWRITE]` statement
 
 The following example loads a parquet file named `sample.parquet` from an Amazon S3 bucket into the `test_parquet` table with an auto-detect schema:
 
-``` notranslate
-LOAD DATA INTO mydataset.testparquet
-  FROM FILES (
-    uris = ['s3://test-bucket/sample.parquet'],
-    format = 'PARQUET'
-  )
-  WITH CONNECTION `aws-us-east-1.test-connection`
-```
+    LOAD DATA INTO mydataset.testparquet
+      FROM FILES (
+        uris = ['s3://test-bucket/sample.parquet'],
+        format = 'PARQUET'
+      )
+      WITH CONNECTION `aws-us-east-1.test-connection`
 
 #### Example 2
 
 The following example loads a CSV file with the prefix `sampled*` from your Blob Storage into the `test_csv` table with predefined column partitioning by time:
 
-``` notranslate
-LOAD DATA INTO mydataset.test_csv (Number INT64, Name STRING, Time DATE)
-  PARTITION BY Time
-  FROM FILES (
-    format = 'CSV', uris = ['azure://test.blob.core.windows.net/container/sampled*'],
-    skip_leading_rows=1
-  )
-  WITH CONNECTION `azure-eastus2.test-connection`
-```
+    LOAD DATA INTO mydataset.test_csv (Number INT64, Name STRING, Time DATE)
+      PARTITION BY Time
+      FROM FILES (
+        format = 'CSV', uris = ['azure://test.blob.core.windows.net/container/sampled*'],
+        skip_leading_rows=1
+      )
+      WITH CONNECTION `azure-eastus2.test-connection`
 
 #### Example 3
 
 The following example overwrites the existing table `test_parquet` with data from a file named `sample.parquet` with an auto-detect schema:
 
-``` notranslate
-LOAD DATA OVERWRITE mydataset.testparquet
-  FROM FILES (
-    uris = ['s3://test-bucket/sample.parquet'],
-    format = 'PARQUET'
-  )
-  WITH CONNECTION `aws-us-east-1.test-connection`
-```
+    LOAD DATA OVERWRITE mydataset.testparquet
+      FROM FILES (
+        uris = ['s3://test-bucket/sample.parquet'],
+        format = 'PARQUET'
+      )
+      WITH CONNECTION `aws-us-east-1.test-connection`
 
 ## Filter data
 
@@ -333,11 +327,9 @@ A new local materialized view is created (if it wasn't specified) and authorized
 
 5.  Create materialized view replicas by using the [`CREATE MATERIALIZED VIEW AS REPLICA OF` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_as_replica_of_statement) :
     
-    ``` notranslate
-    CREATE MATERIALIZED VIEW PROJECT_ID.BQ_DATASET.REPLICA_NAME
-    OPTIONS(replication_interval_seconds=REPLICATION_INTERVAL)
-    AS REPLICA OF PROJECT_ID.S3_DATASET.MATERIALIZED_VIEW_NAME;
-    ```
+        CREATE MATERIALIZED VIEW PROJECT_ID.BQ_DATASET.REPLICA_NAME
+        OPTIONS(replication_interval_seconds=REPLICATION_INTERVAL)
+        AS REPLICA OF PROJECT_ID.S3_DATASET.MATERIALIZED_VIEW_NAME;
     
     Replace the following:
     
@@ -350,13 +342,11 @@ A new local materialized view is created (if it wasn't specified) and authorized
     
     The following example creates a materialized view replica named `mv_replica` in `bq_dataset` :
     
-    ``` notranslate
-    CREATE MATERIALIZED VIEW `myproject.bq_dataset.mv_replica`
-    OPTIONS(
-    replication_interval_seconds=600
-    )
-    AS REPLICA OF `myproject.s3_dataset.my_s3_mv`
-    ```
+        CREATE MATERIALIZED VIEW `myproject.bq_dataset.mv_replica`
+        OPTIONS(
+        replication_interval_seconds=600
+        )
+        AS REPLICA OF `myproject.s3_dataset.my_s3_mv`
 
 After you create the materialized view replica, the replication process polls the source materialized view for changes and replicates data to the materialized view replica, refreshing the data at the interval you specified in the `replication_interval_seconds` or `max_staleness` option. If you query the replica before the first backfill completes, you get a `backfill in progress` error. You can query the data in the materialized view replica after the first replication completes.
 

@@ -78,9 +78,7 @@ Create a dataset named `resnet_inference_test` :
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE SCHEMA `PROJECT_ID.resnet_inference_test`;
-    ```
+        CREATE SCHEMA `PROJECT_ID.resnet_inference_test`;
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -90,9 +88,7 @@ Create a dataset named `resnet_inference_test` :
 
 2.  Run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) to create the dataset:
     
-    ``` notranslate
-    bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
-    ```
+        bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -167,11 +163,9 @@ Create a connection named `lake-connection` :
 
 In Cloud Shell, run the [`gcloud storage buckets add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/add-iam-policy-binding) :
 
-``` notranslate
-gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
---member=serviceAccount:MEMBER \
---role=roles/storage.objectViewer
-```
+    gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
+    --member=serviceAccount:MEMBER \
+    --role=roles/storage.objectViewer
 
 Replace `  MEMBER  ` with the service account ID that you copied earlier. Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 
@@ -189,14 +183,12 @@ Create an object table named `vision_images` based on the image files in the pub
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE resnet_inference_test.vision_images
-    WITH CONNECTION `us.lake-connection`
-    OPTIONS(
-      object_metadata = 'SIMPLE',
-      uris = ['gs://cloud-samples-data/vision/*.jpg']
-    );
-    ```
+        CREATE EXTERNAL TABLE resnet_inference_test.vision_images
+        WITH CONNECTION `us.lake-connection`
+        OPTIONS(
+          object_metadata = 'SIMPLE',
+          uris = ['gs://cloud-samples-data/vision/*.jpg']
+        );
 
 ### bq
 
@@ -220,12 +212,10 @@ Get the model files and make them available in Cloud Storage:
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    CREATE MODEL `resnet_inference_test.resnet`
-    OPTIONS(
-      model_type = 'TENSORFLOW',
-      model_path = 'gs://BUCKET_NAME/*');
-    ```
+        CREATE MODEL `resnet_inference_test.resnet`
+        OPTIONS(
+          model_type = 'TENSORFLOW',
+          model_path = 'gs://BUCKET_NAME/*');
     
     Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 
@@ -259,14 +249,12 @@ Run inference on the `vision_images` object table using the `resnet` model:
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` notranslate
-    SELECT *
-    FROM ML.PREDICT(
-      MODEL `resnet_inference_test.resnet`,
-      (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 224, FALSE) AS input_1
-      FROM resnet_inference_test.vision_images)
-    );
-    ```
+        SELECT *
+        FROM ML.PREDICT(
+          MODEL `resnet_inference_test.resnet`,
+          (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 224, FALSE) AS input_1
+          FROM resnet_inference_test.vision_images)
+        );
     
     The results should look similar to the following:
     

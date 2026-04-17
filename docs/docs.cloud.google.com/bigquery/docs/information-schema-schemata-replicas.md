@@ -117,9 +117,7 @@ This section lists example queries of the `INFORMATION_SCHEMA.SCHEMATA_REPLICAS`
 
 The following example lists all the replicated datasets in the `US` region:
 
-``` notranslate
-SELECT * FROM `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS;
-```
+    SELECT * FROM `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS;
 
 The result is similar to the following:
 
@@ -134,19 +132,17 @@ The result is similar to the following:
 
 The following example lists all replicated datasets and their primary replica in the `US` region:
 
-``` notranslate
-SELECT
- catalog_name,
- schema_name,
- replica_name AS primary_replica_name,
- location AS primary_replica_location,
- replica_primary_assignment_complete AS is_primary,
-FROM
- `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
-WHERE
- replica_primary_assignment_complete = TRUE
- AND replica_primary_assigned = TRUE;
-```
+    SELECT
+     catalog_name,
+     schema_name,
+     replica_name AS primary_replica_name,
+     location AS primary_replica_location,
+     replica_primary_assignment_complete AS is_primary,
+    FROM
+     `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
+    WHERE
+     replica_primary_assignment_complete = TRUE
+     AND replica_primary_assigned = TRUE;
 
 The result is similar to the following:
 
@@ -162,22 +158,20 @@ The result is similar to the following:
 
 The following example lists all replicated datasets and their replica states:
 
-``` notranslate
-SELECT
-  catalog_name,
-  schema_name,
-  replica_name,
-  CASE
-    WHEN (replica_primary_assignment_complete = TRUE AND replica_primary_assigned = TRUE) THEN 'PRIMARY'
-    WHEN (replica_primary_assignment_complete = FALSE
-    AND replica_primary_assigned = FALSE) THEN 'SECONDARY'
-  ELSE
-  'PENDING'
-END
-  AS replica_state,
-FROM
-  `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS;
-```
+    SELECT
+      catalog_name,
+      schema_name,
+      replica_name,
+      CASE
+        WHEN (replica_primary_assignment_complete = TRUE AND replica_primary_assigned = TRUE) THEN 'PRIMARY'
+        WHEN (replica_primary_assignment_complete = FALSE
+        AND replica_primary_assigned = FALSE) THEN 'SECONDARY'
+      ELSE
+      'PENDING'
+    END
+      AS replica_state,
+    FROM
+      `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS;
 
 The result is similar to the following:
 
@@ -192,17 +186,15 @@ The result is similar to the following:
 
 The following example lists all replicas and when that replica was created. When a secondary replica is created, its data is not fully synced with the primary replica until `creation_complete` equals `TRUE` .
 
-``` notranslate
-SELECT
- catalog_name,
- schema_name,
- replica_name,
- creation_time AS creation_time,
-FROM
- `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
-WHERE
- creation_complete = TRUE;
-```
+    SELECT
+     catalog_name,
+     schema_name,
+     replica_name,
+     creation_time AS creation_time,
+    FROM
+     `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
+    WHERE
+     creation_complete = TRUE;
 
 The result is similar to the following:
 
@@ -221,20 +213,18 @@ The following example shows the most recent timestamp when the secondary replica
 
 You must run this query in the region that contains the secondary replica. Some tables in the dataset might be ahead of the reported replication time.
 
-``` notranslate
-SELECT
- catalog_name,
- schema_name,
- replica_name,
- -- Calculate the replication lag in seconds.
- TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), replication_time, SECOND) AS replication_lag_seconds, -- RLS
- -- Calculate the replication lag in minutes.
- TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), replication_time, MINUTE) AS replication_lag_minutes, -- RLM
- -- Show the last sync time for easier interpretation.
- replication_time AS secondary_replica_fully_synced_as_of_time,
-FROM
- `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
-```
+    SELECT
+     catalog_name,
+     schema_name,
+     replica_name,
+     -- Calculate the replication lag in seconds.
+     TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), replication_time, SECOND) AS replication_lag_seconds, -- RLS
+     -- Calculate the replication lag in minutes.
+     TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), replication_time, MINUTE) AS replication_lag_minutes, -- RLM
+     -- Show the last sync time for easier interpretation.
+     replication_time AS secondary_replica_fully_synced_as_of_time,
+    FROM
+     `region-us`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
 
 The result is similar to the following:
 

@@ -227,29 +227,27 @@ The following example creates a persistent Python UDF named `multiplyInputs` and
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
-    ``` notranslate
-    CREATE FUNCTION `PROJECT_ID.DATASET_ID`.multiplyInputs(x FLOAT64, y FLOAT64)
-    RETURNS FLOAT64
-    LANGUAGE python
-    OPTIONS(runtime_version="python-3.11", entry_point="multiply")
-    AS r'''
-    
-    def multiply(x, y):
-      return x * y
-    
-    ''';
-    
-    -- Call the Python UDF.
-    WITH numbers AS
-      (SELECT 1 AS x, 5 as y
-      UNION ALL
-      SELECT 2 AS x, 10 as y
-      UNION ALL
-      SELECT 3 as x, 15 as y)
-    SELECT x, y,
-    `PROJECT_ID.DATASET_ID`.multiplyInputs(x, y) AS product
-    FROM numbers;
-    ```
+        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.multiplyInputs(x FLOAT64, y FLOAT64)
+        RETURNS FLOAT64
+        LANGUAGE python
+        OPTIONS(runtime_version="python-3.11", entry_point="multiply")
+        AS r'''
+        
+        def multiply(x, y):
+          return x * y
+        
+        ''';
+        
+        -- Call the Python UDF.
+        WITH numbers AS
+          (SELECT 1 AS x, 5 as y
+          UNION ALL
+          SELECT 2 AS x, 10 as y
+          UNION ALL
+          SELECT 3 as x, 15 as y)
+        SELECT x, y,
+        `PROJECT_ID.DATASET_ID`.multiplyInputs(x, y) AS product
+        FROM numbers;
     
     Replace PROJECT\_ID . DATASET\_ID with your project ID and dataset ID.
 
@@ -381,19 +379,17 @@ The following example creates a vectorized Python UDF named `multiplyInputs` wit
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
-    ``` notranslate
-    CREATE FUNCTION `PROJECT_ID.DATASET_ID`.multiplyVectorized(x FLOAT64, y FLOAT64)
-    RETURNS FLOAT64
-    LANGUAGE python
-    OPTIONS(runtime_version="python-3.11", entry_point="vectorized_multiply")
-    AS r'''
-    import pandas as pd
-    
-    def vectorized_multiply(df: pd.DataFrame):
-      return df['x'] * df['y']
-    
-    ''';
-    ```
+        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.multiplyVectorized(x FLOAT64, y FLOAT64)
+        RETURNS FLOAT64
+        LANGUAGE python
+        OPTIONS(runtime_version="python-3.11", entry_point="vectorized_multiply")
+        AS r'''
+        import pandas as pd
+        
+        def vectorized_multiply(df: pd.DataFrame):
+          return df['x'] * df['y']
+        
+        ''';
     
     Replace PROJECT\_ID . DATASET\_ID with your project ID and dataset ID.
     
@@ -539,19 +535,17 @@ The following example shows you how to create a Python UDF that installs the `sc
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
-    ``` notranslate
-    CREATE FUNCTION `PROJECT_ID.DATASET_ID`.area(radius FLOAT64)
-    RETURNS FLOAT64 LANGUAGE python
-    OPTIONS (entry_point='area_handler', runtime_version='python-3.11', packages=['scipy==1.15.3'])
-    AS r"""
-    import scipy
-    
-    def area_handler(radius):
-      return scipy.constants.pi*radius*radius
-    """;
-    
-    SELECT `PROJECT_ID.DATASET_ID`.area(4.5);
-    ```
+        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.area(radius FLOAT64)
+        RETURNS FLOAT64 LANGUAGE python
+        OPTIONS (entry_point='area_handler', runtime_version='python-3.11', packages=['scipy==1.15.3'])
+        AS r"""
+        import scipy
+        
+        def area_handler(radius):
+          return scipy.constants.pi*radius*radius
+        """;
+        
+        SELECT `PROJECT_ID.DATASET_ID`.area(4.5);
     
     Replace PROJECT\_ID . DATASET\_ID with your project ID and dataset ID.
 
@@ -577,22 +571,20 @@ The following example shows you how to create a Python UDF that imports the `lib
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
-    ``` notranslate
-    CREATE FUNCTION `PROJECT_ID.DATASET_ID`.myFunc(a FLOAT64, b STRING)
-    RETURNS STRING LANGUAGE python
-    OPTIONS (
-    entry_point='compute', runtime_version='python-3.11',
-    library=['gs://my_bucket/path/to/lib1.py'])
-    AS r"""
-    import path.to.lib1 as lib1
-    
-    def compute(a, b):
-      # doInterestingStuff is a function defined in
-      # gs://my_bucket/path/to/lib1.py
-      return lib1.doInterestingStuff(a, b);
-    
-    """;
-    ```
+        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.myFunc(a FLOAT64, b STRING)
+        RETURNS STRING LANGUAGE python
+        OPTIONS (
+        entry_point='compute', runtime_version='python-3.11',
+        library=['gs://my_bucket/path/to/lib1.py'])
+        AS r"""
+        import path.to.lib1 as lib1
+        
+        def compute(a, b):
+          # doInterestingStuff is a function defined in
+          # gs://my_bucket/path/to/lib1.py
+          return lib1.doInterestingStuff(a, b);
+        
+        """;
     
     Replace PROJECT\_ID . DATASET\_ID with your project ID and dataset ID.
 
@@ -610,24 +602,22 @@ The following example creates a Python UDF using the `CREATE FUNCTION` option li
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
-    ``` notranslate
-    CREATE FUNCTION `PROJECT_ID.DATASET_ID`.resizeImage(image BYTES)
-    RETURNS BYTES LANGUAGE python
-    OPTIONS (entry_point='resize_image', runtime_version='python-3.11',
-    packages=['Pillow==11.2.1'], container_memory='2Gi', container_cpu=1)
-    AS r"""
-    import io
-    from PIL import Image
-    
-    def resize_image(image_bytes):
-      img = Image.open(io.BytesIO(image_bytes))
-    
-      resized_img = img.resize((256, 256), Image.Resampling.LANCZOS)
-      output_stream = io.BytesIO()
-      resized_img.convert('RGB').save(output_stream, format='JPEG')
-      return output_stream.getvalue()
-    """;
-    ```
+        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.resizeImage(image BYTES)
+        RETURNS BYTES LANGUAGE python
+        OPTIONS (entry_point='resize_image', runtime_version='python-3.11',
+        packages=['Pillow==11.2.1'], container_memory='2Gi', container_cpu=1)
+        AS r"""
+        import io
+        from PIL import Image
+        
+        def resize_image(image_bytes):
+          img = Image.open(io.BytesIO(image_bytes))
+        
+          resized_img = img.resize((256, 256), Image.Resampling.LANCZOS)
+          output_stream = io.BytesIO()
+          resized_img.convert('RGB').save(output_stream, format='JPEG')
+          return output_stream.getvalue()
+        """;
     
     Replace PROJECT\_ID . DATASET\_ID with your project ID and dataset ID.
 
@@ -700,45 +690,43 @@ In `my_query_project` , create a Python UDF that calls the Cloud Translation ser
 
 2.  Enter the following `CREATE FUNCTION` statement in the query editor:
     
-    ``` notranslate
-    CREATE FUNCTION `PROJECT_ID.DATASET_ID`.translate_to_es(x STRING)
-    RETURNS STRING LANGUAGE python
-    WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
-    OPTIONS (entry_point='do_translate', runtime_version='python-3.11', packages=['google-cloud-translate>=3.11', 'google-api-core'])
-    AS r"""
-    
-    from google.api_core.retry import Retry
-    from google.cloud import translate
-    
-    project = "my_translate_project"
-    translate_client = translate.TranslationServiceClient()
-    
-    def do_translate(x : str) -> str:
-    
-        response = translate_client.translate_text(
-            request={
-                "parent": f"projects/{project}/locations/us-central1",
-                "contents": [x],
-                "target_language_code": "es",
-                "mime_type": "text/plain",
-            },
-            retry=Retry(),
-        )
-        return response.translations[0].translated_text
-    
-    """;
-    
-    -- Call the UDF.
-    WITH text_table AS
-      (SELECT "Hello" AS text
-      UNION ALL
-      SELECT "Good morning" AS text
-      UNION ALL
-      SELECT "Goodbye" AS text)
-    SELECT text,
-    `PROJECT_ID.DATASET_ID`.translate_to_es(text) AS translated_text
-    FROM text_table;
-    ```
+        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.translate_to_es(x STRING)
+        RETURNS STRING LANGUAGE python
+        WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
+        OPTIONS (entry_point='do_translate', runtime_version='python-3.11', packages=['google-cloud-translate>=3.11', 'google-api-core'])
+        AS r"""
+        
+        from google.api_core.retry import Retry
+        from google.cloud import translate
+        
+        project = "my_translate_project"
+        translate_client = translate.TranslationServiceClient()
+        
+        def do_translate(x : str) -> str:
+        
+            response = translate_client.translate_text(
+                request={
+                    "parent": f"projects/{project}/locations/us-central1",
+                    "contents": [x],
+                    "target_language_code": "es",
+                    "mime_type": "text/plain",
+                },
+                retry=Retry(),
+            )
+            return response.translations[0].translated_text
+        
+        """;
+        
+        -- Call the UDF.
+        WITH text_table AS
+          (SELECT "Hello" AS text
+          UNION ALL
+          SELECT "Good morning" AS text
+          UNION ALL
+          SELECT "Goodbye" AS text)
+        SELECT text,
+        `PROJECT_ID.DATASET_ID`.translate_to_es(text) AS translated_text
+        FROM text_table;
     
     Replace the following:
     

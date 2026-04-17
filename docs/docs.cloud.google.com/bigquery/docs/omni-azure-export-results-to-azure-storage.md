@@ -29,14 +29,12 @@ BigQuery Omni writes to the specified Blob Storage location regardless of any ex
 
 2.  In the **Query editor** field, enter a GoogleSQL export query:
     
-    ``` notranslate
-    EXPORT DATA WITH CONNECTION \`CONNECTION_REGION.CONNECTION_NAME\`
-    OPTIONS(
-      uri="azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH/*",
-      format="FORMAT"
-    )
-    AS QUERY
-    ```
+        EXPORT DATA WITH CONNECTION \`CONNECTION_REGION.CONNECTION_NAME\`
+        OPTIONS(
+          uri="azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH/*",
+          format="FORMAT"
+        )
+        AS QUERY
     
     Replace the following:
     

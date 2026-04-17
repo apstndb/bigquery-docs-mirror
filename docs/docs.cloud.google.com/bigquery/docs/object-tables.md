@@ -161,15 +161,13 @@ Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigque
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET_ID.TABLE_NAME`
-    WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID`| DEFAULT}
-    OPTIONS(
-      object_metadata = 'SIMPLE',
-      uris = ['BUCKET_PATH'[,...]],
-      max_staleness = STALENESS_INTERVAL,
-      metadata_cache_mode = 'CACHE_MODE');
-    ```
+        CREATE EXTERNAL TABLE `PROJECT_ID.DATASET_ID.TABLE_NAME`
+        WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID`| DEFAULT}
+        OPTIONS(
+          object_metadata = 'SIMPLE',
+          uris = ['BUCKET_PATH'[,...]],
+          max_staleness = STALENESS_INTERVAL,
+          metadata_cache_mode = 'CACHE_MODE');
     
     Replace the following:
     
@@ -217,51 +215,43 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The following example creates an object table with a metadata cache staleness interval of 1 day:
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.object_table`
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  object_metadata = 'SIMPLE',
-  uris = ['gs://mybucket/*'],
-  max_staleness = INTERVAL 1 DAY,
-  metadata_cache_mode = 'AUTOMATIC'
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.object_table`
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      object_metadata = 'SIMPLE',
+      uris = ['gs://mybucket/*'],
+      max_staleness = INTERVAL 1 DAY,
+      metadata_cache_mode = 'AUTOMATIC'
+    );
 
 The following example creates an object table over the objects in three Cloud Storage buckets:
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.object_table`
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  object_metadata = 'SIMPLE',
-  uris = ['gs://bucket1/*','gs://bucket2/folder1/*','gs://bucket3/*']
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.object_table`
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      object_metadata = 'SIMPLE',
+      uris = ['gs://bucket1/*','gs://bucket2/folder1/*','gs://bucket3/*']
+    );
 
 The following example creates an object table over just the PDF objects in a Cloud Storage bucket:
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.object_table`
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  object_metadata = 'SIMPLE',
-  uris = ['gs://bucket1/*.pdf']
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.object_table`
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      object_metadata = 'SIMPLE',
+      uris = ['gs://bucket1/*.pdf']
+    );
 
 ### bq
 
 Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
 
-``` notranslate
-bq mk --table \
---external_table_definition=BUCKET_PATH@REGION.CONNECTION_ID \
---object_metadata=SIMPLE \
---max_staleness=STALENESS_INTERVAL \
---metadata_cache_mode=CACHE_MODE \
-PROJECT_ID:DATASET_ID.TABLE_NAME
-```
+    bq mk --table \
+    --external_table_definition=BUCKET_PATH@REGION.CONNECTION_ID \
+    --object_metadata=SIMPLE \
+    --max_staleness=STALENESS_INTERVAL \
+    --metadata_cache_mode=CACHE_MODE \
+    PROJECT_ID:DATASET_ID.TABLE_NAME
 
 Replace the following:
 
@@ -303,32 +293,26 @@ Replace the following:
 
 The following example creates an object table with a metadata cache staleness interval of 1 day:
 
-``` notranslate
-bq mk --table \
---external_table_definition=gs://mybucket/*@us.my-connection \
---object_metadata=SIMPLE \
---max_staleness=0-0 1 0:0:0 \
---metadata_cache_mode=AUTOMATIC \
-my_dataset.object_table
-```
+    bq mk --table \
+    --external_table_definition=gs://mybucket/*@us.my-connection \
+    --object_metadata=SIMPLE \
+    --max_staleness=0-0 1 0:0:0 \
+    --metadata_cache_mode=AUTOMATIC \
+    my_dataset.object_table
 
 The following example creates an object table over the objects in three Cloud Storage buckets:
 
-``` notranslate
-bq mk --table \
---external_table_definition=gs://bucket1/*,gs://bucket2/folder1/*,gs://bucket3/*@us.my-connection \
---object_metadata=SIMPLE \
-my_dataset.object_table
-```
+    bq mk --table \
+    --external_table_definition=gs://bucket1/*,gs://bucket2/folder1/*,gs://bucket3/*@us.my-connection \
+    --object_metadata=SIMPLE \
+    my_dataset.object_table
 
 The following example creates an object table over just the PDF objects in a Cloud Storage bucket:
 
-``` notranslate
-bq mk --table \
---external_table_definition=gs://bucket1/*.pdf@us.my-connection \
---object_metadata=SIMPLE \
-my_dataset.object_table
-```
+    bq mk --table \
+    --external_table_definition=gs://bucket1/*.pdf@us.my-connection \
+    --object_metadata=SIMPLE \
+    my_dataset.object_table
 
 ### API
 
@@ -472,10 +456,8 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 You can query an object table like any other BigQuery, for example:
 
-``` notranslate
-SELECT *
-FROM mydataset.myobjecttable;
-```
+    SELECT *
+    FROM mydataset.myobjecttable;
 
 Querying an object table returns metadata for the underlying objects. For more information, see [Object table schema](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#object_table_schema) .
 

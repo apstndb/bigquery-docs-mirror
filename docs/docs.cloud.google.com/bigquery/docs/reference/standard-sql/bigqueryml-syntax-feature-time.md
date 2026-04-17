@@ -6,7 +6,7 @@ Use this function to use the same point-in-time cutoff for all entities when ret
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.FEATURES_AT_TIME(
    { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) }
    [, TIME => TIMESTAMP][, NUM_ROWS => INT64][, IGNORE_FEATURE_NULLS => BOOL])
@@ -38,7 +38,7 @@ ML.FEATURES_AT_TIME(
 
   - `  IGNORE_FEATURE_NULLS  ` : a `BOOL` value that indicates whether to replace a `NULL` value in a feature column with the feature column value from the row for the same entity that immediately precedes it in time. For example, for the following feature table:
     
-    ``` console
+    ```console
     +-----------+------+------+--------------------------+
     | entity_id | f1   | f2   | feature_timestamp        |
     +-----------+------+------+--------------------------+
@@ -62,7 +62,7 @@ ML.FEATURES_AT_TIME(
     
     Results in the following output, where the `f2` value from the row for entity ID 2 that is timestamped `'2022-06-10 12:00:00+00'` is substituted for the `NULL` value in the row timestamped `'2022-06-11 10:00:00+00'` :
     
-    ``` console
+    ```console
     +-----------+------+------+--------------------------+
     | entity_id | f1   | f2   | feature_timestamp        |
     +-----------+------+------+--------------------------+

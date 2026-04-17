@@ -48,7 +48,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a stored procedure named `my_stored_procedure` :
 
-``` lang-terraform
+```terraform
 # Creates a SQL stored procedure.
 
 # Create a dataset to contain the stored procedure.

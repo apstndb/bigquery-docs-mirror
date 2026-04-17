@@ -77,15 +77,13 @@ Query the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      INFORMATION_SCHEMA.SCHEMATA_OPTIONS
-    WHERE
-      schema_name = 'mydataset'
-      AND option_name = 'labels';
-    ```
+        SELECT
+          *
+        FROM
+          INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+        WHERE
+          schema_name = 'mydataset'
+          AND option_name = 'labels';
 
 3.  Click play\_circle **Run** .
 
@@ -420,13 +418,11 @@ Query the [`INFORMATION_SCHEMA.JOB_BY_*` views](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      query,
-      labels
-    FROM
-      INFORMATION_SCHEMA.JOBS_BY_USER;
-    ```
+        SELECT
+          query,
+          labels
+        FROM
+          INFORMATION_SCHEMA.JOBS_BY_USER;
 
 3.  Click play\_circle **Run** .
 
@@ -473,14 +469,12 @@ Query the [`INFORMATION_SCHEMA.RESERVATIONS` views](https://docs.cloud.google.co
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      reservation_name,
-      labels
-    FROM
-      INFORMATION_SCHEMA.RESERVATIONS
-    WHERE reservation_name = RESERVATION_NAME;
-    ```
+        SELECT
+          reservation_name,
+          labels
+        FROM
+          INFORMATION_SCHEMA.RESERVATIONS
+        WHERE reservation_name = RESERVATION_NAME;
     
     Replace the following:
     
@@ -494,9 +488,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command to view the reservation labels.
 
-``` notranslate
-bq show --format=prettyjson --reservation=true --location=LOCATION RESERVATION_NAME
-```
+    bq show --format=prettyjson --reservation=true --location=LOCATION RESERVATION_NAME
 
 Replace the following:
 

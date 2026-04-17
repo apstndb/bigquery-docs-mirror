@@ -55,24 +55,20 @@ To create a search index, you need the [`bigquery.tables.createIndex` IAM permis
     
     <!-- end list -->
     
-    ``` notranslate
-    DELETE FROM my_dataset.indexed_table
-    WHERE SEARCH(user_id, '123');
-    ```
+        DELETE FROM my_dataset.indexed_table
+        WHERE SEARCH(user_id, '123');
     
       - A search index can be used in the following query:
     
     <!-- end list -->
     
-    ``` notranslate
-    DELETE FROM my_dataset.other_table
-    WHERE
-      user_id IN (
-        SELECT user_id
-        FROM my_dataset.indexed_table
-        WHERE SEARCH(user_id, '123')
-      );
-    ```
+        DELETE FROM my_dataset.other_table
+        WHERE
+          user_id IN (
+            SELECT user_id
+            FROM my_dataset.indexed_table
+            WHERE SEARCH(user_id, '123')
+          );
 
   - Search indexes are not used when the query references [Materialized Views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
 

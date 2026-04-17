@@ -158,19 +158,17 @@ To create a data transfer for Search Ads 360 reporting, you need either your Sea
 
         The following is an example **Custom Floodlight Variable** entry that specifies two custom Floodlight variables:
         
-        ``` notranslate
-        [{
-        "id": "1234",
-        "cfv_field_name": "raw_event_conversion_metrics",
-        "destination_table_name": ["Conversion"],
-        "bigquery_column_name_suffix": "suffix1"
-        },{
-        "name": "example name",
-        "cfv_field_name": "conversion_custom_metrics",
-        "destination_table_name": ["AdGroupConversionActionAndDeviceStats","CampaignConversionActionAndDeviceStats"],
-        "bigquery_column_name_suffix": "suffix2"
-        }]
-        ```
+            [{
+            "id": "1234",
+            "cfv_field_name": "raw_event_conversion_metrics",
+            "destination_table_name": ["Conversion"],
+            "bigquery_column_name_suffix": "suffix1"
+            },{
+            "name": "example name",
+            "cfv_field_name": "conversion_custom_metrics",
+            "destination_table_name": ["AdGroupConversionActionAndDeviceStats","CampaignConversionActionAndDeviceStats"],
+            "bigquery_column_name_suffix": "suffix2"
+            }]
     
     4.  Optional: In the **Custom Columns** field, enter any [custom columns](https://developers.google.com/search-ads/reporting/concepts/custom-columns) to include in the data transfer. The custom columns must be owned by the Search Ads 360 account that is specified by the Customer ID in the transfer config. This field takes string inputs in JSON array format and can support multiple columns. In each item of the JSON array, the following parameters are required:
         
@@ -181,17 +179,15 @@ To create a data transfer for Search Ads 360 reporting, you need either your Sea
         
         The following is an example **Custom Columns** entry that specifies two custom columns:
         
-        ``` notranslate
-        [{
-          "id": "1234",
-          "destination_table_name": ["Conversion"],
-          "bigquery_column_name": "column1"
-        },{
-          "name": "example name",
-          "destination_table_name": ["AdGroupStats","CampaignStats"],
-          "bigquery_column_name": "column2"
-        }]
-        ```
+            [{
+              "id": "1234",
+              "destination_table_name": ["Conversion"],
+              "bigquery_column_name": "column1"
+            },{
+              "name": "example name",
+              "destination_table_name": ["AdGroupStats","CampaignStats"],
+              "bigquery_column_name": "column2"
+            }]
     
     5.  Optional: In the **Table Filter** field, enter a comma-separated list of tables to include, for example `Campaign, AdGroup` . Prefix this list with the `-` character to exclude certain tables, for example `-Campaign, AdGroup` . All tables are included by default.
     
@@ -228,16 +224,14 @@ The following flags are optional:
 
 <!-- end list -->
 
-``` notranslate
-bq mk \
---transfer_config \
---project_id=PROJECT_ID \
---target_dataset=DATASET \
---display_name=NAME \
---data_source=DATA_SOURCE \
---service_account_name=SERVICE_ACCOUNT_NAME \
---params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID\",\"destination_table_name\": [\"CC_DESTINATION_TABLE\"],\"bigquery_column_name\": \"CC_COLUMN\"}]","custom_floodlight_variables":"[{\"id\": \"CFV_ID\",\"cfv_field_name\": [\"CFV_FIELD_NAME\"],\"destination_table_name\": [\"CFV_DESTINATION_TABLE\"],\"bigquery_column_name_suffix\": \"CFV_COLUMN_SUFFIX\"}]"}'
-```
+    bq mk \
+    --transfer_config \
+    --project_id=PROJECT_ID \
+    --target_dataset=DATASET \
+    --display_name=NAME \
+    --data_source=DATA_SOURCE \
+    --service_account_name=SERVICE_ACCOUNT_NAME \
+    --params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID\",\"destination_table_name\": [\"CC_DESTINATION_TABLE\"],\"bigquery_column_name\": \"CC_COLUMN\"}]","custom_floodlight_variables":"[{\"id\": \"CFV_ID\",\"cfv_field_name\": [\"CFV_FIELD_NAME\"],\"destination_table_name\": [\"CFV_DESTINATION_TABLE\"],\"bigquery_column_name_suffix\": \"CFV_COLUMN_SUFFIX\"}]"}'
 
 Where:
 
@@ -275,14 +269,12 @@ Where:
 
 For example, the following command creates a Search Ads 360 data transfer named `My Transfer` using Customer ID `6828088731` and target dataset `mydataset` . The transfer also specifies a custom floodlight variable. The data transfer is created in the default project:
 
-``` notranslate
-bq mk \
---transfer_config \
---target_dataset=mydataset \
---display_name='My Transfer' \
---data_source=search_ads \
---params='{"customer_id":"6828088731", "custom_floodlight_variables":"[{\"id\": \"9876\", \"cfv_field_name\": \"raw_event_conversion_metrics\", \"destination_table_name\": [\"Conversion\"],\"bigquery_column_name_suffix\": \"suffix1\" }]"}'
-```
+    bq mk \
+    --transfer_config \
+    --target_dataset=mydataset \
+    --display_name='My Transfer' \
+    --data_source=search_ads \
+    --params='{"customer_id":"6828088731", "custom_floodlight_variables":"[{\"id\": \"9876\", \"cfv_field_name\": \"raw_event_conversion_metrics\", \"destination_table_name\": [\"Conversion\"],\"bigquery_column_name_suffix\": \"suffix1\" }]"}'
 
 The first time you run the command, you receive a message like the following:
 
@@ -435,29 +427,27 @@ If you query your tables directly instead of using the auto-generated views, you
 
 The following sample query analyzes Search Ads 360 campaign performance for the past 30 days.
 
-``` notranslate
-SELECT
-  c.customer_id,
-  c.campaign_name,
-  c.campaign_status,
-  SUM(cs.metrics_clicks) AS Clicks,
-  (SUM(cs.metrics_cost_micros) / 1000000) AS Cost,
-  SUM(cs.metrics_impressions) AS Impressions
-FROM
-  `DATASET.sa_Campaign_CUSTOMER_ID` c
-LEFT JOIN
-  `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
-ON
-  (c.campaign_id = cs.campaign_id
-  AND cs._DATA_DATE BETWEEN
-  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-WHERE
-  c._DATA_DATE = c._LATEST_DATE
-GROUP BY
-  1, 2, 3
-ORDER BY
-  Impressions DESC
-```
+    SELECT
+      c.customer_id,
+      c.campaign_name,
+      c.campaign_status,
+      SUM(cs.metrics_clicks) AS Clicks,
+      (SUM(cs.metrics_cost_micros) / 1000000) AS Cost,
+      SUM(cs.metrics_impressions) AS Impressions
+    FROM
+      `DATASET.sa_Campaign_CUSTOMER_ID` c
+    LEFT JOIN
+      `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
+    ON
+      (c.campaign_id = cs.campaign_id
+      AND cs._DATA_DATE BETWEEN
+      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+    WHERE
+      c._DATA_DATE = c._LATEST_DATE
+    GROUP BY
+      1, 2, 3
+    ORDER BY
+      Impressions DESC
 
 Replace the following:
 
@@ -519,36 +509,34 @@ Entities in the new Search Ads 360, such as customers, campaigns, and ad groups,
 
 The following query makes use of ID mapping tables to aggregate per-campaign metrics across tables from previous and new Search Ads 360 data transfers in the new ID space.
 
-``` notranslate
-SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
-(SELECT
-  cs.customer_id AS CustomerID,
-  cs.campaign_id AS CampaignID,
-  cs.metrics_clicks AS Clicks,
-  cs.metrics_cost_micros / 1000000 AS Cost
-FROM
-  `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
-WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
-UNION ALL
-SELECT
-  customer_id_mapping.new_id AS CustomerID,
-  campaign_id_mapping.new_id AS CampaignID,
-  cs.clicks AS Clicks,
-  cs.cost AS Cost
-FROM
-  `DATASET.CampaignStats_ADVERTISER_ID` cs
-LEFT JOIN
-  `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
-ON cs.accountId = customer_id_mapping.legacy_id
-LEFT JOIN
-  `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
-ON cs.campaignId = campaign_id_mapping.legacy_id
-WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
-GROUP BY
-1, 2
-ORDER BY
-1, 2
-```
+    SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
+    (SELECT
+      cs.customer_id AS CustomerID,
+      cs.campaign_id AS CampaignID,
+      cs.metrics_clicks AS Clicks,
+      cs.metrics_cost_micros / 1000000 AS Cost
+    FROM
+      `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
+    WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
+    UNION ALL
+    SELECT
+      customer_id_mapping.new_id AS CustomerID,
+      campaign_id_mapping.new_id AS CampaignID,
+      cs.clicks AS Clicks,
+      cs.cost AS Cost
+    FROM
+      `DATASET.CampaignStats_ADVERTISER_ID` cs
+    LEFT JOIN
+      `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
+    ON cs.accountId = customer_id_mapping.legacy_id
+    LEFT JOIN
+      `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
+    ON cs.campaignId = campaign_id_mapping.legacy_id
+    WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
+    GROUP BY
+    1, 2
+    ORDER BY
+    1, 2
 
 Replace the following:
 
@@ -560,36 +548,34 @@ Replace the following:
 
 The following query makes use of ID mapping tables to aggregate per-campaign metrics across tables from previous and new Search Ads 360 data transfers in the old ID space.
 
-``` notranslate
-SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
-(SELECT
-  customer_id_mapping.legacy_id AS CustomerID,
-  campaign_id_mapping.legacy_id AS CampaignID,
-  cs.metrics_clicks AS Clicks,
-  cs.metrics_cost_micros / 1000000 AS Cost
-FROM
-  `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
-LEFT JOIN
-  `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
-ON cs.customer_id = customer_id_mapping.new_id
-LEFT JOIN
-  `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
-ON cs.campaign_id = campaign_id_mapping.new_id
-WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
-UNION ALL
-SELECT
-  CAST(accountId AS INT) AS CustomerID,
-  CAST(campaignId AS INT) AS CampaignID,
-  cs.clicks AS Clicks,
-  cs.cost AS Cost
-FROM
-  `DATASET.CampaignStats_ADVERTISER_ID` cs
-WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
-GROUP BY
-1, 2
-ORDER BY
-1, 2
-```
+    SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
+    (SELECT
+      customer_id_mapping.legacy_id AS CustomerID,
+      campaign_id_mapping.legacy_id AS CampaignID,
+      cs.metrics_clicks AS Clicks,
+      cs.metrics_cost_micros / 1000000 AS Cost
+    FROM
+      `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
+    LEFT JOIN
+      `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
+    ON cs.customer_id = customer_id_mapping.new_id
+    LEFT JOIN
+      `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
+    ON cs.campaign_id = campaign_id_mapping.new_id
+    WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
+    UNION ALL
+    SELECT
+      CAST(accountId AS INT) AS CustomerID,
+      CAST(campaignId AS INT) AS CampaignID,
+      cs.clicks AS Clicks,
+      cs.cost AS Cost
+    FROM
+      `DATASET.CampaignStats_ADVERTISER_ID` cs
+    WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
+    GROUP BY
+    1, 2
+    ORDER BY
+    1, 2
 
 Replace the following:
 

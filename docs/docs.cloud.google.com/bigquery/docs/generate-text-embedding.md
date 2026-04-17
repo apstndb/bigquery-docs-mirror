@@ -90,9 +90,7 @@ Create a BigQuery dataset to contain your resources:
 
 1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
-    ``` notranslate
-    bq --location=LOCATION mk -d DATASET_ID
-    ```
+        bq --location=LOCATION mk -d DATASET_ID
     
     Replace the following:
     
@@ -101,9 +99,7 @@ Create a BigQuery dataset to contain your resources:
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ## Create a connection
 
@@ -147,14 +143,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -170,10 +164,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -187,19 +179,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -321,7 +311,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -444,12 +434,10 @@ Create a remote model:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (ENDPOINT = 'ENDPOINT');
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (ENDPOINT = 'ENDPOINT');
     
     Replace the following:
     
@@ -475,23 +463,21 @@ Create a remote model:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (
-      {HUGGING_FACE_MODEL_ID = 'HUGGING_FACE_MODEL_ID' |
-         MODEL_GARDEN_MODEL_NAME = 'MODEL_GARDEN_MODEL_NAME'}
-      [, HUGGING_FACE_TOKEN = 'HUGGING_FACE_TOKEN' ]
-      [, MACHINE_TYPE = 'MACHINE_TYPE' ]
-      [, MIN_REPLICA_COUNT = MIN_REPLICA_COUNT ]
-      [, MAX_REPLICA_COUNT = MAX_REPLICA_COUNT ]
-      [, RESERVATION_AFFINITY_TYPE = {'NO_RESERVATION' | 'ANY_RESERVATION' | 'SPECIFIC_RESERVATION'} ]
-      [, RESERVATION_AFFINITY_KEY = 'compute.googleapis.com/reservation-name' ]
-      [, RESERVATION_AFFINITY_VALUES = RESERVATION_AFFINITY_VALUES ]
-      [, ENDPOINT_IDLE_TTL = ENDPOINT_IDLE_TTL ]
-    );
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (
+          {HUGGING_FACE_MODEL_ID = 'HUGGING_FACE_MODEL_ID' |
+             MODEL_GARDEN_MODEL_NAME = 'MODEL_GARDEN_MODEL_NAME'}
+          [, HUGGING_FACE_TOKEN = 'HUGGING_FACE_TOKEN' ]
+          [, MACHINE_TYPE = 'MACHINE_TYPE' ]
+          [, MIN_REPLICA_COUNT = MIN_REPLICA_COUNT ]
+          [, MAX_REPLICA_COUNT = MAX_REPLICA_COUNT ]
+          [, RESERVATION_AFFINITY_TYPE = {'NO_RESERVATION' | 'ANY_RESERVATION' | 'SPECIFIC_RESERVATION'} ]
+          [, RESERVATION_AFFINITY_KEY = 'compute.googleapis.com/reservation-name' ]
+          [, RESERVATION_AFFINITY_VALUES = RESERVATION_AFFINITY_VALUES ]
+          [, ENDPOINT_IDLE_TTL = ENDPOINT_IDLE_TTL ]
+        );
     
     Replace the following:
     
@@ -576,14 +562,12 @@ Create a remote model:
 
 2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (
-      ENDPOINT = 'https://ENDPOINT_REGION-aiplatform.googleapis.com/v1/projects/ENDPOINT_PROJECT_ID/locations/ENDPOINT_REGION/endpoints/ENDPOINT_ID'
-    );
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (
+          ENDPOINT = 'https://ENDPOINT_REGION-aiplatform.googleapis.com/v1/projects/ENDPOINT_PROJECT_ID/locations/ENDPOINT_REGION/endpoints/ENDPOINT_ID'
+        );
     
     Replace the following:
     
@@ -615,15 +599,13 @@ Typically, you would use a text embedding model for text-only use cases, and a m
 
 Generate text embeddings by using a remote model over a Vertex AI text embedding model:
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (CONTENT_QUERY)},
-  STRUCT(TASK_TYPE AS task_type,
-    OUTPUT_DIMENSIONALITY AS output_dimensionality)
-);
-```
+    SELECT *
+    FROM AI.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (CONTENT_QUERY)},
+      STRUCT(TASK_TYPE AS task_type,
+        OUTPUT_DIMENSIONALITY AS output_dimensionality)
+    );
 
 Replace the following:
 
@@ -645,7 +627,7 @@ Replace the following:
         
         When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `title` or aliased as `title` , for example:
         
-        ``` notranslate
+        ``` 
               SELECT *      FROM        AI.GENERATE_EMBEDDING(          MODEL mydataset.embedding_model,          (SELECT abstract as content, header as title, publication_number          FROM mydataset.publications),          STRUCT('RETRIEVAL_DOCUMENT' as task_type)      );      
         ```
         
@@ -671,15 +653,13 @@ Replace the following:
 
 The following example shows a request to embed the `content` column of the `text_data` table:
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_EMBEDDING(
-    MODEL `mydataset.embedding_model`,
-    TABLE mydataset.text_data,
-    STRUCT('CLASSIFICATION' AS task_type)
-  );
-```
+    SELECT *
+    FROM
+      AI.GENERATE_EMBEDDING(
+        MODEL `mydataset.embedding_model`,
+        TABLE mydataset.text_data,
+        STRUCT('CLASSIFICATION' AS task_type)
+      );
 
 ### Open text
 
@@ -691,13 +671,11 @@ Note: To give feedback or request support for this feature, contact <bqml-feedba
 
 Generate text embeddings by using a remote model over an open embedding model:
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (CONTENT_QUERY)},
-);
-```
+    SELECT *
+    FROM AI.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (CONTENT_QUERY)},
+    );
 
 Replace the following:
 
@@ -711,14 +689,12 @@ Replace the following:
 
 Generate text embeddings by using a remote model over a Vertex AI multimodal embedding model:
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (CONTENT_QUERY)},
-  STRUCT(OUTPUT_DIMENSIONALITY AS output_dimensionality)
-);
-```
+    SELECT *
+    FROM AI.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      {TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (CONTENT_QUERY)},
+      STRUCT(OUTPUT_DIMENSIONALITY AS output_dimensionality)
+    );
 
 Replace the following:
 
@@ -735,45 +711,43 @@ The following example embeds a collection of movie reviews and orders them by co
 
 For more information about vector search and vector index, see [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
 
-``` notranslate
-CREATE TEMPORARY TABLE movie_review_embeddings AS (
-  SELECT *
-  FROM
-    AI.GENERATE_EMBEDDING(
-      MODEL `bqml_tutorial.embedding_model`,
-      (
-        SELECT "This movie was fantastic" AS content
-        UNION ALL
-        SELECT "This was the best movie I've ever seen!!" AS content
-        UNION ALL
-        SELECT "This movie was just okay..." AS content
-        UNION ALL
-        SELECT "This movie was terrible." AS content
+    CREATE TEMPORARY TABLE movie_review_embeddings AS (
+      SELECT *
+      FROM
+        AI.GENERATE_EMBEDDING(
+          MODEL `bqml_tutorial.embedding_model`,
+          (
+            SELECT "This movie was fantastic" AS content
+            UNION ALL
+            SELECT "This was the best movie I've ever seen!!" AS content
+            UNION ALL
+            SELECT "This movie was just okay..." AS content
+            UNION ALL
+            SELECT "This movie was terrible." AS content
+          )
+        )
+    );
+    
+    WITH average_review_embedding AS (
+      SELECT embedding
+      FROM
+        AI.GENERATE_EMBEDDING(
+          MODEL `bqml_tutorial.embedding_model`,
+          (SELECT "This movie was average" AS content)
+        )
+    )
+    SELECT
+      base.content AS content,
+      distance AS distance_to_average_review
+    FROM
+      VECTOR_SEARCH(
+        TABLE movie_review_embeddings,
+        "embedding",
+        (SELECT embedding FROM average_review_embedding),
+        distance_type=>"COSINE",
+        top_k=>-1
       )
-    )
-);
-
-WITH average_review_embedding AS (
-  SELECT embedding
-  FROM
-    AI.GENERATE_EMBEDDING(
-      MODEL `bqml_tutorial.embedding_model`,
-      (SELECT "This movie was average" AS content)
-    )
-)
-SELECT
-  base.content AS content,
-  distance AS distance_to_average_review
-FROM
-  VECTOR_SEARCH(
-    TABLE movie_review_embeddings,
-    "embedding",
-    (SELECT embedding FROM average_review_embedding),
-    distance_type=>"COSINE",
-    top_k=>-1
-  )
-ORDER BY distance_to_average_review;
-```
+    ORDER BY distance_to_average_review;
 
 The result is similar to the following:
 

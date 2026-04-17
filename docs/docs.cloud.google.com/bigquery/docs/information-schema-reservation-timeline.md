@@ -170,14 +170,12 @@ Replace the following:
 
 The following example shows per-second autoscaling of `  YOUR_RESERVATION_ID  ` across all jobs:
 
-``` notranslate
-SELECT s.start_time, s.autoscale_current_slots
-FROM `region-us.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` m
-JOIN m.per_second_details s
-WHERE period_start BETWEEN '2025-09-28' AND '2025-09-29'
-  AND reservation_id = 'YOUR_RESERVATION_ID'
-ORDER BY period_start, s.start_time
-```
+    SELECT s.start_time, s.autoscale_current_slots
+    FROM `region-us.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` m
+    JOIN m.per_second_details s
+    WHERE period_start BETWEEN '2025-09-28' AND '2025-09-29'
+      AND reservation_id = 'YOUR_RESERVATION_ID'
+    ORDER BY period_start, s.start_time
 
 The result is similar to the following:
 
@@ -203,32 +201,30 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGA
 
 The following example shows per-second slot usage from projects assigned to `  YOUR_RESERVATION_ID  ` across all jobs:
 
-``` notranslate
-SELECT
-  jobs.period_start,
-  SUM(jobs.period_slot_ms) / 1000 AS period_slot_seconds,
-  ANY_VALUE(COALESCE(s.slots_assigned, res.slots_assigned)) AS estimated_slots_assigned,
-  ANY_VALUE(COALESCE(s.slots_max_assigned, res.slots_max_assigned)) AS estimated_slots_max_assigned
-FROM `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION jobs
-JOIN `region-us`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE res
-  ON jobs.reservation_id = res.reservation_id
-  AND TIMESTAMP_TRUNC(jobs.period_start, MINUTE) = res.period_start
-LEFT JOIN UNNEST(res.per_second_details) s
-  ON jobs.period_start = s.start_time
-WHERE
-  jobs.job_creation_time
-    BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-        AND CURRENT_TIMESTAMP()
-  AND res.period_start
-    BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-        AND CURRENT_TIMESTAMP()
-  AND res.reservation_id = 'YOUR_RESERVATION_ID'
-  AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
-GROUP BY
-  period_start
-ORDER BY
-  period_start DESC;
-```
+    SELECT
+      jobs.period_start,
+      SUM(jobs.period_slot_ms) / 1000 AS period_slot_seconds,
+      ANY_VALUE(COALESCE(s.slots_assigned, res.slots_assigned)) AS estimated_slots_assigned,
+      ANY_VALUE(COALESCE(s.slots_max_assigned, res.slots_max_assigned)) AS estimated_slots_max_assigned
+    FROM `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION jobs
+    JOIN `region-us`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE res
+      ON jobs.reservation_id = res.reservation_id
+      AND TIMESTAMP_TRUNC(jobs.period_start, MINUTE) = res.period_start
+    LEFT JOIN UNNEST(res.per_second_details) s
+      ON jobs.period_start = s.start_time
+    WHERE
+      jobs.job_creation_time
+        BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+            AND CURRENT_TIMESTAMP()
+      AND res.period_start
+        BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+            AND CURRENT_TIMESTAMP()
+      AND res.reservation_id = 'YOUR_RESERVATION_ID'
+      AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
+    GROUP BY
+      period_start
+    ORDER BY
+      period_start DESC;
 
 The result is similar to the following:
 
@@ -244,34 +240,32 @@ The result is similar to the following:
 
 The following example shows per-second slot usage for each reservation in the last day:
 
-``` notranslate
-SELECT
-  jobs.period_start,
-  res.reservation_id,
-  SUM(jobs.period_slot_ms) / 1000 AS period_slot_seconds,
-  ANY_VALUE(COALESCE(s.slots_assigned, res.slots_assigned)) AS estimated_slots_assigned,
-  ANY_VALUE(COALESCE(s.slots_max_assigned, res.slots_max_assigned)) AS estimated_slots_max_assigned
-FROM `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION jobs
-JOIN `region-us`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE res
-  ON jobs.reservation_id = res.reservation_id
-  AND TIMESTAMP_TRUNC(jobs.period_start, MINUTE) = res.period_start
-LEFT JOIN UNNEST(res.per_second_details) s
-  ON jobs.period_start = s.start_time
-WHERE
-  jobs.job_creation_time
-      BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-          AND CURRENT_TIMESTAMP()
-  AND res.period_start
-      BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-          AND CURRENT_TIMESTAMP()
-  AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
-GROUP BY
-  period_start,
-  reservation_id
-ORDER BY
-  period_start DESC,
-  reservation_id;
-```
+    SELECT
+      jobs.period_start,
+      res.reservation_id,
+      SUM(jobs.period_slot_ms) / 1000 AS period_slot_seconds,
+      ANY_VALUE(COALESCE(s.slots_assigned, res.slots_assigned)) AS estimated_slots_assigned,
+      ANY_VALUE(COALESCE(s.slots_max_assigned, res.slots_max_assigned)) AS estimated_slots_max_assigned
+    FROM `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION jobs
+    JOIN `region-us`.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE res
+      ON jobs.reservation_id = res.reservation_id
+      AND TIMESTAMP_TRUNC(jobs.period_start, MINUTE) = res.period_start
+    LEFT JOIN UNNEST(res.per_second_details) s
+      ON jobs.period_start = s.start_time
+    WHERE
+      jobs.job_creation_time
+          BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+              AND CURRENT_TIMESTAMP()
+      AND res.period_start
+          BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+              AND CURRENT_TIMESTAMP()
+      AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
+    GROUP BY
+      period_start,
+      reservation_id
+    ORDER BY
+      period_start DESC,
+      reservation_id;
 
 The result is similar to the following:
 

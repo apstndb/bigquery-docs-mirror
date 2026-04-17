@@ -58,14 +58,12 @@ Replace the following:
 
 The following query extracts information on vector index options:
 
-``` notranslate
-SELECT table_name, index_name, option_name, option_type, option_value
-FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_OPTIONS;
-```
+    SELECT table_name, index_name, option_name, option_type, option_value
+    FROM my_project.dataset.INFORMATION_SCHEMA.VECTOR_INDEX_OPTIONS;
 
 The result is similar to the following:
 
-``` console
+```console
 +------------+------------+------------------+------------------+-------------------------------------------------------------------+
 | table_name | index_name | option_name      | option_type      | option_value                                                      |
 +------------+------------+------------------+------------------+-------------------------------------------------------------------+

@@ -6,7 +6,7 @@ For matrix factorization models, you can use the [`AI.GENERATE_EMBEDDING` functi
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.WEIGHTS(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   STRUCT([, STANDARDIZE AS standardize]))
@@ -60,19 +60,17 @@ The following examples show how to use `ML.WEIGHTS` with and without the `standa
 
 The following example retrieves weight information from `mymodel` in `mydataset` . The dataset is in your default project. It returns the weights that are associated with each one-hot encoded category for the input column `input_col` .
 
-``` notranslate
-SELECT
-  category,
-  weight
-FROM
-  UNNEST((
     SELECT
-      category_weights
+      category,
+      weight
     FROM
-      ML.WEIGHTS(MODEL `mydataset.mymodel`)
-    WHERE
-      processed_input = 'input_col'))
-```
+      UNNEST((
+        SELECT
+          category_weights
+        FROM
+          ML.WEIGHTS(MODEL `mydataset.mymodel`)
+        WHERE
+          processed_input = 'input_col'))
 
 This command uses the [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) function because the `category_weights` column is a nested repeated column.
 
@@ -80,13 +78,11 @@ This command uses the [`UNNEST`](https://docs.cloud.google.com/bigquery/docs/ref
 
 The following example retrieves weight information from `mymodel` in `mydataset` . The dataset is in your default project. It retrieves standardized weights, which assume all features have a mean of `0` and a standard deviation of `1` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.WEIGHTS(MODEL `mydataset.mymodel`,
-    STRUCT(true AS standardize))
-```
+    SELECT
+      *
+    FROM
+      ML.WEIGHTS(MODEL `mydataset.mymodel`,
+        STRUCT(true AS standardize))
 
 ## What's next
 

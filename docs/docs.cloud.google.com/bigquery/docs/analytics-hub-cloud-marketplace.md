@@ -40,9 +40,7 @@ Go to the **Analytics Hub API** page and enable the Analytics Hub API for your G
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
-``` notranslate
-gcloud services enable analyticshub.googleapis.com
-```
+    gcloud services enable analyticshub.googleapis.com
 
 You can access the [**Sharing (Analytics Hub)** page](https://console.cloud.google.com/bigquery/analytics-hub) in the Google Cloud console after you enable the Analytics Hub API.
 

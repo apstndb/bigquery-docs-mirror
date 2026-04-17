@@ -98,14 +98,12 @@ To run the query against a project other than your default project, add the proj
 
 for example, `` `myproject`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS `` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  INFORMATION_SCHEMA.SCHEMATA_OPTIONS
-WHERE
-  option_name = 'default_table_expiration_days';
-```
+    SELECT
+      *
+    FROM
+      INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+    WHERE
+      option_name = 'default_table_expiration_days';
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -132,14 +130,12 @@ To run the query against a project other than your default project, add the proj
 
 ; for example, `` `myproject`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS `` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  INFORMATION_SCHEMA.SCHEMATA_OPTIONS
-WHERE
-  option_name = 'labels';
-```
+    SELECT
+      *
+    FROM
+      INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+    WHERE
+      option_name = 'labels';
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

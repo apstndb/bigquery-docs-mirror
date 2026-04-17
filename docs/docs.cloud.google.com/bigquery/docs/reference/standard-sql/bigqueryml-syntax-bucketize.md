@@ -9,7 +9,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.BUCKETIZE(numerical_expression, array_split_points [, exclude_boundaries] [, output_format])
 ```
 
@@ -33,17 +33,15 @@ ML.BUCKETIZE(numerical_expression, array_split_points [, exclude_boundaries] [, 
 
 The following example bucketizes a numerical expression both with and without boundaries:
 
-``` notranslate
-SELECT
-  ML.BUCKETIZE(2.5, [1, 2, 3]) AS bucket,
-  ML.BUCKETIZE(2.5, [1, 2, 3], TRUE) AS bucket_without_boundaries,
-  ML.BUCKETIZE(2.5, [1, 2, 3], FALSE, "bucket_ranges") AS bucket_ranges,
-  ML.BUCKETIZE(2.5, [1, 2, 3], FALSE, "bucket_ranges_json") AS bucket_ranges_json;
-```
+    SELECT
+      ML.BUCKETIZE(2.5, [1, 2, 3]) AS bucket,
+      ML.BUCKETIZE(2.5, [1, 2, 3], TRUE) AS bucket_without_boundaries,
+      ML.BUCKETIZE(2.5, [1, 2, 3], FALSE, "bucket_ranges") AS bucket_ranges,
+      ML.BUCKETIZE(2.5, [1, 2, 3], FALSE, "bucket_ranges_json") AS bucket_ranges_json;
 
 The output looks similar to the following:
 
-``` console
+```console
 +--------+---------------------------+---------------+----------------------------+
 | bucket | bucket_without_boundaries | bucket_ranges | bucket_ranges_json         |
 |--------|---------------------------|---------------|----------------------------|

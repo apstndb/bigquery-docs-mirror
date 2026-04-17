@@ -61,12 +61,10 @@ Replace the following:
 
 The following example retrieves the `OPTION_NAME` , `OPTION_TYPE` , and `OPTION_VALUE` columns from the `INFORMATION_SCHEMA.PROJECT_OPTIONS` view.
 
-``` notranslate
-SELECT
-  option_name, option_type, option_value
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.PROJECT_OPTIONS;
-```
+    SELECT
+      option_name, option_type, option_value
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.PROJECT_OPTIONS;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

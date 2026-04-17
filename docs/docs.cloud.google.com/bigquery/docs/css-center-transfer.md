@@ -56,63 +56,57 @@ The following queries analyze data from the products and product issues report.
 
 The following SQL sample query provides the number of products, products with issues, and issues by day.
 
-``` notranslate
-SELECT
-  _PARTITIONDATE AS date,
-  COUNT(*) AS num_products,
-  COUNTIF(ARRAY_LENGTH(item_issues) > 0) AS num_products_with_issues,
-  SUM(ARRAY_LENGTH(item_issues)) AS num_issues
-FROM
-  dataset.Products_css_id
-WHERE
-  _PARTITIONDATE >= 'YYYY-MM-DD'
-GROUP BY
-  date
-ORDER BY
-  date DESC;
-```
+    SELECT
+      _PARTITIONDATE AS date,
+      COUNT(*) AS num_products,
+      COUNTIF(ARRAY_LENGTH(item_issues) > 0) AS num_products_with_issues,
+      SUM(ARRAY_LENGTH(item_issues)) AS num_issues
+    FROM
+      dataset.Products_css_id
+    WHERE
+      _PARTITIONDATE >= 'YYYY-MM-DD'
+    GROUP BY
+      date
+    ORDER BY
+      date DESC;
 
 #### Disapproved products
 
 The following SQL sample query provides the number of products that are not approved for display, separated by region and reporting context. Disapproval can result from the reporting context being [excluded](https://support.google.com/merchants/answer/6324486) or because of an issue with the product.
 
-``` notranslate
-SELECT
-  _PARTITIONDATE AS date,
-  statuses.region as disapproved_region,
-  reporting_context_status.reporting_context as reporting_context,
-  COUNT(*) AS num_products
-FROM
-  dataset.Products_css_id,
-  UNNEST(reporting_context_statuses) AS reporting_context_status,
-  UNNEST(reporting_context_status.region_and_status) AS statuses
-WHERE
-  _PARTITIONDATE >= 'YYYY-MM-DD' AND statuses.status = 'DISAPPROVED'
-GROUP BY
-  date, disapproved_region, reporting_context
-ORDER BY
-  date DESC;
-```
+    SELECT
+      _PARTITIONDATE AS date,
+      statuses.region as disapproved_region,
+      reporting_context_status.reporting_context as reporting_context,
+      COUNT(*) AS num_products
+    FROM
+      dataset.Products_css_id,
+      UNNEST(reporting_context_statuses) AS reporting_context_status,
+      UNNEST(reporting_context_status.region_and_status) AS statuses
+    WHERE
+      _PARTITIONDATE >= 'YYYY-MM-DD' AND statuses.status = 'DISAPPROVED'
+    GROUP BY
+      date, disapproved_region, reporting_context
+    ORDER BY
+      date DESC;
 
 #### Products with disapproved issues
 
 The following SQL sample query retrieves the number of products with disapproved issues, separated by region.
 
-``` notranslate
-SELECT
-  _PARTITIONDATE AS date,
-  disapproved_region,
-  COUNT(DISTINCT CONCAT(CAST(css_id AS STRING), ':', product_id))
-      AS num_distinct_products
-FROM
-  dataset.Products_css_id,
-  UNNEST(item_issues) AS issue,
-  UNNEST(issue.severity.severity_per_reporting_context) as severity_per_rc,
-  UNNEST(severity_per_rc.disapproved_regions) as disapproved_region
-WHERE
-  _PARTITIONDATE >= 'YYYY-MM-DD'
-GROUP BY
-  date, disapproved_region
-ORDER BY
-  date DESC;
-```
+    SELECT
+      _PARTITIONDATE AS date,
+      disapproved_region,
+      COUNT(DISTINCT CONCAT(CAST(css_id AS STRING), ':', product_id))
+          AS num_distinct_products
+    FROM
+      dataset.Products_css_id,
+      UNNEST(item_issues) AS issue,
+      UNNEST(issue.severity.severity_per_reporting_context) as severity_per_rc,
+      UNNEST(severity_per_rc.disapproved_regions) as disapproved_region
+    WHERE
+      _PARTITIONDATE >= 'YYYY-MM-DD'
+    GROUP BY
+      date, disapproved_region
+    ORDER BY
+      date DESC;

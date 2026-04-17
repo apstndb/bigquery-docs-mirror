@@ -161,7 +161,7 @@ BigQuery provides Smart Tuning materialized views that always return current dat
 </tr>
 <tr class="even">
 <td>Teradata Scheduler, other scheduling tools</td>
-<td>Scheduled Queries, Cloud Composer, Cloud Functions, BigQuery pipelines</td>
+<td>Scheduled Queries, Managed Service for Apache Airflow, Cloud Functions, BigQuery pipelines</td>
 <td>BigQuery integrates with Google Cloud scheduling services and other external scheduling tools.</td>
 </tr>
 <tr class="odd">

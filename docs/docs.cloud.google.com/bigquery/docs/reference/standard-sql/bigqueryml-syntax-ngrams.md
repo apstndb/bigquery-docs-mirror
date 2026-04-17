@@ -9,7 +9,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.NGRAMS(array_input, range [, separator])
 ```
 
@@ -29,14 +29,12 @@ ML.NGRAMS(array_input, range [, separator])
 
 The following example outputs all possible 2-token and 3-token combinations for a set of three input strings:
 
-``` notranslate
-SELECT
-  ML.NGRAMS(['a', 'b', 'c'], [2,3], '#') AS output;
-```
+    SELECT
+      ML.NGRAMS(['a', 'b', 'c'], [2,3], '#') AS output;
 
 The output looks similar to the following:
 
-``` console
+```console
 +-----------------------+
 |        output         |
 +-----------------------+

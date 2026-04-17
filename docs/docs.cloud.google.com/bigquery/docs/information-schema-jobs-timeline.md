@@ -81,19 +81,17 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE `` .
 
 The following example calculates the slot utilization for every second in the last day:
 
-``` notranslate
-SELECT
-  period_start,
-  SUM(period_slot_ms) AS total_slot_ms,
-FROM
-  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
-WHERE
-  period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
-GROUP BY
-  period_start
-ORDER BY
-  period_start DESC;
-```
+    SELECT
+      period_start,
+      SUM(period_slot_ms) AS total_slot_ms,
+    FROM
+      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
+    WHERE
+      period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
+    GROUP BY
+      period_start
+    ORDER BY
+      period_start DESC;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -120,18 +118,16 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE `` .
 
 The following example computes the number of `RUNNING` and `PENDING` jobs at every second in the last day:
 
-``` notranslate
-SELECT
-  period_start,
-  SUM(IF(state = "PENDING", 1, 0)) as PENDING,
-  SUM(IF(state = "RUNNING", 1, 0)) as RUNNING
-FROM
-  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
-WHERE
-  period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
-GROUP BY
-  period_start;
-```
+    SELECT
+      period_start,
+      SUM(IF(state = "PENDING", 1, 0)) as PENDING,
+      SUM(IF(state = "RUNNING", 1, 0)) as RUNNING
+    FROM
+      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
+    WHERE
+      period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
+    GROUP BY
+      period_start;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -156,16 +152,14 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS `` .
 
 The following example returns the `job_id` of all jobs running at a specific point in time together with their resource usage during that one-second period:
 
-``` notranslate
-SELECT
-  job_id,
-  period_slot_ms
-FROM
-  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
-WHERE
-  period_start = '2020-07-29 03:52:14'
-  AND (statement_type != 'SCRIPT' OR statement_type IS NULL);
-```
+    SELECT
+      job_id,
+      period_slot_ms
+    FROM
+      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
+    WHERE
+      period_start = '2020-07-29 03:52:14'
+      AND (statement_type != 'SCRIPT' OR statement_type IS NULL);
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -184,74 +178,72 @@ The result is similar to the following:
 
 You can use [administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) to monitor your organization's health, slot usage, and BigQuery jobs performance over time. The following example queries the `INFORMATION_SCHEMA.JOBS_TIMELINE` view for a slot usage timeline at one-hour intervals, similar to the information that is available in administrative resource charts.
 
-``` notranslate
-DECLARE
-  start_time timestamp DEFAULT TIMESTAMP(START_TIME);
-DECLARE
-  end_time timestamp DEFAULT TIMESTAMP(END_TIME);
-
-WITH
-  snapshot_data AS (
-  SELECT
-    UNIX_MILLIS(period_start) AS period_start,
-    IFNULL(SUM(period_slot_ms), 0) AS period_slot_ms,
-    DIV(UNIX_MILLIS(period_start), 3600000 * 1) * 3600000 * 1 AS time_ms
-  FROM (
+    DECLARE
+      start_time timestamp DEFAULT TIMESTAMP(START_TIME);
+    DECLARE
+      end_time timestamp DEFAULT TIMESTAMP(END_TIME);
+    
+    WITH
+      snapshot_data AS (
+      SELECT
+        UNIX_MILLIS(period_start) AS period_start,
+        IFNULL(SUM(period_slot_ms), 0) AS period_slot_ms,
+        DIV(UNIX_MILLIS(period_start), 3600000 * 1) * 3600000 * 1 AS time_ms
+      FROM (
+        SELECT
+          *
+        FROM
+          `PROJECT_ID.region-US`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
+        WHERE
+          ((job_creation_time >= TIMESTAMP_SUB(start_time, INTERVAL 1200 MINUTE)
+              AND job_creation_time < TIMESTAMP(end_time))
+            AND period_start >= TIMESTAMP(start_time)
+            AND period_start < TIMESTAMP(end_time))
+          AND (statement_type != "SCRIPT"
+            OR statement_type IS NULL)
+          AND REGEXP_CONTAINS(reservation_id, "^PROJECT_ID:") )
+      GROUP BY
+        period_start,
+        time_ms ),
+      converted_percentiles_data AS (
+      SELECT
+        time_ms,
+        100 - CAST(SAFE_DIVIDE(3600000 * 1 * 1 / 1000, COUNT(*)) AS INT64) AS converted_percentiles,
+      FROM
+        snapshot_data
+      GROUP BY
+        time_ms ),
+      data_by_time AS (
+      SELECT
+        time_ms,
+      IF
+        (converted_percentiles <= 0, 0, APPROX_QUANTILES(period_slot_ms, 100)[SAFE_OFFSET(converted_percentiles)] / 1000) AS p99_slots,
+        SUM(period_slot_ms) / (3600000 * 1) AS avg_slots
+      FROM
+        snapshot_data
+      JOIN
+        converted_percentiles_data AS c
+      USING
+        (time_ms)
+      GROUP BY
+        time_ms,
+        converted_percentiles )
     SELECT
-      *
-    FROM
-      `PROJECT_ID.region-US`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
-    WHERE
-      ((job_creation_time >= TIMESTAMP_SUB(start_time, INTERVAL 1200 MINUTE)
-          AND job_creation_time < TIMESTAMP(end_time))
-        AND period_start >= TIMESTAMP(start_time)
-        AND period_start < TIMESTAMP(end_time))
-      AND (statement_type != "SCRIPT"
-        OR statement_type IS NULL)
-      AND REGEXP_CONTAINS(reservation_id, "^PROJECT_ID:") )
-  GROUP BY
-    period_start,
-    time_ms ),
-  converted_percentiles_data AS (
-  SELECT
-    time_ms,
-    100 - CAST(SAFE_DIVIDE(3600000 * 1 * 1 / 1000, COUNT(*)) AS INT64) AS converted_percentiles,
-  FROM
-    snapshot_data
-  GROUP BY
-    time_ms ),
-  data_by_time AS (
-  SELECT
-    time_ms,
-  IF
-    (converted_percentiles <= 0, 0, APPROX_QUANTILES(period_slot_ms, 100)[SAFE_OFFSET(converted_percentiles)] / 1000) AS p99_slots,
-    SUM(period_slot_ms) / (3600000 * 1) AS avg_slots
-  FROM
-    snapshot_data
-  JOIN
-    converted_percentiles_data AS c
-  USING
-    (time_ms)
-  GROUP BY
-    time_ms,
-    converted_percentiles )
-SELECT
-  time_ms,
-  TIMESTAMP_MILLIS(time_ms) AS time_stamp,
-  IFNULL(avg_slots, 0) AS avg_slots,
-  IFNULL(p99_slots, 0) AS p99_slots,
-FROM (
-  SELECT
-    time_ms * 3600000 * 1 AS time_ms
-  FROM
-    UNNEST(GENERATE_ARRAY(DIV(UNIX_MILLIS(start_time), 3600000 * 1), DIV(UNIX_MILLIS(end_time), 3600000 * 1) - 1, 1)) AS time_ms )
-LEFT JOIN
-  data_by_time
-USING
-  (time_ms)
-ORDER BY
-  time_ms DESC;
-```
+      time_ms,
+      TIMESTAMP_MILLIS(time_ms) AS time_stamp,
+      IFNULL(avg_slots, 0) AS avg_slots,
+      IFNULL(p99_slots, 0) AS p99_slots,
+    FROM (
+      SELECT
+        time_ms * 3600000 * 1 AS time_ms
+      FROM
+        UNNEST(GENERATE_ARRAY(DIV(UNIX_MILLIS(start_time), 3600000 * 1), DIV(UNIX_MILLIS(end_time), 3600000 * 1) - 1, 1)) AS time_ms )
+    LEFT JOIN
+      data_by_time
+    USING
+      (time_ms)
+    ORDER BY
+      time_ms DESC;
 
 ### Calculate the percentage of execution time that had pending work
 
@@ -265,12 +257,10 @@ The following example returns a float value that represents the percentage of th
 
 If the resulting value is large, you can try adding more slots to see the impact and understand whether slot contention is the only bottleneck.
 
-``` notranslate
-SELECT ROUND(COUNTIF(period_estimated_runnable_units > 0) / COUNT(*) * 100, 1) as execution_duration_percentage
-FROM `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
-WHERE job_id = 'my_job_id'
-GROUP BY job_id
-```
+    SELECT ROUND(COUNTIF(period_estimated_runnable_units > 0) / COUNT(*) * 100, 1) as execution_duration_percentage
+    FROM `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
+    WHERE job_id = 'my_job_id'
+    GROUP BY job_id
 
 If you know the date of the query execution, add a `DATE(period_start) = 'YYYY-MM-DD'` clause to the query to reduce the amount of bytes processed and speed up the execution. For example, `DATE(period_start) = '2025-08-22'` .
 

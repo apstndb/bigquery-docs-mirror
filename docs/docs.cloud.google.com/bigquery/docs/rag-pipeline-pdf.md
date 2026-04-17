@@ -120,30 +120,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a connection
 
@@ -187,14 +181,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -210,10 +202,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -227,19 +217,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -361,7 +349,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -491,13 +479,11 @@ Create an object table over the PDF file in Cloud Storage:
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.pdf`
-    WITH CONNECTION `LOCATION.CONNECTION_ID`
-    OPTIONS(
-      object_metadata = 'SIMPLE',
-      uris = ['gs://BUCKET/scf23.pdf']);
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.pdf`
+        WITH CONNECTION `LOCATION.CONNECTION_ID`
+        OPTIONS(
+          object_metadata = 'SIMPLE',
+          uris = ['gs://BUCKET/scf23.pdf']);
     
     Replace the following:
     
@@ -521,11 +507,9 @@ Create a remote model to access the Document AI processor:
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.parser_model`
-    REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-      OPTIONS(remote_service_type = 'CLOUD_AI_DOCUMENT_V1', document_processor = 'PROCESSOR_ID');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.parser_model`
+        REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
+          OPTIONS(remote_service_type = 'CLOUD_AI_DOCUMENT_V1', document_processor = 'PROCESSOR_ID');
     
     Replace the following:
     
@@ -545,9 +529,7 @@ Use the document processor with the `ML.PROCESS_DOCUMENT` function to parse the 
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE or REPLACE TABLE bqml_tutorial.chunked_pdf AS (  SELECT * FROM ML.PROCESS_DOCUMENT(  MODEL bqml_tutorial.parser_model,  TABLE bqml_tutorial.pdf,  PROCESS_OPTIONS => (JSON '{"layout_config": {"chunking_config": {"chunk_size": 250}}}')  ));
-    ```
+        CREATE or REPLACE TABLE bqml_tutorial.chunked_pdf AS (  SELECT * FROM ML.PROCESS_DOCUMENT(  MODEL bqml_tutorial.parser_model,  TABLE bqml_tutorial.pdf,  PROCESS_OPTIONS => (JSON '{"layout_config": {"chunking_config": {"chunk_size": 250}}}')  ));
 
 ## Parse the PDF chunk data into separate columns
 
@@ -557,18 +539,14 @@ Extract the PDF content and metadata information from the JSON data returned by 
 
 2.  In the query editor, run the following statement to parse the PDF content:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE bqml_tutorial.parsed_pdf AS (SELECT  uri,  JSON_EXTRACT_SCALAR(json , '$.chunkId') AS id,  JSON_EXTRACT_SCALAR(json , '$.content') AS content,  JSON_EXTRACT_SCALAR(json , '$.pageFooters[0].text') AS page_footers_text,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageStart') AS page_span_start,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageEnd') AS page_span_endFROM bqml_tutorial.chunked_pdf, UNNEST(JSON_EXTRACT_ARRAY(ml_process_document_result.chunkedDocument.chunks, '$')) json);
-    ```
+        CREATE OR REPLACE TABLE bqml_tutorial.parsed_pdf AS (SELECT  uri,  JSON_EXTRACT_SCALAR(json , '$.chunkId') AS id,  JSON_EXTRACT_SCALAR(json , '$.content') AS content,  JSON_EXTRACT_SCALAR(json , '$.pageFooters[0].text') AS page_footers_text,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageStart') AS page_span_start,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageEnd') AS page_span_endFROM bqml_tutorial.chunked_pdf, UNNEST(JSON_EXTRACT_ARRAY(ml_process_document_result.chunkedDocument.chunks, '$')) json);
 
 3.  In the query editor, run the following statement to view a subset of the parsed PDF content:
     
-    ``` notranslate
-    SELECT *
-    FROM `bqml_tutorial.parsed_pdf`
-    ORDER BY id
-    LIMIT 5;
-    ```
+        SELECT *
+        FROM `bqml_tutorial.parsed_pdf`
+        ORDER BY id
+        LIMIT 5;
     
     The output is similar to the following:
     
@@ -593,11 +571,9 @@ Create a remote model that represents a hosted Vertex AI text embedding generati
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.embedding_model`
-      REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-      OPTIONS (ENDPOINT = 'text-embedding-005');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.embedding_model`
+          REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
+          OPTIONS (ENDPOINT = 'text-embedding-005');
     
     Replace the following:
     
@@ -615,13 +591,11 @@ Generate embeddings for the parsed PDF content and then write them to a table:
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.embeddings` AS
-    SELECT * FROM AI.GENERATE_EMBEDDING(
-      MODEL `bqml_tutorial.embedding_model`,
-      TABLE `bqml_tutorial.parsed_pdf`
-    );
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.embeddings` AS
+        SELECT * FROM AI.GENERATE_EMBEDDING(
+          MODEL `bqml_tutorial.embedding_model`,
+          TABLE `bqml_tutorial.parsed_pdf`
+        );
 
 ## Run a vector search
 
@@ -633,24 +607,22 @@ The following query takes text input, creates an embedding for that input using 
 
 2.  In the query editor, run the following SQL statement:
     
-    ``` notranslate
-    SELECT query.query, base.id AS pdf_chunk_id, base.content, distance
-    FROM
-      VECTOR_SEARCH( TABLE `bqml_tutorial.embeddings`,
-        'embedding',
-        (
-        SELECT
-          embedding,
-          content AS query
+        SELECT query.query, base.id AS pdf_chunk_id, base.content, distance
         FROM
-          AI.GENERATE_EMBEDDING( MODEL `bqml_tutorial.embedding_model`,
-            ( SELECT 'Did the typical family net worth increase? If so, by how much?' AS content)
-          )
-        ),
-        top_k => 10,
-        OPTIONS => '{"fraction_lists_to_search": 0.01}')
-    ORDER BY distance DESC;
-    ```
+          VECTOR_SEARCH( TABLE `bqml_tutorial.embeddings`,
+            'embedding',
+            (
+            SELECT
+              embedding,
+              content AS query
+            FROM
+              AI.GENERATE_EMBEDDING( MODEL `bqml_tutorial.embedding_model`,
+                ( SELECT 'Did the typical family net worth increase? If so, by how much?' AS content)
+              )
+            ),
+            top_k => 10,
+            OPTIONS => '{"fraction_lists_to_search": 0.01}')
+        ORDER BY distance DESC;
     
     The output is similar to the following:
     
@@ -680,11 +652,9 @@ Create a remote model that represents a hosted Vertex AI text generation model:
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.text_model`
-      REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-      OPTIONS (ENDPOINT = 'gemini-2.0-flash-001');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.text_model`
+          REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
+          OPTIONS (ENDPOINT = 'gemini-2.0-flash-001');
     
     Replace the following:
     
@@ -702,37 +672,35 @@ Perform a vector search on the embeddings to identify semantically similar PDF c
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT
-      result AS generated
-      FROM
-      AI.GENERATE_TEXT( MODEL `bqml_tutorial.text_model`,
-        (
         SELECT
-        CONCAT( 'Did the typical family net worth change? How does this compare the SCF survey a decade earlier? Be concise and use the following context:',
-        STRING_AGG(FORMAT("context: %s and reference: %s", base.content, base.uri), ',\n')) AS prompt,
-        FROM
-          VECTOR_SEARCH( TABLE
-            `bqml_tutorial.embeddings`,
-            'embedding',
+          result AS generated
+          FROM
+          AI.GENERATE_TEXT( MODEL `bqml_tutorial.text_model`,
             (
             SELECT
-              embedding,
-              content AS query
+            CONCAT( 'Did the typical family net worth change? How does this compare the SCF survey a decade earlier? Be concise and use the following context:',
+            STRING_AGG(FORMAT("context: %s and reference: %s", base.content, base.uri), ',\n')) AS prompt,
             FROM
-              AI.GENERATE_EMBEDDING( MODEL `bqml_tutorial.embedding_model`,
+              VECTOR_SEARCH( TABLE
+                `bqml_tutorial.embeddings`,
+                'embedding',
                 (
                 SELECT
-                  'Did the typical family net worth change? How does this compare the SCF survey a decade earlier?' AS content
-                )
-              )
-            ),
-            top_k => 10,
-            OPTIONS => '{"fraction_lists_to_search": 0.01}')
-          ),
-          STRUCT(512 AS max_output_tokens)
-      );
-    ```
+                  embedding,
+                  content AS query
+                FROM
+                  AI.GENERATE_EMBEDDING( MODEL `bqml_tutorial.embedding_model`,
+                    (
+                    SELECT
+                      'Did the typical family net worth change? How does this compare the SCF survey a decade earlier?' AS content
+                    )
+                  )
+                ),
+                top_k => 10,
+                OPTIONS => '{"fraction_lists_to_search": 0.01}')
+              ),
+              STRUCT(512 AS max_output_tokens)
+          );
     
     The output is similar to the following:
     

@@ -108,33 +108,27 @@ Federated queries are subject to the optimization technique known as SQL pushdow
 
 When you use the `EXTERNAL_QUERY` function, SQL pushdowns work by rewriting the original query. In the following example, the `EXTERNAL_QUERY` function is used to communicate with a Cloud SQL database:
 
-``` notranslate
-SELECT COUNT(*)
-FROM (
-  SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
-  )
-WHERE a = 'Y' AND b NOT IN ('COMPLETE','CANCELLED');
-```
+    SELECT COUNT(*)
+    FROM (
+      SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
+      )
+    WHERE a = 'Y' AND b NOT IN ('COMPLETE','CANCELLED');
 
 Replace `  CONNECTION_ID  ` with the ID of the BigQuery connection.
 
 Without SQL pushdowns, the following query is sent to Cloud SQL:
 
-``` notranslate
-SELECT *
-FROM operations_table
-```
+    SELECT *
+    FROM operations_table
 
 When this query is executed, the entire table is sent back to BigQuery, even though only some rows and columns are needed.
 
 With SQL pushdowns, the following query is sent to Cloud SQL:
 
-``` notranslate
-SELECT `a`, `b`
-FROM (
-  SELECT * FROM operations_table) t
-WHERE ((`a` = 'Y') AND (NOT `b` IN ('COMPLETE', 'CANCELLED')))
-```
+    SELECT `a`, `b`
+    FROM (
+      SELECT * FROM operations_table) t
+    WHERE ((`a` = 'Y') AND (NOT `b` IN ('COMPLETE', 'CANCELLED')))
 
 When this query is executed, only two columns and the rows that match the filtering predicate are sent back to BigQuery.
 
@@ -200,16 +194,12 @@ The following are supported SQL functions by data source. No functions are suppo
     
       - PostgreSQL `NUMERIC` values read from Spanner are handled in accordance with the [Spanner to BigQuery type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#spanner-mapping) . For example, if a numeric column has the `1.1234567891` value, then the following query returns 0 rows:
         
-        ``` notranslate
-        SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "SELECT * from
-        operations_table where numeric_col = 1.123456789")
-        ```
+            SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "SELECT * from
+            operations_table where numeric_col = 1.123456789")
         
         However the following statement returns 1 row based on GoogleSQL semantics:
         
-        ``` notranslate
-        SELECT * from operations_table where numeric_col = 1.123456789
-        ```
+            SELECT * from operations_table where numeric_col = 1.123456789
     
       - JSON object normalization behaves differently. Keys are sorted strictly lexicographically in Spanner `JSON` , but in PostgreSQL `PG JSONB` , they are sorted first by key length, then lexicographically with equivalent key length.
 
@@ -233,9 +223,7 @@ An external data source might have a collation set on a column (for example, cas
 
 Consider the following example where you have a `flag` column with a case-insensitive collation in the external data source:
 
-``` notranslate
-SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table where flag = 'Y'")
-```
+    SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table where flag = 'Y'")
 
 Replace `  CONNECTION_ID  ` with the ID of the BigQuery connection.
 
@@ -243,23 +231,19 @@ The preceding query returns rows where `flag` is `y` or `Y` because the query is
 
 However, for query federation with Cloud SQL, SAP Datasphere, or AlloyDB data sources, if you add a filter on your main query, the query is executed on the BigQuery side with the default collation. See the following query:
 
-``` notranslate
-SELECT * FROM
-  (
-    SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
-  )
-WHERE flag = 'Y'
-```
+    SELECT * FROM
+      (
+        SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
+      )
+    WHERE flag = 'Y'
 
 Due to the default case-sensitive [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) in BigQuery, the preceding query only returns rows where the flag is `Y` and filters out rows where the flag is `y` . To make your `WHERE` clause case-insensitive, specify the collation in the query:
 
-``` notranslate
-SELECT * FROM
-  (
-    SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
-  )
-WHERE COLLATE(flag, 'und:ci') = 'Y'
-```
+    SELECT * FROM
+      (
+        SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
+      )
+    WHERE COLLATE(flag, 'und:ci') = 'Y'
 
 ## What's next
 

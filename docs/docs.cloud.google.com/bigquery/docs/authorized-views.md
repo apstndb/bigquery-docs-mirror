@@ -151,7 +151,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 > **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
-``` lang-terraform
+```terraform
 # Creates an authorized view.
 
 # Create a dataset to contain the view.
@@ -308,7 +308,7 @@ To remove authorization to a view, select one of the following options:
 
 To remove authorization from a view, use the `bq rm` command. Enter the `table_id` for the view you want to remove authorization from.
 
-``` notranslate
+``` 
     bq rm \
     project_id:dataset:table_id
     

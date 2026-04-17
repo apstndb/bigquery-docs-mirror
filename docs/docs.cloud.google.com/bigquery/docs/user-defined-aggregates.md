@@ -16,15 +16,13 @@ To create a persistent UDAF, use the [`CREATE AGGREGATE FUNCTION` statement](htt
 
 For example, the following query creates a persistent UDAF that's called `ScaledAverage` :
 
-``` notranslate
-CREATE AGGREGATE FUNCTION myproject.mydataset.ScaledAverage(
-  dividend FLOAT64,
-  divisor FLOAT64)
-RETURNS FLOAT64
-AS (
-  AVG(dividend / divisor)
-);
-```
+    CREATE AGGREGATE FUNCTION myproject.mydataset.ScaledAverage(
+      dividend FLOAT64,
+      divisor FLOAT64)
+    RETURNS FLOAT64
+    AS (
+      AVG(dividend / divisor)
+    );
 
 ### Create a temporary SQL UDAF
 
@@ -34,15 +32,13 @@ To create a temporary UDAF, use the [`CREATE AGGREGATE FUNCTION` statement](http
 
 For example, the following query creates a temporary UDAF that's called `ScaledAverage` :
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION ScaledAverage(
-  dividend FLOAT64,
-  divisor FLOAT64)
-RETURNS FLOAT64
-AS (
-  AVG(dividend / divisor)
-);
-```
+    CREATE TEMP AGGREGATE FUNCTION ScaledAverage(
+      dividend FLOAT64,
+      divisor FLOAT64)
+    RETURNS FLOAT64
+    AS (
+      AVG(dividend / divisor)
+    );
 
 ### Use aggregate and non-aggregate parameters
 
@@ -54,16 +50,14 @@ A non-aggregate function parameter is a scalar function parameter with a constan
 
 For example, the following function contains an aggregate parameter that's called `dividend` , and a non-aggregate parameter called `divisor` :
 
-``` notranslate
--- Create the function.
-CREATE TEMP AGGREGATE FUNCTION ScaledSum(
-  dividend FLOAT64,
-  divisor FLOAT64 NOT AGGREGATE)
-RETURNS FLOAT64
-AS (
-  SUM(dividend) / divisor
-);
-```
+    -- Create the function.
+    CREATE TEMP AGGREGATE FUNCTION ScaledSum(
+      dividend FLOAT64,
+      divisor FLOAT64 NOT AGGREGATE)
+    RETURNS FLOAT64
+    AS (
+      SUM(dividend) / divisor
+    );
 
 ### Use the default project in the function body
 
@@ -71,39 +65,33 @@ In the body of a SQL UDAF, any references to BigQuery entities, such as tables o
 
 For example, consider the following statement:
 
-``` notranslate
-CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
-  dividend FLOAT64,
-  divisor FLOAT64)
-RETURNS FLOAT64
-AS (
-  ( SELECT AVG(dividend / divisor) FROM dataset_a.my_table )
-);
-```
+    CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
+      dividend FLOAT64,
+      divisor FLOAT64)
+    RETURNS FLOAT64
+    AS (
+      ( SELECT AVG(dividend / divisor) FROM dataset_a.my_table )
+    );
 
 If you run the preceding statement in the `project1` project, the statement succeeds because `my_table` exists in `project1` . However, if you run the preceding statement from a different project, the statement fails. To correct the error, include the project ID in the table reference:
 
-``` notranslate
-CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
-  dividend FLOAT64,
-  divisor FLOAT64)
-RETURNS FLOAT64
-AS (
-  ( SELECT AVG(dividend / divisor) FROM project1.dataset_a.my_table )
-);
-```
+    CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
+      dividend FLOAT64,
+      divisor FLOAT64)
+    RETURNS FLOAT64
+    AS (
+      ( SELECT AVG(dividend / divisor) FROM project1.dataset_a.my_table )
+    );
 
 You can also reference an entity in a different project or dataset from the one where you create the function:
 
-``` notranslate
-CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
-  dividend FLOAT64,
-  divisor FLOAT64)
-RETURNS FLOAT64
-AS (
-  ( SELECT AVG(dividend / divisor) FROM project2.dataset_c.my_table )
-);
-```
+    CREATE AGGREGATE FUNCTION project1.dataset_a.ScaledAverage(
+      dividend FLOAT64,
+      divisor FLOAT64)
+    RETURNS FLOAT64
+    AS (
+      ( SELECT AVG(dividend / divisor) FROM project2.dataset_c.my_table )
+    );
 
 ## Create a JavaScript UDAF
 
@@ -125,40 +113,38 @@ To create a persistent UDAF, use the [`CREATE AGGREGATE FUNCTION` statement](htt
 
 The following query creates a persistent JavaScript UDAF that's called `SumPositive` :
 
-``` notranslate
-CREATE OR REPLACE AGGREGATE FUNCTION my_project.my_dataset.SumPositive(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r'''
-
-  export function initialState() {
-    return {sum: 0}
-  }
-  export function aggregate(state, x) {
-    if (x > 0) {
-      state.sum += x;
-    }
-  }
-  export function merge(state, partialState) {
-    state.sum += partialState.sum;
-  }
-  export function finalize(state) {
-    return state.sum;
-  }
-
-''';
-
--- Call the JavaScript UDAF.
-WITH numbers AS (
-  SELECT * FROM UNNEST([1.0, -1.0, 3.0, -3.0, 5.0, -5.0]) AS x)
-SELECT my_project.my_dataset.SumPositive(x) AS sum FROM numbers;
-
-/*-----*
- | sum |
- +-----+
- | 9.0 |
- *-----*/
-```
+    CREATE OR REPLACE AGGREGATE FUNCTION my_project.my_dataset.SumPositive(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r'''
+    
+      export function initialState() {
+        return {sum: 0}
+      }
+      export function aggregate(state, x) {
+        if (x > 0) {
+          state.sum += x;
+        }
+      }
+      export function merge(state, partialState) {
+        state.sum += partialState.sum;
+      }
+      export function finalize(state) {
+        return state.sum;
+      }
+    
+    ''';
+    
+    -- Call the JavaScript UDAF.
+    WITH numbers AS (
+      SELECT * FROM UNNEST([1.0, -1.0, 3.0, -3.0, 5.0, -5.0]) AS x)
+    SELECT my_project.my_dataset.SumPositive(x) AS sum FROM numbers;
+    
+    /*-----*
+     | sum |
+     +-----+
+     | 9.0 |
+     *-----*/
 
 ### Create a temporary JavaScript UDAF
 
@@ -168,40 +154,38 @@ To create a temporary UDAF, use the [`CREATE AGGREGATE FUNCTION` statement](http
 
 The following query creates a temporary JavaScript UDAF that's called `SumPositive` :
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r'''
-
-  export function initialState() {
-    return {sum: 0}
-  }
-  export function aggregate(state, x) {
-    if (x > 0) {
-      state.sum += x;
-    }
-  }
-  export function merge(state, partialState) {
-    state.sum += partialState.sum;
-  }
-  export function finalize(state) {
-    return state.sum;
-  }
-
-''';
-
--- Call the JavaScript UDAF.
-WITH numbers AS (
-  SELECT * FROM UNNEST([1.0, -1.0, 3.0, -3.0, 5.0, -5.0]) AS x)
-SELECT SumPositive(x) AS sum FROM numbers;
-
-/*-----*
- | sum |
- +-----+
- | 9.0 |
- *-----*/
-```
+    CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r'''
+    
+      export function initialState() {
+        return {sum: 0}
+      }
+      export function aggregate(state, x) {
+        if (x > 0) {
+          state.sum += x;
+        }
+      }
+      export function merge(state, partialState) {
+        state.sum += partialState.sum;
+      }
+      export function finalize(state) {
+        return state.sum;
+      }
+    
+    ''';
+    
+    -- Call the JavaScript UDAF.
+    WITH numbers AS (
+      SELECT * FROM UNNEST([1.0, -1.0, 3.0, -3.0, 5.0, -5.0]) AS x)
+    SELECT SumPositive(x) AS sum FROM numbers;
+    
+    /*-----*
+     | sum |
+     +-----+
+     | 9.0 |
+     *-----*/
 
 ### Include non-aggregate parameters in a JavaScript UDAF
 
@@ -213,40 +197,38 @@ A non-aggregate function parameter is a scalar function parameter with a constan
 
 In the following example, the JavaScript UDAF contains an aggregate parameter called `s` and a non-aggregate parameter called `delimiter` :
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION JsStringAgg(
-  s STRING,
-  delimiter STRING NOT AGGREGATE)
-RETURNS STRING
-LANGUAGE js
-AS r'''
-
-  export function initialState() {
-    return {strings: []}
-  }
-  export function aggregate(state, s) {
-    state.strings.push(s);
-  }
-  export function merge(state, partialState) {
-    state.strings = state.strings.concat(partialState.strings);
-  }
-  export function finalize(state, delimiter) {
-    return state.strings.join(delimiter);
-  }
-
-''';
-
--- Call the JavaScript UDAF.
-WITH strings AS (
-  SELECT * FROM UNNEST(["aaa", "bbb", "ccc", "ddd"]) AS values)
-SELECT JsStringAgg(values, '.') AS result FROM strings;
-
-/*-----------------*
- | result          |
- +-----------------+
- | aaa.bbb.ccc.ddd |
- *-----------------*/
-```
+    CREATE TEMP AGGREGATE FUNCTION JsStringAgg(
+      s STRING,
+      delimiter STRING NOT AGGREGATE)
+    RETURNS STRING
+    LANGUAGE js
+    AS r'''
+    
+      export function initialState() {
+        return {strings: []}
+      }
+      export function aggregate(state, s) {
+        state.strings.push(s);
+      }
+      export function merge(state, partialState) {
+        state.strings = state.strings.concat(partialState.strings);
+      }
+      export function finalize(state, delimiter) {
+        return state.strings.join(delimiter);
+      }
+    
+    ''';
+    
+    -- Call the JavaScript UDAF.
+    WITH strings AS (
+      SELECT * FROM UNNEST(["aaa", "bbb", "ccc", "ddd"]) AS values)
+    SELECT JsStringAgg(values, '.') AS result FROM strings;
+    
+    /*-----------------*
+     | result          |
+     +-----------------+
+     | aaa.bbb.ccc.ddd |
+     *-----------------*/
 
 ### Serialize and deserialize data in a JavaScript UDAF
 
@@ -282,122 +264,116 @@ If you want to work with non-serializable aggregation states, the JavaScript UDA
 
 In the following example, an external library calculates sums by using an interface:
 
-``` notranslate
-export class SumAggregator {
- constructor() {
-   this.sum = 0;
- }
- update(value) {
-   this.sum += value;
- }
- getSum() {
-   return this.sum;
- }
-}
-```
+    export class SumAggregator {
+     constructor() {
+       this.sum = 0;
+     }
+     update(value) {
+       this.sum += value;
+     }
+     getSum() {
+       return this.sum;
+     }
+    }
 
 The following query doesn't execute because the `SumAggregator` class object is not BigQuery-serializable, due to the presence of functions inside of the class.
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION F(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r'''
-
-  class SumAggregator {
-   constructor() {
-     this.sum = 0;
-   }
-
-   update(value) {
-     this.sum += value;
-   }
-
-   getSum() {
-     return this.sum;
-   }
-  }
-
-  export function initialState() {
-   return new SumAggregator();
-  }
-
-  export function aggregate(agg, value) {
-   agg.update(value);
-  }
-
-  export function merge(agg1, agg2) {
-   agg1.update(agg2.getSum());
-  }
-
-  export function finalize(agg) {
-   return agg.getSum();
-  }
-
-''';
-
---Error: getSum is not a function
-SELECT F(x) AS results FROM UNNEST([1,2,3,4]) AS x;
-```
+    CREATE TEMP AGGREGATE FUNCTION F(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r'''
+    
+      class SumAggregator {
+       constructor() {
+         this.sum = 0;
+       }
+    
+       update(value) {
+         this.sum += value;
+       }
+    
+       getSum() {
+         return this.sum;
+       }
+      }
+    
+      export function initialState() {
+       return new SumAggregator();
+      }
+    
+      export function aggregate(agg, value) {
+       agg.update(value);
+      }
+    
+      export function merge(agg1, agg2) {
+       agg1.update(agg2.getSum());
+      }
+    
+      export function finalize(agg) {
+       return agg.getSum();
+      }
+    
+    ''';
+    
+    --Error: getSum is not a function
+    SELECT F(x) AS results FROM UNNEST([1,2,3,4]) AS x;
 
 If you add the `serialize` and `deserialize` functions to the preceding query, the query runs because the `SumAggregator` class object is converted to an object that is BigQuery-serializable and then back to a `SumAggregator` class object again.
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION F(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r'''
-
-  class SumAggregator {
-   constructor() {
-     this.sum = 0;
-   }
-
-   update(value) {
-     this.sum += value;
-   }
-
-   getSum() {
-     return this.sum;
-   }
-  }
-
-  export function initialState() {
-   return new SumAggregator();
-  }
-
-  export function aggregate(agg, value) {
-   agg.update(value);
-  }
-
-  export function merge(agg1, agg2) {
-   agg1.update(agg2.getSum());
-  }
-
-  export function finalize(agg) {
-   return agg.getSum();
-  }
-
-  export function serialize(agg) {
-   return {sum: agg.getSum()};
-  }
-
-  export function deserialize(serialized) {
-   var agg = new SumAggregator();
-   agg.update(serialized.sum);
-   return agg;
-  }
-
-''';
-
-SELECT F(x) AS results FROM UNNEST([1,2,3,4]) AS x;
-
-/*-----------------*
- | results         |
- +-----------------+
- | 10.0            |
- *-----------------*/
-```
+    CREATE TEMP AGGREGATE FUNCTION F(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r'''
+    
+      class SumAggregator {
+       constructor() {
+         this.sum = 0;
+       }
+    
+       update(value) {
+         this.sum += value;
+       }
+    
+       getSum() {
+         return this.sum;
+       }
+      }
+    
+      export function initialState() {
+       return new SumAggregator();
+      }
+    
+      export function aggregate(agg, value) {
+       agg.update(value);
+      }
+    
+      export function merge(agg1, agg2) {
+       agg1.update(agg2.getSum());
+      }
+    
+      export function finalize(agg) {
+       return agg.getSum();
+      }
+    
+      export function serialize(agg) {
+       return {sum: agg.getSum()};
+      }
+    
+      export function deserialize(serialized) {
+       var agg = new SumAggregator();
+       agg.update(serialized.sum);
+       return agg;
+      }
+    
+    ''';
+    
+    SELECT F(x) AS results FROM UNNEST([1,2,3,4]) AS x;
+    
+    /*-----------------*
+     | results         |
+     +-----------------+
+     | 10.0            |
+     *-----------------*/
 
 To learn more about the serialization functions, see [Optional JavaScript serialization functions](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#javascript-serialization-functions) .
 
@@ -411,68 +387,66 @@ Don't use global variables to store aggregation state. Instead, limit aggregatio
 
 In the following query, the `SumOfPrimes` function calculates a sum, but only prime numbers are included in the calculation. In the JavaScript function body, there are two global variables, `primes` and `maxTested` , that are initialized first. In addition, there is a custom function called `isPrime` that checks if a number is prime.
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION SumOfPrimes(x INT64)
-RETURNS INT64
-LANGUAGE js
-AS r'''
-
-  var primes = new Set([2]);
-  var maxTested = 2;
-
-  function isPrime(n) {
-    if (primes.has(n)) {
-      return true;
-    }
-    if (n <= maxTested) {
-      return false;
-    }
-    for (var k = 2; k < n; ++k) {
-      if (!isPrime(k)) {
-        continue;
-      }
-      if ((n % k) == 0) {
+    CREATE TEMP AGGREGATE FUNCTION SumOfPrimes(x INT64)
+    RETURNS INT64
+    LANGUAGE js
+    AS r'''
+    
+      var primes = new Set([2]);
+      var maxTested = 2;
+    
+      function isPrime(n) {
+        if (primes.has(n)) {
+          return true;
+        }
+        if (n <= maxTested) {
+          return false;
+        }
+        for (var k = 2; k < n; ++k) {
+          if (!isPrime(k)) {
+            continue;
+          }
+          if ((n % k) == 0) {
+            maxTested = n;
+            return false;
+          }
+        }
         maxTested = n;
-        return false;
+        primes.add(n);
+        return true;
       }
-    }
-    maxTested = n;
-    primes.add(n);
-    return true;
-  }
-
-  export function initialState() {
-    return {sum: 0};
-  }
-
-  export function aggregate(state, x) {
-    x = Number(x);
-    if (isPrime(x)) {
-      state.sum += x;
-    }
-  }
-
-  export function merge(state, partialState) {
-    state.sum += partialState.sum;
-  }
-
-  export function finalize(state) {
-    return state.sum;
-  }
-
-''';
-
--- Call the JavaScript UDAF.
-WITH numbers AS (
-  SELECT * FROM UNNEST([10, 11, 13, 17, 19, 20]) AS x)
-SELECT SumOfPrimes(x) AS sum FROM numbers;
-
-/*-----*
- | sum |
- +-----+
- | 60  |
- *-----*/
-```
+    
+      export function initialState() {
+        return {sum: 0};
+      }
+    
+      export function aggregate(state, x) {
+        x = Number(x);
+        if (isPrime(x)) {
+          state.sum += x;
+        }
+      }
+    
+      export function merge(state, partialState) {
+        state.sum += partialState.sum;
+      }
+    
+      export function finalize(state) {
+        return state.sum;
+      }
+    
+    ''';
+    
+    -- Call the JavaScript UDAF.
+    WITH numbers AS (
+      SELECT * FROM UNNEST([10, 11, 13, 17, 19, 20]) AS x)
+    SELECT SumOfPrimes(x) AS sum FROM numbers;
+    
+    /*-----*
+     | sum |
+     +-----+
+     | 60  |
+     *-----*/
 
 ### Include JavaScript libraries
 
@@ -480,31 +454,29 @@ You can extend your JavaScript UDAFs with the `library` option in the `OPTIONS` 
 
 In the following example, code in `bar.js` is available to any code in the function body of the JavaScript UDAF:
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION JsAggFn(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-OPTIONS (library = ['gs://foo/bar.js'])
-AS r'''
-
-  import doInterestingStuff from 'bar.js';
-
-  export function initialState() {
-    return ...
-  }
-  export function aggregate(state, x) {
-    var result = doInterestingStuff(x);
-    ...
-  }
-  export function merge(state, partial_state) {
-    ...
-  }
-  export function finalize(state) {
-    return ...;
-  }
-
-''';
-```
+    CREATE TEMP AGGREGATE FUNCTION JsAggFn(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    OPTIONS (library = ['gs://foo/bar.js'])
+    AS r'''
+    
+      import doInterestingStuff from 'bar.js';
+    
+      export function initialState() {
+        return ...
+      }
+      export function aggregate(state, x) {
+        var result = doInterestingStuff(x);
+        ...
+      }
+      export function merge(state, partial_state) {
+        ...
+      }
+      export function finalize(state) {
+        return ...;
+      }
+    
+    ''';
 
 ### Required JavaScript structure
 
@@ -633,14 +605,12 @@ You can call a persistent UDAF in the same way that you call a built-in aggregat
 
 In the following example, the query calls a persistent UDAF that's called `WeightedAverage` :
 
-``` notranslate
-SELECT my_project.my_dataset.WeightedAverage(item, weight, 2) AS weighted_average
-FROM (
-  SELECT 1 AS item, 2.45 AS weight UNION ALL
-  SELECT 3 AS item, 0.11 AS weight UNION ALL
-  SELECT 5 AS item, 7.02 AS weight
-);
-```
+    SELECT my_project.my_dataset.WeightedAverage(item, weight, 2) AS weighted_average
+    FROM (
+      SELECT 1 AS item, 2.45 AS weight UNION ALL
+      SELECT 3 AS item, 0.11 AS weight UNION ALL
+      SELECT 5 AS item, 7.02 AS weight
+    );
 
 A table with the following results is produced:
 
@@ -658,17 +628,15 @@ The temporary function must be included in a [multi-statement query](https://doc
 
 In the following example, the query calls a temporary UDAF that's called `WeightedAverage` :
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION WeightedAverage(...)
-
--- Temporary UDAF function call
-SELECT WeightedAverage(item, weight, 2) AS weighted_average
-FROM (
-  SELECT 1 AS item, 2.45 AS weight UNION ALL
-  SELECT 3 AS item, 0.11 AS weight UNION ALL
-  SELECT 5 AS item, 7.02 AS weight
-);
-```
+    CREATE TEMP AGGREGATE FUNCTION WeightedAverage(...)
+    
+    -- Temporary UDAF function call
+    SELECT WeightedAverage(item, weight, 2) AS weighted_average
+    FROM (
+      SELECT 1 AS item, 2.45 AS weight UNION ALL
+      SELECT 3 AS item, 0.11 AS weight UNION ALL
+      SELECT 5 AS item, 7.02 AS weight
+    );
 
 A table with the following results is produced:
 
@@ -686,50 +654,48 @@ When neither the `IGNORE NULLS` nor `RESPECT NULLS` argument is provided, the de
 
 The following example illustrates the default `NULL` behavior, the `IGNORE NULLS` behavior, and the `RESPECT NULLS` behavior:
 
-``` notranslate
-CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r'''
-
-  export function initialState() {
-    return {sum: 0}
-  }
-  export function aggregate(state, x) {
-    if (x == null) {
-      // Use 1000 instead of 0 as placeholder for null so
-      // that NULL values passed are visible in the result.
-      state.sum += 1000;
-      return;
-    }
-    if (x > 0) {
-      state.sum += x;
-    }
-  }
-  export function merge(state, partialState) {
-    state.sum += partialState.sum;
-  }
-  export function finalize(state) {
-    return state.sum;
-  }
-
-''';
-
--- Call the JavaScript UDAF.
-WITH numbers AS (
-  SELECT * FROM UNNEST([1.0, 2.0, NULL]) AS x)
-SELECT
-  SumPositive(x) AS sum,
-  SumPositive(x IGNORE NULLS) AS sum_ignore_nulls,
-  SumPositive(x RESPECT NULLS) AS sum_respect_nulls
-FROM numbers;
-
-/*-----+------------------+-------------------*
- | sum | sum_ignore_nulls | sum_respect_nulls |
- +-----+------------------+-------------------+
- | 3.0 | 3.0              | 1003.0            |
- *-----+------------------+-------------------*/
-```
+    CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r'''
+    
+      export function initialState() {
+        return {sum: 0}
+      }
+      export function aggregate(state, x) {
+        if (x == null) {
+          // Use 1000 instead of 0 as placeholder for null so
+          // that NULL values passed are visible in the result.
+          state.sum += 1000;
+          return;
+        }
+        if (x > 0) {
+          state.sum += x;
+        }
+      }
+      export function merge(state, partialState) {
+        state.sum += partialState.sum;
+      }
+      export function finalize(state) {
+        return state.sum;
+      }
+    
+    ''';
+    
+    -- Call the JavaScript UDAF.
+    WITH numbers AS (
+      SELECT * FROM UNNEST([1.0, 2.0, NULL]) AS x)
+    SELECT
+      SumPositive(x) AS sum,
+      SumPositive(x IGNORE NULLS) AS sum_ignore_nulls,
+      SumPositive(x RESPECT NULLS) AS sum_respect_nulls
+    FROM numbers;
+    
+    /*-----+------------------+-------------------*
+     | sum | sum_ignore_nulls | sum_respect_nulls |
+     +-----+------------------+-------------------+
+     | 3.0 | 3.0              | 1003.0            |
+     *-----+------------------+-------------------*/
 
 ## Delete a UDAF
 
@@ -741,9 +707,7 @@ To delete a persistent UDAF, use the [`DROP FUNCTION` statement](https://docs.cl
 
 In the following example, the query deletes a persistent UDAF that's called `WeightedAverage` :
 
-``` notranslate
-DROP FUNCTION IF EXISTS my_project.my_dataset.WeightedAverage;
-```
+    DROP FUNCTION IF EXISTS my_project.my_dataset.WeightedAverage;
 
 ### Delete a temporary UDAF
 
@@ -751,9 +715,7 @@ To delete a temporary UDAF, use the [`DROP FUNCTION` statement](https://docs.clo
 
 In the following example, the query deletes a temporary UDAF that's called `WeightedAverage` :
 
-``` notranslate
-DROP FUNCTION IF EXISTS WeightedAverage;
-```
+    DROP FUNCTION IF EXISTS WeightedAverage;
 
 A temporary UDAF expires as soon as the query finishes. The UDAF doesn't need to be deleted unless you want to remove it early from a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) or [procedure](https://docs.cloud.google.com/bigquery/docs/procedures) .
 

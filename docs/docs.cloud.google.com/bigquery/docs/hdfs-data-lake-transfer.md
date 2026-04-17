@@ -231,7 +231,7 @@ Select one of the following options:
 
 To schedule Hive Metastore transfer, enter the `bq mk` command and supply the transfer creation flag `--transfer_config` :
 
-``` notranslate
+``` 
   bq mk --transfer_config
   --data_source=hadoop display_name='TRANSFER_NAME'
   --service_account_name='SERVICE_ACCOUNT'
@@ -304,283 +304,275 @@ Before using this automation script, you must do the following:
 
 1.  Save the following script to a local file. This script is designed to be configured and executed by a `cron` daemon to automate the extraction and upload process of dumper output.
     
-    ``` notranslate
-    #!/bin/bash
-    
-    # Exit immediately if a command exits with a non-zero status.
-    set -e
-    # Treat unset variables as an error when substituting.
-    set -u
-    # Pipelines return the exit status of the last command to exit with a non-zero status.
-    set -o pipefail
-    
-    # These values are used if not overridden by command-line options.
-    DUMPER_EXECUTABLE="DUMPER_PATH/dwh-migration-dumper"
-    GCS_BASE_PATH="gs://PATH_TO_DUMPER_OUTPUT"
-    LOCAL_BASE_DIR="LOCAL_BASE_DIRECTORY_PATH"
-    
-    # Optional arguments for cloud environments
-    DUMPER_HOST=""
-    DUMPER_PORT=""
-    HIVE_KERBEROS_URL=""
-    HIVEQL_RPC_PROTECTION=""
-    KERBEROS_AUTHENTICATION="false"
-    
-    # Function to display usage information
-    usage() {
-      echo "Usage: $0 [options]"
-      echo ""
-      echo "Runs the dwh-migration-dumper tool and uploads its output to provided Cloud Storage path."
-      echo ""
-      echo "Required Options:"
-      echo "  --dumper-executable   The full path to the dumper executable."
-      echo "  --gcs-base-path       The base Cloud Storage folder to upload dumper output files to. The script generates timestamped ZIP files in this folder."
-      echo "  --local-base-dir      The local base directory for logs and temp files."
-      echo ""
-      echo "Optional Hive connection options:"
-      echo "  --host              The hostname for the dumper connection."
-      echo "  --port              The port number for the dumper connection."
-      echo ""
-      echo "To use Kerberos authentication, include the following options."
-      echo "If --kerberos-authentication is specified, then --host, --port,"
-      echo "--hive-kerberos-url and --hiveql-rpc-protection are all required:"
-      echo ""
-      echo "  --kerberos-authentication   Enable Kerberos authentication."
-      echo "  --hive-kerberos-url    The Hive Kerberos URL."
-      echo "  --hiveql-rpc-protection "
-      echo "                            The hiveql-rpc-protection level, equal to the value of"
-      echo "                            'hadoop.rpc.protection' in '/etc/hadoop/conf/core-site.xml',"
-      echo "                            with one of the following values:"
-      echo "                            - authentication"
-      echo "                            - integrity"
-      echo "                            - privacy"
-      echo ""
-      echo "Other Options:"
-      echo "  -h, --help                  Display this help message and exit."
-      exit 1
-    }
-    
-    # This loop processes command-line options and overrides the default configuration.
-    while [[ "$#" -gt 0 ]]; do
-      case $1 in
-          --dumper-executable)
-              DUMPER_EXECUTABLE="$2"
-              shift # past argument
-              shift # past value
-              ;;
-          --gcs-base-path)
-              GCS_BASE_PATH="$2"
-              shift
-              shift
-              ;;
-          --local-base-dir)
-              LOCAL_BASE_DIR="$2"
-              shift
-              shift
-              ;;
-          --host)
-              DUMPER_HOST="$2"
-              shift
-              shift
-              ;;
-          --port)
-              DUMPER_PORT="$2"
-              shift
-              shift
-              ;;
-          --hive-kerberos-url)
-              HIVE_KERBEROS_URL="$2"
-              shift
-              shift
-              ;;
-          --hiveql-rpc-protection)
-              HIVEQL_RPC_PROTECTION="$2"
-              shift
-              shift
-              ;;
-          --kerberos-authentication)
-              KERBEROS_AUTHENTICATION="true"
-              shift
-              ;;
-          -h|--help)
-              usage
-              ;;
-          *)
-              echo "Unknown option: $1"
-              usage
-              ;;
-      esac
-    done
-    
-    # This runs AFTER parsing arguments to ensure no placeholder values are left.
-    if [[ "$DUMPER_EXECUTABLE" == "DUMPER_PATH"* || "$GCS_BASE_PATH" == "gs://PATH_TO_DUMPER_OUTPUT" || "$LOCAL_BASE_DIR" == "LOCAL_BASE_DIRECTORY_PATH" ]]; then
-      echo "ERROR: One or more configuration variables have not been set. Please provide them as command-line arguments or edit the script." >&2
-      echo "Run with --help for more information." >&2
-      exit 1
-    fi
-    
-    # If Kerberos authentication is enabled, check for required fields.
-    if [[ "$KERBEROS_AUTHENTICATION" == "true" ]]; then
-      if [[ -z "$DUMPER_HOST" || -z "$DUMPER_PORT" || -z "$HIVE_KERBEROS_URL" || -z "$HIVEQL_RPC_PROTECTION" ]]; then
-          echo "ERROR: If --kerberos-authentication is enabled, --host, --port, --hive-kerberos-url and --hiveql-rpc-protection must be provided." >&2
+        #!/bin/bash
+        
+        # Exit immediately if a command exits with a non-zero status.
+        set -e
+        # Treat unset variables as an error when substituting.
+        set -u
+        # Pipelines return the exit status of the last command to exit with a non-zero status.
+        set -o pipefail
+        
+        # These values are used if not overridden by command-line options.
+        DUMPER_EXECUTABLE="DUMPER_PATH/dwh-migration-dumper"
+        GCS_BASE_PATH="gs://PATH_TO_DUMPER_OUTPUT"
+        LOCAL_BASE_DIR="LOCAL_BASE_DIRECTORY_PATH"
+        
+        # Optional arguments for cloud environments
+        DUMPER_HOST=""
+        DUMPER_PORT=""
+        HIVE_KERBEROS_URL=""
+        HIVEQL_RPC_PROTECTION=""
+        KERBEROS_AUTHENTICATION="false"
+        
+        # Function to display usage information
+        usage() {
+          echo "Usage: $0 [options]"
+          echo ""
+          echo "Runs the dwh-migration-dumper tool and uploads its output to provided Cloud Storage path."
+          echo ""
+          echo "Required Options:"
+          echo "  --dumper-executable   The full path to the dumper executable."
+          echo "  --gcs-base-path       The base Cloud Storage folder to upload dumper output files to. The script generates timestamped ZIP files in this folder."
+          echo "  --local-base-dir      The local base directory for logs and temp files."
+          echo ""
+          echo "Optional Hive connection options:"
+          echo "  --host              The hostname for the dumper connection."
+          echo "  --port              The port number for the dumper connection."
+          echo ""
+          echo "To use Kerberos authentication, include the following options."
+          echo "If --kerberos-authentication is specified, then --host, --port,"
+          echo "--hive-kerberos-url and --hiveql-rpc-protection are all required:"
+          echo ""
+          echo "  --kerberos-authentication   Enable Kerberos authentication."
+          echo "  --hive-kerberos-url    The Hive Kerberos URL."
+          echo "  --hiveql-rpc-protection "
+          echo "                            The hiveql-rpc-protection level, equal to the value of"
+          echo "                            'hadoop.rpc.protection' in '/etc/hadoop/conf/core-site.xml',"
+          echo "                            with one of the following values:"
+          echo "                            - authentication"
+          echo "                            - integrity"
+          echo "                            - privacy"
+          echo ""
+          echo "Other Options:"
+          echo "  -h, --help                  Display this help message and exit."
+          exit 1
+        }
+        
+        # This loop processes command-line options and overrides the default configuration.
+        while [[ "$#" -gt 0 ]]; do
+          case $1 in
+              --dumper-executable)
+                  DUMPER_EXECUTABLE="$2"
+                  shift # past argument
+                  shift # past value
+                  ;;
+              --gcs-base-path)
+                  GCS_BASE_PATH="$2"
+                  shift
+                  shift
+                  ;;
+              --local-base-dir)
+                  LOCAL_BASE_DIR="$2"
+                  shift
+                  shift
+                  ;;
+              --host)
+                  DUMPER_HOST="$2"
+                  shift
+                  shift
+                  ;;
+              --port)
+                  DUMPER_PORT="$2"
+                  shift
+                  shift
+                  ;;
+              --hive-kerberos-url)
+                  HIVE_KERBEROS_URL="$2"
+                  shift
+                  shift
+                  ;;
+              --hiveql-rpc-protection)
+                  HIVEQL_RPC_PROTECTION="$2"
+                  shift
+                  shift
+                  ;;
+              --kerberos-authentication)
+                  KERBEROS_AUTHENTICATION="true"
+                  shift
+                  ;;
+              -h|--help)
+                  usage
+                  ;;
+              *)
+                  echo "Unknown option: $1"
+                  usage
+                  ;;
+          esac
+        done
+        
+        # This runs AFTER parsing arguments to ensure no placeholder values are left.
+        if [[ "$DUMPER_EXECUTABLE" == "DUMPER_PATH"* || "$GCS_BASE_PATH" == "gs://PATH_TO_DUMPER_OUTPUT" || "$LOCAL_BASE_DIR" == "LOCAL_BASE_DIRECTORY_PATH" ]]; then
+          echo "ERROR: One or more configuration variables have not been set. Please provide them as command-line arguments or edit the script." >&2
           echo "Run with --help for more information." >&2
           exit 1
-      fi
-    fi
-    
-    # Remove trailing slashes from GCS_BASE_PATH, if any.
-    GCS_BASE_PATH=$(echo "${GCS_BASE_PATH}" | sed 's:/*$::')
-    
-    # Create unique timestamp and directories for this run
-    EPOCH=$(date +%s)
-    LOCAL_LOG_DIR="${LOCAL_BASE_DIR}/logs"
-    mkdir -p "${LOCAL_LOG_DIR}" # Ensures the base and logs directories exist
-    
-    # Define the unique log and zip file path for this run
-    LOG_FILE="${LOCAL_LOG_DIR}/dumper_execution_${EPOCH}.log"
-    ZIP_FILE_NAME="dts-cron-dumper-output_${EPOCH}.zip"
-    LOCAL_ZIP_PATH="${LOCAL_BASE_DIR}/${ZIP_FILE_NAME}"
-    
-    echo "Script execution started. All subsequent output will be logged to: ${LOG_FILE}"
-    
-    # --- Helper Functions ---
-    
-    log() { echo "$(date '+%Y-%m-%d %H:%M:%S') - $@" >> "${LOG_FILE}"; }
-    
-    cleanup() {
-      local path_to_remove="$1"
-      log "Cleaning up local file/directory: ${path_to_remove}..."
-      rm -rf "${path_to_remove}"
-    }
-    
-    # This function is called when the script exits to ensure cleanup and logging happen reliably.
-    handle_exit() {
-      local exit_code=$?
-      # Only run the failure logic if the script is exiting with an error
-      if [[ ${exit_code} -ne 0 ]]; then
-          log "ERROR: Script is exiting with a failure code (${exit_code})."
-          local gcs_log_path_on_failure="${GCS_BASE_PATH}/logs/$(basename "${LOG_FILE}")"
-          log "Uploading log file to ${gcs_log_path_on_failure} for debugging..."
-          # Attempt to upload the log file on failure, but don't let this command cause the script to exit.
-          gsutil cp "${LOG_FILE}" "${gcs_log_path_on_failure}" > /dev/null 2>&1 || log "WARNING: Failed to upload log file to Cloud Storage."
-    
-      else
-          # SUCCESS PATH
-          log "Script finished successfully. Now cleaning up local zip file...."
-          # Clean up the local zip file ONLY on success
-          cleanup "${LOCAL_ZIP_PATH}"
-      fi
-    
-      log "*****Script End*****"
-      exit ${exit_code}
-    }
-    
-    # Trap the EXIT signal to run the handle_exit function, ensuring cleanup always happens.
-    trap handle_exit EXIT
-    
-    # Validates the dumper log file based on a strict set of rules.
-    validate_dumper_output() {
-      local log_file_to_check="$1"
-    
-      # Check for the specific success message from the dumper tool.
-      if grep -q "Dumper execution: SUCCEEDED" "${log_file_to_check}"; then
-          log "Validation Successful: Found 'Dumper execution: SUCCEEDED' message."
-          return 0 # Success
-      else
-          log "ERROR: Validation failed. The 'Dumper execution: SUCCEEDED' message was not found."
-          return 1 # Failure
-      fi
-    }
-    
-    # --- Main Script Logic ---
-    
-    log "*****Script Start*****"
-    log "Dumper Executable: ${DUMPER_EXECUTABLE}"
-    log "Cloud Storage Base Path: ${GCS_BASE_PATH}"
-    log "Local Base Directory: ${LOCAL_BASE_DIR}"
-    
-    # Use an array to build the command safely
-    dumper_command_args=(
-      "--connector" "hiveql"
-      "--output" "${LOCAL_ZIP_PATH}"
-    )
-    
-    # Add optional arguments if they are provided
-    if [[ -n "${DUMPER_HOST}" ]]; then
-    dumper_command_args+=("--host" "${DUMPER_HOST}")
-    log "Using Host: ${DUMPER_HOST}"
-    fi
-    if [[ -n "${DUMPER_PORT}" ]]; then
-    dumper_command_args+=("--port" "${DUMPER_PORT}")
-    log "Using Port: ${DUMPER_PORT}"
-    fi
-    if [[ -n "${HIVE_KERBEROS_URL}" ]]; then
-    dumper_command_args+=("--hive-kerberos-url" "${HIVE_KERBEROS_URL}")
-    log "Using Hive Kerberos URL: ${HIVE_KERBEROS_URL}"
-    fi
-    if [[ -n "${HIVEQL_RPC_PROTECTION}" ]]; then
-    dumper_command_args+=("-Dhiveql.rpc.protection=${HIVEQL_RPC_PROTECTION}")
-    log "Using HiveQL RPC Protection: ${HIVEQL_RPC_PROTECTION}"
-    fi
-    
-    log "Starting dumper tool execution..."
-    log "COMMAND: JAVA_OPTS=\"-Djavax.security.auth.useSubjectCredsOnly=false\" ${DUMPER_EXECUTABLE} ${dumper_command_args[*]}"
-    
-    JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" "${DUMPER_EXECUTABLE}" "${dumper_command_args[@]}" >> "${LOG_FILE}" 2>&1
-    
-    log "Dumper process finished."
-    
-    # Validate the output from the dumper execution for success or failure.
-    validate_dumper_output "${LOG_FILE}"
-    
-    # Upload the ZIP file to Cloud Storage
-    gcs_zip_path="${GCS_BASE_PATH}/${ZIP_FILE_NAME}"
-    log "Uploading ${LOCAL_ZIP_PATH} to ${gcs_zip_path}..."
-    
-    if [ ! -f "${LOCAL_ZIP_PATH}" ]; then
-      log "ERROR: Expected ZIP file ${LOCAL_ZIP_PATH} not found after dumper execution."
-      # The script will exit here with an error code, and the trap will run.
-      exit 1
-    fi
-    
-    gsutil cp "${LOCAL_ZIP_PATH}" "${gcs_zip_path}" >> "${LOG_FILE}" 2>&1
-    log "Upload to Cloud Storage successful."
-    
-    # The script will now exit with code 0. The trap will call cleanup and log the script end.
-    ```
+        fi
+        
+        # If Kerberos authentication is enabled, check for required fields.
+        if [[ "$KERBEROS_AUTHENTICATION" == "true" ]]; then
+          if [[ -z "$DUMPER_HOST" || -z "$DUMPER_PORT" || -z "$HIVE_KERBEROS_URL" || -z "$HIVEQL_RPC_PROTECTION" ]]; then
+              echo "ERROR: If --kerberos-authentication is enabled, --host, --port, --hive-kerberos-url and --hiveql-rpc-protection must be provided." >&2
+              echo "Run with --help for more information." >&2
+              exit 1
+          fi
+        fi
+        
+        # Remove trailing slashes from GCS_BASE_PATH, if any.
+        GCS_BASE_PATH=$(echo "${GCS_BASE_PATH}" | sed 's:/*$::')
+        
+        # Create unique timestamp and directories for this run
+        EPOCH=$(date +%s)
+        LOCAL_LOG_DIR="${LOCAL_BASE_DIR}/logs"
+        mkdir -p "${LOCAL_LOG_DIR}" # Ensures the base and logs directories exist
+        
+        # Define the unique log and zip file path for this run
+        LOG_FILE="${LOCAL_LOG_DIR}/dumper_execution_${EPOCH}.log"
+        ZIP_FILE_NAME="dts-cron-dumper-output_${EPOCH}.zip"
+        LOCAL_ZIP_PATH="${LOCAL_BASE_DIR}/${ZIP_FILE_NAME}"
+        
+        echo "Script execution started. All subsequent output will be logged to: ${LOG_FILE}"
+        
+        # --- Helper Functions ---
+        
+        log() { echo "$(date '+%Y-%m-%d %H:%M:%S') - $@" >> "${LOG_FILE}"; }
+        
+        cleanup() {
+          local path_to_remove="$1"
+          log "Cleaning up local file/directory: ${path_to_remove}..."
+          rm -rf "${path_to_remove}"
+        }
+        
+        # This function is called when the script exits to ensure cleanup and logging happen reliably.
+        handle_exit() {
+          local exit_code=$?
+          # Only run the failure logic if the script is exiting with an error
+          if [[ ${exit_code} -ne 0 ]]; then
+              log "ERROR: Script is exiting with a failure code (${exit_code})."
+              local gcs_log_path_on_failure="${GCS_BASE_PATH}/logs/$(basename "${LOG_FILE}")"
+              log "Uploading log file to ${gcs_log_path_on_failure} for debugging..."
+              # Attempt to upload the log file on failure, but don't let this command cause the script to exit.
+              gsutil cp "${LOG_FILE}" "${gcs_log_path_on_failure}" > /dev/null 2>&1 || log "WARNING: Failed to upload log file to Cloud Storage."
+        
+          else
+              # SUCCESS PATH
+              log "Script finished successfully. Now cleaning up local zip file...."
+              # Clean up the local zip file ONLY on success
+              cleanup "${LOCAL_ZIP_PATH}"
+          fi
+        
+          log "*****Script End*****"
+          exit ${exit_code}
+        }
+        
+        # Trap the EXIT signal to run the handle_exit function, ensuring cleanup always happens.
+        trap handle_exit EXIT
+        
+        # Validates the dumper log file based on a strict set of rules.
+        validate_dumper_output() {
+          local log_file_to_check="$1"
+        
+          # Check for the specific success message from the dumper tool.
+          if grep -q "Dumper execution: SUCCEEDED" "${log_file_to_check}"; then
+              log "Validation Successful: Found 'Dumper execution: SUCCEEDED' message."
+              return 0 # Success
+          else
+              log "ERROR: Validation failed. The 'Dumper execution: SUCCEEDED' message was not found."
+              return 1 # Failure
+          fi
+        }
+        
+        # --- Main Script Logic ---
+        
+        log "*****Script Start*****"
+        log "Dumper Executable: ${DUMPER_EXECUTABLE}"
+        log "Cloud Storage Base Path: ${GCS_BASE_PATH}"
+        log "Local Base Directory: ${LOCAL_BASE_DIR}"
+        
+        # Use an array to build the command safely
+        dumper_command_args=(
+          "--connector" "hiveql"
+          "--output" "${LOCAL_ZIP_PATH}"
+        )
+        
+        # Add optional arguments if they are provided
+        if [[ -n "${DUMPER_HOST}" ]]; then
+        dumper_command_args+=("--host" "${DUMPER_HOST}")
+        log "Using Host: ${DUMPER_HOST}"
+        fi
+        if [[ -n "${DUMPER_PORT}" ]]; then
+        dumper_command_args+=("--port" "${DUMPER_PORT}")
+        log "Using Port: ${DUMPER_PORT}"
+        fi
+        if [[ -n "${HIVE_KERBEROS_URL}" ]]; then
+        dumper_command_args+=("--hive-kerberos-url" "${HIVE_KERBEROS_URL}")
+        log "Using Hive Kerberos URL: ${HIVE_KERBEROS_URL}"
+        fi
+        if [[ -n "${HIVEQL_RPC_PROTECTION}" ]]; then
+        dumper_command_args+=("-Dhiveql.rpc.protection=${HIVEQL_RPC_PROTECTION}")
+        log "Using HiveQL RPC Protection: ${HIVEQL_RPC_PROTECTION}"
+        fi
+        
+        log "Starting dumper tool execution..."
+        log "COMMAND: JAVA_OPTS=\"-Djavax.security.auth.useSubjectCredsOnly=false\" ${DUMPER_EXECUTABLE} ${dumper_command_args[*]}"
+        
+        JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" "${DUMPER_EXECUTABLE}" "${dumper_command_args[@]}" >> "${LOG_FILE}" 2>&1
+        
+        log "Dumper process finished."
+        
+        # Validate the output from the dumper execution for success or failure.
+        validate_dumper_output "${LOG_FILE}"
+        
+        # Upload the ZIP file to Cloud Storage
+        gcs_zip_path="${GCS_BASE_PATH}/${ZIP_FILE_NAME}"
+        log "Uploading ${LOCAL_ZIP_PATH} to ${gcs_zip_path}..."
+        
+        if [ ! -f "${LOCAL_ZIP_PATH}" ]; then
+          log "ERROR: Expected ZIP file ${LOCAL_ZIP_PATH} not found after dumper execution."
+          # The script will exit here with an error code, and the trap will run.
+          exit 1
+        fi
+        
+        gsutil cp "${LOCAL_ZIP_PATH}" "${gcs_zip_path}" >> "${LOG_FILE}" 2>&1
+        log "Upload to Cloud Storage successful."
+        
+        # The script will now exit with code 0. The trap will call cleanup and log the script end.
 
 2.  To make the script executable, run the following command:
     
-    ``` notranslate
-    chmod +x PATH_TO_SCRIPT
-    ```
+        chmod +x PATH_TO_SCRIPT
 
 3.  Schedule the script using `crontab` , replacing the variables with appropriate values for your job. Add an entry to schedule the job. The following examples run the script every day at 2:30 AM:
     
     If you are running on a host that has direct access to Hive Metastore and doesn't require Kerberos authentication, run the following command:
     
-    ``` notranslate
-    # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer.
-    30 2 * * * PATH_TO_SCRIPT \
-      --dumper-executable PATH_TO_DUMPER_EXECUTABLE \
-      --gcs-base-path GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT \
-      --local-base-dir LOCAL_PATH_TO_SAVE_INTERMEDIARY_FILES
-    ```
+        # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer.
+        30 2 * * * PATH_TO_SCRIPT \
+          --dumper-executable PATH_TO_DUMPER_EXECUTABLE \
+          --gcs-base-path GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT \
+          --local-base-dir LOCAL_PATH_TO_SAVE_INTERMEDIARY_FILES
     
     If your Hive Metastore instance requires Kerberos authentication, run the following command:
     
-    ``` notranslate
-    # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer with Kerberos authentication.
-    30 2 * * * PATH_TO_SCRIPT \
-      --dumper-executable PATH_TO_DUMPER_EXECUTABLE \
-      --gcs-base-path GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT \
-      --local-base-dir LOCAL_PATH_TO_SAVE_INTERMEDIARY_FILES \
-      --kerberos-authentication \
-      --host HIVE_HOST \
-      --port HIVE_PORT \
-      --hive-kerberos-url HIVE_KERBEROS_URL \
-      --hiveql-rpc-protection HIVEQL_RPC_PROTECTION
-    ```
+        # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer with Kerberos authentication.
+        30 2 * * * PATH_TO_SCRIPT \
+          --dumper-executable PATH_TO_DUMPER_EXECUTABLE \
+          --gcs-base-path GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT \
+          --local-base-dir LOCAL_PATH_TO_SAVE_INTERMEDIARY_FILES \
+          --kerberos-authentication \
+          --host HIVE_HOST \
+          --port HIVE_PORT \
+          --hive-kerberos-url HIVE_KERBEROS_URL \
+          --hiveql-rpc-protection HIVEQL_RPC_PROTECTION
 
 > **Note:** When creating the transfer, verify that the `table_metadata_path` field is set to the same Cloud Storage path you configured for `GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT` . This is the path containing the dumper output ZIP files.
 
@@ -630,7 +622,7 @@ To list all resources and their statuses, use the [`projects.locations.transferC
 
 Run the API request with the following information:
 
-``` notranslate
+``` 
   GET https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources
   Example Response (abridged) (JSON):
   {
@@ -650,7 +642,7 @@ Run the API request with the following information:
 
 `curl` command:
 
-``` notranslate
+``` 
   curl -X GET 
 
   "https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources" 
@@ -675,14 +667,14 @@ To get the status of a specific table or partition, use the [`projects.locations
 
 Run the API request with the following information:
 
-``` notranslate
+``` 
   GET https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources/RESOURCE_ID
   
 ```
 
 `curl` command:
 
-``` notranslate
+``` 
   curl -X GET 
 
   "https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources/RESOURCE_ID" 

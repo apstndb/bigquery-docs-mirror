@@ -64,13 +64,11 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    OPTIONS (
-      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-    );
-    ```
+        CREATE RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        OPTIONS (
+          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+        );
     
     Replace the following:
     
@@ -96,15 +94,13 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To create a reservation, use the `bq mk` command with the `--reservation` flag:
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation \
-    --slots=NUMBER_OF_BASELINE_SLOTS \
-    --ignore_idle_slots=false \
-    RESERVATION_NAME
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation \
+        --slots=NUMBER_OF_BASELINE_SLOTS \
+        --ignore_idle_slots=false \
+        RESERVATION_NAME
 
 Replace the following:
 
@@ -221,13 +217,11 @@ To change the size of a reservation, use the [`ALTER RESERVATION SET OPTIONS` da
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    SET OPTIONS (
-      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-    );
-    ```
+        ALTER RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        SET OPTIONS (
+          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+        );
     
     Replace the following:
     
@@ -247,13 +241,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update the size of a reservation, use the `bq update` command with the `--reservation` flag:
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --slots=NUMBER_OF_BASELINE_SLOTS \
-    --reservation RESERVATION_NAME
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --slots=NUMBER_OF_BASELINE_SLOTS \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -318,13 +310,11 @@ The `--ignore_idle_slots` flag controls whether queries running in a reservation
 
 To update a reservation, use the `bq update` command with the `--reservation` flag . The following example sets `--ignore_idle_slots` to `true` , meaning the reservation will only use slots allocated to the reservation.
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --ignore_idle_slots=true \
-    --reservation RESERVATION_NAME
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --ignore_idle_slots=true \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -344,13 +334,11 @@ Query the `ignore_idle_slots` column of the [`INFORMATION_SCHEMA.RESERVATIONS_BY
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      reservation_name,
-      ignore_idle_slots
-    FROM
-      `ADMIN_PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT;
-    ```
+        SELECT
+          reservation_name,
+          ignore_idle_slots
+        FROM
+          `ADMIN_PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT;
     
     Replace the following:
     
@@ -365,11 +353,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the `bq ls` command with the `--reservation` flag:
 
-``` notranslate
-bq ls --reservation \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION
-```
+    bq ls --reservation \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION
 
 Replace the following:
 
@@ -422,10 +408,8 @@ To delete a reservation, use the [`DROP RESERVATION` DDL statement](https://docs
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`;
-    ```
+        DROP RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`;
     
     Replace the following:
     
@@ -441,12 +425,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To delete a reservation, use the `bq rm` command with the `--reservation` flag:
 
-``` notranslate
-bq rm \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation RESERVATION_NAME
-```
+    bq rm \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation RESERVATION_NAME
 
 Replace the following:
 

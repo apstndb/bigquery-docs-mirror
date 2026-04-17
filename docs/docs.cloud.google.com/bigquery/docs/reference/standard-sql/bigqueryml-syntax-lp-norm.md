@@ -4,7 +4,7 @@ This document describes the `ML.LP_NORM` scalar function, which lets you compute
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.LP_NORM(vector, degree)
 ```
 
@@ -32,27 +32,21 @@ The following example gets the Euclidean norm for vectors consisting of `ARRAY<F
 
 1.  Create the table `t1` :
     
-    ``` notranslate
-    CREATE TABLE mydataset.t1
-    (
-      v1 ARRAY<FLOAT64>,
-      v2 ARRAY<FLOAT64>
-    )
-    ```
+        CREATE TABLE mydataset.t1
+        (
+          v1 ARRAY<FLOAT64>,
+          v2 ARRAY<FLOAT64>
+        )
 
 2.  Populate `t1` :
     
-    ``` notranslate
-    INSERT mydataset.t1 (v1,v2)
-    VALUES ([4.1,0.5,1.0], [3.0,0.0,2.5])
-    ```
+        INSERT mydataset.t1 (v1,v2)
+        VALUES ([4.1,0.5,1.0], [3.0,0.0,2.5])
 
 3.  Calculate the Euclidean norm for `v1` and `v2` :
     
-    ``` notranslate
-    SELECT v1, ML.LP_NORM(v1, 2.0) AS v1_norm, v2, ML.LP_NORM(v2, 2.0) AS v2_norm
-    FROM mydataset.t1;
-    ```
+        SELECT v1, ML.LP_NORM(v1, 2.0) AS v1_norm, v2, ML.LP_NORM(v2, 2.0) AS v2_norm
+        FROM mydataset.t1;
     
     This query produces the following output:
     

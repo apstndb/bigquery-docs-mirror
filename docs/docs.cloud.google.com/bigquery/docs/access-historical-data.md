@@ -53,7 +53,7 @@ You can't undelete a table by using the Google Cloud console.
 
 2.  To restore a table, first determine a UNIX timestamp of when the table existed (in milliseconds). You can use the Linux `date` command to generate the Unix timestamp from a regular timestamp value:
     
-    ``` lang-sh
+    ```sh
     date -d '2023-08-04 16:00:34.456789Z' +%s000
     ```
 
@@ -61,7 +61,7 @@ You can't undelete a table by using the Google Cloud console.
     
     For example, enter the following command to copy the `mydataset.mytable` table at the time `1418864998000` into a new table `mydataset.newtable` .
     
-    ``` lang-sh
+    ```sh
     bq cp mydataset.mytable@1418864998000 mydataset.newtable
     ```
     
@@ -69,7 +69,7 @@ You can't undelete a table by using the Google Cloud console.
     
     You can also specify a relative offset. The following example copies the version of a table from one hour ago:
     
-    ``` lang-sh
+    ```sh
     bq cp mydataset.mytable@-3600000 mydataset.newtable
     ```
     

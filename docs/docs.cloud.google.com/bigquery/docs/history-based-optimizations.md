@@ -29,9 +29,7 @@ History-based optimizations are only applied when there is high confidence that 
 
 History-based optimizations are enabled by default. If history-based optimizations have been disabled for a project or organization, you can manually re-enable history-based optimizations by including the `default_query_optimizer_options = 'adaptive=on'` parameter in your [`ALTER PROJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
 
-``` notranslate
-ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=on');
-```
+    ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=on');
 
 Replace the following:
 
@@ -44,9 +42,7 @@ Replace the following:
 
 To disable history-based optimizations in a project, include the `default_query_optimizer_options = 'adaptive=off'` parameter in the [`ALTER PROJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
 
-``` notranslate
-ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=off');
-```
+    ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=off');
 
 Replace the following:
 

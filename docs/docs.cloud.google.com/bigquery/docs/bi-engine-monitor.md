@@ -106,70 +106,66 @@ The following examples show how to view reports and data sources:
 
 #### Find report and data source URL for each Looker Studio BigQuery job
 
-``` notranslate
--- Standard labels used by Looker Studio.
-DECLARE requestor_key STRING DEFAULT 'requestor';
-DECLARE requestor_value STRING DEFAULT 'looker_studio';
-
-CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
-AS (
-  (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
-);
-
-CREATE TEMP FUNCTION GetDatasourceUrl(labels ANY TYPE)
-AS (
-  CONCAT("https://lookerstudio.google.com/datasources/", GetLabel(labels, 'looker_studio_datasource_id'))
-);
-
-CREATE TEMP FUNCTION GetReportUrl(labels ANY TYPE)
-AS (
-  CONCAT("https://lookerstudio.google.com/reporting/", GetLabel(labels, 'looker_studio_report_id'))
-);
-
-SELECT
-  job_id,
-  GetDatasourceUrl(labels) AS datasource_url,
-  GetReportUrl(labels) AS report_url,
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS jobs
-WHERE
-  creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-  AND GetLabel(labels, requestor_key) = requestor_value
-LIMIT
-  100;
-```
+    -- Standard labels used by Looker Studio.
+    DECLARE requestor_key STRING DEFAULT 'requestor';
+    DECLARE requestor_value STRING DEFAULT 'looker_studio';
+    
+    CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
+    AS (
+      (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
+    );
+    
+    CREATE TEMP FUNCTION GetDatasourceUrl(labels ANY TYPE)
+    AS (
+      CONCAT("https://lookerstudio.google.com/datasources/", GetLabel(labels, 'looker_studio_datasource_id'))
+    );
+    
+    CREATE TEMP FUNCTION GetReportUrl(labels ANY TYPE)
+    AS (
+      CONCAT("https://lookerstudio.google.com/reporting/", GetLabel(labels, 'looker_studio_report_id'))
+    );
+    
+    SELECT
+      job_id,
+      GetDatasourceUrl(labels) AS datasource_url,
+      GetReportUrl(labels) AS report_url,
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS jobs
+    WHERE
+      creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+      AND GetLabel(labels, requestor_key) = requestor_value
+    LIMIT
+      100;
 
 #### View jobs produced by using a report and data source
 
-``` notranslate
--- Specify report and data source id, which can be found at the end of Looker Studio URLs.
-DECLARE user_report_id STRING DEFAULT '*report id here*';
-DECLARE user_datasource_id STRING DEFAULT '*datasource id here*';
-
--- Looker Studio labels for BigQuery.
-DECLARE requestor_key STRING DEFAULT 'requestor';
-DECLARE requestor_value STRING DEFAULT 'looker_studio';
-DECLARE datasource_key STRING DEFAULT 'looker_studio_datasource_id';
-DECLARE report_key STRING DEFAULT 'looker_studio_report_id';
-
-CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
-AS (
-  (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
-);
-
-SELECT
-  creation_time,
-  job_id,
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS jobs
-WHERE
-  creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-  AND GetLabel(labels, requestor_key) = requestor_value
-  AND GetLabel(labels, datasource_key) = user_datasource_id
-  AND GetLabel(labels, report_key) = user_report_id
-ORDER BY 1
-LIMIT 100;
-```
+    -- Specify report and data source id, which can be found at the end of Looker Studio URLs.
+    DECLARE user_report_id STRING DEFAULT '*report id here*';
+    DECLARE user_datasource_id STRING DEFAULT '*datasource id here*';
+    
+    -- Looker Studio labels for BigQuery.
+    DECLARE requestor_key STRING DEFAULT 'requestor';
+    DECLARE requestor_value STRING DEFAULT 'looker_studio';
+    DECLARE datasource_key STRING DEFAULT 'looker_studio_datasource_id';
+    DECLARE report_key STRING DEFAULT 'looker_studio_report_id';
+    
+    CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
+    AS (
+      (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
+    );
+    
+    SELECT
+      creation_time,
+      job_id,
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS jobs
+    WHERE
+      creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+      AND GetLabel(labels, requestor_key) = requestor_value
+      AND GetLabel(labels, datasource_key) = user_datasource_id
+      AND GetLabel(labels, report_key) = user_report_id
+    ORDER BY 1
+    LIMIT 100;
 
 ## Cloud Logging
 

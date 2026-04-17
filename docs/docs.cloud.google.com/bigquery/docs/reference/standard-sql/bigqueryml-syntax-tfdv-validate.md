@@ -42,32 +42,28 @@ This document describes the `ML.TFDV_VALIDATE` function, which you can use to co
 
 The following example returns the skew between training and serving data and also sets custom anomaly detection thresholds for two of the feature columns:
 
-``` notranslate
-DECLARE stats1 JSON;
-DECLARE stats2 JSON;
-
-SET stats1 = (SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.training`));
-
-SET stats2 = (SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`));
-
-SELECT ML.TFDV_VALIDATE(
-  stats1, stats2, 'SKEW', .3, 'L_INFTY', .3, 'JENSEN_SHANNON_DIVERGENCE', [('feature1', 0.2), ('feature2', 0.5)]
-);
-
-INSERT `myproject.mydataset.serve_stats`
-  (t, dataset_feature_statistics_list)
-SELECT CURRENT_TIMESTAMP() AS t, stats1;
-```
+    DECLARE stats1 JSON;
+    DECLARE stats2 JSON;
+    
+    SET stats1 = (SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.training`));
+    
+    SET stats2 = (SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`));
+    
+    SELECT ML.TFDV_VALIDATE(
+      stats1, stats2, 'SKEW', .3, 'L_INFTY', .3, 'JENSEN_SHANNON_DIVERGENCE', [('feature1', 0.2), ('feature2', 0.5)]
+    );
+    
+    INSERT `myproject.mydataset.serve_stats`
+      (t, dataset_feature_statistics_list)
+    SELECT CURRENT_TIMESTAMP() AS t, stats1;
 
 The following example returns the drift between two sets of serving data:
 
-``` notranslate
-SELECT ML.TFDV_VALIDATE(
-  (SELECT dataset_feature_statistics_list FROM `myproject.mydataset.servingJan24`),
-  (SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`)),
-  'DRIFT'
-);
-```
+    SELECT ML.TFDV_VALIDATE(
+      (SELECT dataset_feature_statistics_list FROM `myproject.mydataset.servingJan24`),
+      (SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`)),
+      'DRIFT'
+    );
 
 ## Limitations
 

@@ -112,7 +112,7 @@ In the **Create table** pane, specify the following details:
 3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. To enable the [auto detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) of a schema, select **Auto detect** . You can enter schema information manually by using one of the following methods:
       - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
         
-        ``` notranslate
+        ``` 
             bq show --format=prettyjson dataset.table
             
         ```
@@ -143,13 +143,11 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA OVERWRITE mydataset.mytable
-    (x INT64,y STRING)
-    FROM FILES (
-      format = 'JSON',
-      uris = ['gs://bucket/path/file.json']);
-    ```
+        LOAD DATA OVERWRITE mydataset.mytable
+        (x INT64,y STRING)
+        FROM FILES (
+          format = 'JSON',
+          uris = ['gs://bucket/path/file.json']);
 
 3.  Click play\_circle **Run** .
 
@@ -205,13 +203,11 @@ Other optional flags include:
 
 To load JSON data into BigQuery, enter the following command:
 
-``` notranslate
-bq --location=LOCATION load \
---source_format=FORMAT \
-DATASET.TABLE \
-PATH_TO_SOURCE \
-SCHEMA
-```
+    bq --location=LOCATION load \
+    --source_format=FORMAT \
+    DATASET.TABLE \
+    PATH_TO_SOURCE \
+    SCHEMA
 
 Replace the following:
 
@@ -683,67 +679,65 @@ The JSON data file would look like the following. Notice that the address field 
 
 The schema for this table would look like the following:
 
-``` notranslate
-[
-    {
-        "name": "id",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "first_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "last_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "dob",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "addresses",
-        "type": "RECORD",
-        "mode": "REPEATED",
-        "fields": [
-            {
-                "name": "status",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "address",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "city",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "state",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "zip",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "numberOfYears",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            }
-        ]
-    }
-]
-```
+    [
+        {
+            "name": "id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "first_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "last_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "dob",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "addresses",
+            "type": "RECORD",
+            "mode": "REPEATED",
+            "fields": [
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "city",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "zip",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "numberOfYears",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                }
+            ]
+        }
+    ]
 
 For information on specifying a nested and repeated schema, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
@@ -759,35 +753,33 @@ BigQuery supports loading semi-structured data, in which a field can take values
 
 You can load this data into BigQuery by using the following schema:
 
-``` notranslate
-[
-    {
-        "name": "id",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "first_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "last_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "dob",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "address",
-        "type": "JSON",
-        "mode": "NULLABLE"
-    }
-]
-```
+    [
+        {
+            "name": "id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "first_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "last_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "dob",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "address",
+            "type": "JSON",
+            "mode": "NULLABLE"
+        }
+    ]
 
 The `address` field is loaded into a column with type [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) that allows it to hold the mixed types in the example. You can ingest data as `JSON` whether it contains mixed types or not. For example, you could specify `JSON` instead of `STRING` as the type for the `first_name` field. For more information, see [Working with JSON data in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/json-data) .
 
@@ -838,7 +830,7 @@ In the **Create table** pane, specify the following details:
 3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. To enable the [auto detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) of a schema, select **Auto detect** . You can enter schema information manually by using one of the following methods:
       - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
         
-        ``` notranslate
+        ``` 
             bq show --format=prettyjson dataset.table
             
         ```
@@ -865,12 +857,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA INTO mydataset.mytable
-    FROM FILES (
-      format = 'JSON',
-      uris = ['gs://bucket/path/file.json']);
-    ```
+        LOAD DATA INTO mydataset.mytable
+        FROM FILES (
+          format = 'JSON',
+          uris = ['gs://bucket/path/file.json']);
 
 3.  Click play\_circle **Run** .
 
@@ -902,14 +892,12 @@ Other optional flags include:
 
 <!-- end list -->
 
-``` notranslate
-bq --location=LOCATION load \
---[no]replace \
---source_format=FORMAT \
-DATASET.TABLE \
-PATH_TO_SOURCE \
-SCHEMA
-```
+    bq --location=LOCATION load \
+    --[no]replace \
+    --source_format=FORMAT \
+    DATASET.TABLE \
+    PATH_TO_SOURCE \
+    SCHEMA
 
 Replace the following:
 

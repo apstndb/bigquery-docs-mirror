@@ -8,7 +8,7 @@ An easy and convenient way to reduce the bandwidth needed for each request is to
 
 In order to receive a gzip-encoded response you must do two things: Set an `Accept-Encoding` header, and modify your user agent to contain the string `gzip` . Here is an example of properly formed HTTP headers for enabling gzip compression:
 
-``` yaml
+```yaml
 Accept-Encoding: gzip
 User-Agent: my program (gzip)
 ```

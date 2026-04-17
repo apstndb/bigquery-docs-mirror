@@ -847,8 +847,8 @@ The following limits apply to BigQuery [vector indexes](https://docs.cloud.googl
 </tr>
 <tr class="odd">
 <td>Maximum size of the array in the indexed column</td>
-<td>1,600 elements</td>
-<td>The column to index can have at most 1,600 elements in the array.</td>
+<td>4,096 elements</td>
+<td>The column to index can have at most 4,096 elements in the array.</td>
 </tr>
 <tr class="even">
 <td>Minimum table size for vector index population</td>

@@ -4,7 +4,7 @@ This document describes the `ML.FEATURE_IMPORTANCE` function, which lets you see
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.FEATURE_IMPORTANCE(
   MODEL `PROJECT_ID.DATASET.MODEL`
 )
@@ -41,12 +41,10 @@ You must have the `bigquery.models.create` and `bigquery.models.getData` [Identi
 
 This example retrieves feature importance from `mymodel` in `mydataset` . The dataset is in your default project.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.FEATURE_IMPORTANCE(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.FEATURE_IMPORTANCE(MODEL `mydataset.mymodel`)
 
 ## What's next
 

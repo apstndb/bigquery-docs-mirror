@@ -9,7 +9,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.HASH_BUCKETIZE(string_expression, hash_bucket_size)
 ```
 
@@ -28,15 +28,13 @@ ML.HASH_BUCKETIZE(string_expression, hash_bucket_size)
 
 The following example bucketizes string expressions into three buckets:
 
-``` notranslate
-SELECT
-  f, ML.HASH_BUCKETIZE(f, 3) AS bucket
-FROM UNNEST(['a', 'b', 'c', 'd']) AS f;
-```
+    SELECT
+      f, ML.HASH_BUCKETIZE(f, 3) AS bucket
+    FROM UNNEST(['a', 'b', 'c', 'd']) AS f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +---+--------+
 | f | bucket |
 +---+--------+

@@ -160,14 +160,12 @@ Replace the following:
 
 The following example gets the history of changes for a given reservation. Use this information to see the list of changes made to a specific reservation, such as creating or deleting the reservation.
 
-``` notranslate
-SELECT
-  *
-FROM
-  reservation-admin-project.`region-us`.
-  INFORMATION_SCHEMA.RESERVATION_CHANGES
-WHERE
-  reservation_name = "my-reservation"
-ORDER BY
-  change_timestamp DESC;
-```
+    SELECT
+      *
+    FROM
+      reservation-admin-project.`region-us`.
+      INFORMATION_SCHEMA.RESERVATION_CHANGES
+    WHERE
+      reservation_name = "my-reservation"
+    ORDER BY
+      change_timestamp DESC;

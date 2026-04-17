@@ -537,19 +537,17 @@ You enable [multiplexing](https://docs.cloud.google.com/bigquery/docs/write-api-
 
 After enabling the connection pool, the Java client library manages your connections in the background, scaling up connections if the existing connections are considered too busy. For automatic scaling up to be more effective, you should consider lowering the `maxInflightRequests` limit.
 
-``` notranslate
-// One possible way for constructing StreamWriter
-StreamWriter.newBuilder(streamName)
-              .setWriterSchema(protoSchema)
-              .setEnableConnectionPool(true)
-              .setMaxInflightRequests(100)
-              .build();
-// One possible way for constructing JsonStreamWriter
-JsonStreamWriter.newBuilder(tableName, bigqueryClient)
-              .setEnableConnectionPool(true)
-              .setMaxInflightRequests(100)
-              .build();
-```
+    // One possible way for constructing StreamWriter
+    StreamWriter.newBuilder(streamName)
+                  .setWriterSchema(protoSchema)
+                  .setEnableConnectionPool(true)
+                  .setMaxInflightRequests(100)
+                  .build();
+    // One possible way for constructing JsonStreamWriter
+    JsonStreamWriter.newBuilder(tableName, bigqueryClient)
+                  .setEnableConnectionPool(true)
+                  .setMaxInflightRequests(100)
+                  .build();
 
 To enable multiplexing in Go, see [Connection Sharing (Multiplexing)](https://pkg.go.dev/cloud.google.com/go/bigquery/storage/managedwriter#hdr-Connection_Sharing__Multiplexing_) .
 

@@ -229,55 +229,51 @@ The following examples demonstrate how a BigQuery query might look before and af
 
 Consider the following example query that analyzes Search Ads campaign performance from the past 30 days using the old Search Ads 360 reporting API.
 
-``` notranslate
-SELECT
-  c.accountId,
-  c.campaign,
-  C.status,
-  SUM(cs.impr) AS Impressions,
-  SUM(cs.clicks) AS Clicks,
-  (SUM(cs.cost) / 1000000) AS Cost
-FROM
-  `previous_dataset.Campaign_advertiser_id` c
-LEFT JOIN
-  `previous_dataset.CampaignStats_advertiser_id` cs
-ON
-  (c.campaignId = cs.campaignId
-  AND cs._DATA_DATE BETWEEN
-  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-WHERE
-  c._DATA_DATE = c._LATEST_DATE
-GROUP BY
-  1, 2, 3
-ORDER BY
-  Impressions DESC
-```
+    SELECT
+      c.accountId,
+      c.campaign,
+      C.status,
+      SUM(cs.impr) AS Impressions,
+      SUM(cs.clicks) AS Clicks,
+      (SUM(cs.cost) / 1000000) AS Cost
+    FROM
+      `previous_dataset.Campaign_advertiser_id` c
+    LEFT JOIN
+      `previous_dataset.CampaignStats_advertiser_id` cs
+    ON
+      (c.campaignId = cs.campaignId
+      AND cs._DATA_DATE BETWEEN
+      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+    WHERE
+      c._DATA_DATE = c._LATEST_DATE
+    GROUP BY
+      1, 2, 3
+    ORDER BY
+      Impressions DESC
 
 When mapped to be compatible with the new Search Ads 360 reporting API, the same query is converted to the following:
 
-``` notranslate
-SELECT
-  c.customer_id,
-  c.campaign_name,
-  C.campaign_status,
-  SUM(cs.metrics_impressions) AS Impressions,
-  SUM(cs.metrics_clicks) AS Clicks,
-  (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
-FROM
-  `new_dataset.sa_Campaign_customer_id` c
-LEFT JOIN
-  `new_dataset.sa_CampaignStats_customer_id` cs
-ON
-  (c.campaign_id = cs.campaign_id
-  AND cs._DATA_DATE BETWEEN
-  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-WHERE
-  c._DATA_DATE = c._LATEST_DATE
-GROUP BY
-  1, 2, 3
-ORDER BY
-  Impressions DESC
-```
+    SELECT
+      c.customer_id,
+      c.campaign_name,
+      C.campaign_status,
+      SUM(cs.metrics_impressions) AS Impressions,
+      SUM(cs.metrics_clicks) AS Clicks,
+      (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
+    FROM
+      `new_dataset.sa_Campaign_customer_id` c
+    LEFT JOIN
+      `new_dataset.sa_CampaignStats_customer_id` cs
+    ON
+      (c.campaign_id = cs.campaign_id
+      AND cs._DATA_DATE BETWEEN
+      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+    WHERE
+      c._DATA_DATE = c._LATEST_DATE
+    GROUP BY
+      1, 2, 3
+    ORDER BY
+      Impressions DESC
 
 For more examples of queries that are compatible with the new Search Ads 360, see [Example queries](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#example_queries) .
 

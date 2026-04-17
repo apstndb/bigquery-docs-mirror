@@ -60,7 +60,7 @@ You can delete a model in the Google Cloud console by using the **Delete Model**
 
 3.  Type your DDL statement in the **Query editor** text area.
     
-    ``` notranslate
+    ``` 
      DROP MODEL mydataset.mymodel
     ```
 

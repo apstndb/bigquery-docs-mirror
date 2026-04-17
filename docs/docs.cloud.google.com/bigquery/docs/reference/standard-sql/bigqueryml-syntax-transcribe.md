@@ -6,7 +6,7 @@ This document describes the `ML.TRANSCRIBE` function, which lets you transcribe 
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.TRANSCRIBE(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   TABLE `PROJECT_ID.DATASET.OBJECT_TABLE`,
@@ -91,14 +91,12 @@ The following example transcribes the audio files represented by the `audio` tab
 
 Create the model:
 
-``` notranslate
-# Create model
-CREATE OR REPLACE MODEL
-`myproject.mydataset.transcribe_model`
-REMOTE WITH CONNECTION `myproject.myregion.myconnection`
-OPTIONS (remote_service_type = 'CLOUD_AI_SPEECH_TO_TEXT_V2',
-speech_recognizer = 'projects/project_number/locations/recognizer_location/recognizer/recognizer_id');
-```
+    # Create model
+    CREATE OR REPLACE MODEL
+    `myproject.mydataset.transcribe_model`
+    REMOTE WITH CONNECTION `myproject.myregion.myconnection`
+    OPTIONS (remote_service_type = 'CLOUD_AI_SPEECH_TO_TEXT_V2',
+    speech_recognizer = 'projects/project_number/locations/recognizer_location/recognizer/recognizer_id');
 
 Transcribe the audio files without overriding the recognizer's default configuration:
 

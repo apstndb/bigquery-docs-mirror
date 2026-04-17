@@ -124,16 +124,14 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-      WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID` | DEFAULT}
-      OPTIONS (
-        format ="TABLE_FORMAT",
-        uris = ['BUCKET_PATH'[,...]],
-        max_staleness = STALENESS_INTERVAL,
-        metadata_cache_mode = 'CACHE_MODE'
-        );
-    ```
+        CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+          WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID` | DEFAULT}
+          OPTIONS (
+            format ="TABLE_FORMAT",
+            uris = ['BUCKET_PATH'[,...]],
+            max_staleness = STALENESS_INTERVAL,
+            metadata_cache_mode = 'CACHE_MODE'
+            );
     
     Replace the following:
     
@@ -195,18 +193,16 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) to create a table definition file, and then pass the path to the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) as follows:
 
-``` notranslate
-bq mkdef \
-    --connection_id=CONNECTION_ID \
-    --source_format=SOURCE_FORMAT \
-  BUCKET_PATH > DEFINITION_FILE
-
-bq mk --table \
-    --external_table_definition=DEFINITION_FILE \
-    --max_staleness=STALENESS_INTERVAL \
-    PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME \
-    SCHEMA
-```
+    bq mkdef \
+        --connection_id=CONNECTION_ID \
+        --source_format=SOURCE_FORMAT \
+      BUCKET_PATH > DEFINITION_FILE
+    
+    bq mk --table \
+        --external_table_definition=DEFINITION_FILE \
+        --max_staleness=STALENESS_INTERVAL \
+        PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME \
+        SCHEMA
 
 Replace the following:
 
@@ -250,46 +246,40 @@ Replace the following:
 
 Example:
 
-``` notranslate
-bq mkdef
-    --connection_id=myconnection
-    --metadata_cache_mode=CACHE_MODE
-    --source_format=CSV 'gs://mybucket/*.csv' > mytable_def
-
-bq mk
-    --table
-    --external_table_definition=mytable_def='gs://mybucket/*.csv'
-    --max_staleness=0-0 0 4:0:0
-    myproject:mydataset.mybiglaketable
-    Region:STRING,Quarter:STRING,Total_sales:INTEGER
-```
+    bq mkdef
+        --connection_id=myconnection
+        --metadata_cache_mode=CACHE_MODE
+        --source_format=CSV 'gs://mybucket/*.csv' > mytable_def
+    
+    bq mk
+        --table
+        --external_table_definition=mytable_def='gs://mybucket/*.csv'
+        --max_staleness=0-0 0 4:0:0
+        myproject:mydataset.mybiglaketable
+        Region:STRING,Quarter:STRING,Total_sales:INTEGER
 
 To use schema auto-detection, set the `--autodetect=true` flag in the `mkdef` command and omit the schema:
 
-``` notranslate
-bq mkdef \
-    --connection_id=myconnection \
-    --metadata_cache_mode=CACHE_MODE \
-    --source_format=CSV --autodetect=true \
-    gs://mybucket/*.csv > mytable_def
-
-bq mk \
-    --table \
-    --external_table_definition=mytable_def=gs://mybucket/*.csv \
-    --max_staleness=0-0 0 4:0:0 \
-    myproject:mydataset.myexternaltable
-```
+    bq mkdef \
+        --connection_id=myconnection \
+        --metadata_cache_mode=CACHE_MODE \
+        --source_format=CSV --autodetect=true \
+        gs://mybucket/*.csv > mytable_def
+    
+    bq mk \
+        --table \
+        --external_table_definition=mytable_def=gs://mybucket/*.csv \
+        --max_staleness=0-0 0 4:0:0 \
+        myproject:mydataset.myexternaltable
 
 **Option 2: Inline table definition**
 
 Instead of creating a table definition file, you can pass the table definition directly to the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) . Use the `@connection` decorator to specify the connection to use at the end of the [`--external_table_definition`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#external_table_definition_flag) flag.
 
-``` notranslate
-bq mk --table \
-  --external_table_definition=@SOURCE_FORMAT=BUCKET_PATH@projects/PROJECT_ID/locations/REGION/connections/CONNECTION_ID \
-  DATASET_NAME.TABLE_NAME \
-  SCHEMA
-```
+    bq mk --table \
+      --external_table_definition=@SOURCE_FORMAT=BUCKET_PATH@projects/PROJECT_ID/locations/REGION/connections/CONNECTION_ID \
+      DATASET_NAME.TABLE_NAME \
+      SCHEMA
 
 Replace the following:
 
@@ -351,7 +341,7 @@ This example creates a BigLake Table on unpartitioned data.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` lang-terraform
+```terraform
 # This creates a bucket in the US region named "my-bucket" with a pseudorandom suffix.
 resource "random_id" "default" {
   byte_length = 8
@@ -560,21 +550,19 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-    WITH PARTITION COLUMNS
-    (
-      PARTITION_COLUMN PARTITION_COLUMN_TYPE,
-    )
-    WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID` | DEFAULT}
-    OPTIONS (
-      hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
-      uris=['FILE_PATH'],
-      max_staleness = STALENESS_INTERVAL,
-      metadata_cache_mode = 'CACHE_MODE',
-      format ="TABLE_FORMAT"
-    );
-    ```
+        CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+        WITH PARTITION COLUMNS
+        (
+          PARTITION_COLUMN PARTITION_COLUMN_TYPE,
+        )
+        WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID` | DEFAULT}
+        OPTIONS (
+          hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
+          uris=['FILE_PATH'],
+          max_staleness = STALENESS_INTERVAL,
+          metadata_cache_mode = 'CACHE_MODE',
+          format ="TABLE_FORMAT"
+        );
     
     Replace the following:
     
@@ -630,20 +618,18 @@ The following example creates a BigLake table over partitioned data where:
 
 <!-- end list -->
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.my_table`
-WITH PARTITION COLUMNS
-(
-  sku STRING,
-)
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  hive_partition_uri_prefix = "gs://mybucket/products",
-  uris = ['gs://mybucket/products/*'],
-  max_staleness = INTERVAL 1 DAY,
-  metadata_cache_mode = 'AUTOMATIC'
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.my_table`
+    WITH PARTITION COLUMNS
+    (
+      sku STRING,
+    )
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      hive_partition_uri_prefix = "gs://mybucket/products",
+      uris = ['gs://mybucket/products/*'],
+      max_staleness = INTERVAL 1 DAY,
+      metadata_cache_mode = 'AUTOMATIC'
+    );
 
 The following example creates a BigLake table over partitioned data where:
 
@@ -653,40 +639,36 @@ The following example creates a BigLake table over partitioned data where:
 
 <!-- end list -->
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.my_table`
-(
-  ProductId INTEGER,
-  ProductName STRING,
-  ProductType STRING
-)
-WITH PARTITION COLUMNS
-(
-  sku STRING,
-)
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  hive_partition_uri_prefix = "gs://mybucket/products",
-  uris = ['gs://mybucket/products/*'],
-  max_staleness = INTERVAL 8 HOUR,
-  metadata_cache_mode = 'MANUAL'
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.my_table`
+    (
+      ProductId INTEGER,
+      ProductName STRING,
+      ProductType STRING
+    )
+    WITH PARTITION COLUMNS
+    (
+      sku STRING,
+    )
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      hive_partition_uri_prefix = "gs://mybucket/products",
+      uris = ['gs://mybucket/products/*'],
+      max_staleness = INTERVAL 8 HOUR,
+      metadata_cache_mode = 'MANUAL'
+    );
 
 ### bq
 
 First, use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) command to create a table definition file:
 
-``` notranslate
-bq mkdef \
---source_format=SOURCE_FORMAT \
---connection_id=REGION.CONNECTION_ID \
---hive_partitioning_mode=PARTITIONING_MODE \
---hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX \
---require_hive_partition_filter=BOOLEAN \
---metadata_cache_mode=CACHE_MODE \
- GCS_URIS > DEFINITION_FILE
-```
+    bq mkdef \
+    --source_format=SOURCE_FORMAT \
+    --connection_id=REGION.CONNECTION_ID \
+    --hive_partitioning_mode=PARTITIONING_MODE \
+    --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX \
+    --require_hive_partition_filter=BOOLEAN \
+    --metadata_cache_mode=CACHE_MODE \
+     GCS_URIS > DEFINITION_FILE
 
 Replace the following:
 
@@ -724,18 +706,14 @@ Replace the following:
 
 If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the source URI prefix, using the following format:
 
-``` notranslate
---hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
-```
+    --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 
 After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
 
-``` notranslate
-bq mk --external_table_definition=DEFINITION_FILE \
---max_staleness=STALENESS_INTERVAL \
-DATASET_NAME.TABLE_NAME \
-SCHEMA
-```
+    bq mk --external_table_definition=DEFINITION_FILE \
+    --max_staleness=STALENESS_INTERVAL \
+    DATASET_NAME.TABLE_NAME \
+    SCHEMA
 
 Replace the following:
 
@@ -807,7 +785,7 @@ This example creates a BigLake Table on partitioned data.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` lang-terraform
+```terraform
 # This creates a bucket in the US region named "my-bucket" with a pseudorandom
 # suffix.
 resource "random_id" "default" {
@@ -978,7 +956,7 @@ You can use several methods to control access to BigLake tables:
 
 For example, let's say you want to limit row access for the table `mytable` in the dataset `mydataset` :
 
-``` console
+```console
 +---------+---------+-------+
 | country | product | price |
 +---------+---------+-------+
@@ -990,18 +968,14 @@ For example, let's say you want to limit row access for the table `mytable` in t
 
 You can create a row-level filter for Kim ( `kim@example.com` ) that restricts their access to rows where `country` is equal to `US` .
 
-``` notranslate
-CREATE ROW ACCESS POLICY only_us_filter
-ON mydataset.mytable
-GRANT TO ('user:kim@example.com')
-FILTER USING (country = 'US');
-```
+    CREATE ROW ACCESS POLICY only_us_filter
+    ON mydataset.mytable
+    GRANT TO ('user:kim@example.com')
+    FILTER USING (country = 'US');
 
 Then, Kim runs the following query:
 
-``` notranslate
-SELECT * FROM projectid.mydataset.mytable;
-```
+    SELECT * FROM projectid.mydataset.mytable;
 
 The output shows only the rows where `country` is equal to `US` :
 
@@ -1031,17 +1005,15 @@ Use the [`CREATE OR REPLACE EXTERNAL TABLE` DDL statement](https://docs.cloud.go
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE
-      `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-      WITH CONNECTION {`REGION.CONNECTION_ID` | DEFAULT}
-      OPTIONS(
-        format ="TABLE_FORMAT",
-        uris = ['BUCKET_PATH'],
-        max_staleness = STALENESS_INTERVAL,
-        metadata_cache_mode = 'CACHE_MODE'
-        );
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE
+          `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+          WITH CONNECTION {`REGION.CONNECTION_ID` | DEFAULT}
+          OPTIONS(
+            format ="TABLE_FORMAT",
+            uris = ['BUCKET_PATH'],
+            max_staleness = STALENESS_INTERVAL,
+            metadata_cache_mode = 'CACHE_MODE'
+            );
     
     Replace the following:
     
@@ -1105,12 +1077,10 @@ Use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cl
 
 1.  Generate an [external table definition](https://docs.cloud.google.com/bigquery/external-table-definition#table-definition) , that describes the aspects of the table to change:
     
-    ``` notranslate
-    bq mkdef --connection_id=PROJECT_ID.REGION.CONNECTION_ID \
-    --source_format=TABLE_FORMAT \
-    --metadata_cache_mode=CACHE_MODE \
-    "BUCKET_PATH" > /tmp/DEFINITION_FILE
-    ```
+        bq mkdef --connection_id=PROJECT_ID.REGION.CONNECTION_ID \
+        --source_format=TABLE_FORMAT \
+        --metadata_cache_mode=CACHE_MODE \
+        "BUCKET_PATH" > /tmp/DEFINITION_FILE
     
     Replace the following:
     
@@ -1150,11 +1120,9 @@ Use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cl
 
 2.  Update the table using the new external table definition:
     
-    ``` notranslate
-    bq update --max_staleness=STALENESS_INTERVAL \
-    --external_table_definition=/tmp/DEFINITION_FILE \
-    PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME
-    ```
+        bq update --max_staleness=STALENESS_INTERVAL \
+        --external_table_definition=/tmp/DEFINITION_FILE \
+        PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME
     
     Replace the following:
     

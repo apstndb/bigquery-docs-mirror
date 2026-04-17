@@ -199,23 +199,27 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
     
     If you provide both include patterns and exclude patterns, the exclude patterns are applied first.
 
-9.  Optional: In **Project** , select the BigQuery dataset project that contains the BigLake external or non-BigLake external tables created by the discovery scan. If not provided, the dataset is created in the project that contains the Cloud Storage bucket.
+9.  For **Unstructured data options** , select **Enable semantic inference** .
+    
+    This option is required if you want to view data insights for unstructured data in Knowledge Catalog. For more information, see [About data insights for unstructured data](https://docs.cloud.google.com/dataplex/docs/data-insights-unstructured-data) .
 
-10. In **Location type** , select either **Region** or **Multi-region** (whichever is available) where the BigQuery publishing dataset is created.
+10. Optional: In **Project** , select the BigQuery dataset project that contains the BigLake external or non-BigLake external tables created by the discovery scan. If not provided, the dataset is created in the project that contains the Cloud Storage bucket.
 
-11. To create BigLake tables from the scanned data, in the **Connection ID** field, provide your Google Cloud resource connection ID. For more information, see [Google Cloud resource connections in BigQuery](https://docs.cloud.google.com/bigquery/docs/connections-api-intro#cloud-resource-connections) .
+11. In **Location type** , select either **Region** or **Multi-region** (whichever is available) where the BigQuery publishing dataset is created.
+
+12. To create BigLake tables from the scanned data, in the **Connection ID** field, provide your Google Cloud resource connection ID. For more information, see [Google Cloud resource connections in BigQuery](https://docs.cloud.google.com/bigquery/docs/connections-api-intro#cloud-resource-connections) .
     
     You can create a new connection ID in the same location as the BigQuery dataset location, which is [compatible with the Cloud Storage bucket location](https://docs.cloud.google.com/bigquery/docs/external-tables#storage-location-considerations) .
     
     If you don't provide a resource connection ID, the discovery scan creates [non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/external-data-sources#non-biglake-tables) . To understand the differences between these external table types and why the discovery service might choose one over the other, see the [behavioral differences comparison](https://docs.cloud.google.com/bigquery/docs/external-data-sources#external_data_source_feature_comparison) .
 
-12. In the **Discovery frequency** section, configure when you want the discovery scan to run:
+13. In the **Discovery frequency** section, configure when you want the discovery scan to run:
     
       - **Repeat** : the scan runs on a predefined schedule. Provide the start time, days to run the scan, and the frequency, such as hourly.
     
       - **On demand** : the scan runs on demand.
 
-13. Optional: In the **JSON or CSV specifications** section, specify how the scan should process JSON and CSV files. Click **JSON or CSV specifications** .
+14. Optional: In the **JSON or CSV specifications** section, specify how the scan should process JSON and CSV files. Click **JSON or CSV specifications** .
     
     1.  To configure JSON options, select **Enable JSON parsing options** .
           - **Disable type inference** : whether the discovery scan should infer data types when scanning data. If you disable type inference for JSON data, all columns are registered as their primitive types, such as string, number, or boolean.
@@ -226,7 +230,7 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
           - **Column delimiter character** : the character that is used to separate values. Provide a single character, `\r` (carriage return), or `\n` (newline). The default is a comma ( `,` ).
           - **Encoding format** : the character encoding of the data, such as `UTF-8` , `US-ASCII` , or `ISO-8859-1` . If you don't specify a value, UTF-8 is used as the default.
 
-14. Click **Create** (for a scheduled scan), **Run now** (for an on-demand scan), or **Create and run** (for a one-time scan).
+15. Click **Create** (for a scheduled scan), **Run now** (for an on-demand scan), or **Create and run** (for a one-time scan).
     
     A scheduled scan is run according to the schedule that you set.
     
@@ -238,10 +242,8 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 To create a discovery scan, use the [`gcloud dataplex datascans create data-discovery`](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-discovery) command.
 
-``` suppresswarning
-gcloud dataplex datascans create data-discovery --location=LOCATION
---data-source-resource=BUCKET_PATH
-```
+    gcloud dataplex datascans create data-discovery --location=LOCATION
+    --data-source-resource=BUCKET_PATH
 
 Replace the following:
 
@@ -266,26 +268,24 @@ To query BigLake tables using Spark SQL on a Managed Service for Apache Spark se
 
 1.  Create a PySpark script similar to the following sample script:
     
-    ``` suppresswarning
-    from pyspark.sql import SparkSession
-    session = (
-      SparkSession.builder.appName("testing")
-        .config("viewsEnabled","true")
-        .config("materializationDataset", "DATASET_ID")
-        .config("spark.hive.metastore.bigquery.project.id", "PROJECT_ID")
-        .config("spark.hive.metastore.client.factory.class", "com.google.cloud.bigquery.metastore.client.BigQueryMetastoreClientFactory")
-        .enableHiveSupport()
-        .getOrCreate()
-    )
-    
-    session.sql("show databases").show()
-    session.sql("use TABLE_NAME").show()
-    session.sql("show tables").show()
-    
-    sql = "SELECT * FROM DATASET_ID.TABLE_ID LIMIT 10"
-    df = session.read.format("bigquery").option("dataset", "DATASET_ID").load(sql)
-    df.show()
-    ```
+        from pyspark.sql import SparkSession
+        session = (
+          SparkSession.builder.appName("testing")
+            .config("viewsEnabled","true")
+            .config("materializationDataset", "DATASET_ID")
+            .config("spark.hive.metastore.bigquery.project.id", "PROJECT_ID")
+            .config("spark.hive.metastore.client.factory.class", "com.google.cloud.bigquery.metastore.client.BigQueryMetastoreClientFactory")
+            .enableHiveSupport()
+            .getOrCreate()
+        )
+        
+        session.sql("show databases").show()
+        session.sql("use TABLE_NAME").show()
+        session.sql("show tables").show()
+        
+        sql = "SELECT * FROM DATASET_ID.TABLE_ID LIMIT 10"
+        df = session.read.format("bigquery").option("dataset", "DATASET_ID").load(sql)
+        df.show()
     
     Replace the following:
     
@@ -434,12 +434,10 @@ To view a discovery scan, select one of the following options.
 
 ### gcloud
 
-``` suppresswarning
-gcloud dataplex datascans jobs describe JOB \
-    --location=LOCATION \
-    --datascan=DATASCAN \
-    --view=FULL
-```
+    gcloud dataplex datascans jobs describe JOB \
+        --location=LOCATION \
+        --datascan=DATASCAN \
+        --view=FULL
 
 Replace the following:
 
@@ -470,11 +468,9 @@ To view historical discovery scan results, select one of the following options.
 
 ### gcloud
 
-``` suppresswarning
-gcloud dataplex datascans jobs list \
-    --location=LOCATION \
-    --datascan=DATASCAN
-```
+    gcloud dataplex datascans jobs list \
+        --location=LOCATION \
+        --datascan=DATASCAN
 
 Replace the following:
 
@@ -507,9 +503,7 @@ To change the schedule of a discovery scan, for example, to change the schedule 
 
 To update a discovery scan, use the [`gcloud dataplex datascans update data-discovery`](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/update/data-discovery) command.
 
-``` suppresswarning
-gcloud dataplex datascans update data-discovery SCAN_ID --location=LOCATION --description=DESCRIPTION
-```
+    gcloud dataplex datascans update data-discovery SCAN_ID --location=LOCATION --description=DESCRIPTION
 
 Replace the following:
 
@@ -537,9 +531,7 @@ To delete a discovery scan, select one of the following options.
 
 ### gcloud
 
-``` suppresswarning
-gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
-```
+    gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
 
 Replace the following:
 

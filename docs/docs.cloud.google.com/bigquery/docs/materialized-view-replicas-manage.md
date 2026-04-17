@@ -79,10 +79,8 @@ To get information about materialized view replicas, query the [`INFORMATION_SCH
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT * FROM PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.TABLES
-    WHERE table_type = 'MATERIALIZED VIEW';
-    ```
+        SELECT * FROM PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.TABLES
+        WHERE table_type = 'MATERIALIZED VIEW';
     
     Replace the following:
     
@@ -97,9 +95,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
 
-``` notranslate
-bq show --project=project_id --format=prettyjson dataset.materialized_view_replica
-```
+    bq show --project=project_id --format=prettyjson dataset.materialized_view_replica
 
 Replace the following:
 

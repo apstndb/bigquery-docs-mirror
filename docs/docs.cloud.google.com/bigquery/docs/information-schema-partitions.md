@@ -119,15 +119,13 @@ Replace the following:
 
 The following example calculates the number of logical bytes used by each storage tier in all of the tables in a dataset named `mydataset` :
 
-``` notranslate
-SELECT
-  storage_tier,
-  SUM(total_logical_bytes) AS logical_bytes
-FROM
-  `mydataset.INFORMATION_SCHEMA.PARTITIONS`
-GROUP BY
-  storage_tier;
-```
+    SELECT
+      storage_tier,
+      SUM(total_logical_bytes) AS logical_bytes
+    FROM
+      `mydataset.INFORMATION_SCHEMA.PARTITIONS`
+    GROUP BY
+      storage_tier;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -144,23 +142,21 @@ The results look similar to the following:
 
 The following example creates a column that extracts the partition type from the `partition_id` field and aggregates partition information at the table level for the public `bigquery-public-data.covid19_usafacts` dataset:
 
-``` notranslate
-SELECT
-  table_name,
-  CASE
-    WHEN regexp_contains(partition_id, '^[0-9]{4}$') THEN 'YEAR'
-    WHEN regexp_contains(partition_id, '^[0-9]{6}$') THEN 'MONTH'
-    WHEN regexp_contains(partition_id, '^[0-9]{8}$') THEN 'DAY'
-    WHEN regexp_contains(partition_id, '^[0-9]{10}$') THEN 'HOUR'
-    END AS partition_type,
-  min(partition_id) AS earliest_partition,
-  max(partition_id) AS latest_partition_id,
-  COUNT(partition_id) AS partition_count,
-  sum(total_logical_bytes) AS sum_total_logical_bytes,
-  max(last_modified_time) AS max_last_updated_time
-FROM `bigquery-public-data.covid19_usafacts.INFORMATION_SCHEMA.PARTITIONS`
-GROUP BY 1, 2;
-```
+    SELECT
+      table_name,
+      CASE
+        WHEN regexp_contains(partition_id, '^[0-9]{4}$') THEN 'YEAR'
+        WHEN regexp_contains(partition_id, '^[0-9]{6}$') THEN 'MONTH'
+        WHEN regexp_contains(partition_id, '^[0-9]{8}$') THEN 'DAY'
+        WHEN regexp_contains(partition_id, '^[0-9]{10}$') THEN 'HOUR'
+        END AS partition_type,
+      min(partition_id) AS earliest_partition,
+      max(partition_id) AS latest_partition_id,
+      COUNT(partition_id) AS partition_count,
+      sum(total_logical_bytes) AS sum_total_logical_bytes,
+      max(last_modified_time) AS max_last_updated_time
+    FROM `bigquery-public-data.covid19_usafacts.INFORMATION_SCHEMA.PARTITIONS`
+    GROUP BY 1, 2;
 
 The results look similar to the following:
 

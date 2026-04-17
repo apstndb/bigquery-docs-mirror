@@ -203,15 +203,13 @@ Optional flags:
 
 <!-- end list -->
 
-``` notranslate
-bq mk --transfer_config \
---project_id=project_id \
---target_dataset=dataset \
---display_name=name \
---params='parameters' \
---data_source=data_source \
---service_account_name=service_account_name
-```
+    bq mk --transfer_config \
+    --project_id=project_id \
+    --target_dataset=dataset \
+    --display_name=name \
+    --params='parameters' \
+    --data_source=data_source \
+    --service_account_name=service_account_name
 
 Where:
 
@@ -328,19 +326,17 @@ In each of the following queries, replace variables like dataset with your value
 
 The following SQL sample query analyzes the number of impressions and unique users by city over the past 30 days.
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-SELECT
-  City,
-  _DATA_DATE AS Date,
-  count(*) AS imps,
-  count(distinct UserId) AS uniq_users
-FROM `dataset.NetworkImpressions_network_code`
-WHERE
-  _DATA_DATE BETWEEN start_date AND end_date
-GROUP BY City, Date
-```
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+    SELECT
+      City,
+      _DATA_DATE AS Date,
+      count(*) AS imps,
+      count(distinct UserId) AS uniq_users
+    FROM `dataset.NetworkImpressions_network_code`
+    WHERE
+      _DATA_DATE BETWEEN start_date AND end_date
+    GROUP BY City, Date
 
 ### Impressions and unique users by line item type
 
@@ -366,40 +362,36 @@ The following SQL sample query analyzes the number of impressions and unique use
 
 The following SQL sample query analyzes the number of impressions by ad unit over the past 30 days.
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-SELECT
-  MT.AdUnitCode AS AdUnitCode,
-  DT.DATA_DATE AS Date,
-  count(*) AS imps
-FROM `dataset.NetworkImpressions_network_code` AS DT
-LEFT JOIN `dataset.MatchTableAdUnit_network_code` AS MT
-ON
-  DT.AdUnitId = MT.Id
-WHERE
-  DT._DATA_DATE BETWEEN start_date AND end_date
-GROUP BY AdUnitCode, Date
-ORDER BY Date desc, imps desc
-```
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+    SELECT
+      MT.AdUnitCode AS AdUnitCode,
+      DT.DATA_DATE AS Date,
+      count(*) AS imps
+    FROM `dataset.NetworkImpressions_network_code` AS DT
+    LEFT JOIN `dataset.MatchTableAdUnit_network_code` AS MT
+    ON
+      DT.AdUnitId = MT.Id
+    WHERE
+      DT._DATA_DATE BETWEEN start_date AND end_date
+    GROUP BY AdUnitCode, Date
+    ORDER BY Date desc, imps desc
 
 ### Impressions by line item
 
 The following SQL sample query analyzes the number of impressions by line item over the past 30 days.
 
-``` notranslate
-# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-SELECT
-  MT.Name AS LineItemName,
-  DT._DATA_DATE AS Date,
-  count(*) AS imps
-FROM `dataset.NetworkImpressions_network_code` AS DT
-LEFT JOIN `dataset.MatchTableLineItem_network_code` AS MT
-ON
-  DT.LineItemId = MT.Id
-WHERE
-  DT._DATA_DATE BETWEEN start_date AND end_date
-GROUP BY LineItemName, Date
-ORDER BY Date desc, imps desc
-```
+    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+    SELECT
+      MT.Name AS LineItemName,
+      DT._DATA_DATE AS Date,
+      count(*) AS imps
+    FROM `dataset.NetworkImpressions_network_code` AS DT
+    LEFT JOIN `dataset.MatchTableLineItem_network_code` AS MT
+    ON
+      DT.LineItemId = MT.Id
+    WHERE
+      DT._DATA_DATE BETWEEN start_date AND end_date
+    GROUP BY LineItemName, Date
+    ORDER BY Date desc, imps desc

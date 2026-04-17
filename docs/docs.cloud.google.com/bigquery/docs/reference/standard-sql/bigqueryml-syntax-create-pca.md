@@ -10,7 +10,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(model_option_list)
@@ -191,73 +191,65 @@ The following examples create models named `mymodel` in `mydataset` in your defa
 
 This example creates a PCA model with four principal components.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='PCA',
-    NUM_PRINCIPAL_COMPONENTS=4 ) AS
-SELECT
-  *
-FROM `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='PCA',
+        NUM_PRINCIPAL_COMPONENTS=4 ) AS
+    SELECT
+      *
+    FROM `mydataset.mytable`
 
 **Example 2**
 
 This example performs dimensionality reduction with the `mydataset.iris_pca` PCA model with input features.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.iris_pca`
-OPTIONS
-  ( MODEL_TYPE='PCA',
-    NUM_PRINCIPAL_COMPONENTS=2,
-    SCALE_FEATURES=FALSE ) AS
-SELECT
-  sepal_length,
-  sepal_width,
-  petal_length,
-  petal_width
-FROM `bigquery-public-data.ml_datasets.iris`;
-```
+    CREATE MODEL
+      `mydataset.iris_pca`
+    OPTIONS
+      ( MODEL_TYPE='PCA',
+        NUM_PRINCIPAL_COMPONENTS=2,
+        SCALE_FEATURES=FALSE ) AS
+    SELECT
+      sepal_length,
+      sepal_width,
+      petal_length,
+      petal_width
+    FROM `bigquery-public-data.ml_datasets.iris`;
 
 The following sample transforms the input features using the `mydataset.iris_pca` model into a lower dimensional space, which is then used to train the `mydataset.iris_logistic` model. `mydataset.iris_logistic` will be a better ML model if the original input features are afflicted by the curse of dimensionality.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.iris_logistic`
-OPTIONS
-  ( MODEL_TYPE='LOGISTIC_REG',
-    INPUT_LABEL_COLS=['species'] ) AS
-SELECT
-  *
-FROM
-  ML.PREDICT(
-    MODEL `mydataset.iris_pca`,
-    (
-      SELECT
-        sepal_length,
-        sepal_width,
-        petal_length,
-        petal_width,
-        species
-      FROM `bigquery-public-data.ml_datasets.iris`
-    )
-  );
-```
+    CREATE MODEL
+      `mydataset.iris_logistic`
+    OPTIONS
+      ( MODEL_TYPE='LOGISTIC_REG',
+        INPUT_LABEL_COLS=['species'] ) AS
+    SELECT
+      *
+    FROM
+      ML.PREDICT(
+        MODEL `mydataset.iris_pca`,
+        (
+          SELECT
+            sepal_length,
+            sepal_width,
+            petal_length,
+            petal_width,
+            species
+          FROM `bigquery-public-data.ml_datasets.iris`
+        )
+      );
 
 ### Use the `PCA_EXPLAINED_VARIANCE_RATIO` option
 
 This example creates a PCA model, where the number of principal components is selected such that the percentage of variance explained by them is greater than 0.8.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='PCA',
-    PCA_EXPLAINED_VARIANCE_RATIO=0.8 ) AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='PCA',
+        PCA_EXPLAINED_VARIANCE_RATIO=0.8 ) AS
+    SELECT
+      *
+    FROM
+      `mydataset.mytable`

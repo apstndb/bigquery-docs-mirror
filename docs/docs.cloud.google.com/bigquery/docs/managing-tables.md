@@ -89,11 +89,9 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-      SET OPTIONS (
-        description = 'Description of mytable');
-    ```
+        ALTER TABLE mydataset.mytable
+          SET OPTIONS (
+            description = 'Description of mytable');
 
 3.  Click play\_circle **Run** .
 
@@ -107,11 +105,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 2.  Issue the `bq update` command with the `--description` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
     
-    ``` notranslate
-    bq update \
-    --description "description" \
-    project_id:dataset.table
-    ```
+        bq update \
+        --description "description" \
+        project_id:dataset.table
     
     Replace the following:
     
@@ -124,13 +120,13 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     To change the description of the `mytable` table in the `mydataset` dataset to "Description of mytable", enter the following command. The `mydataset` dataset is in your default project.
     
-    ``` lang-sh
+    ```sh
     bq update --description "Description of mytable" mydataset.mytable
     ```
     
     To change the description of the `mytable` table in the `mydataset` dataset to "Description of mytable", enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
     
-    ``` lang-sh
+    ```sh
     bq update \
     --description "Description of mytable" \
     myotherproject:mydataset.mytable
@@ -322,12 +318,10 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-      SET OPTIONS (
-        -- Sets table expiration to timestamp 2025-02-03 12:34:56
-        expiration_timestamp = TIMESTAMP '2025-02-03 12:34:56');
-    ```
+        ALTER TABLE mydataset.mytable
+          SET OPTIONS (
+            -- Sets table expiration to timestamp 2025-02-03 12:34:56
+            expiration_timestamp = TIMESTAMP '2025-02-03 12:34:56');
 
 3.  Click play\_circle **Run** .
 
@@ -341,10 +335,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 2.  Issue the `bq update` command with the `--expiration` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
     
-    ``` notranslate
-    bq update \
-    --expiration integer \project_id:dataset.table
-    ```
+        bq update \
+        --expiration integer \project_id:dataset.table
     
     Replace the following:
     
@@ -357,13 +349,13 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     To update the expiration time of the `mytable` table in the `mydataset` dataset to 5 days (432000 seconds), enter the following command. The `mydataset` dataset is in your default project.
     
-    ``` lang-sh
+    ```sh
     bq update --expiration 432000 mydataset.mytable
     ```
     
     To update the expiration time of the `mytable` table in the `mydataset` dataset to 5 days (432000 seconds), enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
     
-    ``` lang-sh
+    ```sh
     bq update --expiration 432000 myotherproject:mydataset.mytable
     ```
 
@@ -627,11 +619,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 You can update a table's [default rounding mode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode) by using the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the default rounding mode for `mytable` to `ROUND_HALF_EVEN` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-SET OPTIONS (
-  default_rounding_mode = "ROUND_HALF_EVEN");
-```
+    ALTER TABLE mydataset.mytable
+    SET OPTIONS (
+      default_rounding_mode = "ROUND_HALF_EVEN");
 
 When you add a `NUMERIC` or `BIGNUMERIC` field to a table and do not specify a [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) , then the rounding mode is automatically set to the table's default rounding mode. Changing a table's default rounding mode doesn't alter the rounding mode of existing fields.
 
@@ -643,10 +633,8 @@ For more information about updating a table's schema definition, see [Modifying 
 
 You can rename a table after it has been created by using the [`ALTER TABLE RENAME TO` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) . The following example renames `mytable` to `mynewtable` :
 
-``` notranslate
-ALTER TABLE mydataset.mytable
-RENAME TO mynewtable;
-```
+    ALTER TABLE mydataset.mytable
+    RENAME TO mynewtable;
 
 The `ALTER TABLE RENAME TO` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
 
@@ -771,9 +759,7 @@ Use the [`CREATE TABLE COPY` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE myproject.mydataset.table1copyCOPY myproject.mydataset.table1;
-    ```
+        CREATE TABLE myproject.mydataset.table1copyCOPY myproject.mydataset.table1;
 
 3.  Click play\_circle **Run** .
 
@@ -798,10 +784,8 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
     
-    ``` notranslate
-    bq --location=location cp \
-    -a -f -n \project_id:dataset.source_table \project_id:dataset.destination_table
-    ```
+        bq --location=location cp \
+        -a -f -n \project_id:dataset.source_table \project_id:dataset.destination_table
     
     Replace the following:
     
@@ -815,29 +799,25 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     To copy the `mydataset.mytable` table to the `mydataset2.mytable2` table, enter the following command. Both datasets are in your default project.
     
-    ``` lang-sh
+    ```sh
     bq cp mydataset.mytable mydataset2.mytable2
     ```
     
     To copy the `mydataset.mytable` table and to overwrite a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-f` shortcut is used to overwrite the destination table without a prompt.
     
-    ``` notranslate
-    bq cp -f \
-    mydataset.mytable \
-    myotherproject:myotherdataset.mytable
-    ```
+        bq cp -f \
+        mydataset.mytable \
+        myotherproject:myotherdataset.mytable
     
     To copy the `mydataset.mytable` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-n` shortcut is used to prevent overwriting a table with the same name.
     
-    ``` notranslate
-    bq cp -n \
-    mydataset.mytable \
-    myotherproject:myotherdataset.mytable
-    ```
+        bq cp -n \
+        mydataset.mytable \
+        myotherproject:myotherdataset.mytable
     
     To copy the `mydataset.mytable` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `- a` shortcut is used to append to the destination table.
     
-    ``` lang-sh
+    ```sh
     bq cp -a mydataset.mytable myotherproject:myotherdataset.mytable
     ```
 
@@ -1146,10 +1126,8 @@ To copy multiple source tables, select one of the following choices:
     
     (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
     
-    ``` notranslate
-    bq --location=location cp \
-    -a -f -n \project_id:dataset.source_table,project_id:dataset.source_table \project_id:dataset.destination_table
-    ```
+        bq --location=location cp \
+        -a -f -n \project_id:dataset.source_table,project_id:dataset.source_table \project_id:dataset.destination_table
     
     Replace the following:
     
@@ -1163,35 +1141,27 @@ To copy multiple source tables, select one of the following choices:
     
     To copy the `mydataset.mytable` table and the `mydataset.mytable2` table to `mydataset2.tablecopy` table, enter the following command . All datasets are in your default project.
     
-    ``` notranslate
-    bq cp \
-    mydataset.mytable,mydataset.mytable2 \
-    mydataset2.tablecopy
-    ```
+        bq cp \
+        mydataset.mytable,mydataset.mytable2 \
+        mydataset2.tablecopy
     
     To copy the `mydataset.mytable` table and the `mydataset.mytable2` table to `myotherdataset.mytable` table and to overwrite a destination table with the same name, enter the following command. The destination dataset is in the `myotherproject` project, not your default project. The `-f` shortcut is used to overwrite the destination table without a prompt.
     
-    ``` notranslate
-    bq cp -f \
-    mydataset.mytable,mydataset.mytable2 \
-    myotherproject:myotherdataset.mytable
-    ```
+        bq cp -f \
+        mydataset.mytable,mydataset.mytable2 \
+        myotherproject:myotherdataset.mytable
     
     To copy the `myproject:mydataset.mytable` table and the `myproject:mydataset.mytable2` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The destination dataset is in the `myotherproject` project. The `-n` shortcut is used to prevent overwriting a table with the same name.
     
-    ``` notranslate
-    bq cp -n \
-    myproject:mydataset.mytable,myproject:mydataset.mytable2 \
-    myotherproject:myotherdataset.mytable
-    ```
+        bq cp -n \
+        myproject:mydataset.mytable,myproject:mydataset.mytable2 \
+        myotherproject:myotherdataset.mytable
     
     To copy the `mydataset.mytable` table and the `mydataset.mytable2` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-a` shortcut is used to append to the destination table.
     
-    ``` notranslate
-    bq cp -a \
-    mydataset.mytable,mydataset.mytable2 \
-    myotherproject:myotherdataset.mytable
-    ```
+        bq cp -a \
+        mydataset.mytable,mydataset.mytable2 \
+        myotherproject:myotherdataset.mytable
 
 ### API
 
@@ -1392,7 +1362,7 @@ To copy a table across regions, select one of the following options:
 
 <!-- end list -->
 
-``` notranslate
+``` 
    bq cp \   -f -n \   SOURCE_PROJECT:SOURCE_DATASET.SOURCE_TABLE \   DESTINATION_PROJECT:DESTINATION_DATASET.DESTINATION_TABLE   
 ```
 
@@ -1412,19 +1382,19 @@ Replace the following:
 
 The following example is a command that copies the `mydataset_us.mytable` table from the `us` multi-region to the `mydataset_eu.mytable2` table in the `eu` multi-region. Both datasets are in the default project.
 
-``` lang-sh
+```sh
 bq cp --sync=false mydataset_us.mytable mydataset_eu.mytable2
 ```
 
 To copy a table across regions into a CMEK-enabled destination dataset, you must [enable CMEK on the table](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#change_to_kms) with a key from the table's region. The CMEK on the table doesn't have to be the same CMEK in use by the destination dataset. The following example copies a CMEK-enabled table to a destination dataset using the `bq cp` command.
 
-``` lang-sh
+```sh
 bq cp source-project-id:source-dataset-id.source-table-id destination-project-id:destination-dataset-id.destination-table-id
 ```
 
 Conversely, to copy a CMEK-enabled table across regions into a destination dataset, you can [enable CMEK on the destination dataset](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#dataset_default_key) with a key from the destination dataset's region. You can also use the `destination_kms_keys` flag in the `bq cp` command, as shown in the following example:
 
-``` lang-sh
+```sh
 bq cp --destination_kms_key=projects/project_id/locations/eu/keyRings/eu_key/cryptoKeys/eu_region mydataset_us.mytable mydataset_eu.mytable2
 ```
 
@@ -1701,15 +1671,13 @@ Copying a table across regions is subject to the following limitations:
 
 You can view your current usage of query, load, extract, or copy jobs by running an `INFORMATION_SCHEMA` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `INFORMATION_SCHEMA.JOBS` view to list the number of query, load, extract, and copy jobs by project:
 
-``` notranslate
-SELECT
-  sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
-  sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
-  sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
-  sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
-FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE date(creation_time)= CURRENT_DATE()
-```
+    SELECT
+      sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
+      sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
+      sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
+      sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
+    FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE date(creation_time)= CURRENT_DATE()
 
 > **Note:** The `INFORMATION_SCHEMA` view does not display cross-region copy jobs.
 
@@ -1727,15 +1695,13 @@ If you'd like to gather more data about where the copy jobs are coming from, you
 
   - If your copy jobs are located in a single or only a few regions, you can try querying the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
     
-    ``` notranslate
-    SELECT
-    creation_time, job_id, user_email, destination_table.project_id, destination_table.dataset_id, destination_table.table_id
-    FROM `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-    WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type = "COPY"
-    order by creation_time DESC
-    ```
+        SELECT
+        creation_time, job_id, user_email, destination_table.project_id, destination_table.dataset_id, destination_table.table_id
+        FROM `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+        WHERE
+        creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY) AND CURRENT_TIMESTAMP()
+        AND job_type = "COPY"
+        order by creation_time DESC
     
     You can also adjust the time interval depending on the time range you're interested in.
 
@@ -1807,9 +1773,7 @@ Use the [`DROP TABLE` statement](https://docs.cloud.google.com/bigquery/docs/ref
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP TABLE mydataset.mytable;
-    ```
+        DROP TABLE mydataset.mytable;
 
 3.  Click play\_circle **Run** .
 
@@ -1825,12 +1789,10 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     If the table is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
     
-    ``` notranslate
-    bq rm \
-    -f \
-    -t \
-    project_id:dataset.table
-    ```
+        bq rm \
+        -f \
+        -t \
+        project_id:dataset.table
     
     Replace the following:
     
@@ -1842,19 +1804,19 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in your default project.
     
-    ``` lang-sh
+    ```sh
     bq rm -t mydataset.mytable
     ```
     
     To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
     
-    ``` lang-sh
+    ```sh
     bq rm -t myotherproject:mydataset.mytable
     ```
     
     To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in your default project. The command uses the `-f` shortcut to bypass confirmation.
     
-    ``` lang-sh
+    ```sh
     bq rm -f -t mydataset.mytable
     ```
     

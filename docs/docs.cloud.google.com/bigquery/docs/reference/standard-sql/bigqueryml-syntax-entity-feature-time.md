@@ -6,7 +6,7 @@ Use this function to retrieve features from multiple entities for multiple point
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ENTITY_FEATURES_AT_TIME(
    { TABLE `PROJECT_ID.DATASET.FEATURE_TABLE_NAME` | (FEATURE_QUERY_STATEMENT) },
    { TABLE `PROJECT_ID.DATASET.ENTITY_TIME_TABLE_NAME` | (ENTITY_TIME_QUERY_STATEMENT) },
@@ -50,7 +50,7 @@ ML.ENTITY_FEATURES_AT_TIME(
     
     **Feature table**
     
-    ``` console
+    ```console
     +-----------+------+------+--------------------------+
     | entity_id | f1   | f2   | feature_timestamp        |
     +-----------+------+------+--------------------------+
@@ -64,7 +64,7 @@ ML.ENTITY_FEATURES_AT_TIME(
     
     **Entity time table**
     
-    ``` console
+    ```console
     +-----------+--------------------------+
     | entity_id | time                     |
     +-----------+--------------------------+
@@ -84,7 +84,7 @@ ML.ENTITY_FEATURES_AT_TIME(
     
     Results in the following output, where the `f2` value from the row for entity ID 2 that is timestamped `'2022-06-10 12:00:00+00'` is substituted for the `NULL` value in the row timestamped `'2022-06-11 10:00:00+00'` :
     
-    ``` console
+    ```console
     +-----------+------+------+--------------------------+
     | entity_id | f1   | f2   | feature_timestamp        |
     +-----------+------+------+--------------------------+

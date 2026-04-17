@@ -6,7 +6,45 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## April 17, 2026
+
+Feature
+
+Using [folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) to organize and control access to single file code assets is [generally available](https://cloud.google.com/products#product-launch-stages) (GA). In addition, you can perform bulk move and delete operations, refresh folder contents, and view full breadcrumb paths based on resource permissions. For more information, see [Create and manage folders](https://docs.cloud.google.com/bigquery/docs/create-manage-folders) .
+
+## April 16, 2026
+
+Feature
+
+[Conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) now supports querying Lakehouse tables that connect to the Apache Iceberg REST catalog or are federated to an external catalog. For more information, see [Query BigLake data with natural language](https://docs.cloud.google.com/biglake/docs/conversational-analytics) .
+
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can now use [Colab Data Apps](https://docs.cloud.google.com/bigquery/docs/colab-data-apps) to transform your data analyses from Colab notebooks into polished, interactive applications.
+
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can now use the [`AI.KEY_DRIVERS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers) to identify segments of data that cause statistically significant changes to a summable metric.
+
+This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## April 15, 2026
+
+Feature
+
+BigQuery Apache Iceberg external tables now support [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) , including binary deletion vectors. For more information, see [Apache Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
+Feature
+
+BigQuery agent analytics is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in the Google Agent Developer Kit. [BigQuery agent analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics) is an open source solution that lets you capture, analyze, and visualize multimodal agent interaction data at scale.
+
+Announcement
+
+A known issue has been resolved where a materialized view refresh could expose could expose masked or filtered data from fine grained access control policies in error messages. No further action is needed.
 
 Feature
 

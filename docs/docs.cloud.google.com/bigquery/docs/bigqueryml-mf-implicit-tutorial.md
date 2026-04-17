@@ -77,30 +77,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Prepare the sample data
 
@@ -112,63 +106,59 @@ Follow these steps to create the training data table:
 
 2.  Create the training data table. In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.analytics_session_data`
-    AS
-    WITH
-      visitor_page_content AS (
-        SELECT
-          fullVisitorID,
-          (
+        CREATE OR REPLACE TABLE `bqml_tutorial.analytics_session_data`
+        AS
+        WITH
+          visitor_page_content AS (
             SELECT
-              MAX(
-                IF(
-                  index = 10,
-                  value,
-                  NULL))
+              fullVisitorID,
+              (
+                SELECT
+                  MAX(
+                    IF(
+                      index = 10,
+                      value,
+                      NULL))
+                FROM
+                  UNNEST(hits.customDimensions)
+              ) AS latestContentId,
+              (LEAD(hits.time, 1) OVER (PARTITION BY fullVisitorId ORDER BY hits.time ASC) - hits.time)
+                AS session_duration
             FROM
-              UNNEST(hits.customDimensions)
-          ) AS latestContentId,
-          (LEAD(hits.time, 1) OVER (PARTITION BY fullVisitorId ORDER BY hits.time ASC) - hits.time)
-            AS session_duration
+              `cloud-training-demos.GA360_test.ga_sessions_sample`,
+              UNNEST(hits) AS hits
+            WHERE
+              # only include hits on pages
+              hits.type = 'PAGE'
+            GROUP BY
+              fullVisitorId,
+              latestContentId,
+              hits.time
+          )
+        # aggregate web stats
+        SELECT
+          fullVisitorID AS visitorId,
+          latestContentId AS contentId,
+          SUM(session_duration) AS session_duration
         FROM
-          `cloud-training-demos.GA360_test.ga_sessions_sample`,
-          UNNEST(hits) AS hits
+          visitor_page_content
         WHERE
-          # only include hits on pages
-          hits.type = 'PAGE'
+          latestContentId IS NOT NULL
         GROUP BY
-          fullVisitorId,
-          latestContentId,
-          hits.time
-      )
-    # aggregate web stats
-    SELECT
-      fullVisitorID AS visitorId,
-      latestContentId AS contentId,
-      SUM(session_duration) AS session_duration
-    FROM
-      visitor_page_content
-    WHERE
-      latestContentId IS NOT NULL
-    GROUP BY
-      fullVisitorID,
-      latestContentId
-    HAVING
-      session_duration > 0
-    ORDER BY
-      latestContentId;
-    ```
+          fullVisitorID,
+          latestContentId
+        HAVING
+          session_duration > 0
+        ORDER BY
+          latestContentId;
 
 3.  View a subset of the training data. In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT * FROM `bqml_tutorial.analytics_session_data` LIMIT 5;
-    ```
+        SELECT * FROM `bqml_tutorial.analytics_session_data` LIMIT 5;
     
     The results should look similar to the following:
     
-    ``` console
+    ```console
     +---------------------+-----------+------------------+
     | visitorId           | contentId | session_duration |
     +---------------------+-----------+------------------+
@@ -200,24 +190,22 @@ The following `CREATE MODEL` statement uses these columns to generate recommenda
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.mf_implicit`
-      OPTIONS (
-        MODEL_TYPE = 'matrix_factorization',
-        FEEDBACK_TYPE = 'implicit',
-        USER_COL = 'visitorId',
-        ITEM_COL = 'contentId',
-        RATING_COL = 'rating',
-        L2_REG = 30,
-        NUM_FACTORS = 15)
-    AS
-    SELECT
-      visitorId,
-      contentId,
-      0.3 * (1 + (session_duration - 57937) / 57937) AS rating
-    FROM `bqml_tutorial.analytics_session_data`
-    WHERE 0.3 * (1 + (session_duration - 57937) / 57937) < 1;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.mf_implicit`
+          OPTIONS (
+            MODEL_TYPE = 'matrix_factorization',
+            FEEDBACK_TYPE = 'implicit',
+            USER_COL = 'visitorId',
+            ITEM_COL = 'contentId',
+            RATING_COL = 'rating',
+            L2_REG = 30,
+            NUM_FACTORS = 15)
+        AS
+        SELECT
+          visitorId,
+          contentId,
+          0.3 * (1 + (session_duration - 57937) / 57937) AS rating
+        FROM `bqml_tutorial.analytics_session_data`
+        WHERE 0.3 * (1 + (session_duration - 57937) / 57937) < 1;
     
     The query takes about 10 minutes to complete, after which the `mf_implicit` model appears in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -247,7 +235,7 @@ Follow these steps to view the model's training statistics:
 
 7.  In the **View as** section, click **Table** . The results should look similar to the following:
     
-    ``` console
+    ```console
     +-----------+--------------------+--------------------+
     | Iteration | Training Data Loss | Duration (seconds) |
     +-----------+--------------------+--------------------+
@@ -273,16 +261,14 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.EVALUATE(MODEL `bqml_tutorial.mf_implicit`);
-    ```
+        SELECT
+          *
+        FROM
+          ML.EVALUATE(MODEL `bqml_tutorial.mf_implicit`);
     
     The results should look similar to the following:
     
-    ``` console
+    ```console
     +------------------------+-----------------------+---------------------------------------+---------------------+
     | mean_average_precision |  mean_squared_error   | normalized_discounted_cumulative_gain |    average_rank     |
     +------------------------+-----------------------+---------------------------------------+---------------------+
@@ -302,24 +288,22 @@ Follow these steps to get predicted ratings:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.RECOMMEND(
-        MODEL `bqml_tutorial.mf_implicit`,
-        (
-          SELECT
-            visitorId
-          FROM
-            `bqml_tutorial.analytics_session_data`
-          LIMIT 5
-        ));
-    ```
+        SELECT
+          *
+        FROM
+          ML.RECOMMEND(
+            MODEL `bqml_tutorial.mf_implicit`,
+            (
+              SELECT
+                visitorId
+              FROM
+                `bqml_tutorial.analytics_session_data`
+              LIMIT 5
+            ));
     
     The results should look similar to the following:
     
-    ``` console
+    ```console
     +-------------------------------+---------------------+-----------+
     | predicted_rating_confidence   | visitorId           | contentId |
     +-------------------------------+---------------------+-----------+
@@ -343,33 +327,29 @@ Follow these steps to generate recommendations:
 
 2.  Write the predicted ratings to a table. In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.recommend_content`
-    AS
-    SELECT
-      *
-    FROM
-      ML.RECOMMEND(MODEL `bqml_tutorial.mf_implicit`);
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.recommend_content`
+        AS
+        SELECT
+          *
+        FROM
+          ML.RECOMMEND(MODEL `bqml_tutorial.mf_implicit`);
 
 3.  Select the top five results per visitor. In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      visitorId,
-      ARRAY_AGG(
-        STRUCT(contentId, predicted_rating_confidence)
-        ORDER BY predicted_rating_confidence DESC
-        LIMIT 5) AS rec
-    FROM
-      `bqml_tutorial.recommend_content`
-    GROUP BY
-      visitorId;
-    ```
+        SELECT
+          visitorId,
+          ARRAY_AGG(
+            STRUCT(contentId, predicted_rating_confidence)
+            ORDER BY predicted_rating_confidence DESC
+            LIMIT 5) AS rec
+        FROM
+          `bqml_tutorial.recommend_content`
+        GROUP BY
+          visitorId;
     
     The results should look similar to the following:
     
-    ``` console
+    ```console
     +---------------------+-----------------+---------------------------------+
     | visitorId           | rec:contentId   | rec:predicted_rating_confidence |
     +---------------------+-----------------+-------------------------  ------+

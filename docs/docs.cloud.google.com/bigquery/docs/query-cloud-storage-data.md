@@ -59,11 +59,9 @@ You query a temporary table linked to an external data source using the [`bq que
 
 To query a temporary table linked to your external data source using a table definition file, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=TABLE::DEFINITION_FILE \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=TABLE::DEFINITION_FILE \
+    'QUERY'
 
 Replace the following:
 
@@ -84,11 +82,9 @@ For example, the following command creates and queries a temporary table named `
 
 To query a temporary table linked to your external data source using an inline schema definition, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=TABLE::SCHEMA@SOURCE_FORMAT=BUCKET_PATH \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=TABLE::SCHEMA@SOURCE_FORMAT=BUCKET_PATH \
+    'QUERY'
 
 Replace the following:
 
@@ -130,11 +126,9 @@ For example, the following command creates and queries a temporary table named `
 
 To query a temporary table linked to your external data source using a JSON schema file, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=SCHEMA_FILE@SOURCE_FORMAT=BUCKET_PATH \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=SCHEMA_FILE@SOURCE_FORMAT=BUCKET_PATH \
+    'QUERY'
 
 Replace the following:
 
@@ -164,7 +158,7 @@ Replace the following:
 
 For example, the following command creates and queries a temporary table named `sales` linked to a CSV file stored in Cloud Storage using the `/tmp/sales_schema.json` schema file.
 
-``` notranslate
+``` 
   bq query \
   --external_table_definition=sales::/tmp/sales_schema.json@CSV=gs://mybucket/sales.csv \
   'SELECT
@@ -333,7 +327,7 @@ Tables based on external data sources provide a pseudocolumn named `_FILE_NAME` 
 
 The `_FILE_NAME` column name is reserved, which means that you cannot create a column by that name in any of your tables. To select the value of `_FILE_NAME` , you must use an alias. The following example query demonstrates selecting `_FILE_NAME` by assigning the alias `fn` to the pseudocolumn.
 
-``` notranslate
+``` 
   bq query \  --project_id=PROJECT_ID \  --use_legacy_sql=false \  'SELECT     name,     _FILE_NAME AS fn   FROM     `DATASET.TABLE_NAME`   WHERE     name contains "Alex"' 
 ```
 

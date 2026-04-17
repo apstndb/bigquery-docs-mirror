@@ -14,9 +14,7 @@ To see the last metadata index refresh time of a table, query the `LAST_METADATA
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT  project_id,  project_number,  table_name,  last_metadata_index_refresh_timeFROM  [PROJECT_ID.]region-REGION.INFORMATION_SCHEMA.TABLE_STORAGE;
-    ```
+        SELECT  project_id,  project_number,  table_name,  last_metadata_index_refresh_timeFROM  [PROJECT_ID.]region-REGION.INFORMATION_SCHEMA.TABLE_STORAGE;
     
     Replace the following:
     
@@ -33,25 +31,21 @@ You can also view column metadata index usage with the `metadata_cache_statistic
 
 For example, the following displays column metadata index usage for the `my-job` job:
 
-``` notranslate
-SELECT metadata_cache_statistics
-FROM `region-US`.INFORMATION_SCHEMA.JOBS
-WHERE job_id = 'my-job';
-```
+    SELECT metadata_cache_statistics
+    FROM `region-US`.INFORMATION_SCHEMA.JOBS
+    WHERE job_id = 'my-job';
 
 As another example, the following displays the number of jobs that used column metadata index for the `my-table` table:
 
-``` notranslate
-SELECT COUNT(*)
-FROM
-  `region-US`.INFORMATION_SCHEMA.JOBS,
-  UNNEST(metadata_cache_statistics.table_metadata_cache_usage) AS stats
-WHERE
-  stats.table_reference.table_id='my-table' AND
-  stats.table_reference.dataset_id='my-dataset' AND
-  stats.table_reference.project_id='my-project' AND
-  stats.unusedReason IS NULL;
-```
+    SELECT COUNT(*)
+    FROM
+      `region-US`.INFORMATION_SCHEMA.JOBS,
+      UNNEST(metadata_cache_statistics.table_metadata_cache_usage) AS stats
+    WHERE
+      stats.table_reference.table_id='my-table' AND
+      stats.table_reference.dataset_id='my-dataset' AND
+      stats.table_reference.project_id='my-project' AND
+      stats.unusedReason IS NULL;
 
 ## Set up dedicated indexing resources
 
@@ -78,16 +72,14 @@ After setting up your reservation, select one of the following methods to assign
 
 Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) .
 
-``` notranslate
-bq mk \
-  --project_id=ADMIN_PROJECT_ID \
-  --location=LOCATION \
-  --reservation_assignment \
-  --reservation_id=RESERVATION_NAME \
-  --assignee_id=PROJECT_ID \
-  --job_type=BACKGROUND \
-  --assignee_type=PROJECT
-```
+    bq mk \
+      --project_id=ADMIN_PROJECT_ID \
+      --location=LOCATION \
+      --reservation_assignment \
+      --reservation_id=RESERVATION_NAME \
+      --assignee_id=PROJECT_ID \
+      --job_type=BACKGROUND \
+      --assignee_type=PROJECT
 
 Replace the following:
 
@@ -104,13 +96,11 @@ To assign a reservation to a project, use the [`CREATE ASSIGNMENT` DDL statement
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE ASSIGNMENT
-    ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
-    OPTIONS (
-      assignee = 'projects/PROJECT_ID',
-      job_type = 'BACKGROUND');
-    ```
+        CREATE ASSIGNMENT
+        ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
+        OPTIONS (
+          assignee = 'projects/PROJECT_ID',
+          job_type = 'BACKGROUND');
     
     Replace the following:
     
@@ -126,17 +116,15 @@ To assign a reservation to a project, use the [`CREATE ASSIGNMENT` DDL statement
 
 After you set up your dedicated indexing jobs, you can view information about the indexing jobs with the [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . The following SQL sample shows the five most recent refresh jobs in PROJECT\_NAME .
 
-``` notranslate
-SELECT *
-FROM
-  region-us.INFORMATION_SCHEMA.JOBS
-WHERE
-  project_id = 'PROJECT_NAME'
-  AND SEARCH(job_id, '`metadata_cache_refresh`')
-ORDER BY
-  creation_time DESC
-LIMIT 5;
-```
+    SELECT *
+    FROM
+      region-us.INFORMATION_SCHEMA.JOBS
+    WHERE
+      project_id = 'PROJECT_NAME'
+      AND SEARCH(job_id, '`metadata_cache_refresh`')
+    ORDER BY
+      creation_time DESC
+    LIMIT 5;
 
 Replace `  PROJECT_NAME  ` with the name of the project containing your metadata indexing jobs.
 

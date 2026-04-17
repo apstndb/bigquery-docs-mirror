@@ -8,9 +8,7 @@ Read more about the Cloud Client Libraries and the older Google API Client Libra
 
 ### Go
 
-``` notranslate
-go get cloud.google.com/go/bigquery
-```
+    go get cloud.google.com/go/bigquery
 
 For more information, see [Setting Up a Go Development Environment](https://docs.cloud.google.com/go/docs/setup) .
 
@@ -20,9 +18,7 @@ For more information, see [Setting Up a Java Development Environment](https://do
 
 ### Python
 
-``` notranslate
-pip install --upgrade google-cloud-bigquery-migration
-```
+    pip install --upgrade google-cloud-bigquery-migration
 
 For more information, see [Setting Up a Python Development Environment](https://docs.cloud.google.com/python/docs/setup) .
 

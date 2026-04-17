@@ -88,64 +88,58 @@ The `Products_` table has the following schema:
 
 The following SQL sample query provides the number of products, products with issues, and issues by day.
 
-``` notranslate
-SELECT
-  _PARTITIONDATE AS date,
-  COUNT(*) AS num_products,
-  COUNTIF(ARRAY_LENGTH(issues) > 0) AS num_products_with_issues,
-  SUM(ARRAY_LENGTH(issues)) AS num_issues
-FROM
-  dataset.Products_merchant_id
-WHERE
-  _PARTITIONDATE >= 'YYYY-MM-DD'
-GROUP BY
-  date
-ORDER BY
-  date DESC
-```
+    SELECT
+      _PARTITIONDATE AS date,
+      COUNT(*) AS num_products,
+      COUNTIF(ARRAY_LENGTH(issues) > 0) AS num_products_with_issues,
+      SUM(ARRAY_LENGTH(issues)) AS num_issues
+    FROM
+      dataset.Products_merchant_id
+    WHERE
+      _PARTITIONDATE >= 'YYYY-MM-DD'
+    GROUP BY
+      date
+    ORDER BY
+      date DESC
 
 ### Products disapproved for Shopping Ads
 
 The following SQL sample query provides the number of products that are not approved for display in Shopping Ads, separated by country. Disapproval can result from the destination being [excluded](https://support.google.com/merchants/answer/6324486) or because of an issue with the product.
 
-``` notranslate
-SELECT
-  _PARTITIONDATE AS date,
-  disapproved_country,
-  COUNT(*) AS num_products
-FROM
-  dataset.Products_merchant_id,
-  UNNEST(destinations) AS destination,
-  UNNEST(disapproved_countries) AS disapproved_country
-WHERE
-  _PARTITIONDATE >= 'YYYY-MM-DD'
-GROUP BY
-  date, disapproved_country
-ORDER BY
-  date DESC
-```
+    SELECT
+      _PARTITIONDATE AS date,
+      disapproved_country,
+      COUNT(*) AS num_products
+    FROM
+      dataset.Products_merchant_id,
+      UNNEST(destinations) AS destination,
+      UNNEST(disapproved_countries) AS disapproved_country
+    WHERE
+      _PARTITIONDATE >= 'YYYY-MM-DD'
+    GROUP BY
+      date, disapproved_country
+    ORDER BY
+      date DESC
 
 ### Products with disapproved issues
 
 The following SQL sample query retrieves the number of products with disapproved issues, separated by country.
 
-``` notranslate
-SELECT
-  _PARTITIONDATE AS date,
-  applicable_country,
-  COUNT(DISTINCT CONCAT(CAST(merchant_id AS STRING), ':', product_id))
-      AS num_distinct_products
-FROM
-  dataset.Products_merchant_id,
-  UNNEST(issues) AS issue,
-  UNNEST(issue.applicable_countries) as applicable_country
-WHERE
-  _PARTITIONDATE >= 'YYYY-MM-DD' AND
-  issue.servability = 'disapproved'
-GROUP BY
-  date, applicable_country
-ORDER BY
-  date DESC
-```
+    SELECT
+      _PARTITIONDATE AS date,
+      applicable_country,
+      COUNT(DISTINCT CONCAT(CAST(merchant_id AS STRING), ':', product_id))
+          AS num_distinct_products
+    FROM
+      dataset.Products_merchant_id,
+      UNNEST(issues) AS issue,
+      UNNEST(issue.applicable_countries) as applicable_country
+    WHERE
+      _PARTITIONDATE >= 'YYYY-MM-DD' AND
+      issue.servability = 'disapproved'
+    GROUP BY
+      date, applicable_country
+    ORDER BY
+      date DESC
 
 > **Note:** This query constructs a unique key by using `merchant_id` and `product_id` . This is only required if you have an MCA account. When you use an MCA account, there is the potential for `product_id` collisions across multiple sub-accounts.

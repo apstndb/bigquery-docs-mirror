@@ -51,12 +51,10 @@ Create a table definition file for a Cloud Storage data source:
 
 1.  Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) with the `--autodetect` flag to create a table definition file. The `mkdef` command generates a table definition file in JSON format. The following example creates a table definition and writes the output to a file: ` /tmp/ file_name  ` .
     
-    ``` notranslate
-    bq mkdef \
-      --autodetect \
-      --source_format=SOURCE_FORMAT \
-      "URI" > /tmp/FILE_NAME
-    ```
+        bq mkdef \
+          --autodetect \
+          --source_format=SOURCE_FORMAT \
+          "URI" > /tmp/FILE_NAME
     
     Replace the following:
     
@@ -70,23 +68,21 @@ Create a table definition file for a Cloud Storage data source:
 
 2.  (Optional) Open the table definition file in a text editor. For example, the command ` nano /tmp/ file_name  ` opens the file in nano. The file should look like the following for a CSV external data source. Notice `"autodetect"` is set to `true` .
     
-    ``` notranslate
-    {
-    "autodetect": true,
-    "csvOptions": {
-      "allowJaggedRows": false,
-      "allowQuotedNewlines": false,
-      "encoding": "UTF-8",
-      "fieldDelimiter": ",",
-      "quote": "\"",
-      "skipLeadingRows": 0
-    },
-    "sourceFormat": "CSV",
-    "sourceUris": [
-      "URI"
-    ]
-    }
-    ```
+        {
+        "autodetect": true,
+        "csvOptions": {
+          "allowJaggedRows": false,
+          "allowQuotedNewlines": false,
+          "encoding": "UTF-8",
+          "fieldDelimiter": ",",
+          "quote": "\"",
+          "skipLeadingRows": 0
+        },
+        "sourceFormat": "CSV",
+        "sourceUris": [
+          "URI"
+        ]
+        }
 
 3.  (Optional) Manually edit the table definition file to modify, add, or delete general settings such as `maxBadRecords` and `ignoreUnknownValues` . There are no configuration settings that are specific to JSON source files, but there are settings that apply to [CSV](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions) and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GoogleSheetsOptions) files. For more information, see [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the API reference.
 
@@ -96,12 +92,10 @@ Create a table definition file for a Drive data source:
 
 1.  Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) with the `--autodetect` flag to create a table definition. The `mkdef` command generates a table definition file in JSON format. The following example creates a table definition and writes the output to a file: ` /tmp/ file_name  ` .
     
-    ``` notranslate
-    bq mkdef \
-       --autodetect \
-       --source_format=SOURCE_FORMAT \
-       "URI" > /tmp/FILE_NAME
-    ```
+        bq mkdef \
+           --autodetect \
+           --source_format=SOURCE_FORMAT \
+           "URI" > /tmp/FILE_NAME
     
     Replace the following:
     
@@ -115,15 +109,13 @@ Create a table definition file for a Drive data source:
 
 2.  Open the table definition file in a text editor. For example, the command ` nano /tmp/ file_name  ` opens the file in nano. The file should look like the following for a Google Sheets external data source. Notice `"autodetect"` is set to `true` .
     
-    ``` notranslate
-    {
-    "autodetect": true,
-    "sourceFormat": "GOOGLE_SHEETS",
-    "sourceUris": [
-      "URI"
-    ]
-    }
-    ```
+        {
+        "autodetect": true,
+        "sourceFormat": "GOOGLE_SHEETS",
+        "sourceUris": [
+          "URI"
+        ]
+        }
 
 3.  (Optional) Manually edit the table definition file to modify, add, or delete general settings such as `maxBadRecords` and `ignoreUnknownValues` . There are no configuration settings that are specific to JSON source files, but there are settings that apply to [CSV](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions) and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GoogleSheetsOptions) files. For more information, see [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the API reference.
 
@@ -139,13 +131,11 @@ Create a table definition for a Cloud Storage or Drive data source by using an i
 
 1.  Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) with the `--noautodetect` flag to create a table definition. The `mkdef` command generates a table definition file in JSON format. The following example creates a table definition and writes the output to a file: ` /tmp/ file_name  ` .
     
-    ``` notranslate
-    bq mkdef \
-      --noautodetect \
-      --source_format=SOURCE_FORMAT \
-      "URI" \
-      FIELD:DATA_TYPE,FIELD:DATA_TYPE > /tmp/FILE_NAME
-    ```
+        bq mkdef \
+          --noautodetect \
+          --source_format=SOURCE_FORMAT \
+          "URI" \
+          FIELD:DATA_TYPE,FIELD:DATA_TYPE > /tmp/FILE_NAME
     
     Replace the following
     
@@ -163,27 +153,25 @@ Create a table definition for a Cloud Storage or Drive data source by using an i
 
 2.  (Optional) Open the table definition file in a text editor. For example, the command ` nano /tmp/ file_name  ` opens the file in nano. The file should look like the following. Notice `"autodetect"` is not enabled, and the schema information is written to the table definition file.
     
-    ``` notranslate
-    {
-    "schema": {
-      "fields": [
         {
-          "name": "FIELD",
-          "type": "DATA_TYPE"
+        "schema": {
+          "fields": [
+            {
+              "name": "FIELD",
+              "type": "DATA_TYPE"
+            },
+            {
+              "name": "FIELD",
+              "type": "DATA_TYPE"
+            }
+            ...
+          ]
         },
-        {
-          "name": "FIELD",
-          "type": "DATA_TYPE"
+        "sourceFormat": "NEWLINE_DELIMITED_JSON",
+        "sourceUris": [
+          "URI"
+        ]
         }
-        ...
-      ]
-    },
-    "sourceFormat": "NEWLINE_DELIMITED_JSON",
-    "sourceUris": [
-      "URI"
-    ]
-    }
-    ```
 
 3.  (Optional) Manually edit the table definition file to modify, add, or delete general settings such as `maxBadRecords` and `ignoreUnknownValues` . There are no configuration settings that are specific to JSON source files, but there are settings that apply to [CSV](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions) and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GoogleSheetsOptions) files. For more information, see [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the API reference.
 
@@ -197,13 +185,11 @@ Create a table definition for a Cloud Storage data source using a JSON schema fi
 
 1.  Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) with the `--noautodetect` flag to create a table definition. The `mkdef` command generates a table definition file in JSON format. The following example creates a table definition and writes the output to a file: ` /tmp/ file_name  ` .
     
-    ``` notranslate
-    bq mkdef \
-       --noautodetect \
-       --source_format=SOURCE_FORMAT \
-       "URI" \
-      PATH_TO_SCHEMA_FILE > /tmp/FILE_NAME
-    ```
+        bq mkdef \
+           --noautodetect \
+           --source_format=SOURCE_FORMAT \
+           "URI" \
+          PATH_TO_SCHEMA_FILE > /tmp/FILE_NAME
     
     Replace the following:
     
@@ -220,27 +206,25 @@ Create a table definition for a Cloud Storage data source using a JSON schema fi
 2.  (Optional) Open the table definition file in a text editor. For example, the command ` nano /tmp/ file_name  ` opens the file in  
     nano. The file should look like the following. Notice `"autodetect"` is not enabled, and the schema information is written to the table definition file.
     
-    ``` notranslate
-    {
-    "schema": {
-      "fields": [
         {
-          "name": "FIELD",
-          "type": "DATA_TYPE"
+        "schema": {
+          "fields": [
+            {
+              "name": "FIELD",
+              "type": "DATA_TYPE"
+            },
+            {
+              "name": "FIELD",
+              "type": "DATA_TYPE"
+            }
+            ...
+          ]
         },
-        {
-          "name": "FIELD",
-          "type": "DATA_TYPE"
+        "sourceFormat": "NEWLINE_DELIMITED_JSON",
+        "sourceUris": [
+          "URI"
+        ]
         }
-        ...
-      ]
-    },
-    "sourceFormat": "NEWLINE_DELIMITED_JSON",
-    "sourceUris": [
-      "URI"
-    ]
-    }
-    ```
 
 3.  (Optional) Manually edit the table definition file to modify, add, or delete general settings such as `maxBadRecords` and `ignoreUnknownValues` . There are no configuration settings that are specific to JSON source files, but there are settings that apply to [CSV](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions) and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GoogleSheetsOptions) files. For more information, see [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the API reference.
 
@@ -250,13 +234,11 @@ Create a table definition for a Drive data source using a JSON schema file:
 
 1.  Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) with the `--noautodetect` flag to create a table definition. The `mkdef` command generates a table definition file in JSON format. The following example creates a table definition and writes the output to a file: ` /tmp/ file_name  ` .
     
-    ``` notranslate
-    bq mkdef \
-       --noautodetect \
-       --source_format=source_format \
-       "URI" \
-       PATH_TO_SCHEMA_FILE > /tmp/FILE_NAME
-    ```
+        bq mkdef \
+           --noautodetect \
+           --source_format=source_format \
+           "URI" \
+           PATH_TO_SCHEMA_FILE > /tmp/FILE_NAME
     
     Replace the following:
     
@@ -272,27 +254,25 @@ Create a table definition for a Drive data source using a JSON schema file:
 
 2.  Open the table definition file in a text editor. For example, the command ` nano /tmp/ file_name  ` opens the file in nano. The file should look like the following. Notice `"autodetect"` is not enabled, and the schema information is written to the table definition file.
     
-    ``` notranslate
-    {
-    "schema": {
-      "fields": [
         {
-          "name": "FIELD",
-          "type": "DATA_TYPE"
+        "schema": {
+          "fields": [
+            {
+              "name": "FIELD",
+              "type": "DATA_TYPE"
+            },
+            {
+              "name": "FIELD",
+              "type": "DATA_TYPE"
+            }
+            ...
+          ]
         },
-        {
-          "name": "FIELD",
-          "type": "DATA_TYPE"
+        "sourceFormat": "GOOGLE_SHEETS",
+        "sourceUris": [
+          "URI"
+        ]
         }
-        ...
-      ]
-    },
-    "sourceFormat": "GOOGLE_SHEETS",
-    "sourceUris": [
-      "URI"
-    ]
-    }
-    ```
 
 3.  (Optional) Manually edit the table definition file to modify, add, or delete general settings such as `maxBadRecords` and `ignoreUnknownValues` . There are no configuration settings that are specific to JSON source files, but there are settings that apply to [CSV](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions) and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GoogleSheetsOptions) files. For more information, see [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the API reference.
 
@@ -306,11 +286,9 @@ You can create a table definition file for Avro, Parquet, or ORC data stored in 
 
 1.  Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) to create a table definition.
     
-    ``` notranslate
-    bq mkdef \
-        --source_format=FORMAT \
-        "URI" > FILE_NAME
-    ```
+        bq mkdef \
+            --source_format=FORMAT \
+            "URI" > FILE_NAME
     
     Replace the following:
     
@@ -324,14 +302,12 @@ You can create a table definition file for Avro, Parquet, or ORC data stored in 
 
 2.  Optional: Open the table definition file in a text editor. The file looks similar to the following:
     
-    ``` notranslate
-    {
-       "sourceFormat": "AVRO",
-       "sourceUris": [
-       "URI"
-        ]
-    }
-    ```
+        {
+           "sourceFormat": "AVRO",
+           "sourceUris": [
+           "URI"
+            ]
+        }
 
 3.  Optional: Manually edit the table definition file to modify, add, or delete general settings such as `maxBadRecords` and `ignoreUnknownValues` . For more information, see [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the API reference.
 
@@ -347,11 +323,9 @@ You can create a table definition file for Datastore and Firestore export data s
 
 1.  Use the [`bq mkdef` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) to create a table definition. You don't need to use the `--noautodetect` flag with Datastore or Firestore backup files. Schema auto-detect is disabled for these file types. The `mkdef` command generates a table definition file in JSON format. The following example creates a table definition and writes the output to a file: ` /tmp/ file_name  ` .
     
-    ``` notranslate
-    bq mkdef \
-    --source_format=DATASTORE_BACKUP \
-    "URI" > /tmp/FILE_NAME
-    ```
+        bq mkdef \
+        --source_format=DATASTORE_BACKUP \
+        "URI" > /tmp/FILE_NAME
     
     Replace the following:
     
@@ -362,14 +336,12 @@ You can create a table definition file for Datastore and Firestore export data s
 
 2.  (Optional) Open the table definition file in a text editor. For example, the command ` nano /tmp/ file_name  ` opens the file in nano. The file should look like the following. Notice there is no need for the `"autodetect"` setting.
     
-    ``` notranslate
-    {
-    "sourceFormat": "DATASTORE_BACKUP",
-    "sourceUris": [
-      "gs://URI"
-    ]
-    }
-    ```
+        {
+        "sourceFormat": "DATASTORE_BACKUP",
+        "sourceUris": [
+          "gs://URI"
+        ]
+        }
 
 3.  (Optional) Manually edit the table definition file to modify, add, or delete settings such as `maxBadRecords` and `ignoreUnknownValues` . There are no configuration settings that are specific to Datastore and Firestore export files. For more information, see [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the API reference.
 
@@ -379,23 +351,21 @@ When you create a table definition file for Bigtable, you manually generate the 
 
 A JSON table definition file for Bigtable looks like the following. Using this table definition file, BigQuery reads data from a single column family, interpreting the values as binary encoded integers.
 
-``` notranslate
-{
-    "sourceFormat": "BIGTABLE",
-    "sourceUris": [
-        "https://googleapis.com/bigtable/projects/PROJECT_ID/instances/INSTANCE_ID[/appProfiles/APP_PROFILE_ID]/tables/TABLE_NAME"
-    ],
-    "bigtableOptions": {
-        "columnFamilies" : [
-            {
-                "familyId": "FAMILY_ID",
-                "type": "INTEGER",
-                "encoding": "BINARY"
-            }
-        ]
+    {
+        "sourceFormat": "BIGTABLE",
+        "sourceUris": [
+            "https://googleapis.com/bigtable/projects/PROJECT_ID/instances/INSTANCE_ID[/appProfiles/APP_PROFILE_ID]/tables/TABLE_NAME"
+        ],
+        "bigtableOptions": {
+            "columnFamilies" : [
+                {
+                    "familyId": "FAMILY_ID",
+                    "type": "INTEGER",
+                    "encoding": "BINARY"
+                }
+            ]
+        }
     }
-}
-```
 
 Replace the following:
 

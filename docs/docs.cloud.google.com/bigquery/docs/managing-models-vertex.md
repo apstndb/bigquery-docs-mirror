@@ -49,12 +49,10 @@ All models created using BigQuery ML still display in the BigQuery user interfac
 
 The following example shows how to create and register a k-means model:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.my_kmeans_model`
-  MODEL_TYPE = 'KMEANS',
-  MODEL_REGISTRY = 'VERTEX_AI',
-  VERTEX_AI_MODEL_ID = 'customer_clustering';
-```
+    CREATE OR REPLACE MODEL `mydataset.my_kmeans_model`
+      MODEL_TYPE = 'KMEANS',
+      MODEL_REGISTRY = 'VERTEX_AI',
+      VERTEX_AI_MODEL_ID = 'customer_clustering';
 
 ### Register an existing BigQuery ML model to the Model Registry
 
@@ -95,15 +93,13 @@ The following examples show how to register an existing model:
 
 Use the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) :
 
-``` notranslate
-ALTER MODEL IF EXISTS mymodel SET OPTIONS (vertex_ai_model_id='my_vertex_ai_model_id');
-```
+    ALTER MODEL IF EXISTS mymodel SET OPTIONS (vertex_ai_model_id='my_vertex_ai_model_id');
 
 ### bq
 
 Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--model` flag:
 
-``` notranslate
+``` 
   bq update --model --vertex_ai_model_id 'my_vertex_ai_model_id' myproject:mydataset.mymodel
 ```
 
@@ -111,14 +107,12 @@ Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/refere
 
 Use the [`models.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/patch) . Pass in an [`Model` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model) that contains a [`trainingRuns` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrainingRun) with a populated `vertexAiModelId` field:
 
-``` notranslate
-{
-  "trainingRuns": [
     {
-      "vertexAiModelId": my_vertex_ai_model_id
+      "trainingRuns": [
+        {
+          "vertexAiModelId": my_vertex_ai_model_id
+        }
     }
-}
-```
 
 ### Register multiple versions of BigQuery ML models
 

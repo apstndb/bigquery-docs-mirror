@@ -74,22 +74,18 @@ For example, `myproject.region-us.INFORMATION_SCHEMA.SHARED_DATASET_USAGE` .
 
 The following example calculates total jobs run by [subscribers](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) for a project:
 
-``` notranslate
-SELECT
-  COUNT(DISTINCT job_id) AS num_jobs
-FROM
-  `region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-```
+    SELECT
+      COUNT(DISTINCT job_id) AS num_jobs
+    FROM
+      `region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
 
 The result is similar to the following:
 
-``` notranslate
-+------------+
-| num_jobs   |
-+------------+
-| 1000       |
-+------------+
-```
+    +------------+
+    | num_jobs   |
+    +------------+
+    | 1000       |
+    +------------+
 
 To check the total jobs run by subscribers, use the `WHERE` clause:
 
@@ -100,21 +96,19 @@ To check the total jobs run by subscribers, use the `WHERE` clause:
 
 The following query calculates the most used table based on the number of rows processed by subscribers.
 
-``` notranslate
-SELECT
-  dataset_id,
-  table_id,
-  SUM(num_rows_processed) AS usage_rows
-FROM
-  `region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-GROUP BY
-  1,
-  2
-ORDER BY
-  3 DESC
-LIMIT
-  1
-```
+    SELECT
+      dataset_id,
+      table_id,
+      SUM(num_rows_processed) AS usage_rows
+    FROM
+      `region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
+    GROUP BY
+      1,
+      2
+    ORDER BY
+      3 DESC
+    LIMIT
+      1
 
 The output is similar to the following:
 
@@ -128,16 +122,14 @@ The output is similar to the following:
 
 The following query calculates the top subscribers based on the number of bytes processed from your tables. You can also use the `num_rows_processed` column as a metric.
 
-``` notranslate
-SELECT
-  subscriber_org_number,
-  ANY_VALUE(subscriber_org_display_name) AS subscriber_org_display_name,
-  SUM(total_bytes_processed) AS usage_bytes
-FROM
-  `region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-GROUP BY
-  1
-```
+    SELECT
+      subscriber_org_number,
+      ANY_VALUE(subscriber_org_display_name) AS subscriber_org_display_name,
+      SUM(total_bytes_processed) AS usage_bytes
+    FROM
+      `region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
+    GROUP BY
+      1
 
 The output is similar to the following:
 
@@ -159,41 +151,37 @@ If your [data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hu
 
 <!-- end list -->
 
-``` notranslate
-SELECT
-  *
-FROM
-  source_project_1.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-WHERE
-  dataset_id='source_dataset_id'
-AND data_exchange_id="projects/4/locations/us/dataExchanges/x1"
-UNION ALL
-SELECT
-  *
-FROM
-  source_project_2.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-WHERE
-  dataset_id='source_dataset_id'
-AND data_exchange_id="projects/4/locations/us/dataExchanges/x1"
-```
+    SELECT
+      *
+    FROM
+      source_project_1.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
+    WHERE
+      dataset_id='source_dataset_id'
+    AND data_exchange_id="projects/4/locations/us/dataExchanges/x1"
+    UNION ALL
+    SELECT
+      *
+    FROM
+      source_project_2.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
+    WHERE
+      dataset_id='source_dataset_id'
+    AND data_exchange_id="projects/4/locations/us/dataExchanges/x1"
 
 ### Get usage metrics for shared views
 
 The following query displays the usage metrics for all of the shared views present in a project:
 
-``` notranslate
-SELECT
-  project_id,
-  dataset_id,
-  table_id,
-  num_rows_processed,
-  total_bytes_processed,
-  shared_resource_id,
-  shared_resource_type,
-  referenced_tables
-FROM `myproject`.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-WHERE shared_resource_type = 'VIEW'
-```
+    SELECT
+      project_id,
+      dataset_id,
+      table_id,
+      num_rows_processed,
+      total_bytes_processed,
+      shared_resource_id,
+      shared_resource_type,
+      referenced_tables
+    FROM `myproject`.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
+    WHERE shared_resource_type = 'VIEW'
 
 The output is similar to the following:
 
@@ -209,19 +197,17 @@ The output is similar to the following:
 
 The following query displays the usage metrics for all of the shared table valued functions present in a project:
 
-``` notranslate
-SELECT
-  project_id,
-  dataset_id,
-  table_id,
-  num_rows_processed,
-  total_bytes_processed,
-  shared_resource_id,
-  shared_resource_type,
-  referenced_tables
-FROM `myproject`.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-WHERE shared_resource_type = 'TABLE_VALUED_FUNCTION'
-```
+    SELECT
+      project_id,
+      dataset_id,
+      table_id,
+      num_rows_processed,
+      total_bytes_processed,
+      shared_resource_id,
+      shared_resource_type,
+      referenced_tables
+    FROM `myproject`.`region-us`.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
+    WHERE shared_resource_type = 'TABLE_VALUED_FUNCTION'
 
 The output is similar to the following:
 

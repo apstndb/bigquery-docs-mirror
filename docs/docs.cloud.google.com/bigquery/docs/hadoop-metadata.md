@@ -38,17 +38,13 @@ To install the `dwh-migration-dumper` tool, follow these steps:
     
     ### Bash
     
-    ``` notranslate
-    sha256sum --check SHA256SUMS.txt
-    ```
+        sha256sum --check SHA256SUMS.txt
     
     If verification fails, see [Troubleshooting](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata#corrupted_zip_file) .
     
     ### Windows PowerShell
     
-    ``` notranslate
-    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-    ```
+        (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
     
     Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
     

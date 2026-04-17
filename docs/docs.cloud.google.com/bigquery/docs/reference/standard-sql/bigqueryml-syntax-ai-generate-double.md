@@ -153,7 +153,7 @@ To determine the population of each city in millions, you can call the `AI.GENER
 
 The result is similar to the following:
 
-``` console
+```console
 +---------+--------+
 | city    | result |
 +---------+--------+

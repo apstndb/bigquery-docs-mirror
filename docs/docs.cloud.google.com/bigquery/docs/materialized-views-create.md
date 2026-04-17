@@ -32,11 +32,9 @@ Use the [`CREATE MATERIALIZED VIEW` statement](https://docs.cloud.google.com/big
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE MATERIALIZED VIEW PROJECT_ID.DATASET.MATERIALIZED_VIEW_NAME AS (
-      QUERY_EXPRESSION
-    );
-    ```
+        CREATE MATERIALIZED VIEW PROJECT_ID.DATASET.MATERIALIZED_VIEW_NAME AS (
+          QUERY_EXPRESSION
+        );
     
     Replace the following:
     
@@ -53,17 +51,15 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The following example creates a materialized view for the number of clicks for each product ID:
 
-``` notranslate
-CREATE MATERIALIZED VIEW myproject.mydataset.my_mv_table AS (
-  SELECT
-    product_id,
-    SUM(clicks) AS sum_clicks
-  FROM
-    myproject.mydataset.my_base_table
-  GROUP BY
-    product_id
-);
-```
+    CREATE MATERIALIZED VIEW myproject.mydataset.my_mv_table AS (
+      SELECT
+        product_id,
+        SUM(clicks) AS sum_clicks
+      FROM
+        myproject.mydataset.my_base_table
+      GROUP BY
+        product_id
+    );
 
 ### Terraform
 
@@ -75,7 +71,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a view named `my_materialized_view` :
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -304,11 +300,9 @@ Incremental materialized views have the following limitations.
 
 Aggregates in the materialized view query must be outputs. Computing, filtering, or joining based on an aggregated value is not supported. For example, creating a view from the following query is not supported because it produces a value computed from an aggregate, `COUNT(*) / 10 as cnt` .
 
-``` notranslate
-SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, COUNT(*) / 10 AS cnt
-FROM mydataset.mytable
-GROUP BY ts_hour;
-```
+    SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, COUNT(*) / 10 AS cnt
+    FROM mydataset.mytable
+    GROUP BY ts_hour;
 
 Only the following aggregation functions are supported:
 
@@ -360,34 +354,30 @@ Incremental materialized views support `LEFT OUTER JOIN` and `UNION ALL` . Mater
 
 The following example creates an aggregate incremental materialized view with a `LEFT JOIN` . This view is incrementally updated when data appends to the left table.
 
-``` notranslate
-CREATE MATERIALIZED VIEW dataset.mv
-AS (
-  SELECT
-    s_store_sk,
-    s_country,
-    s_zip,
-    SUM(ss_net_paid) AS sum_sales,
-  FROM dataset.store_sales
-  LEFT JOIN dataset.store
-    ON ss_store_sk = s_store_sk
-  GROUP BY 1, 2, 3
-);
-```
+    CREATE MATERIALIZED VIEW dataset.mv
+    AS (
+      SELECT
+        s_store_sk,
+        s_country,
+        s_zip,
+        SUM(ss_net_paid) AS sum_sales,
+      FROM dataset.store_sales
+      LEFT JOIN dataset.store
+        ON ss_store_sk = s_store_sk
+      GROUP BY 1, 2, 3
+    );
 
 The following example creates an aggregate incremental materialized view with a `UNION ALL` . This view is incrementally updated when data appends to either or both tables. For more information about incremental updates, see [Incremental Updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) .
 
-``` notranslate
-CREATE MATERIALIZED VIEW dataset.mv PARTITION BY DATE(ts_hour)
-AS (
-  SELECT
-    SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, SUM(sales) sum_sales
-  FROM
-    (SELECT ts, sales from dataset.table1 UNION ALL
-     SELECT ts, sales from dataset.table2)
-  GROUP BY 1
-);
-```
+    CREATE MATERIALIZED VIEW dataset.mv PARTITION BY DATE(ts_hour)
+    AS (
+      SELECT
+        SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, SUM(sales) sum_sales
+      FROM
+        (SELECT ts, sales from dataset.table1 UNION ALL
+         SELECT ts, sales from dataset.table2)
+      GROUP BY 1
+    );
 
 ### `WITH` clause and common table expressions (CTEs)
 
@@ -397,27 +387,23 @@ Materialized views support `WITH` clauses and common table expressions. Material
 
 The following example shows a materialized view using a `WITH` clause:
 
-``` notranslate
-WITH tmp AS (
-  SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, *
-  FROM mydataset.mytable
-)
-SELECT ts_hour, COUNT(*) AS cnt
-FROM tmp
-GROUP BY ts_hour;
-```
+    WITH tmp AS (
+      SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, *
+      FROM mydataset.mytable
+    )
+    SELECT ts_hour, COUNT(*) AS cnt
+    FROM tmp
+    GROUP BY ts_hour;
 
 The following example shows a materialized view using a `WITH` clause that is not supported because it contains two `GROUP BY` clauses:
 
-``` notranslate
-WITH tmp AS (
-  SELECT city, COUNT(*) AS population
-  FROM mydataset.mytable
-  GROUP BY city
-)
-SELECT population, COUNT(*) AS cnt
-GROUP BY population;
-```
+    WITH tmp AS (
+      SELECT city, COUNT(*) AS population
+      FROM mydataset.mytable
+      GROUP BY city
+    )
+    SELECT population, COUNT(*) AS cnt
+    GROUP BY population;
 
 ### Materialized views over BigLake tables
 
@@ -429,12 +415,10 @@ To create [materialized views over BigLake tables](https://docs.cloud.google.com
 
 Creation of an aggregate view using a BigLake base table:
 
-``` notranslate
-CREATE MATERIALIZED VIEW sample_dataset.sample_mv
-    OPTIONS (max_staleness=INTERVAL "0:30:0" HOUR TO SECOND)
-AS SELECT COUNT(*) cnt
-FROM dataset.biglake_base_table;
-```
+    CREATE MATERIALIZED VIEW sample_dataset.sample_mv
+        OPTIONS (max_staleness=INTERVAL "0:30:0" HOUR TO SECOND)
+    AS SELECT COUNT(*) cnt
+    FROM dataset.biglake_base_table;
 
 For details about the limitations of materialized views over BigLake tables, see [materialized views over BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) .
 
@@ -446,12 +430,10 @@ You can reference large Iceberg tables in materialized views instead of migratin
 
 The following example creates a partition-aligned materialized view over a partitioned base Iceberg table:
 
-``` notranslate
-CREATE MATERIALIZED VIEW mydataset.myicebergmv
-  PARTITION BY DATE_TRUNC(birth_month, MONTH)
-AS
-  SELECT * FROM mydataset.myicebergtable;
-```
+    CREATE MATERIALIZED VIEW mydataset.myicebergmv
+      PARTITION BY DATE_TRUNC(birth_month, MONTH)
+    AS
+      SELECT * FROM mydataset.myicebergtable;
 
 The underlying base Iceberg table `myicebergtable` must have a [partition spec](https://iceberg.apache.org/spec/#partition-specs) like the following:
 
@@ -517,48 +499,44 @@ Partition expiration can't be set on materialized views. A materialized view imp
 
 In this example, the base table is partitioned on the `transaction_time` column with daily partitions. The materialized view is partitioned on the same column and clustered on the `employee_id` column.
 
-``` notranslate
-CREATE TABLE my_project.my_dataset.my_base_table(
-  employee_id INT64,
-  transaction_time TIMESTAMP)
-  PARTITION BY DATE(transaction_time)
-  OPTIONS (partition_expiration_days = 2);
-
-CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
-  PARTITION BY DATE(transaction_time)
-  CLUSTER BY employee_id
-AS (
-  SELECT
-    employee_id,
-    transaction_time,
-    COUNT(employee_id) AS cnt
-  FROM
-    my_dataset.my_base_table
-  GROUP BY
-    employee_id, transaction_time
-);
-```
+    CREATE TABLE my_project.my_dataset.my_base_table(
+      employee_id INT64,
+      transaction_time TIMESTAMP)
+      PARTITION BY DATE(transaction_time)
+      OPTIONS (partition_expiration_days = 2);
+    
+    CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
+      PARTITION BY DATE(transaction_time)
+      CLUSTER BY employee_id
+    AS (
+      SELECT
+        employee_id,
+        transaction_time,
+        COUNT(employee_id) AS cnt
+      FROM
+        my_dataset.my_base_table
+      GROUP BY
+        employee_id, transaction_time
+    );
 
 #### Example 2
 
 In this example, the base table is partitioned by ingestion time with daily partitions. The materialized view selects the ingestion time as a column named `date` . The materialized view is grouped by the `date` column and partitioned by the same column.
 
-``` notranslate
-CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
-  PARTITION BY date
-  CLUSTER BY employee_id
-AS (
-  SELECT
-    employee_id,
-    _PARTITIONDATE AS date,
-    COUNT(1) AS count
-  FROM
-    my_dataset.my_base_table
-  GROUP BY
-    employee_id,
-    date
-);
-```
+    CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
+      PARTITION BY date
+      CLUSTER BY employee_id
+    AS (
+      SELECT
+        employee_id,
+        _PARTITIONDATE AS date,
+        COUNT(1) AS count
+      FROM
+        my_dataset.my_base_table
+      GROUP BY
+        employee_id,
+        date
+    );
 
 #### Example 3
 
@@ -572,26 +550,24 @@ Note the following:
 
 <!-- end list -->
 
-``` notranslate
-CREATE TABLE my_project.my_dataset.my_base_table (
-  employee_id INT64,
-  transaction_time TIMESTAMP)
-  PARTITION BY DATE(transaction_time);
-
-CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
-  PARTITION BY DATE(transaction_hour)
-AS (
-  SELECT
-    employee_id,
-    TIMESTAMP_TRUNC(transaction_time, HOUR) AS transaction_hour,
-    COUNT(employee_id) AS cnt
-  FROM
-    my_dataset.my_base_table
-  GROUP BY
-    employee_id,
-    transaction_hour
-);
-```
+    CREATE TABLE my_project.my_dataset.my_base_table (
+      employee_id INT64,
+      transaction_time TIMESTAMP)
+      PARTITION BY DATE(transaction_time);
+    
+    CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
+      PARTITION BY DATE(transaction_hour)
+    AS (
+      SELECT
+        employee_id,
+        TIMESTAMP_TRUNC(transaction_time, HOUR) AS transaction_hour,
+        COUNT(employee_id) AS cnt
+      FROM
+        my_dataset.my_base_table
+      GROUP BY
+        employee_id,
+        transaction_hour
+    );
 
 ## Cluster materialized views
 
@@ -623,12 +599,10 @@ For example, consider a query on a table where users often filter by the columns
 
 As another example, you can use deterministic date filters, either by specific date, such as `WHERE order_date = '2019-10-01'` , or date range, such as `WHERE order_date BETWEEN '2019-10-01' AND '2019-10-31'` . Add a date range filter in the materialized view that covers expected date ranges in the query:
 
-``` notranslate
-CREATE MATERIALIZED VIEW ...
-  ...
-  WHERE date > '2019-01-01'
-  GROUP BY date
-```
+    CREATE MATERIALIZED VIEW ...
+      ...
+      WHERE date > '2019-01-01'
+      GROUP BY date
 
 ### Joins in materialized views
 
@@ -642,32 +616,28 @@ Ensure that the largest or most frequently changing table is the first or leftmo
 
 Materialized views with joins work best in cases where the data is heavily aggregated or the original join query is expensive. For selective queries, BigQuery is often already able to perform the join efficiently and no materialized view is needed. For example consider the following materialized view definitions.
 
-``` notranslate
-CREATE MATERIALIZED VIEW dataset.mv
-  CLUSTER BY s_market_id
-AS (
-  SELECT
-    s_market_id,
-    s_country,
-    SUM(ss_net_paid) AS sum_sales,
-    COUNT(*) AS cnt_sales
-  FROM dataset.store_sales
-  INNER JOIN dataset.store
-    ON ss_store_sk = s_store_sk
-  GROUP BY s_market_id, s_country
-);
-```
+    CREATE MATERIALIZED VIEW dataset.mv
+      CLUSTER BY s_market_id
+    AS (
+      SELECT
+        s_market_id,
+        s_country,
+        SUM(ss_net_paid) AS sum_sales,
+        COUNT(*) AS cnt_sales
+      FROM dataset.store_sales
+      INNER JOIN dataset.store
+        ON ss_store_sk = s_store_sk
+      GROUP BY s_market_id, s_country
+    );
 
 Suppose `store_sales` is clustered on `ss_store_sk` and you often run queries like the following:
 
-``` notranslate
-SELECT
-  SUM(ss_net_paid)
-FROM dataset.store_sales
-INNER JOIN dataset.store
-ON ss_store_sk = s_store_sk
-WHERE s_country = 'Germany';
-```
+    SELECT
+      SUM(ss_net_paid)
+    FROM dataset.store_sales
+    INNER JOIN dataset.store
+    ON ss_store_sk = s_store_sk
+    WHERE s_country = 'Germany';
 
 The materialized view might not be as efficient as the original query. For best results, experiment with a representative set of queries, with and without the materialized view.
 
@@ -695,9 +665,7 @@ To create a materialized view with the `max_staleness` option, add an `OPTIONS` 
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE MATERIALIZED VIEW  project-id.my_dataset.my_mv_table  OPTIONS (enable_refresh = true, refresh_interval_minutes = 60,    max_staleness = INTERVAL "4:0:0" HOUR TO SECOND)AS SELECT  employee_id,  DATE(transaction_time),  COUNT(1) AS countFROM my_dataset.my_base_tableGROUP BY 1, 2;
-    ```
+        CREATE MATERIALIZED VIEW  project-id.my_dataset.my_mv_table  OPTIONS (enable_refresh = true, refresh_interval_minutes = 60,    max_staleness = INTERVAL "4:0:0" HOUR TO SECOND)AS SELECT  employee_id,  DATE(transaction_time),  COUNT(1) AS countFROM my_dataset.my_base_tableGROUP BY 1, 2;
     
     Replace the following:
     
@@ -816,9 +784,7 @@ Add an `OPTIONS` clause to the DDL statement when you create the materialized vi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_tableOPTIONS (  enable_refresh = true, refresh_interval_minutes = 60,  max_staleness = INTERVAL "4" HOUR,    allow_non_incremental_definition = true)AS SELECT  s_store_sk,  SUM(ss_net_paid) AS sum_sales,  APPROX_QUANTILES(ss_net_paid, 2)[safe_offset(1)] medianFROM my_project.my_dataset.storeLEFT OUTER JOIN my_project.my_dataset.store_sales  ON ss_store_sk = s_store_skGROUP BY s_store_skHAVING median < 40 OR median is NULL ;
-    ```
+        CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_tableOPTIONS (  enable_refresh = true, refresh_interval_minutes = 60,  max_staleness = INTERVAL "4" HOUR,    allow_non_incremental_definition = true)AS SELECT  s_store_sk,  SUM(ss_net_paid) AS sum_sales,  APPROX_QUANTILES(ss_net_paid, 2)[safe_offset(1)] medianFROM my_project.my_dataset.storeLEFT OUTER JOIN my_project.my_dataset.store_sales  ON ss_store_sk = s_store_skGROUP BY s_store_skHAVING median < 40 OR median is NULL ;
     
     Replace the following:
     
@@ -870,18 +836,16 @@ Before you proceed, you must create the underlying Spanner external dataset usin
 
 You can create non-incremental materialized views that reference [Spanner external dataset tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) by using the `allow_non_incremental_definition` option. The following example uses a base Spanner external dataset table:
 
-``` notranslate
-/*
-  You must create the spanner_external_dataset with a CLOUD_RESOURCE connection.
-*/
-CREATE MATERIALIZED VIEW sample_dataset.sample_spanner_mv
-  OPTIONS (
-      enable_refresh = true, refresh_interval_minutes = 60,
-      max_staleness = INTERVAL "24" HOUR,
-        allow_non_incremental_definition = true)
-AS
-  SELECT COUNT(*) cnt FROM spanner_external_dataset.spanner_table;
-```
+    /*
+      You must create the spanner_external_dataset with a CLOUD_RESOURCE connection.
+    */
+    CREATE MATERIALIZED VIEW sample_dataset.sample_spanner_mv
+      OPTIONS (
+          enable_refresh = true, refresh_interval_minutes = 60,
+          max_staleness = INTERVAL "24" HOUR,
+            allow_non_incremental_definition = true)
+    AS
+      SELECT COUNT(*) cnt FROM spanner_external_dataset.spanner_table;
 
 ### Query with `allow_non_incremental_definition`
 

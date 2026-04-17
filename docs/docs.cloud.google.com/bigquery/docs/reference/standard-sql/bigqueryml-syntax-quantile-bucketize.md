@@ -11,7 +11,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.QUANTILE_BUCKETIZE(numerical_expression, num_buckets [, output_format]) OVER()
 ```
 
@@ -34,20 +34,18 @@ ML.QUANTILE_BUCKETIZE(numerical_expression, num_buckets [, output_format]) OVER(
 
 The following example breaks a numerical expression of five elements into three buckets:
 
-``` notranslate
-SELECT
-  f,
-  ML.QUANTILE_BUCKETIZE(f, 3) OVER() AS bucket,
-  ML.QUANTILE_BUCKETIZE(f, 3, "bucket_ranges") OVER() AS bucket_ranges,
-  ML.QUANTILE_BUCKETIZE(f, 3, "bucket_ranges_json") OVER() AS bucket_ranges_json
-FROM
-  UNNEST([1,2,3,4,5]) AS f
-ORDER BY f;
-```
+    SELECT
+      f,
+      ML.QUANTILE_BUCKETIZE(f, 3) OVER() AS bucket,
+      ML.QUANTILE_BUCKETIZE(f, 3, "bucket_ranges") OVER() AS bucket_ranges,
+      ML.QUANTILE_BUCKETIZE(f, 3, "bucket_ranges_json") OVER() AS bucket_ranges_json
+    FROM
+      UNNEST([1,2,3,4,5]) AS f
+    ORDER BY f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +---+--------+---------------+------------------------------------+
 | f | bucket | bucket_ranges | bucket_ranges_json                 |
 |---|--------|---------------|------------------------------------|

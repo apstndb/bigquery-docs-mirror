@@ -74,11 +74,9 @@ To set the maximum concurrency target for a new reservation, use the [`CREATE RE
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
-      OPTIONS (
-        target_job_concurrency = CONCURRENCY);
-    ```
+        CREATE RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
+          OPTIONS (
+            target_job_concurrency = CONCURRENCY);
     
     Replace the following:
     
@@ -95,14 +93,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To set the maximum concurrency target for a new reservation, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) :
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --target_job_concurrency=CONCURRENCY \
-    --reservation \
-    RESERVATION_NAME
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --target_job_concurrency=CONCURRENCY \
+        --reservation \
+        RESERVATION_NAME
 
 Replace the following:
 
@@ -163,11 +159,9 @@ To update the maximum concurrency target for an existing reservation, use the [`
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
-    SET OPTIONS (
-      target_job_concurrency = CONCURRENCY);
-    ```
+        ALTER RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
+        SET OPTIONS (
+          target_job_concurrency = CONCURRENCY);
     
     Replace the following:
     
@@ -184,14 +178,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update the maximum concurrency target for an existing reservation, run the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) :
 
-``` notranslate
-bq update \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --target_job_concurrency=CONCURRENCY \
-    --reservation \
-    RESERVATION_NAME
-```
+    bq update \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --target_job_concurrency=CONCURRENCY \
+        --reservation \
+        RESERVATION_NAME
 
 Replace the following:
 
@@ -210,46 +202,44 @@ To find out which queries are running and which are queued, look at the [`INFORM
 
 To view how many concurrent queries ran when the dynamic concurrency threshold was reached for each second over the last day, run the following query:
 
-``` notranslate
-SELECT
-  t1.period_start,
-  t1.job_count AS dynamic_concurrency_threshold
-FROM (
-  SELECT
-    period_start,
-    state,
-    COUNT(DISTINCT job_id) AS job_count
-  FROM
-    `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
-  WHERE
-    period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-    AND CURRENT_TIMESTAMP()
-    AND reservation_id = "RESERVATION_ID"
-  GROUP BY
-    period_start,
-    state) AS t1
-JOIN (
-  SELECT
-    period_start,
-    state,
-    COUNT(DISTINCT job_id) AS job_count
-  FROM
-    `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
-  WHERE
-    state = "PENDING"
-    AND period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-    AND CURRENT_TIMESTAMP()
-    AND reservation_id = "RESERVATION_ID"
-  GROUP BY
-    period_start,
-    state
-  HAVING
-    COUNT(DISTINCT job_id) > 0 ) AS t2
-ON
-  t1.period_start = t2.period_start
-WHERE
-  t1.state = "RUNNING";
-```
+    SELECT
+      t1.period_start,
+      t1.job_count AS dynamic_concurrency_threshold
+    FROM (
+      SELECT
+        period_start,
+        state,
+        COUNT(DISTINCT job_id) AS job_count
+      FROM
+        `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
+      WHERE
+        period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+        AND CURRENT_TIMESTAMP()
+        AND reservation_id = "RESERVATION_ID"
+      GROUP BY
+        period_start,
+        state) AS t1
+    JOIN (
+      SELECT
+        period_start,
+        state,
+        COUNT(DISTINCT job_id) AS job_count
+      FROM
+        `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
+      WHERE
+        state = "PENDING"
+        AND period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+        AND CURRENT_TIMESTAMP()
+        AND reservation_id = "RESERVATION_ID"
+      GROUP BY
+        period_start,
+        state
+      HAVING
+        COUNT(DISTINCT job_id) > 0 ) AS t2
+    ON
+      t1.period_start = t2.period_start
+    WHERE
+      t1.state = "RUNNING";
 
 Replace the following:
 

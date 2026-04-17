@@ -30,13 +30,11 @@ In the Google Cloud console, each session is assigned to an editor tab.
 
 Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
 
-``` notranslate
-bq query \
---nouse_legacy_sql \
---create_session
-[--location 'SESSION_LOCATION'] \
-'SQL_STATEMENT'
-```
+    bq query \
+    --nouse_legacy_sql \
+    --create_session
+    [--location 'SESSION_LOCATION'] \
+    'SQL_STATEMENT'
 
 where:
 
@@ -49,13 +47,11 @@ Your session ID is returned with the results of the query.
 
 Call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
 
-``` notranslate
-{
-  "query": "SQL_STATEMENT",
-  "createSession": true,
-  ["location": "SESSION_LOCATION"]
-}
-```
+    {
+      "query": "SQL_STATEMENT",
+      "createSession": true,
+      ["location": "SESSION_LOCATION"]
+    }
 
 where:
 
@@ -92,12 +88,10 @@ After you create a session, you can run queries in that session:
 
 Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
 
-``` notranslate
-bq query \
---nouse_legacy_sql \
---session_id=SESSION_ID \
-'SQL_STATEMENT'
-```
+    bq query \
+    --nouse_legacy_sql \
+    --session_id=SESSION_ID \
+    'SQL_STATEMENT'
 
 where:
 
@@ -119,15 +113,13 @@ After you've added the session ID to `.bigqueryrc` , you can omit the `--session
 
 Call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
 
-``` notranslate
-{
-  "query": "SQL_STATEMENT",
-  "connectionProperties": [{
-    "key": "session_id",
-    "value": "SESSION_ID"
-  }]
-}
-```
+    {
+      "query": "SQL_STATEMENT",
+      "connectionProperties": [{
+        "key": "session_id",
+        "value": "SESSION_ID"
+      }]
+    }
 
 where:
 
@@ -160,9 +152,7 @@ Do the following to terminate your session:
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CALL BQ.ABORT_SESSION();
-    ```
+        CALL BQ.ABORT_SESSION();
 
 3.  Click play\_circle **Run** .
 
@@ -174,9 +164,7 @@ You can terminate a session using its ID. You don't need to be in the session to
 
 [Get the session ID](https://docs.cloud.google.com/bigquery/docs/sessions#get-id) , and then run the following statement:
 
-``` notranslate
-CALL BQ.ABORT_SESSION(SESSION_ID);
-```
+    CALL BQ.ABORT_SESSION(SESSION_ID);
 
 Replace SESSION\_ID with the ID of the session to terminate.
 
@@ -249,9 +237,7 @@ To get a list of your three most recent sessions including the active and termin
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT  session_id,  MAX(creation_time) AS last_modified_timeFROM region-us.INFORMATION_SCHEMA.VIEWWHERE  session_id IS NOT NULL  AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)GROUP BY session_idORDER BY last_modified_time DESC;
-    ```
+        SELECT  session_id,  MAX(creation_time) AS last_modified_timeFROM region-us.INFORMATION_SCHEMA.VIEWWHERE  session_id IS NOT NULL  AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)GROUP BY session_idORDER BY last_modified_time DESC;
     
     Replace the following:
     
@@ -309,14 +295,12 @@ To view historical data for a specific session, first [get your session ID](http
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      region-us.INFORMATION_SCHEMA.VIEW
-    WHERE
-      session_info.session_id = 'SESSION_ID';
-    ```
+        SELECT
+          *
+        FROM
+          region-us.INFORMATION_SCHEMA.VIEW
+        WHERE
+          session_info.session_id = 'SESSION_ID';
     
     Replace the following:
     
@@ -338,15 +322,13 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The following returns the history for a session that has the session ID `CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0` . You can replace this session ID with your own.
 
-``` notranslate
-SELECT
-  creation_time, query
-FROM
-  region-us.INFORMATION_SCHEMA.JOBS_BY_USER
-WHERE
-  session_info.session_id = 'CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0'
-  AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY);
-```
+    SELECT
+      creation_time, query
+    FROM
+      region-us.INFORMATION_SCHEMA.JOBS_BY_USER
+    WHERE
+      session_info.session_id = 'CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0'
+      AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY);
 
 The result is similar to the following:
 

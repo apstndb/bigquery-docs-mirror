@@ -11,7 +11,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ROBUST_SCALER(numerical_expression [, quantile_range] [, with_median] [, with_quantile_range]) OVER()
 ```
 
@@ -32,16 +32,14 @@ ML.ROBUST_SCALER(numerical_expression [, quantile_range] [, with_median] [, with
 
 The following example centers a set of numerical expressions and then scales it to the range `[25, 75]` :
 
-``` notranslate
-SELECT f, ML.ROBUST_SCALER(f) OVER () AS output
-FROM
-  UNNEST([NULL, -3, 1, 2, 3, 4, 5]) AS f
-ORDER BY f;
-```
+    SELECT f, ML.ROBUST_SCALER(f) OVER () AS output
+    FROM
+      UNNEST([NULL, -3, 1, 2, 3, 4, 5]) AS f
+    ORDER BY f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +------+---------------------+
 |  f   |       output        |
 +------+---------------------+

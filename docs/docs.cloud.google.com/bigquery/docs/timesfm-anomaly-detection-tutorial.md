@@ -39,35 +39,33 @@ Follow these steps to detect anomalies with the TimesFM model:
 
 2.  In the query editor, paste in the following query and click **Run** , the query takes 1-2 minutes to complete:
     
-    ``` notranslate
-    WITH
-      bike_share_trips AS (
-        SELECT
-          TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips
-        FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
-        GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
-      )
-    SELECT *
-    FROM
-      AI.DETECT_ANOMALIES(
-        (
-          SELECT *
-          FROM bike_share_trips
-          WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
-        ),
-        (
-          SELECT *
-          FROM bike_share_trips
-          WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
-        ),
-        anomaly_prob_threshold => 0.95,
-        timestamp_col => 'trip_hour',
-        data_col => 'num_trips');
-    ```
+        WITH
+          bike_share_trips AS (
+            SELECT
+              TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips
+            FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
+            GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
+          )
+        SELECT *
+        FROM
+          AI.DETECT_ANOMALIES(
+            (
+              SELECT *
+              FROM bike_share_trips
+              WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
+            ),
+            (
+              SELECT *
+              FROM bike_share_trips
+              WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
+            ),
+            anomaly_prob_threshold => 0.95,
+            timestamp_col => 'trip_hour',
+            data_col => 'num_trips');
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-------------------------+------------------+------------+--------------------+---------------------+---------------------+---------------------------+
     | time_series_timestamp   | time_series_data | is_anomaly | lower_bound        | upper_bound         | anomaly_probability | ai_detect_anomalies_status|
     +-------------------------+------------------+------------+--------------------+---------------------+---------------------+---------------------------+
@@ -95,36 +93,34 @@ Follow these steps to detect anomalies with the TimesFM model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    WITH
-      bike_share_trips AS (
-        SELECT
-          TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips, subscriber_type
-        FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
-        GROUP BY TIMESTAMP_TRUNC(start_date, HOUR), subscriber_type
-      )
-    SELECT *
-    FROM
-      AI.DETECT_ANOMALIES(
-        (
-          SELECT *
-          FROM bike_share_trips
-          WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
-        ),
-        (
-          SELECT *
-          FROM bike_share_trips
-          WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
-        ),
-        anomaly_prob_threshold => 0.95,
-        timestamp_col => 'trip_hour',
-        data_col => 'num_trips',
-        id_cols => ['subscriber_type']);
-    ```
+        WITH
+          bike_share_trips AS (
+            SELECT
+              TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips, subscriber_type
+            FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
+            GROUP BY TIMESTAMP_TRUNC(start_date, HOUR), subscriber_type
+          )
+        SELECT *
+        FROM
+          AI.DETECT_ANOMALIES(
+            (
+              SELECT *
+              FROM bike_share_trips
+              WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
+            ),
+            (
+              SELECT *
+              FROM bike_share_trips
+              WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
+            ),
+            anomaly_prob_threshold => 0.95,
+            timestamp_col => 'trip_hour',
+            data_col => 'num_trips',
+            id_cols => ['subscriber_type']);
     
     The results look similar to the following:
     
-    ``` console
+    ```console
     +-----------------+-------------------------+------------------+------------+--------------------+---------------------+---------------------+---------------------------+
     | subscriber_type | time_series_timestamp   | time_series_data | is_anomaly | lower_bound        | upper_bound         | anomaly_probability | ai_detect_anomalies_status|
     +-----------------+-------------------------+------------------+------------+--------------------+---------------------+---------------------+---------------------------+

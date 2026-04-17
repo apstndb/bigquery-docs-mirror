@@ -63,15 +63,13 @@ To manually test a query string with `@run_time` and `@run_date` parameters befo
 
 The `@run_time` parameter is part of the query string in this example, which queries a public dataset named [`hacker_news.stories`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=hacker_news&page=dataset) .
 
-``` notranslate
-SELECT @run_time AS time,
-  title,
-  author,
-  text
-FROM `bigquery-public-data.hacker_news.stories`
-LIMIT
-  1000
-```
+    SELECT @run_time AS time,
+      title,
+      author,
+      text
+    FROM `bigquery-public-data.hacker_news.stories`
+    LIMIT
+      1000
 
 ### Destination table
 
@@ -358,12 +356,10 @@ For a description of the schedule syntax, see [Formatting the schedule](https://
 
 To create a scheduled query, add the options `destination_table` (or `target_dataset` ), `--schedule` , and `--display_name` to your `bq query` command.
 
-``` notranslate
-bq query \
---display_name=name \
---destination_table=table \
---schedule=interval
-```
+    bq query \
+    --display_name=name \
+    --destination_table=table \
+    --schedule=interval
 
 Replace the following:
 
@@ -433,14 +429,12 @@ Optional flags:
 
 <!-- end list -->
 
-``` notranslate
-bq mk \
---transfer_config \
---target_dataset=dataset \
---display_name=name \
---params='parameters' \
---data_source=data_source
-```
+    bq mk \
+    --transfer_config \
+    --target_dataset=dataset \
+    --display_name=name \
+    --params='parameters' \
+    --data_source=data_source
 
 Replace the following:
 
@@ -870,14 +864,12 @@ Optional flags:
 
 <!-- end list -->
 
-``` notranslate
-bq update \
---target_dataset=dataset \
---display_name=name \
---params='parameters'
---transfer_config \
-RESOURCE_NAME
-```
+    bq update \
+    --target_dataset=dataset \
+    --display_name=name \
+    --params='parameters'
+    --transfer_config \
+    RESOURCE_NAME
 
 Replace the following:
 
@@ -1202,13 +1194,11 @@ Enter the `bq mk` command and supply the transfer run flag `--transfer_run` . Th
 
 <!-- end list -->
 
-``` notranslate
-bq mk \
---transfer_run \
---start_time='start_time' \
---end_time='end_time' \
-resource_name
-```
+    bq mk \
+    --transfer_run \
+    --start_time='start_time' \
+    --end_time='end_time' \
+    resource_name
 
 Replace the following:
 

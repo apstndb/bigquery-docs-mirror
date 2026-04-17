@@ -12,17 +12,13 @@ Read more about the Cloud Client Libraries and the older Google API Client Libra
 
 ### C\#
 
-``` notranslate
-Install-Package Google.Cloud.BigQuery.Connection.V1 -Pre
-```
+    Install-Package Google.Cloud.BigQuery.Connection.V1 -Pre
 
 For more information, see [Setting Up a C\# Development Environment](https://docs.cloud.google.com/dotnet/docs/setup) .
 
 ### Go
 
-``` notranslate
-go get cloud.google.com/go/bigquery
-```
+    go get cloud.google.com/go/bigquery
 
 For more information, see [Setting Up a Go Development Environment](https://docs.cloud.google.com/go/docs/setup) .
 
@@ -57,33 +53,25 @@ For more information, see [Setting Up a Java Development Environment](https://do
 
 ### Node.js
 
-``` notranslate
-npm install @google-cloud/bigquery-connection
-```
+    npm install @google-cloud/bigquery-connection
 
 For more information, see [Setting Up a Node.js Development Environment](https://docs.cloud.google.com/nodejs/docs/setup) .
 
 ### PHP
 
-``` notranslate
-composer require google/cloud-bigquery-connection
-```
+    composer require google/cloud-bigquery-connection
 
 For more information, see [Using PHP on Google Cloud](https://docs.cloud.google.com/php/docs) .
 
 ### Python
 
-``` notranslate
-pip install --upgrade google-cloud-bigquery-connection
-```
+    pip install --upgrade google-cloud-bigquery-connection
 
 For more information, see [Setting Up a Python Development Environment](https://docs.cloud.google.com/python/docs/setup) .
 
 ### Ruby
 
-``` notranslate
-gem install google-cloud-bigquery-connection
-```
+    gem install google-cloud-bigquery-connection
 
 For more information, see [Setting Up a Ruby Development Environment](https://docs.cloud.google.com/ruby/docs/setup) .
 

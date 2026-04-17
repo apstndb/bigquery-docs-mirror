@@ -6,7 +6,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 [INPUT(field_name field_type, …)
@@ -144,16 +144,14 @@ The following example imports a XGBoost model into BigQuery as a BigQuery model.
 
 <!-- end list -->
 
-``` notranslate
-CREATE OR REPLACE
-  MODEL
-    `project_id.mydataset.mymodel`
-      INPUT(f1 float64, f2 float64, f3 float64, f4 float64)
-      OUTPUT(predicted_label float64)
-  OPTIONS (
-    MODEL_TYPE = 'XGBOOST',
-    MODEL_PATH = 'gs://bucket-name/xgboost-model/*')
-```
+    CREATE OR REPLACE
+      MODEL
+        `project_id.mydataset.mymodel`
+          INPUT(f1 float64, f2 float64, f3 float64, f4 float64)
+          OUTPUT(predicted_label float64)
+      OPTIONS (
+        MODEL_TYPE = 'XGBOOST',
+        MODEL_PATH = 'gs://bucket-name/xgboost-model/*')
 
 ### Import a model that already contains input and output columns
 
@@ -165,11 +163,9 @@ The following example imports a XGBoost model into BigQuery as a BigQuery model.
 
 <!-- end list -->
 
-``` notranslate
-CREATE OR REPLACE
-  MODEL
-    `project_id.mydataset.mymodel`
-  OPTIONS (
-    MODEL_TYPE = 'XGBOOST',
-    MODEL_PATH = 'gs://bucket-name/xgboost-model/*')
-```
+    CREATE OR REPLACE
+      MODEL
+        `project_id.mydataset.mymodel`
+      OPTIONS (
+        MODEL_TYPE = 'XGBOOST',
+        MODEL_PATH = 'gs://bucket-name/xgboost-model/*')

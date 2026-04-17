@@ -75,9 +75,7 @@ The following example shows how to create a VPC Service Controls perimeter that 
     
     To update an existing perimeter, use the [`gcloud access-context-manager perimeters update`](https://docs.cloud.google.com/sdk/gcloud/reference/access-context-manager/perimeters/update) command:
     
-    ``` wrap-code
-    gcloud access-context-manager perimeters update BIGQUERY_PERIMETER --set-ingress-policies=ingress.yaml
-    ```
+        gcloud access-context-manager perimeters update BIGQUERY_PERIMETER --set-ingress-policies=ingress.yaml
     
     Replace `  BIGQUERY_PERIMETER  ` with the ID of the perimeter protecting the BigQuery resource.
 
@@ -95,21 +93,19 @@ The following examples show how to selectively allow communication between the B
 
 1.  Allow the BigQuery project to access the Cloud Storage project by updating the egress rules for the perimeter around the Cloud Storage project:
     
-    ``` wrap-code
-    echo """
-    - egressFrom:
-        identityType: ANY_IDENTITY
-      egressTo:
-        operations:
-        - methodSelectors:
-          - method: '*'
-          serviceName: storage.googleapis.com
-        resources:
-        - projects/BIGQUERY_PROJECT_NUMBER
-    """ > egress.yaml
-    
-    gcloud access-context-manager perimeters update CLOUD_STORAGE_PERIMETER --policy=POLICY_NAME --set-egress-policies=egress.yaml
-    ```
+        echo """
+        - egressFrom:
+            identityType: ANY_IDENTITY
+          egressTo:
+            operations:
+            - methodSelectors:
+              - method: '*'
+              serviceName: storage.googleapis.com
+            resources:
+            - projects/BIGQUERY_PROJECT_NUMBER
+        """ > egress.yaml
+        
+        gcloud access-context-manager perimeters update CLOUD_STORAGE_PERIMETER --policy=POLICY_NAME --set-egress-policies=egress.yaml
     
     Replace the following:
     
@@ -119,21 +115,19 @@ The following examples show how to selectively allow communication between the B
 
 2.  Allow the Cloud Storage project to access the BigQuery project by updating the egress rules for the perimeter around the BigQuery project:
     
-    ``` wrap-code
-    echo """
-    - egressFrom:
-        identityType: ANY_IDENTITY
-      egressTo:
-        operations:
-        - methodSelectors:
-          - method: '*'
-          serviceName: storage.googleapis.com
-        resources:
-        - projects/CLOUD_STORAGE_PROJECT_NUMBER
-    """ > egress1.yaml
-    
-    gcloud access-context-manager perimeters update BIGQUERY_PERIMETER --policy=POLICY_NAME --set-egress-policies=egress1.yaml
-    ```
+        echo """
+        - egressFrom:
+            identityType: ANY_IDENTITY
+          egressTo:
+            operations:
+            - methodSelectors:
+              - method: '*'
+              serviceName: storage.googleapis.com
+            resources:
+            - projects/CLOUD_STORAGE_PROJECT_NUMBER
+        """ > egress1.yaml
+        
+        gcloud access-context-manager perimeters update BIGQUERY_PERIMETER --policy=POLICY_NAME --set-egress-policies=egress1.yaml
     
     Replace the following:
     

@@ -116,16 +116,14 @@ The following example uses the [`CREATE TABLE` statement](https://docs.cloud.goo
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.trips AS (
-      SELECT
-        bike_id,
-        start_time,
-        duration_minutes
-      FROM
-        bigquery-public-data.austin_bikeshare.bikeshare_trips
-    );
-    ```
+        CREATE TABLE mydataset.trips AS (
+          SELECT
+            bike_id,
+            start_time,
+            duration_minutes
+          FROM
+            bigquery-public-data.austin_bikeshare.bikeshare_trips
+        );
 
 3.  Click play\_circle **Run** .
 
@@ -149,11 +147,9 @@ For more information, see [Creating a new table from an existing table](https://
     
       - `--replace` : If the destination table exists, it is overwritten with the query results.
         
-        ``` notranslate
-        bq --location=location query \
-        --destination_table project_id:dataset.table \
-        --use_legacy_sql=false 'query'
-        ```
+            bq --location=location query \
+            --destination_table project_id:dataset.table \
+            --use_legacy_sql=false 'query'
         
         Replace the following:
     
@@ -175,56 +171,50 @@ For more information, see [Creating a new table from an existing table](https://
         
         Enter the following command to write query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
         
-        ``` notranslate
-        bq query \
-        --destination_table mydataset.mytable \
-        --use_legacy_sql=false \
-        'SELECT
-        name,
-        number
-        FROM
-        `bigquery-public-data`.usa_names.usa_1910_current
-        WHERE
-        gender = "M"
-        ORDER BY
-        number DESC'
-        ```
+            bq query \
+            --destination_table mydataset.mytable \
+            --use_legacy_sql=false \
+            'SELECT
+            name,
+            number
+            FROM
+            `bigquery-public-data`.usa_names.usa_1910_current
+            WHERE
+            gender = "M"
+            ORDER BY
+            number DESC'
         
         Enter the following command to use query results to overwrite a destination table named `mytable` in `mydataset` . The dataset is in your default project. The command uses the `--replace` flag to overwrite the destination table.
         
-        ``` notranslate
-        bq query \
-        --destination_table mydataset.mytable \
-        --replace \
-        --use_legacy_sql=false \
-        'SELECT
-        name,
-        number
-        FROM
-        `bigquery-public-data`.usa_names.usa_1910_current
-        WHERE
-        gender = "M"
-        ORDER BY
-        number DESC'
-        ```
+            bq query \
+            --destination_table mydataset.mytable \
+            --replace \
+            --use_legacy_sql=false \
+            'SELECT
+            name,
+            number
+            FROM
+            `bigquery-public-data`.usa_names.usa_1910_current
+            WHERE
+            gender = "M"
+            ORDER BY
+            number DESC'
         
         Enter the following command to append query results to a destination table named `mytable` in `mydataset` . The dataset is in `my-other-project` , not your default project. The command uses the `--append_table` flag to append the query results to the destination table.
         
-        ``` notranslate
-        bq query \
-        --append_table \
-        --use_legacy_sql=false \
-        --destination_table my-other-project:mydataset.mytable \
-        'SELECT
-        name,
-        number
-        FROM
-        `bigquery-public-data`.usa_names.usa_1910_current
-        WHERE
-        gender = "M"
-        ORDER BY
-        number DESC'
-        ```
+            bq query \
+            --append_table \
+            --use_legacy_sql=false \
+            --destination_table my-other-project:mydataset.mytable \
+            'SELECT
+            name,
+            number
+            FROM
+            `bigquery-public-data`.usa_names.usa_1910_current
+            WHERE
+            gender = "M"
+            ORDER BY
+            number DESC'
         
         The output for each of these examples looks like the following. For readability, some output is truncated.
         

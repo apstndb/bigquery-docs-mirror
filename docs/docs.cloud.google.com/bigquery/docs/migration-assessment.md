@@ -54,15 +54,11 @@ Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-too
 
 ### Bash
 
-``` notranslate
-sha256sum --check SHA256SUMS.txt
-```
+    sha256sum --check SHA256SUMS.txt
 
 ### Windows PowerShell
 
-``` notranslate
-(Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-```
+    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 
 Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
@@ -76,30 +72,26 @@ Use the extraction tool to extract logs and metadata from your Teradata data war
 
 Generate the metadata zip file:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector teradata \
-  --database DATABASES \
-  --driver path/terajdbc4.jar \
-  --host HOST \
-  --assessment \
-  --user USER \
-  --password PASSWORD
-```
+    dwh-migration-dumper \
+      --connector teradata \
+      --database DATABASES \
+      --driver path/terajdbc4.jar \
+      --host HOST \
+      --assessment \
+      --user USER \
+      --password PASSWORD
 
 **Note:** The `--database` flag is optional for the `teradata` connector. If omitted, then the metadata for all of the databases is extracted. This flag is only valid for the `teradata` connector and can't be used with `teradata-logs` .
 
 Generate the zip file containing query logs:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector teradata-logs \
-  --driver path/terajdbc4.jar \
-  --host HOST \
-  --assessment \
-  --user USER \
-  --password PASSWORD
-```
+    dwh-migration-dumper \
+      --connector teradata-logs \
+      --driver path/terajdbc4.jar \
+      --host HOST \
+      --assessment \
+      --user USER \
+      --password PASSWORD
 
 **Note:** The `--database` flag isn't used when extracting query logs with the `teradata-logs` connector. Query logs are always extracted for all databases.
 
@@ -124,53 +116,47 @@ For example:
 
 ### Bash
 
-``` notranslate
-dwh-migration-dumper \
-  --connector teradata-logs \
-  --driver path/terajdbc4.jar \
-  --host HOST \
-  --assessment \
-  --user USER \
-  --password PASSWORD \
-  -Dteradata-logs.query-logs-table=pdcrdata.QryLogV_hst \
-  -Dteradata-logs.sql-logs-table=pdcrdata.DBQLSqlTbl_hst \
-  -Dteradata-logs.log-date-column=LogDate \
-  -Dteradata-logs.utility-logs-table=pdcrdata.DBQLUtilityTbl_hst \
-  -Dteradata-logs.res-usage-scpu-table=pdcrdata.ResUsageScpu_hst \
-  -Dteradata-logs.res-usage-spma-table=pdcrdata.ResUsageSpma_hst
-```
+    dwh-migration-dumper \
+      --connector teradata-logs \
+      --driver path/terajdbc4.jar \
+      --host HOST \
+      --assessment \
+      --user USER \
+      --password PASSWORD \
+      -Dteradata-logs.query-logs-table=pdcrdata.QryLogV_hst \
+      -Dteradata-logs.sql-logs-table=pdcrdata.DBQLSqlTbl_hst \
+      -Dteradata-logs.log-date-column=LogDate \
+      -Dteradata-logs.utility-logs-table=pdcrdata.DBQLUtilityTbl_hst \
+      -Dteradata-logs.res-usage-scpu-table=pdcrdata.ResUsageScpu_hst \
+      -Dteradata-logs.res-usage-spma-table=pdcrdata.ResUsageSpma_hst
 
 ### Windows PowerShell
 
-``` notranslate
-dwh-migration-dumper `
-  --connector teradata-logs `
-  --driver path\terajdbc4.jar `
-  --host HOST `
-  --assessment `
-  --user USER `
-  --password PASSWORD `
-  "-Dteradata-logs.query-logs-table=pdcrdata.QryLogV_hst" `
-  "-Dteradata-logs.sql-logs-table=pdcrdata.DBQLSqlTbl_hst" `
-  "-Dteradata-logs.log-date-column=LogDate" `
-  "-Dteradata-logs.utility-logs-table=pdcrdata.DBQLUtilityTbl_hst" `
-  "-Dteradata-logs.res-usage-scpu-table=pdcrdata.ResUsageScpu_hst" `
-  "-Dteradata-logs.res-usage-spma-table=pdcrdata.ResUsageSpma_hst"
-```
+    dwh-migration-dumper `
+      --connector teradata-logs `
+      --driver path\terajdbc4.jar `
+      --host HOST `
+      --assessment `
+      --user USER `
+      --password PASSWORD `
+      "-Dteradata-logs.query-logs-table=pdcrdata.QryLogV_hst" `
+      "-Dteradata-logs.sql-logs-table=pdcrdata.DBQLSqlTbl_hst" `
+      "-Dteradata-logs.log-date-column=LogDate" `
+      "-Dteradata-logs.utility-logs-table=pdcrdata.DBQLUtilityTbl_hst" `
+      "-Dteradata-logs.res-usage-scpu-table=pdcrdata.ResUsageScpu_hst" `
+      "-Dteradata-logs.res-usage-spma-table=pdcrdata.ResUsageSpma_hst"
 
 By default, the `dwh-migration-dumper` tool extracts the last seven days of query logs. Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You can specify a custom time range by using the `--query-log-start` and `--query-log-end` flags. For example:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector teradata-logs \
-  --driver path/terajdbc4.jar \
-  --host HOST \
-  --assessment \
-  --user USER \
-  --password PASSWORD \
-  --query-log-start "2023-01-01 00:00:00" \
-  --query-log-end "2023-01-15 00:00:00"
-```
+    dwh-migration-dumper \
+      --connector teradata-logs \
+      --driver path/terajdbc4.jar \
+      --host HOST \
+      --assessment \
+      --user USER \
+      --password PASSWORD \
+      --query-log-start "2023-01-01 00:00:00" \
+      --query-log-end "2023-01-15 00:00:00"
 
 You can also generate multiple zip files containing query logs covering different periods and provide all of them for assessment.
 
@@ -192,15 +178,11 @@ Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-too
 
 ### Bash
 
-``` notranslate
-sha256sum --check SHA256SUMS.txt
-```
+    sha256sum --check SHA256SUMS.txt
 
 ### Windows PowerShell
 
-``` notranslate
-(Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-```
+    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 
 Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
@@ -214,29 +196,25 @@ Use the `dwh-migration-dumper` tool to extract logs and metadata from your Amazo
 
 Generate the metadata zip file:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector redshift \
-  --database DATABASE \
-  --driver PATH/redshift-jdbc42-VERSION.jar \
-  --host host.region.redshift.amazonaws.com \
-  --assessment \
-  --user USER \
-  --iam-profile IAM_PROFILE_NAME
-```
+    dwh-migration-dumper \
+      --connector redshift \
+      --database DATABASE \
+      --driver PATH/redshift-jdbc42-VERSION.jar \
+      --host host.region.redshift.amazonaws.com \
+      --assessment \
+      --user USER \
+      --iam-profile IAM_PROFILE_NAME
 
 Generate the zip file containing query logs:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector redshift-raw-logs \
-  --database DATABASE \
-  --driver PATH/redshift-jdbc42-VERSION.jar \
-  --host host.region.redshift.amazonaws.com \
-  --assessment \
-  --user USER \
-  --iam-profile IAM_PROFILE_NAME
-```
+    dwh-migration-dumper \
+      --connector redshift-raw-logs \
+      --database DATABASE \
+      --driver PATH/redshift-jdbc42-VERSION.jar \
+      --host host.region.redshift.amazonaws.com \
+      --assessment \
+      --user USER \
+      --iam-profile IAM_PROFILE_NAME
 
 Replace the following:
 
@@ -252,18 +230,16 @@ By default, the `dwh-migration-dumper` tool extracts the last seven days of quer
 
 Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You might need to run the extraction tool a few times over the course of two weeks to get the best results. You can specify a custom range by using the `--query-log-start` and `--query-log-end` flags. For example:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector redshift-raw-logs \
-  --database DATABASE \
-  --driver PATH/redshift-jdbc42-VERSION.jar \
-  --host host.region.redshift.amazonaws.com \
-  --assessment \
-  --user USER \
-  --iam-profile IAM_PROFILE_NAME \
-  --query-log-start "2023-01-01 00:00:00" \
-  --query-log-end "2023-01-02 00:00:00"
-```
+    dwh-migration-dumper \
+      --connector redshift-raw-logs \
+      --database DATABASE \
+      --driver PATH/redshift-jdbc42-VERSION.jar \
+      --host host.region.redshift.amazonaws.com \
+      --assessment \
+      --user USER \
+      --iam-profile IAM_PROFILE_NAME \
+      --query-log-start "2023-01-01 00:00:00" \
+      --query-log-end "2023-01-02 00:00:00"
 
 You can also generate multiple zip files containing query logs covering different periods and provide all of them for assessment.
 
@@ -291,29 +267,25 @@ Use the `dwh-migration-dumper` tool to extract usage logs and metadata from your
 
 Generate the metadata zip file:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector redshift \
-  --database DATABASE \
-  --driver PATH/redshift-jdbc42-VERSION.jar \
-  --host host.region.redshift-serverless.amazonaws.com \
-  --assessment \
-  --user USER \
-  --iam-profile IAM_PROFILE_NAME
-```
+    dwh-migration-dumper \
+      --connector redshift \
+      --database DATABASE \
+      --driver PATH/redshift-jdbc42-VERSION.jar \
+      --host host.region.redshift-serverless.amazonaws.com \
+      --assessment \
+      --user USER \
+      --iam-profile IAM_PROFILE_NAME
 
 Generate the zip file containing query logs:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector redshift-serverless-logs \
-  --database DATABASE \
-  --driver PATH/redshift-jdbc42-VERSION.jar \
-  --host host.region.redshift-serverless.amazonaws.com \
-  --assessment \
-  --user USER \
-  --iam-profile IAM_PROFILE_NAME
-```
+    dwh-migration-dumper \
+      --connector redshift-serverless-logs \
+      --database DATABASE \
+      --driver PATH/redshift-jdbc42-VERSION.jar \
+      --host host.region.redshift-serverless.amazonaws.com \
+      --assessment \
+      --user USER \
+      --iam-profile IAM_PROFILE_NAME
 
 Replace the following:
 
@@ -347,15 +319,11 @@ Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-too
 
 ### Bash
 
-``` notranslate
-sha256sum --check SHA256SUMS.txt
-```
+    sha256sum --check SHA256SUMS.txt
 
 ### Windows PowerShell
 
-``` notranslate
-(Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-```
+    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 
 Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
@@ -369,33 +337,29 @@ Use the `dwh-migration-dumper` tool to extract logs and metadata from your Snowf
 
 Generate the metadata zip file:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector snowflake \
-  --host HOST_NAME \
-  --user USER_NAME \
-  --role ROLE_NAME \
-  --warehouse WAREHOUSE \
-  --assessment \
-  --private-key-file PRIVATE_KEY_PATH \
-  --private-key-password PRIVATE_KEY_PASSWORD
-```
+    dwh-migration-dumper \
+      --connector snowflake \
+      --host HOST_NAME \
+      --user USER_NAME \
+      --role ROLE_NAME \
+      --warehouse WAREHOUSE \
+      --assessment \
+      --private-key-file PRIVATE_KEY_PATH \
+      --private-key-password PRIVATE_KEY_PASSWORD
 
 Generate the zip file containing query logs:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector snowflake-logs \
-  --host HOST_NAME \
-  --user USER_NAME \
-  --role ROLE_NAME \
-  --warehouse WAREHOUSE \
-  --query-log-start STARTING_DATE \
-  --query-log-end ENDING_DATE \
-  --assessment \
-  --private-key-file PRIVATE_KEY_PATH \
-  --private-key-password PRIVATE_KEY_PASSWORD
-```
+    dwh-migration-dumper \
+      --connector snowflake-logs \
+      --host HOST_NAME \
+      --user USER_NAME \
+      --role ROLE_NAME \
+      --warehouse WAREHOUSE \
+      --query-log-start STARTING_DATE \
+      --query-log-end ENDING_DATE \
+      --assessment \
+      --private-key-file PRIVATE_KEY_PATH \
+      --private-key-password PRIVATE_KEY_PASSWORD
 
 Replace the following:
 
@@ -435,9 +399,7 @@ Download the [`dwh-migration-dumper` command-line extraction tool](https://githu
 
 Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
 
-``` notranslate
-sha256sum --check SHA256SUMS.txt
-```
+    sha256sum --check SHA256SUMS.txt
 
 For details about how to use the `dwh-migration-dumper` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
@@ -447,17 +409,15 @@ For multitenant databases, the `dwh-migration-dumper` tool must be executed in t
 
 Generate the metadata zip file:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector oracle-stats \
-  --host HOST_NAME \
-  --port PORT \
-  --oracle-service SERVICE_NAME \
-  --assessment \
-  --driver JDBC_DRIVER_PATH \
-  --user USER_NAME \
-  --password
-```
+    dwh-migration-dumper \
+      --connector oracle-stats \
+      --host HOST_NAME \
+      --port PORT \
+      --oracle-service SERVICE_NAME \
+      --assessment \
+      --driver JDBC_DRIVER_PATH \
+      --user USER_NAME \
+      --password
 
 Replace the following:
 
@@ -491,7 +451,7 @@ You must have the following to extract metadata from Cloudera:
 
 3.  In your command-line environment, verify zip correctness:
     
-    ``` notranslate
+    ``` 
       sha256sum --check SHA256SUMS.txt
       
     ```
@@ -500,19 +460,17 @@ You must have the following to extract metadata from Cloudera:
 
 4.  Use the `dwh-migration-dumper` tool to extract metadata and performance statistics to the zip file:
     
-    ``` notranslate
-    dwh-migration-dumper \
-        --connector cloudera-manager \
-        --user USER_NAME \
-        --password PASSWORD \
-        --url URL_PATH \
-        --yarn-application-types "APP_TYPES" \
-        --spark-history-service-names "SPARK_HISTORY_SERVICE_NAMES" \
-        --pagination-page-size PAGE_SIZE \
-        --start-date START_DATE \
-        --end-date END_DATE \
-        --assessment
-    ```
+        dwh-migration-dumper \
+            --connector cloudera-manager \
+            --user USER_NAME \
+            --password PASSWORD \
+            --url URL_PATH \
+            --yarn-application-types "APP_TYPES" \
+            --spark-history-service-names "SPARK_HISTORY_SERVICE_NAMES" \
+            --pagination-page-size PAGE_SIZE \
+            --start-date START_DATE \
+            --end-date END_DATE \
+            --assessment
     
     Replace the following:
     
@@ -531,13 +489,11 @@ If you use Oozie in your Cloudera cluster, you can dump Oozie job history with t
 
 For Kerberos authentication, run the following:
 
-``` notranslate
-kinit
-dwh-migration-dumper \
-    --connector oozie \
-    --url URL_PATH \
-    --assessment
-```
+    kinit
+    dwh-migration-dumper \
+        --connector oozie \
+        --url URL_PATH \
+        --assessment
 
 Replace the following:
 
@@ -545,14 +501,12 @@ Replace the following:
 
 For basic authentication, run the following:
 
-``` notranslate
-dwh-migration-dumper \
-    --connector oozie \
-    --user USER_NAME \
-    --password PASSWORD \
-    --url URL_PATH \
-    --assessment
-```
+    dwh-migration-dumper \
+        --connector oozie \
+        --user USER_NAME \
+        --password PASSWORD \
+        --url URL_PATH \
+        --assessment
 
 Replace the following:
 
@@ -564,17 +518,15 @@ Replace the following:
 
 If you use Airflow in your Cloudera cluster, you can dump DAGs history with the Airflow connector:
 
-``` notranslate
-dwh-migration-dumper \
-    --connector airflow \
-    --user USER_NAME \
-    --password PASSWORD \
-    --url URL \
-    --driver "DRIVER_PATH" \
-    --start-date START_DATE \
-    --end-date END_DATE \
-    --assessment
-```
+    dwh-migration-dumper \
+        --connector airflow \
+        --user USER_NAME \
+        --password PASSWORD \
+        --url URL \
+        --driver "DRIVER_PATH" \
+        --start-date START_DATE \
+        --end-date END_DATE \
+        --assessment
 
 Replace the following:
 
@@ -614,15 +566,11 @@ Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-too
 
 ### Bash
 
-``` notranslate
-sha256sum --check SHA256SUMS.txt
-```
+    sha256sum --check SHA256SUMS.txt
 
 ### Windows PowerShell
 
-``` notranslate
-(Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-```
+    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 
 Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
 
@@ -638,30 +586,26 @@ Use the `dwh-migration-dumper` tool to generate metadata from your Hive data war
 
 To generate the metadata zip file, run the following command on a machine that has access to the source data warehouse:
 
-``` notranslate
-dwh-migration-dumper \
-  --connector hiveql \
-  --database DATABASES \
-  --host hive.cluster.host \
-  --port 9083 \
-  --assessment
-```
+    dwh-migration-dumper \
+      --connector hiveql \
+      --database DATABASES \
+      --host hive.cluster.host \
+      --port 9083 \
+      --assessment
 
 #### With Kerberos Authentication
 
 To authenticate to the metastore, sign in as a user that has access to the Apache Hive metastore and generate a Kerberos ticket. Then, generate the metadata zip file with the following command:
 
-``` notranslate
-JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
-  dwh-migration-dumper \
-  --connector hiveql \
-  --database DATABASES \
-  --host hive.cluster.host \
-  --port 9083 \
-  --hive-kerberos-url PRINCIPAL/HOST \
-  -Dhiveql.rpc.protection=hadoop.rpc.protection \
-  --assessment
-```
+    JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
+      dwh-migration-dumper \
+      --connector hiveql \
+      --database DATABASES \
+      --host hive.cluster.host \
+      --port 9083 \
+      --hive-kerberos-url PRINCIPAL/HOST \
+      -Dhiveql.rpc.protection=hadoop.rpc.protection \
+      --assessment
 
 Replace the following:
 
@@ -759,7 +703,7 @@ Alternatively, you can also run the `pmrep` command to export your object files 
 
 <!-- end list -->
 
-``` notranslate
+``` 
   pmrep connect -r `REPOSITORY_NAME` -d `DOMAIN_NAME` -n `USERNAME` -x `PASSWORD`
 ```
 
@@ -776,7 +720,7 @@ Replace the following:
 
 <!-- end list -->
 
-``` notranslate
+``` 
   pmrep objectexport -n `OBJECT_NAME` -o `OBJECT_TYPE` -f `FOLDER_NAME` -u `OUTPUT_FILE_NAME.xml`
 ```
 
@@ -881,7 +825,7 @@ To request feedback or support for this feature, send email to <bq-edw-migration
 
 Upload a zip file containing your Informatica XML repository objects to a Cloud Storage bucket. This zip file must also include a `compilerworks-metadata.yaml` file that contains the following:
 
-``` notranslate
+``` 
   product:
     arguments: "ConnectorArguments{connector=informatica, assessment=true}"
 ```
@@ -949,17 +893,15 @@ To share the Looker Studio report with a user, you need to grant the following r
 
 The following example shows you how to grant the required roles to a user that you want to share the report with:
 
-``` notranslate
-gcloud projects add-iam-policy-binding \
-  PROJECT \
-  --member=user:REPORT_VIEWER_EMAIL \
-  --role=roles/bigquery.dataViewer
-
-gcloud projects add-iam-policy-binding \
-  PROJECT \
-  --member=user:REPORT_VIEWER_EMAIL \
-  --role=roles/bigquery.jobUser
-```
+    gcloud projects add-iam-policy-binding \
+      PROJECT \
+      --member=user:REPORT_VIEWER_EMAIL \
+      --role=roles/bigquery.dataViewer
+    
+    gcloud projects add-iam-policy-binding \
+      PROJECT \
+      --member=user:REPORT_VIEWER_EMAIL \
+      --role=roles/bigquery.jobUser
 
 Replace the following:
 
@@ -970,55 +912,53 @@ Replace the following:
 
 We recommend that you create and set up a new project to run your migration assessment. You can use the following script to create a new Google Cloud project with all the necessary permissions and role assignments to run the assessment:
 
-``` notranslate
-#!/bin/bash
-
-# --- Configuration ---
-# Replace with your desired project ID, the email of the user that runs
-# the assessment, and your organization ID.
-export PROJECT_ID="PROJECT_ID"
-export ASSESSMENT_RUNNER_EMAIL="RUNNER_EMAIL"
-export ORGANIZATION_ID="ORGANIZATION_ID"
-
-
-# --- Project Creation ---
-echo "Creating project: $PROJECT_ID"
-gcloud projects create $PROJECT_ID --organization=$ORGANIZATION_ID
-
-# Set the new project as the default for subsequent gcloud commands
-gcloud config set project $PROJECT_ID
-
-# --- IAM Role Creation ---
-echo "Creating custom role 'BQMSrole' in project $PROJECT_ID"
-gcloud iam roles create BQMSrole \
-  --project=$PROJECT_ID \
-  --title=BQMSrole \
-  --permissions=bigquerymigration.subtasks.get,bigquerymigration.subtasks.list,bigquerymigration.workflows.create,bigquerymigration.workflows.get,bigquerymigration.workflows.list,bigquerymigration.workflows.delete,resourcemanager.projects.update,resourcemanager.projects.get,serviceusage.services.enable,serviceusage.services.get,storage.objects.get,storage.objects.list,storage.objects.create,storage.objects.delete,storage.objects.update,bigquery.datasets.get,bigquery.datasets.update,bigquery.datasets.create,bigquery.datasets.delete,bigquery.tables.get,bigquery.tables.create,bigquery.tables.updateData,bigquery.tables.getData,bigquery.tables.list,bigquery.jobs.create,bigquery.jobs.update,bigquery.jobs.list,bigquery.jobs.delete,storage.buckets.list,storage.buckets.get
-
-# --- IAM Policy Binding for Assessment Runner ---
-echo "Granting IAM roles to the assessment runner: $ASSESSMENT_RUNNER_EMAIL"
-
-# Grant the custom BQMSrole to the assessment runner user
-gcloud projects add-iam-policy-binding \
-  $PROJECT_ID \
-  --member=user:$ASSESSMENT_RUNNER_EMAIL \
-  --role=projects/$PROJECT_ID/roles/BQMSrole
-
-# Grant the BigQuery Data Viewer role to the assessment runner user
-gcloud projects add-iam-policy-binding \
-  $PROJECT_ID \
-  --member=user:$ASSESSMENT_RUNNER_EMAIL \
-  --role=roles/bigquery.dataViewer
-
-# Grant the BigQuery Job User role to the assessment runner user
-gcloud projects add-iam-policy-binding \
-  $PROJECT_ID \
-  --member=user:$ASSESSMENT_RUNNER_EMAIL \
-  --role=roles/bigquery.jobUser
-
-echo "Project $PROJECT_ID created and configured for BigQuery Migration Assessment."
-echo "Assessment Runner: $ASSESSMENT_RUNNER_EMAIL"
-```
+    #!/bin/bash
+    
+    # --- Configuration ---
+    # Replace with your desired project ID, the email of the user that runs
+    # the assessment, and your organization ID.
+    export PROJECT_ID="PROJECT_ID"
+    export ASSESSMENT_RUNNER_EMAIL="RUNNER_EMAIL"
+    export ORGANIZATION_ID="ORGANIZATION_ID"
+    
+    
+    # --- Project Creation ---
+    echo "Creating project: $PROJECT_ID"
+    gcloud projects create $PROJECT_ID --organization=$ORGANIZATION_ID
+    
+    # Set the new project as the default for subsequent gcloud commands
+    gcloud config set project $PROJECT_ID
+    
+    # --- IAM Role Creation ---
+    echo "Creating custom role 'BQMSrole' in project $PROJECT_ID"
+    gcloud iam roles create BQMSrole \
+      --project=$PROJECT_ID \
+      --title=BQMSrole \
+      --permissions=bigquerymigration.subtasks.get,bigquerymigration.subtasks.list,bigquerymigration.workflows.create,bigquerymigration.workflows.get,bigquerymigration.workflows.list,bigquerymigration.workflows.delete,resourcemanager.projects.update,resourcemanager.projects.get,serviceusage.services.enable,serviceusage.services.get,storage.objects.get,storage.objects.list,storage.objects.create,storage.objects.delete,storage.objects.update,bigquery.datasets.get,bigquery.datasets.update,bigquery.datasets.create,bigquery.datasets.delete,bigquery.tables.get,bigquery.tables.create,bigquery.tables.updateData,bigquery.tables.getData,bigquery.tables.list,bigquery.jobs.create,bigquery.jobs.update,bigquery.jobs.list,bigquery.jobs.delete,storage.buckets.list,storage.buckets.get
+    
+    # --- IAM Policy Binding for Assessment Runner ---
+    echo "Granting IAM roles to the assessment runner: $ASSESSMENT_RUNNER_EMAIL"
+    
+    # Grant the custom BQMSrole to the assessment runner user
+    gcloud projects add-iam-policy-binding \
+      $PROJECT_ID \
+      --member=user:$ASSESSMENT_RUNNER_EMAIL \
+      --role=projects/$PROJECT_ID/roles/BQMSrole
+    
+    # Grant the BigQuery Data Viewer role to the assessment runner user
+    gcloud projects add-iam-policy-binding \
+      $PROJECT_ID \
+      --member=user:$ASSESSMENT_RUNNER_EMAIL \
+      --role=roles/bigquery.dataViewer
+    
+    # Grant the BigQuery Job User role to the assessment runner user
+    gcloud projects add-iam-policy-binding \
+      $PROJECT_ID \
+      --member=user:$ASSESSMENT_RUNNER_EMAIL \
+      --role=roles/bigquery.jobUser
+    
+    echo "Project $PROJECT_ID created and configured for BigQuery Migration Assessment."
+    echo "Assessment Runner: $ASSESSMENT_RUNNER_EMAIL"
 
 Replace the following:
 
@@ -1638,7 +1578,7 @@ Although the Looker Studio reports are the most convenient way to view the asses
 
 The following example gets the total number of unique queries, the number of queries that failed translation, and the percentage of unique queries that failed translation.
 
-``` notranslate
+``` 
   SELECT
     QueryCount.v AS QueryCount,
     ErrorCount.v as ErrorCount,

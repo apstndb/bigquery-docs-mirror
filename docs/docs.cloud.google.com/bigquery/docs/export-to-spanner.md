@@ -120,9 +120,7 @@ You can use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery
 
 The following example exports selected fields from a table that's named `mydataset.table1` :
 
-``` notranslate
-EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME" }""")AS SELECT * FROM mydataset.table1;
-```
+    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME" }""")AS SELECT * FROM mydataset.table1;
 
 Replace the following:
 
@@ -181,14 +179,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -204,10 +200,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -221,19 +215,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -355,7 +347,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -453,9 +445,7 @@ To grant access to database-level roles for the service account, do the followin
 
 With the connection created and the appropriate access granted to it, you can run the export using the `CLOUD_RESOURCE` connection. The following example shows an `EXPORT` command that exports with a `CLOUD_RESOURCE` connection.
 
-``` notranslate
-EXPORT DATA WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_NAME` OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "SPANNER_TABLE_NAME" }""")AS SELECT * FROM my_bq_dataset.table1;
-```
+    EXPORT DATA WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_NAME` OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "SPANNER_TABLE_NAME" }""")AS SELECT * FROM my_bq_dataset.table1;
 
 Replace the following:
 
@@ -482,9 +472,7 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
     
     The following example shows a Spanner export command set to `HIGH` priority:
     
-    ``` notranslate
-    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "LOW" }""")
-    ```
+        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "LOW" }""")
 
   - Avoid ordering the query results. If the result set contains all primary key columns, the exporter automatically sorts the primary keys of the destination table to streamline writes and minimize contention.
     
@@ -492,31 +480,25 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
     
     For example, in the following Spanner schema, `SaleYear` and `SaleMonth` are generated columns that make up the beginning of the Spanner primary key:
     
-    ``` notranslate
-    CREATE TABLE Sales (
-      SaleId STRING(36) NOT NULL,
-      ProductId INT64 NOT NULL,
-      SaleTimestamp TIMESTAMP NOT NULL,
-      Amount FLOAT64,
-      -- Generated columns
-      SaleYear INT64 AS (EXTRACT(YEAR FROM SaleTimestamp)) STORED,
-      SaleMonth INT64 AS (EXTRACT(MONTH FROM SaleTimestamp)) STORED,
-    ) PRIMARY KEY (SaleYear, SaleMonth, SaleId);
-    ```
+        CREATE TABLE Sales (
+          SaleId STRING(36) NOT NULL,
+          ProductId INT64 NOT NULL,
+          SaleTimestamp TIMESTAMP NOT NULL,
+          Amount FLOAT64,
+          -- Generated columns
+          SaleYear INT64 AS (EXTRACT(YEAR FROM SaleTimestamp)) STORED,
+          SaleMonth INT64 AS (EXTRACT(MONTH FROM SaleTimestamp)) STORED,
+        ) PRIMARY KEY (SaleYear, SaleMonth, SaleId);
     
     When you export data from BigQuery to a Spanner table with generated columns used in the primary key, it is recommended, but not required, to include the expressions for these generated columns in your `EXPORT DATA` query. This lets BigQuery pre-sort the data correctly, which is critical for efficient batching and writing to Spanner. The values for the generated columns in the `EXPORT DATA` statement aren't committed in Spanner, because they are auto-generated by Spanner, but they are used to optimize the export.
     
     The following example exports data to a Spanner `Sales` table whose primary key uses generated columns. To optimize write performance, the query includes `EXTRACT` expressions that match the generated `SaleYear` and `SaleMonth` columns, letting BigQuery pre-sort the data before export:
     
-    ``` notranslate
-    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "Sales" }""")AS SELECT  s.SaleId,  s.ProductId,  s.SaleTimestamp,  s.Amount,  -- Add expressions that match the generated columns in the Spanner PK  EXTRACT(YEAR FROM s.SaleTimestamp) AS SaleYear,  EXTRACT(MONTH FROM s.SaleTimestamp) AS SaleMonthFROM my_dataset.sales_export AS s;
-    ```
+        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "Sales" }""")AS SELECT  s.SaleId,  s.ProductId,  s.SaleTimestamp,  s.Amount,  -- Add expressions that match the generated columns in the Spanner PK  EXTRACT(YEAR FROM s.SaleTimestamp) AS SaleYear,  EXTRACT(MONTH FROM s.SaleTimestamp) AS SaleMonthFROM my_dataset.sales_export AS s;
 
   - To prevent long running jobs, export data by partition. Shard your BigQuery data using a partition key, such as a timestamp in your query:
     
-    ``` notranslate
-    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "MEDIUM" }""")AS SELECT *FROM 'mydataset.table1' dWHEREd.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' ANDd.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
-    ```
+        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "MEDIUM" }""")AS SELECT *FROM 'mydataset.table1' dWHEREd.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' ANDd.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
     
     This lets the query complete within the 6-hour job runtime. For more information about these limits, see the [query job limits](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
 

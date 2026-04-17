@@ -11,7 +11,7 @@ After you create the remote model, you can use one of the following functions to
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}

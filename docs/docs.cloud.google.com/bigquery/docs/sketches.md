@@ -17,54 +17,52 @@ A solution is to store sketches in the table instead. Each sketch is an approxim
 
 For example, the following query uses [HLL++](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_hll) and [KLL](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_kll) sketches to estimate distinct users and median visit duration for YouTube (Product A) and Google Maps (Product B):
 
-``` notranslate
--- Build sketches for YouTube stats.
-CREATE TABLE user.YOUTUBE_ACCESS_STATS
-AS
-SELECT
-  HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
-  KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
-  hour_of_day
-FROM YOUTUBE_ACCESS_LOG()
-GROUP BY hour_of_day;
-
--- Build sketches for Maps stats.
-CREATE TABLE user.MAPS_ACCESS_STATS
-AS
-SELECT
-  HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
-  KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
-  hour_of_day
-FROM MAPS_ACCESS_LOG()
-GROUP BY hour_of_day;
-
--- Query YouTube hourly stats.
-SELECT
-  HLL_COUNT.EXTRACT(distinct_users_sketch) AS distinct_users,
-  KLL_QUANTILES.EXTRACT_POINT_INT64(visit_duration_ms_sketch, 0.5)
-  AS median_visit_duration, hour_of_day
-FROM user.YOUTUBE_ACCESS_STATS;
-
--- Query YouTube daily stats.
-SELECT
-  HLL_COUNT.MERGE(distinct_users_sketch),
-  KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
-  AS median_visit_duration, date
-FROM user.YOUTUBE_ACCESS_STATS
-GROUP BY date;
-
--- Query total stats across YouTube and Maps.
-SELECT
-  HLL_COUNT.MERGE(distinct_users_sketch) AS unique_users_all_services,
-  KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
-    AS median_visit_duration_all_services,
-FROM
-  (
-    SELECT * FROM user.YOUTUBE_ACCESS_STATS
-    UNION ALL
-    SELECT * FROM user.MAPS_ACCESS_STATS
-  );
-```
+    -- Build sketches for YouTube stats.
+    CREATE TABLE user.YOUTUBE_ACCESS_STATS
+    AS
+    SELECT
+      HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
+      KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
+      hour_of_day
+    FROM YOUTUBE_ACCESS_LOG()
+    GROUP BY hour_of_day;
+    
+    -- Build sketches for Maps stats.
+    CREATE TABLE user.MAPS_ACCESS_STATS
+    AS
+    SELECT
+      HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
+      KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
+      hour_of_day
+    FROM MAPS_ACCESS_LOG()
+    GROUP BY hour_of_day;
+    
+    -- Query YouTube hourly stats.
+    SELECT
+      HLL_COUNT.EXTRACT(distinct_users_sketch) AS distinct_users,
+      KLL_QUANTILES.EXTRACT_POINT_INT64(visit_duration_ms_sketch, 0.5)
+      AS median_visit_duration, hour_of_day
+    FROM user.YOUTUBE_ACCESS_STATS;
+    
+    -- Query YouTube daily stats.
+    SELECT
+      HLL_COUNT.MERGE(distinct_users_sketch),
+      KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
+      AS median_visit_duration, date
+    FROM user.YOUTUBE_ACCESS_STATS
+    GROUP BY date;
+    
+    -- Query total stats across YouTube and Maps.
+    SELECT
+      HLL_COUNT.MERGE(distinct_users_sketch) AS unique_users_all_services,
+      KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
+        AS median_visit_duration_all_services,
+    FROM
+      (
+        SELECT * FROM user.YOUTUBE_ACCESS_STATS
+        UNION ALL
+        SELECT * FROM user.MAPS_ACCESS_STATS
+      );
 
 Because a sketch has lossy compression of the original data, it introduces a statistical error that's represented by an error bound or confidence interval (CI). For most applications, this uncertainty is small. For example, a typical cardinality-counting sketch has a relative error of about 1% in 95% of all cases. A sketch trades some accuracy, or *precision* , for faster and less expensive computations, and less storage.
 

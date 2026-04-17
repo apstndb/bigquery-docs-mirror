@@ -73,15 +73,11 @@ You can also grant `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` p
 
   - Run the following command to get the equivalent Unix epoch time by passing the UTC timestamp:
     
-    ``` notranslate
-    date -d '2023-08-04 16:00:34.456789Z' +%s000
-    ```
+        date -d '2023-08-04 16:00:34.456789Z' +%s000
 
   - Replace the UNIX epoch time `1691164834000` received from the previous command in the bq command-line tool. Run the following command to restore a copy of the deleted table `deletedTableID` in another table `restoredTable` , within the same dataset `myDatasetID` :
     
-    ``` notranslate
-    bq cp myProjectID:myDatasetID.deletedTableID@1691164834000 myProjectID:myDatasetID.restoredTable
-    ```
+        bq cp myProjectID:myDatasetID.deletedTableID@1691164834000 myProjectID:myDatasetID.restoredTable
 
 ## Fail-safe
 

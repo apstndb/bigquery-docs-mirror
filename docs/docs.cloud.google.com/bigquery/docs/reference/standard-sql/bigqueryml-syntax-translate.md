@@ -4,7 +4,7 @@ This document describes the `ML.TRANSLATE` function, which lets you translate te
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.TRANSLATE(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -73,21 +73,17 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 The following example applies text translation on the column name `text_content` on the bq table `mybqtable` in `mydataset` to Chinese.
 
-``` notranslate
-# Create model
-CREATE OR REPLACE MODEL
-`myproject.mydataset.mytranslatemodel`
-REMOTE WITH CONNECTION `myproject.myregion.myconnection`
-OPTIONS (remote_service_type = 'cloud_ai_translate_v3')
-```
+    # Create model
+    CREATE OR REPLACE MODEL
+    `myproject.mydataset.mytranslatemodel`
+    REMOTE WITH CONNECTION `myproject.myregion.myconnection`
+    OPTIONS (remote_service_type = 'cloud_ai_translate_v3')
 
-``` notranslate
-# Translate text
-SELECT * FROM ML.TRANSLATE(
-  MODEL `mydataset.mytranslatemodel`,
-  TABLE `mydataset.mybqtable`,
-  STRUCT('translate_text' AS translate_mode, 'zh-CN' AS target_language_code));
-```
+    # Translate text
+    SELECT * FROM ML.TRANSLATE(
+      MODEL `mydataset.mytranslatemodel`,
+      TABLE `mydataset.mybqtable`,
+      STRUCT('translate_text' AS translate_mode, 'zh-CN' AS target_language_code));
 
 The output is similar to the following:
 
@@ -99,23 +95,21 @@ The output is similar to the following:
 
 The following example translates the text in the column `text_content` in the table `mybqtable` to Chinese, and parses the JSON results into separate columns.
 
-``` notranslate
-# Translate text and parse the json
-CREATE TABLE
-  `mydataset.translate_result` AS (
-  SELECT
-    STRING(ml_translate_result.translations[0].detected_language_code) AS `Original Language`,
-    text_content AS `Original Text`,
-    "zh-CN" AS `Destination Language`,
-    STRING(ml_translate_result.translations[0].translated_text) AS Translation,
-    ml_translate_status as `Status`
-  FROM ML.TRANSLATE(
-    MODEL `mydataset.mytranslatemodel`,
-    TABLE `mydataset.mybqtable`,
-    STRUCT('translate_text' AS translate_mode, 'zh-CN' AS target_language_code)));
-
-SELECT * FROM `mydataset.translate_result`;
-```
+    # Translate text and parse the json
+    CREATE TABLE
+      `mydataset.translate_result` AS (
+      SELECT
+        STRING(ml_translate_result.translations[0].detected_language_code) AS `Original Language`,
+        text_content AS `Original Text`,
+        "zh-CN" AS `Destination Language`,
+        STRING(ml_translate_result.translations[0].translated_text) AS Translation,
+        ml_translate_status as `Status`
+      FROM ML.TRANSLATE(
+        MODEL `mydataset.mytranslatemodel`,
+        TABLE `mydataset.mybqtable`,
+        STRUCT('translate_text' AS translate_mode, 'zh-CN' AS target_language_code)));
+    
+    SELECT * FROM `mydataset.translate_result`;
 
 The output is similar to the following:
 
@@ -125,24 +119,22 @@ The output is similar to the following:
 
 If you get an error like `query limit exceeded` , you might have exceeded the [quota](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) for this function, which can leave you with unprocessed rows. Use the following query to complete processing the unprocessed rows:
 
-``` notranslate
-CREATE TABLE
-  `mydataset.translate_result_next` AS (
-  SELECT
-    STRING(ml_translate_result.translations[0].detected_language_code) AS `Original Language`,
-    text_content AS `Original Text`,
-    'zh-CN' AS `Destination Language`,
-    STRING(ml_translate_result.translations[0].translated_text) AS Translation,
-    ml_translate_status as `Status`
-  FROM ML.TRANSLATE(
-    MODEL `mydataset.mytranslatemodel`,
-    (SELECT `Original Text` AS text_content
-     FROM `mydataset.translate_result`
-     WHERE Status != ''),
-    STRUCT('translate_text' AS translate_mode, 'zh-CN' AS target_language_code)));
-
-SELECT * FROM `mydataset.translate_result_next`;
-```
+    CREATE TABLE
+      `mydataset.translate_result_next` AS (
+      SELECT
+        STRING(ml_translate_result.translations[0].detected_language_code) AS `Original Language`,
+        text_content AS `Original Text`,
+        'zh-CN' AS `Destination Language`,
+        STRING(ml_translate_result.translations[0].translated_text) AS Translation,
+        ml_translate_status as `Status`
+      FROM ML.TRANSLATE(
+        MODEL `mydataset.mytranslatemodel`,
+        (SELECT `Original Text` AS text_content
+         FROM `mydataset.translate_result`
+         WHERE Status != ''),
+        STRUCT('translate_text' AS translate_mode, 'zh-CN' AS target_language_code)));
+    
+    SELECT * FROM `mydataset.translate_result_next`;
 
 ## What's next
 

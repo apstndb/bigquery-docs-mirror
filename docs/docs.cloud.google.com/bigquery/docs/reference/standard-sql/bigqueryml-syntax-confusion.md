@@ -4,7 +4,7 @@ This document describes the `ML.CONFUSION_MATRIX` function, which you can use to
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.CONFUSION_MATRIX(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }]
@@ -77,34 +77,30 @@ The following examples demonstrate the use of the `ML.CONFUSION_MATRIX` function
 
 The following example returns the confusion matrix for a logistic regression model named `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
-  (
     SELECT
       *
     FROM
-      `mydataset.mytable`))
-```
+      ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
+      (
+        SELECT
+          *
+        FROM
+          `mydataset.mytable`))
 
 ### `ML.CONFUSION_MATRIX` with a custom threshold
 
 The following example returns the confusion matrix for a logistic regression model named `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
-    (
     SELECT
       *
     FROM
-      `mydataset.mytable`),
-    STRUCT(0.6 AS threshold))
-```
+      ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
+        (
+        SELECT
+          *
+        FROM
+          `mydataset.mytable`),
+        STRUCT(0.6 AS threshold))
 
 ## What's next
 

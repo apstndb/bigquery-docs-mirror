@@ -1,11 +1,5 @@
 # Create and manage folders
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To give feedback or request support for this feature, send an email to <bigquery-explorer-feedback@google.com> .
-
 The following document describes how create and manage folders in BigQuery. You can use folders to organize and control access to single file code assets, such as [notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) , [saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) , [data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas) , and [data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) files. BigQuery offers user folders for individuals to manage their own code assets, and team folders to manage a team's code assets.
 
 BigQuery folders are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
@@ -93,9 +87,17 @@ Follow these steps to view folders and code assets in BigQuery:
       - Expand the **Team folders** node to view all team folders that you have access to.
       - Expand the **Shared with me** node to view all folders and files that other users have shared with you.
 
-### Change the code region
+> **Note:** When you open a folder, the breadcrumb trail at the top of the folder view displays the full path to your current location. The path is visible up to the level of the folder for which you have permissions.
 
-You can have folders and code assets in [different code regions](https://docs.cloud.google.com/bigquery/docs/code-asset-folders#folder_code_regions) . Follow these steps to change the code region that you are viewing:
+### Set the default region for code assets
+
+You can have folders and code assets in [different code regions](https://docs.cloud.google.com/bigquery/docs/code-asset-folders#folder_code_regions) .
+
+All new code assets in your Google Cloud project use a default region. After the asset is created, you can't change its region.
+
+> **Important:** If you change the region while creating a code asset, that region becomes the default for all subsequent code assets. Existing code assets are not affected.
+
+To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
@@ -105,9 +107,25 @@ You can have folders and code assets in [different code regions](https://docs.cl
 
 3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
 
-4.  Select the code region that you want to view.
+4.  Select the code region that you want to use as a default.
 
 5.  Click **Save** .
+
+For a list of supported regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
+
+### Refresh folder contents
+
+To ensure that any recent changes made by you or shared by others are visible in the file browser, do the following:
+
+1.  Go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
+
+3.  Select the folder that you want to refresh, such as your user root node, a team folder root, or an individual folder.
+
+4.  Click more\_vert **View actions** \> **Refresh contents** .
 
 ## Create a folder or code asset
 
@@ -174,7 +192,9 @@ Follow these steps to upload a code asset in BigQuery:
 
 6.  Type a name for the code asset.
 
-7.  Optional: Select a region in which to store the code asset. If you select a different region than the default value, the region that you select becomes the default region where all new code assets are created going forward.
+7.  Optional: Select a region in which to store the code asset.
+    
+    > **Note:** If you select a different region than the default value, the region that you select becomes the default region where all new code assets are created going forward.
 
 8.  Click **Save** .
 
@@ -256,13 +276,16 @@ Follow these steps to move a folder or code asset in BigQuery:
     
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Select the folder or code asset that you want to move.
+3.  Depending on how many resources you want to move, do one of the following:
+    
+      - **Move a single resource** : In the file browser, select the folder or code asset you want to move, and then click more\_vert **View actions** \> **Move** .
+      - **Move multiple resources** : In the folder view, select the checkbox next to each resource that you want to move, and then click **Move** .
 
-4.  Click more\_vert **View actions** \> **Move** .
+4.  In the move resource dialog, select the user folder or team folder to which you want to move the resource.
 
-5.  In the move resource dialog, select the user or team folder to which you want to move the resource.
+5.  Click **Move** .
 
-6.  Click **Move** .
+> **Note:** Bulk move operations are independent. If one resource fails to move, the operation still attempts to complete the move for all other selected resources.
 
 ## Copy a folder or code asset
 
@@ -292,11 +315,14 @@ Follow these steps to delete a folder or code asset in BigQuery:
     
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Select the folder or code asset that you want to delete.
+3.  Depending on how many resources you want to delete, do one of the following:
+    
+      - **Delete a single resource** : In the file browser, select the folder or code asset you want to delete, and then click more\_vert **View actions** \> **Delete** .
+      - **Delete multiple resources** : In the folder view, select the checkbox next to each resource you want to delete, and then click **Delete** .
 
-4.  Click more\_vert **View actions** \> **Delete** .
+4.  In the delete resource dialog, click **Delete** .
 
-5.  In the delete resource dialog, click **Delete** .
+> **Note:** When deleting multiple resources, the selected folders must be empty for the operation to succeed. Bulk delete operations are independent; if one resource fails to delete, the operation still attempts to complete the deletion for all other selected resources.
 
 ## What's next
 

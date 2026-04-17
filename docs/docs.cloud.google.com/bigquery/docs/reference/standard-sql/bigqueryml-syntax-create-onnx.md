@@ -6,7 +6,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(MODEL_TYPE = 'ONNX', MODEL_PATH = string_value

@@ -171,7 +171,7 @@ To create a Delta BigLake table, use the [`CREATE EXTERNAL TABLE` statement](htt
 
 2.  In the query editor, run the `CREATE EXTERNAL TABLE` statement:
     
-    ``` lang-sh
+    ```sh
     CREATE EXTERNAL TABLE PROJECT_ID.DATASET_NAME.TABLE_NAME
     WITH PARTITION COLUMNS(
     `PARTITION_COLUMN PARTITION_COLUMN_TYPE`,)
@@ -242,17 +242,15 @@ Use the [`CREATE OR REPLACE EXTERNAL TABLE` DDL statement](https://docs.cloud.go
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE
-      `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-      WITH CONNECTION {`REGION.CONNECTION_ID` | DEFAULT}
-      OPTIONS(
-        format ="TABLE_FORMAT",
-        uris = ['BUCKET_PATH'],
-        max_staleness = STALENESS_INTERVAL,
-        metadata_cache_mode = 'CACHE_MODE'
-        );
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE
+          `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+          WITH CONNECTION {`REGION.CONNECTION_ID` | DEFAULT}
+          OPTIONS(
+            format ="TABLE_FORMAT",
+            uris = ['BUCKET_PATH'],
+            max_staleness = STALENESS_INTERVAL,
+            metadata_cache_mode = 'CACHE_MODE'
+            );
     
     Replace the following:
     
@@ -316,12 +314,10 @@ Use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cl
 
 1.  Generate an [external table definition](https://docs.cloud.google.com/bigquery/external-table-definition#table-definition) , that describes the aspects of the table to change:
     
-    ``` notranslate
-    bq mkdef --connection_id=PROJECT_ID.REGION.CONNECTION_ID \
-    --source_format=TABLE_FORMAT \
-    --metadata_cache_mode=CACHE_MODE \
-    "BUCKET_PATH" > /tmp/DEFINITION_FILE
-    ```
+        bq mkdef --connection_id=PROJECT_ID.REGION.CONNECTION_ID \
+        --source_format=TABLE_FORMAT \
+        --metadata_cache_mode=CACHE_MODE \
+        "BUCKET_PATH" > /tmp/DEFINITION_FILE
     
     Replace the following:
     
@@ -361,11 +357,9 @@ Use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cl
 
 2.  Update the table using the new external table definition:
     
-    ``` notranslate
-    bq update --max_staleness=STALENESS_INTERVAL \
-    --external_table_definition=/tmp/DEFINITION_FILE \
-    PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME
-    ```
+        bq update --max_staleness=STALENESS_INTERVAL \
+        --external_table_definition=/tmp/DEFINITION_FILE \
+        PROJECT_ID:DATASET.EXTERNAL_TABLE_NAME
     
     Replace the following:
     

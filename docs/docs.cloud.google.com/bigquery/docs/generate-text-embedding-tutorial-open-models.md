@@ -90,30 +90,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create the remote model
 
@@ -125,13 +119,11 @@ Create a remote model that represents a hosted Vertex AI model:
 
 <!-- end list -->
 
-``` notranslate
-CREATE OR REPLACE MODEL `bqml_tutorial.qwen3_embedding_model`
-  REMOTE WITH CONNECTION DEFAULT
-  OPTIONS (
-    HUGGING_FACE_MODEL_ID = 'Qwen/Qwen3-Embedding-0.6B'
-);
-```
+    CREATE OR REPLACE MODEL `bqml_tutorial.qwen3_embedding_model`
+      REMOTE WITH CONNECTION DEFAULT
+      OPTIONS (
+        HUGGING_FACE_MODEL_ID = 'Qwen/Qwen3-Embedding-0.6B'
+    );
 
 The query takes up to 20 minutes to complete, after which the `qwen3_embedding_model` model appears in the `bqml_tutorial` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -143,22 +135,20 @@ Perform text embedding on [IMDB](https://www.imdb.com/) movie reviews by using t
 
 2.  In the query editor, enter the following statement to perform text embedding on five movie reviews:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      AI.GENERATE_EMBEDDING(
-        MODEL `bqml_tutorial.qwen3_embedding_model`,
-        (
-          SELECT
-            review AS content,
-            *
-          FROM
-            `bigquery-public-data.imdb.reviews`
-          LIMIT 5
-        )
-      );
-    ```
+        SELECT
+          *
+        FROM
+          AI.GENERATE_EMBEDDING(
+            MODEL `bqml_tutorial.qwen3_embedding_model`,
+            (
+              SELECT
+                review AS content,
+                *
+              FROM
+                `bigquery-public-data.imdb.reviews`
+              LIMIT 5
+            )
+          );
     
     The results include the following columns:
     
@@ -171,10 +161,8 @@ Perform text embedding on [IMDB](https://www.imdb.com/) movie reviews by using t
 
 If you choose not to [delete your project as recommended](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding-tutorial-open-models#clean_up) , you must undeploy the Qwen3 embedding model in Vertex AI to avoid continued billing for it. BigQuery automatically undeploys the model after a specified period of idleness (6.5 hours by default). Alternatively, you can immediately undeploy the model by using the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) , as shown in the following example:
 
-``` notranslate
-ALTER MODEL `bqml_tutorial.qwen3_embedding_model`
-SET OPTIONS (deploy_model = false);
-```
+    ALTER MODEL `bqml_tutorial.qwen3_embedding_model`
+    SET OPTIONS (deploy_model = false);
 
 For more information, see [Automatic or immediate open model undeployment](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-model-undeployment) .
 

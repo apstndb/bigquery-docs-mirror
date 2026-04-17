@@ -40,33 +40,31 @@ To create an AWS IAM policy, use the AWS console or Terraform:
 
 3.  Click **JSON** and paste the following into the editor:
     
-    ``` notranslate
-    {
-     "Version": "2012-10-17",
-     "Statement": [
         {
-         "Effect": "Allow",
-         "Action": [
-           "s3:ListBucket"
-         ],
-         "Resource": [
-           "arn:aws:s3:::BUCKET_NAME"
-          ]
-        },
-       {
-         "Effect": "Allow",
-         "Action": [
-           "s3:GetObject",
-           EXPORT_PERM
-         ],
-         "Resource": [
-           "arn:aws:s3:::BUCKET_NAME",
-            "arn:aws:s3:::BUCKET_NAME/*"
-          ]
+         "Version": "2012-10-17",
+         "Statement": [
+            {
+             "Effect": "Allow",
+             "Action": [
+               "s3:ListBucket"
+             ],
+             "Resource": [
+               "arn:aws:s3:::BUCKET_NAME"
+              ]
+            },
+           {
+             "Effect": "Allow",
+             "Action": [
+               "s3:GetObject",
+               EXPORT_PERM
+             ],
+             "Resource": [
+               "arn:aws:s3:::BUCKET_NAME",
+                "arn:aws:s3:::BUCKET_NAME/*"
+              ]
+            }
+         ]
         }
-     ]
-    }
-    ```
     
     Replace the following:
     
@@ -82,9 +80,7 @@ To create an AWS IAM policy, use the AWS console or Terraform:
 
 Your policy is created with an Amazon Resource Name (ARN) in the following format:
 
-``` notranslate
-arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
-```
+    arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 
 Replace the following:
 
@@ -95,7 +91,7 @@ Replace the following:
 
 To create an AWS IAM policy, use the [`aws iam create-policy` command](https://docs.aws.amazon.com/cli/latest/reference/iam/create-policy.html) :
 
-``` notranslate
+``` 
   aws iam create-policy \
    --policy-name POLICY_NAME \
    --policy-document '{
@@ -134,9 +130,7 @@ Replace the following:
 
 Your policy is created with an Amazon Resource Name (ARN) in the following format:
 
-``` notranslate
-arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
-```
+    arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
 
 Replace the following:
 
@@ -147,7 +141,7 @@ Replace the following:
 
 Add the following to your Terraform config to attach a policy to an Amazon S3 bucket resource:
 
-``` notranslate
+``` 
   resource "aws_iam_policy" "bigquery-omni-connection-policy" {
     name = "bigquery-omni-connection-policy"
 
@@ -214,7 +208,7 @@ To create an AWS IAM role, use the AWS console or Terraform:
 
 Use the following command to create an IAM role and assign the policy to the role created:
 
-``` notranslate
+``` 
   aws iam create-role \
    --role-name bigquery-omni-connection \
    --max-session-duration 43200 \
@@ -241,7 +235,7 @@ Use the following command to create an IAM role and assign the policy to the rol
 
 Add the following to your Terraform config to create an IAM role and assign the policy to the role created:
 
-``` notranslate
+``` 
   resource "aws_iam_role" "bigquery-omni-connection-role" {
     name                 = "bigquery-omni-connection"
     max_session_duration = 43200
@@ -279,7 +273,7 @@ Add the following to your Terraform config to create an IAM role and assign the 
 
 Then, attach the policy to the role:
 
-``` notranslate
+``` 
   aws iam attach-role-policy \
     --role-name bigquery-omni-connection \
     --policy-arn arn:aws:iam::AWS_ACCOUNT_ID:policy/POLICY_NAME
@@ -328,9 +322,7 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
     
       - For **AWS role id** , enter the full IAM role ID that you created in this format:
         
-        ``` notranslate
-        arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME
-        ```
+            arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME
 
 8.  Click **Create connection** .
 
@@ -345,7 +337,7 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
 
 ### Terraform
 
-``` notranslate
+``` 
   resource "google_bigquery_connection" "connection" {
     connection_id = "bigquery-omni-aws-connection"
     friendly_name = "bigquery-omni-aws-connection"
@@ -371,12 +363,10 @@ Replace the following:
 
 ### bq
 
-``` notranslate
-bq mk --connection --connection_type='AWS' \
---iam_role_id=arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME \
---location=AWS_LOCATION \
-CONNECTION_ID
-```
+    bq mk --connection --connection_type='AWS' \
+    --iam_role_id=arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME \
+    --location=AWS_LOCATION \
+    CONNECTION_ID
 
 Replace the following:
 
@@ -483,25 +473,23 @@ To add a trust relationship, use the AWS console or Terraform:
 
 5.  Select **Trust Relationships** and click **Edit trust relationship** . Replace the policy content with the following:
     
-    ``` notranslate
-    {
-      "Version": "2012-10-17",
-      "Statement": [
         {
-          "Effect": "Allow",
-          "Principal": {
-            "Federated": "accounts.google.com"
-          },
-          "Action": "sts:AssumeRoleWithWebIdentity",
-          "Condition": {
-            "StringEquals": {
-              "accounts.google.com:sub": "IDENTITY_ID"
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Federated": "accounts.google.com"
+              },
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": {
+                "StringEquals": {
+                  "accounts.google.com:sub": "IDENTITY_ID"
+                }
+              }
             }
-          }
+          ]
         }
-      ]
-    }
-    ```
     
     Replace `  IDENTITY_ID  ` with the **BigQuery Google identity** value, which you can find on the Google Cloud console for the [connection you created](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-connection) .
 
@@ -511,7 +499,7 @@ To add a trust relationship, use the AWS console or Terraform:
 
 To create a trust relationship with the BigQuery connection, use the [`aws iam update-assume-role-policy` command](https://docs.aws.amazon.com/cli/latest/reference/iam/update-assume-role-policy.html) :
 
-``` notranslate
+``` 
   aws iam update-assume-role-policy \
     --role-name bigquery-omni-connection \
     --policy-document '{
@@ -560,7 +548,7 @@ Replace the following:
 
 Update the `aws_iam_role` resource in the Terraform configuration to add a trust relationship:
 
-``` notranslate
+``` 
     resource "aws_iam_role" "bigquery-omni-connection-role" {
       name                 = "bigquery-omni-connection"
       max_session_duration = 43200

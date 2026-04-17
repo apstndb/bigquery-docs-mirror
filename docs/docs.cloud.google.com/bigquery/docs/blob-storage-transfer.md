@@ -129,16 +129,14 @@ Select one of the following options:
 
 Use the [`bq mk --transfer_config` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) to create a Blob Storage transfer:
 
-``` notranslate
-bq mk \
-  --transfer_config \
-  --project_id=PROJECT_ID \
-  --data_source=DATA_SOURCE \
-  --display_name=DISPLAY_NAME \
-  --target_dataset=DATASET \
-  --destination_kms_key=DESTINATION_KEY \
-  --params=PARAMETERS
-```
+    bq mk \
+      --transfer_config \
+      --project_id=PROJECT_ID \
+      --data_source=DATA_SOURCE \
+      --display_name=DISPLAY_NAME \
+      --target_dataset=DATASET \
+      --destination_kms_key=DESTINATION_KEY \
+      --params=PARAMETERS
 
 Replace the following:
 
@@ -165,26 +163,24 @@ Replace the following:
 
 For example, the following creates a Blob Storage data transfer called `mytransfer` :
 
-``` notranslate
-bq mk \
-  --transfer_config \
-  --data_source=azure_blob_storage \
-  --display_name=mytransfer \
-  --target_dataset=mydataset \
-  --destination_kms_key=projects/myproject/locations/us/keyRings/mykeyring/cryptoKeys/key1
-  --params={"destination_table_name_template":"mytable",
-      "storage_account":"myaccount",
-      "container":"mycontainer",
-      "data_path":"myfolder/*.csv",
-      "sas_token":"my_sas_token_value",
-      "file_format":"CSV",
-      "max_bad_records":"1",
-      "ignore_unknown_values":"true",
-      "field_delimiter":"|",
-      "skip_leading_rows":"1",
-      "allow_quoted_newlines":"true",
-      "allow_jagged_rows":"false"}
-```
+    bq mk \
+      --transfer_config \
+      --data_source=azure_blob_storage \
+      --display_name=mytransfer \
+      --target_dataset=mydataset \
+      --destination_kms_key=projects/myproject/locations/us/keyRings/mykeyring/cryptoKeys/key1
+      --params={"destination_table_name_template":"mytable",
+          "storage_account":"myaccount",
+          "container":"mycontainer",
+          "data_path":"myfolder/*.csv",
+          "sas_token":"my_sas_token_value",
+          "file_format":"CSV",
+          "max_bad_records":"1",
+          "ignore_unknown_values":"true",
+          "field_delimiter":"|",
+          "skip_leading_rows":"1",
+          "allow_quoted_newlines":"true",
+          "allow_jagged_rows":"false"}
 
 ### API
 

@@ -89,7 +89,7 @@ Set the default Cloud resource connection for the project by using the [`ALTER P
 
 The following example sets the default connection for the project:
 
-``` notranslate
+``` 
   ALTER PROJECT PROJECT_ID
   SET OPTIONS (
     `region-REGION.default_cloud_resource_connection_id` = CONNECTION_ID);

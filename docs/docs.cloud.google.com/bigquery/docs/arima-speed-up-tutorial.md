@@ -79,30 +79,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a table of input data
 
@@ -116,31 +110,29 @@ Follow these steps to create the input data table:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE
-      `bqml_tutorial.nyc_citibike_time_series` AS
-    WITH input_time_series AS
-    (
-      SELECT
-        start_station_name,
-        EXTRACT(DATE FROM starttime) AS date,
-        COUNT(*) AS num_trips
-      FROM
-        `bigquery-public-data.new_york.citibike_trips`
-      GROUP BY
-        start_station_name, date
-    )
-    SELECT table_1.*
-    FROM input_time_series AS table_1
-    INNER JOIN (
-      SELECT start_station_name,  COUNT(*) AS num_points
-      FROM input_time_series
-      GROUP BY start_station_name) table_2
-    ON
-      table_1.start_station_name = table_2.start_station_name
-    WHERE
-      num_points > 400;
-    ```
+        CREATE OR REPLACE TABLE
+          `bqml_tutorial.nyc_citibike_time_series` AS
+        WITH input_time_series AS
+        (
+          SELECT
+            start_station_name,
+            EXTRACT(DATE FROM starttime) AS date,
+            COUNT(*) AS num_trips
+          FROM
+            `bigquery-public-data.new_york.citibike_trips`
+          GROUP BY
+            start_station_name, date
+        )
+        SELECT table_1.*
+        FROM input_time_series AS table_1
+        INNER JOIN (
+          SELECT start_station_name,  COUNT(*) AS num_points
+          FROM input_time_series
+          GROUP BY start_station_name) table_2
+        ON
+          table_1.start_station_name = table_2.start_station_name
+        WHERE
+          num_points > 400;
 
 ## Create a model to multiple time-series with default parameters
 
@@ -156,18 +148,16 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_default`
-    OPTIONS
-      (model_type = 'ARIMA_PLUS',
-      time_series_timestamp_col = 'date',
-      time_series_data_col = 'num_trips',
-      time_series_id_col = 'start_station_name'
-      ) AS
-    SELECT *
-    FROM bqml_tutorial.nyc_citibike_time_series
-    WHERE date < '2016-06-01';
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_default`
+        OPTIONS
+          (model_type = 'ARIMA_PLUS',
+          time_series_timestamp_col = 'date',
+          time_series_data_col = 'num_trips',
+          time_series_id_col = 'start_station_name'
+          ) AS
+        SELECT *
+        FROM bqml_tutorial.nyc_citibike_time_series
+        WHERE date < '2016-06-01';
     
     The query takes about 15 minutes to complete.
 
@@ -181,13 +171,11 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT *
-    FROM
-      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
-      TABLE `bqml_tutorial.nyc_citibike_time_series`,
-      STRUCT(7 AS horizon, TRUE AS perform_aggregation));
-    ```
+        SELECT *
+        FROM
+          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
+          TABLE `bqml_tutorial.nyc_citibike_time_series`,
+          STRUCT(7 AS horizon, TRUE AS perform_aggregation));
     
     This query reports several forecasting metrics, including:
     
@@ -211,15 +199,13 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      AVG(mean_absolute_percentage_error) AS MAPE,
-      AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
-    FROM
-      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
-        TABLE `bqml_tutorial.nyc_citibike_time_series`,
-        STRUCT(7 AS horizon, TRUE AS perform_aggregation));
-    ```
+        SELECT
+          AVG(mean_absolute_percentage_error) AS MAPE,
+          AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
+        FROM
+          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
+            TABLE `bqml_tutorial.nyc_citibike_time_series`,
+            STRUCT(7 AS horizon, TRUE AS perform_aggregation));
 
 This query returns a `MAPE` value of `0.3471` , and a `sMAPE` value of `0.2563` .
 
@@ -235,19 +221,17 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`
-    OPTIONS
-      (model_type = 'ARIMA_PLUS',
-      time_series_timestamp_col = 'date',
-      time_series_data_col = 'num_trips',
-      time_series_id_col = 'start_station_name',
-      auto_arima_max_order = 2
-      ) AS
-    SELECT *
-    FROM `bqml_tutorial.nyc_citibike_time_series`
-    WHERE date < '2016-06-01';
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`
+        OPTIONS
+          (model_type = 'ARIMA_PLUS',
+          time_series_timestamp_col = 'date',
+          time_series_data_col = 'num_trips',
+          time_series_id_col = 'start_station_name',
+          auto_arima_max_order = 2
+          ) AS
+        SELECT *
+        FROM `bqml_tutorial.nyc_citibike_time_series`
+        WHERE date < '2016-06-01';
     
     The query takes about 2 minutes to complete. Recall that the previous model took about 15 minutes to complete when the `auto_arima_max_order` value was `5` , so this change improves model training speed gain by around 7x. If you wonder why the speed gain is not `5/2=2.5x` , this is because when the `auto_arima_max_order` value increases, not only do the number of candidate models increase, but also the complexity. This causes the training time of the model increases.
 
@@ -259,15 +243,13 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      AVG(mean_absolute_percentage_error) AS MAPE,
-      AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
-    FROM
-      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`,
-        TABLE `bqml_tutorial.nyc_citibike_time_series`,
-        STRUCT(7 AS horizon, TRUE AS perform_aggregation));
-    ```
+        SELECT
+          AVG(mean_absolute_percentage_error) AS MAPE,
+          AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
+        FROM
+          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`,
+            TABLE `bqml_tutorial.nyc_citibike_time_series`,
+            STRUCT(7 AS horizon, TRUE AS perform_aggregation));
 
 This query returns a `MAPE` value of `0.3337` , and a `sMAPE` value of `0.2337` .
 
@@ -287,20 +269,18 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`
-    OPTIONS
-      (model_type = 'ARIMA_PLUS',
-      time_series_timestamp_col = 'date',
-      time_series_data_col = 'num_trips',
-      time_series_id_col = 'start_station_name',
-      auto_arima_max_order = 2,
-      max_time_series_length = 30
-      ) AS
-    SELECT *
-    FROM `bqml_tutorial.nyc_citibike_time_series`
-    WHERE date < '2016-06-01';
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`
+        OPTIONS
+          (model_type = 'ARIMA_PLUS',
+          time_series_timestamp_col = 'date',
+          time_series_data_col = 'num_trips',
+          time_series_id_col = 'start_station_name',
+          auto_arima_max_order = 2,
+          max_time_series_length = 30
+          ) AS
+        SELECT *
+        FROM `bqml_tutorial.nyc_citibike_time_series`
+        WHERE date < '2016-06-01';
     
     The query takes about 35 seconds to complete. This is 3x faster compared to the query you used in the [Create a model to forecast multiple time-series with a smaller hyperparameter search space](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial#small-search-space) section. Due to the constant time overhead for the non-training part of the query, such as data preprocessing, the speed gain is much higher when the number of time series is much larger than in this example. For a million time series, the speed gain approaches the ratio of the time series length and the value of the `max_time_series_length` option value. In that case, the speed gain is greater than 10x.
 
@@ -312,15 +292,13 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      AVG(mean_absolute_percentage_error) AS MAPE,
-      AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
-    FROM
-      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`,
-        TABLE `bqml_tutorial.nyc_citibike_time_series`,
-        STRUCT(7 AS horizon, TRUE AS perform_aggregation));
-    ```
+        SELECT
+          AVG(mean_absolute_percentage_error) AS MAPE,
+          AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
+        FROM
+          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`,
+            TABLE `bqml_tutorial.nyc_citibike_time_series`,
+            STRUCT(7 AS horizon, TRUE AS perform_aggregation));
 
 This query returns a `MAPE` value of `0.3515` , and a `sMAPE` value of `0.2473` .
 
@@ -338,28 +316,26 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-      `bqml_tutorial.liquor_forecast_by_product`
-    OPTIONS(
-      MODEL_TYPE = 'ARIMA_PLUS',
-      TIME_SERIES_TIMESTAMP_COL = 'date',
-      TIME_SERIES_DATA_COL = 'total_bottles_sold',
-      TIME_SERIES_ID_COL = ['store_number', 'item_description'],
-      HOLIDAY_REGION = 'US',
-      AUTO_ARIMA_MAX_ORDER = 2,
-      MAX_TIME_SERIES_LENGTH = 30
-    ) AS
-    SELECT
-      store_number,
-      item_description,
-      date,
-      SUM(bottles_sold) as total_bottles_sold
-    FROM
-      `bigquery-public-data.iowa_liquor_sales.sales`
-    WHERE date BETWEEN DATE("2015-01-01") AND DATE("2021-12-31")
-    GROUP BY store_number, item_description, date;
-    ```
+        CREATE OR REPLACE MODEL
+          `bqml_tutorial.liquor_forecast_by_product`
+        OPTIONS(
+          MODEL_TYPE = 'ARIMA_PLUS',
+          TIME_SERIES_TIMESTAMP_COL = 'date',
+          TIME_SERIES_DATA_COL = 'total_bottles_sold',
+          TIME_SERIES_ID_COL = ['store_number', 'item_description'],
+          HOLIDAY_REGION = 'US',
+          AUTO_ARIMA_MAX_ORDER = 2,
+          MAX_TIME_SERIES_LENGTH = 30
+        ) AS
+        SELECT
+          store_number,
+          item_description,
+          date,
+          SUM(bottles_sold) as total_bottles_sold
+        FROM
+          `bigquery-public-data.iowa_liquor_sales.sales`
+        WHERE date BETWEEN DATE("2015-01-01") AND DATE("2021-12-31")
+        GROUP BY store_number, item_description, date;
     
     The query takes about 1 hour 16 minutes to complete.
 

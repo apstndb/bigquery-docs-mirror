@@ -85,12 +85,10 @@ Follow these steps to upload a model:
 
 Loading a model that works with image object tables is the same as loading a model that works with structured data. Follow these steps to load a model into BigQuery ML:
 
-``` notranslate
-CREATE MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`
-OPTIONS(
-  model_type = 'MODEL_TYPE',
-  model_path = 'BUCKET_PATH');
-```
+    CREATE MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`
+    OPTIONS(
+      model_type = 'MODEL_TYPE',
+      model_path = 'BUCKET_PATH');
 
 Replace the following:
 
@@ -104,12 +102,10 @@ Replace the following:
 
 The following example uses the default project and loads a TensorFlow model to BigQuery ML as `my_vision_model` , using the `saved_model.pb` file and `variables` folder from `gs://my_bucket/my_model_folder` :
 
-``` notranslate
-CREATE MODEL `my_dataset.my_vision_model`
-OPTIONS(
-  model_type = 'TENSORFLOW',
-  model_path = 'gs://my_bucket/my_model_folder/*');
-```
+    CREATE MODEL `my_dataset.my_vision_model`
+    OPTIONS(
+      model_type = 'TENSORFLOW',
+      model_path = 'gs://my_bucket/my_model_folder/*');
 
 ## Inspect the model
 
@@ -145,11 +141,9 @@ You must use the [`ML.DECODE_IMAGE` function](https://docs.cloud.google.com/bigq
 
 The following example writes the output of the `ML.DECODE_IMAGE` function to a table:
 
-``` notranslate
-CREATE OR REPLACE TABLE mydataset.mytable AS (
-  SELECT ML.DECODE_IMAGE(data) AS decoded_image FROM mydataset.object_table
-  );
-```
+    CREATE OR REPLACE TABLE mydataset.mytable AS (
+      SELECT ML.DECODE_IMAGE(data) AS decoded_image FROM mydataset.object_table
+      );
 
 Use the following functions to further process images so that they work with your model:
 
@@ -165,14 +159,12 @@ Once you have an appropriate model loaded, and optionally preprocessed the image
 
 To run inference:
 
-``` notranslate
-SELECT *
-FROM ML.PREDICT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  (SELECT [other columns from the object table,] IMAGE_DATA AS MODEL_INPUT
-  FROM PROJECT_ID.DATASET_ID.TABLE_NAME)
-);
-```
+    SELECT *
+    FROM ML.PREDICT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      (SELECT [other columns from the object table,] IMAGE_DATA AS MODEL_INPUT
+      FROM PROJECT_ID.DATASET_ID.TABLE_NAME)
+    );
 
 Replace the following:
 
@@ -189,28 +181,24 @@ Replace the following:
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. It returns the inference results for all images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
-``` notranslate
-SELECT * FROM
-ML.PREDICT(
-  MODEL `my_dataset.vision_model`,
-  (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
-  FROM `my_dataset.object_table`)
-);
-```
+    SELECT * FROM
+    ML.PREDICT(
+      MODEL `my_dataset.vision_model`,
+      (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
+      FROM `my_dataset.object_table`)
+    );
 
 **Example 2**
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function, and uses the `ML.CONVERT_COLOR_SPACE` function in the `ML.PREDICT` function to convert the image color space from `RBG` to `YIQ` . It also shows how to use object table fields to filter the objects included in inference. It returns the inference results for all JPG images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
-``` notranslate
-SELECT * FROM
-  ML.PREDICT(
-    MODEL `my_dataset.vision_model`,
-    (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 280, TRUE), 'YIQ') AS input
-    FROM `my_dataset.object_table`
-    WHERE content_type = 'image/jpeg')
-  );
-```
+    SELECT * FROM
+      ML.PREDICT(
+        MODEL `my_dataset.vision_model`,
+        (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 280, TRUE), 'YIQ') AS input
+        FROM `my_dataset.object_table`
+        WHERE content_type = 'image/jpeg')
+      );
 
 **Example 3**
 
@@ -218,22 +206,18 @@ The following example uses results from `ML.DECODE_IMAGE` that have been written
 
 Create the decoded images table:
 
-``` notranslate
-CREATE OR REPLACE TABLE `my_dataset.decoded_images`
-  AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
-  FROM `my_dataset.object_table`);
-```
+    CREATE OR REPLACE TABLE `my_dataset.decoded_images`
+      AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
+      FROM `my_dataset.object_table`);
 
 Run inference on the decoded images table:
 
-``` notranslate
-SELECT * FROM
-ML.PREDICT(
-  MODEL`my_dataset.vision_model`,
-  (SELECT uri, ML.CONVERT_IMAGE_TYPE(ML.RESIZE_IMAGE(decoded_image, 480, 480, FALSE)) AS input
-  FROM `my_dataset.decoded_images`)
-);
-```
+    SELECT * FROM
+    ML.PREDICT(
+      MODEL`my_dataset.vision_model`,
+      (SELECT uri, ML.CONVERT_IMAGE_TYPE(ML.RESIZE_IMAGE(decoded_image, 480, 480, FALSE)) AS input
+      FROM `my_dataset.decoded_images`)
+    );
 
 **Example 4**
 
@@ -241,38 +225,32 @@ The following example uses results from `ML.DECODE_IMAGE` that have been written
 
 Create the table:
 
-``` notranslate
-CREATE OR REPLACE TABLE `my_dataset.decoded_images`
-  AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
-  FROM `my_dataset.object_table`);
-```
+    CREATE OR REPLACE TABLE `my_dataset.decoded_images`
+      AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
+      FROM `my_dataset.object_table`);
 
 Run inference on the decoded images table:
 
-``` notranslate
-SELECT * FROM
-ML.PREDICT(
-  MODEL `my_dataset.vision_model`,
-  (SELECT uri, decoded_image AS input
-  FROM `my_dataset.decoded_images`)
-);
-```
+    SELECT * FROM
+    ML.PREDICT(
+      MODEL `my_dataset.vision_model`,
+      (SELECT uri, decoded_image AS input
+      FROM `my_dataset.decoded_images`)
+    );
 
 **Example 5**
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. In this example, the model has an output field of `embeddings` and two input fields: one that expects an image, `f_img` , and one that expects a string, `f_txt` . The image input comes from the object table and the string input comes from a standard BigQuery table that is joined with the object table by using the `uri` column.
 
-``` notranslate
-SELECT * FROM
-  ML.PREDICT(
-    MODEL `my_dataset.mixed_model`,
-    (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(my_dataset.my_object_table.data), 224, 224, FALSE) AS f_img,
-      my_dataset.image_description.description AS f_txt
-    FROM `my_dataset.object_table`
-    JOIN `my_dataset.image_description`
-    ON object_table.uri = image_description.uri)
-  );
-```
+    SELECT * FROM
+      ML.PREDICT(
+        MODEL `my_dataset.mixed_model`,
+        (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(my_dataset.my_object_table.data), 224, 224, FALSE) AS f_img,
+          my_dataset.image_description.description AS f_txt
+        FROM `my_dataset.object_table`
+        JOIN `my_dataset.image_description`
+        ON object_table.uri = image_description.uri)
+      );
 
 ## What's next
 

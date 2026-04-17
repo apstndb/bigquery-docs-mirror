@@ -181,11 +181,9 @@ Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SCHEMA PROJECT_ID.DATASET_ID
-    OPTIONS (
-      tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        CREATE SCHEMA PROJECT_ID.DATASET_ID
+        OPTIONS (
+          tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -204,11 +202,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `--add_tags` flag:
 
-``` notranslate
-bq mk --dataset \
-    --add_tags=TAG \
-    PROJECT_ID:DATASET_ID
-```
+    bq mk --dataset \
+        --add_tags=TAG \
+        PROJECT_ID:DATASET_ID
 
 Replace the following:
 
@@ -226,7 +222,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a dataset named `my_dataset` , then attaches tags to it by populating the `resource_tags` field:
 
-``` lang-terraform
+```terraform
 # Create tag keys and values
 data "google_project" "default" {}
 
@@ -377,11 +373,9 @@ The following example overwrites all tags for an existing dataset.
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA PROJECT_ID.DATASET_ID
-    SET OPTIONS (
-      tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        ALTER SCHEMA PROJECT_ID.DATASET_ID
+        SET OPTIONS (
+          tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -403,11 +397,9 @@ The following example uses the `+=` operator to attach tags to a dataset without
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA PROJECT_ID.DATASET_ID
-    SET OPTIONS (
-      tags += [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        ALTER SCHEMA PROJECT_ID.DATASET_ID
+        SET OPTIONS (
+          tags += [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -427,11 +419,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `--add_tags` flag:
 
-``` notranslate
-bq update \
-    --add_tags=TAG \
-    PROJECT_ID:DATASET_ID
-```
+    bq update \
+        --add_tags=TAG \
+        PROJECT_ID:DATASET_ID
 
 Replace the following:
 
@@ -443,12 +433,10 @@ Replace the following:
 
 To attach a tag to a dataset using the command line, create a tag binding resource by using the [`gcloud resource-manager tags bindings create` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/create) :
 
-``` notranslate
-gcloud resource-manager tags bindings create \
-    --tag-value=TAG_VALUE_NAME \
-    --parent=RESOURCE_ID \
-    --location=LOCATION
-```
+    gcloud resource-manager tags bindings create \
+        --tag-value=TAG_VALUE_NAME \
+        --parent=RESOURCE_ID \
+        --location=LOCATION
 
 Replace the following:
 
@@ -484,9 +472,7 @@ The following steps provide a list of tag bindings attached directly to a datase
 
 To list tags attached to a dataset, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) .
 
-``` notranslate
-bq show PROJECT_ID:DATASET_ID
-```
+    bq show PROJECT_ID:DATASET_ID
 
 Replace the following:
 
@@ -497,11 +483,9 @@ Replace the following:
 
 To get a list of tag bindings attached to a resource, use the [`gcloud resource-manager tags bindings list` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/list) :
 
-``` notranslate
-gcloud resource-manager tags bindings list \
-    --parent=RESOURCE_ID \
-    --location=LOCATION
-```
+    gcloud resource-manager tags bindings list \
+        --parent=RESOURCE_ID \
+        --location=LOCATION
 
 Replace the following:
 
@@ -511,19 +495,15 @@ Replace the following:
 
 The output is similar to the following:
 
-``` lang-none notranslate
-name: tagBindings/%2F%2Fbigquery.googleapis.com%2Fprojects%2Fmy_project%2Fdatasets%2Fmy_dataset/tagValues/4567890123
-parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
-tagValue: tagValues/4567890123
-```
+    name: tagBindings/%2F%2Fbigquery.googleapis.com%2Fprojects%2Fmy_project%2Fdatasets%2Fmy_dataset/tagValues/4567890123
+    parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
+    tagValue: tagValues/4567890123
 
 ### Terraform
 
 Use the `terraform state show` command to list the attributes of the dataset, including the `resource_tags` field. Run this command in the directory where the dataset's Terraform configuration file has been run.
 
-``` lang-none notranslate
-terraform state show google_bigquery_dataset.default
-```
+    terraform state show google_bigquery_dataset.default
 
 ### API
 
@@ -535,7 +515,7 @@ Use the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google.c
 
 For example, the following query shows all tags attached to all datasets in a region. This query returns a table with columns including `schema_name` (the dataset names), `option_name` (always `'tags'` ), `object_type` (always `ARRAY<STRUCT<STRING, STRING>>` ), and `option_value` , which contains arrays of `STRUCT` objects representing tags associated with each dataset. For datasets without assigned tags, the `option_value` column returns an empty array.
 
-``` notranslate lang-googlesql
+```googlesql
 SELECT * from region-REGION.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
 WHERE option_name='tags'
 ```
@@ -574,11 +554,9 @@ The following example detaches tags from a dataset using the `-=` operator. To d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
-    SET OPTIONS (
-      tags -= [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
+        SET OPTIONS (
+          tags -= [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -598,11 +576,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) with the `--remove_tags` flag:
 
-``` notranslate
-bq update \
-    --remove_tags=REMOVED_TAG \
-    PROJECT_ID:DATASET_ID
-```
+    bq update \
+        --remove_tags=REMOVED_TAG \
+        PROJECT_ID:DATASET_ID
 
 Replace the following:
 
@@ -612,22 +588,18 @@ Replace the following:
 
 Alternatively, if you want to remove *all* tags from a dataset, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--clear_all_tags` flag:
 
-``` notranslate
-bq update \
-    --clear_all_tags
-    PROJECT_ID:DATASET_ID
-```
+    bq update \
+        --clear_all_tags
+        PROJECT_ID:DATASET_ID
 
 ### gcloud
 
 To detach a tag from a dataset using the command line, delete the tag binding by using the [`gcloud resource-manager tags bindings delete` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/delete) :
 
-``` notranslate
-gcloud resource-manager tags bindings delete \
-    --tag-value=TAG_VALUE_NAME \
-    --parent=RESOURCE_ID \
-    --location=LOCATION
-```
+    gcloud resource-manager tags bindings delete \
+        --tag-value=TAG_VALUE_NAME \
+        --parent=RESOURCE_ID \
+        --location=LOCATION
 
 Replace the following:
 
@@ -695,11 +667,9 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE PROJECT_ID.DATASET_ID.TABLE_ID
-    OPTIONS (
-      tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        CREATE TABLE PROJECT_ID.DATASET_ID.TABLE_ID
+        OPTIONS (
+          tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -719,12 +689,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `--add_tags` flag:
 
-``` notranslate
-bq mk --table \
-    --schema=SCHEMA \
-    --add_tags=TAG \
-    PROJECT_ID:DATASET_ID.TABLE_ID
-```
+    bq mk --table \
+        --schema=SCHEMA \
+        --add_tags=TAG \
+        PROJECT_ID:DATASET_ID.TABLE_ID
 
 Replace the following:
 
@@ -744,7 +712,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a table named `mytable` , then attaches tags to it by populating the `resource_tags` field:
 
-``` lang-terraform
+```terraform
 # Create tag keys and values
 data "google_project" "default" {}
 
@@ -904,11 +872,9 @@ The following example overwrites all tags for an existing table.
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
-    SET OPTIONS (
-      tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
+        SET OPTIONS (
+          tags = [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -930,11 +896,9 @@ The following example uses the `+=` operator to attach a tag to a table without 
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
-    SET OPTIONS (
-      tags += [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
+        SET OPTIONS (
+          tags += [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -954,11 +918,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--add_tags` flag:
 
-``` notranslate
-bq update \
-    --add_tags=TAG \
-    PROJECT_ID:DATASET_ID.TABLE_ID
-```
+    bq update \
+        --add_tags=TAG \
+        PROJECT_ID:DATASET_ID.TABLE_ID
 
 Replace the following:
 
@@ -971,12 +933,10 @@ Replace the following:
 
 To attach a tag to a table using the command line, create a tag binding resource by using the [`gcloud resource-manager tags bindings create` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/create) :
 
-``` notranslate
-gcloud resource-manager tags bindings create \
-    --tag-value=TAG_VALUE_NAME \
-    --parent=RESOURCE_ID \
-    --location=LOCATION
-```
+    gcloud resource-manager tags bindings create \
+        --tag-value=TAG_VALUE_NAME \
+        --parent=RESOURCE_ID \
+        --location=LOCATION
 
 Replace the following:
 
@@ -1014,10 +974,8 @@ You can list tags that are attached directly to a table. This process doesn't li
 
 Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) and look for the `tags` column. If there are no tags on the table, the `tags` column isn't displayed.
 
-``` notranslate
-bq show \
-    PROJECT_ID:DATASET_ID.TABLE_ID
-```
+    bq show \
+        PROJECT_ID:DATASET_ID.TABLE_ID
 
 Replace the following:
 
@@ -1029,7 +987,7 @@ Replace the following:
 
 To get a list of tag bindings attached to a resource, use the [`gcloud resource-manager tags bindings list` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/list) :
 
-``` lang-sh notranslate
+```sh
 gcloud resource-manager tags bindings list \
     --parent=RESOURCE_ID \
     --location=LOCATION
@@ -1043,19 +1001,15 @@ Replace the following:
 
 The output is similar to the following:
 
-``` lang-none notranslate
-name: tagBindings/%2F%2Fbigquery.googleapis.com%2Fprojects%2Fmy_project%2Fdatasets%2Fmy_dataset/tagValues/4567890123
-parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
-tagValue: tagValues/4567890123
-```
+    name: tagBindings/%2F%2Fbigquery.googleapis.com%2Fprojects%2Fmy_project%2Fdatasets%2Fmy_dataset/tagValues/4567890123
+    parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
+    tagValue: tagValues/4567890123
 
 ### Terraform
 
 Use the `terraform state show` command to list the attributes of the table, including the `resource_tags` field. Run this command in the directory where the table's Terraform configuration file has been run.
 
-``` lang-none notranslate
-terraform state show google_bigquery_table.default
-```
+    terraform state show google_bigquery_table.default
 
 ### API
 
@@ -1067,7 +1021,7 @@ Use the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/
 
 For example, the following query shows all tags attached to all tables in a dataset. This query returns a table with columns including `schema_name` (the dataset name), `option_name` (always `'tags'` ), `object_type` (always `ARRAY<STRUCT<STRING, STRING>>` ), and `option_value` , which contains arrays of `STRUCT` objects representing tags associated with each dataset. For tables without assigned tags, the `option_value` column returns an empty array.
 
-``` notranslate lang-googlesql
+```googlesql
 SELECT * from DATASET_ID.INFORMATION_SCHEMA.TABLE_OPTIONS
 WHERE option_name='tags'
 ```
@@ -1106,11 +1060,9 @@ The following example detaches tags from a table using the `-=` operator. To det
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
-    SET OPTIONS (
-      tags -= [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
-    ```
+        ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
+        SET OPTIONS (
+          tags -= [('TAG_KEY_1', 'TAG_VALUE_1'), ('TAG_KEY_2', 'TAG_VALUE_2')];)
     
     Replace the following:
     
@@ -1130,11 +1082,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To remove some tags from a table, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--remove_tags` flag:
 
-``` notranslate
-bq update \
-    --remove_tags=TAG_KEYS \
-    PROJECT_ID:DATASET_ID.TABLE_ID
-```
+    bq update \
+        --remove_tags=TAG_KEYS \
+        PROJECT_ID:DATASET_ID.TABLE_ID
 
 Replace the following:
 
@@ -1145,22 +1095,18 @@ Replace the following:
 
 To remove all tags from a table, use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--clear_all_tags` flag:
 
-``` notranslate
-bq update \
-    --clear_all_tags \
-    PROJECT_ID:DATASET_ID.TABLE_ID
-```
+    bq update \
+        --clear_all_tags \
+        PROJECT_ID:DATASET_ID.TABLE_ID
 
 ### gcloud
 
 To remove a tag association from a table using the command line, delete the tag binding by using the [`gcloud resource-manager tags bindings delete` command](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/bindings/delete) :
 
-``` notranslate
-gcloud resource-manager tags bindings delete \
-    --tag-value=TAG_VALUE_NAME \
-    --parent=RESOURCE_ID \
-    --location=LOCATION
-```
+    gcloud resource-manager tags bindings delete \
+        --tag-value=TAG_VALUE_NAME \
+        --parent=RESOURCE_ID \
+        --location=LOCATION
 
 Replace the following:
 
@@ -1220,12 +1166,10 @@ Suppose you are an administrator of an organization. Your data analysts are all 
 
 13. To attach the `intern` tag value to the `anonymousData` dataset, use the command line to run the `gcloud resource-manager tags bindings create` command. For example:
     
-    ``` notranslate
-    gcloud resource-manager tags bindings create \
-        --tag-value=tagValues/4567890123 \
-        --parent=//bigquery.googleapis.com/projects/userData/datasets/anonymousData \
-        --location=US
-    ```
+        gcloud resource-manager tags bindings create \
+            --tag-value=tagValues/4567890123 \
+            --parent=//bigquery.googleapis.com/projects/userData/datasets/anonymousData \
+            --location=US
 
 ## What's next
 

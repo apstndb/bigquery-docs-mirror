@@ -67,7 +67,7 @@ Statistics are only computed for feature columns in the serving data that match 
 
   - `visualization_link` : a URL that links to a Vertex AI visualization of the results for the given feature. The URL is formatted as follows:
     
-    ``` console
+    ```console
     https://console.cloud.google.com/vertex-ai/model-monitoring/locations/region/model-monitors/vertex_model_monitor_id/model-monitoring-jobs/vertex_model_monitoring_job_id/feature-drift?project=project_id&featureName=feature_name
     ```
     
@@ -87,14 +87,12 @@ The following examples demonstrate how to use the `ML.VALIDATE_DATA_SKEW` functi
 
 The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `0.2` :
 
-``` notranslate
-SELECT *
-FROM ML.VALIDATE_DATA_SKEW(
-  MODEL `myproject.mydataset.mymodel`,
-  TABLE `myproject.mydataset.serving`,
-  STRUCT(0.2 AS categorical_default_threshold)
-);
-```
+    SELECT *
+    FROM ML.VALIDATE_DATA_SKEW(
+      MODEL `myproject.mydataset.mymodel`,
+      TABLE `myproject.mydataset.serving`,
+      STRUCT(0.2 AS categorical_default_threshold)
+    );
 
 The output looks similar to the following:
 
@@ -110,15 +108,13 @@ The output looks similar to the following:
 
 The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `0.2` :
 
-``` notranslate
-SELECT *
-FROM ML.VALIDATE_DATA_SKEW(
-  MODEL `myproject.mydataset.mymodel`,
-  TABLE `myproject.mydataset.serving`,
-  STRUCT(0.2 AS categorical_default_threshold,
-    TRUE AS enable_visualization_link)
-);
-```
+    SELECT *
+    FROM ML.VALIDATE_DATA_SKEW(
+      MODEL `myproject.mydataset.mymodel`,
+      TABLE `myproject.mydataset.serving`,
+      STRUCT(0.2 AS categorical_default_threshold,
+        TRUE AS enable_visualization_link)
+    );
 
 The output looks similar to the following:
 
@@ -150,60 +146,58 @@ Copying and pasting the visualization link into a browser tab returns results si
 
 The following example shows how to automate skew detection for a linear regression model:
 
-``` notranslate
-DECLARE anomalies ARRAY<STRING>;
-
-SET anomalies = (
-  SELECT ARRAY_AGG(input)
-  FROM
-    ML.VALIDATE_DATA_SKEW(
-      MODEL mydataset.model_linear_reg,
-      TABLE mydataset.serving,
-      STRUCT(
-        0.3 AS categorical_default_threshold,
-        0.2 AS numerical_default_threshold,
-        'JENSEN_SHANNON_DIVERGENCE' AS numerical_metric_type,
-        [STRUCT('fare', 0.15), STRUCT('company', 0.25)] AS thresholds))
-  WHERE is_anomaly
-);
-
-IF(ARRAY_LENGTH(anomalies) > 0)
-  THEN
-    CREATE OR REPLACE MODEL mydataset.model_linear_reg
-    TRANSFORM(
-      ML.MIN_MAX_SCALER(fare) OVER() AS f1,
-      ML.ROBUST_SCALER(pickup_longitude) OVER() AS f2,
-      ML.LABEL_ENCODER(company) OVER() AS f3,
-      ML.ONE_HOT_ENCODER(payment_type) OVER() AS f4,
-      label
-    )
-    OPTIONS (
-      model_type = 'linear_reg',
-      max_iterations = 1)
-    AS (
-      SELECT
-        fare,
-        pickup_longitude,
-        company,
-        payment_type,
-        2 AS label
-      FROM mydataset.new_training_data
+    DECLARE anomalies ARRAY<STRING>;
+    
+    SET anomalies = (
+      SELECT ARRAY_AGG(input)
+      FROM
+        ML.VALIDATE_DATA_SKEW(
+          MODEL mydataset.model_linear_reg,
+          TABLE mydataset.serving,
+          STRUCT(
+            0.3 AS categorical_default_threshold,
+            0.2 AS numerical_default_threshold,
+            'JENSEN_SHANNON_DIVERGENCE' AS numerical_metric_type,
+            [STRUCT('fare', 0.15), STRUCT('company', 0.25)] AS thresholds))
+      WHERE is_anomaly
     );
-
-    SELECT
-      ERROR(
-        CONCAT(
-          "Found data skew in features: ",
-          ARRAY_TO_STRING(anomalies, ", "),
-          ". Model is retrained with the latest data."));
-  ELSE
-    SELECT *
-    FROM
-      ML.PREDICT(
-        MODEL mydataset.model_linear_reg,
-        TABLE mydataset.serving);
-END IF;
-```
+    
+    IF(ARRAY_LENGTH(anomalies) > 0)
+      THEN
+        CREATE OR REPLACE MODEL mydataset.model_linear_reg
+        TRANSFORM(
+          ML.MIN_MAX_SCALER(fare) OVER() AS f1,
+          ML.ROBUST_SCALER(pickup_longitude) OVER() AS f2,
+          ML.LABEL_ENCODER(company) OVER() AS f3,
+          ML.ONE_HOT_ENCODER(payment_type) OVER() AS f4,
+          label
+        )
+        OPTIONS (
+          model_type = 'linear_reg',
+          max_iterations = 1)
+        AS (
+          SELECT
+            fare,
+            pickup_longitude,
+            company,
+            payment_type,
+            2 AS label
+          FROM mydataset.new_training_data
+        );
+    
+        SELECT
+          ERROR(
+            CONCAT(
+              "Found data skew in features: ",
+              ARRAY_TO_STRING(anomalies, ", "),
+              ". Model is retrained with the latest data."));
+      ELSE
+        SELECT *
+        FROM
+          ML.PREDICT(
+            MODEL mydataset.model_linear_reg,
+            TABLE mydataset.serving);
+    END IF;
 
 ## Limitations
 

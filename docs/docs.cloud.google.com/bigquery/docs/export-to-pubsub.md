@@ -70,22 +70,20 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
 
 6.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    EXPORT DATA
-    OPTIONS (
-    format = 'CLOUD_PUBSUB',
-    uri = 'https://pubsub.googleapis.com/projects/PROJECT_ID/topics/TOPIC_ID'
-    ) AS
-    (
-    QUERY
-    );
-    ```
+        EXPORT DATA
+        OPTIONS (
+        format = 'CLOUD_PUBSUB',
+        uri = 'https://pubsub.googleapis.com/projects/PROJECT_ID/topics/TOPIC_ID'
+        ) AS
+        (
+        QUERY
+        );
     
     Replace the following:
     
       - `  PROJECT_ID  ` : your project ID.
       - `  TOPIC_ID  ` : the Pub/Sub topic ID. You can get the topic ID from the [**Topics** page](https://console.cloud.google.com/cloudpubsub/topic/list) of the Google Cloud console.
-      - `  QUERY  ` : the SQL statement to select the data to export. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) . You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `FROM` clause of a continuous query to specify the point in time at which to start processing data.
+      - `  QUERY  ` : the SQL statement to select the data to export. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) . You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `FROM` clause of a continuous query to specify the point in time at which to start processing data.
 
 7.  Click **Run** .
 
@@ -102,17 +100,15 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
     
     <!-- end list -->
     
-    ``` notranslate
-    bq query --project_id=PROJECT_ID --use_legacy_sql=false \
-    --continuous=true --connection_property=service_account=SERVICE_ACCOUNT_EMAIL \
-    'EXPORT DATA OPTIONS (format = "CLOUD_PUBSUB", uri = "https://pubsub.googleapis.com/projects/PROJECT_ID/topics/TOPIC_ID") AS (QUERY);'
-    ```
+        bq query --project_id=PROJECT_ID --use_legacy_sql=false \
+        --continuous=true --connection_property=service_account=SERVICE_ACCOUNT_EMAIL \
+        'EXPORT DATA OPTIONS (format = "CLOUD_PUBSUB", uri = "https://pubsub.googleapis.com/projects/PROJECT_ID/topics/TOPIC_ID") AS (QUERY);'
     
     Replace the following:
     
       - `  PROJECT_ID  ` : your project ID.
       - `  SERVICE_ACCOUNT_EMAIL  ` : the service account email. You can get the service account email on the [**Service accounts** page](https://console.cloud.google.com/iam-admin/serviceaccounts) of the Google Cloud console.
-      - `  QUERY  ` : the SQL statement to select the data to export. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) . You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `FROM` clause of a continuous query to specify the point in time at which to start processing data.
+      - `  QUERY  ` : the SQL statement to select the data to export. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) . You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `FROM` clause of a continuous query to specify the point in time at which to start processing data.
 
 ### API
 
@@ -123,48 +119,44 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
     
     <!-- end list -->
     
-    ``` notranslate
-    curl --request POST \
-      'https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs'
-      --header 'Authorization: Bearer $(gcloud auth print-access-token) \
-      --header 'Accept: application/json' \
-      --header 'Content-Type: application/json' \
-      --data '("configuration":("query":"EXPORT DATA OPTIONS (format = 'CLOUD_PUBSUB', uri = 'https://pubsub.googleapis.com/projects/PROJECT_ID/topics/TOPIC_ID') AS (QUERY);","useLegacySql":false,"continuous":true,"connectionProperties":["key": "service_account","value":"SERVICE_ACCOUNT_EMAIL"]))' \
-      --compressed
-    ```
+        curl --request POST \
+          'https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs'
+          --header 'Authorization: Bearer $(gcloud auth print-access-token) \
+          --header 'Accept: application/json' \
+          --header 'Content-Type: application/json' \
+          --data '("configuration":("query":"EXPORT DATA OPTIONS (format = 'CLOUD_PUBSUB', uri = 'https://pubsub.googleapis.com/projects/PROJECT_ID/topics/TOPIC_ID') AS (QUERY);","useLegacySql":false,"continuous":true,"connectionProperties":["key": "service_account","value":"SERVICE_ACCOUNT_EMAIL"]))' \
+          --compressed
     
     Replace the following:
     
       - `  PROJECT_ID  ` : your project ID.
-      - `  QUERY  ` : the SQL statement to select the data to export. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) . You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `FROM` clause of a continuous query to specify the point in time at which to start processing data.
+      - `  QUERY  ` : the SQL statement to select the data to export. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) . You must use the [`APPENDS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `FROM` clause of a continuous query to specify the point in time at which to start processing data.
       - `  SERVICE_ACCOUNT_EMAIL  ` : the service account email. You can get the service account email on the [**Service accounts** page](https://console.cloud.google.com/iam-admin/serviceaccounts) of the Google Cloud console.
 
 ## Export multiple columns to Pub/Sub
 
 If you want to include multiple columns in your output, you can create a struct column to contain the column values, and then convert the struct value to a JSON string by using the [`TO_JSON_STRING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json_string) . The following example exports data from four columns, formatted as a JSON string:
 
-``` notranslate
-EXPORT DATA
-  OPTIONS (
-    format = 'CLOUD_PUBSUB',
-    uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
-AS (
-  SELECT
-    TO_JSON_STRING(
-      STRUCT(
-        ride_id,
-        timestamp,
-        latitude,
-        longitude)) AS message
-  FROM
-    APPENDS(TABLE `myproject.real_time_taxi_streaming.taxi_rides`,
-      -- Configure the APPENDS TVF start_timestamp to specify when you want to
-      -- start processing data using your continuous query.
-      -- This example starts processing at 10 minutes before the current time.
-      CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-  WHERE ride_status = 'enroute'
-);
-```
+    EXPORT DATA
+      OPTIONS (
+        format = 'CLOUD_PUBSUB',
+        uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides')
+    AS (
+      SELECT
+        TO_JSON_STRING(
+          STRUCT(
+            ride_id,
+            timestamp,
+            latitude,
+            longitude)) AS message
+      FROM
+        APPENDS(TABLE `myproject.real_time_taxi_streaming.taxi_rides`,
+          -- Configure the APPENDS TVF start_timestamp to specify when you want to
+          -- start processing data using your continuous query.
+          -- This example starts processing at 10 minutes before the current time.
+          CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+      WHERE ride_status = 'enroute'
+    );
 
 ## Export optimization
 

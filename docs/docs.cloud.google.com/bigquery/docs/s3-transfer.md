@@ -148,16 +148,14 @@ To create an Amazon S3 data transfer:
 
 Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` .
 
-``` notranslate
-bq mk \
---transfer_config \
---project_id=project_id \
---data_source=data_source \
---display_name=name \
---target_dataset=dataset \
---service_account_name=service_account \
---params='parameters'
-```
+    bq mk \
+    --transfer_config \
+    --project_id=project_id \
+    --data_source=data_source \
+    --display_name=name \
+    --target_dataset=dataset \
+    --service_account_name=service_account \
+    --params='parameters'
 
 Where:
 

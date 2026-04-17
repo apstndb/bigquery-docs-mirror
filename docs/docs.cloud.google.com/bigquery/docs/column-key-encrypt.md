@@ -160,9 +160,7 @@ Take note of the following concepts, as they are referenced in the next sections
 
   - `KMS_KEY` : Cloud KMS key (KEK) in this format:
     
-    ``` notranslate
-    'gcp-kms://projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID'
-    ```
+        'gcp-kms://projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID'
     
     Here is an example of a Cloud KMS key:
     
@@ -170,9 +168,7 @@ Take note of the following concepts, as they are referenced in the next sections
 
   - `KMS_KEY_SHORT` : Similar to `KMS_KEY` but in this format:
     
-    ``` notranslate
-    projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID
-    ```
+        projects/PROJECT_ID/locations/LOCATION_ID/keyRings/KEY_RING_ID/cryptoKeys/KEY_ID
 
   - `KEYSET_DECODED` : A decoded keyset as a `BYTES` sequence. The output looks similar to that for a decoded wrapped keyset.
     
@@ -216,11 +212,9 @@ Run the following query to create a keyset with a key of type `DETERMINISTIC_AEA
 
 Run the following query to create a Cloud KMS wrapped keyset with a key of type `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` .
 
-``` notranslate
-SELECT KEYS.NEW_WRAPPED_KEYSET(
-  KMS_KEY,
-  'DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
-```
+    SELECT KEYS.NEW_WRAPPED_KEYSET(
+      KMS_KEY,
+      'DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
 
 ### Decode a keyset
 
@@ -230,39 +224,31 @@ Although SQL functions that return keysets produce the keysets in `BYTES` format
 
 Run the following query to decode a Cloud KMS wrapped keyset.
 
-``` notranslate
-SELECT FORMAT('%T', FROM_BASE64(WRAPPED_KEYSET_ENCODED'))
-```
+    SELECT FORMAT('%T', FROM_BASE64(WRAPPED_KEYSET_ENCODED'))
 
 #### Decode a raw keyset
 
 Run the following query to decode a raw keyset.
 
-``` notranslate
-SELECT FORMAT('%T', FROM_BASE64(KEYSET_ENCODED'))
-```
+    SELECT FORMAT('%T', FROM_BASE64(KEYSET_ENCODED'))
 
 ### Rewrap a wrapped keyset
 
 Run the following query to rewrap a Cloud KMS wrapped keyset with a new Cloud KMS key. `KMS_KEY_CURRENT` represents the new `KMS_KEY` that is used to encrypt the keyset. `KMS_KEY_NEW` represents the new `KMS_KEY` that is used to encrypt the keyset.
 
-``` notranslate
-SELECT KEYS.REWRAP_KEYSET(
-  KMS_KEY_CURRENT,
-  KMS_KEY_NEW,
-  WRAPPED_KEYSET_DECODED)
-```
+    SELECT KEYS.REWRAP_KEYSET(
+      KMS_KEY_CURRENT,
+      KMS_KEY_NEW,
+      WRAPPED_KEYSET_DECODED)
 
 ### Rotate a wrapped keyset
 
 Run the following query to rotate a Cloud KMS wrapped keyset with a key of type `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` .
 
-``` notranslate
-SELECT KEYS.ROTATE_WRAPPED_KEYSET(
-  KMS_KEY,
-  WRAPPED_KEYSET_DECODED,
-  'DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
-```
+    SELECT KEYS.ROTATE_WRAPPED_KEYSET(
+      KMS_KEY,
+      WRAPPED_KEYSET_DECODED,
+      'DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
 
 ### Generate a raw keyset from a wrapped keyset
 
@@ -272,21 +258,15 @@ Some encryption functions require a raw keyset. To decrypt a Cloud KMS wrapped k
 
 2.  In the bq command-line tool enter the following commands to save a wrapped keyset in a file called `keyset_to_unwrap` , decrypt the wrapped keyset, and produce the output in the `KEYSET_DECODED` format:
     
-    ``` notranslate
-    echo WRAPPED_KEYSET_ENCODED | base64 -d > /tmp/decoded_wrapped_key
-    ```
+        echo WRAPPED_KEYSET_ENCODED | base64 -d > /tmp/decoded_wrapped_key
     
-    ``` notranslate
-    gcloud kms decrypt \
-    --ciphertext-file=/tmp/decoded_wrapped_key \
-    --key=KMS_KEY_SHORT \
-    --plaintext-file=/tmp/keyset_to_unwrap.dec \
-    --project=PROJECT_ID
-    ```
+        gcloud kms decrypt \
+        --ciphertext-file=/tmp/decoded_wrapped_key \
+        --key=KMS_KEY_SHORT \
+        --plaintext-file=/tmp/keyset_to_unwrap.dec \
+        --project=PROJECT_ID
     
-    ``` notranslate
-    od -An --format=o1 /tmp/keyset_to_unwrap.dec | tr ' ' '\'
-    ```
+        od -An --format=o1 /tmp/keyset_to_unwrap.dec | tr ' ' '\'
 
 ### Generate a wrapped keyset from a raw keyset
 
@@ -296,21 +276,15 @@ Some encryption functions require a Cloud KMS wrapped keyset. To encrypt a raw k
 
 2.  In the bq command-line tool enter the following commands to save a raw keyset in a file called `keyset_to_wrap` , encrypt the raw keyset, and produce the output in the `WRAPPED_KEYSET_DECODED` format:
     
-    ``` notranslate
-    echo KEYSET_ENCODED | base64 -d > /tmp/decoded_key
-    ```
+        echo KEYSET_ENCODED | base64 -d > /tmp/decoded_key
     
-    ``` notranslate
-    gcloud kms encrypt \
-    --plaintext-file=/tmp/decoded_key \
-    --key=KMS_KEY_SHORT \
-    --ciphertext-file=/tmp/keyset_to_wrap.dec \
-    --project=PROJECT_ID
-    ```
+        gcloud kms encrypt \
+        --plaintext-file=/tmp/decoded_key \
+        --key=KMS_KEY_SHORT \
+        --ciphertext-file=/tmp/keyset_to_wrap.dec \
+        --project=PROJECT_ID
     
-    ``` notranslate
-    od -An --format=o1 /tmp/keyset_to_wrap.dec | tr ' ' '\'
-    ```
+        od -An --format=o1 /tmp/keyset_to_wrap.dec | tr ' ' '\'
 
 ### Generate a wrapped key for a DLP function
 
@@ -354,9 +328,7 @@ Run the following query to get the number of keys in a raw keyset.
 
 2.  Run this query with the raw keyset:
     
-    ``` notranslate
-    SELECT KEYS.KEYSET_LENGTH(KEYSET_DECODED) as key_count;
-    ```
+        SELECT KEYS.KEYSET_LENGTH(KEYSET_DECODED) as key_count;
 
 ### Get a JSON representation of a keyset
 
@@ -366,9 +338,7 @@ Run the following query to view a JSON representation of a raw keyset.
 
 2.  Run this query with the raw keyset:
     
-    ``` notranslate
-    SELECT KEYS.KEYSET_TO_JSON(KEYSET_DECODED);
-    ```
+        SELECT KEYS.KEYSET_TO_JSON(KEYSET_DECODED);
 
 ## Encryption and decryption
 
@@ -382,25 +352,21 @@ Run the following query to create a table and store a Cloud KMS wrapped keyset w
 
 2.  Encrypt a column with the wrapped keyset.
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE DATASET_NAME.TABLE_NAME AS
-      SELECT DETERMINISTIC_ENCRYPT(
-        KEYS.KEYSET_CHAIN(KMS_KEY, WRAPPED_KEYSET_DECODED),
-        'plaintext',
-        '') AS encrypted_content
-    ```
+        CREATE OR REPLACE TABLE DATASET_NAME.TABLE_NAME AS
+          SELECT DETERMINISTIC_ENCRYPT(
+            KEYS.KEYSET_CHAIN(KMS_KEY, WRAPPED_KEYSET_DECODED),
+            'plaintext',
+            '') AS encrypted_content
 
 ### Deterministically decrypt a column with a wrapped keyset
 
 Run the following query to deterministically decrypt a column that contains encrypted content, using a Cloud KMS wrapped keyset. This query assumes you are referencing a table with a column called `encrypted_content` .
 
-``` notranslate
-SELECT DETERMINISTIC_DECRYPT_STRING(
-  KEYS.KEYSET_CHAIN(KMS_KEY, WRAPPED_KEYSET_DECODED),
-  encrypted_content,
-  '')
-FROM DATASET_NAME.TABLE_NAME
-```
+    SELECT DETERMINISTIC_DECRYPT_STRING(
+      KEYS.KEYSET_CHAIN(KMS_KEY, WRAPPED_KEYSET_DECODED),
+      encrypted_content,
+      '')
+    FROM DATASET_NAME.TABLE_NAME
 
 ### Non-deterministically encrypt a column with a wrapped keyset
 

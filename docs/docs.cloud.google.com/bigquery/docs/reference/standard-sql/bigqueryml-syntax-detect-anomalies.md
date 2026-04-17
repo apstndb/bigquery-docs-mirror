@@ -16,7 +16,7 @@ If you don't want to manage your own times series anomaly detection model, you c
 
 ## Syntax
 
-``` lang-sql
+```sql
 # ARIMA_PLUS and ARIMA_PLUS_XREG models:
 ML.DETECT_ANOMALIES(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`
@@ -122,12 +122,10 @@ The following examples show how to use `ML.DETECT_ANOMALIES` with different inpu
 
 The following example detects anomalies using an `ARIMA_PLUS` model that has the [`DECOMPOSE_TIME_SERIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option set to its default value of `TRUE` , without specifying the `anomaly_prob_threshold` argument.
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`)
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`)
 
 If the time series input column names are `ts_timestamp` and `ts_data` , then this query returns results similar to the following:
 
@@ -142,13 +140,11 @@ If the time series input column names are `ts_timestamp` and `ts_data` , then th
 
 The following example detects anomalies using an `ARIMA_PLUS` model that has the [`DECOMPOSE_TIME_SERIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option set to its default value of `TRUE` , using a custom `anomaly_prob_threshold` value of `0.8` :
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`,
-    STRUCT(0.8 AS anomaly_prob_threshold))
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`,
+        STRUCT(0.8 AS anomaly_prob_threshold))
 
 If the time series input column names are `ts_timestamp` and `ts_data` , then this query returns results similar to the following:
 
@@ -163,18 +159,16 @@ If the time series input column names are `ts_timestamp` and `ts_data` , then th
 
 The following example detects anomalies using an `ARIMA_PLUS` model, using a custom `anomaly_prob_threshold` value of `0.9` and passing an input data table into the query:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`,
-    STRUCT(0.9 AS anomaly_prob_threshold),
-    (
-      SELECT
-        state, city, date, temperature, weather
-      FROM
-        `mydataset.my_time_series_data_table`))
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`,
+        STRUCT(0.9 AS anomaly_prob_threshold),
+        (
+          SELECT
+            state, city, date, temperature, weather
+          FROM
+            `mydataset.my_time_series_data_table`))
 
 This example uses the following column values:
 
@@ -195,14 +189,12 @@ This example returns results similar to the following:
 
 The following example detects anomalies using an `ARIMA_PLUS` model, using a custom `anomaly_prob_threshold` value of `0.9` and passing an input data table into the query:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`,
-    STRUCT(0.9 AS anomaly_prob_threshold),
-    TABLE `mydataset.my_time_series_data_table`)
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES(MODEL `mydataset.my_arima_plus_model`,
+        STRUCT(0.9 AS anomaly_prob_threshold),
+        TABLE `mydataset.my_time_series_data_table`)
 
 If the `TIME_SERIES_ID_COL` column names are `state` , `city` , and `TIME_SERIES_TIMESTAMP_COL` , and the `TIME_SERIES_DATA_COL` column names are `date` and `temperature` , and one additional column `weather` is in the input data table, then this query returns results similar to the following:
 
@@ -217,17 +209,15 @@ If the `TIME_SERIES_ID_COL` column names are `state` , `city` , and `TIME_SERIES
 
 The following example detects anomalies using an `ARIMA_PLUS_XREG` model that uses a custom `anomaly_prob_threshold` value of `0.6` :
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES (
-   MODEL `mydataset.my arima_plus_xreg_model`,
-   STRUCT(0.6 AS anomaly_prob_threshold)
-  )
-ORDER BY
-  date ASC;
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES (
+       MODEL `mydataset.my arima_plus_xreg_model`,
+       STRUCT(0.6 AS anomaly_prob_threshold)
+      )
+    ORDER BY
+      date ASC;
 
 If the time series input column names are `date` and `temperature` , then this query returns results similar to the following:
 
@@ -243,14 +233,12 @@ If the time series input column names are `date` and `temperature` , then this q
 
 The following example detects anomalies using an autoencoder model and a `contamination` value of `0.1` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_autoencoder_model`,
-    STRUCT(0.1 AS contamination),
-    TABLE `mydataset.mytable`)
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES(MODEL `mydataset.my_autoencoder_model`,
+        STRUCT(0.1 AS contamination),
+        TABLE `mydataset.mytable`)
 
 If the feature column names are `f1` and `f2` , then this query returns results similar to the following:
 
@@ -265,19 +253,17 @@ If the feature column names are `f1` and `f2` , then this query returns results 
 
 The following example detects anomalies using a k-means model and a `contamination` value of `0.2` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_kmeans_model`,
-    STRUCT(0.2 AS contamination),
-    (
-      SELECT
-        f1,
-        f2
-      FROM
-        `mydataset.mytable`))
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES(MODEL `mydataset.my_kmeans_model`,
+        STRUCT(0.2 AS contamination),
+        (
+          SELECT
+            f1,
+            f2
+          FROM
+            `mydataset.mytable`))
 
 This query returns results similar to the following:
 
@@ -292,14 +278,12 @@ This query returns results similar to the following:
 
 The following example detects anomalies using a PCA model and a `contamination` value of `0.1` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.DETECT_ANOMALIES(MODEL `mydataset.my_pca_model`,
-    STRUCT(0.1 AS contamination),
-    TABLE `mydataset.mytable`)
-```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES(MODEL `mydataset.my_pca_model`,
+        STRUCT(0.1 AS contamination),
+        TABLE `mydataset.mytable`)
 
 If the feature column names are `f1` , `f2` and `f3` , then this query returns results similar to the following:
 

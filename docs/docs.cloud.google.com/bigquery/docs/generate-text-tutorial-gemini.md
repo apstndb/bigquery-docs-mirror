@@ -83,30 +83,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a connection
 
@@ -148,14 +142,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -171,10 +163,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -188,19 +178,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -322,7 +310,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -420,11 +408,9 @@ Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/s
 
 <!-- end list -->
 
-``` notranslate
-CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
-  REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-  OPTIONS (ENDPOINT = 'gemini-2.5-flash');
-```
+    CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
+      REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
+      OPTIONS (ENDPOINT = 'gemini-2.5-flash');
 
 Replace the following:
 
@@ -444,31 +430,29 @@ Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 2.  In the query editor, enter the following statement to perform keyword extraction on five movie reviews:
     
-    ``` notranslate
-    SELECT
-      title, result, review
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `bqml_tutorial.gemini_model`,
-        (
-          SELECT
-            CONCAT(
-              """Extract a list of only 3 key words from this review.
-                List only the key words, nothing else. Review: """,
-                review) AS prompt,
-            *
-          FROM
-            `bigquery-public-data.imdb.reviews`
-          LIMIT 5
-        ),
-        STRUCT(
-          0.2 AS temperature,
-          100 AS max_output_tokens));
-    ```
+        SELECT
+          title, result, review
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `bqml_tutorial.gemini_model`,
+            (
+              SELECT
+                CONCAT(
+                  """Extract a list of only 3 key words from this review.
+                    List only the key words, nothing else. Review: """,
+                    review) AS prompt,
+                *
+              FROM
+                `bigquery-public-data.imdb.reviews`
+              LIMIT 5
+            ),
+            STRUCT(
+              0.2 AS temperature,
+              100 AS max_output_tokens));
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     +--------------+------------------+----------------------------------------+
     | title        | result           | review                                 |
     +--------------+------------------+----------------------------------------+
@@ -491,31 +475,29 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 2.  In the query editor, run the following statement to perform sentiment analysis on movie reviews:
     
-    ``` notranslate
-    SELECT
-      title, result, review
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `bqml_tutorial.gemini_model`,
-        (
-          SELECT
-            CONCAT(
-              """Perform sentiment analysis on the following text and
-                 return one the following categories: positive, negative: """,
-              review) AS prompt,
-            *
-          FROM
-            `bigquery-public-data.imdb.reviews`
-          LIMIT 5
-        ),
-        STRUCT(
-          0.2 AS temperature,
-          100 AS max_output_tokens));
-    ```
+        SELECT
+          title, result, review
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `bqml_tutorial.gemini_model`,
+            (
+              SELECT
+                CONCAT(
+                  """Perform sentiment analysis on the following text and
+                     return one the following categories: positive, negative: """,
+                  review) AS prompt,
+                *
+              FROM
+                `bigquery-public-data.imdb.reviews`
+              LIMIT 5
+            ),
+            STRUCT(
+              0.2 AS temperature,
+              100 AS max_output_tokens));
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     +----------+----------+------------------------------------------------+
     | title    | result   | review                                         |
     +----------+----------+------------------------------------------------+

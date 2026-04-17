@@ -39,9 +39,7 @@ Enable the Analytics Hub API for your Google Cloud project by following these st
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
-``` notranslate
-gcloud services enable analyticshub.googleapis.com
-```
+    gcloud services enable analyticshub.googleapis.com
 
 ### Required roles
 
@@ -99,7 +97,7 @@ Use the [`projects.locations.dataExchanges.listings.create` method](https://docs
 
 The following example shows how to call the `projects.locations.dataExchanges.listings.create` method using the `curl` command:
 
-``` notranslate
+``` 
     curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
     '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}],},"displayName":LISTING_NAME"}'
 ```
@@ -202,15 +200,13 @@ You can [update the query template](https://docs.cloud.google.com/bigquery/docs/
 
 The following example shows how to create a query template with a `curl` command:
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID -d
-  'query_template {
-  display_name: "DISPLAY_NAME",
-  routine {
-    definition_body: "QUERY_TEMPLATE_ID(TVF arguments) AS (TVF_DEFINITION)"
-  }
-}'
-```
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID -d
+      'query_template {
+      display_name: "DISPLAY_NAME",
+      routine {
+        definition_body: "QUERY_TEMPLATE_ID(TVF arguments) AS (TVF_DEFINITION)"
+      }
+    }'
 
 Replace the following:
 
@@ -265,7 +261,7 @@ To update a query template, select one of the following options:
 
 The following example shows how to update a query template with a `curl` command:
 
-``` notranslate
+``` 
  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
  -H "Content-Type: application/json" \
  -H 'x-goog-user-project:DCR_PROJECT_ID' \
@@ -308,7 +304,7 @@ Select one of the following options:
 
 The following example shows how to submit a query template for review with a `curl` command:
 
-``` notranslate
+``` 
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID:submit
 ```
 
@@ -339,7 +335,7 @@ Select one of the following options:
 
 The following example shows how to delete a query template with a `curl` command:
 
-``` notranslate
+``` 
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID
 ```
 
@@ -384,9 +380,7 @@ Select one of the following options:
 
 1.  Create the routine out of the query template using a `jobserver.query` call:
     
-    ``` notranslate
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://bigquery.googleapis.com/bigquery/v2/projects/ROUTINE_PROJECT_ID/queries --data '{"query":"ROUTINE_CREATION_QUERY","useLegacySql":false}'
-    ```
+        curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://bigquery.googleapis.com/bigquery/v2/projects/ROUTINE_PROJECT_ID/queries --data '{"query":"ROUTINE_CREATION_QUERY","useLegacySql":false}'
     
     Replace the following:
     
@@ -395,10 +389,8 @@ Select one of the following options:
 
 2.  Add the routine you created to the data clean room:
     
-    ``` notranslate
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
-    '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}],},"displayName":"LISTING_NAME"}'
-    ```
+        curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
+        '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}],},"displayName":"LISTING_NAME"}'
     
     Replace the following:
     
@@ -413,9 +405,7 @@ Select one of the following options:
 
 3.  Update the query template status to `APPROVED` :
     
-    ``` notranslate
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID:approve  --data '{}'
-    ```
+        curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID:approve  --data '{}'
     
     Replace the following:
     
@@ -464,7 +454,7 @@ Use the [`projects.locations.dataExchanges.subscribe` method](https://docs.cloud
 
 The following example shows how to call the `projects.locations.dataExchanges.subscribe` method using the `curl` command:
 
-``` notranslate
+``` 
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination":"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
 ```
 

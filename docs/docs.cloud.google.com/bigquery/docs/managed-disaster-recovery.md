@@ -191,14 +191,12 @@ To create a reservation, use the [`CREATE RESERVATION` data definition language 
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    OPTIONS (
-      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-      edition = ENTERPRISE_PLUS,
-      secondary_location = SECONDARY_LOCATION);
-    ```
+        CREATE RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        OPTIONS (
+          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+          edition = ENTERPRISE_PLUS,
+          secondary_location = SECONDARY_LOCATION);
     
     Replace the following:
     
@@ -246,12 +244,10 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    SET OPTIONS (
-      secondary_location = SECONDARY_LOCATION);
-    ```
+        ALTER RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        SET OPTIONS (
+          secondary_location = SECONDARY_LOCATION);
     
     Replace the following:
     
@@ -297,12 +293,10 @@ To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL st
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA
-      `DATASET_NAME`
-    SET OPTIONS (
-      failover_reservation = ADMIN_PROJECT_ID.RESERVATION_NAME);
-    ```
+        ALTER SCHEMA
+          `DATASET_NAME`
+        SET OPTIONS (
+          failover_reservation = ADMIN_PROJECT_ID.RESERVATION_NAME);
     
     Replace the following:
     
@@ -340,12 +334,10 @@ To detach a dataset from a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL 
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA
-      `DATASET_NAME`
-    SET OPTIONS (
-      failover_reservation = NULL);
-    ```
+        ALTER SCHEMA
+          `DATASET_NAME`
+        SET OPTIONS (
+          failover_reservation = NULL);
     
     Replace the following:
     
@@ -379,12 +371,10 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    SET OPTIONS (
-      is_primary = TRUE, failover_mode=FAILOVER_MODE);
-    ```
+        ALTER RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        SET OPTIONS (
+          is_primary = TRUE, failover_mode=FAILOVER_MODE);
     
     Replace the following:
     
@@ -449,59 +439,55 @@ To view these metrics in Monitoring, do the following:
 
 To determine the state of your replicas, query the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) . For example:
 
-``` notranslate
-SELECT
-  schema_name,
-  replica_name,
-  creation_complete,
-  replica_primary_assigned,
-  replica_primary_assignment_complete
-FROM
-  `region-LOCATION`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
-WHERE
-  schema_name="my_dataset"
-```
+    SELECT
+      schema_name,
+      replica_name,
+      creation_complete,
+      replica_primary_assigned,
+      replica_primary_assignment_complete
+    FROM
+      `region-LOCATION`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
+    WHERE
+      schema_name="my_dataset"
 
 The following query returns the jobs from the last seven days that would fail if their datasets were failover datasets:
 
-``` notranslate
-WITH
-  non_epe_reservations AS (
-    SELECT project_id, reservation_name
-    FROM `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS
-    WHERE edition != 'ENTERPRISE_PLUS'
-  )
-SELECT *
-FROM
-  (
-    SELECT job_id
+    WITH
+      non_epe_reservations AS (
+        SELECT project_id, reservation_name
+        FROM `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS
+        WHERE edition != 'ENTERPRISE_PLUS'
+      )
+    SELECT *
     FROM
       (
-        SELECT
-          job_id,
-          reservation_id,
-          ARRAY_CONCAT(referenced_tables, [destination_table]) AS all_referenced_tables,
-          query
+        SELECT job_id
         FROM
-          `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.JOBS
-        WHERE
-          creation_time
-          BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-          AND CURRENT_TIMESTAMP()
-      ) A,
-      UNNEST(all_referenced_tables) AS referenced_table
-  ) jobs
-LEFT OUTER JOIN non_epe_reservations
-  ON (
-    jobs.reservation_id = CONCAT(
-      non_epe_reservations.project_id, ':', 'LOCATION', '.', non_epe_reservations.reservation_name))
-WHERE
-  CONCAT(jobs.project_id, ':', jobs.dataset_id)
-  IN UNNEST(
-    [
-      'PROJECT_ID:DATASET_ID',
-      'PROJECT_ID:DATASET_ID']);
-```
+          (
+            SELECT
+              job_id,
+              reservation_id,
+              ARRAY_CONCAT(referenced_tables, [destination_table]) AS all_referenced_tables,
+              query
+            FROM
+              `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.JOBS
+            WHERE
+              creation_time
+              BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+              AND CURRENT_TIMESTAMP()
+          ) A,
+          UNNEST(all_referenced_tables) AS referenced_table
+      ) jobs
+    LEFT OUTER JOIN non_epe_reservations
+      ON (
+        jobs.reservation_id = CONCAT(
+          non_epe_reservations.project_id, ':', 'LOCATION', '.', non_epe_reservations.reservation_name))
+    WHERE
+      CONCAT(jobs.project_id, ':', jobs.dataset_id)
+      IN UNNEST(
+        [
+          'PROJECT_ID:DATASET_ID',
+          'PROJECT_ID:DATASET_ID']);
 
 Replace the following:
 

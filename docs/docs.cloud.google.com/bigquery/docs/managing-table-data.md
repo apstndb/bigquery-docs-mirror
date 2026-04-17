@@ -54,7 +54,7 @@ To append to or overwrite a table using query results, specify a destination tab
 
 You can use the following query to append records from one table to another:
 
-``` notranslate
+``` 
   INSERT INTO <projectID>.<datasetID>.<table1> (
     <column2>,
     <column3>) (SELECT * FROM <projectID>.<datasetID>.<table2>)
@@ -122,13 +122,11 @@ To specify the number of rows to skip before displaying table data, use the ` --
 
 If the table you're browsing is in a project other than your default project, add the project ID to the command in the following format: `  project_id:dataset.table  ` .
 
-``` notranslate
-bq head \
---max_rows integer1 \
---start_row integer2 \
---selected_fields "columns" \
-project_id:dataset.table
-```
+    bq head \
+    --max_rows integer1 \
+    --start_row integer2 \
+    --selected_fields "columns" \
+    project_id:dataset.table
 
 Where:
 

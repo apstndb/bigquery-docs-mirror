@@ -103,18 +103,16 @@ This tutorial queries BigQuery datasets and uses the Google Maps JavaScript API.
 
 2.  To authenticate with your project, enter the following code:
     
-    ``` notranslate
-    # REQUIRED: Authenticate with your project.
-    GCP_PROJECT_ID = "PROJECT_ID"  #@param {type:"string"}
-    
-    from google.colab import auth
-    from google.colab import userdata
-    
-    auth.authenticate_user(project_id=GCP_PROJECT_ID)
-    
-    # Set GMP_API_KEY to none
-    GMP_API_KEY = None
-    ```
+        # REQUIRED: Authenticate with your project.
+        GCP_PROJECT_ID = "PROJECT_ID"  #@param {type:"string"}
+        
+        from google.colab import auth
+        from google.colab import userdata
+        
+        auth.authenticate_user(project_id=GCP_PROJECT_ID)
+        
+        # Set GMP_API_KEY to none
+        GMP_API_KEY = None
     
     Replace PROJECT\_ID with your project ID.
 
@@ -152,15 +150,13 @@ This step is necessary only if you're using the Maps API. If you don't authentic
 
 8.  To authenticate with the Maps API, enter the following code:
     
-    ``` notranslate
-    # Authenticate with the Google Maps JavaScript API.
-    GMP_API_SECRET_KEY_NAME = "GMP_API_KEY" #@param {type:"string"}
-    
-    if GMP_API_SECRET_KEY_NAME:
-      GMP_API_KEY = userdata.get(GMP_API_SECRET_KEY_NAME) if GMP_API_SECRET_KEY_NAME else None
-    else:
-      GMP_API_KEY = None
-    ```
+        # Authenticate with the Google Maps JavaScript API.
+        GMP_API_SECRET_KEY_NAME = "GMP_API_KEY" #@param {type:"string"}
+        
+        if GMP_API_SECRET_KEY_NAME:
+          GMP_API_KEY = userdata.get(GMP_API_SECRET_KEY_NAME) if GMP_API_SECRET_KEY_NAME else None
+        else:
+          GMP_API_KEY = None
 
 9.  When prompted, click **Grant access** to give the notebook access to your key, if you agree.
 
@@ -189,10 +185,8 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
 
 2.  To install the `pydeck` and `h3` packages, enter the following code:
     
-    ``` notranslate
-    # Install pydeck and h3.
-    !pip install pydeck>=0.9 h3>=4.2
-    ```
+        # Install pydeck and h3.
+        !pip install pydeck>=0.9 h3>=4.2
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -204,15 +198,13 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
 
 2.  To import the Python libraries, enter the following code:
     
-    ``` notranslate
-    # Import data science libraries.
-    import branca
-    import geemap.deck as gmdk
-    import h3
-    import pydeck as pdk
-    import geopandas as gpd
-    import shapely
-    ```
+        # Import data science libraries.
+        import branca
+        import geemap.deck as gmdk
+        import h3
+        import pydeck as pdk
+        import geopandas as gpd
+        import shapely
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -224,11 +216,9 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
 
 2.  To enable `pandas` DataFrames, enter the following code:
     
-    ``` notranslate
-    # Enable displaying pandas data frames as interactive tables by default.
-    from google.colab import data_table
-    data_table.enable_dataframe_formatter()
-    ```
+        # Enable displaying pandas data frames as interactive tables by default.
+        from google.colab import data_table
+        data_table.enable_dataframe_formatter()
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -242,28 +232,26 @@ In this section, you create a shared routine that renders layers on a base map.
 
 2.  To create a shared routine for rendering layers on a map, enter the following code:
     
-    ``` notranslate
-    # Set Google Maps as the base map provider.
-    MAP_PROVIDER_GOOGLE = pdk.bindings.base_map_provider.BaseMapProvider.GOOGLE_MAPS.value
-    
-    # Shared routine for rendering layers on a map using geemap.deck.
-    def display_pydeck_map(layers, view_state, **kwargs):
-      deck_kwargs = kwargs.copy()
-    
-      # Use Google Maps as the base map only if the API key is provided.
-      if GMP_API_KEY:
-        deck_kwargs.update({
-          "map_provider": MAP_PROVIDER_GOOGLE,
-          "map_style": pdk.bindings.map_styles.GOOGLE_ROAD,
-          "api_keys": {MAP_PROVIDER_GOOGLE: GMP_API_KEY},
-        })
-    
-      m = gmdk.Map(initial_view_state=view_state, ee_initialize=False, **deck_kwargs)
-    
-      for layer in layers:
-        m.add_layer(layer)
-      return m
-    ```
+        # Set Google Maps as the base map provider.
+        MAP_PROVIDER_GOOGLE = pdk.bindings.base_map_provider.BaseMapProvider.GOOGLE_MAPS.value
+        
+        # Shared routine for rendering layers on a map using geemap.deck.
+        def display_pydeck_map(layers, view_state, **kwargs):
+          deck_kwargs = kwargs.copy()
+        
+          # Use Google Maps as the base map only if the API key is provided.
+          if GMP_API_KEY:
+            deck_kwargs.update({
+              "map_provider": MAP_PROVIDER_GOOGLE,
+              "map_style": pdk.bindings.map_styles.GOOGLE_ROAD,
+              "api_keys": {MAP_PROVIDER_GOOGLE: GMP_API_KEY},
+            })
+        
+          m = gmdk.Map(initial_view_state=view_state, ee_initialize=False, **deck_kwargs)
+        
+          for layer in layers:
+            m.add_layer(layer)
+          return m
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -281,21 +269,19 @@ The following example demonstrates how to use a layer and a scatterplot layer to
 
 2.  To query the San Francisco Ford GoBike Share public dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
-    ``` notranslate
-    # Query the station ID, station name, station short name, and station
-    # geometry from the bike share dataset.
-    # NOTE: In this tutorial, the denormalized 'lat' and 'lon' columns are
-    # ignored. They are decomposed components of the geometry.
-    %%bigquery gdf_sf_bikestations --project {GCP_PROJECT_ID} --use_geodataframe station_geom
-    
-    SELECT
-      station_id,
-      name,
-      short_name,
-      station_geom
-    FROM
-      `bigquery-public-data.san_francisco_bikeshare.bikeshare_station_info`
-    ```
+        # Query the station ID, station name, station short name, and station
+        # geometry from the bike share dataset.
+        # NOTE: In this tutorial, the denormalized 'lat' and 'lon' columns are
+        # ignored. They are decomposed components of the geometry.
+        %%bigquery gdf_sf_bikestations --project {GCP_PROJECT_ID} --use_geodataframe station_geom
+        
+        SELECT
+          station_id,
+          name,
+          short_name,
+          station_geom
+        FROM
+          `bigquery-public-data.san_francisco_bikeshare.bikeshare_station_info`
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -307,10 +293,8 @@ The following example demonstrates how to use a layer and a scatterplot layer to
 
 5.  To get a summary of the DataFrame, including columns and data types, enter the following code:
     
-    ``` notranslate
-    # Get a summary of the DataFrame
-    gdf_sf_bikestations.info()
-    ```
+        # Get a summary of the DataFrame
+        gdf_sf_bikestations.info()
 
 6.  Click play\_circle\_filled **Run cell** .
     
@@ -332,10 +316,8 @@ The following example demonstrates how to use a layer and a scatterplot layer to
 
 8.  To preview the first five rows of the DataFrame, enter the following code:
     
-    ``` notranslate
-    # Preview the first five rows
-    gdf_sf_bikestations.head()
-    ```
+        # Preview the first five rows
+        gdf_sf_bikestations.head()
 
 9.  Click play\_circle\_filled **Run cell** .
     
@@ -351,11 +333,9 @@ Since `gdf_sf_bikestations` is a `geopandas.GeoDataFrame` , coordinates are acce
 
 2.  To extract the longitude and latitude values from the `station_geom` column, enter the following code:
     
-    ``` notranslate
-    # Extract the longitude (x) and latitude (y) from station_geom.
-    gdf_sf_bikestations["longitude"] = gdf_sf_bikestations["station_geom"].x
-    gdf_sf_bikestations["latitude"] = gdf_sf_bikestations["station_geom"].y
-    ```
+        # Extract the longitude (x) and latitude (y) from station_geom.
+        gdf_sf_bikestations["longitude"] = gdf_sf_bikestations["station_geom"].x
+        gdf_sf_bikestations["latitude"] = gdf_sf_bikestations["station_geom"].y
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -365,22 +345,20 @@ Since `gdf_sf_bikestations` is a `geopandas.GeoDataFrame` , coordinates are acce
 
 5.  To render the scatter plot of bike share stations based on the longitude and latitude values you extracted previously, enter the following code:
     
-    ``` notranslate
-    # Render a scatter plot using pydeck with the extracted longitude and
-    # latitude columns in the gdf_sf_bikestations geopandas.GeoDataFrame.
-    scatterplot_layer = pdk.Layer(
-      "ScatterplotLayer",
-      id="bike_stations_scatterplot",
-      data=gdf_sf_bikestations,
-      get_position=['longitude', 'latitude'],
-      get_radius=100,
-      get_fill_color=[255, 0, 0, 140],  # Adjust color as desired
-      pickable=True,
-    )
-    
-    view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
-    display_pydeck_map([scatterplot_layer], view_state)
-    ```
+        # Render a scatter plot using pydeck with the extracted longitude and
+        # latitude columns in the gdf_sf_bikestations geopandas.GeoDataFrame.
+        scatterplot_layer = pdk.Layer(
+          "ScatterplotLayer",
+          id="bike_stations_scatterplot",
+          data=gdf_sf_bikestations,
+          get_position=['longitude', 'latitude'],
+          get_radius=100,
+          get_fill_color=[255, 0, 0, 140],  # Adjust color as desired
+          pickable=True,
+        )
+        
+        view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
+        display_pydeck_map([scatterplot_layer], view_state)
 
 6.  Click play\_circle\_filled **Run cell** .
     
@@ -409,17 +387,15 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 2.  To query the geographic data from the `bigquery-public-data.san_francisco_neighborhoods.boundaries` table in the San Francisco Neighborhoods dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
-    ``` notranslate
-    # Query the neighborhood name and geometry from the San Francisco
-    # neighborhoods dataset.
-    %%bigquery gdf_sanfrancisco_neighborhoods --project {GCP_PROJECT_ID} --use_geodataframe geometry
-    
-    SELECT
-      neighborhood,
-      neighborhood_geom AS geometry
-    FROM
-      `bigquery-public-data.san_francisco_neighborhoods.boundaries`
-    ```
+        # Query the neighborhood name and geometry from the San Francisco
+        # neighborhoods dataset.
+        %%bigquery gdf_sanfrancisco_neighborhoods --project {GCP_PROJECT_ID} --use_geodataframe geometry
+        
+        SELECT
+          neighborhood,
+          neighborhood_geom AS geometry
+        FROM
+          `bigquery-public-data.san_francisco_neighborhoods.boundaries`
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -431,10 +407,8 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 5.  To get a summary of the DataFrame, enter the following code:
     
-    ``` notranslate
-    # Get a summary of the DataFrame
-    gdf_sanfrancisco_neighborhoods.info()
-    ```
+        # Get a summary of the DataFrame
+        gdf_sanfrancisco_neighborhoods.info()
 
 6.  Click play\_circle\_filled **Run cell** .
     
@@ -452,10 +426,8 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 7.  To preview the first row of the DataFrame, enter the following code:
     
-    ``` notranslate
-    # Preview the first row
-    gdf_sanfrancisco_neighborhoods.head(1)
-    ```
+        # Preview the first row
+        gdf_sanfrancisco_neighborhoods.head(1)
 
 8.  Click play\_circle\_filled **Run cell** .
     
@@ -469,22 +441,20 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 10. To visualize the polygons, enter the following code. `pydeck` is used to convert each `shapely` object instance in the geometry column into `GeoJSON` format:
     
-    ``` notranslate
-    # Visualize the polygons.
-    geojson_layer = pdk.Layer(
-        'GeoJsonLayer',
-        id="sf_neighborhoods",
-        data=gdf_sanfrancisco_neighborhoods,
-        get_line_color=[127, 0, 127, 255],
-        get_fill_color=[60, 60, 60, 50],
-        get_line_width=100,
-        pickable=True,
-        stroked=True,
-        filled=True,
-      )
-    view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
-    display_pydeck_map([geojson_layer], view_state)
-    ```
+        # Visualize the polygons.
+        geojson_layer = pdk.Layer(
+            'GeoJsonLayer',
+            id="sf_neighborhoods",
+            data=gdf_sanfrancisco_neighborhoods,
+            get_line_color=[127, 0, 127, 255],
+            get_fill_color=[60, 60, 60, 50],
+            get_line_width=100,
+            pickable=True,
+            stroked=True,
+            filled=True,
+          )
+        view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
+        display_pydeck_map([geojson_layer], view_state)
 
 11. Click play\_circle\_filled **Run cell** .
     
@@ -502,16 +472,14 @@ In this section, you use a polygon layer to render an array of points and use th
 
 2.  To aggregate and count the number of stations per neighborhood and to create a `polygon` column that contains an array of points, enter the following code:
     
-    ``` notranslate
-    # Aggregate and count the number of stations per neighborhood.
-    gdf_count_stations = gdf_sanfrancisco_neighborhoods.sjoin(gdf_sf_bikestations, how='left', predicate='contains')
-    gdf_count_stations = gdf_count_stations.groupby(by='neighborhood')['station_id'].count().rename('num_stations')
-    gdf_stations_x_neighborhood = gdf_sanfrancisco_neighborhoods.join(gdf_count_stations, on='neighborhood', how='inner')
-    
-    # To simulate non-GeoJSON input data, create a polygon column that contains
-    # an array of points by using the pandas.Series.map method.
-    gdf_stations_x_neighborhood['polygon'] = gdf_stations_x_neighborhood['geometry'].map(lambda g: list(g.exterior.coords))
-    ```
+        # Aggregate and count the number of stations per neighborhood.
+        gdf_count_stations = gdf_sanfrancisco_neighborhoods.sjoin(gdf_sf_bikestations, how='left', predicate='contains')
+        gdf_count_stations = gdf_count_stations.groupby(by='neighborhood')['station_id'].count().rename('num_stations')
+        gdf_stations_x_neighborhood = gdf_sanfrancisco_neighborhoods.join(gdf_count_stations, on='neighborhood', how='inner')
+        
+        # To simulate non-GeoJSON input data, create a polygon column that contains
+        # an array of points by using the pandas.Series.map method.
+        gdf_stations_x_neighborhood['polygon'] = gdf_stations_x_neighborhood['geometry'].map(lambda g: list(g.exterior.coords))
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -521,17 +489,15 @@ In this section, you use a polygon layer to render an array of points and use th
 
 5.  To add a `fill_color` column for each of the polygons, enter the following code:
     
-    ``` notranslate
-    # Create a color map gradient using the branch library, and add a fill_color
-    # column for each of the polygons.
-    colormap = branca.colormap.LinearColormap(
-      colors=["lightblue", "darkred"],
-      vmin=0,
-      vmax=gdf_stations_x_neighborhood['num_stations'].max(),
-    )
-    gdf_stations_x_neighborhood['fill_color'] = gdf_stations_x_neighborhood['num_stations'] \
-      .map(lambda c: list(colormap.rgba_bytes_tuple(c)[:3]) + [0.7 * 255])   # force opacity of 0.7
-    ```
+        # Create a color map gradient using the branch library, and add a fill_color
+        # column for each of the polygons.
+        colormap = branca.colormap.LinearColormap(
+          colors=["lightblue", "darkred"],
+          vmin=0,
+          vmax=gdf_stations_x_neighborhood['num_stations'].max(),
+        )
+        gdf_stations_x_neighborhood['fill_color'] = gdf_stations_x_neighborhood['num_stations'] \
+          .map(lambda c: list(colormap.rgba_bytes_tuple(c)[:3]) + [0.7 * 255])   # force opacity of 0.7
 
 6.  Click play\_circle\_filled **Run cell** .
     
@@ -541,23 +507,21 @@ In this section, you use a polygon layer to render an array of points and use th
 
 8.  To render the polygon layer, enter the following code:
     
-    ``` notranslate
-    # Render the polygon layer.
-    polygon_layer = pdk.Layer(
-      'PolygonLayer',
-      id="bike_stations_choropleth",
-      data=gdf_stations_x_neighborhood,
-      get_polygon='polygon',
-      get_fill_color='fill_color',
-      get_line_color=[0, 0, 0, 255],
-      get_line_width=50,
-      pickable=True,
-      stroked=True,
-      filled=True,
-    )
-    view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
-    display_pydeck_map([polygon_layer], view_state)
-    ```
+        # Render the polygon layer.
+        polygon_layer = pdk.Layer(
+          'PolygonLayer',
+          id="bike_stations_choropleth",
+          data=gdf_stations_x_neighborhood,
+          get_polygon='polygon',
+          get_fill_color='fill_color',
+          get_line_color=[0, 0, 0, 255],
+          get_line_width=50,
+          pickable=True,
+          stroked=True,
+          filled=True,
+        )
+        view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
+        display_pydeck_map([polygon_layer], view_state)
 
 9.  Click play\_circle\_filled **Run cell** .
     
@@ -581,22 +545,20 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
 
 2.  To query the data in the San Francisco Police Department (SFPD) Reports dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
-    ``` notranslate
-    # Query the incident key and location  data from the SFPD reports dataset.
-    %%bigquery gdf_incidents --project {GCP_PROJECT_ID} --use_geodataframe location_geography
-    
-    SELECT
-      unique_key,
-      location_geography
-    FROM (
-      SELECT
-        unique_key,
-        SAFE.ST_GEOGFROMTEXT(location) AS location_geography, # WKT string to GEOMETRY
-        EXTRACT(YEAR FROM timestamp) AS year,
-      FROM `bigquery-public-data.san_francisco_sfpd_incidents.sfpd_incidents` incidents
-    )
-    WHERE year = 2015
-    ```
+        # Query the incident key and location  data from the SFPD reports dataset.
+        %%bigquery gdf_incidents --project {GCP_PROJECT_ID} --use_geodataframe location_geography
+        
+        SELECT
+          unique_key,
+          location_geography
+        FROM (
+          SELECT
+            unique_key,
+            SAFE.ST_GEOGFROMTEXT(location) AS location_geography, # WKT string to GEOMETRY
+            EXTRACT(YEAR FROM timestamp) AS year,
+          FROM `bigquery-public-data.san_francisco_sfpd_incidents.sfpd_incidents` incidents
+        )
+        WHERE year = 2015
 
 3.  Click play\_circle\_filled **Run cell** .
     
@@ -608,22 +570,20 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
 
 5.  To compute the cell for each incident's latitude and longitude, aggregate the incidents for each cell, construct a `geopandas` DataFrame, and add the center of each hexagon for the heatmap layer, enter the following code:
     
-    ``` notranslate
-    # Compute the cell for each incident's latitude and longitude.
-    H3_RESOLUTION = 9
-    gdf_incidents['h3_cell'] = gdf_incidents.geometry.apply(
-        lambda geom: h3.latlng_to_cell(geom.y, geom.x, H3_RESOLUTION)
-    )
-    
-    # Aggregate the incidents for each hexagon cell.
-    count_incidents = gdf_incidents.groupby(by='h3_cell')['unique_key'].count().rename('num_incidents')
-    
-    # Construct a new geopandas.GeoDataFrame with the aggregate results.
-    # Add the center of each hexagon for the HeatmapLayer to render.
-    gdf_incidents_x_cell = gpd.GeoDataFrame(data=count_incidents).reset_index()
-    gdf_incidents_x_cell['h3_center'] = gdf_incidents_x_cell['h3_cell'].apply(h3.cell_to_latlng)
-    gdf_incidents_x_cell.info()
-    ```
+        # Compute the cell for each incident's latitude and longitude.
+        H3_RESOLUTION = 9
+        gdf_incidents['h3_cell'] = gdf_incidents.geometry.apply(
+            lambda geom: h3.latlng_to_cell(geom.y, geom.x, H3_RESOLUTION)
+        )
+        
+        # Aggregate the incidents for each hexagon cell.
+        count_incidents = gdf_incidents.groupby(by='h3_cell')['unique_key'].count().rename('num_incidents')
+        
+        # Construct a new geopandas.GeoDataFrame with the aggregate results.
+        # Add the center of each hexagon for the HeatmapLayer to render.
+        gdf_incidents_x_cell = gpd.GeoDataFrame(data=count_incidents).reset_index()
+        gdf_incidents_x_cell['h3_center'] = gdf_incidents_x_cell['h3_cell'].apply(h3.cell_to_latlng)
+        gdf_incidents_x_cell.info()
 
 6.  Click play\_circle\_filled **Run cell** .
     
@@ -644,10 +604,8 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
 
 8.  To preview the first five rows of the DataFrame, enter the following code:
     
-    ``` notranslate
-    # Preview the first five rows.
-    gdf_incidents_x_cell.head()
-    ```
+        # Preview the first five rows.
+        gdf_incidents_x_cell.head()
 
 9.  Click play\_circle\_filled **Run cell** .
     
@@ -659,17 +617,15 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
 
 11. To convert the data into a JSON format that can be used by `HeatmapLayer` , enter the following code:
     
-    ``` notranslate
-    # Convert to a JSON format recognized by the HeatmapLayer.
-    def _make_heatmap_datum(row) -> dict:
-      return {
-          "latitude": row['h3_center'][0],
-          "longitude": row['h3_center'][1],
-          "weight": float(row['num_incidents']),
-      }
-    
-    heatmap_data = gdf_incidents_x_cell.apply(_make_heatmap_datum, axis='columns').values.tolist()
-    ```
+        # Convert to a JSON format recognized by the HeatmapLayer.
+        def _make_heatmap_datum(row) -> dict:
+          return {
+              "latitude": row['h3_center'][0],
+              "longitude": row['h3_center'][1],
+              "weight": float(row['num_incidents']),
+          }
+        
+        heatmap_data = gdf_incidents_x_cell.apply(_make_heatmap_datum, axis='columns').values.tolist()
 
 12. Click play\_circle\_filled **Run cell** .
     
@@ -679,21 +635,19 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
 
 14. To render the heatmap, enter the following code:
     
-    ``` notranslate
-    # Render the heatmap.
-    heatmap_layer = pdk.Layer(
-      "HeatmapLayer",
-      id="sfpd_heatmap",
-      data=heatmap_data,
-      get_position=['longitude', 'latitude'],
-      get_weight='weight',
-      opacity=0.7,
-      radius_pixels=99,  # this limitation can introduce artifacts (see above)
-      aggregation='MEAN',
-    )
-    view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
-    display_pydeck_map([heatmap_layer], view_state)
-    ```
+        # Render the heatmap.
+        heatmap_layer = pdk.Layer(
+          "HeatmapLayer",
+          id="sfpd_heatmap",
+          data=heatmap_data,
+          get_position=['longitude', 'latitude'],
+          get_weight='weight',
+          opacity=0.7,
+          radius_pixels=99,  # this limitation can introduce artifacts (see above)
+          aggregation='MEAN',
+        )
+        view_state = pdk.ViewState(latitude=37.77613, longitude=-122.42284, zoom=12)
+        display_pydeck_map([heatmap_layer], view_state)
 
 15. Click play\_circle\_filled **Run cell** .
     

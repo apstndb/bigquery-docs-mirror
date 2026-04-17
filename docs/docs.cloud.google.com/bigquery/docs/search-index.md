@@ -19,12 +19,10 @@ When you create a search index, you can specify the type of [text analyzer](http
 
 In the following example, a search index is created on columns `a` and `c` of `simple_table` and uses the `LOG_ANALYZER` text analyzer by default:
 
-``` notranslate
-CREATE TABLE dataset.simple_table(a STRING, b INT64, c JSON);
-
-CREATE SEARCH INDEX my_index
-ON dataset.simple_table(a, c);
-```
+    CREATE TABLE dataset.simple_table(a STRING, b INT64, c JSON);
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.simple_table(a, c);
 
 ### Create a search index on all columns with the `NO_OP_ANALYZER` analyzer
 
@@ -32,19 +30,17 @@ When you create a search index on `ALL COLUMNS` , all `STRING` or `JSON` data in
 
 In the following example, a search index is created on `a` , `c.e` , and `c.f.g` , and uses the `NO_OP_ANALYZER` text analyzer:
 
-``` notranslate
-CREATE TABLE dataset.my_table(
-  a STRING,
-  b INT64,
-  c STRUCT <d INT64,
-            e ARRAY<STRING>,
-            f STRUCT<g STRING, h INT64>>) AS
-SELECT 'hello' AS a, 10 AS b, (20, ['x', 'y'], ('z', 30)) AS c;
-
-CREATE SEARCH INDEX my_index
-ON dataset.my_table(ALL COLUMNS)
-OPTIONS (analyzer = 'NO_OP_ANALYZER');
-```
+    CREATE TABLE dataset.my_table(
+      a STRING,
+      b INT64,
+      c STRUCT <d INT64,
+                e ARRAY<STRING>,
+                f STRUCT<g STRING, h INT64>>) AS
+    SELECT 'hello' AS a, 10 AS b, (20, ['x', 'y'], ('z', 30)) AS c;
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.my_table(ALL COLUMNS)
+    OPTIONS (analyzer = 'NO_OP_ANALYZER');
 
 Since the search index was created on `ALL COLUMNS` , any columns added to the table are automatically indexed if they contain `STRING` data.
 
@@ -54,13 +50,11 @@ When you create a search index, you can specify data types to use. Data types co
 
 In the following example, a search index is created on columns `a` , `b` , `c` and `d` of a table named `simple_table` . The supported column data types are `STRING` , `INT64` , and `TIMESTAMP` .
 
-``` notranslate
-CREATE TABLE dataset.simple_table(a STRING, b INT64, c JSON, d TIMESTAMP);
-
-CREATE SEARCH INDEX my_index
-ON dataset.simple_table(a, b, c, d)
-OPTIONS ( data_types = ['STRING', 'INT64', 'TIMESTAMP']);
-```
+    CREATE TABLE dataset.simple_table(a STRING, b INT64, c JSON, d TIMESTAMP);
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.simple_table(a, b, c, d)
+    OPTIONS ( data_types = ['STRING', 'INT64', 'TIMESTAMP']);
 
 ### Create a search index on all columns and specify the data types
 
@@ -68,26 +62,24 @@ When you create a search index on `ALL COLUMNS` with the `data_types` option spe
 
 In the following example, a search index is created on `ALL COLUMNS` with data types specified. Columns `a` , `b` , `c` , `d.e` , `d.f` , `d.g.h` , `d.g.i` of a table named `my_table` is indexed:
 
-``` notranslate
-CREATE TABLE dataset.my_table(
-  a STRING,
-  b INT64,
-  c TIMESTAMP,
-  d STRUCT <e INT64,
-            f ARRAY<STRING>,
-            g STRUCT<h STRING, i INT64>>)
-AS (
-  SELECT
-    'hello' AS a,
-    10 AS b,
-    TIMESTAMP('2008-12-25 15:30:00 UTC') AS c,
-    (20, ['x', 'y'], ('z', 30)) AS d;
-)
-
-CREATE SEARCH INDEX my_index
-ON dataset.my_table(ALL COLUMNS)
-OPTIONS ( data_types = ['STRING', 'INT64', 'TIMESTAMP']);
-```
+    CREATE TABLE dataset.my_table(
+      a STRING,
+      b INT64,
+      c TIMESTAMP,
+      d STRUCT <e INT64,
+                f ARRAY<STRING>,
+                g STRUCT<h STRING, i INT64>>)
+    AS (
+      SELECT
+        'hello' AS a,
+        10 AS b,
+        TIMESTAMP('2008-12-25 15:30:00 UTC') AS c,
+        (20, ['x', 'y'], ('z', 30)) AS d;
+    )
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.my_table(ALL COLUMNS)
+    OPTIONS ( data_types = ['STRING', 'INT64', 'TIMESTAMP']);
 
 Since the search index was created on `ALL COLUMNS` , any columns added to the table are automatically indexed if they match with any of the specified data types.
 
@@ -167,18 +159,16 @@ This section includes example queries of the `INFORMATION_SCHEMA.SEARCH_INDEX_CO
 
 The following example creates a search index on all columns of `my_table` .
 
-``` notranslate
-CREATE TABLE dataset.my_table(
-  a STRING,
-  b INT64,
-  c STRUCT <d INT64,
-            e ARRAY<STRING>,
-            f STRUCT<g STRING, h INT64>>) AS
-SELECT 'hello' AS a, 10 AS b, (20, ['x', 'y'], ('z', 30)) AS c;
-
-CREATE SEARCH INDEX my_index
-ON dataset.my_table(ALL COLUMNS);
-```
+    CREATE TABLE dataset.my_table(
+      a STRING,
+      b INT64,
+      c STRUCT <d INT64,
+                e ARRAY<STRING>,
+                f STRUCT<g STRING, h INT64>>) AS
+    SELECT 'hello' AS a, 10 AS b, (20, ['x', 'y'], ('z', 30)) AS c;
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.my_table(ALL COLUMNS);
 
 The following query extracts information on which fields are indexed. The `index_field_path` indicates which field of a column is indexed. This differs from the `index_column_name` only in the case of a `STRUCT` , where the full path to the indexed field is given. In this example, column `c` contains an `ARRAY<STRING>` field `e` and another `STRUCT` called `f` which contains a `STRING` field `g` , each of which is indexed.
 
@@ -197,36 +187,34 @@ The result is similar to the following:
 
 The following query joins the `INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS` view with the `INFORMATION_SCHEMA.SEARCH_INDEXES` and `INFORMATION_SCHEMA.COLUMNS` views to include the search index status and the data type of each column:
 
-``` notranslate
-SELECT
-  index_columns_view.index_catalog AS project_name,
-  index_columns_view.index_SCHEMA AS dataset_name,
-  indexes_view.TABLE_NAME AS table_name,
-  indexes_view.INDEX_NAME AS index_name,
-  indexes_view.INDEX_STATUS AS status,
-  index_columns_view.INDEX_COLUMN_NAME AS column_name,
-  index_columns_view.INDEX_FIELD_PATH AS field_path,
-  columns_view.DATA_TYPE AS data_type
-FROM
-  mydataset.INFORMATION_SCHEMA.SEARCH_INDEXES indexes_view
-INNER JOIN
-  mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS index_columns_view
-  ON
-    indexes_view.TABLE_NAME = index_columns_view.TABLE_NAME
-    AND indexes_view.INDEX_NAME = index_columns_view.INDEX_NAME
-LEFT OUTER JOIN
-  mydataset.INFORMATION_SCHEMA.COLUMNS columns_view
-  ON
-    indexes_view.INDEX_CATALOG = columns_view.TABLE_CATALOG
-    AND indexes_view.INDEX_SCHEMA = columns_view.TABLE_SCHEMA
-    AND index_columns_view.TABLE_NAME = columns_view.TABLE_NAME
-    AND index_columns_view.INDEX_COLUMN_NAME = columns_view.COLUMN_NAME
-ORDER BY
-  project_name,
-  dataset_name,
-  table_name,
-  column_name;
-```
+    SELECT
+      index_columns_view.index_catalog AS project_name,
+      index_columns_view.index_SCHEMA AS dataset_name,
+      indexes_view.TABLE_NAME AS table_name,
+      indexes_view.INDEX_NAME AS index_name,
+      indexes_view.INDEX_STATUS AS status,
+      index_columns_view.INDEX_COLUMN_NAME AS column_name,
+      index_columns_view.INDEX_FIELD_PATH AS field_path,
+      columns_view.DATA_TYPE AS data_type
+    FROM
+      mydataset.INFORMATION_SCHEMA.SEARCH_INDEXES indexes_view
+    INNER JOIN
+      mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS index_columns_view
+      ON
+        indexes_view.TABLE_NAME = index_columns_view.TABLE_NAME
+        AND indexes_view.INDEX_NAME = index_columns_view.INDEX_NAME
+    LEFT OUTER JOIN
+      mydataset.INFORMATION_SCHEMA.COLUMNS columns_view
+      ON
+        indexes_view.INDEX_CATALOG = columns_view.TABLE_CATALOG
+        AND indexes_view.INDEX_SCHEMA = columns_view.TABLE_SCHEMA
+        AND index_columns_view.TABLE_NAME = columns_view.TABLE_NAME
+        AND index_columns_view.INDEX_COLUMN_NAME = columns_view.COLUMN_NAME
+    ORDER BY
+      project_name,
+      dataset_name,
+      table_name,
+      column_name;
 
 The result is similar to the following:
 
@@ -246,35 +234,33 @@ This section includes example queries of the `INFORMATION_SCHEMA.SEARCH_INDEXES_
 
 The following example illustrates if the total indexed base table size across an organization, utilizing shared slots within the US multi-region, exceeds 100 TB:
 
-``` notranslate
-WITH
- indexed_base_table_size AS (
- SELECT
-   SUM(base_table.total_logical_bytes) AS total_logical_bytes
- FROM
-   `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
- JOIN
-   `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
- ON
-   (search_index.table_name = base_table.table_name
-     AND search_index.project_id = base_table.project_id
-     AND search_index.index_schema = base_table.table_schema)
- WHERE
-   TRUE
-   -- Excludes search indexes that are permanently disabled.
-   AND search_index.index_status != 'PERMANENTLY DISABLED'
-   -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
-   -- less than 10 GB. These tables don't count toward the limit.
-   AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
-   -- Excludes search indexes whose project has BACKGROUND reservation purchased
-   -- for search indexes.
-   AND search_index.use_background_reservation = false
- -- Outputs the total indexed base table size if it exceeds 100 TB,
- -- otherwise, doesn't return any output.
-)
-SELECT * FROM indexed_base_table_size
-WHERE total_logical_bytes >= 109951162777600 -- 100 TB
-```
+    WITH
+     indexed_base_table_size AS (
+     SELECT
+       SUM(base_table.total_logical_bytes) AS total_logical_bytes
+     FROM
+       `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
+     JOIN
+       `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
+     ON
+       (search_index.table_name = base_table.table_name
+         AND search_index.project_id = base_table.project_id
+         AND search_index.index_schema = base_table.table_schema)
+     WHERE
+       TRUE
+       -- Excludes search indexes that are permanently disabled.
+       AND search_index.index_status != 'PERMANENTLY DISABLED'
+       -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
+       -- less than 10 GB. These tables don't count toward the limit.
+       AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
+       -- Excludes search indexes whose project has BACKGROUND reservation purchased
+       -- for search indexes.
+       AND search_index.use_background_reservation = false
+     -- Outputs the total indexed base table size if it exceeds 100 TB,
+     -- otherwise, doesn't return any output.
+    )
+    SELECT * FROM indexed_base_table_size
+    WHERE total_logical_bytes >= 109951162777600 -- 100 TB
 
 The result is similar to the following:
 
@@ -288,28 +274,26 @@ The result is similar to the following:
 
 The following example gives the breakdown on each project in a US multi-region with the total size of indexed base tables:
 
-``` notranslate
-SELECT
- search_index.project_id,
- search_index.use_background_reservation,
- SUM(base_table.total_logical_bytes) AS total_logical_bytes
-FROM
- `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
-JOIN
- `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
-ON
- (search_index.table_name = base_table.table_name
-   AND search_index.project_id = base_table.project_id
-   AND search_index.index_schema = base_table.table_schema)
-WHERE
- TRUE
-  -- Excludes search indexes that are permanently disabled.
-  AND search_index.index_status != 'PERMANENTLY DISABLED'
-  -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
-  -- less than 10 GB. These tables don't count toward limit.
- AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
-GROUP BY search_index.project_id, search_index.use_background_reservation
-```
+    SELECT
+     search_index.project_id,
+     search_index.use_background_reservation,
+     SUM(base_table.total_logical_bytes) AS total_logical_bytes
+    FROM
+     `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION AS search_index
+    JOIN
+     `region-us`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION AS base_table
+    ON
+     (search_index.table_name = base_table.table_name
+       AND search_index.project_id = base_table.project_id
+       AND search_index.index_schema = base_table.table_schema)
+    WHERE
+     TRUE
+      -- Excludes search indexes that are permanently disabled.
+      AND search_index.index_status != 'PERMANENTLY DISABLED'
+      -- Excludes BASE_TABLE_TOO_SMALL search indexes whose base table size is
+      -- less than 10 GB. These tables don't count toward limit.
+     AND search_index.index_status_details.throttle_status != 'BASE_TABLE_TOO_SMALL'
+    GROUP BY search_index.project_id, search_index.use_background_reservation
 
 The result is similar to the following:
 
@@ -327,15 +311,13 @@ The result is similar to the following:
 
 This following example returns all search indexes that are throttled within the organization and region:
 
-``` notranslate
-SELECT project_id, index_schema, table_name, index_name
-FROM
- `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION
-WHERE
- -- Excludes search indexes that are permanently disabled.
- index_status != 'PERMANENTLY DISABLED'
- AND index_status_details.throttle_status IN ('ORGANIZATION_LIMIT_EXCEEDED', 'BASE_TABLE_TOO_LARGE')
-```
+    SELECT project_id, index_schema, table_name, index_name
+    FROM
+     `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION
+    WHERE
+     -- Excludes search indexes that are permanently disabled.
+     index_status != 'PERMANENTLY DISABLED'
+     AND index_status_details.throttle_status IN ('ORGANIZATION_LIMIT_EXCEEDED', 'BASE_TABLE_TOO_LARGE')
 
 The result is similar to the following:
 
@@ -382,13 +364,11 @@ Use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigque
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-    OPTIONS (
-      assignee = 'projects/PROJECT_ID',
-      job_type = 'BACKGROUND');
-    ```
+        CREATE ASSIGNMENT
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+        OPTIONS (
+          assignee = 'projects/PROJECT_ID',
+          job_type = 'BACKGROUND');
     
     Replace the following:
     
@@ -412,16 +392,14 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the `bq mk` command:
 
-``` notranslate
-bq mk \
-    --project_id=ADMIN_PROJECT_ID \
-    --location=LOCATION \
-    --reservation_assignment \
-    --reservation_id=RESERVATION_NAME \
-    --assignee_id=PROJECT_ID \
-    --job_type=BACKGROUND \
-    --assignee_type=PROJECT
-```
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --reservation_id=RESERVATION_NAME \
+        --assignee_id=PROJECT_ID \
+        --job_type=BACKGROUND \
+        --assignee_type=PROJECT
 
 Replace the following:
 
@@ -434,18 +412,16 @@ Replace the following:
 
 A new indexing job is created every time an index is created or updated on a single table. To view information about the job, query the [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . You can filter for indexing jobs by setting ``job_type IS NULL AND SEARCH(job_id, '`search_index`')`` in the `WHERE` clause of your query. The following example lists the five most recent indexing jobs in the project `my_project` :
 
-``` notranslate
-SELECT *
-FROM
- region-us.INFORMATION_SCHEMA.JOBS
-WHERE
-  project_id  = 'my_project'
-  AND job_type IS NULL
-  AND SEARCH(job_id, '`search_index`')
-ORDER BY
- creation_time DESC
-LIMIT 5;
-```
+    SELECT *
+    FROM
+     region-us.INFORMATION_SCHEMA.JOBS
+    WHERE
+      project_id  = 'my_project'
+      AND job_type IS NULL
+      AND SEARCH(job_id, '`search_index`')
+    ORDER BY
+     creation_time DESC
+    LIMIT 5;
 
 > **Note:** You can't view information about indexing jobs run in the default shared slot pool.
 
@@ -481,25 +457,23 @@ The following estimates can help you to approximate how many slots your reservat
 
 The best way to assess the number of slots you need to efficiently run your index-management jobs is to monitor your slot utilization and adjust the reservation size accordingly. The following query produces the daily slot usage for index-management jobs. Only the past 30 days are included in the region `us-west1` :
 
-``` notranslate
-SELECT
-  TIMESTAMP_TRUNC(job.creation_time, DAY) AS usage_date,
-  -- Aggregate total_slots_ms used for index-management jobs in a day and divide
-  -- by the number of milliseconds in a day. This value is most accurate for
-  -- days with consistent slot usage.
-  SAFE_DIVIDE(SUM(job.total_slot_ms), (1000 * 60 * 60 * 24)) AS average_daily_slot_usage
-FROM
-  `region-us-west1`.INFORMATION_SCHEMA.JOBS job
-WHERE
-  project_id = 'my_project'
-  AND job_type IS NULL
-  AND SEARCH(job_id, '`search_index`')
-GROUP BY
-  usage_date
-ORDER BY
-  usage_date DESC
-limit 30;
-```
+    SELECT
+      TIMESTAMP_TRUNC(job.creation_time, DAY) AS usage_date,
+      -- Aggregate total_slots_ms used for index-management jobs in a day and divide
+      -- by the number of milliseconds in a day. This value is most accurate for
+      -- days with consistent slot usage.
+      SAFE_DIVIDE(SUM(job.total_slot_ms), (1000 * 60 * 60 * 24)) AS average_daily_slot_usage
+    FROM
+      `region-us-west1`.INFORMATION_SCHEMA.JOBS job
+    WHERE
+      project_id = 'my_project'
+      AND job_type IS NULL
+      AND SEARCH(job_id, '`search_index`')
+    GROUP BY
+      usage_date
+    ORDER BY
+      usage_date DESC
+    limit 30;
 
 When there are insufficient slots to run index-management jobs, an index can become out of sync with its table and indexing jobs might fail. In this case, BigQuery rebuilds the index from scratch. To avoid having an out-of-sync index, ensure you have enough slots to support index updates from data ingestion and optimization. For more information on monitoring slot usage, see [admin resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
@@ -519,9 +493,7 @@ If an indexed table is deleted, its index is deleted automatically.
 
 Example:
 
-``` notranslate
-DROP SEARCH INDEX my_index ON dataset.simple_table;
-```
+    DROP SEARCH INDEX my_index ON dataset.simple_table;
 
 ## What's next
 

@@ -454,7 +454,7 @@ To run the query against a project other than your default project, add the proj
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
+``` 
   SELECT
     *
   FROM
@@ -483,7 +483,7 @@ The following example retrieves metadata about all tables in `mydataset` that co
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
 
-``` notranslate
+``` 
   SELECT
     *
   FROM

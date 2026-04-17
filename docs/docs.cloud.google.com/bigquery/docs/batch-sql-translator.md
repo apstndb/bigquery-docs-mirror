@@ -444,21 +444,15 @@ Once the translation job is created, you can see its status in the translation j
     
       - The following example shows a command to create a translation job. The command will run the workflow and show output if this workflow is successful.
         
-        ``` notranslate
-        gcloud bq migration-workflows create --location=us --config-file=CONFIG_FILE_NAME.json
-        ```
+            gcloud bq migration-workflows create --location=us --config-file=CONFIG_FILE_NAME.json
     
       - The following example shows a command to create and run the workflow with the `--async` flag. The command will create and run the workflow and return immediately with a link to the workflow.
         
-        ``` notranslate
-        gcloud bq migration-workflows create --location=LOCATION  --config-file=CONFIG_FILE_NAME.json --async
-        ```
+            gcloud bq migration-workflows create --location=LOCATION  --config-file=CONFIG_FILE_NAME.json --async
     
       - The following example shows a command to list your translation jobs:
         
-        ``` notranslate
-        gcloud bq migration-workflows list --location=LOCATION
-        ```
+            gcloud bq migration-workflows list --location=LOCATION
     
     Replace the following:
     
@@ -475,68 +469,62 @@ You can run the batch SQL translator using the bq command-line tool command-line
     
     The following example shows a translation configuration YAML file for a Teradata to BigQuery translation:
     
-    ``` notranslate
-    tasks:
-    translation_task:
-      type: Teradata2BigQuery_Translation
-      translationDetails:
-        sourceTargetMapping:
-        - sourceSpec:
-            baseUri: gs://bq-translations/input
-          targetSpec:
-            relativePath: output
-        targetBaseUri: gs://bq-translations
-        targetTypes:
-        - sql
-        sourceEnvironment:
-          defaultDatabase: default_db
-          schemaSearchPath:
-          - foo
-    ```
+        tasks:
+        translation_task:
+          type: Teradata2BigQuery_Translation
+          translationDetails:
+            sourceTargetMapping:
+            - sourceSpec:
+                baseUri: gs://bq-translations/input
+              targetSpec:
+                relativePath: output
+            targetBaseUri: gs://bq-translations
+            targetTypes:
+            - sql
+            sourceEnvironment:
+              defaultDatabase: default_db
+              schemaSearchPath:
+              - foo
     
     The following example shows a translation configuration JSON file for a Teradata to BigQuery translation:
     
-    ``` notranslate
-    {
-    "tasks": {
-      "translation_task": {
-        "type": "Teradata2BigQuery_Translation",
-        "translationDetails": {
-          "sourceTargetMapping": [
-            {
-              "sourceSpec": {
-                "literal": {
-                  "literalString": "sel 1",
-                  "relativePath": "my_input_1"
+        {
+        "tasks": {
+          "translation_task": {
+            "type": "Teradata2BigQuery_Translation",
+            "translationDetails": {
+              "sourceTargetMapping": [
+                {
+                  "sourceSpec": {
+                    "literal": {
+                      "literalString": "sel 1",
+                      "relativePath": "my_input_1"
+                    },
+                    "encoding": "UTF-8"
+                  }
                 },
-                "encoding": "UTF-8"
-              }
-            },
-            {
-              "sourceSpec": {
-                "literal": {
-                  "literalString": "sel 2",
-                  "relativePath": "my_input_2"
-                },
-                "encoding": "UTF-8"
-              }
+                {
+                  "sourceSpec": {
+                    "literal": {
+                      "literalString": "sel 2",
+                      "relativePath": "my_input_2"
+                    },
+                    "encoding": "UTF-8"
+                  }
+                }
+              ],
+              "targetReturnLiterals": [
+                "sql/my_input_1",
+                "sql/my_input_2"
+              ]
             }
-          ],
-          "targetReturnLiterals": [
-            "sql/my_input_1",
-            "sql/my_input_2"
-          ]
+          }
         }
-      }
-    }
-    }
-    ```
+        }
 
 2.  Once the translation configuration is created, run the following command to run the translation job.
     
-    ``` notranslate
-    bq mk --migration_workflow --location=LOCATION --config_file=CONFIG_FILE_NAME.json
-    ```
+        bq mk --migration_workflow --location=LOCATION --config_file=CONFIG_FILE_NAME.json
     
     Replace the following:
     
@@ -547,9 +535,7 @@ You can run the batch SQL translator using the bq command-line tool command-line
 
   - To view details about a specific translation job, run the following command:
     
-    ``` notranslate
-    bq show --migration_workflow projects/PROJECT_ID/ locations/us/workflows/WORKFLOW_ID
-    ```
+        bq show --migration_workflow projects/PROJECT_ID/ locations/us/workflows/WORKFLOW_ID
     
     Replace the following:
     
@@ -558,21 +544,15 @@ You can run the batch SQL translator using the bq command-line tool command-line
 
   - To see the results of a specific translation job, run the following command:
     
-    ``` notranslate
-    gcloud bq migration-workflows describe projects/PROJECT_ID    /locations/us/workflows/WORKFLOW_ID
-    ```
+        gcloud bq migration-workflows describe projects/PROJECT_ID    /locations/us/workflows/WORKFLOW_ID
 
   - To remove a translation job from the list, run the following command:
     
-    ``` notranslate
-    bq rm --migration_workflow projects/PROJECT_ID/locations/us/workflows/WORKFLOW_ID
-    ```
+        bq rm --migration_workflow projects/PROJECT_ID/locations/us/workflows/WORKFLOW_ID
 
   - To list all your translation jobs, run the following command:
     
-    ``` notranslate
-    bq ls --migration_workflow --location=LOCATION
-    ```
+        bq ls --migration_workflow --location=LOCATION
 
 ## Explore the translation output
 

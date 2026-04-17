@@ -38,12 +38,10 @@ Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/big
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      schema_name
-    FROM
-      PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA;
-    ```
+        SELECT
+          schema_name
+        FROM
+          PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA;
     
     Replace the following:
     
@@ -69,12 +67,10 @@ Additional flags include:
 
 <!-- end list -->
 
-``` notranslate
-bq ls --filter labels.key:value \
---max_results integer \
---format=prettyjson \
---project_id project_id
-```
+    bq ls --filter labels.key:value \
+    --max_results integer \
+    --format=prettyjson \
+    --project_id project_id
 
 Replace the following:
 
@@ -332,12 +328,10 @@ Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/big
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      * EXCEPT (schema_owner)
-    FROM
-      PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA;
-    ```
+        SELECT
+          * EXCEPT (schema_owner)
+        FROM
+          PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA;
     
     Replace the following:
     
@@ -350,12 +344,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 You can also query the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options) .
 
-``` notranslate
-SELECT
-  *
-FROM
-  PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS;
-```
+    SELECT
+      *
+    FROM
+      PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS;
 
 ### bq
 
@@ -363,9 +355,7 @@ Issue the `bq show` command. The `--format` flag can be used to control the outp
 
 To show information about a [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) , use the [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/listing-datasets) command to list all datasets and then use the name of the hidden dataset in the `bq show` command.
 
-``` notranslate
-bq show --format=prettyjson project_id:dataset
-```
+    bq show --format=prettyjson project_id:dataset
 
 Replace the following:
 

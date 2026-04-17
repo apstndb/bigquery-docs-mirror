@@ -66,33 +66,31 @@ The following sample query analyzes Google Ads campaign performance for the past
 
 ### Console
 
-``` notranslate
-SELECT
-  c.customer_id,
-  c.campaign_name,
-  c.campaign_status,
-  SUM(cs.metrics_impressions) AS Impressions,
-  SUM(cs.metrics_interactions) AS Interactions,
-  (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
-FROM
-  `DATASET.ads_Campaign_CUSTOMER_ID` c
-LEFT JOIN
-  `DATASET.ads_CampaignBasicStats_CUSTOMER_ID` cs
-ON
-  (c.campaign_id = cs.campaign_id
-  AND cs._DATA_DATE BETWEEN
-  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-WHERE
-  c._DATA_DATE = c._LATEST_DATE
-GROUP BY
-  1, 2, 3
-ORDER BY
-  Impressions DESC
-```
+    SELECT
+      c.customer_id,
+      c.campaign_name,
+      c.campaign_status,
+      SUM(cs.metrics_impressions) AS Impressions,
+      SUM(cs.metrics_interactions) AS Interactions,
+      (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
+    FROM
+      `DATASET.ads_Campaign_CUSTOMER_ID` c
+    LEFT JOIN
+      `DATASET.ads_CampaignBasicStats_CUSTOMER_ID` cs
+    ON
+      (c.campaign_id = cs.campaign_id
+      AND cs._DATA_DATE BETWEEN
+      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+    WHERE
+      c._DATA_DATE = c._LATEST_DATE
+    GROUP BY
+      1, 2, 3
+    ORDER BY
+      Impressions DESC
 
 ### bq
 
-``` notranslate
+``` 
   bq query --use_legacy_sql=false '
   SELECT
     c.customer_id,
@@ -153,7 +151,7 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 ### bq
 
-``` notranslate
+``` 
   bq query --use_legacy_sql=false '
   SELECT
     c.campaign_status AS CampaignStatus,

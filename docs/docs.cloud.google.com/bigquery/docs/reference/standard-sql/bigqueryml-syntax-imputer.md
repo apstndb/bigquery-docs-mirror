@@ -11,7 +11,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.IMPUTER(expression, strategy) OVER()
 ```
 
@@ -35,16 +35,14 @@ ML.IMPUTER(expression, strategy) OVER()
 
 The following example imputes numerical expressions:
 
-``` notranslate
-SELECT f, ML.IMPUTER(f, 'mean') OVER () AS output
-FROM
-  UNNEST([NULL, -3, -3, -3, 1, 2, 3, 4, 5]) AS f
-ORDER BY f;
-```
+    SELECT f, ML.IMPUTER(f, 'mean') OVER () AS output
+    FROM
+      UNNEST([NULL, -3, -3, -3, 1, 2, 3, 4, 5]) AS f
+    ORDER BY f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +------+--------+
 |  f   | output |
 +------+--------+
@@ -64,16 +62,14 @@ The output looks similar to the following:
 
 The following example imputes string expressions:
 
-``` notranslate
-SELECT f, ML.IMPUTER(f, 'most_frequent') OVER () AS output
-FROM
-  UNNEST([NULL, NULL, NULL, NULL, 'a', 'a', 'b', 'b', 'c', 'c', 'c']) AS f
-ORDER BY f;
-```
+    SELECT f, ML.IMPUTER(f, 'most_frequent') OVER () AS output
+    FROM
+      UNNEST([NULL, NULL, NULL, NULL, 'a', 'a', 'b', 'b', 'c', 'c', 'c']) AS f
+    ORDER BY f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +------+--------+
 |  f   | output |
 +------+--------+

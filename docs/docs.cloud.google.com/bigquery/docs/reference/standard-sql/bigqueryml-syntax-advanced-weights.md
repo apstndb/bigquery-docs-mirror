@@ -18,7 +18,7 @@ Multiclass logistic regression models aren't supported.
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ADVANCED_WEIGHTS(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   STRUCT(
@@ -72,13 +72,11 @@ The following example retrieves weight information from `mymodel` in `mydataset`
 
 The query returns the weights associated with each one-hot encoded category for the input column `input_col` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.ADVANCED_WEIGHTS(MODEL `mydataset.mymodel`,
-    STRUCT(FALSE AS standardize))
-```
+    SELECT
+      *
+    FROM
+      ML.ADVANCED_WEIGHTS(MODEL `mydataset.mymodel`,
+        STRUCT(FALSE AS standardize))
 
 > **Note:** Because un-standardizing the standard error for the intercept column is computationally expensive, the standard error and p-value aren't provided. If the standard error and p-value for the intercept are required, then set the `STANDARDIZE` argument to `TRUE` .
 
@@ -88,13 +86,11 @@ The following example retrieves weight information from `mymodel` in `mydataset`
 
 The query retrieves standardized weights, which assume all features have a mean of `0` and a standard deviation of `1.0` .
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.ADVANCED_WEIGHTS(MODEL `mydataset.mymodel`,
-    STRUCT(TRUE AS standardize))
-```
+    SELECT
+      *
+    FROM
+      ML.ADVANCED_WEIGHTS(MODEL `mydataset.mymodel`,
+        STRUCT(TRUE AS standardize))
 
 ## What's next
 

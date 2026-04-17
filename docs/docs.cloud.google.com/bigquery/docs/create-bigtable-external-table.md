@@ -95,13 +95,11 @@ You can create a permanent external table by running the [`CREATE EXTERNAL TABLE
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE DATASET.NEW_TABLE
-    OPTIONS (
-      format = 'CLOUD_BIGTABLE',
-      uris = ['URI'],
-      bigtable_options = BIGTABLE_OPTIONS );
-    ```
+        CREATE EXTERNAL TABLE DATASET.NEW_TABLE
+        OPTIONS (
+          format = 'CLOUD_BIGTABLE',
+          uris = ['URI'],
+          bigtable_options = BIGTABLE_OPTIONS );
     
     Replace the following:
     
@@ -141,11 +139,9 @@ You create a table in the bq command-line tool using the [`bq mk` command](https
 
 1.  Use the `bq mk` command to create a permanent table.
     
-    ``` notranslate
-    bq mk \
-    --external_table_definition=DEFINITION_FILE \
-    DATASET.TABLE
-    ```
+        bq mk \
+        --external_table_definition=DEFINITION_FILE \
+        DATASET.TABLE
     
     Replace the following:
     
@@ -286,35 +282,31 @@ You are storing user profiles for a fictional social network. One data model for
 
 Using the default schema, a GoogleSQL query to count the number of male users over 30 is:
 
-``` notranslate
-SELECT
-  COUNT(1)
-FROM
-  `dataset.table`
-OMIT
-  RECORD IF NOT SOME(profile.column.name = "gender"
-    AND profile.column.cell.value = "male")
-  OR NOT SOME(profile.column.name = "age"
-    AND INTEGER(profile.column.cell.value) > 30)
-```
+    SELECT
+      COUNT(1)
+    FROM
+      `dataset.table`
+    OMIT
+      RECORD IF NOT SOME(profile.column.name = "gender"
+        AND profile.column.cell.value = "male")
+      OR NOT SOME(profile.column.name = "age"
+        AND INTEGER(profile.column.cell.value) > 30)
 
 Querying the data is less challenging if `gender` and `age` are exposed as sub- fields. To expose them as sub-fields, list `gender` and `age` as named columns in the `profile` column family when defining the table. You can also instruct BigQuery to expose the latest values from this column family because typically, only the latest value (and possibly the only value) is of interest.
 
 After exposing the columns as sub-fields, the GoogleSQL query to count the number of male users over 30 is:
 
-``` notranslate
-SELECT
-  COUNT(1)
-FROM
-  `dataset.table`
-WHERE
-  profile.gender.cell.value="male"
-  AND profile.age.cell.value > 30
-```
+    SELECT
+      COUNT(1)
+    FROM
+      `dataset.table`
+    WHERE
+      profile.gender.cell.value="male"
+      AND profile.age.cell.value > 30
 
 Notice how `gender` and `age` are referenced directly as fields. The JSON configuration for this setup is:
 
-``` notranslate
+``` 
   "bigtableOptions": {
     "readRowkeyAsString": "true",
     "columnFamilies": [

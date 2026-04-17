@@ -32,14 +32,12 @@ You can construct an arbitrary SQL query and visualize the data in Data Studio. 
 
 7.  In the query editor, construct your query. For example:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      `bigquery-public-data.austin_bikeshare.bikeshare_trips`
-    LIMIT
-      1000;
-    ```
+        SELECT
+          *
+        FROM
+          `bigquery-public-data.austin_bikeshare.bikeshare_trips`
+        LIMIT
+          1000;
 
 8.  Click play\_circle **Run** .
 
@@ -146,72 +144,68 @@ The following examples show how to view reports and data sources:
 
 To view the report and data source URL for each Data Studio BigQuery job by running the following query:
 
-``` notranslate
--- Standard labels used by Data Studio.
-DECLARE requestor_key STRING DEFAULT 'requestor';
-DECLARE requestor_value STRING DEFAULT 'looker_studio';
-
-CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
-AS (
-  (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
-);
-
-CREATE TEMP FUNCTION GetDatasourceUrl(labels ANY TYPE)
-AS (
-  CONCAT("https://datastudio.google.com/datasources/", GetLabel(labels, 'looker_studio_datasource_id'))
-);
-
-CREATE TEMP FUNCTION GetReportUrl(labels ANY TYPE)
-AS (
-  CONCAT("https://datastudio.google.com/reporting/", GetLabel(labels, 'looker_studio_report_id'))
-);
-
-SELECT
-  job_id,
-  GetDatasourceUrl(labels) AS datasource_url,
-  GetReportUrl(labels) AS report_url,
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS jobs
-WHERE
-  creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-  AND GetLabel(labels, requestor_key) = requestor_value
-LIMIT
-  100;
-```
+    -- Standard labels used by Data Studio.
+    DECLARE requestor_key STRING DEFAULT 'requestor';
+    DECLARE requestor_value STRING DEFAULT 'looker_studio';
+    
+    CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
+    AS (
+      (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
+    );
+    
+    CREATE TEMP FUNCTION GetDatasourceUrl(labels ANY TYPE)
+    AS (
+      CONCAT("https://datastudio.google.com/datasources/", GetLabel(labels, 'looker_studio_datasource_id'))
+    );
+    
+    CREATE TEMP FUNCTION GetReportUrl(labels ANY TYPE)
+    AS (
+      CONCAT("https://datastudio.google.com/reporting/", GetLabel(labels, 'looker_studio_report_id'))
+    );
+    
+    SELECT
+      job_id,
+      GetDatasourceUrl(labels) AS datasource_url,
+      GetReportUrl(labels) AS report_url,
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS jobs
+    WHERE
+      creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+      AND GetLabel(labels, requestor_key) = requestor_value
+    LIMIT
+      100;
 
 #### View jobs produced by using a report and data source
 
 To view the jobs produced, you run the following query:
 
-``` notranslate
--- Specify report and data source id, which can be found in the end of Data Studio URLs.
-DECLARE user_report_id STRING DEFAULT '*report id here*';
-DECLARE user_datasource_id STRING DEFAULT '*datasource id here*';
-
--- Data Studio labels for BigQuery jobs.
-DECLARE requestor_key STRING DEFAULT 'requestor';
-DECLARE requestor_value STRING DEFAULT 'looker_studio';
-DECLARE datasource_key STRING DEFAULT 'looker_studio_datasource_id';
-DECLARE report_key STRING DEFAULT 'looker_studio_report_id';
-
-CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
-AS (
-  (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
-);
-
-SELECT
-  creation_time,
-  job_id,
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS jobs
-WHERE
-  creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-  AND GetLabel(labels, requestor_key) = requestor_value
-  AND GetLabel(labels, datasource_key) = user_datasource_id
-  AND GetLabel(labels, report_key) = user_report_id
-ORDER BY 1
-LIMIT 100;
-```
+    -- Specify report and data source id, which can be found in the end of Data Studio URLs.
+    DECLARE user_report_id STRING DEFAULT '*report id here*';
+    DECLARE user_datasource_id STRING DEFAULT '*datasource id here*';
+    
+    -- Data Studio labels for BigQuery jobs.
+    DECLARE requestor_key STRING DEFAULT 'requestor';
+    DECLARE requestor_value STRING DEFAULT 'looker_studio';
+    DECLARE datasource_key STRING DEFAULT 'looker_studio_datasource_id';
+    DECLARE report_key STRING DEFAULT 'looker_studio_report_id';
+    
+    CREATE TEMP FUNCTION GetLabel(labels ANY TYPE, label_key STRING)
+    AS (
+      (SELECT l.value FROM UNNEST(labels) l WHERE l.key = label_key)
+    );
+    
+    SELECT
+      creation_time,
+      job_id,
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS jobs
+    WHERE
+      creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+      AND GetLabel(labels, requestor_key) = requestor_value
+      AND GetLabel(labels, datasource_key) = user_datasource_id
+      AND GetLabel(labels, report_key) = user_report_id
+    ORDER BY 1
+    LIMIT 100;
 
 ## What's next
 

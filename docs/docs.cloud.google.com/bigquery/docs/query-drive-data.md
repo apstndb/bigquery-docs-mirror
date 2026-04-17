@@ -74,11 +74,9 @@ You query a temporary table linked to an external data source using the `bq quer
 
 To query a temporary table linked to your external data source using a table definition file, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=TABLE::DEFINITION_FILE \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=TABLE::DEFINITION_FILE \
+    'QUERY'
 
 Where:
 
@@ -98,11 +96,9 @@ For example, the following command creates and queries a temporary table named `
 
 To query a temporary table linked to your external data source using an inline schema definition, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=TABLE::SCHEMA@SOURCE_FORMAT=DRIVE_URI \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=TABLE::SCHEMA@SOURCE_FORMAT=DRIVE_URI \
+    'QUERY'
 
 Where:
 
@@ -124,11 +120,9 @@ For example, the following command creates and queries a temporary table named `
 
 To query a temporary table linked to your external data source using a JSON schema file, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=SCHEMA_FILE@SOURCE_FORMT=DRIVE_URI \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=SCHEMA_FILE@SOURCE_FORMT=DRIVE_URI \
+    'QUERY'
 
 Where:
 

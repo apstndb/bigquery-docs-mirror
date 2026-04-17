@@ -77,20 +77,18 @@ The following examples show how to query the `INFORMATION_SCHEMA.JOBS_TIMELINE_B
 
 The following query displays the number of unique jobs running per minute in the designated project's folder:
 
-``` notranslate
-SELECT
-  TIMESTAMP_TRUNC(period_start, MINUTE) AS per_start,
-  COUNT(DISTINCT job_id) AS unique_jobs
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_FOLDER,
-  UNNEST(folder_numbers) f
-WHERE
-  my_folder_number = f
-GROUP BY
-  per_start
-ORDER BY
-  per_start DESC;
-```
+    SELECT
+      TIMESTAMP_TRUNC(period_start, MINUTE) AS per_start,
+      COUNT(DISTINCT job_id) AS unique_jobs
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_FOLDER,
+      UNNEST(folder_numbers) f
+    WHERE
+      my_folder_number = f
+    GROUP BY
+      per_start
+    ORDER BY
+      per_start DESC;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -110,22 +108,20 @@ The result is similar to the following:
 
 The following query displays the slot-time used per minute in the designated project's folder:
 
-``` notranslate
-SELECT
-  TIMESTAMP_TRUNC(period_start, MINUTE) AS per_start,
-  SUM(period_slot_ms) AS slot_ms
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_FOLDER,
-  UNNEST(folder_numbers) f
-WHERE
-  my_folder_number = f
-  AND reservation_id = "my reservation id"
-  AND statement_type != "SCRIPT"
-GROUP BY
-  per_start
-ORDER BY
-  per_start DESC;
-```
+    SELECT
+      TIMESTAMP_TRUNC(period_start, MINUTE) AS per_start,
+      SUM(period_slot_ms) AS slot_ms
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_FOLDER,
+      UNNEST(folder_numbers) f
+    WHERE
+      my_folder_number = f
+      AND reservation_id = "my reservation id"
+      AND statement_type != "SCRIPT"
+    GROUP BY
+      per_start
+    ORDER BY
+      per_start DESC;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

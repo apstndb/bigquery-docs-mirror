@@ -216,15 +216,13 @@ When this data transfer runs, the BigQuery Data Transfer Service automatically p
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-``` notranslate
-bq mk
-    --transfer_config
-    --project_id=PROJECT_ID
-    --data_source=DATA_SOURCE
-    --display_name=DISPLAY_NAME
-    --target_dataset=DATASET
-    --params='PARAMETERS'
-```
+    bq mk
+        --transfer_config
+        --project_id=PROJECT_ID
+        --data_source=DATA_SOURCE
+        --display_name=DISPLAY_NAME
+        --target_dataset=DATASET
+        --params='PARAMETERS'
 
 Where:
 
@@ -244,20 +242,18 @@ Where:
 
 For example, the following command creates a Facebook Ads data transfer in the default project with all the required parameters:
 
-``` notranslate
-bq mk
---transfer_config
---target_dataset=mydataset
---data_source=facebook_ads
---display_name='My Transfer'
---params='{"connector.authentication.oauth.clientId": "1650000000",
-    "connector.authentication.oauth.clientSecret":"TBA99550",
-    "connector.authentication.oauth.refreshToken":"abcdef",
-    "connector.authorizedAdAccountsOnly":true,
-    "connector.actionCollections":["Actions", "Conversions"],
-    "connector.genericBreakdowns":["PublisherPlatform", "PlatformPosition"],
-    "connector.actionBreakdowns":["ActionDevice", "ActionType"]}'
-```
+    bq mk
+    --transfer_config
+    --target_dataset=mydataset
+    --data_source=facebook_ads
+    --display_name='My Transfer'
+    --params='{"connector.authentication.oauth.clientId": "1650000000",
+        "connector.authentication.oauth.clientSecret":"TBA99550",
+        "connector.authentication.oauth.refreshToken":"abcdef",
+        "connector.authorizedAdAccountsOnly":true,
+        "connector.actionCollections":["Actions", "Conversions"],
+        "connector.genericBreakdowns":["PublisherPlatform", "PlatformPosition"],
+        "connector.actionBreakdowns":["ActionDevice", "ActionType"]}'
 
 ### API
 

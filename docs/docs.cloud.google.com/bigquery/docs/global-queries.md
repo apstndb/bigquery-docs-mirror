@@ -38,15 +38,11 @@ To allow this global query to execute successfully, the following configuration 
 
 1.  You need to enable execution of global queries in the project ( `query_project` ) in the region running a global query ( `us-central1` ):
     
-    ``` notranslate
-    ALTER PROJECT `query_project`SET OPTIONS (`region-us-central1.enable_global_queries_execution` = TRUE);
-    ```
+        ALTER PROJECT `query_project`SET OPTIONS (`region-us-central1.enable_global_queries_execution` = TRUE);
 
 2.  You need to enable copying data by global queries from the project containing the data ( `data_project` ) for its region ( `europe-west1` ):
     
-    ``` notranslate
-    ALTER PROJECT `data_project`SET OPTIONS (`region-europe-west1.enable_global_queries_data_access` = TRUE);
-    ```
+        ALTER PROJECT `data_project`SET OPTIONS (`region-europe-west1.enable_global_queries_data_access` = TRUE);
 
 To create and use [views](https://docs.cloud.google.com/bigquery/docs/views-intro) that contain remote tables, the same principles apply: the project running the queries must have `enable_global_queries_execution` enabled.
 
@@ -127,9 +123,7 @@ To disable global queries for your project or organization, use the [`ALTER PROJ
 
 The following example shows how to disable global queries at the project level:
 
-``` notranslate
-ALTER PROJECT PROJECT_IDSET OPTIONS (  `region-REGION.enable_global_queries_execution` = false,  `region-REGION.enable_global_queries_data_access` = false);
-```
+    ALTER PROJECT PROJECT_IDSET OPTIONS (  `region-REGION.enable_global_queries_execution` = false,  `region-REGION.enable_global_queries_data_access` = false);
 
 Replace the following:
 

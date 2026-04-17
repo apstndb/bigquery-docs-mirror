@@ -4,7 +4,7 @@ This document describes the `ML.PROCESS_DOCUMENT` function, which lets you proce
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.PROCESS_DOCUMENT(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   { TABLE `PROJECT_ID.DATASET.OBJECT_TABLE` | (QUERY_STATEMENT) },
@@ -71,14 +71,12 @@ The following example uses the [invoice parser](https://docs.cloud.google.com/do
 
 Create the model:
 
-``` notranslate
-# Create model
-CREATE OR REPLACE MODEL
-`myproject.mydataset.invoice_parser`
-REMOTE WITH CONNECTION `myproject.myregion.myconnection`
-OPTIONS (remote_service_type = 'cloud_ai_document_v1',
-document_processor='processor_id');
-```
+    # Create model
+    CREATE OR REPLACE MODEL
+    `myproject.mydataset.invoice_parser`
+    REMOTE WITH CONNECTION `myproject.myregion.myconnection`
+    OPTIONS (remote_service_type = 'cloud_ai_document_v1',
+    document_processor='processor_id');
 
 > **Note:** For more information about how to specify a processor ID, see [Create a model](https://docs.cloud.google.com/bigquery/docs/process-document#create_a_model) .
 

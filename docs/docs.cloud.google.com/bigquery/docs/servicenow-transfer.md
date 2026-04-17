@@ -284,7 +284,7 @@ Replace the following:
     <tr class="odd">
     <td><code dir="ltr" translate="no">writeMode</code></td>
     <td>Optional</td>
-    <td>If using incremental ingestion, determines the synchronization strategy for incremental ingestion, specifying <strong>Upsert</strong> (updated if existing, inserted if new) into the destination table. This field is required for incremental transfers.</td>
+    <td>If using incremental ingestion, determines the synchronization strategy for incremental ingestion. This field is required for incremental transfers. Supported value is <code dir="ltr" translate="no">WRITE_MODE_UPSERT</code> .</td>
     </tr>
     <tr class="even">
     <td><code dir="ltr" translate="no">assets</code></td>

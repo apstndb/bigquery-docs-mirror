@@ -73,17 +73,15 @@ Replace the following:
 
 The following query displays the total slot milliseconds consumed per second by jobs submitted by the current user in the designated project:
 
-``` notranslate
-SELECT
-  period_start,
-  SUM(period_slot_ms) AS total_period_slot_ms
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER
-GROUP BY
-  period_start
-ORDER BY
-  period_start DESC;
-```
+    SELECT
+      period_start,
+      SUM(period_slot_ms) AS total_period_slot_ms
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER
+    GROUP BY
+      period_start
+    ORDER BY
+      period_start DESC;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

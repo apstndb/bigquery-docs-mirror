@@ -89,7 +89,7 @@ To perform a dry run, do the following:
 
 Enter a query like the following using the `--dry_run` flag.
 
-``` notranslate
+``` 
 bq query \
 --use_legacy_sql=false \
 --dry_run \
@@ -356,7 +356,7 @@ To set the maximum bytes billed:
 
 Use the `bq query` command with the `--maximum_bytes_billed` flag.
 
-``` notranslate
+``` 
   bq query --maximum_bytes_billed=1000000 \
   --use_legacy_sql=false \
   'SELECT

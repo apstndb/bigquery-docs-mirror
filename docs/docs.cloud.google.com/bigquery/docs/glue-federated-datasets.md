@@ -8,22 +8,20 @@ Ensure that you have a connection to access AWS Glue data.
 
   - To create or modify a connection, follow the instructions in [Connect to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection) . When you create that connection, include the following policy statement for AWS Glue in your [AWS Identity and Access Management policy for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-policy) . Include this statement in addition to the other permissions on the Amazon S3 bucket where the data in your AWS Glue tables is stored.
     
-    ``` notranslate
-    {
-     "Effect": "Allow",
-     "Action": [
-       "glue:GetDatabase",
-       "glue:GetTable",
-       "glue:GetTables",
-       "glue:GetPartitions"
-     ],
-     "Resource": [
-       "arn:aws:glue:REGION:ACCOUNT_ID:catalog",
-       "arn:aws:glue:REGION:ACCOUNT_ID:database/DATABASE_NAME",
-       "arn:aws:glue:REGION:ACCOUNT_ID:table/DATABASE_NAME/*"
-     ]
-    }
-    ```
+        {
+         "Effect": "Allow",
+         "Action": [
+           "glue:GetDatabase",
+           "glue:GetTable",
+           "glue:GetTables",
+           "glue:GetPartitions"
+         ],
+         "Resource": [
+           "arn:aws:glue:REGION:ACCOUNT_ID:catalog",
+           "arn:aws:glue:REGION:ACCOUNT_ID:database/DATABASE_NAME",
+           "arn:aws:glue:REGION:ACCOUNT_ID:table/DATABASE_NAME/*"
+         ]
+        }
     
     Replace the following:
     
@@ -92,13 +90,11 @@ Use the [`CREATE EXTERNAL SCHEMA` data definition language (DDL) statement](http
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL SCHEMA DATASET_NAME
-    WITH CONNECTION PROJECT_ID.CONNECTION_LOCATION.CONNECTION_NAME
-      OPTIONS (
-        external_source = 'AWS_GLUE_SOURCE',
-        location = 'LOCATION');
-    ```
+        CREATE EXTERNAL SCHEMA DATASET_NAME
+        WITH CONNECTION PROJECT_ID.CONNECTION_LOCATION.CONNECTION_NAME
+          OPTIONS (
+            external_source = 'AWS_GLUE_SOURCE',
+            location = 'LOCATION');
     
     Replace the following:
     
@@ -117,12 +113,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 In a command-line environment, create a dataset by using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
 
-``` notranslate
-bq --location=LOCATION mk --dataset \
-    --external_source aws-glue://AWS_GLUE_SOURCE \
-    --connection_id PROJECT_ID.CONNECTION_LOCATION.CONNECTION_NAME \
-    DATASET_NAME
-```
+    bq --location=LOCATION mk --dataset \
+        --external_source aws-glue://AWS_GLUE_SOURCE \
+        --connection_id PROJECT_ID.CONNECTION_LOCATION.CONNECTION_NAME \
+        DATASET_NAME
 
 Replace the following:
 
@@ -143,20 +137,18 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates an AWS Glue federated dataset:
 
-``` notranslate
-resource "google_bigquery_dataset" "dataset" {
-  provider                    = google-beta
-  dataset_id                  = "example_dataset"
-  friendly_name               = "test"
-  description                 = "This is a test description."
-  location                    = "aws-us-east-1"
-
-external_dataset_reference {
-  external_source = "aws-glue://arn:aws:glue:us-east-1:999999999999:database/database"
-  connection      = "projects/project/locations/aws-us-east-1/connections/connection"
-  }
-}
-```
+    resource "google_bigquery_dataset" "dataset" {
+      provider                    = google-beta
+      dataset_id                  = "example_dataset"
+      friendly_name               = "test"
+      description                 = "This is a test description."
+      location                    = "aws-us-east-1"
+    
+    external_dataset_reference {
+      external_source = "aws-glue://arn:aws:glue:us-east-1:999999999999:database/database"
+      connection      = "projects/project/locations/aws-us-east-1/connections/connection"
+      }
+    }
 
 To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
 

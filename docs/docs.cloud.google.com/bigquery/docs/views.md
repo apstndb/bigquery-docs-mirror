@@ -105,19 +105,17 @@ Use the [`CREATE VIEW` statement](https://docs.cloud.google.com/bigquery/docs/re
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE VIEW mydataset.usa_male_names(name, number) AS (
-      SELECT
-        name,
-        number
-      FROM
-        `bigquery-public-data.usa_names.usa_1910_current`
-      WHERE
-        gender = 'M'
-      ORDER BY
-        number DESC
-    );
-    ```
+        CREATE VIEW mydataset.usa_male_names(name, number) AS (
+          SELECT
+            name,
+            number
+          FROM
+            `bigquery-public-data.usa_names.usa_1910_current`
+          WHERE
+            gender = 'M'
+          ORDER BY
+            number DESC
+        );
 
 3.  Click play\_circle **Run** .
 
@@ -208,7 +206,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a view named `myview` :
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days

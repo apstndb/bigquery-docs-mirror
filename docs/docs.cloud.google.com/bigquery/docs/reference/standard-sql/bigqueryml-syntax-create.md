@@ -33,7 +33,7 @@ For more information about IAM roles and permissions in BigQuery, see [Introduct
 
 > **Note:** This syntax statement provides a comprehensive list of model types with their model options. When you create a model, use that model specific `CREATE MODEL` statement for convenience. You can view specific `CREATE MODEL` statements by clicking the `MODEL_TYPE` name in the following list, in the table of contents in the left panel, or in the *create model* link in the [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) .
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 [TRANSFORM (select_list)]
@@ -1258,13 +1258,13 @@ A weight must be present for every class label. The weights are not required to 
 
 All model types support the following `AS` clause syntax for specifying the training data:
 
-``` lang-googlesql
+```googlesql
 AS query_statement
 ```
 
 For time series forecasting models that have a `DATA_FREQUENCY` value of either `DAILY` or `AUTO_FREQUENCY` , you can optionally use the following `AS` clause syntax to perform [custom holiday modeling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) in addition to specifying the training data:
 
-``` lang-googlesql
+```googlesql
 AS (
   training_data AS (query_statement),
   custom_holiday AS (holiday_statement)
@@ -1301,32 +1301,30 @@ The `preholiday_days` and `postholiday_days` arguments together describe the hol
 
 To achieve the best holiday modeling result, provide as much historical and forecast information about the occurrences of each included holiday as possible. For example, if you have time series data from 2018 to 2022 and would like to forecast for 2023, you get the best result by providing the custom holiday information for all of those years, similar to the following:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.arima_model`
-  OPTIONS (
-    model_type = 'ARIMA_PLUS',
-    holiday_region = 'US',...) AS (
-        training_data AS (SELECT * FROM `mydataset.timeseries_data`),
-        custom_holiday AS (
-            SELECT
-              'US' AS region,
-              'Halloween' AS holiday_name,
-              primary_date,
-              5 AS preholiday_days,
-              1 AS postholiday_days
-            FROM
-              UNNEST(
-                [
-                  DATE('2018-10-31'),
-                  DATE('2019-10-31'),
-                  DATE('2020-10-31'),
-                  DATE('2021-10-31'),
-                  DATE('2022-10-31'),
-                  DATE('2023-10-31')])
-                AS primary_date
+    CREATE OR REPLACE MODEL `mydataset.arima_model`
+      OPTIONS (
+        model_type = 'ARIMA_PLUS',
+        holiday_region = 'US',...) AS (
+            training_data AS (SELECT * FROM `mydataset.timeseries_data`),
+            custom_holiday AS (
+                SELECT
+                  'US' AS region,
+                  'Halloween' AS holiday_name,
+                  primary_date,
+                  5 AS preholiday_days,
+                  1 AS postholiday_days
+                FROM
+                  UNNEST(
+                    [
+                      DATE('2018-10-31'),
+                      DATE('2019-10-31'),
+                      DATE('2020-10-31'),
+                      DATE('2021-10-31'),
+                      DATE('2022-10-31'),
+                      DATE('2023-10-31')])
+                    AS primary_date
+              )
           )
-      )
-```
 
 ## Supported inputs
 

@@ -64,30 +64,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Train and deploy a logistic regression model
 
@@ -97,16 +91,14 @@ Use the following sections to learn how to train and deploy a logistic regressio
 
 Train a logistic regression model that predicts iris type using the BigQuery ML [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_model_syntax) statement. This training job should take approximately 1 minute to complete.
 
-``` notranslate
-bq query --use_legacy_sql=false \
-  'CREATE MODEL `bqml_tutorial.iris_model`
-  OPTIONS (model_type="logistic_reg",
-      max_iterations=10, input_label_cols=["species"])
-  AS SELECT
-    *
-  FROM
-    `bigquery-public-data.ml_datasets.iris`;'
-```
+    bq query --use_legacy_sql=false \
+      'CREATE MODEL `bqml_tutorial.iris_model`
+      OPTIONS (model_type="logistic_reg",
+          max_iterations=10, input_label_cols=["species"])
+      AS SELECT
+        *
+      FROM
+        `bigquery-public-data.ml_datasets.iris`;'
 
 ### Export the model
 
@@ -209,16 +201,14 @@ Use the following sections to learn how to train and deploy a boosted tree class
 
 Train a boosted tree classifier model that predicts iris type using the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_model) statement. This training job should take approximately 7 minutes to complete.
 
-``` notranslate
-bq query --use_legacy_sql=false \
-  'CREATE MODEL `bqml_tutorial.boosted_tree_iris_model`
-  OPTIONS (model_type="boosted_tree_classifier",
-      max_iterations=10, input_label_cols=["species"])
-  AS SELECT
-    *
-  FROM
-    `bigquery-public-data.ml_datasets.iris`;'
-```
+    bq query --use_legacy_sql=false \
+      'CREATE MODEL `bqml_tutorial.boosted_tree_iris_model`
+      OPTIONS (model_type="boosted_tree_classifier",
+          max_iterations=10, input_label_cols=["species"])
+      AS SELECT
+        *
+      FROM
+        `bigquery-public-data.ml_datasets.iris`;'
 
 ### Export the model
 
@@ -317,16 +307,14 @@ Use the following sections to learn how to train and deploy an AutoML classifier
 
 Train an AutoML classifier model that predicts iris type using the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) statement. AutoML models need at least 1000 rows of input data. Because `ml_datasets.iris` only has 150 rows, we duplicate the data 10 times. This training job should take around **2 hours** to complete.
 
-``` notranslate
-bq query --use_legacy_sql=false \
-  'CREATE MODEL `bqml_tutorial.automl_iris_model`
-  OPTIONS (model_type="automl_classifier",
-      budget_hours=1, input_label_cols=["species"])
-  AS SELECT
-    * EXCEPT(multiplier)
-  FROM
-    `bigquery-public-data.ml_datasets.iris`, unnest(GENERATE_ARRAY(1, 10)) as multiplier;'
-```
+    bq query --use_legacy_sql=false \
+      'CREATE MODEL `bqml_tutorial.automl_iris_model`
+      OPTIONS (model_type="automl_classifier",
+          budget_hours=1, input_label_cols=["species"])
+      AS SELECT
+        * EXCEPT(multiplier)
+      FROM
+        `bigquery-public-data.ml_datasets.iris`, unnest(GENERATE_ARRAY(1, 10)) as multiplier;'
 
 ### Export the model
 

@@ -59,11 +59,9 @@ Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA mydataset
-    SET OPTIONS (
-      labels = [('sensitivity', 'high')]);
-    ```
+        ALTER SCHEMA mydataset
+        SET OPTIONS (
+          labels = [('sensitivity', 'high')]);
 
 3.  Click play\_circle **Run** .
 
@@ -75,9 +73,7 @@ To add a label to an existing dataset, use the `bq update` command with the `set
 
 If the dataset is in a project other than your default project, specify the project ID in the following format: `  PROJECT_ID:DATASET  ` .
 
-``` notranslate
-bq update --set_label KEY:VALUE PROJECT_ID:DATASET
-```
+    bq update --set_label KEY:VALUE PROJECT_ID:DATASET
 
 Replace the following:
 
@@ -296,11 +292,9 @@ Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    SET OPTIONS (
-      labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
-    ```
+        ALTER TABLE mydataset.mytable
+        SET OPTIONS (
+          labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
 
 3.  Click play\_circle **Run** .
 
@@ -312,11 +306,9 @@ To add a label to an existing table or view, use the `bq update` command with th
 
 If the table or view is in a project other than your default project, specify the project ID in the following format: `  PROJECT_ID:DATASET  ` .
 
-``` notranslate
-bq update \
---set_label KEY:VALUE \
-PROJECT_ID:DATASET.TABLE_OR_VIEW
-```
+    bq update \
+    --set_label KEY:VALUE \
+    PROJECT_ID:DATASET.TABLE_OR_VIEW
 
 Replace the following:
 
@@ -524,9 +516,7 @@ To add a label to a job:
 
 To add a label to a query job, use the `bq query` command with the `--label` flag. To add multiple labels, repeat the flag. The flag indicates that your query uses GoogleSQL syntax.
 
-``` notranslate
-bq query --label KEY:VALUE  'QUERY'
-```
+    bq query --label KEY:VALUE  'QUERY'
 
 Replace the following:
 
@@ -597,7 +587,7 @@ If you run queries in a [session](https://docs.cloud.google.com/bigquery/docs/se
 
 Set the [`@@query_label`](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) system variable in the session by running the following query:
 
-``` notranslate
+``` 
   SET @@query_label = "KEY:VALUE";
   
 ```
@@ -606,7 +596,7 @@ Set the [`@@query_label`](https://docs.cloud.google.com/bigquery/docs/reference/
 
 Example:
 
-``` notranslate
+``` 
   SET @@query_label = "cost_center:logistics";
   
 ```
@@ -667,11 +657,9 @@ To add a label to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL st
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION myreservation
-    SET OPTIONS (
-      labels = [('sensitivity', 'high')]);
-    ```
+        ALTER RESERVATION myreservation
+        SET OPTIONS (
+          labels = [('sensitivity', 'high')]);
 
 3.  Click play\_circle **Run** .
 
@@ -681,9 +669,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To add a label to a reservation, use the `bq update` command with the `set_label` flag and the `--reservation` flag. To add multiple labels, repeat the `set_label` flag.
 
-``` notranslate
-bq update --set_label KEY:VALUE --location LOCATION --reservation RESERVATION_NAME
-```
+    bq update --set_label KEY:VALUE --location LOCATION --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -725,11 +711,9 @@ To add a label without a value, use the [`ALTER TABLE SET OPTIONS` DDL statement
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    SET OPTIONS (
-      labels=[("key1", ""), ("key2", "")]);
-    ```
+        ALTER TABLE mydataset.mytable
+        SET OPTIONS (
+          labels=[("key1", ""), ("key2", "")]);
 
 3.  Click play\_circle **Run** .
 
@@ -739,9 +723,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To add a label without a value to an existing resource, use the `bq update` command with the `set_label` flag. Specify the key, followed by a colon, but leave the value unspecified.
 
-``` notranslate
-bq update --set_label KEY: RESOURCE_ID
-```
+    bq update --set_label KEY: RESOURCE_ID
 
 Replace the following:
 

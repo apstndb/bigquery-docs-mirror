@@ -170,15 +170,13 @@ Add Mailchimp data into BigQuery by setting up a transfer configuration using on
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-``` notranslate
-bq mk
-    --transfer_config
-    --project_id=PROJECT_ID
-    --data_source=DATA_SOURCE
-    --display_name=NAME
-    --target_dataset=DATASET
-    --params='PARAMETERS'
-```
+    bq mk
+        --transfer_config
+        --project_id=PROJECT_ID
+        --data_source=DATA_SOURCE
+        --display_name=NAME
+        --target_dataset=DATASET
+        --params='PARAMETERS'
 
 Replace the following:
 
@@ -198,7 +196,7 @@ Replace the following:
 
 The following command creates a Mailchimp data transfer in the default project.
 
-``` notranslate
+``` 
     bq mk
         --transfer_config
         --target_dataset=mydataset

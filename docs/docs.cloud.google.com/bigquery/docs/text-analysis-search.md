@@ -347,30 +347,26 @@ The following examples demonstrates the use of text analysis with customization 
 
 The following example configures `LOG_ANALYZER` options with [NFKC ICU](https://en.wikipedia.org/wiki/Unicode_equivalence) normalization and stop words. The example assumes the following data table with data already populated:
 
-``` notranslate
-CREATE TABLE dataset.data_table(
-  text_data STRING
-);
-```
+    CREATE TABLE dataset.data_table(
+      text_data STRING
+    );
 
 To create a search index with NFKC ICU normalization and a list of stop words, create a JSON-formatted string in the `analyzer_options` option of the [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `LOG_ANALYZER` , see [`LOG_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) . For this example, our stop words are `"the", "of", "and", "for"` .
 
-``` notranslate
-CREATE OR REPLACE SEARCH INDEX `my_index` ON `dataset.data_table`(ALL COLUMNS) OPTIONS(
-  analyzer='PATTERN_ANALYZER',
-  analyzer_options= '''{
-    "token_filters": [
-      {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFKC",
-          "icu_case_folding": true
-        }
-      },
-      { "stop_words": ["the", "of", "and", "for"] }
-    ]
-  }''');
-```
+    CREATE OR REPLACE SEARCH INDEX `my_index` ON `dataset.data_table`(ALL COLUMNS) OPTIONS(
+      analyzer='PATTERN_ANALYZER',
+      analyzer_options= '''{
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFKC",
+              "icu_case_folding": true
+            }
+          },
+          { "stop_words": ["the", "of", "and", "for"] }
+        ]
+      }''');
 
 Given the previous example, the following table describes the token extraction for various values of `text_data` . Note that in this document the double question mark character ( *⁇* ) has been italicized to differentiate between two question marks (??):
 
@@ -420,25 +416,23 @@ Finally, the stop words filter does nothing because none of the tokens are in th
 
 Now that the search index has been created, you can use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) to search the table using the same analyzer configurations specified in the search index. Note that if the analyzer configurations in the `SEARCH` function don't match those of the search index, the search index won't be used. Use the following query:
 
-``` notranslate
-SELECT
-  SEARCH(
-  analyzer => 'LOG_ANALYZER',
-  analyzer_options => '''{
-    "token_filters": [
-      {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFKC",
-          "icu_case_folding": true
-        }
-      },
-      {
-        "stop_words": ["the", "of", "and", "for"]
-      }
-    ]
-  }''')
-```
+    SELECT
+      SEARCH(
+      analyzer => 'LOG_ANALYZER',
+      analyzer_options => '''{
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFKC",
+              "icu_case_folding": true
+            }
+          },
+          {
+            "stop_words": ["the", "of", "and", "for"]
+          }
+        ]
+      }''')
 
 Replace the following:
 
@@ -515,31 +509,27 @@ The following example configures the `PATTERN_ANALYZER` text analyzer to search 
 
 This example assumes that the following table is populated with data:
 
-``` notranslate
-CREATE TABLE dataset.data_table(
-  text_data STRING
-);
-```
+    CREATE TABLE dataset.data_table(
+      text_data STRING
+    );
 
 To create a search index the `pattern` option and a list of stop words, create a JSON-formatted string in the `analyzer_options` option of the [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `PATTERN_ANALYZER` , see [`PATTERN_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) . For this example, our stop words are the localhost address, `127.0.0.1` .
 
-``` notranslate
-CREATE SEARCH INDEX my_index
-ON dataset.data_table(text_data)
-OPTIONS (analyzer = 'PATTERN_ANALYZER', analyzer_options = '''{
-  "patterns": [
-    "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
-  ],
-  "token_filters": [
-    {
-      "stop_words": [
-        "127.0.0.1"
+    CREATE SEARCH INDEX my_index
+    ON dataset.data_table(text_data)
+    OPTIONS (analyzer = 'PATTERN_ANALYZER', analyzer_options = '''{
+      "patterns": [
+        "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+      ],
+      "token_filters": [
+        {
+          "stop_words": [
+            "127.0.0.1"
+          ]
+        }
       ]
-    }
-  ]
-}'''
-);
-```
+    }'''
+    );
 
 When using regular expressions with `analyzer_options` , include three leading `\` symbols to properly escape regular expressions that include a `\` symbol, such as `\d` or `\b` .
 
@@ -552,25 +542,23 @@ The following table describes the tokenization options for various values of `te
 
 Now that the search index has been created, you can use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) to search the table based on the tokenization specified in `analyzer_options` . Use the following query:
 
-``` notranslate
-SELECT
-  SEARCH(dataset.data_table.text_data
-  "search_data",
-  analyzer => 'PATTERN_ANALYZER',
-  analyzer_options => '''{
-    "patterns": [
-      "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
-      ],
-    "token_filters": [
-      {
-        "stop_words": [
-          "127.0.0.1"
+    SELECT
+      SEARCH(dataset.data_table.text_data
+      "search_data",
+      analyzer => 'PATTERN_ANALYZER',
+      analyzer_options => '''{
+        "patterns": [
+          "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+          ],
+        "token_filters": [
+          {
+            "stop_words": [
+              "127.0.0.1"
+            ]
+          }
         ]
-      }
-    ]
-  }'''
-);
-```
+      }'''
+    );
 
 Replace the following:
 

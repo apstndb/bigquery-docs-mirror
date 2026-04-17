@@ -289,22 +289,18 @@ This example shows how to generate an embedding of a single piece of sample text
 
 Create the remote model:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.text_embedding`
-  REMOTE WITH CONNECTION `us.test_connection`
-  OPTIONS(ENDPOINT = 'text-embedding-005')
-```
+    CREATE OR REPLACE MODEL `mydataset.text_embedding`
+      REMOTE WITH CONNECTION `us.test_connection`
+      OPTIONS(ENDPOINT = 'text-embedding-005')
 
 Generate the embedding:
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_EMBEDDING(
-    MODEL `mydataset.text_embedding`,
-    (SELECT "Example text to embed" AS content)
-);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_EMBEDDING(
+        MODEL `mydataset.text_embedding`,
+        (SELECT "Example text to embed" AS content)
+    );
 
 The result is similar to the following:
 
@@ -322,36 +318,30 @@ This example shows how to generate embeddings from visual content by using a rem
 
 Create the remote model:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.multimodalembedding`
-  REMOTE WITH CONNECTION `us.test_connection`
-  OPTIONS(ENDPOINT = 'multimodalembedding@001')
-```
+    CREATE OR REPLACE MODEL `mydataset.multimodalembedding`
+      REMOTE WITH CONNECTION `us.test_connection`
+      OPTIONS(ENDPOINT = 'multimodalembedding@001')
 
 **Use an `ObjectRefRuntime` value**
 
 Generate embeddings from visual content in an `ObjectRef` column in a standard table:
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_EMBEDDING(
-  MODEL `mydataset.multimodalembedding`,
-    (
-      SELECT OBJ.GET_ACCESS_URL(art_image, 'r') as content
-      FROM `mydataset.art`)
- );
-```
+    SELECT *
+    FROM AI.GENERATE_EMBEDDING(
+      MODEL `mydataset.multimodalembedding`,
+        (
+          SELECT OBJ.GET_ACCESS_URL(art_image, 'r') as content
+          FROM `mydataset.art`)
+     );
 
 **Use an object table**
 
 Generate embeddings from visual content in an object table:
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_EMBEDDING(
-  MODEL `mydataset.multimodalembedding`,
-  TABLE `mydataset.my_object_table`);
-```
+    SELECT *
+    FROM AI.GENERATE_EMBEDDING(
+      MODEL `mydataset.multimodalembedding`,
+      TABLE `mydataset.my_object_table`);
 
 ### PCA
 
@@ -359,47 +349,43 @@ This example shows how to generate embeddings that represent the principal compo
 
 Create the PCA model:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.pca_nyc_trees`
-  OPTIONS (
-    MODEL_TYPE = 'PCA',
-    PCA_EXPLAINED_VARIANCE_RATIO = 0.9)
-AS (
-  SELECT
-    tree_id,
-    block_id,
-    tree_dbh,
-    stump_diam,
-    curb_loc,
-    status,
-    health,
-    spc_latin
-  FROM
-    `bigquery-public-data.new_york_trees.tree_census_2015`
-);
-```
+    CREATE OR REPLACE MODEL `mydataset.pca_nyc_trees`
+      OPTIONS (
+        MODEL_TYPE = 'PCA',
+        PCA_EXPLAINED_VARIANCE_RATIO = 0.9)
+    AS (
+      SELECT
+        tree_id,
+        block_id,
+        tree_dbh,
+        stump_diam,
+        curb_loc,
+        status,
+        health,
+        spc_latin
+      FROM
+        `bigquery-public-data.new_york_trees.tree_census_2015`
+    );
 
 Generate embeddings that represent principal components:
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_EMBEDDING(
-    MODEL `mydataset.pca_nyc_trees`,
-(
-  SELECT
-    tree_id,
-    block_id,
-    tree_dbh,
-    stump_diam,
-    curb_loc,
-    status,
-    health,
-    spc_latin
-  FROM
-    `bigquery-public-data.new_york_trees.tree_census_2015`
-));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_EMBEDDING(
+        MODEL `mydataset.pca_nyc_trees`,
+    (
+      SELECT
+        tree_id,
+        block_id,
+        tree_dbh,
+        stump_diam,
+        curb_loc,
+        status,
+        health,
+        spc_latin
+      FROM
+        `bigquery-public-data.new_york_trees.tree_census_2015`
+    ));
 
 ### Autoencoder
 
@@ -407,42 +393,38 @@ This example shows how to generate embeddings that represent the latent space di
 
 Create the autoencoder model:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.my_autoencoder_model`
-  OPTIONS (
-    model_type = 'autoencoder',
-    activation_fn = 'relu',
-    batch_size = 8,
-    dropout = 0.2,
-    hidden_units =
-      [
-        32,
-        16,
-        4,
-        16,
-        32],
-    learn_rate = 0.001,
-    l1_reg_activation = 0.0001,
-    max_iterations = 10,
-    optimizer = 'adam')
-AS
-SELECT * EXCEPT (
-    Time,
-    Class)
-FROM
-  `bigquery-public-data.ml_datasets.ulb_fraud_detection`;
-```
+    CREATE OR REPLACE MODEL `mydataset.my_autoencoder_model`
+      OPTIONS (
+        model_type = 'autoencoder',
+        activation_fn = 'relu',
+        batch_size = 8,
+        dropout = 0.2,
+        hidden_units =
+          [
+            32,
+            16,
+            4,
+            16,
+            32],
+        learn_rate = 0.001,
+        l1_reg_activation = 0.0001,
+        max_iterations = 10,
+        optimizer = 'adam')
+    AS
+    SELECT * EXCEPT (
+        Time,
+        Class)
+    FROM
+      `bigquery-public-data.ml_datasets.ulb_fraud_detection`;
 
 Generate embeddings that represent latent space dimensions:
 
-``` notranslate
-SELECT
-  *
-FROM
-  AI.GENERATE_EMBEDDING(
-    MODEL `mydataset.my_autoencoder_model`,
-    TABLE `bigquery-public-data.ml_datasets.ulb_fraud_detection`);
-```
+    SELECT
+      *
+    FROM
+      AI.GENERATE_EMBEDDING(
+        MODEL `mydataset.my_autoencoder_model`,
+        TABLE `bigquery-public-data.ml_datasets.ulb_fraud_detection`);
 
 ### Matrix factorization
 
@@ -450,32 +432,28 @@ This example shows how to generate embeddings that represent the underlying weig
 
 Create the matrix factorization model:
 
-``` notranslate
-CREATE OR REPLACE MODEL
-  `mydataset.my_mf_model`
-OPTIONS (
-  model_type='matrix_factorization',
-  user_col='user_id',
-  item_col='item_id',
-  l2_reg=9.83,
-  num_factors=34)
-AS SELECT
-  user_id,
-  item_id,
-  AVG(rating) as rating
-FROM
-  movielens.movielens_1m
-GROUP BY user_id, item_id;
-```
+    CREATE OR REPLACE MODEL
+      `mydataset.my_mf_model`
+    OPTIONS (
+      model_type='matrix_factorization',
+      user_col='user_id',
+      item_col='item_id',
+      l2_reg=9.83,
+      num_factors=34)
+    AS SELECT
+      user_id,
+      item_id,
+      AVG(rating) as rating
+    FROM
+      movielens.movielens_1m
+    GROUP BY user_id, item_id;
 
 Generate embeddings that represent model weights and intercepts:
 
-``` notranslate
-SELECT
-  *
-FROM
-  AI.GENERATE_EMBEDDING(MODEL `mydataset.my_mf_model`)
-```
+    SELECT
+      *
+    FROM
+      AI.GENERATE_EMBEDDING(MODEL `mydataset.my_mf_model`)
 
 ## Supported text embedding models
 

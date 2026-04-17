@@ -161,7 +161,7 @@ You can use the following generic tools to migrate data from Snowflake to BigQue
   - **[Cloud Storage client libraries](https://docs.cloud.google.com/storage/docs/reference/libraries) :** Copy downloaded Snowflake files into Cloud Storage with a custom tool that uses the Cloud Storage client libraries.
   - **[BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) :** Interact with BigQuery with a custom tool built on top of the BigQuery client library.
   - **[BigQuery query scheduler](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) :** Schedule recurring SQL queries with this built-in BigQuery feature.
-  - **[Cloud Composer](https://docs.cloud.google.com/composer/docs) :** Use this fully managed Apache Airflow environment to orchestrate BigQuery load jobs and transformations.
+  - **[Managed Service for Apache Airflow](https://docs.cloud.google.com/composer/docs) :** Use this fully managed Apache Airflow environment to orchestrate BigQuery load jobs and transformations.
 
 For more information on loading data into BigQuery, see [Loading data into BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview#loading_the_data_into_bigquery) .
 

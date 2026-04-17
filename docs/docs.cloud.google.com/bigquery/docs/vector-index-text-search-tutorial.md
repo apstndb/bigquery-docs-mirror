@@ -96,30 +96,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create the remote model for text embedding generation
 
@@ -129,11 +123,9 @@ Create a remote model that represents a hosted Vertex AI text embedding generati
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.embedding_model`
-      REMOTE WITH CONNECTION DEFAULT
-      OPTIONS (ENDPOINT = 'text-embedding-005');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.embedding_model`
+          REMOTE WITH CONNECTION DEFAULT
+          OPTIONS (ENDPOINT = 'text-embedding-005');
     
     The query takes several seconds to complete, after which the model `embedding_model` can be accessed through the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -145,18 +137,16 @@ Generate text embeddings from patent abstracts using the [`AI.GENERATE_EMBEDDING
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.embeddings` AS
-    SELECT * FROM AI.GENERATE_EMBEDDING(
-      MODEL `bqml_tutorial.embedding_model`,
-      (
-        SELECT *, abstract AS content
-        FROM `patents-public-data.google_patents_research.publications`
-        WHERE LENGTH(abstract) > 0 AND LENGTH(title) > 0 AND country = 'Singapore'
-      )
-    )
-    WHERE LENGTH(status) = 0;
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.embeddings` AS
+        SELECT * FROM AI.GENERATE_EMBEDDING(
+          MODEL `bqml_tutorial.embedding_model`,
+          (
+            SELECT *, abstract AS content
+            FROM `patents-public-data.google_patents_research.publications`
+            WHERE LENGTH(abstract) > 0 AND LENGTH(title) > 0 AND country = 'Singapore'
+          )
+        )
+        WHERE LENGTH(status) = 0;
 
 This query takes approximately 5 minutes to complete.
 
@@ -174,13 +164,11 @@ To create a vector index, use the [`CREATE VECTOR INDEX`](https://docs.cloud.goo
 
 2.  In the query editor, run the following SQL statement:
     
-    ``` notranslate
-    CREATE OR REPLACE VECTOR INDEX my_index
-    ON `bqml_tutorial.embeddings`(embedding)
-    OPTIONS(index_type = 'IVF',
-      distance_type = 'COSINE',
-      ivf_options = '{"num_lists":500}')
-    ```
+        CREATE OR REPLACE VECTOR INDEX my_index
+        ON `bqml_tutorial.embeddings`(embedding)
+        OPTIONS(index_type = 'IVF',
+          distance_type = 'COSINE',
+          ivf_options = '{"num_lists":500}')
 
 Creating a vector index typically takes only a few seconds. It takes another 2 or 3 minutes for the vector index to be populated and ready to use.
 
@@ -192,11 +180,9 @@ The vector index is populated asynchronously. You can check whether the index is
 
 2.  In the query editor, run the following SQL statement:
     
-    ``` notranslate
-    SELECT table_name, index_name, index_status,
-    coverage_percentage, last_refresh_time, disable_reason
-    FROM `PROJECT_ID.bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES`
-    ```
+        SELECT table_name, index_name, index_status,
+        coverage_percentage, last_refresh_time, disable_reason
+        FROM `PROJECT_ID.bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES`
     
     Replace `  PROJECT_ID  ` with your project ID.
 
@@ -212,18 +198,16 @@ The model you use to generate the embeddings in this query must be the same as t
 
 2.  In the query editor, run the following SQL statement:
     
-    ``` notranslate
-    SELECT query.query, base.publication_number, base.title, base.abstract
-    FROM VECTOR_SEARCH(
-      TABLE `bqml_tutorial.embeddings`, 'embedding',
-      (
-      SELECT embedding, content AS query
-      FROM AI.GENERATE_EMBEDDING(
-      MODEL `bqml_tutorial.embedding_model`,
-      (SELECT 'improving password security' AS content))
-      ),
-      top_k => 5, options => '{"fraction_lists_to_search": 0.01}')
-    ```
+        SELECT query.query, base.publication_number, base.title, base.abstract
+        FROM VECTOR_SEARCH(
+          TABLE `bqml_tutorial.embeddings`, 'embedding',
+          (
+          SELECT embedding, content AS query
+          FROM AI.GENERATE_EMBEDDING(
+          MODEL `bqml_tutorial.embedding_model`,
+          (SELECT 'improving password security' AS content))
+          ),
+          top_k => 5, options => '{"fraction_lists_to_search": 0.01}')
     
     The output is similar to the following:
     
@@ -245,11 +229,9 @@ Create a remote model that represents a hosted Vertex AI text generation model:
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.text_model`
-      REMOTE WITH CONNECTION DEFAULT
-      OPTIONS (ENDPOINT = 'gemini-2.0-flash-001');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.text_model`
+          REMOTE WITH CONNECTION DEFAULT
+          OPTIONS (ENDPOINT = 'gemini-2.0-flash-001');
     
     The query takes several seconds to complete, after which the model `text_model` can be accessed through the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -261,30 +243,28 @@ Feed the search results as prompts to generate text with the [`AI.GENERATE_TEXT`
 
 2.  In the query editor, run the following statement:
     
-    ``` notranslate
-    SELECT result AS generated, prompt
-    FROM AI.GENERATE_TEXT(
-      MODEL `bqml_tutorial.text_model`,
-      (
-        SELECT CONCAT(
-          'Propose some project ideas to improve user password security using the context below: ',
-          STRING_AGG(
-            FORMAT("patent title: %s, patent abstract: %s", base.title, base.abstract),
-            ',\n')
-          ) AS prompt,
-        FROM VECTOR_SEARCH(
-          TABLE `bqml_tutorial.embeddings`, 'embedding',
+        SELECT result AS generated, prompt
+        FROM AI.GENERATE_TEXT(
+          MODEL `bqml_tutorial.text_model`,
           (
-            SELECT embedding, content AS query
-            FROM AI.GENERATE_EMBEDDING(
-              MODEL `bqml_tutorial.embedding_model`,
-             (SELECT 'improving password security' AS content)
-            )
+            SELECT CONCAT(
+              'Propose some project ideas to improve user password security using the context below: ',
+              STRING_AGG(
+                FORMAT("patent title: %s, patent abstract: %s", base.title, base.abstract),
+                ',\n')
+              ) AS prompt,
+            FROM VECTOR_SEARCH(
+              TABLE `bqml_tutorial.embeddings`, 'embedding',
+              (
+                SELECT embedding, content AS query
+                FROM AI.GENERATE_EMBEDDING(
+                  MODEL `bqml_tutorial.embedding_model`,
+                 (SELECT 'improving password security' AS content)
+                )
+              ),
+            top_k => 5, options => '{"fraction_lists_to_search": 0.01}')
           ),
-        top_k => 5, options => '{"fraction_lists_to_search": 0.01}')
-      ),
-      STRUCT(600 AS max_output_tokens));
-    ```
+          STRUCT(600 AS max_output_tokens));
     
     The output is similar to the following:
     

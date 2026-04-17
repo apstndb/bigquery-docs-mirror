@@ -25,23 +25,21 @@ The following query returns the metadata for all active continuous queries. The 
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    SELECT
-      start_time,
-      job_id,
-      user_email,
-      query,
-      state,
-      reservation_id,
-      continuous_query_info.output_watermark
-    FROM `PROJECT_ID.region-REGION.INFORMATION_SCHEMA.JOBS`
-    WHERE
-      creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 day)
-      AND continuous IS TRUE
-      AND state = "RUNNING"
-    ORDER BY
-      start_time DESC
-    ```
+        SELECT
+          start_time,
+          job_id,
+          user_email,
+          query,
+          state,
+          reservation_id,
+          continuous_query_info.output_watermark
+        FROM `PROJECT_ID.region-REGION.INFORMATION_SCHEMA.JOBS`
+        WHERE
+          creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 day)
+          AND continuous IS TRUE
+          AND state = "RUNNING"
+        ORDER BY
+          start_time DESC
     
     Replace the following:
     
@@ -58,21 +56,19 @@ Return reservation assignment details for continuous queries:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    SELECT
-      reservation.reservation_name,
-      reservation.slot_capacity
-    FROM
-      `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.ASSIGNMENTS`
-        AS assignment
-    INNER JOIN
-      `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.RESERVATIONS`
-        AS reservation
-      ON (assignment.reservation_name = reservation.reservation_name)
-    WHERE
-      assignment.assignee_id = 'PROJECT_ID'
-      AND job_type = 'CONTINUOUS';
-    ```
+        SELECT
+          reservation.reservation_name,
+          reservation.slot_capacity
+        FROM
+          `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.ASSIGNMENTS`
+            AS assignment
+        INNER JOIN
+          `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.RESERVATIONS`
+            AS reservation
+          ON (assignment.reservation_name = reservation.reservation_name)
+        WHERE
+          assignment.assignee_id = 'PROJECT_ID'
+          AND job_type = 'CONTINUOUS';
     
     Replace the following:
     
@@ -90,33 +86,31 @@ Return slot consumption information for continuous queries:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    SELECT
-      jobs.period_start,
-      reservation.reservation_name,
-      reservation.slot_capacity,
-      SUM(jobs.period_slot_ms) / 1000 AS consumed_total_slots
-    FROM
-      `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.ASSIGNMENTS`
-        AS assignment
-    INNER JOIN
-      `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.RESERVATIONS`
-        AS reservation
-      ON (assignment.reservation_name = reservation.reservation_name)
-    INNER JOIN
-      `PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.JOBS_TIMELINE` AS jobs
-      ON (
-        UPPER(CONCAT('ADMIN_PROJECT_ID:LOCATION.', assignment.reservation_name))
-        = UPPER(jobs.reservation_id))
-    WHERE
-      assignment.assignee_id = 'PROJECT_ID'
-      AND assignment.job_type = 'CONTINUOUS'
-      AND jobs.period_start
-        BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-        AND CURRENT_TIMESTAMP()
-    GROUP BY 1, 2, 3
-    ORDER BY jobs.period_start DESC;
-    ```
+        SELECT
+          jobs.period_start,
+          reservation.reservation_name,
+          reservation.slot_capacity,
+          SUM(jobs.period_slot_ms) / 1000 AS consumed_total_slots
+        FROM
+          `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.ASSIGNMENTS`
+            AS assignment
+        INNER JOIN
+          `ADMIN_PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.RESERVATIONS`
+            AS reservation
+          ON (assignment.reservation_name = reservation.reservation_name)
+        INNER JOIN
+          `PROJECT_ID.region-LOCATION.INFORMATION_SCHEMA.JOBS_TIMELINE` AS jobs
+          ON (
+            UPPER(CONCAT('ADMIN_PROJECT_ID:LOCATION.', assignment.reservation_name))
+            = UPPER(jobs.reservation_id))
+        WHERE
+          assignment.assignee_id = 'PROJECT_ID'
+          AND assignment.job_type = 'CONTINUOUS'
+          AND jobs.period_start
+            BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+            AND CURRENT_TIMESTAMP()
+        GROUP BY 1, 2, 3
+        ORDER BY jobs.period_start DESC;
     
     Replace the following:
     
@@ -160,11 +154,9 @@ Instead of routinely checking whether your continuous queries have failed, it ca
 
 6.  In the **Filter selection** section, enter the following into the **Build filter** editor:
     
-    ``` lang-none
-    resource.type = "bigquery_project"
-    protoPayload.resourceName : "projects/PROJECT_ID/jobs/CUSTOM_JOB_ID_PREFIX"
-    severity = ERROR
-    ```
+        resource.type = "bigquery_project"
+        protoPayload.resourceName : "projects/PROJECT_ID/jobs/CUSTOM_JOB_ID_PREFIX"
+        severity = ERROR
     
     Replace the following:
     
@@ -198,11 +190,9 @@ One possible approach to automating query retry is the following:
 
 1.  Create a [Cloud Logging sink](https://docs.cloud.google.com/logging/docs/export/configure_export_v2#creating_sink) based on an inclusion filter matching the following criteria to route logs to a Pub/Sub topic:
     
-    ``` lang-none
-    resource.type = "bigquery_project"
-    protoPayload.resourceName : "projects/PROJECT_ID/jobs/CUSTOM_JOB_ID_PREFIX"
-    severity = ERROR
-    ```
+        resource.type = "bigquery_project"
+        protoPayload.resourceName : "projects/PROJECT_ID/jobs/CUSTOM_JOB_ID_PREFIX"
+        severity = ERROR
     
     Replace the following:
     

@@ -11,7 +11,7 @@ For more information about supported SQL statements and functions for different 
 
 ## `ALTER MODEL` syntax
 
-``` lang-sql
+```sql
 ALTER MODEL [IF EXISTS]
 `PROJECT_ID.DATASET.MODEL`
 SET OPTIONS

@@ -55,10 +55,8 @@ Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA mydataset
-    SET OPTIONS (labels = [('sensitivity', 'high')]);
-    ```
+        ALTER SCHEMA mydataset
+        SET OPTIONS (labels = [('sensitivity', 'high')]);
 
 3.  Click play\_circle **Run** .
 
@@ -70,11 +68,9 @@ To add additional labels or to update a dataset label, issue the `bq update` com
 
 If the dataset is in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
-``` notranslate
-bq update \
---set_label key:value \
-project_id:dataset
-```
+    bq update \
+    --set_label key:value \
+    project_id:dataset
 
 Where:
 
@@ -282,11 +278,9 @@ Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    SET OPTIONS (
-      labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
-    ```
+        ALTER TABLE mydataset.mytable
+        SET OPTIONS (
+          labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
 
 3.  Click play\_circle **Run** .
 
@@ -298,11 +292,9 @@ To add additional labels or to update a table or view label, issue the `bq updat
 
 If the table or view is in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
 
-``` notranslate
-bq update \
---set_label key:value \
-project_id:dataset.table_or_view
-```
+    bq update \
+    --set_label key:value \
+    project_id:dataset.table_or_view
 
 Where:
 
@@ -516,9 +508,7 @@ To update a label to a reservation:
 
 To update a label to a reservation, issue the `bq update` command with the `set_label` flag and `--reservation` flag. To update multiple labels, repeat the flag.
 
-``` notranslate
-bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
-```
+    bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
 
 Replace the following:
 
@@ -533,11 +523,9 @@ To update a label to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION myreservation
-    SET OPTIONS (
-      labels = [('sensitivity', 'high')]);
-    ```
+        ALTER RESERVATION myreservation
+        SET OPTIONS (
+          labels = [('sensitivity', 'high')]);
 
 3.  Click play\_circle **Run** .
 
@@ -596,11 +584,9 @@ To convert a label to a tag:
 
 To convert a label to a tag, use the `bq update` command with the `set_label` flag. Specify the key, followed by a colon, but leave the value unspecified. This updates an existing label to a tag.
 
-``` notranslate
-bq update \
---set_label key: \
-resource_id
-```
+    bq update \
+    --set_label key: \
+    resource_id
 
 Where:
 

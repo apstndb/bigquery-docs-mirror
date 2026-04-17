@@ -8,7 +8,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -658,176 +658,158 @@ The following examples create models named `mymodel` in `mydataset` in your defa
 
 The following example creates and trains a linear regression model. The learn rate is set to `0.15` , the L1 regularization is set to `1` , and the maximum number of training iterations is set to `5` .
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LINEAR_REG',
-    LS_INIT_LEARN_RATE=0.15,
-    L1_REG=1,
-    MAX_ITERATIONS=5 ) AS
-SELECT
-  column1,
-  column2,
-  column3,
-  label
-FROM
-  `mydataset.mytable`
-WHERE
-  column4 < 10
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LINEAR_REG',
+        LS_INIT_LEARN_RATE=0.15,
+        L1_REG=1,
+        MAX_ITERATIONS=5 ) AS
+    SELECT
+      column1,
+      column2,
+      column3,
+      label
+    FROM
+      `mydataset.mytable`
+    WHERE
+      column4 < 10
 
 ### Train a linear regression model with a sequential data split
 
 The following example creates a linear regression model with a sequential data split. The split fraction is `0.3` and the split uses the `timestamp` column as the basis for the split.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LINEAR_REG',
-    LS_INIT_LEARN_RATE=0.15,
-    L1_REG=1,
-    MAX_ITERATIONS=5,
-    DATA_SPLIT_METHOD='SEQ',
-    DATA_SPLIT_EVAL_FRACTION=0.3,
-    DATA_SPLIT_COL='timestamp' ) AS
-SELECT
-  column1,
-  column2,
-  column3,
-  timestamp,
-  label
-FROM
-  `mydataset.mytable`
-WHERE
-  column4 < 10
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LINEAR_REG',
+        LS_INIT_LEARN_RATE=0.15,
+        L1_REG=1,
+        MAX_ITERATIONS=5,
+        DATA_SPLIT_METHOD='SEQ',
+        DATA_SPLIT_EVAL_FRACTION=0.3,
+        DATA_SPLIT_COL='timestamp' ) AS
+    SELECT
+      column1,
+      column2,
+      column3,
+      timestamp,
+      label
+    FROM
+      `mydataset.mytable`
+    WHERE
+      column4 < 10
 
 ### Train a linear regression model with a custom data split
 
 The following example creates a linear regression model using a custom data split method and trains the model by joining the data from the evaluation and training tables. All the columns in the training table and in the evaluation table are either features or the label. The query uses `SELECT *` and `UNION ALL` to append all of the data in the `split_col` column to the existing data.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LINEAR_REG',
-    DATA_SPLIT_METHOD='CUSTOM',
-    DATA_SPLIT_COL='SPLIT_COL' ) AS
-SELECT
-  *,
-  false AS split_col
-FROM
-  `mydataset.training_table`
-UNION ALL
-SELECT
-  *,
-  true AS split_col
-FROM
-  `mydataset.evaluation_table`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LINEAR_REG',
+        DATA_SPLIT_METHOD='CUSTOM',
+        DATA_SPLIT_COL='SPLIT_COL' ) AS
+    SELECT
+      *,
+      false AS split_col
+    FROM
+      `mydataset.training_table`
+    UNION ALL
+    SELECT
+      *,
+      true AS split_col
+    FROM
+      `mydataset.evaluation_table`
 
 ### Train a linear regression model with hyperparameter tuning
 
 The following example creates and trains a linear regression model. It uses hyperparameter tuning to improve model performance.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LINEAR_REG',
-    num_trials=10,
-    max_parallel_trials=2,
-    HPARAM_TUNING_OBJECTIVES=['R2_SCORE']) AS
-SELECT
-  column1,
-  column2,
-  column3,
-  label
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LINEAR_REG',
+        num_trials=10,
+        max_parallel_trials=2,
+        HPARAM_TUNING_OBJECTIVES=['R2_SCORE']) AS
+    SELECT
+      column1,
+      column2,
+      column3,
+      label
+    FROM
+      `mydataset.mytable`
 
 ### Train a multiclass logistic regression model with automatically calculated weights
 
 The following example creates a multiclass logistic regression model using the `auto_class_weights` option.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LOGISTIC_REG',
-    AUTO_CLASS_WEIGHTS=TRUE ) AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LOGISTIC_REG',
+        AUTO_CLASS_WEIGHTS=TRUE ) AS
+    SELECT
+      *
+    FROM
+      `mydataset.mytable`
 
 ### Train a multiclass logistic regression model with specified weights
 
 The following example creates a multiclass logistic regression model using the `class_weights` option. The label columns are `label1` , `label2` , and `label3` .
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LOGISTIC_REG',
-    CLASS_WEIGHTS=[('label1', 0.5), ('label2', 0.3), ('label3', 0.2)]) AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LOGISTIC_REG',
+        CLASS_WEIGHTS=[('label1', 0.5), ('label2', 0.3), ('label3', 0.2)]) AS
+    SELECT
+      *
+    FROM
+      `mydataset.mytable`
 
 ### Train a logistic regression model with specified weights
 
 The following example creates a logistic regression model using the `class_weights` option.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LOGISTIC_REG',
-    CLASS_WEIGHTS=[('0', 0.9), ('1', 0.1)]) AS
-SELECT
-  *
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LOGISTIC_REG',
+        CLASS_WEIGHTS=[('0', 0.9), ('1', 0.1)]) AS
+    SELECT
+      *
+    FROM
+      `mydataset.mytable`
 
 ### Train a logistic regression model with hyperparameter tuning
 
 The following example creates and trains a logistic regression model. It uses hyperparameter tuning to improve model performance.
 
-``` notranslate
-CREATE MODEL
-  `mydataset.mymodel`
-OPTIONS
-  ( MODEL_TYPE='LOGISTIC_REG',
-    num_trials=10,
-    max_parallel_trials=2,
-    HPARAM_TUNING_OBJECTIVES=['ROC_AUC'] ) AS
-SELECT
-  column1,
-  column2,
-  column3,
-  label
-FROM
-  `mydataset.mytable`
-```
+    CREATE MODEL
+      `mydataset.mymodel`
+    OPTIONS
+      ( MODEL_TYPE='LOGISTIC_REG',
+        num_trials=10,
+        max_parallel_trials=2,
+        HPARAM_TUNING_OBJECTIVES=['ROC_AUC'] ) AS
+    SELECT
+      column1,
+      column2,
+      column3,
+      label
+    FROM
+      `mydataset.mytable`
 
 ### Model creation with `TRANSFORM` , while excluding original columns
 
 The following example trains a model after adding the columns `f1` and `f2` from the `SELECT` statement to form a new column `c` ; the columns `f1` and `f2` are omitted from the training data. Model training uses columns `f3` and `label_col` as they appear in the data source `t` .
 
-``` notranslate
-CREATE MODEL `mydataset.mymodel`
-  TRANSFORM(f1 + f2 as c, * EXCEPT(f1, f2))
-  OPTIONS(model_type='linear_reg', input_label_cols=['label_col'])
-AS SELECT f1, f2, f3, label_col FROM t;
-```
+    CREATE MODEL `mydataset.mymodel`
+      TRANSFORM(f1 + f2 as c, * EXCEPT(f1, f2))
+      OPTIONS(model_type='linear_reg', input_label_cols=['label_col'])
+    AS SELECT f1, f2, f3, label_col FROM t;
 
 ## What's next
 

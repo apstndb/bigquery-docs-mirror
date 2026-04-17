@@ -86,11 +86,9 @@ To clone a table, use the [CREATE TABLE CLONE](https://docs.cloud.google.com/big
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE
-    myproject.myDataset_backup.myTableClone
-    CLONE myproject.myDataset.myTable;
-    ```
+        CREATE TABLE
+        myproject.myDataset_backup.myTableClone
+        CLONE myproject.myDataset.myTable;
 
 3.  Click play\_circle **Run** .
 
@@ -106,9 +104,7 @@ Replace the following:
 
 Use a [`bq cp`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command with the `--clone` flag:
 
-``` notranslate
-bq cp --clone --no_clobber project1:myDataset.myTable PROJECT:DATASET.CLONE_NAME
-```
+    bq cp --clone --no_clobber project1:myDataset.myTable PROJECT:DATASET.CLONE_NAME
 
 Replace the following:
 
@@ -120,9 +116,7 @@ The `--no_clobber` flag is required.
 
 If you are creating a clone in the same project as the base table, you can skip specifying a project, as shown following:
 
-``` notranslate
-bq cp --clone --no_clobber myDataset.myTable DATASET.CLONE_NAME
-```
+    bq cp --clone --no_clobber myDataset.myTable DATASET.CLONE_NAME
 
 ### API
 
@@ -146,7 +140,7 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [

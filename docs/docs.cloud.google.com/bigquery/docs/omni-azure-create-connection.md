@@ -74,7 +74,7 @@ To create an application in your Azure tenant, follow these steps:
 
 Add the following to your Terraform configuration file:
 
-``` notranslate
+``` 
   data "azuread_client_config" "current" {}
 
   resource "azuread_application" "example" {
@@ -137,7 +137,7 @@ For more information, see how to [register an application](https://docs.microsof
 
 ### Terraform
 
-``` notranslate
+``` 
   resource "google_bigquery_connection" "connection" {
     connection_id = "omni-azure-connection"
     location      = "azure-eastus2"
@@ -156,14 +156,12 @@ Replace `  TENANT_ID  ` with the tenant ID of the Azure directory that contains 
 
 Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) . To get the output in JSON format, use the `--format=json` parameter.
 
-``` notranslate
-bq mk --connection --connection_type='Azure' \
-  --tenant_id=TENANT_ID \
-  --location=AZURE_LOCATION \
-  --federated_azure=true \
-  --federated_app_client_id=APP_ID \
-  CONNECTION_ID
-```
+    bq mk --connection --connection_type='Azure' \
+      --tenant_id=TENANT_ID \
+      --location=AZURE_LOCATION \
+      --federated_azure=true \
+      --federated_app_client_id=APP_ID \
+      CONNECTION_ID
 
 Replace the following:
 
@@ -174,11 +172,9 @@ Replace the following:
 
 The output is similar to the following:
 
-``` notranslate
-Connection CONNECTION_ID successfully created
-Please add the following identity to your Azure application APP_ID
-Identity: SUBJECT_ID
-```
+    Connection CONNECTION_ID successfully created
+    Please add the following identity to your Azure application APP_ID
+    Identity: SUBJECT_ID
 
 This output includes the following values:
 
@@ -216,7 +212,7 @@ To create a federated credential, follow these steps:
 
 Add the following to your Terraform configuration file:
 
-``` notranslate
+``` 
   resource "azuread_application_federated_identity_credential" "example" {
     application_id = azuread_application.example.id
     display_name   = "omni-federated-credential"
@@ -261,7 +257,7 @@ For more information, see [Assign Azure roles using the Azure portal](https://do
 
 Add the following to your Terraform configuration file:
 
-``` notranslate
+``` 
   resource "azurerm_role_assignment" "data_role" {
     scope                = data.azurerm_storage_account.example.id
     # Read permission for Omni on the storage account
@@ -274,7 +270,7 @@ Add the following to your Terraform configuration file:
 
 To add a role assignment for a service principal at a resource scope, you can use the [`New-AzRoleAssignment` command](https://docs.microsoft.com/en-us/powershell/module/az.resources/new-azroleassignment?view=azps-7.5.0) :
 
-``` notranslate
+``` 
   New-AzRoleAssignment`
    -SignInName APP_NAME`
    -RoleDefinitionName ROLE_NAME`
@@ -301,7 +297,7 @@ To add a role assignment for a service principal at a resource scope, you can us
 
 To assign a role, such as the **Storage Blob Data Reader** role, to the service principal, run the [`az role assignment create` command](https://docs.microsoft.com/en-us/cli/azure/role/assignment?view=azure-cli-latest#az-role-assignment-create) :
 
-``` notranslate
+``` 
   az role assignment create --role "Storage Blob Data Reader" \
     --assignee-object-id ${SP_ID} \
     --assignee-principal-type ServicePrincipal \
@@ -325,7 +321,7 @@ To call the Microsoft Graph REST API, retrieve an OAuth token for an application
 
 To generate an OAuth token, run the following command:
 
-``` notranslate
+``` 
   export TOKEN=$(curl -X POST \
     https://login.microsoftonline.com/TENANT_ID/oauth2/token \
     -H 'cache-control: no-cache' \
@@ -352,7 +348,7 @@ These are some common roles:
 
 To assign a role to the service principal, call the Microsoft Graph REST API to the Azure Resource Management REST API:
 
-``` notranslate
+``` 
   export ROLE_ASSIGNMENT_ID=$(uuidgen)
   curl -X PUT \
 'https://management.azure.com/subscriptions/SUBSCRIPTION_ID/resourcegroups/RESOURCE_GROUP_NAME/providers/Microsoft.Storage/storageAccounts/STORAGE_ACCOUNT_NAME/providers/Microsoft.Authorization/roleAssignments/ROLE_ASSIGNMENT_ID?api-version=2018-01-01-preview' \

@@ -111,10 +111,8 @@ Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigqu
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE TABLE_PROJECT_ID.TABLE_DATASET_NAME.NEW_TABLE_NAME
-    CLONE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME;
-    ```
+        CREATE TABLE TABLE_PROJECT_ID.TABLE_DATASET_NAME.NEW_TABLE_NAME
+        CLONE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME;
     
     Replace the following:
     
@@ -133,13 +131,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq cp \
---restore \
---no_clobber \
-SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME \
-TABLE_PROJECT_ID:TABLE_DATASET_NAME.NEW_TABLE_NAME
-```
+    bq cp \
+    --restore \
+    --no_clobber \
+    SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME \
+    TABLE_PROJECT_ID:TABLE_DATASET_NAME.NEW_TABLE_NAME
 
 Replace the following:
 
@@ -174,7 +170,7 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [
@@ -243,10 +239,8 @@ Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigqu
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE TABLE_PROJECT_ID.TABLE_DATASET_NAME.TABLE_NAME
-    CLONE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME;
-    ```
+        CREATE OR REPLACE TABLE TABLE_PROJECT_ID.TABLE_DATASET_NAME.TABLE_NAME
+        CLONE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME;
     
     Replace the following:
     
@@ -265,13 +259,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq cp \
---restore \
---force \
-SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME \
-TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME
-```
+    bq cp \
+    --restore \
+    --force \
+    SNAPSHOT_PROJECT_ID:SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME \
+    TABLE_PROJECT_ID:TABLE_DATASET_NAME.TABLE_NAME
 
 Replace the following:
 
@@ -304,7 +296,7 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [

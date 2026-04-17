@@ -42,67 +42,65 @@ The JSON data file would look like the following. Notice that the addresses colu
 
 The schema for this table looks like the following:
 
-``` notranslate
-[
-    {
-        "name": "id",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "first_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "last_name",
-        "type": "STRING",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "dob",
-        "type": "DATE",
-        "mode": "NULLABLE"
-    },
-    {
-        "name": "addresses",
-        "type": "RECORD",
-        "mode": "REPEATED",
-        "fields": [
-            {
-                "name": "status",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "address",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "city",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "state",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "zip",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "numberOfYears",
-                "type": "STRING",
-                "mode": "NULLABLE"
-            }
-        ]
-    }
-]
-```
+    [
+        {
+            "name": "id",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "first_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "last_name",
+            "type": "STRING",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "dob",
+            "type": "DATE",
+            "mode": "NULLABLE"
+        },
+        {
+            "name": "addresses",
+            "type": "RECORD",
+            "mode": "REPEATED",
+            "fields": [
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "city",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "zip",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "numberOfYears",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                }
+            ]
+        }
+    ]
 
 ### Specifying the nested and repeated columns in the example
 
@@ -170,24 +168,22 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE IF NOT EXISTS mydataset.mytable (
-      id STRING,
-      first_name STRING,
-      last_name STRING,
-      dob DATE,
-      addresses
-        ARRAY<
-          STRUCT<
-            status STRING,
-            address STRING,
-            city STRING,
-            state STRING,
-            zip STRING,
-            numberOfYears STRING>>
-    ) OPTIONS (
-        description = 'Example name and addresses table');
-    ```
+        CREATE TABLE IF NOT EXISTS mydataset.mytable (
+          id STRING,
+          first_name STRING,
+          last_name STRING,
+          dob DATE,
+          addresses
+            ARRAY<
+              STRUCT<
+                status STRING,
+                address STRING,
+                city STRING,
+                state STRING,
+                zip STRING,
+                numberOfYears STRING>>
+        ) OPTIONS (
+            description = 'Example name and addresses table');
 
 3.  Click play\_circle **Run** .
 
@@ -412,45 +408,39 @@ Use the following queries to insert nested data records into tables that have `R
 
 **Example 1**
 
-``` notranslate
-INSERT INTO mydataset.mytable (id,
-first_name,
-last_name,
-dob,
-addresses) values ("1","Johnny","Dawn","1969-01-22",
-    ARRAY<
-      STRUCT<
-        status STRING,
-        address STRING,
-        city STRING,
-        state STRING,
-        zip STRING,
-        numberOfYears STRING>>
-      [("current","123 First Avenue","Seattle","WA","11111","1")])
-```
+    INSERT INTO mydataset.mytable (id,
+    first_name,
+    last_name,
+    dob,
+    addresses) values ("1","Johnny","Dawn","1969-01-22",
+        ARRAY<
+          STRUCT<
+            status STRING,
+            address STRING,
+            city STRING,
+            state STRING,
+            zip STRING,
+            numberOfYears STRING>>
+          [("current","123 First Avenue","Seattle","WA","11111","1")])
 
 **Example 2**
 
-``` notranslate
-INSERT INTO mydataset.mytable (id,
-first_name,
-last_name,
-dob,
-addresses) values ("1","Johnny","Dawn","1969-01-22",[("current","123 First Avenue","Seattle","WA","11111","1")])
-```
+    INSERT INTO mydataset.mytable (id,
+    first_name,
+    last_name,
+    dob,
+    addresses) values ("1","Johnny","Dawn","1969-01-22",[("current","123 First Avenue","Seattle","WA","11111","1")])
 
 ### Query nested and repeated columns
 
 To select the value of an `ARRAY` at a specific position, use an [array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator) . To access elements in a `STRUCT` , use the [dot operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator) . The following example selects the first name, last name, and first address listed in the `addresses` field:
 
-``` notranslate
-SELECT
-  first_name,
-  last_name,
-  addresses[offset(0)].address
-FROM
-  mydataset.mytable;
-```
+    SELECT
+      first_name,
+      last_name,
+      addresses[offset(0)].address
+    FROM
+      mydataset.mytable;
 
 The result is the following:
 
@@ -463,17 +453,15 @@ The result is the following:
 
 To extract all elements of an `ARRAY` , use the [`UNNEST` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) with a [`CROSS JOIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join) . The following example selects the first name, last name, address, and state for all addresses not located in New York:
 
-``` notranslate
-SELECT
-  first_name,
-  last_name,
-  a.address,
-  a.state
-FROM
-  mydataset.mytable CROSS JOIN UNNEST(addresses) AS a
-WHERE
-  a.state != 'NY';
-```
+    SELECT
+      first_name,
+      last_name,
+      a.address,
+      a.state
+    FROM
+      mydataset.mytable CROSS JOIN UNNEST(addresses) AS a
+    WHERE
+      a.state != 'NY';
 
 The result is the following:
 
@@ -518,27 +506,25 @@ You also have the following table, `mydataset.authors` , with complete informati
 
 If the tables are large, it might be resource intensive to join them regularly. Depending on your situation, it might be beneficial to create a single table that contains all the information:
 
-``` notranslate
-CREATE TABLE mydataset.denormalized_books(
-  title STRING,
-  authors ARRAY<STRUCT<id INT64, name STRING, date_of_birth STRING>>,
-  num_pages INT64)
-AS (
-  SELECT
-    title,
-    ARRAY_AGG(STRUCT(author_id, author_name, date_of_birth)) AS authors,
-    ANY_VALUE(num_pages)
-  FROM
-    mydataset.books,
-    UNNEST(author_ids) id
-  JOIN
-    mydataset.authors
-    ON
-      id = author_id
-  GROUP BY
-    title
-);
-```
+    CREATE TABLE mydataset.denormalized_books(
+      title STRING,
+      authors ARRAY<STRUCT<id INT64, name STRING, date_of_birth STRING>>,
+      num_pages INT64)
+    AS (
+      SELECT
+        title,
+        ARRAY_AGG(STRUCT(author_id, author_name, date_of_birth)) AS authors,
+        ANY_VALUE(num_pages)
+      FROM
+        mydataset.books,
+        UNNEST(author_ids) id
+      JOIN
+        mydataset.authors
+        ON
+          id = author_id
+      GROUP BY
+        title
+    );
 
 The resulting table looks like the following:
 
@@ -556,16 +542,14 @@ BigQuery supports loading nested and repeated data from source formats that supp
 
 The following query uses the `row_number()` function to identify duplicate records that have the same values for `last_name` and `first_name` in the examples used and sorts them by `dob` :
 
-``` notranslate
-CREATE OR REPLACE TABLE mydataset.mytable AS (
-  SELECT * except(row_num) FROM (
-    SELECT *,
-    row_number() over (partition by last_name, first_name order by dob) row_num
-    FROM
-    mydataset.mytable) temp_table
-  WHERE row_num=1
-)
-```
+    CREATE OR REPLACE TABLE mydataset.mytable AS (
+      SELECT * except(row_num) FROM (
+        SELECT *,
+        row_number() over (partition by last_name, first_name order by dob) row_num
+        FROM
+        mydataset.mytable) temp_table
+      WHERE row_num=1
+    )
 
 ## Table security
 

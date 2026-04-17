@@ -18,10 +18,8 @@ To prune partitions when you query a [time-unit column-partitioned table](https:
 
 In the following example, assume that `dataset.table` is partitioned on the `transaction_date` column. The example query prunes dates before `2016-01-01` .
 
-``` notranslate
-SELECT * FROM dataset.table
-WHERE transaction_date >= '2016-01-01'
-```
+    SELECT * FROM dataset.table
+    WHERE transaction_date >= '2016-01-01'
 
 ## Query an ingestion-time partitioned table
 
@@ -40,41 +38,33 @@ Both of these pseudocolumn names are reserved. You can't create a column with ei
 
 To prune partitions, filter on either of these columns. For example, the following query scans only the partitions between the dates January 1, 2016 and January 2, 2016:
 
-``` notranslate
-SELECT
-  column
-FROM
-  dataset.table
-WHERE
-  _PARTITIONTIME BETWEEN TIMESTAMP('2016-01-01') AND TIMESTAMP('2016-01-02')
-```
+    SELECT
+      column
+    FROM
+      dataset.table
+    WHERE
+      _PARTITIONTIME BETWEEN TIMESTAMP('2016-01-01') AND TIMESTAMP('2016-01-02')
 
 To select the `_PARTITIONTIME` pseudocolumn, you must use an alias. For example, the following query selects `_PARTITIONTIME` by assigning the alias `pt` to the pseudocolumn:
 
-``` notranslate
-SELECT
-  _PARTITIONTIME AS pt, column
-FROM
-  dataset.table
-```
+    SELECT
+      _PARTITIONTIME AS pt, column
+    FROM
+      dataset.table
 
 For daily partitioned tables, you can select the `_PARTITIONDATE` pseudocolumn in the same way:
 
-``` notranslate
-SELECT
-  _PARTITIONDATE AS pd, column
-FROM
-  dataset.table
-```
+    SELECT
+      _PARTITIONDATE AS pd, column
+    FROM
+      dataset.table
 
 The `_PARTITIONTIME` and `_PARTITIONDATE` pseudocolumns are not returned by a `SELECT *` statement. You must select them explicitly:
 
-``` notranslate
-SELECT
-  _PARTITIONTIME AS pt, *
-FROM
-  dataset.table
-```
+    SELECT
+      _PARTITIONTIME AS pt, *
+    FROM
+      dataset.table
 
 ### Handle time zones in ingestion-time partitioned tables
 
@@ -89,23 +79,21 @@ To improve query performance, use the `_PARTITIONTIME` pseudocolumn by itself on
 
 For example, the following two queries are equivalent. Depending on the table size, the second query might perform better, because it places `_PARTITIONTIME` by itself on the left side of the `>` operator. Both queries process the same amount of data.
 
-``` notranslate
--- Might be slower.
-SELECT
-  field1
-FROM
-  dataset.table1
-WHERE
-  TIMESTAMP_ADD(_PARTITIONTIME, INTERVAL 5 DAY) > TIMESTAMP("2016-04-15");
-
--- Often performs better.
-SELECT
-  field1
-FROM
-  dataset.table1
-WHERE
-  _PARTITIONTIME > TIMESTAMP_SUB(TIMESTAMP('2016-04-15'), INTERVAL 5 DAY);
-```
+    -- Might be slower.
+    SELECT
+      field1
+    FROM
+      dataset.table1
+    WHERE
+      TIMESTAMP_ADD(_PARTITIONTIME, INTERVAL 5 DAY) > TIMESTAMP("2016-04-15");
+    
+    -- Often performs better.
+    SELECT
+      field1
+    FROM
+      dataset.table1
+    WHERE
+      _PARTITIONTIME > TIMESTAMP_SUB(TIMESTAMP('2016-04-15'), INTERVAL 5 DAY);
 
 To limit the partitions that are scanned in a query, use a constant expression in your filter. The following query limits which partitions are pruned based on the first filter condition in the `WHERE` clause. However, the second filter condition doesn't limit the scanned partitions, because it uses table values, which are dynamic.
 
@@ -121,28 +109,24 @@ To limit the partitions that are scanned in a query, use a constant expression i
 
 To limit the partitions scanned, don't include any other columns in a `_PARTITIONTIME` filter. For example, the following query does not limit the scanned partitions, because `field1` is a column in the table.
 
-``` notranslate
--- Scans all partitions of table2. No pruning.
-SELECT
-  field1
-FROM
-  dataset.table2
-WHERE
-  _PARTITIONTIME + field1 = TIMESTAMP('2016-03-28');
-```
+    -- Scans all partitions of table2. No pruning.
+    SELECT
+      field1
+    FROM
+      dataset.table2
+    WHERE
+      _PARTITIONTIME + field1 = TIMESTAMP('2016-03-28');
 
 If you often query a particular range of times, consider creating a view that filters on the `_PARTITIONTIME` pseudocolumn. For example, the following statement creates a view that includes only the most recent seven days of data from a table named `dataset.partitioned_table` :
 
-``` notranslate
--- This view provides pruning.
-CREATE VIEW dataset.past_week AS
-  SELECT *
-  FROM
-    dataset.partitioned_table
-  WHERE _PARTITIONTIME BETWEEN
-    TIMESTAMP_TRUNC(TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 7 * 24 HOUR), DAY)
-    AND TIMESTAMP_TRUNC(CURRENT_TIMESTAMP, DAY);
-```
+    -- This view provides pruning.
+    CREATE VIEW dataset.past_week AS
+      SELECT *
+      FROM
+        dataset.partitioned_table
+      WHERE _PARTITIONTIME BETWEEN
+        TIMESTAMP_TRUNC(TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 7 * 24 HOUR), DAY)
+        AND TIMESTAMP_TRUNC(CURRENT_TIMESTAMP, DAY);
 
 For information about creating views, see [Creating views](https://docs.cloud.google.com/bigquery/docs/views) .
 
@@ -152,27 +136,23 @@ To prune partitions when you query an [integer-range partitioned table](https://
 
 In the following example, assume that `dataset.table` is an integer-range partitioned table with a partitioning specification of `customer_id:0:100:10` The example query scans the three partitions that start with 30, 40, and 50.
 
-``` notranslate
-SELECT * FROM dataset.table
-WHERE customer_id BETWEEN 30 AND 50
-
-+-------------+-------+
-| customer_id | value |
-+-------------+-------+
-|          40 |    41 |
-|          45 |    46 |
-|          30 |    31 |
-|          35 |    36 |
-|          50 |    51 |
-+-------------+-------+
-```
+    SELECT * FROM dataset.table
+    WHERE customer_id BETWEEN 30 AND 50
+    
+    +-------------+-------+
+    | customer_id | value |
+    +-------------+-------+
+    |          40 |    41 |
+    |          45 |    46 |
+    |          30 |    31 |
+    |          35 |    36 |
+    |          50 |    51 |
+    +-------------+-------+
 
 Partition pruning is not supported for functions over an integer range partitioned column. For example, the following query scans the entire table.
 
-``` notranslate
-SELECT * FROM dataset.table
-WHERE customer_id + 1 BETWEEN 30 AND 50
-```
+    SELECT * FROM dataset.table
+    WHERE customer_id + 1 BETWEEN 30 AND 50
 
 ## Query data in the write-optimized storage
 
@@ -182,13 +162,11 @@ Data in the write-optimized storage has `NULL` values in the `_PARTITIONTIME` an
 
 To query data in the `__UNPARTITIONED__` partition, use the `_PARTITIONTIME` pseudocolumn with the `NULL` value. For example:
 
-``` notranslate
-SELECT
-  column
-FROM dataset.table
-WHERE
-  _PARTITIONTIME IS NULL
-```
+    SELECT
+      column
+    FROM dataset.table
+    WHERE
+      _PARTITIONTIME IS NULL
 
 For more information, see [Streaming into partitioned tables](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#streaming_into_partitioned_tables) .
 
@@ -200,34 +178,30 @@ To limit the partitions that are scanned in a query, use a constant expression i
 
 For example, the following query prunes partitions because the filter contains a constant expression:
 
-``` notranslate
-SELECT
-  t1.name,
-  t2.category
-FROM
-  table1 AS t1
-INNER JOIN
-  table2 AS t2
-ON t1.id_field = t2.field2
-WHERE
-  t1.ts = CURRENT_TIMESTAMP()
-```
+    SELECT
+      t1.name,
+      t2.category
+    FROM
+      table1 AS t1
+    INNER JOIN
+      table2 AS t2
+    ON t1.id_field = t2.field2
+    WHERE
+      t1.ts = CURRENT_TIMESTAMP()
 
 However, the following query doesn't prune partitions, because the filter, `WHERE t1.ts = (SELECT timestamp from table where key = 2)` , is not a constant expression; it depends on the dynamic values of the `timestamp` and `key` fields:
 
-``` notranslate
-SELECT
-  t1.name,
-  t2.category
-FROM
-  table1 AS t1
-INNER JOIN
-  table2 AS t2
-ON
-  t1.id_field = t2.field2
-WHERE
-  t1.ts = (SELECT timestamp from table3 where key = 2)
-```
+    SELECT
+      t1.name,
+      t2.category
+    FROM
+      table1 AS t1
+    INNER JOIN
+      table2 AS t2
+    ON
+      t1.id_field = t2.field2
+    WHERE
+      t1.ts = (SELECT timestamp from table3 where key = 2)
 
 ### Isolate the partition column in your filter
 

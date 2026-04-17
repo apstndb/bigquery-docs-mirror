@@ -55,11 +55,9 @@ Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SCHEMA mydataset
-    OPTIONS (
-      location = 'azure-eastus2');
-    ```
+        CREATE SCHEMA mydataset
+        OPTIONS (
+          location = 'azure-eastus2');
 
 3.  Click play\_circle **Run** .
 
@@ -69,11 +67,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 In a command-line environment, create a dataset using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
 
-``` notranslate
-bq --location=LOCATION mk \
-    --dataset \
-PROJECT_ID:DATASET_NAME
-```
+    bq --location=LOCATION mk \
+        --dataset \
+    PROJECT_ID:DATASET_NAME
 
 The `--project_id` parameter overrides the default project.
 
@@ -146,13 +142,11 @@ To create a BigLake table, use the [`CREATE EXTERNAL TABLE`](https://docs.cloud.
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE DATASET_NAME.TABLE_NAME
-    WITH CONNECTION `AZURE_LOCATION.CONNECTION_NAME`
-      OPTIONS (
-        format = 'DATA_FORMAT',
-        uris = ['azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH']);
-    ```
+        CREATE EXTERNAL TABLE DATASET_NAME.TABLE_NAME
+        WITH CONNECTION `AZURE_LOCATION.CONNECTION_NAME`
+          OPTIONS (
+            format = 'DATA_FORMAT',
+            uris = ['azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH']);
     
     Replace the following:
     
@@ -171,23 +165,19 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Example:
 
-``` notranslate
-CREATE EXTERNAL TABLE absdataset.abstable
-WITH CONNECTION `azure-eastus2.abs-read-conn`
-  OPTIONS (
-    format = 'CSV', uris = ['azure://account_name.blob.core.windows.net/container/path/file.csv']);
-```
+    CREATE EXTERNAL TABLE absdataset.abstable
+    WITH CONNECTION `azure-eastus2.abs-read-conn`
+      OPTIONS (
+        format = 'CSV', uris = ['azure://account_name.blob.core.windows.net/container/path/file.csv']);
 
 ### bq
 
 Create a [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) :
 
-``` notranslate
-bq mkdef  \
-    --source_format=DATA_FORMAT \
-    --connection_id=AZURE_LOCATION.CONNECTION_NAME \
-    "azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH" > table_def
-```
+    bq mkdef  \
+        --source_format=DATA_FORMAT \
+        --connection_id=AZURE_LOCATION.CONNECTION_NAME \
+        "azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH" > table_def
 
 Replace the following:
 
@@ -200,9 +190,7 @@ Replace the following:
 
 Next, create the BigLake table:
 
-``` notranslate
-bq mk --external_table_definition=table_def DATASET_NAME.TABLE_NAME
-```
+    bq mk --external_table_definition=table_def DATASET_NAME.TABLE_NAME
 
 Replace the following:
 
@@ -211,15 +199,13 @@ Replace the following:
 
 For example, the following commands create a new BigLake table, `my_dataset.my_table` , which can query your Blob Storage data that's stored at the path `azure://account_name.blob.core.windows.net/container/path` and has a read connection in the location `azure-eastus2` :
 
-``` notranslate
-bq mkdef \
-    --source_format=AVRO \
-    --connection_id=azure-eastus2.read-conn \
-    "azure://account_name.blob.core.windows.net/container/path" > table_def
-
-bq mk \
-    --external_table_definition=table_def my_dataset.my_table
-```
+    bq mkdef \
+        --source_format=AVRO \
+        --connection_id=azure-eastus2.read-conn \
+        "azure://account_name.blob.core.windows.net/container/path" > table_def
+    
+    bq mk \
+        --external_table_definition=table_def my_dataset.my_table
 
 > **Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
@@ -305,19 +291,17 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
-    WITH PARTITION COLUMNS
-    (
-      PARTITION_COLUMN PARTITION_COLUMN_TYPE,
-    )
-    WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
-    OPTIONS (
-      hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
-      uris=['FILE_PATH'],
-      format ="TABLE_FORMAT"
-    );
-    ```
+        CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
+        WITH PARTITION COLUMNS
+        (
+          PARTITION_COLUMN PARTITION_COLUMN_TYPE,
+        )
+        WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
+        OPTIONS (
+          hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
+          uris=['FILE_PATH'],
+          format ="TABLE_FORMAT"
+        );
     
     Replace the following:
     
@@ -344,52 +328,46 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The following example creates a BigLake table over partitioned data in Amazon S3. The schema is autodetected.
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.my_table`
-WITH PARTITION COLUMNS
-(
-  sku STRING,
-)
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  hive_partition_uri_prefix = "s3://mybucket/products",
-  uris = ['s3://mybucket/products/*']
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.my_table`
+    WITH PARTITION COLUMNS
+    (
+      sku STRING,
+    )
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      hive_partition_uri_prefix = "s3://mybucket/products",
+      uris = ['s3://mybucket/products/*']
+    );
 
 The following example creates a BigLake table over partitioned data in Blob Storage. The schema is specified.
 
-``` notranslate
-CREATE EXTERNAL TABLE `my_dataset.my_table`
-(
-  ProductId INTEGER,
-  ProductName, STRING,
-  ProductType, STRING
-)
-WITH PARTITION COLUMNS
-(
-  sku STRING,
-)
-WITH CONNECTION `us.my-connection`
-OPTIONS(
-  hive_partition_uri_prefix = "azure://mystorageaccount.blob.core.windows.net/mycontainer/products",
-  uris = ['azure://mystorageaccount.blob.core.windows.net/mycontainer/*']
-);
-```
+    CREATE EXTERNAL TABLE `my_dataset.my_table`
+    (
+      ProductId INTEGER,
+      ProductName, STRING,
+      ProductType, STRING
+    )
+    WITH PARTITION COLUMNS
+    (
+      sku STRING,
+    )
+    WITH CONNECTION `us.my-connection`
+    OPTIONS(
+      hive_partition_uri_prefix = "azure://mystorageaccount.blob.core.windows.net/mycontainer/products",
+      uris = ['azure://mystorageaccount.blob.core.windows.net/mycontainer/*']
+    );
 
 ### bq
 
 First, use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mkdef) command to create a table definition file:
 
-``` notranslate
-bq mkdef \
---source_format=SOURCE_FORMAT \
---connection_id=REGION.CONNECTION_ID \
---hive_partitioning_mode=PARTITIONING_MODE \
---hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX \
---require_hive_partition_filter=BOOLEAN \
- URIS > DEFINITION_FILE
-```
+    bq mkdef \
+    --source_format=SOURCE_FORMAT \
+    --connection_id=REGION.CONNECTION_ID \
+    --hive_partitioning_mode=PARTITIONING_MODE \
+    --hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX \
+    --require_hive_partition_filter=BOOLEAN \
+     URIS > DEFINITION_FILE
 
 Replace the following:
 
@@ -407,17 +385,13 @@ Replace the following:
 
 If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the source URI prefix, using the following format:
 
-``` notranslate
---hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
-```
+    --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 
 After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
 
-``` notranslate
-bq mk --external_table_definition=DEFINITION_FILE \
-DATASET_NAME.TABLE_NAME \
-SCHEMA
-```
+    bq mk --external_table_definition=DEFINITION_FILE \
+    DATASET_NAME.TABLE_NAME \
+    SCHEMA
 
 Replace the following:
 
@@ -483,7 +457,7 @@ Delta Lake maintains a canonical schema as part of its metadata. You can't updat
 
 1.  Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--autodetect_schema` flag:
     
-    ``` lang-sh
+    ```sh
     bq update --autodetect_schema
     PROJECT_ID:DATASET.TABLE
     ```
@@ -535,7 +509,7 @@ The following limitations apply to Delta Lake tables:
 
 The following example creates an external table by using the [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) statement with the Delta Lake format:
 
-``` lang-googlesql
+```googlesql
 CREATE [OR REPLACE] EXTERNAL TABLE table_name
 WITH CONNECTION connection_name
 OPTIONS (
@@ -556,7 +530,7 @@ Replace the following:
 
 The following example uses the [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) statement to load data to the appropriate table:
 
-``` lang-googlesql
+```googlesql
 LOAD DATA [INTO | OVERWRITE] table_name
 FROM FILES (
         format = 'DELTA_LAKE',
@@ -780,7 +754,7 @@ To apply a network rule, use the Azure PowerShell or Terraform:
 
 Run the following command to add a network rule to your storage account that specifies the retrieved BigQuery Omni subnet IDs as the `VirtualNetworkResourceId` .
 
-``` notranslate
+``` 
   Add-AzStorageAccountNetworkRule`
    -ResourceGroupName "RESOURCE_GROUP_NAME"`
    -Name "STORAGE_ACCOUNT_NAME"`
@@ -797,7 +771,7 @@ Replace the following:
 
 Add the following to your Terraform configuration file:
 
-``` notranslate
+``` 
   resource "azurerm_storage_account_network_rules" "example" {
     storage_account_name       = "STORAGE_ACCOUNT_NAME"
     resource_group_name        = "RESOURCE_GROUP_NAME"

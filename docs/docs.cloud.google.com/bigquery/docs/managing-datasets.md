@@ -419,7 +419,7 @@ To manually move a dataset from one location to another, follow these steps:
     
     You are not charged for loading the data into BigQuery, but you will incur charges for storing the data in Cloud Storage until you delete the data or the bucket. You are also charged for storing the data in BigQuery after it is loaded. Loading data into BigQuery is subject to the [load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) limits.
 
-You can also use [Cloud Composer](https://cloud.google.com/blog/products/data-analytics/how-to-transfer-bigquery-tables-between-locations-with-cloud-composer) to move and copy large datasets programmatically.
+You can also use [Managed Service for Apache Airflow](https://cloud.google.com/blog/products/data-analytics/how-to-transfer-bigquery-tables-between-locations-with-cloud-composer) to move and copy large datasets programmatically.
 
 For more information about using Cloud Storage to store and move large datasets, see [Use Cloud Storage with big data](https://docs.cloud.google.com/storage/docs/working-with-big-data) .
 
@@ -463,15 +463,11 @@ The following example deletes a dataset named `mydataset` :
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP SCHEMA IF EXISTS mydataset;
-    ```
+        DROP SCHEMA IF EXISTS mydataset;
     
     By default, this only works to delete an empty dataset. To delete a dataset and all of its contents, use the `CASCADE` keyword:
     
-    ``` notranslate
-    DROP SCHEMA IF EXISTS mydataset CASCADE;
-    ```
+        DROP SCHEMA IF EXISTS mydataset CASCADE;
 
 3.  Click play\_circle **Run** .
 

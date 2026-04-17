@@ -181,17 +181,15 @@ To create a BigLake Iceberg table in BigQuery, select one of the following metho
 
 ### SQL
 
-``` notranslate
-CREATE TABLE [PROJECT_ID.]DATASET_ID.TABLE_NAME (
-COLUMN DATA_TYPE[, ...]
-)
-CLUSTER BY CLUSTER_COLUMN_LIST
-WITH CONNECTION {CONNECTION_NAME | DEFAULT}
-OPTIONS (
-file_format = 'PARQUET',
-table_format = 'ICEBERG',
-storage_uri = 'STORAGE_URI');
-```
+    CREATE TABLE [PROJECT_ID.]DATASET_ID.TABLE_NAME (
+    COLUMN DATA_TYPE[, ...]
+    )
+    CLUSTER BY CLUSTER_COLUMN_LIST
+    WITH CONNECTION {CONNECTION_NAME | DEFAULT}
+    OPTIONS (
+    file_format = 'PARQUET',
+    table_format = 'ICEBERG',
+    storage_uri = 'STORAGE_URI');
 
 Replace the following:
 
@@ -213,17 +211,15 @@ Replace the following:
 
 ### bq
 
-``` notranslate
-bq --project_id=PROJECT_ID mk \
-    --table \
-    --file_format=PARQUET \
-    --table_format=ICEBERG \
-    --connection_id=CONNECTION_NAME \
-    --storage_uri=STORAGE_URI \
-    --schema=COLUMN_NAME:DATA_TYPE[, ...] \
-    --clustering_fields=CLUSTER_COLUMN_LIST \
-    DATASET_ID.MANAGED_TABLE_NAME
-```
+    bq --project_id=PROJECT_ID mk \
+        --table \
+        --file_format=PARQUET \
+        --table_format=ICEBERG \
+        --connection_id=CONNECTION_NAME \
+        --storage_uri=STORAGE_URI \
+        --schema=COLUMN_NAME:DATA_TYPE[, ...] \
+        --clustering_fields=CLUSTER_COLUMN_LIST \
+        DATASET_ID.MANAGED_TABLE_NAME
 
 Replace the following:
 
@@ -240,28 +236,26 @@ Replace the following:
 
 Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) ' method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) , similar to the following:
 
-``` notranslate
-{
-"tableReference": {
-  &quot;tableId": "TABLE_NAME"
-},
-"biglakeConfiguration&quot;: {
-  "connectionId": "CONNECTION_NAME",
-  "fileFormat";: "PARQUET",
-  "tableFormat": &quot;ICEBERG",
-  "storageUri": "STORAGE_URI"
-},
-"schema": {
-  "fields": [
     {
-      "name": "COLUMN_NAME",
-      "type": "DATA_TYPE"
+    "tableReference": {
+      "tableId": "TABLE_NAME"
+    },
+    "biglakeConfiguration": {
+      "connectionId": "CONNECTION_NAME",
+      "fileFormat": "PARQUET",
+      "tableFormat": "ICEBERG",
+      "storageUri": "STORAGE_URI"
+    },
+    "schema": {
+      "fields": [
+        {
+          "name": "COLUMN_NAME",
+          "type": "DATA_TYPE"
+        }
+        [, ...]
+      ]
     }
-    [, ...]
-  ]
-}
-}
-```
+    }
 
 Replace the following:
 
@@ -285,12 +279,10 @@ See the following for tool-specific examples of batch loads into managed tables:
 
 ### SQL
 
-``` notranslate
-LOAD DATA INTO MANAGED_TABLE_NAME
-FROM FILES (
-uris=[&#39;STORAGE_URI'],
-format=';FILE_FORMAT');
-```
+    LOAD DATA INTO MANAGED_TABLE_NAME
+    FROM FILES (
+    uris=['STORAGE_URI'],
+    format='FILE_FORMAT');
 
 Replace the following:
 
@@ -300,12 +292,10 @@ Replace the following:
 
 ### bq
 
-``` notranslate
-bq load \
-  --source_format=FILE_FORMAT \
-  MANAGED_TABLE \
-  STORAGE_URI
-```
+    bq load \
+      --source_format=FILE_FORMAT \
+      MANAGED_TABLE \
+      STORAGE_URI
 
 Replace the following:
 
@@ -341,25 +331,21 @@ To create a BigLake Iceberg table in BigQuery metadata snapshot, follow these st
 
 The following example creates a scheduled query named `My Scheduled Snapshot Refresh Query` using the DDL statement `EXPORT TABLE METADATA FROM mydataset.test` . The DDL statement runs every 24 hours.
 
-``` notranslate
-bq query \
-    --use_legacy_sql=false \
-    --display_name='My Scheduled Snapshot Refresh Query' \
-    --schedule='every 24 hours' \
-    'EXPORT TABLE METADATA FROM mydataset.test'
-```
+    bq query \
+        --use_legacy_sql=false \
+        --display_name='My Scheduled Snapshot Refresh Query' \
+        --schedule='every 24 hours' \
+        'EXPORT TABLE METADATA FROM mydataset.test'
 
 ### View BigLake Iceberg table in BigQuery metadata snapshot
 
 After you refresh the BigLake Iceberg table in BigQuery metadata snapshot you can find the snapshot in the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) that the BigLake Iceberg table in BigQuery was originally created in. The `/data` folder contains the Parquet file data shards, and the `/metadata` folder contains the BigLake Iceberg table in BigQuery metadata snapshot.
 
-``` notranslate
-SELECT
-  table_name,
-  REGEXP_EXTRACT(ddl, r"storage_uri\s*=\s*\"([^\"]+)\"") AS storage_uri
-FROM
-  `mydataset`.INFORMATION_SCHEMA.TABLES;
-```
+    SELECT
+      table_name,
+      REGEXP_EXTRACT(ddl, r"storage_uri\s*=\s*\"([^\"]+)\"") AS storage_uri
+    FROM
+      `mydataset`.INFORMATION_SCHEMA.TABLES;
 
 Note that `mydataset` and `table_name` are placeholders for your actual dataset and table.
 
@@ -367,16 +353,14 @@ Note that `mydataset` and `table_name` are placeholders for your actual dataset 
 
 The following sample sets up your environment to use Spark SQL with Apache Iceberg, and then executes a query to fetch data from a specified BigLake Iceberg table in BigQuery.
 
-``` notranslate
-spark-sql \
-  --packages org.apache.iceberg:iceberg-spark-runtime-ICEBERG_VERSION_NUMBER \
-  --conf spark.sql.catalog.CATALOG_NAME=org.apache.iceberg.spark.SparkCatalog \
-  --conf spark.sql.catalog.CATALOG_NAME.type=hadoop \
-  --conf spark.sql.catalog.CATALOG_NAME.warehouse=&#39;BUCKET_PATH' \
-
-# Query the table
-SELECT * FROM CATALOG_NAME.FOLDER_NAME;
-```
+    spark-sql \
+      --packages org.apache.iceberg:iceberg-spark-runtime-ICEBERG_VERSION_NUMBER \
+      --conf spark.sql.catalog.CATALOG_NAME=org.apache.iceberg.spark.SparkCatalog \
+      --conf spark.sql.catalog.CATALOG_NAME.type=hadoop \
+      --conf spark.sql.catalog.CATALOG_NAME.warehouse='BUCKET_PATH' \
+    
+    # Query the table
+    SELECT * FROM CATALOG_NAME.FOLDER_NAME;
 
 Replace the following:
 

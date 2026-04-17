@@ -55,7 +55,7 @@ In Dataform, you can develop, test, and version control [SQL workflows for data 
 
 Dataform stores your SQL workflow code in [repositories](https://docs.cloud.google.com/dataform/docs/create-repository) and uses Git to track file changes. Development workspaces in Dataform let you work on the contents of the repository without affecting the work of others who are working in the same repository. You can connect Dataform repositories to third-party Git providers, including Azure DevOps Services, Bitbucket, GitHub, and GitLab.
 
-You can run or schedule SQL workflows with Dataform release configurations and workflow configurations. Alternatively, you can schedule executions either with Cloud Composer, or with Workflows and Cloud Scheduler. During execution, Dataform executes SQL queries in BigQuery in order of object dependencies in your SQL workflow. After execution, you can use your defined tables and views for analysis in BigQuery.
+You can run or schedule SQL workflows with Dataform release configurations and workflow configurations. Alternatively, you can schedule executions either with Managed Service for Apache Airflow, or with Workflows and Cloud Scheduler. During execution, Dataform executes SQL queries in BigQuery in order of object dependencies in your SQL workflow. After execution, you can use your defined tables and views for analysis in BigQuery.
 
 To learn more about creating data transformation SQL workflows in Dataform, see [Dataform overview](https://docs.cloud.google.com/dataform/docs/overview) and [Dataform features](https://docs.cloud.google.com/dataform/docs/overview#features) .
 

@@ -112,11 +112,9 @@ To run an interactive query, select one of the following options:
 
 2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) . In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
     
-    ``` notranslate
-    bq query \
-        --use_legacy_sql=false \
-        'QUERY'
-    ```
+        bq query \
+            --use_legacy_sql=false \
+            'QUERY'
     
     Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
@@ -138,13 +136,11 @@ To run an interactive query, select one of the following options:
     
     Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `--append_table=true` ) or overwrite ( `--replace=true` ) the table.
     
-    ``` notranslate
-    bq query \
-        --location=LOCATION \
-        --destination_table=TABLE \
-        --use_legacy_sql=false \
-        'QUERY'
-    ```
+        bq query \
+            --location=LOCATION \
+            --destination_table=TABLE \
+            --use_legacy_sql=false \
+            'QUERY'
     
     Replace the following:
     
@@ -170,7 +166,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example runs a query. You can retrieve the query results by [viewing the job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) :
 
-``` lang-terraform
+```terraform
 # Generate a unique job ID.
 resource "random_string" "job_id" {
   lower   = true
@@ -562,12 +558,10 @@ To run a batch query, select one of the following options:
 
 2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `--batch` flag. In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
     
-    ``` notranslate
-    bq query \
-        --batch \
-        --use_legacy_sql=false \
-        'QUERY'
-    ```
+        bq query \
+            --batch \
+            --use_legacy_sql=false \
+            'QUERY'
     
     Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
@@ -590,14 +584,12 @@ To run a batch query, select one of the following options:
     
     Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `--append_table=true` ) or overwrite ( `--replace=true` ) the table.
     
-    ``` notranslate
-    bq query \
-        --batch \
-        --location=LOCATION \
-        --destination_table=TABLE \
-        --use_legacy_sql=false \
-        'QUERY'
-    ```
+        bq query \
+            --batch \
+            --location=LOCATION \
+            --destination_table=TABLE \
+            --use_legacy_sql=false \
+            'QUERY'
     
     Replace the following:
     
@@ -922,14 +914,12 @@ To run a query using optional job creation mode, select one of the following opt
 
 2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `--job_creation_mode=JOB_CREATION_OPTIONAL` flag. In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
     
-    ``` notranslate
-    bq query \
-        --rpc=true \
-        --use_legacy_sql=false \
-        --job_creation_mode=JOB_CREATION_OPTIONAL \
-        --location=LOCATION \
-        'QUERY'
-    ```
+        bq query \
+            --rpc=true \
+            --use_legacy_sql=false \
+            --job_creation_mode=JOB_CREATION_OPTIONAL \
+            --location=LOCATION \
+            'QUERY'
     
     Replace QUERY with a valid GoogleSQL query, and replace LOCATION with a valid region where the dataset is located. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
     
@@ -1278,7 +1268,7 @@ To perform a dry run, do the following:
 
 Enter a query like the following using the `--dry_run` flag.
 
-``` notranslate
+``` 
 bq query \
 --use_legacy_sql=false \
 --dry_run \

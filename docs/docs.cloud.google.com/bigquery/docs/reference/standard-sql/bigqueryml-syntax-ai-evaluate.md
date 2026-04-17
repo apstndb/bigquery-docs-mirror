@@ -4,7 +4,7 @@ This document describes the `AI.EVALUATE` function, which lets you evaluate [Tim
 
 ## Syntax
 
-``` lang-sql
+```sql
 SELECT
   *
 FROM
@@ -140,7 +140,7 @@ The result is similar to the following:
 
 The following example evaluates historical bike trips against actual bike trips for multiple time series:
 
-``` lang-googlesql
+```googlesql
 WITH
   citibike_trips AS (
     SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips

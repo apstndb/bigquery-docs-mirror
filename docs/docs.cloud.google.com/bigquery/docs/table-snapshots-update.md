@@ -77,11 +77,9 @@ You can change the description for a table snapshot by using one of the followin
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq update \
---description="DESCRIPTION" \
-PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
-```
+    bq update \
+    --description="DESCRIPTION" \
+    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 
@@ -129,11 +127,9 @@ You can change the expiration of a table snapshot by using one of the following 
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq update \
---expiration=EXPIRATION_TIME \
-PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
-```
+    bq update \
+    --expiration=EXPIRATION_TIME \
+    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 
@@ -183,12 +179,10 @@ You can give a user access to view the data in a table snapshot by using one of 
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq add-iam-policy-binding \
-    --member="user:PRINCIPAL" \
-    --role="roles/bigquery.dataViewer" \
-    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
-```
+    bq add-iam-policy-binding \
+        --member="user:PRINCIPAL" \
+        --role="roles/bigquery.dataViewer" \
+        PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 
@@ -215,11 +209,11 @@ Call the [`tables.setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/ref
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">Resource</code></td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>projects/PROJECT_ID/datasets/DATASET_NAME/tables/SNAPSHOT_NAME</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>projects/PROJECT_ID/datasets/DATASET_NAME/tables/SNAPSHOT_NAME</code></pre></td>
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
       &quot;policy&quot;: {
         &quot;bindings&quot;: [
           {

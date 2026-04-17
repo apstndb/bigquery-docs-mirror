@@ -4,7 +4,7 @@ This document describes the `ML.GET_INSIGHTS` function, which you can use to ret
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.GET_INSIGHTS(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`
 )

@@ -47,10 +47,8 @@ To alter a materialized view, use the [`ALTER MATERIALIZED VIEW SET OPTIONS` DDL
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
-    SET OPTIONS (enable_refresh = true);
-    ```
+        ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
+        SET OPTIONS (enable_refresh = true);
     
     Replace the following:
     
@@ -66,12 +64,10 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Run the `bq update` command:
 
-``` notranslate
-bq update \
---enable_refresh=true \
---refresh_interval_ms= \
-PROJECT.DATASET.MATERIALIZED_VIEW
-```
+    bq update \
+    --enable_refresh=true \
+    --refresh_interval_ms= \
+    PROJECT.DATASET.MATERIALIZED_VIEW
 
 ### Java
 
@@ -158,9 +154,7 @@ The process to list materialized views is identical to the process for listing t
 
 Issue the `bq ls` command. The `--format` flag can be used to control the output. If you are listing materialized views in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
-``` notranslate
-bq ls --format=pretty project_id:dataset
-```
+    bq ls --format=pretty project_id:dataset
 
 Where:
 
@@ -283,10 +277,8 @@ To get information about materialized views, query the [`INFORMATION_SCHEMA.TABL
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT * FROM PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.TABLES
-    WHERE table_type = 'MATERIALIZED VIEW';
-    ```
+        SELECT * FROM PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.TABLES
+        WHERE table_type = 'MATERIALIZED VIEW';
     
     Replace the following:
     
@@ -301,9 +293,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
 
-``` notranslate
-bq show --project=project_id --format=prettyjson dataset.materialized_view
-```
+    bq show --project=project_id --format=prettyjson dataset.materialized_view
 
 Replace the following:
 
@@ -349,9 +339,7 @@ To delete a materialized view, use the [`DROP MATERIALIZED VIEW` DDL statement](
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW;
-    ```
+        DROP MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW;
     
     Replace the following:
     
@@ -445,19 +433,15 @@ You can set the [refresh frequency cap](https://docs.cloud.google.com/bigquery/d
 
 To turn automatic refresh off when you create a materialized view, set `enable_refresh` to `false` .
 
-``` notranslate
-CREATE MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
-PARTITION BY RANGE_BUCKET(column_name, buckets)
-OPTIONS (enable_refresh = false)
-AS SELECT ...
-```
+    CREATE MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
+    PARTITION BY RANGE_BUCKET(column_name, buckets)
+    OPTIONS (enable_refresh = false)
+    AS SELECT ...
 
 For an existing materialized view, you can modify the `enable_refresh` value using `ALTER MATERIALIZED VIEW` .
 
-``` notranslate
-ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
-SET OPTIONS (enable_refresh = true);
-```
+    ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
+    SET OPTIONS (enable_refresh = true);
 
 > **Note:** Enabling automatic refresh immediately triggers an automatic refresh of the materialized view.
 
@@ -469,18 +453,14 @@ The refresh frequency cap can be changed at any time.
 
 To set a refresh frequency cap when you create a materialized view, set `refresh_interval_minutes` in DDL (or `refresh_interval_ms` in the API and bq command-line tool), to the value you want.
 
-``` notranslate
-CREATE MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
-OPTIONS (enable_refresh = true, refresh_interval_minutes = 60)
-AS SELECT ...
-```
+    CREATE MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
+    OPTIONS (enable_refresh = true, refresh_interval_minutes = 60)
+    AS SELECT ...
 
 Similarly, you can set the frequency cap when you modify a materialized view. This example assumes you have already enabled automatic refresh, and just want to change the frequency cap:
 
-``` notranslate
-ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
-SET OPTIONS (refresh_interval_minutes = 60);
-```
+    ALTER MATERIALIZED VIEW PROJECT.DATASET.MATERIALIZED_VIEW
+    SET OPTIONS (refresh_interval_minutes = 60);
 
 The minimum refresh frequency cap is 1 minute. The maximum refresh frequency cap is 7 days.
 
@@ -512,9 +492,7 @@ For more information about BigQuery Identity and Access Management (IAM), see [P
 
 To update the data in the materialized view, call the [`BQ.REFRESH_MATERIALIZED_VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_materialized_view) system procedure. When this procedure is called, BigQuery identifies the changes that have taken place in the base tables and applies those changes to the materialized view. The query to run `BQ.REFRESH_MATERIALIZED_VIEW` finishes when the refresh is complete.
 
-``` notranslate
-CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT.DATASET.MATERIALIZED_VIEW');
-```
+    CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT.DATASET.MATERIALIZED_VIEW');
 
 > **Caution:** Don't perform more than one refresh at a time. If you run multiple refreshes concurrently for the same materialized view, then only the first refresh to complete is successful.
 

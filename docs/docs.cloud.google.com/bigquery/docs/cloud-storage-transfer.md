@@ -190,17 +190,15 @@ When using the bq command-line tool to set up a Cloud Storage data transfer, the
 
 The following sample shows a command to create a Cloud Storage data transfer with all the required parameters:
 
-``` notranslate
-bq mk \
---transfer_config \
---project_id=PROJECT_ID \
---data_source=DATA_SOURCE \
---display_name=NAME \
---target_dataset=DATASET \
---destination_kms_key="DESTINATION_KEY" \
---params='PARAMETERS' \
---service_account_name=SERVICE_ACCOUNT_NAME
-```
+    bq mk \
+    --transfer_config \
+    --project_id=PROJECT_ID \
+    --data_source=DATA_SOURCE \
+    --display_name=NAME \
+    --target_dataset=DATASET \
+    --destination_kms_key="DESTINATION_KEY" \
+    --params='PARAMETERS' \
+    --service_account_name=SERVICE_ACCOUNT_NAME
 
 Replace the following:
 

@@ -8,45 +8,41 @@ For information on user-defined functions in GoogleSQL, see [User-defined functi
 
 ## UDF example
 
-``` notranslate
-// UDF definition
-function urlDecode(row, emit) {
-  emit({title: decodeHelper(row.title),
-        requests: row.num_requests});
-}
-
-// Helper function with error handling
-function decodeHelper(s) {
-  try {
-    return decodeURI(s);
-  } catch (ex) {
-    return s;
-  }
-}
-
-// UDF registration
-bigquery.defineFunction(
-  'urlDecode',  // Name used to call the function from SQL
-
-  ['title', 'num_requests'],  // Input column names
-
-  // JSON representation of the output schema
-  [{name: 'title', type: 'string'},
-   {name: 'requests', type: 'integer'}],
-
-  urlDecode  // The function reference
-);
-```
+    // UDF definition
+    function urlDecode(row, emit) {
+      emit({title: decodeHelper(row.title),
+            requests: row.num_requests});
+    }
+    
+    // Helper function with error handling
+    function decodeHelper(s) {
+      try {
+        return decodeURI(s);
+      } catch (ex) {
+        return s;
+      }
+    }
+    
+    // UDF registration
+    bigquery.defineFunction(
+      'urlDecode',  // Name used to call the function from SQL
+    
+      ['title', 'num_requests'],  // Input column names
+    
+      // JSON representation of the output schema
+      [{name: 'title', type: 'string'},
+       {name: 'requests', type: 'integer'}],
+    
+      urlDecode  // The function reference
+    );
 
 [Back to top](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy#top)
 
 ## UDF structure
 
-``` notranslate
-function name(row, emit) {
-  emit(<output data>);
-}
-```
+    function name(row, emit) {
+      emit(<output data>);
+    }
 
 BigQuery UDFs operate on individual rows of a table or subselect query results. The UDF has two formal parameters:
 
@@ -55,30 +51,26 @@ BigQuery UDFs operate on individual rows of a table or subselect query results. 
 
 The following code example shows a basic UDF.
 
-``` notranslate
-function urlDecode(row, emit) {
-  emit({title: decodeURI(row.title),
-        requests: row.num_requests});
-}
-```
+    function urlDecode(row, emit) {
+      emit({title: decodeURI(row.title),
+            requests: row.num_requests});
+    }
 
 ### Registering the UDF
 
 You must register a name for your function so that it can be invoked from BigQuery SQL. The registered name doesn't have to match the name you used for your function in JavaScript.
 
-``` notranslate
-bigquery.defineFunction(
-  '<UDF name>',  // Name used to call the function from SQL
-
-  ['<col1>', '<col2>'],  // Input column names
-
-  // JSON representation of the output schema
-  [<output schema>],
-
-  // UDF definition or reference
-  <UDF definition or reference>
-);
-```
+    bigquery.defineFunction(
+      '<UDF name>',  // Name used to call the function from SQL
+    
+      ['<col1>', '<col2>'],  // Input column names
+    
+      // JSON representation of the output schema
+      [<output schema>],
+    
+      // UDF definition or reference
+      <UDF definition or reference>
+    );
 
 #### Input columns
 
@@ -115,13 +107,11 @@ You must provide BigQuery with the schema or structure of the records your UDF p
 
 The following code example shows the syntax for records in the output schema. Each output field requires a `name` and `type` attribute. Nested fields must also contain a `fields` attribute.
 
-``` notranslate
-[{name: 'foo_bar', type: 'record', fields:
-  [{name: 'a', type: 'string'},
-   {name: 'b', type: 'integer'},
-   {name: 'c', type: 'boolean'}]
-}]
-```
+    [{name: 'foo_bar', type: 'record', fields:
+      [{name: 'a', type: 'string'},
+       {name: 'b', type: 'integer'},
+       {name: 'c', type: 'boolean'}]
+    }]
 
 Each field can contain an optional `mode` attribute, which supports the following values:
 
@@ -135,80 +125,74 @@ Rows passed to the `emit()` function must match the data types of the output sch
 
 If you prefer, you can define the UDF inline in `bigquery.defineFunction` . For example:
 
-``` notranslate
-bigquery.defineFunction(
-  'urlDecode',  // Name used to call the function from SQL
-
-  ['title', 'num_requests'],  // Input column names
-
-  // JSON representation of the output schema
-  [{name: 'title', type: 'string'},
-   {name: 'requests', type: 'integer'}],
-
-  // The UDF
-  function(row, emit) {
-    emit({title: decodeURI(row.title),
-          requests: row.num_requests});
-  }
-);
-```
+    bigquery.defineFunction(
+      'urlDecode',  // Name used to call the function from SQL
+    
+      ['title', 'num_requests'],  // Input column names
+    
+      // JSON representation of the output schema
+      [{name: 'title', type: 'string'},
+       {name: 'requests', type: 'integer'}],
+    
+      // The UDF
+      function(row, emit) {
+        emit({title: decodeURI(row.title),
+              requests: row.num_requests});
+      }
+    );
 
 Otherwise, you can define the UDF separately, and pass a reference to the function in `bigquery.defineFunction` . For example:
 
-``` notranslate
-// The UDF
-function urlDecode(row, emit) {
-  emit({title: decodeURI(row.title),
-        requests: row.num_requests});
-}
-
-// UDF registration
-bigquery.defineFunction(
-  'urlDecode',  // Name used to call the function from SQL
-
-  ['title', 'num_requests'],  // Input column names
-
-  // JSON representation of the output schema
-  [{name: 'title', type: 'string'},
-   {name: 'requests', type: 'integer'}],
-
-  urlDecode  // The function reference
-);
-```
+    // The UDF
+    function urlDecode(row, emit) {
+      emit({title: decodeURI(row.title),
+            requests: row.num_requests});
+    }
+    
+    // UDF registration
+    bigquery.defineFunction(
+      'urlDecode',  // Name used to call the function from SQL
+    
+      ['title', 'num_requests'],  // Input column names
+    
+      // JSON representation of the output schema
+      [{name: 'title', type: 'string'},
+       {name: 'requests', type: 'integer'}],
+    
+      urlDecode  // The function reference
+    );
 
 #### Error handling
 
 If an exception or error is thrown during the processing of a UDF, the entire query will fail. You can use a try-catch block to handle errors. For example:
 
-``` notranslate
-// The UDF
-function urlDecode(row, emit) {
-  emit({title: decodeHelper(row.title),
-        requests: row.num_requests});
-}
-
-// Helper function with error handling
-function decodeHelper(s) {
-  try {
-    return decodeURI(s);
-  } catch (ex) {
-    return s;
-  }
-}
-
-// UDF registration
-bigquery.defineFunction(
-  'urlDecode',  // Name used to call the function from SQL
-
-  ['title', 'num_requests'],  // Input column names
-
-  // JSON representation of the output schema
-  [{name: 'title', type: 'string'},
-   {name: 'requests', type: 'integer'}],
-
-  urlDecode  // The function reference
-);
-```
+    // The UDF
+    function urlDecode(row, emit) {
+      emit({title: decodeHelper(row.title),
+            requests: row.num_requests});
+    }
+    
+    // Helper function with error handling
+    function decodeHelper(s) {
+      try {
+        return decodeURI(s);
+      } catch (ex) {
+        return s;
+      }
+    }
+    
+    // UDF registration
+    bigquery.defineFunction(
+      'urlDecode',  // Name used to call the function from SQL
+    
+      ['title', 'num_requests'],  // Input column names
+    
+      // JSON representation of the output schema
+      [{name: 'title', type: 'string'},
+       {name: 'requests', type: 'integer'}],
+    
+      urlDecode  // The function reference
+    );
 
 <span id="webui"></span>
 
@@ -305,23 +289,21 @@ The query configuration may contain multiple `userDefinedFunctionResource` eleme
 
 The following JSON example illustrates a query request that references two UDF resources: one blob of inline code, and one file `lib.js` to be read from Cloud Storage. In this example, `myFunc` and the registration invocation for `myFunc` are provided by `lib.js` .
 
-``` notranslate
-{
-  "configuration": {
-    "query": {
-      "userDefinedFunctionResources": [
-        {
-          "inlineCode": "var someCode = 'here';"
-        },
-        {
-          "resourceUri": "gs://some-bucket/js/lib.js"
+    {
+      "configuration": {
+        "query": {
+          "userDefinedFunctionResources": [
+            {
+              "inlineCode": "var someCode = 'here';"
+            },
+            {
+              "resourceUri": "gs://some-bucket/js/lib.js"
+            }
+          ],
+          "query": "select a from myFunc(T);"
         }
-      ],
-      "query": "select a from myFunc(T);"
+      }
     }
-  }
-}
-```
 
 [Back to top](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy#top)
 
@@ -341,17 +323,15 @@ In the [running a query](https://docs.cloud.google.com/bigquery/user-defined-fun
 
 Do not store or access mutable state across UDF calls. The following code example describes this scenario:
 
-``` notranslate
-// myCode.js
-var numRows = 0;
-
-function dontDoThis(r, emit) {
-  emit({rowCount: ++numRows});
-}
-
-// The query.
-SELECT max(rowCount) FROM dontDoThis(t);
-```
+    // myCode.js
+    var numRows = 0;
+    
+    function dontDoThis(r, emit) {
+      emit({rowCount: ++numRows});
+    }
+    
+    // The query.
+    SELECT max(rowCount) FROM dontDoThis(t);
 
 The above example will not behave as expected, because BigQuery shards your query across many nodes. Each node has a standalone JavaScript processing environment that accumulates separate values for `numRows` .
 
@@ -365,16 +345,14 @@ You must explicitly list the columns being selected from a UDF. `SELECT * FROM <
 
 To examine the structure of the input row data, you can use `JSON.stringify()` to emit a string output column:
 
-``` notranslate
-bigquery.defineFunction(
-  'examineInputFormat',
-  ['some', 'input', 'columns'],
-  [{name: 'input', type: 'string'}],
-  function(r, emit) {
-    emit({input: JSON.stringify(r)});
-  }
-);
-```
+    bigquery.defineFunction(
+      'examineInputFormat',
+      ['some', 'input', 'columns'],
+      [{name: 'input', type: 'string'}],
+      function(r, emit) {
+        emit({input: JSON.stringify(r)});
+      }
+    );
 
 [Back to top](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy#top)
 

@@ -73,14 +73,12 @@ For clustered tables, you can query the `CLUSTERING_ORDINAL_POSITION` column in 
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE TABLE mydataset.data (column1 INT64, column2 INT64)
-    CLUSTER BY column1, column2;
-    SELECT
-      column_name, clustering_ordinal_position
-    FROM
-      mydataset.INFORMATION_SCHEMA.COLUMNS;
-    ```
+        CREATE TABLE mydataset.data (column1 INT64, column2 INT64)
+        CLUSTER BY column1, column2;
+        SELECT
+          column_name, clustering_ordinal_position
+        FROM
+          mydataset.INFORMATION_SCHEMA.COLUMNS;
 
 3.  Click play\_circle **Run** .
 
@@ -94,12 +92,10 @@ Issue the `bq show` command to display all table information. Use the `--schema`
 
 If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
-``` notranslate
-bq show \
-    --schema \
-    --format=prettyjson \
-    PROJECT_ID:DATASET.TABLE
-```
+    bq show \
+        --schema \
+        --format=prettyjson \
+        PROJECT_ID:DATASET.TABLE
 
 Replace the following:
 
@@ -115,7 +111,7 @@ Enter the following command to display all information about `myclusteredtable` 
 
 The output should look like the following:
 
-``` console
+```console
 {
   "clustering": {
     "fields": [
@@ -156,9 +152,7 @@ Follow these steps to apply a new clustering specification to unpartitioned or p
 
 2.  To cluster all rows according to the new clustering specification, run the following `UPDATE` statement:
     
-    ``` notranslate
-    UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
-    ```
+        UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
     
     > **Note:** If a new clustering specification is applied to a table that is in long-term storage, then the table reverts to active storage pricing. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 

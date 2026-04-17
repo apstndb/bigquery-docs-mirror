@@ -6,7 +6,7 @@ For more information about supported SQL statements and functions for this model
 
 ## `CREATE MODEL` syntax
 
-``` lang-sql
+```sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(MODEL_TYPE = 'TENSORFLOW_LITE', MODEL_PATH = string_value
@@ -123,8 +123,6 @@ Imported TensorFlow Lite models have the following limitations:
 
 The following example imports a TensorFlow Lite model into BigQuery as a BigQuery ML model. The example assumes that there is an existing TensorFlow Lite model located at `gs://bucket/path/to/tflite_model/*` .
 
-``` notranslate
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='TENSORFLOW_LITE',
-         MODEL_PATH="gs://bucket/path/to/tflite_model/*")
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='TENSORFLOW_LITE',
+             MODEL_PATH="gs://bucket/path/to/tflite_model/*")

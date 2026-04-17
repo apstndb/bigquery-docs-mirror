@@ -44,9 +44,7 @@ Run a query on the Blob Storage BigLake table:
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT * FROM DATASET_NAME.TABLE_NAME;
-    ```
+        SELECT * FROM DATASET_NAME.TABLE_NAME;
     
     Replace the following:
     
@@ -82,7 +80,7 @@ Tables based on external data sources provide a pseudocolumn named `_FILE_NAME` 
 
 The `_FILE_NAME` column name is reserved, which means that you cannot create a column by that name in any of your tables. To select the value of `_FILE_NAME` , you must use an alias. The following example query demonstrates selecting `_FILE_NAME` by assigning the alias `fn` to the pseudocolumn.
 
-``` notranslate
+``` 
   bq query \  --project_id=PROJECT_ID \  --use_legacy_sql=false \  'SELECT     name,     _FILE_NAME AS fn   FROM     `DATASET.TABLE_NAME`   WHERE     name contains "Alex"' 
 ```
 

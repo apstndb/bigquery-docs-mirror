@@ -329,19 +329,17 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION 
 
 The following example demonstrates how to find the five jobs that scanned the most bytes in an organization for the current day. You can filter further on `statement_type` to query for additional information such as loads, exports, and queries.
 
-``` notranslate
-SELECT
-  job_id,
-  user_email,
-  total_bytes_billed
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
-WHERE
-  EXTRACT(DATE FROM  creation_time) = current_date()
-ORDER BY
-  total_bytes_billed DESC
-LIMIT 5;
-```
+    SELECT
+      job_id,
+      user_email,
+      total_bytes_billed
+    FROM
+      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
+    WHERE
+      EXTRACT(DATE FROM  creation_time) = current_date()
+    ORDER BY
+      total_bytes_billed DESC
+    LIMIT 5;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

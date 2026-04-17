@@ -201,30 +201,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -249,7 +243,7 @@ Select one of the following options:
 
 2.  In the query editor, run the following `CREATE MODEL` statement to create the `tokenizer` model.
     
-    ``` notranslate
+    ``` 
      CREATE OR REPLACE MODEL `bqml_tutorial.tokenizer`
       OPTIONS (MODEL_TYPE='ONNX',
        MODEL_PATH='TOKENIZER_BUCKET_PATH')
@@ -267,7 +261,7 @@ Select one of the following options:
 
 5.  In the query editor, run the following `CREATE MODEL` statement to create the `all-MiniLM-L6-v2` model.
     
-    ``` notranslate
+    ``` 
      CREATE OR REPLACE MODEL `bqml_tutorial.all-MiniLM-L6-v2`
       OPTIONS (MODEL_TYPE='ONNX',
        MODEL_PATH='TRANSFORMER_BUCKET_PATH')
@@ -289,14 +283,12 @@ Use the bq command-line tool [`query` command](https://docs.cloud.google.com/big
 
 1.  On the command line, run the following command to create the `tokenizer` model.
     
-    ``` notranslate
-    bq query --use_legacy_sql=false \
-    "CREATE OR REPLACE MODEL
-    `bqml_tutorial.tokenizer`
-    OPTIONS
-    (MODEL_TYPE='ONNX',
-    MODEL_PATH='TOKENIZER_BUCKET_PATH')"
-    ```
+        bq query --use_legacy_sql=false \
+        "CREATE OR REPLACE MODEL
+        `bqml_tutorial.tokenizer`
+        OPTIONS
+        (MODEL_TYPE='ONNX',
+        MODEL_PATH='TOKENIZER_BUCKET_PATH')"
     
     Replace `  TOKENIZER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TOKENIZER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/tokenizer.onnx` .
     
@@ -304,14 +296,12 @@ Use the bq command-line tool [`query` command](https://docs.cloud.google.com/big
 
 2.  On the command line, run the following command to create the `all-MiniLM-L6-v2` model.
     
-    ``` notranslate
-    bq query --use_legacy_sql=false \
-    "CREATE OR REPLACE MODEL
-    `bqml_tutorial.all-MiniLM-L6-v2`
-    OPTIONS
-    (MODEL_TYPE='ONNX',
-      MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
-    ```
+        bq query --use_legacy_sql=false \
+        "CREATE OR REPLACE MODEL
+        `bqml_tutorial.all-MiniLM-L6-v2`
+        OPTIONS
+        (MODEL_TYPE='ONNX',
+          MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
     
     Replace `  TRANSFORMER_BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  TRANSFORMER_BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/all-MiniLM-L6-v2/model_quantized.onnx` .
     
@@ -319,18 +309,14 @@ Use the bq command-line tool [`query` command](https://docs.cloud.google.com/big
 
 3.  After you import the models, verify that the models appear in the dataset.
     
-    ``` notranslate
-    bq ls -m bqml_tutorial
-    ```
+        bq ls -m bqml_tutorial
     
     The output is similar to the following:
     
-    ``` notranslate
-    tableId            Type
-    ------------------------
-    tokenizer          MODEL
-    all-MiniLM-L6-v2   MODEL
-    ```
+        tableId            Type
+        ------------------------
+        tokenizer          MODEL
+        all-MiniLM-L6-v2   MODEL
 
 ### API
 
@@ -338,11 +324,9 @@ Use the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/refer
 
 1.  Use the following `query` parameter value to create the `tokenizer` model.
     
-    ``` notranslate
-    {
-    "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.tokenizer` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TOKENIZER_BUCKET_PATH')"
-    }
-    ```
+        {
+        "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.tokenizer` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TOKENIZER_BUCKET_PATH')"
+        }
     
     Replace the following:
     
@@ -351,11 +335,9 @@ Use the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/refer
 
 2.  Use the following `query` parameter value to create the `all-MiniLM-L6-v2` model.
     
-    ``` notranslate
-    {
-    "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.all-MiniLM-L6-v2` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
-    }
-    ```
+        {
+        "query": "CREATE MODEL `PROJECT_ID :bqml_tutorial.all-MiniLM-L6-v2` OPTIONS(MODEL_TYPE='ONNX' MODEL_PATH='TRANSFORMER_BUCKET_PATH')"
+        }
     
     Replace the following:
     
@@ -370,21 +352,19 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Import the tokenizer and sentence transformer models by using the `ONNXModel` object.
 
-``` notranslate
-import bigframes
-from bigframes.ml.imported import ONNXModel
-
-bigframes.options.bigquery.project = PROJECT_ID
-
-bigframes.options.bigquery.location = "US"
-
-tokenizer = ONNXModel(
-  model_path= "TOKENIZER_BUCKET_PATH"
-)
-imported_onnx_model = ONNXModel(
-  model_path="TRANSFORMER_BUCKET_PATH"
-)
-```
+    import bigframes
+    from bigframes.ml.imported import ONNXModel
+    
+    bigframes.options.bigquery.project = PROJECT_ID
+    
+    bigframes.options.bigquery.location = "US"
+    
+    tokenizer = ONNXModel(
+      model_path= "TOKENIZER_BUCKET_PATH"
+    )
+    imported_onnx_model = ONNXModel(
+      model_path="TRANSFORMER_BUCKET_PATH"
+    )
 
 Replace the following:
 
@@ -413,22 +393,20 @@ The `SELECT` statement retrieves the `sentence_embedding` column, which is an ar
 
 2.  In the query editor, run the following query.
     
-    ``` notranslate
-    SELECT
-    sentence_embedding
-    FROM
-    ML.PREDICT (MODEL `bqml_tutorial.all-MiniLM-L6-v2`,
-      (
-      SELECT
-        input_ids, attention_mask
-      FROM
-        ML.PREDICT(MODEL `bqml_tutorial.tokenizer`,
+        SELECT
+        sentence_embedding
+        FROM
+        ML.PREDICT (MODEL `bqml_tutorial.all-MiniLM-L6-v2`,
           (
           SELECT
-            title AS text
+            input_ids, attention_mask
           FROM
-            `bigquery-public-data.imdb.reviews` limit 10))))
-    ```
+            ML.PREDICT(MODEL `bqml_tutorial.tokenizer`,
+              (
+              SELECT
+                title AS text
+              FROM
+                `bigquery-public-data.imdb.reviews` limit 10))))
     
     The result is similar to the following:
     
@@ -456,23 +434,21 @@ The `SELECT` statement retrieves the `sentence_embedding` column, which is an ar
 
 On the command line, run the following command to run the query.
 
-``` notranslate
-bq query --use_legacy_sql=false \
-'SELECT
-sentence_embedding
-FROM
-ML.PREDICT (MODEL `bqml_tutorial.all-MiniLM-L6-v2`,
-  (
-  SELECT
-    input_ids, attention_mask
-  FROM
-    ML.PREDICT(MODEL `bqml_tutorial.tokenizer`,
+    bq query --use_legacy_sql=false \
+    'SELECT
+    sentence_embedding
+    FROM
+    ML.PREDICT (MODEL `bqml_tutorial.all-MiniLM-L6-v2`,
       (
       SELECT
-        title AS text
+        input_ids, attention_mask
       FROM
-        `bigquery-public-data.imdb.reviews` limit 10))))'
-```
+        ML.PREDICT(MODEL `bqml_tutorial.tokenizer`,
+          (
+          SELECT
+            title AS text
+          FROM
+            `bigquery-public-data.imdb.reviews` limit 10))))'
 
 The result is similar to the following:
 

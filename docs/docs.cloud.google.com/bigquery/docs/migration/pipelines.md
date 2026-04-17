@@ -133,7 +133,7 @@ The following example describes an operational data pipeline that writes product
 
 **Figure 6** . An operational data pipeline that writes product prices into a PCM system.
 
-An operational data pipeline is a type of downstream process, whereas data pipelines implementing [ETL](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#etl) , [ELT](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#elt) , or [CDC](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#cdc) are upstream processes. Nevertheless, the tools used to implement both can overlap. For instance, you can use [Dataflow](https://docs.cloud.google.com/dataflow) to define and run all the data processing DAGs, [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) to define transformations that execute within BigQuery, and [Cloud Composer](https://docs.cloud.google.com/composer) to orchestrate the end-to-end flow of data.
+An operational data pipeline is a type of downstream process, whereas data pipelines implementing [ETL](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#etl) , [ELT](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#elt) , or [CDC](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#cdc) are upstream processes. Nevertheless, the tools used to implement both can overlap. For instance, you can use [Dataflow](https://docs.cloud.google.com/dataflow) to define and run all the data processing DAGs, [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) to define transformations that execute within BigQuery, and [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer) to orchestrate the end-to-end flow of data.
 
 ## Choosing a migration approach
 
@@ -188,7 +188,7 @@ The following diagram shows the approach outlined in this section.
 With respect to the orchestration of the ETL pipeline, you need to perform two separate steps:
 
 1.  Reuse your existing on-premises pipeline orchestration to write the transformed data into the file system. Extend this orchestration to copy the files from your on-premises file system into Cloud Storage, or create an additional script that runs regularly to perform the copy step.
-2.  When the data is in Cloud Storage, use a [Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) to schedule recurring loads from Cloud Storage to BigQuery. Alternatives to Cloud Storage transfers are [Cloud Storage triggers](https://docs.cloud.google.com/functions/docs/calling/storage) and [Cloud Composer](https://docs.cloud.google.com/composer) .
+2.  When the data is in Cloud Storage, use a [Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) to schedule recurring loads from Cloud Storage to BigQuery. Alternatives to Cloud Storage transfers are [Cloud Storage triggers](https://docs.cloud.google.com/functions/docs/calling/storage) and [Managed Airflow](https://docs.cloud.google.com/composer) .
 
 In Figure 8, note how it's also possible for the orchestration on Google Cloud to use a pull model by retrieving the files using a protocol such as [SFTP](https://wikipedia.org/wiki/SSH_File_Transfer_Protocol) .
 
@@ -265,7 +265,7 @@ Handling the parallelization of the work is nontrivial. If your vendor doesn't p
 
 In this diagram, each VM in the MIG executes the third-party pipeline software. You can trigger a pipeline execution in several ways:
 
-  - Automatically, by using [Cloud Scheduler](https://docs.cloud.google.com/scheduler) , [Cloud Composer](https://docs.cloud.google.com/composer) , or a [Cloud Storage trigger](https://docs.cloud.google.com/functions/docs/calling/storage) when new data arrives into a Cloud Storage bucket.
+  - Automatically, by using [Cloud Scheduler](https://docs.cloud.google.com/scheduler) , [Managed Airflow](https://docs.cloud.google.com/composer) , or a [Cloud Storage trigger](https://docs.cloud.google.com/functions/docs/calling/storage) when new data arrives into a Cloud Storage bucket.
   - Programmatically, by calling a [Cloud Endpoint](https://docs.cloud.google.com/endpoints) or [Cloud Function](https://docs.cloud.google.com/functions) , or by using the [Pub/Sub API](https://docs.cloud.google.com/pubsub/docs/apis) .
   - Manually, by placing a new message in a Pub/Sub topic with the Google Cloud CLI.
 
@@ -382,7 +382,7 @@ In a third iteration, the team revisits the use cases and extracts the monthly s
 In subsequent iterations, the migration team can solve any remaining functional issues and migrate the pipelines to use the following [Google Cloud-managed services](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#rewrite_data_pipelines_to_use_gcp-managed_services) , among others:
 
   - [Dataflow](https://docs.cloud.google.com/dataflow) : Enables you to define each data pipeline as a self-contained DAG using the [Beam model](https://beam.apache.org/documentation/execution-model/) .
-  - [Cloud Composer](https://docs.cloud.google.com/composer) : Enables you to define the broader orchestration as one or more [Airflow DAGs](https://airflow.apache.org/concepts.html#dags) .
+  - [Managed Airflow](https://docs.cloud.google.com/composer) : Enables you to define the broader orchestration as one or more [Airflow DAGs](https://airflow.apache.org/concepts.html#dags) .
 
 Even though Airflow supports sub-DAGs natively, this functionality might limit its performance and is therefore [discouraged](https://docs.cloud.google.com/composer/docs/faq#using_operators) . In their place, use independent DAGs with the [`TriggerDagRunOperator`](https://github.com/apache/airflow/blob/main/providers/src/airflow/providers/standard/operators/trigger_dagrun.py) operator.
 

@@ -46,14 +46,12 @@ Replace the following:
 
 The following example retrieves all changes of the `default_query_job_timeout_ms option` option:
 
-``` notranslate
-SELECT
-  *
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES
-WHERE
-  updated_options.default_query_job_timeout_ms is not null;
-```
+    SELECT
+      *
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES
+    WHERE
+      updated_options.default_query_job_timeout_ms is not null;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

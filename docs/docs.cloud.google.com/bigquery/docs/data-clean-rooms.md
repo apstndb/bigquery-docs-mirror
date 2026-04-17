@@ -111,9 +111,7 @@ Go to the **Analytics Hub API** page and enable the API for your Google Cloud pr
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
-``` notranslate
-gcloud services enable analyticshub.googleapis.com
-```
+    gcloud services enable analyticshub.googleapis.com
 
 After you enable the Analytics Hub API, you can access the [Sharing (Analytics Hub) page](https://console.cloud.google.com/bigquery/analytics-hub) .
 
@@ -164,7 +162,7 @@ Use the [`projects.locations.dataExchanges.create` method](https://docs.cloud.go
 
 The following example shows how to call the `projects.locations.dataExchanges.create` method using the `curl` command:
 
-``` notranslate
+``` 
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges?data_exchange_id=CLEAN_ROOM_ID -d
   '{
     display_name: "CLEAN_ROOM_NAME",
@@ -207,13 +205,11 @@ Use the [`projects.locations.dataExchanges.patch` method](https://docs.cloud.goo
 
 The following example shows how to call the `projects.locations.dataExchanges.patch` method using the `curl` command:
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID?updateMask=UPDATEMASK -d
-'{
-  display_name: "CLEAN_ROOM_NAME",
-  sharing_environment_config: {dcr_exchange_config: {}}
-}'
-```
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID?updateMask=UPDATEMASK -d
+    '{
+      display_name: "CLEAN_ROOM_NAME",
+      sharing_environment_config: {dcr_exchange_config: {}}
+    }'
 
 Replace the following:
 
@@ -252,9 +248,7 @@ Use the [`projects.locations.dataExchanges.delete` method](https://docs.cloud.go
 
 The following example shows how to call the `projects.locations.dataExchanges.delete` method using the `curl` command:
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges?data_exchange_id=CLEAN_ROOM_ID
-```
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges?data_exchange_id=CLEAN_ROOM_ID
 
 Replace the following:
 
@@ -293,21 +287,19 @@ Use the [`projects.locations.dataExchanges.setIamPolicy` method](https://docs.cl
 
 The following example shows how to call the `projects.locations.dataExchanges.setIamPolicy` method using the `curl` command:
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:setIamPolicy -d
-'{
-  "policy": {
-    "bindings": [
-      {
-        "members": [
-          "my-service-account@my-project.iam.gserviceaccount.com"
-        ],
-        "role": "roles/analyticshub.publisher"
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:setIamPolicy -d
+    '{
+      "policy": {
+        "bindings": [
+          {
+            "members": [
+              "my-service-account@my-project.iam.gserviceaccount.com"
+            ],
+            "role": "roles/analyticshub.publisher"
+          }
+        ]
       }
-    ]
-  }
-}'
-```
+    }'
 
 The policy in the request body should conform to the structure of a [Policy](https://docs.cloud.google.com/iam/reference/rest/v1/Policy) .
 
@@ -345,27 +337,25 @@ Use the [`projects.locations.dataExchanges.setIamPolicy` method](https://docs.cl
 
 The following example shows how to call the `projects.locations.dataExchanges.setIamPolicy` method using the `curl` command:
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:setIamPolicy -d
-'{
-  "policy": {
-    "bindings": [
-      {
-        "members": [
-          "user:mike@example.com"
-        ],
-        "role": "roles/analyticshub.subscriptionOwner"
-      },
-      {
-        "members": [
-          "user:mike@example.com"
-        ],
-        "role": "roles/analyticshub.subscriber"
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:setIamPolicy -d
+    '{
+      "policy": {
+        "bindings": [
+          {
+            "members": [
+              "user:mike@example.com"
+            ],
+            "role": "roles/analyticshub.subscriptionOwner"
+          },
+          {
+            "members": [
+              "user:mike@example.com"
+            ],
+            "role": "roles/analyticshub.subscriber"
+          }
+        ]
       }
-    ]
-  }
-}'
-```
+    }'
 
 The policy in the request body should conform to the structure of a [Policy](https://docs.cloud.google.com/iam/reference/rest/v1/Policy) .
 
@@ -439,7 +429,7 @@ Use the [`projects.locations.dataExchanges.listings.create` method](https://docs
 
 The following example shows how to call the `projects.locations.dataExchanges.listings.create` method using the `curl` command:
 
-``` notranslate
+``` 
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
   '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"table":"projects/PROJECT_ID/datasets/DATASET_ID/tables/VIEW_ID"}],},"displayName":LISTING_NAME"}'
 ```
@@ -487,10 +477,8 @@ Use the [`projects.locations.dataExchanges.listings.patch` method](https://docs.
 
 The following example shows how to call the `projects.locations.dataExchanges.listings.patch` method using the `curl` command:
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X PATCH https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings/listingId=LISTING_ID?updateMask=displayName -d
-'{"displayName":LISTING_NAME"}'
-```
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X PATCH https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings/listingId=LISTING_ID?updateMask=displayName -d
+    '{"displayName":LISTING_NAME"}'
 
 Replace the following:
 
@@ -520,9 +508,7 @@ Use the [`projects.locations.dataExchanges.listings.delete` method](https://docs
 
 The following example shows how to call the `projects.locations.dataExchanges.listings.delete` method using the `curl` command:
 
-``` notranslate
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID
-```
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID
 
 Replace the following:
 
@@ -593,7 +579,7 @@ Use the [`projects.locations.dataExchanges.subscribe` method](https://docs.cloud
 
 The following example shows how to call the `projects.locations.dataExchanges.subscribe` method using the `curl` command:
 
-``` notranslate
+``` 
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination":"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
 ```
 
@@ -676,12 +662,10 @@ To find all the data clean rooms that you have access to, do the following:
 
 To find all the linked datasets created by data clean rooms in your project, run the following command in a command-line environment:
 
-``` notranslate
-PROJECT=PROJECT_ID \
-for dataset in $(bq ls --project_id $PROJECT | tail +3); \
-do [ "$(bq show -d --project_id $PROJECT $dataset | egrep LINKED)" ] \
-&& echo $dataset; done
-```
+    PROJECT=PROJECT_ID \
+    for dataset in $(bq ls --project_id $PROJECT | tail +3); \
+    do [ "$(bq show -d --project_id $PROJECT $dataset | egrep LINKED)" ] \
+    && echo $dataset; done
 
 Replace `  PROJECT_ID  ` with the project that contains your linked datasets.
 

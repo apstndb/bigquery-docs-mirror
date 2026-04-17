@@ -23,7 +23,7 @@ You can run prediction during model creation, after model creation, or after a f
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.PREDICT(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }
@@ -187,19 +187,17 @@ The following example predicts an outcome and returns the following columns:
 
 <!-- end list -->
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.PREDICT(MODEL `mydataset.mymodel`,
-    (
     SELECT
-      label,
-      column1,
-      column2
+      *
     FROM
-      `mydataset.mytable`))
-```
+      ML.PREDICT(MODEL `mydataset.mymodel`,
+        (
+        SELECT
+          label,
+          column1,
+          column2
+        FROM
+          `mydataset.mytable`))
 
 ### Compare predictions from two different models
 
@@ -207,82 +205,72 @@ The following example creates two models and then compares their output:
 
 1.  Create the first model:
     
-    ``` notranslate
-    CREATE MODEL
-      `mydataset.mymodel1`
-    OPTIONS
-      (model_type='linear_reg',
-        input_label_cols=['label'],
-      ) AS
-    SELECT
-      label,
-      input_column1
-    FROM
-      `mydataset.mytable`
-    ```
+        CREATE MODEL
+          `mydataset.mymodel1`
+        OPTIONS
+          (model_type='linear_reg',
+            input_label_cols=['label'],
+          ) AS
+        SELECT
+          label,
+          input_column1
+        FROM
+          `mydataset.mytable`
 
 2.  Create the second model:
     
-    ``` notranslate
-    CREATE MODEL
-      `mydataset.mymodel2`
-    OPTIONS
-      (model_type='linear_reg',
-        input_label_cols=['label'],
-      ) AS
-    SELECT
-      label,
-      input_column2
-    FROM
-      `mydataset.mytable`
-    ```
+        CREATE MODEL
+          `mydataset.mymodel2`
+        OPTIONS
+          (model_type='linear_reg',
+            input_label_cols=['label'],
+          ) AS
+        SELECT
+          label,
+          input_column2
+        FROM
+          `mydataset.mytable`
 
 3.  Compare the output of the two models:
     
-    ``` notranslate
-    SELECT
-      label,
-      predicted_label1,
-      predicted_label AS predicted_label2
-    FROM
-      ML.PREDICT(MODEL `mydataset.mymodel2`,
-        (
         SELECT
-          * EXCEPT (predicted_label),
-              predicted_label AS predicted_label1
+          label,
+          predicted_label1,
+          predicted_label AS predicted_label2
         FROM
-          ML.PREDICT(MODEL `mydataset.mymodel1`,
-            TABLE `mydataset.mytable`)))
-    ```
+          ML.PREDICT(MODEL `mydataset.mymodel2`,
+            (
+            SELECT
+              * EXCEPT (predicted_label),
+                  predicted_label AS predicted_label1
+            FROM
+              ML.PREDICT(MODEL `mydataset.mymodel1`,
+                TABLE `mydataset.mytable`)))
 
 ### Specify a custom threshold
 
 The following example runs prediction with input data and a custom threshold of `0.55` :
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.PREDICT(MODEL `mydataset.mymodel`,
-    (
     SELECT
-      custom_label,
-      column1,
-      column2
+      *
     FROM
-      `mydataset.mytable`),
-    STRUCT(0.55 AS threshold))
-```
+      ML.PREDICT(MODEL `mydataset.mymodel`,
+        (
+        SELECT
+          custom_label,
+          column1,
+          column2
+        FROM
+          `mydataset.mytable`),
+        STRUCT(0.55 AS threshold))
 
 ### Predict an outcome from structured data with an imported TensorFlow model
 
 The following query predicts outcomes using an imported TensorFlow model. The `input_data` table contains inputs in the schema expected by `my_model` . See [the `CREATE MODEL` statement for TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) for more information.
 
-``` notranslate
-SELECT *
-FROM ML.PREDICT(MODEL `my_project.my_dataset.my_model`,
-  (SELECT * FROM input_data))
-```
+    SELECT *
+    FROM ML.PREDICT(MODEL `my_project.my_dataset.my_model`,
+      (SELECT * FROM input_data))
 
 ### Predict an outcome from image data with an imported TensorFlow model
 
@@ -296,28 +284,24 @@ The following examples show different ways you can use the `ML.PREDICT` function
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. It returns the inference results for all images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
-``` notranslate
-SELECT * FROM
-ML.PREDICT(
-  MODEL `my_dataset.vision_model`,
-  (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
-  FROM `my_dataset.object_table`)
-);
-```
+    SELECT * FROM
+    ML.PREDICT(
+      MODEL `my_dataset.vision_model`,
+      (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
+      FROM `my_dataset.object_table`)
+    );
 
 **Example 2**
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function, and uses the `ML.CONVERT_COLOR_SPACE` function in the `ML.PREDICT` function to convert the image color space from `RBG` to `YIQ` . It also shows how to use object table fields to filter the objects included in inference. It returns the inference results for all JPG images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
-``` notranslate
-SELECT * FROM
-  ML.PREDICT(
-    MODEL `my_dataset.vision_model`,
-    (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 280, TRUE), 'YIQ') AS input
-    FROM `my_dataset.object_table`
-    WHERE content_type = 'image/jpeg')
-  );
-```
+    SELECT * FROM
+      ML.PREDICT(
+        MODEL `my_dataset.vision_model`,
+        (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 280, TRUE), 'YIQ') AS input
+        FROM `my_dataset.object_table`
+        WHERE content_type = 'image/jpeg')
+      );
 
 **Example 3**
 
@@ -325,22 +309,18 @@ The following example uses results from `ML.DECODE_IMAGE` that have been written
 
 Create the decoded images table:
 
-``` notranslate
-CREATE OR REPLACE TABLE `my_dataset.decoded_images`
-  AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
-  FROM `my_dataset.object_table`);
-```
+    CREATE OR REPLACE TABLE `my_dataset.decoded_images`
+      AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
+      FROM `my_dataset.object_table`);
 
 Run inference on the decoded images table:
 
-``` notranslate
-SELECT * FROM
-ML.PREDICT(
-  MODEL`my_dataset.vision_model`,
-  (SELECT uri, ML.CONVERT_IMAGE_TYPE(ML.RESIZE_IMAGE(decoded_image, 480, 480, FALSE)) AS input
-  FROM `my_dataset.decoded_images`)
-);
-```
+    SELECT * FROM
+    ML.PREDICT(
+      MODEL`my_dataset.vision_model`,
+      (SELECT uri, ML.CONVERT_IMAGE_TYPE(ML.RESIZE_IMAGE(decoded_image, 480, 480, FALSE)) AS input
+      FROM `my_dataset.decoded_images`)
+    );
 
 **Example 4**
 
@@ -348,56 +328,46 @@ The following example uses results from `ML.DECODE_IMAGE` that have been written
 
 Create the table:
 
-``` notranslate
-CREATE OR REPLACE TABLE `my_dataset.decoded_images`
-  AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
-  FROM `my_dataset.object_table`);
-```
+    CREATE OR REPLACE TABLE `my_dataset.decoded_images`
+      AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
+      FROM `my_dataset.object_table`);
 
 Run inference on the decoded images table:
 
-``` notranslate
-SELECT * FROM
-ML.PREDICT(
-  MODEL `my_dataset.vision_model`,
-  (SELECT uri, decoded_image AS input
-  FROM `my_dataset.decoded_images`)
-);
-```
+    SELECT * FROM
+    ML.PREDICT(
+      MODEL `my_dataset.vision_model`,
+      (SELECT uri, decoded_image AS input
+      FROM `my_dataset.decoded_images`)
+    );
 
 **Example 5**
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. In this example, the model has an output field of `embeddings` and two input fields: one that expects an image, `f_img` , and one that expects a string, `f_txt` . The image input comes from the object table and the string input comes from a standard BigQuery table that is joined with the object table by using the `uri` column.
 
-``` notranslate
-SELECT * FROM
-  ML.PREDICT(
-    MODEL `my_dataset.mixed_model`,
-    (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(my_dataset.my_object_table.data), 224, 224, FALSE) AS f_img,
-      my_dataset.image_description.description AS f_txt
-    FROM `my_dataset.object_table`
-    JOIN `my_dataset.image_description`
-    ON object_table.uri = image_description.uri)
-  );
-```
+    SELECT * FROM
+      ML.PREDICT(
+        MODEL `my_dataset.mixed_model`,
+        (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(my_dataset.my_object_table.data), 224, 224, FALSE) AS f_img,
+          my_dataset.image_description.description AS f_txt
+        FROM `my_dataset.object_table`
+        JOIN `my_dataset.image_description`
+        ON object_table.uri = image_description.uri)
+      );
 
 ### Predict an outcome with a model trained with the `TRANSFORM` clause
 
 The following example trains a model using the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) :
 
-``` notranslate
-CREATE MODEL `mydataset.mymodel`
-  TRANSFORM(f1 + f2 as c, label)
-  OPTIONS(...)
-AS SELECT f1, f2, f3, label FROM t;
-```
+    CREATE MODEL `mydataset.mymodel`
+      TRANSFORM(f1 + f2 as c, label)
+      OPTIONS(...)
+    AS SELECT f1, f2, f3, label FROM t;
 
 Because the `f3` column doesn't appear in the `TRANSFORM` clause, the following prediction query omits that column in the `QUERY_STATEMENT` :
 
-``` notranslate
-SELECT * FROM ML.PREDICT(
-  MODEL `mydataset.mymodel`, (SELECT f1, f2 FROM t1));
-```
+    SELECT * FROM ML.PREDICT(
+      MODEL `mydataset.mymodel`, (SELECT f1, f2 FROM t1));
 
 If `f3` is provided in the `SELECT` statement, it isn't used for calculating predictions but is instead passed through for use in the rest of the SQL statement.
 
@@ -405,10 +375,8 @@ If `f3` is provided in the `SELECT` statement, it isn't used for calculating pre
 
 The following example runs prediction against a previously built autoencoder model, where the input was 4 dimensional (4 input columns) and the dimensionality reduction had 2 dimensions (2 output columns):
 
-``` notranslate
-SELECT * FROM ML.PREDICT(
-  MODEL `mydataset.mymodel`, (SELECT f1, f2, f3, f4 FROM t1));
-```
+    SELECT * FROM ML.PREDICT(
+      MODEL `mydataset.mymodel`, (SELECT f1, f2, f3, f4 FROM t1));
 
 ## What's next
 

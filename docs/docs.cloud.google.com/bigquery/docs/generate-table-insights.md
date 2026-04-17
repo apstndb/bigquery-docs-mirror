@@ -43,8 +43,6 @@ When generating table insights, BigQuery provides two modes:
 </tbody>
 </table>
 
-> **Note:** Modes apply only to table-level insights. The system generates dataset-level insights on demand and doesn't publish them to Knowledge Catalog in the same way.
-
 ## Before you begin
 
 Data insights are generated using [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/overview) . To start generating insights, you must first [set up Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/set-up-gemini) .

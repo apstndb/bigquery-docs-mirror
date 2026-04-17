@@ -111,18 +111,16 @@ To create a dataset in a project other than your default project, add the projec
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE SCHEMA PROJECT_ID.DATASET_ID
-      OPTIONS (
-        default_kms_key_name = 'KMS_KEY_NAME',
-        default_partition_expiration_days = PARTITION_EXPIRATION,
-        default_table_expiration_days = TABLE_EXPIRATION,
-        description = 'DESCRIPTION',
-        labels = [('KEY_1','VALUE_1'),('KEY_2','VALUE_2')],
-        location = 'LOCATION',
-        max_time_travel_hours = HOURS,
-        storage_billing_model = BILLING_MODEL);
-    ```
+        CREATE SCHEMA PROJECT_ID.DATASET_ID
+          OPTIONS (
+            default_kms_key_name = 'KMS_KEY_NAME',
+            default_partition_expiration_days = PARTITION_EXPIRATION,
+            default_table_expiration_days = TABLE_EXPIRATION,
+            description = 'DESCRIPTION',
+            labels = [('KEY_1','VALUE_1'),('KEY_2','VALUE_2')],
+            location = 'LOCATION',
+            max_time_travel_hours = HOURS,
+            storage_billing_model = BILLING_MODEL);
     
     Replace the following:
     
@@ -162,20 +160,18 @@ To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquer
 
 To create a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET_ID  ` .
 
-``` notranslate
-bq --location=LOCATION mk \
-    --dataset \
-    --default_kms_key=KMS_KEY_NAME \
-    --default_partition_expiration=PARTITION_EXPIRATION \
-    --default_table_expiration=TABLE_EXPIRATION \
-    --description="DESCRIPTION" \
-    --label=KEY_1:VALUE_1 \
-    --label=KEY_2:VALUE_2 \
-    --add_tags=KEY_3:VALUE_3[,...] \
-    --max_time_travel_hours=HOURS \
-    --storage_billing_model=BILLING_MODEL \
-    PROJECT_ID:DATASET_ID
-```
+    bq --location=LOCATION mk \
+        --dataset \
+        --default_kms_key=KMS_KEY_NAME \
+        --default_partition_expiration=PARTITION_EXPIRATION \
+        --default_table_expiration=TABLE_EXPIRATION \
+        --description="DESCRIPTION" \
+        --label=KEY_1:VALUE_1 \
+        --label=KEY_2:VALUE_2 \
+        --add_tags=KEY_3:VALUE_3[,...] \
+        --max_time_travel_hours=HOURS \
+        --storage_billing_model=BILLING_MODEL \
+        PROJECT_ID:DATASET_ID
 
 Replace the following:
 
@@ -207,12 +203,10 @@ Replace the following:
 
 For example, the following command creates a dataset named `mydataset` with data location set to `US` , a default table expiration of 3600 seconds (1 hour), and a description of `This is my dataset` . Instead of using the `--dataset` flag, the command uses the `-d` shortcut. If you omit `-d` and `--dataset` , the command defaults to creating a dataset.
 
-``` notranslate
-bq --location=US mk -d \
-    --default_table_expiration 3600 \
-    --description "This is my dataset." \
-    mydataset
-```
+    bq --location=US mk -d \
+        --default_table_expiration 3600 \
+        --description "This is my dataset." \
+        mydataset
 
 To confirm that the dataset was created, enter the `bq ls` command. Also, you can create a table when you create a new dataset using the following format: ` bq mk -t dataset . table  ` . For more information about creating tables, see [Creating a table](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
 
@@ -228,7 +222,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a dataset named `mydataset` :
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -256,7 +250,7 @@ The following example creates a dataset named `mydataset` , then uses the [`goog
 
 > **Note:** Don't use this approach if you want to use authorized objects, such as [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , with this dataset. In that case, use the `google_bigquery_dataset_access` resource. For examples, see [`google_bigquery_dataset_access`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset_access) .
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -311,7 +305,7 @@ resource "google_bigquery_dataset_iam_policy" "default" {
 
 The following example creates a dataset named `mydataset` , and also uses the [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a Cloud Key Management Service key for the dataset. You must [enable the Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&redirect=https://console.cloud.google.com) before running this example.
 
-``` lang-terraform
+```terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days

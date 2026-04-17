@@ -40,34 +40,30 @@ Consider the case where the table `dataset1.table1` contains rows belonging to d
 
 You can create and populate the example table by using the following query:
 
-``` notranslate
-CREATE TABLE IF NOT EXISTS
-  dataset1.table1 (partner STRING,
-    contact STRING,
-    country STRING,
-    region STRING);
-INSERT INTO
-  dataset1.table1 (partner,
-    contact,
-    country,
-    region)
-VALUES
-  ('Example Customers Corp', 'alice@examplecustomers.com', 'Japan', 'APAC'),
-  ('Example Enterprise Group', 'bob@exampleenterprisegroup.com', 'Singapore', 'APAC'),
-  ('Example HighTouch Co.', 'carrie@examplehightouch.com', 'USA', 'US'),
-  ('Example Buyers Inc.', 'david@examplebuyersinc.com', 'USA', 'US');
-```
+    CREATE TABLE IF NOT EXISTS
+      dataset1.table1 (partner STRING,
+        contact STRING,
+        country STRING,
+        region STRING);
+    INSERT INTO
+      dataset1.table1 (partner,
+        contact,
+        country,
+        region)
+    VALUES
+      ('Example Customers Corp', 'alice@examplecustomers.com', 'Japan', 'APAC'),
+      ('Example Enterprise Group', 'bob@exampleenterprisegroup.com', 'Singapore', 'APAC'),
+      ('Example HighTouch Co.', 'carrie@examplehightouch.com', 'USA', 'US'),
+      ('Example Buyers Inc.', 'david@examplebuyersinc.com', 'USA', 'US');
 
 Row-level security lets a data owner or administrator implement policies. The following statement implements a policy that restricts users in the APAC mailing group to see only partners from the APAC region:
 
-``` notranslate
-CREATE ROW ACCESS POLICY
-  apac_filter
-ON
-  dataset1.table1 GRANT TO ("group:sales-apac@example.com")
-FILTER USING
-  (region="APAC" );
-```
+    CREATE ROW ACCESS POLICY
+      apac_filter
+    ON
+      dataset1.table1 GRANT TO ("group:sales-apac@example.com")
+    FILTER USING
+      (region="APAC" );
 
 The resulting behavior is that users in the `sales-apac@example.com` group can view only rows where the value for `region` is `APAC` .
 
@@ -75,15 +71,13 @@ The resulting behavior is that users in the `sales-apac@example.com` group can v
 
 The following statement implements a policy that restricts both individuals and groups to see only partners from the US region:
 
-``` notranslate
-CREATE ROW ACCESS POLICY
-  us_filter
-ON
-  dataset1.table1 GRANT TO ("group:sales-us@example.com",
-"user:jon@example.com")
-FILTER USING
-  (region="US");
-```
+    CREATE ROW ACCESS POLICY
+      us_filter
+    ON
+      dataset1.table1 GRANT TO ("group:sales-us@example.com",
+    "user:jon@example.com")
+    FILTER USING
+      (region="US");
 
 The resulting behavior is that users in the group `sales-us@example.com` and the user `jon@example.com` can view only rows where the value for `region` is `US` .
 
@@ -97,34 +91,30 @@ Now, consider a different use case, where you have a table that contains salary 
 
 You can create and populate the example table by using the following query:
 
-``` notranslate
-CREATE OR REPLACE TABLE
-  dataset1.table1 (name STRING,
-    department STRING,
-    salary INT64,
-    email STRING);
-INSERT INTO
-  dataset1.table1 ( name,
-    department,
-    salary,
-    email)
-VALUES
-  ('Jim D', 'HR', 100000, 'jim@example.com'),
-  ('Anna K', 'Finance', 100000, 'anna@example.com'),
-  ('Bruce L', 'Engineering', 100000, 'bruce@example.com'),
-  ('Carrie F', 'Business', 100000, 'carrie@example.com');
-```
+    CREATE OR REPLACE TABLE
+      dataset1.table1 (name STRING,
+        department STRING,
+        salary INT64,
+        email STRING);
+    INSERT INTO
+      dataset1.table1 ( name,
+        department,
+        salary,
+        email)
+    VALUES
+      ('Jim D', 'HR', 100000, 'jim@example.com'),
+      ('Anna K', 'Finance', 100000, 'anna@example.com'),
+      ('Bruce L', 'Engineering', 100000, 'bruce@example.com'),
+      ('Carrie F', 'Business', 100000, 'carrie@example.com');
 
 The row access policy in the following statement restricts querying to members of the company domain. In addition, the use of the `SESSION_USER()` function restricts access only to rows that belong to the user running the query, based on their user email address.
 
-``` notranslate
-CREATE ROW ACCESS POLICY
-  salary_personal
-ON
-  dataset1.table1 GRANT TO ("domain:example.com")
-  FILTER USING
-  (Email=SESSION_USER());
-```
+    CREATE ROW ACCESS POLICY
+      salary_personal
+    ON
+      dataset1.table1 GRANT TO ("domain:example.com")
+      FILTER USING
+      (Email=SESSION_USER());
 
 The following image demonstrates how the row access policy restricts the table containing salary information. In this example, the user is named Jim, with the email address `jim@example.com` .
 

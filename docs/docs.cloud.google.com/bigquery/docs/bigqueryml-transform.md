@@ -55,30 +55,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create the model
 
@@ -105,27 +99,25 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.penguin_transform`
-      TRANSFORM(
-        body_mass_g,
-        culmen_depth_mm,
-        flipper_length_mm,
-        ML.QUANTILE_BUCKETIZE(culmen_length_mm, 10) OVER () AS bucketized_culmen_length,
-        CAST(culmen_length_mm AS string) AS culmen_length_mm,
-        ML.FEATURE_CROSS(STRUCT(species, sex)) AS species_sex)
-      OPTIONS (
-        model_type = 'linear_reg',
-        input_label_cols = ['body_mass_g'])
-    AS
-    SELECT
-      *
-    FROM
-      `bigquery-public-data.ml_datasets.penguins`
-    WHERE
-      body_mass_g IS NOT NULL
-      AND RAND() < 0.2;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.penguin_transform`
+          TRANSFORM(
+            body_mass_g,
+            culmen_depth_mm,
+            flipper_length_mm,
+            ML.QUANTILE_BUCKETIZE(culmen_length_mm, 10) OVER () AS bucketized_culmen_length,
+            CAST(culmen_length_mm AS string) AS culmen_length_mm,
+            ML.FEATURE_CROSS(STRUCT(species, sex)) AS species_sex)
+          OPTIONS (
+            model_type = 'linear_reg',
+            input_label_cols = ['body_mass_g'])
+        AS
+        SELECT
+          *
+        FROM
+          `bigquery-public-data.ml_datasets.penguins`
+        WHERE
+          body_mass_g IS NOT NULL
+          AND RAND() < 0.2;
     
     The query takes about 15 minutes to complete, after which the `penguin_transform` model appears in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -141,21 +133,19 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.EVALUATE(
-        MODEL `bqml_tutorial.penguin_transform`,
-        (
-          SELECT
-            *
-          FROM
-            `bigquery-public-data.ml_datasets.penguins`
-          WHERE
-            body_mass_g IS NOT NULL
-        ));
-    ```
+        SELECT
+          *
+        FROM
+          ML.EVALUATE(
+            MODEL `bqml_tutorial.penguin_transform`,
+            (
+              SELECT
+                *
+              FROM
+                `bigquery-public-data.ml_datasets.penguins`
+              WHERE
+                body_mass_g IS NOT NULL
+            ));
     
     The results should look similar to the following:
     
@@ -185,21 +175,19 @@ Follow these steps to get predictions from the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      predicted_body_mass_g
-    FROM
-      ML.PREDICT(
-        MODEL `bqml_tutorial.penguin_transform`,
-        (
-          SELECT
-            *
-          FROM
-            `bigquery-public-data.ml_datasets.penguins`
-          WHERE
-            sex = 'MALE'
-        ));
-    ```
+        SELECT
+          predicted_body_mass_g
+        FROM
+          ML.PREDICT(
+            MODEL `bqml_tutorial.penguin_transform`,
+            (
+              SELECT
+                *
+              FROM
+                `bigquery-public-data.ml_datasets.penguins`
+              WHERE
+                sex = 'MALE'
+            ));
     
     The results should look similar to the following:
     

@@ -18,21 +18,17 @@ The following examples show you how to set and remove the `enable_fine_grained_d
 
 To configure organization settings, use the [`ALTER ORGANIZATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) . The following example sets `enable_fine_grained_dataset_acls_option` to `TRUE` at the organization level:
 
-``` notranslate
-ALTER ORGANIZATION
-SET OPTIONS (
-  `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
-```
+    ALTER ORGANIZATION
+    SET OPTIONS (
+      `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
 
 Replace REGION with the [region](https://docs.cloud.google.com/bigquery/docs/locations#regions) associated with your organization—for example, `us` or `europe-west6` .
 
 The following example clears the organization-level `enable_fine_grained_dataset_acls_option` setting:
 
-``` notranslate
-ALTER ORGANIZATION
-SET OPTIONS (
-  `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
-```
+    ALTER ORGANIZATION
+    SET OPTIONS (
+      `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
 
 #### Configure project settings
 
@@ -40,21 +36,17 @@ To configure project settings, use the [`ALTER PROJECT SET OPTIONS` DDL statemen
 
 The following example sets `enable_fine_grained_dataset_acls_option` to `TRUE` .
 
-``` notranslate
-ALTER PROJECT PROJECT_ID
-SET OPTIONS (
-  `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
-```
+    ALTER PROJECT PROJECT_ID
+    SET OPTIONS (
+      `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
 
 Replace PROJECT\_ID with your project ID.
 
 The following example clears the project-level `enable_fine_grained_dataset_acls_option` setting:
 
-``` notranslate
-ALTER PROJECT PROJECT_ID
-SET OPTIONS (
-  `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
-```
+    ALTER PROJECT PROJECT_ID
+    SET OPTIONS (
+      `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
 
 ## Changes to custom roles
 
@@ -165,9 +157,7 @@ If you don't opt into early enforcement, or if you opt out after opting in, you 
 
 The following example sends a `GET` request with the `dataset_view` parameter set to `METADATA` :
 
-``` notranslate
-GET https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?datasetView=METADATA&key=YOUR_API_KEY HTTP/1.1
-```
+    GET https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?datasetView=METADATA&key=YOUR_API_KEY HTTP/1.1
 
 Replace the following:
 
@@ -239,9 +229,7 @@ If you don't opt into early enforcement, or if you opt out after opting in, BigQ
 
 The following example sends a `PUT` request with the `update_mode` parameter set to `METADATA` :
 
-``` notranslate
-PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
-```
+    PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
 
 Replace the following:
 
@@ -312,9 +300,7 @@ If you don't opt into early enforcement, or if you opt out after opting in, BigQ
 
 The following example sends a `PUT` request with the `update_mode` parameter set to `METADATA` :
 
-``` notranslate
-PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
-```
+    PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
 
 Replace the following:
 

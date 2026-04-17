@@ -11,7 +11,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.MIN_MAX_SCALER(numerical_expression) OVER()
 ```
 
@@ -29,16 +29,14 @@ ML.MIN_MAX_SCALER(numerical_expression) OVER()
 
 The following example scales a set of numerical expressions to values between `0` and `1` :
 
-``` notranslate
-SELECT
-  f, ML.MIN_MAX_SCALER(f) OVER() AS output
-FROM
-  UNNEST([1,2,3,4,5]) AS f;
-```
+    SELECT
+      f, ML.MIN_MAX_SCALER(f) OVER() AS output
+    FROM
+      UNNEST([1,2,3,4,5]) AS f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +---+--------+
 | f | output |
 +---+--------+

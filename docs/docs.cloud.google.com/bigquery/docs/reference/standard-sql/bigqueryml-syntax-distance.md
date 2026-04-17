@@ -6,7 +6,7 @@ This document describes the `ML.DISTANCE` scalar function, which lets you comput
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.DISTANCE(vector1, vector2 [, type])
 ```
 
@@ -48,26 +48,20 @@ Get the Euclidean distance for two tensors of `ARRAY<FLOAT64>` values:
 
 1.  Create the table `t1` :
     
-    ``` notranslate
-    CREATE TABLE mydataset.t1
-    (
-    v1 ARRAY<FLOAT64>,
-    v2 ARRAY<FLOAT64>
-    )
-    ```
+        CREATE TABLE mydataset.t1
+        (
+        v1 ARRAY<FLOAT64>,
+        v2 ARRAY<FLOAT64>
+        )
 
 2.  Populate `t1` :
     
-    ``` notranslate
-    INSERT mydataset.t1 (v1,v2)
-    VALUES ([4.1,0.5,1.0], [3.0,0.0,2.5])
-    ```
+        INSERT mydataset.t1 (v1,v2)
+        VALUES ([4.1,0.5,1.0], [3.0,0.0,2.5])
 
 3.  Calculate the Euclidean norm for `v1` and `v2` :
     
-    ``` notranslate
-    SELECT v1, v2, ML.DISTANCE(v1, v2, 'EUCLIDEAN') AS output FROM mydataset.t1
-    ```
+        SELECT v1, v2, ML.DISTANCE(v1, v2, 'EUCLIDEAN') AS output FROM mydataset.t1
     
     This query produces the following output:
     

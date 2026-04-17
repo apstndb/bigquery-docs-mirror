@@ -82,37 +82,29 @@ Create a BigQuery dataset:
 
 1.  Create the `patents` table that contains patents embeddings, based on a subset of the [Google Patents](https://console.cloud.google.com/marketplace/product/google_patents_public_datasets/google-patents-public-data) public dataset:
     
-    ``` notranslate
-    CREATE TABLE vector_search.patents AS
-    SELECT * FROM `patents-public-data.google_patents_research.publications`
-    WHERE ARRAY_LENGTH(embedding_v1) > 0
-     AND publication_number NOT IN ('KR-20180122872-A')
-    LIMIT 1000000;
-    ```
+        CREATE TABLE vector_search.patents AS
+        SELECT * FROM `patents-public-data.google_patents_research.publications`
+        WHERE ARRAY_LENGTH(embedding_v1) > 0
+         AND publication_number NOT IN ('KR-20180122872-A')
+        LIMIT 1000000;
 
 2.  Create the `patents2` table that contains a patent embedding to find nearest neighbors for:
     
-    ``` notranslate
-    CREATE TABLE vector_search.patents2 AS
-    SELECT * FROM `patents-public-data.google_patents_research.publications`
-    WHERE publication_number = 'KR-20180122872-A';
-    ```
+        CREATE TABLE vector_search.patents2 AS
+        SELECT * FROM `patents-public-data.google_patents_research.publications`
+        WHERE publication_number = 'KR-20180122872-A';
 
 ## Create a vector index
 
 1.  Create the `my_index` vector index on the `embeddings_v1` column of the `patents` table:
     
-    ``` notranslate
-    CREATE OR REPLACE VECTOR INDEX my_index ON vector_search.patents(embedding_v1)
-    STORING(publication_number, title)
-    OPTIONS(distance_type='COSINE', index_type='IVF');
-    ```
+        CREATE OR REPLACE VECTOR INDEX my_index ON vector_search.patents(embedding_v1)
+        STORING(publication_number, title)
+        OPTIONS(distance_type='COSINE', index_type='IVF');
 
 2.  Wait several minutes for the vector index to be created, then run the following query and confirm that the `coverage_percentage` value is `100` :
     
-    ``` notranslate
-    SELECT * FROM vector_search.INFORMATION_SCHEMA.VECTOR_INDEXES;
-    ```
+        SELECT * FROM vector_search.INFORMATION_SCHEMA.VECTOR_INDEXES;
 
 ## Use the `VECTOR_SEARCH` function with an index
 
@@ -122,25 +114,23 @@ After the vector index is created and populated, use the `VECTOR_SEARCH` functio
 
 Use the `VECTOR_SEARCH` function with an index:
 
-``` notranslate
-SELECT query.publication_number AS query_publication_number,
-  query.title AS query_title,
-  base.publication_number AS base_publication_number,
-  base.title AS base_title,
-  distance
-FROM
-  VECTOR_SEARCH(
-    TABLE vector_search.patents,
-    'embedding_v1',
-    TABLE vector_search.patents2,
-    top_k => 5,
-    distance_type => 'COSINE',
-    options => '{"fraction_lists_to_search": 0.005}');
-```
+    SELECT query.publication_number AS query_publication_number,
+      query.title AS query_title,
+      base.publication_number AS base_publication_number,
+      base.title AS base_title,
+      distance
+    FROM
+      VECTOR_SEARCH(
+        TABLE vector_search.patents,
+        'embedding_v1',
+        TABLE vector_search.patents2,
+        top_k => 5,
+        distance_type => 'COSINE',
+        options => '{"fraction_lists_to_search": 0.005}');
 
 The results look similar to the following:
 
-``` console
+```console
 +--------------------------+-------------------------------------------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------------+---------------------+
 | query_publication_number |                         query_title                         | base_publication_number |                                                        base_title                                                        |      distance       |
 +--------------------------+-------------------------------------------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------------+---------------------+
@@ -156,25 +146,23 @@ The results look similar to the following:
 
 Use the `VECTOR_SEARCH` function to find the nearest neighbor for the embedding in the `embedding_v1` column in the `patents2` table. This query doesn't use the vector index in the search, so `VECTOR_SEARCH` finds the embedding's exact nearest neighbor.
 
-``` notranslate
-SELECT query.publication_number AS query_publication_number,
-  query.title AS query_title,
-  base.publication_number AS base_publication_number,
-  base.title AS base_title,
-  distance
-FROM
-  VECTOR_SEARCH(
-    TABLE vector_search.patents,
-    'embedding_v1',
-    TABLE vector_search.patents2,
-    top_k => 5,
-    distance_type => 'COSINE',
-    options => '{"use_brute_force":true}');
-```
+    SELECT query.publication_number AS query_publication_number,
+      query.title AS query_title,
+      base.publication_number AS base_publication_number,
+      base.title AS base_title,
+      distance
+    FROM
+      VECTOR_SEARCH(
+        TABLE vector_search.patents,
+        'embedding_v1',
+        TABLE vector_search.patents2,
+        top_k => 5,
+        distance_type => 'COSINE',
+        options => '{"use_brute_force":true}');
 
 The results look similar to the following:
 
-``` console
+```console
 +--------------------------+-------------------------------------------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------------+---------------------+
 | query_publication_number |                         query_title                         | base_publication_number |                                                        base_title                                                        |      distance       |
 +--------------------------+-------------------------------------------------------------+-------------------------+--------------------------------------------------------------------------------------------------------------------------+---------------------+
@@ -190,39 +178,37 @@ The results look similar to the following:
 
 When you perform a vector search with an index, it returns approximate results, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) . You can compute recall by comparing the results returned by vector search with an index and by vector search with brute force. In this dataset, the `publication_number` value uniquely identifies a patent, so it is used for comparison.
 
-``` notranslate
-WITH approx_results AS (
-  SELECT query.publication_number AS query_publication_number,
-    base.publication_number AS base_publication_number
-  FROM
-    VECTOR_SEARCH(
-      TABLE vector_search.patents,
-      'embedding_v1',
-      TABLE vector_search.patents2,
-      top_k => 5,
-      distance_type => 'COSINE',
-      options => '{"fraction_lists_to_search": 0.005}')
-),
-  exact_results AS (
-  SELECT query.publication_number AS query_publication_number,
-    base.publication_number AS base_publication_number
-  FROM
-    VECTOR_SEARCH(
-      TABLE vector_search.patents,
-      'embedding_v1',
-      TABLE vector_search.patents2,
-      top_k => 5,
-      distance_type => 'COSINE',
-      options => '{"use_brute_force":true}')
-)
-
-SELECT
-  a.query_publication_number,
-  SUM(CASE WHEN a.base_publication_number = e.base_publication_number THEN 1 ELSE 0 END) / 5 AS recall
-FROM exact_results e LEFT JOIN approx_results a
-  ON e.query_publication_number = a.query_publication_number
-GROUP BY a.query_publication_number
-```
+    WITH approx_results AS (
+      SELECT query.publication_number AS query_publication_number,
+        base.publication_number AS base_publication_number
+      FROM
+        VECTOR_SEARCH(
+          TABLE vector_search.patents,
+          'embedding_v1',
+          TABLE vector_search.patents2,
+          top_k => 5,
+          distance_type => 'COSINE',
+          options => '{"fraction_lists_to_search": 0.005}')
+    ),
+      exact_results AS (
+      SELECT query.publication_number AS query_publication_number,
+        base.publication_number AS base_publication_number
+      FROM
+        VECTOR_SEARCH(
+          TABLE vector_search.patents,
+          'embedding_v1',
+          TABLE vector_search.patents2,
+          top_k => 5,
+          distance_type => 'COSINE',
+          options => '{"use_brute_force":true}')
+    )
+    
+    SELECT
+      a.query_publication_number,
+      SUM(CASE WHEN a.base_publication_number = e.base_publication_number THEN 1 ELSE 0 END) / 5 AS recall
+    FROM exact_results e LEFT JOIN approx_results a
+      ON e.query_publication_number = a.query_publication_number
+    GROUP BY a.query_publication_number
 
 If the recall is lower than you would like, you can increase the `fraction_lists_to_search` value, with the downside of potentially higher latency and resource usage. To tune your vector search, you can try multiple runs of `VECTOR_SEARCH` with different argument values, save the results to tables, and then compare the results.
 

@@ -74,9 +74,7 @@ Use the [`DROP SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigq
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    DROP SNAPSHOT TABLE PROJECT_ID.DATASET_NAME.SNAPSHOT_NAME;
-    ```
+        DROP SNAPSHOT TABLE PROJECT_ID.DATASET_NAME.SNAPSHOT_NAME;
     
     Replace the following:
     
@@ -92,10 +90,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq rm \
-PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
-```
+    bq rm \
+    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 

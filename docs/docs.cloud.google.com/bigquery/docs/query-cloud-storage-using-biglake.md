@@ -46,15 +46,13 @@ Spark-BigQuery connector versions are listed in the GitHub [GoogleCloudDataproc/
 
 Create a single node cluster using the initialization action for the Spark-BigQuery connector:
 
-``` notranslate
-gcloud dataproc clusters create biglake-demo-cluster \
-    --optional-components=ZEPPELIN \
-    --region=REGION \
-    --enable-component-gateway \
-    --single-node \
-    --initialization-actions gs://goog-dataproc-initialization-actions-REGION/connectors/connectors.sh \
-    --metadata spark-bigquery-connector-url= gs://spark-lib/bigquery/spark-bigquery-with-dependencies_SCALA_VERSION-CONNECTOR_VERSION.jar
-```
+    gcloud dataproc clusters create biglake-demo-cluster \
+        --optional-components=ZEPPELIN \
+        --region=REGION \
+        --enable-component-gateway \
+        --single-node \
+        --initialization-actions gs://goog-dataproc-initialization-actions-REGION/connectors/connectors.sh \
+        --metadata spark-bigquery-connector-url= gs://spark-lib/bigquery/spark-bigquery-with-dependencies_SCALA_VERSION-CONNECTOR_VERSION.jar
 
 ### Apache Hive
 
@@ -66,13 +64,11 @@ Hive-BigQuery connector versions are listed in the GitHub [GoogleCloudDataproc/h
 
 Create a single node cluster using the initialization action for the Hive-BigQuery connector:
 
-``` notranslate
-gcloud dataproc clusters create biglake-hive-demo-cluster \
-    --region=REGION \
-    --single-node \
-    --initialization-actions gs://goog-dataproc-initialization-actions-REGION/connectors/connectors.sh \
-    --metadata hive-bigquery-connector-url=gs://goog-dataproc-artifacts-REGION/hive-bigquery/hive-bigquery-connector-CONNECTOR_VERSION.jar
-```
+    gcloud dataproc clusters create biglake-hive-demo-cluster \
+        --region=REGION \
+        --single-node \
+        --initialization-actions gs://goog-dataproc-initialization-actions-REGION/connectors/connectors.sh \
+        --metadata hive-bigquery-connector-url=gs://goog-dataproc-artifacts-REGION/hive-bigquery/hive-bigquery-connector-CONNECTOR_VERSION.jar
 
 For more information about the Hive-BigQuery connector, see [Use the Hive-BigQuery Connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/hive-bigquery) .
 
@@ -106,11 +102,9 @@ Use the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cl
 
 To query a temporary table linked to your external data source using a table definition file, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=TABLE::DEFINITION_FILE \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=TABLE::DEFINITION_FILE \
+    'QUERY'
 
 Replace the following:
 
@@ -131,11 +125,9 @@ For example, the following command creates and queries a temporary table named `
 
 To query a temporary table linked to your external data source using an inline schema definition, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=TABLE::SCHEMA@SOURCE_FORMAT=BUCKET_PATH@projects/PROJECT_ID/locations/REGION/connections/CONNECTION_ID \
-'query'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=TABLE::SCHEMA@SOURCE_FORMAT=BUCKET_PATH@projects/PROJECT_ID/locations/REGION/connections/CONNECTION_ID \
+    'query'
 
 Replace the following:
 
@@ -183,11 +175,9 @@ For example, the following command creates and queries a temporary table named `
 
 To query a temporary table linked to your external data source using a JSON schema file, enter the following command.
 
-``` notranslate
-bq --location=LOCATION query \
---external_table_definition=SCHEMA_FILE@SOURCE_FORMAT=BUCKET_PATH@projects/PROJECT_ID/locations/REGION/connections/CONNECTION_ID \
-'QUERY'
-```
+    bq --location=LOCATION query \
+    --external_table_definition=SCHEMA_FILE@SOURCE_FORMAT=BUCKET_PATH@projects/PROJECT_ID/locations/REGION/connections/CONNECTION_ID \
+    'QUERY'
 
 Replace the following:
 
@@ -223,7 +213,7 @@ Replace the following:
 
 For example, the following command creates and queries a temporary table named `sales` linked to a CSV file stored in Cloud Storage using the `/tmp/sales_schema.json` schema file.
 
-``` notranslate
+``` 
   bq query \
   --external_table_definition=sales::/tmp/sales_schema.json@CSV=gs://mybucket/sales.csv@us.myconnection \
   'SELECT

@@ -13,7 +13,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.ONE_HOT_ENCODER(string_expression [, drop] [, top_k] [, frequency_threshold]) OVER()
 ```
 
@@ -36,15 +36,13 @@ ML.ONE_HOT_ENCODER(string_expression [, drop] [, top_k] [, frequency_threshold])
 
 The following example performs dummy encoding on a set of string expressions. It limits the encoding vocabulary to the ten categories that occur the most frequently in the data and that also occur zero or more times.
 
-``` notranslate
-SELECT f, ML.ONE_HOT_ENCODER(f, 'most_frequent', 10, 0) OVER () AS output
-FROM UNNEST([NULL, 'a', 'b', 'b', 'c', 'c', 'c', 'd', 'd']) AS f
-ORDER BY f;
-```
+    SELECT f, ML.ONE_HOT_ENCODER(f, 'most_frequent', 10, 0) OVER () AS output
+    FROM UNNEST([NULL, 'a', 'b', 'b', 'c', 'c', 'c', 'd', 'd']) AS f
+    ORDER BY f;
 
 The output looks similar to the following:
 
-``` console
+```console
 +------+-----------------------------+
 |  f   | output.index | output.value |
 +------+--------------+--------------+

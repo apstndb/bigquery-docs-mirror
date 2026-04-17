@@ -80,73 +80,59 @@ You can authorize a dataset's current and future views to access another dataset
 
 2.  Write the existing metadata (including the access control list) for the dataset you want to share into a JSON file by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
-    ``` notranslate
-    bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
-    ```
+        bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
 
 3.  Use a text editor to add the dataset that you want to authorize into the existing `access` section of the JSON file that was created at FILE\_PATH .
     
     For example:
     
-    ``` notranslate
-    "access": [
-     ...
-     {
-       "dataset": {
-         "dataset": {
-           "project_id": "PROJECT",
-           "dataset_id": "AUTHORIZED_DATASET"
-         },
-         "target_types": "VIEWS"
-       }
-     }
-    ]
-    ```
+        "access": [
+         ...
+         {
+           "dataset": {
+             "dataset": {
+               "project_id": "PROJECT",
+               "dataset_id": "AUTHORIZED_DATASET"
+             },
+             "target_types": "VIEWS"
+           }
+         }
+        ]
 
 4.  Update the shared dataset by using the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command. For example:
     
-    ``` notranslate
-    bq update --source FILE_PATH PROJECT:SHARED_DATASET
-    ```
+        bq update --source FILE_PATH PROJECT:SHARED_DATASET
 
 5.  To verify that the authorized dataset has been added, enter the `bq show` command again. For example:
     
-    ``` notranslate
-    bq show --format=prettyjson PROJECT:SHARED_DATASET
-    ```
+        bq show --format=prettyjson PROJECT:SHARED_DATASET
 
 ### API
 
 1.  Get the current metadata for the dataset you want to share by calling the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method, as follows:
     
-    ``` notranslate
-    GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
-    ```
+        GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     
     The response body returns a [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource that contains JSON metadata for the dataset.
 
 2.  Add the dataset that you want authorize into the `access` section of the JSON metadata that was returned in the `Dataset` resource as follows:
     
-    ``` notranslate
-    "access": [
-     ...
-     {
-       "dataset": {
-         "dataset": {
-           "project_id": "PROJECT",
-           "dataset_id": "AUTHORIZED_DATASET"
-         },
-         "target_types": "VIEWS"
-       }
-     }
-    ]
-    ```
+        "access": [
+         ...
+         {
+           "dataset": {
+             "dataset": {
+               "project_id": "PROJECT",
+               "dataset_id": "AUTHORIZED_DATASET"
+             },
+             "target_types": "VIEWS"
+           }
+         }
+        ]
 
 3.  Use the [`datasets.update`](https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update) method to update the dataset with the added authorization:
     
-    ``` notranslate
-    PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
-    ```
+        PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     
     Include the updated `Dataset` resource in the request body.
 
@@ -185,13 +171,11 @@ To revoke the access granted to the views in an authorized dataset, remove the a
 
 2.  Write the existing metadata (including the access control list) for the shared dataset into a JSON file by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
-    ``` notranslate
-    bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
-    ```
+        bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
 
 3.  Use a text editor to remove the authorized dataset from the `access` section of the JSON file that was created at FILE\_PATH , as follows:
     
-    ``` notranslate
+    ``` 
       {
         "dataset": {
           "dataset": {
@@ -205,29 +189,23 @@ To revoke the access granted to the views in an authorized dataset, remove the a
 
 4.  Update the shared dataset by using the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command. For example:
     
-    ``` notranslate
-    bq update --source FILE_PATH PROJECT:SHARED_DATASET
-    ```
+        bq update --source FILE_PATH PROJECT:SHARED_DATASET
 
 5.  To verify that the authorized dataset has been removed, enter the `bq show` command again. For example:
     
-    ``` notranslate
-    bq show --format=prettyjson PROJECT:SHARED_DATASET
-    ```
+        bq show --format=prettyjson PROJECT:SHARED_DATASET
 
 ### API
 
 1.  Get the current metadata for the shared dataset by calling the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method, as follows:
     
-    ``` notranslate
-    GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
-    ```
+        GET https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     
     The response body returns a [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource that contains JSON metadata for the dataset.
 
 2.  Remove the authorized dataset from the `access` section of the JSON that was returned in the `Dataset` resource, for example:
     
-    ``` notranslate
+    ``` 
      {
        "dataset": {
          "dataset": {
@@ -241,9 +219,7 @@ To revoke the access granted to the views in an authorized dataset, remove the a
 
 3.  Use the [`datasets.update`](https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update) method to update the dataset with the removed authorization:
     
-    ``` notranslate
-    PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
-    ```
+        PUT https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT/datasets/SHARED_DATASET
     
     Include the updated `Dataset` resource in the request body.
 

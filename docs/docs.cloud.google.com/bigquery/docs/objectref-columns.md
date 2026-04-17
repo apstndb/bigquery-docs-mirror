@@ -34,13 +34,11 @@ Create and populate an `ObjectRef` column based on output from the `OBJ.MAKE_REF
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
-    AS
-    SELECT TABLE_NAME.*,
-      OBJ.MAKE_REF(uri, 'CONNECTION_ID') AS objectrefcolumn
-    FROM DATASET_ID.TABLE_NAME;
-    ```
+        CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
+        AS
+        SELECT TABLE_NAME.*,
+          OBJ.MAKE_REF(uri, 'CONNECTION_ID') AS objectrefcolumn
+        FROM DATASET_ID.TABLE_NAME;
     
     Replace the following:
     
@@ -68,14 +66,12 @@ Create and populate an `ObjectRef` column based on data from an object table `re
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
-    AS
-    SELECT TABLE_NAME.*, OBJECT_TABLE.ref AS objectrefcolumn
-    FROM DATASET_ID.TABLE_NAME
-    INNER JOIN DATASET_ID.OBJECT_TABLE
-    ON OBJECT_TABLE.uri = TABLE_NAME.uri;
-    ```
+        CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
+        AS
+        SELECT TABLE_NAME.*, OBJECT_TABLE.ref AS objectrefcolumn
+        FROM DATASET_ID.TABLE_NAME
+        INNER JOIN DATASET_ID.OBJECT_TABLE
+        ON OBJECT_TABLE.uri = TABLE_NAME.uri;
     
     Replace the following:
     
@@ -108,11 +104,9 @@ Update an `ObjectRef` column by using data from an object table `ref` column:
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
-    SET objectrefcolumn = (SELECT ref FROM DATASET_ID.OBJECT_TABLE WHERE OBJECT_TABLE.uri = TABLE_NAME.uri)
-    WHERE uri != "";
-    ```
+        UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
+        SET objectrefcolumn = (SELECT ref FROM DATASET_ID.OBJECT_TABLE WHERE OBJECT_TABLE.uri = TABLE_NAME.uri)
+        WHERE uri != "";
     
     Replace the following:
     
@@ -133,11 +127,9 @@ Update an `ObjectRef` column by using output from the `OBJ.FETCH_METADATA` and `
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
-    SET objectrefcolumn = (SELECT OBJ.MAKE_REF(uri, 'CONNECTION_ID'))
-    WHERE uri != "";
-    ```
+        UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
+        SET objectrefcolumn = (SELECT OBJ.MAKE_REF(uri, 'CONNECTION_ID'))
+        WHERE uri != "";
     
     Replace the following:
     

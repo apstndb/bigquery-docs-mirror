@@ -172,24 +172,22 @@ The following example shows how to return storage information for tables in a sp
 
 The following example sums the storage usage by day for projects in a specified region.
 
-``` notranslate
-SELECT
-  usage_date,
-  project_id,
-  SUM(billable_total_logical_usage) AS billable_total_logical_usage,
-  SUM(billable_active_logical_usage) AS billable_active_logical_usage,
-  SUM(billable_long_term_logical_usage) AS billable_long_term_logical_usage,
-  SUM(billable_total_physical_usage) AS billable_total_physical_usage,
-  SUM(billable_active_physical_usage) AS billable_active_physical_usage,
-  SUM(billable_long_term_physical_usage) AS billable_long_term_physical_usage
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
-GROUP BY
-  1,
-  2
-ORDER BY
-  usage_date;
-```
+    SELECT
+      usage_date,
+      project_id,
+      SUM(billable_total_logical_usage) AS billable_total_logical_usage,
+      SUM(billable_active_logical_usage) AS billable_active_logical_usage,
+      SUM(billable_long_term_logical_usage) AS billable_long_term_logical_usage,
+      SUM(billable_total_physical_usage) AS billable_total_physical_usage,
+      SUM(billable_active_physical_usage) AS billable_active_physical_usage,
+      SUM(billable_long_term_physical_usage) AS billable_long_term_physical_usage
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
+    GROUP BY
+      1,
+      2
+    ORDER BY
+      usage_date;
 
 The result is similar to the following:
 
@@ -209,21 +207,19 @@ The result is similar to the following:
 
 The following example shows the storage usage for a specified day for tables in a dataset that uses logical storage.
 
-``` notranslate
-SELECT
-  usage_date,
-  table_schema,
-  table_name,
-  billable_total_logical_usage
-FROM
-  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
-WHERE
-  project_id = 'PROJECT_ID'
-  AND table_schema = 'DATASET_NAME'
-  AND usage_date = 'USAGE_DATE'
-ORDER BY
-  billable_total_logical_usage DESC;
-```
+    SELECT
+      usage_date,
+      table_schema,
+      table_name,
+      billable_total_logical_usage
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
+    WHERE
+      project_id = 'PROJECT_ID'
+      AND table_schema = 'DATASET_NAME'
+      AND usage_date = 'USAGE_DATE'
+    ORDER BY
+      billable_total_logical_usage DESC;
 
 The result is similar to the following:
 
@@ -243,28 +239,26 @@ The result is similar to the following:
 
 The following example shows the storage usage for the most recent usage date for tables in a dataset that uses physical storage.
 
-``` notranslate
-SELECT
-  usage_date,
-  table_schema,
-  table_name,
-  billable_total_physical_usage
-FROM
-  (
     SELECT
-      *,
-      ROW_NUMBER()
-        OVER (PARTITION BY project_id, table_schema, table_name ORDER BY usage_date DESC) AS rank
+      usage_date,
+      table_schema,
+      table_name,
+      billable_total_physical_usage
     FROM
-      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
-  )
-WHERE
-  rank = 1
-  AND project_id = 'PROJECT_ID'
-  AND table_schema ='DATASET_NAME'
-ORDER BY
-  usage_date;
-```
+      (
+        SELECT
+          *,
+          ROW_NUMBER()
+            OVER (PARTITION BY project_id, table_schema, table_name ORDER BY usage_date DESC) AS rank
+        FROM
+          `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
+      )
+    WHERE
+      rank = 1
+      AND project_id = 'PROJECT_ID'
+      AND table_schema ='DATASET_NAME'
+    ORDER BY
+      usage_date;
 
 The result is similar to the following:
 
@@ -284,10 +278,8 @@ The result is similar to the following:
 
 The following example joins the `TABLE_OPTIONS` and `TABLE_STORAGE_USAGE_TIMELINE` views to get storage usage details based on tags.
 
-``` notranslate
-SELECT * FROM region-REGION.INFORMATION_SCHEMA.TABLE_OPTIONS
-    INNER JOIN region-REGION.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
-    USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME)
-    WHERE option_name='tags'
-    AND CONTAINS_SUBSTR(option_value, '(\"tag_namespaced_key\", \"tag_namespaced_value\")')
-```
+    SELECT * FROM region-REGION.INFORMATION_SCHEMA.TABLE_OPTIONS
+        INNER JOIN region-REGION.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
+        USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME)
+        WHERE option_name='tags'
+        AND CONTAINS_SUBSTR(option_value, '(\"tag_namespaced_key\", \"tag_namespaced_value\")')

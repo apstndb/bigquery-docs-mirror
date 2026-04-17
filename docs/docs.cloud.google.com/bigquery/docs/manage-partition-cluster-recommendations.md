@@ -399,9 +399,7 @@ Follow these steps to apply a new clustering specification to unpartitioned or p
 
 2.  To cluster all rows according to the new clustering specification, run the following `UPDATE` statement:
     
-    ``` notranslate
-    UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
-    ```
+        UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
     
     > **Note:** If a new clustering specification is applied to a table that is in long-term storage, then the table reverts to active storage pricing. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
@@ -415,10 +413,8 @@ You can use this method to apply cluster recommendations to both unpartitioned a
 
 2.  In the query editor, create an empty table with the same metadata (including the clustering specifications) of the original table by using the `LIKE` operator:
     
-    ``` notranslate
-    CREATE TABLE DATASET.COPIED_TABLE
-    LIKE DATASET.ORIGINAL_TABLE
-    ```
+        CREATE TABLE DATASET.COPIED_TABLE
+        LIKE DATASET.ORIGINAL_TABLE
     
     Replace the following:
     
@@ -440,14 +436,12 @@ You can use this method to apply cluster recommendations to both unpartitioned a
 
 5.  In the query editor, retrieve the table schema with the partitioning and clustering configuration of the original table, if any partitioning or clustering exists. You can retrieve the schema by viewing the `INFORMATION_SCHEMA.TABLES` view of the original table:
     
-    ``` notranslate
-    SELECT
-      ddl
-    FROM
-      DATASET.INFORMATION_SCHEMA.TABLES
-    WHERE
-      table_name = 'ORIGINAL_TABLE'
-    ```
+        SELECT
+          ddl
+        FROM
+          DATASET.INFORMATION_SCHEMA.TABLES
+        WHERE
+          table_name = 'ORIGINAL_TABLE'
     
     The output is the full data definition language (DDL) statement of ORIGINAL\_TABLE , including the `PARTITION BY` clause. For more information about the arguments in your DDL output, see [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
     
@@ -459,36 +453,30 @@ You can use this method to apply cluster recommendations to both unpartitioned a
     
       - If the original table is non-partitioned or partitioned by a table column, ingest the data from the original table to the copied table:
         
-        ``` notranslate
-        INSERT INTO DATASET.COPIED_TABLE
-        SELECT * FROM DATASET.ORIGINAL_TABLE
-        ```
+            INSERT INTO DATASET.COPIED_TABLE
+            SELECT * FROM DATASET.ORIGINAL_TABLE
     
       - If the original table is partitioned by ingestion time, follow these steps:
         
         1.  Retrieve the list of columns to form the data ingestion expression by using the `INFORMATION_SCHEMA.COLUMNS` view:
             
-            ``` notranslate
-            SELECT
-            ARRAY_TO_STRING((
-            SELECT
-              ARRAY(
-              SELECT
-                column_name
-              FROM
-                DATASET.INFORMATION_SCHEMA.COLUMNS
-              WHERE
-                table_name = 'ORIGINAL_TABLE')), ", ")
-            ```
+                SELECT
+                ARRAY_TO_STRING((
+                SELECT
+                  ARRAY(
+                  SELECT
+                    column_name
+                  FROM
+                    DATASET.INFORMATION_SCHEMA.COLUMNS
+                  WHERE
+                    table_name = 'ORIGINAL_TABLE')), ", ")
             
             The output is a comma-separated list of column names.
         
         2.  Ingest the data from the original table to the copied table:
             
-            ``` notranslate
-            INSERT DATASET.COPIED_TABLE (COLUMN_NAMES, _PARTITIONTIME)
-            SELECT *, _PARTITIONTIME FROM DATASET.ORIGINAL_TABLE
-            ```
+                INSERT DATASET.COPIED_TABLE (COLUMN_NAMES, _PARTITIONTIME)
+                SELECT *, _PARTITIONTIME FROM DATASET.ORIGINAL_TABLE
             
             Replace `  COLUMN_NAMES  ` with the list of columns that was the output in the preceding step, separated by commas—for example, `col1, col2, col3` .
     
@@ -496,19 +484,15 @@ You can use this method to apply cluster recommendations to both unpartitioned a
 
 7.  Rename the original table to a backup table:
     
-    ``` notranslate
-    ALTER TABLE DATASET.ORIGINAL_TABLE
-    RENAME TO BACKUP_TABLE
-    ```
+        ALTER TABLE DATASET.ORIGINAL_TABLE
+        RENAME TO BACKUP_TABLE
     
     Replace `  BACKUP_TABLE  ` with a name for your backup table—for example, `backup_mytable` .
 
 8.  Rename the copied table to the original table:
     
-    ``` notranslate
-    ALTER TABLE DATASET.COPIED_TABLE
-    RENAME TO ORIGINAL_TABLE
-    ```
+        ALTER TABLE DATASET.COPIED_TABLE
+        RENAME TO ORIGINAL_TABLE
     
     Your original table is now clustered according to the cluster recommendation.
 
@@ -524,7 +508,7 @@ If any issues arise, you must manually migrate the affected artifacts to the new
 
 After reviewing the clustered table, you can optionally delete the backup table with the following command:
 
-``` notranslate
+``` 
     DROP TABLE DATASET.BACKUP_TABLE
     
 ```
@@ -547,11 +531,9 @@ The following procedure uses an example recommendation to partition a table by t
 
 1.  Create a copied table using the partition recommendations:
     
-    ``` notranslate
-    CREATE TABLE DATASET.COPIED_TABLE
-    PARTITION BY DATE_TRUNC(PARTITION_COLUMN, DAY)
-    AS SELECT * FROM DATASET.ORIGINAL_TABLE
-    ```
+        CREATE TABLE DATASET.COPIED_TABLE
+        PARTITION BY DATE_TRUNC(PARTITION_COLUMN, DAY)
+        AS SELECT * FROM DATASET.ORIGINAL_TABLE
     
     Replace the following:
     
@@ -563,19 +545,15 @@ The following procedure uses an example recommendation to partition a table by t
 
 2.  Rename the original table to a backup table:
     
-    ``` notranslate
-    ALTER TABLE DATASET.ORIGINAL_TABLE
-    RENAME TO BACKUP_TABLE
-    ```
+        ALTER TABLE DATASET.ORIGINAL_TABLE
+        RENAME TO BACKUP_TABLE
     
     Replace `  BACKUP_TABLE  ` with a name for your backup table—for example, `backup_mytable` .
 
 3.  Rename the copied table to the original table:
     
-    ``` notranslate
-    ALTER TABLE DATASET.COPIED_TABLE
-    RENAME TO ORIGINAL_TABLE
-    ```
+        ALTER TABLE DATASET.COPIED_TABLE
+        RENAME TO ORIGINAL_TABLE
     
     Your original table is now partitioned according to the partition recommendation.
 
@@ -592,7 +570,7 @@ If any issues arise, you must manually migrate the affected artifacts to the new
 
 After reviewing the partitioned table, you can optionally delete the backup table with the following command:
 
-``` notranslate
+``` 
     DROP TABLE DATASET.BACKUP_TABLE
     
 ```
@@ -620,40 +598,38 @@ If you have a specific clustering recommendation that you want to verify, you ca
 
 This query searches your job history for instances where a single job scans the same table across more than 10 distinct execution stages.
 
-``` notranslate
-SELECT
-  job_id,
-  project_id,
-  user_email,
-  table_name,
-  scan_count,
-  total_billed_gb,
-  creation_time
-FROM (
-  SELECT
-    job_id,
-    project_id,
-    user_email,
-    creation_time,
-    total_bytes_billed / (1024*1024*1024) as total_billed_gb,
-    -- Extract the table name from the 'READ' substeps
-    REGEXP_EXTRACT(substep, r'FROM ([^ ]+)') as table_name,
-    COUNT(DISTINCT stage.id) as scan_count
-  FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS,
-  UNNEST(job_stages) as stage,
-  UNNEST(stage.steps) as step,
-  UNNEST(step.substeps) as substep
-  WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 14 DAY)
-    AND step.kind = 'READ'
-    AND substep LIKE 'FROM %'
-    -- Exclude internal intermediate stages
-    AND NOT REGEXP_CONTAINS(substep, r'FROM __stage')
-  GROUP BY 1, 2, 3, 4, 5, 6
-)
-WHERE scan_count > 10 -- Adjust this threshold to find more complex query patterns
-ORDER BY scan_count DESC
-LIMIT 100;
-```
+    SELECT
+      job_id,
+      project_id,
+      user_email,
+      table_name,
+      scan_count,
+      total_billed_gb,
+      creation_time
+    FROM (
+      SELECT
+        job_id,
+        project_id,
+        user_email,
+        creation_time,
+        total_bytes_billed / (1024*1024*1024) as total_billed_gb,
+        -- Extract the table name from the 'READ' substeps
+        REGEXP_EXTRACT(substep, r'FROM ([^ ]+)') as table_name,
+        COUNT(DISTINCT stage.id) as scan_count
+      FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS,
+      UNNEST(job_stages) as stage,
+      UNNEST(stage.steps) as step,
+      UNNEST(step.substeps) as substep
+      WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 14 DAY)
+        AND step.kind = 'READ'
+        AND substep LIKE 'FROM %'
+        -- Exclude internal intermediate stages
+        AND NOT REGEXP_CONTAINS(substep, r'FROM __stage')
+      GROUP BY 1, 2, 3, 4, 5, 6
+    )
+    WHERE scan_count > 10 -- Adjust this threshold to find more complex query patterns
+    ORDER BY scan_count DESC
+    LIMIT 100;
 
 Replace `  REGION_NAME  ` with the region that your project is in.
 

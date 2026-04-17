@@ -9,7 +9,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.FEATURE_CROSS(struct_categorical_features [, degree])
 ```
 
@@ -28,14 +28,12 @@ ML.FEATURE_CROSS(struct_categorical_features [, degree])
 
 The following example crosses three features:
 
-``` notranslate
-SELECT
-  ML.FEATURE_CROSS(STRUCT('a' AS f1, 'b' AS f2, 'c' AS f3)) AS output;
-```
+    SELECT
+      ML.FEATURE_CROSS(STRUCT('a' AS f1, 'b' AS f2, 'c' AS f3)) AS output;
 
 The output looks similar to the following:
 
-``` console
+```console
 +---------------------------------------------+
 |                   output                    |
 +---------------------------------------------+

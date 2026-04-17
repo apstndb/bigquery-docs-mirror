@@ -63,21 +63,19 @@ Replace the following:
 
 The following example displays the user who has made the latest assignment update to a particular assignment within a specified date.
 
-``` notranslate
-SELECT
-  user_email,
-  change_timestamp,
-  reservation_name,
-  assignment_id
-FROM
-  `region-us`.INFORMATION_SCHEMA.ASSIGNMENT_CHANGES
-WHERE
-  change_timestamp BETWEEN '2021-09-30' AND '2021-10-01'
-  AND assignment_id = 'assignment_01'
-ORDER BY
-  change_timestamp DESC
-LIMIT 1;
-```
+    SELECT
+      user_email,
+      change_timestamp,
+      reservation_name,
+      assignment_id
+    FROM
+      `region-us`.INFORMATION_SCHEMA.ASSIGNMENT_CHANGES
+    WHERE
+      change_timestamp BETWEEN '2021-09-30' AND '2021-10-01'
+      AND assignment_id = 'assignment_01'
+    ORDER BY
+      change_timestamp DESC
+    LIMIT 1;
 
 The result is similar to the following:
 
@@ -91,20 +89,18 @@ The result is similar to the following:
 
 The following example displays all of the active assignments of a reservation at a certain point in time.
 
-``` notranslate
-SELECT
-    reservation_name,
-    assignee_id,
-    assignee_type,
-    job_type
-FROM
-    `region-REGION`.INFORMATION_SCHEMA.ASSIGNMENT_CHANGES
-WHERE
-    reservation_name = RESERVATION_NAME
-    AND change_timestamp < TIMESTAMP
-QUALIFY ROW_NUMBER() OVER(PARTITION BY assignee_id, job_type ORDER BY change_timestamp DESC) = 1
-AND action != 'DELETE';
-```
+    SELECT
+        reservation_name,
+        assignee_id,
+        assignee_type,
+        job_type
+    FROM
+        `region-REGION`.INFORMATION_SCHEMA.ASSIGNMENT_CHANGES
+    WHERE
+        reservation_name = RESERVATION_NAME
+        AND change_timestamp < TIMESTAMP
+    QUALIFY ROW_NUMBER() OVER(PARTITION BY assignee_id, job_type ORDER BY change_timestamp DESC) = 1
+    AND action != 'DELETE';
 
 Replace the following:
 
@@ -125,20 +121,18 @@ The result is similar to the following:
 
 To display the assignments that were active when a certain job was executed, use the following example.
 
-``` notranslate
-SELECT
-    reservation_name,
-    assignee_id,
-    assignee_type,
-    job_type
-FROM
-    `region-REGION`.INFORMATION_SCHEMA.ASSIGNMENT_CHANGES
-WHERE
-    reservation_name = RESERVATION_NAME
-    AND change_timestamp < (SELECT creation_time FROM PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.JOBS WHERE job_id = JOB_ID)
-QUALIFY ROW_NUMBER() OVER(PARTITION BY assignee_id, job_type ORDER BY change_timestamp DESC) = 1
-AND action != 'DELETE';
-```
+    SELECT
+        reservation_name,
+        assignee_id,
+        assignee_type,
+        job_type
+    FROM
+        `region-REGION`.INFORMATION_SCHEMA.ASSIGNMENT_CHANGES
+    WHERE
+        reservation_name = RESERVATION_NAME
+        AND change_timestamp < (SELECT creation_time FROM PROJECT_ID.`region-REGION`.INFORMATION_SCHEMA.JOBS WHERE job_id = JOB_ID)
+    QUALIFY ROW_NUMBER() OVER(PARTITION BY assignee_id, job_type ORDER BY change_timestamp DESC) = 1
+    AND action != 'DELETE';
 
 Replace the following:
 

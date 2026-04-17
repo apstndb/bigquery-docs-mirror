@@ -176,7 +176,7 @@ The following column is excluded from the query results:
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` notranslate
+``` 
   SELECT
     * EXCEPT(is_updatable)
   FROM

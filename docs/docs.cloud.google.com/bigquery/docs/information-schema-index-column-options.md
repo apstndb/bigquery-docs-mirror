@@ -56,24 +56,22 @@ Replace the following:
 
 The following example sets the default index column granularity to `COLUMN` , and individually sets the granularity for `col2` and `col3` to `GLOBAL` and `COLUMN` respectively. In this example, columns `col2` and `col3` appear in the results because their granularity is set explicitly. The granularity for column `col1` is not shown because it uses the default granularity.
 
-``` notranslate
-CREATE SEARCH INDEX index1 ON `mydataset.table1` (
-  ALL COLUMNS WITH COLUMN OPTIONS (
-    col2 OPTIONS(index_granularity = 'GLOBAL'),
-    col3 OPTIONS(index_granularity = 'COLUMN')
-  )
-)
-OPTIONS(
-  default_index_column_granularity = 'COLUMN'
-);
-
-SELECT
-  index_column_name, option_name, option_type, option_value
-FROM
-  mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMN_OPTIONS
-WHERE
-  index_schema = 'mydataset' AND index_name = 'index1' AND table_name = 'table1';
-```
+    CREATE SEARCH INDEX index1 ON `mydataset.table1` (
+      ALL COLUMNS WITH COLUMN OPTIONS (
+        col2 OPTIONS(index_granularity = 'GLOBAL'),
+        col3 OPTIONS(index_granularity = 'COLUMN')
+      )
+    )
+    OPTIONS(
+      default_index_column_granularity = 'COLUMN'
+    );
+    
+    SELECT
+      index_column_name, option_name, option_type, option_value
+    FROM
+      mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMN_OPTIONS
+    WHERE
+      index_schema = 'mydataset' AND index_name = 'index1' AND table_name = 'table1';
 
 The result is similar to the following:
 
@@ -86,23 +84,21 @@ The result is similar to the following:
 
 The following equivalent example, which doesn't use `ALL COLUMNS` , sets the default index column granularity to `COLUMN` and individually sets the granularity for two columns to `GLOBAL` and `COLUMN` respectively:
 
-``` notranslate
-CREATE SEARCH INDEX index1 ON `mydataset.table1` (
-  col1,
-  col2 OPTIONS(index_granularity = 'GLOBAL'),
-  col3 OPTIONS(index_granularity = 'COLUMN')
-)
-OPTIONS(
-  default_index_column_granularity = 'COLUMN'
-);
-
-SELECT
-  index_column_name, option_name, option_type, option_value
-FROM
-  mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMN_OPTIONS
-WHERE
-  index_schema = 'mydataset' AND index_name = 'index1' AND table_name = 'table1';
-```
+    CREATE SEARCH INDEX index1 ON `mydataset.table1` (
+      col1,
+      col2 OPTIONS(index_granularity = 'GLOBAL'),
+      col3 OPTIONS(index_granularity = 'COLUMN')
+    )
+    OPTIONS(
+      default_index_column_granularity = 'COLUMN'
+    );
+    
+    SELECT
+      index_column_name, option_name, option_type, option_value
+    FROM
+      mydataset.INFORMATION_SCHEMA.SEARCH_INDEX_COLUMN_OPTIONS
+    WHERE
+      index_schema = 'mydataset' AND index_name = 'index1' AND table_name = 'table1';
 
 The result is similar to the following:
 

@@ -1330,11 +1330,9 @@ To build a temporary table in BigQuery, do the following:
 
 2.  Create the temporary table in the dataset, with a table name prefix of `temp` . For example, to create a table that expires in one hour, do this:
     
-    ``` notranslate
-    CREATE TABLE temp.name (col1, col2, ...)
-    OPTIONS(expiration_timestamp = TIMESTAMP_ADD(CURRENT_TIMESTAMP(),
-    INTERVAL 1 HOUR));
-    ```
+        CREATE TABLE temp.name (col1, col2, ...)
+        OPTIONS(expiration_timestamp = TIMESTAMP_ADD(CURRENT_TIMESTAMP(),
+        INTERVAL 1 HOUR));
 
 3.  Start reading and writing from the temporary table.
 

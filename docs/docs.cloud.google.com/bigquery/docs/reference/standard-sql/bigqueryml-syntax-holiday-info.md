@@ -4,7 +4,7 @@ This document describes the `ML.HOLIDAY_INFO` function, which you can use to ret
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.HOLIDAY_INFO(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`
 )
@@ -32,14 +32,12 @@ ML.HOLIDAY_INFO(
 
 The following example returns the results for a model that uses a [custom holiday](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) :
 
-``` notranslate
-SELECT * FROM
-ML.HOLIDAY_INFO(MODEL `mydataset.arima_model`);
-```
+    SELECT * FROM
+    ML.HOLIDAY_INFO(MODEL `mydataset.arima_model`);
 
 The output looks similar to the following:
 
-``` console
+```console
 +-----------------------+--------------+-----------------+------------------+
 | region | holiday_name | primary_date | preholiday_days | postholiday_days |
 +--------------------------------------------------------+------------------+

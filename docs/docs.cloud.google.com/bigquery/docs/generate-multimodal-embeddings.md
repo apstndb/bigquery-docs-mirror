@@ -150,30 +150,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create the object table
 
@@ -183,14 +177,12 @@ Create an object table over the art images in the public Cloud Storage [`gcs-pub
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.met_images`
-    WITH CONNECTION DEFAULT
-    OPTIONS
-      ( object_metadata = 'SIMPLE',
-        uris = ['gs://gcs-public-data--met/*']
-      );
-    ```
+        CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.met_images`
+        WITH CONNECTION DEFAULT
+        OPTIONS
+          ( object_metadata = 'SIMPLE',
+            uris = ['gs://gcs-public-data--met/*']
+          );
 
 ## Explore the image data
 
@@ -299,11 +291,9 @@ Create a remote model that represents a hosted Vertex AI multimodal embedding mo
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.multimodal_embedding_model`
-      REMOTE WITH CONNECTION DEFAULT
-      OPTIONS (ENDPOINT = 'multimodalembedding@001');
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.multimodal_embedding_model`
+          REMOTE WITH CONNECTION DEFAULT
+          OPTIONS (ENDPOINT = 'multimodalembedding@001');
     
     The query takes several seconds to complete, after which you can access the `multimodal_embedding_model` model that appears in the `bqml_tutorial` dataset. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -315,15 +305,13 @@ Generate embeddings from the images in the object table by using the [`AI.GENERA
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.met_image_embeddings`
-    AS
-    SELECT *
-    FROM
-      AI.GENERATE_EMBEDDING(
-        MODEL `bqml_tutorial.multimodal_embedding_model`,
-        (SELECT * FROM `bqml_tutorial.met_images` WHERE content_type = 'image/jpeg' LIMIT 10000))
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.met_image_embeddings`
+        AS
+        SELECT *
+        FROM
+          AI.GENERATE_EMBEDDING(
+            MODEL `bqml_tutorial.multimodal_embedding_model`,
+            (SELECT * FROM `bqml_tutorial.met_images` WHERE content_type = 'image/jpeg' LIMIT 10000))
 
 ## Correct any embedding generation errors
 
@@ -335,19 +323,15 @@ The `AI.GENERATE_EMBEDDING` function returns error details in the `status` colum
 
 2.  In the query editor, run the following query to see if there were any embedding generation failures:
     
-    ``` notranslate
-    SELECT DISTINCT(status),
-      COUNT(uri) AS num_rows
-    FROM bqml_tutorial.met_image_embeddings
-    GROUP BY 1;
-    ```
+        SELECT DISTINCT(status),
+          COUNT(uri) AS num_rows
+        FROM bqml_tutorial.met_image_embeddings
+        GROUP BY 1;
 
 3.  If rows with errors are returned, drop any rows where embedding generation failed:
     
-    ``` notranslate
-    DELETE FROM `bqml_tutorial.met_image_embeddings`
-    WHERE status = 'A retryable error occurred: RESOURCE_EXHAUSTED error from remote service/endpoint.';
-    ```
+        DELETE FROM `bqml_tutorial.met_image_embeddings`
+        WHERE status = 'A retryable error occurred: RESOURCE_EXHAUSTED error from remote service/endpoint.';
 
 ## Create a vector index
 
@@ -357,24 +341,20 @@ You can optionally use the [`CREATE VECTOR INDEX` statement](https://docs.cloud.
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE
-      VECTOR INDEX `met_images_index`
-    ON
-      bqml_tutorial.met_image_embeddings(embedding)
-      OPTIONS (
-        index_type = 'IVF',
-        distance_type = 'COSINE');
-    ```
+        CREATE OR REPLACE
+          VECTOR INDEX `met_images_index`
+        ON
+          bqml_tutorial.met_image_embeddings(embedding)
+          OPTIONS (
+            index_type = 'IVF',
+            distance_type = 'COSINE');
 
 3.  The vector index is created asynchronously. To check if the vector index has been created, query the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) and confirm that the `coverage_percentage` value is greater than `0` , and the `last_refresh_time` value isn't `NULL` :
     
-    ``` notranslate
-    SELECT table_name, index_name, index_status,
-      coverage_percentage, last_refresh_time, disable_reason
-    FROM bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES
-    WHERE index_name = 'met_images_index';
-    ```
+        SELECT table_name, index_name, index_status,
+          coverage_percentage, last_refresh_time, disable_reason
+        FROM bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES
+        WHERE index_name = 'met_images_index';
 
 ## Generate an embedding for the search text
 
@@ -384,16 +364,14 @@ To search images that correspond to a specified text search string, you must fir
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.search_embedding`
-    AS
-    SELECT * FROM AI.GENERATE_EMBEDDING(
-      MODEL `bqml_tutorial.multimodal_embedding_model`,
-      (
-        SELECT 'pictures of white or cream colored dress from victorian era' AS content
-      )
-    );
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.search_embedding`
+        AS
+        SELECT * FROM AI.GENERATE_EMBEDDING(
+          MODEL `bqml_tutorial.multimodal_embedding_model`,
+          (
+            SELECT 'pictures of white or cream colored dress from victorian era' AS content
+          )
+        );
 
 ## Perform a text-to-image semantic search
 
@@ -403,17 +381,15 @@ Use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/r
 
 2.  In the query editor, run the following query to perform a semantic search and write the results to a table:
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.vector_search_results` AS
-    SELECT base.uri AS gcs_uri, distance
-    FROM
-      VECTOR_SEARCH(
-        TABLE `bqml_tutorial.met_image_embeddings`,
-        'embedding',
-        TABLE `bqml_tutorial.search_embedding`,
-        'embedding',
-        top_k => 3);
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.vector_search_results` AS
+        SELECT base.uri AS gcs_uri, distance
+        FROM
+          VECTOR_SEARCH(
+            TABLE `bqml_tutorial.met_image_embeddings`,
+            'embedding',
+            TABLE `bqml_tutorial.search_embedding`,
+            'embedding',
+            top_k => 3);
 
 ## Visualize the semantic search results
 

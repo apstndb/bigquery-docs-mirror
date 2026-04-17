@@ -79,30 +79,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -129,14 +123,12 @@ In the following GoogleSQL query, the `SELECT` statement parses the `date` colum
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    PARSE_TIMESTAMP("%Y%m%d", date) AS parsed_date,
-    SUM(totals.visits) AS total_visits
-    FROM
-    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-    GROUP BY date;
-    ```
+        SELECT
+        PARSE_TIMESTAMP("%Y%m%d", date) AS parsed_date,
+        SUM(totals.visits) AS total_visits
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        GROUP BY date;
     
     1.  When the query completes, click **Open in** \> **Data Studio** . Data Studio opens in a new tab. Complete the following steps in the new tab.
     
@@ -197,23 +189,21 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.ga_arima_model`
-    OPTIONS
-    (model_type = 'ARIMA_PLUS',
-     time_series_timestamp_col = 'parsed_date',
-     time_series_data_col = 'total_visits',
-     auto_arima = TRUE,
-     data_frequency = 'AUTO_FREQUENCY',
-     decompose_time_series = TRUE
-    ) AS
-    SELECT
-    PARSE_TIMESTAMP("%Y%m%d", date) AS parsed_date,
-    SUM(totals.visits) AS total_visits
-    FROM
-    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-    GROUP BY date;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.ga_arima_model`
+        OPTIONS
+        (model_type = 'ARIMA_PLUS',
+         time_series_timestamp_col = 'parsed_date',
+         time_series_data_col = 'total_visits',
+         auto_arima = TRUE,
+         data_frequency = 'AUTO_FREQUENCY',
+         decompose_time_series = TRUE
+        ) AS
+        SELECT
+        PARSE_TIMESTAMP("%Y%m%d", date) AS parsed_date,
+        SUM(totals.visits) AS total_visits
+        FROM
+        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+        GROUP BY date;
     
     The query takes about 4 seconds to complete, after which you can access the `ga_arima_model` model. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -260,12 +250,10 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.ARIMA_EVALUATE(MODEL `bqml_tutorial.ga_arima_model`);
-    ```
+        SELECT
+        *
+        FROM
+        ML.ARIMA_EVALUATE(MODEL `bqml_tutorial.ga_arima_model`);
     
     The results should look similar to the following:
     
@@ -317,12 +305,10 @@ Follow these steps to retrieve the model's coefficients:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.ga_arima_model`);
-    ```
+        SELECT
+        *
+        FROM
+        ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.ga_arima_model`);
 
 The `ar_coefficients` output column shows the model coefficients of the autoregressive (AR) part of the ARIMA model. Similarly, the `ma_coefficients` output column shows the model coefficients of the moving-average (MA) part of the ARIMA model. Both of these columns contain array values, whose lengths are equal to `non_seasonal_p` and `non_seasonal_q` , respectively. You saw in the output of the `ML.ARIMA_EVALUATE` function that the best model has a `non_seasonal_p` value of `2` and a `non_seasonal_q` value of `3` . Therefore, in the `ML.ARIMA_COEFFICIENTS` output, the `ar_coefficients` value is a 2-element array and the `ma_coefficients` value is a 3-element array. The `intercept_or_drift` value is the constant term in the ARIMA model.
 
@@ -359,13 +345,11 @@ Follow these steps to forecast data with the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.FORECAST(MODEL `bqml_tutorial.ga_arima_model`,
-              STRUCT(30 AS horizon, 0.8 AS confidence_level));
-    ```
+        SELECT
+        *
+        FROM
+        ML.FORECAST(MODEL `bqml_tutorial.ga_arima_model`,
+                  STRUCT(30 AS horizon, 0.8 AS confidence_level));
     
     The results should look similar to the following:
     
@@ -408,13 +392,11 @@ Follow these steps to explain the model's results:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.EXPLAIN_FORECAST(MODEL `bqml_tutorial.ga_arima_model`,
-     STRUCT(30 AS horizon, 0.8 AS confidence_level));
-    ```
+        SELECT
+        *
+        FROM
+        ML.EXPLAIN_FORECAST(MODEL `bqml_tutorial.ga_arima_model`,
+         STRUCT(30 AS horizon, 0.8 AS confidence_level));
     
     The results should look similar to the following:
     

@@ -86,19 +86,17 @@ For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.ASSIGNMENTS `` .
 
 The following example gets a project's currently assigned reservation and its slot capacity. This information is useful for debugging job performance by comparing the project's slot usage with the slot capacity of the reservation assigned to that project.
 
-``` notranslate
-SELECT
-  reservation.reservation_name,
-  reservation.slot_capacity
-FROM
-  `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
-  INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT assignment
-INNER JOIN
-  `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
-  INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT AS reservation
-ON
-  (assignment.reservation_name = reservation.reservation_name)
-WHERE
-   assignment.assignee_id = "PROJECT_ID"
-  AND job_type = "QUERY";
-```
+    SELECT
+      reservation.reservation_name,
+      reservation.slot_capacity
+    FROM
+      `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
+      INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT assignment
+    INNER JOIN
+      `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
+      INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT AS reservation
+    ON
+      (assignment.reservation_name = reservation.reservation_name)
+    WHERE
+       assignment.assignee_id = "PROJECT_ID"
+      AND job_type = "QUERY";

@@ -86,20 +86,18 @@ A table's `max_staleness` value should generally be the higher of the following 
 
 To calculate the time it takes to apply upserted changes to an existing table, use the following SQL query to determine the 95th percentile duration of background apply jobs, plus a seven-minute buffer to allow for the BigQuery write-optimized storage (streaming buffer) conversion.
 
-``` notranslate
-SELECT
-  project_id,
-  destination_table.dataset_id,
-  destination_table.table_id,
-  APPROX_QUANTILES((TIMESTAMP_DIFF(end_time, creation_time,MILLISECOND)/1000), 100)[OFFSET(95)] AS p95_background_apply_duration_in_seconds,
-  CEILING(APPROX_QUANTILES((TIMESTAMP_DIFF(end_time, creation_time,MILLISECOND)/1000), 100)[OFFSET(95)]*2/60)+7 AS recommended_max_staleness_with_buffer_in_minutes
-FROM `region-REGION`.INFORMATION_SCHEMA.JOBS AS job
-WHERE
-  project_id = 'PROJECT_ID'
-  AND DATE(creation_time) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE()
-  AND job_id LIKE "%cdc_background%"
-GROUP BY 1,2,3;
-```
+    SELECT
+      project_id,
+      destination_table.dataset_id,
+      destination_table.table_id,
+      APPROX_QUANTILES((TIMESTAMP_DIFF(end_time, creation_time,MILLISECOND)/1000), 100)[OFFSET(95)] AS p95_background_apply_duration_in_seconds,
+      CEILING(APPROX_QUANTILES((TIMESTAMP_DIFF(end_time, creation_time,MILLISECOND)/1000), 100)[OFFSET(95)]*2/60)+7 AS recommended_max_staleness_with_buffer_in_minutes
+    FROM `region-REGION`.INFORMATION_SCHEMA.JOBS AS job
+    WHERE
+      project_id = 'PROJECT_ID'
+      AND DATE(creation_time) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE()
+      AND job_id LIKE "%cdc_background%"
+    GROUP BY 1,2,3;
 
 Replace the following:
 
@@ -112,40 +110,34 @@ The duration of background apply jobs is affected by several factors including t
 
 To create a table with the `max_staleness` option, use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) . The following example creates the table `employees` with a `max_staleness` limit of 10 minutes:
 
-``` notranslate
-CREATE TABLE employees (
-  id INT64 PRIMARY KEY NOT ENFORCED,
-  name STRING)
-  CLUSTER BY
-    id
-  OPTIONS (
-    max_staleness = INTERVAL 10 MINUTE);
-```
+    CREATE TABLE employees (
+      id INT64 PRIMARY KEY NOT ENFORCED,
+      name STRING)
+      CLUSTER BY
+        id
+      OPTIONS (
+        max_staleness = INTERVAL 10 MINUTE);
 
 ### Modify the `max_staleness` option for an existing table
 
 To add or modify a `max_staleness` limit in an existing table, use the [`ALTER TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example changes the `max_staleness` limit of the `employees` table to 15 minutes:
 
-``` notranslate
-ALTER TABLE employees
-SET OPTIONS (
-  max_staleness = INTERVAL 15 MINUTE);
-```
+    ALTER TABLE employees
+    SET OPTIONS (
+      max_staleness = INTERVAL 15 MINUTE);
 
 ### Determine the current `max_staleness` value of a table
 
 To determine the current `max_staleness` value of a table, query the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) . The following example checks the current `max_staleness` value of the table `mytable` :
 
-``` notranslate
-SELECT
-  option_name,
-  option_value
-FROM
-  DATASET_NAME.INFORMATION_SCHEMA.TABLE_OPTIONS
-WHERE
-  option_name = 'max_staleness'
-  AND table_name = 'TABLE_NAME';
-```
+    SELECT
+      option_name,
+      option_value
+    FROM
+      DATASET_NAME.INFORMATION_SCHEMA.TABLE_OPTIONS
+    WHERE
+      option_name = 'max_staleness'
+      AND table_name = 'TABLE_NAME';
 
 Replace the following:
 
@@ -154,7 +146,7 @@ Replace the following:
 
 The results show that the `max_staleness` value is 10 minutes:
 
-``` console
+```console
 +---------------------+--------------+
 | Row |  option_name  | option_value |
 +---------------------+--------------+
@@ -168,11 +160,9 @@ To monitor the state of a table and to check when row modifications were last ap
 
 The following example checks the `upsert_stream_apply_watermark` value of the table `mytable` :
 
-``` notranslate
-SELECT upsert_stream_apply_watermark
-FROM DATASET_NAME.INFORMATION_SCHEMA.TABLES
-WHERE table_name = 'TABLE_NAME';
-```
+    SELECT upsert_stream_apply_watermark
+    FROM DATASET_NAME.INFORMATION_SCHEMA.TABLES
+    WHERE table_name = 'TABLE_NAME';
 
 Replace the following:
 
@@ -181,7 +171,7 @@ Replace the following:
 
 The result is similar to the following:
 
-``` console
+```console
 [{
  "upsert_stream_apply_watermark": "2022-09-15T04:17:19.909Z"
 }]
@@ -247,13 +237,11 @@ BigQuery CDC ingestion jobs that apply pending row modifications within the `max
 
 To configure a BigQuery reservation for use with CDC, start by [configuring a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) in the region where your BigQuery tables are located. For guidance on the size of your reservation, see [Size and monitor `BACKGROUND` reservations](https://docs.cloud.google.com/bigquery/docs/change-data-capture#size-reservation) . Once you have created a reservation, [assign](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) the BigQuery project to the reservation, and set the `job_type` option to `BACKGROUND` by running the following [`CREATE ASSIGNMENT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) :
 
-``` notranslate
-CREATE ASSIGNMENT
-  `ADMIN_PROJECT_ID.region-REGION.RESERVATION_NAME.ASSIGNMENT_ID`
-OPTIONS (
-  assignee = 'projects/PROJECT_ID',
-  job_type = 'BACKGROUND');
-```
+    CREATE ASSIGNMENT
+      `ADMIN_PROJECT_ID.region-REGION.RESERVATION_NAME.ASSIGNMENT_ID`
+    OPTIONS (
+      assignee = 'projects/PROJECT_ID',
+      job_type = 'BACKGROUND');
 
 Replace the following:
 
@@ -267,21 +255,19 @@ Replace the following:
 
 Reservations determine the amount of compute resources available to perform BigQuery compute operations. Undersizing a reservation can increase the processing time of CDC row modification operations. To size a reservation accurately, monitor historical slot consumption for the project that performs the CDC operations by querying the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) :
 
-``` notranslate
-SELECT
-  period_start,
-  SUM(period_slot_ms) / (1000 * 60) AS slots_used
-FROM
-  region-REGION.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
-WHERE
-  DATE(job_creation_time) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
-  AND CURRENT_DATE()
-  AND job_id LIKE '%cdc_background%'
-GROUP BY
-  period_start
-ORDER BY
-  period_start DESC;
-```
+    SELECT
+      period_start,
+      SUM(period_slot_ms) / (1000 * 60) AS slots_used
+    FROM
+      region-REGION.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
+    WHERE
+      DATE(job_creation_time) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
+      AND CURRENT_DATE()
+      AND job_id LIKE '%cdc_background%'
+    GROUP BY
+      period_start
+    ORDER BY
+      period_start DESC;
 
 Replace `  REGION  ` with the [region name](https://docs.cloud.google.com/bigquery/docs/locations) where your project is located. For example, `us` .
 

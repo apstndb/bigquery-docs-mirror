@@ -103,12 +103,10 @@ For example, you have the following Avro files in Cloud Storage:
 
 Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `mybucket/01/b.avro` :
 
-``` notranslate
-bq load \
---source_format=AVRO \
-dataset.table \
-"gs://mybucket/00/*.avro","gs://mybucket/01/*.avro"
-```
+    bq load \
+    --source_format=AVRO \
+    dataset.table \
+    "gs://mybucket/00/*.avro","gs://mybucket/01/*.avro"
 
 When importing multiple Avro files with different Avro schemas, all schemas must be compatible with [Avro's schema resolution](https://avro.apache.org/docs/1.8.1/spec.html#Schema+Resolution) .
 
@@ -191,12 +189,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA OVERWRITE mydataset.mytable
-    FROM FILES (
-      format = 'avro',
-      uris = ['gs://bucket/path/file.avro']);
-    ```
+        LOAD DATA OVERWRITE mydataset.mytable
+        FROM FILES (
+          format = 'avro',
+          uris = ['gs://bucket/path/file.avro']);
 
 3.  Click play\_circle **Run** .
 
@@ -236,12 +232,10 @@ Other optional flags include:
 
 To load Avro data into BigQuery, enter the following command:
 
-``` notranslate
-bq --location=location load \
---source_format=format \
-dataset.table \
-path_to_source
-```
+    bq --location=location load \
+    --source_format=format \
+    dataset.table \
+    path_to_source
 
 Replace the following:
 
@@ -507,12 +501,10 @@ There are two ways to ensure that Avro data is loaded into BigQuery as [`JSON` d
 
 1.  Annotate your Avro schema with `sqlType` set to `JSON` . For example, if you load data with the following Avro schema, then the `json_field` column is read as a `JSON` type:
     
-    ``` notranslate
-    {
-        "type": {"type": "string", "sqlType": "JSON"},
-        "name": "json_field"
-    }
-    ```
+        {
+            "type": {"type": "string", "sqlType": "JSON"},
+            "name": "json_field"
+        }
 
 2.  Specify the BigQuery destination table schema explicitly and set the column type to `JSON` . For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
@@ -592,12 +584,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA INTO mydataset.mytable
-    FROM FILES (
-      format = 'avro',
-      uris = ['gs://bucket/path/file.avro']);
-    ```
+        LOAD DATA INTO mydataset.mytable
+        FROM FILES (
+          format = 'avro',
+          uris = ['gs://bucket/path/file.avro']);
 
 3.  Click play\_circle **Run** .
 
@@ -617,13 +607,11 @@ Other optional flags include:
 
 <!-- end list -->
 
-``` notranslate
-bq --location=location load \
---[no]replace \
---source_format=format \
-dataset.table \
-path_to_source
-```
+    bq --location=location load \
+    --[no]replace \
+    --source_format=format \
+    dataset.table \
+    path_to_source
 
 Replace the following:
 

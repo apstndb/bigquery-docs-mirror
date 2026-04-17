@@ -77,24 +77,22 @@ For a list of available regions, see [Dataset locations](https://docs.cloud.goog
 
 The following example calculates the per minute breakdown of total failed requests for all tables in the project's organization in the last 30 minutes, split by error code:
 
-``` notranslate
-SELECT
-  start_timestamp,
-  stream_type,
-  error_code,
-  SUM(total_requests) AS num_failed_requests
-FROM
-  `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_ORGANIZATION
-WHERE
-  error_code != 'OK'
-  AND start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 30 MINUTE)
-GROUP BY
-  start_timestamp,
-  stream_type,
-  error_code
-ORDER BY
-  start_timestamp DESC;
-```
+    SELECT
+      start_timestamp,
+      stream_type,
+      error_code,
+      SUM(total_requests) AS num_failed_requests
+    FROM
+      `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_ORGANIZATION
+    WHERE
+      error_code != 'OK'
+      AND start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 30 MINUTE)
+    GROUP BY
+      start_timestamp,
+      stream_type,
+      error_code
+    ORDER BY
+      start_timestamp DESC;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -115,35 +113,33 @@ The result is similar to the following:
 
 The following example calculates a per minute breakdown of successful and failed append requests in the project's organization, split into error code categories. This query could be used to populate a dashboard.
 
-``` notranslate
-SELECT
-  start_timestamp,
-  SUM(total_requests) AS total_requests,
-  SUM(total_rows) AS total_rows,
-  SUM(total_input_bytes) AS total_input_bytes,
-  SUM(
-    IF(
-      error_code IN (
-        'INVALID_ARGUMENT', 'NOT_FOUND', 'CANCELLED', 'RESOURCE_EXHAUSTED',
-        'ALREADY_EXISTS', 'PERMISSION_DENIED', 'UNAUTHENTICATED',
-        'FAILED_PRECONDITION', 'OUT_OF_RANGE'),
-      total_requests,
-      0)) AS user_error,
-  SUM(
-    IF(
-      error_code IN (
-        'DEADLINE_EXCEEDED','ABORTED', 'INTERNAL', 'UNAVAILABLE',
-        'DATA_LOSS', 'UNKNOWN'),
-      total_requests,
-      0)) AS server_error,
-  SUM(IF(error_code = 'OK', 0, total_requests)) AS total_error,
-FROM
-  `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
-GROUP BY
-  start_timestamp
-ORDER BY
-  start_timestamp DESC;
-```
+    SELECT
+      start_timestamp,
+      SUM(total_requests) AS total_requests,
+      SUM(total_rows) AS total_rows,
+      SUM(total_input_bytes) AS total_input_bytes,
+      SUM(
+        IF(
+          error_code IN (
+            'INVALID_ARGUMENT', 'NOT_FOUND', 'CANCELLED', 'RESOURCE_EXHAUSTED',
+            'ALREADY_EXISTS', 'PERMISSION_DENIED', 'UNAUTHENTICATED',
+            'FAILED_PRECONDITION', 'OUT_OF_RANGE'),
+          total_requests,
+          0)) AS user_error,
+      SUM(
+        IF(
+          error_code IN (
+            'DEADLINE_EXCEEDED','ABORTED', 'INTERNAL', 'UNAVAILABLE',
+            'DATA_LOSS', 'UNKNOWN'),
+          total_requests,
+          0)) AS server_error,
+      SUM(IF(error_code = 'OK', 0, total_requests)) AS total_error,
+    FROM
+      `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
+    GROUP BY
+      start_timestamp
+    ORDER BY
+      start_timestamp DESC;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
@@ -162,24 +158,22 @@ The result is similar to the following:
 
 The following example returns the BigQuery Storage Write API ingestion statistics for the 10 tables in the project's organization with the most incoming traffic:
 
-``` notranslate
-SELECT
-  project_id,
-  dataset_id,
-  table_id,
-  SUM(total_rows) AS num_rows,
-  SUM(total_input_bytes) AS num_bytes,
-  SUM(total_requests) AS num_requests
-FROM
-  `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_ORGANIZATION
-GROUP BY
-  project_id,
-  dataset_id,
-  table_id
-ORDER BY
-  num_bytes DESC
-LIMIT 10;
-```
+    SELECT
+      project_id,
+      dataset_id,
+      table_id,
+      SUM(total_rows) AS num_rows,
+      SUM(total_input_bytes) AS num_bytes,
+      SUM(total_requests) AS num_requests
+    FROM
+      `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_ORGANIZATION
+    GROUP BY
+      project_id,
+      dataset_id,
+      table_id
+    ORDER BY
+      num_bytes DESC
+    LIMIT 10;
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

@@ -35,6 +35,12 @@ Several customized connection tools are available to help you incorporate BigQue
 
 Model Context Protocol (MCP) is an open protocol for connecting large language models (LLMs) to data sources like BigQuery. The [MCP Toolbox for Databases](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) connects your BigQuery project to various Integrated Development Environments (IDEs) and developer tools, empowering you build more powerful AI agents with your BigQuery data.
 
+### BigQuery agent analytics
+
+BigQuery agent analytics is a first-party, open source solution that captures, analyzes, and visualizes multimodal agent interaction data at scale. This solution lets developers stream raw agent interactions, such as requests, responses, tool calls, and errors directly into BigQuery.
+
+To learn more about this solution, see [Use BigQuery agent analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics) .
+
 ### ODBC and JDBC drivers
 
 Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers connect applications to databases. Google partners with [Simba](https://insightsoftware.com/simba/) to provide [ODBC and JDBC drivers for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) , which you can use to help build database-neutral software applications through your preferred tooling and infrastructure. The [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is also available in [Preview](https://cloud.google.com/products#product-launch-stages) .
@@ -69,7 +75,7 @@ The following Google services and tools integrate with BigQuery and offer additi
 
   - [**Managed Service for Apache Spark**](https://docs.cloud.google.com/dataproc/docs/concepts/overview) . A fully managed service for running Apache Hadoop and Apache Spark jobs. Managed Service for Apache Spark provides the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery) , which lets Hadoop and Spark directly process data from BigQuery.
   - [**Dataflow**](https://docs.cloud.google.com/dataflow/docs/about-dataflow) . A fully managed service for running Apache Beam jobs at scale. The [BigQuery I/O connector for Beam](https://beam.apache.org/documentation/io/built-in/google-bigquery/) lets Beam pipelines read and write data to and from BigQuery.
-  - [**Cloud Composer**](https://docs.cloud.google.com/composer/docs/concepts/overview) . A fully managed workflow scheduling service built on Apache Airflow. [BigQuery operators](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/bigquery.html) let Airflow workflows manage datasets and tables, run queries, and validate data.
+  - [**Managed Service for Apache Airflow**](https://docs.cloud.google.com/composer/docs/concepts/overview) . A fully managed workflow scheduling service built on Apache Airflow. [BigQuery operators](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/bigquery.html) let Airflow workflows manage datasets and tables, run queries, and validate data.
   - [**Pub/Sub**](https://docs.cloud.google.com/pubsub/docs/overview) . An asynchronous and scalable messaging service. Pub/Sub provides [BigQuery subscriptions](https://docs.cloud.google.com/pubsub/docs/bigquery) , which you can use for writing messages to an existing BigQuery table as they are received.
   - [**Dataform**](https://docs.cloud.google.com/dataform/docs/overview) . A service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery.
   - [**BigQuery Terraform module**](https://github.com/terraform-google-modules/terraform-google-bigquery/blob/master/README.md) . A module to automate the instantiation and deployment of your BigQuery datasets and tables.

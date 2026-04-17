@@ -4,7 +4,7 @@ This document describes the `ML.PRINCIPAL_COMPONENTS` function, which lets you s
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.PRINCIPAL_COMPONENTS(
   MODEL `PROJECT_ID.DATASET.MODEL`
 )
@@ -39,12 +39,10 @@ The output is in descending order by the eigenvalues of the principal components
 
 The following example retrieves the principal components from the model `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.PRINCIPAL_COMPONENTS(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.PRINCIPAL_COMPONENTS(MODEL `mydataset.mymodel`)
 
 ## What's next
 

@@ -6,7 +6,7 @@ You can run `ML.TRAINING_INFO` while the `CREATE MODEL` statement for the target
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.TRAINING_INFO(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
 )
@@ -65,12 +65,10 @@ You must have the `bigquery.models.create` and `bigquery.models.getData` [Identi
 
 The following example retrieves training information from the model `mydataset.linear_regression` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.TRAINING_INFO(MODEL `mydataset.linear_regression`)
-```
+    SELECT
+      *
+    FROM
+      ML.TRAINING_INFO(MODEL `mydataset.linear_regression`)
 
 The result is similar to the following:
 

@@ -6,7 +6,7 @@ For more information about which models support this function, see [End-to-end u
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.FEATURE_INFO(MODEL `PROJECT_ID.DATASET.MODEL_NAME`)
 ```
 
@@ -48,12 +48,10 @@ You must have the `bigquery.models.create` and `bigquery.models.getData` [Identi
 
 The following example retrieves feature information from the model `mydataset.mymodel` in your default project:
 
-``` notranslate
-SELECT
-  *
-FROM
-  ML.FEATURE_INFO(MODEL `mydataset.mymodel`)
-```
+    SELECT
+      *
+    FROM
+      ML.FEATURE_INFO(MODEL `mydataset.mymodel`)
 
 ## What's next
 

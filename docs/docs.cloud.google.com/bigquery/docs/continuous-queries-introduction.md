@@ -64,6 +64,8 @@ The following operations are supported in continuous queries:
 
   - Normalizing numerical data by using the [`ML.NORMALIZER` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-normalizer) .
 
+  - Analyzing and processing `JSON` data, including support for [JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions) and [JSON unnesting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) .
+
   - Using stateless GoogleSQL functions—for example, [conversion functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions) . In stateless functions, each row is processed independently from other rows in the table.
 
   - Using [stateful operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) —for example [`JOIN` s, aggregations, and window aggregations](https://docs.cloud.google.com/bigquery/docs/continuous-queries#join-agg-window-example) . In stateful operations, the state of ingested data is retained across multiple rows or time intervals in order to compute an accurate result.

@@ -51,7 +51,7 @@ To configure the `default_location` at the organization level, follow these step
 
 3.  To configure the `default_location` , enter the following DDL statement into the **Query editor** :
     
-    ``` notranslate
+    ``` 
       ALTER ORGANIZATION
       SET OPTIONS (
       `default_location` = 'LOCATION'
@@ -62,7 +62,7 @@ To configure the `default_location` at the organization level, follow these step
 
 4.  Alternatively, to clear the `default_location` organization-level global settings, enter the following DDL statement into the **Query editor** :
     
-    ``` notranslate
+    ``` 
       ALTER ORGANIZATION
       SET OPTIONS (
       `default_location` = NULL
@@ -75,23 +75,19 @@ To configure the `default_location` at the organization level, follow these step
 
 1.  To configure the `default_location` at the organization level, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` .
     
-    ``` notranslate
-    ALTER ORGANIZATION
-    SET OPTIONS (
-    `default_location` = 'LOCATION'
-    );
-    ```
+        ALTER ORGANIZATION
+        SET OPTIONS (
+        `default_location` = 'LOCATION'
+        );
     
     Replace `  LOCATION  ` with a region or multi-region [location](https://docs.cloud.google.com/bigquery/docs/locations) . This value is the location used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined.
 
 2.  To clear the `default_location` at the organization level, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` .
     
-    ``` notranslate
-    ALTER ORGANIZATION
-    SET OPTIONS (
-    `default_location` = NULL
-    );
-    ```
+        ALTER ORGANIZATION
+        SET OPTIONS (
+        `default_location` = NULL
+        );
 
 ### API
 
@@ -123,7 +119,7 @@ To configure the `default_location` at the project level, follow these steps:
 
 3.  To configure the `default_location` , enter the following DDL statement into the **Query editor** :
     
-    ``` notranslate
+    ``` 
       ALTER PROJECT PROJECT_ID
       SET OPTIONS (
       `default_location` = 'LOCATION'
@@ -138,7 +134,7 @@ To configure the `default_location` at the project level, follow these steps:
 
 4.  Alternatively, to clear the `default_location` setting, enter the following DDL statement into the **Query editor** . If you clear the `default_location` at the project level, organization-level default settings are used, if they exist. Otherwise, the system default setting is used.
     
-    ``` notranslate
+    ``` 
       ALTER PROJECT PROJECT_ID
       SET OPTIONS (
       `default_location` = NULL
@@ -151,12 +147,10 @@ To configure the `default_location` at the project level, follow these steps:
 
 1.  To configure the `default_location` at the project level, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` .
     
-    ``` notranslate
-    ALTER PROJECT PROJECT_ID
-    SET OPTIONS (
-    `default_location` = 'LOCATION'
-    );
-    ```
+        ALTER PROJECT PROJECT_ID
+        SET OPTIONS (
+        `default_location` = 'LOCATION'
+        );
     
     Replace the following:
     
@@ -165,12 +159,10 @@ To configure the `default_location` at the project level, follow these steps:
 
 2.  Alternatively, to clear the `default_location` at the project level, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` . If you clear the `default_location` at the project level, organization-level default settings are used, if they exist. Otherwise, the system default setting is used.
     
-    ``` notranslate
-    ALTER PROJECT PROJECT_ID
-    SET OPTIONS (
-    `default_location` = NULL
-    );
-    ```
+        ALTER PROJECT PROJECT_ID
+        SET OPTIONS (
+        `default_location` = NULL
+        );
 
 ### API
 
@@ -179,6 +171,12 @@ Call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/re
 ## Specify regional settings
 
 You can configure regional settings at the organization or project level.
+
+### Manage reservation and billing controls
+
+You can control how queries use reservations or on-demand billing. These settings help ensure cost predictability by either allowing flexible reservation usage or requiring that queries use reservation slots.
+
+Common reservation and billing controls include settings such as `reservation_override_mode` ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ) and `disable_on_demand_billing` . For a complete list of settings and options, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
 
 ### Configure regional organization settings
 
@@ -203,7 +201,7 @@ To see all regional organization settings, go to [`organization_set_options_list
 
 3.  To configure the regional organization settings, enter the following DDL statement into the **Query editor** :
     
-    ``` notranslate
+    ``` 
       ALTER ORGANIZATION
       SET OPTIONS (
       `region-REGION.default_time_zone`= 'America/Chicago',
@@ -222,7 +220,7 @@ To see all regional organization settings, go to [`organization_set_options_list
 
 4.  Alternatively, to clear the regional organization settings, enter the following DDL statement into the **Query editor** :
     
-    ``` notranslate
+    ``` 
       ALTER ORGANIZATION
       SET OPTIONS (
       `region-REGION.default_time_zone` = NULL,
@@ -239,7 +237,7 @@ To see all regional organization settings, go to [`organization_set_options_list
 
 To configure the regional organization settings, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` .
 
-``` notranslate
+``` 
   ALTER ORGANIZATION
   SET OPTIONS (
   `region-REGION.default_time_zone`= 'America/Chicago',
@@ -257,22 +255,20 @@ Replace the following:
 
 Alternatively, to clear the regional organization settings, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` :
 
-``` notranslate
-ALTER ORGANIZATION
-SET OPTIONS (
-  `region-REGION.default_time_zone` = NULL,
-  `region-REGION.default_kms_key_name` = NULL,
-  `region-REGION.default_query_job_timeout_ms` = NULL,
-  `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
-  `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
-  `region-REGION.default_storage_billing_model`= NULL,
-  `region-REGION.default_max_time_travel_hours` = NULL,
-  `region-REGION.default_cloud_resource_connection_id` = NULL,
-  `region-REGION.default_sql_dialect_option` = NULL,
-  `region-REGION.enable_reservation_based_fairness` = NULL,
-  `region-REGION.enable_global_queries_execution` = NULL,
-  `region-REGION.enable_global_queries_data_access` = NULL);
-```
+    ALTER ORGANIZATION
+    SET OPTIONS (
+      `region-REGION.default_time_zone` = NULL,
+      `region-REGION.default_kms_key_name` = NULL,
+      `region-REGION.default_query_job_timeout_ms` = NULL,
+      `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
+      `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
+      `region-REGION.default_storage_billing_model`= NULL,
+      `region-REGION.default_max_time_travel_hours` = NULL,
+      `region-REGION.default_cloud_resource_connection_id` = NULL,
+      `region-REGION.default_sql_dialect_option` = NULL,
+      `region-REGION.enable_reservation_based_fairness` = NULL,
+      `region-REGION.enable_global_queries_execution` = NULL,
+      `region-REGION.enable_global_queries_data_access` = NULL);
 
 ### API
 
@@ -307,7 +303,7 @@ To see all regional project settings, go to [`project_set_options_list`](https:/
 
 3.  To configure the regional project settings, enter the following DDL statement into the **Query editor** :
     
-    ``` notranslate
+    ``` 
      ALTER PROJECT PROJECT_ID
      SET OPTIONS (
      `region-REGION.default_time_zone` = 'America/Los_Angeles',
@@ -330,7 +326,7 @@ To see all regional project settings, go to [`project_set_options_list`](https:/
 
 4.  Alternatively, to clear the regional project settings, enter the following DDL statement into the **Query editor** :
     
-    ``` notranslate
+    ``` 
       ALTER PROJECT PROJECT_ID
       SET OPTIONS (
       `region-REGION.default_time_zone` = NULL,
@@ -348,17 +344,15 @@ To see all regional project settings, go to [`project_set_options_list`](https:/
 
 1.  To configure the regional project settings, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` .
     
-    ``` notranslate
-    ALTER PROJECT PROJECT_ID
-    SET OPTIONS (
-    `region-REGION.default_time_zone`= 'America/Chicago',
-    -- Ensure all service accounts under the organization have permission to KMS_KEY
-    `region-REGION.default_kms_key_name` = KMS_KEY,
-    `region-REGION.default_query_job_timeout_ms` = 1800000,
-    `region-REGION.default_interactive_query_queue_timeout_ms` = 600000,
-    `region-REGION.default_batch_query_queue_timeout_ms` = 1200000,
-    `region-REGION.enable_reservation_based_fairness` = true);
-    ```
+        ALTER PROJECT PROJECT_ID
+        SET OPTIONS (
+        `region-REGION.default_time_zone`= 'America/Chicago',
+        -- Ensure all service accounts under the organization have permission to KMS_KEY
+        `region-REGION.default_kms_key_name` = KMS_KEY,
+        `region-REGION.default_query_job_timeout_ms` = 1800000,
+        `region-REGION.default_interactive_query_queue_timeout_ms` = 600000,
+        `region-REGION.default_batch_query_queue_timeout_ms` = 1200000,
+        `region-REGION.enable_reservation_based_fairness` = true);
     
     Replace the following:
     
@@ -368,18 +362,16 @@ To see all regional project settings, go to [`project_set_options_list`](https:/
 
 2.  Alternatively, to clear the regional project settings, enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `use_legacy_sql` flag to `false` :
     
-    ``` notranslate
-    ALTER ORGANIZATION
-    SET OPTIONS (
-    `region-REGION.default_time_zone` = NULL,
-    `region-REGION.default_kms_key_name` = NULL,
-    `region-REGION.default_query_job_timeout_ms` = NULL,
-    `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
-    `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
-    `region-REGION.enable_reservation_based_fairness` = false,
-    `region-REGION.enable_global_queries_execution` = NULL,
-    `region-REGION.enable_global_queries_data_access` = NULL);
-    ```
+        ALTER ORGANIZATION
+        SET OPTIONS (
+        `region-REGION.default_time_zone` = NULL,
+        `region-REGION.default_kms_key_name` = NULL,
+        `region-REGION.default_query_job_timeout_ms` = NULL,
+        `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
+        `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
+        `region-REGION.enable_reservation_based_fairness` = false,
+        `region-REGION.enable_global_queries_execution` = NULL,
+        `region-REGION.enable_global_queries_data_access` = NULL);
 
 ### API
 
@@ -413,68 +405,50 @@ Use the following query examples to retrieve your project and organization setti
 
 To view all global organization settings, run the following query:
 
-``` notranslate
-SELECT * FROM INFORMATION_SCHEMA.ORGANIZATION_OPTIONS;
-```
+    SELECT * FROM INFORMATION_SCHEMA.ORGANIZATION_OPTIONS;
 
 To view just the default location organization setting, run the following query:
 
-``` notranslate
-SELECT
-    option_value
-FROM INFORMATION_SCHEMA.ORGANIZATION_OPTIONS
-WHERE option_name = 'default_location'
-```
+    SELECT
+        option_value
+    FROM INFORMATION_SCHEMA.ORGANIZATION_OPTIONS
+    WHERE option_name = 'default_location'
 
 To view all effective global configurations for your default project, run the following query:
 
-``` notranslate
-SELECT * FROM INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS;
-```
+    SELECT * FROM INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS;
 
 To view just the default location effective global configuration for your default project, run the following query:
 
-``` notranslate
-SELECT
-    option_value
-FROM INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS
-WHERE option_name = 'default_location'
-```
+    SELECT
+        option_value
+    FROM INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS
+    WHERE option_name = 'default_location'
 
 To view all global configurations for your default project, run the following query:
 
-``` notranslate
-SELECT * FROM INFORMATION_SCHEMA.PROJECT_OPTIONS;
-```
+    SELECT * FROM INFORMATION_SCHEMA.PROJECT_OPTIONS;
 
 To view just the default location setting for your default project, run the following query:
 
-``` notranslate
-SELECT
-    option_value
-FROM INFORMATION_SCHEMA.PROJECT_OPTIONS
-WHERE option_name = 'default_location'
-```
+    SELECT
+        option_value
+    FROM INFORMATION_SCHEMA.PROJECT_OPTIONS
+    WHERE option_name = 'default_location'
 
 #### View regional settings
 
 To view the configurations under an organization in the `us` region, run the following query:
 
-``` notranslate
-SELECT * FROM region-us.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS;
-```
+    SELECT * FROM region-us.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS;
 
 To view the effective configurations under your default project in the `us` region, run the following query:
 
-``` notranslate
-SELECT * FROM region-us.INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS;
-```
+    SELECT * FROM region-us.INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS;
 
 To view the configurations under your default project in the `us` region, run the following query:
 
-``` notranslate
-SELECT * FROM region-us.INFORMATION_SCHEMA.PROJECT_OPTIONS;
-```
+    SELECT * FROM region-us.INFORMATION_SCHEMA.PROJECT_OPTIONS;
 
 ## Configuration settings
 
@@ -537,6 +511,8 @@ Use the following settings to determine how resources are billed and connected.
 
   - `default_storage_billing_model` : The default storage billing model for new datasets. Set the value to `PHYSICAL` to use physical bytes when calculating storage charges or to `LOGICAL` to use logical bytes. Note that changing the default storage billing model does not affect existing datasets. For more information, see [Storage billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
   - `default_cloud_resource_connection_id` : The default connection to use when creating tables and models. Only specify the connection's ID or name, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you're creating. For more information, see the [Default connection overview](https://docs.cloud.google.com/bigquery/docs/default-connections) .
+  - `reservation_override_mode` : Specifies how query reservations can be overridden in the region (for example, `'ALLOW_ANY_OVERRIDE'` ). For details, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
+  - `disable_on_demand_billing` : Determines whether on-demand billing is disabled for queries in the region. If `true` , all queries must use an assigned reservation or they fail. For details, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
 
 ## Pricing
 

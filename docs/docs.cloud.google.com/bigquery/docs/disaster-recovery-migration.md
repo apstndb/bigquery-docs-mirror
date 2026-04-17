@@ -104,14 +104,12 @@ To create a reservation, use the [`CREATE RESERVATION` data definition language 
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE RESERVATION
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-    OPTIONS (
-      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-      edition = ENTERPRISE_PLUS,
-      secondary_location = SECONDARY_LOCATION);
-    ```
+        CREATE RESERVATION
+          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+        OPTIONS (
+          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+          edition = ENTERPRISE_PLUS,
+          secondary_location = SECONDARY_LOCATION);
     
     Replace the following:
     
@@ -159,12 +157,10 @@ To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL st
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA
-      `DATASET_NAME`
-    SET OPTIONS (
-      failover_reservation = ADMIN_PROJECT_ID.RESERVATION_NAME);
-    ```
+        ALTER SCHEMA
+          `DATASET_NAME`
+        SET OPTIONS (
+          failover_reservation = ADMIN_PROJECT_ID.RESERVATION_NAME);
     
     Replace the following:
     

@@ -80,14 +80,12 @@ To see metadata for a table snapshot, query the [`INFORMATION_SCHEMA.TABLE_SNAPS
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      PROJECT_ID.DATASET_NAME.INFORMATION_SCHEMA.TABLE_SNAPSHOTS
-    WHERE
-      table_name = 'SNAPSHOT_NAME';
-    ```
+        SELECT
+          *
+        FROM
+          PROJECT_ID.DATASET_NAME.INFORMATION_SCHEMA.TABLE_SNAPSHOTS
+        WHERE
+          table_name = 'SNAPSHOT_NAME';
     
     Replace the following:
     
@@ -103,11 +101,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command in the Cloud Shell:
 
-``` notranslate
-bq show \
---format=prettyjson \
-PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
-```
+    bq show \
+    --format=prettyjson \
+    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 
 Replace the following:
 
@@ -117,26 +113,24 @@ Replace the following:
 
 The output is similar to the following:
 
-``` notranslate
-{
-  "creationTime": "1593194331936",
-   ...
-  "snapshotDefinition": {
-    "baseTableReference": {
-      "datasetId": "myDataset",
-      "projectId": "myProject",
-      "tableId": "mytable"
-    },
-    "snapshotTime": "2020-06-26T17:58:50.815Z"
-  },
-  "tableReference": {
-    "datasetId": "otherDataset",
-    "projectId": "myProject",
-    "tableId": "mySnapshot"
-  },
-  "type": "SNAPSHOT"
-}
-```
+    {
+      "creationTime": "1593194331936",
+       ...
+      "snapshotDefinition": {
+        "baseTableReference": {
+          "datasetId": "myDataset",
+          "projectId": "myProject",
+          "tableId": "mytable"
+        },
+        "snapshotTime": "2020-06-26T17:58:50.815Z"
+      },
+      "tableReference": {
+        "datasetId": "otherDataset",
+        "projectId": "myProject",
+        "tableId": "mySnapshot"
+      },
+      "type": "SNAPSHOT"
+    }
 
 ### API
 
@@ -150,7 +144,7 @@ Call the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/re
 
 The response body is similar to the following:
 
-``` lang-json
+```json
 {
   "kind": "bigquery#table",
   "etag": "...",

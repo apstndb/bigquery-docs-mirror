@@ -6,7 +6,7 @@ For more information about which models support this function, see [End-to-end u
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.TRANSFORM(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) }
@@ -41,24 +41,22 @@ The following example returns feature data that has been preprocessed by using t
 
 Create the model that contains the `TRANSFORM` clause:
 
-``` notranslate
-CREATE OR REPLACE MODEL `mydataset.mymodel`
-  TRANSFORM(
-    species,
-    island,
-    ML.MAX_ABS_SCALER(culmen_length_mm) OVER () AS culmen_length_mm,
-    ML.MAX_ABS_SCALER(flipper_length_mm) OVER () AS flipper_length_mm,
-    sex,
-    body_mass_g)
-  OPTIONS (
-    model_type = 'linear_reg',
-    input_label_cols = ['body_mass_g'])
-AS (
-  SELECT *
-  FROM `bigquery-public-data.ml_datasets.penguins`
-  WHERE body_mass_g IS NOT NULL
-);
-```
+    CREATE OR REPLACE MODEL `mydataset.mymodel`
+      TRANSFORM(
+        species,
+        island,
+        ML.MAX_ABS_SCALER(culmen_length_mm) OVER () AS culmen_length_mm,
+        ML.MAX_ABS_SCALER(flipper_length_mm) OVER () AS flipper_length_mm,
+        sex,
+        body_mass_g)
+      OPTIONS (
+        model_type = 'linear_reg',
+        input_label_cols = ['body_mass_g'])
+    AS (
+      SELECT *
+      FROM `bigquery-public-data.ml_datasets.penguins`
+      WHERE body_mass_g IS NOT NULL
+    );
 
 Return feature data preprocessed by the model's `TRANSFORM` clause:
 
@@ -71,7 +69,7 @@ Return feature data preprocessed by the model's `TRANSFORM` clause:
 
 The result is similar to the following:
 
-``` console
+```console
 +-------------------------------------+--------+---------------------+---------------------+--------+-----------------+-------------+
 | species                             | island | culmen_length_mm    | flipper_length_mm   | sex    | culmen_depth_mm | body_mass_g |
 --------------------------------------+--------+ ------------------- +---------------------+--------+-----------------+-------------+

@@ -183,11 +183,9 @@ To give the `snapshot-bot` service account the permissions that it needs to take
 
 2.  Enter the following [`bq add-iam-policy-binding`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_add-iam-policy-binding) command:
     
-    ``` notranslate
-    bq add-iam-policy-binding \
-    --member=serviceAccount:snapshot-bot@PROJECT.iam.gserviceaccount.com \
-    --role=roles/bigquery.dataEditor DATASET.TABLE
-    ```
+        bq add-iam-policy-binding \
+        --member=serviceAccount:snapshot-bot@PROJECT.iam.gserviceaccount.com \
+        --role=roles/bigquery.dataEditor DATASET.TABLE
 
 BigQuery confirms that the new policy binding has been added.
 
@@ -233,29 +231,27 @@ These roles provide the permissions that the `snapshot-bot` service account need
 
 This section describes how to write a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) that creates a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of the `  DATASET . TABLE  ` table by using the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) . The snapshot is saved in the `  BACKUP  ` dataset and it expires after one day.
 
-``` notranslate
--- Declare variables
-DECLARE snapshot_name STRING;
-DECLARE expiration TIMESTAMP;
-DECLARE query STRING;
-
--- Set variables
-SET expiration = DATE_ADD(current_timestamp(), INTERVAL 1 DAY);
-SET snapshot_name = CONCAT(
-                      "BACKUP.TABLE_",
-                      FORMAT_DATETIME('%Y%m%d', current_date()));
-
--- Construct the query to create the snapshot
-SET query = CONCAT(
-              "CREATE SNAPSHOT TABLE ",
-              snapshot_name,
-              " CLONE mydataset.mytable OPTIONS(expiration_timestamp = TIMESTAMP '",
-              expiration,
-              "');");
-
--- Run the query
-EXECUTE IMMEDIATE query;
-```
+    -- Declare variables
+    DECLARE snapshot_name STRING;
+    DECLARE expiration TIMESTAMP;
+    DECLARE query STRING;
+    
+    -- Set variables
+    SET expiration = DATE_ADD(current_timestamp(), INTERVAL 1 DAY);
+    SET snapshot_name = CONCAT(
+                          "BACKUP.TABLE_",
+                          FORMAT_DATETIME('%Y%m%d', current_date()));
+    
+    -- Construct the query to create the snapshot
+    SET query = CONCAT(
+                  "CREATE SNAPSHOT TABLE ",
+                  snapshot_name,
+                  " CLONE mydataset.mytable OPTIONS(expiration_timestamp = TIMESTAMP '",
+                  expiration,
+                  "');");
+    
+    -- Run the query
+    EXECUTE IMMEDIATE query;
 
 ## Schedule the monthly query
 
@@ -267,21 +263,19 @@ EXECUTE IMMEDIATE query;
 
 2.  Enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
     
-    ``` notranslate
-    bq query --use_legacy_sql=false --display_name="Monthly snapshots of the TABLE table" \
-    --location="us" --schedule="1 of month 05:00" \
-    --project_id=PROJECT \
-    'DECLARE snapshot_name STRING;
-    DECLARE expiration TIMESTAMP;
-    DECLARE query STRING;
-    SET expiration = DATE_ADD(@run_time, INTERVAL 40 DAY);
-    SET snapshot_name = CONCAT("BACKUP.TABLE_",
-      FORMAT_DATETIME("%Y%m%d", @run_date));
-    SET query = CONCAT("CREATE SNAPSHOT TABLE ", snapshot_name,
-      " CLONE PROJECT.DATASET.TABLE OPTIONS(expiration_timestamp=TIMESTAMP \"",
-      expiration, "\");");
-    EXECUTE IMMEDIATE query;'
-    ```
+        bq query --use_legacy_sql=false --display_name="Monthly snapshots of the TABLE table" \
+        --location="us" --schedule="1 of month 05:00" \
+        --project_id=PROJECT \
+        'DECLARE snapshot_name STRING;
+        DECLARE expiration TIMESTAMP;
+        DECLARE query STRING;
+        SET expiration = DATE_ADD(@run_time, INTERVAL 40 DAY);
+        SET snapshot_name = CONCAT("BACKUP.TABLE_",
+          FORMAT_DATETIME("%Y%m%d", @run_date));
+        SET query = CONCAT("CREATE SNAPSHOT TABLE ", snapshot_name,
+          " CLONE PROJECT.DATASET.TABLE OPTIONS(expiration_timestamp=TIMESTAMP \"",
+          expiration, "\");");
+        EXECUTE IMMEDIATE query;'
 
 3.  BigQuery schedules the query.
 
@@ -297,9 +291,7 @@ The query is currently scheduled to run using your credentials. Update your sche
 
 1.  Run the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to get the identity of the scheduled query job:
     
-    ``` notranslate
-    bq ls --transfer_config=true --transfer_location=us
-    ```
+        bq ls --transfer_config=true --transfer_location=us
     
     The output looks similar to the following:
     
@@ -310,11 +302,9 @@ The query is currently scheduled to run using your credentials. Update your sche
 
 2.  Using the identifier in the **`name`** field, run the following [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command:
     
-    ``` notranslate
-    bq update --transfer_config --update_credentials \
-    --service_account_name=snapshot-bot@PROJECT.iam.gserviceaccount.com \
-    projects/12345/locations/us/transferConfigs/12345
-    ```
+        bq update --transfer_config --update_credentials \
+        --service_account_name=snapshot-bot@PROJECT.iam.gserviceaccount.com \
+        projects/12345/locations/us/transferConfigs/12345
 
 Cloud Shell confirms that the scheduled query has been successfully updated.
 

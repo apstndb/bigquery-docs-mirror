@@ -80,30 +80,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ## Create a table of input data
 
@@ -122,44 +116,42 @@ Follow these steps to create the input data table:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE TABLE `bqml_tutorial.seattle_air_quality_daily`
-    AS
-    WITH
-      pm25_daily AS (
+        CREATE TABLE `bqml_tutorial.seattle_air_quality_daily`
+        AS
+        WITH
+          pm25_daily AS (
+            SELECT
+              avg(arithmetic_mean) AS pm25, date_local AS date
+            FROM
+              `bigquery-public-data.epa_historical_air_quality.pm25_nonfrm_daily_summary`
+            WHERE
+              city_name = 'Seattle'
+              AND parameter_name = 'Acceptable PM2.5 AQI & Speciation Mass'
+            GROUP BY date_local
+          ),
+          wind_speed_daily AS (
+            SELECT
+              avg(arithmetic_mean) AS wind_speed, date_local AS date
+            FROM
+              `bigquery-public-data.epa_historical_air_quality.wind_daily_summary`
+            WHERE
+              city_name = 'Seattle' AND parameter_name = 'Wind Speed - Resultant'
+            GROUP BY date_local
+          ),
+          temperature_daily AS (
+            SELECT
+              avg(first_max_value) AS temperature, date_local AS date
+            FROM
+              `bigquery-public-data.epa_historical_air_quality.temperature_daily_summary`
+            WHERE
+              city_name = 'Seattle' AND parameter_name = 'Outdoor Temperature'
+            GROUP BY date_local
+          )
         SELECT
-          avg(arithmetic_mean) AS pm25, date_local AS date
-        FROM
-          `bigquery-public-data.epa_historical_air_quality.pm25_nonfrm_daily_summary`
-        WHERE
-          city_name = 'Seattle'
-          AND parameter_name = 'Acceptable PM2.5 AQI & Speciation Mass'
-        GROUP BY date_local
-      ),
-      wind_speed_daily AS (
-        SELECT
-          avg(arithmetic_mean) AS wind_speed, date_local AS date
-        FROM
-          `bigquery-public-data.epa_historical_air_quality.wind_daily_summary`
-        WHERE
-          city_name = 'Seattle' AND parameter_name = 'Wind Speed - Resultant'
-        GROUP BY date_local
-      ),
-      temperature_daily AS (
-        SELECT
-          avg(first_max_value) AS temperature, date_local AS date
-        FROM
-          `bigquery-public-data.epa_historical_air_quality.temperature_daily_summary`
-        WHERE
-          city_name = 'Seattle' AND parameter_name = 'Outdoor Temperature'
-        GROUP BY date_local
-      )
-    SELECT
-      pm25_daily.date AS date, pm25, wind_speed, temperature
-    FROM pm25_daily
-    JOIN wind_speed_daily USING (date)
-    JOIN temperature_daily USING (date);
-    ```
+          pm25_daily.date AS date, pm25, wind_speed, temperature
+        FROM pm25_daily
+        JOIN wind_speed_daily USING (date)
+        JOIN temperature_daily USING (date);
 
 ## Visualize the input data
 
@@ -171,12 +163,10 @@ Follow these steps to visualize the time series data:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      `bqml_tutorial.seattle_air_quality_daily`;
-    ```
+        SELECT
+          *
+        FROM
+          `bqml_tutorial.seattle_air_quality_daily`;
 
 3.  When the query completes, click **Open in** \> **Data Studio** . Data Studio opens in a new tab. Complete the following steps in the new tab.
 
@@ -204,27 +194,25 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE
-      MODEL
-        `bqml_tutorial.seattle_pm25_xreg_model`
-      OPTIONS (
-        MODEL_TYPE = 'ARIMA_PLUS_XREG',
-        time_series_timestamp_col = 'date',  # Identifies the column that contains time points
-        time_series_data_col = 'pm25')       # Identifies the column to forecast
-    AS
-    SELECT
-      date,                                  # The column that contains time points
-      pm25,                                  # The column to forecast
-      temperature,                           # Temperature input to use in forecasting
-      wind_speed                             # Wind speed input to use in forecasting
-    FROM
-      `bqml_tutorial.seattle_air_quality_daily`
-    WHERE
-      date
-      BETWEEN DATE('2012-01-01')
-      AND DATE('2020-12-31');
-    ```
+        CREATE OR REPLACE
+          MODEL
+            `bqml_tutorial.seattle_pm25_xreg_model`
+          OPTIONS (
+            MODEL_TYPE = 'ARIMA_PLUS_XREG',
+            time_series_timestamp_col = 'date',  # Identifies the column that contains time points
+            time_series_data_col = 'pm25')       # Identifies the column to forecast
+        AS
+        SELECT
+          date,                                  # The column that contains time points
+          pm25,                                  # The column to forecast
+          temperature,                           # Temperature input to use in forecasting
+          wind_speed                             # Wind speed input to use in forecasting
+        FROM
+          `bqml_tutorial.seattle_air_quality_daily`
+        WHERE
+          date
+          BETWEEN DATE('2012-01-01')
+          AND DATE('2020-12-31');
     
     The query takes about 20 seconds to complete, after which you can access the `seattle_pm25_xreg_model` model. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -240,12 +228,10 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-     *
-    FROM
-     ML.ARIMA_EVALUATE(MODEL `bqml_tutorial.seattle_pm25_xreg_model`);
-    ```
+        SELECT
+         *
+        FROM
+         ML.ARIMA_EVALUATE(MODEL `bqml_tutorial.seattle_pm25_xreg_model`);
     
     The results should look similar to the following:
     
@@ -273,12 +259,10 @@ Follow these steps to retrieve the model's coefficients:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-     *
-    FROM
-     ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.seattle_pm25_xreg_model`);
-    ```
+        SELECT
+         *
+        FROM
+         ML.ARIMA_COEFFICIENTS(MODEL `bqml_tutorial.seattle_pm25_xreg_model`);
     
     The results should look similar to the following:
     
@@ -302,24 +286,22 @@ Follow these steps to forecast data with the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.FORECAST(
-        MODEL `bqml_tutorial.seattle_pm25_xreg_model`,
-        STRUCT(30 AS horizon, 0.8 AS confidence_level),
-        (
-          SELECT
-            date,
-            temperature,
-            wind_speed
-          FROM
-            `bqml_tutorial.seattle_air_quality_daily`
-          WHERE
-            date > DATE('2020-12-31')
-        ));
-    ```
+        SELECT
+          *
+        FROM
+          ML.FORECAST(
+            MODEL `bqml_tutorial.seattle_pm25_xreg_model`,
+            STRUCT(30 AS horizon, 0.8 AS confidence_level),
+            (
+              SELECT
+                date,
+                temperature,
+                wind_speed
+              FROM
+                `bqml_tutorial.seattle_air_quality_daily`
+              WHERE
+                date > DATE('2020-12-31')
+            ));
     
     The results should look similar to the following:
     
@@ -341,27 +323,25 @@ Follow these steps to evaluate the model's accuracy:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.EVALUATE(
-        MODEL `bqml_tutorial.seattle_pm25_xreg_model`,
-        (
-          SELECT
-            date,
-            pm25,
-            temperature,
-            wind_speed
-          FROM
-            `bqml_tutorial.seattle_air_quality_daily`
-          WHERE
-            date > DATE('2020-12-31')
-        ),
-        STRUCT(
-          TRUE AS perform_aggregation,
-          30 AS horizon));
-    ```
+        SELECT
+          *
+        FROM
+          ML.EVALUATE(
+            MODEL `bqml_tutorial.seattle_pm25_xreg_model`,
+            (
+              SELECT
+                date,
+                pm25,
+                temperature,
+                wind_speed
+              FROM
+                `bqml_tutorial.seattle_air_quality_daily`
+              WHERE
+                date > DATE('2020-12-31')
+            ),
+            STRUCT(
+              TRUE AS perform_aggregation,
+              30 AS horizon));
     
     The results should look similar to the following:
     
@@ -381,24 +361,22 @@ Follow these steps to explain the model's results:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-      *
-    FROM
-      ML.EXPLAIN_FORECAST(
-        MODEL `bqml_tutorial.seattle_pm25_xreg_model`,
-        STRUCT(30 AS horizon, 0.8 AS confidence_level),
-        (
-          SELECT
-            date,
-            temperature,
-            wind_speed
-          FROM
-            `bqml_tutorial.seattle_air_quality_daily`
-          WHERE
-            date > DATE('2020-12-31')
-        ));
-    ```
+        SELECT
+          *
+        FROM
+          ML.EXPLAIN_FORECAST(
+            MODEL `bqml_tutorial.seattle_pm25_xreg_model`,
+            STRUCT(30 AS horizon, 0.8 AS confidence_level),
+            (
+              SELECT
+                date,
+                temperature,
+                wind_speed
+              FROM
+                `bqml_tutorial.seattle_air_quality_daily`
+              WHERE
+                date > DATE('2020-12-31')
+            ));
     
     The results should look similar to the following:
     

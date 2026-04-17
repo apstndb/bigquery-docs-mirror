@@ -228,15 +228,13 @@ Select one of the following options:
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-``` notranslate
-bq mk \
-    --transfer_config \
-    --project_id=PROJECT_ID \
-    --data_source=DATA_SOURCE \
-    --display_name=DISPLAY_NAME \
-    --target_dataset=DATASET \
-    --params='PARAMETERS'
-```
+    bq mk \
+        --transfer_config \
+        --project_id=PROJECT_ID \
+        --data_source=DATA_SOURCE \
+        --display_name=DISPLAY_NAME \
+        --target_dataset=DATASET \
+        --params='PARAMETERS'
 
 Replace the following:
 
@@ -263,7 +261,7 @@ Replace the following:
           - `ENCRYPT_VERIFY_NONE` for data encryption only
           - `DISABLE` for no encryption or verification
       - `connector.tls.trustedServerCertificate` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#trusted_server_certificate_pem) . Required only if the value of `connector.tls.mode` is `ENCRYPT_VERIFY_CA_AND_HOST` or `ENCRYPT_VERIFY_CA` .
-      - `ingestionType` : specify either `FULL` or `INCREMENTAL` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#full_or_incremental_transfers) .
+      - `ingestionType` : specify either `full` or `incremental` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#full_or_incremental_transfers) .
       - `writeMode` : specify either `WRITE_MODE_APPEND` or `WRITE_MODE_UPSERT` .
       - `watermarkColumns` : specify columns in your table as watermark columns. This field is required for incremental transfers.
       - `primaryKeys` : specify columns in your table as primary keys. This field is required for incremental transfers.
@@ -271,30 +269,28 @@ Replace the following:
 
 For example, the following command creates a Microsoft SQL Server transfer called `My Transfer` :
 
-``` notranslate
-bq mk \
-    --transfer_config
-    --target_dataset=mydataset
-    --data_source=sqlserver
-    --display_name='My Transfer'
-    --params='{"assets":["DB1/DEPARTMENT","DB1/EMPLOYEES"],
-        "connector.authentication.username": "User1",
-        "connector.authentication.password":"ABC12345",
-        "connector.database":"DB1",
-        "connector.endpoint.host":"192.168.0.1",
-        "connector.endpoint.port":"1520",
-        "connector.networkAttachment":"projects/dev-project1/regions/us-central1/networkattachments/na1",
-        "ingestionType":"incremental",
-        "writeMode":"WRITE_MODE_APPEND",
-        "watermarkColumns":["createdAt","createdAt"],
-        "primaryKeys":[['dep_id'], ['report_by','report_title']],
-        "connector.tls.mode": "ENCRYPT_VERIFY_CA_AND_HOST",
-        "connector.tls.trustedServerCertificate": "PEM-encoded certificate"}'
-```
+    bq mk \
+        --transfer_config
+        --target_dataset=mydataset
+        --data_source=sqlserver
+        --display_name='My Transfer'
+        --params='{"assets":["DB1/DEPARTMENT","DB1/EMPLOYEES"],
+            "connector.authentication.username": "User1",
+            "connector.authentication.password":"ABC12345",
+            "connector.database":"DB1",
+            "connector.endpoint.host":"192.168.0.1",
+            "connector.endpoint.port":"1520",
+            "connector.networkAttachment":"projects/dev-project1/regions/us-central1/networkattachments/na1",
+            "ingestionType":"incremental",
+            "writeMode":"WRITE_MODE_APPEND",
+            "watermarkColumns":["createdAt","createdAt"],
+            "primaryKeys":[['dep_id'], ['report_by','report_title']],
+            "connector.tls.mode": "ENCRYPT_VERIFY_CA_AND_HOST",
+            "connector.tls.trustedServerCertificate": "PEM-encoded certificate"}'
 
 When specifying multiple assets during an incremental transfer, the values of the `watermarkColumns` and `primaryKeys` fields correspond to the position of values in the `assets` field. In the following example, `dep_id` corresponds to the table `DB1/DEPARTMENT` , while `report_by` and `report_title` corresponds to the table `DB1/EMPLOYEES` .
 
-``` notranslate
+``` 
       "primaryKeys":[['dep_id'], ['report_by','report_title']],
       "assets":["DB1/DEPARTMENT","DB1/EMPLOYEES"],
   

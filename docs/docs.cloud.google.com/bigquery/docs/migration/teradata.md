@@ -85,11 +85,9 @@ Before you create a credential file, you must have [created a service account ke
 
 Once you have the required information, create a credential file. The following is an example credential file with a default location of `$HOME/.gcs/credentials` :
 
-``` notranslate
-[default]
-gcs_access_key_id = ACCESS_ID
-gcs_secret_access_key = ACCESS_KEY
-```
+    [default]
+    gcs_access_key_id = ACCESS_ID
+    gcs_secret_access_key = ACCESS_KEY
 
 Replace the following:
 
@@ -182,16 +180,14 @@ Enter the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli
 
 <!-- end list -->
 
-``` notranslate
-bq mk \
---transfer_config \
---project_id=project ID \
---target_dataset=dataset \
---display_name=name \
---service_account_name=service_account \
---params='parameters' \
---data_source=data source
-```
+    bq mk \
+    --transfer_config \
+    --project_id=project ID \
+    --target_dataset=dataset \
+    --display_name=name \
+    --service_account_name=service_account \
+    --params='parameters' \
+    --data_source=data source
 
 Where:
 
@@ -213,18 +209,16 @@ Where:
 
 For example, the following command creates a Teradata transfer named `My Transfer` using Cloud Storage bucket `mybucket` and target dataset `mydataset` . The transfer will migrate all tables from the Teradata data warehouse `mydatabase` and the optional schema file is `myschemafile.json` .
 
-``` notranslate
-bq mk \
---transfer_config \
---project_id=123456789876 \
---target_dataset=MyDataset \
---display_name='My Migration' \
---params='{"bucket": "mybucket", "database_type": "Teradata",
-"database_name":"mydatabase", "table_name_patterns": ".*",
-"agent_service_account":"myemail@mydomain.com", "schema_file_path":
-"gs://mybucket/myschemafile.json", "is_direct_gcs_unload_enabled": true}' \
---data_source=on_premises
-```
+    bq mk \
+    --transfer_config \
+    --project_id=123456789876 \
+    --target_dataset=MyDataset \
+    --display_name='My Migration' \
+    --params='{"bucket": "mybucket", "database_type": "Teradata",
+    "database_name":"mydatabase", "table_name_patterns": ".*",
+    "agent_service_account":"myemail@mydomain.com", "schema_file_path":
+    "gs://mybucket/myschemafile.json", "is_direct_gcs_unload_enabled": true}' \
+    --data_source=on_premises
 
 After running the command, you receive a message like the following:
 
@@ -313,31 +307,25 @@ If you are going to use the migration agent to create a custom schema file, ensu
 
 1.  Open a new session. On the command line, issue the initialization command, which follows this form:
     
-    ``` notranslate
-    java -cp \
-    OS-specific-separated-paths-to-jars (JDBC and agent) \
-    com.google.cloud.bigquery.dms.Agent \
-    --initialize
-    ```
+        java -cp \
+        OS-specific-separated-paths-to-jars (JDBC and agent) \
+        com.google.cloud.bigquery.dms.Agent \
+        --initialize
     
     The following example shows the initialization command when the JDBC driver and migration agent JAR files are in a local `migration` directory:
     
     ### Unix, Linux, Mac OS
     
-    ``` notranslate
-    java -cp \
-    /usr/local/migration/terajdbc4.jar:/usr/local/migration/mirroring-agent.jar \
-    com.google.cloud.bigquery.dms.Agent \
-    --initialize
-    ```
+        java -cp \
+        /usr/local/migration/terajdbc4.jar:/usr/local/migration/mirroring-agent.jar \
+        com.google.cloud.bigquery.dms.Agent \
+        --initialize
     
     ### Windows
     
     Copy all the files into the `C:\migration` folder (or adjust the paths in the command), then run:
     
-    ``` notranslate
-    java -cp C:\migration\terajdbc4.jar;C:\migration\mirroring-agent.jar com.google.cloud.bigquery.dms.Agent --initialize
-    ```
+        java -cp C:\migration\terajdbc4.jar;C:\migration\mirroring-agent.jar com.google.cloud.bigquery.dms.Agent --initialize
 
 2.  When prompted, configure the following options:
     
@@ -600,29 +588,23 @@ After initializing the migration agent and creating the configuration file, use 
     
     > The migration agent must keep running for the entire period of the transfer. If you run the agent remotely, for example by using SSH, make sure it remains active even if the remote connection is closed. You can do this by using \`tmux\` or similar utilities.
     
-    ``` notranslate
-    java -cp \
-    OS-specific-separated-paths-to-jars (JDBC and agent) \
-    com.google.cloud.bigquery.dms.Agent \
-    --configuration-file=path to configuration file
-    ```
+        java -cp \
+        OS-specific-separated-paths-to-jars (JDBC and agent) \
+        com.google.cloud.bigquery.dms.Agent \
+        --configuration-file=path to configuration file
     
     ### Unix, Linux, Mac OS
     
-    ``` notranslate
-    java -cp \
-    /usr/local/migration/Teradata/JDBC/terajdbc4.jar:mirroring-agent.jar \
-    com.google.cloud.bigquery.dms.Agent \
-    --configuration-file=config.json
-    ```
+        java -cp \
+        /usr/local/migration/Teradata/JDBC/terajdbc4.jar:mirroring-agent.jar \
+        com.google.cloud.bigquery.dms.Agent \
+        --configuration-file=config.json
     
     ### Windows
     
     Copy all the files into the `C:\migration` folder (or adjust the paths in the command), then run:
     
-    ``` notranslate
-    java -cp C:\migration\terajdbc4.jar;C:\migration\mirroring-agent.jar com.google.cloud.bigquery.dms.Agent --configuration-file=config.json
-    ```
+        java -cp C:\migration\terajdbc4.jar;C:\migration\mirroring-agent.jar com.google.cloud.bigquery.dms.Agent --configuration-file=config.json
     
     If you are ready to proceed with the migration, press `Enter` and the agent will proceed if the classpath provided during initialization is valid.
 

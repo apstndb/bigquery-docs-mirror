@@ -23,17 +23,13 @@ Functions are evaluated right before the data is written to the table during job
 
 You can set the default value for columns when you create a new table. You use the [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and add the `DEFAULT` keyword and default value expression after the column name and type. The following example creates a table called `simple_table` with two `STRING` columns, `a` and `b` . Column `b` has the default value `'hello'` .
 
-``` notranslate
-CREATE TABLE mydataset.simple_table (
-  a STRING,
-  b STRING DEFAULT 'hello');
-```
+    CREATE TABLE mydataset.simple_table (
+      a STRING,
+      b STRING DEFAULT 'hello');
 
 When you insert data into `simple_table` that omits column `b` , the default value `'hello'` is used instead—for example:
 
-``` notranslate
-INSERT mydataset.simple_table (a) VALUES ('val1'), ('val2');
-```
+    INSERT mydataset.simple_table (a) VALUES ('val1'), ('val2');
 
 The table `simple_table` contains the following values:
 
@@ -46,13 +42,11 @@ The table `simple_table` contains the following values:
 
 If a column has type `STRUCT` , then you must set the default value for the entire `STRUCT` field. You cannot set the default value for a subset of the fields. The default value for an array cannot be `NULL` or contain any `NULL` elements. The following example creates a table called `complex_table` and sets a default value for the column `struct_col` , which contains nested fields, including an `ARRAY` type:
 
-``` notranslate
-CREATE TABLE mydataset.complex_table (
-  struct_col STRUCT<x STRUCT<x1 TIMESTAMP, x2 NUMERIC>, y ARRAY<DATE>>
-    DEFAULT ((CURRENT_TIMESTAMP(), NULL),
-             [DATE '2022-01-01', CURRENT_DATE()])
-);
-```
+    CREATE TABLE mydataset.complex_table (
+      struct_col STRUCT<x STRUCT<x1 TIMESTAMP, x2 NUMERIC>, y ARRAY<DATE>>
+        DEFAULT ((CURRENT_TIMESTAMP(), NULL),
+                 [DATE '2022-01-01', CURRENT_DATE()])
+    );
 
 You can't set default values that violate a constraint on the column, such as a default value that doesn't conform to a [parameterized type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) or a `NULL` default value when the column's [mode](https://docs.cloud.google.com/bigquery/docs/schemas#modes) is `REQUIRED` .
 
@@ -92,10 +86,8 @@ Use the [`ALTER COLUMN SET DEFAULT` DDL statement](https://docs.cloud.google.com
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    ALTER COLUMN column_name SET DEFAULT default_expression;
-    ```
+        ALTER TABLE mydataset.mytable
+        ALTER COLUMN column_name SET DEFAULT default_expression;
 
 3.  Click play\_circle **Run** .
 
@@ -103,15 +95,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Setting the default value for a column only affects future inserts to the table. It does not change any existing table data. The following example sets the default value of column `a` to `SESSION_USER()` ;
 
-``` notranslate
-ALTER TABLE mydataset.simple_table ALTER COLUMN a SET DEFAULT SESSION_USER();
-```
+    ALTER TABLE mydataset.simple_table ALTER COLUMN a SET DEFAULT SESSION_USER();
 
 If you insert a row into `simple_table` that omits column `a` , the current session user is used instead.
 
-``` notranslate
-INSERT mydataset.simple_table (b) VALUES ('goodbye');
-```
+    INSERT mydataset.simple_table (b) VALUES ('goodbye');
 
 The table `simple_table` contains the following values:
 
@@ -159,9 +147,7 @@ Use the [`ALTER COLUMN DROP DEFAULT` DDL statement](https://docs.cloud.google.co
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable ALTER COLUMN column_name DROP DEFAULT;
-    ```
+        ALTER TABLE mydataset.mytable ALTER COLUMN column_name DROP DEFAULT;
     
     You can also remove the default value from a column by changing its value to `NULL` with the [`ALTER COLUMN SET DEFAULT` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_default_statement) .
 
@@ -173,14 +159,12 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 You can add rows with default values to a table by using the [`INSERT` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) . The default value is used when the value for a column is not specified, or when the keyword `DEFAULT` is used in place of the value expression. The following example creates a table and inserts a row where every value is the default value:
 
-``` notranslate
-CREATE TABLE mydataset.mytable (
-  x TIME DEFAULT CURRENT_TIME(),
-  y INT64 DEFAULT 5,
-  z BOOL);
-
-INSERT mydataset.mytable (x, y, z) VALUES (DEFAULT, DEFAULT, DEFAULT);
-```
+    CREATE TABLE mydataset.mytable (
+      x TIME DEFAULT CURRENT_TIME(),
+      y INT64 DEFAULT 5,
+      z BOOL);
+    
+    INSERT mydataset.mytable (x, y, z) VALUES (DEFAULT, DEFAULT, DEFAULT);
 
 The table `mytable` looks like the following:
 
@@ -192,9 +176,7 @@ The table `mytable` looks like the following:
 
 Column `z` doesn't have a default value, so `NULL` is used as the default. When the default value is a function, such as `CURRENT_TIME()` , it is evaluated at the time the value is written. Calling `INSERT` with the default value for column `x` again results in a different value for `TIME` . In the following example, only column `z` has a value set explicitly, and the omitted columns use their default values:
 
-``` notranslate
-INSERT mydataset.mytable (z) VALUES (TRUE);
-```
+    INSERT mydataset.mytable (z) VALUES (TRUE);
 
 The table `mytable` looks like the following:
 
@@ -207,36 +189,34 @@ The table `mytable` looks like the following:
 
 You can update a table with default values by using the [`MERGE` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) . The following example creates two tables and updates one of them with a `MERGE` statement:
 
-``` notranslate
-CREATE TABLE mydataset.target_table (
-  a STRING,
-  b STRING DEFAULT 'default_b',
-  c STRING DEFAULT SESSION_USER())
-AS (
-  SELECT
-    'val1' AS a, 'hi' AS b, '123@google.com' AS c
-  UNION ALL
-  SELECT
-    'val2' AS a, 'goodbye' AS b, SESSION_USER() AS c
-);
-
-CREATE TABLE mydataset.source_table (
-  a STRING DEFAULT 'default_val',
-  b STRING DEFAULT 'Happy day!')
-AS (
-  SELECT
-    'val1' AS a, 'Good evening！' AS b
-  UNION ALL
-  SELECT
-    'val3' AS a, 'Good morning!' AS b
-);
-
-MERGE mydataset.target_table T
-USING mydataset.source_table S
-ON T.a = S.a
-WHEN NOT MATCHED THEN
-  INSERT(a, b) VALUES (a, DEFAULT);
-```
+    CREATE TABLE mydataset.target_table (
+      a STRING,
+      b STRING DEFAULT 'default_b',
+      c STRING DEFAULT SESSION_USER())
+    AS (
+      SELECT
+        'val1' AS a, 'hi' AS b, '123@google.com' AS c
+      UNION ALL
+      SELECT
+        'val2' AS a, 'goodbye' AS b, SESSION_USER() AS c
+    );
+    
+    CREATE TABLE mydataset.source_table (
+      a STRING DEFAULT 'default_val',
+      b STRING DEFAULT 'Happy day!')
+    AS (
+      SELECT
+        'val1' AS a, 'Good evening！' AS b
+      UNION ALL
+      SELECT
+        'val3' AS a, 'Good morning!' AS b
+    );
+    
+    MERGE mydataset.target_table T
+    USING mydataset.source_table S
+    ON T.a = S.a
+    WHEN NOT MATCHED THEN
+      INSERT(a, b) VALUES (a, DEFAULT);
 
 The result is the following:
 
@@ -250,11 +230,9 @@ The result is the following:
 
 You can update a table with default values by using the [`UPDATE` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) . The following example updates the table `source_table` so that each row of column `b` is equal to its default value:
 
-``` notranslate
-UPDATE mydataset.source_table
-SET b =  DEFAULT
-WHERE TRUE;
-```
+    UPDATE mydataset.source_table
+    SET b =  DEFAULT
+    WHERE TRUE;
 
 The result is the following:
 
@@ -269,13 +247,11 @@ The result is the following:
 
 You can use the `bq query` command with the `--append_table` flag to append the results of a query to a destination table that has default values. If the query omits a column with a default value, the default value is assigned. The following example appends data that specifies values only for column `z` :
 
-``` notranslate
-bq query \
-    --nouse_legacy_sql \
-    --append_table \
-    --destination_table=mydataset.mytable \
-    'SELECT FALSE AS z UNION ALL SELECT FALSE AS Z'
-```
+    bq query \
+        --nouse_legacy_sql \
+        --append_table \
+        --destination_table=mydataset.mytable \
+        'SELECT FALSE AS z UNION ALL SELECT FALSE AS Z'
 
 The table `mytable` uses default values for columns `x` and `y` :
 
@@ -296,60 +272,52 @@ Binary formats, such as AVRO, Parquet, or ORC, have encoded file schemas. When t
 
 Text formats, such as JSON and CSV, don't have encoded file schema. To specify their schema using the bq command-line tool, you can use the `--autodetect` flag or supply a [JSON schema](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . To specify their schema using the `LOAD DATA` statement, you must provide a list of columns. The following is an example that loads only column `a` from a CSV file:
 
-``` notranslate
-LOAD DATA INTO mydataset.insert_table (a)
-FROM FILES(
-  uris = ['gs://test-bucket/sample.csv'],
-  format = 'CSV');
-```
+    LOAD DATA INTO mydataset.insert_table (a)
+    FROM FILES(
+      uris = ['gs://test-bucket/sample.csv'],
+      format = 'CSV');
 
 ## Write API
 
 The Storage Write API only populates default values when the [write stream](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream) schema is missing a field that is contained in the destination table schema. In this case, the missing field is populated with the default value on the column for every write. If the field exists in the write stream schema but is missing from the data itself, then the missing field is populated with `NULL` . For example, suppose you are writing data to a BigQuery table with the following schema:
 
-``` notranslate
-[
-  {
-    "name": "a",
-    "mode": "NULLABLE",
-    "type": "STRING",
-  },
-  {
-    "name": "b",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "defaultValueExpression": "'default_b'"
-  },
-  {
-    "name": "c",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "defaultValueExpression": "'default_c'"
-  }
-]
-```
+    [
+      {
+        "name": "a",
+        "mode": "NULLABLE",
+        "type": "STRING",
+      },
+      {
+        "name": "b",
+        "mode": "NULLABLE",
+        "type": "STRING",
+        "defaultValueExpression": "'default_b'"
+      },
+      {
+        "name": "c",
+        "mode": "NULLABLE",
+        "type": "STRING",
+        "defaultValueExpression": "'default_c'"
+      }
+    ]
 
 The following [write stream schema](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.TableSchema) is missing the field `c` that is present in the destination table:
 
-``` notranslate
-[
-  {
-    "name": "a",
-    "type": "STRING",
-  },
-  {
-    "name": "b",
-    "type": "STRING",
-  }
-]
-```
+    [
+      {
+        "name": "a",
+        "type": "STRING",
+      },
+      {
+        "name": "b",
+        "type": "STRING",
+      }
+    ]
 
 Suppose you stream the following values to the table:
 
-``` notranslate
-{'a': 'val_a', 'b': 'val_b'}
-{'a': 'val_a'}
-```
+    {'a': 'val_a', 'b': 'val_b'}
+    {'a': 'val_a'}
 
 The result is the following:
 
@@ -364,29 +332,25 @@ The write stream schema contains the field `b` , so the default value `default_b
 
 The following write stream schema matches the schema of the table you're writing to:
 
-``` notranslate
-[
-  {
-    "name": "a",
-    "type": "STRING",
-  },
-  {
-    "name": "b",
-    "type": "STRING",
-  }
-  {
-    "name": "c",
-    "type": "STRING",
-  }
-]
-```
+    [
+      {
+        "name": "a",
+        "type": "STRING",
+      },
+      {
+        "name": "b",
+        "type": "STRING",
+      }
+      {
+        "name": "c",
+        "type": "STRING",
+      }
+    ]
 
 Suppose you stream the following values to the table:
 
-``` notranslate
-{'a': 'val_a', 'b': 'val_b'}
-{'a': 'val_a'}
-```
+    {'a': 'val_a', 'b': 'val_b'}
+    {'a': 'val_a'}
 
 The write stream schema isn't missing any fields contained in the destination table, so none of the columns' default values are applied, regardless of whether the fields are populated in the streamed data:
 
@@ -413,35 +377,31 @@ The [`tabledata.insertAll` API method](https://docs.cloud.google.com/bigquery/do
 
 For example, suppose you have the following table schema:
 
-``` notranslate
-[
-  {
-    "name": "a",
-    "mode": "NULLABLE",
-    "type": "STRING",
-  },
-  {
-    "name": "b",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "defaultValueExpression": "'default_b'"
-  },
-  {
-    "name": "c",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "defaultValueExpression": "'default_c'"
-  }
-]
-```
+    [
+      {
+        "name": "a",
+        "mode": "NULLABLE",
+        "type": "STRING",
+      },
+      {
+        "name": "b",
+        "mode": "NULLABLE",
+        "type": "STRING",
+        "defaultValueExpression": "'default_b'"
+      },
+      {
+        "name": "c",
+        "mode": "NULLABLE",
+        "type": "STRING",
+        "defaultValueExpression": "'default_c'"
+      }
+    ]
 
 Suppose you stream the following values to the table:
 
-``` notranslate
-{'a': 'val_a', 'b': 'val_b'}
-{'a': 'val_a'}
-{}
-```
+    {'a': 'val_a', 'b': 'val_b'}
+    {'a': 'val_a'}
+    {}
 
 The result is the following:
 
@@ -459,15 +419,13 @@ The first inserted row doesn't contain a value for the field `c` , so the defaul
 
 To see the default value for a column, query the [`INFORMATION_SCHEMA.COLUMNS` view]() . The `column_default` column field contains the default value for the column. If no default value is set, it is `NULL` . The following example shows the column names and default values for the table `mytable` :
 
-``` notranslate
-SELECT
-  column_name,
-  column_default
-FROM
-  mydataset.INFORMATION_SCHEMA.COLUMNS
-WHERE
-  table_name = 'mytable';
-```
+    SELECT
+      column_name,
+      column_default
+    FROM
+      mydataset.INFORMATION_SCHEMA.COLUMNS
+    WHERE
+      table_name = 'mytable';
 
 The result is similar to the following:
 

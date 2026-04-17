@@ -82,14 +82,12 @@ For example, `example-project.mydataset.INFORMATION_SCHEMA.JOBS_BY_PROJECT` .
 
 The following example retrieves all parameters from the `INFORMATION_SCHEMA.PARAMETERS` view. The metadata returned is for routines in `mydataset` in your default project — `myproject` .
 
-``` notranslate
-SELECT
-  * EXCEPT(is_typed)
-FROM
-  mydataset.INFORMATION_SCHEMA.PARAMETERS
-WHERE
-  table_type = 'BASE TABLE';
-```
+    SELECT
+      * EXCEPT(is_typed)
+    FROM
+      mydataset.INFORMATION_SCHEMA.PARAMETERS
+    WHERE
+      table_type = 'BASE TABLE';
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 

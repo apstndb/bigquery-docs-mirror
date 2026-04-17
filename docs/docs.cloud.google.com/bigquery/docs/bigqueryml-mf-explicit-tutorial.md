@@ -77,30 +77,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -217,22 +211,20 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL `bqml_tutorial.mf_explicit`
-    OPTIONS (
-      MODEL_TYPE = 'matrix_factorization',
-      FEEDBACK_TYPE = 'explicit',
-      USER_COL = 'user_id',
-      ITEM_COL = 'item_id',
-      L2_REG = 9.83,
-      NUM_FACTORS = 34)
-    AS
-    SELECT
-    user_id,
-    item_id,
-    rating
-    FROM `bqml_tutorial.ratings`;
-    ```
+        CREATE OR REPLACE MODEL `bqml_tutorial.mf_explicit`
+        OPTIONS (
+          MODEL_TYPE = 'matrix_factorization',
+          FEEDBACK_TYPE = 'explicit',
+          USER_COL = 'user_id',
+          ITEM_COL = 'item_id',
+          L2_REG = 9.83,
+          NUM_FACTORS = 34)
+        AS
+        SELECT
+        user_id,
+        item_id,
+        rating
+        FROM `bqml_tutorial.ratings`;
     
     The query takes about 10 minutes to complete, after which the `mf_explicit` model appears in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -290,7 +282,7 @@ Follow these steps to view the model's training statistics:
 
 6.  In the **View as** section, click **Table** . The results should look similar to the following:
     
-    ``` console
+    ```console
     +-----------+--------------------+--------------------+
     | Iteration | Training Data Loss | Duration (seconds) |
     +-----------+--------------------+--------------------+
@@ -320,25 +312,23 @@ Use the `ML.EVALUATE` function to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.EVALUATE(
-      MODEL `bqml_tutorial.mf_explicit`,
-      (
         SELECT
-          user_id,
-          item_id,
-          rating
+        *
         FROM
-          `bqml_tutorial.ratings`
-      ));
-    ```
+        ML.EVALUATE(
+          MODEL `bqml_tutorial.mf_explicit`,
+          (
+            SELECT
+              user_id,
+              item_id,
+              rating
+            FROM
+              `bqml_tutorial.ratings`
+          ));
     
     The results should look similar to the following:
     
-    ``` console
+    ```console
     +---------------------+---------------------+------------------------+-----------------------+--------------------+--------------------+
     | mean_absolute_error | mean_squared_error  | mean_squared_log_error | median_absolute_error |      r2_score      | explained_variance |
     +---------------------+---------------------+------------------------+-----------------------+--------------------+--------------------+
@@ -378,24 +368,22 @@ Use the `ML.RECOMMEND` function to get predicted ratings:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.RECOMMEND(
-      MODEL `bqml_tutorial.mf_explicit`,
-      (
         SELECT
-          user_id
+        *
         FROM
-          `bqml_tutorial.ratings`
-        LIMIT 5
-      ));
-    ```
+        ML.RECOMMEND(
+          MODEL `bqml_tutorial.mf_explicit`,
+          (
+            SELECT
+              user_id
+            FROM
+              `bqml_tutorial.ratings`
+            LIMIT 5
+          ));
     
     The results should look similar to the following:
     
-    ``` console
+    ```console
     +--------------------+---------+---------+
     | predicted_rating   | user_id | item_id |
     +--------------------+---------+---------+
@@ -441,20 +429,18 @@ Follow these steps to generate recommendations:
 
 2.  Write the predicted ratings to a table. In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE OR REPLACE TABLE `bqml_tutorial.recommend`
-    AS
-    SELECT
-    *
-    FROM
-    ML.RECOMMEND(MODEL `bqml_tutorial.mf_explicit`);
-    ```
+        CREATE OR REPLACE TABLE `bqml_tutorial.recommend`
+        AS
+        SELECT
+        *
+        FROM
+        ML.RECOMMEND(MODEL `bqml_tutorial.mf_explicit`);
 
 3.  Join the predicted ratings with the movie information, and select the top five results per user. In the query editor, paste in the following query and click **Run** :
 
 <!-- end list -->
 
-``` notranslate
+``` 
   SELECT
     user_id,
     ARRAY_AGG(STRUCT(movie_title, genre, predicted_rating) ORDER BY predicted_rating DESC LIMIT 5)
@@ -479,7 +465,7 @@ Follow these steps to generate recommendations:
 
 The results should look similar to the following:
 
-``` console
+```console
   +---------+-------------------------------------+------------------------+--------------------+
   | user_id | f0_movie_title                      | f0_genre               | predicted_rating   |
   +---------+-------------------------------------+------------------------+--------------------+

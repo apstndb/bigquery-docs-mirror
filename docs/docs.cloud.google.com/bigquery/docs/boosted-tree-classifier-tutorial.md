@@ -75,30 +75,24 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
     
-    ``` notranslate
-    bq mk --dataset \
-      --location=US \
-      --description "BigQuery ML tutorial dataset." \
-      bqml_tutorial
-    ```
+        bq mk --dataset \
+          --location=US \
+          --description "BigQuery ML tutorial dataset." \
+          bqml_tutorial
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` notranslate
-{
-  "datasetReference": {
-     "datasetId": "bqml_tutorial"
-  }
-}
-```
+    {
+      "datasetReference": {
+         "datasetId": "bqml_tutorial"
+      }
+    }
 
 ### BigQuery DataFrames
 
@@ -136,25 +130,23 @@ Run the query that prepares the sample data:
 
 2.  In the query editor, run the following query:
     
-    ``` notranslate
-    CREATE OR REPLACE VIEW
-      `bqml_tutorial.input_data` AS
-    SELECT
-      age,
-      workclass,
-      marital_status,
-      education_num,
-      occupation,
-      hours_per_week,
-      income_bracket,
-      CASE
-        WHEN MOD(functional_weight, 10) < 8 THEN 'training'
-        WHEN MOD(functional_weight, 10) = 8 THEN 'evaluation'
-        WHEN MOD(functional_weight, 10) = 9 THEN 'prediction'
-      END AS dataframe
-    FROM
-      `bigquery-public-data.ml_datasets.census_adult_income`;
-    ```
+        CREATE OR REPLACE VIEW
+          `bqml_tutorial.input_data` AS
+        SELECT
+          age,
+          workclass,
+          marital_status,
+          education_num,
+          occupation,
+          hours_per_week,
+          income_bracket,
+          CASE
+            WHEN MOD(functional_weight, 10) < 8 THEN 'training'
+            WHEN MOD(functional_weight, 10) = 8 THEN 'evaluation'
+            WHEN MOD(functional_weight, 10) = 9 THEN 'prediction'
+          END AS dataframe
+        FROM
+          `bigquery-public-data.ml_datasets.census_adult_income`;
 
 3.  In the left pane, click explore **Explorer** :
     
@@ -211,20 +203,18 @@ Follow these steps to create the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
-    CREATE MODEL `bqml_tutorial.tree_model`
-    OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
-            BOOSTER_TYPE = 'GBTREE',
-            NUM_PARALLEL_TREE = 1,
-            MAX_ITERATIONS = 50,
-            TREE_METHOD = 'HIST',
-            EARLY_STOP = FALSE,
-            SUBSAMPLE = 0.85,
-            INPUT_LABEL_COLS = ['income_bracket'])
-    AS SELECT * EXCEPT(dataframe)
-    FROM `bqml_tutorial.input_data`
-    WHERE dataframe = 'training';
-    ```
+        CREATE MODEL `bqml_tutorial.tree_model`
+        OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
+                BOOSTER_TYPE = 'GBTREE',
+                NUM_PARALLEL_TREE = 1,
+                MAX_ITERATIONS = 50,
+                TREE_METHOD = 'HIST',
+                EARLY_STOP = FALSE,
+                SUBSAMPLE = 0.85,
+                INPUT_LABEL_COLS = ['income_bracket'])
+        AS SELECT * EXCEPT(dataframe)
+        FROM `bqml_tutorial.input_data`
+        WHERE dataframe = 'training';
     
     After the query completes, the `tree_model` model can be accessed through the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
@@ -266,7 +256,7 @@ Follow these steps to evaluate the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
+    ``` 
       SELECT
         *
       FROM
@@ -284,7 +274,7 @@ Follow these steps to evaluate the model:
     
     The results should look similar to the following:
     
-    ``` console
+    ```console
     +---------------------+---------------------+---------------------+-------------------+---------------------+---------------------+
     | precision           | recall              | accuracy            | f1_score          | log_loss            | roc_auc             |
     +---------------------+---------------------+---------------------+-------------------+-------------------------------------------+
@@ -332,7 +322,7 @@ Follow these steps to forecast data with the model:
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` notranslate
+    ``` 
       SELECT
         *
       FROM
@@ -350,7 +340,7 @@ Follow these steps to forecast data with the model:
 
 The first few columns of the results should look similar to the following:
 
-``` console
+```console
   +---------------------------+--------------------------------------+-------------------------------------+
   | predicted_income_bracket  | predicted_income_bracket_probs.label | predicted_income_bracket_probs.prob |
   +---------------------------+--------------------------------------+-------------------------------------+

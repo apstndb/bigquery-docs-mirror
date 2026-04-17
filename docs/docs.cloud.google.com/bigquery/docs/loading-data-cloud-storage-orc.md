@@ -80,12 +80,10 @@ For example, you have the following ORC files in Cloud Storage:
 
 Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `mybucket/01/b.orc` :
 
-``` notranslate
-bq load \
---source_format=ORC \
-dataset.table \
-"gs://mybucket/00/*.orc","gs://mybucket/01/*.orc"
-```
+    bq load \
+    --source_format=ORC \
+    dataset.table \
+    "gs://mybucket/00/*.orc","gs://mybucket/01/*.orc"
 
 When BigQuery detects the schema, some ORC data types are converted to BigQuery data types to make them compatible with GoogleSQL syntax. All fields in the detected schema are [`NULLABLE`](https://docs.cloud.google.com/bigquery/docs/schemas#modes) . For more information, see [ORC conversions](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#orc_conversions) .
 
@@ -158,12 +156,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA OVERWRITE mydataset.mytable
-    FROM FILES (
-      format = 'ORC',
-      uris = ['gs://bucket/path/file.orc']);
-    ```
+        LOAD DATA OVERWRITE mydataset.mytable
+        FROM FILES (
+          format = 'ORC',
+          uris = ['gs://bucket/path/file.orc']);
 
 3.  Click play\_circle **Run** .
 
@@ -203,12 +199,10 @@ Other optional flags include:
 
 To load ORC data into BigQuery, enter the following command:
 
-``` notranslate
-bq --location=location load \
---source_format=format \
-dataset.table \
-path_to_source
-```
+    bq --location=location load \
+    --source_format=format \
+    dataset.table \
+    path_to_source
 
 Where:
 
@@ -646,12 +640,10 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    LOAD DATA INTO mydataset.mytable
-    FROM FILES (
-      format = 'ORC',
-      uris = ['gs://bucket/path/file.orc']);
-    ```
+        LOAD DATA INTO mydataset.mytable
+        FROM FILES (
+          format = 'ORC',
+          uris = ['gs://bucket/path/file.orc']);
 
 3.  Click play\_circle **Run** .
 
@@ -671,13 +663,11 @@ Other optional flags include:
 
 <!-- end list -->
 
-``` notranslate
-bq --location=location load \
---[no]replace \
---source_format=format \
-dataset.table \
-path_to_source
-```
+    bq --location=location load \
+    --[no]replace \
+    --source_format=format \
+    dataset.table \
+    path_to_source
 
 Where:
 

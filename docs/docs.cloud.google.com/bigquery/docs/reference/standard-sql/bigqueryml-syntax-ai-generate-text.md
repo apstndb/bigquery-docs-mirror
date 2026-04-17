@@ -47,7 +47,7 @@ For all other types of models, you can analyze text data from a standard table.
 
 ### Gemini
 
-``` lang-googlesql
+```googlesql
 AI.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -187,7 +187,7 @@ The model and input table must be in the same region.
 
 ### Claude
 
-``` lang-googlesql
+```googlesql
 AI.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -241,7 +241,7 @@ The model and input table must be in the same region.
 
 ### Llama
 
-``` lang-googlesql
+```googlesql
 AI.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -294,7 +294,7 @@ The model and input table must be in the same region.
 
 ### Mistral AI
 
-``` lang-googlesql
+```googlesql
 AI.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -347,7 +347,7 @@ The model and input table must be in the same region.
 
 ### Open models
 
-``` lang-sql
+```sql
 AI.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -413,7 +413,7 @@ The model and input table must be in the same region.
 
 Use the following syntax to use `AI.GENERATE_TEXT` with Gemini models and object table data.
 
-``` lang-googlesql
+```googlesql
 AI.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
 { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -538,17 +538,15 @@ The following examples assume that you have already created a remote Gemini mode
 
 This example shows a request to a Gemini model that enriches a table of articles from the `bbc_news` public dataset with a column of one-sentence summaries.
 
-``` notranslate
-SELECT result, title, body
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.gemini_model`,
-    (
-      SELECT *,
-        ('Summarize the following article in a single sentence: ', body) AS prompt
-      FROM `bigquery-public-data.bbc_news.fulltext`
-      LIMIT 3));
-```
+    SELECT result, title, body
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.gemini_model`,
+        (
+          SELECT *,
+            ('Summarize the following article in a single sentence: ', body) AS prompt
+          FROM `bigquery-public-data.bbc_news.fulltext`
+          LIMIT 3));
 
 The result looks similar to the following:
 
@@ -564,17 +562,15 @@ The result looks similar to the following:
 
 This example shows a request a Gemini model that excludes model responses that contain the strings `Golf` or `football` .
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL
-      `mydataset.gemini_model`,
-    TABLE `mydataset.prompt_table`,
-    STRUCT(
-      .15 AS temperature,
-      ['Golf', 'football'] AS stop_sequences));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL
+          `mydataset.gemini_model`,
+        TABLE `mydataset.prompt_table`,
+        STRUCT(
+          .15 AS temperature,
+          ['Golf', 'football'] AS stop_sequences));
 
 **Example 3**
 
@@ -585,16 +581,14 @@ This example shows a request to a Gemini model with the following characteristic
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL
-      `mydataset.gemini_model`,
-    TABLE `mydataset.prompt_table`,
-    STRUCT(
-      TRUE AS ground_with_google_search));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL
+          `mydataset.gemini_model`,
+        TABLE `mydataset.prompt_table`,
+        STRUCT(
+          TRUE AS ground_with_google_search));
 
 **Example 4**
 
@@ -605,113 +599,105 @@ This example shows a request to a Gemini model with the following characteristic
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL
-      `mydataset.gemini_model`,
-    TABLE `mydataset.prompt_table`,
-    STRUCT(
-      '''
-      {
-        "safety_settings": [
-          { "category": "HARM_CATEGORY_HATE_SPEECH",
-            "threshold": "BLOCK_LOW_AND_ABOVE" },
-          { "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-            "threshold": "BLOCK_MEDIUM_AND_ABOVE" }
-        ],
-        "generation_config": {
-          "max_output_tokens": 75,
-          "thinking_config": {"thinking_budget": 0}
-        }
-      }
-      ''' AS model_params
-    )
-  );
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL
+          `mydataset.gemini_model`,
+        TABLE `mydataset.prompt_table`,
+        STRUCT(
+          '''
+          {
+            "safety_settings": [
+              { "category": "HARM_CATEGORY_HATE_SPEECH",
+                "threshold": "BLOCK_LOW_AND_ABOVE" },
+              { "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                "threshold": "BLOCK_MEDIUM_AND_ABOVE" }
+            ],
+            "generation_config": {
+              "max_output_tokens": 75,
+              "thinking_config": {"thinking_budget": 0}
+            }
+          }
+          ''' AS model_params
+        )
+      );
 
 **Example 5**
 
 The following example shows how to extract information from unstructured text and use the `model_params` argument to specify a custom schema, limit the maximum number of output tokens to 200, and disable thinking:
 
-``` notranslate
-SELECT
-  *
-FROM
-  AI.GENERATE_TEXT(MODEL mydataset.gemini_model,
-    (
     SELECT
-      'Extract the weather data from this sentence: It is 75 degrees Fahrenheit and sunny in Seattle.' AS prompt
-    ),
-    STRUCT(
-      '''
-      {
-        "generation_config": {
-          "max_output_tokens": 200,
-          "thinking_config": {"thinking_budget": 0},
-          "response_mime_type": "application/json",
-          "response_schema": {'type': 'OBJECT', 'properties': {'city_name': {'type': 'STRING'}, 'temperature': {'type': 'INTEGER'}}}
-        }
-      }
-      ''' AS model_params
-    )
-  );
-```
+      *
+    FROM
+      AI.GENERATE_TEXT(MODEL mydataset.gemini_model,
+        (
+        SELECT
+          'Extract the weather data from this sentence: It is 75 degrees Fahrenheit and sunny in Seattle.' AS prompt
+        ),
+        STRUCT(
+          '''
+          {
+            "generation_config": {
+              "max_output_tokens": 200,
+              "thinking_config": {"thinking_budget": 0},
+              "response_mime_type": "application/json",
+              "response_schema": {'type': 'OBJECT', 'properties': {'city_name': {'type': 'STRING'}, 'temperature': {'type': 'INTEGER'}}}
+            }
+          }
+          ''' AS model_params
+        )
+      );
 
 **Example 6**
 
 The following example shows how to use the `model_params` argument to ground with Google Search, specify a maximum number of output tokens, and disable thinking:
 
-``` notranslate
-SELECT
-  *
-FROM
-  AI.GENERATE_TEXT(MODEL mydataset.gemini_model,
-    (
     SELECT
-      'What is the weather in Seattle today?' AS prompt
-    ),
-    STRUCT(
-      '''
-      {
-        "tools": [{"googleSearch": {}}], 
-        "generation_config": {
-          "max_output_tokens": 100,
-          "thinking_config": {"thinking_budget": 0}
-        }
-      }
-      ''' AS model_params
-    )
-  );
-```
+      *
+    FROM
+      AI.GENERATE_TEXT(MODEL mydataset.gemini_model,
+        (
+        SELECT
+          'What is the weather in Seattle today?' AS prompt
+        ),
+        STRUCT(
+          '''
+          {
+            "tools": [{"googleSearch": {}}], 
+            "generation_config": {
+              "max_output_tokens": 100,
+              "thinking_config": {"thinking_budget": 0}
+            }
+          }
+          ''' AS model_params
+        )
+      );
 
 **Example 7**
 
 The following example shows you how to use the `model_params` argument to enable [context caching](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/context-cache/context-cache-overview) , specify the maximum number of output tokens, and disable thinking:
 
-``` notranslate
-SELECT
-  *
-FROM
-  AI.GENERATE_TEXT(MODEL mydataset.gemini_model,
-    (
     SELECT
-      'What is the restaurant name in my context?' AS prompt
-    ),
-    STRUCT(
-      '''
-      {
-        "cachedContent": "projects/PROJECT_NUMBER/locations/LOCATION/cachedContents/CACHED_CONTENT_ID", 
-        "generation_config": {
-          "max_output_tokens": 200,
-          "thinking_config": {"thinking_budget": 0}
-        }
-      }
-      ''' AS model_params
-    )
-  );
-```
+      *
+    FROM
+      AI.GENERATE_TEXT(MODEL mydataset.gemini_model,
+        (
+        SELECT
+          'What is the restaurant name in my context?' AS prompt
+        ),
+        STRUCT(
+          '''
+          {
+            "cachedContent": "projects/PROJECT_NUMBER/locations/LOCATION/cachedContents/CACHED_CONTENT_ID", 
+            "generation_config": {
+              "max_output_tokens": 200,
+              "thinking_config": {"thinking_budget": 0}
+            }
+          }
+          ''' AS model_params
+        )
+      );
 
 ### Visual content analysis
 
@@ -719,84 +705,76 @@ FROM
 
 This example adds product description information to a table by analyzing the object data in an `ObjectRef` column named `image` :
 
-``` notranslate
-UPDATE mydataset.products
-SET
-  image_description = (
-    SELECT
-      result
-    FROM
-      AI.GENERATE_TEXT(
-        MODEL `mydataset.gemini_model`,
-        (
-          SELECT
-            ('Can you describe the following image?', OBJ.GET_ACCESS_URL(image, 'r')) AS prompt
-        )
+    UPDATE mydataset.products
+    SET
+      image_description = (
+        SELECT
+          result
+        FROM
+          AI.GENERATE_TEXT(
+            MODEL `mydataset.gemini_model`,
+            (
+              SELECT
+                ('Can you describe the following image?', OBJ.GET_ACCESS_URL(image, 'r')) AS prompt
+            )
+          )
       )
-  )
-WHERE image IS NOT NULL;
-```
+    WHERE image IS NOT NULL;
 
 **Example 2**
 
 This example analyzes visual content from an object table that's named `dogs` and identifies the breed of dog contained in the content. The content returned is filtered by the specified safety settings:
 
-``` notranslate
-SELECT
-  uri,
-  result
-FROM
-  AI.GENERATE_TEXT(
-    MODEL
-      `mydataset.dog_identifier_model`,
-    TABLE `mydataset.dogs`
-      STRUCT(
-        'What is the breed of the dog?' AS PROMPT,
-        .01 AS TEMPERATURE,
-        TRUE AS FLATTEN_JSON_OUTPUT,
-        [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
-          'BLOCK_LOW_AND_ABOVE' AS threshold),
-        STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
-          'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
-```
+    SELECT
+      uri,
+      result
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL
+          `mydataset.dog_identifier_model`,
+        TABLE `mydataset.dogs`
+          STRUCT(
+            'What is the breed of the dog?' AS PROMPT,
+            .01 AS TEMPERATURE,
+            TRUE AS FLATTEN_JSON_OUTPUT,
+            [STRUCT('HARM_CATEGORY_HATE_SPEECH' AS category,
+              'BLOCK_LOW_AND_ABOVE' AS threshold),
+            STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category,
+              'BLOCK_MEDIUM_AND_ABOVE' AS threshold)] AS safety_settings));
 
 ### Audio content analysis
 
 This example translates and transcribes audio content from an object table that's named `feedback` :
 
-``` notranslate
-SELECT
-  uri,
-  result
-FROM
-  AI.GENERATE_TEXT(
-    MODEL
-      `mydataset.audio_model`,
-        TABLE `mydataset.feedback`,
-          STRUCT(
-          'What is the content of this audio clip, translated into Spanish?' AS PROMPT,
-          .01 AS TEMPERATURE,
-          TRUE AS FLATTEN_JSON_OUTPUT));
-```
+    SELECT
+      uri,
+      result
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL
+          `mydataset.audio_model`,
+            TABLE `mydataset.feedback`,
+              STRUCT(
+              'What is the content of this audio clip, translated into Spanish?' AS PROMPT,
+              .01 AS TEMPERATURE,
+              TRUE AS FLATTEN_JSON_OUTPUT));
 
 ### PDF content analysis
 
 This example classifies PDF content from an object table that's named `documents` :
 
-``` notranslate
-SELECT
-  uri,
-  result
-FROM
-  AI.GENERATE_TEXT(
-    MODEL
-      `mydataset.classify_model`
-        TABLE `mydataset.documents`
-          STRUCT(
-          'Classify this document using the following categories: legal, tax-related, real estate' AS PROMPT,
-          .2 AS TEMPERATURE,
-          TRUE AS FLATTEN_JSON_OUTPUT));
-```
+    SELECT
+      uri,
+      result
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL
+          `mydataset.classify_model`
+            TABLE `mydataset.documents`
+              STRUCT(
+              'Classify this document using the following categories: legal, tax-related, real estate' AS PROMPT,
+              .2 AS TEMPERATURE,
+              TRUE AS FLATTEN_JSON_OUTPUT));
 
 ## Use Vertex AI Provisioned Throughput
 

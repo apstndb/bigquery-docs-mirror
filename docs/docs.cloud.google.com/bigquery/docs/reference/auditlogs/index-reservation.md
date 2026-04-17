@@ -281,7 +281,7 @@ The following examples use [`AuditLog`](https://docs.cloud.google.com/logging/do
 
 This query shows the email address of the users who purchased slots.
 
-``` notranslate
+``` 
   #standardSQL
   SELECT
     protopayload_auditlog.requestMetadata.requestAttributes.time request_time,
@@ -299,7 +299,7 @@ This query shows the email address of the users who purchased slots.
 
 This query shows the history of a project's reservation assignments.
 
-``` notranslate
+``` 
   #standardSQL
   SELECT
     protopayload_auditlog.requestMetadata.requestAttributes.time request_time,

@@ -113,11 +113,9 @@ To filter datasets by using the API, bq command-line tool, or client libraries:
 
 Issue the `bq ls` command with the `--filter` flag. If you are listing datasets in a project other than your default project, specify the `--project_id` flag.
 
-``` notranslate
-bq ls \
---filter "filter_specification" \
---project_id project_id
-```
+    bq ls \
+    --filter "filter_specification" \
+    --project_id project_id
 
 Replace the following:
 

@@ -290,7 +290,7 @@ To use the Cloud Run functions function that translates text into Spanish with a
 
 3.  Click **Run** . A message similar to the following is displayed:
     
-    ``` console
+    ```console
     This statement created a new function named
     your_project.remote_function_test.translate_text.
     ```
@@ -309,7 +309,7 @@ After you create your remote function, test it to make sure that it is linked to
     
     The results are similar to the following:
     
-    ``` console
+    ```console
     +-------------------------------------------+
     | translated_text                           |
     +-------------------------------------------+
@@ -327,7 +327,7 @@ After you create your remote function, test it to make sure that it is linked to
     
     The results are similar to the following:
     
-    ``` console
+    ```console
     +---------------------------------------------------------------------------+
     | text                            | translated_text                         |
     +---------------------------------------------------------------------------+

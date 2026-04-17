@@ -57,10 +57,8 @@ Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER SCHEMA mydataset
-    SET OPTIONS (labels = []);
-    ```
+        ALTER SCHEMA mydataset
+        SET OPTIONS (labels = []);
 
 3.  Click play\_circle **Run** .
 
@@ -72,11 +70,9 @@ To delete a dataset label, issue the `bq update` command with the `clear_label` 
 
 If the dataset is in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
-``` notranslate
-bq update \
---clear_label key \
-project_id:dataset
-```
+    bq update \
+    --clear_label key \
+    project_id:dataset
 
 Where:
 
@@ -308,10 +304,8 @@ Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER TABLE mydataset.mytable
-    SET OPTIONS (labels = []);
-    ```
+        ALTER TABLE mydataset.mytable
+        SET OPTIONS (labels = []);
 
 3.  Click play\_circle **Run** .
 
@@ -323,11 +317,9 @@ To delete a label from a table or view, issue the `bq update` command with the `
 
 If the table or view is in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
 
-``` notranslate
-bq update \
---clear_label key \
-project_id:dataset.table_or_view
-```
+    bq update \
+    --clear_label key \
+    project_id:dataset.table_or_view
 
 Where:
 
@@ -534,11 +526,9 @@ To delete a reservation label, use the [`ALTER RESERVATION SET OPTIONS` DDL stat
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    ALTER RESERVATION myreservation
-    SET OPTIONS (
-      labels = []);
-    ```
+        ALTER RESERVATION myreservation
+        SET OPTIONS (
+          labels = []);
 
 3.  Click play\_circle **Run** .
 
@@ -548,9 +538,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To delete a reservation label, issue the `bq update` command with the `clear_label` flag and `--reservation` flag. To delete multiple labels, repeat the flag.
 
-``` notranslate
-bq update --clear_label KEY  --reservation RESERVATION_NAME
-```
+    bq update --clear_label KEY  --reservation RESERVATION_NAME
 
 Replace the following:
 

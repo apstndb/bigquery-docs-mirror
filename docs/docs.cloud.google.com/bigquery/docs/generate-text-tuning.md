@@ -93,9 +93,7 @@ Create a BigQuery dataset to contain your resources:
 
 1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
     
-    ``` notranslate
-    bq --location=LOCATION mk -d DATASET_ID
-    ```
+        bq --location=LOCATION mk -d DATASET_ID
     
     Replace the following:
     
@@ -104,9 +102,7 @@ Create a BigQuery dataset to contain your resources:
 
 2.  Confirm that the dataset was created:
     
-    ``` notranslate
-    bq ls
-    ```
+        bq ls
 
 ## Create a connection
 
@@ -150,14 +146,12 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 
 2.  In the query editor, enter the following statement:
     
-    ``` notranslate
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
-    ```
+        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+        OPTIONS (
+          connection_type = "CLOUD_RESOURCE",
+          friendly_name = "FRIENDLY_NAME",
+          description = "DESCRIPTION"
+          );
     
     Replace the following:
     
@@ -173,10 +167,8 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 1.  In a command-line environment, create a connection:
     
-    ``` notranslate
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    ```
+        bq mk --connection --location=REGION --project_id=PROJECT_ID \
+            --connection_type=CLOUD_RESOURCE CONNECTION_ID
     
     The `--project_id` parameter overrides the default project.
     
@@ -190,19 +182,17 @@ For more information about how to run queries, see [Run an interactive query](ht
     
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
-    ``` console
+    ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` notranslate
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    ```
+        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     
     The output is similar to the following:
     
-    ``` console
+    ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
     ```
@@ -324,7 +314,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
 
-``` lang-terraform
+```terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -441,23 +431,21 @@ The service account associated with your connection is an instance of the [BigQu
 
 2.  In the query editor, run the following query to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned) :
     
-    ``` notranslate
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (
-      ENDPOINT = 'ENDPOINT',
-      MAX_ITERATIONS = MAX_ITERATIONS,
-      LEARNING_RATE_MULTIPLIER = LEARNING_RATE_MULTIPLIER,
-      DATA_SPLIT_METHOD = 'DATA_SPLIT_METHOD',
-      DATA_SPLIT_EVAL_FRACTION = DATA_SPLIT_EVAL_FRACTION,
-      DATA_SPLIT_COL = 'DATA_SPLIT_COL',
-      EVALUATION_TASK = 'EVALUATION_TASK',
-      PROMPT_COL = 'INPUT_PROMPT_COL',
-      INPUT_LABEL_COLS = INPUT_LABEL_COLS)
-    AS SELECT PROMPT_COLUMN, LABEL_COLUMN
-    FROM `TABLE_PROJECT_ID.TABLE_DATASET.TABLE_NAME`;
-    ```
+        CREATE OR REPLACE MODEL
+        `PROJECT_ID.DATASET_ID.MODEL_NAME`
+        REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+        OPTIONS (
+          ENDPOINT = 'ENDPOINT',
+          MAX_ITERATIONS = MAX_ITERATIONS,
+          LEARNING_RATE_MULTIPLIER = LEARNING_RATE_MULTIPLIER,
+          DATA_SPLIT_METHOD = 'DATA_SPLIT_METHOD',
+          DATA_SPLIT_EVAL_FRACTION = DATA_SPLIT_EVAL_FRACTION,
+          DATA_SPLIT_COL = 'DATA_SPLIT_COL',
+          EVALUATION_TASK = 'EVALUATION_TASK',
+          PROMPT_COL = 'INPUT_PROMPT_COL',
+          INPUT_LABEL_COLS = INPUT_LABEL_COLS)
+        AS SELECT PROMPT_COLUMN, LABEL_COLUMN
+        FROM `TABLE_PROJECT_ID.TABLE_DATASET.TABLE_NAME`;
     
     Replace the following:
     
@@ -540,17 +528,15 @@ The service account associated with your connection is an instance of the [BigQu
 
 2.  In the query editor, run the following query to evaluate the tuned model:
     
-    ``` notranslate
-    SELECT
-    *
-    FROM
-    ML.EVALUATE(
-      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-      TABLE `TABLE_PROJECT_ID.TABLE_DATASET.TABLE_NAME`,
-      STRUCT('TASK_TYPE' AS task_type, TOKENS AS max_output_tokens,
-        TEMPERATURE AS temperature, TOP_K AS top_k,
-        TOP_P AS top_p));
-    ```
+        SELECT
+        *
+        FROM
+        ML.EVALUATE(
+          MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+          TABLE `TABLE_PROJECT_ID.TABLE_DATASET.TABLE_NAME`,
+          STRUCT('TASK_TYPE' AS task_type, TOKENS AS max_output_tokens,
+            TEMPERATURE AS temperature, TOP_K AS top_k,
+            TOP_P AS top_p));
     
     Replace the following:
     
@@ -596,16 +582,14 @@ Generate text with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.c
 
 Generate text by using a table column to provide the prompt.
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  TABLE PROJECT_ID.DATASET_ID.TABLE_NAME,
-  STRUCT(TOKENS AS max_output_tokens, TEMPERATURE AS temperature,
-  TOP_P AS top_p,
-  STOP_SEQUENCES AS stop_sequences)
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      TABLE PROJECT_ID.DATASET_ID.TABLE_NAME,
+      STRUCT(TOKENS AS max_output_tokens, TEMPERATURE AS temperature,
+      TOP_P AS top_p,
+      STOP_SEQUENCES AS stop_sequences)
+    );
 
 Replace the following:
 
@@ -670,30 +654,26 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.mymodel`,
-    TABLE mydataset.prompts,
-    STRUCT(
-      0.4 AS temperature, 100 AS max_output_tokens, 0.5 AS top_p));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.mymodel`,
+        TABLE mydataset.prompts,
+        STRUCT(
+          0.4 AS temperature, 100 AS max_output_tokens, 0.5 AS top_p));
 
 ### Prompt query
 
 Generate text by using a query to provide the prompt.
 
-``` notranslate
-SELECT *
-FROM AI.GENERATE_TEXT(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  (PROMPT_QUERY),
-  STRUCT(TOKENS AS max_output_tokens, TEMPERATURE AS temperature,
-  TOP_P AS top_p,
-  STOP_SEQUENCES AS stop_sequences)
-);
-```
+    SELECT *
+    FROM AI.GENERATE_TEXT(
+      MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
+      (PROMPT_QUERY),
+      STRUCT(TOKENS AS max_output_tokens, TEMPERATURE AS temperature,
+      TOP_P AS top_p,
+      STOP_SEQUENCES AS stop_sequences)
+    );
 
 Replace the following:
 
@@ -760,18 +740,16 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.mymodel`,
-    (
-      SELECT CONCAT('Summarize this text', body) AS prompt
-      FROM mydataset.articles
-    ),
-    STRUCT(
-      0.2 AS temperature, 650 AS max_output_tokens, 0.2 AS top_p));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.mymodel`,
+        (
+          SELECT CONCAT('Summarize this text', body) AS prompt
+          FROM mydataset.articles
+        ),
+        STRUCT(
+          0.2 AS temperature, 650 AS max_output_tokens, 0.2 AS top_p));
 
 **Example 2**
 
@@ -783,15 +761,13 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` notranslate
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `mydataset.mytuned_model`,
-    (
-      SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
-      FROM mydataset.input_table
-    ),
-    STRUCT(
-      0.4 AS temperature, 100 AS max_output_tokens, 0.5 AS top_p));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `mydataset.mytuned_model`,
+        (
+          SELECT CONCAT(question, 'Text:', description, 'Category') AS prompt
+          FROM mydataset.input_table
+        ),
+        STRUCT(
+          0.4 AS temperature, 100 AS max_output_tokens, 0.5 AS top_p));

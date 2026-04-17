@@ -30,7 +30,7 @@ The following examples show how to pass parameter values to a parameterized quer
 
 To run a parameterized query in the Google Cloud console, configure parameters in **Query settings** , and then reference them in your SQL query by prefixing each parameter name with the `@` character.
 
-**Supported data types:** the Google Cloud console only supports parameterized queries of primitive data types, such as `BIGNUMERIC` , `BOOL` , `BYTES` , `DATE` , `DATETIME` , `FLOAT64` , `GEOGRAPHY` , `INT64` , `INTERVAL` , `NUMERIC` , `STRING` , `TIME` , or `TIMESTAMP` . Complex data types, such as `ARRAY` and `STRUCT` , aren't supported in the Google Cloud console.
+**Supported data types** : the Google Cloud console only supports parameterized queries of primitive data types, such as `BIGNUMERIC` , `BOOL` , `BYTES` , `DATE` , `DATETIME` , `FLOAT64` , `GEOGRAPHY` , `INT64` , `INTERVAL` , `NUMERIC` , `STRING` , `TIME` , or `TIMESTAMP` . Complex data types, such as `ARRAY` and `STRUCT` , aren't supported in the Google Cloud console.
 
 ## Add the parameters in the Google Cloud console
 
@@ -52,7 +52,7 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 
 1.  In the query editor, enter a SQL query using the parameters you configured in the previous step. Reference them by prefixing their names with the `@` character, as shown in the example.
     
-    **Example:**
+    **Example** :
     
         SELECT
             word,
@@ -84,23 +84,21 @@ To run a parameterized query in the Google Cloud console, configure parameters i
     
     (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) using the `--location` flag.
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --parameter=corpus::romeoandjuliet \
-       --parameter=min_word_count:INT64:250 \
-       'SELECT
-         word,
-         word_count
-       FROM
-         `bigquery-public-data.samples.shakespeare`
-       WHERE
-         corpus = @corpus
-       AND
-         word_count >= @min_word_count
-       ORDER BY
-         word_count DESC;'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --parameter=corpus::romeoandjuliet \
+           --parameter=min_word_count:INT64:250 \
+           'SELECT
+             word,
+             word_count
+           FROM
+             `bigquery-public-data.samples.shakespeare`
+           WHERE
+             corpus = @corpus
+           AND
+             word_count >= @min_word_count
+           ORDER BY
+             word_count DESC;'
 
 ### API
 
@@ -619,26 +617,24 @@ Arrays in parameterized queries aren't supported by the Google Cloud console.
     
     > **Note:** This example queries a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --parameter='gender::M' \
-       --parameter='states:ARRAY<STRING>:["WA", "WI", "WV", "WY"]' \
-       'SELECT
-         name,
-         SUM(number) AS count
-       FROM
-         `bigquery-public-data.usa_names.usa_1910_2013`
-       WHERE
-         gender = @gender
-         AND state IN UNNEST(@states)
-       GROUP BY
-         name
-       ORDER BY
-         count DESC
-       LIMIT
-         10;'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --parameter='gender::M' \
+           --parameter='states:ARRAY<STRING>:["WA", "WI", "WV", "WY"]' \
+           'SELECT
+             name,
+             SUM(number) AS count
+           FROM
+             `bigquery-public-data.usa_names.usa_1910_2013`
+           WHERE
+             gender = @gender
+             AND state IN UNNEST(@states)
+           GROUP BY
+             name
+           ORDER BY
+             count DESC
+           LIMIT
+             10;'
     
     Be careful to enclose the array type declaration in single quotes so that the command output is not accidentally redirected to a file by the `>` character.
 
@@ -960,13 +956,11 @@ Follow the steps for [adding parameters in the Google Cloud console](https://doc
 
 2.  This query adds an hour to the timestamp parameter value:
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --parameter='ts_value:TIMESTAMP:2016-12-07 08:00:00' \
-       'SELECT
-         TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --parameter='ts_value:TIMESTAMP:2016-12-07 08:00:00' \
+           'SELECT
+             TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);'
 
 ### API
 
@@ -1226,13 +1220,11 @@ Structs in parameterized queries aren't supported by the Google Cloud console.
 
 2.  This trivial query demonstrates the use of structured types by returning the parameter value:
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --parameter='struct_value:STRUCT<x INT64, y STRING>:{"x": 1, "y": "foo"}' \
-       'SELECT
-         @struct_value AS s;'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --parameter='struct_value:STRUCT<x INT64, y STRING>:{"x": 1, "y": "foo"}' \
+           'SELECT
+             @struct_value AS s;'
 
 ### API
 
@@ -1477,12 +1469,10 @@ Ranges in parameterized queries aren't supported by the Google Cloud console.
 
 2.  This query demonstrates the use of range types by returning the parameter value:
     
-    ``` notranslate
-    bq query \
-       --use_legacy_sql=false \
-       --parameter='my_param:RANGE<DATE>:[2020-01-01, 2020-12-31)' \
-       'SELECT @my_param AS foo;'
-    ```
+        bq query \
+           --use_legacy_sql=false \
+           --parameter='my_param:RANGE<DATE>:[2020-01-01, 2020-12-31)' \
+           'SELECT @my_param AS foo;'
 
 ### API
 
@@ -1516,3 +1506,7 @@ This query shows how to use the `RANGE` parameter type by returning the paramete
       "useLegacySql": false,
       "parameterMode": "NAMED"
     }
+
+## What's next
+
+  - Learn about [verified parameterized queries](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) in BigQuery conversational analytics.

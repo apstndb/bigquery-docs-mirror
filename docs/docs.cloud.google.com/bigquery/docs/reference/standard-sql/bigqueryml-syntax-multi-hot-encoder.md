@@ -13,7 +13,7 @@ You can use this function with models that support [manual feature preprocessing
 
 ## Syntax
 
-``` lang-sql
+```sql
 ML.MULTI_HOT_ENCODER(array_expression [, top_k] [, frequency_threshold]) OVER()
 ```
 
@@ -33,20 +33,18 @@ ML.MULTI_HOT_ENCODER(array_expression [, top_k] [, frequency_threshold]) OVER()
 
 The following example performs multi-hot encoding on a set of string array expressions. It limits the encoding vocabulary to the three categories that occur the most frequently in the data and that also occur one or more times.
 
-``` notranslate
-SELECT f[OFFSET(0)] AS f0, ML.MULTI_HOT_ENCODER(f, 3, 1) OVER () AS output
-FROM
-  (
-    SELECT ['a', 'b', 'b', 'c', NULL] AS f
-    UNION ALL
-    SELECT ['c', 'c', 'd', 'd', NULL] AS f
-  )
-ORDER BY f[OFFSET(0)];
-```
+    SELECT f[OFFSET(0)] AS f0, ML.MULTI_HOT_ENCODER(f, 3, 1) OVER () AS output
+    FROM
+      (
+        SELECT ['a', 'b', 'b', 'c', NULL] AS f
+        UNION ALL
+        SELECT ['c', 'c', 'd', 'd', NULL] AS f
+      )
+    ORDER BY f[OFFSET(0)];
 
 The output looks similar to the following:
 
-``` console
+```console
 +------+-----------------------------+
 |  f0  | output.index | output.value |
 +------+--------------+--------------+
