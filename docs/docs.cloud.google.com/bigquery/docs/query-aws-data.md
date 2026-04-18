@@ -117,7 +117,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Query a temporary table
 
-BigQuery creates temporary tables to store query results. To retrieve query result from temporary tables, you can use the Google Cloud console or the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reliability-read#read_with_api) .
+BigQuery creates temporary tables to store query results. To retrieve query results from temporary tables, you can use the Google Cloud console or the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reliability-read#read_with_api) .
 
 Select one of the following options:
 

@@ -264,15 +264,17 @@ In the following example, there are three reservations and 1,200 idle slots. Wit
 
 Reservation groups are subject to the following limitations:
 
-  - Reservations sharing a reservation group must belong to the same project.
+  - Reservations sharing a reservation group must belong to the same project and same region.
 
   - [Reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) must be enabled on the project.
 
   - The total size of reservations within a group cannot exceed 30k slots. This includes autoscale limits.
 
-  - Reservations within a group must have the same edition.
+  - Reservations within a group must have the same [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-  - Reservations within a group must have the same [secondary locations](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#create-reservation) .
+  - You cannot mix reservations with and without [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) configurations within the same group. All reservations in the group must have disaster recovery configured or all must have it disabled.
+
+  - If disaster recovery is enabled for the reservations in a group, all reservations must use the same pair of regions for their primary and secondary locations.
 
 To learn more about working with reservation groups, see [Prioritize idle slots with reservation groups](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#prioritize_idle_slots_with_reservation_groups) .
 

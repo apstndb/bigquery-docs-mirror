@@ -607,7 +607,8 @@ The following request creates a one-time data quality scan:
           "dimension": "DIMENSION",
           "threshold": 1
         }
-      ]
+      ],
+      "filter": "FILTER_CONDITION"
     }
     }
 
@@ -620,6 +621,7 @@ Replace the following:
   - `  TABLE_ID  ` : The ID of BigQuery table.
   - `  COLUMN_NAME  ` : The column name for the rule.
   - `  DIMENSION  ` : The dimension for the rule, for example `VALIDITY` .
+  - `  FILTER_CONDITION  ` : An optional [AIP-160 filter string](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#rule-filtering) to selectively run rules (for example, `name = \"RULE_NAME\"` ).
 
 If you want to build rules for the data quality scan by using rule recommendations that are based on the results of a data profiling scan, get the recommendations by calling the [`dataScans.jobs.generateDataQualityRules` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/generateDataQualityRules) on the data profiling scan.
 

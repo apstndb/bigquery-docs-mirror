@@ -40,7 +40,7 @@ To get started with the notebook gallery, follow these steps:
 
 1.  Go to the **BigQuery** page.
 
-2.  From from the BigQuery Studio home page, click **View notebook gallery** .
+2.  From the BigQuery Studio home page, click **View notebook gallery** .
     
     ![The View notebook gallery link on the BigQuery Studio home page.](https://docs.cloud.google.com/bigquery/images/template-gallery.png)
 

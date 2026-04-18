@@ -268,7 +268,7 @@ Use the [`predict`](https://docs.cloud.google.com/python/docs/reference/bigframe
 
 The results should look like this:
 
-![Result\_visualization](https://docs.cloud.google.com/static/bigquery/images/imported_tensorflow_predictions.png)
+![Result visualization](https://docs.cloud.google.com/static/bigquery/images/imported_tensorflow_predictions.png)
 
 In the query results, the `dense_1` column contains an array of probability values, and the `input` column contains the corresponding string values from the input table. Each array element value represents the probability that the corresponding input string is an article title from a particular publication.
 

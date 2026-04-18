@@ -255,7 +255,7 @@ The hidden layers of the neural network.
 
 **Arguments**
 
-An array of integers that represents the architecture of the hidden layers. If not specified, BigQuery ML applies a single hidden layer that contains no more than 128 units. The number of units is calculated as `[min(128, num_samples / (10 * (num_input_units + num_output_units)))]` . The upper bound of the rule ensures that the model isn't over fitting.
+An array of integers that represents the architecture of the hidden layers. If not specified, BigQuery ML applies a single hidden layer that contains no more than 128 units. The number of units is calculated as `[min(128, num_samples / (10 * (num_input_units + num_output_units)))]` . The upper bound of the rule ensures that the model isn't overfitting.
 
 The number in the middle of the array defines the shape of the latent space. For example, `hidden_units=[128, 64, 4, 64, 128]` defines a four-dimensional latent space.
 

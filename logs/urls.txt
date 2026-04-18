@@ -455,6 +455,7 @@ https://docs.cloud.google.com/bigquery/docs/migrate-dataframes
 https://docs.cloud.google.com/bigquery/docs/migration-assessment
 https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies
 https://docs.cloud.google.com/bigquery/docs/migration-intro
+https://docs.cloud.google.com/bigquery/docs/migration/external-metastore-lakehouse-migration
 https://docs.cloud.google.com/bigquery/docs/migration/hive
 https://docs.cloud.google.com/bigquery/docs/migration/hive-sql
 https://docs.cloud.google.com/bigquery/docs/migration/migration-overview
@@ -478,6 +479,7 @@ https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials
 https://docs.cloud.google.com/bigquery/docs/migration/teradata
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-migration-intro
+https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-sql
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial
 https://docs.cloud.google.com/bigquery/docs/ml-pipelines-overview

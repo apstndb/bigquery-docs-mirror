@@ -109,7 +109,7 @@ A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-se
 
 ### Configure permissions
 
-To configure permissions for a Hive Metastore transfer, do the following:
+To configure permissions for a Hive Metastore transfer, do the steps in the following sections.
 
 1.  The user or the service account creating the transfer should be granted the BigQuery Admin role ( `roles/bigquery.admin` ). If you use a service account, it's only used to create the transfer.
 

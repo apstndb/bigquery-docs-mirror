@@ -295,11 +295,12 @@ If the query exceeds the 0.05 error ratio, it fails and returns an error message
 
 ## Related functions
 
-The `AI.IF` and [`AI.GENERATE_BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool) functions both use models to generate a boolean value in response to a prompt. The following differences can help you choose which function to use:
+The [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) and [`AI.GENERATE_BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool) functions both use models to generate a boolean value in response to a prompt. The following differences can help you choose which function to use:
 
+  - **Optimized mode** : `AI.IF` supports [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) , which lets you process large-scale datasets with reduced cost and latency by training a distilled model. `AI.GENERATE_BOOL` doesn't support optimized mode.
   - **Prompt Optimization** : `AI.IF` automatically [structures](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/structure-prompts) your prompts to improve the quality of the output.
   - **Input** : `AI.GENERATE_BOOL` lets you specify model parameters to use.
-  - **Output** : `AI.IF` returns a `BOOL` value, which makes it easier to work with in queries. `AI.GENERATE_BOOL` returns a `STRUCT` that contains a `BOOL` value, as well as additional information about the model call, which is useful if you need to view details such as the [safety rating](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters) or API response status.
+  - **Output** : `AI.IF` returns a `BOOL` value, which makes it easier to work with in queries. `AI.GENERATE_BOOL` returns a `STRUCT` value that contains a `BOOL` value, as well as additional information about the model call, which is useful if you need to view details such as the [safety rating](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters) or API response status.
   - **Error handling** : If `AI.IF` produces an error for any input, then the function returns `NULL` . `AI.GENERATE_BOOL` records details about the errors in its output.
 
 ## Locations

@@ -744,10 +744,11 @@ Gets the number of rows in the input or the number of rows with an expression ev
 
   - `*` : Use this value to get the number of all rows in the input.
   - `expression` : A value of any data type that represents the expression to evaluate. If `DISTINCT` is present, `expression` can only be a data type that is [groupable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#groupable_data_types) .
-  - `DISTINCT` : To learn more, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
-  - `OVER` : To learn more, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
-  - `over_clause` : To learn more, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
-  - `window_specification` : To learn more, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+  - Optional aggregate clauses: To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+
+<!-- end list -->
+
+  - `OVER` : To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Details**
 
@@ -895,10 +896,11 @@ Gets the number of `TRUE` values for an expression.
 **Definitions**
 
   - `expression` : A `BOOL` value that represents the expression to evaluate.
-  - `DISTINCT` : To learn more, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
-  - `OVER` : To learn more, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
-  - `over_clause` : To learn more, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
-  - `window_specification` : To learn more, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+  - Optional aggregate clauses: To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+
+<!-- end list -->
+
+  - `OVER` : To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Details**
 

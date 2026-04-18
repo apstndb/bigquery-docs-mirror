@@ -50,19 +50,13 @@ Conversational analytics automatically runs queries on your behalf to answer you
 
 ## Create conversations
 
-You can create persistent conversations with an agent or with a data source in the Google Cloud console for BigQuery in the following ways:
-
-  - From the **Agent Catalog** tab on the **Agents** page.
-  - When you view a table or query results.
-  - When the system automatically uses the data source that you select for the conversation. This practice is useful for quick, one-off questions about a specific table.
+You can create a conversation with an existing customized data agent. Alternatively, for quick, one-off questions, you can create a conversation directly with a single data source.
 
 ### Create a conversation with a data agent
 
 To create a conversation with a data agent, you first [create a data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) and publish it. You can also initiate a conversation with agents that others share with you.
 
-To create a conversation with a data agent in the Google Cloud console, select one of the following options:
-
-### Agents page
+To create a conversation with an existing data agent in the Google Cloud console, follow these steps:
 
 1.  Go to the BigQuery **Agents** page.
 
@@ -71,50 +65,6 @@ To create a conversation with a data agent in the Google Cloud console, select o
 3.  From either the **My agents** or **Shared by others in your organization** section, click the agent card of the agent that you want to chat with.
 
 4.  Click **Start a Conversation** . A new chat panel opens.
-
-5.  In the **Ask a question** field, enter a question for the data agent. For example, "What were our total sales last quarter?" or "Show me the top 5 users by session time." You can also click one of the Gemini-suggested questions to get started.
-    
-    The data agent responds by stating the action it is taking to address your question, and then returns the results.
-    
-    To see each step the data agent took to provide the answer to your question, click **Show reasoning** to view each message in the agent's reasoning process.
-    
-    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
-    
-    To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
-    
-    The **Summary** section now includes a generated query followed by the query result. You can optionally open the code in the query editor.
-    
-    ![The agent's calculation details, including a generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
-    
-    When appropriate for the data, the data agent provides images, charts, tables, and other visualizations.
-    
-    To view your chat history, see the **Conversation Management** list.
-    
-    To view agent information, see the **Agent Details** panel. This panel includes a description of the agent and its knowledge sources.
-
-### BigQuery Editor
-
-1.  When you [work with a table](https://docs.cloud.google.com/bigquery/docs/tables) , or [run a query](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click the **Create conversation** button in the menu bar to create a new conversation.
-
-2.  In the **Ask a question** field, enter a question for the data agent. For example, "What were our total sales last quarter?" or "Show me the top 5 users by session time." You can also click one of the Gemini-suggested questions to get started.
-    
-    The data agent responds by stating the action it is taking to address your question, and then returns the results.
-    
-    To see each step the data agent took to provide the answer to your question, click **Show reasoning** to view each message in the agent's reasoning process.
-    
-    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
-    
-    To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
-    
-    The **Summary** section now includes a generated query followed by the query result. You can optionally open the code in the query editor.
-    
-    ![The agent's calculation details, including a generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
-    
-    When appropriate for the data, the data agent provides images, charts, tables, and other visualizations.
-    
-    To view your chat history, see the **Conversation Management** list.
-    
-    To view agent information, see the **Agent Details** panel. This panel includes a description of the agent and its knowledge sources.
 
 ### Create a direct conversation with a data source
 
@@ -128,52 +78,44 @@ To create a direct conversation with a data source from the **Agents** page, fol
 
 2.  On the **Conversations** tab, on the **Chat with your data** pane, click **Data sources** .
 
-3.  Select one or more tables and click **Create conversation** .
-
-4.  In the **Ask a question** field, enter a question for the data agent. You can also click one of the Gemini-suggested questions to get started.
-    
-    The Conversational Analytics API processes your question and returns the results.
-    
-    To see the steps the Conversational Analytics API took, click **Show reasoning** to view each message in the API's reasoning process.
-    
-    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
-    
-    To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
-    
-    The **Summary** section now includes a generated query followed by the query result. You can optionally open the query in the query editor.
-    
-    ![The API's calculation details, including the generated query and a query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
-    
-    When appropriate for the data, the response provides images, charts, tables, and other visualizations.
+3.  Select one or more data sources and click **Create conversation** .
 
 ### BigQuery Editor
 
-1.  To create a new conversation when you [work with a table](https://docs.cloud.google.com/bigquery/docs/tables) , click **Create conversation** in the menu bar.
-    
-    To create a new conversation with your query results when you [run a query](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click **Create conversation** in the **Query results** pane. The data source is the temporary table of [cached results](https://docs.cloud.google.com/bigquery/docs/cached-results) that typically persists for 24 hours. After the cached results expire, you can't ask questions about the data.
+To create a direct conversation with a data source from the **BigQuery** page, follow these steps:
 
-2.  In the **Ask a question** field, enter a question for the data agent. You can also click one of the Gemini-suggested questions to get started.
-    
-    The Conversational Analytics API processes your question and returns the results.
-    
-    To see the steps the Conversational Analytics API took, click **Show reasoning** .
-    
-    To see each step the data agent took to provide the answer to your question, click **Show reasoning** . From the list, and view each message in the agent's reasoning process.
-    
-    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
-    
-    To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
-    
-    The **Summary** section now includes the generated query followed by the query result. You can optionally open the query in the query editor.
-    
-    ![The API's calculation details, including the generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
-    
-    When appropriate for the data, the response provides images, charts, tables, and other visualizations.
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click explore **Explorer** .
+
+3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset. The dataset overview opens.
+
+4.  Select a data source, such as a table, view, or graph. The resource opens.
+
+5.  In the menu bar, click **Create conversation** .
+
+6.  Optional: To create a new conversation with your query results when you [run a query](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click **Create conversation** in the **Query results** pane. The data source is the temporary table of [cached results](https://docs.cloud.google.com/bigquery/docs/cached-results) that typically persists for 24 hours. After the cached results expire, you can't ask questions about the data.
 
 ### Create a data agent from a conversation
 
 1.  From within a conversation's **Data** pane, in the **Quick Actions** section, click **Create Agent** .
 2.  Follow the steps to [create an agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-a-data-agent) .
+
+## Have a conversation
+
+In the **Ask a question** field, enter a question for the data agent. You can also click one of the Gemini-suggested questions to get started.
+
+The Conversational Analytics API processes your question and returns the results. To see each step the data agent took to provide the answer to your question, click **Show reasoning** .
+
+![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
+
+To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
+
+The **Summary** section includes the generated query followed by the query result. You can optionally open the query in the query editor.
+
+![The API's calculation details, including the generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
+
+When appropriate for the data, the response provides images, charts, tables, and other visualizations.
 
 ## Manage conversations
 

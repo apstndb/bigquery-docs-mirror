@@ -110,8 +110,6 @@ You can export table schema to see the metadata of your data in Data Studio. Thi
 6.  In the toolbar, click file\_upload **Export** . If Export is not visible, select more\_vert **More actions** , and then click **Export** .
 
 7.  Click **Explore with Data Studio** .
-    
-    ![image](https://docs.cloud.google.com/static/bigquery/images/looker-studio-export.jpg)
 
 ### Share reports
 

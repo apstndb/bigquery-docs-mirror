@@ -653,7 +653,7 @@ When you specify the `TEXT_GENERATION` task type, the following columns are retu
 
   - `bleu4_score` : a `FLOAT64` column that contains the [bilingual evaluation understudy (BLEU4) score](https://en.wikipedia.org/wiki/BLEU) for the model.
 
-  - `rouge-l_precision` : a `FLOAT64` column that contains the [Recall-oriented understudy for gisting evaluation (ROUGE-L)](https://en.wikipedia.org/wiki/ROUGE_\(metric\)) [precision](https://en.wikipedia.org/wiki/Accuracy_and_precision) for the model .
+  - `rouge-l_precision` : a `FLOAT64` column that contains the [Recall-oriented understudy for gisting evaluation (ROUGE-L)](https://en.wikipedia.org/wiki/ROUGE_\(metric\)) [precision](https://en.wikipedia.org/wiki/Accuracy_and_precision) for the model.
 
   - `rouge-l_recall` : a `FLOAT64` column that contains the ROUGE-L [recall](https://en.wikipedia.org/wiki/Precision_and_recall) for the model.
 
@@ -666,7 +666,7 @@ When you specify the `TEXT_GENERATION` task type, the following columns are retu
 
 When you specify the `CLASSIFICATION` task type, the following columns are returned:
 
-  - `precision` : a `FLOAT64` column that contains the [precision](https://en.wikipedia.org/wiki/Accuracy_and_precision) for the model .
+  - `precision` : a `FLOAT64` column that contains the [precision](https://en.wikipedia.org/wiki/Accuracy_and_precision) for the model.
 
   - `recall` : a `FLOAT64` column that contains the [recall](https://en.wikipedia.org/wiki/Precision_and_recall) for the model.
 
