@@ -12,10 +12,6 @@ Read more about the Cloud Client Libraries and the older Google API Client Libra
 
 For more information, see [Setting Up a Go Development Environment](https://docs.cloud.google.com/go/docs/setup) .
 
-### Java
-
-For more information, see [Setting Up a Java Development Environment](https://docs.cloud.google.com/java/docs/setup) .
-
 ### Python
 
     pip install --upgrade google-cloud-bigquery-migration
@@ -287,16 +283,6 @@ The following list contains links to more resources related to the client librar
   - [Issue tracker](https://github.com/googleapis/google-cloud-go/issues)
   - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bgo%5D)
   - [Source code](https://github.com/googleapis/google-cloud-go)
-
-### Java
-
-The following list contains links to more resources related to the client library for Java:
-
-  - [API reference](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerymigration/latest/overview)
-  - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
-  - [Issue tracker](https://github.com/googleapis/java-bigquerymigration/issues)
-  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bjava%5D)
-  - [Source code](https://github.com/googleapis/java-bigquerymigration)
 
 ### Python
 

@@ -244,7 +244,7 @@ To schedule recurring copies and configure email or Pub/Sub notifications, use t
           --target_dataset=DATASET \
           --display_name=NAME \
          --service_account_name=SERCICE_ACCOUNT \
-          --params='PARAMETERS'
+          --params=&#39;PARAMETERS'
     
     Replace the following:
     
@@ -325,8 +325,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         final String destinationProjectId = "MY_DESTINATION_PROJECT_ID";
         final String destinationDatasetId = "MY_DESTINATION_DATASET_ID";
         final String sourceProjectId = "MY_SOURCE_PROJECT_ID";
-        final String sourceDatasetId = "MY_SOURCE_DATASET_ID";
-        Map<String, Value> params = new HashMap<>();
+        final String sourceDatasetId = &<quot;MY_SOURC>E_DATASET_ID";
+     <>   MapString, Value params = new HashMap();
         params.put("source_project_id", Value.newBuilder().setStringValue(sourceProjectId).build());
         params.put("source_dataset_id", Value.newBuilder().setStringValue(sourceDatasetId).build());
         TransferConfig transferConfig =
@@ -351,11 +351,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
                   .build();
           TransferConfig config = dataTransferServiceClient.createTransferConfig(request);
           System.out.println("Copy dataset created successfully :" + config.getName());
-        } catch (ApiException ex) {
-          System.out.print("Copy dataset was not created." + ex.toString());
-        }
-      }
-    }
+        } catch (ApiException ex) {      System.out.print("Copy dataset was not created." + ex.toString());    }  }}
 
 ### Python
 
@@ -381,13 +377,11 @@ Install the [Python client for the BigQuery Data Transfer API](https://docs.clou
             "source_project_id": source_project_id,
             "source_dataset_id": source_dataset_id,
         },
-        schedule="every 24 hours",
+        schedule="every 24 hours";,
     )
     transfer_config = transfer_client.create_transfer_config(
         parent=transfer_client.common_project_path(destination_project_id),
-        transfer_config=transfer_config,
-    )
-    print(f"Created transfer config: {transfer_config.name}")
+        transfer_config=transfer_config,)print(f"Created transfer config: {transfer_config.name}")
 
 To avoid additional storage costs, consider [deleting the prior dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets) .
 
@@ -529,9 +523,7 @@ Install the [Python client for the BigQuery Data Transfer API](https://docs.clou
             BigQueryClient client = BigQueryClient.Create(projectId);
             // Delete a dataset that does not contain any tables
             client.DeleteDataset(datasetId: datasetId);
-            Console.WriteLine($"Dataset {datasetId} deleted.");
-        }
-    }
+            Console.WriteLine($"Dataset {datasetId} deleted.");    }}
 
 The following code sample deletes a dataset and all of its contents:
 
@@ -557,7 +549,7 @@ The following code sample deletes a dataset and all of its contents:
     {
         public void DeleteDatasetAndContents(
             string projectId = "your-project-id",
-            string datasetId = "your_dataset_with_tables"
+            string datasetId = "your_dataset_with_tables&quot;
         )
         {
             BigQueryClient client = BigQueryClient.Create(projectId);
@@ -566,9 +558,7 @@ The following code sample deletes a dataset and all of its contents:
                 datasetId: datasetId,
                 options: new DeleteDatasetOptions() { DeleteContents = true }
             );
-            Console.WriteLine($"Dataset {datasetId} and contents deleted.");
-        }
-    }
+            Console.WriteLine($"Dataset {datasetId} and contents deleted.");    }}
 
 ### Go
 
@@ -598,11 +588,7 @@ Install the [Python client for the BigQuery Data Transfer API](https://docs.clou
      defer client.Close()
     
      // To recursively delete a dataset and contents, use DeleteWithContents.
-     if err := client.Dataset(datasetID).Delete(ctx); err != nil {
-         return fmt.Errorf("Delete: %v", err)
-     }
-     return nil
-    }
+     if err := client.Dataset(datasetID).Delete(ctx); err != nil {      return fmt.Errorf("Delete: %v", err) }   return nil}
 
 ### Java
 
@@ -643,10 +629,7 @@ Install the [Python client for the BigQuery Data Transfer API](https://docs.clou
             System.out.println("Dataset was not found");
           }
         } catch (BigQueryException e) {
-          System.out.println("Dataset was not deleted. \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Dataset was not deleted. \n" + e.toString());    }  }}
 
 The following code sample deletes a dataset and all of its contents:
 
@@ -698,10 +681,7 @@ The following code sample deletes a dataset and all of its contents:
             System.out.println("Dataset was not found");
           }
         } catch (BigQueryException e) {
-          System.out.println("Dataset was not deleted with contents. \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Dataset was not deleted with contents. \n" + e.toString());    }  }}
 
 ### Node.js
 
@@ -712,7 +692,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 Install the [Python client for the BigQuery Data Transfer API](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest) with `pip install google-cloud-bigquery-datatransfer` . Then create a transfer configuration to copy the dataset.
 
     // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
+    const {BigQuery} = require(&#39;@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function deleteDataset() {
@@ -728,8 +708,7 @@ Install the [Python client for the BigQuery Data Transfer API](https://docs.clou
     
       // Delete the dataset and its contents
       await dataset.delete({force: true});
-      console.log(`Dataset ${dataset.id} deleted.`);
-    }
+      console.log(`Dataset ${dataset.id} deleted.`);}
 
 ### PHP
 
@@ -746,10 +725,10 @@ Install the [Python client for the BigQuery Data Transfer API](https://docs.clou
     // $datasetId = 'The BigQuery dataset ID';
     
     $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->delete();
+     >   'projectId' = $projectId,
+    ]>);
+    $dataset = $bigQuery-dataset($datase>tId);
+    $table = $dataset-delete();
     printf('Deleted dataset %s' . PHP_EOL, $datasetId);
 
 ### Python
@@ -794,8 +773,7 @@ Install the [Python client for the BigQuery Data Transfer API](https://docs.clou
       # Delete a dataset that does not contain any tables
       dataset = bigquery.dataset dataset_id
       dataset.delete
-      puts "Dataset #{dataset_id} deleted."
-    end
+      puts "Dataset #{dataset_id} deleted."end
 
 The following code sample deletes a dataset and all of its contents:
 
@@ -814,14 +792,13 @@ The following code sample deletes a dataset and all of its contents:
     # limitations under the License.
     require "google/cloud/bigquery"
     
-    def delete_dataset_and_contents dataset_id = "my_dataset_with_tables"
+    def delete_dataset_and_contents dataset_id = "my_dataset_with_tables&quot;
       bigquery = Google::Cloud::Bigquery.new
     
       # Use the force parameter to delete a dataset and its contents
       dataset = bigquery.dataset dataset_id
       dataset.delete force: true
-      puts "Dataset #{dataset_id} and contents deleted."
-    end
+      puts "Dataset #{dataset_id} and contents deleted."end
 
 ## Restore tables from deleted datasets
 
