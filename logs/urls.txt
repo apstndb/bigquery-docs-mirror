@@ -854,12 +854,6 @@ https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql
 https://docs.cloud.google.com/bigquery/docs/reference/libraries
 https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview
 https://docs.cloud.google.com/bigquery/docs/reference/mcp
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/execute_sql
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/get_dataset_info
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/get_table_info
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/list_dataset_ids
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/list_table_ids
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_overview
 https://docs.cloud.google.com/bigquery/docs/reference/migration
 https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp
 https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/explain_translation

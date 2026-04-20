@@ -18,6 +18,7 @@ Ensure that the principal creating the transfer has the following roles in the p
       - `bigquery.jobs.create`
       - `bigquery.jobs.get`
       - `bigquery.jobs.listAll`
+      - `bigquery.tables.get`
       - `bigquery.transfers.get`
       - `bigquery.transfers.update`
 
