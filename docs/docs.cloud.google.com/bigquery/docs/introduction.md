@@ -50,7 +50,7 @@ Descriptive and prescriptive analysis uses include business intelligence, ad hoc
   - ANSI-standard SQL queries ( [ISO/IEC 9075 support](https://www.iso.org/standard/76583.html) ) including support for joins, nested and repeated fields, analytic and aggregation functions, multi-statement queries, and a variety of spatial functions with geospatial analytics - Geographic Information Systems.
   - Pandas-compatible Python API, provided by [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .
   - [Create views](https://docs.cloud.google.com/bigquery/docs/views-intro) to share your analysis.
-  - Business intelligence tool support including [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) with [Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) , [Looker](https://docs.cloud.google.com/bigquery/docs/looker) , [Google Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) , and 3rd party tools like Tableau and Power BI.
+  - Business intelligence tool support including [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) with [Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) , [Looker](https://docs.cloud.google.com/bigquery/docs/looker) , [Google Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) , and 3rd party tools like Tableau and Power BI.
   - [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) provides machine learning and predictive analytics.
   - [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) offers features such as Python notebooks, and version control for both notebooks and saved queries. These features make it easier for you to complete your data analysis and machine learning (ML) workflows in BigQuery.
   - [Query data outside of BigQuery](https://docs.cloud.google.com/bigquery/external-data-sources) with [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) and [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
@@ -130,7 +130,7 @@ Task guidance to help if you need to do the following:
 
   - Reference SQL [functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all) , [operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators) , and [conditional expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions) to query data
 
-  - Use tools to analyze and visualize BigQuery data including: [Looker](https://docs.cloud.google.com/bigquery/docs/looker) , [Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) , and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
+  - Use tools to analyze and visualize BigQuery data including: [Looker](https://docs.cloud.google.com/bigquery/docs/looker) , [Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) , and [Google Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
 
   - [Use geospatial analytics](https://docs.cloud.google.com/bigquery/docs/gis-intro) to analyze and visualize geospatial data with BigQuery's Geographic Information Systems
 

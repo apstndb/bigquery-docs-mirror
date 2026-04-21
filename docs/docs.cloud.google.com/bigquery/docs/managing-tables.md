@@ -188,7 +188,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     public class UpdateTableDescription {
     
-      public static void runUpdateTableDescription() {
+      public static void main(String[] args) {
         // TODO(developer): Replace these variables before running the sample.
         String datasetName = "MY_DATASET_NAME";
         String tableName = "MY_TABLE_NAME";
@@ -418,12 +418,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     public class UpdateTableExpiration {
     
-      public static void runUpdateTableExpiration() {
+      public static void main(String[] args) {
         // TODO(developer): Replace these variables before running the sample.
         String datasetName = "MY_DATASET_NAME";
         String tableName = "MY_TABLE_NAME";
         // Update table expiration to one day.
-        Long newExpiration = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS);
+        Long newExpiration =
+            TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) + System.currentTimeMillis();
         updateTableExpiration(datasetName, tableName, newExpiration);
       }
     
@@ -945,7 +946,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     public class CopyTable {
     
-      public static void runCopyTable() {
+      public static void main(String[] args) {
         // TODO(developer): Replace these variables before running the sample.
         String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
         String destinationTableId = "MY_DESTINATION_TABLE_NAME";
@@ -1235,29 +1236,34 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     public class CopyMultipleTables {
     
-      public static void runCopyMultipleTables() {
+      public static void main(String[] args) {
         // TODO(developer): Replace these variables before running the sample.
         String destinationDatasetName = "MY_DATASET_NAME";
         String destinationTableId = "MY_TABLE_NAME";
-        copyMultipleTables(destinationDatasetName, destinationTableId);
+        String sourceTable1Id = "MY_SOURCE_TABLE_1";
+        String sourceTable2Id = "MY_SOURCE_TABLE_2";
+        copyMultipleTables(destinationDatasetName, destinationTableId, sourceTable1Id, sourceTable2Id);
       }
     
-      public static void copyMultipleTables(String destinationDatasetName, String destinationTableId) {
+      public static void copyMultipleTables(
+          String destinationDatasetName,
+          String destinationTableId,
+          String sourceTable1Id,
+          String sourceTable2Id) {
         try {
           // Initialize client that will be used to send requests. This client only needs to be created
           // once, and can be reused for multiple requests.
           BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
     
           TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
+          TableId sourceTable1 = TableId.of(destinationDatasetName, sourceTable1Id);
+          TableId sourceTable2 = TableId.of(destinationDatasetName, sourceTable2Id);
     
           // For more information on CopyJobConfiguration see:
           // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
           CopyJobConfiguration configuration =
               CopyJobConfiguration.newBuilder(
-                      destinationTable,
-                      Arrays.asList(
-                          TableId.of(destinationDatasetName, "table1"),
-                          TableId.of(destinationDatasetName, "table2")))
+                      destinationTable, Arrays.asList(sourceTable1, sourceTable2))
                   .build();
     
           // For more information on Job see:
@@ -1505,7 +1511,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     public class CopyTable {
     
-      public static void runCopyTable() {
+      public static void main(String[] args) {
         // TODO(developer): Replace these variables before running the sample.
         String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
         String destinationTableId = "MY_DESTINATION_TABLE_NAME";
@@ -1894,7 +1900,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     public class DeleteTable {
     
-      public static void runDeleteTable() {
+      public static void main(String[] args) {
         // TODO(developer): Replace these variables before running the sample.
         String datasetName = "MY_DATASET_NAME";
         String tableName = "MY_TABLE_NAME";

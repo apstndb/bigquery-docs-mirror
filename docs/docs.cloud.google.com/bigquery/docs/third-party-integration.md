@@ -18,7 +18,7 @@ For more information on network and query optimizations, see [Migrating data war
 
 ### API and ODBC/JDBC integrations
 
-Google's BI and data analytics products like [Looker Studio](https://docs.cloud.google.com/looker-studio) , [Looker](https://docs.cloud.google.com/looker) , [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) , and [Vertex AI Workbench instances](https://docs.cloud.google.com/vertex-ai/docs/workbench/instances/introduction) , and third-party solutions like [Tableau](https://www.tableau.com/) , offer direct BigQuery integration using the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) .
+Google's BI and data analytics products like [Data Studio](https://docs.cloud.google.com/looker-studio) , [Looker](https://docs.cloud.google.com/looker) , [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) , and [Vertex AI Workbench instances](https://docs.cloud.google.com/vertex-ai/docs/workbench/instances/introduction) , and third-party solutions like [Tableau](https://www.tableau.com/) , offer direct BigQuery integration using the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) .
 
 For other third-party solutions and custom applications, Google has collaborated with [Magnitude Simba](https://www.magnitude.com/products/data-connectivity) to provide [ODBC](https://wikipedia.org/wiki/Open_Database_Connectivity) and [JDBC](https://wikipedia.org/wiki/Java_Database_Connectivity) drivers. The intent of these drivers is to help you leverage the power of BigQuery with existing tooling and infrastructure that doesn't integrate with the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) .
 

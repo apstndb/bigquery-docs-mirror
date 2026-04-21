@@ -104,6 +104,7 @@ You can specify a custom report when you [create a Google Analytics transfer](ht
   - Only one custom report is supported per transfer configuration.
   - A maximum of 9 dimensions and 10 metrics are supported per custom report.
   - Not all dimensions and metrics are compatible with each other. Use the [GA4 Dimensions & Metrics Explorer](https://ga-dev-tools.google/ga4/dimensions-metrics-explorer/) tool to validate your custom report dimensions and metrics before creating the transfer.
+  - [Custom dimensions and metrics](https://support.google.com/analytics/answer/14240153) are not supported.
 
 ## Set up a Google Analytics 4 data transfer
 

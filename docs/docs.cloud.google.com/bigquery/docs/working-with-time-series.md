@@ -384,7 +384,7 @@ For example, consider IoT devices that send their metrics to a centralized colle
 
 You can perform *time series alignment* on unaligned data, using [time aggregation](https://docs.cloud.google.com/bigquery/docs/working-with-time-series#aggregate_a_time_series) . This is helpful if you want to change the sampling period of the time series, such as changing from the original 1-minute sampling period to a 15-minute period. You can align data for further time series processing, such as joining the time series data, or for display purposes (such as graphing).
 
-You can use the `GAP_FILL` table function with LOCF or linear gap-filling methods to perform time series alignment. The idea is to use `GAP_FILL` with the selected output period and alignment (controlled by the optional origin argument). The result of the operation is a table with aligned time series, where values for each data point are derived from the input time series with the gap-filling method used for that particular value column (LOCF of linear).
+You can use the `GAP_FILL` table function with LOCF or linear gap-filling methods to perform time series alignment. The idea is to use `GAP_FILL` with the selected output period and alignment (controlled by the optional origin argument). The result of the operation is a table with aligned time series, where values for each data point are derived from the input time series with the gap-filling method used for that particular value column (LOCF or linear).
 
 Create a table `mydataset.device_data` , which resembles the previous illustration:
 
@@ -626,7 +626,7 @@ To create `mydataset.sensor_location` , run the following query:
 
 Now join data from `mydataset.sensor_temperatures` with data from `mydataset.sensor_location` .
 
-In this scenario, you can't use a windowed join, since the temperature data and location date are not reported at the same interval.
+In this scenario, you can't use a windowed join, since the temperature data and location data are not reported at the same interval.
 
 One way to do this in BigQuery is to transform the timestamp data into a range, using the [`RANGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range) data type. The range represents the temporal validity of a row, providing the start and end time for which the row is valid.
 

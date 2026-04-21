@@ -18,7 +18,7 @@ To prepare and run a BigQuery migration assessment, follow these steps:
 
 4.  [Run the migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment#run-migration-assessment) .
 
-5.  [Review the Looker Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
+5.  [Review the Data Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
 
 6.  Optional: [Query the assessment results](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) to find detailed or specific assessment information.
 
@@ -886,7 +886,7 @@ To run the BigQuery Migration Service, you need the following additional permiss
       - `bigquery.tables.list`
       - `bigquery.tables.updateData`
 
-To share the Looker Studio report with a user, you need to grant the following roles:
+To share the Data Studio report with a user, you need to grant the following roles:
 
   - `roles/bigquery.dataViewer`
   - `roles/bigquery.jobUser`
@@ -984,7 +984,7 @@ Enable the BigQuery Migration API as follows:
 
 #### Create a dataset for the assessment results
 
-The BigQuery migration assessment writes the assessment results to tables in BigQuery. Before you begin, [create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to hold these tables. When you share the Looker Studio report, you must also give users permission to read this dataset. For more information, see [Make the report available to users](https://docs.cloud.google.com/bigquery/docs/migration-assessment#share_the_data_studio_report) .
+The BigQuery migration assessment writes the assessment results to tables in BigQuery. Before you begin, [create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to hold these tables. When you share the Data Studio report, you must also give users permission to read this dataset. For more information, see [Make the report available to users](https://docs.cloud.google.com/bigquery/docs/migration-assessment#share_the_data_studio_report) .
 
 > **Note:** The dataset should be in the same region as the Cloud Storage bucket containing the metadata and log files extracted from the source database. However, if the Cloud Storage bucket is located in a multi-region, then the dataset must be in any of the regions inside this multi-region.
 
@@ -1023,11 +1023,11 @@ The BigQuery migration assessment writes the assessment results to tables in Big
     
     ![Assessment progress in the tooltip.](https://docs.cloud.google.com/static/bigquery/images/assessment-progress-tooltip.png)
 
-6.  While the assessment is running, you can click the **View report** link in the assessment jobs list to view the assessment report with partial data in Looker Studio. The **View report** link might take some time to appear while the assessment is running. The report opens in a new tab.
+6.  While the assessment is running, you can click the **View report** link in the assessment jobs list to view the assessment report with partial data in Data Studio. The **View report** link might take some time to appear while the assessment is running. The report opens in a new tab.
     
     The report is updated with new data as they are processed. Refresh the tab with the report or click **View report** again to see the updated report.
 
-7.  After the assessment is complete, click **View report** to view the complete assessment report in Looker Studio. The report opens in a new tab.
+7.  After the assessment is complete, click **View report** to view the complete assessment report in Data Studio. The report opens in a new tab.
 
 ### API
 
@@ -1065,13 +1065,13 @@ View the **Errors** tab to see the errors that happened during assessment proces
 
 ![Assessment details page - errors tab.](https://docs.cloud.google.com/static/bigquery/images/assessment-details-errors.png)
 
-## Review and share the Looker Studio report
+## Review and share the Data Studio report
 
-After the assessment task completes, you can create and share a Looker Studio report of the results.
+After the assessment task completes, you can create and share a Data Studio report of the results.
 
 ### Review the report
 
-Click the **View report** link listed next to your individual assessment task. The Looker Studio report opens in a new tab, in a preview mode. You can use preview mode to review the content of the report before sharing it further.
+Click the **View report** link listed next to your individual assessment task. The Data Studio report opens in a new tab, in a preview mode. You can use preview mode to review the content of the report before sharing it further.
 
 The report looks similar to the following screenshot:
 
@@ -1561,18 +1561,18 @@ The **Appendix** section of the report contains the following views:
 
 ### Share the report
 
-The Looker Studio report is a frontend dashboard for the migration assessment. It relies on the underlying dataset access permissions. To share the report, the recipient must have access to both the Looker Studio report itself and the BigQuery dataset that contains the assessment results.
+The Data Studio report is a frontend dashboard for the migration assessment. It relies on the underlying dataset access permissions. To share the report, the recipient must have access to both the Data Studio report itself and the BigQuery dataset that contains the assessment results.
 
 When you open the report from the Google Cloud console, you are viewing the report in the preview mode. To create and share the report with other users, perform the following steps:
 
-1.  Click **Edit and share** . Looker Studio prompts you to attach newly created Looker Studio connectors to the new report.
+1.  Click **Edit and share** . Data Studio prompts you to attach newly created Data Studio connectors to the new report.
 2.  Click **Add to report** . The report receives an individual report ID, which you can use to access the report.
-3.  To share the Looker Studio report with other users, follow the steps given in [Share reports with viewers and editors](https://support.google.com/looker-studio/answer/7459147) .
+3.  To share the Data Studio report with other users, follow the steps given in [Share reports with viewers and editors](https://support.google.com/looker-studio/answer/7459147) .
 4.  Grant the users permission to view the BigQuery dataset that was used to run the assessment task. For more information, see [Granting access to a dataset](https://docs.cloud.google.com/bigquery/docs/migration-assessment#required_permissions) .
 
 ## Query the migration assessment output tables
 
-Although the Looker Studio reports are the most convenient way to view the assessment results, you can also [view and query the underlying data](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-ui) in the BigQuery dataset.
+Although the Data Studio reports are the most convenient way to view the assessment results, you can also [view and query the underlying data](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-ui) in the BigQuery dataset.
 
 ### Example query
 

@@ -17,7 +17,7 @@ We use the following terminology when discussing data warehouse migration:
   - Workload  
     A set of use cases that are connected and have shared dependencies. For example, a use case might have the following relationships and dependencies:
     
-      - Purchase reporting can stand alone and is useful for understanding spendings and requesting discounts.
+      - Purchase reporting can stand alone and is useful for understanding spending and requesting discounts.
       - Sales reporting can stand alone and is useful for planning marketing campaigns.
       - Profit and loss reporting, however, is dependent on both purchases and sales, and is useful for determining the company's value.
 
@@ -158,7 +158,7 @@ The following sections explore possible approaches for prioritizing use cases.
 
 ##### Approach: Exploit current opportunities
 
-Look at current opportunities that could help you maximize the return on investment of a specific use case. This approach is especially useful if you're under pressure to justify the business value of migrating to the cloud. It also provides an opportunity to gather additional datapoints to help assess the total migration cost.
+Look at current opportunities that could help you maximize the return on investment of a specific use case. This approach is especially useful if you're under pressure to justify the business value of migrating to the cloud. It also provides an opportunity to gather additional data points to help assess the total migration cost.
 
 Here are some example questions to ask to help you identify which use cases to prioritize:
 
@@ -263,7 +263,7 @@ At the end of each iteration, validate that the use-case migration was successfu
   - Migrated data pipelines function as expected.
   - Business applications are correctly configured to access the migrated data and queries.
 
-You can get started with the [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator) , an open source Python CLI tool that compares data from source and target environments to ensure they match. It supports multiple connection types along with multi-level validation functionality.
+You can get started with the [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator) , an open-source Python CLI tool that compares data from source and target environments to ensure they match. It supports multiple connection types along with multi-level validation functionality.
 
 It's also a good idea to measure the impact of the use-case migration—for example, in terms of improving performance, reducing cost, or enabling new technical or business opportunities. Then you can more accurately quantify the value of the return on investment and compare the value against your success criteria for the iteration.
 

@@ -6,6 +6,45 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## April 20, 2026
+
+Change
+
+Starting July 25, 2026, the [BigQuery Data Transfer Service for Facebook Ads connector](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) will update the data type mapping for the `ActionValue` field in the `AdInsightsActions` report from `INT` to `FLOAT` .
+
+Feature
+
+The following features have been added to [Python UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python) during [Preview](https://cloud.google.com/products/#product-launch-stages) :
+
+  - Vectorized UDFs with Apache Arrow. You can now create [vectorized Python UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#create-vector-udf-apache) using the Apache Arrow `RecordBatch` interface for improved performance.
+  - Cloud Monitoring integration. Python UDFs now export [metrics](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#view_python_udf_metrics) to Cloud Monitoring, including CPU utilization, memory utilization, and maximum concurrent requests per instance.
+  - Container request concurrency. A new option, `container_request_concurrency` , is available for the `CREATE FUNCTION` statement. This option controls the maximum number of concurrent requests per Python UDF container instance.
+  - New quotas. Python UDFs are now subject to [new quotas](https://docs.cloud.google.com/bigquery/quotas#udf_limits) on image storage bytes (10 GiB per project per region) and mutation rate (30 per minute per project per region).
+  - Cost visibility. Python UDF costs can be seen in the `external_service_costs` column in the `INFORMATION_SCHEMA.JOBS` view and in the `ExternalServiceCosts` field in the [Job API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#externalservicecost) .
+
+Feature
+
+You can now [migrate metadata from external data catalogs to BigLake tables for Apache Iceberg](https://docs.cloud.google.com/bigquery/docs/migration/external-metastore-lakehouse-migration) . This feature supports external data catalogs such as such as Apache Hive Metastore and Apache Iceberg REST Catalog. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can use the [BigQuery MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) to perform a range of data-related tasks with your AI applications including:
+
+  - Examining BigQuery resources.
+  - Generating accurate and efficient SQL queries.
+  - Securely executing queries.
+  - Interpreting query results.
+
+This feature is [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now publish a [BigQuery Conversational Analytics agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
+Feature
+
+You can now use the [notebook gallery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction#notebook_gallery) in the BigQuery web UI as your central hub for discovering and using prebuilt notebook templates. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
 ## April 17, 2026
 
 Feature

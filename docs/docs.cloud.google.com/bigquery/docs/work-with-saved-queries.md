@@ -275,7 +275,7 @@ For more information on IAM roles in BigQuery, see [Predefined roles and permiss
 
 5.  In the **Save query** dialog, enter a name for your query, and then set **Visibility** to one of the following options:
     
-      - **Personal (editable only by you)** for a private clasic shared query.
+      - **Personal (editable only by you)** for a private classic saved query.
       - **Project (editable by principals with appropriate permissions)** for a project-level classic saved query.
       - **Public** for a public classic saved query.
 

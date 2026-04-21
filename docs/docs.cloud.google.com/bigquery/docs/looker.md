@@ -145,7 +145,7 @@ The following instructions show you how to set up Looker with BigQuery.
 
 4.  Generate a LookML model and project for your dataset. For more information, see the [instructions for connecting Looker to your database](https://docs.cloud.google.com/looker/docs/connecting-to-your-db) .
 
-5.  Using the **Explore** menu, navigate to an explore associate with the new model file name **Explore 311\_service\_requests\_copy** (or whatever you named your explore).
+5.  Using the **Explore** menu, navigate to an explore associated with the new model file name **Explore 311\_service\_requests\_copy** (or whatever you named your explore).
 
 You have successfully connected Looker to BigQuery. You can use the System Activity feature in Looker to generate a Looker usage report and analyze the performance of your queries against BigQuery-specific performance metrics. To explore various BigQuery BI Engine query performance metrics, see [BigQuery BI Engine metrics](https://docs.cloud.google.com/looker/docs/query-performance-metrics#bigquery_bi_engine_metrics) .
 
@@ -166,11 +166,11 @@ To delete the project:
 
 <!-- end list -->
 
-1.  In the Google Cloud console, go to the **Manage resources** page.
+1.  In Google Cloud console, go to the **Manage resources** page.
 
 2.  In the project list, select the project that you want to delete, and then click **Delete** .
 
-3.  In the dialog, type the project ID, and then click **Shut down** to delete' the project.
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### Delete the reservation
 

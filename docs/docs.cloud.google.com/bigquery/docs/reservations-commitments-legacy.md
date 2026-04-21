@@ -151,7 +151,7 @@ Each of the following predefined IAM roles includes this permission:
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-> **Note:** When you view legacy capacity commitments, the value of the **Capacity Model** column is `Flat-Rate` . The value of the **Edition** column is `Enterprise` . The value of the **Edition** column doesn't indicate that that you have purchased a commitment associated with an edition.
+> **Note:** When you view legacy capacity commitments, the value of the **Capacity Model** column is `Flat-Rate` . The value of the **Edition** column is `Enterprise` . The value of the **Edition** column doesn't indicate that you have purchased a commitment associated with an edition.
 
 ### View capacity commitments by project
 

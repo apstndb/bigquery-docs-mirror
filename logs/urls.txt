@@ -548,6 +548,7 @@ https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables
 https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables
 https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq
 https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-console
+https://docs.cloud.google.com/bigquery/docs/quickstarts/notebook-gallery-quickstart
 https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries
 https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf
 https://docs.cloud.google.com/bigquery/docs/raster-data
@@ -854,6 +855,12 @@ https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql
 https://docs.cloud.google.com/bigquery/docs/reference/libraries
 https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview
 https://docs.cloud.google.com/bigquery/docs/reference/mcp
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_dataset_ids
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_table_ids
 https://docs.cloud.google.com/bigquery/docs/reference/migration
 https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp
 https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/explain_translation

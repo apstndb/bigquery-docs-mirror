@@ -24,7 +24,7 @@ Salesforce data transfers are subject to the following limitations:
       - Across your different transfer configurations, have no more than 10 simultaneous transfer runs at a time.
   - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
       - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
-  - If you are using network attachments with your data transfer, you must [set up a public network address translation (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation) with a static IP address. For more information, see [Setup IP allowlist for Salesforce transfers](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#salesforce-allowlist) .
+  - If you are using network attachments with your data transfer, you must [set up a public network address translation (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation) with a static IP address. For more information, see [Set up IP allowlist for Salesforce transfers](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#salesforce-allowlist) .
   - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Salesforce.
 
 ### Incremental transfer limitations
@@ -209,7 +209,7 @@ In the **My Domain Details** section, your `myDomain` appears as the prefix in *
 7.  Verify your identity using one of the registered methods. You can view the consumer details page for up to five minutes before you're prompted to verify your identity again.
 8.  In the **Consumer Details** page, the **Consumer Key** is your `ClientId` value. The **Customer Secret** is your `ClientSecret` value.
 
-### Setup IP allowlist for Salesforce transfers
+### Set up IP allowlist for Salesforce transfers
 
 You must configure your Google Cloud environment and your Salesforce account to add specific IP addresses to the allowlist for data transfers. This ensures that Salesforce only accepts connections from a trusted, static IP address. This step is required if you are using network attachments with your data transfers.
 

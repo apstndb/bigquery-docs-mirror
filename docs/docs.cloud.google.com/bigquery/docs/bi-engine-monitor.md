@@ -98,15 +98,15 @@ Use the following format to specify [regionality](https://docs.cloud.google.com/
 
 > **Logging slot metrics:** Although slot metrics for BI Engine are reported, accelerated BI Engine input stages are not counted towards slot reservations. For more information, see the [pricing](https://docs.cloud.google.com/bigquery/pricing#bi-engine-pricing) page.
 
-### View Looker Studio information schema details
+### View Data Studio information schema details
 
-You can track which Looker Studio reports and data sources are used by BigQuery by viewing the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . Every Looker Studio query in BigQuery creates an entry with `report_id` and `datasource_id` labels. Those IDs appear at the end of Looker Studio URL when opening a report or data source page. For example, a report with URL `https://lookerstudio.google.com/navigation/reporting/my-report-id-123` has a report ID of `"my-report-id-123"` .
+You can track which Data Studio reports and data sources are used by BigQuery by viewing the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . Every Data Studio query in BigQuery creates an entry with `report_id` and `datasource_id` labels. Those IDs appear at the end of Data Studio URL when opening a report or data source page. For example, a report with URL `https://lookerstudio.google.com/navigation/reporting/my-report-id-123` has a report ID of `"my-report-id-123"` .
 
 The following examples show how to view reports and data sources:
 
-#### Find report and data source URL for each Looker Studio BigQuery job
+#### Find report and data source URL for each Data Studio BigQuery job
 
-    -- Standard labels used by Looker Studio.
+    -- Standard labels used by Data Studio.
     DECLARE requestor_key STRING DEFAULT 'requestor';
     DECLARE requestor_value STRING DEFAULT 'looker_studio';
     
@@ -139,11 +139,11 @@ The following examples show how to view reports and data sources:
 
 #### View jobs produced by using a report and data source
 
-    -- Specify report and data source id, which can be found at the end of Looker Studio URLs.
+    -- Specify report and data source id, which can be found at the end of Data Studio URLs.
     DECLARE user_report_id STRING DEFAULT '*report id here*';
     DECLARE user_datasource_id STRING DEFAULT '*datasource id here*';
     
-    -- Looker Studio labels for BigQuery.
+    -- Data Studio labels for BigQuery.
     DECLARE requestor_key STRING DEFAULT 'requestor';
     DECLARE requestor_value STRING DEFAULT 'looker_studio';
     DECLARE datasource_key STRING DEFAULT 'looker_studio_datasource_id';

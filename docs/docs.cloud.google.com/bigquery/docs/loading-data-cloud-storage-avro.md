@@ -4,7 +4,7 @@
 
 When you load Avro data from Cloud Storage, you can load the data into a new table or partition, or you can append to or overwrite an existing table or partition. When your data is loaded into BigQuery, it is converted into [columnar format for Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (BigQuery's storage format).
 
-When you load data from Cloud Storage into a BigQuery table, the dataset that contains the table must be in the same regional or multi- regional location as the Cloud Storage bucket.
+When you load data from Cloud Storage into a BigQuery table, the dataset that contains the table must be in the same regional or multi-regional location as the Cloud Storage bucket.
 
 For information about loading Avro data from a local file, see [Loading data into BigQuery from a local data source](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_data_from_local_files) .
 
@@ -304,7 +304,7 @@ The following command loads data from multiple files in `gs://mybucket/` into a 
 
 4.  Specify the Avro data format by setting the `sourceFormat` property to `AVRO` .
 
-5.  To check the job status, call [`jobs.get( job_id *)`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , where job\_id is the ID of the job returned by the initial request.
+5.  To check the job status, call [`jobs.get( job_id )`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , where job\_id is the ID of the job returned by the initial request.
     
       - If `status.state = DONE` , the job completed successfully.
       - If the `status.errorResult` property is present, the request failed, and that object will include information describing what went wrong. When a request fails, no table is created and no data is loaded.
@@ -868,7 +868,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Loading hive-partitioned Avro data
 
-BigQuery supports loading hive partitioned Avro data stored on Cloud Storage and populates the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading Externally Partitioned Data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+BigQuery supports loading hive-partitioned Avro data stored on Cloud Storage and populates the hive-partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading Externally Partitioned Data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 ## Avro conversions
 

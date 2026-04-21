@@ -770,7 +770,9 @@ ActionValue
 
 *Integer*
 
-Metric value of default attribution window.
+Metric value of default attribution window.  
+  
+The Facebook Ads plans to update this data type mapping. For more information, see [July 25, 2026](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul25-fb-ads) .
 
 `  ACTION_COLLECTION .1d_click `
 

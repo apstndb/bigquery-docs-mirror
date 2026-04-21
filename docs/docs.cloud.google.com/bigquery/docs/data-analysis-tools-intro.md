@@ -6,7 +6,7 @@ When you use a data platform like BigQuery, analysis and business intelligence t
 
 [Looker](https://docs.cloud.google.com/bigquery/docs/looker) is Google's enterprise platform for data visualization and business intelligence. It is useful for advanced data analytics, predictive analysis, and custom data applications. It can also connect to transactional databases in other public clouds.
 
-[Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) is a Google tool for data visualization and business intelligence. It connects to BigQuery directly from the Google Cloud console and is useful for building simple graphics, reports, and dashboards.
+[Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) is a Google tool for data visualization and business intelligence. It connects to BigQuery directly from the Google Cloud console and is useful for building simple graphics, reports, and dashboards.
 
 [ODBC and JDBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) let you combine the power of BigQuery with your existing tooling and infrastructure that use popular ODBC or JDBC connections.
 
@@ -17,7 +17,7 @@ You can also connect to BigQuery using a number of popular third-party tools suc
 ## What's next
 
   - Learn to [use Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
-  - [Visualize data in Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) .
+  - [Visualize data in Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) .
   - Learn to [use Looker](https://docs.cloud.google.com/bigquery/docs/looker) .
   - Learn to [use ODBC and JDBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
   - Learn to [use programmatic analysis tools](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .

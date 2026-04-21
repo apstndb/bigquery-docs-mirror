@@ -3196,6 +3196,11 @@ The option list specifies options for creating a UDF. The following options are 
 <td><p><code dir="ltr" translate="no">STRING</code></p></td>
 <td><p>Amount of memory provisioned for a Python UDF container instance. Applies only to Python UDFs. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits">Configure container limits for Python UDF</a> .</p></td>
 </tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">container_request_concurrency</code></td>
+<td><p><code dir="ltr" translate="no">INT64</code></p></td>
+<td><p>The maximum number of concurrent requests per Python UDF container instance. Must be an integer from <code dir="ltr" translate="no">1</code> to <code dir="ltr" translate="no">1000</code> . Applies only to Python UDFs. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits">Configure container limits for Python UDF</a> .</p></td>
+</tr>
 </tbody>
 </table>
 
@@ -6551,7 +6556,7 @@ The following options are supported:
 <p>Example: <code dir="ltr" translate="no">`region-us.reservation_override_mode` = 'ALLOW_ANY_OVERRIDE'</code></p></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">disable_on_demand_billing</code></td>
+<td><code dir="ltr" translate="no">disable_on_demand_billing</code> (Preview)</td>
 <td><code dir="ltr" translate="no">BOOL</code></td>
 <td><p>Determines whether on-demand billing is disabled for the organization in the region. If <code dir="ltr" translate="no">true</code> , all queries must use an assigned reservation or they fail.</p>
 <p>Example: <code dir="ltr" translate="no">`region-us.disable_on_demand_billing` = true</code></p></td>
@@ -6725,7 +6730,7 @@ The following options are supported:
 <p>Example: <code dir="ltr" translate="no">`region-us.reservation_override_mode` = 'ALLOW_ANY_OVERRIDE'</code></p></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">disable_on_demand_billing</code></td>
+<td><code dir="ltr" translate="no">disable_on_demand_billing</code> (Preview)</td>
 <td><code dir="ltr" translate="no">BOOL</code></td>
 <td><p>Determines whether on-demand billing is disabled for the project in the region. If <code dir="ltr" translate="no">true</code> , all queries must use an assigned reservation or they fail.</p>
 <p>Example: <code dir="ltr" translate="no">`region-us.disable_on_demand_billing` = true</code></p></td>
@@ -6976,7 +6981,7 @@ Rebuild a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-inde
 
 ### Details
 
-Use the `ALTER VECTOR INDEX REBUILD` statement to rebuild an active vector index on a table without having to drop the vector index, and without any index downtime. When you run the statement, BigQuery creates a shadow index on the table and trains it in the background. BigQuery promotes the shadow index to be the active index when the shadow index has enough coverage.
+Use the `ALTER VECTOR INDEX REBUILD` statement to rebuild an active vector index on a table without having to drop the vector index, and without any index downtime. When you run the statement, BigQuery creates a *shadow index* , a background-only index that inherits the configuration of the current index, on the table and trains it in the background. BigQuery promotes the shadow index to be the active index when the shadow index has enough coverage.
 
 To run the `ALTER VECTOR INDEX REBUILD` statement, you must [create a reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) with a job type of `BACKGROUND` for the project that contains the table. If you run the statement without an appropriate reservation, the query fails.
 

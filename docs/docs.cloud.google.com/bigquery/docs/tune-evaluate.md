@@ -176,7 +176,7 @@ Run the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/doc
 
 ## Evaluate the baseline model
 
-To perform a more detailed evaluation of the model performance, use the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) . This function computes model metrics that measure the accuracy and quality of the generated text, in order to see how the model's responses compare to ideal esponses.
+To perform a more detailed evaluation of the model performance, use the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) . This function computes model metrics that measure the accuracy and quality of the generated text, in order to see how the model's responses compare to ideal responses.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

@@ -3,7 +3,7 @@
 Geospatial analytics lets you visualize geographic location data by using the following:
 
   - [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio)
-  - [Looker Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#data_studio)
+  - [Data Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#data_studio)
   - [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#geo_viz)
   - [Colab notebooks](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#colab)
   - [Google Earth Engine](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#google_earth)
@@ -23,13 +23,13 @@ To see an example of how to use the integrated geography viewer, see [Get starte
   - You can only visualize one `GEOGRAPHY` column at a time.
   - Performance is subject to browser capabilities and isn't intended for rendering extremely large or complex datasets. BigQuery renders up to approximately one million vertices, 20,000 rows, or 128 MB of results.
 
-## Looker Studio
+## Data Studio
 
-Looker Studio is a no-cost, self-serve reporting and data visualization service from Google Marketing Platform that connects to BigQuery and hundreds of other data sources. The service includes support for a variety of [geographic field types](https://support.google.com/looker-studio/answer/9843174) and [choropleth maps](https://en.wikipedia.org/wiki/Choropleth_map) of BigQuery `GEOGRAPHY` polygons. With [Google Maps-based visualization](https://support.google.com/looker-studio/answer/9713352) , you can visualize and interact with your geographic data just as you do with Google Maps: pan around, zoom in, and pop into Street View.
+Data Studio is a no-cost, self-serve reporting and data visualization service from Google Marketing Platform that connects to BigQuery and hundreds of other data sources. The service includes support for a variety of [geographic field types](https://support.google.com/looker-studio/answer/9843174) and [choropleth maps](https://en.wikipedia.org/wiki/Choropleth_map) of BigQuery `GEOGRAPHY` polygons. With [Google Maps-based visualization](https://support.google.com/looker-studio/answer/9713352) , you can visualize and interact with your geographic data just as you do with Google Maps: pan around, zoom in, and pop into Street View.
 
-![Geographic regions visualized in Looker Studio.](https://docs.cloud.google.com/static/bigquery/images/gis-data-studio.png)
+![Geographic regions visualized in Data Studio.](https://docs.cloud.google.com/static/bigquery/images/gis-data-studio.png)
 
-For a walkthrough of geospatial analytics in Looker Studio, see [Visualize BigQuery `GEOGRAPHY` polygons with Looker Studio](https://support.google.com/looker-studio/answer/10502383) .
+For a walkthrough of geospatial analytics in Data Studio, see [Visualize BigQuery `GEOGRAPHY` polygons with Data Studio](https://support.google.com/looker-studio/answer/10502383) .
 
 ## BigQuery Geo Viz
 

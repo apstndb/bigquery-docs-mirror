@@ -1,8 +1,6 @@
 # Connect LLMs to BigQuery with MCP
 
-> **Note:** MCP Toolbox for Databases is in beta (pre-v1.0) and may see breaking changes until the first stable release (v1.0).
-
-This guide shows you how to use the [MCP Toolbox for Databases](https://github.com/googleapis/genai-toolbox) to connect your BigQuery project to a variety of Integrated Development Environments (IDEs) and developer tools. It uses the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) , an open protocol for connecting large language models (LLMs) to data sources like BigQuery, allowing you to run SQL queries and interact with your project directly from your existing tools.
+This guide shows you how to use the [MCP Toolbox for Databases](https://github.com/googleapis/mcp-toolbox) to connect your BigQuery project to a variety of Integrated Development Environments (IDEs) and developer tools. It uses the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) , an open protocol for connecting large language models (LLMs) to data sources like BigQuery, allowing you to run SQL queries and interact with your project directly from your existing tools.
 
 If you use the Gemini CLI, you can use BigQuery extensions. To learn how, see [Develop with Gemini CLI](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli) . If you plan to build custom tools for the Gemini CLI, continue reading.
 
@@ -76,29 +74,29 @@ You don't need to install MCP Toolbox if you only plan to use the BigQuery Gemin
 
 The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server that sits between your IDE and BigQuery, providing a secure and efficient control plane for your AI tools.
 
-1.  Download the latest version of the MCP Toolbox as a binary. Select the [binary](https://github.com/googleapis/genai-toolbox/releases) corresponding to your operating system (OS) and CPU architecture. You must use MCP Toolbox version V0.7.0 or later:
+1.  Download the latest version of the MCP Toolbox as a binary. Select the [binary](https://github.com/googleapis/mcp-toolbox/releases) corresponding to your operating system (OS) and CPU architecture. You must use MCP Toolbox version V0.7.0 or later:
     
     ### linux/amd64
     
-        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/linux/amd64/toolbox
+        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/linux/amd64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
     
     ### macOS darwin/arm64
     
-        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/arm64/toolbox
+        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/arm64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
     
     ### macOS darwin/amd64
     
-        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/amd64/toolbox
+        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/amd64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
     
     ### windows/amd64
     
-        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/windows/amd64/toolbox
+        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/windows/amd64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
 

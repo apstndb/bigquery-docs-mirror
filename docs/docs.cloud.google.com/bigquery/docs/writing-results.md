@@ -26,7 +26,7 @@ BigQuery saves all query results to a table, which can be either permanent or te
 
   - Access to the temporary table data is restricted to the user or service account that created the query job.
 
-  - You cannot share temporary tables, and they are not visible using any of the standard list or other table manipulation methods. If you need to share your query results, write the results to a permanent table, download them, or share them though Google Sheets or Google Drive.
+  - You cannot share temporary tables, and they are not visible using any of the standard list or other table manipulation methods. If you need to share your query results, write the results to a permanent table, download them, or share them through Google Sheets or Google Drive.
 
   - Temporary tables are created in the same region as the table or tables being queried.
 

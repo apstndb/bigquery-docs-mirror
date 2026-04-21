@@ -79,7 +79,7 @@ Follow these steps to detect anomalies with the TimesFM model:
 
 3.  When the query is finished running, click the **Visualization** tab. The resulting chart looks similar to the following:
     
-    ![Graph 1 month time points of input data along with the AI.DETECT\_ANOMALIES function output data to show anomalies.](https://docs.cloud.google.com/static/bigquery/images/ai-detect-anomalies.png)
+    ![Graph one month timepoints of input data along with the AI.DETECT\_ANOMALIES function output data to show anomalies.](https://docs.cloud.google.com/static/bigquery/images/ai-detect-anomalies.png)
     
     You can identify the anomalies where the `time_series_data` value falls outside the `lower_bound` and `upper_bound` range.
 

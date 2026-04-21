@@ -176,7 +176,7 @@ You can configure regional settings at the organization or project level.
 
 You can control how queries use reservations or on-demand billing. These settings help ensure cost predictability by either allowing flexible reservation usage or requiring that queries use reservation slots.
 
-Common reservation and billing controls include settings such as `reservation_override_mode` ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ) and `disable_on_demand_billing` . For a complete list of settings and options, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
+Common reservation and billing controls include settings such as `reservation_override_mode` ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ) and `disable_on_demand_billing` ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ). For a complete list of settings and options, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
 
 ### Configure regional organization settings
 
@@ -511,8 +511,8 @@ Use the following settings to determine how resources are billed and connected.
 
   - `default_storage_billing_model` : The default storage billing model for new datasets. Set the value to `PHYSICAL` to use physical bytes when calculating storage charges or to `LOGICAL` to use logical bytes. Note that changing the default storage billing model does not affect existing datasets. For more information, see [Storage billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
   - `default_cloud_resource_connection_id` : The default connection to use when creating tables and models. Only specify the connection's ID or name, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you're creating. For more information, see the [Default connection overview](https://docs.cloud.google.com/bigquery/docs/default-connections) .
-  - `reservation_override_mode` : Specifies how query reservations can be overridden in the region (for example, `'ALLOW_ANY_OVERRIDE'` ). For details, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
-  - `disable_on_demand_billing` : Determines whether on-demand billing is disabled for queries in the region. If `true` , all queries must use an assigned reservation or they fail. For details, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
+  - `reservation_override_mode` ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ): Specifies how query reservations can be overridden in the region (for example, `'ALLOW_ANY_OVERRIDE'` ). For details, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
+  - `disable_on_demand_billing` ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ): Determines whether on-demand billing is disabled for queries in the region. If `true` , all queries must use an assigned reservation or they fail. For details, see the [`ALTER PROJECT SET OPTIONS` options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
 
 ## Pricing
 

@@ -54,7 +54,7 @@ You can delete a table snapshot by using one of the following options:
 
 1.  In the left pane, click explore **Explorer** :
     
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    ![Image of the highlighted Explorer pane button.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 

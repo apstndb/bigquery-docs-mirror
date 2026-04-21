@@ -893,18 +893,20 @@ The following limits apply to both temporary and persistent [user-defined functi
 
 The following limits apply to persistent UDFs:
 
-| Limit                                                                   | Default          | Notes                                                                                     |
-| ----------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
-| Maximum length of a UDF name                                            | 256 characters   | A UDF name can be up to 256 characters long.                                              |
-| Maximum number of arguments                                             | 256 arguments    | A UDF can have up to 256 arguments.                                                       |
-| Maximum length of an argument name                                      | 128 characters   | A UDF argument name can be up to 128 characters long.                                     |
-| Maximum depth of a UDF reference chain                                  | 16 references    | A UDF reference chain can be up to 16 references deep.                                    |
-| Maximum depth of a `STRUCT` type argument or output                     | 15 levels        | A `STRUCT` type UDF argument or output can be up to 15 levels deep.                       |
-| Maximum number of fields in `STRUCT` type arguments or output per UDF   | 1,024 fields     | A UDF can have up to 1024 fields in `STRUCT` type arguments and output.                   |
-| Maximum number of JavaScript libraries in a `CREATE FUNCTION` statement | 50 libraries     | A `CREATE FUNCTION` statement can have up to 50 JavaScript libraries.                     |
-| Maximum length of included JavaScript library paths                     | 5,000 characters | The path for a JavaScript library included in a UDF can be up to 5,000 characters long.   |
-| Maximum update rate per UDF per 10 seconds                              | 5 updates        | Your project can update a UDF up to five times every 10 seconds.                          |
-| Maximum number of authorized UDFs per dataset                           |                  | See [Datasets](https://docs.cloud.google.com/bigquery/quotas#auth_views_in_dataset_acl) . |
+| Limit                                                                   | Default          | Notes                                                                                                 |
+| ----------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
+| Maximum length of a UDF name                                            | 256 characters   | A UDF name can be up to 256 characters long.                                                          |
+| Maximum number of arguments                                             | 256 arguments    | A UDF can have up to 256 arguments.                                                                   |
+| Maximum length of an argument name                                      | 128 characters   | A UDF argument name can be up to 128 characters long.                                                 |
+| Maximum depth of a UDF reference chain                                  | 16 references    | A UDF reference chain can be up to 16 references deep.                                                |
+| Maximum depth of a `STRUCT` type argument or output                     | 15 levels        | A `STRUCT` type UDF argument or output can be up to 15 levels deep.                                   |
+| Maximum number of fields in `STRUCT` type arguments or output per UDF   | 1,024 fields     | A UDF can have up to 1024 fields in `STRUCT` type arguments and output.                               |
+| Maximum number of JavaScript libraries in a `CREATE FUNCTION` statement | 50 libraries     | A `CREATE FUNCTION` statement can have up to 50 JavaScript libraries.                                 |
+| Maximum length of included JavaScript library paths                     | 5,000 characters | The path for a JavaScript library included in a UDF can be up to 5,000 characters long.               |
+| Maximum update rate per UDF per 10 seconds                              | 5 updates        | Your project can update a UDF up to five times every 10 seconds.                                      |
+| Maximum number of authorized UDFs per dataset                           |                  | See [Datasets](https://docs.cloud.google.com/bigquery/quotas#auth_views_in_dataset_acl) .             |
+| Python UDF image storage bytes per project per region                   | 10 GiB           | The total size in bytes of all container images used by Python UDFs in a specific project and region. |
+| Python UDF mutation limit                                               | 30 per minute    | You can create or update Python UDFs up to 30 times per minute per region per project.                |
 
 ### Remote functions
 

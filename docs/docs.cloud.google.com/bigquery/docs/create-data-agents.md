@@ -22,12 +22,17 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 
 ### Required roles
 
-To work with data agents, you must have one of the following [Conversational Analytics API Identity and Access Management roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) :
+To work with data agents, you must have Identity and Access Management permissions that match your use case. The following sections list required roles based on whether you are creating and publishing agents, provisioning agents in Gemini Enterprise, or discovering and using agents. For more information, see [Conversational Analytics API Identity and Access Management roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) .
 
-  - Create, edit, share, and delete all data agents in the project: Gemini Data Analytics Data Agent Owner ( `roles/geminidataanalytics.dataAgentOwner` ) on the project.
-  - Create, edit, share, and delete your own data agents in the project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
-  - View and edit all data agents in the project: Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ) at the project level.
-  - View all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ).
+  - **Create, edit, publish, share, and delete agents:**
+      - To act on all data agents in the project: Gemini Data Analytics Data Agent Owner ( `roles/geminidataanalytics.dataAgentOwner` ) on the project.
+      - To act on only your own data agents in the project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
+      - To view and edit all data agents in the project: Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ) at the project level.
+  - **Provision agents in Gemini Enterprise:**
+      - To make a published agent available to users in Gemini Enterprise, you need permissions to [register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent) in the Gemini Enterprise administration console.
+  - **Discover and use agents:**
+      - To chat with data agents: Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ).
+      - To view all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ).
 
 Additionally, you must have the following roles to create or edit a data agent:
 
@@ -399,7 +404,7 @@ Continue to the next section to place the agent in draft mode or publish the age
     
     To publish your agent, remain on the agent creation page and proceed to the next step.
 
-4.  Click **Publish** to publish the data agent and make it available for use in the project. You can create conversations with the data agent by using BigQuery Studio or [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) . You can also build your own interface to chat with the data agent by using the Conversational Analytics API.
+4.  Click **Publish** to publish the data agent and make it available for use in the project. You can create conversations with the data agent by using BigQuery Studio or [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) . You can also build your own interface to chat with the data agent by using the Conversational Analytics API. For information on publishing to Gemini Enterprise, see [Publish a data agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) .
 
 5.  Optional: In the **Your agent has been published** dialog, click **Share** to share the data agent with other users.
     
@@ -494,6 +499,76 @@ Follow these steps to share a published data agent. You can't share draft agents
 4.  Click more\_vert **Open actions** \> **Delete** .
 
 5.  In the **Delete agent?** dialog, click **Delete** .
+
+## Publish a data agent in Gemini Enterprise
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/1HIFPcPJk1g0SCPDNyVqoLWszBeXVa9qyU4fbBdW_91Y/edit#responses) . To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
+
+The following sections describe how to publish a data agent in Gemini Enterprise. This process typically involves collaboration between data analysts, Gemini Enterprise administrators, and business users. For more information about the roles required for these users, see [Required roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required-roles) .
+
+To publish a data agent in Gemini Enterprise, complete the following steps:
+
+1.  Create and publish the data agent.
+2.  Provision the agent.
+3.  Discover and use the agent.
+
+### Create and publish an agent
+
+As a data analyst, you create, edit, and publish an agent to Gemini Enterprise by completing the following steps:
+
+1.  [Create](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-a-data-agent) or [edit](https://docs.cloud.google.com/bigquery/docs/create-data-agents#edit-agent) your data agent in BigQuery.
+2.  [Publish](https://docs.cloud.google.com/bigquery/docs/create-data-agents#preview-publish) the agent. When you publish the agent, select **Gemini Enterprise** as a publishing option.
+3.  Copy the A2A endpoint JSON.
+4.  Share the A2A endpoint JSON and the list of users with your Gemini Enterprise administrator.
+5.  [Share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent with the users and groups who need access.
+
+### Provision an agent
+
+As the Gemini Enterprise administrator, you can make a published agent available to users in the Google Cloud console.
+
+1.  In the Google Cloud console, go to **Gemini Enterprise** .
+
+2.  Click the name of the app where you want to register the agent.
+
+3.  Click **Agents** \> add **Add Agents** .
+
+4.  In the **Choose an agent type** section, click **Add** for **Custom agent via A2A** .
+
+5.  In the **Agent card JSON** field, enter the agent card details that you previously received from the data analyst in JSON format. For a complete list of available fields, see the [Agent2Agent (A2A) Protocol Specification](https://a2a-protocol.org/latest/specification/) . The example uses only the required fields.
+
+6.  Click **Preview agent details \> Next** .
+
+7.  To enable the agent to access Google Cloud resources on your behalf, complete the following steps:
+
+8.  Enter the **Client ID** , **Client secret** , **Authorization URI** , and **Token URI** that you generated in the [Configure authorization details](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) section.
+
+9.  Enter the **Scopes** .
+
+10. Click **Finish** .
+
+11. [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups that the data analyst provides.
+
+For more information about working with A2A agents in Gemini Enterprise, see [Register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent) .
+
+### Discover and use an agent
+
+You can discover and use a data agent in Gemini Enterprise using any of these methods:
+
+  - **Manual discovery** : Locate a data agent in the [Agent Gallery](https://docs.cloud.google.com/gemini/enterprise/docs/agent-gallery) and use it with any of these methods:
+      - **Browse the gallery** : Select the agent and start a dedicated chat.
+      - **Direct link** : Use the agent's dedicated URL to open Gemini Enterprise directly into a session with that specific BigQuery data agent.
+      - **Directed intent** : Invoke the agent by `@mention` (for example, `@sales_pipeline_agent` ) in the Gemini Enterprise core chat.
+      - **Seamless orchestration** : Ask a general analytical question (for example, "How is our sales pipeline trending in the last 3 months?") and Gemini Enterprise automatically routes the query to the relevant data agent.
+
+After you've discovered the agent, you can interact with it by performing the following steps:
+
+  - **Authenticate** : Complete the one-time OAuth sign-in to securely authenticate to BigQuery.
+  - **Chat** : Ask natural language questions to the agent. The requests are processed by the BigQuery conversational analytics agent, and the response is streamed back to Gemini Enterprise as text, Markdown, charts, or tables.
+  - **View conversation history** : Conversations are automatically saved in the history pane.
 
 ## Locations
 

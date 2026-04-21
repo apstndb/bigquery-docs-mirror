@@ -217,7 +217,7 @@ For more information about how to run queries, see [Run an interactive query](ht
          mydataset.mytable \
          /tmp/myschema.json
     
-    Enter the following command to create a table using an JSON schema file. This command creates a table named `mytable` in `mydataset` in `myotherproject` . The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The path to the schema file is `/tmp/myschema.json` .
+    Enter the following command to create a table using a JSON schema file. This command creates a table named `mytable` in `mydataset` in `myotherproject` . The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The path to the schema file is `/tmp/myschema.json` .
     
         bq mk \
          --table \

@@ -1057,7 +1057,7 @@ You might also be able to get the required permissions through [custom roles](ht
 You can manually trigger a transfer or backfill run with the following methods:
 
   - Select your transfer run using the Google Cloud console, then clicking **Run transfer now** or **Schedule backfill** .
-  - Use the `bq mk –transfer run` command using the `bq` command-line tool
+  - Use the `bq mk --transfer run` command using the `bq` command-line tool
   - Call the `projects.locations.transferConfigs.startManualRuns method` API method
 
 For detailed instructions about each method, select the corresponding tab:
@@ -1092,7 +1092,7 @@ To manually start a transfer run, enter the `bq mk` command with the `--transfer
 Replace the following:
 
   - `  RUN_TIME  ` is a timestamp that specifies the date of a past transfer. Use timestamps that end in Z or contain a valid time zone offset—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00` .
-      - If your transfer does not have a runtime parameter, or you just want to trigger a transfer now without specifying a past transfer, input your current time in this field.
+      - If your transfer does not have a runtime parameter, or you just want to trigger a transfer now without specifying a past transfer, enter your current time in this field.
   - `  RESOURCE_NAME  ` is the resource name listed on your transfer configuration—for example, `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7` .
       - To find the resource name of a transfer configuration, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details) .
       - The resource name uses the [Relative resource name](https://docs.cloud.google.com/apis/design/resource_names#relative_resource_name) format.
@@ -1107,7 +1107,7 @@ To manually start a transfer run for a range of dates, enter the `bq mk` command
 
 Replace the following:
 
-  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specifies the time range containing the previous transfer runs that you want to backfill from—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00`
+  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specify the time range containing the previous transfer runs that you want to backfill from—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00`
   - `  RESOURCE_NAME  ` is the resource name listed on your transfer configuration—for example, `projects/myproject/locations/us/transferConfigs/1234a123-1234-1a23-1be9-12ab3c456de7`
       - To find the resource name of a transfer configuration, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details) .
       - The resource name uses the [Relative resource name](https://docs.cloud.google.com/apis/design/resource_names#relative_resource_name) format.
@@ -1123,7 +1123,7 @@ To manually start a transfer run, use the [`projects.locations.transferConfigs.s
 Replace the following:
 
   - `  RUN_TIME  ` is a timestamp that specifies the date of a past transfer. Use timestamps that end in Z or contain a valid time zone offset—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00` .
-      - If your transfer does not have a runtime parameter, or you just want to trigger a transfer now without specifying a past transfer, input your current time in this field.
+      - If your transfer does not have a runtime parameter, or you just want to trigger a transfer now without specifying a past transfer, enter your current time in this field.
 
 To manually start a transfer run for a range of dates, provide a date range:
 
@@ -1134,7 +1134,7 @@ To manually start a transfer run for a range of dates, provide a date range:
 
 Replace the following:
 
-  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specifies the time range containing the previous transfer runs that you want to backfill from—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00`
+  - `  START_TIME  ` and `  END_TIME  ` are timestamps that end in Z or contain a valid time zone offset. These values specify the time range containing the previous transfer runs that you want to backfill from—for example, `2022-08-19T12:11:35.00Z` or `2022-05-25T00:00:00+00:00`
 
 ### Java
 

@@ -49,7 +49,7 @@ However, the creation of a table clone is different from the creation of a stand
 
   - If data is changed or deleted in the base table that also exists in a table clone, then you are charged for the table clone storage of the changed or deleted data. If there are multiple clones that contain the changed or deleted data, you are only charged for the storage used by the oldest clone.
 
-  - If data is added to the base table after the table clone was created, then you aren't charged for storage of that data in the table clone, but you are charged for it in the base table,
+  - If data is added to the base table after the table clone was created, then you aren't charged for storage of that data in the table clone, but you are charged for it in the base table.
 
 The difference between base table and table clone storage charges is shown in the following image:
 

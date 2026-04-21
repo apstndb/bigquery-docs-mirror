@@ -15,7 +15,7 @@ You are subject to the following limitations when you load data into BigQuery fr
 
 When you load JSON files into BigQuery, note the following:
 
-  - JSON data must be newline delimited, or ndJSON. Each JSON object must be on a separate line in the file.
+  - JSON data must be newline-delimited, or ndJSON. Each JSON object must be on a separate line in the file.
 
   - If you use gzip [compression](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_compressed_and_uncompressed_data) , BigQuery cannot read the data in parallel. Loading compressed JSON data into BigQuery is slower than loading uncompressed data.
 
@@ -252,7 +252,7 @@ The following command loads data from `gs://mybucket/mydata.json` into a partiti
     ./myschema
 ```
 
-The following command loads data from `gs://mybucket/mydata.json` into a table named `mytable` in `mydataset` . The schema is auto detected.
+The following command loads data from `gs://mybucket/mydata.json` into a table named `mytable` in `mydataset` . The schema is auto-detected.
 
 ``` 
     bq load \
@@ -274,7 +274,7 @@ The following command loads data from `gs://mybucket/mydata.json` into a table n
 
 > **Note:** When you specify the schema using the bq tool, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#specifying_a_schema_file) instead.
 
-The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard. The schema is auto detected.
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard. The schema is auto-detected.
 
 ``` 
     bq load \
@@ -938,7 +938,7 @@ The following command loads data from `gs://mybucket/mydata.json` and appends da
 
 2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `source URIs` property must be fully-qualified, in the format ` gs:// BUCKET / OBJECT  ` . You can include multiple URIs as a comma-separated list. The [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
+3.  The `source URIs` property must be fully qualified, in the format ` gs:// BUCKET / OBJECT  ` . You can include multiple URIs as a comma-separated list. The [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 4.  Specify the data format by setting the `configuration.load.sourceFormat` property to `NEWLINE_DELIMITED_JSON` .
 
@@ -1237,7 +1237,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Loading hive-partitioned JSON data
 
-BigQuery supports loading hive partitioned JSON data stored on Cloud Storage and populates the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+BigQuery supports loading hive-partitioned JSON data stored on Cloud Storage and populates the hive-partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 ## Details of loading JSON data
 

@@ -512,7 +512,7 @@ To update a label to a reservation, issue the `bq update` command with the `set_
 
 Replace the following:
 
-  - `  KEY:VALUE  ` : a key-value pair for a label that you want to update on the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To update multiple labels on a reservation, repeat the `--label` flag and specify a unique key for each label.
+  - `  KEY:VALUE  ` : a key-value pair for a label that you want to update on the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To update multiple labels on a reservation, repeat the `--set_label` flag and specify a unique key for each label.
   - `  RESERVATION_NAME  ` : the name of the reservation.
 
 ### SQL

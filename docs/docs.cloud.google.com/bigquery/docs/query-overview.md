@@ -184,7 +184,7 @@ In addition to running queries in BigQuery, you can analyze your data with vario
 
   - **Looker.** Looker is an enterprise platform for business intelligence, data applications, and embedded analytics. The Looker platform works with many datastores including BigQuery. For information on how to connect Looker to BigQuery, see [Using Looker](https://docs.cloud.google.com/bigquery/docs/looker) .
 
-  - **Looker Studio.** After you run a query, you can launch Looker Studio directly from BigQuery in the Google Cloud console. Then, in Looker Studio you can create visualizations and explore the data that's returned from the query. For information about Looker Studio, see [Looker Studio overview](https://lookerstudio.google.com/overview) .
+  - **Data Studio.** After you run a query, you can launch Data Studio directly from BigQuery in the Google Cloud console. Then, in Data Studio you can create visualizations and explore the data that's returned from the query. For information about Data Studio, see [Data Studio overview](https://lookerstudio.google.com/overview) .
 
   - **Connected Sheets.** You can also launch Connected Sheets directly from BigQuery in the console. Connected Sheets runs BigQuery queries on your behalf either upon your request or on a defined schedule. Results of those queries are saved in your spreadsheet for analysis and sharing. For information about Connected Sheets, see [Using connected sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
 

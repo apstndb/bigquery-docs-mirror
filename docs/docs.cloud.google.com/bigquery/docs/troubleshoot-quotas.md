@@ -365,6 +365,22 @@ To resolve this quota error, do the following:
     
       - For additional quota, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) . Requesting a quota increase might take several days to process. To provide more information for your request, we recommend that your request includes the priority of the job, the user running the query, and the affected method.
 
+### Maximum Python UDF image storage bytes per project per region
+
+The total size of all stored container images used by active Python UDFs can't exceed `10 GiB` per project per region. This limit is enforced when you create or update a Python UDF. If the total size exceeds the regional limit, the request fails immediately, and the following error is returned.
+
+**Error message**
+
+`Resources exceeded during query execution: Quota exceeded: Your project: PROJECT_ID exceeded quota for Python UDF image storage usage per region per project.`
+
+#### Resolution
+
+To resolve this error, do the following:
+
+1.  Request an increase: go to the [**Quotas & System Limits** page](https://docs.cloud.google.com/docs/quotas/view-manage#viewing_your_quota_console) , search for the `Python UDF image storage bytes per project per region` limit, and then request an increase.
+
+2.  Optimize storage: delete unused Python UDFs using the `DROP FUNCTION` statement to free space. After a UDF is deleted, its image size no longer counts towards the quota. You can find the image size by using the `Routine.GetBuildStatus` API.
+
 ## Troubleshoot quotas or limits that can't be increased
 
 You can't increase the following quotas or limits, but you can apply the suggested workarounds or best practices to mitigate them.

@@ -13,7 +13,7 @@ Common use cases for views include the following:
 
 You can also use views in other contexts:
 
-  - As a data source for a visualization tool such as [Looker Studio](https://docs.cloud.google.com/looker/docs) .
+  - As a data source for a visualization tool such as [Data Studio](https://docs.cloud.google.com/looker/docs) .
   - As a means of sharing data to subscribers of [BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
 
 For a comparison of logical, materialized views, and authorized views, see [Overview of logical and materialized views](https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview) .

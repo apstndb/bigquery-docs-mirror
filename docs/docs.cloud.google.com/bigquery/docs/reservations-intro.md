@@ -6,7 +6,7 @@ BigQuery workload management lets you allocate and manage compute resources avai
 
 BigQuery offers two models of workload management. With *on-demand* billing, you pay for the number of bytes processed when you query or process your data. With *capacity-based* billing, you allocate processing capacity for workloads with the option of automatically scaling capacity up and down when needed.
 
-![Reservations trade offs.](https://docs.cloud.google.com/static/bigquery/images/reservations-trade-offs-editions.svg)
+![Reservations tradeoffs.](https://docs.cloud.google.com/static/bigquery/images/reservations-trade-offs-editions.svg)
 
 You can switch between on-demand and capacity-based billing models at any time. You can also use a [combination of the two models](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#combine_reservations_with_on-demand_billing) .
 

@@ -6,7 +6,7 @@ You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/
 
 ## Prepare for migration
 
-The following sections describe how to collect information about table statistics, metadata, and security settings to help you migrate your data warehouse from Hive to BigQuery.
+The following sections describe how to collect information about table statistics, metadata, and security settings to help you migrate your data warehouse from Apache Hive to BigQuery.
 
 ### Collect source table information
 
@@ -81,7 +81,7 @@ Hive and BigQuery have different access control mechanisms. Collect all the Hive
 
 In Hive, you may access the HDFS files behind the tables directly if you have the required permissions. In standard BigQuery tables, after the data is loaded into the table, the data gets stored in the BigQuery storage. You can read data by using the BigQuery Storage Read API but all IAM, row-, and column-level security is still enforced. If you are using BigQuery external tables to query the data in Cloud Storage, access to Cloud Storage is also controlled by IAM.
 
-You can create a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-quickstart) that lets you use [connectors](https://docs.cloud.google.com/bigquery/docs/biglake-quickstart#query-biglake-table-using-connectors) to query the data with Apache Spark, Trino, or Apache Hive. The BigQuery Storage API enforces row- and column-level governance policies for all BigLake tables in Cloud Storage or BigQuery.
+You can create a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-quickstart) that lets you use [connectors](https://docs.cloud.google.com/bigquery/docs/biglake-quickstart#query-biglake-table-using-connectors) to query the data with Apache Spark, Trino, or Hive. The BigQuery Storage API enforces row- and column-level governance policies for all BigLake tables in Cloud Storage or BigQuery.
 
 ## Data migration
 
@@ -94,9 +94,9 @@ The following sections cover migrating Hive data, validating migrated data, and 
 
 ### Partition column data
 
-In Hive, data in partitioned tables is stored in a directory structure. Each partition of the table is associated with a particular value of partition column. The data files themselves do not contain any data of the partition columns. Use the `SHOW PARTITIONS` command to list the different partitions in a partitioned table.
+In Hive, data in partitioned tables is stored in a directory structure. Each partition of the table is associated with a particular value of partition column. The data files themselves don't contain any data of the partition columns. Use the `SHOW PARTITIONS` command to list the different partitions in a partitioned table.
 
-The example below shows that the source Hive table is partitioned on the columns `joining_date` and `department` . The data files under this table do not contain any data related to these two columns.
+The following example shows that the source Hive table is partitioned on the columns `joining_date` and `department` . The data files under this table don't contain any data related to these two columns.
 
     hive> SHOW PARTITIONS corp.employees_partitioned
     joining_date="2018-10-01"/department="HR"
@@ -121,7 +121,7 @@ After selecting the Cloud Storage bucket location, you can use the following com
     hdfs://demo_cluster/user/hive/warehouse/corp/employees/000001_0
     hdfs://demo_cluster/user/hive/warehouse/corp/employees/000002_0
 
-Copy all the files from above to Cloud Storage:
+Copy all the preceding files to Cloud Storage:
 
     > hadoop distcp
     hdfs://demo_cluster/user/hive/warehouse/corp/employees
@@ -247,7 +247,7 @@ While migrating the table for the first time, run the `SHOW PARTITIONS` command 
     partition_column=2018-10-01
     partition_column=2018-11-01
 
-The above output shows that the table `employees` has two partitions. A simplified version of the tracking table is provided below to show how this information can be stored.
+The following output shows that the table `employees` has two partitions. A simplified version of the tracking table is provided in the following table to show how this information can be stored.
 
 | **partition\_information**    | **file\_path** | **gcs\_copy\_status** | **gcs\_file\_path** | **bq\_job\_id** | **...** |
 | ----------------------------- | -------------- | --------------------- | ------------------- | --------------- | ------- |
@@ -280,7 +280,7 @@ When migrating the table for the first time, store the minimum and maximum value
     hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-11-01";
     1 2000
 
-The above output shows that the table employees has two partitions and the minimum and maximum values of the incremental column in each partition. A simplified version of the tracking table is provided below to show how this information can be stored.
+The following output shows that the table employees has two partitions and the minimum and maximum values of the incremental column in each partition. A simplified version of the tracking table is provided in the following table to show how this information can be stored.
 
 | **partition\_information**    | **inc\_col\_min** | **inc\_col\_max** | **file\_path** | **gcs\_copy\_status** | **...** |
 | ----------------------------- | ----------------- | ----------------- | -------------- | --------------------- | ------- |
@@ -303,14 +303,14 @@ In the example, two new partitions have been identified and some incremental dat
 
 BigQuery uses IAM to manage access to resources. BigQuery [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) provide granular access for a specific service and are meant to support common use cases and access control patterns. You can use [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) to provide even more fine-grained access by customizing a set of permissions.
 
-Access controls on [tables](https://docs.cloud.google.com/bigquery/docs/table-access-controls) and datasets specify the operations that users, groups, and service accounts are allowed to perform on tables, views, and datasets. [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) let you share query results with particular users and groups without giving them access to the underlying source data. With [row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) and [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , you can restrict who can access which rows or columns within a table. [Data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) lets you selectively obscure column data for groups of users, while still allowing access to the column.
+Access controls on [tables](https://docs.cloud.google.com/bigquery/docs/table-access-controls) and datasets specify the operations that users, groups, and service accounts are allowed to perform on tables, views, and datasets. [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) lets you share query results with particular users and groups without giving them access to the underlying source data. With [row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) and [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , you can restrict who can access which rows or columns within a table. [Data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) lets you selectively obscure column data for groups of users, while still allowing access to the column.
 
 When you apply access controls, you can grant access to the following users and groups:
 
-  - User by e-mail: gives an individual Google account access to the dataset
-  - Group by e-mail: gives all members of a Google group access to the dataset
+  - User by email: gives an individual Google Account access to the dataset
+  - Group by email: gives all members of a Google group access to the dataset
   - Domain: gives all users and groups in a [Google domain](https://support.google.com/a/answer/53295) access to the dataset
-  - All Authenticated Users: gives all Google account holders access to the dataset (makes the dataset public)
+  - All Authenticated Users: gives all Google Account holders access to the dataset (makes the dataset public)
   - Project Owners: gives all project owners access to the dataset
   - Project Viewers: gives all project viewers access to the dataset
   - Project Editors: gives all project editors access to the dataset
@@ -333,18 +333,18 @@ If you want Sqoop to import data into Hive running on Google Cloud, point it to 
 
 You can run your Sqoop job without managing a Hadoop cluster by using Managed Service for Apache Spark to submit Sqoop jobs to import data into BigQuery.
 
-### Spark SQL and HiveQL
+### Apache Spark SQL and HiveQL
 
-The [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) or [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) can automatically translate your Spark SQL or HiveQL to GoogleSQL.
+The [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) or [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) can automatically translate your Apache Spark SQL or HiveQL to GoogleSQL.
 
-If you don't want to migrate your Spark SQL or HiveQL to BigQuery, you can use Managed Service for Apache Spark or the [BigQuery connector with Apache Spark](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example) .
+If you don't want to migrate your Apache Spark SQL or HiveQL to BigQuery, you can use Managed Service for Apache Spark or the [BigQuery connector with Apache Spark](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example) .
 
 ### Hive ETL
 
 If there are any existing ETL jobs in Hive, you can modify them in the following ways to migrate them from Hive:
 
   - Convert the Hive ETL job to a BigQuery job by using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
-  - Use Apache Spark to read from and write to BigQuery by using the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery#dataproc_name_clusters) . You can use Managed Service for Apache Spark to run your Spark jobs in a cost-efficient way with the help of ephemeral clusters.
+  - Use Apache Spark to read from and write to BigQuery by using the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery#dataproc_name_clusters) . You can use Managed Service for Apache Spark to run your Apache Spark jobs in a cost-efficient way with the help of ephemeral clusters.
   - Rewrite your pipelines using the [Apache Beam](https://beam.apache.org/) SDK and run them on Dataflow.
   - Use [Apache Beam SQL](https://beam.apache.org/documentation/dsls/sql/overview/) to rewrite your pipelines.
 
@@ -354,8 +354,8 @@ To manage your ETL pipeline, you can use [Managed Service for Apache Airflow](ht
 
 If you want to move your Hive ETL pipeline to fully managed cloud services, consider writing your data pipelines using the Apache Beam SDK and running them on Dataflow.
 
-[Dataflow](https://docs.cloud.google.com/dataflow/docs) is a managed service for executing data processing pipelines. It executes programs written using the open source framework [Apache Beam](https://beam.apache.org/) . Apache Beam is a unified programming model that enables you to develop both batch and streaming pipelines.
+[Dataflow](https://docs.cloud.google.com/dataflow/docs) is a managed service for executing data processing pipelines. It executes programs written using the open source framework [Apache Beam](https://beam.apache.org/) . Apache Beam is a unified programming model that lets you develop both batch and streaming pipelines.
 
-If your data pipelines are standard data movement, you can use Dataflow templates to quickly create Dataflow pipelines without writing code. You can refer to this [Google-provided template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided-templates#cloud-storage-text-to-bigquery) which allows you to read text files from Cloud Storage, apply transformations, and write the results to a BigQuery table.
+If your data pipelines are standard data movement, you can use Dataflow templates to quickly create Dataflow pipelines without writing code. You can refer to this [Google-provided template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided-templates#cloud-storage-text-to-bigquery) which lets you read text files from Cloud Storage, apply transformations, and write the results to a BigQuery table.
 
-To further simplify data processing, you can also try [Beam SQL](https://beam.apache.org/documentation/dsls/sql/walkthrough/) which allows you to process data using SQL-like statements.
+To further simplify data processing, you can also try [Beam SQL](https://beam.apache.org/documentation/dsls/sql/walkthrough/) which lets you process data using SQL-like statements.

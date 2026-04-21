@@ -372,7 +372,7 @@ Issue the `bq update` command with the `--expiration` flag. If you are updating 
         --expiration integer \
         project_id:dataset.view
 
-Replace the following::
+Replace the following:
 
   - integer : the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value.
   - project\_id : your project ID

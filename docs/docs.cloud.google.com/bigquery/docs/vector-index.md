@@ -36,7 +36,7 @@ We suggest you try the TreeAH index type if your use case meets the following cr
 
   - You frequently execute large batch queries involving hundreds or more query vectors.
 
-For small batch queries with the TreeAH index type, `VECTOR_SEARCH` or `AI.SEARCH` might revert to [brute-force search](https://wikipedia.org/wiki/Brute-force_search) . When this occurs, a [IndexUnusedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) is provided to explain why the vector index was not utilized.
+For small batch queries with the TreeAH index type, `VECTOR_SEARCH` or `AI.SEARCH` might revert to [brute-force search](https://wikipedia.org/wiki/Brute-force_search) . When this occurs, an [IndexUnusedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) is provided to explain why the vector index was not utilized.
 
 ## Create an IVF vector index
 
@@ -46,7 +46,7 @@ To create an IVF vector index, use the [`CREATE VECTOR INDEX`](https://docs.clou
 
 2.  In the query editor, run the following SQL statement:
     
-    To create a [IVF](https://docs.cloud.google.com/bigquery/docs/vector-index#ivf-index) vector index:
+    To create an [IVF](https://docs.cloud.google.com/bigquery/docs/vector-index#ivf-index) vector index:
     
         CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] INDEX_NAME
         ON DATASET_NAME.TABLE_NAME(COLUMN_NAME)
@@ -249,7 +249,7 @@ To further improve the efficiency of your vector index, you can specify columns 
 
   - Instead of searching an entire table, you can call a search function on a query statement that *pre-filters* the base table with a `WHERE` clause. If your table has an index and you filter on only stored columns, then BigQuery optimizes the query by filtering the data before searching, and then using the index to search the smaller result set. If you filter on columns that aren't stored, then BigQuery applies the filter after the table is searched, or *post-filters* .
 
-  - The `VECTOR_SEARCH` and `AI.SEARCH` functions outputs a struct called `base` that contains all columns from the base table. Without stored columns, a potentially expensive join is needed to retrieve the columns stored in `base` . If you use an IVF index and your query only selects stored columns from `base` , then BigQuery optimizes your query to eliminate that join. For TreeAH indexes, the join with the base table is not removed. Stored columns in TreeAH indexes are only used for pre-filtering purposes.
+  - The `VECTOR_SEARCH` and `AI.SEARCH` functions output a struct called `base` that contains all columns from the base table. Without stored columns, a potentially expensive join is needed to retrieve the columns stored in `base` . If you use an IVF index and your query only selects stored columns from `base` , then BigQuery optimizes your query to eliminate that join. For TreeAH indexes, the join with the base table is not removed. Stored columns in TreeAH indexes are only used for pre-filtering purposes.
 
 To store columns, list them in the `STORING` clause of the [`CREATE VECTOR INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) . Storing columns increases the size of the vector index, so it's best to store only the most frequently used or filtered columns.
 
@@ -300,7 +300,7 @@ To create a partitioned index, use the `PARTITION BY` clause of the [`CREATE VEC
 
     -- Create a date-partitioned table.
     CREATE TABLE my_dataset.my_table(
-      embeddings ARRAY
+      embeddings ARRAY,
       id INT64,
       date DATE,
     )
@@ -358,7 +358,7 @@ Create a partitioned vector index on a timestamp-partitioned table:
 
 Create a partitioned vector index on an integer range-partitioned table:
 
-    -- Create a integer range-partitioned table.
+    -- Create an integer range-partitioned table.
     CREATE TABLE my_dataset.my_table(
       id INT64,
       embeddings ARRAY
@@ -372,7 +372,7 @@ Create a partitioned vector index on an integer range-partitioned table:
 
 Create a partitioned vector index on an ingestion time-partitioned table:
 
-    -- Create a ingestion time-partitioned table.
+    -- Create an ingestion time-partitioned table.
     CREATE TABLE my_dataset.my_table(
       id INT64,
       embeddings ARRAY
@@ -393,7 +393,7 @@ Create a partitioned vector index on an ingestion time-partitioned table:
 
 Vector indexes are fully managed by BigQuery and are automatically refreshed when the indexed table changes.
 
-Indexing is asynchronous. There is a delay between adding new rows to the base table and the new rows being reflected in the index. However, the `VECTOR_SEARCH` and `AI.SEARCH` functions still takes all rows into account and don't miss unindexed rows. The functions search using the index for indexed records, and use brute force search for the records that aren't yet indexed.
+Indexing is asynchronous. There is a delay between adding new rows to the base table and the new rows being reflected in the index. However, the `VECTOR_SEARCH` and `AI.SEARCH` functions still take all rows into account and don't miss unindexed rows. The functions search using the index for indexed records, and use brute force search for the records that aren't yet indexed.
 
 If you create a vector index on an [automatically generated embedding column](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) , then index training starts as soon as at least 80% of the rows have generated embeddings.
 
@@ -516,7 +516,7 @@ For example, the following results returned by `bq show --format=prettyjson -j m
 }
 ```
 
-Known issue: The vector index usage might be inaccurate when the query is running, is cancelled, or has failed.
+Known issue: The vector index usage might be inaccurate when the query is running, is canceled, or has failed.
 
 ## Index management options
 
@@ -672,7 +672,9 @@ If you want to improve recall without increasing search query latency, rebuild t
     FROM DATASET_NAME.INFORMATION_SCHEMA.VECTOR_INDEXES
     WHERE table_name = TABLE_NAME;
 
-You can use the [`VECTOR_INDEX.STATISTICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics) to calculate how much an indexed table's data has drifted between when a vector index was created and the present. If table data has changed enough to require a vector index rebuild, you can use the [`ALTER VECTOR INDEX REBUILD` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_vector_index_rebuild_statement) to rebuild the vector index.
+You can use the [`VECTOR_INDEX.STATISTICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics) to calculate how much an indexed table's data has drifted between when a vector index was created and the present.
+
+If table data has changed enough to require a vector index rebuild, you can use the [`ALTER VECTOR INDEX REBUILD` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_vector_index_rebuild_statement) to rebuild the vector index without having to drop the vector index, and without any index downtime. When you run the statement, BigQuery creates a *shadow index* , a background-only index that inherits the configuration of the current index, on the table and trains it in the background. BigQuery promotes the shadow index to be the active index when the shadow index has enough coverage.
 
 Follow these steps to rebuild a vector index:
 
@@ -723,7 +725,7 @@ The result looks similar to the following:
 
 ### Cancel a rebuild
 
-To cancel a vector index rebuild, use the [`BQ.CANCEL_INDEX_ALTERATION` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqcancel_index_alteration) . An index alteration operation might complete before the cancellation request is processed. To confirm whether the operation was successfully cancelled, query the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the cancellation was successful, the `last_model_build_time` field isn't updated and the `last_index_alteration_info` field isn't present for that index.
+To cancel a vector index rebuild, use the [`BQ.CANCEL_INDEX_ALTERATION` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqcancel_index_alteration) . An index alteration operation might complete before the cancellation request is processed. To confirm whether the operation was successfully canceled, query the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the cancellation was successful, the `last_model_build_time` field isn't updated and the `last_index_alteration_info` field isn't present for that index.
 
 ## Delete a vector index
 

@@ -185,7 +185,7 @@ Running the BigQuery migration assessment tool produces an assessment report tha
   - BigQuery steady state transformation suggestions: shows what the system will look like in BigQuery after the migration. It includes suggestions for optimizing workloads in BigQuery and avoiding wastage.
   - Migration plan: provides information about the migration effort itself. For example, getting from the existing system to the BigQuery steady state. This section includes the count of queries that were automatically translated and the expected time to move each table into BigQuery.
 
-For more information about the results of a migration assessment, see [Review the Looker Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
+For more information about the results of a migration assessment, see [Review the Data Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
 
 ### Validate your migration
 

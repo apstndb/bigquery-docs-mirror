@@ -80,7 +80,7 @@ To view the query execution plan for a Spanner query, see [Understand how Spanne
 
 When running federated queries with external datasets, the "Read data in parallel" option is always used.
 
-To enable parallel reads when using the [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) , enable it when you [create the Connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner) .
+To enable parallel reads when using the [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) , enable it when you [create the connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner) .
 
 ## Manage query execution priority
 
@@ -147,7 +147,7 @@ For more information, see the following information schema references in the Spa
 
 BigQuery supports federated queries where Spanner instances and BigQuery datasets are in different regions. These queries incur an additional Spanner data transfer charge. For more information see [Spanner pricing](https://cloud.google.com/spanner/pricing#network) .
 
-You are charged for the data transfer, based on the following [SKUs](https://docs.cloud.google.com/skus/sku-groups/cloud-spanner) :
+You are charged for the data transfer, based on the following [SKUs](https://cloud.google.com/skus/sku-groups/cloud-spanner) :
 
   - Network Intra-region Cross-Zone Data Transfer Out
   - Network Inter-Region Data Transfer Out to the Same Continent

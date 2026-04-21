@@ -19,7 +19,7 @@ BI Engine can significantly accelerate many SQL queries, including those used fo
 
 BI Engine is useful in the following use cases:
 
-  - **You use BI tools to analyze your data** : BI Engine accelerate BigQuery queries whether they run in the BigQuery console, a BI tool such as Looker Studio or Tableau, or a client library, API, or an ODBC or JDBC connector. This can significantly improve the performance of dashboards connected to BigQuery through a built-in connection (API) or connectors.
+  - **You use BI tools to analyze your data** : BI Engine accelerate BigQuery queries whether they run in the BigQuery console, a BI tool such as Data Studio or Tableau, or a client library, API, or an ODBC or JDBC connector. This can significantly improve the performance of dashboards connected to BigQuery through a built-in connection (API) or connectors.
   - **You have frequently queried tables** : BI Engine lets you designate preferred tables to accelerate. This is helpful if you have a subset of tables that are queried more frequently or are used for high-visibility dashboards.
 
 BI Engine might not fit your needs in the following cases:
@@ -183,5 +183,5 @@ You incur costs for the reservation that you create for BI Engine capacity. For 
   - To understand your utilization of BI Engine, see [Monitor BI Engine with Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor) .
   - Learn about [BI Engine optimized functions](https://docs.cloud.google.com/bigquery/docs/bi-engine-optimized-sql)
   - Learn how to use BI Engine with the following:
-      - [Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio)
+      - [Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio)
       - [Tableau](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau)

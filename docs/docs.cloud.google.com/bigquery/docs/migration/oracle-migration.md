@@ -22,7 +22,7 @@ You can choose between the following pricing models when capacity planning for B
 
   - [Capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) : With capacity-based pricing, you purchase BigQuery slot [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) (a minimum of 100) instead of paying for the bytes processed by queries that you run. We recommend capacity-based pricing for enterprise data warehouse workloads, which commonly see many concurrent reporting and extract-load-transform (ELT) queries that have predictable consumption.
 
-To help with slot estimation, we recommend setting up [BigQuery monitoring using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) and [analyzing your audit logs using BigQuery](https://docs.cloud.google.com/bigquery/audit-logs) . Many customers use [Looker Studio](https://datastudio.google.com/) (for example, see an [open source example](https://github.com/GoogleCloudPlatform/professional-services/tree/master/examples/bigquery-audit-log) of a [Looker Studio dashboard](https://datastudio.google.com/c/u/0/reporting/1kwNFt05J8_GCju5TBH1v4IlBmmAU74Nu/page/nSaN) ), [Looker](https://looker.com/) , or [Tableau](https://www.tableau.com/) as frontends to visualize BigQuery audit log data, specifically for slot usage across queries and projects. You can also leverage BigQuery system tables data for monitoring slot utilization across jobs and reservations. For an example, see an [open source example](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/dashboards/system_tables) of a [Looker Studio dashboard](https://datastudio.google.com/s/kGZzZJWkeyA) .
+To help with slot estimation, we recommend setting up [BigQuery monitoring using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) and [analyzing your audit logs using BigQuery](https://docs.cloud.google.com/bigquery/audit-logs) . Many customers use [Data Studio](https://datastudio.google.com/) (for example, see an [open source example](https://github.com/GoogleCloudPlatform/professional-services/tree/master/examples/bigquery-audit-log) of a [Data Studio dashboard](https://datastudio.google.com/c/u/0/reporting/1kwNFt05J8_GCju5TBH1v4IlBmmAU74Nu/page/nSaN) ), [Looker](https://looker.com/) , or [Tableau](https://www.tableau.com/) as frontends to visualize BigQuery audit log data, specifically for slot usage across queries and projects. You can also leverage BigQuery system tables data for monitoring slot utilization across jobs and reservations. For an example, see an [open source example](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/dashboards/system_tables) of a [Data Studio dashboard](https://datastudio.google.com/s/kGZzZJWkeyA) .
 
 Regularly monitoring and analyzing your slot utilization helps you estimate how many total slots your organization needs as you grow on Google Cloud.
 
@@ -232,7 +232,7 @@ Materialized views are offered in Oracle to increase view performances by simply
 
 [Materialized view functionality](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) is also available in BigQuery. BigQuery leverages precomputed results from materialized views and whenever possible reads only delta changes from the base table to compute up-to-date results.
 
-Caching functionalities in Looker Studio or other modern BI tools can also improve performance and eliminate the need to rerun the same query, saving costs.
+Caching functionalities in Data Studio or other modern BI tools can also improve performance and eliminate the need to rerun the same query, saving costs.
 
 ### Table partitioning
 
@@ -795,7 +795,7 @@ BigQuery offers [geospatial analytics](https://docs.cloud.google.com/bigquery/do
 
 ### Oracle Application Express
 
-Oracle Application Express (APEX) applications are unique to Oracle and need to be rewritten. Reporting and data visualization functionalities can be developed using [Looker Studio](https://datastudio.google.com/c/u/0/navigation/reporting) or BI engine, whereas application-level functionalities such as creating and editing rows can be developed without coding on [AppSheet](https://www.appsheet.com/) using [Cloud SQL](https://docs.cloud.google.com/sql/docs) .
+Oracle Application Express (APEX) applications are unique to Oracle and need to be rewritten. Reporting and data visualization functionalities can be developed using [Data Studio](https://datastudio.google.com/c/u/0/navigation/reporting) or BI engine, whereas application-level functionalities such as creating and editing rows can be developed without coding on [AppSheet](https://www.appsheet.com/) using [Cloud SQL](https://docs.cloud.google.com/sql/docs) .
 
 ## What's next
 

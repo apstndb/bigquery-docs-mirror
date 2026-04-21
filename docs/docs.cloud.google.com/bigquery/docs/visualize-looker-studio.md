@@ -6,7 +6,7 @@ Data Studio offers a premium version, Data Studio Pro, which includes enhanced e
 
 You can use BigQuery BI Engine to improve report performance while reducing compute costs. To learn about BI Engine, see [Introduction to BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
-These examples use Data Studio to visualize data in the BigQuery [`austin_bikeshare`](https://console.cloud.google.com/bigquery?cloudshell=false&d=austin_bikeshare&p=bigquery-public-data&t=bikeshare_trips&page=table&ws=!1m10!1m4!4m3!1sbigquery-public-data!2sfaa!3sus_airports!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) dataset. For more information about public data sets, see [BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) .
+These examples use Data Studio to visualize data in the BigQuery [`austin_bikeshare`](https://console.cloud.google.com/bigquery?cloudshell=false&d=austin_bikeshare&p=bigquery-public-data&t=bikeshare_trips&page=table&ws=!1m10!1m4!4m3!1sbigquery-public-data!2sfaa!3sus_airports!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) dataset. For more information about public datasets, see [BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) .
 
 ### Explore query results
 
@@ -51,7 +51,7 @@ You can construct an arbitrary SQL query and visualize the data in Data Studio. 
 
 The following image shows some features of a Data Studio report:
 
-![image](https://docs.cloud.google.com/static/bigquery/images/looker-studio-features.jpg)
+![A Looker Studio report showing various features and UI elements.](https://docs.cloud.google.com/static/bigquery/images/looker-studio-features.jpg)
 
 **Legend** :
 

@@ -45,7 +45,7 @@ Use the following functions on numerical expressions to regularize data:
 
 ### Categorical functions
 
-Use the following functions on categorize data:
+Use the following functions on categorical data:
 
   - [`ML.FEATURE_CROSS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-cross)
   - [`ML.HASH_BUCKETIZE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-hash-bucketize)

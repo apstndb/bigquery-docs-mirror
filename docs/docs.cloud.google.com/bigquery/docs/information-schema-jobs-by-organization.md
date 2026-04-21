@@ -281,6 +281,11 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#VectorSearchStatistics">Statistics for a vector search query.</a></td>
 </tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">external_service_costs</code></td>
+<td><code dir="ltr" translate="no">RECORD</code></td>
+<td>An array of information about the external service costs for a query job.</td>
+</tr>
 </tbody>
 </table>
 

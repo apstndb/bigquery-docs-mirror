@@ -465,7 +465,7 @@ You can create UDFs for use with [custom masking routines](https://docs.cloud.go
   - In the function `OPTIONS` , the `data_governance_type` option must be set to `DATA_MASKING` .
   - Custom masking routines support the following functions:
       - [`AEAD.DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_bytes) AEAD encryption function with `KEYS.KEYSET_CHAIN` (raw key usage not supported)
-      - [`AEAD.DECRYPT_STRING,`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string) AEAD encryption function with `KEYS.KEYSET_CHAIN` (raw key usage not supported)
+      - [`AEAD.DECRYPT_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string) AEAD encryption function with `KEYS.KEYSET_CHAIN` (raw key usage not supported)
       - [`AEAD.ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeadencrypt) AEAD encryption function with keyset\_chain (raw key usage not supported)
       - [`CAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) conversion function
       - [`CONCAT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat) string function
@@ -488,7 +488,7 @@ You can create UDFs for use with [custom masking routines](https://docs.cloud.go
       - [`LTRIM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#ltrim) string function
       - [`MD5`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#md5) hash function
       - [`REGEXP_REPLACE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_replace) string function
-      - [`REGEX_EXTRACT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_extract) string function
+      - [`REGEXP_EXTRACT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_extract) string function
       - [`REPLACE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#replace) string function
       - [`RPAD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#rpad) string function
       - [`RTRIM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#rtrim) string function
@@ -510,7 +510,7 @@ You can create UDFs for use with [custom masking routines](https://docs.cloud.go
   - An output type must be provided.
   - No other UDFs, subqueries, tables, or views can be referenced in the definition body.
   - After creating a masking routine, the routine cannot be changed to a standard function. This means that if the `data_governance_type` option is set to `DATA_MASKING` , then you cannot change `data_governance_type` using DDL statements or API calls.
-  - Custom masking routines support [CASE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case) and [CASE expr](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case_expr) statement. Following operators can be used with `CASE` and `CASE expr` statements:
+  - Custom masking routines support [CASE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case) and [CASE expr](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case_expr) statements. Following operators can be used with `CASE` and `CASE expr` statements:
       - [`Comparison Operators`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) - `<` , `<=` , `>` , `>=` , `=` , `!=` , `IN`
       - [`Logical Operators`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#logical_operators) - `AND` , `OR` , `NOT`
       - [`IS Operator`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#is_operators)
@@ -539,7 +539,7 @@ The following example masks a `DATETIME` column with a constant value:
       SAFE_CAST('2023-09-07' AS DATETIME)
     );
 
-**As a best practise, use the [`SAFE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) prefix wherever possible to avoid exposing raw data through error messages.**
+**As a best practice, use the [`SAFE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) prefix wherever possible to avoid exposing raw data through error messages.**
 
 After you create the custom masking routine, it's available as a masking rule in [Create data policies](https://docs.cloud.google.com/bigquery/docs/column-data-masking#create_data_policies) .
 
@@ -575,7 +575,7 @@ If you want to contribute to the UDFs in this repository, see [Contributing UDFs
 
 ## Unified access to routines across multiple regions
 
-To use UDFs in queries across multiple regions, the UDF must be available in every region where a query containing the UDF is run. Therefore, you should create and maintain UDFs in any region where you might use the UDF in a query. Even if your tables are identical, you must maintain 2 versions of the function. For example, if you store your sales data in both the `EU` and `US` multi-regions, then you should maintain a version of the function in each region. For example:
+To use UDFs in queries across multiple regions, the UDF must be available in every region where a query containing the UDF is run. Therefore, you should create and maintain UDFs in any region where you might use the UDF in a query. Even if your tables are identical, you must maintain two versions of the function. For example, if you store your sales data in both the `EU` and `US` multi-regions, then you should maintain a version of the function in each region. For example:
 
 A query in `EU` multi-region:
 

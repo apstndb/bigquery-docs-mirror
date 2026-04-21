@@ -1,12 +1,5 @@
 200 https://cloud.google.com/bigquery/pricing
 200 https://cloud.google.com/bigquery/sla
-200 https://docs.cloud.google.com/bigquery/docs/quickstarts/notebook-gallery-quickstart
-200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql
-200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly
-200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info
-200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info
-200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_dataset_ids
-200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_table_ids
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo
 404 https://docs.cloud.google.com/sdk/gcloud/reference/bigquery

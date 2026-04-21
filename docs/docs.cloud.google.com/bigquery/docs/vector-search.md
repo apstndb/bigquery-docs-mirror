@@ -96,7 +96,7 @@ Create a BigQuery dataset:
 
 ## Create a vector index
 
-1.  Create the `my_index` vector index on the `embeddings_v1` column of the `patents` table:
+1.  Create the `my_index` vector index on the `embedding_v1` column of the `patents` table:
     
         CREATE OR REPLACE VECTOR INDEX my_index ON vector_search.patents(embedding_v1)
         STORING(publication_number, title)

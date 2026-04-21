@@ -101,7 +101,7 @@ This section describes the various ways in which you can create a JavaScript UDA
 
   - Only certain type encodings are allowed. For more information, see [Permitted SQL type encodings in a JavaScript UDAF](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#javascript-type-encodings) .
 
-  - The JavaScript function body must include four JavaScript functions that initialize, aggregate, merge, and finalize the results for the JavaScript UDAF ( `initialState` , `aggregate` , `merge` , and `finalize` ). For more information, see [Permitted SQL type encodings in a JavaScript UDAF](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#required-javascript-aggregate-functions) .
+  - The JavaScript function body must include four JavaScript functions that initialize, aggregate, merge, and finalize the results for the JavaScript UDAF ( `initialState` , `aggregate` , `merge` , and `finalize` ). For more information, see [Required JavaScript aggregation functions](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#required-javascript-aggregate-functions) .
 
   - Any value returned by the `initialState` function or that is left in the `state` argument after the `aggregate` or `merge` function is called, must be serializable. If you want to work with non-serializable aggregation data, such as functions or symbol fields, you must use the included `serialize` and `deserialize` functions. To learn more, see [Serialize and deserialize data in a JavaScript UDAF](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#serialize-javascript-udaf) .
 

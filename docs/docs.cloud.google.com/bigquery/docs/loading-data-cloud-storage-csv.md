@@ -316,7 +316,7 @@ The following command loads data from `gs://mybucket/mydata.csv` into a new part
     ./myschema.json
 ```
 
-The following command loads data from `gs://mybucket/mydata.csv` into a table named `mytable` in `mydataset` . The schema is auto detected.
+The following command loads data from `gs://mybucket/mydata.csv` into a table named `mytable` in `mydataset` . The schema is auto-detected.
 
 ``` 
     bq load \
@@ -338,7 +338,7 @@ The following command loads data from `gs://mybucket/mydata.csv` into a table na
 
 > **Note:** When you specify the schema using the bq command-line tool, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
 
-The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard. The schema is auto detected.
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The Cloud Storage URI uses a wildcard. The schema is auto-detected.
 
 ``` 
     bq load \
@@ -348,7 +348,7 @@ The following command loads data from multiple files in `gs://mybucket/` into a 
     gs://mybucket/mydata*.csv
 ```
 
-The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The command includes a comma- separated list of Cloud Storage URIs with wildcards. The schema is defined in a local schema file named `myschema.json` .
+The following command loads data from multiple files in `gs://mybucket/` into a table named `mytable` in `mydataset` . The command includes a comma-separated list of Cloud Storage URIs with wildcards. The schema is defined in a local schema file named `myschema.json` .
 
 ``` 
     bq load \
@@ -1549,7 +1549,7 @@ Examples of Unix epoch timestamp values:
 
 > **Note:** Since the range CSV format contains a comma, if the CSV delimiter is a comma, it must be surrounded by double quotes for the CSV file to be valid.
 
-The following are example of CSV values for `RANGE<DATE>` :
+The following are examples of CSV values for `RANGE<DATE>` :
 
   - `"[2020-01-01, 2021-01-01)"`
   - `"[UNBOUNDED, 2021-01-01)"`

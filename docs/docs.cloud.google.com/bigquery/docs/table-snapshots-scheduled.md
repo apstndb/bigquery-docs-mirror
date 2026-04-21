@@ -80,7 +80,7 @@ The predefined BigQuery roles that provide the permissions that are required to 
 <br />
 <code dir="ltr" translate="no">roles/bigquery.user</code><br />
 <code dir="ltr" translate="no">roles/bigquery.jobuser</code><br />
-<code dir="ltr" translate="no">roles/bigquery.admin</code> `</td>
+<code dir="ltr" translate="no">roles/bigquery.admin</code></td>
 <td><code dir="ltr" translate="no">        PROJECT       </code></td>
 <td>Project</td>
 </tr>
@@ -129,7 +129,7 @@ Verify that BigQuery has created the service account:
 
 Verify that BigQuery has granted your service account the permission that it needs to run queries:
 
-1.  In Google Cloud console, go to to the **Manage resources** page:
+1.  In Google Cloud console, go to the **Manage resources** page:
 
 2.  Click `  PROJECT  ` .
 

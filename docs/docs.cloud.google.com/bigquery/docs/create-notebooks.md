@@ -101,12 +101,6 @@ For a list of supported regions, see [BigQuery Studio locations](https://docs.cl
 
 ### Create a notebook using the notebook gallery
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or to request product enhancements, contact <bigquery-notebook-gallery@google.com> .
-
 The notebook gallery in the Google Cloud console for BigQuery is your central hub for discovering and using prebuilt notebook templates.
 
 To create a notebook from a template in the notebook gallery, follow these steps:

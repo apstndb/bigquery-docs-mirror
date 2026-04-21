@@ -50,7 +50,7 @@ To update a dataset's description:
 
 3.  In the **Details** pane, click mode\_edit **Edit details** to edit the description text.
     
-    In the **Edit detail** dialog that appears, do the following:
+    In the **Edit details** dialog that appears, do the following:
     
     1.  In the **Description** field, enter a description or edit the existing description.
     2.  To save the new description text, click **Save** .
@@ -270,7 +270,7 @@ To update the default expiration time for a dataset:
 
 3.  In the **Details** tab, click mode\_edit **Edit details** to edit the expiration time.
 
-4.  In the **Edit detail** dialog, in the **Default table expiration** section, select **Enable table expiration** and enter a value for **Default maximum table age** .
+4.  In the **Edit details** dialog, in the **Default table expiration** section, select **Enable table expiration** and enter a value for **Default maximum table age** .
 
 5.  Click **Save** .
 

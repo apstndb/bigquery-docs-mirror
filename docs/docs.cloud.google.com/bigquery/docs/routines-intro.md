@@ -95,12 +95,12 @@ For more information about UDFs, see the following resources:
 ### Language-based UDFs
 
   - *SQL-based UDFs* support [templated UDF parameters](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#templated-sql-udf-parameters) , which can match more than one argument type when the UDF is called. SQL UDFs can also return the value of a [scalar subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#scalar_subquery_concepts) .
-  - *Javascript-based UDFs* let you call code written in JavaScript from a SQL query.
+  - *JavaScript-based UDFs* let you call code written in JavaScript from a SQL query.
       - JavaScript UDFs typically consume more slot resources as compared to standard SQL queries, decreasing job performance.
       - If the function can be expressed in SQL, it's often more optimal to run the code as a standard SQL query job.
   - *Python-based UDFs* are built and run on BigQuery managed resources. These UDFs let you implement a function in Python and use it in a SQL query.
       - You can [access a Google Cloud service or an external service](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#use-online-service) from a Python UDF by using the [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) service account.
-      - You can also install third-party libraries from from [the Python Package Index (PyPI)](https://pypi.org/) .
+      - You can also install third-party libraries from [the Python Package Index (PyPI)](https://pypi.org/) .
 
 ### Community contributed UDFs
 
@@ -108,7 +108,7 @@ In addition to the UDFs you create, community contributed UDFs are available in 
 
 ## User-defined aggregate functions (UDAFs)
 
-A UDAF lets you create an aggregate function by using an expression that contains SQL or Javascript code. A UDAF accepts columns of input, performs a calculation on a group of rows at a time, and then returns the result of that calculation as a single value.
+A UDAF lets you create an aggregate function by using an expression that contains SQL or JavaScript code. A UDAF accepts columns of input, performs a calculation on a group of rows at a time, and then returns the result of that calculation as a single value.
 
 UDAFs can't mutate data, talk to external systems, or send logs to Google Cloud Observability or similar applications.
 
@@ -124,11 +124,11 @@ SQL UDAFs normally aggregate function parameters across all rows in a [group](ht
 
 ### Javascript UDAFs
 
-Javascript UDAFs can include Javascript libraries. The JavaScript function body can include custom JavaScript code such as JavaScript global variables and custom functions.
+JavaScript UDAFs can include JavaScript libraries. The JavaScript function body can include custom JavaScript code such as JavaScript global variables and custom functions.
 
-Because Javascript-based functions typically use more resources, consulting these [performance tips](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#performance-tips) can be helpful.
+Because JavaScript-based functions typically use more resources, consulting these [performance tips](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#performance-tips) can be helpful.
 
-Javascript UDAFs have some constraints. Only [specific type encodings are allowed](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#javascript-type-encodings) , and there are [requirements](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#serialize-javascript-udaf) for serialization and deserialization.
+JavaScript UDAFs have some constraints. Only [specific type encodings are allowed](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#javascript-type-encodings) , and there are [requirements](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates#serialize-javascript-udaf) for serialization and deserialization.
 
 ## Compare UDFs and UDAFs
 
@@ -217,7 +217,7 @@ For more information about table functions, see [Table functions](https://docs.c
 
 ## Remote functions
 
-Remote functions enable you to implement your function in languages other than SQL and Javascript, or enable you to use libraries or services that are not supported in BigQuery UDFs.
+Remote functions enable you to implement your function in languages other than SQL and JavaScript, or enable you to use libraries or services that are not supported in BigQuery UDFs.
 
 A BigQuery remote function integrates your Google SQL function with [Cloud Run functions](https://docs.cloud.google.com/functions/docs/concepts/overview) and [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) using any supported language, and then invokes those functions from Google SQL queries.
 

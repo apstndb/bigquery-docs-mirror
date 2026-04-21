@@ -1,7 +1,5 @@
 # Analyze data with the Gemini CLI
 
-> **Note:** The BigQuery CLI extensions are based on MCP Toolbox for Databases. MCP Toolbox for Databases is in beta (pre-v1.0) and may see breaking changes until the first stable release (v1.0).
-
 This page explains how to interact with BigQuery data in your terminal by using natural-language prompts with the [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli) . Using the dedicated BigQuery [extensions](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#about-bigquery-extensions) with the Gemini CLI enables AI-driven data analysis and insights directly within your command line. You can analyze data from your BigQuery tables, or from tables in the BigQuery public datasets.
 
 These first-party extensions provide some common tools for data analysis and insights. To build your own tools, see [Use BigQuery with MCP, Gemini CLI, and other agents](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) .

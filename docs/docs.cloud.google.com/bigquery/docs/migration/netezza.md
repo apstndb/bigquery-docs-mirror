@@ -1,6 +1,6 @@
 # Migrate from IBM Netezza
 
-This document provides high-level guidance on how to migrate from Netezza to BigQuery. It describes the fundamental architectural differences between Netezza and BigQuery and describes the additional capabilities that BigQuery offers. It also shows how you can rethink your existing data model and extract, transform, and load (ETL) processes to maximize the benefits of BigQuery.
+This document provides high-level guidance on how to migrate from IBM Netezza to BigQuery. It describes the fundamental architectural differences between Netezza and BigQuery and describes the additional capabilities that BigQuery offers. It also shows how you can rethink your existing data model and extract, transform, and load (ETL) processes to maximize the benefits of BigQuery.
 
 This document is for enterprise architects, DBAs, application developers, and IT security professionals who want to migrate from Netezza to BigQuery and solve technical challenges in the migration process. This document provides details about the following phases of the migration process:
 
@@ -8,7 +8,7 @@ This document is for enterprise architects, DBAs, application developers, and IT
   - Ingesting data
   - Leveraging third-party tools
 
-You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries. IBM Netezza SQL/NZPLSQL is supported by both tools in [preview](https://cloud.google.com/products#product-launch-stages) .
+You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries. Netezza SQL/NZPLSQL is supported by both tools in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## Architecture comparison
 
@@ -40,7 +40,7 @@ All of the system components are connected by network fabric. The Netezza applia
 
 ### BigQuery architecture
 
-BigQuery is a fully managed enterprise data warehouse that helps you manage and analyze your data with built-in features like machine learning, geospatial analysis, and business intelligence. For more information, see [What is BigQuery?](https://docs.cloud.google.com/bigquery/docs/introduction) .
+BigQuery is a fully managed enterprise data warehouse that helps you manage and analyze your data with built-in features like machine learning, geospatial analysis, and business intelligence. For more information, see [BigQuery overview](https://docs.cloud.google.com/bigquery/docs/introduction) .
 
 BigQuery handles storage and computation to provide durable data storage and high performance responses to analytics queries. For more information, see [BigQuery explained](https://cloud.google.com/blog/products/data-analytics/new-blog-series-bigquery-explained-overview) .
 
@@ -61,7 +61,7 @@ To run queries in BigQuery, select one of the following pricing models:
       - **Annual.** You commit to 365 days.
       - **Three-year.** You commit to 365\*3 days.
 
-A BigQuery slot shares some similarities with Netezza's SPUs, such as, CPU, memory, and processing of data; however, they don't represent the same unit of measurement. Netezza SPUs have a fixed mapping to the underlying hardware components, whereas the BigQuery slot represents a virtual CPU used to execute queries. To help with slot estimation, we recommend setting up [BigQuery monitoring using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) and [analyzing your audit logs using BigQuery](https://docs.cloud.google.com/bigquery/audit-logs) . To visualize BigQuery slot utilization, you can also use tools like [Data Studio](https://datastudio.google.com/c/) or [Looker](https://docs.cloud.google.com/looker) . Regularly monitoring and analyzing your slot utilization helps you estimate how many total slots your organization needs as you grow on Google Cloud.
+A BigQuery slot shares some similarities with Netezza SPUs, such as, CPU, memory, and processing of data; however, they don't represent the same unit of measurement. Netezza SPUs have a fixed mapping to the underlying hardware components, whereas the BigQuery slot represents a virtual CPU used to execute queries. To help with slot estimation, we recommend setting up [BigQuery monitoring using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) and [analyzing your audit logs using BigQuery](https://docs.cloud.google.com/bigquery/audit-logs) . To visualize BigQuery slot utilization, you can also use tools like [Data Studio](https://datastudio.google.com/c/) or [Looker](https://docs.cloud.google.com/looker) . Regularly monitoring and analyzing your slot utilization helps you estimate how many total slots your organization needs as you grow on Google Cloud.
 
 For example, suppose you initially reserve 2,000 BigQuery [slots](https://docs.cloud.google.com/bigquery/docs/slots) to run 50 medium-complexity queries simultaneously. If queries consistently take more than a few hours to run and your dashboards show high slot utilization, your queries might not be optimized or you might need additional BigQuery slots to help support your workloads. To purchase slots yourself in yearly or three-year commitments, you can [create BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-get-started) using the Google Cloud console or the bq command-line tool. If you signed an offline agreement for your capacity-based purchase, your plan might deviate from the details described here.
 
@@ -99,7 +99,7 @@ To achieve row-level security in BigQuery, you can use [authorized views](https:
 
 Netezza appliances use [self-encrypting drives (SEDs)](https://www.ibm.com/support/knowledgecenter/en/SSULQD_7.2.1/com.ibm.nz.adm.doc/c_sysadm_sed_drives.html) for improved security and protection of the data stored on the appliance. SEDs encrypt data when it's written to the disk. Each disk has a disk encryption key (DEK) that is set at the factory and stored on the disk. The disk uses the DEK to encrypt data as it writes and then to decrypt the data when it's read from disk. The operation of the disk, and its encryption and decryption, is transparent to the users who are reading and writing data. This default encryption and decryption mode is referred to as *secure erase mode* .
 
-In secure erase mode, you don't need an authentication key or password to decrypt and read data. SEDs offer improved capabilities for an easy and speedy secure erase for situations when disks must be repurposed or returned for support or warranty reasons.
+In secure erase mode, you don't need an authentication key or password to decrypt and read data. SEDs offer improved capabilities for a streamlined and rapid secure erase for situations when disks must be repurposed or returned for support or warranty reasons.
 
 Netezza uses symmetric encryption; if your data is field-level encrypted, the following decrypt function can help you to read and export data:
 
@@ -138,7 +138,7 @@ Netezza data types differ from BigQuery data types. For information about BigQue
 
 ### SQL comparison
 
-Netezza data SQL consists of DDL, DML, and Netezza-only Data Control Language (DCL), which are different from GoogleSQL. [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) is compliant with the SQL 2011 standard and has extensions that support querying nested and repeated data. If you're using BigQuery legacy SQL, see [Legacy SQL Functions and Operators](https://docs.cloud.google.com/bigquery/query-reference) . For a detailed comparison between Netezza and BigQuery SQL and functions, see the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .
+Netezza data SQL consists of DDL, DML, and Netezza-only Data Control Language (DCL), which are different from GoogleSQL. [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) is compliant with the SQL 2011 standard and has extensions that support querying nested and repeated data. If you're using BigQuery legacy SQL, see [Legacy SQL Functions and Operators](https://docs.cloud.google.com/bigquery/query-reference) . For a detailed comparison between Netezza SQL and BigQuery SQL and functions, see the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .
 
 To help with your SQL code migration, use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL code in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries.
 
@@ -148,11 +148,11 @@ It is important to understand how Netezza functions map to BigQuery functions. F
 
 ## Data migration
 
-To migrate data from Netezza to BigQuery, you export data out of Netezza, transfer and stage the data on Google Cloud, then load the data into BigQuery. This section provides a high level overview of the data migration process. For a detailed description of the data migration process, see [Schema and data migration process](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview#schema_and_data_migration_process) . For a detailed comparison between Netezza and BigQuery supported data types, see the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .
+To migrate data from Netezza to BigQuery, you export data out of Netezza, transfer and stage the data on Google Cloud, then load the data into BigQuery. This section provides a high-level overview of the data migration process. For a detailed description of the data migration process, see [Schema and data migration process](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview#schema_and_data_migration_process) . For a detailed comparison between Netezza and BigQuery supported data types, see the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .
 
 ### Export data out of Netezza
 
-To explore data from Netezza database tables, we recommend that you export to an external table in the CSV format. For more information, see [Unloading data to a remote client system](https://www.ibm.com/docs/en/psfa/7.2.1?topic=tables-unloading-data-remote-client-system) . You can also read data using third-party systems like Informatica (or custom ETL) using JDBC/ODBC connectors to produce CSV files.
+To export data from Netezza database tables, we recommend that you export to an external table in the CSV format. For more information, see [Unloading data to a remote client system](https://www.ibm.com/docs/en/psfa/7.2.1?topic=tables-unloading-data-remote-client-system) . You can also read data using third-party systems like Informatica (or custom ETL) using JDBC/ODBC connectors to produce CSV files.
 
 Netezza only supports export of uncompressed flat files (CSV) for each table. However, if you're exporting large tables, the uncompressed CSV can become very large. If possible, consider converting the CSV to a schema-aware format such as Parquet, Avro, or ORC, which results in smaller export files with higher reliability. If CSV is the only available format, we recommend that you compress the export files to reduce file size before you upload to Google Cloud. Reducing the file size helps to make the upload faster and increases the reliability of the transfer. If you transfer files to Cloud Storage, you can use the `--gzip-local` flag in a [`gcloud storage cp` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/cp) , which compresses the files before uploading them.
 

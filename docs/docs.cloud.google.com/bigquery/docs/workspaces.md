@@ -351,7 +351,7 @@ To revert uncommitted changes, follow these steps:
 
 ### Resolve merge conflicts
 
-A merge conflict can happen when a local change in your workspace is incompatible with a change that has been made to the default default branch of your repository. Merge conflicts usually occur when multiple users simultaneously edit the same file.
+A merge conflict can happen when a local change in your workspace is incompatible with a change that has been made to the default branch of your repository. Merge conflicts usually occur when multiple users simultaneously edit the same file.
 
 You usually encounter a merge conflict when you pull from a branch after a different user has pushed a conflicting change to the same branch. You need to resolve a merge conflict manually by editing the affected file.
 

@@ -84,7 +84,7 @@ Using BigQuery Omni, you can run ad-hoc queries to analyze the Data Cloud data t
 
 ### Run cross-cloud queries
 
-Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](https://docs.cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `john` .
+Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](https://cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `john` .
 
     -- Get combined sales for a customer from both offline and online sales
     USING (
@@ -112,7 +112,7 @@ Once the data is moved, you no longer need to pay egress fees for any queries th
 
 Cross Cloud Materialized Views ( [CCMV](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni-cross-cloud-materialized-views) ) transfer data from a BigQuery Omni region to a non-BigQuery Omni BigQuery region incrementally. Set up a new CCMV that transfers a summary of total sales from online transactions and replicate that data into the `US` region.
 
-You can access CCMVs from Ads Data Hub and join it with other Ads Data Hub data. CCMVs act like regular BigQuery Managed Tables for most part.
+You can access CCMVs from Ads Data Hub and join it with other Ads Data Hub data. CCMVs act like regular BigQuery Managed Tables for the most part.
 
 #### Create a local materialized view
 

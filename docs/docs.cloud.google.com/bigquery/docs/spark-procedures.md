@@ -80,7 +80,7 @@ To create a stored procedure for Spark in the SQL query editor, follow these ste
     
     **Python**
     
-    To create a stored procedures for Spark in Python, use the following sample code:
+    To create stored procedures for Spark in Python, use the following sample code:
     
         CREATE OR REPLACE PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
          WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
@@ -168,7 +168,7 @@ To create a stored procedure for Spark in the SQL query editor, follow these ste
 
 ### Use PySpark editor
 
-When creating a procedure using the PySpark editor, you don't need to use the `CREATE PROCEDURE` statement. Instead, add your Python code directly in the Pyspark editor and save or run your code.
+When creating a procedure using the PySpark editor, you don't need to use the `CREATE PROCEDURE` statement. Instead, add your Python code directly in the PySpark editor and save or run your code.
 
 To create a stored procedure for Spark in the PySpark editor, follow these steps:
 
@@ -271,7 +271,7 @@ Replace the following:
     
     To learn how to add inline PySpark code, see [Use inline code](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-inline-code) .
 
-  - [`  CONTAINER_IMAGE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) : path of image in [artifacts registry](https://docs.cloud.google.com/artifact-registry) . It must only contain libraries to use in your procedure. If not specified, the system default container image associated with the runtime version is used.
+  - [`  CONTAINER_IMAGE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) : path of image in [Artifact Registry](https://docs.cloud.google.com/artifact-registry) . It must only contain libraries to use in your procedure. If not specified, the system default container image associated with the runtime version is used.
 
 For more information about how to build a custom container image with Spark, see [Build a custom container image](https://docs.cloud.google.com/dataproc-serverless/docs/guides/custom-containers#build_a_custom_container_image) .
 
@@ -329,7 +329,7 @@ To use a custom service account, specify the `INVOKER` security mode (using the 
 
 When you run the Spark stored procedure with the custom service account for the first time, BigQuery creates a Spark service agent and grants the service agent required permissions. Make sure that you don't modify this grant before you invoke the Spark stored procedure. To learn more details, see [BigQuery Spark Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquery-spark-service-agent) .
 
-If you want to access and use Spark code from Cloud Storage, you need to grant necessary permissions to the Spark connection's service identify. You need to grant the connection's service account the `storage.objects.get` IAM permission or the `storage.objectViewer` IAM role.
+If you want to access and use Spark code from Cloud Storage, you need to grant necessary permissions to the Spark connection's service identity. You need to grant the connection's service account the `storage.objects.get` IAM permission or the `storage.objectViewer` IAM role.
 
 Optionally, you can grant the connection's service account access to Dataproc Metastore and Managed Service for Apache Spark Persistent History Server if you have specified them in the connection. For more information, see [Grant access to the service account](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#grant-access) .
 
@@ -684,7 +684,7 @@ Add the spark procedure's query project into the perimeter. Add other projects t
 
   - When you use a connection in your project for the first time, it takes about an extra minute to provision. To save time, you can reuse an existing Spark connection when you create a stored procedure for Spark.
 
-  - When you create a Spark procedure for production use, Google recommends specifying a runtime version. For a list of supported runtime versions, see [Managed Service for Apache Spark runtime versions](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/dataproc-serverless-versions) . We recommended to use the Long-Time-Support (LTS) version.
+  - When you create a Spark procedure for production use, Google recommends specifying a runtime version. For a list of supported runtime versions, see [Managed Service for Apache Spark runtime versions](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/dataproc-serverless-versions) . We recommend using the Long-Term Support (LTS) version.
 
   - When you specify a custom container in a Spark procedure, we recommend using Artifact Registry and [image streaming](https://docs.cloud.google.com/dataproc-serverless/docs/guides/custom-containers#image_streaming) .
 

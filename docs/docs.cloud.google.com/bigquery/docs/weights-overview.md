@@ -6,7 +6,7 @@ An ML model is an artifact that is saved after running an ML algorithm on traini
 
   - A linear regression model is comprised of a vector of coefficients that have specific values.
   - A decision tree model is comprised of one or more trees of if-then statements that have specific values.
-  - A deep neural network model is comprised of a graph structure with vectors or matrixes of weights that have specific values.
+  - A deep neural network model is comprised of a graph structure with vectors or matrices of weights that have specific values.
 
 In BigQuery ML, the term *model weights* is used to describe the components that a model is comprised of.
 

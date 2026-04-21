@@ -268,5 +268,5 @@ In the Google Cloud console, the result of this SQL query looks similar to the f
 
   - Learn more about [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
   - Learn about [BI Engine pricing](https://cloud.google.com/bi-engine/pricing) .
-  - [Analyze data with Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) .
+  - [Analyze data with Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) .
   - [Monitor BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor)

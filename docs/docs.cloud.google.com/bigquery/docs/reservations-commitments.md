@@ -407,7 +407,7 @@ Commitments expire at the end of their duration. You can't delete a commitment w
 
 After renewing a commitment, the value of **Start time** isn't changed. It refers to the start time of the original commitment. The value of **End time** is the time the renewed commitment expires. For example, if you have one annual commitment created on December 13, 2022, and it's renewed on December 13, 2023. If you view the commitment details on December 14, 2023, the value of **Start time** would be December 13, 2022 and the value of **End time** would be December 12, 2024.
 
-Baseline slots are always charged. If a capacity commitment expires you might need to manually adjust the amount of baseline slots in your reservations to avoid any unwanted charges. For example, consider that you have a 1-year commitment with 100 slots and a reservation with 100 baseline slots. The commitment expires and doesn't have a renewal plan. Once the commitment expires, you pay for 100 baseline slots at the [pay as you go rate](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+Baseline slots are always charged. If a capacity commitment expires you might need to manually adjust the amount of baseline slots in your reservations to avoid any unwanted charges. For example, consider that you have a 1-year commitment with 100 slots and a reservation with 100 baseline slots. The commitment expires and doesn't have a renewal plan. Once the commitment expires, you pay for 100 baseline slots at the [pay as you go rate](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .
 
 ## Control the creation of capacity commitments
 

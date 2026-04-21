@@ -45,7 +45,7 @@ The following table summarizes the similarities and differences between BigQuery
 
   - **Semantic layering** . Rename complex column names into business-friendly terms for non-technical users.
   - **Rapid development** . Use when logic is in flux and you don't want to manage the overhead of physical storage.
-  - **Consolidated data sources** . Provide a data source for visualization tools such as [Looker Studio](https://docs.cloud.google.com/looker/docs) or [BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
+  - **Consolidated data sources** . Provide a data source for visualization tools such as [Data Studio](https://docs.cloud.google.com/looker/docs) or [BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
 
 ### When to use materialized views
 

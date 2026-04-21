@@ -88,6 +88,16 @@ New columns
 | --------------- | -------------------------------------- |
 | `Creative`      | `reviewStatus.publisherReviewStatuses` |
 
+## Facebook Ads
+
+The BigQuery Data Transfer Service for Facebook Ads connector periodically updates to adapt to new changes introduced by Facebook Ads.
+
+The following sections outline the changes organized by release date.
+
+### July 25, 2026
+
+On July 25, 2026, the [Facebook Ads connector](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) plans to update its data type mapping for the `ActionValue` field in the `AdInsightsActions` report from `INT` to `FLOAT` . This change is made to more accurately reflect the source data and to ensure data integrity.
+
 ## Google Ads API
 
 The BigQuery Data Transfer Service for Google Ads periodically updates to support new columns and adapt to changes introduced by new [Google Ads API](https://developers.google.com/google-ads/api/docs/release-notes) versions. The BigQuery Data Transfer Service for Google Ads connector uses the [supported API version](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#connector_overview) in the Google Ads connector.
