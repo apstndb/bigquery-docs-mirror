@@ -1,7 +1,5 @@
 # Use externally partitioned data
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 You can use BigQuery external tables to query partitioned data in the following data stores:
 
   - [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake#create-biglake-partitioned-data)

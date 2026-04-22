@@ -140,7 +140,15 @@ In a graph, labels and properties are uniquely identified by their names. Labels
 
 **Definitions**
 
-  - `element_name` : The name of the input table from which elements are created.
+  - `element_name` : The name of the input table or view from which elements are created. The following types of inputs are supported:
+    
+      - Standard tables
+      - External tables
+      - Managed BigLake Iceberg tables
+      - Views, including authorized views
+      - Non-incremental materialized views
+    
+    You can't use incremental materialized views or Iceberg REST catalog tables.
 
   - `element_alias` : An optional alias. You must use an alias if you use an input table for more than one element definition.
 

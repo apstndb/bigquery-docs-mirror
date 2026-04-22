@@ -407,8 +407,6 @@ The following example shows a materialized view using a `WITH` clause that is no
 
 ### Materialized views over BigLake tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 To create [materialized views over BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) , the BigLake table must have [metadata caching enabled](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) over Cloud Storage data and the materialized view must have a [`max_staleness`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) option value greater than the base table. Materialized views over BigLake tables support the [same set of queries](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#query_limitations) as other materialized views.
 
 #### Example

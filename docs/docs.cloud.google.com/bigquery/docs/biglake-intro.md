@@ -1,7 +1,5 @@
 # Introduction to BigLake external tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document provides an overview of BigLake and assumes familiarity with database tables and Identity and Access Management (IAM). To query data stored in the [supported data stores](https://docs.cloud.google.com/bigquery/docs/biglake-intro#supported-data-stores) , you must first create BigLake tables and then query them using GoogleSQL syntax:
 
   - [Create Cloud Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) and then [query](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake) .

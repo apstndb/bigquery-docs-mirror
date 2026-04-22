@@ -57,8 +57,6 @@ The following BigQuery features work transparently with materialized views:
 
 ### BigLake metadata cache-enabled tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 Materialized views over [BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) can reference structured data stored in Cloud Storage and Amazon Simple Storage Service (Amazon S3). These materialized views function like materialized views over BigQuery-managed storage tables, including the benefits of automatic refresh and smart tuning. Other benefits include the pre-aggregating, pre-filtering, and pre-joining of data stored outside of BigQuery. Materialized views over BigLake tables are stored in and have all of the characteristics of [BigQuery managed storage](https://docs.cloud.google.com/bigquery/docs/storage_overview) .
 
 > **Note:** When a materialized view over a BigLake table with cached metadata is refreshed, the materialized view's cached data contains all updates to the external table up to the most recent metadata cache creation.

@@ -1,7 +1,5 @@
 # Query open table formats with manifests
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document describes how to use manifest files to query data stored in open table formats such as [Apache Hudi](https://github.com/apache/hudi) and [Delta Lake](https://github.com/delta-io) .
 
 Some open table formats such as Hudi and Delta Lake export their current state as one or more manifest files. A manifest file contains a list of data files that make tables. With the manifest support in BigQuery, you can query and load data stored in open table formats.

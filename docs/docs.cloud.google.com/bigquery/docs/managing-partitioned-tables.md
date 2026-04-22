@@ -51,7 +51,7 @@ The `__PARTITIONS_SUMMARY__` meta-table has the following columns:
 | `creation_time`      | The time at which the partition was created, in milliseconds since January 1, 1970 UTC.       |
 | `last_modified_time` | The time at which the partition was last modified, in milliseconds since January 1, 1970 UTC. |
 
-At a minimum, to run a query job that uses the `__PARTITIONS_SUMMARY__` meta- table, you must be granted `bigquery.jobs.create` permissions and `bigquery.tables.getData` permissions.
+At a minimum, to run a query job that uses the `__PARTITIONS_SUMMARY__` meta-table, you must be granted `bigquery.jobs.create` permissions and `bigquery.tables.getData` permissions.
 
 For more information on IAM roles in BigQuery, see [Access control](https://docs.cloud.google.com/bigquery/access-control) .
 

@@ -1,7 +1,5 @@
 # Create and set up a Cloud resource connection
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 As a BigQuery administrator, you can create a Cloud resource connection that enables data analysts to perform the following tasks:
 
   - [Query structured Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake) using BigLake tables. [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) enable you to query external data with access delegation.

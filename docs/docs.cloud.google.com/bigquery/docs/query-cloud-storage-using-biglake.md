@@ -1,7 +1,5 @@
 # Query Cloud Storage data in BigLake tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document describes how to query data stored in a [Cloud Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
 
 ## Before you begin

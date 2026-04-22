@@ -2,8 +2,6 @@
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 With BigQuery Omni, you can run BigQuery analytics on data stored in Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage using BigLake tables.
 
 Many organizations store data in multiple public clouds. Often, this data ends up being siloed, because it's hard to get insights across all of the data. You want to be able to analyze the data with a multi-cloud data tool that is inexpensive, fast, and does not create additional overhead of decentralized data governance. By using BigQuery Omni, we reduce these frictions with a unified interface.

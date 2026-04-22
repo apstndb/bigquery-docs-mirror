@@ -1,7 +1,5 @@
 # Export query results to Blob Storage
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document describes how to export the result of a query that runs against a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) to your Azure Blob Storage.
 
 For information about how data flows between BigQuery and Azure Blob Storage, see [Data flow when exporting data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#export-data) .

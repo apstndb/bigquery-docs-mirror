@@ -104,6 +104,7 @@ FROM
   - `root_mean_squared_error` : a `FLOAT64` value that contains the [root mean squared error](https://en.wikipedia.org/wiki/Root-mean-square_deviation) for the time series.
   - `mean_absolute_percentage_error` : a `FLOAT64` value that contains the [mean absolute percentage error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) for the time series.
   - `symmetric_mean_absolute_percentage_error` : a `FLOAT64` value that contains the [symmetric mean absolute percentage error](https://en.wikipedia.org/wiki/Symmetric_mean_absolute_percentage_error) for the time series.
+  - `mean_absolute_scaled_error` : a `FLOAT64` value that contains the [mean absolute scaled error](https://en.wikipedia.org/wiki/Mean_absolute_scaled_error) for the time series.
   - `ai_evaluate_status` : a `STRING` value that contains the evaluation status. The value is empty if the operation was successful. If the operation wasn't successful, the value is the error string. A common error is `The time series data is too short.` This error indicates that there wasn't enough historical data in the time series to generate forecasted data to evaluate. A minimum of 3 data points is required.
 
 ## Examples
@@ -130,11 +131,11 @@ The following example evaluates historical bike trips against actual bike trips 
 
 The result is similar to the following:
 
-    +---------------------+--------------------+-------------------------+--------------------------------+------------------------------------------+--------------------+
-    | mean_absolute_error | mean_squared_error | root_mean_squared_error | mean_absolute_percentage_error | symmetric_mean_absolute_percentage_error | ai_evaluate_status |
-    +---------------------+--------------------+-------------------------+--------------------------------+------------------------------------------+--------------------+
-    | 7512.2744140624982  | 88702684.834815472 | 9418.210277691589       | 16.068001108491149             | 15.740030591250889                       | null               |
-    +---------------------+--------------------+-------------------------+--------------------------------+------------------------------------------+--------------------+
+    +---------------------+--------------------+-------------------------+--------------------------------+------------------------------------------+-----------------------------+--------------------+
+    | mean_absolute_error | mean_squared_error | root_mean_squared_error | mean_absolute_percentage_error | symmetric_mean_absolute_percentage_error | mean_absolute_scaled_error  | ai_evaluate_status |
+    +---------------------+--------------------+-------------------------+--------------------------------+------------------------------------------+-----------------------------+--------------------+
+    | 7512.2744140624982  | 88702684.834815472 | 9418.210277691589       | 16.068001108491149             | 15.740030591250889                       | 0.981234567                 | null               |
+    +---------------------+--------------------+-------------------------+--------------------------------+------------------------------------------+-----------------------------+--------------------+
 
 ### Evaluate multiple time series
 

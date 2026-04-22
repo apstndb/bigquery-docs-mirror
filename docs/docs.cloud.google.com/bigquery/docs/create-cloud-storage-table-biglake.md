@@ -1,7 +1,5 @@
 # Create BigLake external tables for Cloud Storage
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document describes how to create a Cloud Storage BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query structured data in Cloud Storage. Access delegation decouples access to the BigLake table from access to the underlying datastore.
 
 ## Before you begin

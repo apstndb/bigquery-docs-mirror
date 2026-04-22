@@ -3943,7 +3943,7 @@ Example: <code dir="ltr" translate="no">runtime_version="1.1"</code></td>
 <p>If not specified, the system default container image that includes the default Spark, Java, and Python packages associated with a runtime version is used.</p>
 <p>You can provide a custom container Docker image that includes your own built Java or Python dependencies. As Spark is mounted into your custom container at runtime, you must omit Spark in your custom container image.</p>
 <p>For optimized performance, we recommend you to host your image in Artifact Registry. For more information, see <a href="https://docs.cloud.google.com/dataproc-serverless/docs/guides/custom-containers">Use custom containers with Managed Service for Apache Spark</a> .</p>
-<p>Example: <code dir="ltr" translate="no">container_image="us-docker.pkg.dev/my-project-id/my-images/my-image”</code></p></td>
+<p>Example: <code dir="ltr" translate="no">container_image="us-docker.pkg.dev/my-project-id/my-images/my-image"</code></p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">properties</code></td>
@@ -3984,7 +3984,7 @@ Example: <code dir="ltr" translate="no">main_file_uri="gs://my-bucket/my-scala-m
 <td><code dir="ltr" translate="no">main_class</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td><p>Applies only to stored procedures for Spark written in Java and Scala. Specify a fully-qualified class name in a JAR set with the <code dir="ltr" translate="no">jar_uris</code> option. You can set only one value for <code dir="ltr" translate="no">main_file_uri</code> and <code dir="ltr" translate="no">main_class</code> .</p>
-Example: <code dir="ltr" translate="no">main_class=”com.example.wordcount”</code></td>
+Example: <code dir="ltr" translate="no">main_class="com.example.wordcount"</code></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">py_file_uris</code></td>

@@ -1,7 +1,5 @@
 # Create Amazon S3 BigLake external tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document describes how to create an Amazon Simple Storage Service (Amazon S3) BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Amazon S3. Access delegation decouples access to the BigLake table from access to the underlying datastore.
 
 For information about how data flows between BigQuery and Amazon S3, see [Data flow when querying data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#query-data) .

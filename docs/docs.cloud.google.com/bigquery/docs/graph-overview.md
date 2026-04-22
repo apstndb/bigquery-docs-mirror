@@ -12,7 +12,7 @@
 
 BigQuery Graph lets you use the analytical power of BigQuery to perform graph analysis on a large scale. When you model your data as a graph with nodes and edges, you can use Graph Query Language (GQL) to find complex, hidden relationships between data points that would be challenging to find using SQL.
 
-You can create node and edge tables directly from tables that store entities and relationships between entities. You don't need to modify your existing workflows or replicate your data to use it in graph queries.
+You can create node and edge tables directly from tables or views that store entities and relationships between entities. You don't need to modify your existing workflows or replicate your data to use it in graph queries.
 
 BigQuery Graph supports a graph query interface compatible with the [ISO GQL standard](https://www.iso.org/standard/76120.html) and the [ISO Property Graph Queries (SQL/PGQ) standard](https://www.iso.org/standard/79473.html) . This provides you with interoperability between relational and graph models by combining well-established SQL capabilities with the expressiveness of graph pattern matching.
 

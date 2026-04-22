@@ -488,6 +488,20 @@ Follow these steps to share a published data agent. You can't share draft agents
     
     ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
+#### Share a data agent in Data Studio
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+When you [publish](https://docs.cloud.google.com/bigquery/docs/create-data-agents#preview-publish) your agent and [share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) it with Data Studio users, the agent automatically appears for those users on the **Chat with your data** page in Data Studio.
+
+You can also copy a direct link to the agent, which opens [Data Studio directly into a session with that specific BigQuery data agent](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) . You can copy the agent's dedicated URL in these ways:
+
+  - From the agent catalog: Select more\_vert **Open actions** ; next, select **Copy link** , and then select **Data Studio** .
+  - From the agent details view: Select content\_copy **Copy agent link** , and then select **Data Studio** .
+  - From the **Share** overflow menu: Select **Copy link to agent in Data Studio** .
+
 ### Delete a data agent
 
 1.  Go to the BigQuery **Agents** page.

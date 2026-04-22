@@ -1,7 +1,5 @@
 # Create Cloud Storage external tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 BigQuery supports querying Cloud Storage data in the following formats:
 
   - Comma-separated values (CSV)

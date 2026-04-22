@@ -1,7 +1,5 @@
 # Introduction to external tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document describes how to work with data stored outside of BigQuery in external tables. To work with external data sources, you can also use [External datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro#external_datasets) .
 
 Non-BigLake external tables let you query structured data in external data stores. To query a non-BigLake external table, you must have permissions to both the external table and the external data source. For example, to query a non-BigLake external table that uses a data source in Cloud Storage, you must have the following permissions:

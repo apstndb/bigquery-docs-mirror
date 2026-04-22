@@ -542,6 +542,7 @@ For models that return them, the `precision` , `recall` , `f1_score` , `log_loss
   - `root_mean_squared_error` : a `FLOAT64` value that contains the [root mean squared error](https://en.wikipedia.org/wiki/Root-mean-square_deviation) for the model.
   - `mean_absolute_percentage_error` : a `FLOAT64` value that contains the [mean absolute percentage error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) for the model.
   - `symmetric_mean_absolute_percentage_error` : a `FLOAT64` value that contains the [symmetric mean absolute percentage error](https://en.wikipedia.org/wiki/Symmetric_mean_absolute_percentage_error) for the model.
+  - `mean_absolute_scaled_error` : a `FLOAT64` value that contains the [mean absolute scaled error](https://en.wikipedia.org/wiki/Mean_absolute_scaled_error) for the model.
 
 > **Notes:**
 > 

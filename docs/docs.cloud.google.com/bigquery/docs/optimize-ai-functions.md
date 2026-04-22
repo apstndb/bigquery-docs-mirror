@@ -172,8 +172,8 @@ The following sections explain how to diagnose and resolve common issues with us
 
 **Solution** :
 
-  - Remove rare categories from the `AI.CLASSIFY` function call.
-  - Combine multiple rare categories into a broader category to increase the sample size in the combined category. For example, combine multiple rare categories into an `OTHER` category.
+  - Remove rare or empty categories from the `AI.CLASSIFY` function call.
+  - Group rare categories into a broader one to increase the sample size. You can use an `OTHER` category to group items not covered by more specific categories. However, don't add `OTHER` if your list of categories is already complete, as this term is ambiguous and might cause confusion.
 
 ### Embeddings have inconsistent dimensions
 
@@ -191,9 +191,11 @@ The following sections explain how to diagnose and resolve common issues with us
 
 **Solution** :
 
-  - Use mutually exclusive categories.
+  - Use a set of categories that form a partition. Ensure that the categories have minimal overlap and cover all possible inputs.
     
       - Avoid overlapping categories where an input might belong to multiple categories simultaneously. For example, avoid categories like `['terrible', 'bad', 'okay', 'good', 'excellent']` .
+    
+      - Avoid gaps where no categories apply. For example, the list of categories `['bad', 'average']` doesn't cover a review expressing praise.
     
       - Provide category descriptions to guide the LLM to resolve ambiguity between categories. For example:
         

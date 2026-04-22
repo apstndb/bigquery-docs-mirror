@@ -1,7 +1,5 @@
 # Create Blob Storage BigLake tables
 
-> **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
-
 This document describes how to create an Azure Blob Storage BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Blob Storage. Access delegation decouples access to the BigLake table from access to the underlying datastore.
 
 For information about how data flows between BigQuery and Blob Storage, see [Data flow when querying data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#query-data) .
@@ -312,7 +310,7 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
       - `  PARTITION_COLUMN_TYPE  ` : the type of the partitioning column
       - `  REGION  ` : the region that contains the connection—for example, `us`
       - `  CONNECTION_ID  ` : the name of the connection—for example, `myconnection`
-      - `  HIVE_PARTITION_URI_PREFIX  ` : hive partitioning uri prefix–for example:
+      - `  HIVE_PARTITION_URI_PREFIX  ` : hive partitioning URI prefix—for example:
           - `s3://mybucket/`
           - `azure://mystorageaccount.blob.core.windows.net/mycontainer/`
       - `  FILE_PATH  ` : path to the data source for the external table that you want to create—for example:
@@ -326,7 +324,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 **Examples**
 
-The following example creates a BigLake table over partitioned data in Amazon S3. The schema is autodetected.
+The following example creates a BigLake table over partitioned data in Amazon S3. The schema is auto-detected.
 
     CREATE EXTERNAL TABLE `my_dataset.my_table`
     WITH PARTITION COLUMNS

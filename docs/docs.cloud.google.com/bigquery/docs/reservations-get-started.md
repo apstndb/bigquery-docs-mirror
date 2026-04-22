@@ -69,7 +69,7 @@ Create a reservation named `test` in the `US` multi-region, and allocate a maxim
 
 7.  For **Max reservation size selector** , select **Small (100 Slots)** .
 
-8.  Leave the other default setting as they are, and click **Save** .
+8.  Leave the other default settings as they are, and click **Save** .
 
 To learn how to create a reservation using SQL or the bq tool, see [Create a reservation with dedicated slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) .
 

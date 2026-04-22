@@ -292,7 +292,7 @@ To resolve this error, do the following:
     
     1.  Go to the [Google Cloud console API dashboard](https://console.cloud.google.com/apis/dashboard) .
     2.  In the dashboard, filter for Quota: `Tabledata list bytes per minute (default quota)` .
-    3.  Select the quota and follow the instruction in [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
+    3.  Select the quota and follow the instructions in [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
     
     It might take several days to review and process the request.
 
