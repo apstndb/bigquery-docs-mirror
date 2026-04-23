@@ -1,11 +1,5 @@
 # Use the Data Engineering Agent to build and modify data pipelines
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or to ask questions about this preview feature, contact <bigquery-dea-feedback@google.com>
-
 The Data Engineering Agent lets you to build, modify, and troubleshoot data pipelines in BigQuery using natural language prompts. The Data Engineering Agent offers the following capabilities to streamline your data engineering workflows to ingest data into BigQuery:
 
   - **Dataform Integration** : The agent generates and organizes data pipeline code directly within Dataform repositories and workspaces
@@ -24,7 +18,6 @@ For more examples of prompts you can use with the Data Engineering Agent, see [S
 
 The Data Engineering Agent has the following limitations:
 
-  - The Data Engineering Agent is a pre-GA offering and isn't intended for production use.
   - The Data Engineering Agent doesn't support natural-language commands for the following file types:
       - Notebooks
       - Data preparation
@@ -34,6 +27,7 @@ The Data Engineering Agent has the following limitations:
   - The Data Engineering Agent cannot search any web links or URLs provided through instructions or direct prompts.
   - When importing files in an [agent instruction file](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#create_agent_instructions) , the `@` import syntax supports only paths that begin with `./` , `/` , or a letter.
   - The [data preview](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is supported only for tables, declarations, or queries with the `hasOutput` flag set to `true` .
+  - The Data Engineering Agent is subject to the [general limitations of AI technology](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
 ## How the Data Engineering Agent uses your data
 

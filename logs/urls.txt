@@ -152,8 +152,6 @@ https://docs.cloud.google.com/bigquery/docs/custom-quotas
 https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption
 https://docs.cloud.google.com/bigquery/docs/data-analysis-tools-intro
 https://docs.cloud.google.com/bigquery/docs/data-canvas
-https://docs.cloud.google.com/bigquery/docs/data-catalog
-https://docs.cloud.google.com/bigquery/docs/data-catalog-overview
 https://docs.cloud.google.com/bigquery/docs/data-clean-rooms
 https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines
 https://docs.cloud.google.com/bigquery/docs/data-governance
@@ -275,6 +273,8 @@ https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transformation
 https://docs.cloud.google.com/bigquery/docs/graph-compare
 https://docs.cloud.google.com/bigquery/docs/graph-create
 https://docs.cloud.google.com/bigquery/docs/graph-iso-standards
+https://docs.cloud.google.com/bigquery/docs/graph-measures
+https://docs.cloud.google.com/bigquery/docs/graph-modeler
 https://docs.cloud.google.com/bigquery/docs/graph-overview
 https://docs.cloud.google.com/bigquery/docs/graph-query-best-practices
 https://docs.cloud.google.com/bigquery/docs/graph-query-overview

@@ -9,6 +9,7 @@ You can create embeddings for the following types of data:
   - Text data from standard tables.
   - Visual data that is returned as [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`OBJ.GET_ACCESS_URL` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values from standard tables as input to the `OBJ.GET_ACCESS_URL` function.
   - Visual data in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+  - Combinations of unstructured data, including text, images, audio, video, and PDFs, represented by a `STRUCT` that contains `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
   - Output data from [PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) , [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) , or [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models.
 
 ## Embeddings
@@ -30,9 +31,9 @@ Embeddings help you perform the following tasks:
 
 Depending on the task, the `ML.GENERATE_EMBEDDING` function works in one of the following ways:
 
-  - To generate embeddings from text or visual content, `ML.GENERATE_EMBEDDING` sends the request to a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Vertex AI embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , and then returns the model's response.
+  - To generate embeddings from text or visual content, `ML.GENERATE_EMBEDDING` sends the request to a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Agent Platform embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , and then returns the model's response.
     
-    The `ML.GENERATE_EMBEDDING` function works with the Vertex AI model to perform embedding tasks supported by that model. For more information on the types of tasks these models can perform, see the following documentation:
+    The `ML.GENERATE_EMBEDDING` function works with the Agent Platform model to perform embedding tasks supported by that model. For more information on the types of tasks these models can perform, see the following documentation:
     
       - [Text embedding model use cases](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings#text-use-cases)
       - [Multimodal embedding model use cases](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings#multimodal-use-cases)
@@ -45,7 +46,7 @@ Depending on the task, the `ML.GENERATE_EMBEDDING` function works in one of the 
 
 ## Syntax
 
-`ML.GENERATE_EMBEDDING` syntax differs depending on the BigQuery ML model you choose. If you use a remote model, it also differs depending on the Vertex AI model that your remote models targets. Choose the option appropriate for your use case.
+`ML.GENERATE_EMBEDDING` syntax differs depending on the BigQuery ML model you choose. If you use a remote model, it also differs depending on the Agent Platform model that your remote models targets. Choose the option appropriate for your use case.
 
 ### `gemini-embedding-001`
 
@@ -70,42 +71,42 @@ Depending on the task, the `ML.GENERATE_EMBEDDING` function works in one of the 
     
     You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains a `STRING` column that's named `content` . For information about the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+`  QUERY_STATEMENT  ` : a query whose result contains a `STRING` column that's named `content` . For information about the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
-  - `  FLATTEN_JSON_OUTPUT  ` : a `BOOL` value that determines whether the `JSON` content returned by the function is parsed into separate columns. The default is `TRUE` .
+`  FLATTEN_JSON_OUTPUT  ` : a `BOOL` value that determines whether the `JSON` content returned by the function is parsed into separate columns. The default is `TRUE` .
 
-  - `  TASK_TYPE  ` : a `STRING` literal that specifies the intended downstream application to help the model produce better quality embeddings. The `TASK_TYPE` argument accepts the following values:
-    
-      - `RETRIEVAL_QUERY` : specifies that the given text is a query in a search or retrieval setting.
-    
-      - `RETRIEVAL_DOCUMENT` : specifies that the given text is a document in a search or retrieval setting.
-        
-        When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `title` or aliased as `title` , for example:
-        
-            SELECT *
-            FROM
-            ML.GENERATE_EMBEDDING(
-              MODEL `mydataset.embedding_model`,
-              (SELECT abstract as content, header as title, publication_number
-              FROM `mydataset.publications`),
-              STRUCT(TRUE AS flatten_json_output, 'RETRIEVAL_DOCUMENT' as task_type)
-            );
-        
-        Specifying the title column in the input query populates the [`title` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `title` value when using any other task type, that input is ignored and has no effect on the embedding results.
-    
-      - `SEMANTIC_SIMILARITY` : specifies that the given text will be used for Semantic Textual Similarity (STS).
-    
-      - `CLASSIFICATION` : specifies that the embeddings will be used for classification.
-    
-      - `CLUSTERING` : specifies that the embeddings will be used for clustering.
-    
-      - `QUESTION_ANSWERING` : specifies that the embeddings will be used for question answering.
-    
-      - `FACT_VERIFICATION` : specifies that the embeddings will be used for fact verification.
-    
-      - `CODE_RETRIEVAL_QUERY` : specifies that the embeddings will be used for code retrieval.
+`  TASK_TYPE  ` : a `STRING` literal that specifies the intended downstream application to help the model produce better quality embeddings. The `TASK_TYPE` argument accepts the following values:
 
-  - `  OUTPUT_DIMENSIONALITY  ` : an `INT64` value in the range `[1, 3072]` that specifies the number of dimensions to use when generating embeddings. For example, if you specify `256 AS output_dimensionality` , then the `ml_generate_embedding_result` output column contains 256 embeddings for each input value. The default value is `3072` .
+  - `RETRIEVAL_QUERY` : specifies that the given text is a query in a search or retrieval setting.
+
+  - `RETRIEVAL_DOCUMENT` : specifies that the given text is a document in a search or retrieval setting.
+    
+    When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `title` or aliased as `title` , for example:
+    
+        SELECT *
+        FROM
+        ML.GENERATE_EMBEDDING(
+          MODEL `mydataset.embedding_model`,
+          (SELECT abstract as content, header as title, publication_number
+          FROM `mydataset.publications`),
+          STRUCT(TRUE AS flatten_json_output, 'RETRIEVAL_DOCUMENT' as task_type)
+        );
+    
+    Specifying the title column in the input query populates the [`title` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `title` value when using any other task type, that input is ignored and has no effect on the embedding results.
+
+  - `SEMANTIC_SIMILARITY` : specifies that the given text will be used for Semantic Textual Similarity (STS).
+
+  - `CLASSIFICATION` : specifies that the embeddings will be used for classification.
+
+  - `CLUSTERING` : specifies that the embeddings will be used for clustering.
+
+  - `QUESTION_ANSWERING` : specifies that the embeddings will be used for question answering.
+
+  - `FACT_VERIFICATION` : specifies that the embeddings will be used for fact verification.
+
+  - `CODE_RETRIEVAL_QUERY` : specifies that the embeddings will be used for code retrieval.
+
+`  OUTPUT_DIMENSIONALITY  ` : an `INT64` value in the range `[1, 3072]` that specifies the number of dimensions to use when generating embeddings. For example, if you specify `256 AS output_dimensionality` , then the `ml_generate_embedding_result` output column contains 256 embeddings for each input value. The default value is `3072` .
 
 ### Details
 
@@ -130,48 +131,48 @@ The model and input table must be in the same region.
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a remote model over a Vertex AI text embedding model.
+  - `  MODEL_NAME  ` : the name of a remote model over a Agent Platform text embedding model.
     
     You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
   - `  TABLE_NAME  ` : the name of the BigQuery table that contains a `STRING` column to embed. The text in the column that's named `content` is sent to the model. If your table doesn't have a `content` column, use a `SELECT` statement for this argument to provide an alias for an existing table column. An error occurs if no `content` column exists.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains a `STRING` column that's named `content` . For information about the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+`  QUERY_STATEMENT  ` : a query whose result contains a `STRING` column that's named `content` . For information about the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
-  - `  FLATTEN_JSON_OUTPUT  ` : a `BOOL` value that determines whether the `JSON` content returned by the function is parsed into separate columns. The default is `TRUE` .
+`  FLATTEN_JSON_OUTPUT  ` : a `BOOL` value that determines whether the `JSON` content returned by the function is parsed into separate columns. The default is `TRUE` .
 
-  - `  TASK_TYPE  ` : a `STRING` literal that specifies the intended downstream application to help the model produce better quality embeddings. The `TASK_TYPE` argument accepts the following values:
-    
-      - `RETRIEVAL_QUERY` : specifies that the given text is a query in a search or retrieval setting.
-    
-      - `RETRIEVAL_DOCUMENT` : specifies that the given text is a document in a search or retrieval setting.
-        
-        When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `title` or aliased as `title` , for example:
-        
-            SELECT *
-            FROM
-            ML.GENERATE_EMBEDDING(
-              MODEL `mydataset.embedding_model`,
-              (SELECT abstract as content, header as title, publication_number
-              FROM `mydataset.publications`),
-              STRUCT(TRUE AS flatten_json_output, 'RETRIEVAL_DOCUMENT' as task_type)
-            );
-        
-        Specifying the title column in the input query populates the [`title` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `title` value when using any other task type, that input is ignored and has no effect on the embedding results.
-    
-      - `SEMANTIC_SIMILARITY` : specifies that the given text will be used for Semantic Textual Similarity (STS).
-    
-      - `CLASSIFICATION` : specifies that the embeddings will be used for classification.
-    
-      - `CLUSTERING` : specifies that the embeddings will be used for clustering.
-    
-      - `QUESTION_ANSWERING` : specifies that the embeddings will be used for question answering.
-    
-      - `FACT_VERIFICATION` : specifies that the embeddings will be used for fact verification.
-    
-      - `CODE_RETRIEVAL_QUERY` : specifies that the embeddings will be used for code retrieval.
+`  TASK_TYPE  ` : a `STRING` literal that specifies the intended downstream application to help the model produce better quality embeddings. The `TASK_TYPE` argument accepts the following values:
 
-  - `  OUTPUT_DIMENSIONALITY  ` : an `INT64` value in the range `[1, 768]` that specifies the number of dimensions to use when generating embeddings. For example, if you specify `256 AS output_dimensionality` , then the `ml_generate_embedding_result` output column contains 256 embeddings for each input value. The default value is `768` .
+  - `RETRIEVAL_QUERY` : specifies that the given text is a query in a search or retrieval setting.
+
+  - `RETRIEVAL_DOCUMENT` : specifies that the given text is a document in a search or retrieval setting.
+    
+    When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `title` or aliased as `title` , for example:
+    
+        SELECT *
+        FROM
+        ML.GENERATE_EMBEDDING(
+          MODEL `mydataset.embedding_model`,
+          (SELECT abstract as content, header as title, publication_number
+          FROM `mydataset.publications`),
+          STRUCT(TRUE AS flatten_json_output, 'RETRIEVAL_DOCUMENT' as task_type)
+        );
+    
+    Specifying the title column in the input query populates the [`title` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `title` value when using any other task type, that input is ignored and has no effect on the embedding results.
+
+  - `SEMANTIC_SIMILARITY` : specifies that the given text will be used for Semantic Textual Similarity (STS).
+
+  - `CLASSIFICATION` : specifies that the embeddings will be used for classification.
+
+  - `CLUSTERING` : specifies that the embeddings will be used for clustering.
+
+  - `QUESTION_ANSWERING` : specifies that the embeddings will be used for question answering.
+
+  - `FACT_VERIFICATION` : specifies that the embeddings will be used for fact verification.
+
+  - `CODE_RETRIEVAL_QUERY` : specifies that the embeddings will be used for code retrieval.
+
+`  OUTPUT_DIMENSIONALITY  ` : an `INT64` value in the range `[1, 768]` that specifies the number of dimensions to use when generating embeddings. For example, if you specify `256 AS output_dimensionality` , then the `ml_generate_embedding_result` output column contains 256 embeddings for each input value. The default value is `768` .
 
 ### Details
 
@@ -199,15 +200,15 @@ The model and input table must be in the same region.
 
   - `  TABLE_NAME  ` : the name of the BigQuery table that contains a `STRING` column to embed. The text in the column that's named `content` is sent to the model. If your table doesn't have a `content` column, use a `SELECT` statement for this argument to provide an alias for an existing table column. An error occurs if no `content` column exists.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains a `STRING` column that's named `content` . For information about the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+`  QUERY_STATEMENT  ` : a query whose result contains a `STRING` column that's named `content` . For information about the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
-  - `  FLATTEN_JSON_OUTPUT  ` : a `BOOL` value that determines whether the `JSON` content returned by the function is parsed into separate columns. The default is `TRUE` .
+`  FLATTEN_JSON_OUTPUT  ` : a `BOOL` value that determines whether the `JSON` content returned by the function is parsed into separate columns. The default is `TRUE` .
 
 ### Details
 
 The model and input table must be in the same region.
 
-### `multimodalembedding`
+### Multimodal embedding
 
     # Syntax for standard tables
     ML.GENERATE_EMBEDDING(
@@ -238,7 +239,7 @@ The model and input table must be in the same region.
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a remote model over a Vertex AI `multimodalembedding@001` model.
+  - `  MODEL_NAME  ` : the name of a remote model over a Agent Platform model. Supported models include `multimodalembedding@001` and `gemini-embedding-2-preview` ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
     
     You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -247,6 +248,8 @@ The model and input table must be in the same region.
       - If you are creating embeddings for text in a standard table, the name of the BigQuery table that contains the content. The content must be in a `STRING` column named `content` . If your table does not have a `content` column, use the `QUERY_STATEMENT` argument instead and provide a `SELECT` statement that includes an alias for an existing table column. An error occurs if no `content` column is available.
     
       - If you are creating embeddings for visual content using data from an object table, the name of a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains the visual content.
+    
+      - If you use the `gemini-embedding-2-preview` model ( [Preview](https://cloud.google.com/products#product-launch-stages) ), you can also specify a `STRUCT` column that contains a combination of `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
 
   - `  QUERY_STATEMENT  ` : the GoogleSQL query that generates the input data for the function.
     
@@ -268,7 +271,7 @@ The model and input table must be in the same region.
 
   - `  INTERVAL_SECONDS  ` : a `FLOAT64` value that specifies the interval to use when creating embeddings. For example, if you set `START_SECOND` = `0` , `END_SECOND` = `120` , and `INTERVAL_SECONDS` = `10` , then the video is split into twelve 10 second segments ( `[0, 10), [10, 20), [20, 30)...` ) and embeddings are generated for each segment. This value must be greater than or equal to `4` and less than `120` . The default value is `16` . This argument only applies to video content.
 
-  - `  OUTPUT_DIMENSIONALITY  ` : an `INT64` value that specifies the number of dimensions to use when generating embeddings. Valid values are `128` , `256` , `512` , and `1408` . The default value is `1408` . For example, if you specify `256 AS output_dimensionality` , then the `ml_generate_embedding_result` output column contains 256 embeddings for each input value.
+  - `  OUTPUT_DIMENSIONALITY  ` : an `INT64` value that specifies the number of dimensions to use when generating embeddings. For more information, see how to [specify lower-dimensional embeddings](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#low-dimension) .
     
     You can only use this argument when creating text or image embeddings. If you use this argument when creating video embeddings, the function returns an error.
 
@@ -297,7 +300,7 @@ The model and input table must be in the same region.
 
   - `  TABLE_NAME  ` : the name of the BigQuery table that contains the input data for the PCA model.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains the input data for the PCA model.
+`  QUERY_STATEMENT  ` : a query whose result contains the input data for the PCA model.
 
 ### Details
 
@@ -325,9 +328,9 @@ The model and input table must be in the same region.
 
   - `  TABLE_NAME  ` : the name of the BigQuery table that contains the input data for the autoencoder model.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains the input data for the autoencoder model.
+`  QUERY_STATEMENT  ` : a query whose result contains the input data for the autoencoder model.
 
-  - `  TRIAL_ID  ` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
+`  TRIAL_ID  ` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
 
 ### Details
 
@@ -352,7 +355,7 @@ The model and input table must be in the same region.
     
     You can confirm the type of model by opening the Google Cloud console and looking at the **Model type** field in the model details page.
 
-  - `  TRIAL_ID  ` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
+`  TRIAL_ID  ` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
 
 ## Output
 
@@ -393,7 +396,7 @@ The model and input table must be in the same region.
 
   - `ml_generate_embedding_status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
 
-### `multimodalembedding`
+### Multimodal embedding
 
 `ML.GENERATE_EMBEDDING` returns the input table and the following columns:
 
@@ -404,9 +407,17 @@ The model and input table must be in the same region.
 
   - `ml_generate_embedding_status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
 
-  - `ml_generate_embedding_start_sec` : for video content, an `INT64` value that contains the starting second of the portion of the video that the embedding represents. For image content, the value is `NULL` . This column isn't returned for text content.
-
-  - `ml_generate_embedding_end_sec` : for video content, an `INT64` value that contains the ending second of the portion of the video that the embedding represents. For image content, the value is `NULL` . This column isn't returned for text content.
+  - Additional output fields depend on which embedding model you use:
+    
+      - The `gemini-embedding-2-preview` model also outputs the following field:
+        
+          - `ml_generate_embedding_statistics` : a `JSON` value that contains information about the token count for each modality of input that you provide.
+    
+      - The `multimodalembedding@001` model also outputs the following fields:
+        
+          - `ml_generate_embedding_start_sec` : for video content, an `INT64` value that contains the starting second of the portion of the video that the embedding represents. For image content, the value is `NULL` . This column isn't returned for text content.
+        
+          - `ml_generate_embedding_end_sec` : for video content, an `INT64` value that contains the ending second of the portion of the video that the embedding represents. For image content, the value is `NULL` . This column isn't returned for text content.
 
 ### PCA
 
@@ -617,9 +628,9 @@ The `ML.GENERATE_EMBEDDING` function must run in the same [region or multi-regio
 
 ## Quotas
 
-Quotas apply when you use the `ML.GENERATE_EMBEDDING` function with remote models. For more information, see [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+Quotas apply when you use the `ML.GENERATE_EMBEDDING` function with remote models. For more information, see [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
-To request more quota for the Vertex AI models, use the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) .
+To request more quota for the Agent Platform models, use the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) .
 
 ## What's next
 
@@ -629,7 +640,7 @@ To request more quota for the Vertex AI models, use the process described in [Ma
       - [Creating image embeddings](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding)
       - [Creating video embeddings](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding)
 
-  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
 
   - Try the [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) tutorial to learn how to do the following tasks:
     

@@ -65,7 +65,14 @@ The `AI.KEY_DRIVERS` function takes the following arguments:
 
   - `  INTEREST_LABEL_COL  ` : a `STRING` value that contains the name of the column to use to determine whether a given row is interest group or reference group. The column that you specify must have a `BOOL` data type. For more information, see [choose interest and reference data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers#choose-interest-reference) .
 
-  - `  MIN_APRIORI_SUPPORT  ` : a `FLOAT64` value in the range `[0,1]` that contains the minimum apriori support threshold for including segments in the output. All segments whose `apriori_support` value is less than the `MIN_APRIORI_SUPPORT` value that you specify are excluded from the output. You can't use the `MIN_APRIORI_SUPPORT` option with `TOP_K` . The default value is `0.1` .
+  - `  MIN_APRIORI_SUPPORT  ` : a `FLOAT64` value in the range `[0,1]` that contains the minimum apriori support threshold for including segments in the output. The apriori support for a segment is computed as the following:
+    
+        GREATEST(
+          metric_interest / SUM(metric_interest for the population),
+          metric_reference / SUM(metric_reference for the population)
+        )
+    
+    The `metric_interest` and `metric_reference` values are the sum of the metric column for the segment on the interest or reference group respectively. All segments whose `apriori_support` value is less than the `MIN_APRIORI_SUPPORT` value that you specify are excluded from the output. You can't use the `MIN_APRIORI_SUPPORT` option with `TOP_K` . The default value is `0.1` .
 
   - `  TOP_K  ` : an `INT64` value between 1 and 1,000,000 that contains the maximum number of insights to output with the highest apriori support value. The model automatically retrieves the insights with the highest apriori support values and prunes insights with low apriori support, decreasing query runtime compared to using no apriori support thresholding. The `TOP_K` option can't be used together with `MIN_APRIORI_SUPPORT` .
     

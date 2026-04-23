@@ -95,6 +95,25 @@ If your transfer configuration is correct, and the appropriate permissions are g
   - Error: `For asset " ASSET ", no eligible column found for splitting (Reason: Primary or Indexed Key columns found, but none are of supported types (INTEGER, TINYINT, SMALLINT, FLOAT, REAL, DOUBLE, NUMERIC, BIGINT, DECIMAL, DATE, BOOLEAN))`  
     **Resolution:** This error can occur when you are trying to transfer more than 2,000,000 records from a source table to a BigQuery table and there isn't a primary key or indexed column of supported data type in the source table. To resolve this issue, configure a column with one of the supported data types as primary key or indexed column in your source table. For more information, see the limitations section of your transfer source guide.
 
+  - Error: `Permission bigquery.tables.create denied.`  
+    **Symptom:**
+    
+        Error code 7 : Access Denied : Dataset [PROJECT_ID]:[DATASET_ID] : Permission bigquery.tables.create denied on dataset [PROJECT_ID]:[DATASET_ID] (or it may not exist).
+    
+    A Cloud Storage transfer fails with an access denied error for table creation, even if the destination table already exists and the service account has standard data editor roles.
+    
+    **Cause:** This error occurs when a Cloud Storage transfer run involves more than 10,000 files and the `bigquery.tables.create` permission isn't granted. When transfers exceed 10,000 files, the service shards data into temporary staging tables created dynamically. Doing so requires the bigquery.tables.create permission even if a project is enrolled for high-volume transfers (or has an approved quota increase).
+    
+    **Resolution:** To successfully transfer more than 10,000 files, ensure you meet both of the following requirements:
+
+<!-- end list -->
+
+1.  **Verify Quota and Feature Enrollment:** Ensure that your project is enrolled for high-volume Cloud Storage transfers (exceeding 10,000 files). If you need to transfer more than 10,000 files, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) to request a quota increase for the maximum files per transfer run.
+
+2.  **Grant Required IAM Permissions:** Grant the service account or user identity running the transfer the `bigquery.tables.create` permission on the destination dataset. This permission is included in the BigQuery Data Editor ( `roles/bigquery.dataEditor` ) and BigQuery Admin ( `roles/bigquery.admin` ) roles. If you continue to see failures after granting the necessary permissions, you may need to [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) to confirm your allowlist status.
+    
+    **Alternative:** If you can't grant the required permissions or increase the quota, you must reduce the number of files per transfer run to 10,000 or fewer; for example, by using more specific URI wildcards or splitting the transfer into multiple smaller configurations.
+
 ## Authorization and permission issues
 
 The following are some common permission errors that you can encounter when you transfer data from different data sources:

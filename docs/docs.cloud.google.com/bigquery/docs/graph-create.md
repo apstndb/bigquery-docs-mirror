@@ -68,7 +68,7 @@ To create these tables, run the following [`CREATE TABLE` statements](https://do
 
 ## Create a graph
 
-To create a graph, you use the [`CREATE PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) . The following example creates a graph called `FinGraph` in the `graph_db` dataset. The `Account` and `Person` tables are the node tables. The `AccountTransferAccount` and `PersonOwnAccount` tables are the edge tables, which represent relationships between the node tables.
+To create a graph, you can use the [`CREATE PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) or the [visual graph modeler](https://docs.cloud.google.com/bigquery/docs/graph-modeler) . The following example uses the `CREATE PROPERTY GRAPH` statement to create a graph called `FinGraph` in the `graph_db` dataset. The `Account` and `Person` tables are the node tables. The `AccountTransferAccount` and `PersonOwnAccount` tables are the edge tables, which represent relationships between the node tables.
 
     CREATE OR REPLACE PROPERTY GRAPH graph_db.FinGraph
       NODE TABLES (
@@ -148,6 +148,8 @@ The results look similar to the following:
     | Dana  | 500.0  | Alex           |
     | Dana  | 200.0  | Lee            |
     +-------+--------+----------------+
+
+You can also use graphs as a data source in [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) , which lets you ask natural language questions about your graphs. For example, you might ask "Who has Dana transferred money to and how much was transferred?"
 
 ## Visualize graph query results
 

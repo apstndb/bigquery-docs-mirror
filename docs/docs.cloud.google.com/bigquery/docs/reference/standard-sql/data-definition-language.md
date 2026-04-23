@@ -1334,7 +1334,7 @@ This script returns the following output:
 
 #### Example 1
 
-Suppose you have a BigLake table named `myawsdataset.orders` that references data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) . You want to transfer data from that table to a BigQuery table `myotherdataset.shipments` in the US multi-region.
+Suppose you have a Lakehouse table named `myawsdataset.orders` that references data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) . You want to transfer data from that table to a BigQuery table `myotherdataset.shipments` in the US multi-region.
 
 First, display information about the `myawsdataset.orders` table:
 
@@ -2388,7 +2388,7 @@ The base table, `mv_base_table` , must also be partitioned by the `col_datetime`
 
 ## `CREATE MATERIALIZED VIEW AS REPLICA OF` statement
 
-Creates a [replica of a materialized view](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) . The source materialized view must be over an Amazon Simple Storage Service (Amazon S3) BigLake table. You can use the materialized view replica to make Amazon S3 data available locally for joins.
+Creates a [replica of a materialized view](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) . The source materialized view must be over an Amazon Simple Storage Service (Amazon S3) Google Cloud Lakehouse table. You can use the materialized view replica to make Amazon S3 data available locally for joins.
 
 For more information, see [Create materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#create) .
 
@@ -2406,7 +2406,7 @@ For more information, see [Create materialized view replicas](https://docs.cloud
 
   - [`materialized_view_replica_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_replica_option_list) : Allows you to specify options such as the replication interval.
 
-  - `source_materialized_view_name` : The name of the materialized view you are replicating, in table path syntax. The source materialized view must be over an Amazon S3 BigLake table, and must be authorized on the dataset that contains that table.
+  - `source_materialized_view_name` : The name of the materialized view you are replicating, in table path syntax. The source materialized view must be over an Amazon S3 Google Cloud Lakehouse table, and must be authorized on the dataset that contains that table.
 
 ### `materialized_view_replica_option_list`
 
@@ -2740,7 +2740,7 @@ Applies to: CSV, JSON, and Google Sheets data.
 
 `INTERVAL`
 
-Applicable for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
+Applicable for [Google Cloud Lakehouse tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
 
 Specifies whether cached metadata is used by operations against the table, and how fresh the cached metadata must be in order for the operation to use it.
 
@@ -2953,7 +2953,7 @@ If the `OPTIONS` clause includes an expiration time, then the `bigquery.tables.d
 
 ### Examples
 
-The following example creates a BigLake table and explicitly specifies the schema. It also specifies refreshing metadata cache automatically at a system-defined interval.
+The following example creates a Lakehouse table and explicitly specifies the schema. It also specifies refreshing metadata cache automatically at a system-defined interval.
 
     CREATE OR REPLACE EXTERNAL TABLE mydataset.newtable (x INT64, y STRING, z BOOL)
       WITH CONNECTION myconnection
@@ -6679,7 +6679,7 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">default_cloud_resource_connection_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
-<td><p>The default connection to use when creating tables and models ([Preview](/products#product-launch-stages)). Only specify the connection's ID, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you create. For more information, see the <a href="https://docs.cloud.google.com/bigquery/docs/default-connections">Default connection overview</a> .</p>
+<td><p>The default connection to use when creating tables and models ( <a href="https://docs.cloud.google.com/products#product-launch-stages">Preview</a> ). Only specify the connection's ID, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you create. For more information, see the <a href="https://docs.cloud.google.com/bigquery/docs/default-connections">Default connection overview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">`region-us.default_cloud_resource_connection_id` = "connection_1"</code> . Sets the default connection to <code dir="ltr" translate="no">connection_1</code> in the <code dir="ltr" translate="no">us</code> region.</p></td>
 </tr>
 <tr class="even">

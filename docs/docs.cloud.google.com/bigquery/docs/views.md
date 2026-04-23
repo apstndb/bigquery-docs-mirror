@@ -28,6 +28,7 @@ BigQuery views are subject to the following limitations:
       - The [update](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) or [patch](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API methods.
   - You cannot include a temporary user-defined function or a temporary table in the SQL query that defines a view.
   - You cannot reference a view in a [wildcard table](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) query.
+  - Logical views cannot inherit or explicitly define [parameterized data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) , such as `STRING(n)` , as parameterized data types are only supported for base table columns and script variables.
 
 For information about quotas and limits that apply to views, see [View limits](https://docs.cloud.google.com/bigquery/quotas#view_limits) .
 

@@ -2010,6 +2010,117 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       puts "Table #{table_id} deleted."
     end
 
+## Troubleshoot deleted tables
+
+There are three main reasons for a deleted table: manual table deletion, expiration, and dataset deletion.
+
+### Table deletion
+
+Check Cloud Audit Logs for a `google.cloud.bigquery.v2.TableService.DeleteTable` event. To view deleted tables, select one of the following options:
+
+### Console
+
+1.  In the Google Cloud console, go to the **Logs Explorer** page.
+
+2.  In the **Filter** section, use the following Cloud Logging Filter and **Run Query** ,
+    
+        resource.type="bigquery_dataset"
+        protoPayload.methodName="google.cloud.bigquery.v2.TableService.DeleteTable"
+        protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+
+### bq
+
+1.  In the Google Cloud console, activate Cloud Shell.
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+
+2.  Use the `gcloud logging read` command with the following filters:
+    
+    ```sh
+    gcloud logging read '
+    resource.type="bigquery_dataset"
+    protoPayload.methodName="google.cloud.bigquery.v2.TableService.DeleteTable"
+    protoPayload.resourceName=~"projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+    '
+    ```
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : your project ID
+      - `  DATASET_ID  ` : the name of the dataset that contains the table
+      - `  TABLE_ID  ` : the name of the table that was deleted
+
+### Table expiration
+
+Tables can be created with an expiration time. Once this time is reached, BigQuery automatically deletes the table. To view deleted tables, select one of the following options:
+
+### Console
+
+1.  In the Google Cloud console, go to the **Logs Explorer** page.
+
+2.  In the **Filter** section, use the following Cloud Logging Filter and click **Run Query** .
+    
+        protoPayload.methodName="InternalTableExpired"
+          protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+
+### bq
+
+1.  In the Google Cloud console, activate Cloud Shell.
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+
+2.  Use the `gcloud logging read` command with the following filters:
+    
+    ```sh
+    gcloud logging read '
+        protoPayload.methodName="InternalTableExpired"
+        protoPayload.resourceName=~"projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+        '
+    ```
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : your project ID
+      - `  DATASET_ID  ` : the name of the dataset that contains the table
+      - `  TABLE_ID  ` : the name of the table that was deleted
+
+You can query the [`INFORMATION_SCHEMA.TABLE_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) view to check the `expiration_timestamp` column for existing tables.
+
+### Dataset deletion
+
+If the dataset containing the table was deleted, the table will also be deleted. To view deleted tables, select one of the following options:
+
+### Console
+
+1.  In the Google Cloud console, go to the **Logs Explorer** page.
+
+2.  In the **Filter** section, use the following Cloud Logging Filter and **Run Query** .
+    
+        resource.type="bigquery_dataset"
+        protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.DeleteDataset"
+        protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID"
+
+### bq
+
+1.  In the Google Cloud console, activate Cloud Shell.
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+
+2.  Use the `gcloud logging read` command with the following filters:
+    
+    ```sh
+    gcloud logging read '
+    resource.type="bigquery_dataset"
+    protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.DeleteDataset"
+    protoPayload.resourceName=~"projects/var>PROJECT_ID/datasets/DATASET_ID"
+    '
+    ```
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : your project ID
+      - `  DATASET_ID  ` : the name of the dataset that contains the table
+
 ## Restore deleted tables
 
 To learn how to restore or undelete deleted tables, see [Restore deleted tables](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) .

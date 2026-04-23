@@ -56,13 +56,13 @@ You must run this procedure in the same location as the indexed table. To set th
 
 **Description**
 
-Refreshes the metadata cache of a BigLake table or an object table. This procedure fails if you run it against a table that has the metadata caching mode set to `AUTOMATIC` .
+Refreshes the metadata cache of a Google Cloud Lakehouse table or an object table. This procedure fails if you run it against a table that has the metadata caching mode set to `AUTOMATIC` .
 
 To run this system procedure, you need the `bigquery.tables.update` and `bigquery.tables.updateData` permissions.
 
 Specify the name of the table as a string with the format `'[project_id.]dataset.table'` . If you run this system procedure from a different project than the table, then you must include the project ID.
 
-For BigLake tables, you can optionally specify one or more subdirectories of the table data directory in Cloud Storage in the format `'gs://table_data_directory/subdirectory/.../'` . This lets you refresh only the table metadata from those subdirectories and thereby avoid unnecessary metadata processing.
+For Lakehouse tables, you can optionally specify one or more subdirectories of the table data directory in Cloud Storage in the format `'gs://table_data_directory/subdirectory/.../'` . This lets you refresh only the table metadata from those subdirectories and thereby avoid unnecessary metadata processing.
 
 **Examples**
 
@@ -70,7 +70,7 @@ To refresh all of the metadata for a table:
 
     CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table')
 
-To selectively refresh the metadata for a BigLake table:
+To selectively refresh the metadata for a Lakehouse table:
 
     CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table', ['gs://source/uri/sub/path/d1/*', 'gs://source/uri/sub/path/d2/*'])
 
@@ -92,3 +92,47 @@ Refreshes a materialized view.
 Specify the name of the materialized view as a string with the format `'[project_id.]dataset.table'` . If you run this system procedure from a different project than the materialized view, then you must include the project ID.
 
 For more information, see [Manual refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views#manual_refresh) .
+
+## BQ.SHOW\_GRAPH\_EXPAND\_SCHEMA
+
+**Syntax**
+
+    CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(graph_name, output_schema);
+
+**Description**
+
+Populates the `output_schema` variable that you provide with the schema of the table returned by calling the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) on `graph_name` .
+
+Specify the name of the [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a string with the format `'[project_id.]dataset.graph'` . Each column returned by the `GRAPH_EXPAND` TVF represents as property in the graph. The output includes the name, type, and mode for each column. If the property has a description or synonyms defined on it, then those appear in a `description` field for the column. If the property defines a measure, then the output includes `"is_measure":true` for that field.
+
+**Examples**
+
+    DECLARE schema STRING;
+    CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA('my_project.my_dataset.my_graph', schema);
+    SELECT schema;
+
+The output looks similar to the following:
+
+    {
+      "fields":[
+        {
+          "name":"Department_dept_name",
+          "type":"STRING",
+          "mode":"NULLABLE",
+          "description":
+            "{\"description\":\"The name of the academic department\",
+              \"synonyms\":[\"division\"]}"
+        },
+        {
+          "name":"Department_budget",
+          "type":"FLOAT",
+          "mode":"NULLABLE"
+        },
+        {
+          "name":"Department_total_budget",
+          "type":"FLOAT",
+          "mode":"NULLABLE",
+          "is_measure":true
+        }
+      ]
+    }

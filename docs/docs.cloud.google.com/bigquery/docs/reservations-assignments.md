@@ -351,6 +351,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 To assign a project to `none` , use the `bq mk` command with the `--reservation_assignment` flag:
 
     bq mk \
+        --project_id=ADMIN_PROJECT_ID \
         --location=LOCATION \
         --reservation_assignment \
         --reservation_id=none \
@@ -360,6 +361,7 @@ To assign a project to `none` , use the `bq mk` command with the `--reservation_
 
 Replace the following:
 
+  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
   - `  PROJECT_ID  ` : the ID of the project to assign to `none`
 
@@ -440,6 +442,8 @@ Each Terraform configuration file must have its own directory (also called a *ro
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
 > **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+
+If there are no reservations in the administration project, then you must use the bq command-line tool to view projects assigned to `none` .
 
 ### Override a reservation on a query
 

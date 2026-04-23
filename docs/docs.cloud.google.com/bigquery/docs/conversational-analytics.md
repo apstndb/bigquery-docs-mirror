@@ -8,7 +8,7 @@
 
 Conversational analytics in BigQuery lets you chat with agents about your data using natural language. To get answers about your data, you can do the following:
 
-  - Create [data agents](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#data-agents) that automatically define data context and query processing instructions for a set of knowledge sources, such as tables, views, or user-defined functions (UDFs) that you select.
+  - Create [data agents](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#data-agents) that automatically define data context and query processing instructions for a set of knowledge sources, such as tables, views, graphs, or user-defined functions (UDFs) that you select.
   - If needed, you can create context and instructions for an agent in the form of custom table and field metadata, instructions to the agent for interpreting and querying the data, or by creating verified queries (previously known as *golden queries* ) to configure the data agent to effectively answer questions for specific use cases.
 
 Before customizing an agent, it's recommended that you first work with the context and instructions that the agent creates.
@@ -58,6 +58,7 @@ The chat response returned to you provides the following features:
 
   - The answer to your question as text, code, or images (multimodal). The answer can include supported BigQuery ML functions.
   - Generated charts where appropriate.
+  - Graph visualizations for GQL query paths.
   - The agent's reasoning behind the results.
   - Metadata about the conversation, such as the agent and data sources used.
 
@@ -90,6 +91,20 @@ The following table shows examples of one-shot prompts that activate the use of 
 | Anomaly detection   | "Find outliers in trips per day for 2018 using 2017 as a baseline."                      | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
 | LLM text generation | "For each article in the 'sports' category, summarize the body column in 1-2 sentences." | [`bigquery-public-data.bbc_news.fulltext`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news.fulltext)                                                          |
 
+## Graph support
+
+Conversational analytics supports using a [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a data source. When you ask questions about your graph, the agent constructs GQL or SQL queries to answer them. Agents can use [descriptions and synonyms](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) that you define on your graph labels and properties to improve the quality of the results. Agents can also take advantage of [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to perform multi-level aggregation. If the response includes graph paths, graph visualizations are provided.
+
+For example, you can ask questions similar to the following about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph:
+
+  - `Which product is most popular among 25-year-olds?`
+  - `Show me all bow tie orders in Chicago from users under 25`
+
+The following limitations apply when you use a graph as a data source:
+
+  - You can use at most one graph as a data source per agent or conversation.
+  - You can't combine tables and graphs as data sources.
+
 ## Security
 
 You can manage access to conversational analytics in BigQuery using [Conversational Analytics API IAM roles and permissions](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) . For information about the roles needed for specific operations, see the [data agent required roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required_roles) and the [conversation required roles](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
@@ -116,7 +131,7 @@ For more information about limitations on queries, conversations, data, and visu
 
 ## Dynamic shared quota
 
-Dynamic Shared Quota (DSQ) in Vertex AI manages capacity for the Gemini model. Unlike conventional quotas, DSQ lets you access a large shared pool of resources without a fixed per-project limit for model throughput.
+Dynamic Shared Quota (DSQ) in Agent Platform manages capacity for the Gemini model. Unlike conventional quotas, DSQ lets you access a large shared pool of resources without a fixed per-project limit for model throughput.
 
 Performance, such as latency, can vary depending on the overall system load. During times of high demand across the shared pool, you might occasionally experience temporary `429 Resource Exhausted` errors. These errors indicate that the shared pool capacity is momentarily constrained, but not that you have reached a specific quota limit on your project. To check on the capacity, retry the request after a short delay.
 

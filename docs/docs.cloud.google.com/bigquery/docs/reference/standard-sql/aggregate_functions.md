@@ -15,42 +15,46 @@ GoogleSQL for BigQuery supports the following general aggregate functions. To le
 </thead>
 <tbody>
 <tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg"><code dir="ltr" translate="no">AGG</code></a></td>
+<td>Aggregates a measure type.</td>
+</tr>
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value"><code dir="ltr" translate="no">ANY_VALUE</code></a></td>
 <td>Gets an expression for some row.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct"><code dir="ltr" translate="no">APPROX_COUNT_DISTINCT</code></a></td>
 <td>Gets the approximate result for <code dir="ltr" translate="no">COUNT(DISTINCT expression)</code> .<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions">Approximate aggregate functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles"><code dir="ltr" translate="no">APPROX_QUANTILES</code></a></td>
 <td>Gets the approximate quantile boundaries.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions">Approximate aggregate functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count"><code dir="ltr" translate="no">APPROX_TOP_COUNT</code></a></td>
 <td>Gets the approximate top elements and their approximate count.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions">Approximate aggregate functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum"><code dir="ltr" translate="no">APPROX_TOP_SUM</code></a></td>
 <td>Gets the approximate top elements and sum, based on the approximate sum of an assigned weight.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions">Approximate aggregate functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg"><code dir="ltr" translate="no">ARRAY_AGG</code></a></td>
 <td>Gets an array of values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg"><code dir="ltr" translate="no">ARRAY_CONCAT_AGG</code></a></td>
 <td>Concatenates arrays and returns a single array as a result.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg"><code dir="ltr" translate="no">AVG</code></a></td>
 <td>Gets the average of non- <code dir="ltr" translate="no">NULL</code> values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg"><code dir="ltr" translate="no">AVG</code> (Differential Privacy)</a></td>
 <td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">AVG</code> .<br />
 <br />
@@ -58,28 +62,28 @@ Gets the differentially-private average of non- <code dir="ltr" translate="no">N
 <br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions">Differential privacy functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and"><code dir="ltr" translate="no">BIT_AND</code></a></td>
 <td>Performs a bitwise AND operation on an expression.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or"><code dir="ltr" translate="no">BIT_OR</code></a></td>
 <td>Performs a bitwise OR operation on an expression.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor"><code dir="ltr" translate="no">BIT_XOR</code></a></td>
 <td>Performs a bitwise XOR operation on an expression.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr"><code dir="ltr" translate="no">CORR</code></a></td>
 <td>Computes the Pearson coefficient of correlation of a set of number pairs.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count"><code dir="ltr" translate="no">COUNT</code></a></td>
 <td>Gets the number of rows in the input, or the number of rows with an expression evaluated to any value other than <code dir="ltr" translate="no">NULL</code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count"><code dir="ltr" translate="no">COUNT</code> (Differential Privacy)</a></td>
 <td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">COUNT</code> .<br />
 <br />
@@ -89,54 +93,54 @@ Signature 2: Gets the differentially-private count of rows with a non- <code dir
 <br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions">Differential privacy functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif"><code dir="ltr" translate="no">COUNTIF</code></a></td>
 <td>Gets the number of <code dir="ltr" translate="no">TRUE</code> values for an expression.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop"><code dir="ltr" translate="no">COVAR_POP</code></a></td>
 <td>Computes the population covariance of a set of number pairs.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp"><code dir="ltr" translate="no">COVAR_SAMP</code></a></td>
 <td>Computes the sample covariance of a set of number pairs.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#grouping"><code dir="ltr" translate="no">GROUPING</code></a></td>
 <td>Checks if a groupable value in the <code dir="ltr" translate="no">GROUP BY</code> clause is aggregated.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and"><code dir="ltr" translate="no">LOGICAL_AND</code></a></td>
 <td>Gets the logical AND of all non- <code dir="ltr" translate="no">NULL</code> expressions.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or"><code dir="ltr" translate="no">LOGICAL_OR</code></a></td>
 <td>Gets the logical OR of all non- <code dir="ltr" translate="no">NULL</code> expressions.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max"><code dir="ltr" translate="no">MAX</code></a></td>
 <td>Gets the maximum non- <code dir="ltr" translate="no">NULL</code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max_by"><code dir="ltr" translate="no">MAX_BY</code></a></td>
 <td>Synonym for <code dir="ltr" translate="no">ANY_VALUE(x HAVING MAX y)</code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min"><code dir="ltr" translate="no">MIN</code></a></td>
 <td>Gets the minimum non- <code dir="ltr" translate="no">NULL</code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min_by"><code dir="ltr" translate="no">MIN_BY</code></a></td>
 <td>Synonym for <code dir="ltr" translate="no">ANY_VALUE(x HAVING MIN y)</code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont"><code dir="ltr" translate="no">PERCENTILE_CONT</code></a></td>
 <td>Computes the specified percentile for a value, using linear interpolation.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions">Navigation functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont"><code dir="ltr" translate="no">PERCENTILE_CONT</code> (Differential Privacy)</a></td>
 <td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">PERCENTILE_CONT</code> .<br />
 <br />
@@ -144,50 +148,50 @@ Computes a differentially-private percentile across privacy unit columns in a qu
 <br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions">Differential privacy functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc"><code dir="ltr" translate="no">PERCENTILE_DISC</code></a></td>
 <td>Computes the specified percentile for a discrete value.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions">Navigation functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_centroid_agg"><code dir="ltr" translate="no">ST_CENTROID_AGG</code></a></td>
 <td>Gets the centroid of a set of <code dir="ltr" translate="no">GEOGRAPHY</code> values.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions">Geography functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_extent"><code dir="ltr" translate="no">ST_EXTENT</code></a></td>
 <td>Gets the bounding box for a group of <code dir="ltr" translate="no">GEOGRAPHY</code> values.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions">Geography functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_union_agg"><code dir="ltr" translate="no">ST_UNION_AGG</code></a></td>
 <td>Aggregates over <code dir="ltr" translate="no">GEOGRAPHY</code> values and gets their point set union.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions">Geography functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev"><code dir="ltr" translate="no">STDDEV</code></a></td>
 <td>An alias of the <code dir="ltr" translate="no">STDDEV_SAMP</code> function.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop"><code dir="ltr" translate="no">STDDEV_POP</code></a></td>
 <td>Computes the population (biased) standard deviation of the values.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp"><code dir="ltr" translate="no">STDDEV_SAMP</code></a></td>
 <td>Computes the sample (unbiased) standard deviation of the values.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg"><code dir="ltr" translate="no">STRING_AGG</code></a></td>
 <td>Concatenates non- <code dir="ltr" translate="no">NULL</code> <code dir="ltr" translate="no">STRING</code> or <code dir="ltr" translate="no">BYTES</code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum"><code dir="ltr" translate="no">SUM</code></a></td>
 <td>Gets the sum of non- <code dir="ltr" translate="no">NULL</code> values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum"><code dir="ltr" translate="no">SUM</code> (Differential Privacy)</a></td>
 <td><code dir="ltr" translate="no">DIFFERENTIAL_PRIVACY</code> -supported <code dir="ltr" translate="no">SUM</code> .<br />
 <br />
@@ -195,23 +199,109 @@ Gets the differentially-private sum of non- <code dir="ltr" translate="no">NULL<
 <br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions">Differential privacy functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop"><code dir="ltr" translate="no">VAR_POP</code></a></td>
 <td>Computes the population (biased) variance of the values.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp"><code dir="ltr" translate="no">VAR_SAMP</code></a></td>
 <td>Computes the sample (unbiased) variance of the values.<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance"><code dir="ltr" translate="no">VARIANCE</code></a></td>
 <td>An alias of <code dir="ltr" translate="no">VAR_SAMP</code> .<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions">Statistical aggregate functions</a> .</td>
 </tr>
 </tbody>
 </table>
+
+## `AGG`
+
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
+
+> **Note:** To provide feedback or request support for this feature, send an email to <bq-graph-preview-support@google.com> .
+
+    AGG(measure_expression)
+
+**Description**
+
+Aggregates a [measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) . A measure type encapsulates an aggregate calculation to perform, locked to a specific granularity defined by a key. The `AGG` function invokes the calculation exactly once per key with the guarantee of avoiding overcounting. Measures are useful for defining business metrics. You can perform aggregation using the `AGG` function instead of complex aggregation queries.
+
+For more information and examples of using the `AGG` function with measures, see [work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
+
+**Supported Argument Types**
+
+A single `MEASURE` type
+
+**Returned Data Types**
+
+The type returned by the expression associated with the measure.
+
+**Examples**
+
+The following example creates a graph called `StoreGraph` based on the `Stores` and `Locations` tables. The node table defined by location data has a measure property called `total_population` . The measure is defined by the aggregate calculation `SUM(population)` and the key `id` .
+
+    CREATE OR REPLACE TABLE mydataset.Stores (
+      name STRING PRIMARY KEY NOT ENFORCED,
+      location_id INT64 REFERENCES mydataset.Locations(id) NOT ENFORCED
+    ) AS (
+      SELECT 'Store 1' AS name, 101 AS location_id
+      UNION ALL
+      SELECT 'Store 2' AS name, 101 AS location_id
+    );
+    
+    CREATE OR REPLACE TABLE mydataset.Locations (
+      id INT64 PRIMARY KEY NOT ENFORCED,
+      name STRING,
+      population INT64
+    ) AS (
+      SELECT 101 AS id, 'Anytown' AS name, 1000 AS population
+    );
+    
+    CREATE OR REPLACE PROPERTY GRAPH mydataset.StoreGraph
+      NODE TABLES (
+        mydataset.Stores AS S,
+        mydataset.Locations AS L
+        PROPERTIES(id, name, population, MEASURE(SUM(population)) AS total_population)
+      )
+      EDGE TABLES (
+        mydataset.Stores AS SL
+        SOURCE KEY (location_id) REFERENCES L (id)
+        DESTINATION KEY (name) REFERENCES S (name)
+      );
+
+To access measures defined on a graph, you must call the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) , which performs a series of `LEFT JOIN` operations on your graph's input tables to produce a flattened version of the graph.
+
+The following query calls the `GRAPH_EXPAND` function and omits the `L_total_population` column from the output because you can't directly select a column for a property defined by a measure without using the `AGG` function:
+
+    SELECT * EXCEPT(L_total_population)
+    FROM GRAPH_EXPAND('mydataset.StoreGraph');
+    
+    /*---------------+---------+------+---------+--------------+
+     | S_location_id | S_name  | L_id | L_name  | L_population |
+     +---------------+---------+------+---------+--------------+
+     | 101           | Store 2 | 101  | Anytown | 1000         |
+     | 101           | Store 1 | 101  | Anytown | 1000         |
+     +---------------+---------+------+---------+--------------*/
+
+The following query shows the difference between aggregating a measure and a regular value. When you apply the `AGG` function to the `L_total_population` measure, the population of a location is counted exactly once per distinct `location_id` value. If you call the `SUM` function on `L_population` , then the `L_population` column contributes the population for every row in the table with a given location ID.
+
+    SELECT
+      S_location_id,
+      AGG(L_total_population) AS true_total_population,
+      SUM(L_population) AS overcounted_population
+    FROM GRAPH_EXPAND('mydataset.StoreGraph')
+    GROUP BY S_location_id;
+    
+    /*---------------+-----------------------+------------------------+
+     | S_location_id | true_total_population | overcounted_population |
+     +---------------+-----------------------+------------------------+
+     | 101           | 1000                  | 2000                   |
+     +---------------+-----------------------+------------------------*/
 
 ## `ANY_VALUE`
 

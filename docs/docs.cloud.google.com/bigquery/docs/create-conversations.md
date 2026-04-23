@@ -6,11 +6,11 @@
 
 > **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
-This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables or views, that you select.
+This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables, views or graphs, that you select.
 
 You can ask data agents multi-part questions that use common terms—for example, "sales" or "most popular"—without specifying table field names, or defining conditions to filter the data. An agent can determine which data sources to query and take advantage of optimizations, such as table partitions, when it constructs a response. The chat response contains the answer to your question as text and code, and it includes the reasoning behind the results. The response can also include images and charts when appropriate.
 
-You can create a conversation with a data agent, or a direct conversation with one or more tables. When you create a direct conversation, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions offered by a data agent.
+You can create a conversation with a data agent, or a direct conversation with one or more data sources. When you create a direct conversation, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions offered by a data agent.
 
 ## Before you begin
 

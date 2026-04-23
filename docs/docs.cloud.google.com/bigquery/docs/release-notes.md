@@ -6,6 +6,52 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## April 22, 2026
+
+Feature
+
+You can now use the [visual graph modeler](https://docs.cloud.google.com/bigquery/docs/graph-modeler) in BigQuery Studio to define BigQuery graph nodes and edges from your BigQuery tables and edit graph schema. This feature is available in [Preview](https://docs.cloud.google.com/products#product-launch-stages) .
+
+Announcement
+
+Dataproc is now called [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs/concepts/overview) . The names for associated API, client library, CLI, and Identity and Access Management (IAM) resources remain unchanged.
+
+Announcement
+
+BigLake is now called [Google Cloud Lakehouse](https://docs.cloud.google.com/biglake/docs/introduction) . BigLake metastore is now called the [Lakehouse runtime catalog](https://docs.cloud.google.com/biglake/docs/about-blms) . The names for associated APIs, client libraries, CLI commands, and Identity and Access Management (IAM) remain unchanged and still reference BigLake.
+
+Announcement
+
+Dataplex Universal Catalog is now called [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) . The API, client library, CLI, and Identity and Access Management (IAM) names remain unchanged. For more information, see [Knowledge Catalog overview](https://docs.cloud.google.com/dataplex/docs/introduction) .
+
+Announcement
+
+Looker Studio is now called [Data Studio](https://docs.cloud.google.com/data-studio) . The website and endpoint change from `lookerstudio.google.com` to `datastudio.google.com` . You do not need to update your reports for this change, as Data Studio automatically redirects to the new domain. However, if your company uses proxies to restrict access to external sites, your IT administrator needs to add the new domain to your access control list (ACL). The names for associated API, client library, CLI, and Identity and Access Management (IAM) resources remain unchanged. For more information, see [Data Studio returns as new home for Data Cloud assets](https://cloud.google.com/blog/products/data-analytics/looker-studio-is-data-studio) .
+
+Feature
+
+[BigQuery graphs](https://docs.cloud.google.com/bigquery/docs/graph-overview) now support the following features:
+
+  - You can [query graphs](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) using natural language in Conversational Analytics.
+  - You can add [descriptions and synonyms](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) to the labels and properties in your graphs.
+  - For some types of graphs you can [define measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) , which lock an aggregation to a key to help you perform complex aggregations without overcounting. To query measures, you transform your graph into a flattened table by using the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) , and then query measures in that table with the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) .
+
+These features are in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can now use the `gemini-embedding-2-preview` model in the [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) , [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) , [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) , and [`ML.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) functions to generate a single embedding from a combination of input types, including text, image, audio, video, and PDF files. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can now [use the Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) to build, modify, and troubleshoot data pipelines in BigQuery. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+## April 21, 2026
+
+Feature
+
+You can now [visualize BigQuery graph query results and graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-visualization#visualization-results) directly in BigQuery Studio, without the need of a notebook environment. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## April 20, 2026
 
 Change

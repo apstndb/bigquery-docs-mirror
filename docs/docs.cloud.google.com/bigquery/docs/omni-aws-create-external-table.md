@@ -1,6 +1,6 @@
-# Create Amazon S3 BigLake external tables
+# External tables for S3
 
-This document describes how to create an Amazon Simple Storage Service (Amazon S3) BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Amazon S3. Access delegation decouples access to the BigLake table from access to the underlying datastore.
+This document describes how to create an Amazon Simple Storage Service (Amazon S3) Google Cloud Lakehouse table. A [Lakehouse table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Amazon S3. Access delegation decouples access to the Lakehouse table from access to the underlying datastore.
 
 For information about how data flows between BigQuery and Amazon S3, see [Data flow when querying data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#query-data) .
 
@@ -125,7 +125,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-## Create BigLake tables on unpartitioned data
+## Create Lakehouse tables on unpartitioned data
 
 Select one of the following options:
 
@@ -166,7 +166,7 @@ Select one of the following options:
 
 ### SQL
 
-To create a BigLake table, use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) with the `WITH CONNECTION` clause:
+To create a Lakehouse table, use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) with the `WITH CONNECTION` clause:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -194,7 +194,7 @@ To create a BigLake table, use the [`CREATE EXTERNAL TABLE` statement](https://d
     
       - `  S3_URI  ` : a URI pointing to the Amazon S3 data (for example, `s3://bucket/path` )
     
-      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
+      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
         
         To disable metadata caching, specify 0. This is the default.
         
@@ -251,13 +251,13 @@ Replace the following:
 
 > **Note:** To override the default project, use the ` --project_id= PROJECT_ID  ` parameter. Replace `  PROJECT_ID  ` with the ID of your Google Cloud project.
 
-Next, create the BigLake table:
+Next, create the Lakehouse table:
 
     bq mk --max_staleness=STALENESS_INTERVAL --external_table_definition=table_def DATASET_NAME.TABLE_NAME
 
 Replace the following:
 
-  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
+  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
     
     To disable metadata caching, specify 0. This is the default.
     
@@ -267,7 +267,7 @@ Replace the following:
 
   - `  TABLE_NAME  ` : the name you want to give to this table.
 
-For example, the following command creates a new BigLake table, `awsdataset.awstable` , which can query your Amazon S3 data that's stored at the path `s3://s3-bucket/path/file.csv` and has a read connection in the location `aws-us-east-1` :
+For example, the following command creates a new Lakehouse table, `awsdataset.awstable` , which can query your Amazon S3 data that's stored at the path `s3://s3-bucket/path/file.csv` and has a read connection in the location `aws-us-east-1` :
 
     bq mkdef  \
     --autodetect \
@@ -351,11 +351,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       }
     }
 
-## Create BigLake tables on partitioned data
+## Create Lakehouse tables on partitioned data
 
-You can create a BigLake table for Hive partitioned data in Amazon S3. After you create an externally partitioned table, you can't change the partition key. You need to recreate the table to change the partition key.
+You can create a Lakehouse table for Hive partitioned data in Amazon S3. After you create an externally partitioned table, you can't change the partition key. You need to recreate the table to change the partition key.
 
-To create a BigLake table based on Hive partitioned data, select one of the following options:
+To create a Lakehouse table based on Hive partitioned data, select one of the following options:
 
 ### Console
 
@@ -453,7 +453,7 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
     
       - `  TABLE_FORMAT  ` : the format of the table that you want to create—for example, `PARQUET`
     
-      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
+      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
         
         To disable metadata caching, specify 0. This is the default.
         
@@ -473,7 +473,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 **Examples**
 
-The following example creates a BigLake table over partitioned data in Amazon S3. The schema is autodetected.
+The following example creates a Lakehouse table over partitioned data in Amazon S3. The schema is autodetected.
 
     CREATE EXTERNAL TABLE `my_dataset.my_table`
     WITH PARTITION COLUMNS
@@ -533,7 +533,7 @@ If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the
 
     --hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 
-After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
+After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the Lakehouse table:
 
     bq mk --max_staleness=STALENESS_INTERVAL \
     --external_table_definition=DEFINITION_FILE \
@@ -542,7 +542,7 @@ After you create the table definition file, use the [`bq mk`](https://docs.cloud
 
 Replace the following:
 
-  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
+  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) .
     
     To disable metadata caching, specify 0. This is the default.
     
@@ -588,7 +588,7 @@ The following example uses `STRING` Hive partitioning mode for Amazon S3 data:
 
 ### API
 
-To set Hive partitioning using the BigQuery API, include the [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a BigLake table, you must also specify a value for the `connectionId` field.
+To set Hive partitioning using the BigQuery API, include the [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a Lakehouse table, you must also specify a value for the `connectionId` field.
 
 If you set the `hivePartitioningOptions.mode` field to `CUSTOM` , you must encode the partition key schema in the `hivePartitioningOptions.sourceUriPrefix` field as follows: `s3:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...`
 
@@ -596,7 +596,7 @@ To enforce the use of a predicate filter at query time, set the `hivePartitionin
 
 ## Delta Lake tables
 
-Delta Lake is an open source table format that supports petabyte scale data tables. Delta Lake tables can be queried as both temporary and permanent tables, and is supported as a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+Delta Lake is an open source table format that supports petabyte scale data tables. Delta Lake tables can be queried as both temporary and permanent tables, and is supported as a [Google Cloud Lakehouse table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
 
 ### Schema synchronization
 
@@ -650,7 +650,7 @@ The following limitations apply to Delta Lake tables:
 
   - You can't update a table with a new JSON metadata file. You must use an auto detect schema table update operation. See [Schema synchronization](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#schema_synchronization) for more information.
 
-  - BigLake security features only protect Delta Lake tables when accessed through BigQuery services.
+  - Google Cloud Lakehouse security features only protect Delta Lake tables when accessed through BigQuery services.
 
 ### Create a Delta Lake table
 
@@ -688,7 +688,7 @@ WITH CONNECTION connection_name;
 
 For more examples of cross-cloud data transfers, see [Load data with cross cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) .
 
-## Query BigLake tables
+## Query Lakehouse tables
 
 For more information, see [Query Amazon S3 data](https://docs.cloud.google.com/bigquery/docs/query-aws-data) .
 
@@ -1000,13 +1000,13 @@ Replace the following:
 
 ## Limitations
 
-For a full list of limitations that apply to BigLake tables based on Amazon S3 and Blob Storage, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
+For a full list of limitations that apply to Lakehouse tables based on Amazon S3 and Blob Storage, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
 
 ## What's next
 
   - Learn about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
   - Use the [BigQuery Omni with AWS lab](https://www.cloudskillsboost.google/catalog_lab/5345) .
-  - Learn about [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+  - Learn about [Lakehouse tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
   - Learn how to [export query results to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) .
   - Learn how to create [materialized views over Amazon Simple Storage Service (Amazon S3) metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) .
   - Learn how to make Amazon S3 data in a materialized view available locally for joins by [creating a replica of the materialized view](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) .

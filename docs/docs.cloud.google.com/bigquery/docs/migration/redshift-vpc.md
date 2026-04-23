@@ -92,6 +92,10 @@ As part of the data transfer, BigQuery Data Transfer Service writes data from Am
     
     The console page lists all of your VPC networks.
 
+### Advertise reserved IPs as custom routes
+
+When providing the range of reserved IP addresses in the transfer configuration, you must first [add the IP range as a custom route to the existing Cloud Router or BGP session advertisement](https://docs.cloud.google.com/network-connectivity/docs/router/how-to/advertising-custom-ip) .
+
 ## Set up an Amazon Redshift transfer
 
 Use the following instructions to set up an Amazon Redshift transfer:
@@ -137,6 +141,7 @@ Use the following instructions to set up an Amazon Redshift transfer:
         
         ![Amazon Redshift migration CIDR field](https://docs.cloud.google.com/static/bigquery/images/redshift-migration-cidr-field.png)
         
+          - The IP addresses must first be advertised as a custom route. For more information, see [Advertise reserved IPs as custom routes](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#advertise-routes) .
           - The form is `VPC_network_name:CIDR` , for example: `my_vpc:10.251.1.0/24` .
           - Use standard private VPC network address ranges in the CIDR notation, starting with `10.x.x.x` .
           - The IP range must have more than 10 IP addresses.

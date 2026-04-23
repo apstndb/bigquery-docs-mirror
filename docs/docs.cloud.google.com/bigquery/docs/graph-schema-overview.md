@@ -233,8 +233,14 @@ The following example defines a `Person` node with a custom property and an `Acc
           PROPERTIES (CONCAT(city, ", ", country) AS address)
           LABEL Entity PROPERTIES (id, name),
         graph_db.Account KEY (id)
-          LABEL Account PROPERTIES (id, create_time)
-          LABEL Entity PROPERTIES (id, nick_name AS name)
+          LABEL Account OPTIONS(description = 'A checking or savings account')
+          PROPERTIES (id, create_time)
+          LABEL Entity
+          PROPERTIES (
+            id,
+            nick_name AS name OPTIONS(description = 'A user-defined account name',
+                                      synonyms = ['friendly name', 'display name'])
+          )
       );
 
   - The `Person` nodes use the `Customer` label to expose the `address` property. The `address` property is defined by the expression `CONCAT(city, ", ", country),` that refers to the `city` and `country` column from the input table `Person` .
@@ -245,6 +251,7 @@ The `Person` and `Account` nodes both have the `Entity` label with properties `i
 
   - In the `Person` node, the `id` and `name` properties come from the input table columns.
   - In the `Account` node, the `name` property refers to the `nick_name` column of the input table.
+  - In the `Account` node, the `name` property uses the `OPTIONS` clause to provide a description of the property and a list of synonyms. These fields provide context and improve discoverability for natural language querying interfaces. You can't access these fields directly in your graph queries and they don't change the query results in any way.
 
 #### Label and property consistency
 

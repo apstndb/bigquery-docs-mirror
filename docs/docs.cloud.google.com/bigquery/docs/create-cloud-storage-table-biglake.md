@@ -1,6 +1,6 @@
-# Create BigLake external tables for Cloud Storage
+# External tables for Cloud Storage
 
-This document describes how to create a Cloud Storage BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query structured data in Cloud Storage. Access delegation decouples access to the BigLake table from access to the underlying datastore.
+This document describes how to create a Cloud Storage Google Cloud Lakehouse table. A [Lakehouse table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query structured data in Cloud Storage. Access delegation decouples access to the Lakehouse table from access to the underlying datastore.
 
 ## Before you begin
 
@@ -21,7 +21,7 @@ This document describes how to create a Cloud Storage BigLake table. A [BigLake 
     
     To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    If you want to read BigLake tables from open source engines such as Apache Spark, then you need to enable the [BigQuery Storage Read API](https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com) .
+    If you want to read Lakehouse tables from open source engines such as Apache Spark, then you need to enable the [BigQuery Storage Read API](https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com) .
 
 4.  In the Google Cloud console, activate Cloud Shell.
 
@@ -39,14 +39,14 @@ This document describes how to create a Cloud Storage BigLake table. A [BigLake 
 
 ### Required roles
 
-To create a BigLake table, you need the following BigQuery Identity and Access Management (IAM) permissions:
+To create a Lakehouse table, you need the following BigQuery Identity and Access Management (IAM) permissions:
 
   - `bigquery.tables.create`
   - `bigquery.connections.delegate`
 
 The BigQuery Admin ( `roles/bigquery.admin` ) predefined Identity and Access Management role includes these permissions.
 
-If you are not a principal in this role, ask your administrator to grant you access or to create the BigLake table for you.
+If you are not a principal in this role, ask your administrator to grant you access or to create the Lakehouse table for you.
 
 For more information on Identity and Access Management roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -54,13 +54,13 @@ For more information on Identity and Access Management roles and permissions in 
 
 When you use Cloud Storage to store data files, you can improve performance by using Cloud Storage [single-region](https://docs.cloud.google.com/storage/docs/locations#available-locations) or [dual-region](https://docs.cloud.google.com/storage/docs/locations#location-dr) buckets instead of multi-region buckets.
 
-## Create BigLake tables on unpartitioned data
+## Create external tables on unpartitioned data
 
-If you're familiar with creating tables in BigQuery, the process of creating a BigLake table is similar. Your table can use any file format that BigLake supports. For more information, see [Limitations](https://docs.cloud.google.com/bigquery/docs/biglake-intro#limitations) .
+If you're familiar with creating tables in BigQuery, the process of creating an external table is similar. Your table can use any file format that external tables support. For more information, see [Limitations](https://docs.cloud.google.com/bigquery/docs/biglake-intro#limitations) .
 
-Before you create a BigLake table, you need to have a [dataset](https://docs.cloud.google.com/bigquery/docs/datasets) and a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) that can [access Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#access-storage) .
+Before you create a Lakehouse table, you need to have a [dataset](https://docs.cloud.google.com/bigquery/docs/datasets) and a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) that can [access Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#access-storage) .
 
-To create a BigLake table, select one of the following options:
+To create a Lakehouse table, select one of the following options:
 
 ### Console
 
@@ -167,7 +167,7 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
         
         For more information about using Cloud Storage URIs in BigQuery, see [Cloud Storage resource path](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#google-cloud-storage-uri) .
     
-      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
+      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
         
         To disable metadata caching, specify 0. This is the default.
         
@@ -230,7 +230,7 @@ Replace the following:
 
   - `  DEFINITION_FILE  ` : the path to the [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition) on your local machine.
 
-  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
+  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
     
     To disable metadata caching, specify 0. This is the default.
     
@@ -240,7 +240,7 @@ Replace the following:
 
   - `  EXTERNAL_TABLE_NAME  ` : the name of the table that you want to create—for example, `mytable`
 
-  - `  SCHEMA  ` : the schema for the BigLake table
+  - `  SCHEMA  ` : the schema for the Lakehouse table
 
 Example:
 
@@ -311,11 +311,11 @@ Replace the following:
     
     To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . REGION . CONNECTION\_ID .
 
-  - `  DATASET_NAME  ` : the name of the dataset where you want to create the BigLake table
+  - `  DATASET_NAME  ` : the name of the dataset where you want to create the Lakehouse table
 
-  - `  TABLE_NAME  ` : the name of the BigLake table
+  - `  TABLE_NAME  ` : the name of the Lakehouse table
 
-  - `  SCHEMA  ` : the schema for the BigLake table
+  - `  SCHEMA  ` : the schema for the Lakehouse table
 
 Example:
 
@@ -335,7 +335,7 @@ Specify the `connectionId` property to identify the connection to use for connec
 
 ### Terraform
 
-This example creates a BigLake Table on unpartitioned data.
+This example creates a Google Cloud Lakehouse Table on unpartitioned data.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -483,13 +483,13 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 > **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
-BigLake supports schema autodetection. However, if you did not provide a schema and the service account was not granted access in the previous steps, these steps fail with an access denied message if you try to autodetect the schema.
+Lakehouse supports schema autodetection. However, if you did not provide a schema and the service account was not granted access in the previous steps, these steps fail with an access denied message if you try to autodetect the schema.
 
-## Create BigLake tables on Apache Hive partitioned data
+## Create Lakehouse tables on Apache Hive partitioned data
 
-You can create a BigLake table for Hive partitioned data in Cloud Storage. After you create an externally partitioned table, you can't change the partition key. You need to recreate the table to change the partition key.
+You can create a Lakehouse table for Hive partitioned data in Cloud Storage. After you create an externally partitioned table, you can't change the partition key. You need to recreate the table to change the partition key.
 
-To create a BigLake table based on Hive partitioned data in Cloud Storage, select one of the following options:
+To create a Lakehouse table based on Hive partitioned data in Cloud Storage, select one of the following options:
 
 ### Console
 
@@ -586,7 +586,7 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
     
       - `  FILE_PATH  ` : path to the data source for the external table that you want to create—for example, `gs://mybucket/*.parquet`
     
-      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
+      - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. For more information about metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
         
         To disable metadata caching, specify 0. This is the default.
         
@@ -608,7 +608,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 **Examples**
 
-The following example creates a BigLake table over partitioned data where:
+The following example creates a Lakehouse table over partitioned data where:
 
   - The schema is autodetected.
   - The metadata cache staleness interval for the table is 1 day.
@@ -629,7 +629,7 @@ The following example creates a BigLake table over partitioned data where:
       metadata_cache_mode = 'AUTOMATIC'
     );
 
-The following example creates a BigLake table over partitioned data where:
+The following example creates a Lakehouse table over partitioned data where:
 
   - The schema is specified.
   - The metadata cache staleness interval for the table is 8 hours.
@@ -706,7 +706,7 @@ If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the
 
     --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 
-After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
+After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the Lakehouse table:
 
     bq mk --external_table_definition=DEFINITION_FILE \
     --max_staleness=STALENESS_INTERVAL \
@@ -717,7 +717,7 @@ Replace the following:
 
   - `  DEFINITION_FILE  ` : the path to the table definition file.
 
-  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the BigLake table, and how fresh the cached metadata must be in order for the operation to use it. If you include this flag, you must have also specified a value for the `--metadata_cache_mode` flag in the preceding `bq mkdef` command. For more information on metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
+  - `  STALENESS_INTERVAL  ` : specifies whether cached metadata is used by operations against the Lakehouse table, and how fresh the cached metadata must be in order for the operation to use it. If you include this flag, you must have also specified a value for the `--metadata_cache_mode` flag in the preceding `bq mkdef` command. For more information on metadata caching considerations, see [Metadata caching for performance](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) .
     
     To disable metadata caching, specify 0. This is the default.
     
@@ -771,7 +771,7 @@ The following example uses `CUSTOM` Hive partitioning mode:
 
 ### API
 
-To set Hive partitioning using the BigQuery API, include the [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a BigLake table, you must also specify a value for the `connectionId` field.
+To set Hive partitioning using the BigQuery API, include the [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a Lakehouse table, you must also specify a value for the `connectionId` field.
 
 If you set the `hivePartitioningOptions.mode` field to `CUSTOM` , you must encode the partition key schema in the `hivePartitioningOptions.sourceUriPrefix` field as follows: `gs:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...`
 
@@ -779,7 +779,7 @@ To enforce the use of a predicate filter at query time, set the `hivePartitionin
 
 ### Terraform
 
-This example creates a BigLake Table on partitioned data.
+This example creates a Google Cloud Lakehouse Table on partitioned data.
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
@@ -944,7 +944,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ## Set up access control policies
 
-You can use several methods to control access to BigLake tables:
+You can use several methods to control access to Lakehouse tables:
 
   - For directions on setting up column-level security, see the [column-level security guide](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
 
@@ -983,17 +983,17 @@ The output shows only the rows where `country` is equal to `US` :
     | US      | phone   |   100 |
     +---------+---------+-------+
 
-## Query BigLake tables
+## Query Lakehouse tables
 
-For more information, see [Query Cloud Storage data in BigLake tables](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake) .
+For more information, see [Query Cloud Storage data in Google Cloud Lakehouse tables](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake) .
 
-## Update BigLake tables
+## Update Lakehouse tables
 
-You can update BigLake tables if necessary, for example to change their [metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) . To get table details such as source format and source URI, see [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information) .
+You can update Lakehouse tables if necessary, for example to change their [metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) . To get table details such as source format and source URI, see [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information) .
 
-You can also use this same procedure to upgrade Cloud Storage-based external tables to BigLake tables by associating the external table to a connection. For more information, see [Upgrade external tables to BigLake tables](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#upgrade-external-tables-to-biglake-tables) .
+You can also use this same procedure to upgrade Cloud Storage-based external tables to Lakehouse tables by associating the external table to a connection. For more information, see [Upgrade external tables to Lakehouse tables](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#upgrade-external-tables-to-biglake-tables) .
 
-To update a BigLake table, select one of the following options:
+To update a Lakehouse table, select one of the following options:
 
 ### SQL
 
@@ -1153,7 +1153,7 @@ For information about logging in BigQuery, see [Introduction to BigQuery monitor
 
 ## What's next
 
-  - Learn more about [BigLake](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+  - Learn more about [Lakehouse](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
   - Learn about [Cloud Storage](https://docs.cloud.google.com/storage/docs/introduction) .
   - Learn about [querying Amazon Web Services (AWS) data](https://docs.cloud.google.com/bigquery/docs/omni-aws-introduction) .
   - Learn about [querying Microsoft Azure data](https://docs.cloud.google.com/bigquery/docs/omni-azure-introduction) .

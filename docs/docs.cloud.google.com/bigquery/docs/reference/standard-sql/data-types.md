@@ -66,6 +66,11 @@ SQL type name: <code dir="ltr" translate="no">INTERVAL</code></td>
 SQL type name: <code dir="ltr" translate="no">JSON</code></td>
 </tr>
 <tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type">Measure type</a></td>
+<td>An aggregate calculation that doesn’t overcount.<br />
+SQL type name: <code dir="ltr" translate="no">MEASURE</code></td>
+</tr>
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types">Numeric types</a></td>
 <td><p>A numeric value. Several types are supported.</p>
 <p>A 64-bit integer.<br />
@@ -80,27 +85,27 @@ SQL aliases: <code dir="ltr" translate="no">BIGDECIMAL</code></p>
 <p>An approximate double precision numeric value.<br />
 SQL type name: <code dir="ltr" translate="no">FLOAT64</code></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type">Range type</a></td>
 <td>Contiguous range between two dates, datetimes, or timestamps.<br />
 SQL type name: <code dir="ltr" translate="no">RANGE</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type">String type</a></td>
 <td>Variable-length character data.<br />
 SQL type name: <code dir="ltr" translate="no">STRING</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type">Struct type</a></td>
 <td>Container of ordered fields.<br />
 SQL type name: <code dir="ltr" translate="no">STRUCT</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type">Time type</a></td>
 <td>A time of day, as might be displayed on a clock, independent of a specific date and time zone.<br />
 SQL type name: <code dir="ltr" translate="no">TIME</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type">Timestamp type</a></td>
 <td>A timestamp value represents an absolute point in time, independent of any time zone or convention such as daylight saving time (DST).<br />
 SQL type name: <code dir="ltr" translate="no">TIMESTAMP</code></td>
@@ -880,6 +885,22 @@ Expect these canonicalization behaviors when creating a value of JSON type:
   - The format of the original string representation of a JSON number may not be preserved.
 
 To learn more about the literal representation of a JSON type, see [JSON literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#json_literals) .
+
+## Measure type
+
+| Name      | Description                                      |
+| --------- | ------------------------------------------------ |
+| `MEASURE` | An aggregate calculation that doesn't overcount. |
+
+A measure is a special type that aggregates data without overcounting. The measure type is used by only the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . Measures are useful for defining business metrics that you can query using the `AGG` function instead of complex aggregation queries.
+
+A measure is defined by a graph property, an aggregate function, and the key of the graph element. When you call the `AGG` function on the measure, the aggregation function is applied to the graph property once per unique key. For information about how to define a measure, see the [element properties definition](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) .
+
+The measure type has the following limitations:
+
+  - Supported by only the `AGG` function.
+  - Can't be a member type of non-measure container types, such as `STRUCT` , `ARRAY` , or `MAP` types.
+  - Defined only as a property in a graph. For more information and examples, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 
 ## Numeric types
 

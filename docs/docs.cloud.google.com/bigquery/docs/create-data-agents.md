@@ -95,7 +95,7 @@ After you create an agent, you can [edit its settings](https://docs.cloud.google
 
 6.  In the **Knowledge sources** section, click **Add source** . The **Add knowledge source** page opens.
 
-7.  In the **Recents** section, select any tables, views, or UDFs that you want to use as knowledge sources. UDFs are prefixed with an 'fx' indicator in the Google Cloud console.
+7.  In the **Recents** section, select any tables, views, graphs, or UDFs that you want to use as knowledge sources. UDFs are prefixed with an 'fx' indicator in the Google Cloud console.
 
 8.  To view additional knowledge sources, select keyboard\_arrow\_down **Show more** .
 

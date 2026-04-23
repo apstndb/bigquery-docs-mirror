@@ -1,4 +1,4 @@
-# Use externally partitioned data
+# External tables for Hive partitioned data
 
 You can use BigQuery external tables to query partitioned data in the following data stores:
 
@@ -14,7 +14,7 @@ The external partitioned data must use a [default Hive partitioning layout](http
   - ORC
   - Parquet
 
-To query externally partitioned data, you must create a [BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) or an [external table](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#create-external-table-partitioned) . We recommend using BigLake tables because they let you enforce fine-grained security at the table level. For information about BigLake and external tables, see [Introduction to BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [Introduction to external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
+To query externally partitioned data, you must create a [Google Cloud Lakehouse table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) or an [external table](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#create-external-table-partitioned) . We recommend using Google Cloud Lakehouse tables because they let you enforce fine-grained security at the table level. For information about Lakehouse and external tables, see [Introduction to Lakehouse tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [Introduction to external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 You enable Hive partitioning support by setting the appropriate options in the [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#create_a_definition_file_for_hive-partitioned_data) . For instructions about querying managed partitioned tables, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 

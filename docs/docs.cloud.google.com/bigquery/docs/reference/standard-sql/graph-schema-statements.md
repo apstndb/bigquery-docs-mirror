@@ -41,7 +41,7 @@ Graph Query Language (GQL) supports all GoogleSQL DDL statements, including the 
 
 Creates a property graph.
 
-> **Note:** all GQL examples in the GQL reference use the [`FinGraph`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#fin_graph) property graph example. To set up this property graph, see [Create and query a graph](https://cloud.google.com/bigquery/docs/graph-create) .
+> **Note:** all GQL examples in the GQL reference use the [`FinGraph`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#fin_graph) property graph example. To set up this property graph, see [Create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
 
 **Definitions**
 
@@ -211,7 +211,13 @@ In a graph, labels and properties are uniquely identified by their names. Labels
       {
         LABEL label_name |
         DEFAULT LABEL
-      }
+      } [ options_clause ]
+    
+    options_clause:
+      OPTIONS (
+        [ descriptions = description_string ]
+        [, synonyms = synonym_array ]
+      )
 
 **Description**
 
@@ -235,6 +241,10 @@ Adds a list of labels and properties to an element.
 
   - `element_properties` : The properties associated with a label. A property can't be used more than once for a specific label. For more information, see [Element properties definition](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) .
 
+  - `description_string` : A string literal that describes the label to provide context and improve discoverability for natural language querying interfaces.
+
+  - `synonym_array` : An array of string literals that provides alternative names for the label to improve accuracy for natural language querying interfaces.
+
 ### Element properties definition
 
     element_properties:
@@ -254,7 +264,13 @@ Adds a list of labels and properties to an element.
       PROPERTIES (derived_property[, ...])
     
     derived_property:
-      value_expression [ AS property_name ]
+      { value_expression | measure_expression } [ AS property_name ] [ options_clause ] 
+    
+    options_clause:
+      OPTIONS (
+        [ descriptions = description_string ]
+        [, synonyms = synonym_array ]
+      )
 
 **Description**
 
@@ -296,11 +312,19 @@ Adds properties associated with a label.
     
       - `value_expression` : An expression that can be represented by simple constructs such as column references and functions. Subqueries are excluded.
     
-      - `AS property_name` : Alias to assign to the value expression. This is optional unless `value_expression` is a function.
+      - `measure_expression` : An aggregation expression in the format `MEASURE(AGGREGATE_FUNCTION(property_name))` , where `property_name` refers to a property already defined on the graph element. A [measure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) uses the `KEY` of the node or edge table on which the measure is defined to ensure that aggregations on `property_name` are performed at the correct level. For example, if `amount` is a property on the `Account` node, then you can define another property as `MEASURE(SUM(amount)) AS total_account_amount` .
+        
+        Supported aggregate functions include `SUM` , `AVG` , `MIN` , `MAX` , `COUNT` , and `COUNT(DISTINCT)` . You can't use GQL to access a property that you defined using a measure. You can use the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) to transform your graph into a flattened table that lets you access the measure by calling it with the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . For limitations on the types of graphs that you can use with `GRAPH_EXPAND` , read the [input limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#input_limitations) . For more information, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
+    
+      - `AS property_name` : Alias to assign to the value expression. This is optional unless `value_expression` is a function or the property is defined by a measure.
     
     If `derived_property` has any column reference in `value_expression` , that column reference must refer to a column of the underlying table.
     
     If `derived_property` doesn't define `property_name` , `value_expression` must be a column reference and the implicit `property_name` is the column name.
+
+  - `description_string` : A string literal that describes the property to provide context and improve discoverability for natural language querying interfaces.
+
+  - `synonym_array` : An array of string literals that provides alternative names for the property to improve accuracy for natural language querying interfaces.
 
 ### `FinGraph` example
 

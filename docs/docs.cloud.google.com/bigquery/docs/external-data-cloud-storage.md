@@ -1,4 +1,4 @@
-# Create Cloud Storage external tables
+# External tables for Cloud Storage
 
 BigQuery supports querying Cloud Storage data in the following formats:
 
@@ -17,7 +17,7 @@ BigQuery supports querying Cloud Storage data from these [storage classes](https
   - Coldline
   - Archive
 
-To query a Cloud Storage external table, you must have permissions on both the external table and the Cloud Storage files. We recommend using a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) instead if possible. BigLake tables provide access delegation, so that you only need permissions on the BigLake table in order to query the Cloud Storage data.
+To query a Cloud Storage external table, you must have permissions on both the external table and the Cloud Storage files. We recommend using a [Google Cloud Lakehouse table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) instead if possible. Lakehouse tables provide access delegation, so that you only need permissions on the Lakehouse table in order to query the Cloud Storage data.
 
 Be sure to [consider the location](https://docs.cloud.google.com/bigquery/docs/locations#data-locations) of your dataset and Cloud Storage bucket when you query data stored in Cloud Storage.
 
@@ -710,11 +710,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 For more information, see [Query Cloud Storage data in external tables](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-data) .
 
-## Upgrade external tables to BigLake
+## Upgrade external tables to Lakehouse
 
-You can upgrade tables based on Cloud Storage to BigLake tables by associating the external table to a connection. If you want to use [metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) with the BigLake table, you can specify settings for this at the same time. To get table details such as source format and source URI, see [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information) .
+You can upgrade tables based on Cloud Storage to Lakehouse tables by associating the external table to a connection. If you want to use [metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) with the Lakehouse table, you can specify settings for this at the same time. To get table details such as source format and source URI, see [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information) .
 
-To update an external table to a BigLake table, select one of the following options:
+To update an external table to a Lakehouse table, select one of the following options:
 
 ### SQL
 
@@ -923,4 +923,4 @@ For information about limitations that apply to external tables, see [External t
 ## What's next
 
   - Learn about [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
-  - Learn about [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+  - Learn about [Google Cloud Lakehouse tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .

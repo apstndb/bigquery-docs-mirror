@@ -63,8 +63,6 @@ FROM
     
       - `STRING`
       - `INT64`
-      - `ARRAY<STRING>`
-      - `ARRAY<INT64>`
 
   - `  HORIZON  ` : an `INT64` value that specifies the number of forecasted time points to evaluate. The default value is `1024` . The valid input range is `[1, 10,000]` .
 
