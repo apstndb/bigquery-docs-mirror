@@ -1,4 +1,4 @@
-# Transfer data into BigLake Iceberg table in BigQuery
+# Transfer data into Managed Iceberg table
 
 > **Preview**
 > 
@@ -6,11 +6,11 @@
 
 > **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can use the BigQuery Data Transfer Service to transfer data from external sources, such as Amazon Simple Storage Service (Amazon S3), Azure Blob Storage, or Cloud Storage into BigLake Iceberg table in BigQuery.
+You can use the BigQuery Data Transfer Service to transfer data from external sources, such as Amazon Simple Storage Service (Amazon S3), Azure Blob Storage, or Cloud Storage into Managed Iceberg table.
 
 ## Data sources supported
 
-You can specify BigLake Iceberg table in BigQuery as the destination table type when you set up your transfer configuration for these data sources:
+You can specify Managed Iceberg table as the destination table type when you set up your transfer configuration for these data sources:
 
   - [Amazon S3](https://docs.cloud.google.com/bigquery/docs/s3-transfer)
   - [Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer)
@@ -18,14 +18,14 @@ You can specify BigLake Iceberg table in BigQuery as the destination table type 
 
 ## Limitations
 
-Transfers to BigLake Iceberg table in BigQuery are subject to the following limitations:
+Transfers to Managed Iceberg table are subject to the following limitations:
 
   - **Append-only:** Data is only appended to the destination table. Overwriting, updating, or deleting existing data is not supported.
-  - **Partitioning limitations:** Partitioning is supported on the destination BigLake Iceberg table in BigQuery, but some limitations apply. For more information, see [Partitioning limitations](https://docs.cloud.google.com/bigquery/docs/lakehouse-iceberg-rest-catalog-transactions-partitioning#partitioning_limitations) .
+  - **Partitioning limitations:** Partitioning is supported on the destination Managed Iceberg table, but some limitations apply. For more information, see [Partitioning limitations](https://docs.cloud.google.com/bigquery/docs/lakehouse-iceberg-rest-catalog-transactions-partitioning#partitioning_limitations) .
   - **No backfills:** Transfers do not support [backfills](https://docs.cloud.google.com/bigquery/docs/samples/bigquerydatatransfer-schedule-backfill) .
 
 ## Pricing
 
 For information on BigQuery Data Transfer Service pricing, see the [Pricing](https://cloud.google.com/bigquery/pricing#data-transfer-service-pricing) page.
 
-After data is transferred to BigLake Iceberg table in BigQuery, standard storage and query [pricing](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#pricing) applies.
+After data is transferred to Managed Iceberg table, standard storage and query [pricing](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#pricing) applies.

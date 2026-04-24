@@ -10,7 +10,7 @@
 
 [Video](https://www.youtube.com/watch?v=_9YTyst9xWg)
 
-BigQuery Graph lets you use the analytical power of BigQuery to perform graph analysis on a large scale. When you model your data as a graph with nodes and edges, you can use Graph Query Language (GQL) to find complex, hidden relationships between data points that would be challenging to find using SQL.
+BigQuery Graph lets you use the analytical power of BigQuery to perform graph analysis on a large scale. When you model your data as a graph with nodes and edges, you can use [Graph Query Language (GQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) to find complex, hidden relationships between data points that would be challenging to find using SQL.
 
 You can create node and edge tables directly from tables or views that store entities and relationships between entities. You don't need to modify your existing workflows or replicate your data to use it in graph queries.
 
@@ -35,6 +35,8 @@ When your graph data is represented as tables, you must perform self joins or re
   - **Performance and scalability** . Graph workloads are powered by BigQuery's scalable, cost-effective and distributed analytics engine.
 
   - **Integration with Spanner Graph** . BigQuery Graph and Spanner Graph share the same graph schema and query language. You can execute operational graph workloads in Spanner and run complex graph analytics in BigQuery without needing to remodel your data or translate your queries.
+
+  - **Query using natural language** . Ask questions about your graph using [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) . Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results.
 
 ### Use cases
 

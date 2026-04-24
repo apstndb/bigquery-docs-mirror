@@ -406,5 +406,4 @@ Data in the sample isn't automatically refreshed. If data in the source tables f
 
   - Learn how to [schedule data preparations](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) .
   - Learn about [managing data preparations](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations) .
-  - Learn about [quotas and limits for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) .
   - Review [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .

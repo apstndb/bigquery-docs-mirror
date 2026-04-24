@@ -439,11 +439,25 @@ You can also use [project default keys](https://docs.cloud.google.com/bigquery/d
 
 ## Quotas and limits
 
-BigQuery has a load quota of 15 TB for each load job for each table by default. Internally, Snowflake compresses the table data, so the exported table size is larger than the table size reported by Snowflake. To load tables larger than 15 TB, contact <dts-migration-preview-support@google.com> .
+BigQuery has a load quota of 15 TB for each load job for each table by default. Internally, Snowflake compresses the table data, so the exported table size is larger than the table size reported by Snowflake.
 
 To improve load times for larger tables, specify the [`PIPELINE` job type](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#quotas_and_limits) for your reservation assignment.
 
 Because of [Amazon S3's consistency model](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro#consistency_considerations) , it's possible that some files won't be included in the transfer to BigQuery.
+
+## Optimize data transfer performance
+
+You can monitor the performance of your data transfers by viewing the [logs for the data transfer](https://docs.cloud.google.com/bigquery/docs/dts-monitor) . To improve the performance of your data transfers, we recommend that you perform the following optimization steps:
+
+  - Keep your Snowflake instance, staging bucket, and BigQuery dataset in the same region
+  - You can improve table unload speeds by doing the following:
+      - Increase the size of your Snowflake virtual warehouse, especially when transferring large Snowflake tables (1 TiB or higher).
+      - Adjust the `MAX_FILE_SIZE` option in the transfer configuration.
+          - Smaller file sizes can improve transfer speeds, but making it too small can lead to too many files.
+  - You can improve table load speeds by increasing the number of BigQuery slot reservations for `PIPELINE` and `QUERY` job types.
+  - When making a full transfer, avoid clustering and partitioning on the destination BigQuery table.
+  - When making an incremental transfer in Upsert mode, consider clustering and partitioning on primary key columns to improve transfer performance.
+      - However, avoid clustering and partitioning on non-primary key columns to prevent slower merge operations.
 
 ## Pricing
 

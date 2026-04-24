@@ -60,7 +60,7 @@ A page token received from the `nextPageToken` field in the response. Send that 
 
 `string`
 
-Optional. Do not use this field. It is unsupported and is ignored unless explicitly documented otherwise. This is primarily for internal usage.
+Optional. Do not use this field unless explicitly documented otherwise. This is primarily for internal usage.
 
 ### Request body
 

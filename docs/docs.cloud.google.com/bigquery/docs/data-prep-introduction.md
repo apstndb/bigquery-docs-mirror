@@ -256,10 +256,6 @@ Running data preparations and creating data preview samples use BigQuery resourc
 
 Data preparation is included in the [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) . You can use BigQuery data preparation during Preview at no additional cost. For more information, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
-## Quotas
-
-For more information, see [quotas for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) .
-
 ## What's next
 
   - Learn how to [prepare data with Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .

@@ -28,7 +28,7 @@ Each of the top-level policy tags contains leaf policy tags. For example, the **
 
 This structure has several benefits:
 
-  - You can grant access to an entire group of policy tags at once. For example, you can grant the **Data Catalog Fine Grained Reader** role on the **Low** tier.
+  - You can grant access to an entire group of policy tags at once. For example, you can grant the Data Catalog Fine-Grained Reader role on the **Low** tier.
 
   - You can move policy tags from one tier to another. For example, you can move **Address** from the **Low** tier to the **Medium** tier to further restrict its access, without needing to reclassify all **Address** columns.
     

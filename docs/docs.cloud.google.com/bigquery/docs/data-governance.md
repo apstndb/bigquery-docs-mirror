@@ -13,7 +13,7 @@ Administrators, data stewards, data governance managers, and data custodians can
 
 BigQuery governance capabilities are powered by [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , a centralized inventory of all data assets in your organization. Knowledge Catalog holds business, technical, and operational metadata for all of your data. It helps you discover relationships and semantics in the metadata by applying artificial intelligence and machine learning.
 
-BigLake metastore lets you use multiple data processing engines to query a single copy of data with a single schema, without data duplication. The data processing engines that you can use include BigQuery, Apache Spark, Apache Flink, and Apache Hive. Your data can be stored in locations like BigQuery storage tables, BigLake tables for Apache Iceberg in BigQuery, or BigLake external tables.
+Lakehouse runtime catalog lets you use multiple data processing engines to query a single copy of data with a single schema, without data duplication. The data processing engines that you can use include BigQuery, Apache Spark, Apache Flink, and Apache Hive. Your data can be stored in locations like BigQuery storage tables, Managed Apache Iceberg tables in BigQuery, or BigLake external tables.
 
 BigQuery supports an end-to-end data lifecycle, from discovery to use of data. Governance features are also available in Knowledge Catalog.
 

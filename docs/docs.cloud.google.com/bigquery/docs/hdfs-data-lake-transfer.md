@@ -10,11 +10,11 @@ The Apache Hive Metastore migration connector in the BigQuery Data Transfer Serv
 
 With the Hive Metastore migration connector, you can use Cloud Storage as the file storage and register your Hive Metastore tables with one of the following metastores:
 
-  - [BigLake metastore Iceberg REST Catalog](https://docs.cloud.google.com/bigquery/docs/blms-rest-catalog)
+  - [Lakehouse runtime catalog Iceberg REST Catalog](https://docs.cloud.google.com/bigquery/docs/blms-rest-catalog)
     
-    We recommend using the BigLake metastore Iceberg REST Catalog for all your Iceberg data.
+    We recommend using the Lakehouse runtime catalog Iceberg REST Catalog for all your Iceberg data.
     
-    The BigLake metastore Iceberg REST Catalog creates interoperability between your query engines by offering a single source of truth for all of your Iceberg data. You can use BigQuery to query the data, in addition to Apache Spark and other OSS engines. The BigLake metastore Iceberg REST Catalog only supports Iceberg table formats.
+    The Lakehouse runtime catalog Iceberg REST Catalog creates interoperability between your query engines by offering a single source of truth for all of your Iceberg data. You can use BigQuery to query the data, in addition to Apache Spark and other OSS engines. The Lakehouse runtime catalog Iceberg REST Catalog only supports Iceberg table formats.
 
   - [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview)
     
@@ -122,7 +122,7 @@ To configure permissions for a Hive Metastore transfer, do the steps in the foll
       - [Storage Transfer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer#storagetransfer.admin) ( `roles/storagetransfer.admin` )
       - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
       - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
-      - To migrate metadata to BigLake metastore Iceberg REST Catalog : [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
+      - To migrate metadata to Lakehouse runtime catalog Iceberg REST Catalog : [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
       - To migrate metadata to Dataproc Metastore: [Dataproc Metastore Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/metastore#metastore.metadataOwner) ( `roles/metastore.metadataOwner` )
     
     For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -224,7 +224,7 @@ Select one of the following options:
     5.  For **Destination gcs path** , enter a path to a Cloud Storage bucket to store your migrated data.
     6.  Choose the Destination Metastore type from the drop-down list:
           - `DATAPROC_METASTORE` (legacy): Select this option to store your metadata in [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) . You must provide the URL for the Dataproc Metastore in **Dataproc metastore url** .
-          - `BIGLAKE_REST_CATALOG` : Select this option to store your metadata in the BigLake metastore Iceberg REST catalog. Catalog is created based on the destination Cloud Storage bucket.
+          - `BIGLAKE_REST_CATALOG` : Select this option to store your metadata in the Lakehouse runtime catalog Iceberg REST catalog. Catalog is created based on the destination Cloud Storage bucket.
     7.  Optional: For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created.
 
 ### bq
@@ -270,9 +270,9 @@ Replace the following:
   - `MIGRATION_BUCKET` : Destination GCS path to which all underlying files will be loaded. Available only if `transfer_strategy` is `FULL_TRANSFER` .
   - `METASTORE` : The type of metastore to migrate to. Set this to one of the following values:
       - `DATAPROC_METASTORE` : To transfer metadata to Dataproc Metastore.
-      - `BIGLAKE_REST_CATALOG` : To transfer metadata to BigLake metastore Iceberg REST Catalog.
+      - `BIGLAKE_REST_CATALOG` : To transfer metadata to Lakehouse runtime catalog Iceberg REST Catalog.
   - `DATAPROC_METASTORE_URL` : The URL of your Dataproc Metastore. Required if `metastore` is `DATAPROC_METASTORE` .
-  - `BIGLAKE_METASTORE_DATASET` : The BigQuery dataset for your BigLake metastore. Required if `metastore` is `BIGLAKE_METASTORE` and `transfer_strategy` is `FULL_TRANSFER` .
+  - `BIGLAKE_METASTORE_DATASET` : The BigQuery dataset for your Lakehouse runtime catalog. Required if `metastore` is `BIGLAKE_METASTORE` and `transfer_strategy` is `FULL_TRANSFER` .
   - `STORAGE_TYPE` : Specify the underlying file storage for your tables. Supported types are `HDFS` , `S3` , and `AZURE` . Required if `transfer_strategy` is `FULL_TRANSFER` .
   - `AGENT_POOL_NAME` : the name of the agent pool used for creating agents. Required if `storage_type` is `HDFS` .
   - `AWS_ACCESS_KEY_ID` : the access key ID from [access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-sts) . Required if `storage_type` is `S3` .

@@ -763,10 +763,6 @@ For instructions about how to search for assets in Knowledge Catalog, see [Searc
 
 For details about pricing for this feature, see [Gemini in BigQuery pricing overview](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .
 
-## Quotas and limits
-
-For information about quotas and limits for this feature, see [Quotas for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) .
-
 ## Locations
 
 You can use BigQuery data canvas in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . To learn about where Gemini in BigQuery processes your data, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .

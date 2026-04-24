@@ -125,7 +125,7 @@ Primary and secondary replicas are subject to the following differences:
 <tr class="even">
 <td>BigLake Apache Iceberg table</td>
 <td>BigLake Apache Iceberg table</td>
-<td>See <a href="https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery">BigLake metastore cross-region replication and disaster recovery</a> .</td>
+<td>See <a href="https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery">Lakehouse runtime catalog cross-region replication and disaster recovery</a> .</td>
 </tr>
 <tr class="odd">
 <td>External table</td>

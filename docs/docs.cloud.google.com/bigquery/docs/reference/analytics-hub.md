@@ -18,6 +18,48 @@ For more information, see [Setting Up a C\# Development Environment](https://doc
 
 For more information, see [Setting Up a Go Development Environment](https://docs.cloud.google.com/go/docs/setup) .
 
+### Java
+
+If you are using [Maven](https://maven.apache.org/) , add the following to your `pom.xml` file. For more information about BOMs, see [The Google Cloud Platform Libraries BOM](https://cloud.google.com/java/docs/bom) .
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>com.google.cloud</groupId>
+          <artifactId>libraries-bom</artifactId>
+          <version>26.79.0</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+    
+    <dependencies>
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-analyticshub</artifactId>
+      </dependency>
+    </dependencies>
+
+If you are using [Gradle](https://gradle.org/) , add the following to your dependencies:
+
+    implementation 'com.google.cloud:google-cloud-analyticshub:0.88.0'
+
+If you are using [sbt](https://www.scala-sbt.org/) , add the following to your dependencies:
+
+    libraryDependencies += "com.google.cloud" % "google-cloud-analyticshub" % "0.88.0"
+
+If you're using Visual Studio Code or IntelliJ, you can add client libraries to your project using the following IDE plugins:
+
+  - [Cloud Code for VS Code](https://docs.cloud.google.com/code/docs/vscode/client-libraries)
+  - [Cloud Code for IntelliJ](https://docs.cloud.google.com/code/docs/intellij/client-libraries)
+
+The plugins provide additional functionality, such as key management for service accounts. Refer to each plugin's documentation for details.
+
+> **Note:** Cloud Java client libraries do not currently support Android.
+
+For more information, see [Setting Up a Java Development Environment](https://docs.cloud.google.com/java/docs/setup) .
+
 ### Node.js
 
     npm install @google-cloud/bigquery-data-exchange
@@ -305,6 +347,16 @@ The following list contains links to more resources related to the client librar
   - [Issue tracker](https://github.com/googleapis/google-cloud-go/issues)
   - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bgo%5D)
   - [Source code](https://github.com/googleapis/google-cloud-go)
+
+### Java
+
+The following list contains links to more resources related to the client library for Java:
+
+  - [API reference](https://docs.cloud.google.com/java/docs/reference/google-cloud-analyticshub/latest/overview)
+  - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
+  - [Issue tracker](https://github.com/googleapis/google-cloud-java/tree/main/java-analyticshub/issues)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bjava%5D)
+  - [Source code](https://github.com/googleapis/google-cloud-java/tree/main/java-analyticshub)
 
 ### Node.js
 

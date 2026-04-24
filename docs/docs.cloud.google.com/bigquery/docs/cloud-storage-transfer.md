@@ -9,7 +9,7 @@ Before you create a Cloud Storage data transfer, do the following:
   - Verify that you have completed all actions required in [Enabling the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
   - Retrieve your [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#google-cloud-storage-uri) .
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-  - [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. You can create a BigQuery table or [create BigLake Iceberg table in BigQuery](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
+  - [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. You can create a BigQuery table or [create Managed Iceberg table](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
   - If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#CMEK) .
 
 ## Limitations
@@ -110,7 +110,7 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
     
       - For **Dataset** , select the dataset that you created to store your data. ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
       - Select **Native table** if you want to transfer to a BigQuery table.
-      - Select **Apache Iceberg** if you want to transfer to a BigLake Iceberg table in BigQuery.
+      - Select **Apache Iceberg** if you want to transfer to a Managed Iceberg table.
 
 7.  In the **Data source details** section:
     

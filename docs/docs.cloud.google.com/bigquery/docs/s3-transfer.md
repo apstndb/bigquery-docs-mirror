@@ -8,7 +8,7 @@ Before you create an Amazon S3 data transfer:
 
   - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
   - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-  - [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. The destination table must follow the [table naming rules](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) . Destination table names also support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) . You can create a BigQuery table or [create BigLake Iceberg table in BigQuery](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
+  - [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. The destination table must follow the [table naming rules](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) . Destination table names also support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) . You can create a BigQuery table or [create Managed Iceberg table](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
   - Retrieve your Amazon S3 URI, your access key ID, and your secret access key. For information on managing your access keys, see the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) .
   - If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
@@ -94,7 +94,7 @@ To create an Amazon S3 data transfer:
         
           - For **Dataset** , select the dataset that you created to store your data. ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
           - Select **Native table** if you want to transfer to a BigQuery table.
-          - Select **Apache Iceberg** if you want to transfer to a BigLake Iceberg table in BigQuery.
+          - Select **Apache Iceberg** if you want to transfer to a Managed Iceberg table.
     
       - In the **Data source details** section:
         

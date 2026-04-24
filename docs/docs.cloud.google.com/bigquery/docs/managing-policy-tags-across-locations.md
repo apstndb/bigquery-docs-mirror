@@ -30,9 +30,9 @@ To facilitate syncing of the taxonomy, you can use [Cloud Scheduler](https://doc
 
 ### Required permissions
 
-The user credentials or service account replicating the taxonomy must have the **Data Catalog Policy Tags Admin** role.
+The user credentials or service account replicating the taxonomy must have the Data Catalog Policy Tag Admin role.
 
-Read more about granting the **Policy Tags Admin** role in [Restricting access with BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
+Read more about granting the Policy Tag Admin role in [Restricting access with BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -68,7 +68,7 @@ To create a new service account, see [Create service accounts](https://docs.clou
 
 ### Required permissions
 
-1.  The service account that is syncing the taxonomy must have the **Data Catalog Policy Tags Admin** role. For more information, see [Grant the Policy Tags Admin role](https://docs.cloud.google.com/bigquery/docs/column-level-security#policy_tags_admin) .
+1.  The service account that is syncing the taxonomy must have the Data Catalog Policy Tag Admin role. For more information, see [The Data Catalog Policy Tag Admin role](https://docs.cloud.google.com/bigquery/docs/column-level-security#policy_tags_admin) .
 
 2.  
 ### Setting up a taxonomy sync with Cloud Scheduler

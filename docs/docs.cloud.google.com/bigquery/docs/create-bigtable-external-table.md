@@ -36,7 +36,9 @@ Determine the type of compute you want to use when you query your data. You spec
 
 #### Data Boost
 
-To avoid impacting your application serving traffic, you can use Data Boost serverless compute when you use a BigQuery external table to read your Bigtable data. To use Data Boost, you must use a Data Boost app profile and include the app profile ID when you compose your Bigtable URI. For more information about Data Boost, see [Bigtable Data Boost overview](https://docs.cloud.google.com/bigtable/docs/data-boost-overview) .
+To avoid impacting your application serving traffic, you can use Data Boost serverless compute when you use a BigQuery external table to read your Bigtable data. To use Data Boost, you must use a Data Boost app profile and include the app profile ID when you compose your Bigtable URI. For more information, see [Bigtable Data Boost overview](https://docs.cloud.google.com/bigtable/docs/data-boost-overview) .
+
+> **Note:** While this standard usage is available in both the Enterprise and Enterprise Plus editions, using Data Boost specifically for SQL queries requires the Enterprise Plus edition.
 
 #### Provisioned nodes
 
@@ -336,7 +338,7 @@ The text format assumes that all values are stored as alphanumeric text strings.
 
 ## Supported regions and zones
 
-Querying data in Bigtable is available in all supported Bigtable zones. You can find the list of zones [here](https://docs.cloud.google.com/bigtable/docs/locations) . For multi-cluster instances, BigQuery routes traffic based on Bigtable [app profile](https://docs.cloud.google.com/bigtable/docs/app-profiles) settings.
+Querying data in Bigtable is available in all supported Bigtable zones. For more information, see [BigQuery locations](https://docs.cloud.google.com/bigtable/docs/locations) . For multi-cluster instances, BigQuery routes traffic based on Bigtable [app profile](https://docs.cloud.google.com/bigtable/docs/app-profiles) settings.
 
 ## Limitations
 

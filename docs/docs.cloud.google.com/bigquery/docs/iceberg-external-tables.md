@@ -8,7 +8,7 @@ As a BigQuery administrator, you can enforce row- and column-level access contro
 
 You can create Iceberg external tables in the following ways:
 
-  - **[With BigLake metastore (recommended for Google Cloud)](https://docs.cloud.google.com/biglake/docs/about-blms) .** BigLake metastore is a unified, managed, serverless, and scalable metastore that connects lakehouse data stored in Google Cloud to multiple runtimes, including open source engines (like Apache Spark) and BigQuery.
+  - **[With Lakehouse runtime catalog (recommended for Google Cloud)](https://docs.cloud.google.com/biglake/docs/about-blms) .** Lakehouse runtime catalog is a unified, managed, serverless, and scalable metastore that connects lakehouse data stored in Google Cloud to multiple runtimes, including open source engines (like Apache Spark) and BigQuery.
 
   - **[With AWS Glue Data Catalog (recommended for AWS)](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) .** AWS Glue is the recommended method for AWS because it's a centralized metadata repository where you define the structure and location of your data stored in various AWS services and provides capabilities like automatic schema discovery and integration with AWS analytics tools.
 
@@ -55,9 +55,9 @@ The following permissions are required to create an Iceberg external table:
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-## Create tables with BigLake metastore
+## Create tables with Lakehouse runtime catalog
 
-We recommend creating Iceberg external tables with [BigLake metastore](https://docs.cloud.google.com/biglake/docs/about-blms) .
+We recommend creating Iceberg external tables with [Lakehouse runtime catalog](https://docs.cloud.google.com/biglake/docs/about-blms) .
 
 ## Create tables with a metadata file
 

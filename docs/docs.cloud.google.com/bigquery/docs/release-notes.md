@@ -6,6 +6,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## April 23, 2026
+
+Change
+
+An updated version of the [Simba JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_jdbc_driver) is now available.
+
 ## April 22, 2026
 
 Feature
@@ -40,11 +46,11 @@ These features are in [Preview](https://cloud.google.com/products#product-launch
 
 Feature
 
-You can now use the `gemini-embedding-2-preview` model in the [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) , [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) , [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) , and [`ML.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) functions to generate a single embedding from a combination of input types, including text, image, audio, video, and PDF files. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+You can now [use the Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) to build, modify, and troubleshoot data pipelines in BigQuery. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
 Feature
 
-You can now [use the Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) to build, modify, and troubleshoot data pipelines in BigQuery. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now use the `gemini-embedding-2-preview` model in the [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) , [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) , and [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) functions to generate a single embedding from a combination of input types, including text, image, audio, video, and PDF files. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 21, 2026
 

@@ -38,10 +38,6 @@ For information about security, privacy and compliance, see [Security, privacy, 
 
 See [Gemini for Google Cloud pricing](https://cloud.google.com/products/gemini/pricing) .
 
-## Quotas and limits
-
-For quotas and limits that apply to Gemini in BigQuery, see [Gemini for Google Cloud quotas and limits](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) .
-
 ## Where to interact with Gemini in BigQuery
 
 After you [set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) , you can use Gemini in BigQuery to do the following in BigQuery Studio:

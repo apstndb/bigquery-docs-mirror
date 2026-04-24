@@ -657,10 +657,6 @@ You can use Gemini in BigQuery-assisted SQL and Python data analysis in all [Big
 
 For details about pricing for this feature, see [Gemini in BigQuery pricing overview](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .
 
-## Quotas and limits
-
-For information about quotas and limits for this feature, see [Quotas for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) .
-
 ## What's next
 
   - Read [Gemini for Google Cloud overview](https://docs.cloud.google.com/gemini/docs/overview) .

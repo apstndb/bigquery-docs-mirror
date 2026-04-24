@@ -497,6 +497,7 @@ https://docs.cloud.google.com/bigquery/docs/object-table-introduction
 https://docs.cloud.google.com/bigquery/docs/object-table-remote-function
 https://docs.cloud.google.com/bigquery/docs/object-tables
 https://docs.cloud.google.com/bigquery/docs/objectref-columns
+https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery
 https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection
 https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table
 https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3
@@ -1330,6 +1331,7 @@ https://docs.cloud.google.com/bigquery/docs/updating-model-metadata
 https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp
 https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp
 https://docs.cloud.google.com/bigquery/docs/use-cloud-assist
+https://docs.cloud.google.com/bigquery/docs/use-knowledge-catalog
 https://docs.cloud.google.com/bigquery/docs/use-service-accounts
 https://docs.cloud.google.com/bigquery/docs/use-spark
 https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates

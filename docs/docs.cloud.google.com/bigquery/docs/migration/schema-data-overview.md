@@ -29,7 +29,7 @@ In the [planning](https://docs.cloud.google.com/bigquery/docs/migration/migratio
 
 2.  Configure some test upstream processes to write data to BigQuery tables instead of (or in addition to) the existing data warehouse.
     
-    After testing, configure your production upstream and downstream processes to write and read to the BigQuery tables. These processes can connect to BigQuery using the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference) and incorporate new cloud products such as [Looker Studio](https://lookerstudio.google.com/) and [Dataflow](https://docs.cloud.google.com/dataflow/docs) .
+    After testing, configure your production upstream and downstream processes to write and read to the BigQuery tables. These processes can connect to BigQuery using the [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference) and incorporate new cloud products such as [Data Studio](https://lookerstudio.google.com/) and [Dataflow](https://docs.cloud.google.com/dataflow/docs) .
     
     At this point, you have three flows of data:
     

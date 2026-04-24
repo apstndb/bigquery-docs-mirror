@@ -171,7 +171,7 @@ In the following example, entering `DataprocSparkSession` and holding the pointe
 This section provides BigQuery Studio Python notebook examples with PySpark code to perform the following tasks:
 
   - Run a wordcount against a public Shakespeare dataset.
-  - Create an Iceberg table with metadata saved in [BigLake metastore](https://docs.cloud.google.com/bigquery/docs/about-blms) .
+  - Create an Iceberg table with metadata saved in [Lakehouse runtime catalog](https://docs.cloud.google.com/bigquery/docs/about-blms) .
 
 ### Wordcount
 
@@ -235,9 +235,9 @@ The cell output lists a sample of the wordcount output. To see session details i
 
 ### Iceberg table
 
-## Run PySpark code to create an Iceberg table with BigLake metastore metadata
+## Run PySpark code to create an Iceberg table with Lakehouse runtime catalog metadata
 
-The following example code creates a `sample_iceberg_table` with table metadata stored in BigLake metastore, and then queries the table.
+The following example code creates a `sample_iceberg_table` with table metadata stored in Lakehouse runtime catalog, and then queries the table.
 
     from google.cloud.dataproc_spark_connect import DataprocSparkSession
     from google.cloud.dataproc_v1 import Session
@@ -514,5 +514,5 @@ If a failure occurs in a cell containing Spark code, you can troubleshoot the er
 ## What's next
 
   - YouTube video demo: [Unleashing the power of Apache Spark integrated with BigQuery](https://www.youtube.com/watch?v=DIZn6Nuur7k) .
-  - [Use BigLake metastore with Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc)
-  - [Use BigLake metastore with Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless)
+  - [Use Lakehouse runtime catalog with Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc)
+  - [Use Lakehouse runtime catalog with Managed Service for Apache Spark](https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless)

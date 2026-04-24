@@ -114,7 +114,7 @@ A page token received from the `next_page_token` field in the response. Send tha
 
 `string`
 
-Optional. Do not use this field. It is unsupported and is ignored unless explicitly documented otherwise. This is primarily for internal usage.
+Optional. Do not use this field unless explicitly documented otherwise. This is primarily for internal usage.
 
 ## ListLocationsResponse
 

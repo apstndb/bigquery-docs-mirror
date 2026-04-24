@@ -56,13 +56,13 @@ You must run this procedure in the same location as the indexed table. To set th
 
 **Description**
 
-Refreshes the metadata cache of a Google Cloud Lakehouse table or an object table. This procedure fails if you run it against a table that has the metadata caching mode set to `AUTOMATIC` .
+Refreshes the metadata cache of a BigLake table or an object table. This procedure fails if you run it against a table that has the metadata caching mode set to `AUTOMATIC` .
 
 To run this system procedure, you need the `bigquery.tables.update` and `bigquery.tables.updateData` permissions.
 
 Specify the name of the table as a string with the format `'[project_id.]dataset.table'` . If you run this system procedure from a different project than the table, then you must include the project ID.
 
-For Lakehouse tables, you can optionally specify one or more subdirectories of the table data directory in Cloud Storage in the format `'gs://table_data_directory/subdirectory/.../'` . This lets you refresh only the table metadata from those subdirectories and thereby avoid unnecessary metadata processing.
+For BigLake tables, you can optionally specify one or more subdirectories of the table data directory in Cloud Storage in the format `'gs://table_data_directory/subdirectory/.../'` . This lets you refresh only the table metadata from those subdirectories and thereby avoid unnecessary metadata processing.
 
 **Examples**
 
@@ -70,7 +70,7 @@ To refresh all of the metadata for a table:
 
     CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table')
 
-To selectively refresh the metadata for a Lakehouse table:
+To selectively refresh the metadata for a BigLake table:
 
     CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table', ['gs://source/uri/sub/path/d1/*', 'gs://source/uri/sub/path/d2/*'])
 

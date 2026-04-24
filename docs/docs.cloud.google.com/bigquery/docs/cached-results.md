@@ -338,8 +338,8 @@ Use one of the following methods to determine if BigQuery returned a result usin
 
 By default, BigQuery caches query results for 24 hours, with the [exceptions](https://docs.cloud.google.com/bigquery/docs/cached-results#cache-exceptions) noted previously. Queries against a table protected by [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) might not be cached. If BigQuery does cache the result, the 24-hour cache lifetime applies.
 
-A change such as removing a group or a user from the **Data Catalog Fine Grained Reader** role used for a policy tag does not invalidate the 24-hour cache. A change to the **Data Catalog Fine Grained Reader** access control group itself is propagated immediately, but the change does not invalidate the cache.
+A change such as removing a group or a user from the Data Catalog Fine-Grained Reader role used for a policy tag does not invalidate the 24-hour cache. A change to the Data Catalog Fine-Grained Reader access control group itself is propagated immediately, but the change does not invalidate the cache.
 
 The impact is if a user ran a query, the query results remain visible to the user on screen. The user can also retrieve those results from the cache even if they lost access to the data within the last 24 hours.
 
-During the 24 hours after a user is removed from the **Data Catalog Fine Grained Reader** role for a policy tag, the user can access the cached data only for data that the user was previously allowed to see. If rows are added to the table, the user can't see the added rows, even if the results are cached.
+During the 24 hours after a user is removed from the Data Catalog Fine-Grained Reader role for a policy tag, the user can access the cached data only for data that the user was previously allowed to see. If rows are added to the table, the user can't see the added rows, even if the results are cached.

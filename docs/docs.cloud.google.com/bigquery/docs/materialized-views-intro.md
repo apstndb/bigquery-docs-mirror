@@ -55,13 +55,13 @@ The following BigQuery features work transparently with materialized views:
 
   - **[Cross-region data replication](https://docs.cloud.google.com/bigquery/docs/data-replication) :** Materialized views can be created on top of BigQuery tables that have cross-region replication enabled, but only on the primary region. If the secondary region is used, you can encounter the following error message: `The dataset replica of the cross region dataset {PROJECT}:{DATASET} in region {REGION} is read-only because it's not the primary replica.`
 
-### Lakehouse metadata cache-enabled tables
+### BigLake metadata cache-enabled tables
 
-Materialized views over [Google Cloud Lakehouse metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) can reference structured data stored in Cloud Storage and Amazon Simple Storage Service (Amazon S3). These materialized views function like materialized views over BigQuery-managed storage tables, including the benefits of automatic refresh and smart tuning. Other benefits include the pre-aggregating, pre-filtering, and pre-joining of data stored outside of BigQuery. Materialized views over Lakehouse tables are stored in and have all of the characteristics of [BigQuery managed storage](https://docs.cloud.google.com/bigquery/docs/storage_overview) .
+Materialized views over [BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) can reference structured data stored in Cloud Storage and Amazon Simple Storage Service (Amazon S3). These materialized views function like materialized views over BigQuery-managed storage tables, including the benefits of automatic refresh and smart tuning. Other benefits include the pre-aggregating, pre-filtering, and pre-joining of data stored outside of BigQuery. Materialized views over BigLake tables are stored in and have all of the characteristics of [BigQuery managed storage](https://docs.cloud.google.com/bigquery/docs/storage_overview) .
 
-> **Note:** When a materialized view over a Lakehouse table with cached metadata is refreshed, the materialized view's cached data contains all updates to the external table up to the most recent metadata cache creation.
+> **Note:** When a materialized view over a BigLake table with cached metadata is refreshed, the materialized view's cached data contains all updates to the external table up to the most recent metadata cache creation.
 
-When you create a materialized view over an Amazon S3 Lakehouse table, the data in the materialized view isn't available for joins with BigQuery data. To make Amazon S3 data in a materialized view available for joins, create a [replica](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) of the materialized view. You can only create materialized view replicas over [authorized materialized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
+When you create a materialized view over an Amazon S3 BigLake table, the data in the materialized view isn't available for joins with BigQuery data. To make Amazon S3 data in a materialized view available for joins, create a [replica](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) of the materialized view. You can only create materialized view replicas over [authorized materialized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
 
 ## Limitations
 
@@ -84,12 +84,12 @@ When you create a materialized view over an Amazon S3 Lakehouse table, the data 
 
 <sup>1</sup> Logical view reference support is in [preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Reference logical views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#reference_logical_views) .
 
-### Limitations of materialized views over Lakehouse tables
+### Limitations of materialized views over BigLake tables
 
-  - Partitioning of the materialized view is not supported. The base tables can use hive partitioning but the materialized view storage cannot be partitioned in Lakehouse tables. This means that any deletion in a base table causes a full refresh of the materialized view. For more details see [Incremental updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) .
-  - The [`--max_staleness` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) value of the materialized view must be greater than that of the Google Cloud Lakehouse base table.
-  - Joins between BigQuery managed tables and Lakehouse tables are not supported in a single materialized view definition.
-  - BigQuery BI Engine doesn't support acceleration of materialized views over Lakehouse tables.
+  - Partitioning of the materialized view is not supported. The base tables can use hive partitioning but the materialized view storage cannot be partitioned in BigLake tables. This means that any deletion in a base table causes a full refresh of the materialized view. For more details see [Incremental updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) .
+  - The [`--max_staleness` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) value of the materialized view must be greater than that of the BigLake base table.
+  - Joins between BigQuery managed tables and BigLake tables are not supported in a single materialized view definition.
+  - BigQuery BI Engine doesn't support acceleration of materialized views over BigLake tables.
 
 ## Materialized views pricing
 

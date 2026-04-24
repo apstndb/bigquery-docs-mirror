@@ -2,7 +2,7 @@
 
 Before you can use [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) , which offers AI-powered assistance for your data analytics, your team must enable required APIs and grant roles.
 
-Some Gemini in BigQuery features are available at no additional charge, while other features require [quota](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) that is earned by using compute capacity. To learn more about using Gemini in BigQuery features, see [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .
+To learn more about using Gemini in BigQuery features, see [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .
 
 > **Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
 

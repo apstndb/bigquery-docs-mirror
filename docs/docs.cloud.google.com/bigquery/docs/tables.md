@@ -1437,7 +1437,7 @@ The `INFORMATION_SCHEMA.TABLES` view has the following schema:
 
 <ul>
 <li><code dir="ltr" translate="no">NATIVE</code> : A standard <a href="https://docs.cloud.google.com/bigquery/docs/tables-intro">table</a></li>
-<li><code dir="ltr" translate="no">BIGLAKE</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/iceberg-tables">BigLake table for Apache Iceberg in BigQuery</a></li>
+<li><code dir="ltr" translate="no">BIGLAKE</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/iceberg-tables">Managed Apache Iceberg table in BigQuery</a></li>
 </ul></td>
 </tr>
 <tr class="even">

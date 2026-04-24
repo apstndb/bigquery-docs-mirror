@@ -2,7 +2,7 @@
 
 This document describes the `AI.EMBED` function, which lets you create [embeddings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#embeddings) from text or image data in BigQuery. For example, the following query creates an embedding for a piece of text:
 
-The function works by sending a request to a [stable Agent Platform embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions#latest-stable) or a [built-in embedding model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) in BigQuery, and then returning that model's response.
+The function works by sending a request to a [stable Vertex AI embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions#latest-stable) or a [built-in embedding model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) in BigQuery, and then returning that model's response.
 
     SELECT AI.EMBED("Some text to embed!", endpoint => 'text-embedding-005');
 
@@ -49,13 +49,13 @@ When you analyze image data, the content must be in one of the supported image f
     
     The `content` value can be a string literal, the name of a table column, or the output of an expression that evaluates to a string.
 
-  - `endpoint` : a `STRING` value that specifies a supported Agent Platform [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model. The function incurs charges in Agent Platform each time it's called.
+  - `endpoint` : a `STRING` value that specifies a supported Vertex AI [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model. The function incurs charges in Vertex AI each time it's called.
     
     The endpoint value that you specify must include the model version, for example, `text-embedding-005` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint. For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) .
 
   - `model` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) .
     
-    If you specify this parameter, you can't specify the `endpoint` , `title` , `model_params` , or `connection_id` parameters. Your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
+    If you specify this parameter, you can't specify the `endpoint` , `title` , `model_params` , or `connection_id` parameters. Your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Vertex AI and no charges are incurred in Vertex AI.
     
     To request feedback or support for this feature, send email to <bqml-feedback@google.com> .
 
@@ -137,7 +137,7 @@ When you analyze image data, the content must be in one of the supported image f
     
     You need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you run the function.
 
-  - `endpoint` : a `STRING` value that specifies a supported Agent Platform [multimodal embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/multimodal-embeddings-api) endpoint to use for the multimodal embedding model. The endpoint value that you specify must include the model version, for example `gemini-embedding-2-preview` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
+  - `endpoint` : a `STRING` value that specifies a supported Vertex AI [multimodal embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/multimodal-embeddings-api) endpoint to use for the multimodal embedding model. The endpoint value that you specify must include the model version, for example `gemini-embedding-2-preview` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 
   - `model_params` : a `JSON` literal that provides additional parameters to the model. Only the `dimension` field is supported. You can use the `dimension` field to specify the number of dimensions to use when generating embeddings. For example, if you specify `256` for the `dimension` field, then the model returns a 256-dimensional embedding for each input value. For more information, see how to [specify lower-dimensional embeddings](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#low-dimension) .
 
@@ -152,7 +152,7 @@ When you analyze image data, the content must be in one of the supported image f
 
 ### text embedding
 
-The following example shows how to embed a string literal using a Agent Platform endpoint:
+The following example shows how to embed a string literal using a Vertex AI endpoint:
 
     SELECT
       AI.EMBED(
@@ -242,23 +242,23 @@ The following query uses the `gemini-embedding-2-preview` model to embed the com
 
 Use the following table to help you choose an embedding model for your data:
 
-| Model specification                             | Output dimension | Max sequence length | Supported text languages                                                                                                                            | Description                                                                                                                                 | Embedding location      | Billing and permissions                                                                                          |
-| ----------------------------------------------- | ---------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `model => 'embeddinggemma-300m'`                | 768              | 2048 tokens         | [Supported text languages](https://ai.google.dev/gemma/docs/embeddinggemma)                                                                         | Best for embedding short strings (\<= 128 tokens). Specialized for multilingual tasks.                                                      | BigQuery query engine   | Uses and scales with BigQuery slots. No Agent Platform charges or setup.                                         |
-| `endpoint => 'gemini-embedding-001'`            | up to 3072       | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best performance for multilingual and coding tasks.                                                                                         | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
-| `endpoint => 'text-embedding-005'`              | up to 768        | 2048 tokens         | English                                                                                                                                             | Best for embedding long English strings. Specialized in English and coding tasks.                                                           | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
-| `endpoint => 'text-multilingual-embedding-002'` | up to 768        | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best for embedding long strings. Specialized in multilingual tasks.                                                                         | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
-| `endpoint => 'gemini-embedding-2-preview'`      | up to 3072       | 8192 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#expandable-4)                                          | Best for embedding long strings, including multilingual and unstructured data. Supports a mix of text, images, audio, video, and PDF files. | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
+| Model specification                             | Output dimension | Max sequence length | Supported text languages                                                                                                                            | Description                                                                                                                                 | Embedding location    | Billing and permissions                                                                                |
+| ----------------------------------------------- | ---------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------ |
+| `model => 'embeddinggemma-300m'`                | 768              | 2048 tokens         | [Supported text languages](https://ai.google.dev/gemma/docs/embeddinggemma)                                                                         | Best for embedding short strings (\<= 128 tokens). Specialized for multilingual tasks.                                                      | BigQuery query engine | Uses and scales with BigQuery slots. No Vertex AI charges or setup.                                    |
+| `endpoint => 'gemini-embedding-001'`            | up to 3072       | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best performance for multilingual and coding tasks.                                                                                         | Vertex AI endpoint    | Incurs Vertex AI charges. Might require Vertex AI permission setup depending on your project settings. |
+| `endpoint => 'text-embedding-005'`              | up to 768        | 2048 tokens         | English                                                                                                                                             | Best for embedding long English strings. Specialized in English and coding tasks.                                                           | Vertex AI endpoint    | Incurs Vertex AI charges. Might require Vertex AI permission setup depending on your project settings. |
+| `endpoint => 'text-multilingual-embedding-002'` | up to 768        | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best for embedding long strings. Specialized in multilingual tasks.                                                                         | Vertex AI endpoint    | Incurs Vertex AI charges. Might require Vertex AI permission setup depending on your project settings. |
+| `endpoint => 'gemini-embedding-2-preview'`      | up to 3072       | 8192 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#expandable-4)                                          | Best for embedding long strings, including multilingual and unstructured data. Supports a mix of text, images, audio, video, and PDF files. | Vertex AI endpoint    | Incurs Vertex AI charges. Might require Vertex AI permission setup depending on your project settings. |
 
 ## Locations
 
-You can run `AI.EMBED` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Agent Platform embedding models, and also in the `US` and `EU` multi-regions.
+You can run `AI.EMBED` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Vertex AI embedding models, and also in the `US` and `EU` multi-regions.
 
 ## Quotas
 
-See [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+See [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## What's next
 
-  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .

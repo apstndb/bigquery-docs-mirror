@@ -1,4 +1,4 @@
-# Migrate metadata from external data catalogs to BigLake tables for Apache Iceberg
+# Migrate metadata from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg
 
 > **Preview**
 > 
@@ -6,7 +6,7 @@
 
 > **Note:** To get support or provide feedback for this feature, contact <da-migrations-feedback@google.com> .
 
-This document shows you how to migrate metadata from external data catalogs to [BigLake tables for Apache Iceberg](https://docs.cloud.google.com/biglake/docs/biglake-iceberg-tables) . The BigQuery Migration Service supports the migration of metadata from the following external metastores:
+This document shows you how to migrate metadata from external data catalogs to [Lakehouse REST catalog tables for Apache Iceberg](https://docs.cloud.google.com/biglake/docs/biglake-iceberg-tables) . The BigQuery Migration Service supports the migration of metadata from the following external metastores:
 
   - Apache Hive Metastore
   - Apache Iceberg REST Catalogs
@@ -15,12 +15,12 @@ This document shows you how to migrate metadata from external data catalogs to [
 
 > **Warning:** Modifying data on both the source and destination tables after a migration can lead to data loss.
 
-  - Metadata migrations from external data catalogs to BigLake tables for Apache Iceberg are a one-time sync. This feature doesn't support continuous or periodic syncs, so any writes made after migration aren't visible until you migrate again.
+  - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg are a one-time sync. This feature doesn't support continuous or periodic syncs, so any writes made after migration aren't visible until you migrate again.
   - Nested namespaces aren't supported.
   - The Iceberg REST catalog only supports Parquet data files.
   - BigLake doesn't support Apache Iceberg V3 tables.
-  - Metadata migrations from external data catalogs to BigLake tables for Apache Iceberg only supports migrations of up to 10,000 tables. If your workload requires processing more than 10,000 tables, then we recommend splitting your workload across multiple migrations.
-  - Metadata migrations from external data catalogs to BigLake tables for Apache Iceberg don't support the use of organization policies to enforce [domain-restricted sharing](https://docs.cloud.google.com/organization-policy/domain-restricted-sharing) .
+  - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg only supports migrations of up to 10,000 tables. If your workload requires processing more than 10,000 tables, then we recommend splitting your workload across multiple migrations.
+  - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg don't support the use of organization policies to enforce [domain-restricted sharing](https://docs.cloud.google.com/organization-policy/domain-restricted-sharing) .
 
 ## Before you begin
 
@@ -49,7 +49,7 @@ A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-se
       - [Storage Transfer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer#storagetransfer.admin) ( `roles/storagetransfer.admin` )
       - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
       - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
-      - To migrate metadata to BigLake metastore Iceberg REST Catalog : [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
+      - To migrate metadata to Lakehouse runtime catalog Iceberg REST Catalog : [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
       - To migrate metadata to Dataproc Metastore: [Dataproc Metastore Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/metastore#metastore.metadataOwner) ( `roles/metastore.metadataOwner` )
     
     For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -75,7 +75,7 @@ A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-se
 
 ### Required user roles and permissions
 
-To ensure that the service agent has the necessary permissions to create, modify, and run a BigLake tables for Apache Iceberg migration, ask your administrator to grant the following IAM roles to the service agent on the user:
+To ensure that the service agent has the necessary permissions to create, modify, and run a Lakehouse REST catalog tables for Apache Iceberg migration, ask your administrator to grant the following IAM roles to the service agent on the user:
 
 > **Important:** You must grant these roles to the service agent, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
@@ -88,7 +88,7 @@ Your administrator might also be able to give the service agent the required per
 
 ### Required service account roles and permissions
 
-To ensure that the customer-provided service account has the necessary permissions to create, modify, and run a BigLake tables for Apache Iceberg migration, ask your administrator to grant the following IAM roles to the customer-provided service account:
+To ensure that the customer-provided service account has the necessary permissions to create, modify, and run a Lakehouse REST catalog tables for Apache Iceberg migration, ask your administrator to grant the following IAM roles to the customer-provided service account:
 
 > **Important:** You must grant these roles to the customer-provided service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
@@ -136,7 +136,7 @@ Replace the following:
 
 ## Migrate metadata
 
-To start a metadata migration to BigLake Iceberg tables, do the following:
+To start a metadata migration to Lakehouse Iceberg REST catalog tables, do the following:
 
 1.  In the Google Cloud console, go to the **Migration** \> **Services** page.
 
@@ -164,4 +164,4 @@ When the metadata migration completes, the metadata from your external catalogs 
 
 ## Pricing
 
-There is no cost to transfer metadata to BigLake Iceberg tables. Once metadata is transferred, [BigLake pricing](https://cloud.google.com/products/biglake/pricing) applies.
+There is no cost to transfer metadata to Lakehouse Iceberg REST catalog tables. Once metadata is transferred, [BigLake pricing](https://cloud.google.com/products/biglake/pricing) applies.

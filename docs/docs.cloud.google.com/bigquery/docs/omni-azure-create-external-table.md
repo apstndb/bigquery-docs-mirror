@@ -1,6 +1,6 @@
 # External tables for Azure Blob storage
 
-This document describes how to create an Azure Blob Storage Google Cloud Lakehouse table. A [Lakehouse table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Blob Storage. Access delegation decouples access to the Lakehouse table from access to the underlying datastore.
+This document describes how to create an Azure Blob Storage BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Blob Storage. Access delegation decouples access to the BigLake table from access to the underlying datastore.
 
 For information about how data flows between BigQuery and Blob Storage, see [Data flow when querying data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#query-data) .
 
@@ -83,7 +83,7 @@ Replace the following:
     
     To create a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID : DATASET_NAME  ` .
 
-## Create Lakehouse tables on unpartitioned data
+## Create BigLake tables on unpartitioned data
 
 Select one of the following options:
 
@@ -134,7 +134,7 @@ Select one of the following options:
 
 ### SQL
 
-To create a Lakehouse table, use the [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) statement with the `WITH CONNECTION` clause:
+To create a BigLake table, use the [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) statement with the `WITH CONNECTION` clause:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -186,7 +186,7 @@ Replace the following:
   - `  CONTAINER_NAME  ` : the name of the Blob Storage container
   - `  FILE_PATH  ` : the data path that points to the Blob Storage data
 
-Next, create the Lakehouse table:
+Next, create the BigLake table:
 
     bq mk --external_table_definition=table_def DATASET_NAME.TABLE_NAME
 
@@ -195,7 +195,7 @@ Replace the following:
   - `  DATASET_NAME  ` : the name of the dataset that you created
   - `  TABLE_NAME  ` : the name that you want to give to this table
 
-For example, the following commands create a new Lakehouse table, `my_dataset.my_table` , which can query your Blob Storage data that's stored at the path `azure://account_name.blob.core.windows.net/container/path` and has a read connection in the location `azure-eastus2` :
+For example, the following commands create a new BigLake table, `my_dataset.my_table` , which can query your Blob Storage data that's stored at the path `azure://account_name.blob.core.windows.net/container/path` and has a read connection in the location `azure-eastus2` :
 
     bq mkdef \
         --source_format=AVRO \
@@ -215,11 +215,11 @@ Specify the `schema` property or set the `autodetect` property to `true` to enab
 
 Specify the `connectionId` property to identify the connection to use for connecting to Blob Storage.
 
-## Create Lakehouse tables on partitioned data
+## Create BigLake tables on partitioned data
 
-You can create a Lakehouse table for Hive partitioned data in Blob Storage. After you create an externally partitioned table, you can't change the partition key. You need to recreate the table to change the partition key.
+You can create a BigLake table for Hive partitioned data in Blob Storage. After you create an externally partitioned table, you can't change the partition key. You need to recreate the table to change the partition key.
 
-To create a Lakehouse table based on Hive partitioned data, select one of the following options:
+To create a BigLake table based on Hive partitioned data, select one of the following options:
 
 ### Console
 
@@ -324,7 +324,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 **Examples**
 
-The following example creates a Lakehouse table over partitioned data in Amazon S3. The schema is auto-detected.
+The following example creates a BigLake table over partitioned data in Amazon S3. The schema is auto-detected.
 
     CREATE EXTERNAL TABLE `my_dataset.my_table`
     WITH PARTITION COLUMNS
@@ -337,7 +337,7 @@ The following example creates a Lakehouse table over partitioned data in Amazon 
       uris = ['s3://mybucket/products/*']
     );
 
-The following example creates a Lakehouse table over partitioned data in Blob Storage. The schema is specified.
+The following example creates a BigLake table over partitioned data in Blob Storage. The schema is specified.
 
     CREATE EXTERNAL TABLE `my_dataset.my_table`
     (
@@ -385,7 +385,7 @@ If `  PARTITIONING_MODE  ` is `CUSTOM` , include the partition key schema in the
 
     --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX/{KEY1:TYPE1}/{KEY2:TYPE2}/...
 
-After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the Lakehouse table:
+After you create the table definition file, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) command to create the BigLake table:
 
     bq mk --external_table_definition=DEFINITION_FILE \
     DATASET_NAME.TABLE_NAME \
@@ -439,7 +439,7 @@ The following example uses `CUSTOM` Hive partitioning mode for Blob Storage data
 
 ### API
 
-To set Hive partitioning using the BigQuery API, include the [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a Lakehouse table, you must also specify a value for the `connectionId` field.
+To set Hive partitioning using the BigQuery API, include the [`hivePartitioningOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#hivepartitioningoptions) object in the [`ExternalDataConfiguration`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) object when you create the [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition) . To create a BigLake table, you must also specify a value for the `connectionId` field.
 
 If you set the `hivePartitioningOptions.mode` field to `CUSTOM` , you must encode the partition key schema in the `hivePartitioningOptions.sourceUriPrefix` field as follows: `s3:// BUCKET / PATH_TO_TABLE /{ KEY1 : TYPE1 }/{ KEY2 : TYPE2 }/...`
 
@@ -447,7 +447,7 @@ To enforce the use of a predicate filter at query time, set the `hivePartitionin
 
 ## Delta Lake tables
 
-Delta Lake is an open source table format that supports petabyte scale data tables. Delta Lake tables can be queried as both temporary and permanent tables, and is supported as a [Google Cloud Lakehouse table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+Delta Lake is an open source table format that supports petabyte scale data tables. Delta Lake tables can be queried as both temporary and permanent tables, and is supported as a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
 
 ### Schema synchronization
 
@@ -501,7 +501,7 @@ The following limitations apply to Delta Lake tables:
 
   - You can't update a table with a new JSON metadata file. You must use an auto detect schema table update operation. See [Schema synchronization](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#schema_synchronization) for more information.
 
-  - Google Cloud Lakehouse security features only protect Delta Lake tables when accessed through BigQuery services.
+  - BigLake security features only protect Delta Lake tables when accessed through BigQuery services.
 
 ### Create a Delta Lake table
 
@@ -539,7 +539,7 @@ WITH CONNECTION connection_name;
 
 For more examples of cross-cloud data transfers, see [Load data with cross cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) .
 
-## Query Lakehouse tables
+## Query BigLake tables
 
 For more information, see [Query Blob Storage data](https://docs.cloud.google.com/bigquery/docs/query-azure-data) .
 
@@ -809,10 +809,10 @@ Replace the following:
 
 ## Limitations
 
-For a full list of limitations that apply to Lakehouse tables based on Amazon S3 and Blob Storage, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
+For a full list of limitations that apply to BigLake tables based on Amazon S3 and Blob Storage, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
 
 ## What's next
 
   - Learn about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
-  - Learn about [Lakehouse tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+  - Learn about [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
   - Learn how to [export query results to Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage) .

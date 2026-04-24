@@ -31,9 +31,9 @@ Embeddings help you perform the following tasks:
 
 Depending on the task, the `ML.GENERATE_EMBEDDING` function works in one of the following ways:
 
-  - To generate embeddings from text or visual content, `ML.GENERATE_EMBEDDING` sends the request to a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Agent Platform embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , and then returns the model's response.
+  - To generate embeddings from text or visual content, `ML.GENERATE_EMBEDDING` sends the request to a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Vertex AI embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , and then returns the model's response.
     
-    The `ML.GENERATE_EMBEDDING` function works with the Agent Platform model to perform embedding tasks supported by that model. For more information on the types of tasks these models can perform, see the following documentation:
+    The `ML.GENERATE_EMBEDDING` function works with the Vertex AI model to perform embedding tasks supported by that model. For more information on the types of tasks these models can perform, see the following documentation:
     
       - [Text embedding model use cases](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings#text-use-cases)
       - [Multimodal embedding model use cases](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings#multimodal-use-cases)
@@ -46,7 +46,7 @@ Depending on the task, the `ML.GENERATE_EMBEDDING` function works in one of the 
 
 ## Syntax
 
-`ML.GENERATE_EMBEDDING` syntax differs depending on the BigQuery ML model you choose. If you use a remote model, it also differs depending on the Agent Platform model that your remote models targets. Choose the option appropriate for your use case.
+`ML.GENERATE_EMBEDDING` syntax differs depending on the BigQuery ML model you choose. If you use a remote model, it also differs depending on the Vertex AI model that your remote models targets. Choose the option appropriate for your use case.
 
 ### `gemini-embedding-001`
 
@@ -131,7 +131,7 @@ The model and input table must be in the same region.
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a remote model over a Agent Platform text embedding model.
+  - `  MODEL_NAME  ` : the name of a remote model over a Vertex AI text embedding model.
     
     You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -239,7 +239,7 @@ The model and input table must be in the same region.
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a remote model over a Agent Platform model. Supported models include `multimodalembedding@001` and `gemini-embedding-2-preview` ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+  - `  MODEL_NAME  ` : the name of a remote model over a Vertex AI model. Supported models include `multimodalembedding@001` and `gemini-embedding-2-preview` ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
     
     You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -628,9 +628,9 @@ The `ML.GENERATE_EMBEDDING` function must run in the same [region or multi-regio
 
 ## Quotas
 
-Quotas apply when you use the `ML.GENERATE_EMBEDDING` function with remote models. For more information, see [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+Quotas apply when you use the `ML.GENERATE_EMBEDDING` function with remote models. For more information, see [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
-To request more quota for the Agent Platform models, use the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) .
+To request more quota for the Vertex AI models, use the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) .
 
 ## What's next
 
@@ -640,7 +640,7 @@ To request more quota for the Agent Platform models, use the process described i
       - [Creating image embeddings](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding)
       - [Creating video embeddings](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding)
 
-  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
 
   - Try the [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) tutorial to learn how to do the following tasks:
     

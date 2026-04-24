@@ -2051,7 +2051,41 @@ NOTE: The GoogleSQL snapping process may discard sufficiently short edges and sn
 
 **Return type**
 
-LineString `GEOGRAPHY`
+  - LineString `GEOGRAPHY`
+  - MultiLineString `GEOGRAPHY` (if the snapped input contains self-overlapping lines)
+  - Point `GEOGRAPHY` (if the input contains a single point only)
+
+**Example**
+
+The following example constructs different types of `GEOGRAPHY` s:
+
+    WITH segments AS (
+        SELECT 1 AS id, [ST_GEOGPOINT(1, 2), ST_GEOGPOINT(2, 3)] AS geos
+        UNION ALL
+        SELECT 2, [ST_GEOGPOINT(1, 2), ST_GEOGPOINT(1, 2)]
+        UNION ALL
+        SELECT
+          3, [ ST_MAKELINE(ST_GEOGPOINT(1, 2), ST_GEOGPOINT(2, 3)),
+               ST_MAKELINE(ST_GEOGPOINT(2, 3), ST_GEOGPOINT(3, 4)),
+               ST_MAKELINE(ST_GEOGPOINT(3, 4), ST_GEOGPOINT(4, 5))]
+        UNION ALL
+        SELECT
+          4, [ ST_MAKELINE(ST_GEOGPOINT(1, 0), ST_GEOGPOINT(10, 0)),
+               ST_MAKELINE(ST_GEOGPOINT(10, 0), ST_GEOGPOINT(5, 0)),
+               ST_MAKELINE(ST_GEOGPOINT(5, 0), ST_GEOGPOINT(5, 4))]
+      )
+    SELECT
+      id, ST_MAKELINE(geos) AS constructed_line
+    FROM segments;
+    
+    /*----+-------------------------------------------------------+
+     | id | constructed_line                                      |
+     +----+-------------------------------------------------------+
+     | 1  | LINESTRING(1 2, 2 3)                                  |
+     | 2  | POINT(1 2)                                            |
+     | 3  | LINESTRING(1 2, 2 3, 3 4, 4 5)                        |
+     | 4  | MULTILINESTRING((1 0, 5 0, 10 0), (5 0, 5 4))         |
+     +----+-------------------------------------------------------*/
 
 ## `ST_MAKEPOLYGON`
 

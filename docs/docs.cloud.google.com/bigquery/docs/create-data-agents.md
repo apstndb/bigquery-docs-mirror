@@ -364,8 +364,8 @@ Follow these steps to create custom glossary terms for an agent:
 Follow these steps to view business glossary terms imported from Knowledge Catalog:
 
 1.  In the **Glossary** section of the agent **Editor** page, click **Add term** .
-2.  Navigate to the page section called **Imported from Knowledge Catalog** .
-3.  To modify imported terms in Knowledge Catalog, you must click the link "Go to Knowledge Catalog glossaries."
+2.  Navigate to the page section called **Imported from Dataplex** .
+3.  To modify imported terms in Knowledge Catalog, you must click the link "Go to Dataplex glossaries."
 4.  After you've modified the terms in Knowledge Catalog, you can return to the agent **Editor** page to view the modified terms.
 
 #### Configure settings
