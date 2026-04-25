@@ -383,6 +383,88 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
+### Terraform
+
+Use the [`google_bigquery_reservation`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_reservation) resource.
+
+> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+The following example creates a predictable reservation group named `my-reservation` :
+
+```terraform
+resource "google_bigquery_reservation" "default" {
+  provider          = google-beta
+  name              = "my-reservation"
+  location          = "us-central1"
+  slot_capacity     = 100
+  edition           = "ENTERPRISE"
+  ignore_idle_slots = true
+  concurrency       = 0 # Automatically adjust query concurrency based on available resources
+  max_slots         = 300
+  scaling_mode      = "AUTOSCALE_ONLY"
+}
+```
+
+To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
+
+## Prepare Cloud Shell
+
+1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
+
+2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
+    
+    You only need to run this command once per project, and you can run it in any directory.
+    
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    
+    Environment variables are overridden if you set explicit values in the Terraform configuration file.
+
+## Prepare the directory
+
+Each Terraform configuration file must have its own directory (also called a *root module* ).
+
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
+    
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+2.  If you are following a tutorial, you can copy the sample code in each section or step.
+    
+    Copy the sample code into the newly created `main.tf` .
+    
+    Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
+
+3.  Review and modify the sample parameters to apply to your environment.
+
+4.  Save your changes.
+
+5.  Initialize Terraform. You only need to do this once per directory.
+    
+        terraform init
+    
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
+    
+        terraform init -upgrade
+
+## Apply the changes
+
+1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
+    
+        terraform plan
+    
+    Make corrections to the configuration as necessary.
+
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
+    
+        terraform apply
+    
+    Wait until Terraform displays the "Apply complete\!" message.
+
+3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
+
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+
 To learn more about predictable reservations, see [Predictable reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) .
 
 ## Update reservations

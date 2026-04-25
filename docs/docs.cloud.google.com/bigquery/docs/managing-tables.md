@@ -1672,6 +1672,7 @@ Copying a table across regions is subject to the following limitations:
   - You can't copy tables in append mode. If you use `write_empty` mode, the destination table must not exist.
   - [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) information is not copied to the destination region.
   - When you copy a table clone or snapshot to a new region, a full copy of the table is created. This incurs additional storage costs.
+  - Expiration time from the source table is copied to the destination table.
 
 ### View current quota usage
 

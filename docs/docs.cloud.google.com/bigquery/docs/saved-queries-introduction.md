@@ -48,17 +48,13 @@ Iowa
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
-Las Vegas
-
-`us-west4`
-
 Los Angeles
 
 `us-west2`
 
-Mexico
+Las Vegas
 
-`northamerica-south1`
+`us-west4`
 
 Montréal
 
@@ -66,29 +62,13 @@ Montréal
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
-North Virginia
+N. Virginia
 
 `us-east4`
-
-Oklahoma
-
-`us-central2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Oregon
 
 `us-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Salt Lake City
-
-`us-west3`
-
-Santiago
-
-`southamerica-west1`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
@@ -102,21 +82,7 @@ South Carolina
 
 `us-east1`
 
-Toronto
-
-`northamerica-northeast2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
 **Asia Pacific**
-
-Bangkok
-
-`asia-southeast3`
-
-Delhi
-
-`asia-south2`
 
 Hong Kong
 
@@ -126,17 +92,9 @@ Jakarta
 
 `asia-southeast2`
 
-Melbourne
-
-`australia-southeast2`
-
 Mumbai
 
 `asia-south1`
-
-Osaka
-
-`asia-northeast2`
 
 Seoul
 
@@ -166,16 +124,6 @@ Belgium
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
-Berlin
-
-`europe-west10`
-
-Finland
-
-`europe-north1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
 Frankfurt
 
 `europe-west3`
@@ -192,35 +140,15 @@ Madrid
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
-Milan
-
-`europe-west8`
-
 Netherlands
 
 `europe-west4`
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
-Paris
-
-`europe-west9`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Stockholm
-
-`europe-north2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
 Turin
 
 `europe-west12`
-
-Warsaw
-
-`europe-central2`
 
 Zürich
 
@@ -230,17 +158,13 @@ Zürich
 
 **Middle East**
 
-Dammam
-
-`me-central2`
-
 Doha
 
 `me-central1`
 
-Tel Aviv
+Dammam
 
-`me-west1`
+`me-central2`
 
 ### Quotas and limits
 
