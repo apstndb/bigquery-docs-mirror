@@ -1,10 +1,8 @@
 # Work with Salesforce Data Cloud data in BigQuery
 
-Data Cloud users can access their Data Cloud data natively in BigQuery. You can analyze Data Cloud data with BigQuery Omni and perform cross-cloud analytics with the data in Google Cloud. In this document, we provide instructions on accessing your Data Cloud data and several analytical tasks you can perform with that data in BigQuery.
+This document describes how to access and analyze Salesforce Data Cloud data in BigQuery using BigQuery Omni. The document shows how to link your Data Cloud datasets in BigQuery to run queries, join data with tables in Google Cloud, and replicate data using cross-cloud materialized views.
 
-Data Cloud works with BigQuery based on the following architecture:
-
-![Data Cloud architecture.](https://docs.cloud.google.com/static/bigquery/images/data-cloud-architecture.png)
+This document is intended for Data Cloud users who want to use BigQuery for deep analytics on their Data Cloud data, or combine it with data in Google Cloud for cross-cloud analytics—all without building and maintaining extract, transform, and load (ETL) pipelines.
 
 ## Before you begin
 

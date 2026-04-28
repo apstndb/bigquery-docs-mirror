@@ -348,7 +348,7 @@ Schema with only `COMMIT_TIMESTAMP`
       ]
     }
 
-Scheme with `COMMIT_TIMESTAMP` and one column (Id) as `PRIMARY_KEY`
+Schema with `COMMIT_TIMESTAMP` and one column (Id) as `PRIMARY_KEY`
 
     {
       "databases": [

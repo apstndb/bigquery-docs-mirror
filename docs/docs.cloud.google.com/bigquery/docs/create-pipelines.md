@@ -63,9 +63,9 @@ To create a pipeline, follow these steps:
 
 4.  Click **Get started** , and then go to the **Settings** tab.
 
-5.  In the **Authentication** section, choose to authorize the pipeline with your Google Account user credentials or a service account.
+5.  In the **Authentication** section, choose to authorize the pipeline with the user credentials for your Google Account or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with my user credentials** .
+      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with my user credentials** .
         
         > **Note:** Authenticating API-based runs with user credentials isn't supported. To [run all the tasks in a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#run-pipeline-all-tasks) using the Dataform API, you must configure the pipeline to use a service account.
     
@@ -461,10 +461,15 @@ To run selected tasks in a pipeline, do the following:
 
 4.  Click play\_circle\_filled **Run** \> **Select tasks to run** .
 
-5.  In the **Run** pane, in the **Authentication** section, authorize the execution with your Google Account user credentials or a service account.
+5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
-      - To use a custom service account, select **Run with selected service account** , and then select a custom service account. If you need to create a service account, click **New service account** .
+      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+    
+      - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
+        
+        > **Note:** To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
+        
+        If you need to create a service account, click **New service account** .
 
 6.  Ensure **Selection of tasks** is selected.
 
@@ -502,10 +507,15 @@ To run tasks with selected tags in a pipeline, do the following:
       - Click a tag that you want to run.
       - Click checklist **Select tags to run** .
 
-5.  In the **Run** pane, in the **Authentication** section, authorize the execution with your Google Account user credentials or a service account.
+5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
-      - To use a custom service account, select **Run with selected service account** , and then select a custom service account. If you need to create a service account, click **New service account** .
+      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+    
+      - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
+        
+        > **Note:** To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
+        
+        If you need to create a service account, click **New service account** .
 
 6.  Ensure **Selection of tags** is selected.
 

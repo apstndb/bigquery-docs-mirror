@@ -34,7 +34,7 @@ BigQuery has the following table types:
 
 ### External tables
 
-External tables are stored outside out of BigQuery storage and refer to data that's stored outside of BigQuery. For more information, see [Introduction to external data sources](https://docs.cloud.google.com/bigquery/docs/external-data-sources) . External tables include the following types:
+External tables are stored outside of BigQuery storage and refer to data that's stored outside of BigQuery. For more information, see [Introduction to external data sources](https://docs.cloud.google.com/bigquery/docs/external-data-sources) . External tables include the following types:
 
   - [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , which reference structured data stored in data stores such as Cloud Storage, Amazon Simple Storage Service (Amazon S3), and Azure Blob Storage. These tables let you enforce fine-grained security at the table level.
     

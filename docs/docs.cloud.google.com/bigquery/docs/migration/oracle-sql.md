@@ -74,7 +74,7 @@ This section shows equivalents between data types in Oracle and in BigQuery.
 <p>Additionally, before storing a decimal number Oracle rounds up if that number has more digits after the decimal point than is specified for the corresponding column. In BigQuery this feature could be implemented using <code dir="ltr" translate="no">ROUND()</code> function.</p></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">        NUMBER(*, x)       </code> <a href="https://docs.oracle.com/cd/B19306_01/olap.102/b14346/dml_datatypes002.htm"></a></td>
+<td><code dir="ltr" translate="no">        NUMBER(*, x)       </code></td>
 <td><code dir="ltr" translate="no">        NUMERIC       </code></td>
 <td>BigQuery does not allow user specification of custom values for precision or scale. As a result, a column in Oracle may be defined so that it has a bigger scale than BigQuery supports.
 <p>Additionally, before storing a decimal number Oracle rounds up if that number has more digits after the decimal point than is specified for the corresponding column. In BigQuery this feature could be implemented using <code dir="ltr" translate="no">ROUND()</code> function.</p></td>
@@ -331,7 +331,7 @@ The following table shows mappings between common Oracle aggregate, statistical 
 BigQuery doesn't support the rest of arguments that Oracle defines.</td>
 </tr>
 <tr class="odd">
-<td><code>        APPROX_PERCENTILE_AGG       </code></td>
+<td><code dir="ltr" translate="no">        APPROX_PERCENTILE_AGG       </code></td>
 <td><code dir="ltr" translate="no">        APPROX_QUANTILES        (expression, 100)[  OFFSET(CAST(TRUNC(percentile * 100) as INT64))]</code></td>
 </tr>
 <tr class="even">

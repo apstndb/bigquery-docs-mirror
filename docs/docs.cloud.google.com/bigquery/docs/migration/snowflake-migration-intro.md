@@ -181,7 +181,7 @@ In your Snowflake to BigQuery migration, we recommend that you start by running 
 
 Running the BigQuery migration assessment tool produces an assessment report that contains the following sections:
 
-  - Existing system report: a snapshot of the existing Snowflake system and usage, including the number of databases, schemas, tables, and total size in TB. It also lists the schemas by size and points to potential sub-optimal resource utilization, like tables with no writes or few reads.
+  - Existing system report: a snapshot of the existing Snowflake system and usage, including the number of databases, schemas, tables, and total size in TB. It also lists the schemas by size and points to potential suboptimal resource utilization, like tables with no writes or few reads.
   - BigQuery steady state transformation suggestions: shows what the system will look like in BigQuery after the migration. It includes suggestions for optimizing workloads in BigQuery and avoiding wastage.
   - Migration plan: provides information about the migration effort itself. For example, getting from the existing system to the BigQuery steady state. This section includes the count of queries that were automatically translated and the expected time to move each table into BigQuery.
 

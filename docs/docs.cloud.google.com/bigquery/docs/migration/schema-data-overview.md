@@ -72,7 +72,7 @@ Depending on how far you want to go with the evolution, you might stop at an int
     
     If you want to further evolve your schema beyond light optimizations, create *facade views* for your tables. The [facade pattern](https://wikipedia.org/wiki/Facade_pattern) is a design method that masks the underlying code or structures to hide complexity. In this case, the facade views mask the underlying tables to hide the complexity caused by table changes from the downstream processes.
     
-    The views can describe a new schema, free from technical debt, and modelled with new ingestion and consumption scenarios in mind.
+    The views can describe a new schema, free from technical debt, and modeled with new ingestion and consumption scenarios in mind.
     
     Under the hood, the tables and the view query definition itself can change. But the views abstract away these changes as an internal implementation detail of your data warehouse, and they always return the same results. This [abstraction layer](https://wikipedia.org/wiki/Abstraction_layer) made of facade views isolates your upstream and downstream systems from change for as long as needed, and only surfaces the changes when appropriate.
 
@@ -132,7 +132,7 @@ For further considerations when choosing a data transfer method, see [Choosing a
 
 Depending on your data extraction format and whether you want to trim or enrich your data before loading it into BigQuery, you might include a step to transform your data. You can transform the data in the existing environment or on Google Cloud:
 
-  - If you transform the data in the current environment, consider how the available compute capacity and tooling might limit throughput. In addition, if you are encriching the data during the transformation process, consider whether you need additional transfer time or network bandwidth.
+  - If you transform the data in the current environment, consider how the available compute capacity and tooling might limit throughput. In addition, if you are enriching the data during the transformation process, consider whether you need additional transfer time or network bandwidth.
   - If you transform the data on Google Cloud, see [Load data using an ETL tool](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview#load_data_using_an_etl_tool) for more information on your options.
 
 ### Extract the existing schema and data into files

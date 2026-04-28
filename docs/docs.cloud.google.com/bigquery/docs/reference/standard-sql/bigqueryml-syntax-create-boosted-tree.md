@@ -308,7 +308,7 @@ This option accepts the following values:
   - `AUTO` : Faster histogram optimized approximate greedy algorithm. This is the default.
   - `EXACT` : Exact greedy algorithm. Enumerates all split candidates.
   - `APPROX` : Approximate greedy algorithm using quantile sketch and gradient histogram.
-  - `HIST` : Same as the `AUTO` tree method..
+  - `HIST` : Same as the `AUTO` tree method.
 
 If you are running hyperparameter training, you can provide more than one value for this option by using `HPARAM_CANDIDATES` and specifying an array. For example, `TREE_METHOD = HPARAM_CANDIDATES(['APPROX', 'HIST'])` .
 
@@ -349,7 +349,7 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `COLSAMPLE_BYTREE = HPARAM_RANGE(0, 0.3))` .
+  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `COLSAMPLE_BYTREE = HPARAM_RANGE(0, 0.3)` .
   - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `COLSAMPLE_BYTREE = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])` .
 
 When running hyperparameter tuning, the valid range is `[0, 1.0]` , there is no default range, and the scale type is `LINEAR` .
@@ -370,7 +370,7 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `COLSAMPLE_BYLEVEL = HPARAM_RANGE(0, 0.3))` .
+  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `COLSAMPLE_BYLEVEL = HPARAM_RANGE(0, 0.3)` .
   - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `COLSAMPLE_BYLEVEL = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])` .
 
 When running hyperparameter tuning, the valid range is `[0, 1.0]` , there is no default range, and the scale type is `LINEAR` .
@@ -391,7 +391,7 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `COLSAMPLE_BYNODE = HPARAM_RANGE(0, 0.3))` .
+  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `COLSAMPLE_BYNODE = HPARAM_RANGE(0, 0.3)` .
   - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `COLSAMPLE_BYNODE = HPARAM_CANDIDATES([0, 0.1, 0.3, 0.5])` .
 
 When running hyperparameter tuning, the valid range is `[0, 1.0]` , there is no default range, and the scale type is `LINEAR` .

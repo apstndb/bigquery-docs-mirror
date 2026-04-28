@@ -1,6 +1,6 @@
 # Schedule a Snowflake transfer
 
-The Snowflake connector provided by the BigQuery Data Transfer Service lets you schedule and manage automated transfer jobs to migrate data from Snowflake into BigQuery using public IP allow lists.
+The Snowflake connector provided by the BigQuery Data Transfer Service lets you schedule and manage automated transfer jobs to migrate data from Snowflake into BigQuery using public IP allowlists.
 
 ## Overview
 

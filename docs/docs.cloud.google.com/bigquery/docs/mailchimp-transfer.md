@@ -147,7 +147,7 @@ Add Mailchimp data into BigQuery by setting up a transfer configuration using on
     
       - For **API Key** , enter your Mailchimp API key. For more information, see [Mailchimp prerequisites](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer#mailchimp-prerequisites) .
       - Optional: For **Start Date** , specify a start date for new records to be included in the data transfer. Only records created on or after this date are included in the data transfer.
-          - Enter a data in the format `YYYY-MM-DD` . The minimum value is `2001-01-01` .
+          - Enter a date in the format `YYYY-MM-DD` . The minimum value is `2001-01-01` .
       - For **Mailchimp objects to transfer** , click **Browse** to select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
 
 5.  In the **Destination settings** section, for **Dataset** , choose the dataset that you created to store your data.

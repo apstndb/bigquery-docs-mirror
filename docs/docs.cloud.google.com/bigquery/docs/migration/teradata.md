@@ -142,7 +142,7 @@ If you are creating a recurring transfer, we strongly recommend that you specify
         
         > **Note:** For information about regular expression syntax for Teradata transfers, see the [re2 library](https://github.com/google/re2/wiki/Syntax) .
     
-      - For **Service account email** , enter the email address associated with the service account's credentials used by an migration agent.
+      - For **Service account email** , enter the email address associated with the service account's credentials used by a migration agent.
     
       - Optional: For **Schema file path** , enter the path and filename of a custom schema file. For more information about creating a custom schema file, see [Custom schema file](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#custom_schema_file) . You can leave this field blank to have BigQuery [automatically detect your source table schema](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#default_schema_detection) for you.
     
@@ -304,7 +304,7 @@ You can optionally set up the transfer directly from the migration agent. For mo
 
 You must initialize the migration agent for a new transfer. Initialization is required only once for a transfer, whether or not it is recurring. Initialization only configures the migration agent, it doesn't start the transfer.
 
-If you are going to use the migration agent to create a custom schema file, ensure that you have a writeable directory under your working directory with the same name as the project you want to use for the transfer. This is where the migration agent creates the schema file. For example, if you are working in `/home` and you are setting up the transfer in project `myProject` , create directory `/home/myProject` and make sure it is writeable by users.
+If you are going to use the migration agent to create a custom schema file, ensure that you have a writable directory under your working directory with the same name as the project you want to use for the transfer. This is where the migration agent creates the schema file. For example, if you are working in `/home` and you are setting up the transfer in project `myProject` , create directory `/home/myProject` and make sure it is writable by users.
 
 1.  Open a new session. On the command line, issue the initialization command, which follows this form:
     

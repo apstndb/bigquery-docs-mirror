@@ -167,7 +167,7 @@ The following example creates a table called `complex_table` with an index that 
     OPTIONS (analyzer = 'LOG_ANALYZER', analyzer_options = '''{
       "token_filters": [
         {
-          "normalization": {"mode": "NONE"}
+          "normalizer": {"mode": "NONE"}
         }
       ]
     }''');
@@ -274,6 +274,20 @@ The following queries are eligible for optimization:
     WHERE JSON_VALUE(string_column, '$.job') IN ('doctor', 'lawyer', 'teacher');
 
 Combinations of these functions are also optimized, such as `UPPER(JSON_VALUE(json_string_expression)) = 'FOO'` .
+
+### Optimize with JSON\_FLATTEN
+
+BigQuery supports search index optimization for queries that use the [`JSON_FLATTEN` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_flatten) to flatten JSON arrays, typically in conjunction with `EXISTS` and `UNNEST` .
+
+For example, suppose you have a table called `dataset.logs` with a `JSON` column `json_payload` . The following query is eligible for optimization:
+
+    SELECT json_payload
+    FROM dataset.logs
+    WHERE EXISTS(
+      SELECT 1
+      FROM UNNEST(JSON_FLATTEN(JSON_QUERY(json_payload, "lax recursive $.message"))) AS f
+      WHERE SEARCH(f, "nullpointerexception")
+    );
 
 ## Search index usage
 

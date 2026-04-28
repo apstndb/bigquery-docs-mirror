@@ -102,9 +102,9 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
     
       - If you select **On-demand** , then this data transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
     
-      - If you select **Event-driven** , you must also specify a **Pub/Sub subscription** . Choose your [subscription](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a subscription** . This option enables an [event-driven transfer](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer) that trigger transfer runs when events arrive at the Pub/Sub subscription.
+      - If you select **Event-driven** , you must also specify a **Pub/Sub subscription** . Choose your [subscription](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a subscription** . This option enables an [event-driven transfer](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer) that triggers transfer runs when events arrive at the Pub/Sub subscription.
         
-        > **Note:** You must setup all [the required configurations](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer#gcs-event-driven-transfers) to enable an event-driven transfer.
+        > **Note:** You must set up all [the required configurations](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer#gcs-event-driven-transfers) to enable an event-driven transfer.
 
 6.  In the **Destination settings** section:
     

@@ -43,7 +43,7 @@ Cloud storage:
 Google Services:
 
   - [Campaign Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer)
-  - [Comparison Shopping Service (CSS)Center](https://docs.cloud.google.com/bigquery/docs/css-center-transfer-schedule-transfers) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Comparison Shopping Service (CSS) Center](https://docs.cloud.google.com/bigquery/docs/css-center-transfer-schedule-transfers) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
   - [Display & Video 360](https://docs.cloud.google.com/bigquery/docs/display-video-transfer)
   - [Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer)
   - [Google Ad Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer)

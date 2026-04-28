@@ -140,6 +140,10 @@ The following column will be deprecated on June 8, 2026. The column will be popu
 | ------------------------------------- | --------------- |
 | `ad_group_ad_ad_call_ad_phone_number` | `Ad`            |
 
+### May 7, 2026
+
+Starting May 7, 2026, Google Ads will require [Multi-factor authentication (MFA) for individual user authentication](https://ads-developers.googleblog.com/2026/04/multi-factor-authentication-requirement.html) . Existing transfer configurations and transfer runs aren't impacted. If you want to create new transfer configurations that are authorized with individual user credentials, you must enable [2-step verification](https://support.google.com/accounts/answer/185839) . 2-step verification is not required for new transfer configurations that are authorized with service accounts.
+
 ### March 2, 2026
 
 The [Google Ads connector](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v21](https://developers.google.com/google-ads/api/fields/v21/overview) to [v22](https://developers.google.com/google-ads/api/fields/v22/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v21-v22) .

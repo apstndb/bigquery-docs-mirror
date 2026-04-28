@@ -237,7 +237,7 @@ Note: Function security is not a configurable parameter in BigQuery. BigQuery su
 <p><code dir="ltr" translate="no">RETURNS data_type</code></p>
 <p><code dir="ltr" translate="no">AS sql_function_definition</code></p>
 <br />
-Note: Function behaviour for null inputs is implicitly handled in BigQuery and need not be specified as a separate option.</td>
+Note: Function behavior for null inputs is implicitly handled in BigQuery and need not be specified as a separate option.</td>
 </tr>
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">CREATE [OR REPLACE] FUNCTION</code></p>

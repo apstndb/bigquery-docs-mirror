@@ -111,9 +111,9 @@ For more information, see [Grant `bigquery.admin` access](https://docs.cloud.goo
 
 ### Required Google Ads roles
 
-You must grant read access to the Google Ads Customer ID or [manager account](https://support.google.com/google-ads/answer/6139186) (MCC) that is used in the transfer configuration.
+You must grant read access to the Google Ads Customer ID or [manager account](https://support.google.com/google-ads/answer/6139186) (MCC) that is used in the transfer configuration. When you create a new transfer configuration that is authorized with individual user credentials, you must [enable 2-Step Verification](https://support.google.com/accounts/answer/185839) .
 
-To authorize a service account for your Google Ads data transfer, we recommend that you grant the service account direct-account access to Google Ads. For more information, see [Authorization with direct account access](https://developers.google.com/google-ads/api/docs/oauth/service-accounts#direct.)
+To authorize a service account for your Google Ads data transfer, we recommend that you grant the service account direct-account access to Google Ads. For more information, see [Authorization with direct account access](https://developers.google.com/google-ads/api/docs/oauth/service-accounts#direct) . Multi-factor authentication (MFA) requirements, such as 2-Step Verification, are not needed for transfer configurations that are authorized with service accounts.
 
 ## Create Google Ads data transfer
 
