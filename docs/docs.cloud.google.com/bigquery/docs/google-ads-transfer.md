@@ -182,6 +182,7 @@ The following flags are optional:
   - `--schedule` : Specifies how often the query runs. If you don't specify `--schedule` , the default is set to `every 24 hours` . For information about the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
   - `--refresh_window_days` : Specifies the refresh window for a transfer configuration in days. The default value is `7` .
   - `--service_account_name` : Specifies a service account to use for the Google Ads transfer authentication instead of your user account.
+  - `--include_pmax` : Specify `true` to include tables specific to PMax reports. The default value is `false` . For more information about PMax support, see [PMax support](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#pmax-support)
 
 <!-- end list -->
 
@@ -193,9 +194,10 @@ The following flags are optional:
     --params='PARAMETERS' \
     --data_source=DATA_SOURCE \
     --table_filter=TABLES \
-    --schedule=SCHEDULE
-    --refresh_window_days=REFRESH_DAYS
-    --service_account_name=SERVICE_ACCOUNT_NAME
+    --schedule=SCHEDULE \
+    --refresh_window_days=REFRESH_DAYS \
+    --service_account_name=SERVICE_ACCOUNT_NAME \
+    --include_pmax=PMAX_ENABLE
 
 Where:
 
@@ -212,6 +214,7 @@ Where:
   - SCHEDULE is how often you want the query to run. If `--schedule` isn't specified, the default is every 24 hours, starting from the time the transfer is created.
   - REFRESH\_DAYS is an integer that specifies the refresh window for a transfer configuration in days. The default value is `7` .
   - SERVICE\_ACCOUNT\_NAME is the service account name used to authenticate your transfer. The service account must be owned by the same `project_id` used to create the transfer and it must have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#required_permissions) .
+  - PMAX\_ENABLE : Specify `true` to include tables specific to PMax reports. The default value is `false` . For more information about PMax support, see [PMax support](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#pmax-support)
 
 > **Caution:** You can't configure notifications using the command-line tool.
 

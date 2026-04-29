@@ -1435,7 +1435,7 @@ You can now apply [SQL query generated in the Gemini Cloud Assist chat](https://
 
 Feature
 
-To simplify access management for your Iceberg tables, you can use [credential vending mode with the Apache Iceberg REST catalog](https://docs.cloud.google.com/bigquery/docs/blms-rest-catalog) in BigLake metastore. Credential vending removes the need for catalog users to have direct access to Cloud Storage buckets. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+To simplify access management for your Iceberg tables, you can use [credential vending mode with the Apache Iceberg REST catalog](https://docs.cloud.google.com/bigquery/docs/blms-rest-catalog) in Lakehouse runtime catalog. Credential vending removes the need for catalog users to have direct access to Cloud Storage buckets. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
 
 Feature
 

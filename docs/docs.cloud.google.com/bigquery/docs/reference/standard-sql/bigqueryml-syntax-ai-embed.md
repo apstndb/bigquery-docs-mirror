@@ -230,7 +230,7 @@ The following query creates an external table from images of pet products stored
       `cymbal_pets.product_images`
     LIMIT 2;
 
-The following query uses the `gemini-embedding-2-preview` model to embed the combination of a text description and an image:
+The following query uses the `gemini-embedding-2-preview` ( [Preview](https://cloud.google.com/products#product-launch-stages) ) model to embed the combination of a text description and an image:
 
     SELECT
       AI.EMBED(
@@ -253,6 +253,8 @@ Use the following table to help you choose an embedding model for your data:
 ## Locations
 
 You can run `AI.EMBED` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Vertex AI embedding models, and also in the `US` and `EU` multi-regions.
+
+The `gemini-embedding-2-preview` model is only supported in the `US` and `us-central1` regions.
 
 ## Quotas
 

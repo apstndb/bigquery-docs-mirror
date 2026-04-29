@@ -1296,7 +1296,7 @@ Regions other than [supported European single regions](https://docs.cloud.google
 
 `gemini-embedding-2-preview`
 
-`us-central1`
+`us-central1` and `US` multi-region
 
 4,000 <sup>3</sup>
 
@@ -1826,6 +1826,14 @@ The following quotas apply to [BigQuery Storage Read API](https://docs.cloud.goo
 </td>
 </tr>
 <tr class="even">
+<td>Maximum concurrent read connections</td>
+<td>2,000 in multi-regions; 400 in regions</td>
+<td>Maximum number of concurrent <code dir="ltr" translate="no">ReadRows</code> connections per project. The default is 2,000 connections in the <code dir="ltr" translate="no">us</code> and <code dir="ltr" translate="no">eu</code> multi-regions, and 400 connections in other regions.<br />
+Actual connection availability can fluctuate based on overall region-wide service load and demand. This dynamic adjustment ensures fair resource distribution and maintains service stability for all users. When a stream is closed for fairness or when you reach the connection limit, you receive a <code dir="ltr" translate="no">RESOURCE_EXHAUSTED</code> error (HTTP 429).<br />
+Quota increase requests (QIRs) are reviewed based on the project's past usage patterns and the general availability of resources within the region.<br />
+</td>
+</tr>
+<tr class="odd">
 <td>Read control plane requests per minute per user</td>
 <td>5,000 requests</td>
 <td>Each user can make up to 5,000 Storage Read API metadata operation calls per minute per project. The metadata calls include the <code dir="ltr" translate="no">CreateReadSession</code> and <code dir="ltr" translate="no">SplitReadStream</code> methods.<br />
@@ -1836,12 +1844,11 @@ The following quotas apply to [BigQuery Storage Read API](https://docs.cloud.goo
 
 The following limits apply to [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) requests:
 
-| Limit                           | Default                                | Notes                                                                                                                                                                                                                                                                                                                                                       |
-| ------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Maximum row/filter length       | 1 MB                                   | When you use the Storage Read API `CreateReadSession` call, you are limited to a maximum length of 1 MB for each row or filter.                                                                                                                                                                                                                             |
-| Maximum serialized data size    | 128 MB                                 | When you use the Storage Read API `ReadRows` call, the serialized representation of the data in an individual `ReadRowsResponse` message cannot be larger than 128 MB.                                                                                                                                                                                      |
-| Maximum concurrent connections  | 2,000 in multi-regions; 400 in regions | You can open a maximum of 2,000 concurrent `ReadRows` connections per project in the `us` and `eu` multi-regions, and 400 concurrent `ReadRows` connections in other regions. In some cases you may be limited to fewer concurrent connections than this limit.                                                                                             |
-| Maximum per-stream memory usage | 1.5 GB                                 | The maximum per-stream memory is approximate because the limit is based on the internal representation of the row data. Streams utilizing more than 1.5 GB memory for a single row might fail. For more information, see [Troubleshoot resources exceeded issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-resources-exceeded) . |
+| Limit                           | Default | Notes                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Maximum row/filter length       | 1 MB    | When you use the Storage Read API `CreateReadSession` call, you are limited to a maximum length of 1 MB for each row or filter.                                                                                                                                                                                                                             |
+| Maximum serialized data size    | 128 MB  | When you use the Storage Read API `ReadRows` call, the serialized representation of the data in an individual `ReadRowsResponse` message cannot be larger than 128 MB.                                                                                                                                                                                      |
+| Maximum per-stream memory usage | 1.5 GB  | The maximum per-stream memory is approximate because the limit is based on the internal representation of the row data. Streams utilizing more than 1.5 GB memory for a single row might fail. For more information, see [Troubleshoot resources exceeded issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-resources-exceeded) . |
 
 ### Storage Write API
 
@@ -1868,7 +1875,7 @@ If you plan to [request a quota adjustment](https://docs.cloud.google.com/docs/q
 </thead>
 <tbody>
 <tr class="odd">
-<td>Concurrent connections</td>
+<td>Concurrent write connections</td>
 <td>1,000 in a region; 10,000 in a multi-region</td>
 <td><p>The concurrent connections quota is based on the client project that initiates the Storage Write API request, not the project containing the BigQuery dataset resource. The initiating project is the project associated with the <a href="https://docs.cloud.google.com/docs/authentication/api-keys">API key</a> or the <a href="https://docs.cloud.google.com/iam/docs/understanding-service-accounts">service account</a> .</p>
 <p>Your project can operate on 1,000 concurrent connections in a region, or 10,000 concurrent connections in the <code dir="ltr" translate="no">US</code> and <code dir="ltr" translate="no">EU</code> multi-regions.</p>

@@ -55,6 +55,10 @@ The following BigQuery features work transparently with materialized views:
 
   - **[Cross-region data replication](https://docs.cloud.google.com/bigquery/docs/data-replication) :** Materialized views can be created on top of BigQuery tables that have cross-region replication enabled, but only on the primary region. If the secondary region is used, you can encounter the following error message: `The dataset replica of the cross region dataset {PROJECT}:{DATASET} in region {REGION} is read-only because it's not the primary replica.`
 
+### Tables with active change data capture
+
+You can create materialized views over tables with active [change data capture](https://docs.cloud.google.com/bigquery/docs/change-data-capture) (CDC). These materialized views function like materialized views over BigQuery tables, including the benefits of automatic refresh. Materialized views can't perform [runtime merge queries](https://docs.cloud.google.com/bigquery/docs/change-data-capture#query-max-staleness) , so materialized views must be configured with a sufficient `max_staleness` to avoid runtime merge jobs. For more information, see [Limitations of materialized views over tables with active change data capture](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#cdc_limits) .
+
 ### BigLake metadata cache-enabled tables
 
 Materialized views over [BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) can reference structured data stored in Cloud Storage and Amazon Simple Storage Service (Amazon S3). These materialized views function like materialized views over BigQuery-managed storage tables, including the benefits of automatic refresh and smart tuning. Other benefits include the pre-aggregating, pre-filtering, and pre-joining of data stored outside of BigQuery. Materialized views over BigLake tables are stored in and have all of the characteristics of [BigQuery managed storage](https://docs.cloud.google.com/bigquery/docs/storage_overview) .
@@ -67,22 +71,29 @@ When you create a materialized view over an Amazon S3 BigLake table, the data in
 
   - Limits on base table references and other restrictions might apply. For more information about materialized view limits, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#materialized_view_limits) .
   - The data of a materialized view cannot be updated or manipulated directly using operations such as `COPY` , `EXPORT` , `LOAD` , `WRITE` , or data manipulation language (DML) statements.
-  - You cannot replace an existing materialized view with a materialized view of the same name.
   - The materialized view SQL cannot be updated after the materialized view is created.
   - A materialized view must reside in the same organization as its base tables, or in the same project if the project does not belong to an organization.
   - Materialized views use a restricted SQL syntax and a limited set of aggregation functions. For more information, see [Supported materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views#supported-mvs) .
   - Materialized views cannot be nested on other materialized views.
   - Materialized views cannot query external or wildcard tables, logical views <sup>1</sup> , or snapshots.
   - [System variables](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) , including the `@@session_id` system variable, aren't supported with materialized views.
+  - The value of the `max_staleness` option must be between 30 minutes and 3 days, inclusive.
   - Only the GoogleSQL dialect is supported for materialized views.
   - You can set descriptions for materialized views, but you cannot set descriptions for the individual columns in the materialized view.
   - If you delete a base table without first deleting the materialized view, queries and refreshes of the materialized view fail. If you recreate the base table, you must also recreate the materialized view.
-  - If a materialized view has a [change data capture-enabled](https://docs.cloud.google.com/bigquery/docs/change-data-capture) base table, then that table can't be referenced in the same query as the materialized view.
   - Only non-incremental materialized view can have [Spanner external dataset base tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) . If a non-incremental materialized view's last refresh occurred outside the `max_staleness` interval, then the query reads the base Spanner external dataset tables. To learn more about Spanner external dataset tables, see [Create materialized views over Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#spanner) .
   - Query results are not cached if the query runs against non-incremental materialized views that reference [Spanner external dataset tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
   - Materialized views can't inherit or explicitly define [parameterized data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) , such as `STRING(n)` , as parameterized data types are only supported for base table columns and script variables.
 
 <sup>1</sup> Logical view reference support is in [preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Reference logical views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#reference_logical_views) .
+
+### Limitations of materialized views over tables with active CDC
+
+Materialized views with active change data capture base tables have the following limitations:
+
+  - If a materialized view has a base table with active [change data capture](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , then that table can't be referenced in a query that also references the materialized view.
+  - When you create a materialized view over a table with active change data capture, the materialized view can't perform the runtime merge jobs of the underlying CDC table. Set the [`max_staleness` value](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) of the materialized view to at least twice the `max_staleness` value of the base table. Queries against a materialized view fail if the current version of the underlying CDC table is staler than the materialized view `max_staleness` .
+  - Smart tuning isn't supported for materialized views over tables with active change data capture.
 
 ### Limitations of materialized views over BigLake tables
 

@@ -441,9 +441,14 @@ The model and input table must be in the same region.
   - `processed_input` : a `STRING` value that contains the name of the user or item column. The value of this column matches the name of the user or item column provided in the [`query_statement` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) that was used when the matrix factorization model was trained.
   - `feature` : a `STRING` value that contains the names of the specific users or items used during training.
 
-## Supported visual content
+## Supported multimodal content
 
-You can use the `ML.GENERATE_EMBEDDING` function to generate embeddings for videos and images that meet the requirements described in [API limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
+You can use the `ML.GENERATE_EMBEDDING` function to generate embeddings for different modalities that meet the requirements described in [API limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
+
+| Model name                                                                                           | Supported data types           | Output dimensions | Description                                                   |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------ | ----------------- | ------------------------------------------------------------- |
+| `gemini-embedding-2-preview` (\[Preview\](https://cloud.google.com/products\#product-launch-stages)) | Text, image, video, audio, PDF | Up to 3072        | Multimodal model supporting a wide range of inputs. (Preview) |
+| `multimodalembedding@001`                                                                            | Text, image, video             | Up to 1408        | Generates embeddings for text, images, and video.             |
 
 There is no limitation on the length of the video files you can use with this function. However, the function only processes the first two minutes of a video. If a video is longer than two minutes, the `ML.GENERATE_EMBEDDING` function only returns embeddings for the first two minutes.
 
@@ -625,6 +630,8 @@ Generate embeddings that represent model weights and intercepts:
 ## Locations
 
 The `ML.GENERATE_EMBEDDING` function must run in the same [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations) as the model that the function references. For more information on supported regions for embedding models, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) . Embedding models are also available in the `US` multi-region.
+
+The `gemini-embedding-2-preview` model is only supported in the `US` and `us-central1` regions.
 
 ## Quotas
 

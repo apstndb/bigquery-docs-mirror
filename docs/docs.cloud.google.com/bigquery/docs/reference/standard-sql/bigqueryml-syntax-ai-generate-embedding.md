@@ -510,9 +510,14 @@ You can get text embeddings by using the following models:
 
 To get started, see the E5 family [model card](https://console.cloud.google.com/vertex-ai/publishers/intfloat/model-garden/multilingual-e5-large-instruct-maas) . For more information on open models, see [Open models for MaaS](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/maas/use-open-models)
 
-## Supported visual content
+## Supported multimodal content
 
-You can use the `AI.GENERATE_EMBEDDING` function to generate embeddings for videos and images that meet the requirements described in [API limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
+You can use the `AI.GENERATE_EMBEDDING` function to generate embeddings for different modalities that meet the requirements described in [API limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
+
+| Model name                                                                                           | Supported data types           | Output dimensions | Description                                                   |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------ | ----------------- | ------------------------------------------------------------- |
+| `gemini-embedding-2-preview` (\[Preview\](https://cloud.google.com/products\#product-launch-stages)) | Text, image, video, audio, PDF | Up to 3072        | Multimodal model supporting a wide range of inputs. (Preview) |
+| `multimodalembedding@001`                                                                            | Text, image, video             | Up to 1408        | Generates embeddings for text, images, and video.             |
 
 There is no limitation on the length of the video files you can use with this function. However, the function only processes the first two minutes of a video. If a video is longer than two minutes, the `AI.GENERATE_EMBEDDING` function only returns embeddings for the first two minutes.
 
@@ -536,7 +541,7 @@ Quotas apply when you use the `AI.GENERATE_EMBEDDING` function with remote model
 
 For the `multimodalembedding` model, the default requests per minute (RPM) for non- `EU` regions is 600. The default RPM for `EU` regions is 120. However, you can request a quota increase in order to increase throughput.
 
-To increase quota, first request more quota for the Vertex AI `multimodalembedding` model by using the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) . When the model quota has been increased, send an email to <bqml-feedback@google.com> and request a quota increase for the `AI.GENERATE_EMBEDDING` function. Include information about the adjusted `multimodalembedding` quota.
+To increase quota, first request more quota for the Vertex AI `multimodalembedding` model by using the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) .
 
 ## What's next
 

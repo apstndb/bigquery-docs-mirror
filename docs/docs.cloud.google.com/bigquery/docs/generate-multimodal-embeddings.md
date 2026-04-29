@@ -293,7 +293,7 @@ Create a remote model that represents a hosted Vertex AI multimodal embedding mo
     
         CREATE OR REPLACE MODEL `bqml_tutorial.multimodal_embedding_model`
           REMOTE WITH CONNECTION DEFAULT
-          OPTIONS (ENDPOINT = 'multimodalembedding@001');
+          OPTIONS (ENDPOINT = 'gemini-embedding-2-preview');
     
     The query takes several seconds to complete, after which you can access the `multimodal_embedding_model` model that appears in the `bqml_tutorial` dataset. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 

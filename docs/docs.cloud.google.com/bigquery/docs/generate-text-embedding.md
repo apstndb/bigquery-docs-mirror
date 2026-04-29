@@ -647,7 +647,7 @@ Replace the following:
 
   - `  OUTPUT_DIMENSIONALITY  ` : an `INT64` value that specifies the number of dimensions to use when generating embeddings. For example, if you specify `256 AS output_dimensionality` , then the `embedding` output column contains a 256 dimensional embedding for each input value.
     
-    For remote models over `gemini-embedding-001` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `[1, 3072]` . The default value is `3072` . For remote models over `text-embedding` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `[1, 768]` . The default value is `768` .
+    For remote models over `gemini-embedding-2-preview` or `gemini-embedding-001` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `[1, 3072]` . The default value is `3072` . For remote models over `text-embedding` models, the `  OUTPUT_DIMENSIONALITY  ` value must be in the range `[1, 768]` . The default value is `768` .
 
 **Example: Embed text in a table**
 
