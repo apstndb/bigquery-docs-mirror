@@ -1,8 +1,6 @@
 # Use the BigQuery MCP server
 
-This document shows you how to use the BigQuery remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. You can use the BigQuery remote MCP server to perform tasks such as running queries, getting metadata, and listing resources..
-
-The BigQuery remote MCP server is enabled when you enable the BigQuery API.
+This document shows you how to use the BigQuery remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. You can use the BigQuery remote MCP server to perform tasks such as running queries, getting metadata, and listing resources. The BigQuery remote MCP server is enabled when you enable the BigQuery API.
 
 [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) (MCP) standardizes how large language models (LLMs) and AI applications or agents connect to external data sources. MCP servers let you use their tools, resources, and prompts to take actions and get updated data from their backend service.
 
@@ -121,7 +119,7 @@ To view details of available MCP tools and their descriptions for the BigQuery M
 
 The BigQuery MCP tools are subject to the following limitations:
 
-  - The [`execute_sql`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/execute_sql) and [`execute_sql_readonly`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/execute_sql_readonly) tools don't support querying Google Drive external tables.
+  - The [`execute_sql`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql) and [`execute_sql_readonly`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly) tools don't support querying Google Drive external tables.
   - By default, the `execute_sql` and `execute_sql_readonly` tools limit query processing time to three minutes. Queries that run longer than three minutes are automatically canceled.
   - Query results are limited to a maximum of 3,000 rows.
   - The `execute_sql_readonly` tool allows only read-only operations on the data. Mutations such as DML statements, DDL statements, and Python UDFs aren't supported.

@@ -1259,7 +1259,7 @@ To apply, change, or remove a dataset default key, select one of the following o
               default_kms_key_name = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY',
               location = 'LOCATION');
     
-      - To change the default key for a dataset, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_statement) :
+      - To change the default key for a dataset, use the [`ALTER SCHEMA SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) :
         
             ALTER SCHEMA PROJECT_ID.DATASET_ID
             SET OPTIONS (

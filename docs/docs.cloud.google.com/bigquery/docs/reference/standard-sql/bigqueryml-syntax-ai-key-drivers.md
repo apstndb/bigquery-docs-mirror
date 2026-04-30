@@ -20,7 +20,6 @@ Calling the `AI.KEY_DRIVERS` function is similar to first [creating a contributi
 
 | `AI.KEY_DRIVERS`                                     | Contribution analysis model with `ML.GET_INSIGHTS`                     |
 | ---------------------------------------------------- | ---------------------------------------------------------------------- |
-| Faster for one-off analysis                          | Preferred for repeated analysis                                        |
 | Supports a maximum of 12 dimensions                  | Supports more than 12 dimensions                                       |
 | Supports only a summable metric                      | Supports summable, summable by ratio, and summable by category metrics |
 | Prunes redundant insights by default                 | Returns all insights by default                                        |

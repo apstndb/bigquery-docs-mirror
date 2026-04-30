@@ -266,7 +266,7 @@ Select one of the following options:
 
 9.  In the **Schema Configuration** section, do the following:
     
-    1.  For **Ingestion type** , select **Full** or **Incremental** . For more information, see [Data ingestion behavior](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental#data-ingestion) .
+    1.  For **Ingestion type** , select **Full** or **Incremental** . For more information, see [Configure incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental#configure_incremental_transfers) .
     2.  For **Table name patterns** , specify a table to transfer by entering a name or a pattern that matches the table name in the schema. You can use regular expressions to specify the pattern, for example `  table1_regex ; table2_regex  ` . The pattern should follow Java regular expression syntax. For example,
           - `lineitem;ordertb` matches tables that are named `lineitem` and `ordertb` .
           - `.*` matches all tables.
@@ -355,7 +355,7 @@ You can configure the following parameters for your Snowflake transfer configura
         
         You can also leave this field blank to migrate all tables from the specified schema.
 
-  - `ingestion_mode` : specify the ingestion mode for the transfer. Supported values are `FULL` and `INCREMENTAL` . For more information, see [Data ingestion behavior](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental#data-ingestion) .
+  - `ingestion_mode` : specify the ingestion mode for the transfer. Supported values are `FULL` and `INCREMENTAL` . For more information, see [Configure incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental#configure_incremental_transfers) .
 
   - `translation_output_gcs_path` : (Optional) specify a path to the Cloud Storage folder that contains the [schema mapping files from the translation engine](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema) . You can leave this empty to have the Snowflake connector automatically detect your schema.
     

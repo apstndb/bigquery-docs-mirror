@@ -35,7 +35,7 @@ If you have fewer than 12 dimensions and are using a summable metric, then you c
 
 ### Use a contribution analysis model
 
-For repeated analysis, or if you require more than 12 dimensions or other types of metrics, you can create a contribution analysis model with the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
+If you require more than 12 dimensions or other types of metrics, you can create a contribution analysis model with the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
 
 To reduce model creation time, specify an [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) . An apriori support threshold lets you prune small and less relevant segments so that the model uses only the largest and most relevant segments.
 

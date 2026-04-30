@@ -50,6 +50,10 @@
   - `  SourceTargetMapping  ` (message)
   - `  SparkSQLDialect  ` (message)
   - `  StartMigrationWorkflowRequest  ` (message)
+  - `  SuggestionConfig  ` (message)
+  - `  SuggestionStep  ` (message)
+  - `  SuggestionStep.RewriteTarget  ` (enum)
+  - `  SuggestionStep.SuggestionType  ` (enum)
   - `  TargetSpec  ` (message)
   - `  TeradataDialect  ` (message)
   - `  TeradataDialect.Mode  ` (enum)
@@ -922,7 +926,19 @@ Output only. Immutable. The unique identifier for the migration task. The ID is 
 
 `string`
 
-The type of the task. This must be one of the supported task types: Translation\_Teradata2BQ, Translation\_Redshift2BQ, Translation\_Bteq2BQ, Translation\_Oracle2BQ, Translation\_HiveQL2BQ, Translation\_SparkSQL2BQ, Translation\_Snowflake2BQ, Translation\_Netezza2BQ, Translation\_AzureSynapse2BQ, Translation\_Vertica2BQ, Translation\_SQLServer2BQ, Translation\_Presto2BQ, Translation\_MySQL2BQ, Translation\_Postgresql2BQ, Translation\_SQLite2BQ, Translation\_Greenplum2BQ.
+The type of the task. This must be one of the supported task types.
+
+Assessment:
+
+  - `Assessment_Hive` - Assessment for Hive.
+  - `Assessment_Redshift` - Assessment for Redshift.
+  - `Assessment_Snowflake` - Assessment for Snowflake.
+  - `Assessment_Teradata_v2` - Assessment for Teradata.
+  - `Assessment_Oracle` - Assessment for Oracle.
+  - `Assessment_Hadoop` - Assessment for Hadoop.
+  - `Assessment_Informatica` - Assessment for Informatica.
+
+Translation: See [Supported Task Types](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) for a list of supported task types.
 
 `state`
 
@@ -958,7 +974,7 @@ Output only. Provides details to errors and issues encountered while processing 
 
 `int32`
 
-The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `resource_error_count` that is higher than the size of `resource_error_details` .
+Output only. The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `resource_error_count` that is higher than the size of `resource_error_details` .
 
 `metrics[]`
 
@@ -1426,6 +1442,12 @@ The base URI for all files to be read in as sources for translation.
 
 Source literal.
 
+`gcs_file_path`
+
+`string`
+
+The path to a single source file in Cloud Storage.
+
 ## SourceTargetMapping
 
 Represents one mapping from a source SQL to a target SQL.
@@ -1461,6 +1483,72 @@ Fields
 `string`
 
 Required. The unique identifier for the migration workflow. Example: `projects/123/locations/us/workflows/1234`
+
+## SuggestionConfig
+
+The configuration for the suggestion if requested as a target type.
+
+Fields
+
+`skip_suggestion_steps[]`
+
+`  SuggestionStep  `
+
+The list of suggestion steps to skip.
+
+## SuggestionStep
+
+Suggestion step to skip.
+
+Fields
+
+`suggestion_type`
+
+`  SuggestionType  `
+
+The type of suggestion.
+
+`rewrite_target`
+
+`  RewriteTarget  `
+
+The rewrite target.
+
+## RewriteTarget
+
+The target to apply the suggestion to.
+
+Enums
+
+`REWRITE_TARGET_UNSPECIFIED`
+
+Rewrite target unspecified.
+
+`SOURCE_SQL`
+
+Source SQL.
+
+`TARGET_SQL`
+
+Target SQL.
+
+## SuggestionType
+
+Suggestion type.
+
+Enums
+
+`SUGGESTION_TYPE_UNSPECIFIED`
+
+Suggestion type unspecified.
+
+`QUERY_CUSTOMIZATION`
+
+Query customization.
+
+`TRANSLATION_EXPLANATION`
+
+Translation explanation.
 
 ## TargetSpec
 
@@ -1653,6 +1741,12 @@ The list of literal targets that will be directly returned to the response. Each
 `string`
 
 The types of output to generate, e.g. sql, metadata, lineage\_from\_sql\_scripts, etc. If not specified, a default set of targets will be generated. Some additional target types may be slower to generate. See the documentation for the set of available target types.
+
+`suggestion_config`
+
+`  SuggestionConfig  `
+
+The configuration for the suggestion if requested as a target type.
 
 ## TranslationTaskResult
 

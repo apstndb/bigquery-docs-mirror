@@ -78,11 +78,11 @@ You can connect a remote repository through HTTPS or SSH. Connecting a BigQuery 
 
 ### Connect a remote repository through SSH
 
-To connect a remote repository through SSH, you must generate an SSH key and a Secret Manager secret. The SSH key consists of a public SSH key and a private SSH key. You must share the public SSH key with your Git provider, and create a Secret Manager secret with the private SSH key. Then, share the secret with your default BigQuery service account.
+To connect a remote repository through SSH, you must generate an SSH key and a Secret Manager secret. The SSH key consists of a public SSH key and a private SSH key. You must share the public SSH key with your Git provider, and create a Secret Manager secret with the private SSH key. Then, share the secret with your custom service account.
 
 BigQuery uses the secret with the private SSH key to sign in to your Git provider to commit changes on behalf of users. BigQuery makes these commits using the user's Google Cloud email address so you can tell who made each commit.
 
-> **Warning:** The private SSH key that you create is shared among all BigQuery users who use the repository. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner](https://docs.cloud.google.com/bigquery/docs/access-control) role can use the key to connect repositories. BigQuery users are not able to see the key itself.
+> **Warning:** The private SSH key is shared among all BigQuery users who have [act-as permissions](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode) on the custom service account. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories that you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) ( `roles/dataform.codeOwner` ) can use the SSH key to connect repositories. BigQuery users aren't able to see the SSH key itself.
 
 To connect a remote repository to a BigQuery repository through SSH, follow these steps:
 
@@ -113,7 +113,7 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
 
 3.  [Grant access to the secret to your default Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
     
-    Your default Dataform service account is in the following format:
+    Your default Dataform service agent is in the following format:
     
         service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
@@ -212,11 +212,11 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
 
 ### Connect a remote repository through HTTPS
 
-To connect a remote repository through HTTPS, you must create a Secret Manager secret with a personal access token, and share the secret with your default BigQuery service account.
+To connect a remote repository through HTTPS, you must create a Secret Manager secret with a personal access token, and share the secret with your custom service account.
 
 BigQuery then uses the access token to sign in to your Git provider to commit changes on behalf of users. BigQuery makes these commits using the user's Google Cloud email address so you can tell who made each commit.
 
-> **Warning:** The private HTTPS token that you create is shared among all BigQuery users who use the repository. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner](https://docs.cloud.google.com/bigquery/docs/access-control) role can use the token to connect repositories. BigQuery users are not able to see the token itself.
+> **Warning:** The private HTTPS token is shared among all BigQuery users who have [act-as permissions](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode) on the custom service account. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories that you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) ( `roles/dataform.codeOwner` ) can use the HTTPS token to connect repositories. BigQuery users aren't able to see the HTTPS token itself.
 
 To connect a remote repository to a BigQuery repository through HTTPS, follow these steps:
 

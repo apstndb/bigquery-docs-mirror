@@ -35,6 +35,8 @@ All BigQuery repositories are connected to the default Dataform service agent. T
 
     service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
+[Strict act-as mode](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode) is enforced and requires all repositories to use a custom service account or user credentials for a Google Account to schedule pipelines and notebooks.
+
 ## Locations
 
 You can create repositories in all [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .

@@ -28,13 +28,13 @@ Set up either Cross-Cloud Interconnect or HA VPN from AWS or Azure. This step is
 
 ### AWS
 
-A high availability VPN lets you transfer data through an encrypted VPN tunnel. To use a HA VPN for your private Snowflake transfer, see [Create HA VPN connections between Google Cloud and AWS](https://docs.cloud.google.com/network-connectivity/docs/vpn/tutorials/create-ha-vpn-connections-google-cloud-aws) .
+A high availability VPN lets you transfer data through an encrypted VPN tunnel. To use an HA VPN for your private Snowflake transfer, see [Create HA VPN connections between Google Cloud and AWS](https://docs.cloud.google.com/network-connectivity/docs/vpn/tutorials/create-ha-vpn-connections-google-cloud-aws) .
 
 A [Cross-Cloud Interconnect](https://docs.cloud.google.com/network-connectivity/docs/interconnect/concepts/cci-overview) connection creates a dedicated private link between cloud providers and is suitable for large data transfers with low-latency requirements. To use Cross-Cloud Interconnect for your private Snowflake transfer, see [Connect to AWS](https://docs.cloud.google.com/network-connectivity/docs/interconnect/how-to/cci/aws/connectivity-overview) .
 
 ### Azure
 
-A high availability VPN lets you transfer data through an encrypted VPN tunnel. To use a HA VPN for your private Snowflake transfer, see [Create HA VPN connections between Google Cloud and Azure](https://docs.cloud.google.com/network-connectivity/docs/vpn/tutorials/create-ha-vpn-connections-google-cloud-azure) .
+A high availability VPN lets you transfer data through an encrypted VPN tunnel. To use an HA VPN for your private Snowflake transfer, see [Create HA VPN connections between Google Cloud and Azure](https://docs.cloud.google.com/network-connectivity/docs/vpn/tutorials/create-ha-vpn-connections-google-cloud-azure) .
 
 A [Cross-Cloud Interconnect](https://docs.cloud.google.com/network-connectivity/docs/interconnect/concepts/cci-overview) connection creates a dedicated private link between cloud providers and is suitable for large data transfers with low-latency requirements. To use Cross-Cloud Interconnect for your private Snowflake transfer, see [Connect to Azure](https://docs.cloud.google.com/network-connectivity/docs/interconnect/how-to/cci/azure/connectivity-overview) .
 

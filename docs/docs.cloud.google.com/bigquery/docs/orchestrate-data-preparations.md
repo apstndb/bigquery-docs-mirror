@@ -14,7 +14,7 @@ Before you begin, [create a data preparation](https://docs.cloud.google.com/bigq
 
 To authorize a data preparation with a service account when [manually running the data preparation in development](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#run-undeployed-manually) or [scheduling the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#create-schedule) , you must grant roles to the service account that you plan to use for executing the data preparation runs. For more information, see [Give access to the Dataform service account](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations#dataform-service-account-iam) .
 
-Before scheduling data preparations with a custom service account, do the following:
+To schedule data preparations, do the following:
 
   - Ask your administrator to grant you the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account.
   - Grant the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) and the [Service Account Token Creator role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `roles/iam.serviceAccountTokenCreator` ) to the default Dataform service agent on the custom service account.

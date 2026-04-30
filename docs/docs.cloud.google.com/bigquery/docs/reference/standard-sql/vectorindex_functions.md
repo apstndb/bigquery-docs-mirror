@@ -1,9 +1,3 @@
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
-
 GoogleSQL for BigQuery supports the following vector index functions.
 
 ## Function list
@@ -13,12 +7,6 @@ GoogleSQL for BigQuery supports the following vector index functions.
 | [`VECTOR_INDEX.STATISTICS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics) | Calculate how much an indexed table's data has drifted between when a vector index was trained and the present. |
 
 ## `VECTOR_INDEX.STATISTICS`
-
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
 
     VECTOR_INDEX.STATISTICS(
       TABLE table_name

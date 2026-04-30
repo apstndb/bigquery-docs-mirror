@@ -281,12 +281,6 @@ The following example creates a vector index with stored columns, and then runs 
 
 ### Pre-filter with partitions
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
-
 If the table that you are creating the vector index on is partitioned, you can choose to also partition the vector index. Partitioning the vector index has the following benefits:
 
   - Partition pruning is applied to the vector indexes in addition to the table partitions. Partition pruning occurs when the vector search uses a qualifying filter on the value of the partitioning column. This allows BigQuery to scan the partitions that match the filter and skip the remaining partitions. Partition pruning can decrease I/O costs. For more information on partition pruning, see [Query partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
@@ -657,12 +651,6 @@ The best way to assess the number of slots you need to efficiently run your inde
 When there are insufficient slots to run index-management jobs, an index can become out of sync with its table and indexing jobs might fail. In this case, BigQuery rebuilds the index from scratch. To avoid having an out-of-sync index, ensure you have enough slots to support index updates from data ingestion and optimization. For more information on monitoring slot usage, see [admin resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
 ## Rebuild a vector index
-
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bq-vector-search@google.com> .
 
 When table data changes significantly after a vector index is created, the vector index can become less efficient. When a vector index is less efficient, a vector search query that initially had high [recall](https://developers.google.com/machine-learning/glossary#recall) when using the index will have lower recall, because the data distribution shift in the base table isn't represented in the vector index.
 

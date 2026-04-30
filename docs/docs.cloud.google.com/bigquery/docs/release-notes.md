@@ -6,6 +6,26 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## April 29, 2026
+
+Breaking
+
+[Strict act-as mode](https://docs.cloud.google.com/dataform/docs/strict-act-as-mode) is enforced globally for all Dataform repositories, requiring the use of a custom service account or user credentials for running Dataform workflows, BigQuery pipelines, notebooks, and data preparations.
+
+Feature
+
+You can now use the [`VECTOR_INDEX.STATISTICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics) to calculate how much an indexed table's data has drifted between when a vector index was created and the present. If table data has changed enough to require a [vector index rebuild](https://docs.cloud.google.com/bigquery/docs/vector-index#rebuild_a_vector_index) , you can use the [`ALTER VECTOR INDEX REBUILD` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_vector_index_rebuild_statement) to rebuild the vector index without downtime. These features are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+Feature
+
+You can now use the `PARTITION BY` clause of the [`CREATE VECTOR INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) to [partition TreeAH vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index#partitions) . Partitioning enables partition pruning and can decrease I/O costs. This feature is [Generally Available](https://cloud.google.com/products/#product-launch-stages) .
+
+## April 28, 2026
+
+Feature
+
+You can now [create materialized views over active change data capture (CDC) enabled tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#cdc) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## April 23, 2026
 
 Change

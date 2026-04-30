@@ -45,8 +45,10 @@ If successful, the response body contains an instance of `  MigrationWorkflow  `
 
 ### Authorization scopes
 
-Requires the following OAuth scope:
+Requires one of the following OAuth scopes:
 
+  - `https://www.googleapis.com/auth/bigquerymigration`
+  - `https://www.googleapis.com/auth/bigquerymigration.readonly`
   - `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

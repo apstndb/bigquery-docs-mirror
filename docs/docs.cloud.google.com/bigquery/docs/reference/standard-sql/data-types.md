@@ -898,7 +898,7 @@ A measure is defined by a graph property, an aggregate function, and the key of 
 
 The measure type has the following limitations:
 
-  - Supported by only the `AGG` function.
+  - Supported by only the `AGG` function on output from the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .
   - Can't be a member type of non-measure container types, such as `STRUCT` , `ARRAY` , or `MAP` types.
   - Defined only as a property in a graph. For more information and examples, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 

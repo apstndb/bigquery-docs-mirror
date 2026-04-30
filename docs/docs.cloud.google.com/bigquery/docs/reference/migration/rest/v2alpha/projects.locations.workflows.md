@@ -77,6 +77,12 @@
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#SourceEnvironment.SCHEMA_REPRESENTATION)
   - [MetadataCaching](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#MetadataCaching)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#MetadataCaching.SCHEMA_REPRESENTATION)
+  - [SuggestionConfig](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#SuggestionConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#SuggestionConfig.SCHEMA_REPRESENTATION)
+  - [SuggestionStep](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#SuggestionStep)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#SuggestionStep.SCHEMA_REPRESENTATION)
+  - [SuggestionType](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#SuggestionType)
+  - [RewriteTarget](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#RewriteTarget)
   - [State](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#State)
   - [MigrationTaskOrchestrationResult](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#MigrationTaskOrchestrationResult)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows#MigrationTaskOrchestrationResult.SCHEMA_REPRESENTATION)
@@ -183,7 +189,19 @@ Output only. Immutable. The unique identifier for the migration task. The ID is 
 
 `string`
 
-The type of the task. This must be one of the supported task types: Translation\_Teradata2BQ, Translation\_Redshift2BQ, Translation\_Bteq2BQ, Translation\_Oracle2BQ, Translation\_HiveQL2BQ, Translation\_SparkSQL2BQ, Translation\_Snowflake2BQ, Translation\_Netezza2BQ, Translation\_AzureSynapse2BQ, Translation\_Vertica2BQ, Translation\_SQLServer2BQ, Translation\_Presto2BQ, Translation\_MySQL2BQ, Translation\_Postgresql2BQ, Translation\_SQLite2BQ, Translation\_Greenplum2BQ.
+The type of the task. This must be one of the supported task types.
+
+Assessment:
+
+  - `Assessment_Hive` - Assessment for Hive.
+  - `Assessment_Redshift` - Assessment for Redshift.
+  - `Assessment_Snowflake` - Assessment for Snowflake.
+  - `Assessment_Teradata_v2` - Assessment for Teradata.
+  - `Assessment_Oracle` - Assessment for Oracle.
+  - `Assessment_Hadoop` - Assessment for Hadoop.
+  - `Assessment_Informatica` - Assessment for Informatica.
+
+Translation: See [Supported Task Types](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) for a list of supported task types.
 
 `details`
 
@@ -233,7 +251,7 @@ Output only. Provides details to errors and issues encountered while processing 
 
 `integer`
 
-The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `resourceErrorCount` that is higher than the size of `resourceErrorDetails` .
+Output only. The number or resources with errors. Note: This is not the total number of errors as each resource can have more than one error. This is used to indicate truncation by having a `resourceErrorCount` that is higher than the size of `resourceErrorDetails` .
 
 `metrics[]`
 
@@ -1481,7 +1499,7 @@ The translation details to capture the necessary settings for a translation job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceTargetMapping&quot;: [{object (SourceTargetMapping)}],&quot;targetBaseUri&quot;: string,&quot;sourceEnvironment&quot;: {object (SourceEnvironment)},&quot;targetReturnLiterals&quot;: [string],&quot;targetTypes&quot;: [string]}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceTargetMapping&quot;: [{object (SourceTargetMapping)}],&quot;targetBaseUri&quot;: string,&quot;sourceEnvironment&quot;: {object (SourceEnvironment)},&quot;targetReturnLiterals&quot;: [string],&quot;targetTypes&quot;: [string],&quot;suggestionConfig&quot;: {object (SuggestionConfig)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1517,6 +1535,12 @@ The list of literal targets that will be directly returned to the response. Each
 `string`
 
 The types of output to generate, e.g. sql, metadata, lineage\_from\_sql\_scripts, etc. If not specified, a default set of targets will be generated. Some additional target types may be slower to generate. See the documentation for the set of available target types.
+
+`suggestionConfig`
+
+` object ( SuggestionConfig  ` )
+
+The configuration for the suggestion if requested as a target type.
 
 ## SourceTargetMapping
 
@@ -1567,7 +1591,7 @@ Represents one path to the location that holds source data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;encoding&quot;: string,// Union field source can be only one of the following:&quot;baseUri&quot;: string,&quot;literal&quot;: {object (Literal)}// End of list of possible types for union field source.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;encoding&quot;: string,// Union field source can be only one of the following:&quot;baseUri&quot;: string,&quot;literal&quot;: {object (Literal)},&quot;gcsFilePath&quot;: string// End of list of possible types for union field source.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1593,6 +1617,12 @@ The base URI for all files to be read in as sources for translation.
 ` object ( Literal  ` )
 
 Source literal.
+
+`gcsFilePath`
+
+`string`
+
+The path to a single source file in Cloud Storage.
 
 ## Literal
 
@@ -1743,6 +1773,104 @@ Fields
 Optional. The maximum age of the metadata cache. If the cache is older than this value, the cache will be refreshed. A cache will not be kept for longer than 7 days. Providing no value or a value larger than 7 days will result in using the cache if available (i.e. the same as setting the value to 7 days).
 
 Setting the duration to 0 or a negative value will refresh the cache.
+
+## SuggestionConfig
+
+The configuration for the suggestion if requested as a target type.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;skipSuggestionSteps&quot;: [{object (SuggestionStep)}]}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`skipSuggestionSteps[]`
+
+` object ( SuggestionStep  ` )
+
+The list of suggestion steps to skip.
+
+## SuggestionStep
+
+Suggestion step to skip.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;suggestionType&quot;: enum (SuggestionType),&quot;rewriteTarget&quot;: enum (RewriteTarget)}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`suggestionType`
+
+` enum ( SuggestionType  ` )
+
+The type of suggestion.
+
+`rewriteTarget`
+
+` enum ( RewriteTarget  ` )
+
+The rewrite target.
+
+## SuggestionType
+
+Suggestion type.
+
+Enums
+
+`SUGGESTION_TYPE_UNSPECIFIED`
+
+Suggestion type unspecified.
+
+`QUERY_CUSTOMIZATION`
+
+Query customization.
+
+`TRANSLATION_EXPLANATION`
+
+Translation explanation.
+
+## RewriteTarget
+
+The target to apply the suggestion to.
+
+Enums
+
+`REWRITE_TARGET_UNSPECIFIED`
+
+Rewrite target unspecified.
+
+`SOURCE_SQL`
+
+Source SQL.
+
+`TARGET_SQL`
+
+Target SQL.
 
 ## State
 

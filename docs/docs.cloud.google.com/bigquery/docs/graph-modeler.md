@@ -6,7 +6,7 @@
 
 To request support or provide feedback for this feature, send an email to <bq-graph-preview-support@google.com> .
 
-This document describes how to use the visual graph modeler in BigQuery Studio to define nodes and edges from your BigQuery tables, and how to edit and query graph data. You can also create a graph by using the [`CREATE PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-ddl-statements#create_property_graph) .
+This document describes how to use the visual graph modeler in BigQuery Studio to define nodes and edges from your BigQuery tables, and how to edit and query graph data. You can also create a graph by using the [`CREATE PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) .
 
 ## Required roles
 
