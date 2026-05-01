@@ -1,6 +1,6 @@
 # Apache Iceberg tables
 
-*Apache Iceberg tables managed by BigQuery* (formerly BigLake tables for Apache Iceberg in BigQuery) provide the foundation for building open-format lakehouses on Google Cloud. Managed Iceberg tables offer the same fully managed experience as standard BigQuery tables, but store data in customer-owned storage buckets. Managed Iceberg tables support the open Spark table format for better interoperability with open-source and third-party compute engines on a single copy of data.
+*Apache Iceberg tables managed by BigQuery* (formerly BigLake tables for Apache Iceberg in BigQuery) provide the foundation for building open-format lakehouses on Google Cloud. Managed Iceberg tables offer the same fully managed experience as standard BigQuery tables, but store data in customer-owned storage buckets. Managed Iceberg tables support the open Apache Iceberg table format for better interoperability with open-source and third-party compute engines on a single copy of data.
 
 Managed Iceberg tables support the following features:
 
@@ -19,14 +19,14 @@ Managed Iceberg tables support the following features:
 
 Managed Iceberg tables bring the convenience of BigQuery resource management to tables that reside in your own cloud buckets. You can use BigQuery and open-source compute engines on these tables without moving the data out of the buckets that you control. You must configure a Cloud Storage bucket before you start using Managed Iceberg tables.
 
-Managed Iceberg tables utilize [*Lakehouse runtime catalog*](https://docs.cloud.google.com/bigquery/docs/about-blms) as the unified runtime catalog for all Spark data. The Lakehouse runtime catalog provides a single source of truth for managing metadata from multiple engines and allows for engine interoperability.
+Managed Iceberg tables utilize [*Lakehouse runtime catalog*](https://docs.cloud.google.com/bigquery/docs/about-blms) as the unified runtime catalog for all Apache Iceberg data. The Lakehouse runtime catalog provides a single source of truth for managing metadata from multiple engines and allows for engine interoperability.
 
 Using Apache Iceberg tables has the following implications on your bucket:
 
   - BigQuery creates new data files in the bucket in response to write requests and background storage optimizations, such as DML statements and streaming.
   - Automatic compaction and clustering are performed on the data files in the bucket. After the expiration of the [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) , data files are garbage collected. However, if the table is deleted, the associated data files aren't garbage collected. For more information, see [Storage optimization](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#storage_optimization) .
 
-Creating an Spark table is similar to [creating BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables) . Because it stores data in open formats on Cloud Storage, you must do the following:
+Creating an Apache Iceberg table is similar to [creating BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables) . Because it stores data in open formats on Cloud Storage, you must do the following:
 
   - Specify the [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) with `WITH CONNECTION` to configure the connection credentials for BigQuery to access Cloud Storage.
   - Specify the file format of data storage as `PARQUET` with the `file_format = PARQUET` statement.
@@ -59,12 +59,12 @@ Directly changing or adding files to the bucket outside of BigQuery can lead to 
 To prevent accidental additions and data loss, we also recommend restricting external tool write permissions on buckets containing Managed Iceberg tables.</td>
 </tr>
 <tr class="even">
-<td>Create a new Spark table in a non-empty prefix.</td>
+<td>Create a new Apache Iceberg table in a non-empty prefix.</td>
 <td><strong>Data loss:</strong> Extant data isn't tracked by BigQuery, so these files are considered untracked, and deleted by background garbage collection processes.</td>
 <td>Only create new Managed Iceberg tables in empty prefixes.</td>
 </tr>
 <tr class="odd">
-<td>Modify or replace Spark table data files.</td>
+<td>Modify or replace Apache Iceberg table data files.</td>
 <td><strong>Data loss:</strong> On external modification or replacement, the table fails a consistency check and becomes unreadable. Queries against the table fail.<br />
 There is no self-serve way to recover from this point. Contact <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">support</a> for data recovery assistance.</td>
 <td>Modify data exclusively through BigQuery. This lets BigQuery track the files and prevent them from being garbage collected.<br />
@@ -73,7 +73,7 @@ To prevent accidental additions and data loss, we also recommend restricting ext
 <tr class="even">
 <td>Create two Managed Iceberg tables on the same or overlapping URIs.</td>
 <td><strong>Data loss:</strong> BigQuery doesn't bridge identical URI instances of Managed Iceberg tables. Background garbage collection processes for each table will consider the opposite table's files as untracked, and delete them, causing data loss.</td>
-<td>Use unique URIs for each Spark table.</td>
+<td>Use unique URIs for each Apache Iceberg table.</td>
 </tr>
 </tbody>
 </table>
@@ -92,13 +92,13 @@ The configuration of your Cloud Storage bucket and its connection with BigQuery 
 
   - Verify that the [required roles](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#required-roles) are assigned to the correct users and service accounts.
 
-  - To prevent accidental Spark data deletion or corruption in your Cloud Storage bucket, restrict write and delete permissions for most users in your organization. You can do this by setting a [bucket permission policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions) with conditions that deny `PUT` and `DELETE` requests for all users, except those that you specify.
+  - To prevent accidental Apache Iceberg data deletion or corruption in your Cloud Storage bucket, restrict write and delete permissions for most users in your organization. You can do this by setting a [bucket permission policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions) with conditions that deny `PUT` and `DELETE` requests for all users, except those that you specify.
 
   - Apply [google-managed](https://docs.cloud.google.com/storage/docs/encryption/default-keys) or [customer-managed](https://docs.cloud.google.com/storage/docs/encryption/customer-managed-keys) encryption keys for extra protection of sensitive data.
 
   - Enable [audit logging](https://docs.cloud.google.com/storage/docs/audit-logging#settings) for operational transparency, troubleshooting, and monitoring data access.
 
-  - Keep the default [soft delete policy](https://docs.cloud.google.com/storage/docs/soft-delete) (7 day retention) to protect against accidental deletions. However, if you find that Spark data has been deleted, engage with [support](https://docs.cloud.google.com/bigquery/docs/getting-support) rather than restoring objects manually, as objects that are added or modified outside of BigQuery aren't tracked by BigQuery metadata.
+  - Keep the default [soft delete policy](https://docs.cloud.google.com/storage/docs/soft-delete) (7 day retention) to protect against accidental deletions. However, if you find that Apache Iceberg data has been deleted, engage with [support](https://docs.cloud.google.com/bigquery/docs/getting-support) rather than restoring objects manually, as objects that are added or modified outside of BigQuery aren't tracked by BigQuery metadata.
 
   - Adaptive file sizing, automatic clustering, and garbage collection are enabled automatically and help with optimizing file performance and cost.
 
@@ -127,7 +127,7 @@ Replace the following:
   - `PROJECT_ID` : the ID of your project
   - `LOCATION` : the [location](https://docs.cloud.google.com/storage/docs/locations) for your new bucket
 
-## Spark table workflows
+## Apache Iceberg table workflows
 
 The following sections describe how to create, load, manage, and query managed tables.
 
@@ -174,7 +174,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ### Create Managed Iceberg tables
 
-To create an Spark table, select one of the following methods:
+To create an Apache Iceberg table, select one of the following methods:
 
 ### SQL
 
@@ -263,9 +263,9 @@ The following sections describe how to import data from various table formats in
 
 #### Standard load data from flat files
 
-Managed Iceberg tables use BigQuery load jobs to load external files into Managed Iceberg tables. If you have an existing Spark table, follow the [`bq load` CLI guide](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#bq) or the [`LOAD` SQL guide](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_a_file_that_is_externally_partitioned) to load external data. After loading the data, new Parquet files are written into the STORAGE\_URI `/data` folder.
+Managed Iceberg tables use BigQuery load jobs to load external files into Managed Iceberg tables. If you have an existing Apache Iceberg table, follow the [`bq load` CLI guide](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#bq) or the [`LOAD` SQL guide](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_a_file_that_is_externally_partitioned) to load external data. After loading the data, new Parquet files are written into the STORAGE\_URI `/data` folder.
 
-If the prior instructions are used without an existing Spark table, a BigQuery table is created instead.
+If the prior instructions are used without an existing Apache Iceberg table, a BigQuery table is created instead.
 
 See the following for tool-specific examples of batch loads into managed tables:
 
@@ -278,7 +278,7 @@ See the following for tool-specific examples of batch loads into managed tables:
 
 Replace the following:
 
-  - MANAGED\_TABLE\_NAME : the name of an existing Spark table.
+  - MANAGED\_TABLE\_NAME : the name of an existing Apache Iceberg table.
   - STORAGE\_URI : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported. For example, `gs://mybucket/table` .
   - FILE\_FORMAT : the source table format. For supported formats, see the `format` row of [`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_option_list) .
 
@@ -309,17 +309,17 @@ The following sections describe how to export data from Managed Iceberg tables i
 
 #### Export data into flat formats
 
-To export an Spark table into a flat format, use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) and select a destination format. For more information, see [Exporting data](https://docs.cloud.google.com/bigquery/docs/exporting-data#sql) .
+To export an Apache Iceberg table into a flat format, use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) and select a destination format. For more information, see [Exporting data](https://docs.cloud.google.com/bigquery/docs/exporting-data#sql) .
 
-### Create Spark table metadata snapshots
+### Create Apache Iceberg table metadata snapshots
 
-To create an Spark table metadata snapshot, follow these steps:
+To create an Apache Iceberg table metadata snapshot, follow these steps:
 
-1.  Export the metadata into the Spark V2 format with the [`EXPORT TABLE METADATA`](https://docs.cloud.google.com/bigquery/docs/exporting-data#export_table_metadata) SQL statement.
+1.  Export the metadata into the Apache Iceberg V2 format with the [`EXPORT TABLE METADATA`](https://docs.cloud.google.com/bigquery/docs/exporting-data#export_table_metadata) SQL statement.
 
-2.  Optional: Schedule Spark metadata snapshot refresh. To refresh an Spark metadata snapshot based on a set time interval, use a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
+2.  Optional: Schedule Apache Iceberg metadata snapshot refresh. To refresh an Apache Iceberg metadata snapshot based on a set time interval, use a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
 
-3.  Optional: Enable metadata auto-refresh for your project to automatically update your Spark table metadata snapshot on each table mutation. To enable metadata auto-refresh, contact <bigquery-tables-for-apache-iceberg-help@google.com> . [`EXPORT METADATA` costs](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#queries_and_jobs) are applied on each refresh operation.
+3.  Optional: Enable metadata auto-refresh for your project to automatically update your Apache Iceberg table metadata snapshot on each table mutation. To enable metadata auto-refresh, contact <bigquery-tables-for-apache-iceberg-help@google.com> . [`EXPORT METADATA` costs](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#queries_and_jobs) are applied on each refresh operation.
 
 The following example creates a scheduled query named `My Scheduled Snapshot Refresh Query` using the DDL statement `EXPORT TABLE METADATA FROM mydataset.test` . The DDL statement runs every 24 hours.
 
@@ -329,9 +329,9 @@ The following example creates a scheduled query named `My Scheduled Snapshot Ref
         --schedule='every 24 hours' \
         'EXPORT TABLE METADATA FROM mydataset.test'
 
-### View Spark table metadata snapshot
+### View Apache Iceberg table metadata snapshot
 
-After you refresh the Spark table metadata snapshot you can find the snapshot in the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) that the Spark table was originally created in. The `/data` folder contains the Parquet file data shards, and the `/metadata` folder contains the Spark table metadata snapshot.
+After you refresh the Apache Iceberg table metadata snapshot you can find the snapshot in the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) that the Apache Iceberg table was originally created in. The `/data` folder contains the Parquet file data shards, and the `/metadata` folder contains the Apache Iceberg table metadata snapshot.
 
     SELECT
       table_name,
@@ -343,7 +343,7 @@ Note that `mydataset` and `table_name` are placeholders for your actual dataset 
 
 ### Read Managed Iceberg tables with Spark
 
-The following sample sets up your environment to use Spark SQL with Spark, and then executes a query to fetch data from a specified Spark table.
+The following sample sets up your environment to use Spark SQL with Spark, and then executes a query to fetch data from a specified Apache Iceberg table.
 
     spark-sql \
       --packages org.apache.iceberg:iceberg-spark-runtime-ICEBERG_VERSION_NUMBER \
@@ -356,14 +356,14 @@ The following sample sets up your environment to use Spark SQL with Spark, and t
 
 Replace the following:
 
-  - ICEBERG\_VERSION\_NUMBER : the current version of Spark Spark runtime. Download the latest version from [Spark Releases](https://iceberg.apache.org/releases/) .
-  - CATALOG\_NAME : the catalog to reference your Spark table.
+  - ICEBERG\_VERSION\_NUMBER : the current version of the Apache Iceberg Spark runtime. Download the latest version from [Apache Iceberg Releases](https://iceberg.apache.org/releases/) .
+  - CATALOG\_NAME : the catalog to reference your Apache Iceberg table.
   - BUCKET\_PATH : the path to the bucket containing the table files. For example, `gs://mybucket/` .
   - FOLDER\_NAME : the folder containing the table files. For example, `myfolder` .
 
 ### Modify Managed Iceberg tables
 
-To modify an Spark table, follow the steps shown in [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+To modify an Apache Iceberg table, follow the steps shown in [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 ### Use multi-statement transactions
 
@@ -402,9 +402,9 @@ Managed Iceberg tables also support [clustering](https://docs.cloud.google.com/b
   - Partition expiration isn't supported.
   - [Partition evolution](https://iceberg.apache.org/docs/1.5.1/evolution/#partition-evolution) isn't supported.
 
-#### Create a partitioned Spark table
+#### Create a partitioned Apache Iceberg table
 
-To create a partitioned Spark table, follow the instructions to [create a standard Spark table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables) , and include one of the following, depending on your environment:
+To create a partitioned Apache Iceberg table, follow the instructions to [create a standard Apache Iceberg table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables) , and include one of the following, depending on your environment:
 
   - The [`PARTITION BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression)
   - The [`--time_partitioning_field` and `--time_partitioning_type` flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table)
@@ -412,7 +412,7 @@ To create a partitioned Spark table, follow the instructions to [create a standa
 
 #### Modify and query partitioned Managed Iceberg tables
 
-BigQuery data manipulation language (DML) statements and queries for partitioned Managed Iceberg tables are the same as for standard Spark tables. BigQuery automatically scopes the job to the right partitions, similar to [Spark hidden partitioning](https://iceberg.apache.org/docs/latest/partitioning/#icebergs-hidden-partitioning) . Additionally, any new data that you add to the table is automatically partitioned.
+BigQuery data manipulation language (DML) statements and queries for partitioned Managed Iceberg tables are the same as for standard Apache Iceberg tables. BigQuery automatically scopes the job to the right partitions, similar to [Apache Iceberg hidden partitioning](https://iceberg.apache.org/docs/latest/partitioning/#icebergs-hidden-partitioning) . Additionally, any new data that you add to the table is automatically partitioned.
 
 You can also query partitioned Managed Iceberg tables with other engines in the same way as standard Managed Iceberg tables. We recommend [enabling metadata snapshots](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-table-snapshots) for the best experience.
 
@@ -420,7 +420,7 @@ For enhanced security, partitioning information for Managed Iceberg tables is de
 
 ## Pricing
 
-Spark table pricing consists of storage, storage optimization, and queries and jobs.
+Apache Iceberg table pricing consists of storage, storage optimization, and queries and jobs.
 
 ### Storage
 
@@ -470,7 +470,7 @@ Managed Iceberg tables have the following limitations:
   - Managed Iceberg tables don't support [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .
   - Managed Iceberg tables don't support [fail-safe windows](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) .
   - Managed Iceberg tables don't support extract jobs.
-  - The `INFORMATION_SCHEMA.TABLE_STORAGE` view doesn't include Spark tables.
+  - The `INFORMATION_SCHEMA.TABLE_STORAGE` view doesn't include Apache Iceberg tables.
   - Managed Iceberg tables aren't supported as query result destinations. You can instead use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement with the `AS query_statement` argument to create a table as the query result destination.
   - `CREATE OR REPLACE` doesn't support replacing standard tables with Apache Iceberg tables, or Managed Iceberg tables with standard tables.
   - [Batch loading](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) and [`LOAD DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) only support appending data to existing Managed Iceberg tables.
@@ -479,6 +479,6 @@ Managed Iceberg tables have the following limitations:
       - [`CREATE OR REPLACE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , using the same table creation options.
       - `DELETE FROM` table `WHERE` true
   - The [`APPENDS` table-valued function (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history) doesn't support Managed Iceberg tables.
-  - Spark metadata might not contain data that was streamed to BigQuery by the Storage Write API within the last 90 minutes.
+  - Apache Iceberg metadata might not contain data that was streamed to BigQuery by the Storage Write API within the last 90 minutes.
   - Record-based paginated access using `tabledata.list` doesn't support Apache Iceberg tables.
-  - Only one concurrent mutating DML statement ( `UPDATE` , `DELETE` , and `MERGE` ) runs for each Spark table. Additional mutating DML statements are queued.
+  - Only one concurrent mutating DML statement ( `UPDATE` , `DELETE` , and `MERGE` ) runs for each Apache Iceberg table. Additional mutating DML statements are queued.

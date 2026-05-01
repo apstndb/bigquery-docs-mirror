@@ -385,9 +385,11 @@ As a data contributor, you can do the following:
 
 To perform data contributor tasks, you must have the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) on a data clean room.
 
-You also need the `resourcemanager.organization.get` permission if you want to view data clean rooms in your organization that are not in your current project.
+To perform data contributor tasks, you also need the `bigquery.datasets.get` , `bigquery.datasets.update` , and `bigquery.tables.get` permissions on the source dataset and table. These permissions are available in the [BigQuery Data Owner role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ).
 
-When you use the data clean room creation process to create a [BigQuery view](https://docs.cloud.google.com/bigquery/docs/views#creating_a_view) with [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) , you need the `bigquery.tables.setPrivacyPolicy` permission. If you reference the view directly, this permission won't be required.
+To view data clean rooms in your organization that aren't in your current project, you need the `resourcemanager.organization.get` permission.
+
+To use the data clean room creation process to create a [BigQuery view](https://docs.cloud.google.com/bigquery/docs/views#creating_a_view) with [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) , you need the `bigquery.tables.setPrivacyPolicy` and `bigquery.tables.create` permissions. If you reference the view directly, this permission isn't required.
 
 ### Create a listing (add data)
 

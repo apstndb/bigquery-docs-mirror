@@ -1473,6 +1473,8 @@ The following quotas apply to [BigQuery API](https://docs.cloud.google.com/bigqu
 
 The following limits apply to [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest) (core) requests:
 
+> **Note:** While most BigQuery API core methods have a maximum of 100 API requests per user per method, some core methods can have different rate limits.
+
 <table>
 <colgroup>
 <col style="width: 25%" />

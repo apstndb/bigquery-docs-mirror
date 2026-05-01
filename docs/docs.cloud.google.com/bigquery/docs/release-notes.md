@@ -6,6 +6,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## April 30, 2026
+
+Breaking
+
+Starting May 7, 2026, new transfer configurations that transfer data from Google Ads using the BigQuery Data Transfer Service will require [Multi-factor authentication (MFA) for individual user authentication](https://ads-developers.googleblog.com/2026/04/multi-factor-authentication-requirement.html) . For more information, see [May 7, 2026](https://docs.cloud.google.com/bigquery/docs/transfer-changes#May7-google-ads) .
+
 ## April 29, 2026
 
 Breaking

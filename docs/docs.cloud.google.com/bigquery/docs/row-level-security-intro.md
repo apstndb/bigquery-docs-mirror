@@ -268,7 +268,7 @@ For more information about how row-level security interacts with some BigQuery f
 
   - Subquery row-level access policies only support BigQuery tables, BigLake external tables, and BigLake managed tables.
 
-  - Column [renaming](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_name) and [dropping](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#delete_a_column) statements that modify table schema and could impact row access policies aren't permitted.
+  - Column [renaming](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_name) and [dropping](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#delete_a_column) statements that modify table schema are permitted only if the column being dropped or renamed isn't part of any row access policy.
 
   - [Data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) is only compatible with queries that have non-subquery row access policies. Data masking is applied on top of row-level security. For example, if there is a row access policy applied on `location = "US"` and `location` is masked, then users are able to see rows where `location = "US"` but the location field is masked in the results. Queries involving a subquery row access policy will require Fine-Grained Reader access on columns referenced by row access policies.
 

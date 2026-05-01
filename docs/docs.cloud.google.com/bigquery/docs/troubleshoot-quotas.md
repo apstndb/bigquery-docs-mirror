@@ -298,9 +298,16 @@ To resolve this error, do the following:
 
 ### Maximum number of API requests limit errors
 
-BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email. For more information, see the [**Maximum number of API requests per second per user per method** rate limit](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
+BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email.
 
-> **Note:** The BigQuery API rate limits don't apply to streaming inserts API requests.
+Most BigQuery API core methods have a maximum of 100 API requests per user per method; however, some of these core methods can have different rate limits; for example:
+
+  - The [`jobs.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) has a limit of 1000 API requests per user per second.
+  - The [`projects.list` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list) and the [`tables.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) both have a limit of 10 requests per user per second.
+
+In addition, BigQuery API rate limits [don't apply](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) to streaming inserts.
+
+For more information on individual rate limits, see the [**Maximum number of API requests per second per user per method** rate limit](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
 
 **Error message**
 

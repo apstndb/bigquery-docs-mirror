@@ -31,7 +31,7 @@ A window function computes results over a group of rows. You can use the followi
     
     For example, the numbering function `RANK()` could be used here.
 
-  - `argument_list` : Arguments that are specific to the function. Some functions have them, some don't.
+  - `argument_list` : Arguments that are specific to the function. Some functions have them, some don't. Not all clauses are supported when the function is used with the `OVER` clause as a window function. For example, the `DISTINCT` clause can't be used with the `OVER` clause. For more information, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
   - `OVER` : Keyword required in the window function syntax preceding the [`OVER` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) .
 

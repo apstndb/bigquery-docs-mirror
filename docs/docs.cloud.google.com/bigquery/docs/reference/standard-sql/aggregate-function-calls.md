@@ -46,7 +46,7 @@ Each aggregate function supports all or a subset of the aggregate function call 
     
       - The limit `n` must be a constant `INT64` .
 
-  - `OVER` : If the aggregate function is also a window function, use this clause to define a window of rows around the row being evaluated. For each row, the aggregate function result is computed using the selected window of rows as input. If this clause is used, aggregate function clauses (i.e. `DISTINCT` ) can't be used. To learn more about the `OVER` clause, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+  - `OVER` : If the aggregate function is also a window function, use this clause to define a window of rows around the row being evaluated. For each row, the aggregate function result is computed using the selected window of rows as input. If the `OVER` clause is used, aggregate function clauses, such as `DISTINCT` , aren't supported, but function call modifiers, such as `IGNORE_NULLS` , are still supported. To learn more about the `OVER` clause, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Details**
 
