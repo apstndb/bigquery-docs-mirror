@@ -14,6 +14,8 @@ The Data Engineering Agent lets you to build, modify, and troubleshoot data pipe
 
 For more examples of prompts you can use with the Data Engineering Agent, see [Sample prompts](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#sample_prompts) .
 
+You can also use the [Data Engineering Agent API](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/api-overview) , which uses the A2A protocol, to interact with the agent.
+
 ## Limitations
 
 The Data Engineering Agent has the following limitations:

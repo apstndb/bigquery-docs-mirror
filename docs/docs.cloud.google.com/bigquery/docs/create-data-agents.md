@@ -25,23 +25,18 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 To work with data agents, you must have Identity and Access Management permissions that match your use case. The following sections list required roles based on whether you are creating and publishing agents, provisioning agents in Gemini Enterprise, or discovering and using agents. For more information, see [Conversational Analytics API Identity and Access Management roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) .
 
   - **Create, edit, publish, share, and delete agents:**
-      - To act on all data agents in the project: Gemini Data Analytics Data Agent Owner ( `roles/geminidataanalytics.dataAgentOwner` ) on the project.
-      - To act on only your own data agents in the project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
-      - To view and edit all data agents in the project: Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ) at the project level.
+      - To create data agents in a project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
+      - To edit, share, or delete a data agent: Gemini Data Analytics Data Agent Owner ( `roles/geminidataanalytics.dataAgentOwner` ) on the agent or project.
+      - To edit a data agent in a project: Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ) on the project.
+      - To view data agents in a project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ) on the project.
   - **Provision agents in Gemini Enterprise:**
       - To make a published agent available to users in Gemini Enterprise, you need permissions to [register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent) in the Gemini Enterprise administration console.
   - **Discover and use agents:**
       - To chat with data agents: Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ).
       - To view all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ).
+  - **Add knowledge sources to an agent:** Data Catalog Viewer ( `roles/datacatalog.viewer` ) on the project.
 
-Additionally, you must have the following roles to create or edit a data agent:
-
-  - Gemini Data Analytics Stateless Chat User ( `roles/geminidataanalytics.dataAgentStatelessUser` ).
-  - BigQuery Data Viewer ( `roles/bigquery.dataViewer` ) on any table that the data agent uses as a knowledge source.
-  - Data Catalog Viewer ( `roles/datacatalog.catalogViewer` ) on the project
-  - If a data table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , Fine-Grained Reader ( `roles/datacatalog.categoryFineGrainedReader` ) on the appropriate policy tag. For more information, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
-  - If a data table uses [row-level access control](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , you must have the row-level access policy on that table. For more information, see [Create or update row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) .
-  - If a data table uses [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , Masked Reader ( `roles/bigquerydatapolicy.maskedReader` ) on the appropriate data policy. For more information, see [Roles for querying masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
+To have conversations, see the [required roles for conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
 
 To work with BigQuery resources, such as viewing tables or running queries, see [BigQuery roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery-roles) .
 

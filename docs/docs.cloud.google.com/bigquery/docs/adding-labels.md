@@ -745,6 +745,7 @@ Because views are treated like table resources, you use the `tables.patch` metho
 ## What's next
 
   - Learn how to [view labels](https://docs.cloud.google.com/bigquery/docs/viewing-labels) on BigQuery resources.
+  - Learn how to [identify and analyze agent-generated queries using labels](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#identify-agent-queries) .
   - Learn how to [update labels](https://docs.cloud.google.com/bigquery/docs/updating-labels) on BigQuery resources.
   - Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .
   - Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.

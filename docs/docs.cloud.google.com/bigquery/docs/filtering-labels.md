@@ -284,6 +284,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 ## What's next
 
   - Learn how to [add labels](https://docs.cloud.google.com/bigquery/docs/adding-labels) to BigQuery resources.
+  - Learn how to [identify and analyze agent-generated queries using labels](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#agent-queries) .
   - Learn how to [view labels](https://docs.cloud.google.com/bigquery/docs/viewing-labels) on BigQuery resources.
   - Learn how to [update labels](https://docs.cloud.google.com/bigquery/docs/updating-labels) on BigQuery resources.
   - Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.

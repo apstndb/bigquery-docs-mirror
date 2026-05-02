@@ -63,7 +63,9 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 ## Limitations
 
-The function can't process documents with more than 100 pages. Any row that contains such a file returns an error.
+  - The function can't process documents with more than 130 pages. Any row that contains such a file returns an error.
+  - The function has a 120 second timeout limit per request.
+  - Requests are processed in batches of 10.
 
 ## Example
 
@@ -71,12 +73,10 @@ The following example uses the [invoice parser](https://docs.cloud.google.com/do
 
 Create the model:
 
-    # Create model
-    CREATE OR REPLACE MODEL
-    `myproject.mydataset.invoice_parser`
+    CREATE OR REPLACE MODEL `myproject.mydataset.invoice_parser`
     REMOTE WITH CONNECTION `myproject.myregion.myconnection`
     OPTIONS (remote_service_type = 'cloud_ai_document_v1',
-    document_processor='processor_id');
+             document_processor='processor_id');
 
 > **Note:** For more information about how to specify a processor ID, see [Create a model](https://docs.cloud.google.com/bigquery/docs/process-document#create_a_model) .
 

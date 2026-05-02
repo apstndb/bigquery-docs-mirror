@@ -53,6 +53,11 @@ When you create a row-level access policy, BigQuery automatically grants the `bi
 
 ### Create or update row-level access policies
 
+When you set up row-level access on a table, you'll need at least two row access policies:
+
+  - A policy that grants full access to the table. The first row access policy should grant access to users and groups that require full access to the data in the table for data maintenance or support. For example, your BigQuery administrators and service accounts that use DML statements to transform table data.
+  - A second policy that filters access. This policy uses filters based on business logic to grant access to specific groups.
+
 To create or update a row-level access policy, use one of the following DDL statements:
 
   - The `CREATE ROW ACCESS POLICY` creates a new row-level access policy.
@@ -175,12 +180,12 @@ Consider the following table, `lookup_table` :
 
 Using the subquery on `lookup_table` lets you avoid creating multiple row access policies. For example, the preceding statement yields the same result as the following, with fewer queries:
 
-    CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+    CREATE OR REPLACE ROW ACCESS POLICY us_filter
     ON project.dataset.my_table
     GRANT TO ('user:abc@example.com')
     FILTER USING (region IN ('us-west1', 'us-west2'));
     
-    CREATE OR REPLACE ROW ACCESS POLICY apac_filter
+    CREATE OR REPLACE ROW ACCESS POLICY eu_filter
     ON project.dataset.my_table
     GRANT TO ('user:xyz@example.com')
     FILTER USING (region = 'europe-west1');

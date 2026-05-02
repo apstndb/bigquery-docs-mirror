@@ -414,6 +414,12 @@ Error string: `Error 412: The job references a table that belongs to a failover 
 
 This means that either the job wasn't run under a BigQuery Enterprise Plus edition, or the job ran in a region other than the primary location of the failover dataset. See [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) for more details.
 
+## Error loading view when using cached results
+
+Error string: `BigQuery data export: There was an error loading this view. IAM setPolicy failed for Dataset <PROJECT_ID>. One or more users named in the policy do not belong to a permitted customer.`
+
+This error indicates that your Google Workspace customer ID(s) haven't been granted access in your organization policy constraint. For information on using the `iam.allowedPolicyMemberDomains` constraint, see [Use the `iam.allowedPolicyMemberDomains` constraint to implement domain restricted sharing](https://docs.cloud.google.com/organization-policy/restrict-domains#predefined-constraint) .
+
 ## Legacy SQL errors
 
 The following errors can arise when using legacy SQL.

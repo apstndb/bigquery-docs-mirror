@@ -590,6 +590,7 @@ Custom masking routines are subject to the following limitations:
 
   - Custom data masking supports all [BigQuery data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) except `STRUCT` , because data masking can only apply to leaf fields of the `STRUCT` data type.
   - Deleting a custom masking routine doesn't delete all data policies that use it. However, the data policies that use the deleted masking routine are left with an empty masking rule. Users with the Masked Reader role on other data policies with the same tag can see masked data. Others see the message `Permission denied.` Dangling references to empty masking rules might be cleaned by automated processes after seven days.
+  - You are allowed only one custom masking routine per policy tag.
 
 ## Compatibility with other BigQuery features
 
