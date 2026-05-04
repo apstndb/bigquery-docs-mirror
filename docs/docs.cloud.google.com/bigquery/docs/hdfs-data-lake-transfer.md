@@ -30,7 +30,7 @@ The following diagram provides an overview of the migration process.
 
 Hive Metastore table transfers are subject to the following limitations:
 
-  - Hive Metastore transfers must have a minimum of 24 hours between 2 scheduled runs. On demand runs can still be triggered at any interval.
+  - Hive Metastore transfers must have a minimum of 30 minutes between 2 scheduled runs. On demand runs can still be triggered at any interval.
   - To migrate Hive tables, you must use Dataproc Metastore as your destination metastore.
   - File names must comply with [Cloud Storage object naming requirements](https://docs.cloud.google.com/storage/docs/objects#naming) .
   - Cloud Storage has a 5 TiB limit for single objects. Files within your Hive Metastore tables larger than 5 TiB will fail to transfer.

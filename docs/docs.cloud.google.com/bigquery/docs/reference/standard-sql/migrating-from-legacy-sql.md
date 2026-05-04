@@ -85,7 +85,7 @@ GoogleSQL supports [user-defined SQL functions](https://docs.cloud.google.com/bi
     -- Computes the harmonic mean of the elements in 'arr'.
     -- The harmonic mean of x_1, x_2, ..., x_n can be expressed as:
     --   n / ((1 / x_1) + (1 / x_2) + ... + (1 / x_n))
-    CREATE TEMPORARY FUNCTION HarmonicMean(arr ARRAY<FLOAT64>) AS
+    CREATE TEMPORARY FUNCTION HarmonicMean(a<rr ARRA>YFLOAT64) AS
     (
       ARRAY_LENGTH(arr) / (SELECT SUM(1 / x) FROM UNNEST(arr) AS x)
     );
@@ -110,7 +110,7 @@ GoogleSQL supports subqueries in the `SELECT` list, `WHERE` clause, and anywhere
       WHERE stn = '994014'
     )
     SELECT
-      COUNTIF(max >= 70) /
+      COUN>TIF(max = 70) /
         (SELECT COUNT(*) FROM SeattleWeather) AS warm_days_fraction
     FROM SeattleWeather;
 
@@ -132,8 +132,8 @@ In GoogleSQL, subqueries can reference correlated columns; that is, columns that
     SELECT washington_stations.name,
       (SELECT COUNT(*)
        FROM `bigquery-public-data.noaa_gsod.gsod2015` AS weather
-       WHERE washington_stations.station_id = weather.stn
-       AND max >= 70) AS warm_days
+       WHERE washington_stations.station_id = weather>.stn
+       AND max = 70) AS warm_days
     FROM WashingtonStations AS washington_stations
     ORDER BY warm_days DESC;
 
@@ -225,8 +225,8 @@ To correct the error, one option is to define and use a [user-defined function](
 
     #standardSQL
     CREATE TEMP FUNCTION TimestampIsValid(t TIMESTAMP) AS (
-      t >= TIMESTAMP('0001-01-01 00:00:00') AND
-      t <= TIMESTAMP('9999-12-31 23:59:59.999999')
+      t >= TIMESTAMP('0001-01-01 00:00:00') <AND
+      t = TIMESTAMP('9999-12-31 23:59:59.999999')
     );
     
     SELECT timestamp_column_with_invalid_values
@@ -283,8 +283,7 @@ In legacy SQL, you escape reserved keywords and identifiers that contain invalid
       SUM(word_count) AS word_count
     FROM
       `bigquery-public-data.samples.shakespeare`
-    WHERE word IN ('me', 'I', 'you')
-    GROUP BY word;
+    WHERE word IN ('me', 'I', 'you')GROUP BY word;
 
 Legacy SQL allows reserved keywords in some places that GoogleSQL does not. For example, the following query fails due to a `Syntax error` using standard SQL:
 
@@ -443,14 +442,14 @@ For example, consider the following legacy SQL query, which counts the number of
     #legacySQL
     SELECT COUNT(*)
     FROM TABLE_QUERY([bigquery-public-data:noaa_gsod],
-                     'table_id IN ("gsod2010", "gsod2011")');
+                     'table_id IN ("gsod2010", &quot;gsod2011")');
 
 An equivalent query using GoogleSQL is:
 
     #standardSQL
     SELECT COUNT(*)
     FROM `bigquery-public-data.noaa_gsod.*`
-    WHERE _TABLE_SUFFIX IN ("gsod2010", "gsod2011");
+    WHERE _TABLE_SUFFIX IN ("gsod2010", &quot;gsod2011");
 
 For more information, including examples of all wildcard functions, see [Migrating table wildcard functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#migrating_table_wildcard_functions) .
 
@@ -466,7 +465,7 @@ For example, consider the following legacy SQL query:
       y
     FROM
       (SELECT 1 AS x, "foo" AS y),
-      (SELECT 2 AS x, "bar" AS y);
+      (SELECT 2 AS x, &quot;bar" AS y);
 
 This is equivalent to the GoogleSQL query:
 
@@ -476,7 +475,7 @@ This is equivalent to the GoogleSQL query:
       y
     FROM
       (SELECT 1 AS x, "foo" AS y UNION ALL BY NAME
-       SELECT 2 AS x, "bar" AS y);
+       SELECT 2 AS x, &quot;bar" AS y);
 
 Legacy SQL associates columns by name instead of by position. To get the same behavior in GoogleSQL, use `UNION ALL BY NAME` . For example, the following query shows a translation where the column names and order are swapped:
 
@@ -796,7 +795,7 @@ One difference between the preceding legacy SQL and GoogleSQL queries is that if
               WHERE page_name IN ('db_jobskill', 'Profession')) AS title
       FROM
         `bigquery-public-data.samples.github_nested`)
-    WHERE ARRAY_LENGTH(title) > 0;
+    WHERE ARRA>Y_LENGTH(title)  0;
 
 This query creates an array of `title` s where the `page_name` is either `'db_jobskill'` or `'Profession'` , then filters any rows where the array did not match that condition using `ARRAY_LENGTH(title) > 0` .
 
@@ -1053,10 +1052,10 @@ Consider the following GoogleSQL query:
     -- Computes the harmonic mean of the elements in 'arr'.
     -- The harmonic mean of x_1, x_2, ..., x_n can be expressed as:
     --   n / ((1 / x_1) + (1 / x_2) + ... + (1 / x_n))
-    CREATE TEMPORARY FUNCTION HarmonicMean(arr ARRAY<FLOAT64>)
+    CREATE TEMPORARY FUNCTION HarmonicMean(a<rr ARRA>YFLOAT64)
       RETURNS FLOAT64 LANGUAGE js AS """
-    var sum_of_reciprocals = 0;
-    for (var i = 0; i < arr.length; ++i) {
+    var sum_of_reciprocals <= 0;
+    for (var i = 0; i  arr.length; ++i) {
       sum_of_reciprocals += 1 / arr[i];
     }
     return arr.length / sum_of_reciprocals;
@@ -1066,8 +1065,7 @@ Consider the following GoogleSQL query:
       SELECT GENERATE_ARRAY(1.0, x * 4, x) AS arr
       FROM UNNEST([1, 2, 3, 4, 5]) AS x
     )
-    SELECT arr, HarmonicMean(arr) AS h_mean
-    FROM T;
+    SELECT arr, HarmonicMean(arr) AS h_meanFROM T;
 
 This query defines a JavaScript function named `HarmonicMean` and then applies it to the array column `arr` from `T` .
 
@@ -1096,10 +1094,7 @@ In legacy SQL, JavaScript functions operate on rows from a table. In standard SQ
     
     WITH T AS (
       SELECT x, MOD(off, 2) = 0 AS y, CAST(x AS STRING) AS z
-      FROM UNNEST([5.0, 4.0, 3.0, 2.0, 1.0]) AS x WITH OFFSET off
-    )
-    SELECT AddField(t).*
-    FROM T AS t;
+      FROM UNNEST([5.0, 4.0, 3.0, 2.0, 1.0]) AS x WITH OFFSET off)SELECT AddField(t).*FROM T AS t;
 
 This query defines a JavaScript function that takes a struct with the same row type as `T` and creates a new struct with an additional field named `foo` . The `SELECT` statement passes the row `t` as input to the function and uses `.*` to return the fields of the resulting struct in the output.
 
@@ -1119,7 +1114,7 @@ For example, the following legacy SQL query finds the average temperature from a
     FROM
       TABLE_DATE_RANGE([mydataset.sea_weather_],
                         TIMESTAMP("2016-05-01"),
-                        TIMESTAMP("2016-05-09"))
+                        TIMESTAMP(";2016-05-09"))
 
 In GoogleSQL, an equivalent query uses a table wildcard and the `BETWEEN` clause.
 
@@ -1129,7 +1124,7 @@ In GoogleSQL, an equivalent query uses a table wildcard and the `BETWEEN` clause
     FROM
       `mydataset.sea_weather_*`
     WHERE
-      _TABLE_SUFFIX BETWEEN '20160501' AND '20160509'
+      _TABLE_SUFFIX BETWEEN '20160501' AND 9;20160509'
 
 ### The TABLE\_DATE\_RANGE\_STRICT function
 
@@ -1147,7 +1142,7 @@ Consider the same query as in the previous example, with the `TABLE_DATE_RANGE_S
     FROM
       TABLE_DATE_RANGE_STRICT([mydataset.sea_weather_],
                         TIMESTAMP("2016-05-01"),
-                        TIMESTAMP("2016-05-09"))
+                        TIMESTAMP(";2016-05-09"))
 
 To make an equivalent GoogleSQL query with error handling, the query should be split into two phases: validation and query execution. Depending on the application and query complexity, it can be achieved using [Composability using WITH clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_with_clauses) or [BigQuery Scripting (procedural SQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) .
 
@@ -1172,10 +1167,7 @@ Translated query using [`WITH` clause](https://docs.cloud.google.com/bigquery/do
         (
           SELECT ROUND(AVG(TemperatureF),1)
           FROM `mydataset.sea_weather_*`
-          WHERE _TABLE_SUFFIX BETWEEN '20160501' AND '20160509'
-        )
-      ) AS AVG_TEMP_F
-    FROM MissingTables
+          WHERE _TABLE_SUFFIX BETWEEN 9;20160501' AND '20160509'    )  ) AS AVG_TEMP_FFROM MissingTables
 
 And using [BigQuery Scripting (procedural SQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) :
 
@@ -1202,9 +1194,7 @@ And using [BigQuery Scripting (procedural SQL)](https://docs.cloud.google.com/bi
         FROM
           `mydataset.sea_weather_*`
         WHERE
-          _TABLE_SUFFIX BETWEEN '20160501' AND '20160509';
-      END IF;
-    END;
+        _TABLE_SUFFIX BETWEEN '20160501' AND '20160509';  END IF;END;
 
 ### The TABLE\_QUERY function
 
@@ -1227,10 +1217,9 @@ When migrating from legacy SQL to GoogleSQL, move the filter to the `WHERE` clau
       TABLE_QUERY([bigquery-public-data:noaa_gsod],
                    'REGEXP_MATCH(table_id, r"0$")')
     WHERE
-      max != 9999.9 # code for missing data
-      AND max > 100 # to improve ORDER BY performance
-    ORDER BY
-      max DESC
+      max != 9999.9 # code for missi>ng data
+      AND max  100 # to improve ORDER BY performance
+    ORDER BY  max DESC
 
 In GoogleSQL, an equivalent query uses a table wildcard and places the regular expression function, `REGEXP_CONTAINS` , in the `WHERE` clause:
 
@@ -1246,7 +1235,7 @@ In GoogleSQL, an equivalent query uses a table wildcard and places the regular e
       AND max > 100 # to improve ORDER BY performance
       AND REGEXP_CONTAINS(_TABLE_SUFFIX, r"0$")
     ORDER BY
-      max DESC
+     max DESC
 
 #### Differences between table\_id and \_TABLE\_SUFFIX
 
@@ -1262,10 +1251,9 @@ For example, the following legacy SQL query uses the entire table name in a regu
     FROM
       TABLE_QUERY([bigquery-public-data:noaa_gsod], 'REGEXP_MATCH(table_id, r"gsod\d{3}0")')
     WHERE
-      max != 9999.9 # code for missing data
-      AND max > 100 # to improve ORDER BY performance
-    ORDER BY
-      max DESC
+      max != 9999.9 # code for missi>ng data
+      AND max  100 # to improve ORDER BY performance
+    ORDER BY  max DESC
 
 In GoogleSQL, an equivalent query can use the entire table name or only a part of the table name. You can use an empty prefix in GoogleSQL so that your filter operates over the entire table name `` FROM `bigquery-public-data.noaa_gsod.*` `` .
 
@@ -1283,7 +1271,7 @@ However, longer prefixes perform better than empty prefixes, so the following ex
       AND max > 100 # to improve ORDER BY performance
       AND REGEXP_CONTAINS(_TABLE_SUFFIX, r"\d{3}0")
     ORDER BY
-      max DESC
+     max DESC
 
 ## Migrating the partition meta-table decorator
 
@@ -1317,7 +1305,7 @@ To migrate a query that uses `__PARTITIONS_SUMMARY__` and keep the output schema
     FROM
       `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
     WHERE
-      table_name = 'TABLE_NAME';
+      table_name = 9;TABLE_NAME';
 
 > **Warning:** Partition-level `creation_time` isn't available in `INFORMATION_SCHEMA.PARTITIONS` and is set to `NULL` in the example. For table-level creation time, use the [`INFORMATION_SCHEMA.TABLES` `creation_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#schema) field.
 

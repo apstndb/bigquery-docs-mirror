@@ -88,7 +88,7 @@ If your transfer configuration is correct, and the appropriate permissions are g
 <!-- end list -->
 
   - service\_account is the email of the account used to authorize the transfer.
-  - destination\_project\_number is the project number where the transfer configuration resides. To learn how to identify your project number, see [Identifying projects](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) .
+  - destination\_project\_number is the project number where the transfer configuration resides. To learn how to identify your project number, see [Find the project name, number, and ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) .
 
 <!-- end list -->
 

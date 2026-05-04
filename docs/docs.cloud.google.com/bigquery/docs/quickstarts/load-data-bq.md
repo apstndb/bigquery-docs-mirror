@@ -223,7 +223,6 @@ If you used an existing project, delete the resources that you created:
 
 ## What's next
 
-  - Learn more about [using the bq tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
   - Learn about the [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) .
   - Learn more about [loading data into BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) .
   - Learn more about [querying data in BigQuery](https://docs.cloud.google.com/bigquery/docs/query-overview) .

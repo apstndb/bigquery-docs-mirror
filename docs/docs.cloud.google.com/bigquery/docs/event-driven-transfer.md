@@ -120,7 +120,7 @@ Before configuring a Cloud Storage event-driven transfer, you must perform the f
             "serviceAccount:project-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
         }
     
-    Replace `  PROJECT_NUMBER  ` with the [project ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) that is hosting the transfer resources are created and billed.
+    Replace `  PROJECT_NUMBER  ` with the [project ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) that is hosting the transfer resources are created and billed.
     
     **Quota usage attribution:** when the BigQuery Data Transfer Service agent access the Pub/Sub subscription, the quota usage is charged against the user project.
 

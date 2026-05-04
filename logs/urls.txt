@@ -646,6 +646,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/api-uploads
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/audit-logging-bq-migration
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/index-connection
+https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/index-reservation
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/migration
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditLogConfig.LogType
@@ -665,6 +666,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Type
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.ModelCreation.Reason
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.ModelDataChange.Reason
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.ModelDataRead.Reason
+https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.ModelDeletion.Reason
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.ModelMetadataChange.Reason
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.OperationType
 https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType
@@ -982,6 +984,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert
 https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list
 https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch
 https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/undelete
+https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update
 https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs
 https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel
 https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/delete
@@ -1076,6 +1079,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-embedding-maas
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service

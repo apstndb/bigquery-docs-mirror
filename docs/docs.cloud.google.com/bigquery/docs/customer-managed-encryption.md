@@ -20,7 +20,7 @@ Learn more about [encryption options on Google Cloud](https://docs.cloud.google.
       - `  PROJECT_NUMBER  ` : the project number of the project running BigQuery
       - `  KMS_PROJECT_ID  ` : the project ID of the project running Cloud KMS (even if this is the same project running BigQuery)
     
-    For information about Google Cloud project IDs and project numbers, see [Identifying projects](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) .
+    For information about Google Cloud project IDs and project numbers, see [Find the project name, number, and ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) .
 
   - BigQuery is automatically enabled in new projects. If you are using a pre-existing project to run BigQuery, [enable the BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery) .
 

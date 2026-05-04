@@ -64,7 +64,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 When you enabled the API for Cloud Run functions, a [Compute Engine default service account](https://docs.cloud.google.com/compute/docs/access/service-accounts#default_service_account) was created. To complete this tutorial, you must give this default service account the Cloud Translation API User role.
 
-1.  [Get the ID assigned to the project](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) .
+1.  [Get the ID assigned to the project](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) .
 
 2.  Copy your Compute Engine default service account. Your default service account looks like this:
     
