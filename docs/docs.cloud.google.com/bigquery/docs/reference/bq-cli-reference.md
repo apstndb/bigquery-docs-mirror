@@ -216,7 +216,7 @@ You can get help with the bq command-line tool by running the following commands
 You can use the following flags with any `bq` command, where applicable:
 
   - **` --api= ENDPOINT  `**  
-    Specifies the API endpoint to call. The default value is `https://www.googleapis.com` .
+    Specifies the API endpoint to call. The default value is `https://bigquery.googleapis.com` .
 
   - **` --api_version= VERSION  `**  
     Specifies the API version to use. The default is `v2` .

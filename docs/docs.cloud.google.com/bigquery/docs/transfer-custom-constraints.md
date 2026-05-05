@@ -50,6 +50,52 @@ The following permissions are required to manage organization policies:
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
+## BigQuery Data Transfer Service supported resources
+
+The following table lists the BigQuery Data Transfer Service resources that you can reference in custom constraints.
+
+Resource
+
+Field
+
+bigquerydatatransfer.googleapis.com/TransferConfig
+
+`resource.dataRefreshWindowDays`
+
+`resource.dataSourceId`
+
+`resource.destinationDatasetId`
+
+`resource.disabled`
+
+`resource.displayName`
+
+`resource.emailPreferences.enableFailureEmail`
+
+`resource.encryptionConfiguration.kmsKeyName`
+
+`resource.managedTableType`
+
+`resource.name`
+
+`resource.notificationPubsubTopic`
+
+`resource.schedule`
+
+`resource.scheduleOptions.disableAutoScheduling`
+
+`resource.scheduleOptions.endTime`
+
+`resource.scheduleOptions.startTime`
+
+`resource.scheduleOptionsV2.eventDrivenSchedule.pubsubSubscription`
+
+`resource.scheduleOptionsV2.timeBasedSchedule.endTime`
+
+`resource.scheduleOptionsV2.timeBasedSchedule.schedule`
+
+`resource.scheduleOptionsV2.timeBasedSchedule.startTime`
+
 ## Set up a custom constraint
 
 A custom constraint is defined in a YAML file by the resources, methods, conditions, and actions that are supported by the service on which you are enforcing the organization policy. Conditions for your custom constraints are defined using [Common Expression Language (CEL)](https://github.com/google/cel-spec/blob/master/doc/intro.md) . For more information about how to build conditions in custom constraints using CEL, see the CEL section of [Creating and managing custom constraints](https://docs.cloud.google.com/organization-policy/create-custom-constraints#common_expression_language) .
@@ -314,52 +360,6 @@ This table provides syntax examples for some common custom constraints.
 </tr>
 </tbody>
 </table>
-
-## BigQuery Data Transfer Service supported resources
-
-The following table lists the BigQuery Data Transfer Service resources that you can reference in custom constraints.
-
-Resource
-
-Field
-
-bigquerydatatransfer.googleapis.com/TransferConfig
-
-`resource.dataRefreshWindowDays`
-
-`resource.dataSourceId`
-
-`resource.destinationDatasetId`
-
-`resource.disabled`
-
-`resource.displayName`
-
-`resource.emailPreferences.enableFailureEmail`
-
-`resource.encryptionConfiguration.kmsKeyName`
-
-`resource.managedTableType`
-
-`resource.name`
-
-`resource.notificationPubsubTopic`
-
-`resource.schedule`
-
-`resource.scheduleOptions.disableAutoScheduling`
-
-`resource.scheduleOptions.endTime`
-
-`resource.scheduleOptions.startTime`
-
-`resource.scheduleOptionsV2.eventDrivenSchedule.pubsubSubscription`
-
-`resource.scheduleOptionsV2.timeBasedSchedule.endTime`
-
-`resource.scheduleOptionsV2.timeBasedSchedule.schedule`
-
-`resource.scheduleOptionsV2.timeBasedSchedule.startTime`
 
 ## What's next
 

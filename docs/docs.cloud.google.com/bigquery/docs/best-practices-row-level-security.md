@@ -4,6 +4,23 @@ This document explains best practices when using [row-level security](https://do
 
 Before you read this document, familiarize yourself with row-level security by reading [Introduction to BigQuery row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [Working with row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) .
 
+## Row access policy design considerations
+
+When you set up row access policies on a table, you'll need at least two row access policies:
+
+  - A policy that grants access to the table. The first row access policy should grant access to users and groups that require full access to the data in the table for data maintenance or support. For example, your BigQuery administrators and service accounts that use DML statements to transform table data.
+  - A second policy that uses filters based on business logic and are granted to specific groups.
+
+For more information on setting up row access policies, see [Create or update a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create_or_update_a_row-level_access_policy) .
+
+## Test service accounts with row access policies
+
+You can use service account impersonation to test how row access policies are applied. To test your row access policies by using a service account, do the following:
+
+1.  [Create a service account](https://docs.cloud.google.com/iam/docs/service-account-overview#locations) .
+2.  [Update the row access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) to grant the service account access. Alternatively, add the service account to the Google Group that is granted access by the row access policy.
+3.  Use [service account impersonation](https://docs.cloud.google.com/iam/docs/service-account-impersonation) to validate that the row access policy is working as intended.
+
 ## Restrict user permissions to limit side-channel attacks
 
 > **Best practice:** Don't grant sensitive permissions to users who should only see filtered data.

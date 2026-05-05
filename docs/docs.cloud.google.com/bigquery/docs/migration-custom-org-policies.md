@@ -26,6 +26,90 @@ To get the permissions that you need to manage custom organization policies, ask
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
+## BigQuery supported resources
+
+The following table lists the BigQuery resources that you can reference in custom constraints.
+
+Resource
+
+Field
+
+bigquerymigration.googleapis.com/MigrationWorkflow
+
+`resource.displayName`
+
+`resource.tasks[*].assessmentTaskDetails.dataSource`
+
+`resource.tasks[*].assessmentTaskDetails.featureHandle.addShareableDataset`
+
+`resource.tasks[*].assessmentTaskDetails.inputPath`
+
+`resource.tasks[*].assessmentTaskDetails.outputDataset`
+
+`resource.tasks[*].assessmentTaskDetails.querylogsPath`
+
+`resource.tasks[*].translationConfigDetails.gcsSourcePath`
+
+`resource.tasks[*].translationConfigDetails.gcsTargetPath`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.attribute`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.database`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.relation`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.schema`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.type`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.attribute`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.database`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.relation`
+
+`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.schema`
+
+`resource.tasks[*].translationConfigDetails.requestSource`
+
+`resource.tasks[*].translationConfigDetails.sourceDialect.teradataDialect.mode`
+
+`resource.tasks[*].translationConfigDetails.sourceEnv.defaultDatabase`
+
+`resource.tasks[*].translationConfigDetails.sourceEnv.metadataStoreDataset`
+
+`resource.tasks[*].translationConfigDetails.sourceEnv.schemaSearchPath`
+
+`resource.tasks[*].translationConfigDetails.targetDialect.teradataDialect.mode`
+
+`resource.tasks[*].translationConfigDetails.targetTypes`
+
+`resource.tasks[*].translationDetails.sourceEnvironment.defaultDatabase`
+
+`resource.tasks[*].translationDetails.sourceEnvironment.metadataStoreDataset`
+
+`resource.tasks[*].translationDetails.sourceEnvironment.schemaSearchPath`
+
+`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.baseUri`
+
+`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.encoding`
+
+`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.literal.relativePath`
+
+`resource.tasks[*].translationDetails.sourceTargetMapping.targetSpec.relativePath`
+
+`resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.rewriteTarget`
+
+`resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.suggestionType`
+
+`resource.tasks[*].translationDetails.targetBaseUri`
+
+`resource.tasks[*].translationDetails.targetReturnLiterals`
+
+`resource.tasks[*].translationDetails.targetTypes`
+
+`resource.tasks[*].type`
+
 ## Set up a custom constraint
 
 A custom constraint is defined in a YAML file by the resources, methods, conditions, and actions that are supported by the service on which you are enforcing the organization policy. Conditions for your custom constraints are defined using [Common Expression Language (CEL)](https://github.com/google/cel-spec/blob/master/doc/intro.md) . For more information about how to build conditions in custom constraints using CEL, see the CEL section of [Creating and managing custom constraints](https://docs.cloud.google.com/organization-policy/create-custom-constraints#common_expression_language) .
@@ -256,90 +340,6 @@ Once you have created a `workflow.json` file, try to create the workflow with th
 Replace `PROJECT_ID` with your project ID.
 
 If you see a permission denied error, then your policy is successfully applied.
-
-## BigQuery supported resources
-
-The following table lists the BigQuery resources that you can reference in custom constraints.
-
-Resource
-
-Field
-
-bigquerymigration.googleapis.com/MigrationWorkflow
-
-`resource.displayName`
-
-`resource.tasks[*].assessmentTaskDetails.dataSource`
-
-`resource.tasks[*].assessmentTaskDetails.featureHandle.addShareableDataset`
-
-`resource.tasks[*].assessmentTaskDetails.inputPath`
-
-`resource.tasks[*].assessmentTaskDetails.outputDataset`
-
-`resource.tasks[*].assessmentTaskDetails.querylogsPath`
-
-`resource.tasks[*].translationConfigDetails.gcsSourcePath`
-
-`resource.tasks[*].translationConfigDetails.gcsTargetPath`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.attribute`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.database`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.relation`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.schema`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.source.type`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.attribute`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.database`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.relation`
-
-`resource.tasks[*].translationConfigDetails.nameMappingList.nameMap.target.schema`
-
-`resource.tasks[*].translationConfigDetails.requestSource`
-
-`resource.tasks[*].translationConfigDetails.sourceDialect.teradataDialect.mode`
-
-`resource.tasks[*].translationConfigDetails.sourceEnv.defaultDatabase`
-
-`resource.tasks[*].translationConfigDetails.sourceEnv.metadataStoreDataset`
-
-`resource.tasks[*].translationConfigDetails.sourceEnv.schemaSearchPath`
-
-`resource.tasks[*].translationConfigDetails.targetDialect.teradataDialect.mode`
-
-`resource.tasks[*].translationConfigDetails.targetTypes`
-
-`resource.tasks[*].translationDetails.sourceEnvironment.defaultDatabase`
-
-`resource.tasks[*].translationDetails.sourceEnvironment.metadataStoreDataset`
-
-`resource.tasks[*].translationDetails.sourceEnvironment.schemaSearchPath`
-
-`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.baseUri`
-
-`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.encoding`
-
-`resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.literal.relativePath`
-
-`resource.tasks[*].translationDetails.sourceTargetMapping.targetSpec.relativePath`
-
-`resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.rewriteTarget`
-
-`resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.suggestionType`
-
-`resource.tasks[*].translationDetails.targetBaseUri`
-
-`resource.tasks[*].translationDetails.targetReturnLiterals`
-
-`resource.tasks[*].translationDetails.targetTypes`
-
-`resource.tasks[*].type`
 
 ## What's next
 
