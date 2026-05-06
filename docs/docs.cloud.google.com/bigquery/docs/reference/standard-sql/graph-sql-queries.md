@@ -71,7 +71,7 @@ The `GRAPH_EXPAND` TVF returns a table that generally contains one column for ea
 
 The output column names are constructed by concatenating the label name and property name with an underscore ( `_` ). For example, if a node table has the label `Person` and a property called `age` , then the column name corresponding to that property is `Person_age` .
 
-To select columns that correspond to properties defined by a measure, you must wrap them in the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-functions) . You can't directly select columns that correspond to properties defined by a measure.
+To select columns that correspond to properties defined by a measure, you must wrap them in the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . You can't directly select columns that correspond to properties defined by a measure.
 
 > **Warning:** The output table is created by performing a sequence of `LEFT JOIN` operations on the graph's input tables. Depending on the relationships between your data, nodes might appear in your property graph that aren't reflected in the flattened output table.
 

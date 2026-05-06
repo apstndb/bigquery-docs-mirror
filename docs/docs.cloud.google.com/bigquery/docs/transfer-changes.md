@@ -100,9 +100,9 @@ On July 25, 2026, the [Facebook Ads connector](https://docs.cloud.google.com/big
 
 ## Google Ads API
 
-The BigQuery Data Transfer Service for Google Ads periodically updates to support new columns and adapt to changes introduced by new [Google Ads API](https://developers.google.com/google-ads/api/docs/release-notes) versions. The BigQuery Data Transfer Service for Google Ads connector uses the [supported API version](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#connector_overview) in the Google Ads connector.
+The BigQuery Data Transfer Service for Google Ads periodically updates to support new columns and adapt to changes introduced by the [Google Ads API](https://developers.google.com/google-ads/api/docs/release-notes) . The BigQuery Data Transfer Service for Google Ads connector uses the [supported API version](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#connector_overview) in the Google Ads connector.
 
-The following sections outline the changes when updating to a new Google Ads API version. Changes are organized by release date, and each entry provides information on the changes you need to make for you to continue receiving data from Google Ads.
+The following sections outline the changes introduced by the Google Ads API. Changes are organized by release date, and each entry provides information on the changes you need to make for you to continue receiving data from Google Ads.
 
 For more information about the Google Ads API release schedule, see [Timetable](https://developers.google.com/google-ads/api/docs/sunset-dates#timetable) .
 
@@ -139,6 +139,12 @@ The following column will be deprecated on June 8, 2026. The column will be popu
 | Deprecated columns                    | Tables affected |
 | ------------------------------------- | --------------- |
 | `ad_group_ad_ad_call_ad_phone_number` | `Ad`            |
+
+### June 1, 2026
+
+Effective June 1, 2026, the Google Ads connector will limit daily data backfills to the most recent 37 months. Backfill attempts for dates older than 37 months will result in an error. This change is in response to the [New Data Retention Policy for Google Ads starting June 1, 2026](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html) .
+
+Any data already transferred and stored in your BigQuery tables will remain unaffected.
 
 ### May 7, 2026
 
@@ -382,9 +388,29 @@ Transfer configurations that are created after June 24th 2024 will always use th
 
 ## Google Analytics API
 
-The BigQuery Data Transfer Service for Google Analytics connector periodically updates to support new columns and adapt to changes introduced by new [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1/changelog) versions. The BigQuery Data Transfer Service for Google Analytics connector uses the latest supported API version to retrieve reporting data.
+The BigQuery Data Transfer Service for Google Analytics connector periodically updates to support new columns and adapt to changes introduced by the [Google Analytics Data API](https://developers.google.com/analytics/devguides/reporting/data/v1/changelog) . The BigQuery Data Transfer Service for Google Analytics connector uses the latest supported API version to retrieve reporting data.
 
-The following sections outline the changes when updating to a new Google Analytics Data API version. Changes are organized by release date, and each entry provides information on the changes you need to make to continue receiving data from Google Analytics.
+The following sections outline the changes introduced by the Google Analytics Data API. Changes are organized by release date, and each entry provides information on the changes you need to make to continue receiving data from Google Analytics.
+
+### June 1, 2026
+
+Effective June 1, 2026, backfills for Google Analytics data using BigQuery Data Transfer Service will be limited to the most recent 37 months. This change is in response to the [New Data Retention Policy for Google Ads starting June 1, 2026](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html) .
+
+#### Risk of data loss
+
+> **Warning:** The following actions might result in data loss.
+
+  - Attempting to backfill Google Analytics data older than 37 months after June 1, 2026, can lead to data loss.
+
+  - The Google Analytics Data API might return partial or empty data for dates outside the 37-month retention period.
+
+  - If you trigger a backfill for a date older than 37 months, the transfer run will overwrite the existing data in your BigQuery partition with the incomplete results from the API, potentially replacing complete historical data with empty or partial data.
+
+To avoid data loss, ensure that all manual or automated backfill processes for Google Analytics don't target dates older than 37 months from the schedule date.
+
+Data already transferred and stored in your BigQuery tables before this change remains unaffected. Google won't delete your existing data.
+
+Review your Google Analytics data transfer configurations and backfill scripts to ensure that they comply with the new 37 month retention window before June 1, 2026.
 
 ### September 22, 2025
 
@@ -543,6 +569,18 @@ The following table shows the fields deprecated with the Salesforce connector GA
 | `UserPreferencesHideStatementsRedirectConfirmation` | `User`                     |
 | `UserPreferencesHideInvoicesRedirectConfirmation`   | `UserChangeEvent`          |
 | `UserPreferencesHideStatementsRedirectConfirmation` | `UserChangeEvent`          |
+
+## Search Ads 360
+
+The BigQuery Data Transfer Service for Search Ads 360 connector periodically updates to support new columns and adapt to changes introduced by the [Search Ads 360 API](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/overview) . The BigQuery Data Transfer Service for Search Ads 360 connector uses the latest supported API version to retrieve reporting data.
+
+The following sections outline the changes introduced by the Search Ads 360 Data API. Changes are organized by release date, and each entry provides information on the changes you need to make to continue receiving data from Search Ads 360.
+
+### June 1, 2026
+
+Effective June 1, 2026, the Search Ads 360 connector will limit daily data backfills to the most recent 37 months. Backfill attempts for dates older than 37 months will result in an error. This change is in response to the [New Data Retention Policy for Google Ads starting June 1, 2026](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html) .
+
+Any data already transferred and stored in your BigQuery tables will remain unaffected.
 
 ## ServiceNow
 

@@ -67,11 +67,8 @@ Restrict information returned to a set of selected fields
 
 Valid values of this enum field are:
 
-`MINIMAL`
-
-,
-
-`FULL`
+  - `MINIMAL`
+  - `FULL`
 
 `stateFilter[]`
 
@@ -81,15 +78,9 @@ Filter for job state
 
 Valid values of this enum field are:
 
-`DONE`
-
-,
-
-`PENDING`
-
-,
-
-`RUNNING`
+  - `DONE`
+  - `PENDING`
+  - `RUNNING`
 
 `parentJobId`
 

@@ -1919,7 +1919,7 @@ The following limits apply to [Storage Write API](https://docs.cloud.google.com/
 | Limit                     | Default                  | Notes                                                                      |
 | ------------------------- | ------------------------ | -------------------------------------------------------------------------- |
 | Batch commits             | 10,000 streams per table | You can commit up to 10,000 streams in each `BatchCommitWriteStream` call. |
-| `AppendRows` request size | 10 MB                    | The maximum request size is 10 MB.                                         |
+| `AppendRows` request size | 20 MB                    | The maximum request size is 20 MB.                                         |
 
 ## Streaming inserts
 
