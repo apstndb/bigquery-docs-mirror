@@ -28,11 +28,11 @@ When a user tries to access column data at query time, BigQuery checks the colum
 
 ## Identify what needs to be tagged
 
-To determine the types of sensitive data that you have and which columns need policy tags, consider generating profiles about your data across an organization, folder, or project using Sensitive Data Protection. *Data profiles* contain metrics and metadata about your tables and help you determine where [sensitive and high-risk data](https://docs.cloud.google.com/sensitive-data-protection/docs/sensitivity-risk-calculation) reside. Sensitive Data Protection reports these metrics at the project, table, and column levels. For more information, see [Data profiles for BigQuery data](https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles) .
+To determine the types of sensitive data that you have and which columns need policy tags, consider generating profiles about your data across an organization, folder, or project by using Sensitive Data Protection. *Data profiles* contain metrics and metadata about your tables and help you determine where [sensitive and high-risk data](https://docs.cloud.google.com/sensitive-data-protection/docs/sensitivity-risk-calculation) reside. Sensitive Data Protection reports these metrics at the project, table, and column levels. For more information, see [Overview of sensitive data discovery](https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles) .
 
-The following image shows a list of column data profiles (click to enlarge). Columns with high data-risk values might contain [high-sensitivity data](https://docs.cloud.google.com/sensitive-data-protection/docs/sensitivity-risk-calculation#high-sensitivity) and have no column-level access controls. Alternatively, those columns might contain moderate or high-sensitivity data that is accessible to a large number of people.
+The following image shows a list of column data profiles (click to enlarge). Columns with high data-risk values might contain [high-sensitivity data](https://docs.cloud.google.com/sensitive-data-protection/docs/sensitivity-risk-calculation#high-sensitivity) and have no column-level access controls. Alternatively, those columns might contain moderate or high-sensitivity data that is accessible to many people.
 
-![](https://docs.cloud.google.com/static/sensitive-data-protection/docs/images/column-data-profiles.png)
+![Column data profiles in Sensitive Data Protection](https://docs.cloud.google.com/static/sensitive-data-protection/docs/images/column-data-profiles.png)
 
 ## Example use case
 

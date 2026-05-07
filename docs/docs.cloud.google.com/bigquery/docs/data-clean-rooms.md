@@ -75,7 +75,7 @@ BigQuery data clean rooms have the following limitations:
   - As a data contributor, you can't publish an entire dataset directly to a data clean room.
   - As a data contributor, you can't publish models or routines (outside of query templates) to a data clean room.
   - You can add a maximum of 100 shared resources to a data clean room. If you need to increase this limit, contact <bq-dcr-feedback@google.com> .
-  - Listings for multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ) aren't supported in data clean rooms.
+  - Listings for multiple regions aren't supported in data clean rooms.
 
 ## Before you begin
 

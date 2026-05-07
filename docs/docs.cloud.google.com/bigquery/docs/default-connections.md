@@ -6,7 +6,7 @@ BigQuery supports default connections in the following resources:
 
   - [Cloud Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake)
   - [Object tables](https://docs.cloud.google.com/bigquery/docs/object-tables)
-  - [Managed Apache Iceberg tables in BigQuery](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables)
+  - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables)
   - [Remote models](https://docs.cloud.google.com/bigquery/docs/bqml-introduction#remote_models)
 
 To use the default connection, specify the `DEFAULT` keyword in the following SQL clauses:
@@ -130,7 +130,7 @@ Cloud Storage
 `roles/storage.legacyBucketReader`  
 `roles/storage.legacyObjectReader`
 
-[Managed Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables)
+[Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables)
 
 Cloud Storage
 
@@ -197,9 +197,9 @@ The following SQL expression creates an [object table](https://docs.cloud.google
       object_metadata = 'SIMPLE'
       uris = ['BUCKET_PATH']);
 
-### Example: Create a Managed Iceberg tables with a default connection
+### Example: Create a Iceberg managed tables with a default connection
 
-The following SQL expression creates a [Managed Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) with a default connection:
+The following SQL expression creates a [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) with a default connection:
 
     CREATE TABLE `myproject.tpch_clustered.nation` (
       n_nationkey integer,

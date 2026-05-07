@@ -92,7 +92,7 @@ To create a listing, follow these steps:
         
         2.  Optional: To let subscribers [share a SQL stored procedure within a listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#share-stored-procedure-in-listing) , select **Allow stored procedure sharing** ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ).
         
-        3.  Expand the **Region data availability** menu ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to make the shared dataset available in additional regions. The menu displays the regions where dataset replicas exist with the **Ready to use** label. Before configuring the listing for multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset, as you can select only regions where cross-region dataset replication is enabled. All other regions are labeled as **Unavailable** . If no additional region is selected, the listing uses the shared dataset primary region by default, which is labeled as **Provider primary** .
+        3.  Expand the **Region data availability** menu to make the shared dataset available in additional regions. The menu displays the regions where dataset replicas exist with the **Ready to use** label. Before configuring the listing for multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset, as you can select only regions where cross-region dataset replication is enabled. All other regions are labeled as **Unavailable** . If no additional region is selected, the listing uses the shared dataset primary region by default, which is labeled as **Provider primary** .
         
         4.  In **Data Egress controls** , select the appropriate data egress option.
             
@@ -163,7 +163,7 @@ Replace the following:
 
 In the body of the request, provide the [listing details](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#resource:-listing) .
 
-To create a listing for multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), specify the additional regions in the `bigqueryDataset.replicaLocations` field in the request body. Before configuring the listing for multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. You can select only regions where cross-region dataset replication is enabled. If this optional field is not included, the listing is created using the shared dataset's primary region.
+To create a listing for multiple regions, specify the additional regions in the `bigqueryDataset.replicaLocations` field in the request body. Before configuring the listing for multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. You can select only regions where cross-region dataset replication is enabled. If this optional field is not included, the listing is created using the shared dataset's primary region.
 
 If the request is successful, the response body contains details of the listing. If you enable subscriber email logging with the `logLinkedDatasetQueryUserEmail` field, the listing response contains `log_linked_dataset_query_user_email: true` . The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
 
@@ -189,7 +189,7 @@ You can also create a listing from a dataset by doing the following:
 
 6.  Optional: To let subscribers [share a SQL stored procedure within a listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#share-stored-procedure-in-listing) , select **Allow stored procedure sharing** ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ).
 
-7.  Expand the **Region data availability** menu ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to make the shared dataset available in additional regions. The menu displays the regions where dataset replicas exist with the **Ready to use** label. Before configuring the listing for multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset, as you can select only regions where cross-region dataset replication is enabled. All other regions are labeled as **Unavailable** . If no additional region is selected, the listing uses the shared dataset region by default, which is labeled as **Provider primary** .
+7.  Expand the **Region data availability** menu to make the shared dataset available in additional regions. The menu displays the regions where dataset replicas exist with the **Ready to use** label. Before configuring the listing for multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset, as you can select only regions where cross-region dataset replication is enabled. All other regions are labeled as **Unavailable** . If no additional region is selected, the listing uses the shared dataset region by default, which is labeled as **Provider primary** .
 
 8.  In **Data Egress controls** , select the appropriate data egress option.
     
@@ -414,7 +414,7 @@ The output is similar to the following. Some columns are omitted to simplify the
     | myproject      | myschema3   | subscriptionproject3       |                 974999999293 | subscriptionld3    | subscriptionorg                |
     +----------------+-------------+----------------------------+------------------------------+--------------------+--------------------------------+
 
-For a listing with multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), you can view the subscriptions across different regions by replacing the `us` region with the intended replica location. For example, to view the linked datasets linked to a shared dataset in `myproject` that are in the `eu` region, use the following query:
+For a listing with multiple regions, you can view the subscriptions across different regions by replacing the `us` region with the intended replica location. For example, to view the linked datasets linked to a shared dataset in `myproject` that are in the `eu` region, use the following query:
 
     SELECT * FROM `myproject`.`region-eu`.INFORMATION_SCHEMA.SCHEMATA_LINKS;
 
@@ -494,7 +494,7 @@ To update a listing, follow these steps:
       - If you enable public discoverability, grant the Analytics Hub Viewer role ( `roles/analyticshub.viewer` ) to `allUsers` or `allAuthenticatedUsers` . For more information, see [Grant the role for a listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#grant-role-listing)
       - If you disable public discoverability, remove the Analytics Hub Viewer role ( `roles/analyticshub.viewer` ) from `allUsers` and `allAuthenticatedUsers` . Public exchanges can't have private listings, but private exchanges can have public listings.
       - If you enable and save subscriber email logging, this setting cannot be edited. To disable email logging, delete the listing and recreate it without clicking the **Subscriber email logging** toggle.
-      - Add or remove regions from the listing ( [Preview](https://cloud.google.com/products#product-launch-stages) ). Before adding multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. When removing regions, delete the shared dataset replica in that region first.
+      - Add or remove regions from the listing. Before adding multiple regions, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. When removing regions, delete the shared dataset replica in that region first.
 
 7.  Preview the listing.
 
@@ -524,7 +524,7 @@ In the body of the request, specify updated values for the following fields:
 
 For details on these fields, see [Resource: Listing](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#resource:-listing) .
 
-When updating the replica regions for your listing, ensure that you specify all applicable regions. Before updating the listing, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. You can add only regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ) where the shared dataset is replicated. To remove a region, delete the shared dataset replica for the region before removing it from the listing. You can also convert pre-existing listings to listings for multiple regions.
+When updating the replica regions for your listing, ensure that you specify all applicable regions. Before updating the listing, verify you've enabled [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. You can add only regions where the shared dataset is replicated. To remove a region, delete the shared dataset replica for the region before removing it from the listing. You can also convert pre-existing listings to listings for multiple regions.
 
 For more information about the tasks that you can perform on listings using APIs, see [`projects.locations.dataExchanges.listings` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
 
@@ -536,9 +536,9 @@ You can't delete [Cloud Marketplace-integrated listings](https://docs.cloud.goog
 
 > **Caution:** Be aware that revoking Cloud Marketplace-integrated commercial subscriptions might impact your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 
-Deleting a listing for multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ) doesn't delete the shared dataset replicas. After deleting the listing for multiple regions, subscribers can no longer view the listing or query the linked datasets. If the shared dataset replicas aren't referenced in other listings, you can [choose to delete them](https://docs.cloud.google.com/bigquery/docs/data-replication#remove_a_dataset_replica) .
+Deleting a listing for multiple regions doesn't delete the shared dataset replicas. After deleting the listing for multiple regions, subscribers can no longer view the listing or query the linked datasets. If the shared dataset replicas aren't referenced in other listings, you can [choose to delete them](https://docs.cloud.google.com/bigquery/docs/data-replication#remove_a_dataset_replica) .
 
-Before deleting a listing for multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), ensure there are no active subscriptions associated with it. If active subscriptions exist, you must first revoke them using the [`projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) . After all the active subscriptions are removed, you can proceed with deleting the listing for multiple regions.
+Before deleting a listing for multiple regions, ensure there are no active subscriptions associated with it. If active subscriptions exist, you must first revoke them using the [`projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) . After all the active subscriptions are removed, you can proceed with deleting the listing for multiple regions.
 
 > **Caution:** If you delete a listing, you cannot undo it.
 

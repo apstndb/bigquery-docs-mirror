@@ -82,7 +82,7 @@ The request body must be empty. If successful, the response body contains an ope
 
 When a BigQuery sharing subscriber deletes a subscription, it also deletes the linked dataset from the subscriber's project.
 
-When you delete a subscription from a multi-region listing ( [Preview](https://cloud.google.com/products#product-launch-stages) ), all the primary and secondary linked dataset replicas are also deleted from the subscriber's project.
+When you delete a subscription from a multi-region listing, all the primary and secondary linked dataset replicas are also deleted from the subscriber's project.
 
 For more information about managing subscriptions using the API, see the [`projects.locations.subscriptions` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#methods) .
 
@@ -120,7 +120,7 @@ Replace the following:
 
 When a BigQuery sharing publisher revokes a subscription, the subscriber can no longer query the linked dataset. Because this action is initiated by the publisher on a subscriber-owned resource, the linked dataset remains in the subscriber's project. The subscriber can remove the dataset by deleting it.
 
-If a publisher revokes a subscription from a multi-region listing ( [Preview](https://cloud.google.com/products#product-launch-stages) ), subscribers can no longer query any primary or secondary linked dataset replicas.
+If a publisher revokes a subscription from a multi-region listing, subscribers can no longer query any primary or secondary linked dataset replicas.
 
 > **Caution:** Revoking [Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 

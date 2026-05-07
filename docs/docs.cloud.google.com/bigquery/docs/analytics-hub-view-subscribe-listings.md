@@ -109,7 +109,7 @@ To subscribe to a listing, follow these steps:
         
         > **Note:** The selected primary region doesn't need to be the same as the provider's primary region. You might choose to colocate your linked dataset in the same region as the provider to minimize data replication latency.
     
-      - Optional: **Replica regions** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): select the region or regions where you want to create additional linked dataset secondary replicas. You might choose to colocate your linked dataset in the same region as your other data to minimize egress and facilitate cross-dataset joins. To create linked dataset replicas, you must have the `bigquery.datasets.update` permission on the linked dataset.
+      - Optional: **Replica regions** : select the region or regions where you want to create additional linked dataset secondary replicas. You might choose to colocate your linked dataset in the same region as your other data to minimize egress and facilitate cross-dataset joins. To create linked dataset replicas, you must have the `bigquery.datasets.update` permission on the linked dataset.
     
     > **Note:** Linked dataset replicas are created on a best-effort basis. If permissions are missing, replicas aren't created.
 
@@ -130,7 +130,7 @@ Replace the following:
 
 In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
 
-To create a subscription with linked dataset replicas available in multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), specify the primary region of the linked dataset using the `location` field in the request body. For the secondary regions where you want to create linked dataset replicas, you can optionally use the `destinationDataset.replica_locations` field in the request body and list all the selected secondary replica regions. Ensure that the specified regions in the `location` property and in the `destinationDataset.replica_locations` field are regions where the associated listing is available.
+To create a subscription with linked dataset replicas available in multiple regions, specify the primary region of the linked dataset using the `location` field in the request body. For the secondary regions where you want to create linked dataset replicas, you can optionally use the `destinationDataset.replica_locations` field in the request body and list all the selected secondary replica regions. Ensure that the specified regions in the `location` property and in the `destinationDataset.replica_locations` field are regions where the associated listing is available.
 
 > **Note:** Linked dataset replicas are created on a best-effort basis. If the `bigquery.datasets.update` permission is missing on the linked dataset, replicas aren't created.
 
@@ -178,7 +178,7 @@ Replace the following:
 
 In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
 
-If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe#response-body) . If you have enabled subscriber email logging ( [Preview](https://cloud.google.com/products#product-launch-stages) ) for the data exchange, the subscription response contains `log_linked_dataset_query_user_email: true` .
+If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe#response-body) . If you have enabled subscriber email logging for the data exchange, the subscription response contains `log_linked_dataset_query_user_email: true` .
 
 ## View linked datasets
 

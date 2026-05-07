@@ -8,7 +8,7 @@ Before you create a Blob Storage data transfer, do the following:
 
   - Verify that you have completed all actions that are required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
   - Choose an existing BigQuery dataset or [create a new dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-  - Choose an existing BigQuery table or [create a new destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer, and specify the schema definition. The destination table must follow the [table naming rules](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) . Destination table names also support [parameters](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters) . You can create a BigQuery table or [create Managed Iceberg table](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
+  - Choose an existing BigQuery table or [create a new destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer, and specify the schema definition. The destination table must follow the [table naming rules](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) . Destination table names also support [parameters](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters) . You can create a BigQuery table or [create Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
   - Retrieve your Blob Storage storage account name, container name, data path (optional), and SAS token. For information about granting access to Blob Storage using a shared access signature (SAS), see [Shared access signature (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#shared-access-signature) .
   - If you restrict access to your Azure resources using an Azure Storage firewall, [add BigQuery Data Transfer Service workers to your list of allowed IPs](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#ip_restrictions) .
   - If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer#CMEK) .
@@ -83,7 +83,7 @@ Select one of the following options:
         
           - For **Dataset** , select the dataset that you created to store your data.
           - Select **Native table** if you want to transfer to a BigQuery table.
-          - Select **Apache Iceberg** if you want to transfer to a Managed Iceberg table.
+          - Select **Apache Iceberg** if you want to transfer to a Iceberg managed table.
     
       - In the **Data source details** section, do the following:
         

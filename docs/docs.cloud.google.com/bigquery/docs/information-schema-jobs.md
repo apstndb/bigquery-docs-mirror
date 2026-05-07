@@ -1265,9 +1265,9 @@ For information about copy jobs, see [Copy a table](https://docs.cloud.google.co
     ORDER BY
         day DESC;
 
-### Get usage of Managed Apache Iceberg tables in BigQuery storage optimization
+### Get usage of Apache Iceberg managed tables storage optimization
 
-The following example provides the usage of Managed Iceberg table storage optimization.
+The following example provides the usage of Iceberg managed table storage optimization.
 
     SELECT
         job_id, reservation_id, edition,
@@ -1277,7 +1277,7 @@ The following example provides the usage of Managed Iceberg table storage optimi
         AND user_email = "bigquery-adminbot@system.gserviceaccount.com"
         AND query LIKE "CALL BQ.OPTIMIZE_STORAGE(%)";
 
-### Get usage of Managed Iceberg table export table metadata
+### Get usage of Iceberg managed table export table metadata
 
 The following example provides the usage of Iceberg `EXPORT TABLE METADATA FROM` .
 

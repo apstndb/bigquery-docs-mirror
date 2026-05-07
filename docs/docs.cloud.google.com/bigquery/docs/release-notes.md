@@ -6,6 +6,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 06, 2026
+
+Feature
+
+You can configure BigQuery sharing listings for multiple regions, which allows you to share datasets and linked replicas across global geographies simultaneously. For more information, see [Create a listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Breaking
+
+Starting June 1, 2026, due to changes in Google Ads data retention policies, the BigQuery Data Transfer Service connectors for [Google Ads](https://docs.cloud.google.com/bigquery/docs/transfer-changes#June01-google-ads) , [Search Ads 360](https://docs.cloud.google.com/bigquery/docs/transfer-changes#June01-search-ads) , and [Google Analytics 4](https://docs.cloud.google.com/bigquery/docs/transfer-changes#June01-ga4) will stop populating data for backfill runs with dates earlier than 37 months from the current date.
+
+For more information about the changes to the Google Ads data retention policies, see [New Data Retention Policy for Google Ads starting June 1, 2026](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html) .
+
 ## April 30, 2026
 
 Breaking

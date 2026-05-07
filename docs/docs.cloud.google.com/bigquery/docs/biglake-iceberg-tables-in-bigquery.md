@@ -1,13 +1,13 @@
-# Apache Iceberg tables
+# Apache Iceberg managed tables
 
-*Apache Iceberg tables managed by BigQuery* (formerly BigLake tables for Apache Iceberg in BigQuery) provide the foundation for building open-format lakehouses on Google Cloud. Managed Iceberg tables offer the same fully managed experience as standard BigQuery tables, but store data in customer-owned storage buckets. Managed Iceberg tables support the open Apache Iceberg table format for better interoperability with open-source and third-party compute engines on a single copy of data.
+*Apache Iceberg managed tables* (formerly BigLake tables for Apache Iceberg in BigQuery) provide the foundation for building open-format lakehouses on Google Cloud. Iceberg managed tables offer the same fully managed experience as standard BigQuery tables, but store data in customer-owned storage buckets. Iceberg managed tables support the open Iceberg table format for better interoperability with open-source and third-party compute engines on a single copy of data.
 
-Managed Iceberg tables support the following features:
+Iceberg managed tables support the following features:
 
   - *Table mutations* using GoogleSQL data manipulation language (DML).
   - *Unified batch and high throughput streaming* using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) through connectors like Spark, Dataflow, and other engines.
-  - *Export of Apache Iceberg V2 snapshot and automatic refresh* on each table mutation for direct query access with open-source and third-party query engines, such as Spark.
-  - *Schema evolution* , which lets you add, drop, and rename columns to suit your needs. This feature also lets you [change an existing column's data type](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_data_type) and [column mode](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_mode) . For more information, see [type conversion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
+  - *Export of Iceberg V2 snapshot and automatic refresh* on each table mutation for direct query access with open-source and third-party query engines, such as Spark.
+  - *Schema evolution* , which lets you add, drop, and rename columns to suit your needs. This feature also lets you change an existing column's [data type](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_data_type) and [mode](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_mode) . For more information, see [Conversion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
   - *Automatic storage optimization* , including adaptive file sizing, automatic clustering, garbage collection, and metadata optimization.
   - [*Time travel*](https://docs.cloud.google.com/bigquery/docs/time-travel) for historical data access in BigQuery.
   - [*Column-level security*](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [*data masking*](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .
@@ -17,16 +17,14 @@ Managed Iceberg tables support the following features:
 
 ## Architecture
 
-Managed Iceberg tables bring the convenience of BigQuery resource management to tables that reside in your own cloud buckets. You can use BigQuery and open-source compute engines on these tables without moving the data out of the buckets that you control. You must configure a Cloud Storage bucket before you start using Managed Iceberg tables.
+Iceberg managed tables bring the convenience of BigQuery resource management to tables that reside in your own cloud buckets. You can use BigQuery and open-source compute engines on these tables without moving the data out of the buckets that you control. You must configure a Cloud Storage bucket before you start using Iceberg managed tables.
 
-Managed Iceberg tables utilize [*Lakehouse runtime catalog*](https://docs.cloud.google.com/bigquery/docs/about-blms) as the unified runtime catalog for all Apache Iceberg data. The Lakehouse runtime catalog provides a single source of truth for managing metadata from multiple engines and allows for engine interoperability.
-
-Using Apache Iceberg tables has the following implications on your bucket:
+Using Iceberg managed tables has the following implications on your bucket:
 
   - BigQuery creates new data files in the bucket in response to write requests and background storage optimizations, such as DML statements and streaming.
   - Automatic compaction and clustering are performed on the data files in the bucket. After the expiration of the [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) , data files are garbage collected. However, if the table is deleted, the associated data files aren't garbage collected. For more information, see [Storage optimization](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#storage_optimization) .
 
-Creating an Apache Iceberg table is similar to [creating BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables) . Because it stores data in open formats on Cloud Storage, you must do the following:
+Creating an Iceberg managed table is similar to [creating BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables) . Because it stores data in open formats on Cloud Storage, you must do the following:
 
   - Specify the [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) with `WITH CONNECTION` to configure the connection credentials for BigQuery to access Cloud Storage.
   - Specify the file format of data storage as `PARQUET` with the `file_format = PARQUET` statement.
@@ -34,7 +32,7 @@ Creating an Apache Iceberg table is similar to [creating BigQuery tables](https:
 
 ## Best practices
 
-> **Warning:** Modifying data files for Managed Iceberg tables outside of BigQuery can cause query failure or data loss. Additionally, deleting the Cloud Storage bucket that contains your Managed Iceberg tables or making those tables inaccessible to the connection service account can result in data loss. To prevent this, use BigQuery to update or modify Managed Iceberg tables.
+> **Warning:** Modifying data files for Iceberg managed tables outside of BigQuery can cause query failure or data loss. Additionally, deleting the Cloud Storage bucket that contains your Iceberg managed tables or making those tables inaccessible to the connection service account can result in data loss. To prevent this, use BigQuery to update or modify Iceberg managed tables.
 
 Directly changing or adding files to the bucket outside of BigQuery can lead to data loss or unrecoverable errors. The following table describes possible scenarios:
 
@@ -56,33 +54,33 @@ Directly changing or adding files to the bucket outside of BigQuery can lead to 
 <td>Add new files to the bucket outside BigQuery.</td>
 <td><strong>Data loss:</strong> New files or objects added outside of BigQuery are not tracked by BigQuery. Untracked files are deleted by background garbage collection processes.</td>
 <td>Add data exclusively through BigQuery. This lets BigQuery track the files and prevent them from being garbage collected.<br />
-To prevent accidental additions and data loss, we also recommend restricting external tool write permissions on buckets containing Managed Iceberg tables.</td>
+To prevent accidental additions and data loss, we also recommend restricting external tool write permissions on buckets containing Iceberg managed tables.</td>
 </tr>
 <tr class="even">
-<td>Create a new Apache Iceberg table in a non-empty prefix.</td>
+<td>Create a new Iceberg managed table in a non-empty prefix.</td>
 <td><strong>Data loss:</strong> Extant data isn't tracked by BigQuery, so these files are considered untracked, and deleted by background garbage collection processes.</td>
-<td>Only create new Managed Iceberg tables in empty prefixes.</td>
+<td>Only create new Iceberg managed tables in empty prefixes.</td>
 </tr>
 <tr class="odd">
-<td>Modify or replace Apache Iceberg table data files.</td>
+<td>Modify or replace Iceberg managed table data files.</td>
 <td><strong>Data loss:</strong> On external modification or replacement, the table fails a consistency check and becomes unreadable. Queries against the table fail.<br />
 There is no self-serve way to recover from this point. Contact <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">support</a> for data recovery assistance.</td>
 <td>Modify data exclusively through BigQuery. This lets BigQuery track the files and prevent them from being garbage collected.<br />
-To prevent accidental additions and data loss, we also recommend restricting external tool write permissions on buckets containing Managed Iceberg tables.</td>
+To prevent accidental additions and data loss, we also recommend restricting external tool write permissions on buckets containing Iceberg managed tables.</td>
 </tr>
 <tr class="even">
-<td>Create two Managed Iceberg tables on the same or overlapping URIs.</td>
-<td><strong>Data loss:</strong> BigQuery doesn't bridge identical URI instances of Managed Iceberg tables. Background garbage collection processes for each table will consider the opposite table's files as untracked, and delete them, causing data loss.</td>
-<td>Use unique URIs for each Apache Iceberg table.</td>
+<td>Create two Iceberg managed tables on the same or overlapping URIs.</td>
+<td><strong>Data loss:</strong> BigQuery doesn't bridge identical URI instances of Iceberg managed tables. Background garbage collection processes for each table will consider the opposite table's files as untracked, and delete them, causing data loss.</td>
+<td>Use unique URIs for each Iceberg managed table.</td>
 </tr>
 </tbody>
 </table>
 
 ### Cloud Storage bucket configuration best practices
 
-The configuration of your Cloud Storage bucket and its connection with BigQuery have a direct impact on the performance, cost, data integrity, security, and governance of your Managed Iceberg tables. The following are best practices to help with this configuration:
+The configuration of your Cloud Storage bucket and its connection with BigQuery have a direct impact on the performance, cost, data integrity, security, and governance of your Iceberg managed tables. The following are best practices to help with this configuration:
 
-  - Select a name that clearly indicates that the bucket is only meant for Managed Iceberg tables.
+  - Select a name that clearly indicates that the bucket is only meant for Iceberg managed tables.
 
   - Choose [single-region Cloud Storage buckets](https://docs.cloud.google.com/storage/docs/locations#available-locations) that are co-located in the same region as your BigQuery dataset. This coordination improves performance and lowers costs by avoiding data transfer charges.
 
@@ -92,17 +90,17 @@ The configuration of your Cloud Storage bucket and its connection with BigQuery 
 
   - Verify that the [required roles](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#required-roles) are assigned to the correct users and service accounts.
 
-  - To prevent accidental Apache Iceberg data deletion or corruption in your Cloud Storage bucket, restrict write and delete permissions for most users in your organization. You can do this by setting a [bucket permission policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions) with conditions that deny `PUT` and `DELETE` requests for all users, except those that you specify.
+  - To prevent accidental data deletion or corruption in your Cloud Storage bucket, restrict write and delete permissions for most users in your organization. You can do this by setting a [bucket permission policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions) with conditions that deny `PUT` and `DELETE` requests for all users, except those that you specify.
 
   - Apply [google-managed](https://docs.cloud.google.com/storage/docs/encryption/default-keys) or [customer-managed](https://docs.cloud.google.com/storage/docs/encryption/customer-managed-keys) encryption keys for extra protection of sensitive data.
 
   - Enable [audit logging](https://docs.cloud.google.com/storage/docs/audit-logging#settings) for operational transparency, troubleshooting, and monitoring data access.
 
-  - Keep the default [soft delete policy](https://docs.cloud.google.com/storage/docs/soft-delete) (7 day retention) to protect against accidental deletions. However, if you find that Apache Iceberg data has been deleted, engage with [support](https://docs.cloud.google.com/bigquery/docs/getting-support) rather than restoring objects manually, as objects that are added or modified outside of BigQuery aren't tracked by BigQuery metadata.
+  - Keep the default [soft delete policy](https://docs.cloud.google.com/storage/docs/soft-delete) (7 day retention) to protect against accidental deletions. However, if you find that data has been deleted, engage with [support](https://docs.cloud.google.com/bigquery/docs/getting-support) rather than restoring objects manually, as objects that are added or modified outside of BigQuery aren't tracked by BigQuery metadata.
 
   - Adaptive file sizing, automatic clustering, and garbage collection are enabled automatically and help with optimizing file performance and cost.
 
-  - Avoid the following Cloud Storage features, as they are unsupported for Managed Iceberg tables:
+  - Avoid the following Cloud Storage features, as they are unsupported for Iceberg managed tables:
     
       - [Hierarchical namespaces](https://docs.cloud.google.com/storage/docs/hns-overview)
       - [Object access control lists (ACLs)](https://docs.cloud.google.com/storage/docs/access-control/lists)
@@ -127,22 +125,22 @@ Replace the following:
   - `PROJECT_ID` : the ID of your project
   - `LOCATION` : the [location](https://docs.cloud.google.com/storage/docs/locations) for your new bucket
 
-## Apache Iceberg table workflows
+## Iceberg managed table workflows
 
-The following sections describe how to create, load, manage, and query managed tables.
+The following sections describe how to create, load, manage, and query Iceberg managed tables.
 
 ### Before you begin
 
-Before creating and using Managed Iceberg tables, ensure that you have set up a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to a storage bucket. Your connection needs write permissions on the storage bucket, as specified in the following [Required roles](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#required-roles) section. For more information about required roles and permissions for connections, see [Manage connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
+Before creating and using Iceberg managed tables, ensure that you have set up a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to a storage bucket. Your connection needs write permissions on the storage bucket, as specified in the following [Required roles](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#required-roles) section. For more information about required roles and permissions for connections, see [Manage connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
 
 ### Required roles
 
 To get the permissions that you need to let BigQuery manage tables in your project, ask your administrator to grant you the following IAM roles:
 
-  - To create Managed Iceberg tables:
+  - To create Iceberg managed tables:
       - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) on your project
       - [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) on your project
-  - To query Managed Iceberg tables:
+  - To query Iceberg managed tables:
       - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on your project
       - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) on your project
   - Grant the connection service account the following roles so it can read and write data in Cloud Storage:
@@ -172,9 +170,9 @@ The following permissions are required to let BigQuery manage tables in your pro
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-### Create Managed Iceberg tables
+### Create Iceberg managed tables
 
-To create an Apache Iceberg table, select one of the following methods:
+To create an Iceberg managed table, select one of the following methods:
 
 ### SQL
 
@@ -257,17 +255,17 @@ Replace the following:
   - COLUMN\_NAME : the column name.
   - DATA\_TYPE : the data type of the information contained in the column.
 
-### Import data into Managed Iceberg tables
+### Import data into Iceberg managed tables
 
-The following sections describe how to import data from various table formats into Managed Iceberg tables.
+The following sections describe how to import data from various table formats into Iceberg managed tables.
 
 #### Standard load data from flat files
 
-Managed Iceberg tables use BigQuery load jobs to load external files into Managed Iceberg tables. If you have an existing Apache Iceberg table, follow the [`bq load` CLI guide](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#bq) or the [`LOAD` SQL guide](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_a_file_that_is_externally_partitioned) to load external data. After loading the data, new Parquet files are written into the STORAGE\_URI `/data` folder.
+Iceberg managed tables use BigQuery load jobs to load external files into Iceberg managed tables. If you have an existing Iceberg managed table, follow the [`bq load` CLI guide](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#bq) or the [`LOAD` SQL guide](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_a_file_that_is_externally_partitioned) to load external data. After loading the data, new Parquet files are written into the STORAGE\_URI `/data` folder.
 
-If the prior instructions are used without an existing Apache Iceberg table, a BigQuery table is created instead.
+If the prior instructions are used without an existing Iceberg managed table, a BigQuery table is created instead.
 
-See the following for tool-specific examples of batch loads into managed tables:
+See the following for tool-specific examples of batch loads into Iceberg managed tables:
 
 ### SQL
 
@@ -278,7 +276,7 @@ See the following for tool-specific examples of batch loads into managed tables:
 
 Replace the following:
 
-  - MANAGED\_TABLE\_NAME : the name of an existing Apache Iceberg table.
+  - MANAGED\_TABLE\_NAME : the name of an existing Iceberg managed table.
   - STORAGE\_URI : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported. For example, `gs://mybucket/table` .
   - FILE\_FORMAT : the source table format. For supported formats, see the `format` row of [`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_option_list) .
 
@@ -292,34 +290,34 @@ Replace the following:
 Replace the following:
 
   - FILE\_FORMAT : the source table format. For supported formats, see the `format` row of [`load_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_option_list) .
-      - MANAGED\_TABLE\_NAME : the name of an existing Apache Iceberg table.
+  - MANAGED\_TABLE\_NAME : the name of an existing Iceberg managed table.
   - STORAGE\_URI : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported. For example, `gs://mybucket/table` .
 
 #### Standard load from Apache Hive-partitioned files
 
-You can load Apache Hive-partitioned files into Managed Iceberg tables using standard BigQuery load jobs. For more information, see [Loading externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+You can load Hive-partitioned files into Iceberg managed tables using standard BigQuery load jobs. For more information, see [Loading externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 #### Load streaming data from Pub/Sub
 
-You can load streaming data into Managed Iceberg tables by using a [Pub/Sub BigQuery subscription](https://docs.cloud.google.com/pubsub/docs/subscription-properties#bigquery) .
+You can load streaming data into Iceberg managed tables by using a [Pub/Sub BigQuery subscription](https://docs.cloud.google.com/pubsub/docs/subscription-properties#bigquery) .
 
-### Export data from Managed Iceberg tables
+### Export data from Iceberg managed tables
 
-The following sections describe how to export data from Managed Iceberg tables into various table formats.
+The following sections describe how to export data from Iceberg managed tables into various table formats.
 
 #### Export data into flat formats
 
-To export an Apache Iceberg table into a flat format, use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) and select a destination format. For more information, see [Exporting data](https://docs.cloud.google.com/bigquery/docs/exporting-data#sql) .
+To export an Iceberg managed table into a flat format, use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) and select a destination format. For more information, see [Exporting data](https://docs.cloud.google.com/bigquery/docs/exporting-data#sql) .
 
-### Create Apache Iceberg table metadata snapshots
+### Create Iceberg managed table metadata snapshots
 
-To create an Apache Iceberg table metadata snapshot, follow these steps:
+To create an Iceberg managed table metadata snapshot, follow these steps:
 
-1.  Export the metadata into the Apache Iceberg V2 format with the [`EXPORT TABLE METADATA`](https://docs.cloud.google.com/bigquery/docs/exporting-data#export_table_metadata) SQL statement.
+1.  Export the metadata into the Iceberg V2 format with the [`EXPORT TABLE METADATA`](https://docs.cloud.google.com/bigquery/docs/exporting-data#export_table_metadata) SQL statement.
 
-2.  Optional: Schedule Apache Iceberg metadata snapshot refresh. To refresh an Apache Iceberg metadata snapshot based on a set time interval, use a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
+2.  Optional: Schedule Iceberg metadata snapshot refresh. To refresh an Iceberg metadata snapshot based on a set time interval, use a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
 
-3.  Optional: Enable metadata auto-refresh for your project to automatically update your Apache Iceberg table metadata snapshot on each table mutation. To enable metadata auto-refresh, contact <bigquery-tables-for-apache-iceberg-help@google.com> . [`EXPORT METADATA` costs](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#queries_and_jobs) are applied on each refresh operation.
+3.  Optional: Enable metadata auto-refresh for your project to automatically update your Iceberg table metadata snapshot on each table mutation. To enable metadata auto-refresh, contact <bigquery-tables-for-apache-iceberg-help@google.com> . [`EXPORT METADATA` costs](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#queries_and_jobs) are applied on each refresh operation.
 
 The following example creates a scheduled query named `My Scheduled Snapshot Refresh Query` using the DDL statement `EXPORT TABLE METADATA FROM mydataset.test` . The DDL statement runs every 24 hours.
 
@@ -329,9 +327,9 @@ The following example creates a scheduled query named `My Scheduled Snapshot Ref
         --schedule='every 24 hours' \
         'EXPORT TABLE METADATA FROM mydataset.test'
 
-### View Apache Iceberg table metadata snapshot
+### View Iceberg managed table metadata snapshot
 
-After you refresh the Apache Iceberg table metadata snapshot you can find the snapshot in the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) that the Apache Iceberg table was originally created in. The `/data` folder contains the Parquet file data shards, and the `/metadata` folder contains the Apache Iceberg table metadata snapshot.
+After you refresh the Iceberg managed table metadata snapshot you can find the snapshot in the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) that the Iceberg managed table was originally created in. The `/data` folder contains the Parquet file data shards, and the `/metadata` folder contains the Iceberg managed table metadata snapshot.
 
     SELECT
       table_name,
@@ -341,9 +339,9 @@ After you refresh the Apache Iceberg table metadata snapshot you can find the sn
 
 Note that `mydataset` and `table_name` are placeholders for your actual dataset and table.
 
-### Read Managed Iceberg tables with Spark
+### Read Iceberg managed tables with Spark
 
-The following sample sets up your environment to use Spark SQL with Spark, and then executes a query to fetch data from a specified Apache Iceberg table.
+The following sample sets up your environment to use Spark SQL with Spark, and then executes a query to fetch data from a specified Iceberg managed table.
 
     spark-sql \
       --packages org.apache.iceberg:iceberg-spark-runtime-ICEBERG_VERSION_NUMBER \
@@ -356,14 +354,14 @@ The following sample sets up your environment to use Spark SQL with Spark, and t
 
 Replace the following:
 
-  - ICEBERG\_VERSION\_NUMBER : the current version of the Apache Iceberg Spark runtime. Download the latest version from [Apache Iceberg Releases](https://iceberg.apache.org/releases/) .
-  - CATALOG\_NAME : the catalog to reference your Apache Iceberg table.
+  - ICEBERG\_VERSION\_NUMBER : the current runtime version. Download the latest version from [Iceberg releases](https://iceberg.apache.org/releases/) .
+  - CATALOG\_NAME : the catalog to reference your Iceberg managed table.
   - BUCKET\_PATH : the path to the bucket containing the table files. For example, `gs://mybucket/` .
   - FOLDER\_NAME : the folder containing the table files. For example, `myfolder` .
 
-### Modify Managed Iceberg tables
+### Modify Iceberg managed tables
 
-To modify an Apache Iceberg table, follow the steps shown in [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+To modify an Iceberg managed table, follow the steps shown in [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 ### Use multi-statement transactions
 
@@ -373,7 +371,7 @@ To modify an Apache Iceberg table, follow the steps shown in [Modifying table sc
 
 > **Note:** To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
 
-To gain access to [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) for Managed Iceberg tables, fill out the [sign-up form](https://docs.google.com/forms/d/1lQMsrT_jj_bi_aJbcb65dOc8LJTf0Wjb9AZs9EQXkCg) .
+To gain access to [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) for Iceberg managed tables, fill out the [sign-up form](https://docs.google.com/forms/d/1lQMsrT_jj_bi_aJbcb65dOc8LJTf0Wjb9AZs9EQXkCg) .
 
 ### Use partitioning
 
@@ -383,9 +381,9 @@ To gain access to [multi-statement transactions](https://docs.cloud.google.com/b
 
 > **Note:** To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
 
-To gain access to [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) for Apache Iceberg tables, fill out the [sign-up form](https://forms.gle/AJTG3idhjZ6RLLV98) .
+To gain access to [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) for Iceberg managed tables, fill out the [sign-up form](https://forms.gle/AJTG3idhjZ6RLLV98) .
 
-You partition a table by specifying a partition column, which is used to segment the table. The following column types are supported for Managed Iceberg tables:
+You partition a table by specifying a partition column, which is used to segment the table. The following column types are supported for Iceberg managed tables:
 
   - `DATE`
   - `DATETIME`
@@ -393,7 +391,7 @@ You partition a table by specifying a partition column, which is used to segment
 
 Partitioning a table on a `DATE` , `DATETIME` , or `TIMESTAMP` column is known as [time-unit column partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) . You choose whether the partitions have [hourly, daily, monthly, or yearly granularity](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#select_daily_hourly_monthly_or_yearly_partitioning) .
 
-Managed Iceberg tables also support [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) and [combining clustered and partitioned tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables#combine-clustered-partitioned-tables) .
+Iceberg managed tables also support [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) and [combining clustered and partitioned tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables#combine-clustered-partitioned-tables) .
 
 #### Partitioning limitations
 
@@ -402,33 +400,33 @@ Managed Iceberg tables also support [clustering](https://docs.cloud.google.com/b
   - Partition expiration isn't supported.
   - [Partition evolution](https://iceberg.apache.org/docs/1.5.1/evolution/#partition-evolution) isn't supported.
 
-#### Create a partitioned Apache Iceberg table
+#### Create a partitioned Iceberg managed table
 
-To create a partitioned Apache Iceberg table, follow the instructions to [create a standard Apache Iceberg table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables) , and include one of the following, depending on your environment:
+To create a partitioned Iceberg managed table, follow the instructions to [create a standard Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables) , and include one of the following, depending on your environment:
 
   - The [`PARTITION BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression)
   - The [`--time_partitioning_field` and `--time_partitioning_type` flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table)
   - The [`timePartitioning` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#timepartitioning)
 
-#### Modify and query partitioned Managed Iceberg tables
+#### Modify and query partitioned Iceberg managed tables
 
-BigQuery data manipulation language (DML) statements and queries for partitioned Managed Iceberg tables are the same as for standard Apache Iceberg tables. BigQuery automatically scopes the job to the right partitions, similar to [Apache Iceberg hidden partitioning](https://iceberg.apache.org/docs/latest/partitioning/#icebergs-hidden-partitioning) . Additionally, any new data that you add to the table is automatically partitioned.
+BigQuery data manipulation language (DML) statements and queries for partitioned Iceberg managed tables are the same as for standard Iceberg managed tables. BigQuery automatically scopes the job to the right partitions, similar to [Iceberg hidden partitioning](https://iceberg.apache.org/docs/latest/partitioning/#icebergs-hidden-partitioning) . Additionally, any new data that you add to the table is automatically partitioned.
 
-You can also query partitioned Managed Iceberg tables with other engines in the same way as standard Managed Iceberg tables. We recommend [enabling metadata snapshots](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-table-snapshots) for the best experience.
+You can also query partitioned Iceberg managed tables with other engines in the same way as standard Iceberg managed tables. We recommend [enabling metadata snapshots](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-table-snapshots) for the best experience.
 
-For enhanced security, partitioning information for Managed Iceberg tables is decoupled from the data path and is managed entirely by the metadata layer.
+For enhanced security, partitioning information for Iceberg managed tables is decoupled from the data path and is managed entirely by the metadata layer.
 
 ## Pricing
 
-Apache Iceberg table pricing consists of storage, storage optimization, and queries and jobs.
+Iceberg managed table pricing consists of storage, storage optimization, and queries and jobs.
 
 ### Storage
 
-Managed Iceberg tables store all data in [Cloud Storage](https://docs.cloud.google.com/storage) . You are charged for all data stored, including historical table data. Cloud Storage [data processing](https://cloud.google.com/storage/pricing#process-pricing) and [transfer charges](https://cloud.google.com/storage/pricing#network-buckets) might also apply. Some Cloud Storage operation fees might be waived for operations that are processed through BigQuery or the BigQuery Storage API. There are no BigQuery-specific storage fees. For more information, see [Cloud Storage Pricing](https://cloud.google.com/storage/pricing) .
+Iceberg managed tables store all data in [Cloud Storage](https://docs.cloud.google.com/storage) . You are charged for all data stored, including historical table data. Cloud Storage [data processing](https://cloud.google.com/storage/pricing#process-pricing) and [transfer charges](https://cloud.google.com/storage/pricing#network-buckets) might also apply. Some Cloud Storage operation fees might be waived for operations that are processed through BigQuery or the BigQuery Storage API. There are no BigQuery-specific storage fees. For more information, see [Cloud Storage Pricing](https://cloud.google.com/storage/pricing) .
 
 ### Storage optimization
 
-Managed Iceberg tables perform automatic table management, including compaction, clustering, garbage collection, and BigQuery metadata generation/refresh to optimize query performance and reduce storage costs. Compute resource usage for table management is billed in Data Compute Units (DCUs) over time, in per second increments. For more details, see [Apache Iceberg table pricing](https://cloud.google.com/products/biglake/pricing) .
+Iceberg managed tables perform automatic table management, including compaction, clustering, garbage collection, and BigQuery metadata generation/refresh to optimize query performance and reduce storage costs. Compute resource usage for table management is billed in Data Compute Units (DCUs) over time, in per second increments. For more details, see [Iceberg managed table pricing](https://cloud.google.com/products/biglake/pricing) .
 
 Data export operations taking place while streaming through the Storage Write API are included in Storage Write API pricing and are not charged as background maintenance. For more information, see [Data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
@@ -447,38 +445,38 @@ Load and export operations (such as `EXPORT METADATA` ) use [Enterprise edition 
 
 ## Limitations
 
-Managed Iceberg tables have the following limitations:
+Iceberg managed tables have the following limitations:
 
-  - Managed Iceberg tables don't support [renaming operations](https://docs.cloud.google.com/bigquery/docs/managing-tables#renaming-table) or [`ALTER TABLE RENAME TO` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) .
-      - Managed Iceberg tables don't support [table copies](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) or [`CREATE TABLE COPY` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) .
-          - Managed Iceberg tables don't support [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) or [`CREATE TABLE CLONE` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) .
-              - Managed Iceberg tables don't support [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) or [`CREATE SNAPSHOT TABLE` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) .
-                  - Managed Iceberg tables don't support the following table schema:
-  - Empty schema
+  - Iceberg managed tables don't support [renaming operations](https://docs.cloud.google.com/bigquery/docs/managing-tables#renaming-table) or [`ALTER TABLE RENAME TO` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) .
+  - Iceberg managed tables don't support [table copies](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) or [`CREATE TABLE COPY` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) .
+  - Iceberg managed tables don't support [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) or [`CREATE TABLE CLONE` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) .
+  - Iceberg managed tables don't support [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) or [`CREATE SNAPSHOT TABLE` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) .
+  - Iceberg managed tables don't support the following table schema:
+      - Empty schema
       - Schema with `BIGNUMERIC` , `INTERVAL` , `JSON` , `RANGE` , or `GEOGRAPHY` data types.
       - Schema with [field collations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#collatable_data_types) .
-          - Schema with [default value expressions](https://docs.cloud.google.com/bigquery/docs/default-values) .
-  - Managed Iceberg tables don't support the following schema evolution cases:
+      - Schema with [default value expressions](https://docs.cloud.google.com/bigquery/docs/default-values) .
+  - Iceberg managed tables don't support the following schema evolution cases:
       - `NUMERIC` to `FLOAT` type coercions
       - `INT` to `FLOAT` type coercions
       - Adding new nested fields to an existing `RECORD` columns using SQL DDL statements
-  - Managed Iceberg tables display a 0-byte storage size when queried by the console or APIs.
-  - Managed Iceberg tables don't support [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
-  - Managed Iceberg tables don't support [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , but [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) is supported.
-  - Managed Iceberg tables don't support [change data capture (CDC)](https://docs.cloud.google.com/bigquery/docs/change-data-capture) updates.
-  - Managed Iceberg tables don't support [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)
-  - Managed Iceberg tables don't support [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .
-  - Managed Iceberg tables don't support [fail-safe windows](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) .
-  - Managed Iceberg tables don't support extract jobs.
-  - The `INFORMATION_SCHEMA.TABLE_STORAGE` view doesn't include Apache Iceberg tables.
-  - Managed Iceberg tables aren't supported as query result destinations. You can instead use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement with the `AS query_statement` argument to create a table as the query result destination.
-  - `CREATE OR REPLACE` doesn't support replacing standard tables with Apache Iceberg tables, or Managed Iceberg tables with standard tables.
-  - [Batch loading](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) and [`LOAD DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) only support appending data to existing Managed Iceberg tables.
+  - Iceberg managed tables display a 0-byte storage size when queried by the console or APIs.
+  - Iceberg managed tables don't support [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
+  - Iceberg managed tables don't support [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , but [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) is supported.
+  - Iceberg managed tables don't support [change data capture (CDC)](https://docs.cloud.google.com/bigquery/docs/change-data-capture) updates.
+  - Iceberg managed tables don't support [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)
+  - Iceberg managed tables don't support [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .
+  - Iceberg managed tables don't support [fail-safe windows](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) .
+  - Iceberg managed tables don't support extract jobs.
+  - The `INFORMATION_SCHEMA.TABLE_STORAGE` view doesn't include Iceberg managed tables.
+  - Iceberg managed tables aren't supported as query result destinations. You can instead use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement with the `AS query_statement` argument to create a table as the query result destination.
+  - `CREATE OR REPLACE` doesn't support replacing standard tables with Iceberg managed tables, or Iceberg managed tables with standard tables.
+  - [Batch loading](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) and [`LOAD DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) only support appending data to existing Iceberg managed tables.
   - [Batch loading](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) and [`LOAD DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) don't support schema updates.
-  - `TRUNCATE TABLE` doesn't support Managed Iceberg tables. There are two alternatives:
+  - `TRUNCATE TABLE` doesn't support Iceberg managed tables. There are two alternatives:
       - [`CREATE OR REPLACE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , using the same table creation options.
       - `DELETE FROM` table `WHERE` true
-  - The [`APPENDS` table-valued function (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history) doesn't support Managed Iceberg tables.
-  - Apache Iceberg metadata might not contain data that was streamed to BigQuery by the Storage Write API within the last 90 minutes.
-  - Record-based paginated access using `tabledata.list` doesn't support Apache Iceberg tables.
-  - Only one concurrent mutating DML statement ( `UPDATE` , `DELETE` , and `MERGE` ) runs for each Apache Iceberg table. Additional mutating DML statements are queued.
+  - The [`APPENDS` table-valued function (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history) doesn't support Iceberg managed tables.
+  - Iceberg metadata might not contain data that was streamed to BigQuery by the Storage Write API within the last 90 minutes.
+  - Record-based paginated access using `tabledata.list` doesn't support Iceberg managed tables.
+  - Only one concurrent mutating DML statement ( `UPDATE` , `DELETE` , and `MERGE` ) runs for each Iceberg managed table. Additional mutating DML statements are queued.

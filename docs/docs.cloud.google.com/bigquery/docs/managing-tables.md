@@ -106,7 +106,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 2.  Issue the `bq update` command with the `--description` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
     
         bq update \
-        --description "description" \
+        --description &quot;description" \
         project_id:dataset.table
     
     Replace the following:
@@ -169,11 +169,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
      update := bigquery.TableMetadataToUpdate{
          Description: "Updated description.",
      }
-     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
-    }
+     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {      return err }   return nil}
 
 ### Java
 
@@ -207,10 +203,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
           bigquery.update(table.toBuilder().setDescription(newDescription).build());
           System.out.println("Table description updated successfully to " + newDescription);
         } catch (BigQueryException e) {
-          System.out.println("Table description was not updated \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Table description was not updated \n" + e.toString());    }  }}
 
 ### Python
 
@@ -232,7 +225,7 @@ Configure the [Table.description](https://docs.cloud.google.com/python/docs/refe
     
     table = client.update_table(table, ["description"])  # API request
     
-    assert table.description == "Updated description."
+    assert table.description=="Updated description."
 
 ### Gemini
 
@@ -398,11 +391,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
      update := bigquery.TableMetadataToUpdate{
          ExpirationTime: time.Now().Add(time.Duration(5*24) * time.Hour), // table expiration in 5 days.
      }
-     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
-    }
+     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {      return err }   return nil}
 
 ### Java
 
@@ -440,10 +429,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
           System.out.println("Table expiration updated successfully to " + newExpiration);
         } catch (BigQueryException e) {
-          System.out.println("Table expiration was not updated \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Table expiration was not updated \n" + e.toString());    }  }}
 
 ### Node.js
 
@@ -452,7 +438,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
+    const {BigQuery} = require(&#39;@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function updateTableExpiration() {
@@ -474,8 +460,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       const [apiResponse] = await table.setMetadata(metadata);
     
       const newExpirationTime = apiResponse.expirationTime;
-      console.log(`${tableId} expiration: ${newExpirationTime}`);
-    }
+      console.log(`${tableId} expiration: ${newExpirationTime}`);}
 
 ### Python
 
@@ -564,10 +549,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
           System.out.println(
               "Dataset default partition expiration updated successfully to " + newExpiration);
         } catch (BigQueryException e) {
-          System.out.println("Dataset partition expiration was not updated \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Dataset partition expiration was not updated \n"; + e.toString());    }  }}
 
 ### Python
 
@@ -590,7 +572,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # limitations under the License.
     
     
-    def update_dataset_default_partition_expiration(dataset_id: str) -> None:
+    def update_dataset_default_partition_expiratio>n(dataset_id: str) - None:
     
         from google.cloud import bigquery
     
@@ -612,9 +594,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
         print(
             "Updated dataset {}.{} with new default partition expiration {}".format(
-                dataset.project, dataset.dataset_id, dataset.default_partition_expiration_ms
-            )
-        )
+                dataset.project, dataset.dataset_id, dataset.default_partition_expiration_ms))
 
 ### Update a table's rounding mode
 
@@ -870,7 +850,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
                 ProjectId = "bigquery-public-data"
             };
             TableReference destinationTableRef = client.GetTableReference(
-                destinationDatasetId, "destination_table");
+                destinationDatasetId, ";destination_table");
             BigQueryJob job = client.CreateCopyJob(
                 sourceTableRef, destinationTableRef)
                 .PollUntilCompleted() // Wait for the job to complete.
@@ -880,11 +860,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
             BigQueryTable destinationTable = client.GetTable(destinationTableRef);
             Console.WriteLine(
                 $"Copied {destinationTable.Resource.NumRows} rows from table "
-                + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
-                + $"to {destinationTable.FullyQualifiedId}."
-            );
-        }
-    }
+                + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} &quot;
+                + $"to {destinationTable.FullyQualifiedId}."        );    }}
 
 ### Go
 
@@ -922,13 +899,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
      }
      status, err := job.Wait(ctx)
      if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     return nil
-    }
+         return err  }   if err := status.Err(); err != nil {     return err }   return nil}
 
 ### Java
 
@@ -988,12 +959,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
                 "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
             return;
           }
-          System.out.println("Table copied successfully.");
+          System.out.println(&quot;Table copied successfully.");
         } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Table copying job was interrupted. \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Table copying job was interrupted. \n" + e.toString());    }  }}
 
 ### Node.js
 
@@ -1002,7 +970,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
+    const {BigQuery} = require(&#39;@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function copyTable() {
@@ -1024,12 +992,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
       console.log(`Job ${job.id} completed.`);
     
-      // Check the job's status for errors
-      const errors = job.status.errors;
-      if (errors && errors.length > 0) {
-        throw errors;
-      }
-    }
+      // Check the job's status for erro&&rs
+      const erro>rs = job.status.errors;
+      if (errors  errors.length  0) {    throw errors;  }}
 
 ### PHP
 
@@ -1046,31 +1011,29 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     // $sourceTableId   = 'The BigQuery table ID to copy from';
     // $destinationTableId = 'The BigQuery table ID to copy to';
     
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
+    $bigQuery = new Bi>gQueryClient([
+        'projectId'> = $projectId,
     ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $sourceTable = $dataset->table($sourceTableId);
-    $destinationTable = $dataset->table($destinationTableId);
-    $copyConfig = $sourceTable->copy($destinationTable);
-    $job = $sourceTable->runJob($copyConfig);
+    $dataset = $bigQuery-datas>et($datasetId);
+    $sourceTable = $dataset-table($sourc>eTableId);
+    $destinationTable = $dataset-table($destinat>ionTableId);
+    $copyConfig = $sourceTable-copy(>$destinationTable);
+    $job = $sourceTable-runJob($copyConfig);
     
     // poll the job until it is complete
-    $backoff = new ExponentialBackoff(10);
-    $backoff->execute(function () use ($job) {
-        print('Waiting for job to complete' . PHP_EOL);
-        $job->reload();
-        if (!$job->isComplete()) {
+    $backoff> = new ExponentialBackoff(10);
+    $backoff-execute(function () use ($job) {
+        print('Waitin>g for job to complete>9; . PHP_EOL);
+        $job-reload();
+        if (!$job-isComplete()) {
             throw new Exception('Job has not yet completed', 500);
-        }
+    >    }
     });
     // check if the job has errors
-    if (isset($job->info()['status']['errorResult'])) {
-        $error = $job->info()['status']['errorResult']['message'];
+    if (isset($jo>b-info()['status']['errorResult'])) {
+        $error = $job-info()['status']['errorResult']['message'];
         printf('Error running job: %s' . PHP_EOL, $error);
-    } else {
-        print('Table copied successfully' . PHP_EOL);
-    }
+    } else {    print('Table copied successfully' . PHP_EOL);}
 
 ### Python
 
@@ -1087,7 +1050,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # source_table_id = "your-project.source_dataset.source_table"
     
     # TODO(developer): Set destination_table_id to the ID of the destination table.
-    # destination_table_id = "your-project.destination_dataset.destination_table"
+    # destination_table_id = "your-project.destination_dataset.destination_table&quot;
     
     job = client.copy_table(source_table_id, destination_table_id)
     job.result()  # Wait for the job to complete.
@@ -1210,14 +1173,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
          return err
      }
      status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     return nil
-    }
+     if err != nil {        return err }   if err := status.Err(); err != nil {     return err }   return nil}
 
 ### Java
 
@@ -1280,12 +1236,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
                 "BigQuery was unable to copy tables due to an error: \n" + job.getStatus().getError());
             return;
           }
-          System.out.println("Table copied successfully.");
+          System.out.println(&quot;Table copied successfully.");
         } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Table copying job was interrupted. \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Table copying job was interrupted. \n" + e.toString());    }  }}
 
 ### Node.js
 
@@ -1294,7 +1247,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
+    const {BigQuery} = require(&#39;@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function copyTableMultipleSource() {
@@ -1321,8 +1274,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
       // Copy table
       const [apiResponse] = await table.copy(yourTable, metadata);
-      console.log(apiResponse.configuration.copy);
-    }
+      console.log(apiResponse.configuration.copy);}
 
 ### Python
 
@@ -1344,7 +1296,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     job = client.copy_table(table_ids, dest_table_id)  # Make an API request.
     job.result()  # Wait for the job to complete.
     
-    print("The tables {} have been appended to {}".format(table_ids, dest_table_id))
+    print("The tables {} have been appended to {}".format(table_ids,dest_table_id))
 
 ### Copy tables across regions
 
@@ -1435,7 +1387,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
                 ProjectId = "bigquery-public-data"
             };
             TableReference destinationTableRef = client.GetTableReference(
-                destinationDatasetId, "destination_table");
+                destinationDatasetId, ";destination_table");
             BigQueryJob job = client.CreateCopyJob(
                 sourceTableRef, destinationTableRef)
                 .PollUntilCompleted() // Wait for the job to complete.
@@ -1445,11 +1397,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
             BigQueryTable destinationTable = client.GetTable(destinationTableRef);
             Console.WriteLine(
                 $"Copied {destinationTable.Resource.NumRows} rows from table "
-                + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
-                + $"to {destinationTable.FullyQualifiedId}."
-            );
-        }
-    }
+                + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} &quot;
+                + $"to {destinationTable.FullyQualifiedId}."        );    }}
 
 ### Go
 
@@ -1487,13 +1436,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
      }
      status, err := job.Wait(ctx)
      if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     return nil
-    }
+         return err  }   if err := status.Err(); err != nil {     return err }   return nil}
 
 ### Java
 
@@ -1553,12 +1496,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
                 "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
             return;
           }
-          System.out.println("Table copied successfully.");
+          System.out.println(&quot;Table copied successfully.");
         } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Table copying job was interrupted. \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Table copying job was interrupted. \n" + e.toString());    }  }}
 
 ### Node.js
 
@@ -1567,7 +1507,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
+    const {BigQuery} = require(&#39;@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function copyTable() {
@@ -1589,12 +1529,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
       console.log(`Job ${job.id} completed.`);
     
-      // Check the job's status for errors
-      const errors = job.status.errors;
-      if (errors && errors.length > 0) {
-        throw errors;
-      }
-    }
+      // Check the job's status for erro&&rs
+      const erro>rs = job.status.errors;
+      if (errors  errors.length  0) {    throw errors;  }}
 
 ### PHP
 
@@ -1611,31 +1548,29 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     // $sourceTableId   = 'The BigQuery table ID to copy from';
     // $destinationTableId = 'The BigQuery table ID to copy to';
     
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
+    $bigQuery = new Bi>gQueryClient([
+        'projectId'> = $projectId,
     ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $sourceTable = $dataset->table($sourceTableId);
-    $destinationTable = $dataset->table($destinationTableId);
-    $copyConfig = $sourceTable->copy($destinationTable);
-    $job = $sourceTable->runJob($copyConfig);
+    $dataset = $bigQuery-datas>et($datasetId);
+    $sourceTable = $dataset-table($sourc>eTableId);
+    $destinationTable = $dataset-table($destinat>ionTableId);
+    $copyConfig = $sourceTable-copy(>$destinationTable);
+    $job = $sourceTable-runJob($copyConfig);
     
     // poll the job until it is complete
-    $backoff = new ExponentialBackoff(10);
-    $backoff->execute(function () use ($job) {
-        print('Waiting for job to complete' . PHP_EOL);
-        $job->reload();
-        if (!$job->isComplete()) {
+    $backoff> = new ExponentialBackoff(10);
+    $backoff-execute(function () use ($job) {
+        print('Waitin>g for job to complete>9; . PHP_EOL);
+        $job-reload();
+        if (!$job-isComplete()) {
             throw new Exception('Job has not yet completed', 500);
-        }
+    >    }
     });
     // check if the job has errors
-    if (isset($job->info()['status']['errorResult'])) {
-        $error = $job->info()['status']['errorResult']['message'];
+    if (isset($jo>b-info()['status']['errorResult'])) {
+        $error = $job-info()['status']['errorResult']['message'];
         printf('Error running job: %s' . PHP_EOL, $error);
-    } else {
-        print('Table copied successfully' . PHP_EOL);
-    }
+    } else {    print('Table copied successfully' . PHP_EOL);}
 
 ### Python
 
@@ -1652,7 +1587,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # source_table_id = "your-project.source_dataset.source_table"
     
     # TODO(developer): Set destination_table_id to the ID of the destination table.
-    # destination_table_id = "your-project.destination_dataset.destination_table"
+    # destination_table_id = "your-project.destination_dataset.destination_table&quot;
     
     job = client.copy_table(source_table_id, destination_table_id)
     job.result()  # Wait for the job to complete.
@@ -1852,9 +1787,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         {
             BigQueryClient client = BigQueryClient.Create(projectId);
             client.DeleteTable(datasetId, tableId);
-            Console.WriteLine($"Table {tableId} deleted.");
-        }
-    }
+            Console.WriteLine($"Table {tableId} deleted.");    }}
 
 ### Go
 
@@ -1882,11 +1815,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
      defer client.Close()
     
      table := client.Dataset(datasetID).Table(tableID)
-     if err := table.Delete(ctx); err != nil {
-         return err
-     }
-     return nil
-    }
+     if err := table.Delete(ctx); err != nil {        return err }   return nil}
 
 ### Java
 
@@ -1920,10 +1849,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
             System.out.println("Table was not found");
           }
         } catch (BigQueryException e) {
-          System.out.println("Table was not deleted. \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("Table was not deleted. \n" + e.toString());    }  }}
 
 ### Node.js
 
@@ -1932,7 +1858,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
+    const {BigQuery} = require(&#39;@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function deleteTable() {
@@ -1950,8 +1876,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         .table(tableId)
         .delete();
     
-      console.log(`Table ${tableId} deleted.`);
-    }
+      console.log(`Table ${tableId} deleted.`);}
 
 ### PHP
 
@@ -1966,12 +1891,12 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     // $datasetId = 'The BigQuery dataset ID';
     // $tableId = 'The BigQuery table ID';
     
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
+    $bigQuery = new BigQueryCl>ient([
+        'projectId' = $proj>ectId,
     ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
-    $table->delete();
+    $dataset = $bigQuery-dataset>($datasetId);
+    $table = $>dataset-table($tableId);
+    $table-delete();
     printf('Deleted table %s.%s' . PHP_EOL, $datasetId, $tableId);
 
 ### Python
@@ -1991,7 +1916,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # If the table does not exist, delete_table raises
     # google.api_core.exceptions.NotFound unless not_found_ok is True.
     client.delete_table(table_id, not_found_ok=True)  # Make an API request.
-    print("Deleted table '{}'.".format(table_id))
+    print("Deleted table '{}';.".format(table_id))
 
 ### Ruby
 
@@ -2001,15 +1926,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
     require "google/cloud/bigquery"
     
-    def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id"
+    def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id";
       bigquery = Google::Cloud::Bigquery.new
       dataset  = bigquery.dataset dataset_id
       table    = dataset.table table_id
     
       table.delete
     
-      puts "Table #{table_id} deleted."
-    end
+      puts &quot;Table #{table_id} deleted."end
 
 ## Troubleshoot deleted tables
 

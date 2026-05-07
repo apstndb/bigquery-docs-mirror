@@ -141,7 +141,7 @@ Continuous queries are subject to the following limitations:
     
       - [External tables](https://docs.cloud.google.com/bigquery/docs/external-data-sources) .
       - [Information schema views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
-      - [Managed Apache Iceberg tables in BigQuery](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) .
+      - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) .
       - [Wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
       - [Change Data Capture (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture) data.
       - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
