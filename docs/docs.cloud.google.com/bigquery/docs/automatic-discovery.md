@@ -76,6 +76,8 @@ Enable the Dataplex API.
 
 To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
+> **Note:** The roles listed in the next section are for a standard discovery scan. If you want to use unstructured data semantic inference to extract AI-powered insights from your files, you must also apply the additional roles listed in [Use data insights for unstructured data](https://docs.cloud.google.com/dataplex/docs/use-data-insights-unstructured-data#roles-permissions) .
+
 ### Required roles for the Knowledge Catalog service account
 
 Before you begin, assign the IAM permissions to the Knowledge Catalog service account in your project.

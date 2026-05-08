@@ -113,11 +113,11 @@ To create a dataset in a project other than your default project, add the projec
     
         CREATE SCHEMA PROJECT_ID.DATASET_ID
           OPTIONS (
-            default_kms_key_name = &#39;KMS_KEY_NAME',
+            default_kms_key_name = 'KMS_KEY_NAME',
             default_partition_expiration_days = PARTITION_EXPIRATION,
             default_table_expiration_days = TABLE_EXPIRATION,
-            description = ';DESCRIPTION',
-            labels = [('KEY_19;,';VALUE_1'),('KEY_29;,'VALUE_2')],
+            description = 'DESCRIPTION',
+            labels = [('KEY_1','VALUE_1'),('KEY_2','VALUE_2')],
             location = 'LOCATION',
             max_time_travel_hours = HOURS,
             storage_billing_model = BILLING_MODEL);
@@ -165,7 +165,7 @@ To create a dataset in a project other than your default project, add the projec
         --default_kms_key=KMS_KEY_NAME \
         --default_partition_expiration=PARTITION_EXPIRATION \
         --default_table_expiration=TABLE_EXPIRATION \
-        --description=&quot;DESCRIPTION" \
+        --description="DESCRIPTION" \
         --label=KEY_1:VALUE_1 \
         --label=KEY_2:VALUE_2 \
         --add_tags=KEY_3:VALUE_3[,...] \
@@ -436,7 +436,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
             };
             // Create the dataset
             return client.CreateDataset(
-                datasetId: "your_new_dataset_id", dataset);    }}
+                datasetId: "your_new_dataset_id", dataset);
+        }
+    }
 
 ### Go
 
@@ -459,14 +461,18 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
      client, err := bigquery.NewClient(ctx, projectID)
      if err != nil {
-         return fmt.Errorf("bigquery.N&ewClient: %v", err)
+         return fmt.Errorf("bigquery.NewClient: %v", err)
      }
      defer client.Close()
     
-     meta := bigquery.DatasetMetadata{
+     meta := &bigquery.DatasetMetadata{
          Location: "US", // See https://cloud.google.com/bigquery/docs/locations
      }
-     if err := client.Dataset(datasetID).Create(ctx, meta); err != nil {     return err }   return nil}
+     if err := client.Dataset(datasetID).Create(ctx, meta); err != nil {
+         return err
+     }
+     return nil
+    }
 
 ### Java
 
@@ -498,9 +504,12 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
           Dataset newDataset = bigquery.create(datasetInfo);
           String newDatasetName = newDataset.getDatasetId().getDataset();
-          System.out.println(newDatasetName + " created successfully&quot;);
+          System.out.println(newDatasetName + " created successfully");
         } catch (BigQueryException e) {
-          System.out.println("Dataset was not created. \n"; + e.toString());    }  }}
+          System.out.println("Dataset was not created. \n" + e.toString());
+        }
+      }
+    }
 
 ### Node.js
 
@@ -509,7 +518,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     // Import the Google Cloud client library and create a client
-    const {BigQuery} = require(&#39;@google-cloud/bigquery');
+    const {BigQuery} = require('@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function createDataset() {
@@ -527,7 +536,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
       // Create a new dataset
       const [dataset] = await bigquery.createDataset(datasetId, options);
-      console.log(`Dataset ${dataset.id} created.`);}createDataset();
+      console.log(`Dataset ${dataset.id} created.`);
+    }
+    createDataset();
 
 ### PHP
 
@@ -542,9 +553,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     // $datasetId = 'The BigQuery dataset ID';
     
     $bigQuery = new BigQueryClient([
-     >   'projectId' = $projectId,
-    ]>);
-    $dataset = $bigQuery-createDataset($datasetId);
+        'projectId' => $projectId,
+    ]);
+    $dataset = $bigQuery->createDataset($datasetId);
     printf('Created dataset %s' . PHP_EOL, $datasetId);
 
 ### Python
@@ -571,7 +582,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # Raises google.api_core.exceptions.Conflict if the Dataset already
     # exists within the project.
     dataset = client.create_dataset(dataset, timeout=30)  # Make an API request.
-    print("Created dataset {}.{}".format(client.project,dataset.dataset_id))
+    print("Created dataset {}.{}".format(client.project, dataset.dataset_id))
 
 ### Ruby
 
@@ -581,13 +592,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
     require "google/cloud/bigquery"
     
-    def create_dataset dataset_id = "my_dataset", location = "US";
+    def create_dataset dataset_id = "my_dataset", location = "US"
       bigquery = Google::Cloud::Bigquery.new
     
       # Create the dataset in a specified geographic location
       bigquery.create_dataset dataset_id, location: location
     
-      puts "Created dataset: #{dataset_id}"end
+      puts "Created dataset: #{dataset_id}"
+    end
 
 ## Name datasets
 

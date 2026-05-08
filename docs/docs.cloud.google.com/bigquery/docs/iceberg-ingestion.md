@@ -21,7 +21,7 @@ You can specify Iceberg managed table as the destination table type when you set
 Transfers to Iceberg managed table are subject to the following limitations:
 
   - **Append-only:** Data is only appended to the destination table. Overwriting, updating, or deleting existing data is not supported.
-  - **Partitioning limitations:** Partitioning is supported on the destination Iceberg managed table, but some limitations apply. For more information, see [Partitioning limitations](https://docs.cloud.google.com/bigquery/docs/lakehouse-iceberg-rest-catalog-transactions-partitioning#partitioning_limitations) .
+  - **Partitioning limitations:** Partitioning is supported on the destination Iceberg managed table, but some limitations apply. For more information, see [Partitioning limitations](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#partitioning_limitations) .
   - **No backfills:** Transfers do not support [backfills](https://docs.cloud.google.com/bigquery/docs/samples/bigquerydatatransfer-schedule-backfill) .
 
 ## Pricing

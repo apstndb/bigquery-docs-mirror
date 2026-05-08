@@ -233,7 +233,7 @@ The following example defines a `Person` node with a custom property and an `Acc
           PROPERTIES (CONCAT(city, ", ", country) AS address)
           LABEL Entity PROPERTIES (id, name),
         graph_db.Account KEY (id)
-          LABEL Account OPTIONS(description = 'A checking or savings account')
+          DEFAULT LABEL OPTIONS(description = 'A checking or savings account')
           PROPERTIES (id, create_time)
           LABEL Entity
           PROPERTIES (

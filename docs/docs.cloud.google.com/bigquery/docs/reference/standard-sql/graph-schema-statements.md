@@ -210,8 +210,8 @@ In a graph, labels and properties are uniquely identified by their names. Labels
     element_label:
       {
         LABEL label_name |
-        DEFAULT LABEL
-      } [ options_clause ]
+        DEFAULT LABEL [ options_clause ]
+      }
     
     options_clause:
       OPTIONS (
