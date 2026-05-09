@@ -18,7 +18,7 @@ This document shows you how to migrate metadata from external data catalogs to [
   - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg are a one-time sync. This feature doesn't support continuous or periodic syncs, so any writes made after migration aren't visible until you migrate again.
   - Nested namespaces aren't supported.
   - The Iceberg REST catalog only supports Parquet data files.
-  - BigLake doesn't support Apache Iceberg V3 tables.
+  - Lakehouse doesn't support Apache Iceberg V3 tables.
   - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg only supports migrations of up to 10,000 tables. If your workload requires processing more than 10,000 tables, then we recommend splitting your workload across multiple migrations.
   - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg don't support the use of organization policies to enforce [domain-restricted sharing](https://docs.cloud.google.com/organization-policy/domain-restricted-sharing) .
 
@@ -94,7 +94,7 @@ To ensure that the customer-provided service account has the necessary permissio
 
   - Access to the network attachment: [Compute Network Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkAdmin) ( `roles/compute.networkAdmin` ) on the service account
   - Access to the BigQuery Data Transfer Service: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) on the service account
-  - Access to BigLake resources: [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.editor) ( `roles/biglake.editor` ) on the service account
+  - Access to Lakehouse resources: [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.editor) ( `roles/biglake.editor` ) on the service account
   - Access to secrets: [Secret Manager Secret Accessor](https://docs.cloud.google.com/iam/docs/roles-permissions/secretmanager#secretmanager.secretAccessor) ( `roles/secretmanager.secretAccessor` ) on the customer-provided secret
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -130,9 +130,9 @@ Replace the following:
   - `  POLARIS_REALM  ` : the realm for the Polaris catalog. This field is required only for Apache Polaris. For example, `FINANCE` .
   - `  SCOPE  ` : (Optional) the OAuth2.0 scope. Default value is `PRINCIPAL_ROLE:ALL` .
 
-## Create a BigLake catalog
+## Create a Lakehouse catalog
 
-[Create a BigLake catalog](https://docs.cloud.google.com/biglake/docs/use-biglake-metastore-iceberg-rest-catalog#create-biglake-catalog) . The migrated metadata is stored in the Cloud Storage bucket that you specified when you create the catalog.
+[Create a Lakehouse catalog](https://docs.cloud.google.com/biglake/docs/use-biglake-metastore-iceberg-rest-catalog#create-biglake-catalog) . The migrated metadata is stored in the Cloud Storage bucket that you specified when you create the catalog.
 
 ## Migrate metadata
 
@@ -160,8 +160,8 @@ To start a metadata migration to Lakehouse Iceberg REST catalog tables, do the f
 
 5.  Click **Continue** .
 
-When the metadata migration completes, the metadata from your external catalogs is stored in the Cloud Storage bucket that you specified when you [created the BigLake catalog](https://docs.cloud.google.com/biglake/docs/use-biglake-metastore-iceberg-rest-catalog#create-biglake-catalog) .
+When the metadata migration completes, the metadata from your external catalogs is stored in the Cloud Storage bucket that you specified when you [created the Lakehouse catalog](https://docs.cloud.google.com/biglake/docs/use-biglake-metastore-iceberg-rest-catalog#create-biglake-catalog) .
 
 ## Pricing
 
-There is no cost to transfer metadata to Lakehouse Iceberg REST catalog tables. Once metadata is transferred, [BigLake pricing](https://cloud.google.com/products/biglake/pricing) applies.
+There is no cost to transfer metadata to Lakehouse Iceberg REST catalog tables. Once metadata is transferred, [Lakehouse pricing](https://cloud.google.com/products/biglake/pricing) applies.

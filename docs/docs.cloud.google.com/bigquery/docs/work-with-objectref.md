@@ -146,7 +146,7 @@ The following example shows a query that uses delegated access. It requires the 
 
     SELECT AI.GENERATE(
       ("Describe this image:",
-        OBJ.GET_ACCESS_RUL(OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg", "us.connection1"), 'r')),
+        OBJ.GET_ACCESS_URL(OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg", "us.connection1"), 'r')),
       connection_id => "us.connection2");
 
 ### Best practices

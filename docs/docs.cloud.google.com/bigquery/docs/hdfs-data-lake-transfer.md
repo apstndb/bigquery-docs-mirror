@@ -702,6 +702,6 @@ Once the quota is reached, the transfer waits until more quota is available. Sto
 
 There is no cost to use the Apache Hive Metastore connector to transfer your data. After the data is transferred, you're charged with storing the data in your destination. For more information, see the following:
 
-  - [BigLake](https://cloud.google.com/products/biglake/pricing)
+  - [Lakehouse](https://cloud.google.com/products/lakehouse/pricing)
   - [Dataproc Metastore pricing](https://cloud.google.com/dataproc-metastore/pricing)
   - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)

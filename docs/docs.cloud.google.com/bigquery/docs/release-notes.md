@@ -6,6 +6,14 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 08, 2026
+
+Announcement
+
+Starting August 11, 2026, the billing label for the BigQuery Data Transfer Service SKU will be updated from `goog-bq-feature-type: DATA_TRANSFER_SERVICE` (uppercase) to `goog-bq-feature-type: data_transfer_service` (lowercase) to provide a more unified and complete view of your costs. This update expands the scope of the label to cover all costs associated with the BigQuery Data Transfer Service, including data transfer orchestration, data load operations, and data merge operations.
+
+To ensure uninterrupted cost visibility, update your billing exports, dashboards, and reporting queries to include both these labels.
+
 ## May 06, 2026
 
 Feature
