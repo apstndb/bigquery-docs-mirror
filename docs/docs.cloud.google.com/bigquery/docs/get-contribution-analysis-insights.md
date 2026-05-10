@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights
+uri: https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights
+title: Get data insights from a contribution analysis model using a summable metric
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Get data insights from a contribution analysis model using a summable metric
 
 In this tutorial, you use a [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) model to analyze sales changes between 2020 and 2021 in the Iowa liquor sales dataset. This tutorial guides you through performing the following tasks:

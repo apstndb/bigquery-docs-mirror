@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/sessions-intro
+uri: https://docs.cloud.google.com/bigquery/docs/sessions-intro
+title: Introduction to sessions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Introduction to sessions
 
 This guide describes how to enable, create, and track changes in a BigQuery session. It is intended for users who are familiar with [BigQuery](https://docs.cloud.google.com/bigquery/docs) and [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .

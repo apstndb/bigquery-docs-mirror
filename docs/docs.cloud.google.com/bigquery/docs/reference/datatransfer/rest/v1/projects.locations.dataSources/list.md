@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources/list
+uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources/list
+title: 'Method: dataSources.list'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:36Z"
+---
+
   - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources/list#body.HTTP_TEMPLATE)
   - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources/list#body.PATH_PARAMETERS)
   - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources/list#body.QUERY_PARAMETERS)

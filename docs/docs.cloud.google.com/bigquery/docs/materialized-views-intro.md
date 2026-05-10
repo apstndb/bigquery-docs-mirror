@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/materialized-views-intro
+uri: https://docs.cloud.google.com/bigquery/docs/materialized-views-intro
+title: Introduction to materialized views
+description: Describes characteristics, benefits, and limitations of BigQuery materialized views and compares them with techniques, such as caching, scheduled queries, and standard views.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Introduction to materialized views
 
 Materialized views are precomputed views that periodically store the results of a SQL query. In some use cases, materialized views reduce the total processing time and related charges by reducing the amount of data to be scanned for each query. You can query materialized views as you would other data resources.

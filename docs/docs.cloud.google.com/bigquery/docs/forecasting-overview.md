@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/forecasting-overview
+uri: https://docs.cloud.google.com/bigquery/docs/forecasting-overview
+title: Forecasting overview
+description: Understand the forecasting use case, and the BigQuery ML options for performing forecasting.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Forecasting overview
 
 Forecasting is a technique where you analyze historical data in order to make an informed prediction about future trends. For example, you might analyze historical sales data from several store locations in order to predict future sales at those locations. In BigQuery ML, you perform forecasting on [time series](https://en.wikipedia.org/wiki/Time_series) data.

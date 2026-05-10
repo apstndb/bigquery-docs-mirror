@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/adding-labels
+uri: https://docs.cloud.google.com/bigquery/docs/adding-labels
+title: Add labels to resources
+description: Shows how to add labels to datasets, tables, views, and jobs, and how to use a label as a tag. Includes examples in SQL, Go, Java, Node.js, and Python.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Add labels to resources
 
 This document describes how to add labels to BigQuery resources, including the following resources:

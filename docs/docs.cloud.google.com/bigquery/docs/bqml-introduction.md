@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bqml-introduction
+uri: https://docs.cloud.google.com/bigquery/docs/bqml-introduction
+title: Introduction to ML in BigQuery
+description: Understand BigQuery ML, BigQuery's platform for creating, running, and managing generative AI and ML models.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Introduction to ML in BigQuery
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .

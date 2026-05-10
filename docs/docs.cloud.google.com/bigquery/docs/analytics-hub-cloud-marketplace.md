@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace
+uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace
+title: Commercialize listings on Google Cloud Marketplace
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Commercialize listings on Google Cloud Marketplace
 
 As a BigQuery sharing publisher, you can use the integration of BigQuery sharing (formerly Analytics Hub) with [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace) to create revenue by listing your own data products on Cloud Marketplace. By using the publisher-subscriber model, you can share data offerings with your customers at scale, without having to manage every transaction and subscription. You can configure aspects of the data product, such as the kind of data you provide (for example, BigQuery datasets), the price of the subscription (paid, free, or trial), and the duration.

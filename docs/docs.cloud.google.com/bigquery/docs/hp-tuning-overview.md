@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/hp-tuning-overview
+uri: https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview
+title: Hyperparameter tuning overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Hyperparameter tuning overview
 
 In machine learning, hyperparameter tuning identifies a set of optimal hyperparameters for a learning algorithm. A hyperparameter is a model argument whose value is set before the learning process begins. By contrast, the values of other parameters such as coefficients of a linear model are learned.

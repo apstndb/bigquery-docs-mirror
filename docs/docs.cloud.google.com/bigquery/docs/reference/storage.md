@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/storage
+uri: https://docs.cloud.google.com/bigquery/docs/reference/storage
+title: Use the BigQuery Storage Read API to read table data
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:52:00Z"
+---
+
 # Use the BigQuery Storage Read API to read table data
 
 The BigQuery Storage Read API provides fast access to BigQuery-managed storage by using an [rpc-based](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc) protocol.

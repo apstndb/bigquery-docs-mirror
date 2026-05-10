@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/external-table-definition
+uri: https://docs.cloud.google.com/bigquery/docs/external-table-definition
+title: Create a table definition file for an external data source
+description: Shows how to create a table definition file using schema auto-detect, inline schema, and JSON schema. Explains wildcard support for the table definition files.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Create a table definition file for an external data source
 
 This page describes how to create a table definition file, which is a prerequisite for creating an [external data source](https://docs.cloud.google.com/bigquery/docs/external-data-sources) by using the bq command-line tool. You create the external data source by running the [`bg mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) and using the `--external_table_definition` flag to specify the table definition file.

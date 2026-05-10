@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-max-abs-scaler
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-max-abs-scaler
+title: The ML.MAX_ABS_SCALER function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.MAX\_ABS\_SCALER function
 
 This document describes the `ML.MAX_ABS_SCALER` function, which lets you scale a numerical expression to the range `[-1, 1]` by dividing with the maximum absolute value. It doesn't shift or center the data, and so doesn't destroy any sparsity.

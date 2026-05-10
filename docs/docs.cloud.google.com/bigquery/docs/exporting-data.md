@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/exporting-data
+uri: https://docs.cloud.google.com/bigquery/docs/exporting-data
+title: Export table data to Cloud Storage
+description: Describes how to export data from BigQuery to Cloud Storage in CSV, JSON, Avro, and Parquet formats.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T08:56:33Z"
+---
+
 # Export table data to Cloud Storage
 
 This page describes how to export or extract data from BigQuery tables to Cloud Storage.

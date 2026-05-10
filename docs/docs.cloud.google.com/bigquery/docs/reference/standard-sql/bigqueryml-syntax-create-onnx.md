@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx
+title: The CREATE MODEL statement for importing ONNX models
+description: Use the CREATE MODEL statement for importing ONNX models into BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for importing ONNX models
 
 This document describes the `CREATE MODEL` statement for importing [Open Neural Network Exchange (ONNX)](https://onnx.ai/) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. ONNX is an open standard format for representing machine learning models.

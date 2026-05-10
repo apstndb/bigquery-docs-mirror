@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-sql
+uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-sql
+title: Snowflake SQL translation guide
+description: Provides a reference to compare statements, functions, data types, and other SQL objects between the Snowflake and BigQuery SQL dialects.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Snowflake SQL translation guide
 
 This document details the similarities and differences in SQL syntax between Snowflake and BigQuery to help accelerate the planning and execution of moving your EDW (Enterprise Data Warehouse) to BigQuery. Snowflake data warehousing is designed to work with Snowflake-specific SQL syntax. Scripts written for Snowflake might need to be altered before you can use them in BigQuery, because the SQL dialects vary between the services. Use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries. Snowflake SQL is supported by both tools in [preview](https://cloud.google.com/products#product-launch-stages) .

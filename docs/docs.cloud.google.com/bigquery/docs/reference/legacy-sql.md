@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/legacy-sql
+uri: https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql
+title: Legacy SQL Syntax, Functions and Operators
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:11Z"
+---
+
 # Legacy SQL Syntax, Functions and Operators
 
 This document details legacy SQL query syntax, functions and operators. The preferred query syntax for BigQuery is [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) . For more information, see [Legacy SQL feature availability](https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability) .

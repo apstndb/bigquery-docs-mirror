@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/best-practices-storage
+uri: https://docs.cloud.google.com/bigquery/docs/best-practices-storage
+title: Optimize storage for query performance
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Optimize storage for query performance
 
 This page provides best practices for optimizing BigQuery storage for query performance. You can also [optimize storage for cost](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#control-storage-cost) . While these best practices are primarily focused on tables using BigQuery storage, they can be applied to external tables as well.

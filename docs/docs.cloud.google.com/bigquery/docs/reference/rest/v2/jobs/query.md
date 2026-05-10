@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+title: 'Method: jobs.query'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-12-23T19:11:07Z"
+---
+
   - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.HTTP_TEMPLATE)
   - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.PATH_PARAMETERS)
   - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.request_body)

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/colab-data-science-agent
+uri: https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent
+title: Use the Colab Enterprise Data Science Agent with BigQuery
+description: Overview of Colab Enterprise Data Science Agent in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Use the Colab Enterprise Data Science Agent with BigQuery
 
 > **Preview**

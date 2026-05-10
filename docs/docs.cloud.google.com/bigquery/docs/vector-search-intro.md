@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/vector-search-intro
+uri: https://docs.cloud.google.com/bigquery/docs/vector-search-intro
+title: Introduction to embeddings and vector search
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Introduction to embeddings and vector search
 
 This document provides an overview of embeddings and vector search in BigQuery. Vector search is a technique to compare similar objects using embeddings, and it is used to power Google products, including Google Search, YouTube, and Google Play. You can use vector search to perform searches at scale. When you use [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) with vector search, you can take advantage of foundational technologies like inverted file indexing (IVF) and the [ScaNN algorithm](https://research.google/blog/announcing-scann-efficient-vector-similarity-search/) .

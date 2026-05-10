@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/federated-queries-intro
+uri: https://docs.cloud.google.com/bigquery/docs/federated-queries-intro
+title: Introduction to federated queries
+description: Describes federated queries in BigQuery, their syntax, and how they can be used to query external databases such as AlloyDB, Spanner, and Cloud SQL. Explains the quotas and limits for federated queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Introduction to federated queries
 
 This page introduces how to use federated queries and provides guidance on querying Spanner, AlloyDB, and Cloud SQL data from BigQuery.

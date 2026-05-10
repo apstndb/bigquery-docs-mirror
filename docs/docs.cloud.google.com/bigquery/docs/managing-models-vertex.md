@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/managing-models-vertex
+uri: https://docs.cloud.google.com/bigquery/docs/managing-models-vertex
+title: Manage BigQuery ML models in Vertex AI
+description: Register BigQuery ML models with the Vertex AI Model Registry to manage them alongside your Vertex AI models without needing to export them.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manage BigQuery ML models in Vertex AI
 
 You can register BigQuery ML models with the Vertex AI Model Registry, in order to manage them alongside your Vertex AI models without needing to export them. When you register models with Model Registry, you can version, evaluate, and deploy the models for online prediction by using a single interface, and without needing a serving container. If you aren't familiar with Vertex AI and how it integrates with BigQuery ML, see [Vertex AI for BigQuery users](https://docs.cloud.google.com/vertex-ai/docs/beginner/bqml) .

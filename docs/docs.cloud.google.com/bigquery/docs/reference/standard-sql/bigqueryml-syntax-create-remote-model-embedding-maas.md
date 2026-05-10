@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-embedding-maas
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-embedding-maas
+title: The CREATE MODEL statement for Vertex AI embedding models as MaaS
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for Vertex AI embedding models as MaaS
 
 This document describes the `CREATE MODEL` statement for creating remote models in BigQuery over [embedding models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings) in Vertex AI as a model as a service (MaaS) by using SQL. When you use MaaS on Vertex AI, you don't have to provision or manage serving infrastructure for your models. Choose MaaS for rapid development and prototyping, when you want to minimize operational overhead. For more information, see [When to use MaaS](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/choose-serving-option#when_to_use_maas) .

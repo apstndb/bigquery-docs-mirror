@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/clustered-tables
+uri: https://docs.cloud.google.com/bigquery/docs/clustered-tables
+title: Introduction to clustered tables
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Introduction to clustered tables
 
 Clustered tables in BigQuery are tables that have a user-defined column sort order using *clustered columns* . Clustered tables can improve query performance and reduce query costs.

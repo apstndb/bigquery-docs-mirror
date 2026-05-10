@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer
+title: Schedule a Snowflake transfer
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Schedule a Snowflake transfer
 
 The Snowflake connector provided by the BigQuery Data Transfer Service lets you schedule and manage automated transfer jobs to migrate data from Snowflake into BigQuery using public IP allowlists.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/spanner-federated-queries
+uri: https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries
+title: Spanner federated queries
+description: Shows how to query data in Spanner from BigQuery using federated queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Spanner federated queries
 
 As a data analyst, you can query data in Spanner from BigQuery using [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/export-model-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/export-model-tutorial
+title: Export a BigQuery ML model for online prediction
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 > **Note:** Exporting your models is not required for deployment on Vertex AI if you are using the Vertex AI Model Registry. To learn more about the registry, see [Manage BigQuery ML models in the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
 
 This tutorial shows how to [export a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/exporting-models) and then deploy the model either on Vertex AI or on a local machine. You will use the [`iris` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=iris&page=table) from the BigQuery public datasets and work through the following three end-to-end scenarios:

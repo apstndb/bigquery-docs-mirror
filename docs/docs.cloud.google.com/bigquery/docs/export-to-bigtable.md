@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/export-to-bigtable
+uri: https://docs.cloud.google.com/bigquery/docs/export-to-bigtable
+title: Export data to Bigtable (reverse ETL)
+description: Prepare and configure a data export from BigQuery to Bigtable.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Export data to Bigtable (reverse ETL)
 
 This document describes how you can set up reverse ETL (RETL) from BigQuery to Bigtable. You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from a BigQuery table to a [Bigtable](https://docs.cloud.google.com/bigtable/docs/overview) table.

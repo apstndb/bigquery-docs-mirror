@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/best-practices-costs
+uri: https://docs.cloud.google.com/bigquery/docs/best-practices-costs
+title: Estimate and control costs
+description: Learn best practices for estimating and controlling costs in BigQuery for compute, query processing, and storage. Learn best workload management practices to optimize capacity utilization, including estimating slots and managing slot reservations.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Estimate and control costs
 
 This page describes best practices for estimating and controlling costs in BigQuery.

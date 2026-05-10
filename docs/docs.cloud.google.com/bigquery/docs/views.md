@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/views
+uri: https://docs.cloud.google.com/bigquery/docs/views
+title: Create logical views
+description: Shows how to create logical views in BigQuery using the Cloud console, bq mk command, tables.insert API method, client libraries, and CREATE VIEW DDL statement. Includes examples in Go, Java, Node.js, and Python.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Create logical views
 
 This document describes how to create logical views in BigQuery.

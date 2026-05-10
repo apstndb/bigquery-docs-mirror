@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tf-idf
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tf-idf
+title: The ML.TF_IDF function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.TF\_IDF function
 
 The term frequency-inverse document frequency (TF-IDF) reflects how important a word is to a document in a collection or corpus. Use the `ML.TF_IDF` function to compute TF-IDF of terms in a document, given the precomputed inverse-document frequency for use in machine learning model creation.

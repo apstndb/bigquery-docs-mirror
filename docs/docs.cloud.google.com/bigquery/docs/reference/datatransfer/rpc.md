@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc
+uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc
+title: BigQuery Data Transfer API
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-03-25T07:10:27Z"
+---
+
 Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis.
 
 ## Service: bigquerydatatransfer.googleapis.com

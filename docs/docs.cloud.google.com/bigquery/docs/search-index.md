@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/search-index
+uri: https://docs.cloud.google.com/bigquery/docs/search-index
+title: Manage search indexes
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Manage search indexes
 
 A search index is a data structure designed to enable very efficient search with the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/search) . A search index can also optimize some queries that use [supported functions and operators](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/regional-endpoints
+uri: https://docs.cloud.google.com/bigquery/docs/regional-endpoints
+title: BigQuery regional endpoints
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # BigQuery regional endpoints
 
 This page describes how you can use [Private Service Connect regional endpoints](https://docs.cloud.google.com/vpc/docs/about-accessing-regional-google-apis-endpoints) to access resources in BigQuery. Regional endpoints let you run your workloads in a manner that complies with [data residency](https://docs.cloud.google.com/assured-workloads/docs/data-residency) and data sovereignty requirements, where your request traffic is routed directly to the region specified in the endpoint.

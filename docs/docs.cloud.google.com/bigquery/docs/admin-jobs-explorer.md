@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/admin-jobs-explorer
+uri: https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer
+title: Use administrative jobs explorer
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Use administrative jobs explorer
 
 As a BigQuery administrator, you can use the administrative jobs explorer to help you monitor jobs activity across your organization. Jobs explorer also provides an array of filters and sorting options to troubleshoot and identify problematic jobs. Jobs explorer removes the need for you to have a deep understanding of `INFORMATION_SCHEMA` , and lets you quickly view job information such as owner, project, slot usage, duration, and more, without the need to write `INFORMATION_SCHEMA` queries.

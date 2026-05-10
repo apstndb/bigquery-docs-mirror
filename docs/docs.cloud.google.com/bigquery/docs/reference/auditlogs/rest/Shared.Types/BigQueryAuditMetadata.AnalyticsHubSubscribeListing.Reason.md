@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason
+uri: https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason
+title: BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:32Z"
+---
+
 Describes how the subscription was created.
 
 Enums

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/start_manual_transfer_runs
+uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/start_manual_transfer_runs
+title: 'MCP Tools Reference: bigquerydatatransfer.googleapis.com'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-03-25T00:42:13Z"
+---
+
 ## Tool: `start_manual_transfer_runs`
 
 Start manual transfer runs for a transfer config.

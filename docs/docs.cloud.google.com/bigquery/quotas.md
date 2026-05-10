@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/quotas
+uri: https://docs.cloud.google.com/bigquery/quotas
+title: Quotas and limits
+description: Describes the quotas and limits that apply to BigQuery jobs, queries, tables, datasets, DML, UDFs, API requests.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Quotas and limits
 
 This document lists the quotas and system limits that apply to BigQuery.

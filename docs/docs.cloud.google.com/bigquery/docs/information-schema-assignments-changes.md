@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-assignments-changes
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-assignments-changes
+title: ASSIGNMENT_CHANGES view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # ASSIGNMENT\_CHANGES view
 
 The `INFORMATION_SCHEMA.ASSIGNMENT_CHANGES` view contains a near real-time list of all changes to assignments within the administration project. Each row represents a single change to a single assignment. For more information about reservation, see [Introduction to Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .

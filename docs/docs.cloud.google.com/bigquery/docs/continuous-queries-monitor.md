@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/continuous-queries-monitor
+uri: https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor
+title: Monitor continuous queries
+description: Describes how to monitor continuous queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Monitor continuous queries
 
 You can monitor BigQuery [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) by using the following BigQuery tools:

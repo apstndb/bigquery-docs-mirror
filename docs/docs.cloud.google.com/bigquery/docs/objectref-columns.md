@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/objectref-columns
+uri: https://docs.cloud.google.com/bigquery/docs/objectref-columns
+title: Specify ObjectRef columns in table schemas
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Specify ObjectRef columns in table schemas
 
 This document describes how to define a BigQuery standard table schema with columns that can store `ObjectRef` values.

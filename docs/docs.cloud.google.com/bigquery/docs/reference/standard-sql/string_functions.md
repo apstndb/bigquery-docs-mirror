@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions
+title: String functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:44Z"
+---
+
 GoogleSQL for BigQuery supports string functions. These string functions work on two different values: `STRING` and `BYTES` data types. `STRING` values must be well-formed UTF-8.
 
 Functions that return position values, such as [STRPOS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#strpos) , encode those positions as `INT64` . The value `1` refers to the first character (or byte), `2` refers to the second, and so on. The value `0` indicates an invalid position. When working on `STRING` types, the returned positions refer to character positions.

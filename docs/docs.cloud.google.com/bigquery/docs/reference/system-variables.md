@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/system-variables
+uri: https://docs.cloud.google.com/bigquery/docs/reference/system-variables
+title: System variables reference
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # System variables reference
 
 BigQuery supports the following system variables for [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) or within [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) . You can use system variables to set or retrieve information during query execution, similar to user-defined [procedural language variables](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#variables) .

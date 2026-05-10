@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/klaviyo-data-model
+uri: https://docs.cloud.google.com/bigquery/docs/klaviyo-data-model
+title: Klaviyo data model reference
+description: See the full list of data that is loaded into BigQuery during a Klaviyo data transfer.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Klaviyo data model reference
 
 This page lists the data that's transferred to BigQuery when you [run a Klaviyo data transfer](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer) . The data is organized into tables that list each field name, its associated destination data type, and the JSON path from the source data.

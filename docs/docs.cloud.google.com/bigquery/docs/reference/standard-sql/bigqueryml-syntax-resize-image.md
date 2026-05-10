@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image
+title: The ML.RESIZE_IMAGE function
+description: Resize images with the BigQuery ML `ML.RESIZE_IMAGE` scalar function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.RESIZE\_IMAGE function
 
 This document describes the `ML.RESIZE_IMAGE` scalar function, which lets you resize images by using [bilinear interpolation](https://en.wikipedia.org/wiki/Bilinear_interpolation) . You can use `ML.RESIZE_IMAGE` with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.

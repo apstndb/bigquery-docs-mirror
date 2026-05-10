@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/parameterized-queries
+uri: https://docs.cloud.google.com/bigquery/docs/parameterized-queries
+title: Run parameterized queries
+description: Configure BigQuery query parameters for GoogleSQL. Protect against SQL injection.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Run parameterized queries
 
 When querying BigQuery data using GoogleSQL syntax, you can use parameters to protect queries made from user input against [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) . The parameters substitute arbitrary expressions in your GoogleSQL queries.

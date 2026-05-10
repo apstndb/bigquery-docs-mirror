@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models
+uri: https://docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models
+title: Embed text with pretrained TensorFlow models
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Embed text with pretrained TensorFlow models
 
 This tutorial shows you how to generate NNLM, SWIVEL, and BERT text embeddings in BigQuery by using pretrained TensorFlow models. A text embedding is a dense vector representation of a piece of text such that if two pieces of text are semantically similar, then their respective embeddings are close together in the embedding vector space.

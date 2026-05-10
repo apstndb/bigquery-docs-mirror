@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/e2e-journey-import
+uri: https://docs.cloud.google.com/bigquery/docs/e2e-journey-import
+title: End-to-end user journeys for imported models
+description: Understand BigQuery ML's end-to-end user journeys for imported models like XGBoost, ONNX, and TensorFlow. The workflow covers model creation, training, evaluation, and inference.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # End-to-end user journeys for imported models
 
 This document describes the user journeys for ML models that are imported to BigQuery ML from Cloud Storage, including the statements and functions that you can use to work with imported models. BigQuery ML offers the following types of imported models:

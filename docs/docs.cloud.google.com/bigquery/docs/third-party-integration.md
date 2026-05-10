@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/third-party-integration
+uri: https://docs.cloud.google.com/bigquery/docs/third-party-integration
+title: Integrate with third-party tools
+description: Describes initial configuration steps you might need to take to manage the connection between BigQuery and third-party business intelligence solutions.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Integrate with third-party tools
 
 This document describes initial configuration steps you might need to take to manage the connection between BigQuery and your third-party business intelligence (BI) solutions. If you need assistance with a solution, consider contacting a [Google Cloud Ready - BigQuery partner](https://console.cloud.google.com/bigquery/partner-center) . Third-party software is not supported by Cloud Customer Care when it has been identified that BigQuery is working as intended.

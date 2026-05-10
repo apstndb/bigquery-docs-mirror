@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/use-bigquery-mcp
+uri: https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp
+title: Use the BigQuery MCP server
+description: 'Learn how to use the BigQuery MCP server to perform these data-related tasks: examining BigQuery resources, generating accurate and efficient SQL queries, securely executing queries, and interpreting query results.'
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Use the BigQuery MCP server
 
 This document shows you how to use the BigQuery remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. You can use the BigQuery remote MCP server to perform tasks such as running queries, getting metadata, and listing resources. The BigQuery remote MCP server is enabled when you enable the BigQuery API.

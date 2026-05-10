@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bi-engine-monitor
+uri: https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor
+title: Monitor BI Engine
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Monitor BI Engine
 
 [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) accelerates BigQuery for BI scenarios using memory cache and faster execution. Acceleration details can be monitored using [INFORMATION\_SCHEMA](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [Cloud Monitoring metrics](https://docs.cloud.google.com/bigquery/docs/monitoring) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/user-defined-functions-python
+uri: https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python
+title: Work with user-defined functions in Python
+description: How to implement scalar functions in Python and use them in user-defined functions (UDFs) in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Work with user-defined functions in Python
 
 A Python user-defined function (UDF) lets you implement a scalar function in Python and use it in a SQL query. Python UDFs are similar to [SQL and Javascript UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) , but with additional capabilities. Python UDFs let you install third-party libraries from the [Python Package Index (PyPI)](https://pypi.org/) and let you access external services using a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) .

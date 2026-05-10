@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/table-snapshots-metadata
+uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-metadata
+title: View table snapshot metadata
+description: Describes how to view metadata for a BigQuery table snapshot, such as its base table, creation and expiration times, size, and schema.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # View table snapshot metadata
 
 This document describes how to view the metadata for a BigQuery table snapshot in the Google Cloud console, by querying the [`TABLE_SNAPSHOTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) view of the `INFORMATION_SCHEMA` table, by using the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command, or by calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API. It is intended for users who are familiar with BigQuery [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .

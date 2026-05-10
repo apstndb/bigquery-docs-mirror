@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/image-analysis
+uri: https://docs.cloud.google.com/bigquery/docs/image-analysis
+title: Analyze images
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # Analyze images
 
 This tutorial shows you how to gain insights from unstructured image data by integrating BigQuery ML with Gemini. In the tutorial, you create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on [gemini-2.5-flash](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) and use the [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function to automatically extract metadata, such as titles and release years, from a collection of movie posters.

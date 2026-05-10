@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/facebook-ads-transformation
+uri: https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation
+title: Facebook Ads report transformation
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Facebook Ads report transformation
 
 This document describes how your Facebook Ads reports are transformed when you [run a Facebook Ads transfer to BigQuery](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) .

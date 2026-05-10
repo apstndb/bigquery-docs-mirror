@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-cross
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-cross
+title: The ML.FEATURE_CROSS function
+description: Create feature crosses using the BigQuery ML `ML.FEATURE_CROSS` function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.FEATURE\_CROSS function
 
 This document describes the `ML.FEATURE_CROSS` function, which lets you create [feature crosses](https://developers.google.com/machine-learning/crash-course/feature-crosses/video-lecture) .

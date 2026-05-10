@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty
+title: ConnectionProperty
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:38Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty#SCHEMA_REPRESENTATION)
 
 A connection-level property to customize query behavior. Under JDBC, these correspond directly to connection properties passed to the DriverManager. Under ODBC, these correspond to properties in the connection string.

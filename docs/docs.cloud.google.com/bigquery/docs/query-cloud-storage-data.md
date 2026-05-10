@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/query-cloud-storage-data
+uri: https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-data
+title: Query Cloud Storage data in external tables
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Query Cloud Storage data in external tables
 
 This document describes how to query data stored in a [Cloud Storage external table](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) .

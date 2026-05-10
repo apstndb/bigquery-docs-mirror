@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-dataset-insights
+uri: https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights
+title: Generate dataset insights
+description: Use Gemini in BigQuery to generate dataset-level insights, including relationship graphs and cross-table queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Generate dataset insights
 
 > **Preview**

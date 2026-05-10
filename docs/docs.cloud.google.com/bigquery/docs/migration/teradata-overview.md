@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/teradata-overview
+uri: https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview
+title: 'Teradata to BigQuery migration: Overview'
+description: Describes the high-level workflow involved in migrating from Teradata to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Teradata to BigQuery migration: Overview
 
 This document provides more information to help you understand the decisions you need to make when using the BigQuery Data Transfer Service to migrate schema and data from Teradata to [BigQuery](https://docs.cloud.google.com/bigquery/docs) . For an introduction to the Teradata migration process, see [Introduction to a Teradata to BigQuery migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata-migration-intro) .

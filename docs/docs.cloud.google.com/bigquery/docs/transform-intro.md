@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/transform-intro
+uri: https://docs.cloud.google.com/bigquery/docs/transform-intro
+title: Introduction to data transformation
+description: Describes the different ways to transform data in BigQuery tables.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Introduction to data transformation
 
 This document describes the different ways you can transform data in your BigQuery tables.

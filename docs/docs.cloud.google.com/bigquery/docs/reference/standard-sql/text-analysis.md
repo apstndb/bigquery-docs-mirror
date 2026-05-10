@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis
+title: Text analysis
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:29Z"
+---
+
 This document provides an overview of text analysis, also known as text mining, in GoogleSQL for BigQuery.
 
 GoogleSQL supports text analysis, which is a technique that you can use to identify terms (tokens) in unstructured text, and then use those terms for actionable insight, such as indexing and searching, or as inputs for vectorizations to be used in ML training pipelines. You can use a text analyzer to analyze information in a specific way and text analysis options to apply your own analyzation customizations.

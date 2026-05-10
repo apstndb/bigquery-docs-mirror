@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/ErrorInfo
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/ErrorInfo
+title: ErrorInfo
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:38Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/ErrorInfo#SCHEMA_REPRESENTATION)
 
 Describes the cause of the error with structured details.

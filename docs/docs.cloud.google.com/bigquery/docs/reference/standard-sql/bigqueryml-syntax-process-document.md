@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document
+title: The ML.PROCESS_DOCUMENT function
+description: Process unstructured documents from an object table using the `ML.PROCESS_DOCUMENT` function and the Document AI API.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.PROCESS\_DOCUMENT function
 
 This document describes the `ML.PROCESS_DOCUMENT` function, which lets you process unstructured documents from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using the [Document AI API](https://docs.cloud.google.com/document-ai) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/custom-quotas
+uri: https://docs.cloud.google.com/bigquery/docs/custom-quotas
+title: Create custom query quotas
+description: Shows how to set, modify, and enforce custom quotas to control costs'
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Create custom query quotas
 
 This document describes how to set or modify custom query quotas to control costs. To learn how BigQuery analysts can estimate and control costs, see [Estimate and control costs](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .

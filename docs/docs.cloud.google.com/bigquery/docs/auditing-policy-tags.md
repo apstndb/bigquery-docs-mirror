@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/auditing-policy-tags
+uri: https://docs.cloud.google.com/bigquery/docs/auditing-policy-tags
+title: Audit policy tags
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Audit policy tags
 
 This document describes how to use [Cloud Logging](https://docs.cloud.google.com/logging/docs) to audit activities related to policy tags. For example, you can determine:

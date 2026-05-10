@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast
+title: The ML.FORECAST function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.FORECAST function
 
 This document describes the `ML.FORECAST` function, which you can use to forecast a time series based on a trained `ARIMA_PLUS` or `ARIMA_PLUS_XREG` model.

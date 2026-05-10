@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/enable-transfer-service
+uri: https://docs.cloud.google.com/bigquery/docs/enable-transfer-service
+title: Enable the BigQuery Data Transfer Service
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Enable the BigQuery Data Transfer Service
 
 To use the BigQuery Data Transfer Service, you must complete the following steps as a project [Owner](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) :

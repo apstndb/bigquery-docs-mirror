@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-hash-bucketize
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-hash-bucketize
+title: The ML.HASH_BUCKETIZE function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.HASH\_BUCKETIZE function
 
 This document describes the `ML.HASH_BUCKETIZE` function, which lets you convert a string expression to a deterministic hash and then bucketize it by the modulo value of that hash.

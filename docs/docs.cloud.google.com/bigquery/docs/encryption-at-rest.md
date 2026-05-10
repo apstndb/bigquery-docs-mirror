@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/encryption-at-rest
+uri: https://docs.cloud.google.com/bigquery/docs/encryption-at-rest
+title: Encryption at rest
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Encryption at rest
 
 By default, BigQuery encrypts customer content at rest. BigQuery handles encryption for you without any additional actions on your part. This option is called *Google default encryption* . Google default encryption uses the same hardened key management systems that we use for our own encrypted data. These systems include strict key access controls and auditing. Each BigQuery object's data and metadata is encrypted using the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) .

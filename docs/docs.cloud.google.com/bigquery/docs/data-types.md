@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/data-types
+uri: https://docs.cloud.google.com/bigquery/docs/data-types
+title: Legacy SQL data types
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Legacy SQL data types
 
 This document details the data types supported by BigQuery's legacy SQL query syntax. The preferred query syntax for BigQuery is GoogleSQL. For information on data types in GoogleSQL, see the [GoogleSQL data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .

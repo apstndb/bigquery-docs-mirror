@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules
+title: Conversion rules
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 GoogleSQL for BigQuery supports conversion. Conversion includes, but isn't limited to, casting, coercion, and supertyping.
 
   - Casting is explicit conversion and uses the [`CAST()`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) function.

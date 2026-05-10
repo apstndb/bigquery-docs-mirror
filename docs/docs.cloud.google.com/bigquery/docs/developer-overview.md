@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/developer-overview
+uri: https://docs.cloud.google.com/bigquery/docs/developer-overview
+title: Introduction to developer tools
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Introduction to developer tools
 
 BigQuery provides a set of developer tools that you can use to access BigQuery in your development environment, connect BigQuery to external applications, and develop end-to-end solutions. Before using these tools, you should be familiar with standard BigQuery concepts, such as [analysis](https://docs.cloud.google.com/bigquery/docs/query-overview) and [resource organization](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .

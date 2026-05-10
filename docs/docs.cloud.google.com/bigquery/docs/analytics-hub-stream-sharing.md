@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing
+uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing
+title: Stream sharing with Pub/Sub
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Stream sharing with Pub/Sub
 
 You can share Pub/Sub topics through BigQuery sharing (formerly Analytics Hub) to curate and distribute a library of streaming data across multiple internal and external organizational boundaries. Real-time streaming data is shared using BigQuery sharing exchanges and listings, which lets you logically categorize and group large sets of Pub/Sub topics and provision access at scale.

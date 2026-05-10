@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-text-scalar
+uri: https://docs.cloud.google.com/bigquery/docs/generate-text-scalar
+title: Generate text with the AI.GENERATE function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Generate text with the AI.GENERATE function
 
 This tutorial shows you how to generate text from text or multimodal data by using the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) . With the `AI.GENERATE` function, you use a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to a hosted Gemini model so that you don't have to create and maintain a model of your own.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/create-bigtable-external-table
+uri: https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table
+title: Create a Bigtable external table
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Create a Bigtable external table
 
 This page describes how to create a BigQuery permanent external table that can be used to query data stored in Bigtable. Querying data in Bigtable is available in all [Bigtable locations](https://docs.cloud.google.com/bigtable/docs/locations) .

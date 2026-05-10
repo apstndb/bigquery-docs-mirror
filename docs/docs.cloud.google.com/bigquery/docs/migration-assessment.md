@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration-assessment
+uri: https://docs.cloud.google.com/bigquery/docs/migration-assessment
+title: Migration assessment
+description: Describes how to use the migration assessment feature to evaluate your Teradata, Amazon Redshift, Apache Hive,or Snowflake data warehouse for migration to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Migration assessment
 
 The BigQuery migration assessment lets you plan and review the migration of your existing data warehouse into BigQuery. You can run the BigQuery migration assessment to generate a report to assess the cost to store your data in BigQuery, to see how BigQuery can optimize your existing workload for cost savings, and to prepare a migration plan that outlines the time and effort required to complete your data warehouse migration to BigQuery.

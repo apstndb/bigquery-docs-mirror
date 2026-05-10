@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dataframes-ml-ai
+uri: https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai
+title: Use ML and AI with BigQuery DataFrames
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Use ML and AI with BigQuery DataFrames
 
 BigQuery DataFrames provides ML and AI capabilities for BigQuery DataFrames using the `bigframes.ml` library.

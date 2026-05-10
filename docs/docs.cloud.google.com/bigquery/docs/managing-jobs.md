@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/managing-jobs
+uri: https://docs.cloud.google.com/bigquery/docs/managing-jobs
+title: Manage jobs
+description: Learn how to manage BigQuery jobs. After you submit a BigQuery job, you can view job details, list jobs, cancel a job, repeat a job, or delete job metadata.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manage jobs
 
 This document describes how to manage jobs in BigQuery, including how to [view job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) , [list jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) , [cancel a job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) , [repeat a job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#repeat_jobs) , and [delete job metadata](https://docs.cloud.google.com/bigquery/docs/managing-jobs#delete_job_metadata) .

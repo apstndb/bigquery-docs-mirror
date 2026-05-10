@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-normalizer
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-normalizer
+title: The ML.NORMALIZER function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.NORMALIZER function
 
 This document describes the `ML.NORMALIZER` function, which lets you normalize an array of numerical expressions using a given [p-norm](https://ncatlab.org/nlab/show/p-norm) .

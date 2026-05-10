@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/supported-data-types
+uri: https://docs.cloud.google.com/bigquery/docs/supported-data-types
+title: Supported protocol buffer and Arrow data types
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Supported protocol buffer and Arrow data types
 
 This document describes the supported protocol buffer and Arrow data types for each respective BigQuery data type. Before reading this document, read [Overview of the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .

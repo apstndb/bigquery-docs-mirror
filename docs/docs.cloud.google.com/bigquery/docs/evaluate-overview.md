@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/evaluate-overview
+uri: https://docs.cloud.google.com/bigquery/docs/evaluate-overview
+title: BigQuery ML model evaluation overview
+description: Learn how to evaluate BigQuery ML models.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # BigQuery ML model evaluation overview
 
 This document describes how BigQuery ML supports machine learning (ML) model evaluation.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/libraries
+uri: https://docs.cloud.google.com/bigquery/docs/reference/libraries
+title: BigQuery API Client Libraries
+description: Information about interacting with BigQuery API in C++, C#, Go, Java, Node.js, PHP, Python, and Ruby.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 This page shows how to get started with the Cloud Client Libraries for the BigQuery API. Client libraries make it easier to access Google Cloud APIs from a supported language. Although you can use Google Cloud APIs directly by making raw requests to the server, client libraries provide simplifications that significantly reduce the amount of code you need to write.
 
 Read more about the Cloud Client Libraries and the older Google API Client Libraries in [Client libraries explained](https://docs.cloud.google.com/apis/docs/client-libraries-explained) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration-custom-org-policies
+uri: https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies
+title: Custom Org Policies for BigQuery Migration Service
+description: How to use custom organization policies for BigQuery Migration Service policies.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Custom Org Policies for BigQuery Migration Service
 
 This page shows you how to use Organization Policy Service custom constraints to restrict specific operations on the following Google Cloud resources:

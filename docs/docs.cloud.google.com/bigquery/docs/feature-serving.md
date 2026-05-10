@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/feature-serving
+uri: https://docs.cloud.google.com/bigquery/docs/feature-serving
+title: Feature serving
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Feature serving
 
 This document describes your options for making [features](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) available for BigQuery ML model training and inference. For all options, you must save the features in BigQuery tables as a prerequisite first step.

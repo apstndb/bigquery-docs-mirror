@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/choose-ml-text-function
+uri: https://docs.cloud.google.com/bigquery/docs/choose-ml-text-function
+title: Choose a natural language processing function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Choose a natural language processing function
 
 This document provides a comparison of the natural language processing functions available in BigQuery ML, which are [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) , [`ML.TRANSLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate) , and [`ML.UNDERSTAND_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text) . You can use the information in this document to help you decide which function to use in cases where the functions have overlapping capabilities.

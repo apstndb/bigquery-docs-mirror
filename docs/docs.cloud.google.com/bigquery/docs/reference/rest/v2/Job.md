@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job
+title: Job
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-04-15T18:27:38Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SCHEMA_REPRESENTATION)
   - [JobConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.SCHEMA_REPRESENTATION)

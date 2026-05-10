@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/shopify-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/shopify-transfer
+title: Load Shopify data into BigQuery
+description: Learn how to use the BigQuery Data Transfer Service Shopify connector to ingest data from Shopify into BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Load Shopify data into BigQuery
 
 > **Preview**

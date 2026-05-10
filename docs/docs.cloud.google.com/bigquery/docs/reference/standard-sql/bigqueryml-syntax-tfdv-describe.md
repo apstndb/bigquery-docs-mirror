@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe
+title: The ML.TFDV_DESCRIBE function
+description: Use the `ML.TFDV_DESCRIBE` function to generate fine-grained statistics for the columns in a table.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.TFDV\_DESCRIBE function
 
 This document describes the `ML.TFDV_DESCRIBE` function, which you can use to generate fine-grained statistics for the columns in a table. For example, you might want to know statistics for a table of training or serving data statistics that you plan to use with a machine learning (ML) model. Calling this function provides the same behavior as calling the TensorFlow [TensorFlow `tfdv.generate_statistics_from_csv` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/generate_statistics_from_csv) . You can use the data output by this function for such purposes as [feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) or [model monitoring](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) .

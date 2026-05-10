@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/automatic-discovery
+uri: https://docs.cloud.google.com/bigquery/docs/automatic-discovery
+title: Discover and catalog Cloud Storage data
+description: Ease data security and governance by automatically cataloging data assets in Cloud Storage.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Discover and catalog Cloud Storage data
 
 This document explains how to use Knowledge Catalog automatic discovery, a feature in BigQuery that lets you scan data in Cloud Storage buckets to extract and then catalog metadata. As part of the discovery scan, automatic discovery creates BigLake or external tables for structured data and object tables for unstructured data. This centralized table data eases AI-powered data insights, data security, and governance.

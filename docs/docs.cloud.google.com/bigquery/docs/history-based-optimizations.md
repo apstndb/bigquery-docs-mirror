@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/history-based-optimizations
+uri: https://docs.cloud.google.com/bigquery/docs/history-based-optimizations
+title: Use history-based optimizations
+description: Shows how to enable, disable, and analyze history-based optimization for queries in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Use history-based optimizations
 
 This guide describes how to enable, disable, and analyze history-based optimizations for queries.

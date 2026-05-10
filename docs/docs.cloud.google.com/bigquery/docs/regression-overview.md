@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/regression-overview
+uri: https://docs.cloud.google.com/bigquery/docs/regression-overview
+title: Regression overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Regression overview
 
 A common use case for machine learning is predicting the value of a numerical metric for new data by using a model trained on similar historical data. For example, you might want to predict a house's expected sale price. By using the house's location and characteristics as features, you can compare this house to similar houses that have already sold, and use their sales prices to estimate the house's sale price.

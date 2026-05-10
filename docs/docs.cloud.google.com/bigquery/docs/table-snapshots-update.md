@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/table-snapshots-update
+uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-update
+title: Update table snapshot metadata
+description: Shows how to change the description, expiration, or access policy of a table snapshot in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Update table snapshot metadata
 
 This document describes how to update the description, expiration date, or access policy for a table snapshot by using the Google Cloud console, the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command, or the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API. It is intended for users who are familiar with [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) in BigQuery.

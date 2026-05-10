@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get
+title: 'Method: datasets.get'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-12-22T22:19:02Z"
+---
+
   - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get#body.HTTP_TEMPLATE)
   - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get#body.PATH_PARAMETERS)
   - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get#body.QUERY_PARAMETERS)

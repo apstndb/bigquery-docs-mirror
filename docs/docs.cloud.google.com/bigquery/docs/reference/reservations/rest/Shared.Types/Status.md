@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/reservations/rest/Shared.Types/Status
+uri: https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/Shared.Types/Status
+title: Status
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:04Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/Shared.Types/Status#SCHEMA_REPRESENTATION)
 
 The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc) . Each `Status` message contains three pieces of data: error code, error message, and error details.

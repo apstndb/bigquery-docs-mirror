@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry.TargetType
+uri: https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry.TargetType
+title: DatasetAccessEntry.TargetType
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:59Z"
+---
+
 Indicates the type of resources in a dataset that the entry applies to.
 
 Enums

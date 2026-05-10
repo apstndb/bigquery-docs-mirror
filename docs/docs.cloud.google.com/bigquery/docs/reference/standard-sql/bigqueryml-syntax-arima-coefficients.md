@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-coefficients
+title: The ML.ARIMA_COEFFICIENTS function
+description: Get ARIMA coefficients and the weights of the external regressors for BigQuery ML `ARIMA_PLUS` and `ARIMA_PLUS_XREG` time series models.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The ML.ARIMA\_COEFFICIENTS function
 
 This document describes the `ML.ARIMA_COEFFICIENTS` function, which lets you see the ARIMA coefficients and the weights of the external regressors for `ARIMA_PLUS` and `ARIMA_PLUS_XREG` time series models.

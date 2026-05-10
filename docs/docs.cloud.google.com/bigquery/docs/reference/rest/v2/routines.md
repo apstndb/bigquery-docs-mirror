@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines
+title: 'REST Resource: routines'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:32Z"
+---
+
   - [Resource: Routine](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine.SCHEMA_REPRESENTATION)
   - [RoutineReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineReference)

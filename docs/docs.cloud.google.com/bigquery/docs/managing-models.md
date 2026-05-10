@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/managing-models
+uri: https://docs.cloud.google.com/bigquery/docs/managing-models
+title: Manage models
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manage models
 
 This document shows you how to manage BigQuery ML models, including copying models and renaming models.

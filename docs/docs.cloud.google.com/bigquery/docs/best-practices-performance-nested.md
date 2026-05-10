@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/best-practices-performance-nested
+uri: https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nested
+title: Use nested and repeated fields
+description: Describes best practices to optimize a SELECT statement, such as querying only required columns, filtering partitioned queries, denormalizing data, and using wildcard tables appropriately.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Use nested and repeated fields
 
 BigQuery can be used with many different data modeling methods, and generally provides high performance across many data model methodologies. To further tune a data model for performance, one method you might consider is data denormalization, which means adding columns of data to a single table to reduce or remove table joins.

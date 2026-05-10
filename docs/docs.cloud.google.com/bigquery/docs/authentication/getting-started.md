@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/authentication/getting-started
+uri: https://docs.cloud.google.com/bigquery/docs/authentication/getting-started
+title: Get started with authentication
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T08:52:19Z"
+---
+
 # Get started with authentication
 
 Application Default Credentials (ADC) let your application use service account credentials to access BigQuery resources as its own identity.

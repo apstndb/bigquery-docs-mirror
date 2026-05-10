@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations
+uri: https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations
+title: Schedule data preparations
+description: Describes how to develop and schedule data preparation jobs in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Schedule data preparations
 
 This document describes how to schedule data preparation pipelines and perform manual runs.

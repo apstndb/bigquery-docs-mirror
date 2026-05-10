@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/orchestrate-dags
+uri: https://docs.cloud.google.com/bigquery/docs/orchestrate-dags
+title: Schedule Airflow DAGs
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Schedule Airflow DAGs
 
 This document describes how to schedule [Airflow directed acyclic graphs (DAGs)](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview#about-airflow) from [Managed Airflow 3](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview) on the **Scheduling** page in BigQuery, including how to trigger DAGs manually, and how to view the history and logs of past DAG runs.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/css-center-products-schema
+uri: https://docs.cloud.google.com/bigquery/docs/css-center-products-schema
+title: Comparison Shopping Services Center table schema
+description: Describes the BigQuery table names and schema for Comparison Shopping Services (CSS) Center data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Comparison Shopping Services Center table schema
 
 When your Comparison Shopping Service (CSS) Center reporting data is transferred to BigQuery, the format of product and product issues data corresponds primarily to the format of the relevant fields of the Content API's [`ProductView`](https://developers.google.com/shopping-content/reference/rest/v2.1/reports/search#productview) and [`Productstatuses`](https://developers.google.com/shopping-content/v2/reference/v2.1/productstatuses) resources.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization
+title: The CREATE MODEL statement for matrix factorization models
+description: Use the CREATE MODEL statement for creating matrix factorization models in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for matrix factorization models
 
 > **Note:** Matrix factorization models are only available to customers with reservations. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#pricing) .

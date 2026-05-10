@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions
+title: Differentially private aggregate functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 GoogleSQL for BigQuery supports differentially private aggregate functions. For an explanation of how aggregate functions work, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
 You can only use differentially private aggregate functions with [differentially private queries](https://docs.cloud.google.com/bigquery/docs/differential-privacy) in a [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .

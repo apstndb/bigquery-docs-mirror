@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reservations-workload-management
+uri: https://docs.cloud.google.com/bigquery/docs/reservations-workload-management
+title: Understand reservations
+description: Learn how to use slot reservations to manage your BigQuery workloads. Reservations let you manage capacity and isolate workloads in ways that make sense for your organization.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Understand reservations
 
 This page describes how to use slot reservations to manage your BigQuery workloads.

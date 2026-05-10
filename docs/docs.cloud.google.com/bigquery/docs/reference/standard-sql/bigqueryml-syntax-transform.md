@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform
+title: The ML.TRANSFORM function
+description: Use the ML.TRANSFORM function to preprocess feature data in BigQuery ML models.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.TRANSFORM function
 
 This document describes the `ML.TRANSFORM` function, which you can use to preprocess feature data. This function processes input data by applying the data transformations captured in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of an existing model. The statistics that were calculated for data transformation during model training are applied to the input data of the function.

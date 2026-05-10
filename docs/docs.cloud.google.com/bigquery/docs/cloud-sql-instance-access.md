@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access
+uri: https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access
+title: Configure Cloud SQL instance access
+description: Learn how to set up Virtual Private Cloud peering, install a Cloud SQL proxy, and connect to an internal Cloud SQL IP across different projects.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Configure Cloud SQL instance access
 
 This document provides detailed steps for setting up Virtual Private Cloud peering, installing a Cloud SQL proxy, and connecting to an internal Cloud SQL IP address across different Google Cloud projects. This setup ensures security-enhanced and efficient communication between your Cloud SQL instance and the following connectors:

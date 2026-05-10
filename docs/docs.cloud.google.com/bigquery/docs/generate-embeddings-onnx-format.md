@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-embeddings-onnx-format
+uri: https://docs.cloud.google.com/bigquery/docs/generate-embeddings-onnx-format
+title: Generate embeddings with transformer models in ONNX format
+description: In this tutorial, you import a transformer model in ONNX format into a BigQuery ML dataset. You use the imported model to generate embeddings with a SQL query.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 > **Preview**
 > 
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .

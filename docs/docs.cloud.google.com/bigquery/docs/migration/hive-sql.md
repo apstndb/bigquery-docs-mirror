@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/hive-sql
+uri: https://docs.cloud.google.com/bigquery/docs/migration/hive-sql
+title: Apache Hive SQL translation guide
+description: Provides a reference to compare statements, functions, data types, and other SQL objects between the Apache Hive and GoogleSQL dialects.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T08:52:19Z"
+---
+
 # Apache Hive SQL translation guide
 
 This document details the similarities and differences in SQL syntax between Apache Hive and BigQuery to help you plan your migration. To migrate your SQL scripts in bulk, use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) . To translate ad hoc queries, use [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) .

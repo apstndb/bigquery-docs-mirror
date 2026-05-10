@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/gemini-set-up
+uri: https://docs.cloud.google.com/bigquery/docs/gemini-set-up
+title: Set up Gemini in BigQuery
+description: Describes how to set up Gemini in BigQuery and the available features.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Set up Gemini in BigQuery
 
 Before you can use [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) , which offers AI-powered assistance for your data analytics, your team must enable required APIs and grant roles.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/GetIamPolicyRequest
+uri: https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/GetIamPolicyRequest
+title: GetIamPolicyRequest
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:54Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/GetIamPolicyRequest#SCHEMA_REPRESENTATION)
   - [GetPolicyOptions](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/GetIamPolicyRequest#GetPolicyOptions)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/GetIamPolicyRequest#GetPolicyOptions.SCHEMA_REPRESENTATION)

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model
+title: The ALTER MODEL statement
+description: Modify BigQuery ML model metadata. Configure Vertex AI deployment, expiration, and Cloud Key Management Service encryption by using `ALTER MODEL`.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The ALTER MODEL statement
 
 To update a model in BigQuery, use the BigQuery ML `ALTER MODEL` statement.

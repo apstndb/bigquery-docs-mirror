@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create
+title: The CREATE MODEL statement
+description: Use the CREATE MODEL statement to create models in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement
 
 To create a model in BigQuery, use the BigQuery ML `CREATE MODEL` statement. This statement is similar to the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/data-definition-language#create_table_statement) DDL statement. When you run a query that contains a `CREATE MODEL` statement, a [query job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) is generated for you that processes the query. You can also use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).

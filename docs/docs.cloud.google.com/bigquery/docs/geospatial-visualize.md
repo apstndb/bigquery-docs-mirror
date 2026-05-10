@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/geospatial-visualize
+uri: https://docs.cloud.google.com/bigquery/docs/geospatial-visualize
+title: Visualize geospatial data
+description: 'Describes options available to visualize geographic location data: Data Studio, BigQuery Studio, BigQuery Geo Viz, Colab notebooks, and Google Earth Engine.'
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Visualize geospatial data
 
 Geospatial analytics lets you visualize geographic location data by using the following:

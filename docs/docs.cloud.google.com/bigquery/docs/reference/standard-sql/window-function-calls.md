@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls
+title: Window function calls
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:29Z"
+---
+
 A window function, also known as an analytic function, computes values over a group of rows and returns a single result for *each* row. This is different from an aggregate function, which returns a single result for *a group* of rows.
 
 A window function includes an `OVER` clause, which defines a window of rows around the row being evaluated. For each row, the window function result is computed using the selected window of rows as input, possibly doing aggregation.

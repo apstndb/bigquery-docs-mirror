@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bigquery-ready-partners
+uri: https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners
+title: Google Cloud Ready - BigQuery Partners
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Google Cloud Ready - BigQuery Partners
 
 The BigQuery Validation Program lets partners validate their integrations into BigQuery to ensure the best integration possible. Our BigQuery Validation Program has three phases:

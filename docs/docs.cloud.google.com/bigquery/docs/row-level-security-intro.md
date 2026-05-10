@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/row-level-security-intro
+uri: https://docs.cloud.google.com/bigquery/docs/row-level-security-intro
+title: Introduction to BigQuery row-level security
+description: Describes row-level access policies, their performance and security limitations, and compares them to other access control methods– authorized views and table-level access control.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Introduction to BigQuery row-level security
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .

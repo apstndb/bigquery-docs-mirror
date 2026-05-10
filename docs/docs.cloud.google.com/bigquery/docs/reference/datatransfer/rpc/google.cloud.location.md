@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.location
+uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.location
+title: Package google.cloud.location
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-04-23T22:18:32Z"
+---
+
 ## Index
 
   - `  Locations  ` (interface)

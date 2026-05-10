@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list
+title: 'Method: tabledata.list'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:38Z"
+---
+
   - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list#body.HTTP_TEMPLATE)
   - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list#body.PATH_PARAMETERS)
   - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list#body.QUERY_PARAMETERS)

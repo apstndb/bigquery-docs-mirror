@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/access-control-basic-roles
+uri: https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles
+title: Basic roles and permissions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Basic roles and permissions
 
 BigQuery supports IAM [basic roles](https://docs.cloud.google.com/iam/docs/roles-overview#basic) for project-level access.

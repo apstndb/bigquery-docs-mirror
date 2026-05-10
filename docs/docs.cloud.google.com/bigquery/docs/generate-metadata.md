@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-metadata
+uri: https://docs.cloud.google.com/bigquery/docs/generate-metadata
+title: Generate metadata for translation and assessment
+description: Describes how to use the dwh-migration-dumper command-line tool to generate metadata files. These files can help improve translation of other SQL dialects into GoogleSQL, and can also help with assessing the effort of moving your data warehouse to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Generate metadata for translation and assessment
 
 > **Preview**

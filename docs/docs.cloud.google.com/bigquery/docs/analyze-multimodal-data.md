@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analyze-multimodal-data
+uri: https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data
+title: Analyze multimodal data in BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Analyze multimodal data in BigQuery
 
 This document describes the BigQuery features that you can use to create and analyze multimodal data. These features can be used in BigQuery with GoogleSQL and with Python by using [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .

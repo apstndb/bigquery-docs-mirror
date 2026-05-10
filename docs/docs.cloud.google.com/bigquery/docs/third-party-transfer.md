@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/third-party-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/third-party-transfer
+title: Use third party transfers
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Use third party transfers
 
 Third party transfers for BigQuery Data Transfer Service allow you to automatically schedule and manage recurring load jobs for external data sources such as Salesforce CRM, Adobe Analytics, and Facebook Ads.

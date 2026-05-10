@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/bigquery-dataframes
+uri: https://docs.cloud.google.com/bigquery/docs/reference/bigquery-dataframes
+title: BigQuery DataFrames Python API
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # BigQuery DataFrames Python API
 
 [BigQuery DataFrames](https://dataframes.bigquery.dev/) is a Python API that you can use to analyze data and perform machine learning tasks in BigQuery.

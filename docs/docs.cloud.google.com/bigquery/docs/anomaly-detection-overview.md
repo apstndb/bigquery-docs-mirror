@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/anomaly-detection-overview
+uri: https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview
+title: Anomaly detection overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Anomaly detection overview
 
 Anomaly detection is a data mining technique that you can use to identify data deviations in a given dataset. For example, if the return rate for a given product increases substantially from the baseline for that product, that might indicate a product defect or potential fraud. You can use anomaly detection to detect critical incidents, such as technical issues, or opportunities, such as changes in consumer behavior.

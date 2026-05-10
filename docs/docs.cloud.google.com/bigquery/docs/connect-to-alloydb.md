@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/connect-to-alloydb
+uri: https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb
+title: Connect to AlloyDB for PostgreSQL
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Connect to AlloyDB for PostgreSQL
 
 As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to access AlloyDB data. This connection lets data analysts [query data in AlloyDB](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) .

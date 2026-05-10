@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/sessions-write-queries
+uri: https://docs.cloud.google.com/bigquery/docs/sessions-write-queries
+title: Writing queries in sessions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Writing queries in sessions
 
 This document describes how to write queries in a BigQuery session. It is intended for users who already have a general understanding of BigQuery [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) and know how to [run queries in a session](https://docs.cloud.google.com/bigquery/docs/sessions#run-queries) .

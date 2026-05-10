@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open
+title: The CREATE MODEL statement for self-deployed open models
+description: Use the CREATE MODEL statement for creating remote models in BigQuery over open models deployed to [Vertex AI](/vertex-ai/docs).
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for self-deployed open models
 
 This document describes the `CREATE MODEL` statement for creating remote models in BigQuery over open text embedding and text generation models deployed to [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) . When you self-deploy a model, the model runs within your project and VPC network, giving you full control over the deployment environment. We recommend using self-deployed models when your application requires custom control over model weights, hardware configurations, compliance, or location. For more information, see the [Overview of self-deployed models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-garden/self-deployed-models) and read about [when to use self-deployed models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/choose-serving-option#self-deploy-model-garden) .

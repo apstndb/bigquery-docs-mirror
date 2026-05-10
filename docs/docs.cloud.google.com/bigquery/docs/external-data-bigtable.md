@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/external-data-bigtable
+uri: https://docs.cloud.google.com/bigquery/docs/external-data-bigtable
+title: Query Bigtable data
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Query Bigtable data
 
 This document describes how to use BigQuery to query data stored in a [Bigtable external table](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) . For information on how to query data directly from Bigtable, see [GoogleSQL for Bigtable overview](https://docs.cloud.google.com/bigtable/docs/googlesql-overview) .

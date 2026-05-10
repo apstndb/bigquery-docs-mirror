@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-key-column-usage
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-key-column-usage
+title: KEY_COLUMN_USAGE view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # KEY\_COLUMN\_USAGE view
 
 The `KEY_COLUMN_USAGE` view contains columns of the tables from `TABLE_CONSTRAINTS` that are constrained as keys by [primary and foreign key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) constraints.

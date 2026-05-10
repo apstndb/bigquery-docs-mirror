@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/arrays
+uri: https://docs.cloud.google.com/bigquery/docs/arrays
+title: Work with arrays
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 In GoogleSQL for BigQuery, an array is an ordered list consisting of zero or more values of the same data type. You can construct arrays of a simple data type, such as `INT64` , or a complex data type, such as `STRUCT` . However, arrays of arrays aren't supported. To learn more about the `ARRAY` data type, including `NULL` handling, see [Array type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) .
 
 With GoogleSQL, you can construct array literals, build arrays from subqueries using the [`ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions) function, and aggregate values into an array using the [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg) function.

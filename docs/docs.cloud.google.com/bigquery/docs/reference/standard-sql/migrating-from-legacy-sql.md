@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql
+title: Migrating to GoogleSQL
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 # Migrating to GoogleSQL
 
 BigQuery supports two SQL dialects: [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/introduction-sql) and [legacy SQL](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql) . This document explains the differences between the two dialects, including [syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#syntax_differences) , [functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#function_comparison) , and [semantics](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#semantic_differences) , and gives examples of some of the [highlights of GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#standard_sql_highlights) .

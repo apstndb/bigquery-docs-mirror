@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/managing-table-data
+uri: https://docs.cloud.google.com/bigquery/docs/managing-table-data
+title: Managing table data
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Managing table data
 
 This document describes how to manage table data in BigQuery. You can work with BigQuery table data in the following ways:

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/clustering-overview
+uri: https://docs.cloud.google.com/bigquery/docs/clustering-overview
+title: Clustering overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Clustering overview
 
 Clustering is an unsupervised machine learning technique you can use to group similar records together. It is a useful approach for when you want to understand what groups or clusters you have in your data, but don't have labeled data to train a model on. For example, if you had unlabeled data about subway ticket purchases, you could cluster that data by ticket purchase time to better understand what time periods have the heaviest subway usage. For more information, see [What is clustering?](https://developers.google.com/machine-learning/clustering/overview)

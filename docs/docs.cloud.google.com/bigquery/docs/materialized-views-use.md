@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/materialized-views-use
+uri: https://docs.cloud.google.com/bigquery/docs/materialized-views-use
+title: Use materialized views
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Use materialized views
 
 This document provides additional information about materialized views and how to use them. Before you read this document, familiarize yourself with [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) and [Create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create) .

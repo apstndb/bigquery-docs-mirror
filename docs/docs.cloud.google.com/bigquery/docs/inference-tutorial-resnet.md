@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/inference-tutorial-resnet
+uri: https://docs.cloud.google.com/bigquery/docs/inference-tutorial-resnet
+title: 'Tutorial: Run inference on an object table by using a classification model'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # Tutorial: Run inference on an object table by using a classification model
 
 This tutorial shows you how to create an object table based on the images from a public dataset, and then run inference on that object table using the [ResNet 50 model](https://tfhub.dev/tensorflow/resnet_50/classification/1) .

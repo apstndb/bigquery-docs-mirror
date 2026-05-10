@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/schedule-pipelines
+uri: https://docs.cloud.google.com/bigquery/docs/schedule-pipelines
+title: Schedule pipelines
+description: Learn how to schedule pipelines and inspect pipeline runs in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Schedule pipelines
 
 This document describes how to schedule [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) , including how to schedule pipelines and inspect scheduled pipeline runs.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/getting-model-metadata
+uri: https://docs.cloud.google.com/bigquery/docs/getting-model-metadata
+title: Get model metadata
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Get model metadata
 
 This page shows you how to get information or metadata about BigQuery ML models. You can get model metadata by:

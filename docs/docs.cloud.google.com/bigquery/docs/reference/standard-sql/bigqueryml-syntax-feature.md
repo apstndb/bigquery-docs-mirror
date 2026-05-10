@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature
+title: The ML.FEATURE_INFO function
+description: Get information about the input features that are used to train a BigQuery ML model.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.FEATURE\_INFO function
 
 This document describes the `ML.FEATURE_INFO` function, which lets you see information about the input features that are used to train a model.

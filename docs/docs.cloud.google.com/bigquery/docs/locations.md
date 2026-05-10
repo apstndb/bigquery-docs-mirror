@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/locations
+uri: https://docs.cloud.google.com/bigquery/docs/locations
+title: BigQuery locations
+description: Understand BigQuery locations, and how location impacts pricing and job execution.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # BigQuery locations
 
 This page explains the concept of *location* and the different regions where data can be stored and processed. Pricing for storage and analysis is also defined by location of data and reservations. For more information about pricing for locations, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) . To learn how to set the location for your dataset, see [Create datasets](https://docs.cloud.google.com/bigquery/docs/datasets) . For information about reservation locations, see [Managing reservations in different regions](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#manage_reservations_in_different_regions) .

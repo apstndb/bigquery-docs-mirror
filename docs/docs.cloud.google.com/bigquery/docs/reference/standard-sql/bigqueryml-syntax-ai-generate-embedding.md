@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding
+title: The AI.GENERATE_EMBEDDING function
+description: Generate high-dimensional numerical vectors for text and visual content by using the `AI.GENERATE_EMBEDDING` function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The AI.GENERATE\_EMBEDDING function
 
 This document describes the `AI.GENERATE_EMBEDDING` function, a table-valued function that lets you create embeddings that describe an entity—for example, a piece of text or an image.

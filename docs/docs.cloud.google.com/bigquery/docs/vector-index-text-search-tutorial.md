@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial
+title: Perform semantic search and retrieval-augmented generation
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Perform semantic search and retrieval-augmented generation
 
 This tutorial guides you through the end-to-end process of creating and using [text embeddings](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#text_embedding) for semantic search and [retrieval-augmented generation (RAG)](https://cloud.google.com/use-cases/retrieval-augmented-generation) .

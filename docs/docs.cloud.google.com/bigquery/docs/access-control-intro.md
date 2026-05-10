@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/access-control-intro
+uri: https://docs.cloud.google.com/bigquery/docs/access-control-intro
+title: Introduction to security and access controls in BigQuery
+description: Provides an introduction to Identity and Access Management (IAM) access controls, roles, and permissions for BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Introduction to security and access controls in BigQuery
 
 This document provides an overview of access controls in BigQuery using Identity and Access Management (IAM). IAM lets you grant granular access to specific BigQuery resources and helps prevent access to other resources. IAM helps you apply the security principle of least privilege, which states that no [IAM principal](https://docs.cloud.google.com/iam/docs/principals-overview) should have more permissions than they actually need.

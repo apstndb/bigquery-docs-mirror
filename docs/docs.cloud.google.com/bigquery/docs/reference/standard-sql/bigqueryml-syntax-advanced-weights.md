@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights
+title: The ML.ADVANCED_WEIGHTS function
+description: Understand `ML.ADVANCED_WEIGHTS` for linear and binary logistic regression models, including weights, p-values, and standard errors.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # The ML.ADVANCED\_WEIGHTS function
 
 This document describes the `ML.ADVANCED_WEIGHTS` function, which lets you see the underlying weights that a linear or binary logistic regression model uses during prediction, along with the associated p-values and standard errors for that weight. `ML.ADVANCED_WEIGHTS` is an extended version of `ML.WEIGHTS` for linear and binary logistic regression models.

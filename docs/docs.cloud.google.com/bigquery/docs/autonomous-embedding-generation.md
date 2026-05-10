@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation
+uri: https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation
+title: Autonomous embedding generation
+description: Let BigQuery automatically maintain a column of embeddings on your table.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Autonomous embedding generation
 
 > **Preview**

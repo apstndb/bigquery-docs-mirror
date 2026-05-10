@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/text-analysis-search
+uri: https://docs.cloud.google.com/bigquery/docs/text-analysis-search
+title: Work with text analyzers
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Work with text analyzers
 
 The [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) , and [`TEXT_ANALYZE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) support advanced text analyzer configuration options. Understanding BigQuery's text analyzers and their options lets you refine your search experience.

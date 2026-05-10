@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery
+uri: https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery
+title: Apache Iceberg managed tables
+description: Describes how to use Iceberg managed tables.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Apache Iceberg managed tables
 
 *Apache Iceberg managed tables* (formerly BigLake tables for Apache Iceberg in BigQuery) provide the foundation for building open-format lakehouses on Google Cloud. Iceberg managed tables offer the same fully managed experience as standard BigQuery tables, but store data in customer-owned storage buckets. Iceberg managed tables support the open Iceberg table format for better interoperability with open-source and third-party compute engines on a single copy of data.

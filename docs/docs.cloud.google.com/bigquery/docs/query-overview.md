@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/query-overview
+uri: https://docs.cloud.google.com/bigquery/docs/query-overview
+title: Overview of BigQuery analytics
+description: Describes how BigQuery processes queries and introduces important BigQuery analytic features and tools.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Overview of BigQuery analytics
 
 This document describes how BigQuery processes queries, and it provides an overview of several features that are useful for understanding and analyzing your data.

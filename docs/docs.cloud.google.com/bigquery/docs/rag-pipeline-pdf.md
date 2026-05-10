@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf
+uri: https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf
+title: Parse PDFs in a retrieval-augmented generation pipeline
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Parse PDFs in a retrieval-augmented generation pipeline
 
 This tutorial guides you through the process of creating a retrieval-augmented generation (RAG) pipeline based on parsed PDF content.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/troubleshoot-quotas
+uri: https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas
+title: Troubleshoot quota and limit errors
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Troubleshoot quota and limit errors
 
 BigQuery has various [quotas and limits](https://docs.cloud.google.com/bigquery/quotas) that limit the rate and volume of different requests and operations. They exist both to protect the infrastructure and to help guard against unexpected customer usage. This document describes how to diagnose and mitigate specific errors resulting from quotas and limits.

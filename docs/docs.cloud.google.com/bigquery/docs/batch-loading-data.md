@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/batch-loading-data
+uri: https://docs.cloud.google.com/bigquery/docs/batch-loading-data
+title: Batch loading data
+description: Describes loading data into BigQuery from Cloud Storage or from a local file as a batch operation.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Batch loading data
 
 You can load data into BigQuery from Cloud Storage or from a local file as a batch operation. The source data can be in any of the following formats:

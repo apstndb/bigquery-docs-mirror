@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/start
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/start
+title: 'Method: projects.locations.workflows.start'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:32Z"
+---
+
   - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/start#body.HTTP_TEMPLATE)
   - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/start#body.PATH_PARAMETERS)
   - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/start#body.request_body)

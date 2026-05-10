@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity
+uri: https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity
+title: Reserve BI Engine capacity
+description: Learn how to purchase BI Engine capacity by creating a BI Engine reservation, attached to a project or region you identify.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Reserve BI Engine capacity
 
 You purchase BI Engine capacity by creating a reservation. BI Engine is only available for projects with a supported edition. Reservations are measured in GiB of memory. The reservation is attached to a project and region you identify when the reservation is created. BI Engine uses this capacity to cache data. For information about the maximum reservation size for BI Engine, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#biengine-limits) .

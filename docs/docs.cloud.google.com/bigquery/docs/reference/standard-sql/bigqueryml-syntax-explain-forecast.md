@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast
+title: The ML.EXPLAIN_FORECAST function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.EXPLAIN\_FORECAST function
 
 This document describes the `ML.EXPLAIN_FORECAST` function, which lets you generate forecasts that are based on a trained time series model. It only works on `ARIMA_PLUS` models with the training option `decompose_time_series` enabled or on `ARIMA_PLUS_XREG` models. The `ML.EXPLAIN_FORECAST` function encompasses the `ML.FORECAST` function because its output is a superset of the results of `ML.FORECAST` .

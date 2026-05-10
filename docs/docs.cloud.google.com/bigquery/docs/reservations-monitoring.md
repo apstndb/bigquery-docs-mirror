@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reservations-monitoring
+uri: https://docs.cloud.google.com/bigquery/docs/reservations-monitoring
+title: Monitor BigQuery reservations
+description: Describes ways to view project and reservation slot usage, view your bill in real time, and explain reservation cost attribution.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Monitor BigQuery reservations
 
 As a BigQuery administrator, you can monitor reservations in your project by viewing the project and reservation slot usage and also view your capacity-based bill.

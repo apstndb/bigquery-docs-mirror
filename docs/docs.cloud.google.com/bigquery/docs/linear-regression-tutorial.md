@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/linear-regression-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/linear-regression-tutorial
+title: Use BigQuery ML to predict penguin weight
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 In this tutorial, you use a [linear regression model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) in BigQuery ML to predict the weight of a penguin based on the penguin's demographic information. A linear regression is a type of regression model that generates a continuous value from a linear combination of input features.
 
 This tutorial uses the [`bigquery-public-data.ml_datasets.penguins`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=penguins&page=table) dataset.

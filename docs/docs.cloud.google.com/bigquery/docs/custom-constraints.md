@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/custom-constraints
+uri: https://docs.cloud.google.com/bigquery/docs/custom-constraints
+title: Use organization policies to apply custom constraints to BigQuery resources
+description: How to use organization policies to allow or deny specific operations on BigQuery resources.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Use organization policies to apply custom constraints to BigQuery resources
 
 > **Preview — Constraints on tables, data access policies, row access polcies, and routines**

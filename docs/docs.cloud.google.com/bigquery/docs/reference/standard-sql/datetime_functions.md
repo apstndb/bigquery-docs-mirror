@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions
+title: Datetime functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 GoogleSQL for BigQuery supports the following datetime functions.
 
 All outputs are automatically formatted as per [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) , separating date and time with a `T` .

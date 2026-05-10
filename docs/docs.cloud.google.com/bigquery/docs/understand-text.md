@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/understand-text
+uri: https://docs.cloud.google.com/bigquery/docs/understand-text
+title: Understand text with the ML.UNDERSTAND_TEXT function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Understand text with the ML.UNDERSTAND\_TEXT function
 
 This document describes how to use the [`ML.UNDERSTAND_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to perform a natural language text analysis function on text from a [BigQuery standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .

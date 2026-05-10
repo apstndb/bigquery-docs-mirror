@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/glue-federated-datasets
+uri: https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets
+title: Create and manage AWS Glue federated datasets
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Create and manage AWS Glue federated datasets
 
 A *federated dataset* mirrors the schema and tables from an external data source, making them appear as read-only tables in a BigQuery dataset. You can use a federated dataset as an efficient way to access data from AWS Glue in BigQuery.

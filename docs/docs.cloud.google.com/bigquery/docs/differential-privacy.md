@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/differential-privacy
+uri: https://docs.cloud.google.com/bigquery/docs/differential-privacy
+title: Use differential privacy
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 This document provides general information about differential privacy for BigQuery. For syntax, see the [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) . For a list of functions that you can use with this syntax, see [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .
 
 > **Note:** In this topic, the privacy parameters in the examples aren't recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.

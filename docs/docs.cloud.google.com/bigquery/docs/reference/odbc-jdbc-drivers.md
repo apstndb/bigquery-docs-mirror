@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers
+uri: https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers
+title: Use the Simba ODBC and JDBC drivers for BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Use the Simba ODBC and JDBC drivers for BigQuery
 
 The Simba Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers for BigQuery connect your applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. Generally, the JDBC driver is used with Java applications, and the ODBC driver is used otherwise.

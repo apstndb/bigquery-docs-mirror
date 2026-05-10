@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/omni-azure-create-connection
+uri: https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection
+title: Connect to Blob Storage
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Connect to Blob Storage
 
 As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to let data analysts access data stored in Azure Blob Storage.

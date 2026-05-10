@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dataframes-visualizations
+uri: https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations
+title: Visualize graphs using BigQuery DataFrames
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Visualize graphs using BigQuery DataFrames
 
 This document demonstrates how to plot various types of graphs by using the BigQuery DataFrames visualization library.

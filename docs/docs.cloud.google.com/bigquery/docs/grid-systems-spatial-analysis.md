@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/grid-systems-spatial-analysis
+uri: https://docs.cloud.google.com/bigquery/docs/grid-systems-spatial-analysis
+title: Grid systems for spatial analysis
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Grid systems for spatial analysis
 
 This document explains the purpose and methods of using geospatial grid systems (such as [S2](http://s2geometry.io/) and [H3](https://h3geo.org/) ) in BigQuery to organize spatial data in standardized geographic areas. It also explains how to choose the right grid system for your application. This document is useful for anyone who works with spatial data and performs spatial analysis in BigQuery.

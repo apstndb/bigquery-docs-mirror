@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma
+uri: https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma
+title: Generate text by using a Gemma open model and the AI.GENERATE_TEXT function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Generate text by using a Gemma open model and the AI.GENERATE\_TEXT function
 
 This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) that's based on the [Gemma model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemma-models) , and then how to use that model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis on movie reviews from the `bigquery-public-data.imdb.reviews` public table.

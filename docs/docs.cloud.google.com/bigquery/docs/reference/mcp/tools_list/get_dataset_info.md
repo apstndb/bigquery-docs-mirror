@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info
+uri: https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info
+title: 'MCP Tools Reference: bigquery.googleapis.com'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-04-20T16:01:05Z"
+---
+
 ## Tool: `get_dataset_info`
 
 Get metadata information about a BigQuery dataset.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/managing-row-level-security
+uri: https://docs.cloud.google.com/bigquery/docs/managing-row-level-security
+title: Use row-level security
+description: Shows how to create, update, list, and delete a table's row-level access policies, and shows how to query a table with row-access policies in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Use row-level security
 
 This document explains how to use row-level security in BigQuery to restrict access to data at the table row level. Before you read this document, familiarize yourself with an overview about row-level security by reading [Introduction to BigQuery row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .

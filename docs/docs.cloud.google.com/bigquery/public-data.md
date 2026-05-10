@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/public-data
+uri: https://docs.cloud.google.com/bigquery/public-data
+title: BigQuery public datasets
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:52:00Z"
+---
+
 # BigQuery public datasets
 
 A public dataset is any dataset that is stored in BigQuery and made available to the general public through the [Google Cloud Public Dataset Program](https://cloud.google.com/datasets) . The public datasets are datasets that BigQuery hosts for you to access and integrate into your applications. Google pays for the storage of these datasets and provides public access to the data using a [project](https://docs.cloud.google.com/docs/overview#projects) . You pay only for the queries that you perform on the data. The first 1 TB per month is free, subject to [query pricing details](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .

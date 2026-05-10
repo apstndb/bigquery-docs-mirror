@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift
+title: The ML.VALIDATE_DATA_DRIFT function
+description: Use the `ML.VALIDATE_DATA_DRIFT` function to compute the data drift between two sets of serving data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.VALIDATE\_DATA\_DRIFT function
 
 This document describes the `ML.VALIDATE_DATA_DRIFT` function, which you can use to compute the data drift between two sets of serving data. This function computes and compares the statistics for the two data sets, and then identifies where there are anomalous differences between the two data sets.

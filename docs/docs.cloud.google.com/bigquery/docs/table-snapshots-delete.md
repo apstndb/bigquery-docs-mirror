@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/table-snapshots-delete
+uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-delete
+title: Delete table snapshots
+description: Describes how to delete a BigQuery table snapshot using the {{dynamic_data.site_values.cloud_name_short}} console, the bq rm command, a DROP SNAPSHOT TABLE statement, or the tables.delete API.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Delete table snapshots
 
 This document describes how to delete a table snapshot by using the Google Cloud console, a [`DROP SNAPSHOT TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement) GoogleSQL statement, a [`bq rm`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) command, or a BigQuery API [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) call. It also provides information about how to recover a table snapshot that was deleted or that expired in the past seven days. It is intended for users who are familiar with [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .

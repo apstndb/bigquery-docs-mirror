@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analysis-rules
+uri: https://docs.cloud.google.com/bigquery/docs/analysis-rules
+title: Restrict data access using analysis rules
+description: With analysis rules, you can enforce conditions for sharing data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Restrict data access using analysis rules
 
 This document provides general information about analysis rules in GoogleSQL for BigQuery.

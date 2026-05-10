@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv
+uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv
+title: Loading CSV data from Cloud Storage
+description: Describes how to load CSV data from Cloud Storage to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Loading CSV data from Cloud Storage
 
 When you load CSV data from Cloud Storage, you can load the data into a new table or partition, or you can append to or overwrite an existing table or partition. When your data is loaded into BigQuery, it is converted into columnar format for [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (BigQuery's storage format).

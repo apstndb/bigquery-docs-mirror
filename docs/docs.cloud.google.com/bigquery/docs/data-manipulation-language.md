@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/data-manipulation-language
+uri: https://docs.cloud.google.com/bigquery/docs/data-manipulation-language
+title: Transform data with data manipulation language (DML)
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Transform data with data manipulation language (DML)
 
 The BigQuery data manipulation language (DML) lets you update, insert, and delete data from your BigQuery tables.

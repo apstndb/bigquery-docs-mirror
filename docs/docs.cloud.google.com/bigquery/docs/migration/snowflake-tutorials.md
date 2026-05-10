@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials
+uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials
+title: Snowflake to BigQuery migration tutorials
+description: Describes the high-level workflow involved in migrating from Snowflake to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Snowflake to BigQuery migration tutorials
 
 This document provides end-to-end examples and tutorials for the different ways you can set up a Snowflake to BigQuery migration pipeline.

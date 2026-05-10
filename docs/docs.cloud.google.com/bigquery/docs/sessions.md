@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/sessions
+uri: https://docs.cloud.google.com/bigquery/docs/sessions
+title: Work with sessions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Work with sessions
 
 This document describes how to create, use, terminate, and list your [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .

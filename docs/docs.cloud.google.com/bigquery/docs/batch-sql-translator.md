@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/batch-sql-translator
+uri: https://docs.cloud.google.com/bigquery/docs/batch-sql-translator
+title: Migrate code with the batch SQL translator
+description: Describes how to translate batches of SQL queries or scripts into GoogleSQL queries by using the BigQuery batch SQL translator.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Migrate code with the batch SQL translator
 
 > **Note:** For API-based translations, including new batch translations, we recommend that you use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) to translate your SQL scripts. The BigQuery Migration API works much like the batch SQL translator, but without the need to install or use client code.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-migration-intro
+uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-migration-intro
+title: Snowflake to BigQuery migration
+description: Describes the key features of BigQuery and why a user might want to migrate from Snowflake.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Snowflake to BigQuery migration
 
 This document provides an introduction on how you can migrate from Snowflake to BigQuery. The following sections introduce the migration tools to help you perform a BigQuery migration, and outlines some differences between Snowflake and BigQuery to help you plan your migration.

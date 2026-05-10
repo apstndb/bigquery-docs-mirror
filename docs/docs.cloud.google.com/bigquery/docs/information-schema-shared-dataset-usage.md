@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage
+title: INFORMATION_SCHEMA.SHARED_DATASET_USAGE view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # INFORMATION\_SCHEMA.SHARED\_DATASET\_USAGE view
 
 The `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view contains the near real-time metadata about consumption of your shared dataset tables. To get started with sharing your data across organizations, see [BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .

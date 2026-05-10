@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations
+uri: https://docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations
+title: Managing policy tags across locations
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Managing policy tags across locations
 
 This document describes how to manage policy tags across regional locations for column-level security and dynamic data masking in BigQuery.

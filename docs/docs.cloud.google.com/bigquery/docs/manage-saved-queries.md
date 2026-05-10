@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/manage-saved-queries
+uri: https://docs.cloud.google.com/bigquery/docs/manage-saved-queries
+title: Manage saved queries
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manage saved queries
 
 This document describes how to manage [saved queries and classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) and how to manage saved query metadata in [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .

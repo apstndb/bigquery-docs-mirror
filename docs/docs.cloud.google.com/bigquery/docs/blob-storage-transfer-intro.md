@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro
+uri: https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro
+title: Introduction to Blob Storage transfers
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Introduction to Blob Storage transfers
 
 The [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Azure Blob Storage lets you automatically schedule and manage recurring load jobs from Azure Blob Storage and [Azure Data Lake Storage Gen2](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) into BigQuery.

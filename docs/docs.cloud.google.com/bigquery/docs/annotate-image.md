@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/annotate-image
+uri: https://docs.cloud.google.com/bigquery/docs/annotate-image
+title: Annotate images with the ML.ANNOTATE_IMAGE function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Annotate images with the ML.ANNOTATE\_IMAGE function
 
 This document describes how to use the [`ML.ANNOTATE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to annotate images from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .

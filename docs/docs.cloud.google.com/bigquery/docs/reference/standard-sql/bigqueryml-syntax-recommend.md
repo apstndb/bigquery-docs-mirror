@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend
+title: The ML.RECOMMEND function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.RECOMMEND function
 
 This document describes the `ML.RECOMMEND` function, which lets you generate a predicted rating for every user-item row combination for a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) . Because the input data for a matrix factorization model tends to be a sparse matrix with missing values, `ML.RECOMMEND` can return the predictions for those missing values without requiring specification of each entry.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/auditlogs
+uri: https://docs.cloud.google.com/bigquery/docs/reference/auditlogs
+title: BigQuery audit logs overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:24Z"
+---
+
 # BigQuery audit logs overview
 
 Cloud Audit Logs are a collection of logs provided by Google Cloud that provide insight into operational concerns related to your use of Google Cloud services. This page provides details about BigQuery specific log information, and it demonstrates how to use BigQuery to analyze logged activity. For more information, see [Introduction to audit logs in BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) .

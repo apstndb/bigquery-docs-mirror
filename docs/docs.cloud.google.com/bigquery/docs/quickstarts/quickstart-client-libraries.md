@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries
+uri: https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries
+title: Query a public dataset with the BigQuery client libraries
+description: Learn how to query a public dataset with the BigQuery client libraries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Query a public dataset with the BigQuery client libraries
 
 Learn how to query a public dataset with the BigQuery client libraries.

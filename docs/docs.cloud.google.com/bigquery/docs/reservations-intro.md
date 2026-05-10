@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reservations-intro
+uri: https://docs.cloud.google.com/bigquery/docs/reservations-intro
+title: Introduction to workload management
+description: Gives an overview of workload management reservations feature in BigQuery, including capacity-based pricing for query processing. Introduces capacity commitment plans, reservation assignments, and slot scheduling.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Introduction to workload management
 
 BigQuery workload management lets you allocate and manage compute resources available for data analysis and processing, and also lets you specify how you are charged for those resources.

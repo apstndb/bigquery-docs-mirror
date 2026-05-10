@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/export-to-pubsub
+uri: https://docs.cloud.google.com/bigquery/docs/export-to-pubsub
+title: Export data to Pub/Sub (reverse ETL)
+description: Prepare and configure a data export from BigQuery to Pub/Sub.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Export data to Pub/Sub (reverse ETL)
 
 Exporting data to Pub/Sub requires using BigQuery [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) .

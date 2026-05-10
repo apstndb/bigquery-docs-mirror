@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls
+title: Aggregate function calls
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 An aggregate function summarizes the rows of a group into a single value. When an aggregate function is used with the `OVER` clause, it becomes a window function, which computes values over a group of rows and then returns a single result for each row.
 
 ## Aggregate function call syntax

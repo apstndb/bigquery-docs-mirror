@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series
+uri: https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series
+title: Forecast hierarchical time series with an ARIMA_PLUS univariate model
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Forecast hierarchical time series with an ARIMA\_PLUS univariate model
 
 This tutorial teaches you how to use an [`ARIMA_PLUS` univariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) to forecast hierarchical time series. It forecasts the future value for a given column, based on the historical values for that column, and also calculates roll-up values for that column for one or more dimensions of interest.

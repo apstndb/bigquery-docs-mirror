@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language
+title: Data control language (DCL) statements in GoogleSQL
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 # Data control language (DCL) statements in GoogleSQL
 
 The BigQuery data control language (DCL) statements let you set up and control BigQuery resources using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) query syntax.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/TimeSeries
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/TimeSeries
+title: TimeSeries
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:05:11Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/TimeSeries#SCHEMA_REPRESENTATION)
   - [Point](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/TimeSeries#Point)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/TimeSeries#Point.SCHEMA_REPRESENTATION)

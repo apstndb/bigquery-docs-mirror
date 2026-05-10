@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/manage-clustered-tables
+uri: https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables
+title: Manage clustered tables
+description: Control access to and use clustered tables in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manage clustered tables
 
 This document describes how to get information about and control access to clustered tables in BigQuery.

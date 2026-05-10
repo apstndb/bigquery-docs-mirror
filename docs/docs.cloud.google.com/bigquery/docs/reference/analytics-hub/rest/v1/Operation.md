@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/Operation
+uri: https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/Operation
+title: Operation
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-11-12T09:57:02Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/Operation#SCHEMA_REPRESENTATION)
   - [Status](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/Operation#Status)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/Operation#Status.SCHEMA_REPRESENTATION)

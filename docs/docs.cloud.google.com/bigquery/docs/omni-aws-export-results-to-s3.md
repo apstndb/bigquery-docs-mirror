@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3
+uri: https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3
+title: Export query results to Amazon S3
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Export query results to Amazon S3
 
 This document describes how to export the result of a query that runs against a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) to your Amazon Simple Storage Service (Amazon S3) bucket.

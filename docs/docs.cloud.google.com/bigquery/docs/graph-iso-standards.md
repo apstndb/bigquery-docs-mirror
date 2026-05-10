@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/graph-iso-standards
+uri: https://docs.cloud.google.com/bigquery/docs/graph-iso-standards
+title: BigQuery Graph and ISO standards
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # BigQuery Graph and ISO standards
 
 The document describes how BigQuery Graph supports the ISO international standard query language for graph databases.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries
+uri: https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries
+title: Cloud SQL federated queries
+description: Shows how to query data in Cloud SQL from BigQuery using federated queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Cloud SQL federated queries
 
 As a data analyst, you can query data in Cloud SQL from BigQuery using [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .

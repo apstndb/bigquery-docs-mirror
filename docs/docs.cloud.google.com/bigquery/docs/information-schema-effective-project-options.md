@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-effective-project-options
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-effective-project-options
+title: EFFECTIVE_PROJECT_OPTIONS view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # EFFECTIVE\_PROJECT\_OPTIONS view
 
 You can query the `INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS` view to retrieve real-time metadata about BigQuery effective project options. This view contains configuration options that are set at the organization or project level. If the same configuration option is set at both the organization and project level, the project configuration value is shown. To view the default values for a configuration option, see [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings) .

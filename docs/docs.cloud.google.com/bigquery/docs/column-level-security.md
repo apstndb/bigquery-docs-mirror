@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/column-level-security
+uri: https://docs.cloud.google.com/bigquery/docs/column-level-security
+title: Restrict access with column-level access control
+description: Shows how to add, view, remove, and search policy tags; view and update permissions on policy tags; set a policy tag on a column using the {{dynamic_data.site_values.cloud_name_short}} console, the bq command-line tool, and the BigQuery API; and query data with column-level access control.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Restrict access with column-level access control
 
 This page explains how to use BigQuery column-level access control to restrict access to BigQuery data at the column level. For general information about column-level access control, see [Introduction to BigQuery column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) .

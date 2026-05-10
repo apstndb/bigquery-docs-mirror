@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/access-historical-data
+uri: https://docs.cloud.google.com/bigquery/docs/access-historical-data
+title: Access historical data
+description: Describes how to use time travel in BigQuery to query or restore a table's historical data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Access historical data
 
 BigQuery lets you query and restore data stored in BigQuery that has been changed or deleted within your [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) window.

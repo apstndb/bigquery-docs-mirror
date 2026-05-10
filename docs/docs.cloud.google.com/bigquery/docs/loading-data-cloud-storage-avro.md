@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro
+uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro
+title: Load Avro data from Cloud Storage
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Load Avro data from Cloud Storage
 
 [Avro](https://avro.apache.org) is an open source data format that bundles serialized data with the data's schema in the same file.

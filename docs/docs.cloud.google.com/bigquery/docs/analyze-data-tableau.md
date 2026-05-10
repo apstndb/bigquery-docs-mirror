@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analyze-data-tableau
+uri: https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau
+title: Analyze BigQuery data with BI Engine and Tableau Desktop
+description: Analyze BigQuery data by using BI Engine and Tableau Desktop.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Analyze data with BI Engine and Tableau Desktop
 
 BigQuery BI Engine lets you perform fast, low-latency analysis services and interactive analytics with reports and dashboards backed by BigQuery.

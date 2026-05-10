@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding
+uri: https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding
+title: Generate image embeddings by using the AI.GENERATE_EMBEDDING function
+description: Learn how to generate image embeddings using BigQuery ML and Vertex AI models with the AI.GENERATE_EMBEDDING function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Generate image embeddings by using the AI.GENERATE\_EMBEDDING function
 
 This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a [Vertex AI embedding model](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models#foundation_models) . You then use that model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create image embeddings by using data from a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .

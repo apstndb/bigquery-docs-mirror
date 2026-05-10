@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/ai-application-overview
+uri: https://docs.cloud.google.com/bigquery/docs/ai-application-overview
+title: Task-specific solutions overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Task-specific solutions overview
 
 This document describes the artificial intelligence (AI) features that BigQuery ML supports. These features let you develop task-specific solutions in BigQuery ML by using Cloud AI APIs. Supported tasks include the following:

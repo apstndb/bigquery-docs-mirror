@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/troubleshoot-access-control
+uri: https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control
+title: Troubleshoot IAM permissions in BigQuery
+description: How to troubleshoot issues with IAM permissions in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Troubleshoot IAM permissions in BigQuery
 
 This document shows you how to troubleshoot issues with Identity and Access Management (IAM) permissions in BigQuery. IAM permission issues typically result in `Access Denied` errors like the following:

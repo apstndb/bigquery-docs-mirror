@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/write-sql-gemini
+uri: https://docs.cloud.google.com/bigquery/docs/write-sql-gemini
+title: Write queries with Gemini assistance
+description: How to use Gemini in BigQuery to generate, complete, and explain SQL queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Write queries with Gemini assistance
 
 This document describes how to use AI-powered assistance in [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) to help you query your data with SQL queries and Python code. Gemini in BigQuery can generate and explain queries and code, complete queries and code while you type, and fix code errors.

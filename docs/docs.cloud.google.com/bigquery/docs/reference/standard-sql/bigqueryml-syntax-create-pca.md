@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca
+title: The CREATE MODEL statement for PCA models
+description: Use the CREATE MODEL statement for creating principal component analysis (PCA) models in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for PCA models
 
 ## `CREATE MODEL` statement for PCA

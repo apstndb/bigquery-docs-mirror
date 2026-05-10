@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/managing-datasets
+uri: https://docs.cloud.google.com/bigquery/docs/managing-datasets
+title: Manage datasets
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manage datasets
 
 This document describes how to copy datasets, recreate datasets in another location, secure datasets, delete datasets, and restore tables from deleted datasets in BigQuery. For information about how to restore (or *undelete* ) a deleted dataset, see [Restore deleted datasets](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) .

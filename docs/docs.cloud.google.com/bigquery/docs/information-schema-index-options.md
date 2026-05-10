@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-index-options
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-index-options
+title: SEARCH_INDEX_OPTIONS view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # SEARCH\_INDEX\_OPTIONS view
 
 The `INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS` view contains one row for each search index option in a dataset.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference
+title: JobReference
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:42Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference#SCHEMA_REPRESENTATION)
 
 A job reference is a fully qualified identifier for referring to a job.

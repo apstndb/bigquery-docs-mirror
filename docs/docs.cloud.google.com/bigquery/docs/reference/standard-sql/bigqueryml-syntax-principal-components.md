@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-components
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-components
+title: The ML.PRINCIPAL_COMPONENTS function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.PRINCIPAL\_COMPONENTS function
 
 This document describes the `ML.PRINCIPAL_COMPONENTS` function, which lets you see the principal components of a principal component analysis (PCA) model. Principal components and [eigenvectors](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors) are the same concepts in PCA models.

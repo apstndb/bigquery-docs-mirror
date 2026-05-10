@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/remote-functions-translation-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/remote-functions-translation-tutorial
+title: Remote functions and Translation API tutorial
+description: Describes how to perform a test migration from Teradata to BigQuery using sample data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Remote functions and Translation API tutorial
 
 This tutorial describes how to create a [BigQuery remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions) , invoke the [Cloud Translation API](https://docs.cloud.google.com/translate/docs/reference/api-overview) , and perform content translation from any language to Spanish using SQL and Python.

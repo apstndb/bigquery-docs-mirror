@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2
+title: Package google.cloud.bigquery.migration.v2
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-04-29T22:55:45Z"
+---
+
 ## Index
 
   - `  MigrationService  ` (interface)

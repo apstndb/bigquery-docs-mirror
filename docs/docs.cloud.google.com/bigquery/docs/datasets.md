@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/datasets
+uri: https://docs.cloud.google.com/bigquery/docs/datasets
+title: Create datasets
+description: Shows how to create datasets in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Create datasets
 
 This document describes how to create datasets that store data in BigQuery. Datasets are top-level containers that let you organize and control access to tables and views.

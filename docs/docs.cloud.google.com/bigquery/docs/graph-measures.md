@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/graph-measures
+uri: https://docs.cloud.google.com/bigquery/docs/graph-measures
+title: Work with measures
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Work with measures
 
 > **Preview**

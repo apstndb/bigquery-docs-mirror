@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-min-max-scaler
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-min-max-scaler
+title: The ML.MIN_MAX_SCALER function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.MIN\_MAX\_SCALER function
 
 This document describes the `ML.MIN_MAX_SCALER` function, which lets you scale a numerical\_expression to the range `[0, 1]` . Negative values are set to `0` , and values above `1` are set to `1` .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/time-series-forecasting-holidays-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/time-series-forecasting-holidays-tutorial
+title: Use custom holidays in an ARIMA_PLUS time-series forecasting model
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Use custom holidays in an ARIMA\_PLUS time-series forecasting model
 
 This tutorial shows you how to do the following tasks:

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox
+uri: https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox
+title: Connect LLMs to BigQuery with MCP
+description: Integrate your BigQuery project with agents.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Connect LLMs to BigQuery with MCP
 
 This guide shows you how to use the [MCP Toolbox for Databases](https://github.com/googleapis/mcp-toolbox) to connect your BigQuery project to a variety of Integrated Development Environments (IDEs) and developer tools. It uses the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) , an open protocol for connecting large language models (LLMs) to data sources like BigQuery, allowing you to run SQL queries and interact with your project directly from your existing tools.

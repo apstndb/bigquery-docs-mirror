@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-local-inventories-schema
+uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-local-inventories-schema
+title: Google Merchant Center local inventories table
+description: Describes the BigQuery table names and schema for imported local inventory data, such as pricing, availability, quantity, pick-up, and in-store location.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Google Merchant Center local inventories table
 
 ## Overview

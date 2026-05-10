@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/auto-preprocessing
+uri: https://docs.cloud.google.com/bigquery/docs/auto-preprocessing
+title: Automatic feature preprocessing
+description: Understand BigQuery ML automatic feature preprocessing, including missing value imputation and feature transformations.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Automatic feature preprocessing
 
 BigQuery ML performs automatic preprocessing during training by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) . Automatic preprocessing consists of [missing value imputation](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#imputation) and [feature transformations](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#feature-transform) .

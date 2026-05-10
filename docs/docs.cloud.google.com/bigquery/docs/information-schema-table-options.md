@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-table-options
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-options
+title: TABLE_OPTIONS view
+description: Describes INFORMATION_SCHEMA.TABLE_OPTIONS view to get metadata about tables, columns, and partitions.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # TABLE\_OPTIONS view
 
 The `INFORMATION_SCHEMA.TABLE_OPTIONS` view contains one row for each option, for each table or view in a dataset. The `TABLES` and `TABLE_OPTIONS` views also contain high-level information about views. For detailed information, query the [`INFORMATION_SCHEMA.VIEWS`](https://docs.cloud.google.com/bigquery/docs/information-schema-views) view.

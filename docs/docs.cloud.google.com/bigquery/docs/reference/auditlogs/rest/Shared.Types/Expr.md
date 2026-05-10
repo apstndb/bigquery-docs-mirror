@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/Expr
+uri: https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/Expr
+title: Expr
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:32Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/Expr#SCHEMA_REPRESENTATION)
 
 Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at <https://github.com/google/cel-spec> .

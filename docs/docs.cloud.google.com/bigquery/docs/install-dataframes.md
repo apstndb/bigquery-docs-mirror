@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/install-dataframes
+uri: https://docs.cloud.google.com/bigquery/docs/install-dataframes
+title: Install BigQuery DataFrames
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Install BigQuery DataFrames
 
 BigQuery DataFrames provides a Python DataFrame and machine learning (ML) API powered by the BigQuery engine. BigQuery DataFrames is an open-source package.

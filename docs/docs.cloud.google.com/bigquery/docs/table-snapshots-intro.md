@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/table-snapshots-intro
+uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro
+title: Introduction to table snapshots
+description: Introduces BigQuery table snapshots, which let you preserve a low-cost, read-only copy of a table's data as it was at a particular date and time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Introduction to table snapshots
 
 This document is an introduction to BigQuery table snapshots. It is the first of a set of documents that describes how to work with BigQuery table snapshots, including how to create, restore, update, get information about, and query table snapshots. This document set is intended for users who are familiar with [BigQuery](https://docs.cloud.google.com/bigquery/docs) and BigQuery [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) .

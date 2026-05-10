@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/youtube-content-owner-transformation
+uri: https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transformation
+title: YouTube Content Owner report transformation
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # YouTube Content Owner report transformation
 
 When your YouTube Content Owner or system-managed reports are transferred to BigQuery, the reports are transformed into the following BigQuery tables and views.

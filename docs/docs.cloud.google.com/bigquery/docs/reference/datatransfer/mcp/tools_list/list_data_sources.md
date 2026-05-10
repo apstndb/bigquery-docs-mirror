@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_data_sources
+uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_data_sources
+title: 'MCP Tools Reference: bigquerydatatransfer.googleapis.com'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-03-25T00:42:13Z"
+---
+
 ## Tool: `list_data_sources`
 
 List all the data sources that the project has access to.

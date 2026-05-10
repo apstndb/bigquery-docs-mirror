@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/remote-functions
+uri: https://docs.cloud.google.com/bigquery/docs/remote-functions
+title: Work with remote functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Work with remote functions
 
 A BigQuery remote function allows you to implement your function in other languages than SQL and JavaScript or with the libraries or services which are not allowed in BigQuery [user-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) .

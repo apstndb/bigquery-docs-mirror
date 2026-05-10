@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query
+title: 'MCP Tools Reference: bigquerymigration.googleapis.com'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-03-25T20:31:08Z"
+---
+
 ## Tool: `translate_query`
 
 Translates a single query into BigQuery SQL syntax.

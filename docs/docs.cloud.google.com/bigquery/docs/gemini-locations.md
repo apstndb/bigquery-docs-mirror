@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/gemini-locations
+uri: https://docs.cloud.google.com/bigquery/docs/gemini-locations
+title: Where Gemini in BigQuery processes your data
+description: Understand in which location Gemini in BigQuery processes your data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Where Gemini in BigQuery processes your data
 
 This document helps you understand where Gemini in BigQuery processes your data. This behavior applies to the following Gemini in BigQuery features:

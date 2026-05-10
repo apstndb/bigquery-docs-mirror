@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines
+uri: https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines
+title: Use the Data Engineering Agent to build and modify data pipelines
+description: Use the Data Engineering Agent to build data pipelines to load and process data in BigQuery
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Use the Data Engineering Agent to build and modify data pipelines
 
 The Data Engineering Agent lets you to build, modify, and troubleshoot data pipelines in BigQuery using natural language prompts. The Data Engineering Agent offers the following capabilities to streamline your data engineering workflows to ingest data into BigQuery:

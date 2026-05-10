@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate
+title: The ML.ARIMA_EVALUATE function
+description: Evaluate the model metrics of BigQuery ML `ARIMA_PLUS` or `ARIMA_PLUS_XREG` time series models.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The ML.ARIMA\_EVALUATE function
 
 This document describes the `ML.ARIMA_EVALUATE` function, which you can use to evaluate the model metrics of `ARIMA_PLUS` or `ARIMA_PLUS_XREG` time series models.

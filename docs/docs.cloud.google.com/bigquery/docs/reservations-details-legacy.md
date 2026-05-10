@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reservations-details-legacy
+uri: https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy
+title: Legacy capacity commitment plans
+description: Explains the annual, monthly, and flex slots commitment plans, renewal plans for annual commitments, and how to delete a commitment.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Legacy capacity commitment plans
 
 > **Note:** Legacy reservations, including access to flat-rate billing or certain commitment lengths, are only available to allow-listed customers. To determine if you have access to these legacy features, contact your administrator. The flat-rate billing model defines how you are billed for compute, but flat-rate reservations and commitments function as Enterprise edition slots.

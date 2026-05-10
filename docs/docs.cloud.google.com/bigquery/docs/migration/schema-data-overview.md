@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/schema-data-overview
+uri: https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview
+title: Schema and data transfer overview
+description: Discusses concepts and tasks for transferring the schema and data from your existing data warehouse to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T08:52:35Z"
+---
+
 # Schema and data transfer overview
 
 This document discusses the concepts and tasks for transferring the schema and data from your existing data warehouse to BigQuery.

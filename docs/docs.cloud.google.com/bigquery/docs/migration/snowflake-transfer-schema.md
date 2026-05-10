@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema
+uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema
+title: Schema detection and mapping for Snowflake
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Schema detection and mapping for Snowflake
 
 This guide shows you how to define your schema when transferring data from Snowflake to BigQuery. You can use the BigQuery Data Transfer Service to automatically detect schema and data-type mapping, or you can use the translation engine to define your schema and data types manually.

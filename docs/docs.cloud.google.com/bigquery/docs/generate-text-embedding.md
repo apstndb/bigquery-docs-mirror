@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-text-embedding
+uri: https://docs.cloud.google.com/bigquery/docs/generate-text-embedding
+title: Generate text embeddings by using the AI.GENERATE_EMBEDDING function
+description: Use BigQuery ML to generate embeddings by using the AI.GENERATE_EMBEDDING function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Generate text embeddings by using the AI.GENERATE\_EMBEDDING function
 
 This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references an embedding model. You then use that model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create text embeddings by using data from a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .

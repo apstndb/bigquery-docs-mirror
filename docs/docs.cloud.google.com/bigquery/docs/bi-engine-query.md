@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bi-engine-query
+uri: https://docs.cloud.google.com/bigquery/docs/bi-engine-query
+title: What is BI Engine?
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # What is BI Engine?
 
 BigQuery BI Engine is a fast, in-memory analysis service that accelerates many SQL queries in BigQuery by intelligently caching the data you use most frequently. BI Engine can accelerate SQL queries from any source, including those written by data visualization tools, and can manage cached tables for ongoing optimization. This lets you improve query performance without manual tuning or data tiering. You can use [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) and [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) to further optimize the performance of large tables with BI Engine.

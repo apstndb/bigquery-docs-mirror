@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/views-intro
+uri: https://docs.cloud.google.com/bigquery/docs/views-intro
+title: Introduction to logical views
+description: Describes BigQuery logical views and their limitations, quotas, pricing, and security.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Introduction to logical views
 
 This document provides an overview of BigQuery support for logical views. A view is a virtual table defined by a SQL query. The default type of view for BigQuery is a *logical view* . Query results contain only the data from the tables and fields specified in the query that defines the view.

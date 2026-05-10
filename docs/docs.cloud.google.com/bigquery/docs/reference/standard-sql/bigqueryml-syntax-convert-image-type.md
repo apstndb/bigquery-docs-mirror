@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-image-type
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-image-type
+title: The ML.CONVERT_IMAGE_TYPE function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The ML.CONVERT\_IMAGE\_TYPE function
 
 This document describes the `ML.CONVERT_IMAGE_TYPE` scalar function, which lets you convert the data type of pixel values in an image to `INT64` with a range of `[0, 255)` . You can use `ML.CONVERT_IMAGE_TYPE` with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.

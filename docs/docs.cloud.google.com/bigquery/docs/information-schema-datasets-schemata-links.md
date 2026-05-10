@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-links
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-links
+title: SCHEMATA_LINKS view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # SCHEMATA\_LINKS view
 
 The `INFORMATION_SCHEMA.SCHEMATA_LINKS` view contains one row for each [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) that is shared using BigQuery sharing. This view also contains individual resources, such as tables or views, in a project that is shared using [data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) . This view displays one row for each individual resource in the linked dataset.

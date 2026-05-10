@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-intro
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-intro
+title: Introduction to INFORMATION_SCHEMA
+description: Use BigQuery INFORMATION_SCHEMA views to get metadata about objects in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # Introduction to INFORMATION\_SCHEMA
 
 The BigQuery `INFORMATION_SCHEMA` views are read-only, system-defined views that provide metadata information about your BigQuery objects. The following table lists all `INFORMATION_SCHEMA` views that you can query to retrieve metadata information:

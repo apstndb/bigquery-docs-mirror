@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs
+title: 'REST Resource: jobs'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:48Z"
+---
+
   - [Resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs#RESOURCE_REPRESENTATION)
   - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs#METHODS_SUMMARY)
 

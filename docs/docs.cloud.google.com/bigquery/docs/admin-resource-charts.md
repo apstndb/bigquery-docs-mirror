@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/admin-resource-charts
+uri: https://docs.cloud.google.com/bigquery/docs/admin-resource-charts
+title: Monitor health, resource utilization, and jobs
+description: Describes how to configure dashboards that monitor operational health and resource utilization in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Monitor health, resource utilization, and jobs
 
 As a BigQuery administrator, you can monitor your organization's health, slots use, and jobs performance over time with operational health and resource utilization charts. BigQuery provides configurable charts to help you with the following:

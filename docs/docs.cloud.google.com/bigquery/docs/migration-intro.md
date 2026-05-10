@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration-intro
+uri: https://docs.cloud.google.com/bigquery/docs/migration-intro
+title: Introduction to BigQuery Migration Service
+description: A comprehensive solution for migrating your data warehouse to BigQuery
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Introduction to BigQuery Migration Service
 
 This document provides an overview of the BigQuery Migration Service.

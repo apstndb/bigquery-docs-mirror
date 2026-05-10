@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/introduction-sql
+uri: https://docs.cloud.google.com/bigquery/docs/introduction-sql
+title: Introduction to SQL in BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Introduction to SQL in BigQuery
 
 This document provides an overview of supported statements and SQL dialects in BigQuery.

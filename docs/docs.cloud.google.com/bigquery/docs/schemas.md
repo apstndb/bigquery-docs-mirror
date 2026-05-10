@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/schemas
+uri: https://docs.cloud.google.com/bigquery/docs/schemas
+title: Specifying a schema
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Specifying a schema
 
 BigQuery lets you specify a table's schema when you load data into a table, and when you create an empty table. Alternatively, you can use schema [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect#auto-detect) for supported data formats.

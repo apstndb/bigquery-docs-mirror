@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-indexes-by-organization
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-indexes-by-organization
+title: SEARCH_INDEXES_BY_ORGANIZATION view
+description: Describes INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION view to get information about search indexes for the whole organization associated with the current project.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # SEARCH\_INDEXES\_BY\_ORGANIZATION view
 
 [BigQuery search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) provide free index management until your organization reaches the [limit](https://docs.cloud.google.com/bigquery/quotas#index_limits) in a given region. You can use the `INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view to understand your current consumption towards that limit, broken down by projects and tables. The `INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view contains one row for each search index for the whole organization associated with the current project.

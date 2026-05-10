@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reservations-tasks
+uri: https://docs.cloud.google.com/bigquery/docs/reservations-tasks
+title: Manage workload reservations
+description: Learn how to work with capacity commitments, reservations, and assignments in BigQuery. It includes tasks such as purchasing, creating, and deleting reservations.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Manage workload reservations
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.

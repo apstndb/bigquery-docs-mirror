@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/service-dependencies
+uri: https://docs.cloud.google.com/bigquery/docs/service-dependencies
+title: Manage BigQuery API dependencies
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Manage BigQuery API dependencies
 
 This document describes the Google Cloud services and APIs that BigQuery depends on. It also explains the effects on BigQuery behavior when you disable those services. Review this document before you enable or disable services in your project.

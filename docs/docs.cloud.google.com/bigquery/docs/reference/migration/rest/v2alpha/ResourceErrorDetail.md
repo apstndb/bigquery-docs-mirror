@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/ResourceErrorDetail
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/ResourceErrorDetail
+title: ResourceErrorDetail
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:54Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/ResourceErrorDetail#SCHEMA_REPRESENTATION)
   - [ErrorDetail](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/ResourceErrorDetail#ErrorDetail)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/ResourceErrorDetail#ErrorDetail.SCHEMA_REPRESENTATION)

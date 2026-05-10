@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migrate-dataframes
+uri: https://docs.cloud.google.com/bigquery/docs/migrate-dataframes
+title: Migrate to BigQuery DataFrames version 2.0
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Migrate to BigQuery DataFrames version 2.0
 
 Version 2.0 of BigQuery DataFrames makes security and performance improvements to the BigQuery DataFrames API, adds new features, and introduces breaking changes. This document describes the changes and provides migration guidance. You can apply these recommendations before installing the 2.0 version by using the latest version 1.x of BigQuery DataFrames.

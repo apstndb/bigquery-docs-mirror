@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/kmeans-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/kmeans-tutorial
+title: Create a k-means model to cluster London bicycle hires dataset
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 This tutorial teaches you how to use a [k-means model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) in BigQuery ML to identify clusters in a set of data.
 
 The [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithm that groups your data into clusters is a form of unsupervised machine learning. Unlike supervised machine learning, which is about predictive analytics, unsupervised machine learning is about descriptive analytics. Unsupervised machine learning can help you understand your data so that you can make data-driven decisions.

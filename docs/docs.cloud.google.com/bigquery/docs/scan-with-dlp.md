@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/scan-with-dlp
+uri: https://docs.cloud.google.com/bigquery/docs/scan-with-dlp
+title: Using Sensitive Data Protection to scan BigQuery data
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Using Sensitive Data Protection to scan BigQuery data
 
 Knowing where your sensitive data exists is often the first step in ensuring that it is properly secured and managed. This knowledge can help reduce the risk of exposing sensitive details such as credit card numbers, medical information, Social Security numbers, driver's license numbers, addresses, full names, and company-specific secrets. Periodic scanning of your data can also help with compliance requirements and ensure best practices are followed as your data grows and changes with use. To help meet compliance requirements, use Sensitive Data Protection to inspect your BigQuery tables and to help protect your sensitive data.

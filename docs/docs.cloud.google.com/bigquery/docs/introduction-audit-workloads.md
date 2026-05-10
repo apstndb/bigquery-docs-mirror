@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/introduction-audit-workloads
+uri: https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads
+title: Introduction to audit logs in BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Introduction to audit logs in BigQuery
 
 Logs are text records that are generated in response to particular events or actions. For instance, BigQuery creates log entries for actions such as creating or deleting a table, purchasing slots, or running a load job.

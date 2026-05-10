@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions
+uri: https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions
+title: Prepare data with Gemini
+description: Learn to clean and transform data in BigQuery with Gemini-powered suggestions. Prepare data from tables or load files like CSV or JSON from Cloud Storage.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Prepare data with Gemini
 
 This document explains how to clean and transform your data within BigQuery data preparations using SQL code suggestions from Gemini.

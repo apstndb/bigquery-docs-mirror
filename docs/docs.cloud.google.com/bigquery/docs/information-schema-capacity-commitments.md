@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments
+title: CAPACITY_COMMITMENTS view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # CAPACITY\_COMMITMENTS view
 
 The `INFORMATION_SCHEMA.CAPACITY_COMMITMENTS` view contains a near real-time list of all current capacity commitments within the administration project. Each row represents a single, current capacity commitment. A current capacity commitment is either pending or active and has not been deleted. For more information about reservation, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .

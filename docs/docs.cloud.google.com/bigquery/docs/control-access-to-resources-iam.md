@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam
+uri: https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam
+title: Control access to resources with IAM
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Control access to resources with IAM
 
 This document describes how to view, grant, and revoke access controls for BigQuery datasets and for the resources within datasets: tables, views, and routines. Although models are also dataset-level resources, you cannot grant access to individual models using IAM roles.

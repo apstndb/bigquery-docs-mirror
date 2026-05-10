@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/slots
+uri: https://docs.cloud.google.com/bigquery/docs/slots
+title: Understand slots
+description: Learn about BigQuery slots and the difference between on-demand pricing and capacity-based pricing. Explains how BigQuery chooses how many slots to allocate when executing queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Understand slots
 
 A BigQuery slot is a *virtual compute unit* used by BigQuery to execute SQL queries, Python code, or other [job types](https://docs.cloud.google.com/bigquery/docs/managing-jobs) . During the execution of a query, BigQuery automatically determines how many slots are used by the query. The number of slots used depends on the amount of data being processed, the complexity of the query, and the number of slots available. In general, access to more slots lets you run more concurrent queries, and your complex queries can run faster. You cannot manually change the number of slots used by BigQuery to execute queries.

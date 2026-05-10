@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text
+title: The ML.GENERATE_TEXT function
+description: Generate text and analyze unstructured data with the BigQuery ML`ML.GENERATE_TEXT` function and Vertex AI models.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.GENERATE\_TEXT function
 
 This document describes the `ML.GENERATE_TEXT` function, which lets you perform generative natural language tasks by using any combination of text and unstructured data from BigQuery [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) , or unstructured data from BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .

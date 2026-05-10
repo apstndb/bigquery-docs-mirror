@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/timesfm-model
+uri: https://docs.cloud.google.com/bigquery/docs/timesfm-model
+title: The TimesFM model
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # The TimesFM model
 
 This document describes BigQuery ML's built-in TimesFM time series forecasting model.

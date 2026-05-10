@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/migration-overview
+uri: https://docs.cloud.google.com/bigquery/docs/migration/migration-overview
+title: 'Overview: Migrate data warehouses to BigQuery'
+description: Discusses general concepts about data warehousing technology, and describes a framework you can use to organize and structure your migration to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Overview: Migrate data warehouses to BigQuery
 
 This document discusses the general concepts that apply to any data warehousing technology, and it describes a framework that you can use to organize and structure your migration to BigQuery.

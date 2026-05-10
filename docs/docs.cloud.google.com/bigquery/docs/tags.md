@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/tags
+uri: https://docs.cloud.google.com/bigquery/docs/tags
+title: Tag tables, views, and datasets
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Tag tables, views, and datasets
 
 This document describes how to use tags to conditionally apply [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/tags-access-control) policies to BigQuery tables, views, and datasets.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/geospatial-data
+uri: https://docs.cloud.google.com/bigquery/docs/geospatial-data
+title: Working with geospatial data
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Working with geospatial data
 
 Geospatial analytics let you analyze geographic data in BigQuery. Geographic data is also known as *geospatial data* .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-folder
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-folder
+title: TABLE_STORAGE_BY_FOLDER view
+description: Describes the INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER view to get metadata about a current snapshot of storage usage for the parent folder of the current project, including its subfolders.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # TABLE\_STORAGE\_BY\_FOLDER view
 
 The `INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER` view contains one row for each table or materialized view in the parent folder of the current project, including its subfolders.

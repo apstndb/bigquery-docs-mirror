@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes
+title: CAPACITY_COMMITMENT_CHANGES view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # CAPACITY\_COMMITMENT\_CHANGES view
 
 The `INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES` view contains a near real-time list of all changes to capacity commitments within the administration project. Each row represents a single change to a single capacity commitment. For more information, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .

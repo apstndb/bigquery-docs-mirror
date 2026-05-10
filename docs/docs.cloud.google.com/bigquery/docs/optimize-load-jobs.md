@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/optimize-load-jobs
+uri: https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs
+title: Optimize load jobs
+description: Optimize BigQuery table load jobs. Implement batching, streaming, and partitioned tables to avoid daily modification limits.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Optimize load jobs
 
 The strategies and best practices described in this document help you optimize batch loading or streaming data into BigQuery to avoid reaching [the limit for the number of load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) per table, per day.

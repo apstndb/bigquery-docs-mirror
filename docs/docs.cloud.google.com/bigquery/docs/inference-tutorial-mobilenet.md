@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/inference-tutorial-mobilenet
+uri: https://docs.cloud.google.com/bigquery/docs/inference-tutorial-mobilenet
+title: 'Tutorial: Run inference on an object table by using a feature vector model'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # Tutorial: Run inference on an object table by using a feature vector model
 
 This tutorial shows you how to create an object table based on the images from the [flowers dataset](https://www.tensorflow.org/datasets/catalog/tf_flowers) , and then run inference on that object table using the [MobileNet V3 model](https://tfhub.dev/google/imagenet/mobilenet_v3_small_075_224/feature_vector/5) .

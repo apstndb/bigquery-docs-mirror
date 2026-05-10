@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes
+title: RESERVATION_CHANGES view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # RESERVATION\_CHANGES view
 
 The `INFORMATION_SCHEMA.RESERVATION_CHANGES` view contains a near real-time list of all changes to reservations within the administration project. Each row represents a change to a single reservation. For more information, see [Introduction to reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .

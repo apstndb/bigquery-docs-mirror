@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions
+title: Numbering functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 GoogleSQL for BigQuery supports numbering functions. Numbering functions are a subset of window functions. To create a window function call and learn about the syntax for window functions, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 Numbering functions assign values to each row based on their position within the specified window. The `OVER` clause syntax varies across numbering functions.

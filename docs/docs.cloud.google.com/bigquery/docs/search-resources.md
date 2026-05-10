@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/search-resources
+uri: https://docs.cloud.google.com/bigquery/docs/search-resources
+title: Search for resources
+description: Use full catalog search in BigQuery to search for {{dynamic_data.site_values.cloud_name_short}} resources, such as BigQuery datasets and tables
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Search for resources
 
 > **Preview**

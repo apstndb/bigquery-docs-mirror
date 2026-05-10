@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reliability-intro
+uri: https://docs.cloud.google.com/bigquery/docs/reliability-intro
+title: Understand reliability
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Understand reliability
 
 This document provides an understanding of BigQuery reliability features, such as availability, durability, data consistency, consistency of performance, data recovery, and a review of error handling considerations.

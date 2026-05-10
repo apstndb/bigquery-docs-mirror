@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/cached-results
+uri: https://docs.cloud.google.com/bigquery/docs/cached-results
+title: Using cached query results
+description: Describes the use of cached query results, its limitations, pricing, quotas, and storage. Shows how to disable the retrieval of cached query results, and ensure and verify its usage.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Using cached query results
 
 BigQuery writes all query results to a table. The table is either explicitly identified by the user (a destination table), or it is a temporary, cached results table. If you run the exact same query again, BigQuery returns the results from the cached table, if it exists. Temporary, cached results tables are maintained per-user, per-project. Depending on your edition, you might have access to [cached results from other users](https://docs.cloud.google.com/bigquery/docs/cached-results#cross-user-caching) running queries in the same project. There are no storage costs for cached query result tables, but if you write query results to a permanent table, you are charged for [storing](https://cloud.google.com/bigquery/pricing#storage) the data.

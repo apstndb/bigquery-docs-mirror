@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/updating-datasets
+uri: https://docs.cloud.google.com/bigquery/docs/updating-datasets
+title: Update dataset properties
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Update dataset properties
 
 This document describes how to update dataset properties in BigQuery. After you create a dataset, you can update the following dataset properties:

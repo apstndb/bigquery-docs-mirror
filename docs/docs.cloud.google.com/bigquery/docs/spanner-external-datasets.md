@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/spanner-external-datasets
+uri: https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets
+title: Create Spanner external datasets
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Create Spanner external datasets
 
 This document describes how to create an external dataset (also known as a federated dataset) in BigQuery that's linked to an existing GoogleSQL or PostgreSQL database in [Spanner](https://docs.cloud.google.com/spanner/docs) .

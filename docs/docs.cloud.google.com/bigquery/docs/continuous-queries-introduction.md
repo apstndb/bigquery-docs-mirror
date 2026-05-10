@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/continuous-queries-introduction
+uri: https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction
+title: Introduction to continuous queries
+description: Analyze real-time data in BigQuery with continuous queries. Integrate with Pub/Sub and Bigtable for complete streaming pipelines.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Introduction to continuous queries
 
 This document describes BigQuery continuous queries.

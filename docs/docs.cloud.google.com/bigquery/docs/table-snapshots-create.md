@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/table-snapshots-create
+uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-create
+title: Create table snapshots
+description: Shows how to create a snapshot of a BigQuery table from a specified time and set its expiration date.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Create table snapshots
 
 This document describes how to create a snapshot of a table by using the Google Cloud console, the [`CREATE SNAPSHOT TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) SQL statement, the [`bq cp --snapshot`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command, or the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API. This document is intended for users who are familiar with BigQuery [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .

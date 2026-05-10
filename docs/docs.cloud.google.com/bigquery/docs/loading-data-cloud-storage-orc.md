@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc
+uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc
+title: Loading ORC data from Cloud Storage
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Loading ORC data from Cloud Storage
 
 This page provides an overview of loading ORC data from Cloud Storage into BigQuery.

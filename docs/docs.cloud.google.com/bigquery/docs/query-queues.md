@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/query-queues
+uri: https://docs.cloud.google.com/bigquery/docs/query-queues
+title: Use query queues
+description: Learn how to control the maximum concurrency target and set the queue timeout for BigQuery interactive and batch queries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Use query queues
 
 BigQuery automatically determines the number of queries that can run concurrently, called the *dynamic concurrency* . Additional queries are queued until processing resources become available. This document explains how to control the maximum concurrency target, and set the queue timeout for interactive and batch queries.

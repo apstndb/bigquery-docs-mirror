@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/change-data-capture
+uri: https://docs.cloud.google.com/bigquery/docs/change-data-capture
+title: Stream table updates with change data capture ingestion
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Stream table updates with change data capture ingestion
 
 BigQuery change data capture (CDC) ingestion updates your BigQuery tables by processing and applying streamed changes to existing data. This synchronization is accomplished through upsert and delete row operations that are streamed in real time by the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which you should be familiar with before proceeding.

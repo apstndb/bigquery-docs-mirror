@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/default-values
+uri: https://docs.cloud.google.com/bigquery/docs/default-values
+title: Specify default column values
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Specify default column values
 
 This page describes how to set a default value for a column in a BigQuery table. When you add a row to a table that doesn't contain data for a column with a default value, the default value is written to the column instead.

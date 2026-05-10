@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/raster-data
+uri: https://docs.cloud.google.com/bigquery/docs/raster-data
+title: Work with raster data using Earth Engine in BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Work with raster data using Earth Engine in BigQuery
 
 This document explains how to combine raster and vector data by using the [`ST_REGIONSTATS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) , which uses Google Earth Engine to get access to image and raster data in BigQuery.

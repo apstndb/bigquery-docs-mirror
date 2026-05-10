@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-project-options
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-project-options
+title: PROJECT_OPTIONS view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # PROJECT\_OPTIONS view
 
 You can query the `INFORMATION_SCHEMA.PROJECT_OPTIONS` view to retrieve real-time metadata about BigQuery project options. This view contains configuration options that have been set at the project level. To view the default values for a configuration option, see [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings) .

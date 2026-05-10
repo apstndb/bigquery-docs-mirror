@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/monitoring-dashboard
+uri: https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard
+title: Create dashboards, charts, and alerts
+description: Shows how to view the Cloud Monitoring dashboard, visualize slots available/allocated, create your own charts and dashboards to display the metrics collected by Cloud Monitoring, and create alerts for queries that exceed user-defined limits. Lists metrics available for visualization and known issues.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Create dashboards, charts, and alerts
 
 This document describes how to create charts and alerts to monitor BigQuery resources using Cloud Monitoring.

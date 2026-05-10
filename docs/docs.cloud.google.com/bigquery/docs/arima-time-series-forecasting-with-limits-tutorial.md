@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-limits-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-limits-tutorial
+title: Limit forecasted values for an ARIMA_PLUS time series model
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Limit forecasted values for an ARIMA\_PLUS time series model
 
 This tutorial teaches you how to use limits to narrow the forecasted results returned by an `ARIMA_PLUS` time series model. In this tutorial, you create two time series models over the same data, one model which uses limits and one model that doesn't use limits. This lets you compare the results returned by the models and understand the difference that specifying limits makes.

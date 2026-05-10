@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial
+title: Analyze multimodal data with SQL and BigQuery DataFrames
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Analyze multimodal data with SQL and BigQuery DataFrames
 
 This tutorial shows you how to [analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) by using SQL queries and [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .

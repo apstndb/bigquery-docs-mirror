@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/connections-with-network-attachment
+uri: https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment
+title: Configure connections with network attachments
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Configure connections with network attachments
 
 BigQuery supports federated queries that let you send a query statement to external databases and get the result back as a temporary table. Federated queries use the BigQuery Connection API to establish a connection. This document shows you how to increase the security of this connection.

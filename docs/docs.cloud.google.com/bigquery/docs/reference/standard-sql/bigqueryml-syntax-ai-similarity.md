@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity
+title: The AI.SIMILARITY function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The AI.SIMILARITY function
 
 This document describes the `AI.SIMILARITY` function, which lets you find the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between two inputs. Values closer to 1 indicate more similar inputs and values closer to 0 indicate less similar inputs.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/create-manage-folders
+uri: https://docs.cloud.google.com/bigquery/docs/create-manage-folders
+title: Create and manage folders
+description: Create and manage folders in BigQuery. You can use user folders and team folders to organize and grant access to code assets.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Create and manage folders
 
 The following document describes how create and manage folders in BigQuery. You can use folders to organize and control access to single file code assets, such as [notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) , [saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) , [data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas) , and [data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) files. BigQuery offers user folders for individuals to manage their own code assets, and team folders to manage a team's code assets.

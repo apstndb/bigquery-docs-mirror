@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dts-introduction
+uri: https://docs.cloud.google.com/bigquery/docs/dts-introduction
+title: What is the BigQuery Data Transfer Service?
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # What is the BigQuery Data Transfer Service?
 
 The BigQuery Data Transfer Service automates data movement into [BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction) on a scheduled, managed basis. Your analytics team can lay the foundation for a BigQuery data warehouse without writing a single line of code.

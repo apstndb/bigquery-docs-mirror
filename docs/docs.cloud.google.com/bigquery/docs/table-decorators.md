@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/table-decorators
+uri: https://docs.cloud.google.com/bigquery/docs/table-decorators
+title: Table decorators in legacy SQL
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Table decorators in legacy SQL
 
 > **Caution:** This document describes table decorators in legacy SQL query syntax. The preferred query syntax for BigQuery is GoogleSQL. Standard SQL does not support table decorators, but the [`FOR SYSTEM_TIME AS OF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) clause in GoogleSQL provides functionality equivalent to time decorators. For range decorators, you can achieve similar semantics in GoogleSQL by using time-partitioned tables. For more information, see [Table decorators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#table_decorators) in the GoogleSQL migration guide and [Legacy SQL feature availability](https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability) .

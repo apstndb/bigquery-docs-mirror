@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe
+title: The ML.TRANSCRIBE function
+description: Use the `ML.TRANSCRIBE` function to transcribe audio files from an object table by using the Speech-to-Text API.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.TRANSCRIBE function
 
 > **Note:** This feature is automatically available in the [Enterprise and Enterprise Plus editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) . If you use the Standard edition or [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) and would like to use this feature, send an email to bqml-feedback@google.com.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings
+uri: https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings
+title: Generate and search multimodal embeddings
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Generate and search multimodal embeddings
 
 This tutorial shows how to generate multimodal embeddings for images and text using BigQuery and Vertex AI, and then use these embeddings to perform a text-to-image semantic search.

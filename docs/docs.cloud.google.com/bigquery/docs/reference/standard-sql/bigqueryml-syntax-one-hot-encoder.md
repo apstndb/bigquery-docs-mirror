@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-one-hot-encoder
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-one-hot-encoder
+title: The ML.ONE_HOT_ENCODER function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.ONE\_HOT\_ENCODER function
 
 This document describes the `ML.ONE_HOT_ENCODER` function, which lets you encode a string expression using a [one-hot](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#one_hot_encoding) or [dummy](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#dummy_encoding) encoding scheme.

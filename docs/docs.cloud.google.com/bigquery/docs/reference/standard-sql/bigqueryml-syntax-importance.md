@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance
+title: The ML.FEATURE_IMPORTANCE function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.FEATURE\_IMPORTANCE function
 
 This document describes the `ML.FEATURE_IMPORTANCE` function, which lets you see the feature importance score. This score indicates how useful or valuable each feature was in the construction of a boosted tree or a random forest model during training. For more information, see the [`feature_importances` property](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.XGBRegressor.feature_importances_) in the XGBoost library.

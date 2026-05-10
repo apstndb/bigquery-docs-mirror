@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/querying-clustered-tables
+uri: https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables
+title: Querying clustered tables
+description: Shows how to optimize querying clustered tables by using filters and following best practices.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Querying clustered tables
 
 When you create a clustered table in BigQuery, the table data is automatically organized based on the contents of one or more columns in the table's schema. The columns you specify are used to colocate related data. When you cluster a table using multiple columns, the order of columns you specify is important. The order of the specified columns determines the sort order of the data.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference-patterns
+uri: https://docs.cloud.google.com/bigquery/docs/reference-patterns
+title: Reference patterns
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Reference patterns
 
 This page provides links to business use cases, sample code, and technical reference guides for BigQuery ML use cases. Use these resources to identify best practices and speed up your application development.

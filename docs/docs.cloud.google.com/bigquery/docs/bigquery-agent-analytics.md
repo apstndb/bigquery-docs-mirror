@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics
+uri: https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics
+title: Use BigQuery agent analytics
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Use BigQuery agent analytics
 
 BigQuery agent analytics is an open source solution that lets you capture, analyze, and visualize multimodal agent interaction data at scale. BigQuery agent analytics lets you stream raw agent interactions (requests, responses, tool calls, and errors) directly into BigQuery. Doing so lets you perform AI-powered evaluation, optimize agent prompts, and extract long-term memory to enhance future interactions.

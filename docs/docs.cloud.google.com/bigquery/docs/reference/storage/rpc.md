@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/storage/rpc
+uri: https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc
+title: BigQuery Storage API
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:49Z"
+---
+
 ## Service: bigquerystorage.googleapis.com
 
 The Service name `bigquerystorage.googleapis.com` is needed to create RPC client stubs.

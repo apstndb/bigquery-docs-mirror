@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time
+title: The ML.FEATURES_AT_TIME function
+description: Retrieve point-in-time feature data for machine learning models using the `ML.FEATURES_AT_TIME` BigQuery ML function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.FEATURES\_AT\_TIME function
 
 This document describes the `ML.FEATURES_AT_TIME` function, which lets you use a point-in-time cutoff for all entities when retrieving features, because features can have time dependencies if they include time-sensitive data. To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) , use point-in-time features when training models and running inference.

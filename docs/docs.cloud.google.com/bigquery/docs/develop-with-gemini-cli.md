@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli
+uri: https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli
+title: Analyze data with the Gemini CLI
+description: Integrate your BigQuery project with various developer tools by using the Gemini CLI. This extension provides tools for data analysis, forecasting, and contribution_analysis.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Analyze data with the Gemini CLI
 
 This page explains how to interact with BigQuery data in your terminal by using natural-language prompts with the [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli) . Using the dedicated BigQuery [extensions](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#about-bigquery-extensions) with the Gemini CLI enables AI-driven data analysis and insights directly within your command line. You can analyze data from your BigQuery tables, or from tables in the BigQuery public datasets.

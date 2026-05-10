@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/exporting-models
+uri: https://docs.cloud.google.com/bigquery/docs/exporting-models
+title: Export models
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Export models
 
 This page shows you how to export BigQuery ML models. You can export BigQuery ML models to Cloud Storage, and use them for online prediction, or edit them in Python. You can export a BigQuery ML model by:

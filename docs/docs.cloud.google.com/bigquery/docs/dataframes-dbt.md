@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dataframes-dbt
+uri: https://docs.cloud.google.com/bigquery/docs/dataframes-dbt
+title: Use BigQuery DataFrames in dbt
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Use BigQuery DataFrames in dbt
 
 [dbt](https://www.getdbt.com/) (data build tool) is an open-source command-line framework engineered for data transformation within modern data warehouses. dbt facilitates modular data transformations through the creation of reusable SQL and Python based models. The tool orchestrates the execution of these transformations within the target data warehouse, focusing on the transformation step of the ELT pipeline. For more information, see the [dbt documentation](https://docs.getdbt.com/) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql
+uri: https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql
+title: 'MCP Tools Reference: bigquery.googleapis.com'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-04-20T16:01:05Z"
+---
+
 ## Tool: `execute_sql`
 
 Run a SQL query in the project and return the result. Prefer the `execute_sql_readonly` tool if possible.

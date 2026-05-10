@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/netezza
+uri: https://docs.cloud.google.com/bigquery/docs/migration/netezza
+title: Migrate from IBM Netezza
+description: Provides instructions for migrating from IBM Netezza to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Migrate from IBM Netezza
 
 This document provides high-level guidance on how to migrate from IBM Netezza to BigQuery. It describes the fundamental architectural differences between Netezza and BigQuery and describes the additional capabilities that BigQuery offers. It also shows how you can rethink your existing data model and extract, transform, and load (ETL) processes to maximize the benefits of BigQuery.

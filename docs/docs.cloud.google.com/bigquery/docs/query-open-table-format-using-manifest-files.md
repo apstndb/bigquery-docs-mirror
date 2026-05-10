@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/query-open-table-format-using-manifest-files
+uri: https://docs.cloud.google.com/bigquery/docs/query-open-table-format-using-manifest-files
+title: Query open table formats with manifests
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Query open table formats with manifests
 
 This document describes how to use manifest files to query data stored in open table formats such as [Apache Hudi](https://github.com/apache/hudi) and [Delta Lake](https://github.com/delta-io) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text
+title: The ML.UNDERSTAND_TEXT function
+description: Analyze BigQuery text data with the `ML.UNDERSTAND_TEXT`function and the Cloud Natural Language API.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.UNDERSTAND\_TEXT function
 
 This document describes the `ML.UNDERSTAND_TEXT` function, which lets you analyze text that's stored in BigQuery tables by using the Cloud Natural Language API.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/use-service-accounts
+uri: https://docs.cloud.google.com/bigquery/docs/use-service-accounts
+title: Use service accounts with BigQuery Data Transfer Service
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Use service accounts with BigQuery Data Transfer Service
 
 Some data sources support data transfer authentication by using a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) through the Google Cloud console, API, or the `bq` command line. A service account is a Google Account associated with your Google Cloud project. A service account can run jobs, such as scheduled queries or batch processing pipelines by authenticating with the service account credentials rather than a user's credentials.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/external-tables
+uri: https://docs.cloud.google.com/bigquery/docs/external-tables
+title: Introduction to external tables
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Introduction to external tables
 
 This document describes how to work with data stored outside of BigQuery in external tables. To work with external data sources, you can also use [External datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro#external_datasets) .

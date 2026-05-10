@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/TestIamPermissionsRequest
+uri: https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/TestIamPermissionsRequest
+title: TestIamPermissionsRequest
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:24Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/TestIamPermissionsRequest#SCHEMA_REPRESENTATION)
 
 Request message for `TestIamPermissions` method.

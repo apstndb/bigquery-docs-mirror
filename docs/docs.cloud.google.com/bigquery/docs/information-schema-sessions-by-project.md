@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project
+title: SESSIONS_BY_PROJECT view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # SESSIONS\_BY\_PROJECT view
 
 The `INFORMATION_SCHEMA.SESSIONS_BY_PROJECT` view contains real-time metadata about all BigQuery sessions in the current project.

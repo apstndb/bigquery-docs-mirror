@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/export-file
+uri: https://docs.cloud.google.com/bigquery/docs/export-file
+title: Export query results to a file
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Export query results to a file
 
 This document describes how to save query results as a file, such as CSV or JSON.

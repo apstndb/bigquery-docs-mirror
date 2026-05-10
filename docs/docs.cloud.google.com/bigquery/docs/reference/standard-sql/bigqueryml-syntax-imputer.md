@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-imputer
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-imputer
+title: The ML.IMPUTER function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.IMPUTER function
 
 This document describes the `ML.IMPUTER` function, which lets you replace `NULL` values in a string or numerical expression. You can replace `NULL` values with the most frequently used value for string expressions, or the [mean](https://en.wikipedia.org/wiki/Mean) or [median](https://en.wikipedia.org/wiki/Median) value for numerical expressions.

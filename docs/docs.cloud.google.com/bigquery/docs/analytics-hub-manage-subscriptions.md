@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions
+uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions
+title: Manage subscriptions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Manage subscriptions
 
 This document describes how to manage subscriptions in BigQuery sharing (formerly Analytics Hub), covering tasks for both subscribers and publishers.

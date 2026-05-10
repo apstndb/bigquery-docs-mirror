@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry
+uri: https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry
+title: DatasetAccessEntry
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:49Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry#SCHEMA_REPRESENTATION)
   - [DatasetReference](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry#DatasetReference)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry#DatasetReference.SCHEMA_REPRESENTATION)

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-introduction
+uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction
+title: Introduction to BigQuery sharing
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Introduction to BigQuery sharing
 
 BigQuery sharing (formerly Analytics Hub) is a data exchange platform that lets you share data and insights at scale across organizational boundaries with a robust security and privacy framework. BigQuery sharing lets you discover and access a data library curated by various data providers. This data library also includes Google-provided datasets.

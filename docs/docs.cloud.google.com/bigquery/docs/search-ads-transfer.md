@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/search-ads-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/search-ads-transfer
+title: Load Search Ads 360 data into BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Load Search Ads 360 data into BigQuery
 
 You can load data from Search Ads 360 to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Search Ads 360 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Search Ads 360 to BigQuery.

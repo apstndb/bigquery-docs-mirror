@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights-sum-ratio
+uri: https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights-sum-ratio
+title: Get data insights from a contribution analysis model using a summable ratio metric
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Get data insights from a contribution analysis model using a summable ratio metric
 
 In this tutorial, you use a [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) model to analyze the contribution of the cost of sales ratio in the Iowa liquor sales dataset. This tutorial guides you through performing the following tasks:

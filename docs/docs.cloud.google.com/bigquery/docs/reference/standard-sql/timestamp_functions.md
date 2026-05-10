@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions
+title: Timestamp functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:29Z"
+---
+
 GoogleSQL for BigQuery supports the following timestamp functions.
 
 > **Important:** Before working with these functions, you need to understand the difference between the formats in which timestamps are stored and displayed, and how time zones are used for the conversion between these formats. To learn more, see [How time zones work with timestamp functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) .

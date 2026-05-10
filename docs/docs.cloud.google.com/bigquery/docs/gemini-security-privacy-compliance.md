@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance
+uri: https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance
+title: Security, privacy, and compliance for Gemini in BigQuery
+description: Security, privacy, and compliance for Gemini in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Security, privacy, and compliance for Gemini in BigQuery
 
 This document describes the controls that support the security of Gemini in BigQuery. These controls can also help you meet the privacy and regulatory requirements that apply to your business. Gemini in BigQuery is built on Google Cloud infrastructure. Your data remains in your control. For more information, see [Service Specific Terms](https://cloud.google.com/terms/service-terms) .

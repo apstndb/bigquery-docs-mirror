@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer
+title: Load data with cross-cloud operations
+description: Load data into BigQuery with cross-cloud operations.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Load data with cross-cloud operations
 
 As a BigQuery administrator or analyst, you can load data from an Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into [BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . You can either join the transferred data with the data present in Google Cloud regions or take advantage of BigQuery features like [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) . You can also create materialized view replicas of certain external sources to make that data available in BigQuery.

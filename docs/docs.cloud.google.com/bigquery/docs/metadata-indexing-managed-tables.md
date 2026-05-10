@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/metadata-indexing-managed-tables
+uri: https://docs.cloud.google.com/bigquery/docs/metadata-indexing-managed-tables
+title: Metadata indexing for BigQuery tables
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Metadata indexing for BigQuery tables
 
 This document describes column metadata indexing in BigQuery and explains how to allocate dedicated resources to improve index freshness and query performance.

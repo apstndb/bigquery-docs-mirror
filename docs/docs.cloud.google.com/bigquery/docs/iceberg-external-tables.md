@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/iceberg-external-tables
+uri: https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables
+title: Create Apache Iceberg external tables
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Create Apache Iceberg external tables
 
 Apache Iceberg external tables let you access [Apache Iceberg](https://iceberg.apache.org/docs/latest/) tables with finer-grained access control in a read-only format.

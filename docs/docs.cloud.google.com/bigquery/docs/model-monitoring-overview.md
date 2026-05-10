@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/model-monitoring-overview
+uri: https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview
+title: Model monitoring overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Model monitoring overview
 
 This document describes how BigQuery ML supports monitoring of machine learning (ML) models through evaluation and comparison the data a model uses. This includes comparing a model's serving data to its training data,and comparing new serving data to previously used serving data.

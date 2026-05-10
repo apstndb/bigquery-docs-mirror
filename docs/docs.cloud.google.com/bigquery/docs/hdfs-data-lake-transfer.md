@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer
+title: Migrate Apache Hive Metastore tables to Google Cloud
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-08T18:06:57Z"
+---
+
 # Migrate Apache Hive Metastore tables to Google Cloud
 
 This document shows you how to migrate your Iceberg and Hive tables managed by Apache Hive Metastore to Google Cloud using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .

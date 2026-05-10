@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental
+uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental
+title: Set up incremental transfers for Snowflake
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Set up incremental transfers for Snowflake
 
 This guide shows you how to configure incremental data transfers from Snowflake to BigQuery. Incremental transfers let you transfer only the data that has changed since the last transfer run, which can reduce transfer time and costs.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies
+title: 'REST Resource: rowAccessPolicies'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-03-25T00:03:33Z"
+---
+
   - [Resource: RowAccessPolicy](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicy)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicy.SCHEMA_REPRESENTATION)
   - [RowAccessPolicyReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicyReference)

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/query-insights
+uri: https://docs.cloud.google.com/bigquery/docs/query-insights
+title: Get query performance insights
+description: Describes how to use the query execution graph to diagnose query performance issues, and to see query performance insights.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Get query performance insights
 
 The *execution graph* for a query is a visual representation of the steps that BigQuery takes to execute the query. This document describes how to use the query execution graph to diagnose query performance issues, and to see query performance insights.

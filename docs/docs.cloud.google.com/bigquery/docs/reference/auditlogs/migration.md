@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/auditlogs/migration
+uri: https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/migration
+title: Audit logs migration guide
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Audit logs migration guide
 
 BigQuery provides two versions of audit logs: an older version that uses `AuditData` payload, and a new version that uses `BigQueryAuditMetadata` . This document describes migrating logs interface filters, BigQuery exports, and changes in queries over the exported logs from the old format to the new format.

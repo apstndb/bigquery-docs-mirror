@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability
+uri: https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability
+title: Legacy SQL feature availability
+description: Learn about the changes to BigQuery legacy SQL usage restrictions.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Legacy SQL feature availability
 
 This document describes upcoming restrictions to BigQuery legacy SQL availability, which are based on usage during an evaluation period and take effect after June 1, 2026. These changes are part of BigQuery's transition away from legacy SQL to GoogleSQL, the recommended, ANSI-compliant dialect for BigQuery.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/authentication
+uri: https://docs.cloud.google.com/bigquery/docs/authentication
+title: Authenticate to BigQuery
+description: Learn how to authenticate to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 This document describes how to authenticate to BigQuery programmatically. How you authenticate to BigQuery depends on the interface you use to access the API and the environment where your code is running.
 
 For a short example of authenticating to BigQuery, see [Getting started with authentication](https://docs.cloud.google.com/bigquery/docs/authentication/getting-started) .

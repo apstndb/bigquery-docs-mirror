@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/query-aws-data
+uri: https://docs.cloud.google.com/bigquery/docs/query-aws-data
+title: Query Amazon S3 data
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Query Amazon S3 data
 
 This document describes how to query data stored in an [Amazon Simple Storage Service (Amazon S3) BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) .

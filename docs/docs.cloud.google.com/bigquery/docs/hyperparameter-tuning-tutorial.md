@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial
+uri: https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial
+title: Improve model performance with hyperparameter tuning
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 This tutorial teaches you how to use [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) in BigQuery ML to tune a machine learning model and improve its performance.
 
 You perform hyperparameter tuning by specifying the [`NUM_TRIALS` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#num_trials) of the `CREATE MODEL` statement, in combination with other model-specific options. When you set these options, BigQuery ML trains multiple versions, or *trials* of the model, each with slightly different parameters, and returns the trial that performs the best.

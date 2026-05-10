@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/best-practices-spatial-analysis
+uri: https://docs.cloud.google.com/bigquery/docs/best-practices-spatial-analysis
+title: Best practices for spatial analysis
+description: Learn best practices for optimizing geospatial query performance in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Best practices for spatial analysis
 
 This document describes best practices for optimizing geospatial query performance in BigQuery. You can use these best practices to improve performance and reduce cost and latency.

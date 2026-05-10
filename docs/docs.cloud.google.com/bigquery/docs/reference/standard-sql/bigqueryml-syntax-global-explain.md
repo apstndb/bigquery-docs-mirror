@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain
+title: The ML.GLOBAL_EXPLAIN function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.GLOBAL\_EXPLAIN function
 
 This document describes the `ML.GLOBAL_EXPLAIN` function, which lets you provide explanations for the entire model by aggregating the local explanations of the evaluation data. You can only use `ML.GLOBAL_EXPLAIN` with models that are trained with the [`ENABLE_GLOBAL_EXPLAIN` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#enable_global_explain) set to `TRUE` .

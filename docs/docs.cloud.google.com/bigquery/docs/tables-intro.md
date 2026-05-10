@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/tables-intro
+uri: https://docs.cloud.google.com/bigquery/docs/tables-intro
+title: Introduction to tables
+description: Describes tables in BigQuery, their types (BigQuery tables, external tables, and views), limitations, quotas, and pricing.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Introduction to tables
 
 A BigQuery table contains individual records organized in rows. Each record is composed of columns (also called *fields* ).

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/data-canvas
+uri: https://docs.cloud.google.com/bigquery/docs/data-canvas
+title: Analyze with BigQuery data canvas
+description: Shows how to use BigQuery data canvas, which lets you use natural language to find, query, and visualize data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Analyze with BigQuery data canvas
 
 This document describes how to use data canvas for data analysis. You can also manage data canvas metadata by using [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .

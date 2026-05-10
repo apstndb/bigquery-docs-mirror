@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-write-api-by-organization
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-write-api-by-organization
+title: WRITE_API_TIMELINE_BY_ORGANIZATION view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # WRITE\_API\_TIMELINE\_BY\_ORGANIZATION view
 
 The `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_ORGANIZATION` view contains per minute aggregated streaming statistics for the whole organization associated with the current project.

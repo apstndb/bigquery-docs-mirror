@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/manual-preprocessing
+uri: https://docs.cloud.google.com/bigquery/docs/manual-preprocessing
+title: Manual feature preprocessing
+description: Define custom data preprocessing with the `TRANSFORM` clause and BigQuery ML functions.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manual feature preprocessing
 
 You can use the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of the `CREATE MODEL` statement in combination with manual preprocessing functions to define custom data preprocessing. You can also use these manual preprocessing functions outside of the `TRANSFORM` clause.

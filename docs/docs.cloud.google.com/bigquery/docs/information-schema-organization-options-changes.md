@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-organization-options-changes
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options-changes
+title: ORGANIZATION_OPTIONS_CHANGES view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # ORGANIZATION\_OPTIONS\_CHANGES view
 
 You can query the `INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES` view to retrieve real-time metadata about BigQuery configuration changes in an organization. This view reflects organization-level and project-level configuration changes made after January 31, 2024.

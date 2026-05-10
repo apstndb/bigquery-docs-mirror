@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate
+title: The ML.TFDV_VALIDATE function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.TFDV\_VALIDATE function
 
 This document describes the `ML.TFDV_VALIDATE` function, which you can use to compare the statistics for training and serving data, or two sets of serving data, in order to identify anomalous differences between the two data sets. Calling this function provides the same behavior as calling the TensorFlow [`validate_statistics` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/validate_statistics) . You can use the data output by this function for [model monitoring](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) .

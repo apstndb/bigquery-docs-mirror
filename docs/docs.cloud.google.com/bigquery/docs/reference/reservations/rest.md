@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/reservations/rest
+uri: https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest
+title: BigQuery Reservation API
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-12-19T17:36:29Z"
+---
+
 A service to modify your BigQuery reservations.
 
   - [REST Resource: v1.projects.locations](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest#v1.projects.locations)

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions
+uri: https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions
+title: Customize Python functions for BigQuery DataFrames
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Customize Python functions for BigQuery DataFrames
 
 BigQuery DataFrames lets you turn your custom Python functions into BigQuery artifacts that you can run on BigQuery DataFrames objects at scale. This extensibility support lets you perform operations beyond what is possible with BigQuery DataFrames and SQL APIs, so you can potentially take advantage of open source libraries.

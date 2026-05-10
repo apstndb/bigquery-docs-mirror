@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/hubspot-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/hubspot-transfer
+title: Load HubSpot data into BigQuery
+description: Learn how to use the BigQuery Data Transfer Service HubSpot connector to ingest data from HubSpot into BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Load HubSpot data into BigQuery
 
 > **Preview**

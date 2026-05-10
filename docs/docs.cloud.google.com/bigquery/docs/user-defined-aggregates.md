@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/user-defined-aggregates
+uri: https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates
+title: User-defined aggregate functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # User-defined aggregate functions
 
 This document describes how to create, call, and delete user-defined aggregate functions (UDAFs) in BigQuery.

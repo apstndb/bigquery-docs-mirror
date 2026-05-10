@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/column-level-security-intro
+uri: https://docs.cloud.google.com/bigquery/docs/column-level-security-intro
+title: Introduction to column-level access control
+description: Describes column-level access control in BigQuery, its workflow, and its limitations. Shows how to query tables and views with column-level access control using an example use case.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Introduction to column-level access control
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .

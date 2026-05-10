@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-product-targeting-schema
+uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-product-targeting-schema
+title: Google Merchant Center Product Targeting table
+description: Describes the schema for Google Merchant Center product targeting tables in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Google Merchant Center Product Targeting table
 
 ## Overview

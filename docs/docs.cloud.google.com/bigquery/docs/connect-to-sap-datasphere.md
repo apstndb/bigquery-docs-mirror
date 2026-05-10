@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere
+uri: https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere
+title: Connect to SAP Datasphere
+description: Shows how to connect to SAP Datasphere.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Connect to SAP Datasphere
 
 > **Preview**

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/recommendation-overview
+uri: https://docs.cloud.google.com/bigquery/docs/recommendation-overview
+title: Recommendation overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Recommendation overview
 
 Recommendation systems are one of the most successful and widespread applications of machine learning for businesses. You can use a recommendation system to help your users find compelling content in a large body of content. For example, Google Play Store offers millions of apps, while YouTube offers billions of videos, with more apps and videos added every day. Users can use search to find new content, but that is limited by the search terms they use. A recommendation system can suggest content that users might not have thought to search for on their own. For more information, see [Recommendation Systems Overview](https://developers.google.com/machine-learning/recommendation/overview/types) .

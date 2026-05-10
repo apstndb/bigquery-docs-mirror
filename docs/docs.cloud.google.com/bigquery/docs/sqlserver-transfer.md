@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/sqlserver-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer
+title: Load Microsoft SQL Server data into BigQuery
+description: Learn how to use the BigQuery Data Transfer Service Microsoft SQL Server connector to ingest data from your Microsoft SQL Server instance into BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Load Microsoft SQL Server data into BigQuery
 
 > **Preview**

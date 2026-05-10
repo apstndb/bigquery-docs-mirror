@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-tables
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-tables
+title: TABLES view
+description: Describes INFORMATION_SCHEMA.TABLES view to get metadata about tables, columns, and partitions.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # TABLES view
 
 The `INFORMATION_SCHEMA.TABLES` view contains one row for each table or view in a dataset. The `TABLES` and `TABLE_OPTIONS` views also contain high-level information about views. For detailed information, query the [`INFORMATION_SCHEMA.VIEWS`](https://docs.cloud.google.com/bigquery/docs/information-schema-views) view.

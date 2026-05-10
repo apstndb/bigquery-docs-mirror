@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/table-clones-create
+uri: https://docs.cloud.google.com/bigquery/docs/table-clones-create
+title: Create table clones
+description: Shows how to create a writable, lightweight copy of a BigQuery table using CREATE TABLE CLONE, bq cp, or jobs.insert.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Create table clones
 
 This document describes how to copy a table to a [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) by using a [`CREATE TABLE CLONE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) SQL statement, a [`bq cp`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command, or a [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API call. This document is intended for users who are familiar with [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) .

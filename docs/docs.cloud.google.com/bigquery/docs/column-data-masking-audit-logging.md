@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging
+uri: https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging
+title: BigQuery Data Policy audit logging
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # BigQuery Data Policy audit logging
 
 This document describes audit logging for BigQuery Data Policy. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:

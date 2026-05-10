@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dataset-access-control
+uri: https://docs.cloud.google.com/bigquery/docs/dataset-access-control
+title: Changes to dataset-level access controls
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Changes to dataset-level access controls
 
 If you opt into enforcement of the `enable_fine_grained_dataset_acls_option` configuration for dataset-level access controls, the `bigquery.datasets.getIamPolicy` Identity and Access Management (IAM) permission is required to view a dataset's access controls and to query the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) view. The `bigquery.datasets.setIamPolicy` permission is required to update a dataset's access controls or to [create a dataset with access controls using the API](https://docs.cloud.google.com/bigquery/docs/dataset-access-control#changes_to_api_methods) .

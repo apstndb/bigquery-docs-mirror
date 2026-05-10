@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-table-constraints
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-constraints
+title: TABLE_CONSTRAINTS view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # TABLE\_CONSTRAINTS view
 
 The `TABLE_CONSTRAINTS` view contains [the primary and foreign key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) relations in a BigQuery dataset.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources
+uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources
+title: 'Method: projects.enrollDataSources'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-03-25T00:20:37Z"
+---
+
   - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.HTTP_TEMPLATE)
   - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.PATH_PARAMETERS)
   - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.request_body)

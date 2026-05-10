@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/iterate-generate-embedding-calls
+uri: https://docs.cloud.google.com/bigquery/docs/iterate-generate-embedding-calls
+title: Handle quota errors by calling ML.GENERATE_EMBEDDING iteratively
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Handle quota errors by calling ML.GENERATE\_EMBEDDING iteratively
 
 This tutorial shows you how to use the BigQuery `bqutil.procedure.bqml_generate_embeddings` public stored procedure to iterate through calls to the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) . Calling the function iteratively lets you address any retryable errors that occur due to exceeding the [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) that apply to the function.

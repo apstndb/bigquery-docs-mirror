@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in
+title: Table functions (built in)
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:29Z"
+---
+
 GoogleSQL for BigQuery supports built-in table functions.
 
 This topic includes functions that produce columns of a table. You can only use these functions in the `FROM` clause.

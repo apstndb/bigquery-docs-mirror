@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion
+title: The ML.CONFUSION_MATRIX function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The ML.CONFUSION\_MATRIX function
 
 This document describes the `ML.CONFUSION_MATRIX` function, which you can use to return a confusion matrix for the input classification model and input data.

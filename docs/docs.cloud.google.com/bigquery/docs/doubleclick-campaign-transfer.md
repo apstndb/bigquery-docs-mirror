@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer
+uri: https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer
+title: Load Campaign Manager data into BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Load Campaign Manager data into BigQuery
 
 You can load data from Campaign Manager to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Campaign Manager connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Campaign Manager to BigQuery.

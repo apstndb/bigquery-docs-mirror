@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/transfer-troubleshooting
+uri: https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting
+title: Troubleshoot transfer configurations
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Troubleshoot transfer configurations
 
 This document is intended to help you troubleshoot the most common issues encountered when setting up a BigQuery Data Transfer Service transfer. This document does not encompass all possible error messages or issues.

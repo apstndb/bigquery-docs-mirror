@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table
+title: The AI.GENERATE_TABLE function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The AI.GENERATE\_TABLE function
 
 This document describes the `AI.GENERATE_TABLE` function, which lets you perform generative natural language tasks by using any combination of text and unstructured data from BigQuery [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) , and also specify a schema to format the response from the model.

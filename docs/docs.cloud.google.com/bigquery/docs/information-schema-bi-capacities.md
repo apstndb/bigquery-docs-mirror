@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-bi-capacities
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacities
+title: INFORMATION_SCHEMA.BI_CAPACITIES view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # INFORMATION\_SCHEMA.BI\_CAPACITIES view
 
 The `INFORMATION_SCHEMA.BI_CAPACITIES` view contains metadata about the current state of BI Engine capacity. If you want to view the history of changes to BI Engine reservation, see the [`INFORMATION_SCHEMA.BI_CAPACITY_CHANGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacity-changes) .

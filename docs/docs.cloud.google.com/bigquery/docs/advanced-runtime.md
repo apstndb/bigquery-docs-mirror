@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/advanced-runtime
+uri: https://docs.cloud.google.com/bigquery/docs/advanced-runtime
+title: Use the BigQuery advanced runtime
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Use the BigQuery advanced runtime
 
 BigQuery advanced runtime is a set of performance enhancements designed to automatically accelerate analytical workloads without requiring user action or code changes. This document describes these performance enhancements, including enhanced vectorization and short query optimizations.

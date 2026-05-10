@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/teradata
+uri: https://docs.cloud.google.com/bigquery/docs/migration/teradata
+title: Migrate schema and data from Teradata
+description: Provides step-by-step instructions for using BigQuery Data Transfer Service to migrate schema and data from Teradata to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Migrate schema and data from Teradata
 
 The combination of the BigQuery Data Transfer Service and a special migration agent lets you copy your data from a Teradata on-premises data warehouse instance to BigQuery. This document describes the step-by-step process of migrating data from Teradata using the BigQuery Data Transfer Service.

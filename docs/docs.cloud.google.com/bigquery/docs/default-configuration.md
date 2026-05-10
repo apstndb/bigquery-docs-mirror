@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/default-configuration
+uri: https://docs.cloud.google.com/bigquery/docs/default-configuration
+title: Manage configuration settings
+description: Shows how to set and clear configuration settings in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Manage configuration settings
 
 BigQuery administrators and project owners can manage configuration settings at the organization and project levels. You can set configurations to enforce security, control costs, and optimize query performance across your entire data infrastructure. By setting default values, you can ensure consistent compliance and operational efficiency, making it easier to manage your BigQuery environment.

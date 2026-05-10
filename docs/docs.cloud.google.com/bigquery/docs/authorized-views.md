@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/authorized-views
+uri: https://docs.cloud.google.com/bigquery/docs/authorized-views
+title: Authorized views
+description: Describes how to create BigQuery authorized views and materialized authorized views using the {{dynamic_data.site_values.cloud_name_short}} console, the bq update command, the tables.patch REST API method, and the Go, Java, and Python client libraries.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Authorized views
 
 This document describes how to create authorized views and authorized materialized views in BigQuery. As a data administrator, you can create an *authorized view* to share a subset of data in a dataset to specific users and groups (principals). Principals can view the data you share and run queries on it, but they can't access the source dataset directly.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis
+title: The CREATE MODEL statement for contribution analysis models
+description: Learn how to create contribution analysis models in BigQuery ML.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for contribution analysis models
 
 This document describes the `CREATE MODEL` statement for creating [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) models in BigQuery. You can use contribution analysis models to generate insights about changes to key metrics in your multi-dimensional data.

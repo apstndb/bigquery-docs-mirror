@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/rest
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rest
+title: BigQuery Migration API
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:36Z"
+---
+
 The migration service, exposing apis for migration jobs operations, and agent management.
 
   - [REST Resource: v2alpha.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest#v2alpha.projects.locations.workflows)

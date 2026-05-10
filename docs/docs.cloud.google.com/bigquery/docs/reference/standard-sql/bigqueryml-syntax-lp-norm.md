@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-lp-norm
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-lp-norm
+title: The ML.LP_NORM function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.LP\_NORM function
 
 This document describes the `ML.LP_NORM` scalar function, which lets you compute the [L <sup>p</sup>](https://en.wikipedia.org/wiki/Lp_space) norm for a vector, where <sup>p</sup> is the degree.

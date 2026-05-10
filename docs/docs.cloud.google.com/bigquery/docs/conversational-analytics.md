@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/conversational-analytics
+uri: https://docs.cloud.google.com/bigquery/docs/conversational-analytics
+title: Conversational analytics overview
+description: Introduces conversational analytics in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Conversational analytics overview
 
 > **Preview**

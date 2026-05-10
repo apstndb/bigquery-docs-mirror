@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-table-storage
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage
+title: TABLE_STORAGE view
+description: Describes INFORMATION_SCHEMA.TABLE_STORAGE view to get metadata about a current snapshot of storage usage for the current project.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # TABLE\_STORAGE view
 
 The `INFORMATION_SCHEMA.TABLE_STORAGE` view provides a current snapshot of storage usage for tables and materialized views. When you query the `INFORMATION_SCHEMA.TABLE_STORAGE` view, the query results contain one row for each table or materialized view for the current project.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bigquery-cud
+uri: https://docs.cloud.google.com/bigquery/docs/bigquery-cud
+title: Committed use discounts
+description: Describes BigQuery committed use discounts and how to purchase them.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Committed use discounts
 
 > **Important:** This page describes committed use discounts for BigQuery PAYG capacity. For information about other Google Cloud CUDs, see [Committed use discounts](https://docs.cloud.google.com/billing/docs/resources/multiprice-cuds) .

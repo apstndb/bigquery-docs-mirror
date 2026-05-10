@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew
+title: The ML.VALIDATE_DATA_SKEW function
+description: Use the `ML.VALIDATE_DATA_SKEW` function to compute the data skew between a model's training and serving data.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 # The ML.VALIDATE\_DATA\_SKEW function
 
 This document describes the `ML.VALIDATE_DATA_SKEW` function, which you can use to compute the data skew between a model's training and serving data. This function computes the statistics for the serving data, compares them to the statistics that were computed for the training data at the time the model was created, and identifies where there are anomalous differences between the two data sets.

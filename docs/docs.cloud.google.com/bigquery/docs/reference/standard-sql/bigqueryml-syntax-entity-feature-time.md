@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time
+title: The ML.ENTITY_FEATURES_AT_TIME function
+description: Retrieve point-in-time features for multiple entities using `ML.ENTITY_FEATURES_AT_TIME` in order to prevent data leakage.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.ENTITY\_FEATURES\_AT\_TIME function
 
 This document describes the `ML.ENTITY_FEATURES_AT_TIME` function, which lets you use multiple point-in-time cutoffs for multiple entities when retrieving features, because features can have time dependencies if they include time-sensitive data. To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) , use point-in-time features when training models and running inference.

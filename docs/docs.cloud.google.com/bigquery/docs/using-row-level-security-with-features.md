@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features
+uri: https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features
+title: Using row-level security with other BigQuery features
+description: This document describes how row-level security works with other BigQuery features, including BigQuery BI Engine, Data Studio, data extraction, partitioning, table snapshots, and materialized views.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Using row-level security with other BigQuery features
 
 This document describes how to use row-level access security with other BigQuery features.

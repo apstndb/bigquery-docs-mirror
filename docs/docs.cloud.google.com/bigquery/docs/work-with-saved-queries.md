@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/work-with-saved-queries
+uri: https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries
+title: Create saved queries
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Create saved queries
 
 When you write SQL in the query editor, you can save your query and share your query with others. Saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .

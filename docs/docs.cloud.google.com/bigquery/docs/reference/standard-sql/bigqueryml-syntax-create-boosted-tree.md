@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree
+title: The CREATE MODEL statement for boosted trees models using XGBoost
+description: Use the CREATE MODEL statement for creating boosted trees models in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for boosted trees models using XGBoost
 
 This document describes the `CREATE MODEL` statement for creating [boosted trees](https://xgboost.readthedocs.io/en/stable/tutorials/model.html) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. Boosted trees models are trained using the [XGBoost library](https://xgboost.readthedocs.io/en/latest/) .

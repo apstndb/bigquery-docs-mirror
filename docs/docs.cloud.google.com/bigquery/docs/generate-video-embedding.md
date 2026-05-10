@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-video-embedding
+uri: https://docs.cloud.google.com/bigquery/docs/generate-video-embedding
+title: Generate video embeddings by using the AI.GENERATE_EMBEDDING function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Generate video embeddings by using the AI.GENERATE\_EMBEDDING function
 
 This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a Vertex AI embedding [foundation model](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models#foundation_models) . You then use that model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create video embeddings by using data from a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .

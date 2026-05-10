@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models
+title: The CREATE MODEL statement for deep neural network (DNN) models
+description: Use the CREATE MODEL statement for creating deep neural network (DNN) models in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The CREATE MODEL statement for deep neural network (DNN) models
 
 This document describes the `CREATE MODEL` statement for creating [deep neural network (DNN)](https://en.wikipedia.org/wiki/Deep_learning#Deep_neural_networks) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/tune-evaluate
+uri: https://docs.cloud.google.com/bigquery/docs/tune-evaluate
+title: Use tuning and evaluation to improve model performance
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Use tuning and evaluation to improve model performance
 
 This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a [Vertex AI `gemini-2.0-flash-001` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) . You then use [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) to tune the model with new training data, followed by evaluating the model with the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .

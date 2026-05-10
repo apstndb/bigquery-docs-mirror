@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions
+title: HyperLogLog++ functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 The [HyperLogLog++ algorithm (HLL++)](https://en.wikipedia.org/wiki/HyperLogLog) estimates [cardinality](https://en.wikipedia.org/wiki/Cardinality) from sketches.
 
 HLL++ functions are approximate aggregate functions. Approximate aggregation typically requires less memory than exact aggregation functions, like [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count) , but also introduces statistical error. This makes HLL++ functions appropriate for large data streams for which linear memory usage is impractical, as well as for data that is already approximate.

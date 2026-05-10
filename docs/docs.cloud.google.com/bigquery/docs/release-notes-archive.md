@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/release-notes-archive
+uri: https://docs.cloud.google.com/bigquery/docs/release-notes-archive
+title: BigQuery release notes archive
+description: This page contains an archive of release notes for features and updates to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:52:00Z"
+---
+
 This page documents production updates to BigQuery. We recommend that BigQuery developers periodically check this list for any new announcements. BigQuery automatically updates to the latest release and cannot be downgraded to a previous version.
 
 This page contains a historical archive of all release notes for BigQuery. To view more recent release notes, see the [Release notes](https://docs.cloud.google.com/bigquery/docs/release-notes) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding
+title: The ML.GENERATE_EMBEDDING function
+description: Generate high-dimensional numerical vectors for text and visual content by using the `ML.GENERATE_EMBEDDING` function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.GENERATE\_EMBEDDING function
 
 This document describes the `ML.GENERATE_EMBEDDING` function, which lets you create [embeddings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding#embeddings) that describe an entity—for example, a piece of text or an image.

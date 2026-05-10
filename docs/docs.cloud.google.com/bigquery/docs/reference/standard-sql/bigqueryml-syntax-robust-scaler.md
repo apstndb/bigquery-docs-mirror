@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-robust-scaler
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-robust-scaler
+title: The ML.ROBUST_SCALER function
+description: Scale numerical expressions by using statistics that are robust to outliers with the BigQuery ML `ML.ROBUST_SCALER` function.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.ROBUST\_SCALER function
 
 This document describes the `ML.ROBUST_SCALER` function, which lets you scale a numerical expression by using statistics that are robust to outliers. The function performs the scaling by removing the [median](https://en.wikipedia.org/wiki/Median) and scaling the data according to the [quantile](https://en.wikipedia.org/wiki/Quantile) range.

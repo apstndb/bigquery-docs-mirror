@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles
+uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles
+title: Configure BigQuery sharing roles
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Configure BigQuery sharing roles
 
 This document describes the Identity and Access Management (IAM) roles for BigQuery sharing (formerly Analytics Hub) and how to grant them. For more information, see [BigQuery sharing roles and permissions](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub) .

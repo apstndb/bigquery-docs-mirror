@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/transfer-changes
+uri: https://docs.cloud.google.com/bigquery/docs/transfer-changes
+title: BigQuery Data Transfer Service data source change log
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # BigQuery Data Transfer Service data source change log
 
 This page provides details about changes to BigQuery Data Transfer Service data source schemas and schema mappings. For information about upcoming changes to the BigQuery Data Transfer Service connectors, you can search this page for data sources, such as `Google Ads API` or `Display & Video 360 API` , or for specific table names or values.

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/saved-queries-introduction
+uri: https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction
+title: Introduction to saved queries
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Introduction to saved queries
 
 This document provides an introduction to saved queries in BigQuery. You can use saved queries to create and manage SQL scripts. Changes to a saved query are automatically saved so that you don't lose your work when you close the query editor. Saved queries improve collaboration and query management with the following options:

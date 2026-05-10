@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights
+title: The ML.GET_INSIGHTS function
+description: Retrieve information about changes to key metrics in your multi-dimensional data from a BigQuery ML contribution analysis model.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:18Z"
+---
+
 # The ML.GET\_INSIGHTS function
 
 This document describes the `ML.GET_INSIGHTS` function, which you can use to retrieve information about changes to key metrics in your multi-dimensional data from a [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) model. You can use a [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) to create a contribution analysis model in BigQuery.

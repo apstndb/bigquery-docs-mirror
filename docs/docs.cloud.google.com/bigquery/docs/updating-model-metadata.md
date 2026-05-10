@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/updating-model-metadata
+uri: https://docs.cloud.google.com/bigquery/docs/updating-model-metadata
+title: Update model metadata
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 # Update model metadata
 
 This page shows you how to update BigQuery ML model metadata. You can update model metadata by:

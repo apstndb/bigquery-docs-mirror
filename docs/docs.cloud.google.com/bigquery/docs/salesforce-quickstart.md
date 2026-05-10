@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/salesforce-quickstart
+uri: https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart
+title: Work with Salesforce Data Cloud data in BigQuery
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Work with Salesforce Data Cloud data in BigQuery
 
 This document describes how to access and analyze Salesforce Data Cloud data in BigQuery using BigQuery Omni. The document shows how to link your Data Cloud datasets in BigQuery to run queries, join data with tables in Google Cloud, and replicate data using cross-cloud materialized views.

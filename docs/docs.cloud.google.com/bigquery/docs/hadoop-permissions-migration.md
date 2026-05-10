@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/hadoop-permissions-migration
+uri: https://docs.cloud.google.com/bigquery/docs/hadoop-permissions-migration
+title: Migrating permissions from Hadoop
+description: Migrating permissions from Hadoop to IAM roles in Cloud Storage.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Migrating permissions from Hadoop
 
 > **Preview**

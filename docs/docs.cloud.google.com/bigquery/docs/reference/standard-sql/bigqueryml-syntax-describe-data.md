@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data
+title: The ML.DESCRIBE_DATA function
+description: Use the `ML.DESCRIBE_DATA` function to generate descriptive statistics for the columns in a table or subquery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The ML.DESCRIBE\_DATA function
 
 This document describes the `ML.DESCRIBE_DATA` function, which you can use to generate descriptive statistics for the columns in a table or subquery. For example, you might want to know statistics for a table of training or serving data that you plan to use with a machine learning (ML) model. You can use the data output by this function for such purposes as [feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) or [model monitoring](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) .

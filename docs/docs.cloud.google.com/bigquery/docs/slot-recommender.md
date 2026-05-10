@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/slot-recommender
+uri: https://docs.cloud.google.com/bigquery/docs/slot-recommender
+title: View edition slot recommendations
+description: Learn how to use the BigQuery slot recommender for both reservations billing and on-demand billing. The recommender creates recommendations for edition or on-demand workloads.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # View edition slot recommendations
 
 The BigQuery slot recommender creates recommendations for [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) or on-demand workloads. The recommender analyzes historical slot usage for query jobs and calculates the cost-optimal settings for edition commitment slots and [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) slots while maintaining similar performance. The slot recommender can also recommend a maximum reservation size that can improve performance.

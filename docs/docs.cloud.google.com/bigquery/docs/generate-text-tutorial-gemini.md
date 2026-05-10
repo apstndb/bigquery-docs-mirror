@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemini
+uri: https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemini
+title: Generate text by using a Gemini model and the AI.GENERATE_TEXT function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`gemini-2.5-flash` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
 
 ## Costs

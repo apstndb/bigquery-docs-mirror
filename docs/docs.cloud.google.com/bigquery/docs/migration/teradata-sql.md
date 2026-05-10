@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/teradata-sql
+uri: https://docs.cloud.google.com/bigquery/docs/migration/teradata-sql
+title: Teradata SQL translation guide
+description: Provides a reference to compare statements, functions, data types, and other SQL objects between the Teradata and BigQuery SQL dialects.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Teradata SQL translation guide
 
 This document details the similarities and differences in SQL syntax between Teradata and BigQuery to help you plan your migration. Use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad-hoc queries.

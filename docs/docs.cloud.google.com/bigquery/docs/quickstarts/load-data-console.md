@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/quickstarts/load-data-console
+uri: https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-console
+title: Load and query data
+description: Create a dataset, load data into a table, and query that data using BigQuery Studio.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Load and query data
 
 Get started with BigQuery by creating a dataset, loading data into a table, and querying the table.

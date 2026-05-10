@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/protobuf-export
+uri: https://docs.cloud.google.com/bigquery/docs/protobuf-export
+title: Export data as Protobuf columns
+description: Describes how to export data from BigQuery in the Protobuf format.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Export data as Protobuf columns
 
 This document describes how you can export BigQuery data as Protocol Buffers (Protobuf) columns by using BigQuery user-defined functions (UDFs).

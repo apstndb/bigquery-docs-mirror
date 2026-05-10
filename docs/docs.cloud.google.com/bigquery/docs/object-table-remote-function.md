@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/object-table-remote-function
+uri: https://docs.cloud.google.com/bigquery/docs/object-table-remote-function
+title: Analyze object tables by using remote functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Analyze object tables by using remote functions
 
 This document describes how to analyze unstructured data in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .

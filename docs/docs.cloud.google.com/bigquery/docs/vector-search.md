@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/vector-search
+uri: https://docs.cloud.google.com/bigquery/docs/vector-search
+title: Search embeddings with vector search
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Search embeddings with vector search
 
 This tutorial shows you how to perform a [similarity search](https://wikipedia.org/wiki/Similarity_search) on embeddings stored in BigQuery tables by using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) and optionally a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) .

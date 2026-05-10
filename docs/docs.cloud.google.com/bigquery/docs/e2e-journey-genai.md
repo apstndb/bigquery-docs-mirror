@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/e2e-journey-genai
+uri: https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai
+title: End-to-end user journeys for generative AI models
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # End-to-end user journeys for generative AI models
 
 This document describes the user journeys for BigQuery ML remote models, including the statements and functions that you can use to work with remote models. BigQuery ML offers the following types of remote models:

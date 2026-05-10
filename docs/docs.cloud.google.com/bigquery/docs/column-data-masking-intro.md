@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/column-data-masking-intro
+uri: https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro
+title: Introduction to data masking
+description: Describes column-level data masking in BigQuery, and its benefits, requirements and limitations. Shows how masking rules are applied to different groups of users in some example use cases.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Introduction to data masking
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .

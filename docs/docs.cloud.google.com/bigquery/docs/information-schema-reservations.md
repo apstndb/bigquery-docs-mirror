@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-reservations
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-reservations
+title: RESERVATIONS view
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # RESERVATIONS view
 
 The `INFORMATION_SCHEMA.RESERVATIONS` view contains a near real-time list of all current reservations within the administration project. Each row represents a single, current reservation. A current reservation is a reservation that has not been deleted. For more information about reservation, see [Introduction to reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .

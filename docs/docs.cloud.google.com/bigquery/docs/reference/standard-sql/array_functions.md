@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions
+title: Array functions
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 GoogleSQL for BigQuery supports the following array functions.
 
 ## Function list

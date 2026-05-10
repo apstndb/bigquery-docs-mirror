@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy
+uri: https://docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy
+title: User-defined functions in legacy SQL
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:11Z"
+---
+
 # User-defined functions in legacy SQL
 
 This document details how to use JavaScript user-defined functions in legacy SQL query syntax. The preferred query syntax for user-defined functions in BigQuery is [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) . For more information, see [Legacy SQL feature availability](https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability) .

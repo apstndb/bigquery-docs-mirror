@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/models
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models
+title: 'REST Resource: models'
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:03:38Z"
+---
+
   - [Resource: Model](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model.SCHEMA_REPRESENTATION)
   - [ModelReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelReference)

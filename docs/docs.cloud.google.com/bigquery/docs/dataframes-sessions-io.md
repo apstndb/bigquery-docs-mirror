@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dataframes-sessions-io
+uri: https://docs.cloud.google.com/bigquery/docs/dataframes-sessions-io
+title: Manage BigQuery DataFrames sessions and I/O
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Manage BigQuery DataFrames sessions and I/O
 
 This document explains how to manage sessions and perform input and output (I/O) operations when you use BigQuery DataFrames. You will learn how to create and use sessions, work with in-memory data, and read from and write to files and BigQuery tables.

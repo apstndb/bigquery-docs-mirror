@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/hive
+uri: https://docs.cloud.google.com/bigquery/docs/migration/hive
+title: Migrate schema and data from Apache Hive
+description: Provides instructions for migrating table schemas and data from Apache Hive to BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # Migrate schema and data from Apache Hive
 
 This document describes how to migrate your data, security settings, and pipelines from Apache Hive to BigQuery.

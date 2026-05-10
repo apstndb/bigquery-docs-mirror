@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/notebooks-introduction
+uri: https://docs.cloud.google.com/bigquery/docs/notebooks-introduction
+title: Introduction to notebooks
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Introduction to notebooks
 
 This document provides an introduction to [Colab Enterprise notebooks](https://docs.cloud.google.com/colab/docs/introduction) in BigQuery. You can use notebooks to complete analysis and machine learning (ML) workflows by using SQL, Python, and other common packages and APIs. Notebooks offer improved collaboration and management with the following options:

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline
+title: RESERVATIONS_TIMELINE view
+description: Query BigQuery `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` for real-time, per-minute reservation metadata and autoscale details.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:34Z"
+---
+
 # RESERVATIONS\_TIMELINE view
 
 The `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view shows time slices of reservation metadata for each reservation administration project for every minute in real time. Additionally, the `per_second_details` array shows autoscale details for each second.

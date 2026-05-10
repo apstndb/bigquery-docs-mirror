@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules
+uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules
+title: Sharing VPC Service Controls rules
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # Sharing VPC Service Controls rules
 
 This document describes the ingress and egress rules that you need to let publishers and subscribers in BigQuery sharing (formerly Analytics Hub) access data from projects that have VPC Service Controls perimeters. This document assumes you're familiar with [VPC Service Controls perimeters](https://docs.cloud.google.com/vpc-service-controls/docs/service-perimeters) , [shared datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#shared_datasets) , [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) , [listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#listings) , and [linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .

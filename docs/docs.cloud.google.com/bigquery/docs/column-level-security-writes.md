@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/column-level-security-writes
+uri: https://docs.cloud.google.com/bigquery/docs/column-level-security-writes
+title: Impact on writes from column-level access control
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:57:15Z"
+---
+
 # Impact on writes from column-level access control
 
 This page explains the impact to writes when you use BigQuery column-level access control to restrict access to data at the column level. For general information about column-level access control, see [Introduction to BigQuery column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) .

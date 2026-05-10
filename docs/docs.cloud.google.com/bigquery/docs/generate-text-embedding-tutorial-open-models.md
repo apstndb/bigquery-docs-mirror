@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/generate-text-embedding-tutorial-open-models
+uri: https://docs.cloud.google.com/bigquery/docs/generate-text-embedding-tutorial-open-models
+title: Generate text embeddings by using an open model and the AI.GENERATE_EMBEDDING function
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:52Z"
+---
+
 # Generate text embeddings by using an open model and the AI.GENERATE\_EMBEDDING function
 
 This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) that's based on the open-source text embedding model [Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) , and then how to use that model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to embed movie reviews from the `bigquery-public-data.imdb.reviews` public table.

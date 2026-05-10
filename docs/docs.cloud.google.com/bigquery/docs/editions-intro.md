@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/editions-intro
+uri: https://docs.cloud.google.com/bigquery/docs/editions-intro
+title: Understand BigQuery editions
+description: Gives an overview of the different editions available in BigQuery and their associated features.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Understand BigQuery editions
 
 BigQuery provides three editions which support different types of workloads and the features associated with them. You can enable editions when you [reserve BigQuery capacity](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) . BigQuery also provides an [on-demand (per TiB processed) model](https://cloud.google.com/bigquery/pricing#on_demand_pricing) . You can choose to use editions and the on-demand model at the same time on a per-project basis. For more information about BigQuery editions pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .

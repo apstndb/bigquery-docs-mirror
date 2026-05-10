@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/manage-data-preparations
+uri: https://docs.cloud.google.com/bigquery/docs/manage-data-preparations
+title: Manage data preparations
+description: Manage BigQuery data preparations, including IAM access control, versioning, performance optimization, and metadata management in Knowledge Catalog.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:08Z"
+---
+
 # Manage data preparations
 
 This document describes how to manage your BigQuery data preparations, including managing access, versioning, performance, and metadata. It also describes how to perform basic tasks, such as viewing and downloading your data preparations.

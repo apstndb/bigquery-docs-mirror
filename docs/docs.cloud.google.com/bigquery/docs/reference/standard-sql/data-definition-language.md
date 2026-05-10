@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
+title: Data definition language (DDL) statements in GoogleSQL
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:38Z"
+---
+
 # Data definition language (DDL) statements in GoogleSQL
 
 Data definition language (DDL) statements let you create and modify BigQuery resources using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) query syntax. You can use DDL commands to create, alter, and delete resources, such as the following:

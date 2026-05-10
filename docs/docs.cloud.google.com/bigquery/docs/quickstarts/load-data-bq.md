@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq
+uri: https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq
+title: Use the bq tool
+description: Learn how to create a dataset, load sample data, and query tables with the bq command-line tool.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # Use the bq tool
 
 In this tutorial, you learn how to use `bq` , the Python-based command-line interface (CLI) tool for BigQuery to create a dataset, load sample data, and query tables. After completing this tutorial, you'll be familiar with `bq` and how to work with BigQuery by using a CLI.

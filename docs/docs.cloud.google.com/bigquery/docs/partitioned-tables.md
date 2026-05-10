@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/partitioned-tables
+uri: https://docs.cloud.google.com/bigquery/docs/partitioned-tables
+title: Introduction to partitioned tables
+description: Describes partitioned table in BigQuery, its types, limitations, quotas, pricing, and security.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:50:04Z"
+---
+
 # Introduction to partitioned tables
 
 A partitioned table is divided into segments, called partitions, that make it easier to manage and query your data. By dividing a large table into smaller partitions, you can improve query performance and control costs by reducing the number of bytes read by a query. You partition tables by specifying a partition column which is used to segment the table.

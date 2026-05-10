@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/api-uploads
+uri: https://docs.cloud.google.com/bigquery/docs/reference/api-uploads
+title: API uploads
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # API uploads
 
 The media upload feature allows the BigQuery API to store data in the cloud and make it available to the server. The kind of data that one might want to upload include photos, videos, PDF files, zip files, or any other type of data.

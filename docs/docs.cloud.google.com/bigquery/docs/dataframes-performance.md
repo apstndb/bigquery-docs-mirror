@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dataframes-performance
+uri: https://docs.cloud.google.com/bigquery/docs/dataframes-performance
+title: Optimize BigQuery DataFrames performance
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:54:37Z"
+---
+
 # Optimize BigQuery DataFrames performance
 
 BigQuery DataFrames helps you analyze and transform data in BigQuery using a pandas-compatible API. To make your data processing faster and more cost-effective, you can use several techniques to improve performance.

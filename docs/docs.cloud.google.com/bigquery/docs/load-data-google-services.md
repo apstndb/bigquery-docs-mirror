@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/load-data-google-services
+uri: https://docs.cloud.google.com/bigquery/docs/load-data-google-services
+title: Load data from other Google and Google Cloud services
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # Load data from other Google and Google Cloud services
 
 You can use a number of Google Cloud services to load data into BigQuery where you can then perform further analysis. These services typically require that you initiate extract jobs from the respective console or API of the service. Once enabled, data is loaded into BigQuery according to the cadence defined in the service's extract job. Some extract jobs run in real time and others provide batch data loads.

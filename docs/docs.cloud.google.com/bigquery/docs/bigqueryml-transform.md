@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bigqueryml-transform
+uri: https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform
+title: Perform feature engineering with the TRANSFORM clause
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 This tutorial teaches you how to use the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of the `CREATE MODEL` statement to perform feature engineering at the same time that you create and train a model. Using the `TRANSFORM` clause, you can specify one or more [preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) functions to transform the input data you use to train the model. The preprocessing that you apply to the model is automatically applied when you use the model with the [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) and [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) functions.
 
 This tutorial uses the public [`bigquery-public-data.ml_datasets.penguin` dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=penguins&page=table) .

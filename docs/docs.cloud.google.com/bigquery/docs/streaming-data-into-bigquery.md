@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery
+uri: https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery
+title: Use the legacy streaming API
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:49:56Z"
+---
+
 This document describes how to stream data into BigQuery by using the legacy [`tabledata.insertAll`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) method.
 
 For new projects, we recommend using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) instead of the `tabledata.insertAll` method. The Storage Write API has lower pricing and more robust features, including exactly-once delivery semantics. If you are migrating an existing project from the `tabledata.insertAll` method to the Storage Write API, we recommend selecting the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) . The `tabledata.insertAll` method is still fully supported.

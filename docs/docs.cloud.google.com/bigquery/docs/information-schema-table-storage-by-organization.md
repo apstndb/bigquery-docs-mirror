@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization
+title: TABLE_STORAGE_BY_ORGANIZATION view
+description: Describes INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION view to get metadata about a current snapshot of storage usage for the whole organization associated with the current project.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # TABLE\_STORAGE\_BY\_ORGANIZATION view
 
 The `INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION` view contains one row for each table or materialized view for the whole organization associated with the current project.

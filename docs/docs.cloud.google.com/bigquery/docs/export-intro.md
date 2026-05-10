@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/export-intro
+uri: https://docs.cloud.google.com/bigquery/docs/export-intro
+title: Introduction to data export
+description: Describes the different ways to export data from BigQuery tables.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Introduction to data export
 
 This document describes the different ways of exporting data from BigQuery.

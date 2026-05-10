@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings
+uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings
+title: View and subscribe to listings and data exchanges
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T05:05:25Z"
+---
+
 # View and subscribe to listings and data exchanges
 
 This document describes how to view and subscribe to listings and data exchanges in BigQuery sharing (formerly Analytics Hub). As a BigQuery sharing subscriber, you can view and subscribe to listings and data exchanges for which you have access. Subscribing to a listing or a data exchange in BigQuery sharing creates a linked dataset in your Google Cloud project.

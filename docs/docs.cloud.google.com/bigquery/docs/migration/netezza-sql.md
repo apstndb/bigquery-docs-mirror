@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/migration/netezza-sql
+uri: https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql
+title: IBM Netezza SQL translation guide
+description: Provides a reference to compare statements, functions, data types, and other SQL objects between the IBM Netezza and BigQuery SQL dialects.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:13Z"
+---
+
 # IBM Netezza SQL translation guide
 
 IBM Netezza data warehousing is designed to work with Netezza-specific SQL syntax. Netezza SQL is based on Postgres 7.2. SQL scripts written for Netezza can't be used in a BigQuery data warehouse without alterations, because the SQL dialects vary.

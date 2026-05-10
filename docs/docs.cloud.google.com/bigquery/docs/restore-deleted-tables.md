@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/restore-deleted-tables
+uri: https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables
+title: Restore deleted tables
+description: Shows how to restore (or undelete) a deleted table in BigQuery.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Restore deleted tables
 
 This document describes how to restore (or *undelete* ) a deleted table in BigQuery. You can restore a deleted table within the time travel window specified for the dataset, including explicit deletions and implicit deletions due to table expiration. You can also [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) .

@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image
+uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image
+title: The ML.ANNOTATE_IMAGE function
+description: Annotate images from BigQuery object table using the `ML.ANNOTATE_IMAGE` function and the Cloud Vision API.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:19Z"
+---
+
 # The ML.ANNOTATE\_IMAGE function
 
 This document describes the `ML.ANNOTATE_IMAGE` function, which lets you annotate images that are stored in BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using the [Cloud Vision API](https://docs.cloud.google.com/vision) .

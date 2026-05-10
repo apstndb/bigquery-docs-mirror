@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/slot-estimator
+uri: https://docs.cloud.google.com/bigquery/docs/slot-estimator
+title: Estimate slot capacity requirements
+description: Learn how to use the BigQuery slot estimator to view slot capacity and utilization, understand query performance, and model slot performance. Describes the limitations and pricing for the BigQuery slot estimator.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:00Z"
+---
+
 # Estimate slot capacity requirements
 
 When you purchase reserved slots in BigQuery, you must estimate the right number of slots for your particular workload. The BigQuery slot estimator helps you to manage slot capacity based on historical performance metrics.

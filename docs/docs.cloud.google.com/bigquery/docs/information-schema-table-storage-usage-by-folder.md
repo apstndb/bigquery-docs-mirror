@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-folder
+uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-folder
+title: TABLE_STORAGE_USAGE_TIMELINE_BY_FOLDER view
+description: Describes the INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_FOLDER view to get metadata about billed table storage usage for parent folder of the current project, including its subfolders.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:53Z"
+---
+
 # TABLE\_STORAGE\_USAGE\_TIMELINE\_BY\_FOLDER view
 
 > **Preview**

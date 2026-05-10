@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration
+uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration
+title: EncryptionConfiguration
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2025-10-17T21:04:20Z"
+---
+
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#SCHEMA_REPRESENTATION)
 
 Configuration for Cloud KMS encryption settings.

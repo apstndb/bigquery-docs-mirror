@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/legacy-nested-repeated
+uri: https://docs.cloud.google.com/bigquery/docs/legacy-nested-repeated
+title: Querying nested and repeated fields in legacy SQL
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:45:11Z"
+---
+
 # Querying nested and repeated fields in legacy SQL
 
 This document details how to query nested and repeated data in legacy SQL query syntax. The preferred query syntax for BigQuery is GoogleSQL. For information on handling nested and repeated data in GoogleSQL, see the [GoogleSQL migration guide](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) .

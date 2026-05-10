@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/reference/libraries-overview
+uri: https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview
+title: BigQuery APIs and libraries overview
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:46:21Z"
+---
+
 # BigQuery APIs and libraries overview
 
 This page provides an overview of the various APIs associated with BigQuery. While you can use the APIs directly by making raw requests to the server, client libraries let you code in your preferred language and provide simplifications that significantly reduce the amount of code you need to write. BigQuery supports client libraries in C\#, Go, Java, Node.js, PHP, Python, and Ruby. For a more general overview of client libraries within Google Cloud, see [Client libraries explained](https://docs.cloud.google.com/apis/docs/client-libraries-explained) .

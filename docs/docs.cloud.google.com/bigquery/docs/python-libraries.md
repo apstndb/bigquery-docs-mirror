@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/python-libraries
+uri: https://docs.cloud.google.com/bigquery/docs/python-libraries
+title: Use open source Python libraries
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:49Z"
+---
+
 # Use open source Python libraries
 
 You can choose from among three Python libraries in BigQuery, based on your use case.

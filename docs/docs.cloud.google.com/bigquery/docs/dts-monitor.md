@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/dts-monitor
+uri: https://docs.cloud.google.com/bigquery/docs/dts-monitor
+title: Monitor and view logs for BigQuery Data Transfer Service
+description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:47:34Z"
+---
+
 # Monitor and view logs for BigQuery Data Transfer Service
 
 BigQuery Data Transfer Service [monitoring](https://docs.cloud.google.com/bigquery/docs/dts-monitor#monitor) and [logging](https://docs.cloud.google.com/bigquery/docs/dts-monitor#logs) provide information about the service's workload performance and status. BigQuery Data Transfer Service exports monitoring data to [Cloud Monitoring](https://docs.cloud.google.com/monitoring/docs) .

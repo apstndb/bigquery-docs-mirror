@@ -1,3 +1,12 @@
+---
+name: documents/docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction
+uri: https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction
+title: Introduction to BigQuery DataFrames
+description: BigQuery DataFrames lets you use BigQuery to process terabytes of data and train machine learning models with Python, pandas, and scikit-learn APIs.
+data_source: docs.cloud.google.com
+update_time: "2026-05-09T04:44:45Z"
+---
+
 # Introduction to BigQuery DataFrames
 
 BigQuery DataFrames is a set of open source Python libraries that let you take advantage of BigQuery data processing by using familiar Python APIs. BigQuery DataFrames provides a Pythonic DataFrame powered by the BigQuery engine, and it implements the pandas and scikit-learn APIs by pushing the processing down to BigQuery through SQL conversion. This lets you use BigQuery to explore and process terabytes of data, and also train machine learning (ML) models, all with Python APIs.
