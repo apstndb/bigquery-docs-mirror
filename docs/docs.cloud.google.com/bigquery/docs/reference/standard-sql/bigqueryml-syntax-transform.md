@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.TRANSFORM function
 description: Use the ML.TRANSFORM function to preprocess feature data in BigQuery ML models.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:18Z"
 ---
 
 # The ML.TRANSFORM function

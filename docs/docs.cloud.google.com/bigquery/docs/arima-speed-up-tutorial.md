@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial
 title: Scale an ARIMA_PLUS univariate time series model to millions of time series
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-11T03:28:17Z"
 ---
 
 In this tutorial, you will learn how to significantly accelerate training of a set of [`ARIMA_PLUS` univariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) , in order to perform multiple time-series forecasts with a single query. You will also learn how to evaluate forecasting accuracy.

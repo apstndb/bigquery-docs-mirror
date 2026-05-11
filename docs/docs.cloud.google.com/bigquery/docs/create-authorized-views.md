@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-authorized-views
 title: Create an authorized view
 description: This tutorial shows you how to create an authorized view in BigQuery, which lets you share query results with specified users without giving them full access to the underlying data.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 In this tutorial, you create an authorized view in BigQuery that is used by your data analysts. [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) let you share query results with particular users and groups without giving them access to the underlying source data. The view is given access to the source data instead of a user or group. You can also use the view's SQL query to exclude columns and fields from the query results.

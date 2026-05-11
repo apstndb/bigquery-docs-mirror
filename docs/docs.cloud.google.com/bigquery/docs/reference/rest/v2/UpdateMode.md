@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/UpdateMode
 title: UpdateMode
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2025-12-22T22:19:02Z"
 ---
 
 UpdateMode specifies which dataset fields is updated.

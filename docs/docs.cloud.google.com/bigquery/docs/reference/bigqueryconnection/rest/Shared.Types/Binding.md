@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/re
 title: Binding
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2025-10-17T21:05:11Z"
 ---
 
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/Binding#SCHEMA_REPRESENTATION)

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-explorer
 title: Create queries with table explorer
 description: Use table explorer to create table data exploration queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Create queries with table explorer

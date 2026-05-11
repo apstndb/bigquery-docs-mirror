@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/query-queues
 title: Use query queues
 description: Learn how to control the maximum concurrency target and set the queue timeout for BigQuery interactive and batch queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Use query queues

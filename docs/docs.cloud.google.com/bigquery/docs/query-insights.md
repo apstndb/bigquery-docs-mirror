@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/query-insights
 title: Get query performance insights
 description: Describes how to use the query execution graph to diagnose query performance issues, and to see query performance insights.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Get query performance insights

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/pipelines
 title: Migrate data pipelines
 description: Describes how you can migrate your upstream data pipelines, which load data into your data warehouse.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Migrate data pipelines

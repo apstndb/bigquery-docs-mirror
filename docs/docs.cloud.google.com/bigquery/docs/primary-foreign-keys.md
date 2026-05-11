@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys
 title: Use primary and foreign keys
 description: Use primary and foreign keys to improve query performance.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Use primary and foreign keys

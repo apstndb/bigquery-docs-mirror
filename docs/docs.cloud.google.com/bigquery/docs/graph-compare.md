@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/graph-compare
 title: Use BigQuery Graph and Spanner Graph
 description: Compares BigQuery Graph and Spanner Graph to help you determine which graph solution to use.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 # Use BigQuery Graph and Spanner Graph

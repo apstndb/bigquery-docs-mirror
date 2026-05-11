@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/continuous-query-joins
 title: Use stream-to-stream joins in continuous queries
 description: Use stream-to-stream joins in BigQuery continuous queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Use stream-to-stream joins in continuous queries

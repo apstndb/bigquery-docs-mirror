@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore
 title: Restore table snapshots
 description: Shows how to create a writeable BigQuery table from a table snapshot using the Console, the bq cp command, or the jobs.insert API method.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Restore table snapshots

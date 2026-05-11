@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/export-model-tutorial
 title: Export a BigQuery ML model for online prediction
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:47:34Z"
 ---
 
 > **Note:** Exporting your models is not required for deployment on Vertex AI if you are using the Vertex AI Model Registry. To learn more about the registry, see [Manage BigQuery ML models in the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .

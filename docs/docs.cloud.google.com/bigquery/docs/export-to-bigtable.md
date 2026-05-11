@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/export-to-bigtable
 title: Export data to Bigtable (reverse ETL)
 description: Prepare and configure a data export from BigQuery to Bigtable.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:47:34Z"
 ---
 
 # Export data to Bigtable (reverse ETL)

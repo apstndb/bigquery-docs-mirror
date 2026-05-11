@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting
 title: Forecast multiple time series with a TimesFM univariate model
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 This tutorial teaches you how to use the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to forecast the future value for a given column, based on the historical value of that column.

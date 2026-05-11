@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-conversations
 title: Analyze data with conversations
 description: Learn how to create, edit, and delete conversations in BigQuery. You can use conversations to explore your BigQuery data using natural language.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Analyze data with conversations

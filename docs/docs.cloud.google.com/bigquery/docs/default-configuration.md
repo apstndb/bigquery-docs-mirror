@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/default-configuration
 title: Manage configuration settings
 description: Shows how to set and clear configuration settings in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Manage configuration settings

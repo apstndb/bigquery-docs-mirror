@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/running-queries
 title: Run a query
 description: Learn how to run BigQuery interactive and batch queries, including performing dry runs and managing query results.
 data_source: docs.cloud.google.com
-update_time: "2026-05-11T03:34:44Z"
 ---
 
 # Run a query

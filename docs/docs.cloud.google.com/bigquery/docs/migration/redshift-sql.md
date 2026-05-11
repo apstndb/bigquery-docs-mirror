@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/redshift-sql
 title: Amazon Redshift SQL translation guide
 description: Provides a reference to compare statements, functions, data types, and other SQL objects between the Amazon Redshift and GoogleSQL dialects.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Amazon Redshift SQL translation guide

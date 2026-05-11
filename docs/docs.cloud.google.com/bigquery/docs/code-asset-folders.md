@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/code-asset-folders
 title: Organize code assets with folders
 description: Learn about using folders to organize code assets in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Organize code assets with folders

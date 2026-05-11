@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/time-travel
 title: Data retention with time travel and fail-safe
 description: Describes how time travel and fail-safe retain a table's historical data. Also describes the access required for using time travel when row-level access policies have been applied.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Data retention with time travel and fail-safe

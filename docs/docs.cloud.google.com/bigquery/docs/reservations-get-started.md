@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reservations-get-started
 title: Get started with reservations
 description: Shows how to create a reservation and delete a reservation.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # Get started with reservations

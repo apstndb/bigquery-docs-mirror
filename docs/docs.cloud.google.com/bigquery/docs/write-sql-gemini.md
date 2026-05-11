@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/write-sql-gemini
 title: Write queries with Gemini assistance
 description: How to use Gemini in BigQuery to generate, complete, and explain SQL queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Write queries with Gemini assistance

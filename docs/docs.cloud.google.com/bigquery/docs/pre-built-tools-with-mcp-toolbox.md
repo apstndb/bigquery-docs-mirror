@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbo
 title: Connect LLMs to BigQuery with MCP
 description: Integrate your BigQuery project with agents.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Connect LLMs to BigQuery with MCP

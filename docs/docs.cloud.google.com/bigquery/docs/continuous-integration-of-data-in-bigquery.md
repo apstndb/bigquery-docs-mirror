@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/continuous-integration-of-data-
 title: Continuous data integration in BigQuery
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 This document describes principles and techniques for implementing a repeatable workflow that will help you integrate data changes into your BigQuery-based data warehouse (DWH). These changes might include new datasets, new data sources, or updates and changes to existing datasets. The document also describes a reference architecture for this task.

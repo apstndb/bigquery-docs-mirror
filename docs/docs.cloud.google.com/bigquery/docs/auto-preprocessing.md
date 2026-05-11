@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/auto-preprocessing
 title: Automatic feature preprocessing
 description: Understand BigQuery ML automatic feature preprocessing, including missing value imputation and feature transformations.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Automatic feature preprocessing

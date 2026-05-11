@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.FEATURE_INFO function
 description: Get information about the input features that are used to train a BigQuery ML model.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:18Z"
 ---
 
 # The ML.FEATURE\_INFO function

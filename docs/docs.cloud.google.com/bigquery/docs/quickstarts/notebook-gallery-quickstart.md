@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/quickstarts/notebook-gallery-qu
 title: 'Quickstart: Create and run a notebook using the notebook gallery'
 description: Get started creating and running notebooks using BigQuery Studio and the notebook gallery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Create and run a notebook using the notebook gallery

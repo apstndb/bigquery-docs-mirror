@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.ANNOTATE_IMAGE function
 description: Annotate images from BigQuery object table using the `ML.ANNOTATE_IMAGE` function and the Cloud Vision API.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:19Z"
 ---
 
 # The ML.ANNOTATE\_IMAGE function

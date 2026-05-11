@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statisti
 title: Statistical aggregate functions
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:29Z"
 ---
 
 GoogleSQL for BigQuery supports statistical aggregate functions. To learn about the syntax for aggregate function calls, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .

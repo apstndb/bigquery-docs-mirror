@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/sketches
 title: Sketches
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 GoogleSQL for BigQuery supports data sketches. A data sketch is a compact summary of a data aggregation. It captures all the necessary information to either extract an aggregation result, continue a data aggregation, or merge it with another sketch, enabling re-aggregation.

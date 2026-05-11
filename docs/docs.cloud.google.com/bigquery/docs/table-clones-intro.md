@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-clones-intro
 title: Introduction to table clones
 description: Introduces BigQuery table clones, which let you create a low-cost copy of a table as it was at a particular date and time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Introduction to table clones

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/row-level-security-intro
 title: Introduction to BigQuery row-level security
 description: Describes row-level access policies, their performance and security limitations, and compares them to other access control methods– authorized views and table-level access control.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # Introduction to BigQuery row-level security

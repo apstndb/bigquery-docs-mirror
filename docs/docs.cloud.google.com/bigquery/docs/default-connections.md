@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/default-connections
 title: Default connection overview
 description: Describes default connections concepts in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Default connection overview

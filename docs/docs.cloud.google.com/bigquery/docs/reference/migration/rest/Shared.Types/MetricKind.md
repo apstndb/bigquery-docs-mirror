@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared
 title: MetricKind
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2025-10-17T21:03:01Z"
 ---
 
 The kind of measurement. It describes how the data is reported. For information on setting the start time and end time based on the MetricKind, see \[TimeInterval\]\[google.monitoring.v3.TimeInterval\].

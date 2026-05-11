@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraint
 title: Manage Sharing data exchanges and listings using custom constraints
 description: Learn how to create and enforce custom organization policies for Sharing data exchanges and listings.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # Manage Sharing data exchanges and listings using custom constraints

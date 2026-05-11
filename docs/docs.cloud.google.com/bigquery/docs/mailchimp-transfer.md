@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer
 title: Load Mailchimp data into BigQuery
 description: Learn how to use the BigQuery Data Transfer Service Mailchimp connector to ingest data from Mailchimp into BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # Load Mailchimp data into BigQuery

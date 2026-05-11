@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator
 title: Translate queries with the interactive SQL translator
 description: Describes how to translate a Teradata SQL query into a GoogleSQL query by using the BigQuery interactive SQL translator.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:53Z"
 ---
 
 # Translate queries with the interactive SQL translator

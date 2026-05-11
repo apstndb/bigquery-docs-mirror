@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functi
 title: Customize Python functions for BigQuery DataFrames
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Customize Python functions for BigQuery DataFrames

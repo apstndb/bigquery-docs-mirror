@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/redshift-overview
 title: 'Amazon Redshift to BigQuery migration: Overview'
 description: Describes the high-level workflow involved in migrating from Amazon Redshift to BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Amazon Redshift to BigQuery migration: Overview

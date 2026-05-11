@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/making-predictions-with-pytorch
 title: Make predictions with PyTorch models in ONNX format
 description: In this tutorial, you import a PyTorch model in ONNX format into a BigQuery ML dataset. You use the imported model to make predictions with a SQL query.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 [Open Neural Network Exchange](https://onnx.ai/) (ONNX) provides a uniform format designed to represent any machine learning framework. BigQuery ML support for ONNX lets you:

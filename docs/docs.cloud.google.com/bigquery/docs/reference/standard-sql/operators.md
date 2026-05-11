@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operator
 title: Operators
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:38Z"
 ---
 
 GoogleSQL for BigQuery supports operators. Operators are represented by special characters or keywords; they don't use function call syntax. An operator manipulates any number of data inputs, also called operands, and returns a result.

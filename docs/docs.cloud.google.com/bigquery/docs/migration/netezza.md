@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/netezza
 title: Migrate from IBM Netezza
 description: Provides instructions for migrating from IBM Netezza to BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Migrate from IBM Netezza

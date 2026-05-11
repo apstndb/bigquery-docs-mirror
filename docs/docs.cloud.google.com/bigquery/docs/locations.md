@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/locations
 title: BigQuery locations
 description: Understand BigQuery locations, and how location impacts pricing and job execution.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # BigQuery locations

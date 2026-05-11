@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-create
 title: Create table snapshots
 description: Shows how to create a snapshot of a BigQuery table from a specified time and set its expiration date.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Create table snapshots

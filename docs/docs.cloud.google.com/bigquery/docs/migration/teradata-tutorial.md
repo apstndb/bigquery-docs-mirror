@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial
 title: Migrating Teradata to BigQuery tutorial
 description: Describes how to perform a test migration from Teradata to BigQuery using sample data.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Migrating Teradata to BigQuery tutorial

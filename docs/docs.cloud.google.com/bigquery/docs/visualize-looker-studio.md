@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio
 title: Analyze data with Data Studio
 description: Use BigQuery to explore data with Data Studio, a self-service business intelligence platform that lets you build and consume data visualizations, dashboards, and reports.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Analyze data with Data Studio

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/managing-models-vertex
 title: Manage BigQuery ML models in Vertex AI
 description: Register BigQuery ML models with the Vertex AI Model Registry to manage them alongside your Vertex AI models without needing to export them.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # Manage BigQuery ML models in Vertex AI

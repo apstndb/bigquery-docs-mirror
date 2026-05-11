@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-clones-create
 title: Create table clones
 description: Shows how to create a writable, lightweight copy of a BigQuery table using CREATE TABLE CLONE, bq cp, or jobs.insert.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Create table clones

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list
 title: 'Method: projects.list'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-02-25T21:16:43Z"
 ---
 
   - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list#body.HTTP_TEMPLATE)

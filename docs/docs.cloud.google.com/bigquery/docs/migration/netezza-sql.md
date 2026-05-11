@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql
 title: IBM Netezza SQL translation guide
 description: Provides a reference to compare statements, functions, data types, and other SQL objects between the IBM Netezza and BigQuery SQL dialects.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # IBM Netezza SQL translation guide

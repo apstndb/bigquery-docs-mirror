@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reservations-assignments
 title: Manage workload assignments
 description: Learn how to work with capacity commitments, reservations, and assignments in BigQuery. It includes tasks such as purchasing and deleting commitments; and creating, assigning, and deleting reservations.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Manage workload assignments

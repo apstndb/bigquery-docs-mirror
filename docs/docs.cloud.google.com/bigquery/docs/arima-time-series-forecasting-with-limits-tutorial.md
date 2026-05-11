@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-w
 title: Limit forecasted values for an ARIMA_PLUS time series model
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # Limit forecasted values for an ARIMA\_PLUS time series model

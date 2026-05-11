@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1
 title: DiscoveryType
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2025-10-17T21:04:36Z"
 ---
 
 Specifies the type of discovery on the discovery page. Note that this does not control the visibility of the exchange/listing which is defined by IAM permission.

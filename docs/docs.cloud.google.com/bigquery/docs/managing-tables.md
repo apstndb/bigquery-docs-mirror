@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/managing-tables
 title: Manage tables
 description: Shows how to rename, delete, and copy tables; update table properties; and restore deleted tables.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # Manage tables

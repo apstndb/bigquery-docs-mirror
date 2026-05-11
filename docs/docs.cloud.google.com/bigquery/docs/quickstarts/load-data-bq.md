@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq
 title: Use the bq tool
 description: Learn how to create a dataset, load sample data, and query tables with the bq command-line tool.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Use the bq tool

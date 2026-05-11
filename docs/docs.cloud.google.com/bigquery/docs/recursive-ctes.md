@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/recursive-ctes
 title: Work with recursive CTEs
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 In GoogleSQL for BigQuery, a `WITH` clause contains one or more common table expressions (CTEs) that you can reference in a query expression. CTEs can be [non-recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#simple_cte) , [recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#recursive_cte) , or both. The [`RECURSIVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#recursive_keyword) keyword enables recursion in the `WITH` clause ( `WITH RECURSIVE` ).

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/information-schema-columns
 title: COLUMNS view
 description: Describes INFORMATION_SCHEMA.COLUMNS view to get metadata about tables, columns, and partitions.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:34Z"
 ---
 
 # COLUMNS view

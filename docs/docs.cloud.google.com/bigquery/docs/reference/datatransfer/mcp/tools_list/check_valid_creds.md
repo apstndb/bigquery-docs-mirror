@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tool
 title: 'MCP Tools Reference: bigquerydatatransfer.googleapis.com'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-03-25T00:42:13Z"
 ---
 
 ## Tool: `check_valid_creds`

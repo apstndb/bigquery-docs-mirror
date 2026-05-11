@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/graph-modeler
 title: Use the BigQuery Graph visual modeler
 description: Learn how to create, edit, and query graph data in BigQuery Studio using the visual graph modeler.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 # Use the BigQuery Graph visual modeler

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/batch-loading-data
 title: Batch loading data
 description: Describes loading data into BigQuery from Cloud Storage or from a local file as a batch operation.
 data_source: docs.cloud.google.com
-update_time: "2026-05-11T03:28:17Z"
 ---
 
 # Batch loading data

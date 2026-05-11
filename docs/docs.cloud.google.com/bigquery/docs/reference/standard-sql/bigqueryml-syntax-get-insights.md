@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.GET_INSIGHTS function
 description: Retrieve information about changes to key metrics in your multi-dimensional data from a BigQuery ML contribution analysis model.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:18Z"
 ---
 
 # The ML.GET\_INSIGHTS function

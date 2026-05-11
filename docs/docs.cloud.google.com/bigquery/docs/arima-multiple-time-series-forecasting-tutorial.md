@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-fore
 title: Forecast multiple time series with an ARIMA_PLUS univariate model
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 This tutorial teaches you how to use an [`ARIMA_PLUS` univariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) to forecast the future value of a given column, based on the historical values for that column.

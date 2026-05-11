@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/running-jobs
 title: Running jobs programmatically
 description: Shows how to run a BigQuery job programmatically using the jobs.insert method and client libraries, and generate a job ID. Includes examples in C#, Java, and Python.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # Running jobs programmatically

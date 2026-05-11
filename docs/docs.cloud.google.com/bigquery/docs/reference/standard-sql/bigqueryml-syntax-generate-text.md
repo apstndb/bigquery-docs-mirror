@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.GENERATE_TEXT function
 description: Generate text and analyze unstructured data with the BigQuery ML`ML.GENERATE_TEXT` function and Vertex AI models.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:18Z"
 ---
 
 # The ML.GENERATE\_TEXT function

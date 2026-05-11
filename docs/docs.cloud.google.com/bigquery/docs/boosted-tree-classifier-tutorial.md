@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/boosted-tree-classifier-tutoria
 title: Perform classification with a boosted trees model
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 This tutorial teaches you how to use a [boosted trees classifier model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) to predict the income range of individuals based on their demographic data. The model predicts whether a value falls into one of two categories, in this case whether an individual's annual income falls above or below $50,000.

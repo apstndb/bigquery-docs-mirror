@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/sandbox
 title: Try BigQuery using the sandbox
 description: Use the BigQuery sandbox to query a public dataset and visualize the results, learn about the BigQuery sandbox limitations, and learn how to upgrade from the BigQuery sandbox.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # Try BigQuery using the sandbox

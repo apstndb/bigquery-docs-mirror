@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nest
 title: Use nested and repeated fields
 description: Describes best practices to optimize a SELECT statement, such as querying only required columns, filtering partitioned queries, denormalizing data, and using wildcard tables appropriately.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Use nested and repeated fields

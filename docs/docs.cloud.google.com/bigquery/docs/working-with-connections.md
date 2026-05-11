@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/working-with-connections
 title: Manage connections
 description: Manage BigQuery connections. View, list, share, edit, and delete connections for external data sources.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Manage connections

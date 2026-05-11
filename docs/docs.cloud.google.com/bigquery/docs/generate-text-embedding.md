@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/generate-text-embedding
 title: Generate text embeddings by using the AI.GENERATE_EMBEDDING function
 description: Use BigQuery ML to generate embeddings by using the AI.GENERATE_EMBEDDING function.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 # Generate text embeddings by using the AI.GENERATE\_EMBEDDING function

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/authentication/end-user-install
 title: Authenticate installed apps with user accounts
 description: Shows how to set up client credentials and use them to authenticate and connect to the BigQuery API when your app is installed on users' machines.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:11Z"
 ---
 
 # Authenticate installed apps with user accounts

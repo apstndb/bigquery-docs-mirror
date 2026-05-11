@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-update
 title: Update table snapshot metadata
 description: Shows how to change the description, expiration, or access policy of a table snapshot in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Update table snapshot metadata

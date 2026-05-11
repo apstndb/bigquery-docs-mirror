@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-pipelines
 title: Create pipelines
 description: Describes how to create and configure pipelines in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Create pipelines

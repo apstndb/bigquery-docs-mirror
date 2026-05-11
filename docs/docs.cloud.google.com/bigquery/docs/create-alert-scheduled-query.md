@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query
 title: Set up alerts with scheduled queries
 description: Learn how to set up custom alerts using BigQuery scheduled queries and Cloud Monitoring. This document guides you through creating queries, scheduling them, and configuring alert policies based on row count metrics.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Set up alerts with scheduled queries

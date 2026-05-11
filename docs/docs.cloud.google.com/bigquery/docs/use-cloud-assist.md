@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/use-cloud-assist
 title: Use Gemini Cloud Assist
 description: Describes how to use assistive AI with Gemini Cloud Assist in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Use Gemini Cloud Assist

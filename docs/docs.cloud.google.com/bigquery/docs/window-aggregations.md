@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/window-aggregations
 title: Understand window aggregation in continuous queries
 description: Windowing functions assign data into logical components, or windows, which can be used to group data by the BigQuery system time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Understand window aggregation in continuous queries

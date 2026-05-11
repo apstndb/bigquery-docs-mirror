@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/external-metastore-la
 title: Migrate metadata from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-08T16:48:52Z"
 ---
 
 # Migrate metadata from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg

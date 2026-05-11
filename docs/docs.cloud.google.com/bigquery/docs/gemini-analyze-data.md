@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/gemini-analyze-data
 title: Analyze data with Gemini assistance
 description: Learn how to use Gemini in BigQuery to analyze data.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:47:34Z"
 ---
 
 # Analyze data with Gemini assistance

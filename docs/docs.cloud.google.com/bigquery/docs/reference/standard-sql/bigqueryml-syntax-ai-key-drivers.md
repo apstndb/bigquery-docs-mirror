@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The AI.KEY_DRIVERS function
 description: Understand what data contributed the most to changes in a summable metric on your data.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:19Z"
 ---
 
 # The AI.KEY\_DRIVERS function

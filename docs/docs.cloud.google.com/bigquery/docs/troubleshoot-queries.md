@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries
 title: Troubleshoot query issues
 description: Troubleshoot common query issues.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Troubleshoot query issues

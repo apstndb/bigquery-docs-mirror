@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json
 title: Loading JSON data from Cloud Storage
 description: Shows how to load JSON files from Cloud Storage into a new table, or append to, or overwrite a table. Shows how to load nested/repeated JSON data and hive-partitioned JSON data. Describes JSON data types and options, and limitations of loading JSON files from Cloud Storage.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # Loading JSON data from Cloud Storage

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/
 title: 'REST Resource: projects.locations.transferConfigs.transferResources'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-03-25T07:10:27Z"
 ---
 
   - [Resource: TransferResource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource)

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/gemini-overview
 title: Gemini in BigQuery overview
 description: Assistive AI with Gemini in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:47:34Z"
 ---
 
 # Gemini in BigQuery overview

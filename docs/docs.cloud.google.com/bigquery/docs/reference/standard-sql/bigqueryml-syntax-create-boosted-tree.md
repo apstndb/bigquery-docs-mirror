@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The CREATE MODEL statement for boosted trees models using XGBoost
 description: Use the CREATE MODEL statement for creating boosted trees models in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:19Z"
 ---
 
 # The CREATE MODEL statement for boosted trees models using XGBoost

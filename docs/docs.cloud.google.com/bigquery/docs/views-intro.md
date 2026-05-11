@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/views-intro
 title: Introduction to logical views
 description: Describes BigQuery logical views and their limitations, quotas, pricing, and security.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Introduction to logical views

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/redshift
 title: Migrate schema and data from Amazon Redshift
 description: Provides step-by-step instructions for using the BigQuery Data Transfer Service to migrate schema and data from Amazon Redshift to BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Migrate schema and data from Amazon Redshift

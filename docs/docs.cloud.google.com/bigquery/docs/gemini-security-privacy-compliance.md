@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-complia
 title: Security, privacy, and compliance for Gemini in BigQuery
 description: Security, privacy, and compliance for Gemini in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:47:34Z"
 ---
 
 # Security, privacy, and compliance for Gemini in BigQuery

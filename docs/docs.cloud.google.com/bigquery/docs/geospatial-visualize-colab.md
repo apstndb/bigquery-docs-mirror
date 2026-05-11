@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/geospatial-visualize-colab
 title: Visualize geospatial analytics data using a Colab notebook
 description: This tutorial shows you how to visualize geospatial data from BigQuery using a Colab notebook.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 [Video](https://www.youtube.com/watch?v=t_q-qLa1lX0)

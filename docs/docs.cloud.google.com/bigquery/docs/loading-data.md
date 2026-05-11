@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/loading-data
 title: Introduction to loading data
 description: Describes loading data with ELT and ETL data integration in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # Introduction to loading data

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-tra
 title: Load data with cross-cloud operations
 description: Load data into BigQuery with cross-cloud operations.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:53Z"
 ---
 
 # Load data with cross-cloud operations

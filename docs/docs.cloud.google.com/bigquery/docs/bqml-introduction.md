@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/bqml-introduction
 title: Introduction to ML in BigQuery
 description: Understand BigQuery ML, BigQuery's platform for creating, running, and managing generative AI and ML models.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Introduction to ML in BigQuery

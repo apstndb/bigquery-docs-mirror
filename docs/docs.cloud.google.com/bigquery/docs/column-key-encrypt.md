@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/column-key-encrypt
 title: Column-level encryption with Cloud KMS
 description: Describes how to AEAD encrypt the data encryption key used for column-level encryption with a second key encryption key.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Column-level encryption with Cloud KMS

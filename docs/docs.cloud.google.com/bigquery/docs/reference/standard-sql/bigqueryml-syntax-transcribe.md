@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.TRANSCRIBE function
 description: Use the `ML.TRANSCRIBE` function to transcribe audio files from an object table by using the Speech-to-Text API.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:18Z"
 ---
 
 # The ML.TRANSCRIBE function

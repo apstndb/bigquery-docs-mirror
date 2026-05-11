@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction
 title: Build and use a classification model on census data
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 In this tutorial, you use a binary [logistic regression model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) in BigQuery ML to predict the income range of individuals based on their demographic data. A binary logistic regression model predicts whether a value falls into one of two categories, in this case whether an individual's annual income falls above or below $50,000.

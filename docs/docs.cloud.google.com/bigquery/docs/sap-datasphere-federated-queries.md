@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-querie
 title: SAP Datasphere federated queries
 description: Shows how to query data in SAP Datasphere from BigQuery using federated queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # SAP Datasphere federated queries

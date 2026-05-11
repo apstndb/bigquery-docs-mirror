@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reservations-tasks-legacy
 title: Work with legacy slot reservations
 description: This document describes how to work with capacity commitments, reservations, and assignments in BigQuery. It includes tasks such as purchasing and deleting commitments; and creating, assigning, and deleting reservations.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # Work with legacy slot reservations

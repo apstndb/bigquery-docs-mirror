@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau
 title: Analyze BigQuery data with BI Engine and Tableau Desktop
 description: Analyze BigQuery data by using BI Engine and Tableau Desktop.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # Analyze data with BI Engine and Tableau Desktop

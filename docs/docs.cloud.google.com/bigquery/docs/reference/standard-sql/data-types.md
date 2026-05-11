@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-typ
 title: Data types
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:38Z"
 ---
 
 This page provides an overview of all GoogleSQL for BigQuery data types, including information about their value domains. For information on data type literals and constructors, see [Lexical Structure and Syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#literals) .

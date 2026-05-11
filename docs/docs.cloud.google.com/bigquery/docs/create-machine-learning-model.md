@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model
 title: Create an ML model in BigQuery ML by using SQL
 description: Create a machine learning model by using BigQuery ML and SQL queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Create a machine learning model in BigQuery ML by using SQL

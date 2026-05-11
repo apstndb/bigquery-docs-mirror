@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/information-schema-indexes-by-o
 title: SEARCH_INDEXES_BY_ORGANIZATION view
 description: Describes INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION view to get information about search indexes for the whole organization associated with the current project.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:34Z"
 ---
 
 # SEARCH\_INDEXES\_BY\_ORGANIZATION view

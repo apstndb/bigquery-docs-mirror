@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/best-practices-performance-over
 title: Introduction to optimizing query performance
 description: Gives an overview of techniques for optimizing query performance in BigQuery. Optimization improves query speed and reduces cost.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Introduction to optimizing query performance

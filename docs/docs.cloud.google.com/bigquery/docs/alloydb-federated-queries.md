@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries
 title: AlloyDB federated queries
 description: Shows how to query data in AlloyDB from BigQuery using federated queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # AlloyDB federated queries

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn
 title: Make predictions with scikit-learn models in ONNX format
 description: In this tutorial, you import a scikit-learn model in ONNX format into a BigQuery ML dataset. You use the imported model to make predictions with a SQL query.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 This tutorial shows you how to import an [Open Neural Network Exchange](https://onnx.ai/) (ONNX) model that's trained with [scikit-learn](https://scikit-learn.org/stable/index.html) . You import the model into a BigQuery dataset and use it to make predictions using a SQL query.

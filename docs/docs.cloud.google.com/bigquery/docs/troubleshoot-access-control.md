@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control
 title: Troubleshoot IAM permissions in BigQuery
 description: How to troubleshoot issues with IAM permissions in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Troubleshoot IAM permissions in BigQuery

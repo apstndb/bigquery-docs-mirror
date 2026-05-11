@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/goog
 title: Package google.cloud.bigquery.reservation.v1
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-04-09T08:38:40Z"
 ---
 
 ## Index

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/external-table-definition
 title: Create a table definition file for an external data source
 description: Shows how to create a table definition file using schema auto-detect, inline schema, and JSON schema. Explains wildcard support for the table definition files.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:47:34Z"
 ---
 
 # Create a table definition file for an external data source

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/colab-data-apps
 title: Use Data Apps in BigQuery and Data Studio
 description: How to create and share Colab Data Apps using BigQuery and Data Studio.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Use Data Apps in BigQuery and Data Studio

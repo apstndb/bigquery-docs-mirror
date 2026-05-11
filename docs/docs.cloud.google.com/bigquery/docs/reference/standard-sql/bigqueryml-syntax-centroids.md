@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.CENTROIDS function
 description: Use the `ML.CENTROIDS` function to return information about the centroids in a k-means model.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:19Z"
 ---
 
 # The ML.CENTROIDS function

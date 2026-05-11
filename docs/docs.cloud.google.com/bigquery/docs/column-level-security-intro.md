@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/column-level-security-intro
 title: Introduction to column-level access control
 description: Describes column-level access control in BigQuery, its workflow, and its limitations. Shows how to query tables and views with column-level access control using an example use case.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Introduction to column-level access control

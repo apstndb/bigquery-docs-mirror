@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro
 title: Introduction to table snapshots
 description: Introduces BigQuery table snapshots, which let you preserve a low-cost, read-only copy of a table's data as it was at a particular date and time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Introduction to table snapshots

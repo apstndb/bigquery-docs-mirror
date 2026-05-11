@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/release-notes
 title: BigQuery release notes
 description: This page lists the latest release notes for features and updates to BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-08T18:56:38Z"
 ---
 
 This page documents production updates to BigQuery. We recommend that BigQuery developers periodically check this list for any new announcements. BigQuery automatically updates to the latest release and cannot be downgraded to a previous version.

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditio
 title: Conditional expressions
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:38Z"
 ---
 
 GoogleSQL for BigQuery supports conditional expressions. Conditional expressions impose constraints on the evaluation order of their inputs. In essence, they are evaluated left to right, with short-circuiting, and only evaluate the output value that was chosen. In contrast, all inputs to regular functions are evaluated before calling the function. Short-circuiting in conditional expressions can be exploited for error handling or performance tuning.

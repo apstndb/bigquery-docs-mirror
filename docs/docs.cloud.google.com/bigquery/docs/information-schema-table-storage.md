@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-storag
 title: TABLE_STORAGE view
 description: Describes INFORMATION_SCHEMA.TABLE_STORAGE view to get metadata about a current snapshot of storage usage for the current project.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:53Z"
 ---
 
 # TABLE\_STORAGE view

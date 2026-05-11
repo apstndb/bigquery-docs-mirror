@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/data-profile-scan
 title: Profile your data
 description: Describes how to use BigQuery and Knowledge Catalog to create data profile scans, which allow you to understand the structure, quality, and distribution of your data.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Profile your data

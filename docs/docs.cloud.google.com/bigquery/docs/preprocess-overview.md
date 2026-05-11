@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/preprocess-overview
 title: Feature preprocessing overview
 description: Understand BigQuery ML feature preprocessing, including automatic and manual techniques.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Feature preprocessing overview

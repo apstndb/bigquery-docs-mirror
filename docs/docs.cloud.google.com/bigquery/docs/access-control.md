@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/access-control
 title: BigQuery IAM roles and permissions
 description: Lists the Identity and Access Management (IAM) predefined roles and permissions for BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # BigQuery IAM roles and permissions

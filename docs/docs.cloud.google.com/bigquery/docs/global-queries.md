@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/global-queries
 title: Global queries
 description: Shows how to query data stored in more than one location with a single SQL statement
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 # Global queries

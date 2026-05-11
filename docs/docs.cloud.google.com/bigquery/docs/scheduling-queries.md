@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/scheduling-queries
 title: Scheduling queries
 description: Shows how to set up, update, and delete scheduled queries in BigQuery, and describes configuration options, quotas, pricing, and supported regions for scheduled queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # Scheduling queries

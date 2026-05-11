@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets
 title: 'REST Resource: datasets'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-03-14T23:23:17Z"
 ---
 
   - [Resource: Dataset](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset)

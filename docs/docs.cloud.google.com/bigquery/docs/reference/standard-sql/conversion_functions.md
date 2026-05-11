@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversi
 title: Conversion functions
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:38Z"
 ---
 
 GoogleSQL for BigQuery supports conversion functions. These data type conversions are explicit, but some conversions can happen implicitly. You can learn more about implicit and explicit conversion [here](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .

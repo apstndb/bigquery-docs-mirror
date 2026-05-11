@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment
 title: Set up the Azure-Google Cloud VPN network attachment
 description: Learn how to establish a VPN connection between {{dynamic_data.site_values.cloud_name_short}} and Microsoft Azure.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Set up the Azure-Google Cloud VPN network attachment

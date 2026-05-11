@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/graph-visualization
 title: Visualize graphs
 description: Overview of BigQuery Graph visualizations, which show the graph elements returned by a query or the elements of a graph schema.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 # Visualize graphs

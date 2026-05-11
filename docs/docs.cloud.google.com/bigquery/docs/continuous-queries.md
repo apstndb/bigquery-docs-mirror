@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/continuous-queries
 title: Create continuous queries
 description: Learn how to create and manage continuous queries in BigQuery for real-time data analysis and export to Pub/Sub, Bigtable, or BigQuery tables.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Create continuous queries

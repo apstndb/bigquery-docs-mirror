@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-scheduled
 title: Create table snapshots with a scheduled query
 description: Shows how to create a Google Cloud service account and grant it permissions to create periodic table snapshots using a scheduled query.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Create table snapshots with a scheduled query

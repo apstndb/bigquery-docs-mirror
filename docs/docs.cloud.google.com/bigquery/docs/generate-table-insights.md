@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/generate-table-insights
 title: Generate table insights
 description: Use Gemini in BigQuery to generate descriptions and single-table queries for BigQuery tables.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 # Generate table insights

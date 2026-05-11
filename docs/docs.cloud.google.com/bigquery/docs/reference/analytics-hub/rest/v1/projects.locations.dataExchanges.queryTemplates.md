@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1
 title: 'REST Resource: projects.locations.dataExchanges.queryTemplates'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2025-11-12T09:57:02Z"
 ---
 
   - [Resource: QueryTemplate](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#QueryTemplate)

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/api-sql-translator
 title: Translate SQL queries with the translation API
 description: Describes how to translate SQL queries or scripts into GoogleSQL queries by using the translation API.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T08:52:12Z"
 ---
 
 # Translate SQL queries with the translation API

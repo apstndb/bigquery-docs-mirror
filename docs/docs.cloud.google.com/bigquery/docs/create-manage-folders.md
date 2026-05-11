@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-manage-folders
 title: Create and manage folders
 description: Create and manage folders in BigQuery. You can use user folders and team folders to organize and grant access to code assets.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Create and manage folders

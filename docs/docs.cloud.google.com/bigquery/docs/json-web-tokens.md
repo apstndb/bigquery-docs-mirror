@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/json-web-tokens
 title: Authenticate with JWTs
 description: Describes how to use JSON Web Tokens to authenticate a BigQuery API request.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:53Z"
 ---
 
 # Authenticate with JWTs

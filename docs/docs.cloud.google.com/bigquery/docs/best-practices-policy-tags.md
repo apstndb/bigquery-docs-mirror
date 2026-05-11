@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/best-practices-policy-tags
 title: Best practices for using policy tags in BigQuery
 description: Guidance for designing a hierarchy of policy tags, which can be applied to table columns to implement column-level access control, and for testing access using monitor-only mode.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Best practices for using policy tags in BigQuery

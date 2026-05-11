@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/slot-recommender
 title: View edition slot recommendations
 description: Learn how to use the BigQuery slot recommender for both reservations billing and on-demand billing. The recommender creates recommendations for edition or on-demand workloads.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:00Z"
 ---
 
 # View edition slot recommendations

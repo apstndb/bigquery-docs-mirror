@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/ai-introduction
 title: Introduction to AI in BigQuery
 description: Provides an overview of machine learning, AI functions, search, AI assistance, and agents in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # Introduction to AI in BigQuery

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/analyze-data-pipe-syntax
 title: Analyze data using pipe syntax
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # Analyze data using pipe syntax

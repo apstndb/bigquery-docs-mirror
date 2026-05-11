@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-metadata
 title: View table snapshot metadata
 description: Describes how to view metadata for a BigQuery table snapshot, such as its base table, creation and expiration times, size, and schema.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # View table snapshot metadata

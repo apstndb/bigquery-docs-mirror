@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/access-control-intro
 title: Introduction to security and access controls in BigQuery
 description: Provides an introduction to Identity and Access Management (IAM) access controls, roles, and permissions for BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # Introduction to security and access controls in BigQuery

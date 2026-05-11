@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared
 title: BigQueryAuditMetadata.WriteDisposition
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-01T16:46:49Z"
 ---
 
 Describes whether a job should overwrite or append the existing destination table if it already exists.

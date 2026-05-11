@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigqu
 title: Apache Iceberg managed tables
 description: Describes how to use Iceberg managed tables.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Apache Iceberg managed tables

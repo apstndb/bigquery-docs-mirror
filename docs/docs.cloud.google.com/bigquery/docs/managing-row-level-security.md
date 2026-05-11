@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/managing-row-level-security
 title: Use row-level security
 description: Shows how to create, update, list, and delete a table's row-level access policies, and shows how to query a table with row-access policies in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # Use row-level security

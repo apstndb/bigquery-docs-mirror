@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration-assessment
 title: Migration assessment
 description: Describes how to use the migration assessment feature to evaluate your Teradata, Amazon Redshift, Apache Hive,or Snowflake data warehouse for migration to BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:50:04Z"
 ---
 
 # Migration assessment

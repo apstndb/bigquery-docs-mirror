@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/use-knowledge-catalog
 title: Use Knowledge Catalog with BigQuery
 description: Learn how Knowledge Catalog interacts with BigQuery as a central automation and governance layer for metadata.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Use Knowledge Catalog with BigQuery

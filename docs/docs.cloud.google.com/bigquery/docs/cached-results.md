@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/cached-results
 title: Using cached query results
 description: Describes the use of cached query results, its limitations, pricing, quotas, and storage. Shows how to disable the retrieval of cached query results, and ensure and verify its usage.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Using cached query results

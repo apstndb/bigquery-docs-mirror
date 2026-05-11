@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment
 title: Set up the AWS-Google Cloud VPN and network attachment
 description: Learn how to set up a VPN connection between Amazon Web Services (AWS) and {{dynamic_data.site_values.cloud_name}}.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Set up the AWS-Google Cloud VPN and network attachment

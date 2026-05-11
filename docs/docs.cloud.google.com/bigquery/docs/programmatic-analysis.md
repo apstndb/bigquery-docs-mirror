@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/programmatic-analysis
 title: Programmatic analysis tools
 description: Describes multiple ways for writing and running code to analyze data managed in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Programmatic analysis tools

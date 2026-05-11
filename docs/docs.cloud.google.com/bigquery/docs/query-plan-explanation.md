@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/query-plan-explanation
 title: Query plan and timeline
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 Embedded within query jobs, BigQuery includes diagnostic query plan and timing information. This is similar to the information provided by statements such as `EXPLAIN` in other database and analytical systems. This information can be retrieved from the API responses of methods such as [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) .

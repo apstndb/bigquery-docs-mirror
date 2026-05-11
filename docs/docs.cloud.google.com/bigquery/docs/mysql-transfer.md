@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/mysql-transfer
 title: Load MySQL data into BigQuery
 description: Learn how to use the BigQuery Data Transfer Service MySQL connector to ingest data from your MySQL instance into BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:50:04Z"
 ---
 
 # Load MySQL data into BigQuery

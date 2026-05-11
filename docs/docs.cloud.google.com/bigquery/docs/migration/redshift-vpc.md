@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc
 title: Migrating Amazon Redshift data with a VPC network
 description: Provides step-by-step instructions for using BigQuery Data Transfer Service to migrate schema and data from Amazon Redshift to BigQuery when using a VPC.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Migrating Amazon Redshift data with a VPC network

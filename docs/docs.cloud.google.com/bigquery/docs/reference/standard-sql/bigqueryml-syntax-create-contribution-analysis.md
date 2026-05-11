@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The CREATE MODEL statement for contribution analysis models
 description: Learn how to create contribution analysis models in BigQuery ML.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:19Z"
 ---
 
 # The CREATE MODEL statement for contribution analysis models

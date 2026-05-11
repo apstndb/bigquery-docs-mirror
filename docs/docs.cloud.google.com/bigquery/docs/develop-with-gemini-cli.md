@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli
 title: Analyze data with the Gemini CLI
 description: Integrate your BigQuery project with various developer tools by using the Gemini CLI. This extension provides tools for data analysis, forecasting, and contribution_analysis.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Analyze data with the Gemini CLI

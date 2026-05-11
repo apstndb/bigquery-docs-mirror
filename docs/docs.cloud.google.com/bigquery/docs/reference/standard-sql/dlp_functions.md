@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_func
 title: DLP encryption functions
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:38Z"
 ---
 
 GoogleSQL for BigQuery supports the following DLP functions that allow interoperable encryption and decryption between BigQuery and [Cloud Data Loss Prevention (Cloud DLP)](https://cloud.google.com/dlp/docs) , using [AES-SIV](https://cloud.google.com/dlp/docs/pseudonymization#aes-siv) . To use DLP functions, you need a [new cryptographic key and then use that key to get a wrapped key](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrapped-key-dlp-functions) .

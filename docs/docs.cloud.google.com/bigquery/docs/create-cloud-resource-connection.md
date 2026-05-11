@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connectio
 title: Create and set up a Cloud resource connection
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Create and set up a Cloud resource connection

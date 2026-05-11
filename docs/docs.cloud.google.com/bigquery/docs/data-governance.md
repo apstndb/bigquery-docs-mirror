@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/data-governance
 title: Introduction to data governance in BigQuery
 description: Describes data security and governance features in BigQuery, such as data discovery, data quality, security, access control, and sharing.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Introduction to data governance in BigQuery

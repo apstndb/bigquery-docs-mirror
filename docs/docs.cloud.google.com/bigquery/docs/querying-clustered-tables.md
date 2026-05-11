@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables
 title: Querying clustered tables
 description: Shows how to optimize querying clustered tables by using filters and following best practices.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Querying clustered tables

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-implicit-tutorial
 title: Create recommendations based on implicit feedback with a matrix factorization model
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 This tutorial teaches you how to create a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the Google Analytics 360 user session data in the public [`GA360_test.ga_sessions_sample` table](https://console.cloud.google.com/bigquery?p=cloud-training-demos&d=GA360_test&t=ga_sessions_sample&page=table) . You then use the matrix factorization model to generate content recommendations for site users.

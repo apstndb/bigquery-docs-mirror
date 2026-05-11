@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The AI.GENERATE_BOOL function
 description: Generate Boolean values from text and unstructured data with BigQuery's `AI.GENERATE_BOOL` function and Vertex AI Gemini models.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:19Z"
 ---
 
 # The AI.GENERATE\_BOOL function

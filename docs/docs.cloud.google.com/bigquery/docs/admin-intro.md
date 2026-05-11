@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/admin-intro
 title: Introduction to BigQuery administration
 description: Gives an overview of the tasks required to administer BigQuery and the features that help administrators do them.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T05:05:25Z"
 ---
 
 # Introduction to BigQuery administration

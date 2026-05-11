@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables
 title: Create clustered tables
 description: Shows how to create clustered tables in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Create clustered tables

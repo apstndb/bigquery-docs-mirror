@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/data-quality-scan
 title: Scan for data quality issues
 description: This page describes how to use BigQuery and Knowledge Catalog to create data quality scans, which allow you to identify and fix data quality issues in your BigQuery tables.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Scan for data quality issues

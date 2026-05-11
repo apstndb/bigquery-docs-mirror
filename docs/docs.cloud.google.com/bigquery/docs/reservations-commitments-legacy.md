@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy
 title: Purchase and manage legacy slot commitments
 description: This document describes how to work with capacity commitments in BigQuery. It includes tasks such as purchasing and deleting commitments.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Purchase and manage legacy slot commitments

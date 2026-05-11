@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-list
 title: List table snapshots
 description: Shows how to list the table snapshots in a BigQuery dataset or find all of the snapshots of a specified base table.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # List table snapshots

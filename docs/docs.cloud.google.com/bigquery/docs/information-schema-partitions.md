@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/information-schema-partitions
 title: PARTITIONS view
 description: Describes INFORMATION_SCHEMA.PARTITIONS view to contain one row for each parameter of each routine in a dataset.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:34Z"
 ---
 
 # PARTITIONS view

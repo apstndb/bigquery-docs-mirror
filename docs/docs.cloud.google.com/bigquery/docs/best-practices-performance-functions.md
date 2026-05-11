@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/best-practices-performance-func
 title: Best practices for functions
 description: Describes best practices for optimizing queries that use functions.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Best practices for functions

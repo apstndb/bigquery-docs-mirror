@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/making-predictions-with-importe
 title: Make predictions with imported TensorFlow models
 description: Import TensorFlow models into a BigQuery ML dataset and use them to make predictions from a SQL query.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 In this tutorial, you import TensorFlow models into a BigQuery ML dataset. Then, you use a SQL query to make predictions from the imported models.

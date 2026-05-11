@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/editions-intro
 title: Understand BigQuery editions
 description: Gives an overview of the different editions available in BigQuery and their associated features.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:47:34Z"
 ---
 
 # Understand BigQuery editions

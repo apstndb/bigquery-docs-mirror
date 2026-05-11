@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/
 title: 'REST Resource: projects.locations.reservations.assignments'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2025-12-22T23:02:58Z"
 ---
 
   - [Resource: Assignment](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments#Assignment)

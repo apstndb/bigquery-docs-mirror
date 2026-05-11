@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability
 title: Legacy SQL feature availability
 description: Learn about the changes to BigQuery legacy SQL usage restrictions.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:53Z"
 ---
 
 # Legacy SQL feature availability

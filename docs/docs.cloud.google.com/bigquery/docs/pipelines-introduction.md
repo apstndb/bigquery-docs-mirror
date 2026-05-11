@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/pipelines-introduction
 title: Introduction to BigQuery pipelines
 description: Streamline data tasks with BigQuery pipelines. Create, manage, and schedule sequences of notebooks and SQL queries for efficient data pipelines.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Introduction to BigQuery pipelines

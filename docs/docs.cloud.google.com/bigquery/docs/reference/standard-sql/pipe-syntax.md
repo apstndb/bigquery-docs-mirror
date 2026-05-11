@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syn
 title: Pipe query syntax
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:38Z"
 ---
 
 Pipe query syntax is an extension to GoogleSQL that's simpler and more concise than [standard query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) . Pipe syntax supports the same operations as standard syntax, and improves some areas of SQL query functionality and usability.

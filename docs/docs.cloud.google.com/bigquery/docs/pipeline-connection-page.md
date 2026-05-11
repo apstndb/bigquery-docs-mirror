@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page
 title: Create data integration workflows using the Pipelines & Connections page
 description: Streamline data integration tasks in the BigQuery BigQuery web UI by using the Pipelines & Connections page.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Create data integration workflows using the Pipelines & Connections page

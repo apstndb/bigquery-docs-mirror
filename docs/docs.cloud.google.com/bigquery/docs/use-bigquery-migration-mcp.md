@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp
 title: Learn how to use the BigQuery Migration Service MCP server
 description: Learn how to use the BigQuery Migration Service MCP server to perform SQL translation tasks, including translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL translations.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Learn how to use the BigQuery Migration Service MCP server

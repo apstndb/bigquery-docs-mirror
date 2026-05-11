@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigquery
 title: The ML.ADVANCED_WEIGHTS function
 description: Understand `ML.ADVANCED_WEIGHTS` for linear and binary logistic regression models, including weights, p-values, and standard errors.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # The ML.ADVANCED\_WEIGHTS function

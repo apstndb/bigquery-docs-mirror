@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference
 title: bq command-line tool reference
 description: This reference provides a synopsis, description, examples, flags, and arguments for each command in bq, the BigQuery command line tool.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # bq command-line tool reference

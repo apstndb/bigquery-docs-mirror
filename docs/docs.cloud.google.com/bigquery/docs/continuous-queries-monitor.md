@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor
 title: Monitor continuous queries
 description: Describes how to monitor continuous queries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Monitor continuous queries

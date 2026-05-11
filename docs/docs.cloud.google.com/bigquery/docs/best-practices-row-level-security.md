@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-securi
 title: Best practices for row-level security in BigQuery
 description: Describes considerations for using BigQuery row-level security, including mitigation of side-channel attacks, preventing access windows during updates, using the Filtered Data Viewer role judiciously, and considering performance impact for partitioned tables.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Best practices for row-level security in BigQuery

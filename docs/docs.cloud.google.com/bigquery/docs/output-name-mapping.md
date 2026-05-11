@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/output-name-mapping
 title: Map SQL object names for batch translation
 description: Describes how to specify output name mapping rules for use in batch translation.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:50:04Z"
 ---
 
 # Map SQL object names for batch translation

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/console-video-learning
 title: BigQuery interactive walkthroughs and videos
 description: Interactive and video tutorials for BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # BigQuery interactive walkthroughs and videos

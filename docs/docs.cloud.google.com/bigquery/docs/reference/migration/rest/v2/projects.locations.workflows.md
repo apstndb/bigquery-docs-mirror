@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/pro
 title: 'REST Resource: projects.locations.workflows'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-04-29T22:55:45Z"
 ---
 
   - [Resource: MigrationWorkflow](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MigrationWorkflow)

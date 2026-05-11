@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial
 title: Create recommendations based on explicit feedback with a matrix factorization model
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 This tutorial teaches you how to create a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the customer movie ratings in the [`movielens1m`](https://grouplens.org/datasets/movielens/1m/) dataset. You then use the matrix factorization model to generate movie recommendations for users.

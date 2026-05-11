@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/data-insights
 title: Data insights overview
 description: Use Gemini in BigQuery to uncover insights about your data at the table and dataset level. Generate SQL queries, relationship graphs, and data descriptions instantly.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Data insights overview

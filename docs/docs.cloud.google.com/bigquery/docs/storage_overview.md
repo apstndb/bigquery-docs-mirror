@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/storage_overview
 title: Overview of BigQuery storage
 description: Gives an overview of BigQuery storage, including descriptions of tables, table clones, views, snapshots, and datasets, and strategies for performance optimizations such as partitioning and clustering.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Overview of BigQuery storage

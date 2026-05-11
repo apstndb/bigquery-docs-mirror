@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/function
 title: Function calls
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:38Z"
 ---
 
 When you call a function, specific rules may apply. You can also add the `SAFE.` prefix, which prevents functions from generating some types of errors. To learn more, see the next sections.

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embeddi
 title: Generate image embeddings by using the AI.GENERATE_EMBEDDING function
 description: Learn how to generate image embeddings using BigQuery ML and Vertex AI models with the AI.GENERATE_EMBEDDING function.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:52Z"
 ---
 
 # Generate image embeddings by using the AI.GENERATE\_EMBEDDING function

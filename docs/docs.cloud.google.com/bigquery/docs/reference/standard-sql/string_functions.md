@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_f
 title: String functions
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:44Z"
 ---
 
 GoogleSQL for BigQuery supports string functions. These string functions work on two different values: `STRING` and `BYTES` data types. `STRING` values must be well-formed UTF-8.

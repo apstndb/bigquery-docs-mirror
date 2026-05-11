@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python
 title: Work with user-defined functions in Python
 description: How to implement scalar functions in Python and use them in user-defined functions (UDFs) in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Work with user-defined functions in Python

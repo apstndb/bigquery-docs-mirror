@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/data-prep-introduction
 title: BigQuery data preparation overview
 description: Describes BigQuery data preparation pipelines, which let you clean data with SQL suggested by Gemini.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # BigQuery data preparation overview

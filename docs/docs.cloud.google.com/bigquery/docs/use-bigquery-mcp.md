@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp
 title: Use the BigQuery MCP server
 description: 'Learn how to use the BigQuery MCP server to perform these data-related tasks: examining BigQuery resources, generating accurate and efficient SQL queries, securely executing queries, and interpreting query results.'
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
 ---
 
 # Use the BigQuery MCP server

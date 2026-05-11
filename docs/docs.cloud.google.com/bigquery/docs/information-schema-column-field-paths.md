@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/information-schema-column-field
 title: COLUMN_FIELD_PATHS view
 description: Describes INFORMATION_SCHEMA.COLUMN_FIELD_PATHS views to get metadata about tables, columns, and partitions.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:34Z"
 ---
 
 # COLUMN\_FIELD\_PATHS view

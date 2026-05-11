@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui
 title: Explore BigQuery in the Google Cloud console
 description: Shows how to use the {{dynamic_data.site_values.cloud_name_short}} console to work with BigQuery projects, display resources (such as datasets and tables), compose and run SQL queries, and view query and job histories.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Explore BigQuery in the Google Cloud console

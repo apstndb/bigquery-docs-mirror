@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/authorized-views
 title: Authorized views
 description: Describes how to create BigQuery authorized views and materialized authorized views using the {{dynamic_data.site_values.cloud_name_short}} console, the bq update command, the tables.patch REST API method, and the Go, Java, and Python client libraries.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Authorized views

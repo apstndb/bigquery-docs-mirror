@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipeline
 title: Use the Data Engineering Agent to build and modify data pipelines
 description: Use the Data Engineering Agent to build data pipelines to load and process data in BigQuery
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
 ---
 
 # Use the Data Engineering Agent to build and modify data pipelines

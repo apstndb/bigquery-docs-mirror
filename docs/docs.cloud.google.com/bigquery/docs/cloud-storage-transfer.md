@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer
 title: Load Cloud Storage data into BigQuery
 description: Learn how to load data from Cloud Storage to BigQuery using the BigQuery Data Transfer Service for Cloud Storage connector.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Load Cloud Storage data into BigQuery

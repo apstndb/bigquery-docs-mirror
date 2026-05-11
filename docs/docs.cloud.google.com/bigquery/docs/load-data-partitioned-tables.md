@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables
 title: Load data into partitioned tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:53Z"
 ---
 
 # Load data into partitioned tables

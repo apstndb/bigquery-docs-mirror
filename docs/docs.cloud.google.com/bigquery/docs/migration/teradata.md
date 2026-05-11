@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/teradata
 title: Migrate schema and data from Teradata
 description: Provides step-by-step instructions for using BigQuery Data Transfer Service to migrate schema and data from Teradata to BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Migrate schema and data from Teradata

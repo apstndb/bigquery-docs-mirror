@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/column-data-masking
 title: Mask column data
 description: Shows how to add, view, update, and remove data policies by using the {{dynamic_data.site_values.cloud_name_short}} console or the BigQuery Data Policy API.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Mask column data

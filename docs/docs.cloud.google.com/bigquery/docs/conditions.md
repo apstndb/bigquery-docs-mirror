@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/conditions
 title: Control access with IAM Conditions
 description: Describes how to set IAM Conditions on your BigQuery resources.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Control access with IAM Conditions

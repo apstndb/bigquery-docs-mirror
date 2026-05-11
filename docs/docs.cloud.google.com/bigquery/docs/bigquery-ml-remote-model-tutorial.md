@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutori
 title: Make predictions with remote models on Vertex AI
 description: Make predictions from a SQL query using a remote TensorFlow model in Vertex AI.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 In this tutorial, you register a Vertex AI endpoint as a remote model in BigQuery. Then, you use the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions using the remote model.

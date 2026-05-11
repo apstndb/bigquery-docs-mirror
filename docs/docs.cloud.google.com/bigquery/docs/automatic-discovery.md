@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/automatic-discovery
 title: Discover and catalog Cloud Storage data
 description: Ease data security and governance by automatically cataloging data assets in Cloud Storage.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Discover and catalog Cloud Storage data

@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/use-spark
 title: Run PySpark code in BigQuery Studio notebooks
 description: Design, develop and run PySpark code in a BigQuery notebook. Create and configure Spark sessions using Python, templates, and Gemini Code Assist. Create Iceberg tables with metadata in Lakehouse runtime catalog.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:13Z"
 ---
 
 # Run PySpark code in BigQuery Studio notebooks

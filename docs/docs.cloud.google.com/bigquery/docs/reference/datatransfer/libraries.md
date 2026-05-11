@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/librarie
 title: BigQuery Data Transfer Service API Client Libraries
 description: Information about interacting with BigQuery Data Transfer in C#, Go, Java, Node.js, PHP, Python, Ruby.
 data_source: docs.cloud.google.com
-update_time: "2025-12-17T03:15:19Z"
 ---
 
 This page shows how to get started with the Cloud Client Libraries for the BigQuery Data Transfer API. Client libraries make it easier to access Google Cloud APIs from a supported language. Although you can use Google Cloud APIs directly by making raw requests to the server, client libraries provide simplifications that significantly reduce the amount of code you need to write.

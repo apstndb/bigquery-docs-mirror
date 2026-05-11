@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks
 title: Schedule notebooks
 description: Learn how to schedule and deploy Colab Enterprise notebooks in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:50:04Z"
 ---
 
 # Schedule notebooks

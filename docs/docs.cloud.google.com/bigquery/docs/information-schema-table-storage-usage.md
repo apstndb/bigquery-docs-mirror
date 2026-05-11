@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/information-schema-table-storag
 title: TABLE_STORAGE_USAGE_TIMELINE view
 description: Describes INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE view to get metadata about billed table storage usage for the current project.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:53Z"
 ---
 
 # TABLE\_STORAGE\_USAGE\_TIMELINE view

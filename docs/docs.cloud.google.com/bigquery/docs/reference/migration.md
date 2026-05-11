@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/reference/migration
 title: BigQuery Migration API Client Libraries
 description: Information about interacting with BigQuery Migration API in Go, Java, Python.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:52:00Z"
 ---
 
 This page shows how to get started with the Cloud Client Libraries for the BigQuery Migration API. Client libraries make it easier to access Google Cloud APIs from a supported language. Although you can use Google Cloud APIs directly by making raw requests to the server, client libraries provide simplifications that significantly reduce the amount of code you need to write.

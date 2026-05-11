@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/procedures
 title: Work with SQL stored procedures
 description: Learn about BigQuery stored procedures. Stored procedures are collection of statements that can be called from other queries or other stored procedures.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Work with SQL stored procedures

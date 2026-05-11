@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/migration/teradata-migration-in
 title: 'Teradata to BigQuery migration: Introduction'
 description: Describes the key features of BigQuery and why a user might want to migrate from Teradata.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:46:21Z"
 ---
 
 # Teradata to BigQuery migration: Introduction

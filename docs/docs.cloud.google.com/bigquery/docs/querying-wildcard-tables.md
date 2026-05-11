@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables
 title: Query multiple tables using a wildcard table
 description: Shows how to query multiple tables using a wildcard table, filter and scan tables using the _TABLE_SUFFIX pseudocolumn, and scan a range of ingestion-time partitioned tables using the _PARTITIONTIME pseudocolumn.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:49Z"
 ---
 
 # Query multiple tables using a wildcard table

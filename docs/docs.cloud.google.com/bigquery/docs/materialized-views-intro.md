@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/materialized-views-intro
 title: Introduction to materialized views
 description: Describes characteristics, benefits, and limitations of BigQuery materialized views and compares them with techniques, such as caching, scheduled queries, and standard views.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
 ---
 
 # Introduction to materialized views

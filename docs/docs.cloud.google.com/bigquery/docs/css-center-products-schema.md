@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/css-center-products-schema
 title: Comparison Shopping Services Center table schema
 description: Describes the BigQuery table names and schema for Comparison Shopping Services (CSS) Center data.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Comparison Shopping Services Center table schema

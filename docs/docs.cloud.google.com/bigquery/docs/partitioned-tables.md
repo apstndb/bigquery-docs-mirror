@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/partitioned-tables
 title: Introduction to partitioned tables
 description: Describes partitioned table in BigQuery, its types, limitations, quotas, pricing, and security.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:50:04Z"
 ---
 
 # Introduction to partitioned tables

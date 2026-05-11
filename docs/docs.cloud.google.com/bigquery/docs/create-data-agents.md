@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/create-data-agents
 title: Create data agents
 description: Learn how to create, edit, and delete data agents in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:57:15Z"
 ---
 
 # Create data agents

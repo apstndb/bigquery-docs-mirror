@@ -4,7 +4,6 @@ uri: https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introductio
 title: Introduction to BigQuery DataFrames
 description: BigQuery DataFrames lets you use BigQuery to process terabytes of data and train machine learning models with Python, pandas, and scikit-learn APIs.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:44:45Z"
 ---
 
 # Introduction to BigQuery DataFrames
