@@ -4,7 +4,7 @@ uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv
 title: Loading CSV data from Cloud Storage
 description: Describes how to load CSV data from Cloud Storage to BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:45:08Z"
+update_time: "2026-05-11T03:34:58Z"
 ---
 
 # Loading CSV data from Cloud Storage

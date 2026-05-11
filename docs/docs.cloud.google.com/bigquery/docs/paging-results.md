@@ -4,7 +4,7 @@ uri: https://docs.cloud.google.com/bigquery/docs/paging-results
 title: Read data with BigQuery API using pagination
 description: Shows how to page through the table data and query results using the BigQuery REST API, with examples in C#, Java, Go, Python, PHP, Node.js, and Ruby.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:50:04Z"
+update_time: "2026-05-11T03:24:44Z"
 ---
 
 # Read data with BigQuery API using pagination

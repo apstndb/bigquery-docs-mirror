@@ -4,7 +4,7 @@ uri: https://docs.cloud.google.com/bigquery/docs/datasets
 title: Create datasets
 description: Shows how to create datasets in BigQuery.
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:54:37Z"
+update_time: "2026-05-11T03:28:17Z"
 ---
 
 # Create datasets

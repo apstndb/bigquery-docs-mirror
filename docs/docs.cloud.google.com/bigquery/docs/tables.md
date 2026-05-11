@@ -4,7 +4,7 @@ uri: https://docs.cloud.google.com/bigquery/docs/tables
 title: Create and use tables
 description: Describes how to create and use standard tables in BigQuery
 data_source: docs.cloud.google.com
-update_time: "2026-05-09T04:49:56Z"
+update_time: "2026-05-11T03:23:43Z"
 ---
 
 # Create and use tables
