@@ -158,10 +158,10 @@ To create a data transfer for Search Ads 360 reporting, you need either your Sea
           - `destination_table_name` : a list of BigQuery tables to include the custom Floodlight variables in. When the BigQuery Data Transfer Service retrieves data for these tables, the transfer includes the custom Floodlight variables in the query.
           - `bigquery_column_name_suffix` : the user-defined friendly column name. The BigQuery Data Transfer Service appends the suffix after the standard field name to differentiate different custom Floodlight variables. Depending on the use case, the BigQuery Data Transfer Service generates a BigQuery column name as follows:
         
-        |             | Custom Floodlight variables as metrics and segments                                               | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource                       |
-        | ----------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-        | `metrics`   | ` metrics_conversion_custom_metrics_               bigquery_column_name_suffix              `     | ` metrics_raw_event_conversion_metrics_               bigquery_column_name_suffix              `     |
-        | `dimension` | ` segments_conversion_custom_dimensions_               bigquery_column_name_suffix              ` | ` segments_raw_event_conversion_dimensions_               bigquery_column_name_suffix              ` |
+        |             | Custom Floodlight variables as metrics and segments                                                 | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource                         |
+        | ----------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+        | `metrics`   | ` metrics_conversion_custom_metrics_                bigquery_column_name_suffix               `     | ` metrics_raw_event_conversion_metrics_                bigquery_column_name_suffix               `     |
+        | `dimension` | ` segments_conversion_custom_dimensions_                bigquery_column_name_suffix               ` | ` segments_raw_event_conversion_dimensions_                bigquery_column_name_suffix               ` |
         
 
         The following is an example **Custom Floodlight Variable** entry that specifies two custom Floodlight variables:
@@ -267,10 +267,10 @@ Where:
           - CFV\_COLUMN\_SUFFIX : the user-defined friendly column name. The BigQuery Data Transfer Service appends the suffix after the standard field name to differentiate different custom Floodlight variables. Depending on the use case, the BigQuery Data Transfer Service generates a BigQuery column name as follows:
       - `use_client_account_currency` : specify `TRUE` to use the currency of the client's account to load cost data, instead of the currency of the account used in this data transfer.
     
-    |             | Custom Floodlight variables as metrics and segments                                           | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource                   |
-    | ----------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-    | `metrics`   | ` metrics_conversion_custom_metrics_             bigquery_column_name_suffix            `     | ` metrics_raw_event_conversion_metrics_             bigquery_column_name_suffix            `     |
-    | `dimension` | ` segments_conversion_custom_dimensions_             bigquery_column_name_suffix            ` | ` segments_raw_event_conversion_dimensions_             bigquery_column_name_suffix            ` |
+    |             | Custom Floodlight variables as metrics and segments                                             | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource                     |
+    | ----------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+    | `metrics`   | ` metrics_conversion_custom_metrics_              bigquery_column_name_suffix             `     | ` metrics_raw_event_conversion_metrics_              bigquery_column_name_suffix             `     |
+    | `dimension` | ` segments_conversion_custom_dimensions_              bigquery_column_name_suffix             ` | ` segments_raw_event_conversion_dimensions_              bigquery_column_name_suffix             ` |
     
 
 > **Caution:** You cannot configure notifications using the command-line tool.

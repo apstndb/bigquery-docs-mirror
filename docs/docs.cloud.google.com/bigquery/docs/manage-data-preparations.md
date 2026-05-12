@@ -28,6 +28,7 @@ To get the permissions that you need to prepare data in BigQuery, ask your admin
   - [BigQuery Studio User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioUser) ( `roles/bigquery.studioUser` ) on the project
   - [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` ) on the project
   - Access the source tables: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the table, dataset, or project
+  - Share data preparations: [Dataform Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the table, dataset, or project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -42,8 +43,6 @@ To get the permissions you need to manage data preparation metadata in Knowledge
 #### Give access to the Dataform service account
 
 To ensure that the Dataform service account has the necessary permissions to execute data preparations in BigQuery, ask your administrator to grant the following IAM roles to the Dataform service account:
-
-> **Important:** You must grant these roles to the Dataform service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - Access the source tables: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the table, dataset, or project
   - Access the destination tables: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table, dataset, or project

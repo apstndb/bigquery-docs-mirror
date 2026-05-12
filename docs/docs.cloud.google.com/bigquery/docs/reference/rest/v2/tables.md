@@ -14,6 +14,8 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.SCHEMA_REPRESENTATION)
   - [DataPolicyOption](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DataPolicyOption)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DataPolicyOption.SCHEMA_REPRESENTATION)
+  - [DataPolicyList](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DataPolicyList)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DataPolicyList.SCHEMA_REPRESENTATION)
   - [FieldElementType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FieldElementType)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FieldElementType.SCHEMA_REPRESENTATION)
   - [TimePartitioning](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning)
@@ -444,7 +446,7 @@ A field in TableSchema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {&quot;names&quot;: [string]},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {&quot;names&quot;: [string]},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -516,6 +518,12 @@ A list of policy tag resource names. For example, "projects/1/locations/eu/taxon
 ` object ( DataPolicyOption  ` )
 
 Optional. Data policies attached to this field, used for field-level access control.
+
+`dataPolicyList`
+
+` object ( DataPolicyList  ` )
+
+Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information.
 
 `maxLength`
 
@@ -624,6 +632,34 @@ Fields
 `string`
 
 Data policy resource name in the form of projects/projectId/locations/locationId/dataPolicies/data\_policy\_id.
+
+## DataPolicyList
+
+A list of data policy options. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) .
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataPolicies&quot;: [{object (DataPolicyOption)}]}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`dataPolicies[]`
+
+` object ( DataPolicyOption  ` )
+
+Contains a list of data policy options. At most 9 data policies are allowed per field.
 
 ## FieldElementType
 

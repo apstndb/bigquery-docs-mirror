@@ -62,7 +62,7 @@ Use the following table to determine whether to use TimesFM, `ARIMA_PLUS` , or `
 <tr class="odd">
 <td>Data history used</td>
 <td>Uses all time points in the training data, but can be customized to use fewer time points.</td>
-<td>Uses 512 time points.</td>
+<td>Can be customized using the <code dir="ltr" translate="no">context_window</code> parameter of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast"><code dir="ltr" translate="no">AI.FORECAST</code> function</a> .</td>
 </tr>
 <tr class="even">
 <td>Accuracy</td>
@@ -93,6 +93,11 @@ Use the following table to determine whether to use TimesFM, `ARIMA_PLUS` , or `
 <td>Low.</td>
 </tr>
 <tr class="even">
+<td>Model evaluation</td>
+<td>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate"><code dir="ltr" translate="no">ML.ARIMA_EVALUATE</code> function</a> .</td>
+<td>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate"><code dir="ltr" translate="no">AI.EVALUATE</code> function</a> .</td>
+</tr>
+<tr class="odd">
 <td>Best use cases</td>
 <td><ul>
 <li>You want full control of the model including customization.</li>

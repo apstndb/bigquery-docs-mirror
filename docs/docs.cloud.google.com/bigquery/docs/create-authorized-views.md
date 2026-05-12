@@ -362,13 +362,15 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Grant your data analysts permission to run query jobs
 
-To query the view, your data analysts need the `bigquery.jobs.create` permission so they can run query jobs, and they need to be granted access to the view. In this section, you grant the `bigquery.user` role to your data analysts. The `bigquery.user` role includes `bigquery.jobs.create` permission. In a later step, you grant your data analysts permission to access the view.
+To query the view, your data analysts need the `bigquery.jobs.create` permission so they can run query jobs. This permission is required only on the project where the query job runs (the billing or execution project), which can be different from the project that contains the view.
 
-To assign the data analysts group to the `bigquery.user` role at the project level, do the following:
+In this section, you grant the `bigquery.user` role to your data analysts on the project they use to run their jobs. The `bigquery.user` role includes the `bigquery.jobs.create` permission. In a later step, you grant your data analysts permission to access the view.
+
+To assign the data analysts group to the `bigquery.user` role on the project they use to run their jobs, do the following:
 
 1.  In the Google Cloud console, go to the **IAM** page.
 
-2.  Ensure your project is selected in the project selector.
+2.  Ensure that the project your analysts use to run their jobs is selected in the project selector.
 
 3.  Click person\_add **Grant access** .
 
@@ -384,7 +386,7 @@ To assign the data analysts group to the `bigquery.user` role at the project lev
 
 For your data analysts to query the view, they need to be granted the `bigquery.dataViewer` role at either the dataset level or the view level. Granting this role at the dataset level gives your analysts access to all tables and views in the dataset. Because the dataset created in this tutorial contains a single authorized view, you're granting access at the dataset level. If you have a collection of authorized views that you need to grant access to, consider using an [authorized dataset](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) instead.
 
-The `bigquery.user` role you granted to your data analysts previously gives them the permissions required to create query jobs. However, they cannot successfully query the view unless they also have `bigquery.dataViewer` access to the authorized view or to the dataset that contains the view.
+The `bigquery.user` role you granted to your data analysts previously gives them the permissions required to create query jobs in the project where the query jobs run. However, they cannot successfully query the view unless they also have `bigquery.dataViewer` access to the authorized view or to the dataset that contains the view.
 
 To give your data analysts `bigquery.dataViewer` access to the dataset that contains the authorized view, do the following:
 

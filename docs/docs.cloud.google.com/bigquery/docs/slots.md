@@ -239,7 +239,9 @@ In this example, there is a total of 1000 baseline slots between the two reserva
 
 ### Maximum available slots
 
-You can calculate the maximum number of slots a reservation can use by adding the baseline slots, the maximum number of autoscale slots, and any slots in commitments that were created with the same edition and are not covered by the baseline slots. The example in the previous image is set up as follows:
+You can calculate the maximum number of slots a reservation can use by adding the baseline slots, the maximum number of autoscale slots, and any slots in commitments that were created with the same edition and are not covered by the baseline slots. The following example is set up as follows:
+
+![Autoscaling reservations with capacity commitments.](https://docs.cloud.google.com/static/bigquery/images/autoscaling-example.png)
 
   - A capacity commitment of 1000 annual slots. Those slots are assigned as baseline slots in the `etl` reservation and the `dashboard` reservation.
   - 700 baseline slots assigned to the `etl` reservation.

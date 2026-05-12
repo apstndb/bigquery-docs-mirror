@@ -87,35 +87,41 @@ You also need to grant users or groups access to the project and dataset that co
 
 > **Note:** You can't change the SQL query of an authorized view unless you're a data owner.
 
-#### Admin permissions on the dataset that contains the view
+#### Permissions on the dataset that contains the view
 
 Views are treated as table resources in BigQuery, so creating a view requires the same permissions as creating a table. You must also have permissions to query any tables that are referenced by the view's SQL query.
 
-To create a view, you need the `bigquery.tables.create` IAM permission. The `roles/bigquery.dataEditor` predefined IAM role includes the permissions that you need to create a view.
-
-Additionally, if you have the `bigquery.datasets.create` permission, you can create views in the datasets that you create. To create a view for data that you don't own, you must have `bigquery.tables.getData` permission for that table.
+  - To create a dataset, you need `bigquery.datasets.create` IAM permission on the project.
+  - To create a view, you need the `bigquery.tables.create` IAM permission on the dataset. The `roles/bigquery.dataEditor` predefined IAM role includes the permissions that you need to create a view.
+  - To create a view that queries a table you don't have access to, you must be granted the `bigquery.tables.getData` permission on the table queried by the view.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-#### Admin permissions on the second dataset that gives access to the view
+#### Permissions on the dataset that contains the source data
 
-To update dataset properties, you need the following IAM permissions:
+To authorize a view, the view is granted read permissions to the dataset the source data.
+
+To perform this authorization, you need the following permissions on the dataset that contains the source data:
+
+> **Note:** To create or update an authorized view in a authorized dataset, you don't need the `bigquery.datasets.update` permission.
 
   - `bigquery.datasets.update`
-  - `bigquery.datasets.setIamPolicy` (only required when updating dataset access controls in the Google Cloud console)
+  - `datasets.getIamPolicy`
+  - `datasets.setIamPolicy`
 
-The `roles/bigquery.dataOwner` predefined IAM role includes the permissions that you need to update dataset properties.
-
-Additionally, if you have the `bigquery.datasets.create` permission, you can update properties of the datasets that you create.
-
-For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
+For additional permissions needed to update datasets, see the [required permissions](https://docs.cloud.google.com/bigquery/docs/updating-datasets#required_permissions) .
 
 #### User permissions on the project and dataset for the view
 
 To share an authorized view with users or groups, you must grant the users or groups the following IAM permissions:
 
-  - The `roles/bigquery.jobUser` IAM role to the project that contains the authorized view. This role grants the `bigquery.jobs.create` permission which is required to run query jobs against the view.
-  - The `roles/bigquery.dataViewer` IAM role to the dataset that contains the authorized view. This role grants the `bigquery.tables.getData` which is required to query the view.
+  - The `roles/bigquery.jobUser` (or `roles/bigquery.user` ) IAM role to the project where the query job runs (the billing or execution project). This role grants the `bigquery.jobs.create` permission which is required to run query jobs against the view.
+    
+    The `roles/bigquery.jobUser` IAM role is needed only for the project where you want to run the job, regardless of where the view is hosted.
+
+  - The `roles/bigquery.dataViewer` IAM role to the dataset that contains the authorized view. This role grants the `bigquery.tables.getData` permission, which is required to query the view.
+    
+    If a user queries the authorized view from a separate project, they don't need the `roles/bigquery.jobUser` role on the project that hosts the view. They need the `roles/bigquery.dataViewer` role on the dataset that contains the view, and they need the `roles/bigquery.jobUser` role on the project where the query runs.
 
 ## Work with authorized views
 

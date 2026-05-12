@@ -22,7 +22,7 @@ You can use the Google Cloud console or the BigQuery Data Policy API to work wit
 
 When you have completed these steps, users running queries against the column get unmasked data, masked data, or an access denied error, depending on the groups that they belong to and the roles that they have been granted. For more information, see [How Masked Reader and Fine-Grained Reader roles interact](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#role-interaction) .
 
-Alternatively, you can apply data policies directly on a column ( [Preview](https://cloud.google.com/products#product-launch-stages) ). For more information, see [Mask data with data policies directly on a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) .
+Alternatively, you can apply data policies directly on a column. For more information, see [Mask data with data policies directly on a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) .
 
 ## Mask data with policy tags
 
@@ -943,8 +943,6 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
             print(f"Error deleting data policy '{name}': {e}")
 
 ## Mask data by applying data policies to a column
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security-feedback@google.com> .
 
 As an alternative to creating policy tags, you can create data policies and apply them directly on a column.
 

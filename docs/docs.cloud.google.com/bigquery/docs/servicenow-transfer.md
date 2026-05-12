@@ -280,8 +280,8 @@ Replace the following:
     <td>Optional</td>
     <td>Specify the cloud type of your ServiceNow account. Supported values are:
     <ul>
-    <li><code dir="ltr" translate="no">COMMERCIAL_CLOUD</code> , if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">https://               INSTANCE_ID              .service-now.com</code></li>
-    <li><code dir="ltr" translate="no">GOVERNMENT_COMMUNITY_CLOUD</code> if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">https://               INSTANCE_ID              .servicenowservices.com</code></li>
+    <li><code dir="ltr" translate="no">COMMERCIAL_CLOUD</code> , if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">https://                INSTANCE_ID               .service-now.com</code></li>
+    <li><code dir="ltr" translate="no">GOVERNMENT_COMMUNITY_CLOUD</code> if your ServiceNow instance URL follows the pattern <code dir="ltr" translate="no">https://                INSTANCE_ID               .servicenowservices.com</code></li>
     </ul></td>
     </tr>
     <tr class="even">

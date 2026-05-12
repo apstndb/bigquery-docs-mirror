@@ -91,11 +91,11 @@ Keep in mind the following restrictions when using regional endpoints:
 
 To access BigQuery resources in a manner that's compliant with data residency or sovereignty requirements, use the jurisdictional Google Cloud console URLs:
 
-| Resource                   | URL                                                                                                                                                                                                       |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dataset list for a project | ` https://console.           JURISDICTION          .cloud.google.com/bigquery?project=           PROJECT_ID          `                                                                                    |
-| Table list for a dataset   | `https://console.           JURISDICTION          .cloud.google.com/bigquery/projects/           PROJECT_ID          /datasets/           DATASET_NAME          /tables`                                  |
-| Details for a table        | ` https://console.           JURISDICTION          .cloud.google.com/bigquery/projects/           PROJECT_ID          /datasets/           DATASET_NAME          /tables/           TABLE_NAME          ` |
+| Resource                   | URL                                                                                                                                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dataset list for a project | ` https://console.            JURISDICTION           .cloud.google.com/bigquery?project=            PROJECT_ID           `                                                                                        |
+| Table list for a dataset   | `https://console.            JURISDICTION           .cloud.google.com/bigquery/projects/            PROJECT_ID           /datasets/            DATASET_NAME           /tables`                                    |
+| Details for a table        | ` https://console.            JURISDICTION           .cloud.google.com/bigquery/projects/            PROJECT_ID           /datasets/            DATASET_NAME           /tables/            TABLE_NAME           ` |
 
 Replace `  JURISDICTION  ` with one of the following values:
 

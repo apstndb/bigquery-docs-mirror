@@ -48,9 +48,9 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 Views are treated as table resources in BigQuery, so creating a view requires the same permissions as creating a table. You must also have permissions to query any tables that are referenced by the view's SQL query.
 
-To create a view, you need the `bigquery.tables.create` IAM permission. The `roles/bigquery.dataEditor` predefined IAM role includes the permissions that you need to create a view.
-
-Additionally, if you have the `bigquery.datasets.create` permission, you can create views in the datasets that you create. To create a view for data that you don't own, you must have `bigquery.tables.getData` permission for that table.
+  - To create a dataset, you need `bigquery.datasets.create` IAM permission on the project.
+  - To create a view, you need the `bigquery.tables.create` IAM permission on the dataset. The `roles/bigquery.dataEditor` predefined IAM role includes the permissions that you need to create a view.
+  - To create a view that queries a table you don't have access to, you must be granted the `bigquery.tables.getData` permission on the table queried by the view.
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
