@@ -20,9 +20,12 @@ Creates a new data transfer configuration.
 
 ### HTTP request
 
+Choose a location:
+
+  
 `POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/locations/*}/transferConfigs`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

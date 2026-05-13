@@ -20,9 +20,12 @@ Enroll data sources in a user project. This allows users to create transfer conf
 
 ### HTTP request
 
+Choose a location:
+
+  
 `POST https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*}:enrollDataSources`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

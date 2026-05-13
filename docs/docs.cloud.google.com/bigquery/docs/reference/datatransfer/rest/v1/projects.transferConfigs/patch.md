@@ -20,9 +20,12 @@ Updates a data transfer configuration. All fields must be set, even if they are 
 
 ### HTTP request
 
+Choose a location:
+
+  
 `PATCH https://bigquerydatatransfer.googleapis.com/v1/{transferConfig.name=projects/*/transferConfigs/*}`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

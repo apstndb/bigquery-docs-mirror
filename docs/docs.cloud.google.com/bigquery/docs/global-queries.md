@@ -163,7 +163,7 @@ For information about quotas regarding global queries, see [Query jobs](https://
   - You can't query `RANGE` type columns with global queries.
   - You can't query columns using [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with global queries.
   - You can't query [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) from a remote region in a global query.
-  - Global [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location).
+  - Global [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location). Instead, create authorized views in the region where your data is located and query the authorized views through global queries.
   - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) over global queries are not supported.
   - If your global query references `STRUCT` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the remote region that filters `STRUCT` columns and returns only the necessary fields as individual columns.
   - Global queries are not executed atomically. In cases where data replication succeeds, but the overall query fails, you are still billed for the data replication.

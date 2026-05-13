@@ -20,9 +20,12 @@ Unenroll data sources in a user project. This allows users to remove transfer co
 
 ### HTTP request
 
+Choose a location:
+
+  
 `POST https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*}:unenrollDataSources`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

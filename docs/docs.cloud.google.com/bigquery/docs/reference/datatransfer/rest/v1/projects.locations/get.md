@@ -19,9 +19,12 @@ Gets information about a location.
 
 ### HTTP request
 
+Choose a location:
+
+  
 `GET https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*}`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

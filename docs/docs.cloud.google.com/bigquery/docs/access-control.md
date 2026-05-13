@@ -344,6 +344,7 @@ Repository
 </ul>
 <p><code dir="ltr" translate="no">dataplex.datascans.*</code></p>
 <ul>
+<li><code dir="ltr" translate="no">dataplex.datascans.cancel</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.create</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.delete</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.get</code></li>
@@ -484,6 +485,7 @@ These resources within a dataset:
 </ul>
 <p><code dir="ltr" translate="no">cloudkms.operations.get</code></p>
 <p><code dir="ltr" translate="no">cloudkms.  projects.  showEffectiveAutokeyConfig</code></p>
+<p><code dir="ltr" translate="no">dataplex.datascans.cancel</code></p>
 <p><code dir="ltr" translate="no">dataplex.datascans.create</code></p>
 <p><code dir="ltr" translate="no">dataplex.datascans.delete</code></p>
 <p><code dir="ltr" translate="no">dataplex.datascans.get</code></p>
@@ -621,6 +623,7 @@ These resources within a dataset:
 <p><code dir="ltr" translate="no">cloudkms.  projects.  showEffectiveAutokeyConfig</code></p>
 <p><code dir="ltr" translate="no">dataplex.datascans.*</code></p>
 <ul>
+<li><code dir="ltr" translate="no">dataplex.datascans.cancel</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.create</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.delete</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.get</code></li>
@@ -1328,6 +1331,7 @@ Repository
 </ul>
 <p><code dir="ltr" translate="no">dataplex.datascans.*</code></p>
 <ul>
+<li><code dir="ltr" translate="no">dataplex.datascans.cancel</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.create</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.delete</code></li>
 <li><code dir="ltr" translate="no">dataplex.datascans.get</code></li>
@@ -1397,6 +1401,7 @@ Repository
 <li><code dir="ltr" translate="no">dataprocrm.workloads.get</code></li>
 <li><code dir="ltr" translate="no">dataprocrm.workloads.list</code></li>
 </ul>
+<p><code dir="ltr" translate="no">geminicloudassist.  agents.  invoke</code></p>
 <p><code dir="ltr" translate="no">geminidataanalytics.  locations.  useDataEngineeringAgent</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.get</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.list</code></p></td>
@@ -1538,6 +1543,7 @@ Repository
 <li><code dir="ltr" translate="no">dataprocrm.workloads.get</code></li>
 <li><code dir="ltr" translate="no">dataprocrm.workloads.list</code></li>
 </ul>
+<p><code dir="ltr" translate="no">geminicloudassist.  agents.  invoke</code></p>
 <p><code dir="ltr" translate="no">geminidataanalytics.  locations.  useDataEngineeringAgent</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.get</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.list</code></p></td>
@@ -1809,8 +1815,7 @@ BigQuery Connection API offers the following service agent roles. Service agent 
 <li><code dir="ltr" translate="no">monitoring.  monitoredResourceDescriptors.  get</code></li>
 <li><code dir="ltr" translate="no">monitoring.  monitoredResourceDescriptors.  list</code></li>
 </ul>
-<p><code dir="ltr" translate="no">monitoring.timeSeries.create</code></p>
-<p><code dir="ltr" translate="no">telemetry.metrics.write</code></p></td>
+<p><code dir="ltr" translate="no">monitoring.timeSeries.create</code></p></td>
 </tr>
 </tbody>
 </table>

@@ -28,9 +28,12 @@ For gRPC and client library implementations, the resource name is passed as the 
 
 ### HTTP request
 
+Choose a location:
+
+  
 `GET https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*}/locations`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

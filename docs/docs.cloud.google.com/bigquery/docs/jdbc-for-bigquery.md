@@ -318,7 +318,7 @@ No
 
 The threshold for the number of rows in a query response. When this number is exceeded, and the `EnableHighThroughputAPI` and `HighThroughputActivationRatio` conditions are met, the driver starts using the Storage Read API.
 
-`100`
+`10000`
 
 Integer
 
@@ -416,17 +416,7 @@ No
 
 `LogLevel`
 
-The level of detail logged by the [`java.util.logging` package](https://docs.oracle.com/javase/8/docs/api/java/util/logging/package-summary.html) during database interactions. Logging can affect performance, so only enable it temporarily to capture an issue. One of the following:  
-
-  - `0` : the `OFF` level
-  - `1` : the `SEVERE` level
-  - `2` : the `WARNING` level
-  - `3` : the `INFO` level
-  - `4` : the `CONFIG` level
-  - `5` : the `FINE` level
-  - `6` : the `FINER` level
-  - `7` : the `FINEST` level
-  - `8` : the `ALL` level
+The level of detail logged by the driver. For more information, see [Logging](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#logging) .
 
 `0`
 
@@ -923,6 +913,44 @@ The following example performs a bulk-insert operation with the [`executeBatch` 
     }
     
     statement.executeBatch();
+
+## Logging
+
+To troubleshoot issues with the JDBC driver for BigQuery, you can enable logging by setting connection properties or environment variables. Logging can affect performance and take disk space, so only enable it temporarily to capture an issue.
+
+### Log levels
+
+The `LogLevel` property determines the level of detail that is logged by the `java.util.logging` package:
+
+  - `0` : `OFF` (Default)
+  - `1` : `SEVERE`
+  - `2` : `WARNING`
+  - `3` : `INFO`
+  - `4` : `CONFIG`
+  - `5` : `FINE`
+  - `6` : `FINER`
+  - `7` : `FINEST`
+  - `8` : `ALL`
+
+We recommend level 6 for general troubleshooting. Levels 7 and 8 are limited to `ResultSet` operations and generate a large volume of logs.
+
+### Enable logging in the connection string
+
+To enable logging in the connection string, add the `LogLevel` and `LogPath` connection properties, for example:
+
+    jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=MyTestProject;OAuthType=3;LogLevel=6;LogPath=/tmp/jdbc-logs;
+
+### Enable logging with environment variables
+
+If your development tool doesn't allow connection string edits, you can also set the log level and log path with the following environment variables before running your application:
+
+  - `BIGQUERY_JDBC_LOG_LEVEL` : the log level (0-8).
+  - `BIGQUERY_JDBC_LOG_PATH` : the directory for log files.
+
+For example, in a Linux or macOS environment, run the following:
+
+    export BIGQUERY_JDBC_LOG_LEVEL=6
+    export BIGQUERY_JDBC_LOG_PATH=/tmp/jdbc-logs
 
 ## Pricing
 

@@ -19,9 +19,12 @@ Retrieves a supported data source and returns its settings.
 
 ### HTTP request
 
+Choose a location:
+
+  
 `GET https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/dataSources/*}`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

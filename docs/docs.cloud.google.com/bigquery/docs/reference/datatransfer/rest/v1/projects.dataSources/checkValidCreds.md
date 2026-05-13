@@ -19,9 +19,12 @@ Returns true if valid credentials exist for the given data source and requesting
 
 ### HTTP request
 
+Choose a location:
+
+  
 `POST https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/dataSources/*}:checkValidCreds`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

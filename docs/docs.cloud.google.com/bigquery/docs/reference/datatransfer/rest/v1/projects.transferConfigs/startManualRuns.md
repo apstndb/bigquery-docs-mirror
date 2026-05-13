@@ -25,9 +25,12 @@ If scheduling a single run, it is set to execute immediately (scheduleTime equal
 
 ### HTTP request
 
+Choose a location:
+
+  
 `POST https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/transferConfigs/*}:startManualRuns`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

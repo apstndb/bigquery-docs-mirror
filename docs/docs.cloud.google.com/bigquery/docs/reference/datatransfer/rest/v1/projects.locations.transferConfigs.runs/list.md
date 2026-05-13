@@ -20,9 +20,12 @@ Returns information about running and completed transfer runs.
 
 ### HTTP request
 
+Choose a location:
+
+  
 `GET https://bigquerydatatransfer.googleapis.com/v1/{parent=projects/*/locations/*/transferConfigs/*}/runs`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

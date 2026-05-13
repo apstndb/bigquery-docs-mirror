@@ -300,6 +300,14 @@ Error string: `Resources exceeded during query execution: Google Sheets service 
 
 This can be a transient error that can be fixed by rerunning the query. If the error persists after a query rerun, consider simplifying your spreadsheet; for example, by minimizing the use of formulas. For more information, see [external table limitations](https://docs.cloud.google.com/bigquery/docs/external-tables#limitations) .
 
+Error string: `Access Denied: BigQuery BigQuery: Permission denied while getting Drive credentials`
+
+To address this error, follow these steps:
+
+  - Confirm that you have viewer access to the Drive file linked to the external table.
+  - If the bq command-line tool version is `2.1.12` or older, use the `--enable-gdrive-access` flag.
+  - Verify that you or the service account running the query have been granted the necessary roles to query Google Drive external tables.
+
 ## What's next
 
   - Learn about [using SQL in BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-sql) .

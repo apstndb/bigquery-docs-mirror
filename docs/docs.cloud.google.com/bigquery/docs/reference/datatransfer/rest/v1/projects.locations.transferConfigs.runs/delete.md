@@ -19,9 +19,12 @@ Deletes the specified transfer run.
 
 ### HTTP request
 
+Choose a location:
+
+  
 `DELETE https://bigquerydatatransfer.googleapis.com/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 

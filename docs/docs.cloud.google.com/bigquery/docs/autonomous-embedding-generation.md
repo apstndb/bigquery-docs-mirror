@@ -194,10 +194,6 @@ The following query shows you information about all of your automatically genera
 
 The `generation_expression` field shows you the call to the `AI.EMBED` function that is used to generate the embeddings on the column.
 
-## Use your own reservation
-
-By default, BigQuery uses on-demand slots to handle the processing required to maintain the generated embedding column. To ensure predictable and consistent performance, you can optionally [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) and set the `job_type` to `BACKGROUND` . When a background reservation is present, BigQuery uses it to maintain the generated embedding column instead.
-
 ## Troubleshooting
 
 The generated embedding column contains two fields: `result` and `status` . If an error occurs when BigQuery tries to generate an embedding for a particular row in your table, then the `result` field is `NULL` and the `status` field describes the error. For example, if the source column is `NULL` then the `result` embedding is also `NULL` and the status is `NULL value is not supported for embedding generation` .
@@ -218,6 +214,16 @@ A more severe error can stall embedding generation. In this case, you can query 
     ORDER BY j.creation_time DESC;
 
 ## Track costs
+
+Autonomous embedding generation costs fall into the following categories.
+
+### BigQuery background DML costs
+
+Generated embeddings are written to your table using background DML jobs. By default, BigQuery uses on-demand slots to handle these jobs. The table's project is billed following the [DML on-demand billing model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
+
+Alternatively, to ensure predictable and consistent performance, you can [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) and set the `job_type` to `BACKGROUND` . When a background reservation is present, BigQuery uses it to run the background DML jobs. And the background reservation will be billed for slot time usage from the background DML jobs.
+
+### Vertex AI costs
 
 Autonomous embedding generation sends requests to Vertex AI, which can incur costs. To track the Vertex AI costs incurred by background embedding jobs, follow these steps:
 
