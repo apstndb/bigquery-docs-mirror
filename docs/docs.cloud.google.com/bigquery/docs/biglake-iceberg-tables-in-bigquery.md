@@ -201,10 +201,7 @@ Replace the following:
   - TABLE\_NAME : the name of the table you're creating.
   - DATA\_TYPE : the data type of the information that is contained in the column.
   - CLUSTER\_COLUMN\_LIST (optional): a comma-separated list containing up to four columns. They must be top-level, non-repeated columns.
-  - CONNECTION\_NAME : the name of the connection. For example, `myproject.us.myconnection` .
-
-To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . REGION . CONNECTION\_ID .
-
+  - CONNECTION\_NAME : the name of the connection. For example, `myproject.us.myconnection` . To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection name.
   - STORAGE\_URI : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . For example, `gs://mybucket/table` .
 
 ### bq

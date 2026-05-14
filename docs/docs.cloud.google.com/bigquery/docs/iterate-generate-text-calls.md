@@ -117,7 +117,7 @@ Run the `bqutil.procedure.bqml_generate_text` stored procedure, which iterates t
     
         CALL `bqutil.procedure.bqml_generate_text`(
             "bigquery-public-data.bbc_news.fulltext",   -- source table
-            "PROJECT_ID.sample.news_generated_text",  -- destination table
+            &quot;PROJECT_ID.sample.news_generated_text",  -- destination table
             "PROJECT_ID.sample.generate_text",        -- model
             "body",                                     -- content column
             ["filename"],                               -- key columns
