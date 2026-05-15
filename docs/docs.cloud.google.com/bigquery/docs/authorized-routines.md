@@ -140,6 +140,10 @@ Authorized routines are subject to dataset limits. For more information, see [Da
 
 If you update a routine, then its existing authorized routines authorization expires. BigQuery automatically removes stale authorized routines authorization entries within 24 hours. To update the entries immediately, you must manually delete the entry from the 'Currently authorized routines' list before re-authorizing it.
 
+## Limitations
+
+You can't create an authorized routine in a secondary replica. For more information, see [Resource behavior in dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
+
 ## Authorized routine example
 
 The following is an end-to-end example of creating and using an authorized UDF.

@@ -126,87 +126,102 @@ Primary and secondary replicas are subject to the following differences:
 </thead>
 <tbody>
 <tr class="odd">
+<td>Authorized dataset</td>
+<td>Authorized dataset</td>
+<td>You can't create an authorized dataset in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.</td>
+</tr>
+<tr class="even">
+<td>Authorized routine</td>
+<td>Authorized routine</td>
+<td>You can't create an authorized routine in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.</td>
+</tr>
+<tr class="odd">
+<td>Authorized view</td>
+<td>Authorized view</td>
+<td>You can't create an authorized view in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.</td>
+</tr>
+<tr class="even">
 <td>BigLake table</td>
 <td>BigLake table</td>
 <td>Not supported.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>BigLake Apache Iceberg table</td>
 <td>BigLake Apache Iceberg table</td>
 <td>See <a href="https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery">Lakehouse runtime catalog cross-region replication and disaster recovery</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>External table</td>
 <td>External table</td>
 <td>Only the external table definition is replicated. The query fails when the Cloud Storage bucket is not co-located in the same location as a replica.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Logical view</td>
 <td>Logical view</td>
 <td>Logical views that reference a dataset or resource that is not located in the same location as the logical view fail when queried.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Managed table</td>
 <td>Managed table</td>
 <td>No difference.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Materialized view</td>
 <td>Materialized view</td>
 <td>If a referenced table is not in the same region as the materialized view, the query fails. Replicated materialized views may see staleness above the view's <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness">max staleness</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Model</td>
 <td>Model</td>
 <td>Stored as managed tables.<br />
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Remote function</td>
 <td>Remote function</td>
 <td>Connections are regional. Remote functions that reference a dataset or resource (connection) that is not located in the same location as the remote function fail when run.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Routines</td>
 <td>User-defined function (UDF) or stored procedure</td>
 <td>Routines that reference a dataset or resource that is not located in the same location as the routine fail when run. Any routine that references a connection, such as remote functions, does not work outside the source region.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Row Access Policy</td>
 <td>Row Access Policy</td>
 <td>No difference.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Search index</td>
 <td>Search index</td>
 <td>Only index metadata is replicated. Index data only exists in primary region.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Stored procedure</td>
 <td>Stored procedure</td>
 <td>Stored procedures that reference a dataset or resource that is not located in the same location as the stored procedure fail when run.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Table clone</td>
 <td>Managed table</td>
 <td>Billed as a deep copy in secondary replica.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Table snapshot</td>
 <td>Table snapshot</td>
 <td>Billed as a deep copy in secondary replica.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Table-valued function (TVF)</td>
 <td>TVF</td>
 <td>TVFs that reference a dataset or resource that is not located in the same location as the TVF fail when run.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>UDF</td>
 <td>UDF</td>
 <td>UDFs that reference a dataset or resource that is not located in the same location as the UDF fail when run.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Data policy on a column</td>
 <td>Data policy on a column</td>
 <td>Custom data policies that reference a UDF that is not located in the same location as the policy fail when querying the table that the policy is attached to.</td>

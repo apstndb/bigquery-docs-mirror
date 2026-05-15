@@ -45,9 +45,9 @@ https://docs.cloud.google.com/bigquery/docs/auditing-policy-tags	2026-05-14T04:0
 https://docs.cloud.google.com/bigquery/docs/authentication	2026-05-14T04:00:28Z
 https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed	2026-05-14T03:55:34Z
 https://docs.cloud.google.com/bigquery/docs/authentication/getting-started	2026-05-14T04:20:37Z
-https://docs.cloud.google.com/bigquery/docs/authorized-datasets	2026-05-14T04:00:28Z
-https://docs.cloud.google.com/bigquery/docs/authorized-routines	2026-05-14T04:00:28Z
-https://docs.cloud.google.com/bigquery/docs/authorized-views	2026-05-14T04:00:28Z
+https://docs.cloud.google.com/bigquery/docs/authorized-datasets	2026-05-14T18:27:20Z
+https://docs.cloud.google.com/bigquery/docs/authorized-routines	2026-05-14T18:27:20Z
+https://docs.cloud.google.com/bigquery/docs/authorized-views	2026-05-14T18:27:20Z
 https://docs.cloud.google.com/bigquery/docs/auto-preprocessing	2026-05-14T04:00:28Z
 https://docs.cloud.google.com/bigquery/docs/automatic-discovery	2026-05-14T04:00:28Z
 https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation	2026-05-14T04:00:28Z
@@ -127,7 +127,7 @@ https://docs.cloud.google.com/bigquery/docs/continuous-queries	2026-05-14T04:00:
 https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction	2026-05-14T04:00:28Z
 https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor	2026-05-14T04:00:28Z
 https://docs.cloud.google.com/bigquery/docs/continuous-query-joins	2026-05-14T04:00:28Z
-https://docs.cloud.google.com/bigquery/docs/contribution-analysis	2026-05-14T04:00:28Z
+https://docs.cloud.google.com/bigquery/docs/contribution-analysis	2026-05-14T21:10:26Z
 https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam	2026-05-14T04:00:28Z
 https://docs.cloud.google.com/bigquery/docs/conversational-analytics	2026-05-14T04:00:28Z
 https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query	2026-05-14T04:00:28Z
@@ -141,7 +141,7 @@ https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model	2026-0
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/create-manage-folders	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/create-notebooks	2026-05-14T03:55:38Z
-https://docs.cloud.google.com/bigquery/docs/create-pipelines	2026-05-14T03:55:38Z
+https://docs.cloud.google.com/bigquery/docs/create-pipelines	2026-05-14T05:03:57Z
 https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/css-center-products-schema	2026-05-14T03:55:38Z
@@ -161,7 +161,7 @@ https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions	2026-05-14
 https://docs.cloud.google.com/bigquery/docs/data-prep-introduction	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/data-profile-scan	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/data-quality-scan	2026-05-14T03:55:38Z
-https://docs.cloud.google.com/bigquery/docs/data-replication	2026-05-14T03:55:38Z
+https://docs.cloud.google.com/bigquery/docs/data-replication	2026-05-14T18:27:20Z
 https://docs.cloud.google.com/bigquery/docs/data-types	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions	2026-05-14T03:55:38Z
 https://docs.cloud.google.com/bigquery/docs/dataframes-data-manipulation	2026-05-14T03:55:38Z
@@ -240,7 +240,7 @@ https://docs.cloud.google.com/bigquery/docs/gemini-set-up	2026-05-14T03:55:35Z
 https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights	2026-05-14T03:55:35Z
 https://docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models	2026-05-14T03:55:35Z
 https://docs.cloud.google.com/bigquery/docs/generate-embeddings-onnx-format	2026-05-14T03:55:35Z
-https://docs.cloud.google.com/bigquery/docs/generate-metadata	2026-05-14T03:55:35Z
+https://docs.cloud.google.com/bigquery/docs/generate-metadata	2026-05-14T17:02:06Z
 https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings	2026-05-14T03:55:35Z
 https://docs.cloud.google.com/bigquery/docs/generate-table	2026-05-14T03:55:35Z
 https://docs.cloud.google.com/bigquery/docs/generate-table-insights	2026-05-14T03:55:35Z
@@ -338,9 +338,9 @@ https://docs.cloud.google.com/bigquery/docs/information-schema-project-options-c
 https://docs.cloud.google.com/bigquery/docs/information-schema-property-graphs	2026-05-14T03:55:48Z
 https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations	2026-05-14T03:55:48Z
 https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org	2026-05-14T03:55:48Z
-https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes	2026-05-14T03:55:48Z
-https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline	2026-05-14T03:55:48Z
-https://docs.cloud.google.com/bigquery/docs/information-schema-reservations	2026-05-14T03:55:48Z
+https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes	2026-05-14T20:34:11Z
+https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline	2026-05-14T20:34:11Z
+https://docs.cloud.google.com/bigquery/docs/information-schema-reservations	2026-05-14T20:34:11Z
 https://docs.cloud.google.com/bigquery/docs/information-schema-routine-options	2026-05-14T03:55:48Z
 https://docs.cloud.google.com/bigquery/docs/information-schema-routines	2026-05-14T03:55:48Z
 https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas	2026-05-14T03:55:48Z
@@ -1052,7 +1052,6 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int	2026-05-14T04:00:52Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text	2026-05-14T04:00:52Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if	2026-05-14T04:00:52Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers	2026-05-14T04:00:52Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score	2026-05-14T04:00:52Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search	2026-05-14T04:00:52Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity	2026-05-14T04:00:52Z
@@ -1220,7 +1219,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/system-procedures	2026-05-
 https://docs.cloud.google.com/bigquery/docs/reference/system-variables	2026-05-14T04:20:37Z
 https://docs.cloud.google.com/bigquery/docs/regional-endpoints	2026-05-14T04:01:29Z
 https://docs.cloud.google.com/bigquery/docs/regression-overview	2026-05-14T04:01:29Z
-https://docs.cloud.google.com/bigquery/docs/release-notes	2026-05-14T03:57:41Z
+https://docs.cloud.google.com/bigquery/docs/release-notes	2026-05-14T21:24:04Z
 https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-05-14T03:57:41Z
 https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-05-14T04:01:29Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-05-14T04:01:29Z
@@ -1329,8 +1328,8 @@ https://docs.cloud.google.com/bigquery/docs/understand-text	2026-05-14T03:55:53Z
 https://docs.cloud.google.com/bigquery/docs/updating-datasets	2026-05-14T03:55:53Z
 https://docs.cloud.google.com/bigquery/docs/updating-labels	2026-05-14T03:55:53Z
 https://docs.cloud.google.com/bigquery/docs/updating-model-metadata	2026-05-14T03:55:53Z
-https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp	2026-05-14T03:55:53Z
-https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp	2026-05-14T03:55:53Z
+https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp	2026-05-14T06:31:49Z
+https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp	2026-05-14T06:31:55Z
 https://docs.cloud.google.com/bigquery/docs/use-cloud-assist	2026-05-14T03:55:53Z
 https://docs.cloud.google.com/bigquery/docs/use-knowledge-catalog	2026-05-14T03:55:53Z
 https://docs.cloud.google.com/bigquery/docs/use-service-accounts	2026-05-14T03:55:53Z

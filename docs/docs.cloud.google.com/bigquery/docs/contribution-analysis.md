@@ -37,13 +37,9 @@ A *segment* is a slice of the data identified by a given combination of dimensio
 | store 1            | customer 2        |           |
 | store 2            |                   |           |
 
-### Analyze data without a model
-
-If you have fewer than 12 dimensions and are using a summable metric, then you can perform contribution analysis by using the [`AI.KEY_DRIVERS` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers) . For most applications, we recommend using the `AI.KEY_DRIVERS` function over creating a model because it offers a simplified syntax, faster results, and automatic pruning. The function output consists of rows of insights, where each insight corresponds to a segment and provides the segment's corresponding metrics.
-
 ### Use a contribution analysis model
 
-If you require more than 12 dimensions or other types of metrics, you can create a contribution analysis model with the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
+You can create a contribution analysis model with the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) .
 
 To reduce model creation time, specify an [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) . An apriori support threshold lets you prune small and less relevant segments so that the model uses only the largest and most relevant segments.
 
@@ -70,12 +66,6 @@ The following table describes the statements and functions you can use with cont
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers"><code dir="ltr" translate="no">AI.KEY_DRIVERS</code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>
-<td>N/A</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers#example">Example of contribution analysis on Iowa liquor sale data</a></td>
-</tr>
-<tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights"><code dir="ltr" translate="no">ML.GET_INSIGHTS</code></a></td>

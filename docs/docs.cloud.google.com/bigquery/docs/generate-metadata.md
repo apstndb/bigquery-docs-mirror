@@ -8,10 +8,6 @@ data_source: docs.cloud.google.com
 
 # Generate metadata for translation and assessment
 
-> **Preview**
-> 
-> This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 This document describes how to create metadata and query log files by using the `dwh-migration-dumper` command-line extraction tool. The metadata files describe the SQL objects in your source system.
 
 BigQuery Migration Service uses this information to improve the translation of your SQL scripts from your source system dialect to GoogleSQL.

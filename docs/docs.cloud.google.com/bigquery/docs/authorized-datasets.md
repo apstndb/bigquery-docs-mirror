@@ -289,6 +289,7 @@ You can give a user access to the data returned by the `private_table_filtered` 
 ## Limitations
 
   - You can create authorized datasets in different regions, but BigQuery doesn't support cross-region queries. Therefore, we recommend that you create datasets in the same region.
+  - You can't create an authorized dataset in a secondary replica. For more information, see [Resource behavior in dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
 
 ## What's next
 

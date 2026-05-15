@@ -74,7 +74,7 @@ The `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view has the following schema:
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">reservation_group_path</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code></td>
 <td>The hierarchical group structure to which the reservation is linked. For example, if the group structure includes a parent group and a child group, the <code dir="ltr" translate="no">reservation_group_path</code> field contains a list such as: <code dir="ltr" translate="no">[parent group, child group]</code> . This field is in <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> .</td>
 </tr>
 <tr class="even">

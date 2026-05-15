@@ -70,6 +70,7 @@ For more information, see [Authorized datasets](https://docs.cloud.google.com/bi
 
   - When you make an authorized view or authorized materialized view in another dataset, the source data dataset and authorized view dataset must be in the same regional [location](https://docs.cloud.google.com/bigquery/docs/locations) .
   - When you delete an authorized view, it can take up to 24 hours to remove the authorized view from the list of views. During this time, you cannot access the authorized view, but the deleted authorized view can appear in the list of views, and counts against the [authorized view limit](https://docs.cloud.google.com/bigquery/quotas#dataset_limits) . This limit can prevent the creation of additional authorized views if the new authorized view would exceed that limit.
+  - You can't create an authorized view in a secondary replica. For more information, see [Resource behavior in dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
 
 ## Before you begin
 

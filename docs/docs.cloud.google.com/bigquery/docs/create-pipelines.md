@@ -126,6 +126,21 @@ To add a notebook to your pipeline, do the following in the **Notebook options**
 
 ## Add a pipeline task
 
+You can add multiple tasks to a pipeline that executes code assets in a specific sequence.
+
+### Task naming conventions
+
+When you name a pipeline task, follow these naming conventions:
+
+  - Task names can only contain letters (a-z, A-Z), numbers (0-9), underscores ( `_` ), and hyphens ( `-` ).
+  - Task names must start with a letter, number, or underscore.
+  - Periods ( `.` ) are prohibited in task names. When naming or renaming a task, don't include file extensions such as `.sql` or `.py` . If a task name contains a period, the **Run** button is deactivated.
+  - Task names can contain characters with a total of up to 1,024 UTF-8 bytes.
+  - Task names must be unique within the pipeline container.
+  - Task names are case-sensitive.
+
+### Add a task
+
 To add a task to a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
