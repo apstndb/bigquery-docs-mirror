@@ -311,7 +311,7 @@ resource "google_bigquery_dataset_iam_policy" "default" {
 
 **Create a dataset with a customer-managed encryption key**
 
-The following example creates a dataset named `mydataset` , and also uses the [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a Cloud Key Management Service key for the dataset. You must [enable the Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com&redirect=https://console.cloud.google.com) before running this example.
+The following example creates a dataset named `mydataset` , and also uses the [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a Cloud Key Management Service key for the dataset. You must [enable the Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com&redirect=https://console.cloud.google.com) before running this example.
 
 ```terraform
 resource "google_bigquery_dataset" "default" {

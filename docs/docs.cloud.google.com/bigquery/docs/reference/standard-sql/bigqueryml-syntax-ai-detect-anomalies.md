@@ -27,9 +27,11 @@ SELECT
 FROM
   AI.DETECT_ANOMALIES(
     { TABLE HISTORY_TABLE | (HISTORY_QUERY_STATEMENT) },
-    { TABLE TARGET_TABLE | (TARGET_QUERY_STATEMENT) },
+    [ { TABLE TARGET_TABLE | (TARGET_QUERY_STATEMENT) }, ]
     data_col => 'DATA_COL',
     timestamp_col => 'TIMESTAMP_COL'
+    [, target_last_n_points => TARGET_LAST_N_POINTS]
+    [, target_start_timestamp => TARGET_START_TIMESTAMP]
     [, model => 'MODEL']
     [, id_cols => ID_COLS]
     [, anomaly_prob_threshold => ANOMALY_PROB_THRESHOLD]
@@ -39,13 +41,17 @@ FROM
 
 ### Description
 
-The TimesFM model forecasts data for the `DATA_COL` value, based on the historical data provided in the `HISTORY_TABLE` or `HISTORY_QUERY_STATEMENT` argument, and using the fields contained in the `SELECT` statement as variables. The data provided by the `TARGET_TABLE` or `TARGET_QUERY_STATEMENT` argument is then compared to this forecasted data in order to detect anomalies. The tables or queries that provide the historical and target data must use the same column names for the `DATA_COL` and `TIMESTAMP_COL` arguments, and for the `ID_COLS` argument if it is used.
+The TimesFM model forecasts data for the `DATA_COL` value, based on the historical data provided in the `HISTORY_TABLE` or `HISTORY_QUERY_STATEMENT` argument, and using the fields contained in the `SELECT` statement as variables. The data provided by the `TARGET_TABLE` or `TARGET_QUERY_STATEMENT` argument is then compared to this forecasted data in order to detect anomalies.
+
+The tables or queries that provide the historical and target data must use the same column names for the `DATA_COL` and `TIMESTAMP_COL` arguments, and for the `ID_COLS` argument if it is used.
+
+Optionally, if the `TARGET_TABLE` or `TARGET_QUERY_STATEMENT` argument is not provided, the `HISTORY_TABLE` or `HISTORY_QUERY_STATEMENT` argument provides both the historical and target data, and you must use either the `TARGET_LAST_N_POINTS` or `TARGET_START_TIMESTAMP` argument to split the data.
 
 ### Arguments
 
 `AI.DETECT_ANOMALIES` takes the following arguments:
 
-  - `  HISTORY_TABLE  ` : the name of the table that contains historical time point data. For example, `` `mydataset.mytable` `` .
+  - `  HISTORY_TABLE  ` : the name of the table that contains historical time point data. For example, `` `mydataset.mytable` `` . If the `TARGET_TABLE` argument is not provided, this table provides both the historical and target data.
     
     If the table is in a different project, then you must prepend the project ID to the table name in the following format, including backticks:
     
@@ -53,7 +59,7 @@ The TimesFM model forecasts data for the `DATA_COL` value, based on the historic
     
     For example, `` `myproject.mydataset.mytable` `` .
 
-  - `  HISTORY_QUERY_STATEMENT  ` : the query that generates the historical data.
+  - `  HISTORY_QUERY_STATEMENT  ` : the query that generates the historical data. If the `TARGET_QUERY_STATEMENT` argument is not provided, this query generates both the historical and target data.
 
   - `  TARGET_TABLE  ` : the name of the table that contains the data in which you want to detect anomalies. The table's schema must match the schema of the historical data.
     
@@ -77,6 +83,10 @@ The TimesFM model forecasts data for the `DATA_COL` value, based on the historic
       - `TIMESTAMP`
       - `DATE`
       - `DATETIME`
+
+  - `  TARGET_LAST_N_POINTS  ` : an `INT64` value that specifies the number of most recent data points to use as the target data. The remaining data points are used as the historical data. If you use this argument, then you can't specify the `TARGET_TABLE` , `TARGET_QUERY_STATEMENT` , or `TARGET_START_TIMESTAMP` arguments. The `TARGET_LAST_N_POINTS` value must be in the range `[1, 10000]` .
+
+  - `  TARGET_START_TIMESTAMP  ` : a `TIMESTAMP` value or expression that specifies the cutoff point for the target data. Data points with a timestamp on or prior to the cutoff point are used as historical data. Data points with a timestamp strictly after the cutoff point are used as the target data. If you use this argument, then you can't specify the `TARGET_TABLE` , `TARGET_QUERY_STATEMENT` , or `TARGET_LAST_N_POINTS` arguments. You can use an expression for this argument to specify a rolling time window, for example `TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)` to detect anomalies for the last week.
 
   - `  MODEL_NAME  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.0` .
 
@@ -166,6 +176,38 @@ Anomalies occur when the `time_series_data` is below the `lower_bound` or above 
 > **Note:** The time displayed in the visualization is shown in the `America/Los_Angeles` time zone.
 
 ![Visualization of time series data with lower and upper bounds](https://docs.cloud.google.com/static/bigquery/images/anomaly-detection-graph.png)
+
+This query shows how to perform the same anomaly detection by providing a single input table and using the `target_start_timestamp` argument to separate the historical and target data:
+
+    WITH bike_trips AS (
+        SELECT EXTRACT(DATE FROM starttime) AS date, COUNT(*) AS num_trips
+        FROM `bigquery-public-data.new_york.citibike_trips`
+        GROUP BY date
+      )
+    SELECT *
+    FROM
+      AI.DETECT_ANOMALIES(
+        # Input data from a query
+        (SELECT * FROM bike_trips WHERE date <= DATE('2016-09-01')),
+        data_col => 'num_trips',
+        timestamp_col => 'date',
+        target_start_timestamp => '2016-07-01');
+
+This query shows how to perform the anomaly detection by providing a single input table and using the `target_last_n_points` argument to only detect anomalies on the last 10 data points of the input table:
+
+    WITH bike_trips AS (
+        SELECT EXTRACT(DATE FROM starttime) AS date, COUNT(*) AS num_trips
+        FROM `bigquery-public-data.new_york.citibike_trips`
+        GROUP BY date
+      )
+    SELECT *
+    FROM
+      AI.DETECT_ANOMALIES(
+        # Input data from a query
+        (SELECT * FROM bike_trips WHERE date <= DATE('2016-09-01')),
+        data_col => 'num_trips',
+        timestamp_col => 'date',
+        target_last_n_points => 10);
 
 You can specify `usertype` in the `id_cols` argument to detect anomalies broken down by the type of user, which can be `Subscriber` or `Customer` :
 

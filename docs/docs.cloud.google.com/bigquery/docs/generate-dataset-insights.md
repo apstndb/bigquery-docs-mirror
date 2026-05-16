@@ -259,6 +259,10 @@ Based on the discovered relationships, Gemini generates sample queries. These ar
 
 3.  To ask a follow up question, click **Ask a follow-up** , which opens an untitled data canvas where you can chat with Gemini to explore your data.
 
+## Manage generated insights
+
+After you generate insights for a dataset, you can manage, update, or delete them in Knowledge Catalog. For more information, see [manage dataset insights](https://docs.cloud.google.com/dataplex/docs/use-data-insights-structured-data#manage-dataset-insights) .
+
 ## What's next
 
   - Learn about [data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .

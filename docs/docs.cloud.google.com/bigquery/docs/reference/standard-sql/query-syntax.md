@@ -219,7 +219,7 @@ A `SELECT * EXCEPT` statement specifies the names of one or more columns to excl
      | sprocket  | 200      |
      +-----------+----------*/
 
-> **Note:** `SELECT * EXCEPT` doesn't exclude columns that don't have names.
+> **Note:** `SELECT * EXCEPT` doesn't exclude columns that don't have names. Also, `SELECT * EXCEPT` and the [`EXCEPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#except) set operator have different use cases and rules.
 
 ### `SELECT * REPLACE`
 
@@ -3768,7 +3768,7 @@ Set operators combine or filter results from two or more input queries into a si
   - `UNION` : Returns the combined results of the left and right input queries. Values in columns that are matched by position are concatenated vertically.
   - `INTERSECT` : Returns rows that are found in the results of both the left and right input queries.
   - `EXCEPT` : Returns rows from the left input query that aren't present in the right input query.
-  - `ALL` : Executes the set operation on all rows.
+  - `ALL` : Executes the set operation on all rows. The `ALL` modifier is supported by only the `UNION` set operator.
   - `DISTINCT` : Excludes duplicate rows in the set operation.
   - `BY NAME` , `CORRESPONDING` : Matches columns by name instead of by position. The `BY NAME` modifier is equivalent to `STRICT CORRESPONDING` . For details, see [`BY NAME` or `CORRESPONDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#by_name_or_corresponding) .
   - `INNER` , `FULL | LEFT [OUTER]` , `STRICT` , `ON` , `BY` : Adjust how the `BY NAME` or `CORRESPONDING` modifier behaves when the column names don't match exactly. For details, see [`BY NAME` or `CORRESPONDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#by_name_or_corresponding) .

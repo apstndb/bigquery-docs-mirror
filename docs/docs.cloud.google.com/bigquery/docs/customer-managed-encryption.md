@@ -30,9 +30,9 @@ Learn more about [encryption options on Google Cloud](https://docs.cloud.google.
     
     For information about Google Cloud project IDs and project numbers, see [Find the project name, number, and ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) .
 
-  - BigQuery is automatically enabled in new projects. If you are using a pre-existing project to run BigQuery, [enable the BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery) .
+  - BigQuery is automatically enabled in new projects. If you are using a pre-existing project to run BigQuery, [enable the BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery) .
 
-  - For the Google Cloud project that runs Cloud KMS, [enable the Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com) .
+  - For the Google Cloud project that runs Cloud KMS, [enable the Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com) .
 
 A decryption call is performed using Cloud KMS once per query to a CMEK-encrypted table. For more information, see [Cloud KMS pricing](https://cloud.google.com/kms/pricing) .
 
@@ -236,7 +236,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example creates a table named `mytable` , and also uses the [`google_kms_crypto_key`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`google_kms_key_ring`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for the table.
 
-To run this example, you must enable the [Cloud Resource Manager API](https://console.cloud.google.com/flows/enableapi?apiid=cloudresourcemanager.googleapis.com) and the [Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com) .
+To run this example, you must enable the [Cloud Resource Manager API](https://console.cloud.google.com/apis/enableflow?apiid=cloudresourcemanager.googleapis.com) and the [Cloud Key Management Service API](https://console.cloud.google.com/apis/enableflow?apiid=cloudkms.googleapis.com) .
 
 ```terraform
 resource "google_bigquery_dataset" "default" {

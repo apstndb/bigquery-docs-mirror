@@ -908,9 +908,10 @@ You can visualize the boosted trees using the [plot\_tree](https://xgboost.readt
         import matplotlib.pyplot as plt
         
         model = xgb.Booster(model_file="model.bst")
-        num_ite<rations = iterat>ion_number
+        num_iterations = <iteration_number>
         for tree_num in range(num_iterations):
-          xgb.plot_tree(model, num_trees=tree_num)plt.show
+          xgb.plot_tree(model, num_trees=tree_num)
+        plt.show
 
 This example plots multiple trees (one tree per iteration):
 

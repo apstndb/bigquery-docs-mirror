@@ -467,8 +467,12 @@ For the `churn` column:
 
 If you save the [column descriptions that Gemini generates](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#generate-column-table-descriptions) , then those descriptions are used to generate future insights.
 
+## Manage generated insights
+
+After you generate insights for a table, you can manage, update, or delete them in Knowledge Catalog. For more information, see [manage table insights](https://docs.cloud.google.com/dataplex/docs/use-data-insights-structured-data#manage-table-insights) .
+
 ## What's next
 
-  - Learn about [Data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
-  - Learn how to [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
+  - Learn about [data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+  - Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
   - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .

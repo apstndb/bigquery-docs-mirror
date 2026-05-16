@@ -22,7 +22,7 @@ GoogleSQL for BigQuery supports the following federated query functions.
 
 Executes a query on an external database and returns the results as a temporary table. The external database data type is converted to a [GoogleSQL data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_list) in the temporary result table with [these data type mappings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#data_type_mappings) .
 
-  - `external_database_query` : The query to run on the external database.
+  - `external_database_query` : The query to run on the external database, formatted in the dialect of the external database. For example, if you query a Spanner database that uses the PostgreSQL dialect, write the query in PostgreSQL syntax.
 
   - `connection_id` : The ID of the [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) . The connection resource contains settings for the connection between the external database and BigQuery. If you don't have a default project configured, prepend the project ID to the connection ID in following format:
     

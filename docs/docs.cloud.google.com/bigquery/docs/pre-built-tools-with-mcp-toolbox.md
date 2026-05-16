@@ -28,7 +28,7 @@ This guide demonstrates the connection process for the following IDEs:
 
 2.  [Make sure that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  [Enable the BigQuery API in the Google Cloud project](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&redirect=https://console.cloud.google.com/) .
+3.  [Enable the BigQuery API in the Google Cloud project](https://console.cloud.google.com/apis/enableflow?apiid=bigquery.googleapis.com&redirect=https://console.cloud.google.com/) .
 
 4.  Configure the required roles and permissions to complete this task. You will need the [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control) role ( `roles/bigquery.user` ), the BigQuery Data Viewer role ( `roles/bigquery.dataViewer` ), or equivalent IAM permissions to connect to the project.
 

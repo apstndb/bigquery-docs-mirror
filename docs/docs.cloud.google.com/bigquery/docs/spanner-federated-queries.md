@@ -166,13 +166,11 @@ However, you can also see the schemas without defining external datasets. You ca
 ### PostgreSQL database
 
     SELECT * from EXTERNAL_QUERY(
-     'my-project.us.postgresql.example-db',
-      '''SELECT t.column_name, t.data_type, t.is_nullable
-        FROM information_schema.columns AS t
-        WHERE
-          t.table_schema = 'public' and t.table_name='MyTable'
-        ORDER BY t.ordinal_position
-      ''');
+    'my-project.us.postgresql-example-db',
+    '''SELECT t.column_name, t.data_type, t.is_nullable
+       FROM information_schema.columns AS t
+       WHERE t.table_schema = 'public' AND t.table_name = 'MyTable'
+       ORDER BY t.ordinal_position''');
 
 For more information, see the following information schema references in the Spanner documentation:
 
