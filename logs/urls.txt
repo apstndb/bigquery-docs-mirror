@@ -96,6 +96,7 @@ https://docs.cloud.google.com/bigquery/docs/choose-ml-text-function	2026-05-16T0
 https://docs.cloud.google.com/bigquery/docs/choose-text-generation-function	2026-05-16T03:52:14Z
 https://docs.cloud.google.com/bigquery/docs/classification-overview	2026-05-16T03:52:14Z
 https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries	2026-05-16T03:52:14Z
+https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access	2026-05-16T03:52:14Z
 https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer	2026-05-16T03:52:14Z
 https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview	2026-05-16T03:52:14Z
 https://docs.cloud.google.com/bigquery/docs/clustered-tables	2026-05-16T03:52:14Z
@@ -133,7 +134,7 @@ https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query	2026-05
 https://docs.cloud.google.com/bigquery/docs/create-authorized-views	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection	2026-05-16T04:05:57Z
-https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake	2026-05-16T04:05:57Z
+https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake	2026-05-16T18:58:51Z
 https://docs.cloud.google.com/bigquery/docs/create-conversations	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/create-data-agents	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model	2026-05-16T04:05:57Z

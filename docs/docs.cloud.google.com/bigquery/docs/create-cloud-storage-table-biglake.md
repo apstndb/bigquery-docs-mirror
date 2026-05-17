@@ -497,6 +497,8 @@ BigLake supports schema autodetection. However, if you did not provide a schema 
 
 You can create a BigLake table for Hive partitioned data in Cloud Storage. After you create an externally partitioned table, you can't change the partition key. You need to recreate the table to change the partition key.
 
+Before you create a BigLake table, you need to have a [dataset](https://docs.cloud.google.com/bigquery/docs/datasets) and a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) that can [access Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#access-storage) .
+
 To create a BigLake table based on Hive partitioned data in Cloud Storage, select one of the following options:
 
 ### Console
