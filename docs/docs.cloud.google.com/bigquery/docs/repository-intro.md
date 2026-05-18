@@ -35,7 +35,7 @@ The following table lists supported Git providers and the connection methods tha
 | GitHub                          | SSH or HTTPS      |
 | GitLab                          | SSH or HTTPS      |
 
-For more information, see [Connect to a third-party repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) .
+For more information, see [Connect to a third-party repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) and [Manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
 
 ## Service account
 
@@ -63,3 +63,4 @@ For more information on BigQuery pricing, see [Pricing](https://cloud.google.com
 
   - Learn how to [create repositories](https://docs.cloud.google.com/bigquery/docs/repositories) .
   - Learn how to [create workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces) .
+  - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .

@@ -140,7 +140,7 @@ https://docs.cloud.google.com/bigquery/docs/create-data-agents	2026-05-16T04:05:
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/create-manage-folders	2026-05-16T04:05:57Z
-https://docs.cloud.google.com/bigquery/docs/create-notebooks	2026-05-16T04:05:57Z
+https://docs.cloud.google.com/bigquery/docs/create-notebooks	2026-05-18T08:30:36Z
 https://docs.cloud.google.com/bigquery/docs/create-pipelines	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables	2026-05-16T04:05:57Z
 https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables	2026-05-16T04:05:57Z
@@ -264,6 +264,7 @@ https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights	2
 https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights-sum-ratio	2026-05-16T03:51:54Z
 https://docs.cloud.google.com/bigquery/docs/getting-model-metadata	2026-05-16T03:51:54Z
 https://docs.cloud.google.com/bigquery/docs/getting-support	2026-05-16T03:56:43Z
+https://docs.cloud.google.com/bigquery/docs/git-repositories	2026-05-18T08:30:36Z
 https://docs.cloud.google.com/bigquery/docs/global-queries	2026-05-16T03:51:54Z
 https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets	2026-05-16T03:51:54Z
 https://docs.cloud.google.com/bigquery/docs/google-ads-transfer	2026-05-16T03:51:54Z
@@ -1219,13 +1220,13 @@ https://docs.cloud.google.com/bigquery/docs/reference/system-procedures	2026-05-
 https://docs.cloud.google.com/bigquery/docs/reference/system-variables	2026-05-16T03:56:53Z
 https://docs.cloud.google.com/bigquery/docs/regional-endpoints	2026-05-16T03:56:48Z
 https://docs.cloud.google.com/bigquery/docs/regression-overview	2026-05-16T03:56:48Z
-https://docs.cloud.google.com/bigquery/docs/release-notes	2026-05-16T03:57:49Z
+https://docs.cloud.google.com/bigquery/docs/release-notes	2026-05-18T08:33:20Z
 https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-05-16T03:57:49Z
 https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-05-16T03:56:48Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-05-16T03:56:48Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions-translation-tutorial	2026-05-16T03:56:48Z
-https://docs.cloud.google.com/bigquery/docs/repositories	2026-05-16T03:56:48Z
-https://docs.cloud.google.com/bigquery/docs/repository-intro	2026-05-16T03:56:48Z
+https://docs.cloud.google.com/bigquery/docs/repositories	2026-05-18T08:30:36Z
+https://docs.cloud.google.com/bigquery/docs/repository-intro	2026-05-18T08:30:36Z
 https://docs.cloud.google.com/bigquery/docs/reservations-assignments	2026-05-16T03:56:48Z
 https://docs.cloud.google.com/bigquery/docs/reservations-commitments	2026-05-16T03:56:48Z
 https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy	2026-05-16T03:56:48Z

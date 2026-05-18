@@ -21,6 +21,8 @@ This document shows you how to work with repositories in BigQuery, including the
   - Sharing repositories
   - Optionally connecting a BigQuery repository to a third-party repository
 
+> **Important:** For a more streamlined, folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) [(Preview)](https://cloud.google.com/products/#product-launch-stages) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once. The BigQuery Studio Git repositories feature also eliminates the need to manage separate workspaces.
+
 ## Before you begin
 
 ### Required roles
@@ -370,4 +372,5 @@ To delete a repository and all its contents, follow these steps:
 
 ## What's next
 
+  - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
   - Learn how to [create workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces) .

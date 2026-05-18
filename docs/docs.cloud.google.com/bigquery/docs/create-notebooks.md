@@ -443,3 +443,4 @@ For more information, see [Troubleshoot Colab Enterprise](https://docs.cloud.goo
 
   - Learn how to [manage notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks) .
   - Learn how to [schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) .
+  - Learn how to [access notebook files in a BigQuery Studio Git repository mount](https://docs.cloud.google.com/bigquery/docs/git-repositories#notebook-mount) .
