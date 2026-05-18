@@ -1,4 +1,3 @@
-https://docs.cloud.google.com/bigquery/docs	2026-05-16T03:57:49Z
 https://docs.cloud.google.com/bigquery/docs/access-control	2026-05-16T04:18:13Z
 https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles	2026-05-16T04:18:13Z
 https://docs.cloud.google.com/bigquery/docs/access-control-intro	2026-05-16T04:18:13Z
@@ -10,7 +9,6 @@ https://docs.cloud.google.com/bigquery/docs/admin-resource-charts	2026-05-16T03:
 https://docs.cloud.google.com/bigquery/docs/advanced-runtime	2026-05-16T03:51:52Z
 https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts	2026-05-16T03:51:52Z
 https://docs.cloud.google.com/bigquery/docs/ai-application-overview	2026-05-16T03:51:52Z
-https://docs.cloud.google.com/bigquery/docs/ai-introduction	2026-05-16T03:51:52Z
 https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries	2026-05-16T03:51:52Z
 https://docs.cloud.google.com/bigquery/docs/analysis-rules	2026-05-16T03:51:52Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-audit-logging	2026-05-16T03:51:52Z
@@ -193,7 +191,6 @@ https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer	2026-
 https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation	2026-05-16T03:52:44Z
 https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization	2026-05-16T03:52:44Z
 https://docs.cloud.google.com/bigquery/docs/dts-data-sources-intro	2026-05-16T03:52:44Z
-https://docs.cloud.google.com/bigquery/docs/dts-introduction	2026-05-16T03:52:44Z
 https://docs.cloud.google.com/bigquery/docs/dts-locations	2026-05-16T03:52:44Z
 https://docs.cloud.google.com/bigquery/docs/dts-monitor	2026-05-16T03:52:44Z
 https://docs.cloud.google.com/bigquery/docs/e2e-journey	2026-05-16T03:52:44Z
@@ -234,7 +231,6 @@ https://docs.cloud.google.com/bigquery/docs/forecasting-overview	2026-05-16T04:0
 https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters	2026-05-16T04:05:40Z
 https://docs.cloud.google.com/bigquery/docs/gemini-analyze-data	2026-05-16T04:05:40Z
 https://docs.cloud.google.com/bigquery/docs/gemini-locations	2026-05-16T04:05:40Z
-https://docs.cloud.google.com/bigquery/docs/gemini-overview	2026-05-16T04:05:40Z
 https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance	2026-05-16T04:05:40Z
 https://docs.cloud.google.com/bigquery/docs/gemini-set-up	2026-05-16T04:05:40Z
 https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights	2026-05-16T04:05:40Z
@@ -372,7 +368,6 @@ https://docs.cloud.google.com/bigquery/docs/information-schema-write-api-by-orga
 https://docs.cloud.google.com/bigquery/docs/input-feature-types	2026-05-16T03:52:26Z
 https://docs.cloud.google.com/bigquery/docs/install-dataframes	2026-05-16T03:52:26Z
 https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator	2026-05-16T03:52:26Z
-https://docs.cloud.google.com/bigquery/docs/introduction	2026-05-16T03:52:26Z
 https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads	2026-05-16T03:52:26Z
 https://docs.cloud.google.com/bigquery/docs/introduction-sql	2026-05-16T03:52:26Z
 https://docs.cloud.google.com/bigquery/docs/iterate-generate-embedding-calls	2026-05-16T03:52:26Z
@@ -455,7 +450,6 @@ https://docs.cloud.google.com/bigquery/docs/metadata-indexing-managed-tables	202
 https://docs.cloud.google.com/bigquery/docs/migrate-dataframes	2026-05-16T03:57:11Z
 https://docs.cloud.google.com/bigquery/docs/migration-assessment	2026-05-16T03:57:11Z
 https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies	2026-05-15T21:59:04Z
-https://docs.cloud.google.com/bigquery/docs/migration-intro	2026-05-16T03:57:11Z
 https://docs.cloud.google.com/bigquery/docs/migration/external-metastore-lakehouse-migration	2026-05-16T03:52:56Z
 https://docs.cloud.google.com/bigquery/docs/migration/hive	2026-05-16T03:52:56Z
 https://docs.cloud.google.com/bigquery/docs/migration/hive-sql	2026-05-16T03:52:56Z
@@ -1220,7 +1214,6 @@ https://docs.cloud.google.com/bigquery/docs/reference/system-procedures	2026-05-
 https://docs.cloud.google.com/bigquery/docs/reference/system-variables	2026-05-16T03:56:53Z
 https://docs.cloud.google.com/bigquery/docs/regional-endpoints	2026-05-16T03:56:48Z
 https://docs.cloud.google.com/bigquery/docs/regression-overview	2026-05-16T03:56:48Z
-https://docs.cloud.google.com/bigquery/docs/release-notes	2026-05-18T08:33:20Z
 https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-05-16T03:57:49Z
 https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-05-16T03:56:48Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-05-16T03:56:48Z
@@ -1251,7 +1244,6 @@ https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro	2026-05-16T03:52:3
 https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters	2026-05-16T03:52:31Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart	2026-05-16T03:52:31Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-transfer	2026-05-16T03:52:31Z
-https://docs.cloud.google.com/bigquery/docs/samples	2026-05-16T03:57:49Z
 https://docs.cloud.google.com/bigquery/docs/sandbox	2026-05-16T03:52:31Z
 https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries	2026-05-16T03:52:31Z
 https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction	2026-05-16T03:52:31Z
@@ -1376,4 +1368,3 @@ https://docs.cloud.google.com/bigquery/docs/youtube-channel-transformation	2026-
 https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer	2026-05-16T03:52:56Z
 https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transformation	2026-05-16T03:52:56Z
 https://docs.cloud.google.com/bigquery/public-data	2026-05-16T03:57:49Z
-https://docs.cloud.google.com/bigquery/quotas	2026-05-16T04:18:13Z
