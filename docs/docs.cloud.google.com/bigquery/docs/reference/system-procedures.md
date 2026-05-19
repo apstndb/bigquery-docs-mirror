@@ -70,7 +70,7 @@ To run this system procedure, you need the `bigquery.tables.update` and `bigquer
 
 Specify the name of the table as a string with the format `'[project_id.]dataset.table'` . If you run this system procedure from a different project than the table, then you must include the project ID.
 
-For BigLake tables, you can optionally specify one or more subdirectories of the table data directory in Cloud Storage in the format `'gs://table_data_directory/subdirectory/.../'` . This lets you refresh only the table metadata from those subdirectories and thereby avoid unnecessary metadata processing.
+For BigLake tables, you can optionally specify one or more subdirectories of the table data directory in Cloud Storage in the format `'gs://table_data_directory/subdirectory/.../'` . For a selective refresh to work correctly, the Cloud Storage path parameters must include either a specific path or a wildcard. For more information, see [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#wildcard-support) . This lets you refresh only the table metadata from those subdirectories and thereby avoid unnecessary metadata processing.
 
 **Examples**
 

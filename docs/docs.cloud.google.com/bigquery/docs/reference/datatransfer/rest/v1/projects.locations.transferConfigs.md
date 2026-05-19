@@ -446,7 +446,7 @@ Returns information about all transfer configs owned by a project in the specifi
 
 Updates a data transfer configuration.
 
-### `            scheduleRuns                       (deprecated)           `
+### `            scheduleRuns             (deprecated)  `
 
 Creates transfer runs for a time range \[start\_time, end\_time\].
 

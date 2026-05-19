@@ -16,7 +16,7 @@ A logical view is the default view type for BigQuery, and a materialized view is
 
 An authorized view for a logical view is called an authorized view, but an authorized view for a materialized view is called an *authorized materialized view* .
 
-If a logical view relies on [a large or computationally expensive query](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#use_cases) , then you can create a materialized view instead. To understand the use cases of logical and materialized view, see [Overview of logical and materialized views](https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview) .
+If a logical view relies on [a large or computationally expensive query](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#use_cases) , then you can create a materialized view instead. To understand the use cases of a logical and materialized view, see [Overview of logical and materialized views](https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview) .
 
 ### High-level steps for creating authorized views
 
@@ -60,7 +60,7 @@ To compare these methods in detail, see the following resources:
 
 If you want to give a collection of views access to a dataset without having to authorize each individual view, you can group the views together into a dataset, and then give the dataset that contains the views access to the dataset that contains the data.
 
-You can then give principals access to the dataset containing the group of views, or to individual views in the dataset, as needed. A dataset that has access to another dataset is called an *authorized dataset* . The dataset that authorizes another dataset to access its data is called the *shared dataset* .
+You can then give principals access to the dataset that contains the group of views, or to individual views in the dataset, as needed. A dataset that has access to another dataset is called an *authorized dataset* . The dataset that authorizes another dataset to access its data is called the *shared dataset* .
 
 A dataset's access control list can have up to 2,500 total authorized resources, including [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , and [authorized functions](https://docs.cloud.google.com/bigquery/docs/authorized-functions) . If you exceed this limit due to a large number of authorized views, consider grouping the views into authorized datasets. As a best practice, group related views into authorized datasets when you design new BigQuery architectures, especially multi-tenant architectures.
 
@@ -78,7 +78,56 @@ For more information, see [Authorized datasets](https://docs.cloud.google.com/bi
 
 ### Authorized views and VPC Service Controls
 
-When using authorized views in a VPC Service Controls perimeter, ingress rules allowing principals access to the project containing the view must also include access to any projects that contain the source data from which the view is accessing data. The principal does not need Identity and Access Management permissions on the source data projects, but the ingress rule must permit access to BigQuery in the data source project in addition to the project containing the view.
+When using authorized views in a VPC Service Controls perimeter, ingress and egress rules must allow principals access to the project that contains the view and any other projects that contain the source data the view is accessing data from.
+
+For example, in the following diagram, the caller in Project R accesses the authorized view in Project A whose source table exists in Project B. In this case, the VPC Service Controls ingress and egress rules must allow the caller in project R to access both Project A and Project B using the BigQuery service.
+
+![alt](https://docs.cloud.google.com/static/bigquery/images/authorized-views-vpcsc.svg)
+
+#### Required permissions for VPC Service Controls access
+
+The principal doesn't need Identity and Access Management permissions on the source data project, but the ingress rule must permit access to the BigQuery service in the source project that contains the source table, in addition to permitting access to the project that contains the view.
+
+For information about required roles and permissions, see [User permissions on the project and dataset](https://docs.cloud.google.com/bigquery/docs/authorized-views#user_permissions_on_the_project_and_dataset_for_the_view) .
+
+#### Ingress and egress rules
+
+The following examples of VPC Service Controls ingress and egress rules enable the BigQuery API to access both the source and view projects.
+
+  - For details on configuring ingress and egress rules, see [Configuring ingress and egress policies](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies) .
+  - For limitations on how to configure ingress and egress rules for BigQuery, see [VPC Service Controls supported products: BigQuery](https://docs.cloud.google.com/vpc-service-controls/docs/supported-products#table_bigquery) .
+
+For example, if you create a view in `PROJECT_A` (view) that accesses data in `PROJECT_B` (source), you would need the following set of ingress rules for `PROJECT_B` and another set of ingress rules for `PROJECT_A` :
+
+    - ingressFrom:
+        identityType: caller_r
+        sources:
+        - resource:
+          - projects/project_r
+      ingressTo:
+        operations:
+        - serviceName: bigquery.googleapis.com
+          methodSelectors:
+          - method: *
+        resources:
+        - projects/project_b
+      title: Ingress rules for the source project
+
+The following YAML file shows the set of egress rules for `PROJECT_B` (source). You would also need a set of egress rules for `PROJECT_A` (view):
+
+    - egressTo:
+        operations:
+        - serviceName: bigquery.googleapis.com
+          methodSelectors:
+          - method: *
+        resources:
+        - projects/project_b
+      egressFrom:
+        identityType: caller_r
+        sources:
+        - resource:
+          - projects/project_r
+      title: Egress rules for the source project
 
 ### Required roles
 

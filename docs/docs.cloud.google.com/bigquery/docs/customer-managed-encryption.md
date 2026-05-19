@@ -172,7 +172,7 @@ To create a table that is protected by Cloud KMS:
 
 ### Console
 
-1.  Open the BigQuery page in the Google Cloud console.
+1.  Open the **BigQuery** page in the Google Cloud console.
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -500,7 +500,7 @@ By default, query results are stored in a temporary table encrypted with a Googl
 
 ### Console
 
-1.  Open the BigQuery page in the Google Cloud console.
+1.  Open the **BigQuery** page in the Google Cloud console.
 
 2.  Click **Compose new query** .
 
@@ -696,7 +696,7 @@ To load a data file into a table that is protected by Cloud KMS:
 
 Protect a load job destination table with a customer-managed encryption key by specifying the key when you load the table.
 
-1.  Open the BigQuery page in the Google Cloud console.
+1.  Open the **BigQuery** page in the Google Cloud console.
 
 2.  In the left pane, click explore **Explorer** :
     
@@ -1454,6 +1454,8 @@ To use CMEK to protect your BigQuery Studio code assets, you must set a default 
   - [Notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks)
   - [Data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas)
   - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions)
+
+> **Note:** You can't apply individual CMEK keys to specific code assets in Google Cloud console.
 
 After you set a default Dataform CMEK key, Dataform applies the key to all new resources created in the Google Cloud project by default, including any hidden resources created for storing your code assets.
 

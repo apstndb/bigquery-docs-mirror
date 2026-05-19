@@ -84,6 +84,12 @@ To set the default region for new code assets, do the following:
 
 For a list of supported regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
 
+## Encrypt with CMEK
+
+You can encrypt your Dataform-backed saved queries with customer-managed encryption keys (CMEK) by using the default project-level CMEK key for the Dataform API. You can't apply individual CMEK keys to saved queries in Google Cloud console. New settings are applied only to newly created saved queries.
+
+For more information and instructions on setting the default key, see [Use CMEK to protect BigQuery Studio code assets](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#cmek-studio) .
+
 ## Create saved queries
 
 To create a saved query, follow these steps:

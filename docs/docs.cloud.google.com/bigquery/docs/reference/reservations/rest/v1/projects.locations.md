@@ -23,7 +23,7 @@ Retrieves a BI reservation.
 
 Looks up assignments for a specified resource for a particular region.
 
-### `            searchAssignments                       (deprecated)           `
+### `            searchAssignments             (deprecated)  `
 
 Deprecated: Looks up assignments for a specified resource for a particular region.
 
