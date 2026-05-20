@@ -857,7 +857,7 @@ If you include both `column_list` and `WITH PARTITION COLUMNS` , then you must e
       )
       WITH PARTITION COLUMNS
 
-#### Load data with cross-cloud transfer
+#### Load data with BigQuery Omni transfer
 
 #### Example 1
 

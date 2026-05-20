@@ -100,7 +100,7 @@ There is no default limit on how many TiB in queries a user can run per day. You
 </td>
 </tr>
 <tr class="even">
-<td>Cross-cloud transferred bytes per day</td>
+<td>BigQuery Omni transferred bytes per day</td>
 <td>1 TB</td>
 <td>You can transfer up to 1 TB of data per day from <a href="https://docs.cloud.google.com/bigquery/docs/omni-aws-cross-cloud-transfer">an Amazon S3 bucket or from Azure Blob Storage</a> .<br />
 </td>

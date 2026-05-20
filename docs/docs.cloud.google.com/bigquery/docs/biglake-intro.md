@@ -34,35 +34,35 @@ BigLake tables based on Cloud Storage can be temporary or permanent. BigLake tab
 
 You can create a BigLake table based on multiple external data sources, provided those data sources have the same schema.
 
-## Cross-cloud joins
+## BigQuery Omni joins
 
-Cross-cloud joins let you run queries that span both Google Cloud and BigQuery Omni regions. You can use [GoogleSQL `JOIN` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) to analyze data across many different storage solutions, such as AWS, Azure, public datasets, and other Google Cloud services. Cross-cloud joins eliminate the need to copy data across sources before running queries.
+BigQuery Omni joins let you run queries that span both Google Cloud and BigQuery Omni regions. You can use [GoogleSQL `JOIN` operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) to analyze data across many different storage solutions, such as AWS, Azure, public datasets, and other Google Cloud services. BigQuery Omni joins eliminate the need to copy data across sources before running queries.
 
 You can reference BigLake tables anywhere in a `SELECT` statement as if they were standard BigQuery tables, including in [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) and [data definition language (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statements that use subqueries to retrieve data. You can use multiple BigLake tables from different clouds and BigQuery tables in the same query. All BigQuery tables must be from the same region.
 
-### Cross-cloud join required permissions
+### BigQuery Omni join required permissions
 
-To get the permissions that you need to run a cross-cloud join, ask your administrator to grant you the following IAM roles on the project where the join is executed:
+To get the permissions that you need to run a BigQuery Omni join, ask your administrator to grant you the following IAM roles on the project where the join is executed:
 
   - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
   - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-These predefined roles contain the permissions required to run a cross-cloud join. To see the exact permissions that are required, expand the **Required permissions** section:
+These predefined roles contain the permissions required to run a BigQuery Omni join. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-The following permissions are required to run a cross-cloud join:
+The following permissions are required to run a BigQuery Omni join:
 
   - `bigquery.jobs.create`
   - `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-### Cross-cloud join costs
+### BigQuery Omni join costs
 
-When you run a cross-cloud join operation, BigQuery parses the query into local and remote parts. The local part is treated as a standard query in the BigQuery region. The remote part is converted into a `CREATE TABLE AS SELECT` (CTAS) operation on the referenced BigLake table in the BigQuery Omni region, which creates a temporary table in your BigQuery region. BigQuery then uses this temporary table to execute your cross-cloud join and deletes the table automatically after eight hours.
+When you run a BigQuery Omni join operation, BigQuery parses the query into local and remote parts. The local part is treated as a standard query in the BigQuery region. The remote part is converted into a `CREATE TABLE AS SELECT` (CTAS) operation on the referenced BigLake table in the BigQuery Omni region, which creates a temporary table in your BigQuery region. BigQuery then uses this temporary table to execute your BigQuery Omni join and deletes the table automatically after eight hours.
 
 You incur data transfer costs for data in the referenced BigLake tables. However, BigQuery helps reduce these costs by only transferring columns and rows in the BigLake table that are referenced in the query, rather than the entire table. We recommend specifying a column filter that is as narrow as possible to further reduce transfer costs. The CTAS job appears in your job history and displays information such as the number of transferred bytes. Successful transfers incur costs even if the main query job fails. For more information, see [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
 
@@ -80,24 +80,24 @@ Consider the following query as an example:
 
 This example has two transfers: one from an employees table (with a level filter) and one from an active employees table. The join is performed in the BigQuery region after the transfer occurs. If one transfer fails and the other succeeds, data transfer charges are still applied for the successful transfer.
 
-### Cross-cloud join limitations
+### BigQuery Omni join limitations
 
-  - Cross-cloud joins aren't supported in the BigQuery [free tier](https://cloud.google.com/bigquery/pricing#free-tier) and in the [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) .
+  - BigQuery Omni joins aren't supported in the BigQuery [free tier](https://cloud.google.com/bigquery/pricing#free-tier) and in the [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) .
   - Aggregations might not be pushed down to the BigQuery Omni regions if the query contains `JOIN` statements.
-  - Each temporary table is only used for a single cross-cloud query and is not reused even if the same query is repeated multiple times.
+  - Each temporary table is only used for a single BigQuery Omni query and is not reused even if the same query is repeated multiple times.
   - The transfer size limit for each transfer is 60 GB. Specifically, if you apply a filter on a BigLake table and load the result, it must be smaller than 60 GB. If needed, you can [request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) . There is no limit on scanned bytes.
-  - Cross-cloud join queries employ an internal quota on the rate of queries. If the rate of queries exceeds the quota, you might receive an `All our servers are busy processing data transferred between regions` error. Retrying the query should work in most cases. Contact support to increase the internal quota to support a higher rate of queries.
-  - Cross-cloud joins are only supported in [colocated BigQuery regions](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) with their corresponding BigQuery Omni regions and in the `US` and `EU` multi-regions. Cross-cloud joins that are run in the `US` or `EU` multi-regions can only access data in US or EU BigQuery Omni regions respectively.
-  - If a cross-cloud join query references 10 or more datasets from BigQuery Omni regions, it might fail with an error `Not found: Dataset <BigQuery dataset> was not found in location <BigQuery Omni region>` . To avoid this issue, we recommend [explicitly specifying a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) when you run a cross-cloud join that references more than 10 datasets. Be aware that if you explicitly specify a BigQuery region and your query only contains BigLake tables, then your query is run as a cross-cloud query and incurs data transfer costs.
-  - You can't [query the `_FILE_NAME` pseudo-column](https://docs.cloud.google.com/bigquery/docs/query-aws-data#query_the_file_name_pseudo-column) with cross-cloud joins.
+  - BigQuery Omni join queries employ an internal quota on the rate of queries. If the rate of queries exceeds the quota, you might receive an `All our servers are busy processing data transferred between regions` error. Retrying the query should work in most cases. Contact support to increase the internal quota to support a higher rate of queries.
+  - BigQuery Omni joins are only supported in [colocated BigQuery regions](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) with their corresponding BigQuery Omni regions and in the `US` and `EU` multi-regions. BigQuery Omni joins that are run in the `US` or `EU` multi-regions can only access data in US or EU BigQuery Omni regions respectively.
+  - If a BigQuery Omni join query references 10 or more datasets from BigQuery Omni regions, it might fail with an error `Not found: Dataset <BigQuery dataset> was not found in location <BigQuery Omni region>` . To avoid this issue, we recommend [explicitly specifying a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) when you run a BigQuery Omni join that references more than 10 datasets. Be aware that if you explicitly specify a BigQuery region and your query only contains BigLake tables, then your query is run as a BigQuery Omni query and incurs data transfer costs.
+  - You can't [query the `_FILE_NAME` pseudo-column](https://docs.cloud.google.com/bigquery/docs/query-aws-data#query_the_file_name_pseudo-column) with BigQuery Omni joins.
   - When you reference the columns of a BigLake table in a `WHERE` clause, you can't use `INTERVAL` or `RANGE` literals.
-  - Cross-cloud join jobs don't report the number of bytes that are processed and transferred from other clouds. This information is available in the child CTAS jobs that are created as part of cross-cloud query execution.
+  - BigQuery Omni join jobs don't report the number of bytes that are processed and transferred from other clouds. This information is available in the child CTAS jobs that are created as part of BigQuery Omni query execution.
   - [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) referencing BigQuery Omni tables or views are only supported in BigQuery Omni regions.
-  - If your cross-cloud query references `STRUCT` or `JSON` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the BigQuery Omni region that filters `STRUCT` and `JSON` columns and returns only the necessary fields as individual columns.
-  - [Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) isn't supported by cross-cloud joins.
-  - Cross-cloud joins don't support joining Omni views using the `ORDER BY` clause.
+  - If your BigQuery Omni query references `STRUCT` or `JSON` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the BigQuery Omni region that filters `STRUCT` and `JSON` columns and returns only the necessary fields as individual columns.
+  - [Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) isn't supported by BigQuery Omni joins.
+  - BigQuery Omni joins don't support joining BigQuery Omni views using the `ORDER BY` clause.
 
-### Cross-cloud join examples
+### BigQuery Omni join examples
 
 The following query joins an `orders` table in a BigQuery region with a `lineitem` table in a BigQuery Omni region:
 
@@ -146,7 +146,7 @@ After the temporary table is created, the `JOIN` operation completes, and the fo
     GROUP BY l_shipmode, o_orderpriority
     ORDER BY l_shipmode, o_orderpriority;
 
-As another example, consider the following cross-cloud join:
+As another example, consider the following BigQuery Omni join:
 
     SELECT c_mktsegment, c_name
     FROM bigquery_dataset.customer

@@ -90,7 +90,7 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
     
       - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
     
-      - `  EDITION  ` : the edition of the reservation. Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+      - `  EDITION  ` : the edition of the reservation. The supported values are `STANDARD` , `ENTERPRISE` , and `ENTERPRISE_PLUS` . Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
     
       - `  NUMBER_OF_AUTOSCALING_SLOTS  ` : the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots.
 
@@ -124,7 +124,7 @@ Replace the following:
 
   - `  RESERVATION_NAME  ` : the name of the reservation. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
-  - `  EDITION  ` : the edition of the reservation. Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+  - `  EDITION  ` : the edition of the reservation. The supported values are `STANDARD` , `ENTERPRISE` , and `ENTERPRISE_PLUS` . Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
   - `  NUMBER_OF_AUTOSCALING_SLOTS  ` : the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots. This can't be configured with either the `--max_slots` or `--scaling_mode` flags.
 

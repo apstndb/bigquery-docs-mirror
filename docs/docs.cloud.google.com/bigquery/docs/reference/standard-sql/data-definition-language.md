@@ -4259,7 +4259,7 @@ The following options are supported:
 | `ignore_idle_slots`      | `BOOLEAN`                         | If the value is `true` , then the reservation uses only the slots that are provisioned to it. The default value is `false` . For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) .                                                                                                                    |
 | `slot_capacity`          | `INTEGER`                         | The number of slots to allocate to the reservation. If this reservation was created with an [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , this is equivalent to the amount of [baseline slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#using_reservations_with_baseline_and_autoscaling_slots) . |
 | `target_job_concurrency` | `INTEGER`                         | A soft upper bound on the number of jobs that can run concurrently in this reservation.                                                                                                                                                                                                                                                                |
-| `edition`                | `STRING`                          | The edition associated with this reservation. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .                                                                                                                                                               |
+| `edition`                | `STRING`                          | The edition associated with this reservation. The supported values are `STANDARD` , `ENTERPRISE` , and `ENTERPRISE_PLUS` . For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .                                                                                  |
 | `autoscale_max_slots`    | `INTEGER`                         | The maximum number of slots that could be added to the reservation by autoscaling.                                                                                                                                                                                                                                                                     |
 | `secondary_location`     | `STRING`                          | The secondary location to use in the case of disaster recovery.                                                                                                                                                                                                                                                                                        |
 | `max_slots`              | `INTEGER`                         | The maximum number of slots the reservation can consume. For more details about predictable reservations, see [Reservation predictability](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) .                                                                                                                 |
@@ -6055,7 +6055,7 @@ Changes the data type of a column in a table in BigQuery to a less restrictive d
 
 ### Details
 
-The following data type conversions are supported: :
+The following data type conversions are supported:
 
   - `INT64` to `NUMERIC` , `BIGNUMERIC` , `FLOAT64`
   - `NUMERIC` to `BIGNUMERIC` , `FLOAT64`
@@ -6071,6 +6071,8 @@ The following are examples of valid parameterized data type conversions:
 This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 Without the `IF EXISTS` clause, if the table does not contain a column with that name, the statement returns an error. If the `IF EXISTS` clause is included and the column name does not exist, no error is returned, and no action is taken.
+
+If you want to change the column data type for a table that has data streaming into it, then you must stop the streaming, commit any pending streams, and wait for BigQuery to indicate that streaming is not in use. While a table's column data type can usually be changed 5 hours after the last streaming operation, it might take longer. You can also consider adding a new column instead of updating an existing one.
 
 ### Required permissions
 

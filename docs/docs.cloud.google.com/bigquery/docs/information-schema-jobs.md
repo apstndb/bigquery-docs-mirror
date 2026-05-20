@@ -256,7 +256,7 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <tr class="even">
 <td><code dir="ltr" translate="no">transferred_bytes</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
-<td>Total bytes transferred for cross-cloud queries, such as BigQuery Omni cross-cloud transfer jobs.</td>
+<td>Total bytes transferred for BigQuery Omni queries, such as BigQuery Omni transfer jobs.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">materialized_view_statistics</code></td>

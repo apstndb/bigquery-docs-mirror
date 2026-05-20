@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer
-title: Load data with cross-cloud operations
-description: Load data into BigQuery with cross-cloud operations.
+title: Load data with BigQuery Omni operations
+description: Load data into BigQuery with BigQuery Omni operations.
 data_source: docs.cloud.google.com
 ---
 
-# Load data with cross-cloud operations
+# Load data with BigQuery Omni operations
 
 As a BigQuery administrator or analyst, you can load data from an Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into [BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . You can either join the transferred data with the data present in Google Cloud regions or take advantage of BigQuery features like [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) . You can also create materialized view replicas of certain external sources to make that data available in BigQuery.
 
@@ -30,13 +30,13 @@ To provide Google Cloud with read access required to load or filter data in othe
 
 ### Required role
 
-To get the permissions that you need to load data using cross-cloud transfers, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on the dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data using BigQuery Omni transfers, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on the dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the permissions required to load data using cross-cloud transfers. To see the exact permissions that are required, expand the **Required permissions** section:
+This predefined role contains the permissions required to load data using BigQuery Omni transfers. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-The following permissions are required to load data using cross-cloud transfers:
+The following permissions are required to load data using BigQuery Omni transfers:
 
   - `bigquery.tables.create`
   - `bigquery.tables.get`
@@ -51,7 +51,7 @@ For more information about IAM roles in BigQuery, see [BigQuery IAM roles and pe
 
 ## Pricing
 
-You are billed for the bytes that are transferred across clouds by using the [`LOAD` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) . For pricing information, see the Omni Cross Cloud Data Transfer section in [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
+You are billed for the bytes that are transferred across clouds by using the [`LOAD` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) . For pricing information, see the Omni Data Transfer section in [BigQuery Omni pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
 
 You are billed for the bytes that are transferred across clouds by using the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) or [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) and for the [compute capacity](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 

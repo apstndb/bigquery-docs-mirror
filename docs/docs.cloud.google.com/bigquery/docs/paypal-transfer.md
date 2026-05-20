@@ -250,4 +250,4 @@ There is no cost to transfer PayPal data into BigQuery while this feature is in 
 
   - For an overview of the BigQuery Data Transfer Service, see [Introduction to BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
   - To learn about managing transfer configurations, including how to obtain information, list configurations, and view run history, see [Manage transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .
-  - Learn how to [load data with cross-cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .
+  - Learn how to [load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Work with Salesforce Data Cloud data in BigQuery
 
-This document describes how to access and analyze Salesforce Data Cloud data in BigQuery using BigQuery Omni. The document shows how to link your Data Cloud datasets in BigQuery to run queries, join data with tables in Google Cloud, and replicate data using cross-cloud materialized views.
+This document describes how to access and analyze Salesforce Data Cloud data in BigQuery using BigQuery Omni. The document shows how to link your Data Cloud datasets in BigQuery to run queries, join data with tables in Google Cloud, and replicate data using BigQuery Omni materialized views.
 
 This document is intended for Data Cloud users who want to use BigQuery for deep analytics on their Data Cloud data, or combine it with data in Google Cloud for cross-cloud analytics—all without building and maintaining extract, transform, and load (ETL) pipelines.
 
@@ -88,9 +88,9 @@ Using BigQuery Omni, you can run ad-hoc queries to analyze the Data Cloud data t
       WHERE age > 40
       LIMIT 1000;
 
-### Run cross-cloud queries
+### Run BigQuery Omni queries
 
-Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](https://cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `john` .
+BigQuery Omni queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about BigQuery Omni queries, see this [blog post](https://cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `john` .
 
     -- Get combined sales for a customer from both offline and online sales
     USING (
@@ -101,7 +101,7 @@ Cross-cloud queries let you join any of the tables in the BigQuery Omni region a
            WHERE customer_name = 'john'
     ) a SELECT SUM(total_price);
 
-### Cross Cloud Data Transfer through CTAS
+### BigQuery Omni Data Transfer through CTAS
 
 You can use Create Table As Select (CTAS) to move data from Data Cloud tables in the BigQuery Omni region to the `US` region.
 
@@ -114,9 +114,9 @@ The destination table is a BigQuery managed table in the `US` region. This table
 
 Once the data is moved, you no longer need to pay egress fees for any queries that run in the `online_orders_march` table.
 
-### Cross cloud materialized views
+### BigQuery Omni materialized views
 
-Cross Cloud Materialized Views ( [CCMV](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni-cross-cloud-materialized-views) ) transfer data from a BigQuery Omni region to a non-BigQuery Omni BigQuery region incrementally. Set up a new CCMV that transfers a summary of total sales from online transactions and replicate that data into the `US` region.
+BigQuery Omni Materialized Views ( [CCMV](https://cloud.google.com/blog/products/data-analytics/introducing-bigquery-omni-cross-cloud-materialized-views) ) transfer data from a BigQuery Omni region to a non-BigQuery Omni BigQuery region incrementally. Set up a new CCMV that transfers a summary of total sales from online transactions and replicate that data into the `US` region.
 
 You can access CCMVs from Ads Data Hub and join it with other Ads Data Hub data. CCMVs act like regular BigQuery Managed Tables for the most part.
 
@@ -175,6 +175,6 @@ Data Cloud datasets are subject to the same [limitations](https://docs.cloud.goo
 
   - Learn about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
 
-  - Learn about [cross-cloud joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) .
+  - Learn about [BigQuery Omni joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) .
 
   - Learn about [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .

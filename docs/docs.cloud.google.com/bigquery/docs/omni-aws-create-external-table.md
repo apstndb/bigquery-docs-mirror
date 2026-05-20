@@ -681,7 +681,7 @@ Replace the following:
 
   - parent\_directory : The URI of the parent directory.
 
-### Cross-cloud transfer with Delta Lake
+### BigQuery Omni transfer with Delta Lake
 
 The following example uses the [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) statement to load data to the appropriate table:
 
@@ -694,7 +694,7 @@ FROM FILES (
 WITH CONNECTION connection_name;
 ```
 
-For more examples of cross-cloud data transfers, see [Load data with cross cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) .
+For more examples of BigQuery Omni data transfers, see [Load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#load-data) .
 
 ## Query BigLake tables
 

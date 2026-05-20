@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use organization policies to apply custom constraints to BigQuery resources
 
-> **Preview — Constraints on tables, data access policies, row access polcies, and routines**
+> **Preview — Constraints on tables, data access policies, row access polcies, routines, reservations, assignments, capacity commitments, and BI reservations**
 > 
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
@@ -19,6 +19,10 @@ This page shows you how to use Organization Policy Service custom constraints to
   - `bigquery.googleapis.com/Table`
   - `bigquery.googleapis.com/RowAccessPolicy`
   - `bigquerydatapolicy.googleapis.com/DataPolicy`
+  - `bigqueryreservation.googleapis.com/Reservation`
+  - `bigqueryreservation.googleapis.com/BiReservation`
+  - `bigqueryreservation.googleapis.com/CapacityCommitment`
+  - `bigqueryreservation.googleapis.com/ReservationAssignment`
 
 To learn more about Organization Policy, see [Custom organization policies](https://docs.cloud.google.com/organization-policy/overview#custom-organization-policies) .
 
@@ -34,7 +38,7 @@ By default, organization policies are inherited by the descendants of the resour
 
 ### Benefits
 
-You can use a custom organization policy to allow or deny specific operations on BigQuery resources such as datasets, tables, data access policies, row access policies, and routines. This lets you control costs and manage access to your Google Cloud resources to help you meet your organization's compliance and security requirements. Restrictions on resources are fine-grained. They can be applied at the project, folder, or organization level.
+You can use a custom organization policy to allow or deny specific operations on BigQuery resources such as datasets, tables, data access policies, row access policies, routines, and workload management resources—reservations, assignments, capacity commitments, and BI reservations. This lets you control costs and manage access to your Google Cloud resources to help you meet your organization's compliance and security requirements. Restrictions on resources are fine-grained. They can be applied at the project, folder, or organization level.
 
 ## Limitations
 
@@ -129,6 +133,64 @@ bigquerydatapolicy.googleapis.com/DataPolicy
 `resource.dataMaskingPolicy.predefinedExpression`
 
 `resource.dataPolicyType`
+
+bigqueryreservation.googleapis.com/BiReservation
+
+`resource.name`
+
+`resource.preferredTables.datasetId`
+
+`resource.preferredTables.projectId`
+
+`resource.preferredTables.tableId`
+
+`resource.size`
+
+bigqueryreservation.googleapis.com/CapacityCommitment
+
+`resource.edition`
+
+`resource.plan`
+
+`resource.renewalPlan`
+
+`resource.slotCount`
+
+bigqueryreservation.googleapis.com/Reservation
+
+`resource.autoscale.maxSlots`
+
+`resource.concurrency`
+
+`resource.edition`
+
+`resource.ignoreIdleSlots`
+
+`resource.maxSlots`
+
+`resource.name`
+
+`resource.reservationGroup`
+
+`resource.scalingMode`
+
+`resource.schedulingPolicy.concurrency`
+
+`resource.schedulingPolicy.maxSlots`
+
+`resource.secondaryLocation`
+
+`resource.slotCapacity`
+
+bigqueryreservation.googleapis.com/ReservationAssignment
+
+`resource.assignee`
+
+`resource.jobType`
+
+`resource.schedulingPolicy.concurrency`
+
+`resource.schedulingPolicy.maxSlots`
 
 ## Set up a custom constraint
 
@@ -412,6 +474,69 @@ This table provides syntax examples for some common custom constraints.
     actionType: DENY
     displayName: Reject test routines.
     description: Deny new routines with names that begin with &#39;test&#39;.
+    </code></pre></td>
+</tr>
+<tr class="odd">
+<td>Deny BigQuery reservations with more than 200 slots</td>
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.bqReservationLimitSlots
+    resourceTypes:
+    - bigquery.googleapis.com/Reservation
+    methodTypes:
+    - CREATE
+    - UPDATE
+    condition: &quot;resource.slotCapacity &gt; 200&quot;
+    actionType: DENY
+    displayName: Deny BigQuery reservations with more than 200
+    slots.
+    description: Deny BigQuery reservations with more than 200
+    slots.
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td>Disallow pipeline jobs from using reservations</td>
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.bqAssignmentDenyPipelineJobs
+    resourceTypes:
+    - bigquery.googleapis.com/ReservationAssignment
+    methodTypes:
+    - CREATE
+    condition: &quot;resource.jobType == &#39;PIPELINE&#39;&quot;
+    actionType: DENY
+    displayName: Deny jobs of type PIPELINE from using BigQuery
+    reservations.
+    description: Deny the creation of BigQuery reservation
+    assignments for jobs that are of type PIPELINE.
+    </code></pre></td>
+</tr>
+<tr class="odd">
+<td>Only allow annual term capacity commitments</td>
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.bqCapacityCommitmentAnnualOnly
+    resourceTypes:
+    - bigquery.googleapis.com/CapacityCommitment
+    methodTypes:
+    - CREATE
+    - UPDATE
+    condition: &quot;resource.plan == &#39;ANNUAL&#39; &amp;&amp; resource.renewalPlan == &#39;ANNUAL&#39;&quot;
+    actionType: ALLOW
+    displayName: Only allow BigQuery capacity commitments with an
+    annual commitment plan and renewal cadence.
+    description: Only allow the creation of BigQuery capacity
+    commitments when there is an annual commitment plan and renewal cadence.
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td>Limit BI reservations to 5 GB or less</td>
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.bqBiReservationUnder5GB
+    resourceTypes:
+    - bigquery.googleapis.com/BiReservation
+    methodTypes:
+    - CREATE
+    - UPDATE
+    condition: &quot;resource.size &gt; 5368709120&quot; # 5GB in Bytes
+    actionType: DENY
+    displayName: Limit BigQuery BI reservations to a maximum of
+    5 GB.
+    description: Limit BigQuery BI reservations to a maximum of
+    5 GB.
     </code></pre></td>
 </tr>
 </tbody>

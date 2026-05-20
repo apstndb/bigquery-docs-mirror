@@ -288,4 +288,4 @@ If you are having issues setting up your data transfer, see [Blob Storage transf
 
   - Learn more about [runtime parameters in transfers](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters) .
   - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
-  - Learn how to [load data with cross-cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .
+  - Learn how to [load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .

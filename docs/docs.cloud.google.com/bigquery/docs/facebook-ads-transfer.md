@@ -386,4 +386,4 @@ For pricing information about Facebook Ads transfers, see [Data Transfer Service
 
   - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
   - Learn more about [working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) , such as viewing configurations and run history.
-  - Learn how to [load data with cross-cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .
+  - Learn how to [load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .
