@@ -28,6 +28,9 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#PythonOptions.SCHEMA_REPRESENTATION)
   - [ExternalRuntimeOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalRuntimeOptions)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalRuntimeOptions.SCHEMA_REPRESENTATION)
+  - [RoutineBuildStatus](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineBuildStatus)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineBuildStatus.SCHEMA_REPRESENTATION)
+  - [BuildState](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#BuildState)
   - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#METHODS_SUMMARY)
 
 ## Resource: Routine
@@ -45,7 +48,7 @@ A user-defined function or a stored procedure.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;etag&quot;: string,&quot;routineReference&quot;: {object (RoutineReference)},&quot;routineType&quot;: enum (RoutineType),&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;language&quot;: enum (Language),&quot;arguments&quot;: [{object (Argument)}],&quot;returnType&quot;: {object (StandardSqlDataType)},&quot;returnTableType&quot;: {object (StandardSqlTableType)},&quot;importedLibraries&quot;: [string],&quot;definitionBody&quot;: string,&quot;description&quot;: string,&quot;determinismLevel&quot;: enum (DeterminismLevel),&quot;strictMode&quot;: boolean,&quot;remoteFunctionOptions&quot;: {object (RemoteFunctionOptions)},&quot;sparkOptions&quot;: {object (SparkOptions)},&quot;dataGovernanceType&quot;: enum (DataGovernanceType),&quot;pythonOptions&quot;: {object (PythonOptions)},&quot;externalRuntimeOptions&quot;: {object (ExternalRuntimeOptions)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;etag&quot;: string,&quot;routineReference&quot;: {object (RoutineReference)},&quot;routineType&quot;: enum (RoutineType),&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;language&quot;: enum (Language),&quot;arguments&quot;: [{object (Argument)}],&quot;returnType&quot;: {object (StandardSqlDataType)},&quot;returnTableType&quot;: {object (StandardSqlTableType)},&quot;importedLibraries&quot;: [string],&quot;definitionBody&quot;: string,&quot;description&quot;: string,&quot;determinismLevel&quot;: enum (DeterminismLevel),&quot;strictMode&quot;: boolean,&quot;remoteFunctionOptions&quot;: {object (RemoteFunctionOptions)},&quot;sparkOptions&quot;: {object (SparkOptions)},&quot;dataGovernanceType&quot;: enum (DataGovernanceType),&quot;pythonOptions&quot;: {object (PythonOptions)},&quot;externalRuntimeOptions&quot;: {object (ExternalRuntimeOptions)},&quot;buildStatus&quot;: {object (RoutineBuildStatus)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -207,6 +210,12 @@ Optional. Options for the Python UDF. [Preview](https://cloud.google.com/product
 ` object ( ExternalRuntimeOptions  ` )
 
 Optional. Options for the runtime of the external system executing the routine. This field is only applicable for Python UDFs. [Preview](https://cloud.google.com/products/#product-launch-stages)
+
+`buildStatus`
+
+` object ( RoutineBuildStatus  ` )
+
+Output only. The build status of the routine. This field is only applicable to Python UDFs. [Preview](https://cloud.google.com/products/#product-launch-stages)
 
 ## RoutineReference
 
@@ -710,6 +719,82 @@ Optional. Maximum number of rows in each batch sent to the external runtime. If 
 `string`
 
 Optional. Language runtime version. Example: `python-3.11` .
+
+## RoutineBuildStatus
+
+The status of a routine build.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;buildState&quot;: enum (BuildState),&quot;errorResult&quot;: {object (ErrorProto)},&quot;buildStateUpdateTime&quot;: string,&quot;buildDuration&quot;: string,&quot;imageSizeBytes&quot;: string}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`buildState`
+
+` enum ( BuildState  ` )
+
+Output only. The current build state of the routine.
+
+`errorResult`
+
+` object ( ErrorProto  ` )
+
+Output only. A result object that will be present only if the build has failed.
+
+`buildStateUpdateTime`
+
+` string ( Timestamp  ` format)
+
+Output only. The time when the build state was updated last.
+
+`buildDuration`
+
+` string ( Duration  ` format)
+
+Output only. The time taken for the image build. Populated only after the build succeeds or fails.
+
+A duration in seconds with up to nine fractional digits, ending with ' `s` '. Example: `"3.5s"` .
+
+`imageSizeBytes`
+
+`string ( int64 format)`
+
+Output only. The size of the image in bytes. Populated only after the build succeeds.
+
+## BuildState
+
+The build state of a routine.
+
+Enums
+
+`BUILD_STATE_UNSPECIFIED`
+
+Default value.
+
+`IN_PROGRESS`
+
+The build is in progress.
+
+`SUCCEEDED`
+
+The build has succeeded.
+
+`FAILED`
+
+The build has failed.
 
 ## Methods
 

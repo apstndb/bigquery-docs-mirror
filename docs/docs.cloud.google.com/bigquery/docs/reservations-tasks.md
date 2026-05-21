@@ -377,7 +377,7 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
     
       - `  RESERVATION_NAME  ` : the name of the reservation.The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
     
-      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
+      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number baseline of slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
     
       - `  EDITION  ` : the edition of the reservation. Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
     
@@ -631,7 +631,7 @@ Install the [google-cloud-bigquery-reservation package](https://docs.cloud.googl
 
 The `--ignore_idle_slots` flag controls whether queries running in a reservation can use idle slots from other reservations. For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) . You can update this configuration on an existing reservation.
 
-To update a reservation, use the `bq update` command with the `--reservation` flag . The following example sets `--ignore_idle_slots` to `true` , meaning the reservation will only use slots allocated to the reservation.
+To update a reservation, use the `bq update` command with the `--reservation` flag. The following example sets `--ignore_idle_slots` to `true` , meaning the reservation will only use slots allocated to the reservation.
 
     bq update \
         --project_id=ADMIN_PROJECT_ID \
@@ -892,12 +892,6 @@ Replace the following:
 For more information about IAM, see [Manage access to other resources](https://docs.cloud.google.com/iam/docs/manage-access-other-resources) .
 
 ## Prioritize idle slots with reservation groups
-
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
 
 You can control which reservations get priority access to idle slots by creating a reservation group. Reservations within a reservation group will share idle slots with each other before they are available to other reservations in the project.
 

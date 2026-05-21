@@ -189,8 +189,8 @@ Take note of the following concepts, as they are referenced in the next sections
   - `WRAPPED_KEYSET_DECODED` : A decoded wrapped keyset as a `BYTES` sequence. Here is an example of what the output for this looks like:
     
         b'\x0a$\x00\xa6\xee\x12Y\x8d|l"\xf7\xfa\xc6\xeafM\xdeefy\xe9\x7f\xf2z\xb3M\
-        xf6"\xd0\xe0Le\xa8\x8e\x0fR\xed\x12\xb7\x01\x00\xf0\xa80\xbd\xc1\x07Z\\
-        \xd0L<\x80A0\x9ae\xfd(9\x1e\xfa\xc8\x93\xc7\xe8\...'
+        xf6"\xd0\xe0Le\xa8\x8e\x0fR\xed\x12\xb7\x01\x00\xf0\xa80\xbd\xc<1\x07Z\\
+        \xd0L\x80A0\x9ae\xfd(9\x1e\xfa\xc8\x93\xc7\xe8\...'
     
     Although wrapped keyset functions return wrapped keysets as bytes, the user output is displayed as an encoded string. To convert an encoded wrapped keyset to a decoded wrapped keyset, see [Decode a Cloud KMS keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#decode-wrapped-keyset)
 
@@ -373,7 +373,7 @@ Run the following query to deterministically decrypt a column that contains encr
     SELECT DETERMINISTIC_DECRYPT_STRING(
       KEYS.KEYSET_CHAIN(KMS_KEY, WRAPPED_KEYSET_DECODED),
       encrypted_content,
-      '')
+      '';)
     FROM DATASET_NAME.TABLE_NAME
 
 ### Non-deterministically encrypt a column with a wrapped keyset

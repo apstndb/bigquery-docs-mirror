@@ -913,8 +913,9 @@ The following limits apply to persistent UDFs:
 | Maximum length of included JavaScript library paths                     | 5,000 characters | The path for a JavaScript library included in a UDF can be up to 5,000 characters long.               |
 | Maximum update rate per UDF per 10 seconds                              | 5 updates        | Your project can update a UDF up to five times every 10 seconds.                                      |
 | Maximum number of authorized UDFs per dataset                           |                  | See [Datasets](https://docs.cloud.google.com/bigquery/quotas#auth_views_in_dataset_acl) .             |
-| Python UDF image storage bytes per project per region                   | 10 GiB           | The total size in bytes of all container images used by Python UDFs in a specific project and region. |
-| Python UDF mutation limit                                               | 30 per minute    | You can create or update Python UDFs up to 30 times per minute per region per project.                |
+| Python UDFs: image storage bytes per project per region                 | 10 GiB           | The total size in bytes of all container images used by Python UDFs in a specific project and region. |
+| Python UDFs: mutation limit                                             | 30 per minute    | You can create or update Python UDFs up to 30 times per minute per region per project.                |
+| Python UDFs: maximum number of concurrent python UDFs                   | 10               | You can run up to 10 concurrent queries that reference Python UDFs per project.                       |
 
 ### Remote functions
 
@@ -1239,6 +1240,16 @@ Any single region supported for one of the `gemini-2.5-* models` in [Google mode
 No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota)
 
 10,000,000 for a call with an average of 500 tokens in each input row and 50 output tokens.
+
+`  AI.AGG  `
+
+Various Gemini models
+
+See [Locations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg#locations)
+
+No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) .
+
+20,000,000
 
 `  AI.GENERATE_TEXT  `  
   

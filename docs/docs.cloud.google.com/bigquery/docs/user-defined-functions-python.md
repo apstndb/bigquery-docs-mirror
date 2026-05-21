@@ -18,11 +18,11 @@ Python UDFs are built and run on BigQuery managed resources.
   - You can't create a temporary Python UDF.
   - You can't use a Python UDF with a materialized view.
   - The results of a query that calls a Python UDF aren't cached because the return value of a Python UDF is always assumed to be non-deterministic.
-  - [VPC networks](https://docs.cloud.google.com/vpc/docs/vpc) aren't supported.
   - [Assured workloads](https://docs.cloud.google.com/assured-workloads/docs/overview) aren't supported.
   - These data types are not supported: `JSON` , `RANGE` , `INTERVAL` , and `GEOGRAPHY` .
   - Containers that run Python UDFs can only be configured up to [4 vCpu and 16 GiB](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits) .
-  - [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) aren't supported.
+  - Encrypting Python UDF code with [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) isn't supported.
+  - Python UDFs support VPC Service Controls, but [VPC networks](https://docs.cloud.google.com/vpc/docs/vpc) aren't supported.
 
 ## Required roles
 
@@ -82,122 +82,6 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 For more information about roles in BigQuery, see [Predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) .
 
-## Call a Python UDF
-
-If you have permission to invoke a Python UDF, then you can call it like any other function. To use a function defined in a different project, use the fully qualified name for the function. For example, to call the [`cw_xml_extract` Python UDF](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx) defined as a [bigquery-utils](https://github.com/GoogleCloudPlatform/bigquery-utils) community UDF, follow these steps:
-
-### Console
-
-1.  Go to the **BigQuery** page.
-
-2.  In the query editor, enter the following example:
-    
-        SELECT
-          `bqutil`.`fn`.`cw_xml_extract`(xml, '//title/text()') AS `title`
-        FROM UNNEST([
-          STRUCT('''<book id="1">
-            <title>The Great Gatsby</title>
-            <author>F. Scott Fitzgerald</author>
-          </book>''' AS xml),
-          STRUCT('''<book id="2">
-            <title>1984</title>
-            <author>George Orwell</author>
-          </book>''' AS xml),
-          STRUCT('''<book id="3">
-            <title>Brave New World</title>
-            <author>Aldous Huxley</author>
-          </book>''' AS xml)
-        ])
-
-3.  Click play\_circle\_filled **Run** .
-    
-    This example produces the following output:
-    
-        +--------------------------+
-        | title                    |
-        +--------------------------+
-        | The Great Gatsby         |
-        | 1984                     |
-        | Brave New World          |
-        +--------------------------+
-
-### BigQuery DataFrames
-
-The following example uses the [BigQuery DataFrames](https://dataframes.bigquery.dev/index.html) [`sql_scalar`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.sql_scalar.html) , [`read_gbq_function`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq_function.html) , and [`apply`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.apply.html) methods to call a Python UDF:
-
-    import textwrap
-    from typing import Tuple
-    
-    import bigframes.pandas as bpd
-    import pandas as pd
-    import pyarrow as pa
-    
-    
-    # Using partial ordering mode enables more efficient query optimizations.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    
-    def call_python_udf(
-        project_id: str, location: str,
-    ) -> Tuple[pd.Series, bpd.Series]:
-        # Set the billing project to use for queries. This step is optional, as the
-        # project can be inferred from your environment in many cases.
-        bpd.options.bigquery.project = project_id  # "your-project-id"
-    
-        # Since this example works with local data, set a processing location.
-        bpd.options.bigquery.location = location  # "US"
-    
-        # Create a sample series.
-        xml_series = pd.Series(
-            [
-                textwrap.dedent(
-                    """
-                    <book id="1">
-                        <title>The Great Gatsby</title>
-                        <author>F. Scott Fitzgerald</author>
-                    </book>
-                    """
-                ),
-                textwrap.dedent(
-                    """
-                    <book id="2">
-                        <title>1984</title>
-                        <author>George Orwell</author>
-                    </book>
-                    """
-                ),
-                textwrap.dedent(
-                    """
-                    <book id="3">
-                        <title>Brave New World</title>
-                        <author>Aldous Huxley</author>
-                    </book>
-                    """
-                ),
-            ],
-            dtype=pd.ArrowDtype(pa.string()),
-        )
-        df = pd.DataFrame({"xml": xml_series})
-    
-        # Use the BigQuery Accessor, which is automatically registered on pandas
-        # DataFrames when you import bigframes.  This example uses a function that
-        # has been deployed to bigquery-utils for demonstration purposes. To use in
-        # production, deploy the function at
-        # https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx
-        # to your own project.
-        titles_pandas = df.bigquery.sql_scalar(
-            "`bqutil`.`fn`.cw_xml_extract({xml}, '//title/text()')",
-        )
-    
-        # Alternatively, call read_gbq_function to get a pointer to the function
-        # that can be applied on BigQuery DataFrames objects.
-        cw_xml_extract = bpd.read_gbq_function("bqutil.fn.cw_xml_extract")
-        xml_bigframes = bpd.read_pandas(xml_series)
-    
-        xpath_query = "//title/text()"
-        titles_bigframes = xml_bigframes.apply(cw_xml_extract, args=(xpath_query,))
-        return titles_pandas, titles_bigframes
-
 ## Create a persistent Python UDF
 
 Follow these rules when you create a Python UDF:
@@ -209,8 +93,6 @@ Follow these rules when you create a Python UDF:
   - A Python runtime version needs to be specified in the `runtime_version` option. The only supported Python runtime version is `python-3.11` . For a full list of available options, see the [Function option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#function_option_list) for the `CREATE FUNCTION` statement.
 
 To create a persistent Python UDF, use the [`CREATE FUNCTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) without the `TEMP` or `TEMPORARY` keyword. To delete a persistent Python UDF, use the [`DROP FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement) statement.
-
-When you create a Python UDF using the `CREATE FUNCTION` statement, BigQuery creates or updates a container image that is based on a base image. The container is built on the base image using your code and any specified package dependencies. Creating the container is a long-running process. The first query after you run the `CREATE FUNCTION` statement might automatically wait for the image to complete. Without any external dependencies, the container image should typically be created in less than a minute.
 
 ### Example
 
@@ -360,6 +242,67 @@ The following example uses BigQuery DataFrames to turn a custom function into a 
     session = bpd.get_global_session()
     session.bqclient.delete_routine(f"{your_bq_dataset_id}.{your_bq_routine_id}")
 
+## Container build status
+
+When you create a Python UDF using the `CREATE FUNCTION` statement, BigQuery creates or updates a container image that is based on a base image. The container is built on the base image using your code and any specified package dependencies.
+
+Creating the container is a long-running process. The first query after you run the `CREATE FUNCTION` statement waits for the image build to complete. If there are no external dependencies, the container image is typically created in less than a minute.
+
+The size of all Python UDF containers per project and per region is restricted to a sum total of 10GiB. For more information, see [User-defined function limits for persistent UDFs](https://docs.cloud.google.com/bigquery/quotas#udf_limits) . Your container build fails if your project has reached the quota.
+
+To see the status of your container build, choose one of the following:
+
+### Console
+
+1.  Go to the BigQuery **Studio** page.
+
+2.  In the left pane, expand your project and then click **Datasets** .
+
+3.  Click the link to open the dataset that contains your Python UDF.
+
+4.  On the dataset page, click the **Routines** tab.
+
+5.  In the **Routine ID** column, click your Python UDF.
+
+6.  On the **Persistent function info** page, you can view the build status, build duration, and image size. The build status is one of the following:
+    
+      - In progress
+      - Succeeded
+      - Failed
+    
+    If a build fails, the function information page provides detailed error messages so you can troubleshoot issues such as syntax errors or problems installing external packages.
+    
+    ![The Persistent function info page in the console.](https://docs.cloud.google.com/bigquery/images/function-details.png)
+
+### SQL
+
+To query the build status fields in the `INFORMATION_SCHEMA.ROUTINES` view, follow these steps:
+
+1.  Go to the BigQuery **Studio** page.
+
+2.  Switch to the query editor or click add\_box **SQL query** .
+
+3.  Enter the following query to retrieve the `BUILD_STATUS` fields from the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) . The `BUILD_STATUS` column is a [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) type in GoogleSQL:
+    
+        SELECT
+          build_status.*
+        FROM
+          `PROJECT_ID.DATASET_ID`.INFORMATION_SCHEMA.ROUTINES;
+    
+    Replace PROJECT\_ID . DATASET\_ID with your project ID and dataset ID.
+    
+    The output should look like the following. Error fields are omitted:
+    
+        +---------------+--------------------------------+------------------------+------------------+
+        | build_state   | build_state_update_time        | build_duration_seconds | image_size_bytes |
+        +---------------+--------------------------------+------------------------+------------------+
+        | SUCCEEDED     | 2026-05-14 17:21:49.736000 UTC |                     11 |             3167 |
+        +---------------+--------------------------------+------------------------+------------------+
+
+### API
+
+View the container build status by using [`RoutineBuildStatus`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#routinebuildstatus) in the API.
+
 ## Create a vectorized Python UDF
 
 You can implement your Python UDF to process a batch of rows instead of a single row by using vectorization. Vectorization can improve query performance. You can create a vectorized UDF using either Pandas or Apache Arrow.
@@ -429,6 +372,124 @@ The following example uses the Apache Arrow [`RecordBatch` interface](https://ar
     Calling the UDF is the same as in the previous examples.
 
 3.  Click play\_circle\_filled **Run** .
+
+## Call a Python UDF
+
+If you have permission to invoke a Python UDF, then you can call it like any other function. To use a function defined in a different project, use the fully qualified name for the function. For example, to call an XML extraction function named [`cw_xml_extract`](https://docs.cloud.google.com/bigquery/docs/\(https:/github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx\)) in another project, complete the following steps.
+
+> **Note:** This example is based on a sample from [bigquery-utils](https://github.com/GoogleCloudPlatform/bigquery-utils) .
+
+### Console
+
+1.  Go to the **BigQuery** page.
+
+2.  In the query editor, enter the following example:
+    
+        SELECT
+          `PROJECT_ID.DATASET_ID`.`cw_xml_extract`(xml, '//title/text()') AS `title`
+        FROM UNNEST([
+          STRUCT('''<book id="1">
+            <title>The Great Gatsby</title>
+            <author>F. Scott Fitzgerald</author>
+          </book>''' AS xml),
+          STRUCT('''<book id="2">
+            <title>1984</title>
+            <author>George Orwell</author>
+          </book>''' AS xml),
+          STRUCT('''<book id="3">
+            <title>Brave New World</title>
+            <author>Aldous Huxley</author>
+          </book>''' AS xml)
+        ])
+
+3.  Click play\_circle\_filled **Run** .
+    
+    This example produces the following output:
+    
+        +--------------------------+
+        | title                    |
+        +--------------------------+
+        | The Great Gatsby         |
+        | 1984                     |
+        | Brave New World          |
+        +--------------------------+
+
+### BigQuery DataFrames
+
+The following example uses the [BigQuery DataFrames](https://dataframes.bigquery.dev/index.html) [`sql_scalar`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.sql_scalar.html) , [`read_gbq_function`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.read_gbq_function.html) , and [`apply`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.apply.html) methods to call a Python UDF:
+
+    import textwrap
+    from typing import Tuple
+    
+    import bigframes.pandas as bpd
+    import pandas as pd
+    import pyarrow as pa
+    
+    
+    # Using partial ordering mode enables more efficient query optimizations.
+    bpd.options.bigquery.ordering_mode = "partial"
+    
+    
+    def call_python_udf(
+        project_id: str, location: str,
+    ) -> Tuple[pd.Series, bpd.Series]:
+        # Set the billing project to use for queries. This step is optional, as the
+        # project can be inferred from your environment in many cases.
+        bpd.options.bigquery.project = project_id  # "your-project-id"
+    
+        # Since this example works with local data, set a processing location.
+        bpd.options.bigquery.location = location  # "US"
+    
+        # Create a sample series.
+        xml_series = pd.Series(
+            [
+                textwrap.dedent(
+                    """
+                    <book id="1">
+                        <title>The Great Gatsby</title>
+                        <author>F. Scott Fitzgerald</author>
+                    </book>
+                    """
+                ),
+                textwrap.dedent(
+                    """
+                    <book id="2">
+                        <title>1984</title>
+                        <author>George Orwell</author>
+                    </book>
+                    """
+                ),
+                textwrap.dedent(
+                    """
+                    <book id="3">
+                        <title>Brave New World</title>
+                        <author>Aldous Huxley</author>
+                    </book>
+                    """
+                ),
+            ],
+            dtype=pd.ArrowDtype(pa.string()),
+        )
+        df = pd.DataFrame({"xml": xml_series})
+    
+        # Use the BigQuery Accessor, which is automatically registered on pandas
+        # DataFrames when you import bigframes.  This example uses a function that
+        # has been deployed to bigquery-utils for demonstration purposes. To use in
+        # production, deploy the function at
+        # https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx
+        # to your own project.
+        titles_pandas = df.bigquery.sql_scalar(
+            "`bqutil`.`fn`.cw_xml_extract({xml}, '//title/text()')",
+        )
+    
+        # Alternatively, call read_gbq_function to get a pointer to the function
+        # that can be applied on BigQuery DataFrames objects.
+        cw_xml_extract = bpd.read_gbq_function("bqutil.fn.cw_xml_extract")
+        xml_bigframes = bpd.read_pandas(xml_series)
+    
+        xpath_query = "//title/text()"
+        titles_bigframes = xml_bigframes.apply(cw_xml_extract, args=(xpath_query,))
+        return titles_pandas, titles_bigframes
 
 ## Supported Python UDF data types
 
@@ -549,11 +610,7 @@ python-dateutil 2.8.2<br />
 absl-py 2.0.0<br />
 pytz 2023.3.post1<br />
 tzdata 2023.4<br />
-six 1.16.0<br />
-grpcio 1.76.0<br />
-grpcio-protobuf 6.33.5tools 1.76.0<br />
-typing-extensions 4.15.0<br />
-</td>
+six 1.16.0</td>
 </tr>
 </tbody>
 </table>
@@ -614,18 +671,23 @@ The following example shows you how to create a Python UDF that imports the `lib
         RETURNS STRING LANGUAGE python
         OPTIONS (
         entry_point='compute', runtime_version='python-3.11',
-        library=['gs://my_bucket/path/to/lib1.py'])
+        library=['gs://BUCKET_NAME/PATH/lib1.py'])
         AS r"""
         import path.to.lib1 as lib1
         
         def compute(a, b):
           # doInterestingStuff is a function defined in
-          # gs://my_bucket/path/to/lib1.py
+          # gs://BUCKET_NAME/PATH/lib1.py
           return lib1.doInterestingStuff(a, b);
         
         """;
     
-    Replace PROJECT\_ID . DATASET\_ID with your project ID and dataset ID.
+    Replace the following:
+    
+      - PROJECT\_ID : your project ID.
+      - DATASET\_ID : your dataset ID.
+      - BUCKET\_NAME : the name of the Cloud Storage bucket that contains `lib1.py` .
+      - PATH : the path to the Cloud Storage bucket.
 
 3.  Click play\_circle\_filled **Run** .
 
@@ -647,23 +709,16 @@ The following example creates a Python UDF using the `CREATE FUNCTION` option li
 
 2.  In the query editor, enter the following `CREATE FUNCTION` statement:
     
-        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.resizeImage(image BYTES)
-        RETURNS BYTES LANGUAGE python
-        OPTIONS (entry_point='resize_image', runtime_version='python-3.11',
-        packages=['Pillow==11.2.1'], container_memory='CONTAINER_MEMORY', container_cpu=CONTAINER_CPU,
-        container_request_concurrency=CONTAINER_REQUEST_CONCURRENCY)
+        CREATE FUNCTION `PROJECT_ID.DATASET_ID`.square_area(length FLOAT64)
+        RETURNS FLOAT64 LANGUAGE python
+        OPTIONS (entry_point='square_area', runtime_version='python-3.11',
+        container_memory='CONTAINER_MEMORY', container_cpu=CONTAINER_CPU, container_request_concurrency=CONTAINER_REQUEST_CONCURRENCY)
         AS r"""
-        import io
-        from PIL import Image
-        
-        def resize_image(image_bytes):
-          img = Image.open(io.BytesIO(image_bytes))
-        
-          resized_img = img.resize((256, 256), Image.Resampling.LANCZOS)
-          output_stream = io.BytesIO()
-          resized_img.convert('RGB').save(output_stream, format='JPEG')
-          return output_stream.getvalue()
+        def square_area(length):
+          return length*length
         """;
+        
+        SELECT `PROJECT_ID.DATASET_ID`.square_area(4.5);
     
     Replace the following:
     
@@ -707,7 +762,11 @@ Alternatively, if you've determined the amount of CPU you're allocating, you can
 
 A Python UDF accesses a Google Cloud service or an external service by using the [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) service account. The connection's service account must be granted permissions to access the service. The permissions required vary depending on the service that is accessed and the APIs that are called from your Python code.
 
-If you create a Python UDF without using a Cloud resource connection, the function is executed in an environment that blocks network access. If your UDF accesses online services, you must create the UDF with a Cloud resource connection. If you don't, the UDF is blocked from accessing the network until an internal connection timeout is reached.
+If you create a Python UDF without using a Cloud resource connection, the function is executed in an environment that blocks network access. If your UDF accesses online services, you must create the UDF with a Cloud resource connection. If you don't, the UDF is blocked from accessing the network until an internal connection timeout is reached. When you use a Cloud resource connection, implement the following:
+
+  - Timeouts. When you make network calls within your Python UDF, always include a reasonable timeout. This prevents the UDF from hanging indefinitely if the external service is slow to respond or is unreachable.
+
+  - Use Error Handling. Wrap your network call code in a `try...except` block to gracefully handle potential errors, such as connection errors, timeouts, or HTTP failure status codes. This allows your UDF to return a meaningful error or a fallback value instead of causing the query to fail or stop responding.
 
 The following example shows you how to access the Cloud Translation service from a Python UDF. This example has two projects—a project named `my_query_project` where you create the UDF and the Cloud resource connection, and a project where you are running the Cloud Translation named `my_translate_project` .
 
@@ -997,6 +1056,8 @@ You need the service account ID you copied previously when you configure permiss
 
 To grant the Cloud resource connection service account access to your projects, grant the service account the [Service usage consumer role](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` ) in `my_query_project` and the [Cloud Translation API user role](https://docs.cloud.google.com/translate/docs/access-control#cloudtranslate.user) ( `roles/cloudtranslate.user` ) in `my_translate_project` .
 
+### Console
+
 1.  Go to the **IAM** page.
 
 2.  Verify that `my_query_project` is selected.
@@ -1020,6 +1081,46 @@ To grant the Cloud resource connection service account access to your projects, 
 11. In the **Select a role** field, choose **Cloud translation** , and then select **Cloud Translation API user** .
 
 12. Click **Save** .
+
+### SQL
+
+Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) to grant the [Service usage consumer role](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` ) to the service account in `my_query_project` :
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+    
+    ``` 
+      GRANT `roles/serviceusage.serviceUsageConsumer`
+      ON PROJECT `my_query_project`
+      TO "connection:SERVICE_ACCOUNT_ID";
+      
+    ```
+    
+    Replace `  SERVICE_ACCOUNT_ID  ` with the service account ID you copied previously.
+
+3.  Click play\_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
+Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) to grant the [Cloud Translation API user role](https://docs.cloud.google.com/translate/docs/access-control#cloudtranslate.user) ( `roles/cloudtranslate.user` ) in `my_translate_project` :
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+    
+    ``` 
+      GRANT `roles/cloudtranslate.user`
+      ON PROJECT `my_translate_project`
+      TO "connection:SERVICE_ACCOUNT_ID";
+      
+    ```
+    
+    Replace `  SERVICE_ACCOUNT_ID  ` with the service account ID you copied previously.
+
+3.  Click play\_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### Create a Python UDF that calls the Cloud Translation service
 
@@ -1045,7 +1146,7 @@ In `my_query_project` , create a Python UDF that calls the Cloud Translation ser
         
             response = translate_client.translate_text(
                 request={
-                    "parent": f"projects/{project}/locations/us-central1",
+                    "parent": f"projects/PROJECT_ID/locations/us-central1",
                     "contents": [x],
                     "target_language_code": "es",
                     "mime_type": "text/plain",
@@ -1069,8 +1170,10 @@ In `my_query_project` , create a Python UDF that calls the Cloud Translation ser
     
     Replace the following:
     
-      - `  PROJECT_ID . DATASET_ID  ` : your project ID and dataset ID
-      - `  REGION . CONNECTION_ID  ` : your connection's region and connection ID
+      - `  PROJECT_ID  ` : the project ID.
+      - `  DATASET_ID  ` : the dataset ID.
+      - `  REGION  ` : your connection's region.
+      - `  CONNECTION_ID  ` : the connection ID.
 
 3.  Click play\_circle\_filled **Run** .
     
@@ -1084,20 +1187,36 @@ In `my_query_project` , create a Python UDF that calls the Cloud Translation ser
         | Goodbye                  | Adios                         |
         +--------------------------+-------------------------------+
 
+## Use VPC Service Controls
+
+Python UDFs inherit the VPC Service Controls perimeter of the project that runs the query job. This perimeter protects your jobs from data exfiltration, and it ensures that service interactions are secure.
+
+When you invoke a Python UDF inside the VPC Service Controls perimeter, it has the following network connectivity:
+
+  - Python UDFs that don't use a Cloud resource connection are fully isolated. All outbound traffic is blocked.
+  - Python UDFs that use a Cloud resource connection are blocked from public internet access. Python UDFs can only access Google Cloud services that support VPC Service Controls. Outbound traffic to any destination other than `restricted.googleapis.com` is blocked.
+
+### Configure Python UDFs to access Google Cloud services securely within VPC Service Controls
+
+To access Google Cloud services from Python UDFs while enforcing VPC Service Controls, follow these steps:
+
+1.  Create the Python UDF using the [CREATE FUNCTION statement's](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) `WITH CONNECTION` clause.
+2.  Include the BigQuery project where the query job runs and the target service project in the service perimeter. Alternatively, configure a [perimeter bridge](https://docs.cloud.google.com/vpc-service-controls/docs/create-perimeter-bridges) .
+3.  Add the target service API to the perimeter configuration. For example, `translate.googleapis.com` if you're connecting to the Cloud Translation API.
+
+For more details on configuring a VPC Service Controls perimeter, see:
+
+  - [VPC Service Controls for BigQuery](https://docs.cloud.google.com/bigquery/docs/vpc-sc)
+  - [Overview of VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview)
+
 ## Best practices
 
 When you create Python UDFs, follow these best practices:
 
   - Optimize your query logic for batching. Complex query structures can disable batching. This forces slow, row-by-row processing, which significantly increases latency on large datasets.
-  - Avoid UDFs in conditional expressions.
-  - Avoid using UDFs to embed `STRUCT` fields directly.
-  - Isolate UDFs in projections. To ensure batching, execute the UDF in a `SELECT` statement by using a Common Table Expression (CTE) or subquery. Then, perform filters or joins on that result in a separate step.
-  - Optimize the data payload. The size of individual rows can impact the efficiency of the batching feature.
-  - Minimize row size. Keep each row as small as possible to maximize the number of rows that can be processed in a single batch.
-  - Configure container limits efficiently. Scalability is a function of CPU, memory, and request concurrency.
+  - Optimize the data payload. The size of individual rows can impact the efficiency of the batching feature. Keep each row as small as possible to maximize the number of rows that can be processed in a single batch.
+  - Configure [container limits](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits) efficiently. Scalability is a function of CPU, memory, and request concurrency. Check monitoring metrics to tune the container configuration. If CPU utilization is high, increase CPU allocation using the `container_cpu` limit, or reduce container request concurrency using the `container_request_concurrency` limit.
   - When you use iterative tuning, start with default values. If performance is suboptimal, analyze monitoring metrics to identify specific bottlenecks.
-  - Scale your resources. If monitoring metrics show high utilization levels, increase the allocated CPU and memory.
-  - Manage external dependencies and reliability. UDFs that interact with external services require a connection and appropriate permissions.
   - Implement API timeouts. When your Python UDF accesses the internet, set a timeout on the API call to avoid unexpected behavior. An example of internet access is reading from a Cloud Storage bucket.
 
 ## View Python UDF metrics
@@ -1124,8 +1243,8 @@ The following metrics are available for the `bigquery.googleapis.com/ManagedRout
 
 | Metric                                                                     | Description                                                                                                                               | Unit               | Value type     |
 | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------------- |
-| `bigquery.googleapis.com/managed_routine/python/cpu_utilizations`          | When a Python UDF is invoked, this metric shows the distribution of CPU utilization across all Python UDF instances for the query job.    | 10 <sup>2</sup> .% | `DISTRIBUTION` |
-| `bigquery.googleapis.com/managed_routine/python/memory_utilizations`       | When a Python UDF is invoked, this metric shows the distribution of memory utilization across all Python UDF instances for the query job. | 10 <sup>2</sup> .% | `DISTRIBUTION` |
+| `bigquery.googleapis.com/managed_routine/python/cpu_utilizations`          | When a Python UDF is invoked, this metric shows the distribution of CPU utilization across all Python UDF instances for the query job.    | A percentage value | `DISTRIBUTION` |
+| `bigquery.googleapis.com/managed_routine/python/memory_utilizations`       | When a Python UDF is invoked, this metric shows the distribution of memory utilization across all Python UDF instances for the query job. | A percentage value | `DISTRIBUTION` |
 | `bigquery.googleapis.com/managed_routine/python/max_request_concurrencies` | This metric shows the distribution of the maximum number of concurrent requests served by each Python UDF instance.                       | Count              | `DISTRIBUTION` |
 
 ### View metrics
@@ -1192,14 +1311,25 @@ Python UDFs are supported in all BigQuery [multi-region and regional locations](
 
 ## Pricing
 
-Python UDFs are offered without any additional charges.
+Python UDF charges are billed using the [BigQuery Services SKU](https://cloud.google.com/skus?&filter=BigQuery%20Services&currency=USD) .
 
-When billing is enabled, the following apply:
+Charges include the following:
 
-  - Python UDF charges are billed using the [BigQuery Services SKU](https://cloud.google.com/skus?&filter=bigquery&currency=USD) .
-  - The charges are proportional to the amount of compute and memory consumed when the Python UDF is invoked.
-  - Python UDF customers are also charged for the cost of building or rebuilding the UDF container image. This charge is proportional to the resources used to build the image with customer code and dependencies.
-  - If Python UDFs result in external or internet network egress, you also see a [Premium Tier](https://cloud.google.com/network-tiers/pricing) internet egress charge from Cloud Networking.
+  - Building or rebuilding the UDF container image. This charge is proportional to the duration required to build the corresponding image with customer code and dependencies.
+    
+      - If you're using the [Routines API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines) , the latest build duration is in the `BuildStatus` field. You can also view the build duration in the `BuildStatus` column in the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) .
+      - To view the total cost of builds per project, you can filter your billing report by using the following:
+          - *Key* : `goog-bq-feature-type`
+          - *Value* : `MANAGED_ROUTINE_BUILD`
+
+  - Python UDF customers are also charged for the cost of invoking a Python UDF. This charge is proportional to the amount of compute and memory consumed when the Python UDF is invoked.
+    
+      - To view Python UDF costs per query, you can query the `ExternalServiceCosts` field using the [Job API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#externalservicecost) . You can also view costs per query by viewing the `external_service_costs` column in the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and applying the following filter: `'external_service_costs.external_service="MANAGED_ROUTINE_EXECUTION"'` .
+      - To view the total cost of running Python UDFs per project, you can filter the billing report by using the following:
+          - *Key* : `goog-bq-feature-type`
+          - *Value* : `MANAGED_ROUTINE_EXECUTION`
+
+  - If Python UDFs result in external or internet network egress, you also see a [Premium Tier](https://cloud.google.com/network-tiers/pricing) internet egress charge based on the [BigQuery Egress SKUs](https://cloud.google.com/skus/sku-groups/network-egress) .
 
 ## Quotas
 

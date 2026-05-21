@@ -2,17 +2,17 @@
 name: documents/docs.cloud.google.com/bigquery/docs/history-based-optimizations
 uri: https://docs.cloud.google.com/bigquery/docs/history-based-optimizations
 title: Use history-based optimizations
-description: Shows how to enable, disable, and analyze history-based optimization for queries in BigQuery.
+description: Describes history-based optimization and shows how to analyze history-based optimization for queries in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
 # Use history-based optimizations
 
-This guide describes how to enable, disable, and analyze history-based optimizations for queries.
+This guide describes how history-based optimizations work and how to estimate their impact for queries.
 
 ## About history-based optimizations
 
-History-based optimizations use information from already completed executions of similar queries to apply additional optimizations and further improve query performance such as slot time consumed and query latency. For example, when you apply history-based optimization, the first query execution might take 60 seconds, but the second query execution might take only 30 seconds if a history-based optimization was identified. This process continues until there are no additional optimizations to add.
+History-based optimizations automatically use information from already-completed executions of the same or similar queries to apply additional optimizations and further improve query performance, such as slot time consumed and query latency. For example, the first query execution might take 60 seconds, but the second query execution might take only 30 seconds if a history-based optimization was identified. This process continues until there are no additional optimizations to add.
 
 The following is an example of how history-based optimizations work with BigQuery:
 
@@ -25,39 +25,7 @@ The following is an example of how history-based optimizations work with BigQuer
 | 5               | 19                       | No additional history-based optimizations to apply. |
 | 6               | 20                       | No additional history-based optimizations to apply. |
 
-History-based optimizations are only applied when there is high confidence that there will be a beneficial impact to the query performance. In addition, when an optimization does not significantly improve query performance, that optimization is revoked and not used in future executions of that query.
-
-## Roles and permissions
-
-  - To enable or disable history-based optimizations, you must have the required permissions to create BigQuery default configurations, and then you must use the `ALTER PROJECT` statement to enable history-based optimizations. Once you've enabled history-based optimizations, all jobs in that project use history-based optimizations, regardless of which user created the job. To learn more about required roles and permissions for default configurations, see [Required roles](https://docs.cloud.google.com/bigquery/docs/default-configuration#required_permissions) for default configurations. To enable history-based optimizations, see [Enable history-based optimizations](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations#enable-history-based-optimization) .
-
-  - To review the history-based optimizations for a job using the `INFORMATION_SCHEMA.JOBS` view, you must have the required role. For more information, see [Required role](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#required_role) for `INFORMATION_SCHEMA.JOBS` view.
-
-## Enable history-based optimizations
-
-History-based optimizations are enabled by default. If history-based optimizations have been disabled for a project or organization, you can manually re-enable history-based optimizations by including the `default_query_optimizer_options = 'adaptive=on'` parameter in your [`ALTER PROJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
-
-    ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=on');
-
-Replace the following:
-
-  - `  PROJECT_NAME  ` : the name of the project
-  - `  LOCATION  ` : the location in which jobs should attempt to use history-based optimizations
-
-> **Note:** After you enable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `ALTER PROJECT` or `ALTER ORGANIZATION` statement: `ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.`
-
-## Disable history-based optimizations
-
-To disable history-based optimizations in a project, include the `default_query_optimizer_options = 'adaptive=off'` parameter in the [`ALTER PROJECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
-
-    ALTER PROJECT PROJECT_NAMESET OPTIONS (  `region-LOCATION.default_query_optimizer_options` = 'adaptive=off');
-
-Replace the following:
-
-  - `  PROJECT_NAME  ` : the name of the project
-  - `  LOCATION  ` : the location in which jobs should not attempt to use history-based optimizations
-
-> **Note:** After you disable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `ALTER PROJECT` or `ALTER ORGANIZATION` statement: `ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.`
+History-based optimizations are only applied when there is high confidence that there will be a beneficial impact to the query performance. In addition, when an optimization does not significantly improve query performance or may result in poorer performance, that optimization is revoked and not used in future executions of that query.
 
 ## Review history-based optimizations for a job
 

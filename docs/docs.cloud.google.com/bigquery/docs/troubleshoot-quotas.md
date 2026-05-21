@@ -394,7 +394,21 @@ To resolve this error, do the following:
 
 1.  Request an increase: go to the [**Quotas & System Limits** page](https://docs.cloud.google.com/docs/quotas/view-manage#viewing_your_quota_console) , search for the `Python UDF image storage bytes per project per region` limit, and then request an increase.
 
-2.  Optimize storage: delete unused Python UDFs using the `DROP FUNCTION` statement to free space. After a UDF is deleted, its image size no longer counts towards the quota. You can find the image size by using the `Routine.GetBuildStatus` API.
+2.  Optimize storage: delete unused Python UDFs using the `DROP FUNCTION` statement to free space. After a UDF is deleted, its image size no longer counts towards the quota. You can find the image size by using the API's [`RoutineBuildStatus`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#routinebuildstatus) . For more information on viewing build status, see [Container build status](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#container_build_status) .
+
+### Maximum concurrent Python UDFs
+
+You are limited to 10 concurrent Python UDFs per project. If you run more than 10, you receive the following error.
+
+**Error message**
+
+`Exceeded rate limits: too many concurrent queries with Python UDFs in this project. Your project: PROJECT_ID exceeded quota for maximum concurrent Python UDFs per project.`
+
+To view all Python UDF quotas, see [Routines](https://docs.cloud.google.com/bigquery/quotas#udf_limits) in the Quotas and limits reference.
+
+#### Resolution
+
+To resolve this error, you can request a quota increase by contacting [support](https://docs.cloud.google.com/bigquery/docs/getting-support) or [sales](https://cloud.google.com/contact) . It might take several days to review and process the request. We recommend stating the priority, use case, and the project ID in the request.
 
 ## Troubleshoot quotas or limits that can't be increased
 

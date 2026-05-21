@@ -45,7 +45,7 @@ This section discusses some of the highlights of GoogleSQL compared to legacy SQ
 
 Some of the GoogleSQL examples on this page make use of a [`WITH` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) , which enables extraction or reuse of named subqueries. For example:
 
-    #standardSQL
+    #GoogleSQL
     WITH T AS (
       SELECT x FROM UNNEST([1, 2, 3, 4]) AS x
     )
@@ -54,7 +54,7 @@ Some of the GoogleSQL examples on this page make use of a [`WITH` clause](https:
 
 This query defines a named subquery `T` that contains `x` values of 1, 2, 3, and 4. It selects `x` values from `T` and divides them by the sum of all `x` values in `T` . This query is equivalent to a query where the contents of `T` are inline:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       x / (SELECT SUM(x)
            FROM (SELECT x FROM UNNEST([1, 2, 3, 4]) AS x)) AS weighted_x
@@ -62,7 +62,7 @@ This query defines a named subquery `T` that contains `x` values of 1, 2, 3, and
 
 As another example, consider this query, which uses multiple named subqueries:
 
-    #standardSQL
+    #GoogleSQL
     WITH T AS (
       SELECT x FROM UNNEST([1, 2, 3, 4]) AS x
     ),
@@ -79,7 +79,7 @@ As another example, consider this query, which uses multiple named subqueries:
 
 This query defines a sequence of transformations of the original data, followed by a `SELECT` statement over `TPlusOneTimesTwo` . This query is equivalent to the following query, which inlines the computations:
 
-    #standardSQL
+    #GoogleSQL
     SELECT (x + 1) * 2 AS z
     FROM (SELECT x FROM UNNEST([1, 2, 3, 4]) AS x);
 
@@ -89,7 +89,7 @@ For more information, see [`WITH` clause](https://docs.cloud.google.com/bigquery
 
 GoogleSQL supports [user-defined SQL functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure) . You can use user-defined SQL functions to define common expressions and then reference them from the query. For example:
 
-    #standardSQL
+    #GoogleSQL
     -- Computes the harmonic mean of the elements in 'arr'.
     -- The harmonic mean of x_1, x_2, ..., x_n can be expressed as:
     --   n / ((1 / x_1) + (1 / x_2) + ... + (1 / x_n))
@@ -111,7 +111,7 @@ This query defines a SQL function named `HarmonicMean` and then applies it to th
 
 GoogleSQL supports subqueries in the `SELECT` list, `WHERE` clause, and anywhere else in the query that expects an expression. For example, consider the following GoogleSQL query that computes the fraction of warm days in Seattle in 2015:
 
-    #standardSQL
+    #GoogleSQL
     WITH SeattleWeather AS (
       SELECT *
       FROM `bigquery-public-data.noaa_gsod.gsod2015`
@@ -128,7 +128,7 @@ The Seattle weather station has an ID of `'994014'` . The query computes the num
 
 In GoogleSQL, subqueries can reference correlated columns; that is, columns that originate from the outer query. For example, consider the following GoogleSQL query:
 
-    #standardSQL
+    #GoogleSQL
     WITH WashingtonStations AS (
       SELECT weather.stn AS station_id, ANY_VALUE(station.name) AS name
       FROM `bigquery-public-data.noaa_gsod.stations` AS station
@@ -151,7 +151,7 @@ This query computes the names of weather stations in Washington state and the nu
 
 `ARRAY` and `STRUCT` are powerful concepts in GoogleSQL. As an example that uses both, consider the following query, which computes the top two articles for each day in the HackerNews dataset:
 
-    #standardSQL
+    #GoogleSQL
     WITH TitlesAndScores AS (
       SELECT
         ARRAY_AGG(STRUCT(title, score)) AS titles,
@@ -203,7 +203,7 @@ For more information see:
 
 GoogleSQL has a [stricter range of valid `TIMESTAMP` values](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) than legacy SQL does. In GoogleSQL, valid `TIMESTAMP` values are in the range of `0001-01-01 00:00:00.000000` to `9999-12-31 23:59:59.999999` . For example, you can select the minimum and maximum `TIMESTAMP` values using GoogleSQL:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       min_timestamp,
       max_timestamp,
@@ -219,7 +219,7 @@ This query returns `-62135596800000000` as `min_unix_micros` and `25340230079999
 
 If you select a column that contains timestamp values outside of this range, you receive an error:
 
-    #standardSQL
+    #GoogleSQL
     SELECT timestamp_column_with_invalid_values
     FROM MyTableWithInvalidTimestamps;
 
@@ -231,7 +231,7 @@ This query returns the following error:
 
 To correct the error, one option is to define and use a [user-defined function](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) to filter the invalid timestamps:
 
-    #standardSQL
+    #GoogleSQL
     CREATE TEMP FUNCTION TimestampIsValid(t TIMESTAMP) AS (
       t >= TIMESTAMP('0001-01-01 00:00:00') AND
       t <= TIMESTAMP('9999-12-31 23:59:59.999999')
@@ -243,7 +243,7 @@ To correct the error, one option is to define and use a [user-defined function](
 
 Another option to correct the error is to use the [`SAFE_CAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) function with the timestamp column. For example:
 
-    #standardSQL
+    #GoogleSQL
     SELECT SAFE_CAST(timestamp_column_with_invalid_values AS STRING) AS timestamp_string
     FROM MyTableWithInvalidTimestamps;
 
@@ -272,7 +272,7 @@ For example, the following legacy SQL query uses implicit coercions:
 
 In GoogleSQL, this query is invalid. To achieve the same result, you must use explicit casting:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       1 + SAFE_CAST(true AS INT64) as boolean_coercion,
       TIMESTAMP_MICROS(1234567890) as integer_timestamp_coercion;
@@ -285,7 +285,7 @@ While GoogleSQL and legacy SQL syntaxes are similar, there are some crucial diff
 
 In legacy SQL, you escape reserved keywords and identifiers that contain invalid characters such as a space `  ` or hyphen `-` using square brackets `[]` . In GoogleSQL, you escape such keywords and identifiers using backticks `` ` `` . For example:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       word,
       SUM(word_count) AS word_count
@@ -296,7 +296,7 @@ In legacy SQL, you escape reserved keywords and identifiers that contain invalid
 
 Legacy SQL allows reserved keywords in some places that GoogleSQL does not. For example, the following query fails due to a `Syntax error` using standard SQL:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       COUNT(*) AS rows
     FROM
@@ -304,7 +304,7 @@ Legacy SQL allows reserved keywords in some places that GoogleSQL does not. For 
 
 To fix the error, escape the alias `rows` using backticks:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       COUNT(*) AS `rows`
     FROM
@@ -396,7 +396,7 @@ Example legacy SQL query:
 
 The GoogleSQL equivalent is:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       word
     FROM
@@ -430,7 +430,7 @@ For example, consider a legacy SQL query using a `table` partitioned over the `_
 
 The GoogleSQL equivalent is:
 
-    #standardSQL
+    #GoogleSQL
     SELECT * FROM dataset.table
     WHERE _PARTITIONTIME=TIMESTAMP('2016-05-01');
 
@@ -455,7 +455,7 @@ For example, consider the following legacy SQL query, which counts the number of
 
 An equivalent query using GoogleSQL is:
 
-    #standardSQL
+    #GoogleSQL
     SELECT COUNT(*)
     FROM `bigquery-public-data.noaa_gsod.*`
     WHERE _TABLE_SUFFIX IN ("gsod2010", "gsod2011");
@@ -478,7 +478,7 @@ For example, consider the following legacy SQL query:
 
 This is equivalent to the GoogleSQL query:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       x,
       y
@@ -493,7 +493,7 @@ Legacy SQL associates columns by name instead of by position. To get the same be
 
 The GoogleSQL equivalent will look like:
 
-    #standardSQL
+    #GoogleSQL
     SELECT * FROM (SELECT 1 AS A, 2 as B) UNION ALL BY NAME (SELECT 3 AS B, 4 as A);
 
 Where the result in both cases will be:
@@ -532,19 +532,19 @@ One possible migration path is to create new views using different names. The st
 
 Create a view named `V2` using GoogleSQL with the following contents:
 
-    #standardSQL
+    #GoogleSQL
     SELECT *, EXTRACT(DAY FROM timestamp_col) AS day
     FROM MyTable;
 
 Create a view named `W2` using GoogleSQL with the following contents:
 
-    #standardSQL
+    #GoogleSQL
     SELECT user, action, day
     FROM V2;
 
 Change your query that executes daily to use GoogleSQL and refer to `W2` instead:
 
-    #standardSQL
+    #GoogleSQL
     SELECT COUNT(DISTINCT user), action, day
     FROM W2
     GROUP BY action, day;
@@ -747,7 +747,7 @@ GoogleSQL supports `NULL` array elements, but raises an error if there is a `NUL
 
 Using legacy SQL, you can "dot" into a nested repeated field without needing to consider where the repetition occurs. In GoogleSQL, attempting to "dot" into a nested repeated field results in an error. For example:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url,
       payload.pages.page_name
@@ -762,7 +762,7 @@ Attempting to execute this query returns:
 
 To correct the error and return an array of `page_name` s in the result, use an `ARRAY` subquery instead. For example:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url,
       ARRAY(SELECT page_name FROM UNNEST(payload.pages)) AS page_names
@@ -785,7 +785,7 @@ Using legacy SQL, you can filter repeated fields directly using a `WHERE` clause
 
 This query returns all `title` s of pages for which the `page_name` is either `db_jobskill` or `Profession` . You can express a similar query in GoogleSQL as:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       page.title
     FROM
@@ -795,7 +795,7 @@ This query returns all `title` s of pages for which the `page_name` is either `d
 
 One difference between the preceding legacy SQL and GoogleSQL queries is that if you unset the **Flatten Results** option and execute the legacy SQL query, `payload.pages.title` is `REPEATED` in the query result. To achieve the same semantics in GoogleSQL and return an array for the `title` column, use an `ARRAY` subquery instead:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       title
     FROM (
@@ -824,7 +824,7 @@ Legacy SQL preserves the structure of nested leaf fields in the `SELECT` list wh
 
 This query returns `url` and `has_downloads` within a record named `repository` when **Flatten Results** is unset. Now consider the following GoogleSQL query:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url,
       repository.has_downloads
@@ -834,7 +834,7 @@ This query returns `url` and `has_downloads` within a record named `repository` 
 
 This query returns `url` and `has_downloads` as top-level columns; they are not part of a `repository` record or struct. To return them as part of a struct, use the `STRUCT` operator:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       STRUCT(
         repository.url,
@@ -857,7 +857,7 @@ GoogleSQL does not have a `FLATTEN` function as in legacy SQL, but you can achie
 
 You can express a similar query in GoogleSQL as follows:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url,
       page.page_name
@@ -868,7 +868,7 @@ You can express a similar query in GoogleSQL as follows:
 
 Or, equivalently, use `JOIN` rather than the comma `,` operator:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url,
       page.page_name
@@ -880,7 +880,7 @@ Or, equivalently, use `JOIN` rather than the comma `,` operator:
 
 One important difference is that the legacy SQL query returns a row where `payload.pages.page_name` is `NULL` if `payload.pages` is empty. The standard SQL query, however, does not return a row if `payload.pages` is empty. To achieve exactly the same semantics, use a `LEFT JOIN` or `LEFT OUTER JOIN` . For example:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url,
       page.page_name
@@ -907,7 +907,7 @@ The `OMIT IF` clause from legacy SQL lets you filter rows based on a condition t
 
 The analogous GoogleSQL query is:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url
     FROM
@@ -931,7 +931,7 @@ Alternatively, suppose that the legacy SQL query uses `IN` :
 
 In GoogleSQL, you can express the query using an `EXISTS` clause with `IN` :
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url
     FROM
@@ -952,7 +952,7 @@ Consider the following legacy SQL query that filters records with 80 or fewer pa
 
 In this case, you can use a filter with `ARRAY_LENGTH` in GoogleSQL:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url
     FROM
@@ -980,7 +980,7 @@ Some functions in legacy SQL return `NULL` for invalid input, potentially maskin
 
 Queries executed using GoogleSQL preserve any nesting and repetition of the columns in the result, and the **Flatten Results** option has no effect. To return top-level columns for nested fields, use the `.*` operator on struct columns. For example:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.*
     FROM
@@ -989,7 +989,7 @@ Queries executed using GoogleSQL preserve any nesting and repetition of the colu
 
 To return top-level columns for repeated nested fields ( `ARRAY` s of `STRUCT` s), use a `JOIN` to take the cross product of the table's rows and the elements of the repeated nested field. For example:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       repository.url,
       page.*
@@ -1015,7 +1015,7 @@ Legacy SQL does not comply with the SQL standard in its handling of `NULL` with 
 
 This query returns 163,716 as the count, indicating that there are 163,716 words that don't appear as locations in the GitHub table. Now consider the following GoogleSQL query:
 
-    #standardSQL
+    #GoogleSQL
     SELECT COUNT(*)
     FROM `bigquery-public-data.samples.shakespeare`
     WHERE word NOT IN (
@@ -1025,7 +1025,7 @@ This query returns 163,716 as the count, indicating that there are 163,716 words
 
 This query returns 0 as the count. The difference is due to the semantics of `NOT IN` with GoogleSQL, which returns `NULL` if any value on the right hand side is `NULL` . To achieve the same results as with the legacy SQL query, use a `WHERE` clause to exclude the `NULL` values:
 
-    #standardSQL
+    #GoogleSQL
     SELECT COUNT(*)
     FROM `bigquery-public-data.samples.shakespeare`
     WHERE word NOT IN (
@@ -1036,7 +1036,7 @@ This query returns 0 as the count. The difference is due to the semantics of `NO
 
 This query returns 163,716 as the count. Alternatively, use a `NOT EXISTS` condition:
 
-    #standardSQL
+    #GoogleSQL
     SELECT COUNT(*)
     FROM `bigquery-public-data.samples.shakespeare` AS t
     WHERE NOT EXISTS (
@@ -1057,7 +1057,7 @@ With GoogleSQL, you use `CREATE TEMPORARY FUNCTION` as part of the query body ra
 
 Consider the following GoogleSQL query:
 
-    #standardSQL
+    #GoogleSQL
     -- Computes the harmonic mean of the elements in 'arr'.
     -- The harmonic mean of x_1, x_2, ..., x_n can be expressed as:
     --   n / ((1 / x_1) + (1 / x_2) + ... + (1 / x_n))
@@ -1085,7 +1085,7 @@ For more information about user-defined functions, see the [User-defined functio
 
 In legacy SQL, JavaScript functions operate on rows from a table. In standard SQL, as in the preceding example, JavaScript functions operate on values. To pass a row value to a JavaScript function using GoogleSQL, define a function that takes a struct of the same row type as the table. For example:
 
-    #standardSQL
+    #GoogleSQL
     -- Takes a struct of x, y, and z and returns a struct with a new field foo.
     CREATE TEMPORARY FUNCTION AddField(s STRUCT<x FLOAT64, y BOOL, z STRING>)
       RETURNS STRUCT<x FLOAT64, y BOOL, z STRING, foo STRING> LANGUAGE js AS """
@@ -1131,7 +1131,7 @@ For example, the following legacy SQL query finds the average temperature from a
 
 In GoogleSQL, an equivalent query uses a table wildcard and the `BETWEEN` clause.
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       ROUND(AVG(TemperatureF),1) AS AVG_TEMP_F
     FROM
@@ -1161,7 +1161,7 @@ To make an equivalent GoogleSQL query with error handling, the query should be s
 
 Translated query using [`WITH` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#composability_using_with_clauses) and conditional `ERROR` :
 
-    #standardSQL
+    #GoogleSQL
     WITH MissingTables AS (
       SELECT
         STRING_AGG(FORMAT_DATE('%Y%m%d', day), ', ') AS missing_suffixes
@@ -1187,7 +1187,7 @@ Translated query using [`WITH` clause](https://docs.cloud.google.com/bigquery/do
 
 And using [BigQuery Scripting (procedural SQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) :
 
-    #standardSQL
+    #GoogleSQL
     BEGIN
       DECLARE missing_suffixes STRING;
     
@@ -1242,7 +1242,7 @@ When migrating from legacy SQL to GoogleSQL, move the filter to the `WHERE` clau
 
 In GoogleSQL, an equivalent query uses a table wildcard and places the regular expression function, `REGEXP_CONTAINS` , in the `WHERE` clause:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       max,
       ROUND((max-32)*5/9,1) celsius,
@@ -1279,7 +1279,7 @@ In GoogleSQL, an equivalent query can use the entire table name or only a part o
 
 However, longer prefixes perform better than empty prefixes, so the following example uses a longer prefix, which means that the value of `_TABLE_SUFFIX` is only part of the table name.
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       max,
       ROUND((max-32)*5/9,1) celsius,
@@ -1314,7 +1314,7 @@ In GoogleSQL, you can query the [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.c
 
 To migrate a query that uses `__PARTITIONS_SUMMARY__` and keep the output schema and error handling consistent, use the following GoogleSQL query:
 
-    #standardSQL
+    #GoogleSQL
     SELECT
       IF(partition_id IS NOT NULL, partition_id, ERROR('Table is not partitioned')) AS partition_id,
       table_catalog AS project_id,

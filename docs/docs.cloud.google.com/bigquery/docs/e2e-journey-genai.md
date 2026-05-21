@@ -140,10 +140,13 @@ Remote model over the Document AI API
 
 N/A
 
-[`ML.PROCESS_DOCUMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document)
+  - [`ML.PROCESS_DOCUMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document)
+  - [`AI.PARSE_DOCUMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document) <sup>2</sup>
+
+<!-- end list -->
 
   - [Process documents](https://docs.cloud.google.com/bigquery/docs/process-document)
-  - [Parse PDFs in a RAG pipeline](https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf)
+  - [Parse PDFs in a retrieval-augmented generation pipeline](https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf)
 
 Remote model over the Speech-to-Text API
 

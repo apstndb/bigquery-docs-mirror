@@ -42,12 +42,12 @@ When deciding to purchase spend-based CUDs, keep the following in mind:
 Spend-based CUDs automatically apply to aggregate BigQuery instance usage in a region, which gives you low, predictable costs without needing to make any manual changes or updates. This flexibility helps you to achieve high utilization rates across your commitments, saving you time and money. BigQuery spend-based CUDs apply to all BigQuery PAYG usage. BigQuery spend-based CUDs apply to usage from all supported compute capacity types, which include the following:
 
   - BigQuery editions
-  - Composer 3 (also referred to as BigQuery engine for Apache Airflow)
+  - Managed Service for Apache Airflow (Gen 3) (previously known as *Cloud Composer 3* )
   - Knowledge Catalog
   - BigQuery services
   - Managed Service for Apache Spark (previously known as *Dataproc Serverless* )
 
-For a complete list of applicable SKUs, see [BigQuery CUD Eligible SKUs](https://docs.cloud.google.com/skus/sku-groups/bigquery-cud-eligible-skus) .
+For a complete list of applicable SKUs, see [BigQuery CUD Eligible SKUs](https://cloud.google.com/skus/sku-groups/bigquery-cud-eligible-skus) .
 
 ## Purchase BigQuery spend-based CUDs
 

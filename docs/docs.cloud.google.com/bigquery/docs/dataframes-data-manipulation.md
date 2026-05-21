@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manipulate data with BigQuery DataFrames
 
-This document describes the data manipulation capabilities available with BigQuery DataFrames. You can find the functions that are described in the `bigframes.bigquery` library.
+This document describes the data manipulation capabilities available with BigQuery DataFrames. You can find the functions that are described in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library.
 
 ## Required roles
 
@@ -35,7 +35,7 @@ To check which pandas APIs are supported by BigQuery DataFrames, see [Supported 
 
 ## Inspect and manipulate data
 
-You can use the `bigframes.pandas` API to perform data inspection and calculation operations. The following code sample uses the `bigframes.pandas` library to inspect the `body_mass_g` column, calculate the mean `body_mass` , and calculate the mean `body_mass` by `species` :
+You can use the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) API to perform data inspection and calculation operations. The following code sample uses the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) library to inspect the `body_mass_g` column, calculate the mean `body_mass` , and calculate the mean `body_mass` by `species` :
 
     import bigframes.pandas as bpd
     
@@ -66,7 +66,7 @@ The BigQuery library provides BigQuery SQL functions that might not have a panda
 
 ### Process array values
 
-You can use the `bigframes.bigquery.array_agg()` function in the `bigframes.bigquery` library to aggregate values after a `groupby` operation:
+You can use the [`bigframes.bigquery.array_agg()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.array_agg.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to aggregate values after a [`groupby`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.groupby.html) operation:
 
     import bigframes.bigquery as bbq
     import bigframes.pandas as bpd
@@ -79,11 +79,11 @@ You can use the `bigframes.bigquery.array_agg()` function in the `bigframes.bigq
     # True     [0 2 4]
     # dtype: list<item: int64>[pyarrow]
 
-You can also use the `array_length()` and `array_to_string()` array functions.
+You can also use the [`array_length()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.array_length.html) and [`array_to_string()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.array_to_string.html) array functions.
 
 ### Create a struct `Series` object
 
-You can use the `bigframes.bigquery.struct()` function in the `bigframes.bigquery` library to create a new struct `Series` object with subfields for each column in a DataFrame:
+You can use the [`bigframes.bigquery.struct()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.struct.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to create a new struct [`Series`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.html) object with subfields for each column in a [`DataFrame`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) :
 
     import bigframes.bigquery as bbq
     import bigframes.pandas as bpd
@@ -107,7 +107,7 @@ You can use the `bigframes.bigquery.struct()` function in the `bigframes.bigquer
 
 ### Convert timestamps to Unix epochs
 
-You can use the `bigframes.bigquery.unix_micros()` function in the `bigframes.bigquery` library to convert timestamps into Unix microseconds:
+You can use the [`bigframes.bigquery.unix_micros()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.unix_micros.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to convert timestamps into Unix microseconds:
 
     import pandas as pd
     
@@ -123,11 +123,11 @@ You can use the `bigframes.bigquery.unix_micros()` function in the `bigframes.bi
     # 2    172800000000
     # dtype: Int64
 
-You can also use the `unix_seconds()` and `unix_millis()` time functions.
+You can also use the [`unix_seconds()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.unix_seconds.html) and [`unix_millis()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.unix_millis.html) time functions.
 
 ### Use the SQL scalar function
 
-You can use the `bigframes.bigquery.sql_scalar()` function in the `bigframes.bigquery` library to access arbitrary SQL syntax representing a single-column expression:
+You can use the [`bigframes.bigquery.sql_scalar()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.sql_scalar.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to access arbitrary SQL syntax representing a single-column expression:
 
     import bigframes.bigquery as bbq
     import bigframes.pandas as bpd

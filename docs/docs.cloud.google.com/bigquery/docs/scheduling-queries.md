@@ -1474,81 +1474,23 @@ Scheduled queries are supported in the following locations.
 
 The following table lists the regions in the Americas where BigQuery is available.
 
-**Region description**
-
-**Region name**
-
-**Details**
-
-Columbus, Ohio
-
-`us-east5`
-
-Dallas
-
-`us-south1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Iowa
-
-`us-central1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Las Vegas
-
-`us-west4`
-
-Los Angeles
-
-`us-west2`
-
-Mexico
-
-`northamerica-south1`
-
-Montréal
-
-`northamerica-northeast1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Northern Virginia
-
-`us-east4`
-
-Oregon
-
-`us-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Salt Lake City
-
-`us-west3`
-
-São Paulo
-
-`southamerica-east1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Santiago
-
-`southamerica-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-South Carolina
-
-`us-east1`
-
-Toronto
-
-`northamerica-northeast2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+| **Region description** | **Region name**           | **Details**                                                                                                                                                              |
+| ---------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Columbus, Ohio         | `us-east5`                |                                                                                                                                                                          |
+| Dallas                 | `us-south1`               | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Iowa                   | `us-central1`             | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Las Vegas              | `us-west4`                |                                                                                                                                                                          |
+| Los Angeles            | `us-west2`                |                                                                                                                                                                          |
+| Mexico                 | `northamerica-south1`     |                                                                                                                                                                          |
+| Montréal               | `northamerica-northeast1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Northern Virginia      | `us-east4`                |                                                                                                                                                                          |
+| Oklahoma               | `us-central2`             | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Oregon                 | `us-west1`                | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Salt Lake City         | `us-west3`                |                                                                                                                                                                          |
+| São Paulo              | `southamerica-east1`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Santiago               | `southamerica-west1`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| South Carolina         | `us-east1`                |                                                                                                                                                                          |
+| Toronto                | `northamerica-northeast2` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 
 The following table lists the regions in Asia Pacific where BigQuery is available.
 

@@ -3062,7 +3062,7 @@ To create a Python UDF, use the following syntax:
         ([named_parameter[, ...]])
       RETURNS data_type
       LANGUAGE python
-      [WITH CONNECTION connection_path]
+      [WITH CONNECTION connection_name]
       OPTIONS (function_option_list)
       AS python_code
     
@@ -3075,7 +3075,7 @@ To create a remote function, use the following syntax:
         [[project_name.]dataset_name.]function_name
         ([named_parameter[, ...]])
       RETURNS data_type
-      REMOTE WITH CONNECTION connection_path
+      REMOTE WITH CONNECTION connection_name
       [OPTIONS (function_option_list)]
     
     named_parameter:

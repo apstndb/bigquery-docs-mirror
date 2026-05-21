@@ -14,7 +14,33 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 20, 2026
+
+Announcement
+
+BigQuery can re-execute instructions (queries) to try to proactively detect performance, correctness, or functional regressions. These re-executions will have no side effects and will happen with no additional cost or resource consumption. Data access logs may show `bigquery-adminbot@system.gserviceaccount.com` when BigQuery re-executes an instruction.
+
+Feature
+
+[Python UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python) are now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+You can use Python UDFs to implement a scalar function in Python and use it in a SQL query. Python UDFs let you install third-party libraries from the [Python Package Index (PyPI)](https://pypi.org/) and let you access external services using a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) .
+
+Feature
+
+You can now use the [`AI.AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) to semantically aggregate unstructured input data based on natural language instructions. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+## May 19, 2026
+
+Feature
+
+You can use the [`AI.PARSE_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document) to parse documents such as PDFs. This function uses the Document AI [layout parser](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) to extract structured information, including text chunks and page boundaries. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## May 18, 2026
+
+Feature
+
+You can [group reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#prioritize_idle_slots_with_reservation_groups) together to prioritize idle slot sharing within the group. Reservations within a reservation group share idle slots with each other before making them available to other reservations in the project, giving you more control over slot allocation for high-priority workloads. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
