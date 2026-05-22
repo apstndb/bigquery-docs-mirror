@@ -1055,7 +1055,6 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int	2026-05-20T22:12:48Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text	2026-05-19T04:04:18Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if	2026-05-19T03:55:50Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document	2026-05-19T16:54:47Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score	2026-05-19T03:55:50Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search	2026-05-19T03:55:50Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity	2026-05-19T03:55:50Z
