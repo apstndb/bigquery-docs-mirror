@@ -527,7 +527,7 @@ Grant these roles at the project level:
 
   - [BigQuery Data Viewer ( `roles/bigquery.dataViewer` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) : To view the underlying BigQuery datasets and tables.
   - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) : To run queries against BigQuery data.
-  - [Gemini for Google Cloud User ( `roles/cloudaicompanion.user` )](https://docs.cloud.google.com/vertex-ai/docs/cloudaicompanion/access-control#cloudaicompanion.user) or [BigQuery Studio User ( `roles/bigquery.studioUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) : Required for interacting with the Gemini-powered chat interface in Data Studio. These roles provide the `cloudaicompanion.topics.create` permission.
+  - [Gemini for Google Cloud User ( `roles/cloudaicompanion.user` )](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) or [BigQuery Studio User ( `roles/bigquery.studioUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) : Required for interacting with the Gemini-powered chat interface in Data Studio. These roles provide the `cloudaicompanion.topics.create` permission.
 
 **Data Studio Pro**
 

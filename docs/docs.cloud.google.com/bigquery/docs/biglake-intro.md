@@ -93,7 +93,7 @@ This example has two transfers: one from an employees table (with a level filter
   - When you reference the columns of a BigLake table in a `WHERE` clause, you can't use `INTERVAL` or `RANGE` literals.
   - BigQuery Omni join jobs don't report the number of bytes that are processed and transferred from other clouds. This information is available in the child CTAS jobs that are created as part of BigQuery Omni query execution.
   - [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) referencing BigQuery Omni tables or views are only supported in BigQuery Omni regions.
-  - If your BigQuery Omni query references `STRUCT` or `JSON` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the BigQuery Omni region that filters `STRUCT` and `JSON` columns and returns only the necessary fields as individual columns.
+  - If your BigQuery Omni query references `STRUCT` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the BigQuery Omni region that unpacks necessary fields from `STRUCT` columns into individual columns.
   - [Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) isn't supported by BigQuery Omni joins.
   - BigQuery Omni joins don't support joining BigQuery Omni views using the `ORDER BY` clause.
 

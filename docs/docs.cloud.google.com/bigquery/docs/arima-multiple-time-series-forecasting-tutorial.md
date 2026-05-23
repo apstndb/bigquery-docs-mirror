@@ -200,10 +200,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # 2013-07-24      35271
     # 2013-07-25      31084
     
-    num_trips.plot.line(
-        # Rotate the x labels so they are more visible.
-        rot=45,
-    )
+    num_trips.plot.line(# Rotate the x labels so they are more visible.rot=45,)
 
 ## Create the time series model
 
@@ -292,10 +289,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     # The model.fit() call above created a temporary model.
     # Use the to_gbq() method to write to a permanent location.
-    model.to_gbq(
-        your_model_id,  # For example: "bqml_tutorial.nyc_citibike_arima_model",
-        replace=True,
-    )
+    model.to_gbq(your_model_id,# For example: "bqml_tutorial.nyc_citibike_arima_model",replace=True,)
 
 This creates twelve time series models, one for each of the twelve Citi Bike start stations in the input data. The time cost, approximately 24 seconds, is only 1.4 times more than that of creating a single time series model because of the parallelism.
 

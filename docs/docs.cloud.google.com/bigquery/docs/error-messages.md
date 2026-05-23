@@ -18,8 +18,8 @@ For more information about streaming insert errors, see [Troubleshoot streaming 
 
 Responses from the BigQuery API include an HTTP error code and an error object in the response body. An error object is typically one of the following:
 
-  - An [`errors` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatus) , which contains an array of [`ErrorProto` objects](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#errorproto) .
-  - An [`errorResults` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatus) , which contains a single [`ErrorProto` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#errorproto) .
+  - An [`errors` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatus) , which contains an array of [`ErrorProto` objects](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto) .
+  - An [`errorResults` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatus) , which contains a single [`ErrorProto` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto) .
 
 The **Error message** column in the following table maps to the `reason` property in an `ErrorProto` object.
 

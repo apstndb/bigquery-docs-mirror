@@ -156,7 +156,8 @@ For information about quotas regarding global queries, see [Query jobs](https://
 ## Limitations
 
   - A query's [execution details](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) and [execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) don't show the number of bytes processed and transferred from remote locations. This information appears in copy jobs that you can find in your job history. The job ID of a copy job created by a global query has the job ID of the query job as a prefix.
-  - Global queries are not supported in sandbox mode
+  - Global queries are not supported in sandbox mode.
+  - Global queries are not supported when using [regional endpoints](https://docs.cloud.google.com/bigquery/docs/regional-endpoints) .
   - Global queries incur higher latency than single-region queries due to the time required to transfer data between regions.
   - Global queries don't use any cache to avoid transferring data between regions.
   - You can't query pseudocolumns, such `_PARTITIONTIME` , with global queries.

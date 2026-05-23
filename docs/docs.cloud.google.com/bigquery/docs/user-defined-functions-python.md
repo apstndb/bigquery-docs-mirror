@@ -375,7 +375,7 @@ The following example uses the Apache Arrow [`RecordBatch` interface](https://ar
 
 ## Call a Python UDF
 
-If you have permission to invoke a Python UDF, then you can call it like any other function. To use a function defined in a different project, use the fully qualified name for the function. For example, to call an XML extraction function named [`cw_xml_extract`](https://docs.cloud.google.com/bigquery/docs/\(https:/github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx\)) in another project, complete the following steps.
+If you have permission to invoke a Python UDF, then you can call it like any other function. To use a function defined in a different project, use the fully qualified name for the function. For example, to call an XML extraction function named [`cw_xml_extract`](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx) in another project, complete the following steps.
 
 > **Note:** This example is based on a sample from [bigquery-utils](https://github.com/GoogleCloudPlatform/bigquery-utils) .
 

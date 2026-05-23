@@ -83,7 +83,7 @@ Keep in mind the following restrictions when using regional endpoints:
   - Regional endpoints don't support [mutual Transport Layer Security (mTLS)](https://docs.cloud.google.com/chrome-enterprise-premium/docs/understand-mtls) .
   - Using a regional endpoint won't restrict the creation of resources outside of the endpoint region. To restrict resource creation, use [Organization Policy Service resource locations constraint](https://docs.cloud.google.com/resource-manager/docs/organization-policy/defining-locations) .
   - [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) and [cross-region table copying](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) aren't restricted by endpoint protection.
-  - Running [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries)
+  - Regional endpoints don't support running [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries) .
 
 ## Tools for using regional endpoints
 

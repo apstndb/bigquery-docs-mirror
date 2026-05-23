@@ -30,12 +30,6 @@ Feature
 
 You can now use the [`AI.AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) to semantically aggregate unstructured input data based on natural language instructions. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
-## May 19, 2026
-
-Feature
-
-You can use the [`AI.PARSE_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document) to parse documents such as PDFs. This function uses the Document AI [layout parser](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) to extract structured information, including text chunks and page boundaries. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
-
 ## May 18, 2026
 
 Feature
