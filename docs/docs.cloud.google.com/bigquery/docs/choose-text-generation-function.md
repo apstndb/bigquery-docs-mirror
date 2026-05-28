@@ -15,7 +15,7 @@ This document provides a comparison of the BigQuery ML [`AI.GENERATE_TEXT`](http
 The `AI.GENERATE_TEXT` and `AI.GENERATE` functions are similar in the following ways:
 
   - **Purpose** : Generate text by passing a prompt to a large language model (LLM).
-  - **Billing** : Incur BigQuery ML charges for data processed. For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) . Incur Vertex AI charges for calls to the LLM. If you are using a Gemini 2.0 or greater model, the call is billed at the batch API rate. For more information, see [Cost of building and deploying AI models in Vertex AI](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
+  - **Billing** : Incur BigQuery ML charges for data processed. For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) . Incur Gemini Enterprise Agent Platform charges for calls to the LLM. If you are using a Gemini 2.0 or greater model, the call is billed at the batch API rate. For more information, see [Cost of building and deploying AI models in Agent Platform](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
   - **Scalability** : Process between 1 million and 10 million rows for each a 6-hour query job. Actual throughput depends on factors like the average token length in the input rows. For more information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
   - **Input data** : Support both text and unstructured data from BigQuery standard tables and object tables.
 

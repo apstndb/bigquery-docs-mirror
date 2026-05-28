@@ -81,17 +81,17 @@ Typical steps for this use case are as follows:
 
 ## Monitoring visualization
 
-Some monitoring functions offer integration with [Vertex AI model monitoring](https://docs.cloud.google.com/vertex-ai/docs/model-monitoring/overview) , so that you can use charts and graphs to [analyze model monitoring function output](https://docs.cloud.google.com/vertex-ai/docs/model-monitoring/run-monitoring-job#analyze_monitoring_job_results) .
+Some monitoring functions offer integration with [Gemini Enterprise Agent Platform model monitoring](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview) , so that you can use charts and graphs to [analyze model monitoring function output](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-monitoring/run-monitoring-job#analyze_monitoring_job_results) .
 
-Using Vertex AI visualizations offers the following benefits:
+Using Agent Platform visualizations offers the following benefits:
 
-  - **Interactive visualizations** : explore data distributions, skew metrics, and drift metrics by using charts and graphs in the Vertex AI console.
-  - **Historical analysis** : track model monitoring results over time by using Vertex AI visualizations. This lets you identify trends and patterns in data changes so that you can proactively update and maintain models.
-  - **Centralized management** : manage monitoring for all BigQuery ML and Vertex AI models in the unified Vertex AI dashboard.
+  - **Interactive visualizations** : explore data distributions, skew metrics, and drift metrics by using charts and graphs in the Agent Platform console.
+  - **Historical analysis** : track model monitoring results over time by using Agent Platform visualizations. This lets you identify trends and patterns in data changes so that you can proactively update and maintain models.
+  - **Centralized management** : manage monitoring for all BigQuery ML and Agent Platform models in the unified Agent Platform dashboard.
 
 You can enable visualization of the `ML.VALIDATE_DATA_DRIFT` function output by using that function's `MODEL` argument. You can enable visualization of the `ML.VALIDATE_DATA_SKEW` function output by using that function's `enable_visualization_link` argument.
 
-You can only use monitoring visualization with models that are [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Vertex AI. You can register an existing model by using the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) .
+You can only use monitoring visualization with models that are [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Agent Platform. You can register an existing model by using the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) .
 
 ## Monitoring automation
 

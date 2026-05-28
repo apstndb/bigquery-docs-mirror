@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # The AI.IF function
 
-This document describes the `AI.IF` function, which uses a Vertex AI Gemini model to evaluate a condition described in natural language and returns a `BOOL` .
+This document describes the `AI.IF` function, which uses a Gemini Enterprise Agent Platform Gemini model to evaluate a condition described in natural language and returns a `BOOL` .
+
+> **Tip:** When processing large datasets, use the [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview) with `AI.IF` to reduce large language model (LLM) token costs and query latency.
 
 You can use the `AI.IF` function to filter and join data based on conditions described in natural language or multimodal input. The following are common use cases:
 
@@ -29,7 +31,7 @@ When you analyze unstructured data, that data must meet the following requiremen
   - Content must be in one of the supported formats that are described in the Gemini API model [`mimeType` parameter](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference#blob) .
   - For more information about accepted multimodal input, see the [technical specifications](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/2-5-flash#technical-specifications) for Gemini.
 
-This function passes your input to a Gemini model and incurs charges in Vertex AI each time it's called. For information about how to view these charges, see [Track costs](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#track_costs) .
+This function passes your input to a Gemini model and incurs charges in Gemini Enterprise Agent Platform each time it's called. For information about how to view these charges, see [Track costs](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#track_costs) .
 
 ## Syntax
 
@@ -106,7 +108,7 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
     
     For information about configuring permissions, see [Set permissions for BigQuery ML generative AI functions that call Vertex AI models](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) .
 
-  - `  ENDPOINT  ` : a `STRING` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML dynamically chooses a model based on your query to have the best cost to quality tradeoff for the task. You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) :
+  - `  ENDPOINT  ` : a `STRING` value that specifies the Agent Platform endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML dynamically chooses a model based on your query to have the best cost to quality tradeoff for the task. You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) :
     
         https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/GEMINI_ENDPOINT
     
@@ -131,7 +133,7 @@ This function passes your input to a Gemini model and incurs charges in Vertex A
 
 `AI.IF` returns a `BOOL` based on evaluation of the condition in the input prompt.
 
-If the call to Vertex AI is unsuccessful for any reason, such as exceeding quota or model unavailability, then the function returns `NULL` .
+If the call to Gemini Enterprise Agent Platform is unsuccessful for any reason, such as exceeding quota or model unavailability, then the function returns `NULL` .
 
 ## Examples
 
@@ -321,7 +323,7 @@ See [Generative AI functions quotas and limits](https://docs.cloud.google.com/bi
 
 ## What's next
 
-  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .
   - To use this function in a tutorial, see [Perform semantic analysis with managed AI functions](https://docs.cloud.google.com/bigquery/docs/semantic-analysis) .

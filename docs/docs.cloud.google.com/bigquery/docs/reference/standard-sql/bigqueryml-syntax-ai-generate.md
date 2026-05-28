@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # The AI.GENERATE function
 
-This document describes the `AI.GENERATE` function, which lets you analyze any combination of structured and unstructured data. You can choose to generate text or [structured output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#use_structured_output) according to a custom schema that you specify. The function works by sending requests to a Vertex AI Gemini model and returning a `STRUCT` that contains your generated data, the full model response, and a status.
+This document describes the `AI.GENERATE` function, which lets you analyze any combination of structured and unstructured data. You can choose to generate text or [structured output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#use_structured_output) according to a custom schema that you specify. The function works by sending requests to a Gemini Enterprise Agent Platform Gemini model and returning a `STRUCT` that contains your generated data, the full model response, and a status.
 
 For example, the following query generates summaries of BBC news articles:
 
@@ -104,7 +104,7 @@ Prompt design can strongly affect the responses returned by the model. For more 
 
 <!-- end list -->
 
-  - `  ENDPOINT  ` : a `STRING` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML selects a recent stable version of Gemini to use. The default endpoint is `gemini-2.5-flash` . You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, specify the following endpoint:
+  - `  ENDPOINT  ` : a `STRING` value that specifies the Agent Platform endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML selects a recent stable version of Gemini to use. The default endpoint is `gemini-2.5-flash` . You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, specify the following endpoint:
     
         https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/GEMINI_ENDPOINT
     
@@ -138,7 +138,7 @@ Prompt design can strongly affect the responses returned by the model. For more 
     
       - `SHARED` : The function only uses [dynamic shared quota (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) .
     
-      - `DEDICATED` : The function only uses [Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview) quota. The function returns an invalid query error if Provisioned Throughput quota isn't available. For more information, see [Use Vertex AI Provisioned Throughput](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#provisioned-throughput) .
+      - `DEDICATED` : The function only uses [Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview) quota. The function returns an invalid query error if Provisioned Throughput quota isn't available. For more information, see [Use Agent Platform Provisioned Throughput](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#provisioned-throughput) .
     
       - `UNSPECIFIED` : The function uses quota as follows:
         
@@ -319,11 +319,11 @@ The following query shows how to use the `model_params` argument to specify a [c
 
 ## Manage inference costs
 
-Inference using the Vertex AI Gemini model can be a relatively expensive operation. Due to the nature of query processing in BigQuery, the actual number of rows processed by the model might differ from what you expect, particularly when running complex queries, such as `JOIN` or `ORDER BY ... LIMIT` clauses. To strictly control the number of rows processed by your complex queries, we recommended that you write the results of your query to a separate table beforehand, and then perform the Gemini inference directly on that materialized table. For information about how to view inference charges that you incur in Vertex AI, see [Track costs](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#track_costs) . To estimate the token count of text input, use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) .
+Inference using the Vertex AI Gemini model can be a relatively expensive operation. Due to the nature of query processing in BigQuery, the actual number of rows processed by the model might differ from what you expect, particularly when running complex queries, such as `JOIN` or `ORDER BY ... LIMIT` clauses. To strictly control the number of rows processed by your complex queries, we recommended that you write the results of your query to a separate table beforehand, and then perform the Gemini inference directly on that materialized table. For information about how to view inference charges that you incur in Agent Platform, see [Track costs](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#track_costs) . To estimate the token count of text input, use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) .
 
-## Use Vertex AI Provisioned Throughput
+## Use Agent Platform Provisioned Throughput
 
-You can use [Vertex AI Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview) with the `AI.GENERATE` function to provide consistent high throughput for requests. The remote model that you reference in the `AI.GENERATE` function must use a [supported Gemini model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models) in order for you to use Provisioned Throughput.
+You can use [Agent Platform Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview) with the `AI.GENERATE` function to provide consistent high throughput for requests. The remote model that you reference in the `AI.GENERATE` function must use a [supported Gemini model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models) in order for you to use Provisioned Throughput.
 
 To use Provisioned Throughput, [calculate your Provisioned Throughput requirements](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/measure-provisioned-throughput) and then [purchase Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/purchase-provisioned-throughput) quota before running the `AI.GENERATE` function. When you purchase Provisioned Throughput, do the following:
 
@@ -344,10 +344,10 @@ You can run `AI.GENERATE` in all of the [regions](https://docs.cloud.google.com/
 
 ## Quotas
 
-See [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+See [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## What's next
 
-  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

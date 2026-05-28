@@ -670,7 +670,7 @@ When you specify the `TEXT_GENERATION` task type, the following columns are retu
 
   - `evaluation_status` : a `STRING` column in JSON format that contains the following elements:
     
-      - `num_successful_rows` : the number of successful inference rows returned from Vertex AI.
+      - `num_successful_rows` : the number of successful inference rows returned from Gemini Enterprise Agent Platform.
       - `num_total_rows` : the number of total input rows.
 
 When you specify the `CLASSIFICATION` task type, the following columns are returned:
@@ -685,7 +685,7 @@ When you specify the `CLASSIFICATION` task type, the following columns are retur
 
   - `evaluation_status` : a `STRING` column in JSON format that contains the following elements:
     
-      - `num_successful_rows` : the number of successful inference rows returned from Vertex AI.
+      - `num_successful_rows` : the number of successful inference rows returned from Agent Platform.
       - `num_total_rows` : the number of total input rows.
 
 When you specify the `SUMMARIZATION` task type, the following columns are returned:
@@ -698,7 +698,7 @@ When you specify the `SUMMARIZATION` task type, the following columns are return
 
   - `evaluation_status` : a `STRING` column in JSON format that contains the following elements:
     
-      - `num_successful_rows` : the number of successful inference rows returned from Vertex AI.
+      - `num_successful_rows` : the number of successful inference rows returned from Agent Platform.
       - `num_total_rows` : the number of total input rows.
 
 When you specify the `QUESTION_ANSWERING` task type, the following columns are returned:
@@ -707,12 +707,12 @@ When you specify the `QUESTION_ANSWERING` task type, the following columns are r
 
   - `evaluation_status` : a `STRING` column in JSON format that contains the following elements:
     
-      - `num_successful_rows` : the number of successful inference rows returned from Vertex AI.
+      - `num_successful_rows` : the number of successful inference rows returned from Agent Platform.
       - `num_total_rows` : the number of total input rows.
 
 ### Remote over custom models
 
-`ML.EVALUATE` returns the following column for remote models over custom models deployed to Vertex AI:
+`ML.EVALUATE` returns the following column for remote models over custom models deployed to Agent Platform:
 
   - `remote_eval_metrics` : a `JSON` column containing appropriate metrics for the model type.
 
@@ -735,14 +735,14 @@ When you specify the `QUESTION_ANSWERING` task type, the following columns are r
 `ML.EVALUATE` is subject to the following limitations:
 
   - `ML.EVALUATE` doesn't support [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) or [remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) .
-  - For remote models over Vertex AI endpoints, `ML.EVALUATE` fetches evaluation result from the Vertex AI endpoint and doesn't take any input data.
+  - For remote models over Agent Platform endpoints, `ML.EVALUATE` fetches evaluation result from the Gemini Enterprise Agent Platform endpoint and doesn't take any input data.
 
 ## Costs
 
-When used with remote models over Vertex AI LLMs, `ML.EVALUATE` costs are calculated based on the following:
+When used with remote models over Agent Platform LLMs, `ML.EVALUATE` costs are calculated based on the following:
 
   - The bytes processed from the input table. These charges are billed from BigQuery to your project. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
-  - The input to and output from the LLM. These charges are billed from Vertex AI to your project. For more information, see [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
+  - The input to and output from the LLM. These charges are billed from Agent Platform to your project. For more information, see [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
 
 ## Examples
 

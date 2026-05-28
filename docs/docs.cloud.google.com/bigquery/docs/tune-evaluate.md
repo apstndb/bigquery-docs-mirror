@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Use tuning and evaluation to improve model performance
 
-This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a [Vertex AI `gemini-2.0-flash-001` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) . You then use [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) to tune the model with new training data, followed by evaluating the model with the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a [Gemini Enterprise Agent Platform `gemini-2.0-flash-001` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) . You then use [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) to tune the model with new training data, followed by evaluating the model with the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
 
-Tuning can help you address scenarios where you need to customize the hosted Vertex AI model, such as when the expected behavior of the model is hard to concisely define in a prompt, or when prompts don't produce expected results consistently enough. Supervised tuning also influences the model in the following ways:
+Tuning can help you address scenarios where you need to customize the hosted Agent Platform model, such as when the expected behavior of the model is hard to concisely define in a prompt, or when prompts don't produce expected results consistently enough. Supervised tuning also influences the model in the following ways:
 
   - Guides the model to return specific response styles—for example being more concise or more verbose.
   - Teaches the model new behaviors—for example responding to prompts as a specific persona.
@@ -56,7 +56,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, Vertex AI, and Compute Engine APIs.
+3.  Enable the BigQuery, BigQuery Connection, Agent Platform API, and Compute Engine APIs.
     
     **Roles required to enable APIs**
     
@@ -68,7 +68,7 @@ In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery:** You incur costs for the queries that you run in BigQuery.
   - **BigQuery ML:** You incur costs for the model that you create and the processing that you perform in BigQuery ML.
-  - **Vertex AI:** You incur costs for calls to and supervised tuning of the `gemini-2.0-flash-001` model.
+  - **Gemini Enterprise Agent Platform:** You incur costs for calls to and supervised tuning of the `gemini-2.0-flash-001` model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -78,7 +78,7 @@ For more information, see the following resources:
 
   - [BigQuery storage pricing](https://cloud.google.com/bigquery/pricing#storage)
   - [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml)
-  - [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing)
+  - [Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing)
 
 # Create a dataset
 
@@ -149,7 +149,7 @@ Create tables of training and evaluation data based on the public [task955\_wiki
 
 ## Create a baseline model
 
-Create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over the Vertex AI `gemini-2.0-flash-001` model.
+Create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over the Gemini Enterprise Agent Platform `gemini-2.0-flash-001` model.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

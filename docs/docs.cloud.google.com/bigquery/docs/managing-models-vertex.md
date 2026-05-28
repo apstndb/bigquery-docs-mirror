@@ -1,24 +1,24 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/managing-models-vertex
 uri: https://docs.cloud.google.com/bigquery/docs/managing-models-vertex
-title: Manage BigQuery ML models in Vertex AI
-description: Register BigQuery ML models with the Vertex AI Model Registry to manage them alongside your Vertex AI models without needing to export them.
+title: Manage BigQuery ML models in Gemini Enterprise Agent Platform
+description: Register BigQuery ML models with the Vertex AI Model Registry to manage them alongside your Gemini Enterprise Agent Platform models without needing to export them.
 data_source: docs.cloud.google.com
 ---
 
-# Manage BigQuery ML models in Vertex AI
+# Manage BigQuery ML models in Gemini Enterprise Agent Platform
 
-You can register BigQuery ML models with the Vertex AI Model Registry, in order to manage them alongside your Vertex AI models without needing to export them. When you register models with Model Registry, you can version, evaluate, and deploy the models for online prediction by using a single interface, and without needing a serving container. If you aren't familiar with Vertex AI and how it integrates with BigQuery ML, see [Vertex AI for BigQuery users](https://docs.cloud.google.com/vertex-ai/docs/beginner/bqml) .
+You can register BigQuery ML models with the Vertex AI Model Registry, in order to manage them alongside your Gemini Enterprise Agent Platform models without needing to export them. When you register models with Model Registry, you can version, evaluate, and deploy the models for online prediction by using a single interface, and without needing a serving container. If you aren't familiar with Agent Platform and how it integrates with BigQuery ML, see [Gemini Enterprise Agent Platform for BigQuery users](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/beginner/bqml) .
 
-To learn more about Vertex AI prediction, see [Overview of getting predictions on Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/predictions/overview) .
+To learn more about Agent Platform prediction, see [Overview of getting predictions on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/overview) .
 
 > **Note:** Although all model types can be registered, there are limitations on deployment for certain model types. For more information, see [Model deployment](https://docs.cloud.google.com/bigquery/docs/exporting-models#model-deployment) .
 
-To learn how to manage your BigQuery ML models from Vertex AI Model Registry, see [Introduction to Vertex AI Model Registry](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction) .
+To learn how to manage your BigQuery ML models from Vertex AI Model Registry, see [Introduction to Vertex AI Model Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/introduction) .
 
 ## Before you begin
 
-Enable the Vertex AI API.
+Enable the Agent Platform API.
 
 **Roles required to enable APIs**
 
@@ -46,11 +46,11 @@ When you create a BigQuery ML model, you can register the model to the Model Reg
 
 Once a BigQuery ML model is registered, you can use the following Model Registry capabilities with your model:
 
-  - [Deploy the model to an endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-console)
-  - [Compare model versions](https://docs.cloud.google.com/vertex-ai/docs/model-registry/versioning)
-  - [Get predictions](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-predictions#get_predictions_from_custom_trained_models)
-  - [Monitor the model](https://docs.cloud.google.com/vertex-ai/docs/model-monitoring/overview)
-  - [View model evaluations](https://docs.cloud.google.com/vertex-ai/docs/evaluation/introduction)
+  - [Deploy the model to an endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/deploy-model-console)
+  - [Compare model versions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/versioning)
+  - [Get predictions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-predictions#get_inferences_from_custom_trained_models)
+  - [Monitor the model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview)
+  - [View model evaluations](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/evaluation/introduction)
   - [Get feature-based explanations for the model](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/overview#feature-based)
 
 All models created using BigQuery ML still display in the BigQuery user interface, regardless of whether they are registered to the Model Registry.
@@ -64,7 +64,7 @@ The following example shows how to create and register a k-means model:
 
 ### Register an existing BigQuery ML model to the Model Registry
 
-If you don't register a model to Vertex AI when you create it, you can use SQL, the bq command-line tool, or the BigQuery API to register it afterwards.
+If you don't register a model to Agent Platform when you create it, you can use SQL, the bq command-line tool, or the BigQuery API to register it afterwards.
 
 The following examples show how to register an existing model:
 
@@ -124,7 +124,7 @@ Use the [`models.patch` method](https://docs.cloud.google.com/bigquery/docs/refe
 
 ### Register multiple versions of BigQuery ML models
 
-The first BigQuery ML model that you register under a given model ID displays as version 1 of that model in the Model Registry. You can register additional BigQuery ML models as different versions of that registered model by specifying the same Vertex AI model ID when you create or alter those BigQuery ML models.
+The first BigQuery ML model that you register under a given model ID displays as version 1 of that model in the Model Registry. You can register additional BigQuery ML models as different versions of that registered model by specifying the same Agent Platform model ID when you create or alter those BigQuery ML models.
 
 For example, you could create `model1` in BigQuery ML and register it in Model Registry as `regression_model` . `model1` displays as version 1 of `regression_model` in Model Registry. If you then create `model2` in BigQuery ML and register it in Model Registry as `regression_model` , `model2` displays as version 2 of `regression_model` in Model Registry.
 
@@ -140,11 +140,11 @@ Once a BigQuery ML model is registered to the Model Registry, you can't change t
 
 ### Location considerations
 
-If you register a multi-region BigQuery ML model to Model Registry, the model becomes a regional model in Vertex AI. A BigQuery ML US multi-region model is synced to Vertex AI (us-central1) and a BigQuery ML multi-region EU model is synced to Vertex AI (europe-west4). For single region models, there are no changes.
+If you register a multi-region BigQuery ML model to Model Registry, the model becomes a regional model in Agent Platform. A BigQuery ML US multi-region model is synced to Agent Platform (us-central1) and a BigQuery ML multi-region EU model is synced to Agent Platform (europe-west4). For single region models, there are no changes.
 
-For information about how to update model locations, see [Choosing your location](https://docs.cloud.google.com/vertex-ai/docs/general/locations#choosing_your_location) .
+For information about how to update model locations, see [Choosing your location](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/locations#choosing_your_location) .
 
-## Deploy a model in Vertex AI
+## Deploy a model in Agent Platform
 
 You can use a variety of methods to deploy a model to an endpoint in Vertex AI. For more information, see [Deploy a model to an endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment) .
 
@@ -154,13 +154,13 @@ To delete a BigQuery ML model from the Model Registry, delete the model in BigQu
 
 There are multiple ways you can delete a BigQuery ML model. For more information, see [Delete models](https://docs.cloud.google.com/bigquery/docs/deleting-models) .
 
-If you want to delete a model in BigQuery ML that has been registered in the Model Registry and deployed to an endpoint, you must first use Model Registry to undeploy the model. You can then return to BigQuery ML and delete the model. For more information on how to undeploy a model, see [Delete an endpoint](https://docs.cloud.google.com/vertex-ai/docs/samples/aiplatform-delete-endpoint-sample) .
+If you want to delete a model in BigQuery ML that has been registered in the Model Registry and deployed to an endpoint, you must first use Model Registry to undeploy the model. You can then return to BigQuery ML and delete the model. For more information on how to undeploy a model, see [Delete an endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/undeploy-model) .
 
 ## Limitations
 
   - You can't register [remote models](https://docs.cloud.google.com/bigquery/docs/bqml-introduction#remote_models) .
 
-  - The following models can be registered in Model Registry, but they can't be deployed in Vertex AI:
+  - The following models can be registered in Model Registry, but they can't be deployed in Agent Platform:
     
       - [Imported XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
       - [`ARIMA_PLUS` models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)

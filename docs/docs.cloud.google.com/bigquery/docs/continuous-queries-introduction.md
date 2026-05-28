@@ -61,7 +61,7 @@ The following operations are supported in continuous queries:
     
       - [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
         
-          - This function requires you to have a [BigQuery ML remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over a [Vertex AI model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) .
+          - This function requires you to have a [BigQuery ML remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over a [Gemini Enterprise Agent Platform model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) .
 
   - Calling the following AI functions:
     
@@ -203,7 +203,7 @@ Usage of other services that receive continuous query results or that are called
   - [Bigtable pricing](https://cloud.google.com/bigtable/pricing)
   - [Pub/Sub pricing](https://cloud.google.com/pubsub/pricing)
   - [Spanner pricing](https://cloud.google.com/spanner/pricing)
-  - [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing)
+  - [Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing)
 
 ## What's next
 

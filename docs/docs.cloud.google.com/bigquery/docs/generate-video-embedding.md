@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Generate video embeddings by using the AI.GENERATE\_EMBEDDING function
 
-This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a Vertex AI embedding [foundation model](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models#foundation_models) . You then use that model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create video embeddings by using data from a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a Gemini Enterprise Agent Platform embedding [foundation model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models#foundation_models) . You then use that model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create video embeddings by using data from a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 ## Required roles
 
@@ -20,9 +20,9 @@ To create a remote model and generate embeddings, you need the following Identit
     
     If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Vertex AI endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Gemini Enterprise Agent Platform endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
     
-    If you use the remote model to analyze unstructured data from an object table, and the Cloud Storage bucket that you use in the object table is in a different project than your Vertex AI endpoint, you must also have Storage Admin ( `roles/storage.admin` ) on the Cloud Storage bucket used by the object table.
+    If you use the remote model to analyze unstructured data from an object table, and the Cloud Storage bucket that you use in the object table is in a different project than your Agent Platform endpoint, you must also have Storage Admin ( `roles/storage.admin` ) on the Cloud Storage bucket used by the object table.
 
   - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` ) on your project.
 
@@ -56,7 +56,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, Cloud Storage, and Vertex AI APIs.
+3.  Enable the BigQuery, BigQuery Connection, Cloud Storage, and Agent Platform API APIs.
     
     **Roles required to enable APIs**
     

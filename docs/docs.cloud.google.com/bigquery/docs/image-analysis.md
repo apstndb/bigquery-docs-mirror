@@ -13,7 +13,7 @@ This tutorial shows you how to gain insights from unstructured image data by int
 ## Objectives
 
   - Create a [BigQuery object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) over image data in a Cloud Storage bucket.
-  - Create a BigQuery ML remote model that targets the Vertex AI `gemini-2.5-flash` model.
+  - Create a BigQuery ML remote model that targets the Gemini Enterprise Agent Platform `gemini-2.5-flash` model.
   - Use the remote model with the `AI.GENERATE_TEXT` function to identify the movies associated with a set of movie posters.
 
 ## Costs
@@ -21,7 +21,7 @@ This tutorial shows you how to gain insights from unstructured image data by int
 This tutorial uses the following billable components of Google Cloud:
 
   - [BigQuery ML](https://cloud.google.com/bigquery/pricing)
-  - [Vertex AI](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
+  - [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://cloud.google.com/products/calculator) .
 
@@ -40,7 +40,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
     
     **Roles required to enable APIs**
     
@@ -167,7 +167,7 @@ Create an object table over the movie poster images in the public Cloud Storage 
 
 ## Create the remote model
 
-Create a remote model that represents a Vertex AI `gemini-2.5-flash` model:
+Create a remote model that represents an Agent Platform `gemini-2.5-flash` model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

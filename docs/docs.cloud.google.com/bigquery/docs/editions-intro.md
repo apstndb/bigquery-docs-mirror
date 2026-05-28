@@ -241,21 +241,21 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <td>Run SQL queries on object tables</td>
 <td>Perform ML inference on object tables using remote models:
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Google models hosted in Vertex AI</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Google models hosted in Gemini Enterprise Agent Platform</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service">Cloud AI services</a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https">Custom models deployed to Vertex AI</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https">Custom models deployed to Agent Platform</a></li>
 </ul></td>
 <td>Perform ML inference on object tables using remote models:
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Google models hosted in Vertex AI</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Google models hosted in Agent Platform</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service">Cloud AI services</a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https">Custom models deployed to Vertex AI</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https">Custom models deployed to Agent Platform</a></li>
 </ul></td>
 <td>Perform ML inference on object tables using remote models:
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Google models hosted in Vertex AI</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Google models hosted in Agent Platform</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service">Cloud AI services</a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https">Custom models deployed to Vertex AI</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https">Custom models deployed to Agent Platform</a></li>
 </ul></td>
 </tr>
 <tr class="even">

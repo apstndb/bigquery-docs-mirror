@@ -65,19 +65,19 @@ The following is an example of the filter JSON file structure:
     {
       "filters": [
         {
-          "table": "db1.table1", "condition": "IN", "partition":
+          "table": "db1.table1", "condition": "IN", "partitions":
           ["partition1=value1/partition2=value2"]
         },
         {
-          "table": "db1.table2", "condition": "LESS_THAN", "partition":
+          "table": "db1.table2", "condition": "LESS_THAN", "partitions":
           ["partition1;value1"]
         },
         {
-          "table": "db1.table3", "condition": "GREATER_THAN", "partition":
+          "table": "db1.table3", "condition": "GREATER_THAN", "partitions":
           ["partition1;value1"]
         },
         {
-          "table": "db1.table4", "condition": "RANGE", "partition":
+          "table": "db1.table4", "condition": "RANGE", "partitions":
           ["partition1;value1;value2"]
         }
       ]
@@ -85,12 +85,12 @@ The following is an example of the filter JSON file structure:
 
 #### Filter conditions
 
-The `condition` field in the JSON file supports the following values, each with a specific format for the `partition` array:
+The `condition` field in the JSON file supports the following values, each with a specific format for the `partitions` array:
 
-  - **`IN`** : Specifies the exact partition paths to include. The `partition` array contains strings representing the exact directory structure of the partitions relative to the table base path (for example, `["partition_key1=value1/partition_key2=value2"]` ). You can specify multiple paths in the array.
-  - **`LESS_THAN`** : Includes partitions where the primary partition key value is less than or equal to the specified value. The `partition` array must contain a single string in the format `["<partition_key>;<value>"]` .
-  - **`GREATER_THAN`** : Includes partitions where the primary partition key value is greater than or equal to the specified value. The `partition` array must contain a single string in the format `["<partition_key>;<value>"]` .
-  - **`RANGE`** : Includes partitions where the primary partition key value falls within the specified range (inclusive). The `partition` array must contain a single string in the format `["<partition_key>;<start_value>;<end_value>"]` .
+  - **`IN`** : Specifies the exact partition paths to include. The `partitions` array contains strings representing the exact directory structure of the partitions relative to the table base path (for example, `["partition_key1=value1/partition_key2=value2"]` ). You can specify multiple paths in the array.
+  - **`LESS_THAN`** : Includes partitions where the primary partition key value is less than or equal to the specified value. The `partitions` array must contain a single string in the format `["<partition_key>;<value>"]` .
+  - **`GREATER_THAN`** : Includes partitions where the primary partition key value is greater than or equal to the specified value. The `partitions` array must contain a single string in the format `["<partition_key>;<value>"]` .
+  - **`RANGE`** : Includes partitions where the primary partition key value falls within the specified range (inclusive). The `partitions` array must contain a single string in the format `["<partition_key>;<start_value>;<end_value>"]` .
 
 The filter conditions are subject to the following rules and restrictions:
 

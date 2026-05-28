@@ -743,7 +743,7 @@ If an indexed table is deleted, its index is deleted automatically.
 
 ## Export embeddings to Vertex AI Vector Search
 
-To enable ultra-low latency online applications, use BigQuery integration with Vertex AI [Vector Search](https://docs.cloud.google.com/vertex-ai/docs/vector-search/overview) to import your BigQuery embeddings into Vector Search and deploy low latency endpoints. For more information, see [Import index data from BigQuery](https://docs.cloud.google.com/vertex-ai/docs/vector-search/import-index-data-from-big-query) .
+To enable ultra-low latency online applications, use BigQuery integration with Gemini Enterprise Agent Platform [Vector Search](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search/overview) to import your BigQuery embeddings into Vector Search and deploy low latency endpoints. For more information, see [Import index data from BigQuery](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search/import-index-data-from-big-query) .
 
 ## What's next
 

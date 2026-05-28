@@ -188,7 +188,7 @@ BigQuery ML supports automatic evaluation during model creation. Depending on th
     
     When you train these types of models using hyperparameter tuning, the [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#data_split) option also helps define the dataset that the evaluation metrics are calculated against. For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#data_split) .
 
-  - For AutoML Tables models, see [About data splits for AutoML models](https://docs.cloud.google.com/vertex-ai/docs/general/ml-use) .
+  - For AutoML Tables models, see [About data splits for AutoML models](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/ml-use) .
 
 To get evaluation metrics calculated during model creation, use evaluation functions such as `ML.EVALUATE` on the model with no input data specified. For an example, see [`ML.EVALUATE` with no input data specified](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#mlevaluate_with_no_input_data_specified) .
 

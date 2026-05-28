@@ -6,9 +6,9 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-> **Note:** Exporting your models is not required for deployment on Vertex AI if you are using the Vertex AI Model Registry. To learn more about the registry, see [Manage BigQuery ML models in the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
+> **Note:** Exporting your models is not required for deployment on Gemini Enterprise Agent Platform if you are using the Vertex AI Model Registry. To learn more about the registry, see [Manage BigQuery ML models in the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
 
-This tutorial shows how to [export a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/exporting-models) and then deploy the model either on Vertex AI or on a local machine. You will use the [`iris` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=iris&page=table) from the BigQuery public datasets and work through the following three end-to-end scenarios:
+This tutorial shows how to [export a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/exporting-models) and then deploy the model either on Agent Platform or on a local machine. You will use the [`iris` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=iris&page=table) from the BigQuery public datasets and work through the following three end-to-end scenarios:
 
   - Train and deploy a logistic regression model - also applies to DNN classifier, DNN regressor, k-means, linear regression, and matrix factorization models.
   - Train and deploy a boosted tree classifier model - also applies to boosted tree regressor model.
@@ -20,13 +20,13 @@ This tutorial uses billable components of Google Cloud, including:
 
   - BigQuery ML
   - Cloud Storage
-  - Vertex AI (optional, used for online prediction)
+  - Agent Platform (optional, used for online prediction)
 
 For more information about BigQuery ML costs, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml) .
 
 For more information about Cloud Storage costs, see the [Cloud Storage pricing](https://cloud.google.com/storage/pricing) page.
 
-For more information about Vertex AI costs, see [Custom-trained models](https://cloud.google.com/vertex-ai/pricing#custom-trained_models) .
+For more information about Agent Platform costs, see [Custom-trained models](https://cloud.google.com/vertex-ai/pricing#custom-trained_models) .
 
 ## Before you begin
 
@@ -147,7 +147,7 @@ This step sets a version number (1 in this case) for the model.
 
 This section uses the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud) to deploy and run predictions against the exported model.
 
-For more information about deploying a model to Vertex AI for online or batch predictions, see [Deploy a model to an endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment) .
+For more information about deploying a model to Agent Platform for online or batch predictions, see [Deploy a model to an endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment) .
 
 #### Create a model resource
 
@@ -186,7 +186,7 @@ You should see output similar to this:
 
 #### Online prediction
 
-For more information about running online predictions against a deployed model, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions) .
+For more information about running online predictions against a deployed model, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-online-predictions) .
 
 1\) Create a newline-delimited JSON file for inputs, for example `instances.json` file with the following content:
 
@@ -248,11 +248,11 @@ Install the [XGBoost library](https://xgboost.readthedocs.io/en/latest/build.htm
 
 ### Online deployment and serving
 
-This section uses the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud) to deploy and run predictions against the exported model. For more information, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions) .
+This section uses the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud) to deploy and run predictions against the exported model. For more information, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-online-predictions) .
 
-> **Note:** For serving on [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) Prediction, follow [Request Predictions](https://docs.cloud.google.com/vertex-ai/docs/predictions/getting-predictions) and use the following containers for your region respectively: 1) us-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 2) europe-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 3) asia-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
+> **Note:** For serving on [Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview) Prediction, follow [Request Predictions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-predictions) and use the following containers for your region respectively: 1) us-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 2) europe-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 3) asia-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
 
-For more information about deploying a model to Vertex AI for online or batch predictions using custom routines, see [Deploy a model to an endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment) .
+For more information about deploying a model to Agent Platform for online or batch predictions using custom routines, see [Deploy a model to an endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment) .
 
 #### Create a model resource
 
@@ -292,7 +292,7 @@ You should see output similar to this:
 
 #### Online prediction
 
-For more information about running online predictions against a deployed model, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/vertex-ai/docs/predictions/get-online-predictions) .
+For more information about running online predictions against a deployed model, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-online-predictions) .
 
 1\) Create a newline-delimited JSON file for inputs. For example, `instances.json` file with the following content:
 
@@ -332,7 +332,7 @@ Export the model to a Cloud Storage bucket using the [bq command-line tool](http
 
 ### Local deployment and serving
 
-For details about building AutoML containers, see [Export AutoML tabular models](https://docs.cloud.google.com/vertex-ai/docs/export/export-model-tabular) . The following steps require you to install [Docker](https://hub.docker.com/search/?type=edition&offering=community) .
+For details about building AutoML containers, see [Export AutoML tabular models](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/export/export-model-tabular) . The following steps require you to install [Docker](https://hub.docker.com/search/?type=edition&offering=community) .
 
 #### Copy exported model files to a local directory
 
@@ -360,7 +360,7 @@ For details about building AutoML containers, see [Export AutoML tabular models]
 
 ### Online deployment and serving
 
-Online prediction for AutoML regressor and AutoML classifier models is not supported in Vertex AI.
+Online prediction for AutoML regressor and AutoML classifier models is not supported in Agent Platform.
 
 ## Clean up
 
@@ -379,7 +379,7 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
     docker stop container_id
 
-### Delete Vertex AI resources
+### Delete Agent Platform resources
 
 1\) Delete the model version.
 

@@ -15,7 +15,7 @@ You can use a transform-only model in conjunction with the [`ML.TRANSFORM` funct
   - You can use it in the [query statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) when creating another model, in order to use the transformed data as the training data for that model.
   - You can use it in the [`query statement` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `ML.PREDICT` function, in order to provide data for prediction that is processed in the way the target model expects.
 
-For batch feature transformations, it is better to use transform-only models because it lets you process large amounts of data in a short time. For online feature transformations, it is better to use [Vertex AI Feature Store](https://docs.cloud.google.com/vertex-ai/docs/featurestore/latest/overview) because it provides responses with low latency.
+For batch feature transformations, it is better to use transform-only models because it lets you process large amounts of data in a short time. For online feature transformations, it is better to use [Vertex AI Feature Store](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/featurestore/latest/overview) because it provides responses with low latency.
 
 You can also use a transform-only model with the [`ML.FEATURE_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) in order to return information about feature transformations in the model.
 

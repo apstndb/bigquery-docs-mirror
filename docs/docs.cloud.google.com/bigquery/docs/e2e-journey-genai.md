@@ -15,7 +15,7 @@ This document describes the user journeys for BigQuery ML remote models, includi
   - [Google text embedding models as a service](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-embedding-maas)
   - [Self-deployed open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
   - [Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
-  - [Custom models deployed to Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+  - [Custom models deployed to Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
 
 ## Remote model user journeys
 
@@ -155,9 +155,9 @@ N/A
 
 [Transcribe audio files](https://docs.cloud.google.com/bigquery/docs/transcribe)
 
-Remote model over a custom model deployed to Vertex AI
+Remote model over a custom model deployed to Gemini Enterprise Agent Platform
 
-Remote model over a custom model deployed to Vertex AI
+Remote model over a custom model deployed to Gemini Enterprise Agent Platform
 
 [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
 
@@ -171,4 +171,4 @@ Remote model over a custom model deployed to Vertex AI
 
 <sup>2</sup> This function calls a hosted Gemini model, and doesn't require you to create a model separately using the `CREATE MODEL` statement.
 
-<sup>3</sup> You can automatically deploy an open model when you create the BigQuery ML remote model by specifying the model's Hugging Face or Vertex AI Model Garden ID. BigQuery manages the Vertex AI resources of open models deployed in this way, and lets you interact with those Vertex AI resources by using the BigQuery ML `ALTER MODEL` and `DROP MODEL` statements. It also lets you configure automatic undeployment of the model. For more information, see [Automatically deployed models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
+<sup>3</sup> You can automatically deploy an open model when you create the BigQuery ML remote model by specifying the model's Hugging Face or Agent Platform Model Garden ID. BigQuery manages the Agent Platform resources of open models deployed in this way, and lets you interact with those Agent Platform resources by using the BigQuery ML `ALTER MODEL` and `DROP MODEL` statements. It also lets you configure automatic undeployment of the model. For more information, see [Automatically deployed models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .

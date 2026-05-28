@@ -567,7 +567,7 @@ The following are common issues when sharing data agents with Data Studio users:
 > 
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-> **Note:** To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/1HIFPcPJk1g0SCPDNyVqoLWszBeXVa9qyU4fbBdW_91Y/edit#responses) . To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
+> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
 The following sections describe how to publish a data agent in Gemini Enterprise. This process typically involves collaboration between data analysts, Gemini Enterprise administrators, and business users. For more information about the roles required for these users, see [Required roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required-roles) .
 

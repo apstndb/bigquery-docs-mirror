@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text
 uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text
 title: The AI.GENERATE_TEXT function
-description: Generate text and analyze unstructured data with the BigQuery ML`AI.GENERATE_TEXT` function and Vertex AI models.
+description: Generate text and analyze unstructured data with the BigQuery ML`AI.GENERATE_TEXT` function and Gemini Enterprise Agent Platform models.
 data_source: docs.cloud.google.com
 ---
 
@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes the `AI.GENERATE_TEXT` function, a table-valued function that lets you perform generative natural language tasks by using any combination of text and unstructured data from BigQuery [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) , or unstructured data from BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
-The function works by sending requests to a BigQuery ML remote model that represents a Vertex AI model, and then returning that model's response. The following types of remote models are supported:
+The function works by sending requests to a BigQuery ML remote model that represents a Gemini Enterprise Agent Platform model, and then returning that model's response. The following types of remote models are supported:
 
   - [Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.
 
@@ -22,15 +22,15 @@ The function works by sending requests to a BigQuery ML remote model that repres
 
   - [Remote models over supported open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
 
-Several of the `AI.GENERATE_TEXT` function's arguments provide the parameters that shape the Vertex AI model's response.
+Several of the `AI.GENERATE_TEXT` function's arguments provide the parameters that shape the Agent Platform model's response.
 
 You can use the `AI.GENERATE_TEXT` function to perform tasks such as classification, sentiment analysis, image captioning, and transcription.
 
-Prompt design can strongly affect the responses returned by the Vertex AI model. For more information, see [Introduction to prompting](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design) or [Design multimodal prompts](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/multimodal/design-multimodal-prompts) .
+Prompt design can strongly affect the responses returned by the Agent Platform model. For more information, see [Introduction to prompting](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design) or [Design multimodal prompts](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/design-multimodal-prompts) .
 
 ## Input
 
-The input you can provide to `AI.GENERATE_TEXT` varies depending on the Vertex AI model that you reference from your remote model.
+The input you can provide to `AI.GENERATE_TEXT` varies depending on the Agent Platform model that you reference from your remote model.
 
 ### Input for Gemini models
 
@@ -51,7 +51,7 @@ For all other types of models, you can analyze text data from a standard table.
 
 ## Syntax for standard tables
 
-`AI.GENERATE_TEXT` syntax differs depending on the Vertex AI model that your remote model references. Choose the option appropriate for your use case.
+`AI.GENERATE_TEXT` syntax differs depending on the Agent Platform model that your remote model references. Choose the option appropriate for your use case.
 
 ### Gemini
 
@@ -84,7 +84,7 @@ STRUCT(
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - `  MODEL  ` : the name of the remote model over the Gemini Enterprise Agent Platform model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
     
     You can confirm what model is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
     
@@ -156,7 +156,7 @@ STRUCT(
 
   - `  STOP_SEQUENCES  ` : an `ARRAY<STRING>` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
 
-  - `  GROUND_WITH_GOOGLE_SEARCH  ` : a `BOOL` value that determines whether the Vertex AI model uses [Grounding with Google Search](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview#ground-public) when generating responses. Grounding lets the model use additional information from the internet when generating a response, in order to make model responses more specific and factual. When this field is set to `TRUE` , an additional `grounding_result` column is included in the results, providing the sources that the model used to gather additional information. The default is `FALSE` .
+  - `  GROUND_WITH_GOOGLE_SEARCH  ` : a `BOOL` value that determines whether the Agent Platform model uses [Grounding with Google Search](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview#ground-public) when generating responses. Grounding lets the model use additional information from the internet when generating a response, in order to make model responses more specific and factual. When this field is set to `TRUE` , an additional `grounding_result` column is included in the results, providing the sources that the model used to gather additional information. The default is `FALSE` .
 
   - `  SAFETY_SETTINGS  ` : an `ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` value that configures content safety thresholds to filter responses. The first element in the struct specifies a harm category, and the second element in the struct specifies a corresponding blocking threshold. The model filters out content that violate these settings. You can only specify each category once. For example, you can't specify both `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` and `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)` . If there is no safety setting for a given category, the `BLOCK_MEDIUM_AND_ABOVE` safety setting is used.
     
@@ -221,7 +221,7 @@ STRUCT(
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - `  MODEL  ` : the name of the remote model over the Gemini Enterprise Agent Platform model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
     
     You can confirm what model is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -276,7 +276,7 @@ STRUCT(
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - `  MODEL  ` : the name of the remote model over the Gemini Enterprise Agent Platform model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
     
     You can confirm what model is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -329,7 +329,7 @@ STRUCT(
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - `  MODEL  ` : the name of the remote model over the Gemini Enterprise Agent Platform model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
     
     You can confirm what model is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -383,7 +383,7 @@ STRUCT(
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - `  MODEL  ` : the name of the remote model over the Gemini Enterprise Agent Platform model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
     
     You can confirm what model is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -450,7 +450,7 @@ STRUCT(
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - `  MODEL  ` : the name of the remote model over the Gemini Enterprise Agent Platform model. For more information about how to create this type of remote model, see [The `CREATE MODEL` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
     
     You can confirm which model is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
     
@@ -672,7 +672,7 @@ The following example shows how to use the `model_params` argument to ground wit
         STRUCT(
           '''
           {
-            "tools": [{"googleSearch": {}}], 
+            "tools": [{"googleSearch": {}}],
             "generation_config": {
               "max_output_tokens": 100,
               "thinking_config": {"thinking_budget": 0}
@@ -697,7 +697,7 @@ The following example shows you how to use the `model_params` argument to enable
         STRUCT(
           '''
           {
-            "cachedContent": "projects/PROJECT_NUMBER/locations/LOCATION/cachedContents/CACHED_CONTENT_ID", 
+            "cachedContent": "projects/PROJECT_NUMBER/locations/LOCATION/cachedContents/CACHED_CONTENT_ID",
             "generation_config": {
               "max_output_tokens": 200,
               "thinking_config": {"thinking_budget": 0}
@@ -784,9 +784,9 @@ This example classifies PDF content from an object table that's named `documents
               .2 AS TEMPERATURE,
               TRUE AS FLATTEN_JSON_OUTPUT));
 
-## Use Vertex AI Provisioned Throughput
+## Use Agent Platform Provisioned Throughput
 
-You can use [Vertex AI Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview) with the `AI.GENERATE_TEXT` function to provide consistent high throughput for requests. The remote model that you reference in the `AI.GENERATE_TEXT` function must use a [supported Gemini model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models) in order for you to use Provisioned Throughput.
+You can use [Agent Platform Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview) with the `AI.GENERATE_TEXT` function to provide consistent high throughput for requests. The remote model that you reference in the `AI.GENERATE_TEXT` function must use a [supported Gemini model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/supported-models) in order for you to use Provisioned Throughput.
 
 To use Provisioned Throughput, [calculate your Provisioned Throughput requirements](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/measure-provisioned-throughput) and then [purchase Provisioned Throughput](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/purchase-provisioned-throughput) quota before running the `AI.GENERATE_TEXT` function. When you purchase Provisioned Throughput, do the following:
 
@@ -810,7 +810,7 @@ After you have purchased Provisioned Throughput quota, use the `request_type` ar
 
 ## Quotas
 
-See [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+See [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## Known issues
 
@@ -831,6 +831,6 @@ To iterate through inference calls until all rows are successfully processed, yo
   - Try [a tutorial on generating text using a public dataset](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial) .
   - Get step-by-step instructions on how to [generate text](https://docs.cloud.google.com/bigquery/docs/generate-text) using your own data.
   - Get step-by-step instructions on how to tune an LLM and use it to [generate text](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
-  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

@@ -16,18 +16,17 @@ data_source: docs.cloud.google.com
 
 This document describes how to use the optimized mode for [managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) in BigQuery. This mode lets you process large-scale datasets containing thousands, or even billions, of rows with significantly reduced large language model (LLM) token consumption and query latency compared to standard per-row LLM inference.
 
-The following example demonstrates how to use the [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) function with the optimized mode to categorize news articles, using `text-embedding-005` as the embedding model:
+The following example demonstrates how to use the [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) function with the optimized mode to identify news articles about natural disasters, using `text-embedding-005` as the embedding model:
 
     SELECT
       title,
       body,
-      AI.CLASSIFY(
-        body,
-        categories => ['tech', 'sport', 'business', 'other'],
+      AI.IF(
+        ('The following news story is about a natural disaster: ', body),
         embeddings => AI.EMBED(body, endpoint => 'text-embedding-005', task_type => 'CLASSIFICATION').result,
         -- Optional, 'MINIMIZE_COST' is the default when embeddings are provided.
         optimization_mode => 'MINIMIZE_COST'
-       ) AS category
+       ) AS is_natural_disaster
     FROM
       `bigquery-public-data.bbc_news.fulltext`;
 
@@ -55,12 +54,12 @@ The optimized mode has the following limitations:
   - **Minimum row count** : the input to the AI function must contain approximately 3,000 rows to ensure enough data for model training.
   - **Data types** : for prompts that reference multiple columns, only string columns are supported for optimization.
   - **Multi-label classification** : `AI.CLASSIFY` with `output_mode => 'multi'` isn't supported in optimized mode.
-  - **Function support** : only `AI.IF` and `AI.CLASSIFY` functions support optimized mode.
+  - **Function support** : only `AI.IF` and `AI.CLASSIFY` functions support optimized mode; however, when using optimized mode with `AI.CLASSIFY` , queries can fail if distilled model quality is insufficient.
   - **Error ratio** : The `max_error_ratio` argument isn't supported in optimized mode.
 
 ## Before you begin
 
-To get the permissions that you need to run managed AI functions in BigQuery, see [Set permissions for generative AI functions that call Vertex AI LLMs](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) .
+To get the permissions that you need to run managed AI functions in BigQuery, see [Set permissions for generative AI functions that call Gemini Enterprise Agent Platform LLMs](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) .
 
 ## Choose an embedding model
 

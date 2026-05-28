@@ -69,11 +69,11 @@ If a table has, or has had, [row-level access policies](https://docs.cloud.googl
 
 The following predefined IAM roles provide `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission:
 
-| **Role**                                                                                                        | **Resource**                                      |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| [`roles/bigquery.admin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)             | The table whose historical data is being accessed |
-| [`roles/bigquery.studioAdmin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) | The table whose historical data is being accessed |
-| [`roles/iam.databasesAdmin`](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.databasesAdmin)   | The table whose historical data is being accessed |
+| **Role**                                                                                                               | **Resource**                                      |
+| ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`roles/bigquery.admin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)                    | The table whose historical data is being accessed |
+| [`roles/bigquery.studioAdmin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin)        | The table whose historical data is being accessed |
+| [`roles/iam.databasesAdmin`](https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.databasesAdmin) | The table whose historical data is being accessed |
 
 You can also grant `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission using a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 

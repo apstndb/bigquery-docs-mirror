@@ -1153,11 +1153,11 @@ The following limits apply to [`CREATE MODEL`](https://docs.cloud.google.com/big
 
 ### Generative AI functions
 
-The following limits apply to functions that use Vertex AI large language models (LLMs). For more information, see [Function quota definitions](https://docs.cloud.google.com/bigquery/quotas#function_quota_definitions) .
+The following limits apply to functions that use Agent Platform large language models (LLMs). For more information, see [Function quota definitions](https://docs.cloud.google.com/bigquery/quotas#function_quota_definitions) .
 
 #### Requests per minute limits
 
-The following limits apply to Vertex AI models that use a requests per minute limit.
+The following limits apply to Agent Platform models that use a requests per minute limit.
 
 Function
 
@@ -1323,19 +1323,19 @@ Regions other than [supported European single regions](https://docs.cloud.google
 
 <sup>1</sup> When you use DSQ, there are no predefined quota limits on your usage. Instead, DSQ provides access to a large shared pool of resources, which are dynamically allocated based on real-time availability of resources and the customer demand for the given model. When more customers are active, each customer gets less throughput. Similarly, when fewer customers are active, each customer might get higher throughput.
 
-<sup>2</sup> Provisioned Throughput is a fixed-cost, fixed-term subscription available in several term-lengths. Provisioned Throughput lets you reserve throughput for supported generative AI models on Vertex AI.
+<sup>2</sup> Provisioned Throughput is a fixed-cost, fixed-term subscription available in several term-lengths. Provisioned Throughput lets you reserve throughput for supported generative AI models on Agent Platform.
 
-<sup>3</sup> To increase the quota, request a [QPM quota adjustment](https://docs.cloud.google.com/docs/quotas/view-manage#requesting_higher_quota) in Vertex AI. Allow 30 minutes for the increased quota value to propagate.
+<sup>3</sup> To increase the quota, request a [QPM quota adjustment](https://docs.cloud.google.com/docs/quotas/view-manage#requesting_higher_quota) in Agent Platform. Allow 30 minutes for the increased quota value to propagate.
 
-<sup>4</sup> You can increase the quota for Vertex AI `text-embedding` and `text-multilingual-embedding` models to 10,000 RPM without manual approval. This results in increased throughput of 500,000,000 rows per job or more, based on a call with an average of 50 tokens in each input row.
+<sup>4</sup> You can increase the quota for Agent Platform `text-embedding` and `text-multilingual-embedding` models to 10,000 RPM without manual approval. This results in increased throughput of 500,000,000 rows per job or more, based on a call with an average of 50 tokens in each input row.
 
 <sup>5</sup> This function is limited to a maximum of 5 concurrently running jobs per project.
 
-For more information about quota for Vertex AI LLMs, see [Generative AI on Vertex AI quota limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) .
+For more information about quota for Agent Platform LLMs, see [Generative AI on Agent Platform quota limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) .
 
 #### Tokens per minute limits
 
-The following limits apply to Vertex AI models that use a tokens per minute limit:
+The following limits apply to Agent Platform models that use a tokens per minute limit:
 
 | **Function**                                                                                                                                                                                                                                                                                                                                    | **Tokens per minute** | **Rows per job**                                             | **Number of concurrently running jobs** |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------ | --------------------------------------- |
@@ -1366,19 +1366,19 @@ For more information about quota for Cloud AI service APIs, see the following do
 
 The following list describes the quotas that apply to generative AI and Cloud AI service functions:
 
-  - Functions that call a Vertex AI model use one Vertex AI quota, which is queries per minute (QPM). In this context, the queries are request calls from the function to the Vertex AI model's API. The QPM quota applies to a base model and all versions, identifiers, and tuned versions of that model. For more information on the Vertex AI model quotas, see [Generative AI on Vertex AI quota limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) .
+  - Functions that call an Agent Platform model use one Agent Platform quota, which is queries per minute (QPM). In this context, the queries are request calls from the function to the Agent Platform model's API. The QPM quota applies to a base model and all versions, identifiers, and tuned versions of that model. For more information on the Agent Platform model quotas, see [Generative AI on Agent Platform quota limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) .
 
   - Functions that call a Cloud AI service use the target service's request quotas. Check the given Cloud AI service's quota reference for details.
 
   - BigQuery ML uses the following quotas:
     
-      - **Requests per minute** . This quota is the limit on the number of request calls per minute that functions can make to the Vertex AI model's or Cloud AI service's API. This limit applies to each project and is shared among all jobs using the same model endpoint.
+      - **Requests per minute** . This quota is the limit on the number of request calls per minute that functions can make to the Agent Platform model's or Cloud AI service's API. This limit applies to each project and is shared among all jobs using the same model endpoint.
         
-        Calls to Vertex AI Gemini models have no predefined quota limits on your usage, because Gemini models use [dynamic shared quota (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) . DSQ provides access to a large shared pool of resources, which are dynamically allocated based on real-time availability of resources and the customer demand for the given model.
+        Calls to Agent Platform Gemini models have no predefined quota limits on your usage, because Gemini models use [dynamic shared quota (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) . DSQ provides access to a large shared pool of resources, which are dynamically allocated based on real-time availability of resources and the customer demand for the given model.
     
-      - **Tokens per minute** . This quota is the limit on the number of tokens per minute that functions can send to the Vertex AI model's API. This limit applies to each project.
+      - **Tokens per minute** . This quota is the limit on the number of tokens per minute that functions can send to the Agent Platform model's API. This limit applies to each project.
         
-        For functions that call a Vertex AI foundation model, the number of tokens per minute varies depending on the Vertex AI model endpoint, version, and region, and also your project's reputation. This quota is conceptually the same as the QPM quota used by Vertex AI.
+        For functions that call an Agent Platform foundation model, the number of tokens per minute varies depending on the Agent Platform model endpoint, version, and region, and also your project's reputation. This quota is conceptually the same as the QPM quota used by Agent Platform.
     
       - **Rows per job** . The `Rows per job` value serves as a performance benchmark, approximating the processing capacity when a single job has exclusive use of the project's model endpoint resources. The actual number of processed rows depends on many factors, including the size of the input request to the model, the size of output responses from the model, and availability of dynamic shared quota. The following examples show some common scenarios:
         
@@ -1394,13 +1394,13 @@ The following list describes the quotas that apply to generative AI and Cloud AI
 
 The following examples show how to interpret quota limitations in typical situations:
 
-  - I have a quota of 1,000 QPM in Vertex AI, so a query with 100,000 rows should take around 100 minutes. Why is the job running longer?
+  - I have a quota of 1,000 QPM in Agent Platform, so a query with 100,000 rows should take around 100 minutes. Why is the job running longer?
     
-    Job runtimes can vary even for the same input data. In Vertex AI, remote procedure calls (RPCs) have different priorities in order to avoid quota drainage. When there isn't enough quota, RPCs with lower priorities wait and possibly fail if it takes too long to process them.
+    Job runtimes can vary even for the same input data. In Agent Platform, remote procedure calls (RPCs) have different priorities in order to avoid quota drainage. When there isn't enough quota, RPCs with lower priorities wait and possibly fail if it takes too long to process them.
 
   - How should I interpret the rows per job quota?
     
-    In BigQuery, a query can execute for up to six hours. The maximum supported rows is a function of this timeline and your Vertex AI QPM quota, in order to make sure that BigQuery can complete query processing in six hours. Since typically a query can't use the whole quota, this is a lower number than your QPM quota multiplied by 360.
+    In BigQuery, a query can execute for up to six hours. The maximum supported rows is a function of this timeline and your Agent Platform QPM quota, in order to make sure that BigQuery can complete query processing in six hours. Since typically a query can't use the whole quota, this is a lower number than your QPM quota multiplied by 360.
 
   - What happens if I run a batch inference job on a table with more rows than the rows per job quota, for example 10,000,000 rows?
     
@@ -1408,7 +1408,7 @@ The following examples show how to interpret quota limitations in typical situat
 
   - I have many more rows to process than the rows per job quota. Will splitting my rows across multiple queries and running them simultaneously help?
     
-    No, because these queries are consuming the same BigQuery ML requests per minute quota and Vertex AI QPM quota. If there are multiple queries that all stay within the rows per job quota and number of concurrently running jobs quota, the cumulative processing exhausts the requests per minute quota.
+    No, because these queries are consuming the same BigQuery ML requests per minute quota and Agent Platform QPM quota. If there are multiple queries that all stay within the rows per job quota and number of concurrently running jobs quota, the cumulative processing exhausts the requests per minute quota.
 
 ## BigQuery Graph
 

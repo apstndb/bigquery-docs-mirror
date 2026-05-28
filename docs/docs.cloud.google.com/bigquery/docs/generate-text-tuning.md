@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Tune a model using your data
 
-This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned) that references a Vertex AI model, and then configure the model to perform supervised tuning. The Vertex AI model must be one of the following:
+This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned) that references a Gemini Enterprise Agent Platform model, and then configure the model to perform supervised tuning. The Agent Platform model must be one of the following:
 
   - `gemini-2.5-pro`
   - `gemini-2.5-flash-lite`
@@ -29,7 +29,7 @@ To create and evaluate a tuned model, you need the following Identity and Access
     
     If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
-  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Vertex AI endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Gemini Enterprise Agent Platform endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
 
   - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` ) on your project.
 
@@ -62,7 +62,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection,Vertex AI, and Compute Engine APIs.
+3.  Enable the BigQuery, BigQuery Connection,Agent Platform API, and Compute Engine APIs.
     
     **Roles required to enable APIs**
     
@@ -459,7 +459,7 @@ The service account associated with your connection is an instance of the [BigQu
     
       - `  PROJECT_ID  ` : the project ID of the project in which to create the model.
     
-      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in a [supported Vertex AI region](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) .
+      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in a [supported Gemini Enterprise Agent Platform region](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) .
     
       - `  MODEL_NAME  ` : the name of the model.
     
@@ -619,7 +619,7 @@ Replace the following:
 
   - `  STOP_SEQUENCES  ` : an `ARRAY<STRING>` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
 
-  - `  GROUND_WITH_GOOGLE_SEARCH  ` : a `BOOL` value that determines whether the Vertex AI model uses [Grounding with Google Search](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview#ground-public) when generating responses. Grounding lets the model use additional information from the internet when generating a response, in order to make model responses more specific and factual. When this field is set to `True` , an additional `grounding_result` column is included in the results, providing the sources that the model used to gather additional information. The default is `FALSE` .
+  - `  GROUND_WITH_GOOGLE_SEARCH  ` : a `BOOL` value that determines whether the Gemini Enterprise Agent Platform model uses [Grounding with Google Search](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview#ground-public) when generating responses. Grounding lets the model use additional information from the internet when generating a response, in order to make model responses more specific and factual. When this field is set to `True` , an additional `grounding_result` column is included in the results, providing the sources that the model used to gather additional information. The default is `FALSE` .
 
   - `  SAFETY_SETTINGS  ` : an `ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` value that configures content safety thresholds to filter responses. The first element in the struct specifies a harm category, and the second element in the struct specifies a corresponding blocking threshold. The model filters out content that violate these settings. You can only specify each category once. For example, you can't specify both `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` and `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)` . If there is no safety setting for a given category, the `BLOCK_MEDIUM_AND_ABOVE` safety setting is used.
     
@@ -650,7 +650,7 @@ Replace the following:
     
     The default value is `UNSPECIFIED` .
     
-    For more information, see [Use Vertex AI Provisioned Throughput](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) .
+    For more information, see [Use Agent Platform Provisioned Throughput](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) .
 
   - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`generateContent` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `contents[]` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `AI.GENERATE_TEXT` function. You must either specify every model parameter in the `MODEL_PARAMS` field, or omit this field and specify each parameter separately.
 
@@ -703,7 +703,7 @@ Replace the following:
 
   - `  STOP_SEQUENCES  ` : an `ARRAY<STRING>` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
 
-  - `  GROUND_WITH_GOOGLE_SEARCH  ` : a `BOOL` value that determines whether the Vertex AI model uses [Grounding with Google Search](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview#ground-public) when generating responses. Grounding lets the model use additional information from the internet when generating a response, in order to make model responses more specific and factual. When this field is set to `True` , an additional `grounding_result` column is included in the results, providing the sources that the model used to gather additional information. The default is `FALSE` .
+  - `  GROUND_WITH_GOOGLE_SEARCH  ` : a `BOOL` value that determines whether the Gemini Enterprise Agent Platform model uses [Grounding with Google Search](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview#ground-public) when generating responses. Grounding lets the model use additional information from the internet when generating a response, in order to make model responses more specific and factual. When this field is set to `True` , an additional `grounding_result` column is included in the results, providing the sources that the model used to gather additional information. The default is `FALSE` .
 
   - `  SAFETY_SETTINGS  ` : an `ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` value that configures content safety thresholds to filter responses. The first element in the struct specifies a harm category, and the second element in the struct specifies a corresponding blocking threshold. The model filters out content that violate these settings. You can only specify each category once. For example, you can't specify both `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` and `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)` . If there is no safety setting for a given category, the `BLOCK_MEDIUM_AND_ABOVE` safety setting is used.
     
@@ -734,7 +734,7 @@ Replace the following:
     
     The default value is `UNSPECIFIED` .
     
-    For more information, see [Use Vertex AI Provisioned Throughput](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) .
+    For more information, see [Use Agent Platform Provisioned Throughput](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) .
 
   - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`generateContent` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `contents[]` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `AI.GENERATE_TEXT` function. You must either specify every model parameter in the `MODEL_PARAMS` field, or omit this field and specify each parameter separately.
 
@@ -763,7 +763,7 @@ The following example shows a request with these characteristics:
 
 The following example shows a request with these characteristics:
 
-  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
+  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/prompts/structure-prompts) with table columns.
   - Returns a short and moderately probable response.
   - Doesn't return the generated text and the safety attributes in separate columns.
 

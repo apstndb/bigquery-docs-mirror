@@ -202,6 +202,55 @@ The following query simultaneously calculates the total budget and total number 
 
 > **Caution:** Changes to the underlying graph don't invalidate [cached results](https://docs.cloud.google.com/bigquery/docs/cached-results) for queries that call the `GRAPH_EXPAND` function. To ensure correct output, disable the retrieval of cached results when you call this function.
 
+## Best practices
+
+When you design a graph with measures, follows these best practices:
+
+### Define nodes and edges within a single table
+
+We recommend that you use the same table for a node table definition and its connecting edge table definitions. Reusing the table ensures an exact one-to-one (1:1) relationship between the node table and the edge table, which prevents fan-out and ensures that the `GRAPH_EXPAND` function doesn't ignore the edge as ambiguous.
+
+For example, if you have an input table `Enrollment` that contains foreign keys pointing to `Student` and `Course` tables, define the `Enrollment` node and its outgoing edges using the `Enrollment` input table.
+
+### Model many-to-many relationships as node tables
+
+A *many-to-many* (M:N) relationship occurs when a row in table `A` can correspond to multiple rows in table `B` , and a row in table `B` can correspond to multiple rows in table `A` . For example, one student can enroll in multiple courses and one course can have many students. You can separate a many-to-many relationship into two one-to-many relationships by using an *intermediate junction table* . For example, you can define an `Enrollment` table that contains foreign keys pointing to `Student` and `Course` tables. If you model an intermediate junction table as an edge table that connects two dimension node tables in your `CREATE PROPERTY GRAPH` statement, then the `GRAPH_EXPAND` function ignores these edges because their relationship is ambiguous: not clearly many-to-one or one-to-one.
+
+    CREATE PROPERTY GRAPH university.SchoolGraph
+      NODE TABLES (
+        university.Student,
+        university.Course
+      )
+      EDGE TABLES (
+        -- Modeling the junction table as a standalone edge causes ambiguity
+        university.Enrollment AS StudentEnrollment
+          SOURCE KEY (student_id) REFERENCES Student (student_id)
+          DESTINATION KEY (course_id) REFERENCES Course (course_id)
+      );
+
+The `GRAPH_EXPAND` function ignores these edges because they are ambiguous (not clearly many-to-one or one-to-one between the node tables themselves). If all edges in a graph are ignored, calls to `GRAPH_EXPAND` or `BQ.SHOW_GRAPH_EXPAND_SCHEMA` fail with an error.
+
+To correctly model an M:N relationship for measures, promote the intermediate junction table to a node table. In this structure, the junction node table serves as the single root node table (a node table with an in-degree of zero). Then, define two many-to-one (N:1) edge tables that share the junction table to connect N:1 to each of the dimension node tables:
+
+    CREATE PROPERTY GRAPH university.SchoolGraph
+      NODE TABLES (
+        university.Student KEY (student_id),
+        university.Course KEY (course_id),
+        -- Promote the junction table to a node table (acting as the single root node)
+        university.Enrollment KEY (enrollment_id)
+      )
+      EDGE TABLES (
+        -- Share (reuse) the Enrollment table to define N:1 edges to each dimension
+        university.Enrollment AS EnrollmentToStudent
+          SOURCE KEY (enrollment_id) REFERENCES Enrollment (enrollment_id)
+          DESTINATION KEY (student_id) REFERENCES Student (student_id),
+        university.Enrollment AS EnrollmentToCourse
+          SOURCE KEY (enrollment_id) REFERENCES Enrollment (enrollment_id)
+          DESTINATION KEY (course_id) REFERENCES Course (course_id)
+      );
+
+In this structure, `Enrollment` serves as the single root node table (in-degree of zero) connecting N:1 to the `Student` and `Course` dimension tables (in-degree of one). The `GRAPH_EXPAND` function can flatten this graph by traversing outwards from `Enrollment` to `Student` and `Course` . If you define measures on any of these tables, you can call the `AGG` function on the measure columns to correctly compute the aggregations without overcounting.
+
 ## View `GRAPH_EXPAND` schema
 
 To view the schema of the table returned by the `GRAPH_EXPAND` function without calling the function, use the [`BQ.SHOW_GRAPH_EXPAND_SCHEMA` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqshow_graph_expand_schema) :

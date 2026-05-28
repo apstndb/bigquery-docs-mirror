@@ -8,17 +8,11 @@ data_source: docs.cloud.google.com
 
 # Use the Colab Enterprise Data Science Agent with BigQuery
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback, to ask questions, or to request to opt out of this Preview feature, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent Public Preview Opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) .
-
 The Data Science Agent (DSA) for Colab Enterprise and BigQuery lets you automate exploratory data analysis, perform machine learning tasks, and deliver insights all within a Colab Enterprise notebook.
 
 ## Before you begin
 
-1.  Enable the BigQuery, Vertex AI, Dataform, and Compute Engine APIs.
+1.  Enable the BigQuery, Gemini for Google Cloud, Dataform, and Compute Engine APIs.
     
     **Roles required to enable APIs**
     
@@ -35,10 +29,10 @@ If you're new to Colab Enterprise in BigQuery, see the setup steps on the [Creat
       - CSV files
       - BigQuery tables
   - The code produced by the Data Science Agent only runs in your notebook's runtime.
-  - The Data Science Agent isn't supported in projects that have enabled VPC Service Controls.
   - Searching for BigQuery tables using the `@mention` function is limited to your current project. Use the table selector to search across projects.
   - The `@mention` function only searches for BigQuery tables. To search for data files that you can upload, use the `+` symbol.
   - PySpark in the Data Science Agent only generates Managed Service for Apache Spark 4.0 code. The DSA can help you upgrade to Managed Service for Apache Spark 4.0, but users who require earlier versions shouldn't use the Data Science Agent.
+  - [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) are not supported.
 
 ## When to use the Data Science Agent
 
@@ -79,7 +73,9 @@ The following steps show you how to use the Data Science Agent in BigQuery.
     
     For help, see the [sample prompts](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent#sample-prompts) .
 
-4.  Examine the results.
+4.  Choose your model. The default model is Gemini 3.0 Flash.
+
+5.  Send your prompt, and examine the results.
 
 ### Analyze a CSV file
 
@@ -87,15 +83,17 @@ To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
 
 1.  Go to the **BigQuery** page.
 
-2.  On the BigQuery Studio welcome page, under **Create new** , click **Notebook** .
-    
-    Alternatively, in the tab bar, click the arrow\_drop\_down drop-down arrow next to the **+** icon, and then click **Notebook \> Empty notebook** .
+2.  In the left pane, expand your project, and then click click **Notebooks** .
 
-3.  Click the ![](https://docs.cloud.google.com/static/colab/images/icon-gemini.png) **Toggle Gemini in Colab** button to open the chat dialog.
+3.  Click **New notebook \> Empty notebook** .
     
-    > **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
+    Alternatively, in the tab bar, click the arrow\_drop\_down drop-down arrow next to the add\_box **Add** icon, and then click **Notebook \> Empty notebook** .
 
-4.  Upload your CSV file.
+4.  Click the spark **Toggle Gemini in Colab** button to open the chat dialog.
+    
+    > **Note:** You can toggle between displaying the chat dialog in a separate panel and displaying the chat dialog inside your notebook by clicking the collapse\_content **Move** icon.
+
+5.  Upload your CSV file.
     
     1.  In the chat dialog, click add\_circle\_outline **Add to Gemini \> Upload** .
     
@@ -103,13 +101,15 @@ To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
     
     3.  Browse to the location of the CSV file, and then click **Open** .
 
-5.  Alternatively, type the `+` symbol in your prompt to search for available files to upload.
+6.  Alternatively, type the `+` symbol in your prompt to search for available files to upload.
 
-6.  Enter your prompt in the chat window. For example: `Identify trends and anomalies in this file.`
+7.  Enter your prompt in the chat window. For example: `Identify trends and anomalies in this file.`
 
-7.  Click send **Send** . The results appear in the chat window.
+8.  Choose your model. The default model is Gemini 3.0 Flash.
 
-8.  You can ask the agent to change the plan, or you can run it by clicking **Accept & run** . As the plan runs, generated code and text appear in the notebook. Click **Cancel** to stop.
+9.  Click send **Send** . The results appear in the chat window.
+
+10. You can ask the agent to change the plan, or you can run it by clicking **Accept & run** . As the plan runs, generated code and text appear in the notebook. Click **Cancel** to stop.
 
 ### Analyze BigQuery tables
 
@@ -117,17 +117,19 @@ To analyze a BigQuery table, choose one or more tables in the table selector, pr
 
 1.  Go to the **BigQuery** page.
 
-2.  On the BigQuery Studio welcome page, under **Create new** , click **Notebook** .
+2.  In the left pane, expand your project, and then click click **Notebooks** .
+
+3.  Click **New notebook \> Empty notebook** .
     
-    Alternatively, in the tab bar, click the arrow\_drop\_down drop-down arrow next to the **+** icon, and then click **Notebook \> Empty notebook** .
+    Alternatively, in the tab bar, click the arrow\_drop\_down drop-down arrow next to the add\_box **Add** icon, and then click **Notebook \> Empty notebook** .
 
-3.  Click the ![](https://docs.cloud.google.com/static/colab/images/icon-gemini.png) **Toggle Gemini in Colab** button to open the chat dialog.
+4.  Click the spark **Toggle Gemini in Colab** button to open the chat dialog.
     
-    > **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
+    > **Note:** You can toggle between displaying the chat dialog in a separate panel and displaying the chat dialog inside your notebook by clicking the collapse\_content **Move** icon.
 
-4.  Enter your prompt in the chat window.
+5.  Enter your prompt in the chat window.
 
-5.  Reference your data in one of the following ways:
+6.  Reference your data in one of the following ways:
     
     1.  Choose one or more tables using the table selector:
         
@@ -145,11 +147,13 @@ To analyze a BigQuery table, choose one or more tables in the table selector, pr
     
     3.  Type `@` to search for a BigQuery table in your current project.
 
-6.  Click send **Send** .
+7.  Choose your model. The default model is Gemini 3.0 Flash.
+
+8.  Click send **Send** .
     
     The results appear in the chat window.
 
-7.  You can ask the agent to change the plan, or you can run it by clicking **Accept & run** . As the plan runs, generated code and text appear in the notebook. For additional steps in the plan, you may be required to click **Accept & run** again. Click **Cancel** to stop.
+9.  You can ask the agent to change the plan, or you can run it by clicking **Accept & run** . As the plan runs, generated code and text appear in the notebook. For additional steps in the plan, you may be required to click **Accept & run** again. Click **Cancel** to stop.
 
 ## Sample prompts
 
@@ -161,33 +165,33 @@ The following examples show the types of prompts that you can use with the DSA.
 
 Python code is generated by default unless you use a specific keyword in the prompt such as "BigQuery ML" or "SQL".
 
-  - Investigate and fill missing values by using the k-Nearest Neighbors (KNN) machine learning algorithm.
-  - Create a plot of salary by experience level. Use the `experience_level` column to group the salaries, and create a box plot for each group showing the values from the `salary_in_usd` column.
-  - Use the XGBoost algorithm to make a model for determining the `class` variable of a particular fruit. Split the data into training and testing datasets to generate a model and to determine the model's accuracy. Create a confusion matrix to show the predictions amongst each class, including all predictions that are correct and incorrect.
-  - Forecast `target_variable` from `  filename.csv  ` for the next six months.
+  - "Investigate and fill missing values by using the k-Nearest Neighbors (KNN) machine learning algorithm."
+  - "Create a plot of salary by experience level. Use the `experience_level` column to group the salaries, and create a box plot for each group showing the values from the `salary_in_usd` column."
+  - "Use the XGBoost algorithm to make a model for determining the `class` variable of a particular fruit. Split the data into training and testing datasets to generate a model and to determine the model's accuracy. Create a confusion matrix to show the predictions amongst each class, including all predictions that are correct and incorrect."
+  - "Forecast `target_variable` from `  filename.csv  ` for the next six months."
 
 ### SQL and BigQuery ML prompts
 
-  - Create and evaluate a classification model on `bigquery-public-data.ml_datasets.census_adult_income` using BigQuery SQL.
-  - Using SQL, forecast the future traffic of my website for the next month based on `bigquery-public-data.google_analytics_sample.ga_sessions_*` . Then, plot the historical and forecasted values.
-  - Group similar customers together to create targeting market campaigns using a KMeans model and BigQuery ML SQL functions. Use three features for clustering. Then visualize the results by creating a series of 2D scatter plots. Use the table `bigquery-public-data.ml_datasets.census_adult_income` .
-  - Generate text embeddings in BigQuery ML using the review content in `bigquery-public-data.imdb.reviews` .
+  - "Create and evaluate a classification model on `bigquery-public-data.ml_datasets.census_adult_income` using BigQuery SQL."
+  - "Using SQL, forecast the future traffic of my website for the next month based on `bigquery-public-data.google_analytics_sample.ga_sessions_*` . Then, plot the historical and forecasted values."
+  - "Group similar customers together to create targeting market campaigns using a KMeans model and BigQuery ML SQL functions. Use three features for clustering. Then visualize the results by creating a series of 2D scatter plots. Use the table `bigquery-public-data.ml_datasets.census_adult_income` ."
+  - "Generate text embeddings in BigQuery ML using the review content in `bigquery-public-data.imdb.reviews` ."
 
 For a list of supported models and machine learning tasks, see the [BigQuery ML documentation](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
 
 ### DataFrame prompts
 
-  - Create a pandas DataFrame for the data in `  project_id : dataset . table  ` . Analyze the data for null values, and then graph the distribution of each column using the graph type. Use violin plots for measured values and bar plots for categories.
-  - Read `  filename.csv  ` and construct a DataFrame. Run analysis on the DataFrame to determine what needs to be done with values. For example, are there missing values that need to be replaced or removed, or are there duplicate rows that need to be addressed. Use the data file to determine the distribution of the money invested in USD per city location. Graph the top 20 results using a bar graph that shows the results in descending order as Location versus Avg Amount Invested (USD).
-  - Create and evaluate a classification model on `  project_id : dataset . table  ` using BigQuery DataFrames.
-  - Create a time series forecasting model on `  project_id : dataset . table  ` using BigQuery DataFrames, and visualize the model evaluations.
-  - Visualize the sales figures in the past year in BigQuery table `  project_id : dataset . table  ` using BigQuery DataFrames.
-  - Find the features that can best predict the penguin species from the table `bigquery-public_data.ml_datasets.penguins` using BigQuery DataFrames.
+  - "Create a pandas DataFrame for the data in `  project_id : dataset . table  ` . Analyze the data for null values, and then graph the distribution of each column using the graph type. Use violin plots for measured values and bar plots for categories."
+  - "Read `  filename.csv  ` and construct a DataFrame. Run analysis on the DataFrame to determine what needs to be done with values. For example, are there missing values that need to be replaced or removed, or are there duplicate rows that need to be addressed. Use the data file to determine the distribution of the money invested in USD per city location. Graph the top 20 results using a bar graph that shows the results in descending order as Location versus Avg Amount Invested (USD)."
+  - "Create and evaluate a classification model on `  project_id : dataset . table  ` using BigQuery DataFrames."
+  - "Create a time series forecasting model on `  project_id : dataset . table  ` using BigQuery DataFrames, and visualize the model evaluations."
+  - "Visualize the sales figures in the past year in BigQuery table `  project_id : dataset . table  ` using BigQuery DataFrames."
+  - "Find the features that can best predict the penguin species from the table `bigquery-public_data.ml_datasets.penguins` using BigQuery DataFrames."
 
 ### PySpark prompts
 
-  - Create and evaluate a classification model on `  project_id : dataset . table  ` using Managed Service for Apache Spark.
-  - Group similar customers together to create targeting market campaigns, but first do dimensionality reduction using a PCA model. Use PySpark to do this on table `  project_id : dataset . table  ` .
+  - "Create and evaluate a classification model on `  project_id : dataset . table  ` using Managed Service for Apache Spark."
+  - "Group similar customers together to create targeting market campaigns, but first do dimensionality reduction using a PCA model. Use PySpark to do this on table `  project_id : dataset . table  ` ."
 
 ## Turn off Gemini in BigQuery
 
@@ -195,11 +199,11 @@ To turn off Gemini in BigQuery for a Google Cloud project, an administrator must
 
 To turn off Gemini in BigQuery for a specific user, an administrator needs to revoke the [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` ) role for that user. See [Revoke a single IAM role](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#revoke-single-role) .
 
-> **Note:** To opt out of using the Data Science Agent Preview without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> .
+> **Note:** To opt out of using the Data Science Agent without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> , or complete the [Data Science Agent opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) . To learn more about how to turn off Data Science Agent, see [Turn off Gemini in Colab Enterprise](https://docs.cloud.google.com/colab/docs/use-data-science-agent#turn-off) .
 
 ## Pricing
 
-During Preview, you are charged for running code in the notebook's runtime and for any BigQuery [slots](https://docs.cloud.google.com/bigquery/docs/slots) you used. For more information, see [Colab Enterprise pricing](https://cloud.google.com/colab/pricing) .
+Data Science Agent pricing is based on your input and output data. For more information, see Agents pricing at [How BigQuery pricing works](https://cloud.google.com/bigquery#pricing) .
 
 ## Supported regions
 

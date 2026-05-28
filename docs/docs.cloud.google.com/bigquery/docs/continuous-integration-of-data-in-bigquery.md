@@ -67,7 +67,7 @@ These topics are out of scope for this guide. However, it will benefit your data
 
 The following diagram illustrates a typical DWH design for BigQuery. It shows how data from external sources is ingested into the DWH, and how consumers consume data from the DWH.
 
-![Three databases outside of Google Cloud are data sources. Their data moves into storage in a staging area. The data then moves into BigQuery tables, which are the source for BigQuery views. Consumers like Looker, App Engine, Vertex AI notebooks, and human users consume the data using the views.](https://docs.cloud.google.com/static/bigquery/images/continuous-integration-of-data-in-bigquery-typical-dwh-design.svg)
+![Three databases outside of Google Cloud are data sources. Their data moves into storage in a staging area. The data then moves into BigQuery tables, which are the source for BigQuery views. Consumers like Looker, App Engine, Gemini Enterprise Agent Platform notebooks, and human users consume the data using the views.](https://docs.cloud.google.com/static/bigquery/images/continuous-integration-of-data-in-bigquery-typical-dwh-design.svg)
 
 The data starts at the data sources, where the data is in conventional transactional or low-latency databases such as OLTP SQL databases and NoSQL databases. A scheduled process copies the data into a staging area.
 

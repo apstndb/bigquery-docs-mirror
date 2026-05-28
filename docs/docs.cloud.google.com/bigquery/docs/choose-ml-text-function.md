@@ -57,7 +57,7 @@ Use the following table to compare the `AI.GENERATE_TEXT` , `ML.TRANSLATE` , and
 <tr class="even">
 <td>Billing</td>
 <td><p>Incurs BigQuery ML charges for data processed. For more information, see <a href="https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing">BigQuery ML pricing</a> .</p>
-<p>Incurs Vertex AI charges for calls to the model. If you are using a Gemini 2.0 or greater model, the call is billed at the batch API rate. For more information, see <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/pricing">Cost of building and deploying AI models in Vertex AI</a> .</p></td>
+<p>Incurs Gemini Enterprise Agent Platform charges for calls to the model. If you are using a Gemini 2.0 or greater model, the call is billed at the batch API rate. For more information, see <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/pricing">Cost of building and deploying AI models in Agent Platform</a> .</p></td>
 <td>Incurs BigQuery ML charges for data processed. For more information, see <a href="https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing">BigQuery ML pricing</a> .<br />
 <br />
 Incurs charges for calls to the Cloud Translation API. For more information, see <a href="https://docs.cloud.google.com/translate/pricing">Cloud Translation API pricing</a> .</td>
@@ -108,7 +108,7 @@ Incurs charges for calls to the Cloud Translation API. For more information, see
 </tr>
 <tr class="even">
 <td>Supported regions</td>
-<td>Supported in all Generative AI for Vertex AI <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#available-regions">regions</a> .</td>
+<td>Supported in all Generative AI for Agent Platform <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#available-regions">regions</a> .</td>
 <td>Supported in the <code dir="ltr" translate="no">EU</code> and <code dir="ltr" translate="no">US</code> multi-regions.</td>
 <td>Supported in the <code dir="ltr" translate="no">EU</code> and <code dir="ltr" translate="no">US</code> multi-regions.</td>
 </tr>

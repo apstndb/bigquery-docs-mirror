@@ -1,14 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned
 uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned
-title: The CREATE MODEL statement for fine-tuning Vertex AI Gemini models
+title: The CREATE MODEL statement for fine-tuning Gemini Enterprise Agent Platform Gemini models
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# The CREATE MODEL statement for fine-tuning Vertex AI Gemini models
+# The CREATE MODEL statement for fine-tuning Gemini Enterprise Agent Platform Gemini models
 
-This document describes the `CREATE MODEL` statement for fine-tuning Gemini models in Vertex AI by using SQL. For pre-trained models, see [The CREATE MODEL statement for Vertex AI AI LLMs as MaaS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) . Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `CREATE MODEL` statement for fine-tuning Gemini models in Gemini Enterprise Agent Platform by using SQL. For pre-trained models, see [The CREATE MODEL statement for Agent Platform AI LLMs as MaaS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) . Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
 After you create the remote model, you can use one of the following functions to perform generative AI with that model:
 
@@ -75,7 +75,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
     `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
@@ -89,7 +89,7 @@ The connection elements are as follows:
     
     To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
+If you are creating a remote model over an Agent Platform model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
 If you are using the remote model to analyze unstructured data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
 
@@ -105,11 +105,11 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 **Description**
 
-The endpoint for a Vertex AI Gemini that [supports](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) supervised fine tuning. You can specify the name of the Vertex AI Gemini model, for example `gemini-2.5-flash` , or you can specify the Vertex AI model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Vertex AI model based on the location of the dataset in which you create the model.
+The endpoint for an Agent Platform Gemini model that [supports](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) supervised fine tuning. You can specify the name of the Agent Platform Gemini model, for example `gemini-2.5-flash` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
 
 **Arguments**
 
-A `STRING` value that contains the model name of a Vertex AI Gemini model that [supports fine-tuning](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) .
+A `STRING` value that contains the model name of an Agent Platform Gemini model that [supports fine-tuning](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) .
 
 > **Note:** To provide feedback or request support for the models in preview, send an email to <bqml-feedback@google.com> .
 
@@ -121,11 +121,11 @@ Using the global endpoint for your requests can improve overall availability whi
 
 > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
 
-For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models) .
+For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models) .
 
 #### Retired models
 
-For more information on retired Vertex AI models, see [Retired models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions#retired-models) .
+For more information on retired Agent Platform models, see [Retired models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions#retired-models) .
 
 ### `PROMPT_COL`
 
@@ -323,10 +323,10 @@ Provides the training data to use when performing supervised tuning.
 
 ### Costs
 
-When using supervised tuning with remote models over Vertex AI LLMs, costs are calculated based on the following:
+When using supervised tuning with remote models over Agent Platform LLMs, costs are calculated based on the following:
 
   - The bytes processed from the training data table specified in the [`AS SELECT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) . These charges are billed from BigQuery to your project. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
-  - The number of tokens processed to tune the LLM. These charges are billed from Vertex AI to your project. For more information, see [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models) .
+  - The number of tokens processed to tune the LLM. These charges are billed from Agent Platform to your project. For more information, see [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models) .
 
 ## Locations
 
@@ -338,7 +338,7 @@ The following examples create BigQuery ML remote models.
 
 ### Create a tuned model
 
-The following example creates a BigQuery ML remote model over a tuned version of a Vertex AI Gemini model:
+The following example creates a BigQuery ML remote model over a tuned version of an Agent Platform Gemini model:
 
     CREATE OR REPLACE MODEL `mydataset.tuned_model`
       REMOTE WITH CONNECTION `myproject.us.test_connection`
@@ -357,5 +357,5 @@ The following example creates a BigQuery ML remote model over a tuned version of
 
 ## What's next
 
-  - For more information about using Vertex AI models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - Try [customizing a model by using supervised fine tuning](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .

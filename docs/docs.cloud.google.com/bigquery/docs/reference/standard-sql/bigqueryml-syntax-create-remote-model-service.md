@@ -113,7 +113,7 @@ A document processor from Document AI should exist when you specify this option 
 
   - Select a prebuilt processor from the **Specialized** section of the [Processor Gallery](https://console.cloud.google.com/ai/document-ai/processor-library) . Supported processors have a description that starts with the word `Extract` . For example, `Invoice Parser` , `Utility Parser` , and `W2 Parser` are all supported processors. These types of processors extract predefined, domain-specific fields from the documents as output columns.
   - Use the Form Parser processor or the Layout Parser processor. These processors are available in the [Processor Gallery](https://console.cloud.google.com/ai/document-ai/processor-library) .
-  - Use [Workbench](https://console.cloud.google.com/ai/document-ai/workbench) to build a [`Custom Extractor` processor](https://docs.cloud.google.com/document-ai/docs/processors-list#processor_cde) based on a Vertex AI [foundation model](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models#foundation_model_apis) . You can specify the fields for extraction, and then tune the model with custom documents that contain those fields.
+  - Use [Workbench](https://console.cloud.google.com/ai/document-ai/workbench) to build a [`Custom Extractor` processor](https://docs.cloud.google.com/document-ai/docs/processors-list#processor_cde) based on an Gemini Enterprise Agent Platform [foundation model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models#foundation_model_apis) . You can specify the fields for extraction, and then tune the model with custom documents that contain those fields.
 
 You can provide the `DOCUMENT_PROCESSOR` value in one of the following formats:
 

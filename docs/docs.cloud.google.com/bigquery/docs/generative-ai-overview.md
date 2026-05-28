@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Generative AI overview
 
-This document describes the generative artificial intelligence (AI) functions that BigQuery supports. These functions accept natural language inputs and use pre-trained [Vertex AI models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) and built-in BigQuery models.
+This document describes the generative artificial intelligence (AI) functions that BigQuery supports. These functions accept natural language inputs and use pre-trained [Gemini Enterprise Agent Platform models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) and built-in BigQuery models.
 
 BigQuery offers a variety of AI functions to help with tasks such as the following:
 
@@ -60,9 +60,9 @@ General-purpose AI functions give you full control and transparency on the choic
 
 ### Perform LLM inference
 
-The [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) is a flexible inference function that works by sending requests to a Vertex AI Gemini model and returning that model's response. You can use this function to analyze text, image, audio, video, or PDF data. For example, you might analyze images of home furnishings to generate text for a `design_type` column, so that the furnishings SKU has an associated description, such as `mid-century modern` or `farmhouse` .
+The [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) is a flexible inference function that works by sending requests to a Gemini Enterprise Agent Platform Gemini model and returning that model's response. You can use this function to analyze text, image, audio, video, or PDF data. For example, you might analyze images of home furnishings to generate text for a `design_type` column, so that the furnishings SKU has an associated description, such as `mid-century modern` or `farmhouse` .
 
-You can perform generative AI tasks by using remote models in BigQuery ML to reference models deployed to or hosted in Vertex AI with the [`AI.GENERATE_TEXT` table-valued function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) . You can use the following types of [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
+You can perform generative AI tasks by using remote models in BigQuery ML to reference models deployed to or hosted in Agent Platform with the [`AI.GENERATE_TEXT` table-valued function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) . You can use the following types of [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
 
   - Remote models over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models to analyze text, image, audio, video, or PDF content from standard tables or object tables with a prompt that you provide as a function argument.
 
@@ -76,7 +76,7 @@ Use the following topics to try text generation in BigQuery ML:
   - [Generate text by using the `AI.GENERATE_TEXT` function with your data](https://docs.cloud.google.com/bigquery/docs/generate-text) .
   - [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
 
-For some models, you can optionally choose to configure [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , which lets you train the model on your own data to make it better suited for your use case. All inference occurs in Vertex AI. The results are stored in BigQuery.
+For some models, you can optionally choose to configure [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , which lets you train the model on your own data to make it better suited for your use case. All inference occurs in Agent Platform. The results are stored in BigQuery.
 
 ### Generate structured data
 
@@ -84,7 +84,7 @@ Structured data generation is very similar to text generation, except that you c
 
 You can generate structured data in the following ways:
 
-  - The [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) calls a Vertex AI endpoint and can generate a `STRUCT` value with your custom schema.
+  - The [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) calls an Agent Platform endpoint and can generate a `STRUCT` value with your custom schema.
     
     To try it out, see how to [use structured output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#use_structured_output) when you call the `AI.GENERATE` function.
 
@@ -144,7 +144,7 @@ Supported locations for text generation and embedding models vary based on the m
 
 ## Pricing
 
-You are charged for the compute resources that you use to run queries against models. Remote models make calls to Vertex AI models, so queries against remote models also incur charges from Vertex AI.
+You are charged for the compute resources that you use to run queries against models. Remote models make calls to Agent Platform models, so queries against remote models also incur charges from Agent Platform.
 
 For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) .
 
@@ -159,7 +159,7 @@ When you call a generative AI function that uses a Gemini model other than an em
 
 ## Track costs
 
-The generative AI functions in BigQuery work by sending requests to Vertex AI, which can incur costs. To estimate your input token count before you run a query, use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) . To track the Vertex AI costs incurred by a job that you run in BigQuery, follow these steps:
+The generative AI functions in BigQuery work by sending requests to Gemini Enterprise Agent Platform, which can incur costs. To estimate your input token count before you run a query, use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) . To track the Agent Platform costs incurred by a job that you run in BigQuery, follow these steps:
 
 1.  [View your billing reports](https://docs.cloud.google.com/billing/docs/how-to/reports) in Cloud Billing.
 
@@ -175,13 +175,13 @@ It can take up to 24 hours for some charges to appear in Cloud Billing.
 
 ## Monitoring
 
-To better understand the behavior of AI functions that you call in BigQuery, you can enable request and response logging. To log the entire request and response sent to and received from Vertex AI, follow these steps:
+To better understand the behavior of AI functions that you call in BigQuery, you can enable request and response logging. To log the entire request and response sent to and received from Agent Platform, follow these steps:
 
-1.  [Enable request-response logs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) in Vertex AI. The logs are stored in BigQuery. You must separately enable logging for each different foundation model and region. To log queries that run in the `us` region, specify the `us-central1` region in your request. To log queries that run in the `eu` region, specify the `europe-west4` region in your request.
+1.  [Enable request-response logs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) in Gemini Enterprise Agent Platform. The logs are stored in BigQuery. You must separately enable logging for each different foundation model and region. To log queries that run in the `us` region, specify the `us-central1` region in your request. To log queries that run in the `eu` region, specify the `europe-west4` region in your request.
 
-2.  Run a query using an AI function that makes a call to Vertex AI using the model that you enabled logging for in the previous step.
+2.  Run a query using an AI function that makes a call to Agent Platform using the model that you enabled logging for in the previous step.
 
-3.  To view the full Vertex AI request and response, query your logging table for rows where the `labels.bigquery_job_id_prefix` field of the `full_request` column matches the first 63 characters of your [job ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) . Optionally, you can [use a custom query label](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding-label-to-session) to help you look up the query in the logs.
+3.  To view the full Agent Platform request and response, query your logging table for rows where the `labels.bigquery_job_id_prefix` field of the `full_request` column matches the first 63 characters of your [job ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) . Optionally, you can [use a custom query label](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding-label-to-session) to help you look up the query in the logs.
     
     For example, you can use a query similar to the following:
     

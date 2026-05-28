@@ -1389,8 +1389,8 @@ Customer-managed encryption keys have the following restrictions when encrypting
 
   - CMEK keys aren't supported for remote models:
     
-      - [Remote models over Vertex AI built-in models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
-      - [Remote models over Vertex AI hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+      - [Remote models over Gemini Enterprise Agent Platform built-in models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
+      - [Remote models over Gemini Enterprise Agent Platform hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
       - [Remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
 
 ### Change a model from default encryption to Cloud KMS protection

@@ -55,6 +55,18 @@ When interacting with the agent using the public API, select `us` or `eu` to ens
 
 To change your processing region, you must [create a new Dataform repository](https://docs.cloud.google.com/dataform/docs/create-repository) and configure it to the updated region.
 
+## BigQuery Data Science Agent
+
+The BigQuery Data Science Agent is available in a limited number of Colab Enterprise regions. The region is automatically determined by the location of your Colab Enterprise notebook. For more information, see [Colab Enterprise locations](https://cloud.google.com/colab/docs/locations) .
+
+When you interact with the Data Science Agent in the Google Cloud console, session data—including conversation history and temporary storage of conversation context—is stored in the same region as your notebook. Data stored at rest in your notebook is also stored in the notebook's location.
+
+Gemini model requests are routed to regional or global endpoints depending on the model version and region. This routing is dynamic and may change as new model versions are released. For example, newer model versions may initially use a global endpoint and expand to regional or multiple-region endpoints over time.
+
+For more information about data residency, see [Data residency](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency) .
+
+> **Note:** To opt out of using the Data Science Agent without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) . To learn more about how to turn off Data Science Agent, see [Turn off Gemini in Colab Enterprise](https://docs.cloud.google.com/colab/docs/use-data-science-agent#turn-off) .
+
 ## BigQuery data insights
 
 To generate insights using [BigQuery data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) , you can run data scan operations on selected tables and dataset resources. These scans are created in the same location as the BigQuery dataset resource. Within the `US` or `EU` jurisdictions, Gemini in BigQuery processing is restricted to the jurisdiction where the scan runs. Outside of the `US` and `EU` jurisdictions, processing runs globally. To learn about where global Gemini global data processing takes place, see [Gemini serving locations](https://docs.cloud.google.com/gemini/docs/locations) .
@@ -72,13 +84,7 @@ The location where [BigQuery data preparation](https://docs.cloud.google.com/big
 The following limitations apply when you identify where Gemini in BigQuery processes data:
 
   - Gemini in BigQuery doesn't provide data residency for individual locations. Data processing can be specified for `US` and `EU` supported jurisdictions. Data outside these jurisdictions is processed globally.
-
   - Gemini in BigQuery jurisdiction processing is only available for Gemini in BigQuery features that are generally available (GA). For a list of Gemini in BigQuery features, see [Overview of Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
-
-  - BigQuery Python notebook code assist and the Data Science Agent for Colab Enterprise in BigQuery only support global Gemini processing.
-    
-    > **Note:** To opt out of the Colab Enterprise preview feature without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent Public Preview Opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) . To learn more about how to turn off Data Science Agent, see [Turn off Gemini in Colab Enterprise](https://docs.cloud.google.com/colab/docs/use-data-science-agent#turn-off) .
-
   - Gemini in Cloud Assist chat (GCA) only supports global Gemini processing. You can deny access to the GCA chat panel by removing the `geminicloudassist.agents.invoke` Identity and Access Management (IAM) permission for your users. To learn more about how to create custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 ## What's next

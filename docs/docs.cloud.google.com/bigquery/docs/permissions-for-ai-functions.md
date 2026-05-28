@@ -1,14 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions
 uri: https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions
-title: Set permissions for generative AI functions that call Vertex AI LLMs
+title: Set permissions for generative AI functions that call Gemini Enterprise Agent Platform LLMs
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Set permissions for generative AI functions that call Vertex AI LLMs
+# Set permissions for generative AI functions that call Gemini Enterprise Agent Platform LLMs
 
-This document shows you how to set up permissions for running generative AI queries. Generative AI queries contain `AI.*` functions that call foundation models in Vertex AI; for example, `AI.GENERATE` .
+This document shows you how to set up permissions for running generative AI queries. Generative AI queries contain `AI.*` functions that call foundation models in Gemini Enterprise Agent Platform; for example, `AI.GENERATE` .
 
 There are two ways to set up permissions to run queries that use `AI.*` functions:
 
@@ -26,7 +26,7 @@ To run generative AI queries using end-user credentials, configure the necessary
 To get the permissions that you need to run a query job that calls a Vertex AI model, ask your administrator to grant you the following IAM roles on the project:
 
   - Run query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-  - Access a foundation model in Vertex AI: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
+  - Access a foundation model in Gemini Enterprise Agent Platform: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -34,7 +34,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ### Grant the required roles to the user or group
 
-You can use the Google Cloud console or SQL to grant the required roles for a principal. The principal is the user or group that runs the query that uses `AI.*` functions to call a Vertex AI foundation model.
+You can use the Google Cloud console or SQL to grant the required roles for a principal. The principal is the user or group that runs the query that uses `AI.*` functions to call a Gemini Enterprise Agent Platform foundation model.
 
 ### Console
 
@@ -379,7 +379,7 @@ For more information, see [Create and set up a Cloud resource connection](https:
 
 ### Grant access to the service account
 
-To run queries that use generative `AI.*` functions that call Vertex AI models, you must grant appropriate permissions to the service account that was created when you created your connection. To run functions that call a Vertex AI foundation model, the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) is required.
+To run queries that use generative `AI.*` functions that call Gemini Enterprise Agent Platform models, you must grant appropriate permissions to the service account that was created when you created your connection. To run functions that call a Gemini Enterprise Agent Platform foundation model, the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) is required.
 
 Select one of the following options:
 
@@ -413,7 +413,7 @@ Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/referenc
     
     Replace the following:
     
-      - `  PROJECT_ID  ` : the project where you plan to use Vertex AI.
+      - `  PROJECT_ID  ` : the project where you plan to use Agent Platform.
       - `  CONNECTION_NAME  ` : the name of the connection in either the `  PROJECT_ID . LOCATION . CONNECTION_ID  ` or `  LOCATION . CONNECTION_ID  ` format. If the project is omitted, then it is inferred from the project where the statement is run.
 
 3.  Click play\_circle **Run** .

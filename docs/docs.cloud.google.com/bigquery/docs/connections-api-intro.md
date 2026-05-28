@@ -21,7 +21,7 @@ BigQuery provides different connection types for the following external data sou
   - Amazon Simple Storage Service (Amazon S3)
   - Apache Spark
   - Azure Blob Storage
-  - Google Cloud resources such as Vertex AI remote models, remote functions, and BigLake
+  - Google Cloud resources such as Gemini Enterprise Agent Platform remote models, remote functions, and BigLake
   - Spanner
   - Cloud SQL
   - AlloyDB for PostgreSQL
@@ -58,11 +58,11 @@ Once you have an existing Blob Storage connection, you can do the following:
 
 ### Google Cloud resource connections
 
-A Google Cloud resource connection is a connection to authorize access to other Google Cloud resources such as Vertex AI remote models, remote functions, and BigLake. For details on how to set up a Google Cloud resource connection, see [Create and set up a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) .
+A Google Cloud resource connection is a connection to authorize access to other Google Cloud resources such as Agent Platform remote models, remote functions, and BigLake. For details on how to set up a Google Cloud resource connection, see [Create and set up a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) .
 
 Once you have an existing Google Cloud resource connection, you can create the following BigQuery objects with it:
 
-  - **Remote models** . For more information, see [The CREATE MODEL statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , [The CREATE MODEL statement for remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) , and [The CREATE MODEL statement for remote models over Vertex AI hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
+  - **Remote models** . For more information, see [The CREATE MODEL statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , [The CREATE MODEL statement for remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) , and [The CREATE MODEL statement for remote models over Agent Platform-hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
   - **Remote functions** . BigQuery [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) let you implement functions with any supported languages in Cloud Run functions or Cloud Run. A remote function connection lets you connect with Cloud Run functions or Cloud Run and run these functions. To create a BigQuery remote function connection, see [Create a connection](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_connection) .
   - **BigLake tables** . BigLake connections connect [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) to external data sources while retaining fine-grained BigQuery access control and security for both structured and unstructured data in Cloud Storage.
   - **Object tables** . For more information, see [Introduction to object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .

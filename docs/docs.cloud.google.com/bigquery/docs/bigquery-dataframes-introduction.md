@@ -44,7 +44,7 @@ BigQuery DataFrames does the following:
   - Offers more than 750 pandas and scikit-learn APIs implemented through transparent SQL conversion to BigQuery and BigQuery ML APIs.
   - Defers the execution of queries for enhanced performance.
   - Extends data transformations with user-defined Python functions to let you process data in Google Cloud. These functions are automatically deployed as BigQuery [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
-  - Integrates with Vertex AI to let you use Gemini models for text generation.
+  - Integrates with Gemini Enterprise Agent Platform to let you use Gemini models for text generation.
 
 ## Licensing
 
@@ -69,7 +69,7 @@ For details, see the [`third_party/bigframes_vendored`](https://github.com/googl
 ## Pricing
 
   - BigQuery DataFrames is a set of open source Python libraries available for download at no extra cost.
-  - BigQuery DataFrames uses BigQuery, Cloud Run functions, Vertex AI, and other Google Cloud services, which incur their own costs.
+  - BigQuery DataFrames uses BigQuery, Cloud Run functions, Agent Platform, and other Google Cloud services, which incur their own costs.
   - During regular usage, BigQuery DataFrames stores temporary data, such as intermediate results, in BigQuery tables. These tables persist for seven days by default, and you are charged for the data stored in them. The tables are created in the `_anonymous_` dataset in the Google Cloud project you specify in the [`bf.options.bigquery.project` option](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html) .
 
 ## What's next

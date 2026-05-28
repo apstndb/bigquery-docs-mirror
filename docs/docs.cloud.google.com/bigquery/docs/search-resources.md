@@ -94,7 +94,7 @@ Alternatively, you can [search for resources by using Gemini Cloud Assist](https
 
 Filters let you narrow down the search results.
 
-When you provide filters in multiple sections, the filters are evaluated using the `AND` logical operator. The search results contain resources that match at least one condition from every selected section. For example, if you select the BigQuery system and the `dataset` resource type, the search results include BigQuery datasets but not Vertex AI datasets.
+When you provide filters in multiple sections, the filters are evaluated using the `AND` logical operator. The search results contain resources that match at least one condition from every selected section. For example, if you select the BigQuery system and the `dataset` resource type, the search results include BigQuery datasets but not Gemini Enterprise Agent Platform datasets.
 
 If you select multiple filters within a single section, the filters are evaluated using the `OR` logical operator. For example, if you select the `dataset` resource type and the `table` resource type, the search results include both datasets and tables.
 

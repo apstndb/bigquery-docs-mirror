@@ -8,11 +8,11 @@ data_source: docs.cloud.google.com
 
 # The CREATE MODEL statement for AutoML models
 
-This document describes the `CREATE MODEL` statement for creating [AutoML classification and regression models](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/overview) in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. AutoML lets you quickly build large-scale machine learning models on tabular data.
+This document describes the `CREATE MODEL` statement for creating [AutoML classification and regression models](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/overview) in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. AutoML lets you quickly build large-scale machine learning models on tabular data.
 
 You can use AutoML regressor models with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to perform [regression](https://docs.cloud.google.com/bigquery/docs/regression-overview) , and you can use AutoML classifier models with the `ML.PREDICT` function to perform [classification](https://docs.cloud.google.com/bigquery/docs/classification-overview) . You can use both types of AutoML models with the `ML.PREDICT` function to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
-BigQuery ML uses the default values for [AutoML training options](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/train-model) , including [data splitting](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/data-splits) and [optimization functions](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/train-model#optimization-objectives) .
+BigQuery ML uses the default values for [AutoML training options](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/train-model) , including [data splitting](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits) and [optimization functions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/train-model#optimization-objectives) .
 
 For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
@@ -103,7 +103,7 @@ A `FLOAT64` value between `1.0` and `72.0` . The default value is `1.0` .
 
 Sets the optimization objective function to use for AutoML training.
 
-For more details on the optimization objective functions, see the [AutoML documentation](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/train-model#optimization-objectives) .
+For more details on the optimization objective functions, see the [AutoML documentation](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/train-model#optimization-objectives) .
 
 **Arguments**
 
@@ -188,7 +188,7 @@ Supported data types for `input_label_cols` include the following:
 
 **Description**
 
-The name of the column to use to sort input data into the training, validation, or test set. Defaults to [random splitting](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/data-splits#default_data_split) .
+The name of the column to use to sort input data into the training, validation, or test set. Defaults to [random splitting](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits#default-data-split) .
 
 **Arguments**
 
@@ -201,9 +201,9 @@ If you use a string column, rows are assigned to the appropriate dataset based o
   - `TEST`
   - `UNASSIGNED`
 
-For more information about how to use these values, see [Manual split](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/data-splits#classification-manual) .
+For more information about how to use these values, see [Manual split](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits#classification-manual) .
 
-Timestamp columns are used to perform a [chronological split](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/data-splits#classification-time) .
+Timestamp columns are used to perform a [chronological split](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits#classification-time) .
 
 ### `KMS_KEY_NAME`
 
@@ -242,16 +242,16 @@ For columns other than the label column, any [groupable](https://docs.cloud.goog
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">NUMERIC</code></a><br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">BIGNUMERIC</code></a><br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">FLOAT64</code></a></td>
-<td><a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#numeric-transf"><code dir="ltr" translate="no">NUMERIC</code></a> or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> if AutoML determines that it is a UNIX timestamp</td>
+<td><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#numeric-transf"><code dir="ltr" translate="no">NUMERIC</code></a> or <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> if AutoML determines that it is a UNIX timestamp</td>
 </tr>
 <tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">BOOL</code></a></td>
-<td><a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a></td>
+<td><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a></td>
 </tr>
 <tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">STRING</code></a><br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type"><code dir="ltr" translate="no">BYTES</code></a></td>
-<td>Either <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
+<td>Either <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> or <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
 </tr>
 <tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type"><code dir="ltr" translate="no">TIMESTAMP</code></a><br />
@@ -259,7 +259,7 @@ For columns other than the label column, any [groupable](https://docs.cloud.goog
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type"><code dir="ltr" translate="no">TIME</code></a><br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type"><code dir="ltr" translate="no">DATE</code></a><br />
 </td>
-<td>Either <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> , <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> , or <a href="https://docs.cloud.google.com/vertex-ai/docs/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
+<td>Either <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> , <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> , or <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
 </tr>
 </tbody>
 </table>
@@ -277,7 +277,7 @@ AutoML models have the following limitations:
   - The input data to AutoML must be between 1,000 and 200,000,000 rows, and must be less than 100 GB.
   - `Global` region customer-managed encryption keys (CMEKs) and multi-region CMEKs, for example `eu` or `us` , are not supported.
   - BigQuery ML AutoML models aren't visible in the AutoML user interface, and aren't available for batch or online predictions in AutoML.
-  - The [default maximum number of concurrent training jobs](https://docs.cloud.google.com/vertex-ai/docs/quotas) is 5. Raising the Vertex AI quota does not modify this quota. If you receive the error `Too many AutoML training queries have been issued within a short period of time` , you can submit a request to raise the maximum number of concurrent training jobs. To request an increase, email bqml-feedback@google.com with your project ID and the details of your request.
+  - The [default maximum number of concurrent training jobs](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/quotas) is 5. Raising the Gemini Enterprise Agent Platform quota does not modify this quota. If you receive the error `Too many AutoML training queries have been issued within a short period of time` , you can submit a request to raise the maximum number of concurrent training jobs. To request an increase, email bqml-feedback@google.com with your project ID and the details of your request.
   - Column names for feature columns must be 125 characters or fewer.
   - For `AUTOML_CLASSIFIER` models, the `label` column can contain up to 1,000 unique values; that is, the number of classes is less than or equal to 1,000. If you need to classify into more than 1,000 labels, contact <bqml-feedback@google.com> .
 

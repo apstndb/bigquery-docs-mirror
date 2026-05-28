@@ -412,7 +412,7 @@ To get the updated status for the workflow, [run a `GET` query](https://docs.clo
 > 
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-> **Note:** The translation API can call Gemini using BigQuery Vertex AI integration to generate suggestions to your translated SQL query based on your AI configuration YAML file.
+> **Note:** The translation API can call Gemini using BigQuery Agent Platform integration to generate suggestions to your translated SQL query based on your AI configuration YAML file.
 
 The following example translates the Teradata SQL scripts located in the `gs://my_data_bucket/teradata/input/` Cloud Storage directory and stores results in the Cloud Storage directory `gs://my_data_bucket/teradata/output/` with additional AI suggestion:
 

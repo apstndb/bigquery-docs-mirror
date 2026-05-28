@@ -102,7 +102,7 @@ Exactly the same files that were present when importing the model
 
 ## Export model trained with `TRANSFORM`
 
-If the model is trained with the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) , then an additional preprocessing model performs the same logic in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) and is saved in the TensorFlow SavedModel format under the subdirectory `transform` . You can deploy a model trained with the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) to Vertex AI as well as locally. For more information, see [model deployment](https://docs.cloud.google.com/bigquery/docs/exporting-models#model-deployment) .
+If the model is trained with the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) , then an additional preprocessing model performs the same logic in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) and is saved in the TensorFlow SavedModel format under the subdirectory `transform` . You can deploy a model trained with the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) to Gemini Enterprise Agent Platform as well as locally. For more information, see [model deployment](https://docs.cloud.google.com/bigquery/docs/exporting-models#model-deployment) .
 
 Export model format
 
@@ -169,7 +169,7 @@ The following limitations apply when exporting models:
     
       - `ARRAY` , `TIMESTAMP` , or `GEOGRAPHY` feature types were present in the input data.
 
-  - Exported models for model types `AUTOML_REGRESSOR` and `AUTOML_CLASSIFIER` do not support Vertex AI deployment for online prediction.
+  - Exported models for model types `AUTOML_REGRESSOR` and `AUTOML_CLASSIFIER` do not support Agent Platform deployment for online prediction.
 
   - The model size limit is 1 GB for matrix factorization model export. The model size is roughly proportional to `num_factors` , so you can reduce `num_factors` during training to shrink the model size if you reach the limit.
 
@@ -357,9 +357,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Model deployment
 
-You can deploy the exported model to Vertex AI as well as locally. If the model's [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) contains Date functions, Datetime functions, Time functions or Timestamp functions, you must use [bigquery-ml-utils library](https://pypi.org/project/bigquery-ml-utils/) in the container. The exception is if you are [deploying through Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) , which does not need exported models or serving containers.
+You can deploy the exported model to Agent Platform as well as locally. If the model's [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform) contains Date functions, Datetime functions, Time functions or Timestamp functions, you must use [bigquery-ml-utils library](https://pypi.org/project/bigquery-ml-utils/) in the container. The exception is if you are [deploying through Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) , which does not need exported models or serving containers.
 
-### Vertex AI deployment
+### Agent Platform deployment
 
 <table>
 <colgroup>
@@ -375,7 +375,7 @@ You can deploy the exported model to Vertex AI as well as locally. If the model'
 <tbody>
 <tr class="odd">
 <td>TensorFlow SavedModel (non-AutoML models)</td>
-<td><a href="https://docs.cloud.google.com/vertex-ai/docs/general/deployment">Deploy a TensorFlow SavedModel</a> . You must create the SavedModel file using a <a href="https://docs.cloud.google.com/vertex-ai/docs/supported-frameworks-list#tensorflow">supported version</a> of TensorFlow.</td>
+<td><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment">Deploy a TensorFlow SavedModel</a> . You must create the SavedModel file using a <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/supported-frameworks#tensorflow_1">supported version</a> of TensorFlow.</td>
 </tr>
 <tr class="even">
 <td>TensorFlow SavedModel (AutoML models)</td>
@@ -383,9 +383,9 @@ You can deploy the exported model to Vertex AI as well as locally. If the model'
 </tr>
 <tr class="odd">
 <td>XGBoost Booster</td>
-<td>Use a <a href="https://docs.cloud.google.com/vertex-ai/docs/predictions/custom-prediction-routines">custom prediction routine</a> . For XGBoost Booster models, preprocessing and postprocessing information is saved in the exported files, and a custom prediction routine lets you deploy the model with the extra exported files.<br />
+<td>Use a <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/custom-prediction-routines">custom prediction routine</a> . For XGBoost Booster models, preprocessing and postprocessing information is saved in the exported files, and a custom prediction routine lets you deploy the model with the extra exported files.<br />
 <br />
-You must create the model files using a <a href="https://docs.cloud.google.com/vertex-ai/docs/supported-frameworks-list#xgboost_2">supported version</a> of XGBoost.</td>
+You must create the model files using a <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/supported-frameworks#xgboost_2">supported version</a> of XGBoost.</td>
 </tr>
 </tbody>
 </table>
@@ -408,11 +408,11 @@ You must create the model files using a <a href="https://docs.cloud.google.com/v
 <td>TensorFlow SavedModel (non-AutoML models)</td>
 <td>SavedModel is a standard format, and you can deploy them in <a href="https://www.tensorflow.org/tfx/serving/serving_basic">TensorFlow Serving docker container</a> .<br />
 <br />
-You can also leverage the <a href="https://docs.cloud.google.com/vertex-ai/docs/training/containerize-run-code-local">local run</a> of Vertex AI online prediction.</td>
+You can also leverage the <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/training/containerize-run-code-local">local run</a> of Agent Platform online prediction.</td>
 </tr>
 <tr class="even">
 <td>TensorFlow SavedModel (AutoML models)</td>
-<td><a href="https://docs.cloud.google.com/vertex-ai/docs/training/containerize-run-code-local">Containerize and run the model</a> .</td>
+<td><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/training/containerize-run-code-local">Containerize and run the model</a> .</td>
 </tr>
 <tr class="odd">
 <td>XGBoost Booster</td>

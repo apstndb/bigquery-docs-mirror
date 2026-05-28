@@ -22,7 +22,7 @@ This tutorial shows you how to complete the following tasks:
 In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
-  - **Vertex AI** : You incur costs for calls to the Vertex AI model.
+  - **Gemini Enterprise Agent Platform** : You incur costs for calls to the Agent Platform model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -30,7 +30,7 @@ New Google Cloud users might be eligible for a [free trial](https://docs.cloud.g
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
-For more information about Vertex AI generative AI pricing, see the [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) page.
+For more information about Agent Platform generative AI pricing, see the [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) page.
 
 ## Before you begin
 
@@ -48,7 +48,7 @@ To use the `AI.GENERATE` function, you need the following Identity and Access Ma
 
   - Create and use BigQuery datasets and tables: BigQuery Data Editor ( `roles/bigquery.dataEditor` ) on your project.
   - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` ) on your project.
-  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Vertex AI endpoint.
+  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Gemini Enterprise Agent Platform endpoint.
   - Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` ) on your project.
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:

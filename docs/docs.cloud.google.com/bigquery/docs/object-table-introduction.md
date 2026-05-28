@@ -147,13 +147,13 @@ The following table describes the integration points you can use to do machine l
 <tbody>
 <tr class="odd">
 <td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text"><code dir="ltr" translate="no">AI.GENERATE_TEXT</code> function</a></td>
-<td>Generate text by using a Vertex AI, partner, or open model.</td>
+<td>Generate text by using a Gemini Enterprise Agent Platform, partner, or open model.</td>
 <td>You want to generate text from object data.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/generate-text">Generate text by using the <code dir="ltr" translate="no">AI.GENERATE_TEXT</code> function</a></td>
 </tr>
 <tr class="even">
 <td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding"><code dir="ltr" translate="no">AI.GENERATE_EMBEDDING</code> function</a></td>
-<td>Generate embeddings by using a Vertex AI multimodal model.</td>
+<td>Generate embeddings by using a Gemini Enterprise Agent Platform multimodal model.</td>
 <td>You want to generate embeddings for video or image data to use in vector searches, model input, or other use cases.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding">Generate image embeddings by using the <code dir="ltr" translate="no">AI.GENERATE_EMBEDDING</code> function</a><br />
 <br />

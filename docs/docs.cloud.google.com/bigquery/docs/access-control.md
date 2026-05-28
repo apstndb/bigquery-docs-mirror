@@ -2074,6 +2074,7 @@ BigQuery Data Transfer Service offers the following service agent roles. Service
 </ul>
 <p><code dir="ltr" translate="no">dataform.repositories.create</code></p>
 <p><code dir="ltr" translate="no">dataform.repositories.list</code></p>
+<p><code dir="ltr" translate="no">dataplex.entryGroups.get</code></p>
 <p><code dir="ltr" translate="no">dataplex.  entryGroups.  useContactsAspect</code></p>
 <p><code dir="ltr" translate="no">dataplex.  entryGroups.  useDataProfileAspect</code></p>
 <p><code dir="ltr" translate="no">dataplex.  entryGroups.  useDatabaseDataPolicyAspect</code></p>

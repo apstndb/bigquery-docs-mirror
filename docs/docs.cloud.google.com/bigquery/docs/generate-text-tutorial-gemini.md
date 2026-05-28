@@ -13,7 +13,7 @@ This tutorial shows you how to create a [remote model](https://docs.cloud.google
 In this document, you use the following billable components of Google Cloud:
 
   - [BigQuery ML](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) . You incur costs for the data that you process in BigQuery.
-  - [Vertex AI](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) . You incur costs for calls to the Vertex AI service that's represented by the remote model.
+  - [Gemini Enterprise Agent Platform](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) . You incur costs for calls to the Agent Platform service that's represented by the remote model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -408,7 +408,7 @@ To grant the role, follow these steps:
 
 ## Create the remote model
 
-Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) statement to create a remote model that represents a hosted Vertex AI model:
+Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) statement to create a remote model that represents a hosted Agent Platform model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

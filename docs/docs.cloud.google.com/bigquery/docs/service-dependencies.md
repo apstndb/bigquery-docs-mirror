@@ -218,7 +218,7 @@ For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling an
 <tr class="odd">
 <td><code dir="ltr" translate="no">compute.googleapis.com</code></td>
 <td><ul>
-<li>Google Compute Engine provides a runtime environment for all features provided by Managed Service for Apache Spark and Vertex AI.</li>
+<li>Google Compute Engine provides a runtime environment for all features provided by Managed Service for Apache Spark and Gemini Enterprise Agent Platform.</li>
 </ul></td>
 <td><ul>
 <li>Colab notebooks, remote ML models, Apache Spark, SparkSQL, and PySpark jobs stop.</li>

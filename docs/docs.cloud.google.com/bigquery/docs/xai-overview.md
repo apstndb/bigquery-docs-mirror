@@ -12,7 +12,7 @@ This document describes how BigQuery ML supports Explainable artificial intellig
 
 Explainable AI helps you understand the results that your predictive machine learning model generates for classification and regression tasks by defining how each feature in a row of data contributed to the predicted result. This information is often referred to as feature attribution. You can use this information to verify that the model is behaving as expected, to recognize biases in your models, and to inform ways to improve your model and your training data.
 
-BigQuery ML and Vertex AI both have Explainable AI offerings which offer feature-based explanations. You can perform explainability in BigQuery ML, or you can [register your model](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) in Vertex AI and perform explainability there.
+BigQuery ML and Gemini Enterprise Agent Platform both have Explainable AI offerings which offer feature-based explanations. You can perform explainability in BigQuery ML, or you can [register your model](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) in Agent Platform and perform explainability there.
 
 ## Local versus global explainability
 
@@ -139,9 +139,9 @@ N/A
 
 <sup>4</sup> `ML.ADVANCED_WEIGHTS` is an extended version of `ML.WEIGHTS` .
 
-## Explainable AI in Vertex AI
+## Explainable AI in Agent Platform
 
-Explainable AI is available in Vertex AI for the following subset of exportable supervised learning models:
+Explainable AI is available in Agent Platform for the following subset of exportable supervised learning models:
 
 | Model type                        | Explainable AI method |
 | --------------------------------- | --------------------- |
@@ -160,7 +160,7 @@ See [Feature Attribution Methods](https://docs.cloud.google.com/vertex-ai/docs/e
 
 When your BigQuery ML model is registered in Model Registry, and if it is a type of model that supports Explainable AI, you can enable Explainable AI on the model when deploying to an endpoint. When you register your BigQuery ML model, all of the associated metadata is populated for you.
 
-> **Note:** Explainable AI incurs a minor additional cost. See [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing) to learn more.
+> **Note:** Explainable AI incurs a minor additional cost. See [Gemini Enterprise Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing) to learn more.
 
 1.  [Register your BigQuery ML model to the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) .
 2.  Go to the **Model Registry** page from the BigQuery section in the Google Cloud console.
@@ -172,9 +172,9 @@ When your BigQuery ML model is registered in Model Registry, and if it is a type
 8.  Under **Model settings** , in the logging section, select the checkbox to enable Explainability options.
 9.  Click **Done** , and then **Continue** to deploy to the endpoint.
 
-To learn how to use XAI on your models from the Model Registry, see [Get an online explanation using your deployed model](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/get-online-predictions#online-explanation) . To learn more about XAI in Vertex AI, see [Get explanations](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/getting-explanations) .
+To learn how to use XAI on your models from the Model Registry, see [Get an online explanation using your deployed model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/get-online-predictions#online-explanation) .
 
 ## What's next
 
-  - Learn how to [manage BigQuery ML models in Vertex AI](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
+  - Learn how to [manage BigQuery ML models in Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
   - For more information about supported SQL statements and functions for models that support explainability, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

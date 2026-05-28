@@ -209,7 +209,7 @@ Your notebook can be accessed through the **Explorer** pane.
 
 ## Connect to a runtime
 
-Use the following sections to learn how to connect a notebook to a [Vertex AI runtime](https://docs.cloud.google.com/colab/docs/create-runtime) . A runtime is a compute resource that runs the code in your notebook. The runtime must be in the same region as your notebook.
+Use the following sections to learn how to connect a notebook to an [Gemini Enterprise Agent Platform runtime](https://docs.cloud.google.com/colab/docs/create-runtime) . A runtime is a compute resource that runs the code in your notebook. The runtime must be in the same region as your notebook.
 
 For more information about runtimes, see [Runtimes and runtime templates](https://docs.cloud.google.com/colab/docs/runtimes) .
 
@@ -237,7 +237,7 @@ To connect to the default runtime, follow these steps:
 
 ### Connect to a non-default runtime
 
-If you want to use a runtime other than the default runtime, you must first [create that additional runtime in Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/colab/create-runtime) .
+If you want to use a runtime other than the default runtime, you must first [create that additional runtime in Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/colab/create-runtime) .
 
 To connect to non-default runtime, follow these steps:
 
@@ -277,7 +277,7 @@ To connect to a new runtime, follow these steps:
 
 6.  Click **Create new runtime** .
 
-7.  In **Runtime Template** , select the [Vertex AI runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) to use.
+7.  In **Runtime Template** , select the [Agent Platform runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) to use.
 
 8.  In **Runtime name** , type a name for the runtime.
 

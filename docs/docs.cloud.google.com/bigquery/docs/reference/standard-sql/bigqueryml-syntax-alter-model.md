@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model
 uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model
 title: The ALTER MODEL statement
-description: Modify BigQuery ML model metadata. Configure Vertex AI deployment, expiration, and Cloud Key Management Service encryption by using `ALTER MODEL`.
+description: Modify BigQuery ML model metadata. Configure Gemini Enterprise Agent Platform deployment, expiration, and Cloud Key Management Service encryption by using `ALTER MODEL`.
 data_source: docs.cloud.google.com
 ---
 
@@ -53,9 +53,9 @@ SET OPTIONS
     
     For example, \`myproject.mydataset.mymodel\`.
 
-  - <span id="vertex_ai_model_id"></span> `  VERTEX_AI_MODEL_ID  ` : a `STRING` value that specifies the Vertex AI model ID to register the model with. To learn more, see [Register an existing BigQuery ML model to the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#add-existing) .
+  - <span id="vertex_ai_model_id"></span> `  VERTEX_AI_MODEL_ID  ` : a `STRING` value that specifies the Gemini Enterprise Agent Platform model ID to register the model with. To learn more, see [Register an existing BigQuery ML model to the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#add-existing) .
 
-  - <span id="expiration_timestamp"></span> `  EXPIRATION_TIMESTAMP  ` : a `TIMESTAMP` value that specifies when this model expires. If the model is an [open model that BigQuery manages in Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) , all Vertex AI resources associated with the model are deleted when the model expires.
+  - <span id="expiration_timestamp"></span> `  EXPIRATION_TIMESTAMP  ` : a `TIMESTAMP` value that specifies when this model expires. If the model is an [open model that BigQuery manages in Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) , all Agent Platform resources associated with the model are deleted when the model expires.
 
   - <span id="kms_key_name"></span> `  KMS_KEY_NAME  ` : a `STRING` value that specifies the name of the Cloud KMS key used to encrypt the model.
 
@@ -63,15 +63,15 @@ SET OPTIONS
 
   - <span id="labels"></span> `  LABELS  ` : an `ARRAY<STRUCT<STRING, STRING>>` value that specifies any labels for the model as `key,value` pairs.
 
-  - <span id="deploy_model"></span> `  DEPLOY_MODEL  ` : a `BOOL` value that determines the model's deployment status in Vertex AI. You can use this option to control costs by undeploying or redeploying the model as needed. We recommend undeploying an unused Vertex AI endpoint, because otherwise the endpoint continues to generate charges for the compute resources that it uses, even when it is idle. For more information on Vertex AI compute pricing, see [Prediction and explanation](https://cloud.google.com/vertex-ai/pricing#prediction-prices) .
+  - <span id="deploy_model"></span> `  DEPLOY_MODEL  ` : a `BOOL` value that determines the model's deployment status in Gemini Enterprise Agent Platform. You can use this option to control costs by undeploying or redeploying the model as needed. We recommend undeploying an unused Gemini Enterprise Agent Platform endpoint, because otherwise the endpoint continues to generate charges for the compute resources that it uses, even when it is idle. For more information on Agent Platform compute pricing, see [Prediction and explanation](https://cloud.google.com/vertex-ai/pricing#prediction-prices) .
     
-    You can only use this option with an [open model that BigQuery manages in Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
+    You can only use this option with an [open model that BigQuery manages in Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
     
-    If the model was previously undeployed, setting this option to `TRUE` redeploys the model to a Vertex AI endpoint. If the model is already deployed, this operation has no effect. Model redeployment requires a "cold start" period while the endpoint resources are provisioned. The cold start period can take up to 30 minutes, depending on the size of the model and the number of [machine replicas](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#max-replica-count) specified for the model.
+    If the model was previously undeployed, setting this option to `TRUE` redeploys the model to an Agent Platform endpoint. If the model is already deployed, this operation has no effect. Model redeployment requires a "cold start" period while the endpoint resources are provisioned. The cold start period can take up to 30 minutes, depending on the size of the model and the number of [machine replicas](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#max-replica-count) specified for the model.
     
-    Setting this option to `FALSE` undeploys the model from a Vertex AI endpoint. If the model is already undeployed, this operation has no effect.
+    Setting this option to `FALSE` undeploys the model from an Agent Platform endpoint. If the model is already undeployed, this operation has no effect.
 
-  - <span id="endpoint_idle_ttl"></span> `  ENDPOINT_IDLE_TTL  ` : an `INTERVAL` value that specifies the duration of inactivity after which the model is automatically undeployed from the Vertex AI endpoint. You can only use this option with an [open model that BigQuery manages in Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
+  - <span id="endpoint_idle_ttl"></span> `  ENDPOINT_IDLE_TTL  ` : an `INTERVAL` value that specifies the duration of inactivity after which the model is automatically undeployed from the Agent Platform endpoint. You can only use this option with an [open model that BigQuery manages in Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
     
     To enable automatic undeployment, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `INTERVAL 8 HOUR` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
     

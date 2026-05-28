@@ -34,7 +34,7 @@ The following sections describe the functions that BigQuery offers to help you g
 
 ### Generate single embeddings
 
-You can use the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) with Vertex AI embedding models to generate a single embedding of your input.
+You can use the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) with Gemini Enterprise Agent Platform embedding models to generate a single embedding of your input.
 
 The `AI.EMBED` function supports the following types of input:
 
@@ -46,7 +46,7 @@ The `AI.EMBED` function supports the following types of input:
 
 You can use the [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to create a table that has embeddings for all of the data in a column of your input table. For all types of supported models, `AI.GENERATE_EMBEDDING` works with structured data in [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . For multimodal embedding models, `AI.GENERATE_EMBEDDING` also works with visual content from either standard table [columns that contain `ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/objectref-columns) , or from [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
-For remote models, all inference occurs in Vertex AI. For other model types, all inference occurs in BigQuery. The results are stored in BigQuery.
+For remote models, all inference occurs in Agent Platform. For other model types, all inference occurs in BigQuery. The results are stored in BigQuery.
 
 Use the following topics to try embedding generation in BigQuery ML:
 
@@ -62,7 +62,7 @@ Use the following topics to try embedding generation in BigQuery ML:
 
 > **Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
 
-You can use [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) to simplify the process of creating, maintaining, and querying embeddings. BigQuery maintains a column of embeddings on your table based on a source column. When you add or modify data in the source column, BigQuery automatically generates or updates the embedding column for that data by using a Vertex AI embedding model. This is helpful if you want to let BigQuery maintain your embeddings when your source data is updated regularly.
+You can use [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) to simplify the process of creating, maintaining, and querying embeddings. BigQuery maintains a column of embeddings on your table based on a source column. When you add or modify data in the source column, BigQuery automatically generates or updates the embedding column for that data by using an Agent Platform embedding model. This is helpful if you want to let BigQuery maintain your embeddings when your source data is updated regularly.
 
 ## Search
 

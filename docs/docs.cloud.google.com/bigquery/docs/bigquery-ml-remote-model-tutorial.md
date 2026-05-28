@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial
 uri: https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial
-title: Make predictions with remote models on Vertex AI
-description: Make predictions from a SQL query using a remote TensorFlow model in Vertex AI.
+title: Make predictions with remote models on Gemini Enterprise Agent Platform
+description: Make predictions from a SQL query using a remote TensorFlow model in Gemini Enterprise Agent Platform.
 data_source: docs.cloud.google.com
 ---
 
-In this tutorial, you register a Vertex AI endpoint as a remote model in BigQuery. Then, you use the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions using the remote model.
+In this tutorial, you register a Gemini Enterprise Agent Platform endpoint as a remote model in BigQuery. Then, you use the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions using the remote model.
 
 You can use remote models when a model is too large to import into BigQuery. They are also useful when you want to have a single point of inference for online, batch, and micro-batch use cases.
 
@@ -14,8 +14,8 @@ You can use remote models when a model is too large to import into BigQuery. The
 
 ## Objectives
 
-  - Import a pretrained TensorFlow model into the Vertex AI Model Registry.
-  - Deploy the model to a Vertex AI endpoint.
+  - Import a pretrained TensorFlow model into the Gemini Enterprise Agent Platform Model Registry.
+  - Deploy the model to a Gemini Enterprise Agent Platform endpoint.
   - Create a Cloud resource connection.
   - Use the `CREATE MODEL` statement to create a remote model in BigQuery.
   - Use the `ML.PREDICT` function to make predictions with the remote model.
@@ -26,7 +26,7 @@ In this document, you use the following billable components of Google Cloud:
 
   - [BigQuery](https://cloud.google.com/bigquery/pricing)
   - [BigQuery ML](https://cloud.google.com/bigquery/pricing#bqml)
-  - [Vertex AI](https://docs.cloud.google.com/vertex-ai/pricing)
+  - [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/pricing)
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -86,7 +86,7 @@ Make sure that you have the following role or roles on the project:
 
 For more information about IAM permissions in BigQuery, see [BigQuery permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) .
 
-## Import the model to the Vertex AI Model Registry
+## Import the model to the Gemini Enterprise Agent Platform Model Registry
 
 In this tutorial you use a pretrained TensorFlow model that is available in Cloud Storage at `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/` . The Cloud Storage bucket is in the `US` multi-region location.
 
@@ -96,7 +96,7 @@ The model is a TensorFlow model that's named `saved_model.pb` . It is a customiz
 
 Follow these steps to import the model.
 
-1.  In the Google Cloud console, go to the Vertex AI **Model Registry** page.
+1.  In the Google Cloud console, go to the Gemini Enterprise Agent Platform **Model Registry** page.
 
 2.  Click **Import** .
 
@@ -130,11 +130,11 @@ Follow these steps to import the model.
 
 After the import is complete, your model appears on the **Model Registry** page.
 
-## Deploy the model to a Vertex AI endpoint
+## Deploy the model to a Gemini Enterprise Agent Platform endpoint
 
 Follow these steps to deploy the model to an endpoint.
 
-1.  In the Google Cloud console go to the Vertex AI **Model Registry** page.
+1.  In the Google Cloud console, go to the Gemini Enterprise Agent Platform **Model Registry** page.
 
 2.  In the **Name** column, click **`bert_sentiment`** .
 
@@ -154,7 +154,7 @@ Follow these steps to deploy the model to an endpoint.
     
     1.  In the **Compute settings** section, for **Minimum number of compute nodes** , enter `1` . This is the number of nodes that need to be available to the model at all times.
         
-        > **Note:** In production, you should set the maximum number of compute nodes. This option turns on the autoscaling capability in Vertex AI, and it allows the endpoint to process more requests when your BigQuery table has a large number of rows.
+        > **Note:** In production, you should set the maximum number of compute nodes. This option turns on the autoscaling capability in Gemini Enterprise Agent Platform, and it allows the endpoint to process more requests when your BigQuery table has a large number of rows.
     
     2.  In the **Advanced scaling options** section, for **Machine type** , choose **Standard (n1-standard-2)** . Because you chose GPU as the accelerator type when you imported the model, after you choose the machine type, the accelerator type and accelerator count are set automatically.
     
@@ -211,7 +211,7 @@ Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/referen
 
 ## Create a BigQuery Cloud resource connection
 
-You must have a Cloud resource connection to connect to a Vertex AI endpoint.
+You must have a Cloud resource connection to connect to a Gemini Enterprise Agent Platform endpoint.
 
 ### Console
 
@@ -299,7 +299,7 @@ You create a BigQuery ML remote model by using the `CREATE MODEL` statement with
 
 You create your model in the `US` multi-region location. In a BigQuery multi-region ( `US` , `EU` ) dataset, you can only create a remote model that connects to an endpoint deployed in a region within the same multi-region location ( `US` , `EU` ).
 
-When you create the remote model, you need the endpoint ID that was generated when you [deployed the model](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#deploy-model) to Vertex AI. Also, the input and output field names and types need to be exactly same as the Vertex AI model's input and output. In this example, the input is a text `STRING` , and the output is an `ARRAY` of type `FLOAT64` .
+When you create the remote model, you need the endpoint ID that was generated when you [deployed the model](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#deploy-model) to Gemini Enterprise Agent Platform. Also, the input and output field names and types need to be exactly same as the Gemini Enterprise Agent Platform model's input and output. In this example, the input is a text `STRING` , and the output is an `ARRAY` of type `FLOAT64` .
 
 ### Console
 
@@ -437,9 +437,9 @@ Alternatively, to remove the individual resources used in this tutorial:
 
 2.  Optional: [Delete the dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets) .
 
-3.  [Undeploy the model and delete the endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment#undeploy_a_model_and_delete_the_endpoint) .
+3.  [Undeploy the model and delete the endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment#undeploy_a_model_and_delete_the_endpoint) .
 
-4.  [Delete the model from the Model Registry](https://docs.cloud.google.com/vertex-ai/docs/model-registry/delete-model) .
+4.  [Delete the model from the Model Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/delete-model) .
 
 5.  [Delete the Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#delete-connections) .
 
@@ -449,6 +449,6 @@ Alternatively, to remove the individual resources used in this tutorial:
   - For more information about using the `CREATE MODEL` statement for remote models, see [The CREATE MODEL statement for remote models over custom models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
   - For more information on using a BigQuery notebook, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
   - For more information about BigQuery regions and multi-regions, see the [Supported locations](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) page.
-  - To learn more about importing models in Vertex AI Model Registry, see [Import models to Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/model-registry/import-model) .
-  - To learn more about model versioning in Vertex AI Model Registry, see [Model versioning with Model Registry](https://docs.cloud.google.com/vertex-ai/docs/model-registry/versioning) .
-  - For information on using Vertex AI VPC Service Controls, see [VPC Service Controls with Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/general/vpc-service-controls) .
+  - To learn more about importing models in Gemini Enterprise Agent Platform Model Registry, see [Import models to Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/import-model) .
+  - To learn more about model versioning in Gemini Enterprise Agent Platform Model Registry, see [Model versioning with Model Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/versioning) .
+  - For information on using Gemini Enterprise Agent Platform VPC Service Controls, see [VPC Service Controls with Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/vpc-service-controls) .

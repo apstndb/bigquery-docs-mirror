@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
 
-This document describes how to use autonomous embedding generation for your data, which lets BigQuery maintain a column of embeddings on a table based on a source column. When you add or modify data in the source column, BigQuery automatically generates or updates the embedding column for that data by using a Vertex AI embedding model. This is helpful if you want to let BigQuery maintain your embeddings when your source data is updated regularly.
+This document describes how to use autonomous embedding generation for your data, which lets BigQuery maintain a column of embeddings on a table based on a source column. When you add or modify data in the source column, BigQuery automatically generates or updates the embedding column for that data by using an Agent Platform embedding model. This is helpful if you want to let BigQuery maintain your embeddings when your source data is updated regularly.
 
 Embeddings are useful for modern generative AI applications such as Retrieval Augmented Generation (RAG), but they can be complex to create, manage, and query. You can use autonomous embedding generation to simplify the process of creating, maintaining, and querying embeddings for use in similarity searches and other generative AI applications.
 
@@ -47,7 +47,7 @@ To get the permissions that you need to enable autonomous embedding generation, 
 
   - To use a connection resource: [BigQuery Connections User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) on the connection
   - To create or alter a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table
-  - Grant the connection's service account the following role so that it can access models hosted in Vertex AI endpoints: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) on the project that has the connection
+  - Grant the connection's service account the following role so that it can access models hosted in Agent Platform endpoints: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) on the project that has the connection
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -95,11 +95,11 @@ Replace the following:
 
   - `CONNECTION_ID` : A `STRING` value that contains the name of a connection to use, such as `my_project.us.example_connection` . You must grant the [Vertex AI User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) role to the connection's service account in the project in which you create the table.
 
-  - `ENDPOINT` : a `STRING` value that specifies a supported Vertex AI [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model. The endpoint value that you specify must include the model version, for example `text-embedding-005` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
+  - `ENDPOINT` : a `STRING` value that specifies a supported Agent Platform [text embedding model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/text-embeddings-api) endpoint to use for the text embedding model. The endpoint value that you specify must include the model version, for example `text-embedding-005` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 
   - `MODEL` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): a `STRING` value that specifies a built-in text embedding model. The only supported value is the [`embeddinggemma-300m` model](https://ai.google.dev/gemma/docs/embeddinggemma/model_card) . If you specify this parameter, you can't specify the `endpoint` or `connection_id` parameters.
     
-    When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Vertex AI and no charges are incurred in Vertex AI.
+    When you specify the `MODEL` parameter, your data stays in BigQuery and your slots are used to create the embeddings; no data is sent to Agent Platform and no charges are incurred in Agent Platform.
 
 ### Add an automatically generated embedding column to an existing table
 
@@ -223,9 +223,9 @@ Generated embeddings are written to your table using background DML jobs. By def
 
 Alternatively, to ensure predictable and consistent performance, you can [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) and set the `job_type` to `BACKGROUND` . When a background reservation is present, BigQuery uses it to run the background DML jobs. And the background reservation will be billed for slot time usage from the background DML jobs.
 
-### Vertex AI costs
+### Gemini Enterprise Agent Platform costs
 
-Autonomous embedding generation sends requests to Vertex AI, which can incur costs. To track the Vertex AI costs incurred by background embedding jobs, follow these steps:
+Autonomous embedding generation sends requests to Gemini Enterprise Agent Platform, which can incur costs. To track the Agent Platform costs incurred by background embedding jobs, follow these steps:
 
 1.  [View your billing reports](https://docs.cloud.google.com/billing/docs/how-to/reports) in Cloud Billing.
 

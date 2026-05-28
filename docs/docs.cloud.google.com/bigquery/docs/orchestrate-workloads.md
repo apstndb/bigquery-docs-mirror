@@ -59,7 +59,7 @@ The simplest form of workload scheduling is [scheduling recurring queries](https
 
 ### Vertex AI Pipelines
 
-[Vertex AI Pipelines](https://docs.cloud.google.com/vertex-ai/docs/pipelines/introduction) is a serverless tool based on Kubeflow Pipelines specially designed for scheduling machine learning workloads. It automates and connects all tasks of your model development and deployment, from training data to code, giving you a complete view of how your models work. To learn more about using Vertex AI Pipelines with BigQuery, see [Export and deploy a BigQuery machine learning model for prediction](https://codelabs.developers.google.com/codelabs/bqml-vertex-prediction#0) .
+[Vertex AI Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction) is a serverless tool based on Kubeflow Pipelines specially designed for scheduling machine learning workloads. It automates and connects all tasks of your model development and deployment, from training data to code, giving you a complete view of how your models work. To learn more about using Vertex AI Pipelines with BigQuery, see [Export and deploy a BigQuery machine learning model for prediction](https://codelabs.developers.google.com/codelabs/bqml-vertex-prediction#0) .
 
 **Scheduling method** : event-driven
 
@@ -109,7 +109,7 @@ Many data workloads require additional messaging connections between decoupled m
   - Get started with [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
   - Get started with [Workflows](https://docs.cloud.google.com/workflows/docs/overview) .
   - Get started with [Managed Airflow](https://docs.cloud.google.com/composer/docs/concepts/overview) .
-  - Get started with [Vertex AI Pipelines](https://docs.cloud.google.com/vertex-ai/docs/pipelines/introduction) .
+  - Get started with [Vertex AI Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction) .
   - Get started with [Apigee Integration](https://docs.cloud.google.com/apigee/docs/api-platform/integration/what-is-apigee-integration) .
   - Get started with [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion) .
   - Get started with [Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs/overview) .

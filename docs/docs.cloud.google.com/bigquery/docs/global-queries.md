@@ -101,7 +101,7 @@ To use data that resides in different locations, it must be replicated to one lo
 1.  Determine where the query must be executed, either from [user's declaration](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) or [automatically](https://docs.cloud.google.com/bigquery/docs/global-queries#automatic-location-selection) . This location is called the *primary* location, and all other locations referenced by the query are *remote* .
 2.  Run a sub-query in each remote region to collect the data that is needed to finish the query in the primary region.
 3.  Copy this data from remote locations to the primary location.
-4.  Save the data in temporary tables in the primary location for 8 hours.
+4.  Save the data in temporary tables in the primary location for 24 hours.
 5.  Run a final query with all data collected in the primary location.
 6.  Return the query results.
 
@@ -147,7 +147,7 @@ The cost of a global query consists of following components:
   - The compute cost of every subquery in remote locations, based on your [pricing model](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) in these locations
   - The compute cost of the final query in the region in which it's executed, based on your [pricing model](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) in that region
   - The cost of copying data between different locations, according to [Data replication pricing](https://docs.cloud.google.com/bigquery/pricing#data_replication)
-  - The cost of storing data copied from remote regions to the primary region (for 8 hours), according to [Storage pricing](https://docs.cloud.google.com/bigquery/pricing#storage-pricing)
+  - The cost of storing data copied from remote regions to the primary region (for 24 hours), according to [Storage pricing](https://docs.cloud.google.com/bigquery/pricing#storage-pricing)
 
 ## Quotas
 

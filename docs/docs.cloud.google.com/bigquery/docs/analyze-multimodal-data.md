@@ -105,14 +105,14 @@ The following costs are applicable when using multimodal data:
   - Queries run on `ObjectRef` values incur BigQuery compute costs.
   - New objects that you create from object transformations incur Cloud Storage costs.
   - New data that you create and persist in BigQuery incurs BigQuery storage costs.
-  - Use of generative AI functions incurs Vertex AI costs.
+  - Use of generative AI functions incurs Gemini Enterprise Agent Platform costs.
   - Use of BigQuery Python UDFs, and of multimodal DataFrames and object transformations methods in BigQuery DataFrames, incurs Python UDF costs.
 
 For more information, see the following pricing pages:
 
   - [BigQuery pricing](https://cloud.google.com/bigquery/pricing)
   - [BigQuery Python UDFs pricing](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#pricing)
-  - [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
+  - [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
   - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
 
 ## What's next

@@ -14,6 +14,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## May 27, 2026
+
+Change
+
+An updated version of the [Simba ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver) is now available.
+
+## May 26, 2026
+
+Feature
+
+The [Data Science Agent](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent) (DSA) for Colab Enterprise and BigQuery is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
 ## May 20, 2026
 
 Announcement

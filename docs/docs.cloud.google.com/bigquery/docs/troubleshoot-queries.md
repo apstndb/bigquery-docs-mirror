@@ -555,7 +555,7 @@ Models that exceed the memory limit (typically 250 MB), particularly when using 
 
 To address this error, do the following:
 
-1.  *Use Vertex AI remote models* : For models that exceed memory limits, deploy your model to Vertex AI using the Vertex AI SDK for Python steps to [deploy a model](https://docs.cloud.google.com/vertex-ai/docs/predictions/deploy-model-api) , and then access it using [remote models](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial) . This offloads the memory requirements to dedicated Vertex AI infrastructure.
+1.  *Use Gemini Enterprise Agent Platform remote models* : For models that exceed memory limits, deploy your model to Agent Platform using the Vertex AI SDK for Python steps to [deploy a model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/deploy-model-api) , and then access it using [remote models](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial) . This offloads the memory requirements to dedicated Agent Platform infrastructure.
 
 2.  *Optimize the model* : Reduce the model's RAM footprint by using architecture simplification, quantization, or pruning.
 

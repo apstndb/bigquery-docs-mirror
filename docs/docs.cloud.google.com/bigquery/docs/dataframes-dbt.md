@@ -87,7 +87,7 @@ If you're using Colab Enterprise in a Shared VPC environment, ask your administr
 
   - [`compute.subnetworks.get` permission](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.subnetworks.get) : Grant this permission to the service account used by the Colab Enterprise runtime on the host project or specific subnets. This permission is included in the [Compute Network Viewer role](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkViewer) ( `roles/compute.networkViewer` ).
 
-  - [Compute Network User role](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkUser) ( `roles/compute.networkUser` ): Grant this role to the Vertex AI service agent, `service- PROJECT_NUMBER @gcp-sa-aiplatform.iam.gserviceaccount.com` , on the Shared VPC host project.
+  - [Compute Network User role](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkUser) ( `roles/compute.networkUser` ): Grant this role to the Gemini Enterprise Agent Platform service agent, `service- PROJECT_NUMBER @gcp-sa-aiplatform.iam.gserviceaccount.com` , on the Shared VPC host project.
 
   - [Compute Network User role](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkUser) ( `roles/compute.networkUser` ): If the notebook execution job feature is being used, grant this role to the Colab Enterprise service agent, `service- PROJECT_NUMBER @gcp-sa-vertex-nb.iam.gserviceaccount.com` , on the Shared VPC host project.
 
@@ -99,7 +99,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## Python execution environment
 
-The `dbt-bigquery` adapter utilizes the [Colab Enterprise notebook executor service](https://docs.cloud.google.com/vertex-ai/docs/colab/connect-to-runtime) to run the BigQuery DataFrames Python code. A Colab Enterprise notebook is automatically created and executed by the `dbt-bigquery` adapter for every Python model. You can choose the Google Cloud project to execute the notebook in. The notebook executes the Python code from the model, which is converted into BigQuery SQL by the BigQuery DataFrames library. The BigQuery SQL is then executed in the configured project. The following diagram presents the control flow:
+The `dbt-bigquery` adapter utilizes the [Colab Enterprise notebook executor service](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/colab/connect-to-runtime) to run the BigQuery DataFrames Python code. A Colab Enterprise notebook is automatically created and executed by the `dbt-bigquery` adapter for every Python model. You can choose the Google Cloud project to execute the notebook in. The notebook executes the Python code from the model, which is converted into BigQuery SQL by the BigQuery DataFrames library. The BigQuery SQL is then executed in the configured project. The following diagram presents the control flow:
 
 ![BigQuery DataFrames Python execution environment for a notebook](https://docs.cloud.google.com/static/bigquery/images/python-execution-environment.png)
 
@@ -335,5 +335,5 @@ You can use the following billing label in the BigQuery billing console to filte
 
   - To learn more about dbt and BigQuery DataFrames, see [Using BigQuery DataFrames with dbt Python models](https://docs.getdbt.com/guides/dbt-python-bigframes) .
   - To learn more about dbt Python models, see [Python models](https://docs.getdbt.com/docs/build/python-models) and [Python model configuration](https://docs.getdbt.com/reference/resource-configs/bigquery-configs#python-model-configuration) .
-  - To learn more about Colab Enterprise notebooks, see [Create a Colab Enterprise notebook by using the Google Cloud console](https://docs.cloud.google.com/vertex-ai/docs/colab/create-console-quickstart) .
+  - To learn more about Colab Enterprise notebooks, see [Create a Colab Enterprise notebook by using the Google Cloud console](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/colab/create-console-quickstart) .
   - To learn more about Google Cloud partners, see [Google Cloud Ready - BigQuery Partners](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) .

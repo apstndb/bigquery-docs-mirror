@@ -529,15 +529,15 @@ The `MODEL_REGISTRY` option specifies the model registry destination. `VERTEX_AI
 
 ### `VERTEX_AI_MODEL_ID`
 
-The `VERTEX_AI_MODEL_ID` option specifies a Vertex AI model ID to register the model with. The model ID is associated with your BigQuery ML model, and is visible from the Model Registry. If you don't specify a Vertex AI model ID, the BigQuery ML model name is used.
+The `VERTEX_AI_MODEL_ID` option specifies an Gemini Enterprise Agent Platform model ID to register the model with. The model ID is associated with your BigQuery ML model, and is visible from the Model Registry. If you don't specify an Agent Platform model ID, the BigQuery ML model name is used.
 
-The `VERTEX_AI_MODEL_ID` value can have up to 63 characters, and valid characters are `[a-z0-9_-]` . The first character cannot be a number or hyphen. If you don't specify a Vertex AI model ID, the BigQuery ML model name must meet these requirements.
+The `VERTEX_AI_MODEL_ID` value can have up to 63 characters, and valid characters are `[a-z0-9_-]` . The first character cannot be a number or hyphen. If you don't specify an Agent Platform model ID, the BigQuery ML model name must meet these requirements.
 
 You can only set the `VERTEX_AI_MODEL_ID` option when the `MODEL_REGISTRY` option is set to `VERTEX_AI` .
 
 ### `VERTEX_AI_MODEL_VERSION_ALIASES`
 
-The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifies a Vertex AI model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](https://docs.cloud.google.com/vertex-ai/docs/model-registry/model-alias) .
+The `VERTEX_AI_MODEL_VERSION_ALIASES` option specifies an Agent Platform model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](https://docs.cloud.google.com/vertex-ai/docs/model-registry/model-alias) .
 
 You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the `MODEL_REGISTRY` option is set to `VERTEX_AI` .
 

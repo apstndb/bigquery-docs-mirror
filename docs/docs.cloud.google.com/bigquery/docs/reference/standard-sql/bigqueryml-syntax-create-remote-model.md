@@ -1,14 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model
 uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model
-title: The CREATE MODEL statement for Vertex AI LLMs as MaaS
+title: The CREATE MODEL statement for Gemini Enterprise Agent Platform LLMs as MaaS
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# The CREATE MODEL statement for Vertex AI LLMs as MaaS
+# The CREATE MODEL statement for Gemini Enterprise Agent Platform LLMs as MaaS
 
-This document describes the `CREATE MODEL` statement for creating remote models in BigQuery over LLMs in Vertex AI as a model as a service (MaaS) by using SQL. When you use MaaS on Vertex AI, you don't have to provision or manage serving infrastructure for your models. Choose MaaS for rapid development and prototyping, when you want to minimize operational overhead. Vertex AI offers access to [Google models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models) , [partner models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-partner-models) and [open models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-maas) using MaaS. For more information, see [When to use MaaS](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/choose-serving-option#when_to_use_maas) .
+This document describes the `CREATE MODEL` statement for creating remote models in BigQuery over LLMs in Gemini Enterprise Agent Platform as a model as a service (MaaS) by using SQL. When you use MaaS on Agent Platform, you don't have to provision or manage serving infrastructure for your models. Choose MaaS for rapid development and prototyping, when you want to minimize operational overhead. Agent Platform offers access to [Google models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models) , [partner models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-partner-models) and [open models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/use-maas) using MaaS. For more information, see [When to use MaaS](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/choose-serving-option#when_to_use_maas) .
 
 Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
@@ -59,7 +59,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
     `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
@@ -73,7 +73,7 @@ The connection elements are as follows:
     
     To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
+If you are creating a remote model over an Agent Platform model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
 If you are using the remote model to analyze unstructured data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
 
@@ -89,11 +89,11 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 **Description**
 
-The Vertex AI endpoint for the remote model to use. You can specify the name of the Vertex AI model, for example `gemini-2.5-flash` , or you can specify the Vertex AI model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Vertex AI model based on the location of the dataset in which you create the model.
+The Agent Platform endpoint for the remote model to use. You can specify the name of the Agent Platform model, for example `gemini-2.5-flash` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
 
 **Arguments**
 
-A `STRING` value that contains the model name of the target Vertex AI LLM. The following LLMs are supported:
+A `STRING` value that contains the model name of the target Agent Platform LLM. The following LLMs are supported:
 
 ### Pretrained Gemini models
 
@@ -126,7 +126,7 @@ The following [Anthropic Claude models](https://docs.cloud.google.com/vertex-ai/
   - `claude-3-5-haiku`
   - `claude-3-haiku`
 
-You must enable Claude models in Vertex AI before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
+You must enable Claude models in Gemini Enterprise Agent Platform before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
 Although Claude models are multimodal, you can only use text input with Claude models in BigQuery ML.
 
@@ -142,7 +142,7 @@ The following [Mistral AI models](https://docs.cloud.google.com/vertex-ai/genera
 
 Don't use a version suffix with any Mistral AI model.
 
-You must enable Mistral AI models in Vertex AI before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
+You must enable Mistral AI models in Gemini Enterprise Agent Platform before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
 After you create a remote model based on a Mistral AI model, you can use the model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text based on a prompt you provide in a query or from a column in a [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
@@ -162,11 +162,11 @@ The following [Llama models](https://docs.cloud.google.com/vertex-ai/generative-
 
 > **Important:** For Llama 4.0 and greater models, you must create the dataset and connection for the remote model in the same region as the Llama model endpoint.
 
-You must enable Llama models in Vertex AI before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
+You must enable Llama models in Gemini Enterprise Agent Platform before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
 After you create a remote model based on a Llama model, you can use the model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text based on a prompt you provide in a query or from a column in a [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
-For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models) .
+For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models) .
 
 ## Locations
 
@@ -194,6 +194,6 @@ The following example creates a BigQuery ML remote model over a Mistral AI model
 
 ## What's next
 
-  - For more information about using Vertex AI models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - Try [generating text from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-text) .
   - Try [generating structured text from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-table) .

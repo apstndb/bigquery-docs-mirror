@@ -26,7 +26,7 @@ Get started analyzing data by using the notebook gallery in BigQuery Studio.
 
 ### Required roles
 
-To get the permissions that you need to create a run notebooks, ask your administrator to grant you the following IAM roles on project:
+To get the permissions that you need to create a run notebooks, ask your administrator to grant you the following IAM roles on your project:
 
   - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
   - [BigQuery Studio User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioUser) ( `roles/bigquery.studioUser` )
@@ -79,7 +79,7 @@ To open the *Introduction to notebooks in BigQuery Studio* template in notebook 
 
 ### Connect to the default runtime
 
-Before you can run the notebook, you must connect it to a [Vertex AI runtime](https://docs.cloud.google.com/colab/docs/create-runtime) . A runtime is a compute resource that runs the code in your notebook. The runtime must be in the same region as your notebook.
+Before you can run the notebook, you must connect it to an [Gemini Enterprise Agent Platform runtime](https://docs.cloud.google.com/colab/docs/create-runtime) . A runtime is a compute resource that runs the code in your notebook. The runtime must be in the same region as your notebook.
 
 For more information about runtimes, see [Runtimes and runtime templates](https://docs.cloud.google.com/colab/docs/runtimes) . For more information about configuring regional settings, see [Set the default region for code assets](https://docs.cloud.google.com/bigquery/docs/create-notebooks#set_the_default_region_for_code_assets) .
 

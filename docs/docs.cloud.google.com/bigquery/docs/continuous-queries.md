@@ -506,9 +506,9 @@ The following example shows a continuous query that filters and transforms data 
     WHERE
       ride_status = 'dropoff';
 
-### Process data by using a Vertex AI model
+### Process data by using an Gemini Enterprise Agent Platform model
 
-The following example shows a continuous query which uses a Vertex AI model to generate an advertisement for taxi riders based on their current latitude and longitude, and then exports the results into a Pub/Sub topic in real time:
+The following example shows a continuous query which uses an Agent Platform model to generate an advertisement for taxi riders based on their current latitude and longitude, and then exports the results into a Pub/Sub topic in real time:
 
     EXPORT DATA
       OPTIONS (

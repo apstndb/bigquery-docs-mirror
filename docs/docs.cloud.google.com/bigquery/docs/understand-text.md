@@ -475,4 +475,4 @@ The following example inspects the text in the table's `comment` column and prov
 
   - For more information about model inference in BigQuery ML, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .
-  - Try the [Unstructured data analytics with BigQuery ML and Vertex AI pre-trained models](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/bigquery_ml/bq_ml_with_vision_translation_nlp.ipynb) notebook.
+  - Try the [Unstructured data analytics with BigQuery ML and Gemini Enterprise Agent Platform pre-trained models](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/bigquery_ml/bq_ml_with_vision_translation_nlp.ipynb) notebook.

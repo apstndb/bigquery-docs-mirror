@@ -109,17 +109,17 @@ You can schedule daily snapshots of the [recommendations](https://docs.cloud.goo
 
 To set up snapshots of your data using the BigQuery Data Transfer Service, see [Export recommendations to BigQuery](https://docs.cloud.google.com/recommender/docs/bq-export/export-recommendations-to-bq) .
 
-### Vertex AI Batch Prediction
+### Gemini Enterprise Agent Platform Batch Prediction
 
-[Vertex AI](https://docs.cloud.google.com/vertex-ai) Batch Prediction creates a set of predictions based on an input to a model. You can store these results in BigQuery for additional analytics and joins.
+[Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai) Batch Prediction creates a set of predictions based on an input to a model. You can store these results in BigQuery for additional analytics and joins.
 
-To configure exports of batch prediction results, see [Get batch predictions and explanations](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/get-batch-predictions#make-batch-request) .
+To configure exports of batch prediction results, see [Get batch predictions and explanations](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/get-batch-predictions#make-batch-inference-request) .
 
-### Vertex AI Predictions
+### Gemini Enterprise Agent Platform Predictions
 
-You can use Vertex AI Predictions to store prediction results from online endpoints in BigQuery for additional analysis.
+You can use Gemini Enterprise Agent Platform Predictions to store prediction results from online endpoints in BigQuery for additional analysis.
 
-To configure model prediction integration with BigQuery, see [Online prediction logging](https://docs.cloud.google.com/vertex-ai/docs/predictions/online-prediction-logging#enabling-and-disabling) .
+To configure model prediction integration with BigQuery, see [Online prediction logging](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/online-prediction-logging#enabling-and-disabling) .
 
 ## What's next
 

@@ -23,7 +23,7 @@ This document describes the `ML.PREDICT` function, which you can use to predict 
       - [TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
       - [TensorFlow Lite models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
       - [XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
-  - [Vertex AI hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+  - [Agent Platform hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
 
 For PCA and autoencoder models, you can use the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) as an alternative to the `ML.PREDICT` function. `AI.GENERATE_EMBEDDING` generates the same embedding data as `ML.PREDICT` as an array in a single column, rather than in a series of columns. Having all of the embeddings in a single column lets you directly use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the `AI.GENERATE_EMBEDDING` output.
 
@@ -58,7 +58,7 @@ ML.PREDICT(
     
     For TensorFlow Lite, Open Neural Network Exchange (ONNX), and XGBoost models, the input must be [convertible](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) to the type expected by the model.
     
-    For remote models, the input columns must contain all Vertex AI endpoint input fields.
+    For remote models, the input columns must contain all Gemini Enterprise Agent Platform endpoint input fields.
     
     If there are unused columns from the table, they are passed through as output columns.
 
@@ -68,7 +68,7 @@ ML.PREDICT(
     
     For TensorFlow Lite, ONNX, and XGBoost models, the input must be [convertible](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) to the type expected by the model.
     
-    For remote models, the input columns must contain all Vertex AI endpoint input fields.
+    For remote models, the input columns must contain all Gemini Enterprise Agent Platform endpoint input fields.
     
     If there are unused columns from the query, they are passed through as output columns.
     
@@ -163,7 +163,7 @@ For XGBoost models, the output is the output of the XGBoost model's predict meth
 
 ### Remote models
 
-For remote models, the output columns contain all Vertex AI endpoint output fields, and also a `remote_model_status` field that contains status messages from Vertex AI endpoint.
+For remote models, the output columns contain all Gemini Enterprise Agent Platform endpoint output fields, and also a `remote_model_status` field that contains status messages from Gemini Enterprise Agent Platform endpoint.
 
 ## Missing data imputation
 

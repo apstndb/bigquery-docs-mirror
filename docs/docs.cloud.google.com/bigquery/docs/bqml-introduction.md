@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-BigQuery ML lets you [create and run machine learning (ML) models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) by using either GoogleSQL queries or the Google Cloud console. BigQuery ML models are stored in BigQuery datasets, similar to tables and views. BigQuery ML also lets you access [Vertex AI models](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) and [Cloud AI APIs](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) to perform artificial intelligence (AI) tasks like text generation or machine translation. Gemini for Google Cloud also provides AI-powered assistance for BigQuery tasks. To see a list of AI-powered features in BigQuery, see [Gemini in BigQuery overview](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
+BigQuery ML lets you [create and run machine learning (ML) models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) by using either GoogleSQL queries or the Google Cloud console. BigQuery ML models are stored in BigQuery datasets, similar to tables and views. BigQuery ML also lets you access [Gemini Enterprise Agent Platform models](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) and [Cloud AI APIs](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) to perform artificial intelligence (AI) tasks like text generation or machine translation. Gemini for Google Cloud also provides AI-powered assistance for BigQuery tasks. To see a list of AI-powered features in BigQuery, see [Gemini in BigQuery overview](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
 
 Usually, performing ML or AI on large datasets requires extensive programming and knowledge of ML frameworks. These requirements restrict solution development to a very small set of people within each company, and they exclude data analysts who understand the data but have limited ML knowledge and programming expertise. However, with BigQuery ML, SQL practitioners can use existing SQL tools and skills to build and evaluate models, and to generate results from LLMs and Cloud AI APIs.
 
@@ -84,7 +84,7 @@ You can perform a [dry run](https://docs.cloud.google.com/bigquery/docs/running-
 
 ### Externally trained models
 
-The following models are external to BigQuery ML and trained in Vertex AI:
+The following models are external to BigQuery ML and trained in Agent Platform:
 
   - [Deep neural network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) is for creating TensorFlow-based deep neural networks for classification and regression models.
   - [Wide & Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) is useful for generic large-scale regression and classification problems with sparse inputs ( [categorical features](https://en.wikipedia.org/wiki/Categorical_variable) with a large number of possible feature values), such as recommender systems, search, and ranking problems.
@@ -118,13 +118,13 @@ In BigQuery ML, you can use a model with data from multiple BigQuery Datasets fo
 
 [![This decision tree maps ML models to actions that you want to accomplish.](https://docs.cloud.google.com/static/bigquery/images/ml-model-cheatsheet.svg)](https://docs.cloud.google.com/static/bigquery/images/ml-model-cheatsheet.pdf) [Download the model selection decision tree.](https://docs.cloud.google.com/static/bigquery/images/ml-model-cheatsheet.pdf)
 
-## BigQuery ML and Vertex AI
+## BigQuery ML and Agent Platform
 
-BigQuery ML integrates with Vertex AI, which is the end-to-end platform for AI and ML in Google Cloud. You can register your BigQuery ML models to Model Registry in order to deploy these models to endpoints for online prediction. For more information, see the following:
+BigQuery ML integrates with Agent Platform, which is the end-to-end platform for AI and ML in Google Cloud. You can register your BigQuery ML models to Model Registry in order to deploy these models to endpoints for online prediction. For more information, see the following:
 
-  - To learn more about using your BigQuery ML models with Vertex AI, see [Manage BigQuery ML models with Vertex AI](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
-  - If you aren't familiar with Vertex AI and want to learn more about how it integrates with BigQuery ML, see [Vertex AI for BigQuery users](https://docs.cloud.google.com/vertex-ai/docs/beginner/bqml) .
-  - Watch the video [How to simplify AI models with Vertex AI and BigQuery ML](https://www.youtube.com/watch?v=AVwwkqLOito) .
+  - To learn more about using your BigQuery ML models with Agent Platform, see [Manage BigQuery ML models with Agent Platform](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
+  - If you aren't familiar with Agent Platform and want to learn more about how it integrates with BigQuery ML, see [Agent Platform for BigQuery users](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/beginner/bqml) .
+  - Watch the video [How to simplify AI models with Agent Platform and BigQuery ML](https://www.youtube.com/watch?v=AVwwkqLOito) .
 
 ## BigQuery ML and Colab Enterprise
 
@@ -136,7 +136,7 @@ BigQuery ML is supported in the same regions as BigQuery. For more information, 
 
 ## Pricing
 
-You are charged for the compute resources that you use to train models and to run queries against models. The type of model that you create affects where the model is trained and the pricing that applies to that operation. Queries against models always run in BigQuery and use [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) . Because [remote models](https://docs.cloud.google.com/bigquery/docs/bqml-introduction#remote_models) make calls to Vertex AI models, queries against remote models also incur charges from Vertex AI.
+You are charged for the compute resources that you use to train models and to run queries against models. The type of model that you create affects where the model is trained and the pricing that applies to that operation. Queries against models always run in BigQuery and use [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) . Because [remote models](https://docs.cloud.google.com/bigquery/docs/bqml-introduction#remote_models) make calls to Agent Platform models, queries against remote models also incur charges from Agent Platform.
 
 You are charged for the storage used by trained models, using [BigQuery storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
@@ -160,7 +160,7 @@ In addition to [BigQuery ML-specific limits](https://docs.cloud.google.com/bigqu
       - [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/)
       - [Machine learning glossary](https://developers.google.com/machine-learning/glossary/)
 
-  - To learn about MLOps with Model Registry, see [Manage BigQuery ML models in Vertex AI](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
+  - To learn about MLOps with Model Registry, see [Manage BigQuery ML models in Agent Platform](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
 
   - For more information about supported SQL statements and functions for different model types, see the following documents:
     

@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes the `ML.VALIDATE_DATA_SKEW` function, which you can use to compute the data skew between a model's training and serving data. This function computes the statistics for the serving data, compares them to the statistics that were computed for the training data at the time the model was created, and identifies where there are anomalous differences between the two data sets.
 
-You can optionally visualize the function output by using [Vertex AI model monitoring](https://docs.cloud.google.com/vertex-ai/docs/model-monitoring/overview) . For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
+You can optionally visualize the function output by using [Agent Platform model monitoring](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview) . For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
 
 Statistics are only computed for feature columns in the serving data that match feature columns in the training data, in order to achieve better performance and lower cost. For models that were created with use of the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the statistics are based on the raw feature data before feature preprocessing within the `TRANSFORM` clause.
 
@@ -55,9 +55,9 @@ Statistics are only computed for feature columns in the serving data that match 
 
   - `  THRESHOLDS  ` : an `ARRAY<STRUCT<STRING, FLOAT64>>` value that specifies the anomaly detection thresholds for one or more columns for which you don't want to use the default threshold. The `STRING` value in the struct specifies the column name, and the `FLOAT64` value specifies the threshold. The `FLOAT64` value must be in the range `[0, 1)` . For example, `[('col_a', 0.1), ('col_b', 0.8)]` .
 
-  - `  ENABLE_VISUALIZATION_LINK  ` : a `BOOL` value that determines whether to return links to the visualized function output. When you specify `TRUE` for this argument, the `ML.VALIDATE_DATA_DRIFT` output includes the `visualization_link` column. The `visualization_link` column provides URLs that link to visualizations of the function results in Vertex AI monitoring.
+  - `  ENABLE_VISUALIZATION_LINK  ` : a `BOOL` value that determines whether to return links to the visualized function output. When you specify `TRUE` for this argument, the `ML.VALIDATE_DATA_DRIFT` output includes the `visualization_link` column. The `visualization_link` column provides URLs that link to visualizations of the function results in Agent Platform monitoring.
     
-    When you specify `TRUE` for this argument, the `model` argument value must refer to a BigQuery ML model that is [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Vertex AI. If the model isn't registered, an invalid query error is returned.
+    When you specify `TRUE` for this argument, the `model` argument value must refer to a BigQuery ML model that is [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Agent Platform. If the model isn't registered, an invalid query error is returned.
 
 ## Output
 
@@ -73,7 +73,7 @@ Statistics are only computed for feature columns in the serving data that match 
 
   - `is_anomaly` : a `BOOL` column that indicates whether the `value` value is higher than the `threshold` value.
 
-  - `visualization_link` : a URL that links to a Vertex AI visualization of the results for the given feature. The URL is formatted as follows:
+  - `visualization_link` : a URL that links to an Agent Platform visualization of the results for the given feature. The URL is formatted as follows:
     
     ```console
     https://console.cloud.google.com/vertex-ai/model-monitoring/locations/region/model-monitors/vertex_model_monitor_id/model-monitoring-jobs/vertex_model_monitoring_job_id/feature-drift?project=project_id&featureName=feature_name
@@ -214,7 +214,7 @@ The following example shows how to automate skew detection for a linear regressi
       - [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
       - [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
       - [`ARIMA_PLUS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-      - Remote models over [LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , [Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) , or [Vertex AI endpoints](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+      - Remote models over [LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , [Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) , or [Gemini Enterprise Agent Platform endpoints](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
       - Imported [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) , [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) , [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) , or [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) models
 
   - `ML.VALIDATE_DATA_SKEW` doesn't support models created before March 28, 2024, or models that use the [`WARM START` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#warm_start) . To enable use of `ML.VALIDATE_DATA_SKEW` , retrain the model by running the [`CREATE OR REPLACE model` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_or_replace_model) .

@@ -42,14 +42,14 @@ To work with default connections, use the following Identity and Access Manageme
     
       - If the default connection is used to create external tables: Storage Admin ( `roles/storage.admin` ) on any Cloud Storage buckets used by the external tables.
     
-      - If the default connection is used to create remote models: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Vertex AI endpoint. For the following types of remote models, this is the current project:
+      - If the default connection is used to create remote models: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Gemini Enterprise Agent Platform endpoint. For the following types of remote models, this is the current project:
         
           - Remote models over Cloud AI services.
           - Remote models over Google or partner models that you created by specifying the model name as an endpoint.
         
-        For all other remote models, this is the project that contains the Vertex AI endpoint to which the target model is deployed.
+        For all other remote models, this is the project that contains the Agent Platform endpoint to which the target model is deployed.
         
-        If you use the remote model to analyze unstructured data from an object table, and the Cloud Storage bucket that you use in the object table is in a different project than your Vertex AI endpoint, you must also have Storage Admin ( `roles/storage.admin` ) on the Cloud Storage bucket used by the object table.
+        If you use the remote model to analyze unstructured data from an object table, and the Cloud Storage bucket that you use in the object table is in a different project than your Agent Platform endpoint, you must also have Storage Admin ( `roles/storage.admin` ) on the Cloud Storage bucket used by the object table.
     
     You only need these roles if you are an administrator configuring a connection for use as the default connection, or a user who is using a default connection that has not yet had the appropriate role granted to its service account. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
@@ -114,7 +114,7 @@ For more information about configuring a default connection for a project, see [
 
 ## Permissions provisioning for the default connection
 
-When you use the default connection to create an external table or remote model, Google Cloud grants the default connection's service account the appropriate roles if the service account doesn't already have them. This action fails if you don't have administrative privileges on the Cloud Storage or Vertex AI resource used by the external table or remote model.
+When you use the default connection to create an external table or remote model, Google Cloud grants the default connection's service account the appropriate roles if the service account doesn't already have them. This action fails if you don't have administrative privileges on the Cloud Storage or Agent Platform resource used by the external table or remote model.
 
 The following roles are granted to the default connection's service account:
 
@@ -145,7 +145,7 @@ Cloud Storage
 `roles/storage.legacyBucketWriter`  
 `roles/storage.legacyObjectOwner`
 
-[BigQuery ML remote models over Vertex AI models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+[BigQuery ML remote models over Gemini Enterprise Agent Platform models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
 
 Google owned models
 
@@ -225,7 +225,7 @@ The following SQL expression creates a [Iceberg managed tables](https://docs.clo
 
 The following examples show how to create remote models by specifying `REMOTE WITH CONNECTION DEFAULT` in BigQuery.
 
-### Example: Create a remote model over a Vertex AI model
+### Example: Create a remote model over an Agent Platform model
 
 The following SQL expression creates a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) with a default connection:
 

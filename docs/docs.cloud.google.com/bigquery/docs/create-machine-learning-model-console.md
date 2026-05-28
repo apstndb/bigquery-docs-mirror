@@ -46,10 +46,10 @@ Before you create a model, make sure that you have addressed any prerequisites f
 
   - The following remote models require a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) :
     
-      - [Remote models over Vertex AI and partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
+      - [Remote models over Gemini Enterprise Agent Platform and partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
       - [Remote models over open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
       - [Remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
-      - [Remote models over custom models in Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+      - [Remote models over custom models in Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
     
     The connection's service account must also be granted certain roles, depending on the type of remote model.
 
@@ -206,7 +206,7 @@ To create a model:
 
 Use this procedure to create the following types of remote models:
 
-  - [Models over Vertex AI or partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
+  - [Models over Agent Platform or partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
   - [Models over open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
 
 To create a model:
@@ -253,7 +253,7 @@ To create a model:
 11. In the **Required options** section, do one of the following:
     
       - For remote models over Google models and partner models, specify the endpoint to use. This is the name of the model, for example `gemini-2.0-flash` . For more information about supported models, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
-      - For remote models over open models, copy and paste in the endpoint to use. This is the shared public endpoint of a model deployed to Vertex AI, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint) .
+      - For remote models over open models, copy and paste in the endpoint to use. This is the shared public endpoint of a model deployed to Agent Platform, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint) .
 
 12. Click **Create model** .
 
@@ -261,7 +261,7 @@ To create a model:
 
 ## Create a remote model over a custom model
 
-Use this procedure to create remote models over [custom models deployed to Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
+Use this procedure to create remote models over [custom models deployed to Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
 
 To create a model:
 
@@ -302,7 +302,7 @@ To create a model:
             
             > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
-10. In the **Required options** section, specify the endpoint to use. This is the shared public endpoint of a model deployed to Vertex AI, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint) .
+10. In the **Required options** section, specify the endpoint to use. This is the shared public endpoint of a model deployed to Agent Platform, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint) .
 
 11. Click **Create model** .
 

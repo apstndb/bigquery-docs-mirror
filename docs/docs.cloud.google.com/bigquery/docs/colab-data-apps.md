@@ -84,7 +84,7 @@ After you create Data Apps, you publish them to Data Studio to turn your data an
 
 > **Note:** Data Apps don't require Data Studio Pro.
 
-When you publish Data Apps, you can connect them to an existing Colab runtime, or you can create a new runtime using a [template](https://docs.cloud.google.com/vertex-ai/docs/colab/create-runtime-template) . With templates, you can size the runtime according to your workloads, and you can set the idle shutdown time to balance costs and app startup time.
+When you publish Data Apps, you can connect them to an existing Colab runtime, or you can create a new runtime using a [template](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/colab/create-runtime-template) . With templates, you can size the runtime according to your workloads, and you can set the idle shutdown time to balance costs and app startup time.
 
 To create and publish Data Apps, follow these steps:
 

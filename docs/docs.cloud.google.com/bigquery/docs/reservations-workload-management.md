@@ -270,8 +270,6 @@ Reservation groups are subject to the following limitations:
 
   - [Reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) must be enabled on the project.
 
-  - The total size of reservations within a group cannot exceed 30k slots. This includes autoscale limits.
-
   - Reservations within a group must have the same [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
   - You cannot mix reservations with and without [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) configurations within the same group. All reservations in the group must have disaster recovery configured or all must have it disabled.

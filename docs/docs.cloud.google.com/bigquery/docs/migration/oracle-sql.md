@@ -1344,10 +1344,10 @@ BigQuery [UDFs]() or ETL tool like Dataflow can be used to process XML.
 Machine learning (ML) functions in Oracle and BigQuery are different. Oracle requires advanced analytics pack and licenses to do ML on the database. Oracle uses the `DBMS_DATA_MINING` package for ML. Converting Oracle data miner jobs requires rewriting the code to work with BigQuery features. You can choose from comprehensive [Google AI offerings](https://cloud.google.com/products/ai/) , including the following products and features:
 
   - [BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction)
-  - [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/start/introduction-unified-platform)
+  - [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview)
   - [AI APIs for Google Cloud](https://cloud.google.com/ai/apis)
 
-You can use [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) or [Vertex AI development tools](https://docs.cloud.google.com/vertex-ai/docs/general/developer-tools-overview) to develop, train, and evaluate ML models.
+You can use [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) or [Agent Platform development tools](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/developer-tools-overview) to develop, train, and evaluate ML models.
 
 The following table shows Oracle ML functions:
 

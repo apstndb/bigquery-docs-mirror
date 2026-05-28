@@ -337,7 +337,7 @@ See the following documentation for supported locations for remote models over G
   - For Gemini model and embedding model supported regions, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) .
   - For Claude, Llama, and Mistral AI model supported regions, see [Google Cloud partner model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#genai-partner-models) .
 
-The following table shows which regions are supported for remote models over Cloud AI services and custom models deployed to Vertex AI. The column name indicates the type of remote model.
+The following table shows which regions are supported for remote models over Cloud AI services and custom models deployed to Agent Platform. The column name indicates the type of remote model.
 
 Region description
 
@@ -605,18 +605,18 @@ Tel Aviv
 
 ●
 
-If the dataset in which you are creating the remote model is in a single region, the Vertex AI model endpoint must be in the same region. If you specify the model endpoint URL, use the endpoint in the same region as the dataset. For example, if the dataset is in the `us-central1` region, then specify the endpoint `https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/<target_model>` . If you specify the model name, BigQuery ML automatically chooses the endpoint in the correct region.
+If the dataset in which you are creating the remote model is in a single region, the Agent Platform model endpoint must be in the same region. If you specify the model endpoint URL, use the endpoint in the same region as the dataset. For example, if the dataset is in the `us-central1` region, then specify the endpoint `https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/<target_model>` . If you specify the model name, BigQuery ML automatically chooses the endpoint in the correct region.
 
 #### Multi-regional locations
 
 Multi-regional support for remote models is as follows:
 
   - Gemini models are supported in the `US` and `EU` multi-regions.
-  - Claude, Llama, and Mistral AI models in the `US` multi-region can use the Vertex AI endpoint for any single region within the `US` multi-region. Claude, Llama, and Mistral AI models in the `EU` multi-region can use the Vertex AI endpoint for any single region within the `EU` multi-region except for `eu-west2` and `eu-west6` .
+  - Claude, Llama, and Mistral AI models in the `US` multi-region can use the Agent Platform endpoint for any single region within the `US` multi-region. Claude, Llama, and Mistral AI models in the `EU` multi-region can use the Agent Platform endpoint for any single region within the `EU` multi-region except for `eu-west2` and `eu-west6` .
   - Vertex AI deployed models aren't supported in either multi-region.
   - [Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) are supported in the `US` and `EU` multi-regions.
 
-If the dataset in which you are creating the remote model is in a multi-region, then the Vertex AI model endpoint must be in a region within that multi-region. For example, if the dataset is in the `eu` multi-region, then you could specify the URL for the `europe-west1` region endpoint, `https://europe-west1-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west1/publishers/google/models/<target_model>` . If you specify the model name instead of the endpoint URL, BigQuery ML defaults to using the `europe-west4` endpoint for datasets in the `eu` multi-region, and to using the `us-central1` endpoint for datasets in the `us` multi-region.
+If the dataset in which you are creating the remote model is in a multi-region, then the Agent Platform model endpoint must be in a region within that multi-region. For example, if the dataset is in the `eu` multi-region, then you could specify the URL for the `europe-west1` region endpoint, `https://europe-west1-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west1/publishers/google/models/<target_model>` . If you specify the model name instead of the endpoint URL, BigQuery ML defaults to using the `europe-west4` endpoint for datasets in the `eu` multi-region, and to using the `us-central1` endpoint for datasets in the `us` multi-region.
 
 #### Global endpoint
 
@@ -628,9 +628,9 @@ Don't use the global endpoint if you have requirements for the data processing l
 
 #### Processing locations for Google models and partner models
 
-For information about processing locations used by Google models hosted in Vertex AI, see [ML processing for Google Cloud models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency#ml-processing-google-models) . This information covers models deployed to regions or multi-regions. Models that use the global endpoint don't guarantee any particular processing location.
+For information about processing locations used by Google models hosted in Agent Platform, see [ML processing for Google Cloud models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency#ml-processing-google-models) . This information covers models deployed to regions or multi-regions. Models that use the global endpoint don't guarantee any particular processing location.
 
-For information about processing locations used by partner models hosted in Vertex AI, see [ML processing for Google Cloud partner models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency#ml-processing-partner-models) .
+For information about processing locations used by partner models hosted in Agent Platform, see [ML processing for Google Cloud partner models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency#ml-processing-partner-models) .
 
 ### Locations for non-remote models
 
@@ -1171,7 +1171,7 @@ All supported models other than remote models are supported in the `US` and `EU`
 
 Data located in the `EU` multi-region is not stored in the `europe-west2` (London) or `europe-west6` (Zürich) data centers.
 
-Vertex AI Model Registry integration is supported only for single region integrations. If you send a multi-region BigQuery ML model to the Model Registry, then it is converted to a regional model in Vertex AI. A BigQuery ML multi-region US model is synced to Vertex AI `us-central1` and a BigQuery ML multi-region EU model is synced to Vertex AI `europe-west4` . For single region models, there are no changes.
+Vertex AI Model Registry integration is supported only for single region integrations. If you send a multi-region BigQuery ML model to the Model Registry, then it is converted to a regional model in Vertex AI. A BigQuery ML multi-region US model is synced to Agent Platform `us-central1` and a BigQuery ML multi-region EU model is synced to Agent Platform `europe-west4` . For single region models, there are no changes.
 
 #### Processing locations
 

@@ -20,7 +20,7 @@ The NNLM, SWIVEL, and BERT models vary in size, accuracy, scalability, and cost.
 | [SWIVEL](https://tfhub.dev/google/tf2-preview/gnews-swivel-20dim/1)  | \<150MB    | 20                  | Short phrases, news, tweets, reviews                   | Submatrix-wise Vector Embedding Learner                 |
 | [BERT](https://tfhub.dev/tensorflow/bert_en_cased_L-12_H-768_A-12/4) | \~200MB    | 768                 | Short phrases, news, tweets, reviews, short paragraphs | Bidirectional Encoder Representations from Transformers |
 
-In this tutorial, the NNLM and SWIVEL models are [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models) , and the BERT model is a [remote model on Vertex AI](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial) .
+In this tutorial, the NNLM and SWIVEL models are [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models) , and the BERT model is a [remote model on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial) .
 
 ## Required permissions
 
@@ -55,7 +55,7 @@ In this document, you use the following billable components of Google Cloud:
   - **BigQuery:** You incur costs for the queries that you run in BigQuery.
   - **BigQuery ML:** You incur costs for the model that you create and the inference that you perform in BigQuery ML.
   - **Cloud Storage:** You incur costs for the objects that you store in Cloud Storage.
-  - **Vertex AI:** If you follow the instructions for generating the BERT model, then you incur costs for deploying the model to an endpoint.
+  - **Gemini Enterprise Agent Platform:** If you follow the instructions for generating the BERT model, then you incur costs for deploying the model to an endpoint.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -66,7 +66,7 @@ For more information, see the following resources:
   - [Storage pricing](https://cloud.google.com/bigquery/pricing#storage)
   - [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml)
   - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
-  - [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing)
+  - [Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing)
 
 ## Before you begin
 
@@ -240,11 +240,11 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### BERT
 
-To load the BERT model into BigQuery, import the BERT model to Vertex AI, deploy the model to a Vertex AI endpoint, create a connection, and then create a remote model in BigQuery.
+To load the BERT model into BigQuery, import the BERT model to Agent Platform, deploy the model to an Agent Platform endpoint, create a connection, and then create a remote model in BigQuery.
 
-To import the BERT model to Vertex AI, follow these steps:
+To import the BERT model to Agent Platform, follow these steps:
 
-1.  In the Google Cloud console, go to the Vertex AI **Model registry** page.
+1.  In the Google Cloud console, go to the Agent Platform **Model registry** page.
 
 2.  Click **Import** , and then do the following:
     
@@ -258,9 +258,9 @@ To import the BERT model to Vertex AI, follow these steps:
 
 4.  Click **Import** . After the import is complete, your model appears on the **Model registry** page.
 
-To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, follow these steps:
+To deploy the BERT model to a Gemini Enterprise Agent Platform endpoint and connect it to BigQuery, follow these steps:
 
-1.  In the Google Cloud console, go to the Vertex AI **Model registry** page.
+1.  In the Google Cloud console, go to the Agent Platform **Model registry** page.
 
 2.  Click on the name of your model.
 
@@ -278,7 +278,7 @@ To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, fol
 
 9.  [Create a BigQuery Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) and [grant access](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#set_up_connection_access) to the connection's service account.
 
-To create a remote model based on the Vertex AI endpoint, use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
+To create a remote model based on the Agent Platform endpoint, use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -297,7 +297,7 @@ To create a remote model based on the Vertex AI endpoint, use the [`CREATE MODEL
         
         When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  `
     
-      - `  ENDPOINT_LOCATION  ` : the location of your Vertex AI endpoint. For example: "us-central1".
+      - `  ENDPOINT_LOCATION  ` : the location of your Agent Platform endpoint. For example: "us-central1".
     
       - `  ENDPOINT_ID  ` : the ID of your model endpoint
 

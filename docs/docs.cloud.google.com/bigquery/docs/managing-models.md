@@ -145,4 +145,4 @@ For more information about using a customer-managed encryption key (CMEK) to enc
       - [List models](https://docs.cloud.google.com/bigquery/docs/listing-models)
       - [Update model metadata](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata)
       - [Delete models](https://docs.cloud.google.com/bigquery/docs/deleting-models)
-      - [Manage models with Vertex AI](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex)
+      - [Manage models with Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex)

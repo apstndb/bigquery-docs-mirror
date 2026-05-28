@@ -29,7 +29,7 @@ In this document, you use the following billable components of Google Cloud:
   - **BigQuery** : you incur costs for the data that you process in BigQuery.
   - **BigQuery Python UDFs** : you incur costs for using Python UDFs.
   - **Cloud Storage** : you incur costs for the objects stored in Cloud Storage.
-  - **Vertex AI** : you incur costs for calls to Vertex AI models.
+  - **Gemini Enterprise Agent Platform** : you incur costs for calls to Agent Platform models.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -40,7 +40,7 @@ For more information about, see the following pricing pages:
   - [BigQuery pricing](https://cloud.google.com/bigquery/pricing)
   - [BigQuery Python UDFs pricing](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#pricing)
   - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
-  - [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
+  - [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
 
 ## Before you begin
 
@@ -55,7 +55,7 @@ For more information about, see the following pricing pages:
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, Cloud Storage, and Vertex AI APIs.
+3.  Enable the BigQuery, BigQuery Connection, Cloud Storage, and Agent Platform API APIs.
     
     **Roles required to enable APIs**
     
@@ -165,9 +165,9 @@ Give the service account access to use objects in the bucket you created:
 
 7.  Click **Save** .
 
-#### Grant permissions on to use Vertex AI models
+#### Grant permissions on to use Agent Platform models
 
-Give the service account access to use Vertex AI models:
+Give the service account access to use Agent Platform models:
 
 1.  Go to the **IAM & Admin** page.
 
@@ -288,7 +288,7 @@ Create an object table that contains the Cymbal pets product manuals:
 
 ### Create a text generation model
 
-Create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a Vertex AI Gemini model:
+Create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents an Agent Platform Gemini model:
 
   - Run the following to create the remote model:
     
@@ -313,7 +313,7 @@ Create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/
 
 ### Create an embedding generation model
 
-Create a BigQuery ML remote model that represents a Vertex AI multimodal embedding model:
+Create a BigQuery ML remote model that represents an Agent Platform multimodal embedding model:
 
   - Run the following to create the remote model:
     

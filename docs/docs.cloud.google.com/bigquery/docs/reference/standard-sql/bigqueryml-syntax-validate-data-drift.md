@@ -12,7 +12,7 @@ This document describes the `ML.VALIDATE_DATA_DRIFT` function, which you can use
 
 For example, you might want to compare the current serving data to historical serving data from a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) , or to the features served at a particular point in time, which you can get by using the [`ML.FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) .
 
-You can optionally visualize the function output by using [Vertex AI model monitoring](https://docs.cloud.google.com/vertex-ai/docs/model-monitoring/overview) . For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
+You can optionally visualize the function output by using [Gemini Enterprise Agent Platform model monitoring](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview) . For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
 
 ## Syntax
 
@@ -53,7 +53,7 @@ You can optionally visualize the function output by using [Vertex AI model monit
   - `  NUMERICAL_DEFAULT_THRESHOLD  ` : a `FLOAT64` value that specifies the custom threshold to use for anomaly detection for numerical features. The value must be in the range `[0, 1)` . The default value is `0.3` .
   - `  NUMERICAL_METRIC_TYPE  ` : a `STRING` value that specifies the metric used to compare statistics for numerical, `ARRAY<numerical>` , and `ARRAY<STRUCT<INT64, numerical>>` features. The only valid value is `JENSEN_SHANNON_DIVERGENCE` .
   - `  THRESHOLDS  ` : an `ARRAY<STRUCT<STRING, FLOAT64>>` value that specifies the anomaly detection thresholds for one or more columns for which you don't want to use the default threshold. The `STRING` value in the struct specifies the column name, and the `FLOAT64` value specifies the threshold. The `FLOAT64` value must be in the range `[0,1)` . For example, `[('col_a', 0.1), ('col_b', 0.8)]` .
-  - `  MODEL  ` : The name of a BigQuery ML model that is [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Vertex AI. When you specify this argument, the `ML.VALIDATE_DATA_DRIFT` output includes the `visualization_link` column. The `visualization_link` column provides URLs that link to visualizations of the function results in Vertex AI model monitoring.
+  - `  MODEL  ` : The name of a BigQuery ML model that is [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Agent Platform. When you specify this argument, the `ML.VALIDATE_DATA_DRIFT` output includes the `visualization_link` column. The `visualization_link` column provides URLs that link to visualizations of the function results in Agent Platform model monitoring.
 
 ## Output
 
@@ -69,7 +69,7 @@ You can optionally visualize the function output by using [Vertex AI model monit
 
   - `is_anomaly` : a `BOOL` column that indicates whether the `value` value is higher than the `threshold` value.
 
-  - `visualization_link` : a URL that links to a Vertex AI visualization of the results for the given feature. The URL is formatted as follows:
+  - `visualization_link` : a URL that links to an Agent Platform visualization of the results for the given feature. The URL is formatted as follows:
     
     ```console
     https://console.cloud.google.com/vertex-ai/model-monitoring/locations/region/model-monitors/vertex_model_monitor_id/model-monitoring-jobs/vertex_model_monitoring_job_id/feature-drift?project=project_id&featureName=feature_name

@@ -10,13 +10,13 @@ data_source: docs.cloud.google.com
 
 This document describes the `AI.GENERATE_TABLE` function, which lets you perform generative natural language tasks by using any combination of text and unstructured data from BigQuery [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) , and also specify a schema to format the response from the model.
 
-The function works by sending requests to a BigQuery ML remote model that represents a Vertex AI Gemini model, and then returning that model's response. The function supports remote models over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.
+The function works by sending requests to a BigQuery ML remote model that represents a Gemini Enterprise Agent Platform Gemini model, and then returning that model's response. The function supports remote models over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.
 
-Several of the `AI.GENERATE_TABLE` function's arguments provide the parameters that shape the Vertex AI model's response.
+Several of the `AI.GENERATE_TABLE` function's arguments provide the parameters that shape the Agent Platform model's response.
 
 You can use the `AI.GENERATE_TABLE` function to perform tasks such as classification, sentiment analysis, image captioning, and transcription.
 
-Prompt design can strongly affect the responses returned by the Vertex AI model. For more information, see [Introduction to prompting](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design) .
+Prompt design can strongly affect the responses returned by the Agent Platform model. For more information, see [Introduction to prompting](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design) .
 
 ## Input
 
@@ -115,7 +115,7 @@ STRUCT(
         | `STRUCT<STRING, ObjectRefRuntime>` | `('Describe this city', OBJ.GET_ACCESS_URL(image_objectref_column, 'r'))` | 'Describe this city' image                              |
         
 
-    > **Note:** To minimize Vertex AI charges, write query results to a table and then reference that table in the `AI.GENERATE_TABLE` function. This can help you ensure that you are sending as few rows as possible to the model.
+    > **Note:** To minimize Agent Platform charges, write query results to a table and then reference that table in the `AI.GENERATE_TABLE` function. This can help you ensure that you are sending as few rows as possible to the model.
 
   - `  OUTPUT_SCHEMA  ` : a `STRING` value that specifies the schema of the output as a comma-separated list of fields. Each field consists of a name, a data type, and an optional `OPTIONS` clause in which you can specify a description of the field. The following example shows how to specify an output schema that contains two string fields, `name` and `state` , with a description for the `state` field:
     
@@ -257,7 +257,7 @@ You can create remote models over Gemini models in the [supported regions](https
 
 ## Quotas
 
-See [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+See [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## Known issues
 
@@ -276,6 +276,6 @@ To iterate through inference calls until all rows are successfully processed, yo
 ## What's next
 
   - Get step-by-step instructions on how to [generate structured data](https://docs.cloud.google.com/bigquery/docs/generate-table) using your own data.
-  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

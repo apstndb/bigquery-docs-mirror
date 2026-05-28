@@ -139,7 +139,7 @@ For more information about limitations on queries, conversations, data, and visu
 
 ## Dynamic shared quota
 
-Dynamic Shared Quota (DSQ) in Vertex AI manages capacity for the Gemini model. Unlike conventional quotas, DSQ lets you access a large shared pool of resources without a fixed per-project limit for model throughput.
+Dynamic Shared Quota (DSQ) in Gemini Enterprise Agent Platform manages capacity for the Gemini model. Unlike conventional quotas, DSQ lets you access a large shared pool of resources without a fixed per-project limit for model throughput.
 
 Performance, such as latency, can vary depending on the overall system load. During times of high demand across the shared pool, you might occasionally experience temporary `429 Resource Exhausted` errors. These errors indicate that the shared pool capacity is momentarily constrained, but not that you have reached a specific quota limit on your project. To check on the capacity, retry the request after a short delay.
 

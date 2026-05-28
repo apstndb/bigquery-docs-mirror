@@ -2,15 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https
 uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https
 title: The CREATE MODEL statement for remote models over custom models
-description: Use the CREATE MODEL statement for creating remote models in BigQuery over custom models deployed to [Vertex AI](/vertex-ai/docs).
+description: Use the CREATE MODEL statement for creating remote models in BigQuery over custom models deployed to [Gemini Enterprise Agent Platform](/gemini-enterprise-agent-platform/overview).
 data_source: docs.cloud.google.com
 ---
 
 # The CREATE MODEL statement for remote models over custom models
 
-This document describes the `CREATE MODEL` statement for creating remote models in BigQuery over custom models deployed to [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `CREATE MODEL` statement for creating remote models in BigQuery over custom models deployed to [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview) by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-After you create a remote model, you can use it with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to get predictions from the custom model deployed to Vertex AI.
+After you create a remote model, you can use it with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to get predictions from the custom model deployed to Agent Platform.
 
 ## `CREATE MODEL` syntax
 
@@ -52,7 +52,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 ### `INPUT` and `OUTPUT` clauses
 
-You must specify the `INPUT` and `OUTPUT` clauses when you create a remote model with an HTTPS endpoint over a custom model deployed to Vertex AI. The `INPUT` clause must contain the fields needed for the Vertex AI endpoint request, and the `OUTPUT` clause must contain the fields needed for the Vertex AI endpoint response.
+You must specify the `INPUT` and `OUTPUT` clauses when you create a remote model with an HTTPS endpoint over a custom model deployed to Agent Platform. The `INPUT` clause must contain the fields needed for the Gemini Enterprise Agent Platform endpoint request, and the `OUTPUT` clause must contain the fields needed for the Gemini Enterprise Agent Platform endpoint response.
 
 #### Supported data types
 
@@ -68,11 +68,11 @@ You can use the following BigQuery data types in the `INPUT` and `OUTPUT` clause
 
 #### Field name format
 
-The `INPUT` and `OUTPUT` field names must be identical as the field names of the Vertex AI endpoint request and response. For a Vertex AI endpoint with a single `OUTPUT` , there is no field name in the response, and therefore you can specify any field name in the `OUTPUT` statement.
+The `INPUT` and `OUTPUT` field names must be identical as the field names of the Gemini Enterprise Agent Platform endpoint request and response. For a Gemini Enterprise Agent Platform endpoint with a single `OUTPUT` , there is no field name in the response, and therefore you can specify any field name in the `OUTPUT` statement.
 
 **Example**
 
-If the Vertex AI request looks like the following example:
+If the Gemini Enterprise Agent Platform request looks like the following example:
 
     {
       "instances": [
@@ -85,7 +85,7 @@ The `INPUT` statement must be:
 
     INPUT(f1 INT64, f2 FLOAT64, f3 STRING, f4 ARRAY<INT64>)
 
-If the Vertex AI response looks like the following example:
+If the Gemini Enterprise Agent Platform response looks like the following example:
 
     {
       "predictions": [
@@ -110,7 +110,7 @@ The `OUTPUT` statement must be:
 
     `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
@@ -124,7 +124,7 @@ The connection elements are as follows:
     
     To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
+If you are creating a remote model over an Agent Platform model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
 If you are using the remote model to analyze unstructured data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
 
@@ -142,7 +142,7 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 For `vertex_ai_https_endpoint` , specify the [shared public endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/choose-endpoint-type) of a model deployed to Vertex AI, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . Dedicated public endpoints, Private Service Connect endpoints, and private endpoints aren't supported.
 
-To learn more about deploying a model to a shared public endpoint, see [Create a shared public endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/create-public-endpoint#create_a_shared_public_endpoint) .
+To learn more about deploying a model to a shared public endpoint, see [Create a shared public endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/create-public-endpoint#create_a_shared_public_endpoint) .
 
 The following example shows how to create a remote model that uses a shared public endpoint:
 
@@ -154,7 +154,7 @@ For information about supported locations, see [Locations for remote models](htt
 
 ## Example
 
-The following example creates a BigQuery ML remote model over a model deployed to a Vertex AI endpoint:
+The following example creates a BigQuery ML remote model over a model deployed to an Agent Platform endpoint:
 
     CREATE MODEL `project_id.mydataset.mymodel`
      INPUT(f1 INT64, f2 FLOAT64, f3 STRING, f4 ARRAY)
@@ -164,5 +164,5 @@ The following example creates a BigQuery ML remote model over a model deployed t
 
 ## What's next
 
-  - Learn how to [make predictions with remote models on Vertex AI](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#create-remote-model) .
+  - Learn how to [make predictions with remote models on Agent Platform](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#create-remote-model) .
   - For more information about the supported SQL statements and functions for remote models that use HTTPS endpoints, see [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

@@ -157,7 +157,7 @@ During a Snowflake transfer, the Snowflake connector connects to your Snowflake 
     TO ROLE MIGRATION_ROLE;
 
   GRANT USAGE
-    ON STORAGE_INTEGRATION_OBJECT_NAME
+    ON INTEGRATION STORAGE_INTEGRATION_OBJECT_NAME
     TO ROLE MIGRATION_ROLE;
 ```
 
@@ -449,7 +449,7 @@ You can also use [project default keys](https://docs.cloud.google.com/bigquery/d
 
 BigQuery has a load quota of 15 TB for each load job for each table by default. Internally, Snowflake compresses the table data, so the exported table size is larger than the table size reported by Snowflake.
 
-To improve load times for larger tables, specify the [`PIPELINE` job type](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#quotas_and_limits) for your reservation assignment.
+To improve load times for larger tables and to remove the 15TB BigQuery load limit, specify the [`PIPELINE` job type](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#quotas_and_limits) for your reservation assignment.
 
 Because of [Amazon S3's consistency model](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro#consistency_considerations) , it's possible that some files won't be included in the transfer to BigQuery.
 

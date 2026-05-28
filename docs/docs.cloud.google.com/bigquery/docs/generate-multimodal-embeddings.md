@@ -8,13 +8,13 @@ data_source: docs.cloud.google.com
 
 # Generate and search multimodal embeddings
 
-This tutorial shows how to generate multimodal embeddings for images and text using BigQuery and Vertex AI, and then use these embeddings to perform a text-to-image semantic search.
+This tutorial shows how to generate multimodal embeddings for images and text using BigQuery and Gemini Enterprise Agent Platform, and then use these embeddings to perform a text-to-image semantic search.
 
 This tutorial covers the following tasks:
 
   - Creating a [BigQuery object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) over image data in a Cloud Storage bucket.
   - Exploring the image data by using a [Colab Enterprise notebook in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
-  - Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that targets the [Vertex AI `multimodalembedding` foundation model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#foundation_model_apis) .
+  - Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that targets the [Gemini Enterprise Agent Platform `multimodalembedding` foundation model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#foundation_model_apis) .
   - Using the remote model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from the images in the object table.
   - Correct any embedding generation errors.
   - Optionally, creating a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) to index the image embeddings.
@@ -103,7 +103,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
-  - **Vertex AI** : You incur costs for calls to the Vertex AI service that's represented by the remote model.
+  - **Gemini Enterprise Agent Platform** : You incur costs for calls to the Agent Platform service that's represented by the remote model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -111,7 +111,7 @@ New Google Cloud users might be eligible for a [free trial](https://docs.cloud.g
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
-For more information about Vertex AI pricing, see the [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) page.
+For more information about Agent Platform pricing, see the [Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) page.
 
 ## Before you begin
 
@@ -126,7 +126,7 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
     
     **Roles required to enable APIs**
     
@@ -293,7 +293,7 @@ Create a [Colab Enterprise notebook](https://docs.cloud.google.com/colab/docs/in
 
 ## Create the remote model
 
-Create a remote model that represents a hosted Vertex AI multimodal embedding model:
+Create a remote model that represents a hosted Agent Platform multimodal embedding model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -323,7 +323,7 @@ Generate embeddings from the images in the object table by using the [`AI.GENERA
 
 ## Correct any embedding generation errors
 
-Check for and correct any embedding generation errors. Embedding generation can fail because of [Generative AI on Vertex AI quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) or service unavailability.
+Check for and correct any embedding generation errors. Embedding generation can fail because of [Generative AI on Agent Platform quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) or service unavailability.
 
 The `AI.GENERATE_EMBEDDING` function returns error details in the `status` column. This column is empty if embedding generation was successful, or contains an error message if embedding generation failed.
 

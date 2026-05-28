@@ -291,7 +291,7 @@ If these columns are returned by `query_statement` , you must reference them in 
 
 #### `field_name`
 
-For remote models, `INPUT` and `OUTPUT` field names must be identical as the field names of the Vertex AI endpoint request and response. See examples in [remote model `INPUT` and `OUTPUT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#in-out-clause) .
+For remote models, `INPUT` and `OUTPUT` field names must be identical as the field names of the Gemini Enterprise Agent Platform endpoint request and response. See examples in [remote model `INPUT` and `OUTPUT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#in-out-clause) .
 
 For XGBoost models, `INPUT` field names must be identical to the names in the `feature_names` field if `feature_names` field is populated in the XGBoost model file. See [XGBoost INPUT OUTPUT clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost#input_output_clause) for more details.
 
@@ -306,7 +306,7 @@ For XGBoost models, `INPUT` field names must be identical to the names in the `f
 
 ### `connection_name`
 
-BigQuery uses a `CLOUD_RESOURCE` [connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with your Vertex AI endpoint. You need to grant [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to connection's service account on your Vertex AI endpoint project.
+BigQuery uses a `CLOUD_RESOURCE` [connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with your Gemini Enterprise Agent Platform endpoint. You need to grant [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to connection's service account on your Gemini Enterprise Agent Platform endpoint project.
 
 See examples in [remote model `CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#connection) .
 
@@ -502,11 +502,11 @@ Remote models
 
 N/A
 
-Create a model by specifying a Cloud AI service, or the endpoint for a Vertex AI model.
+Create a model by specifying a Cloud AI service, or the endpoint for a Gemini Enterprise Agent Platform model.
 
-[CREATE MODEL statement for remote models over Google models in Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)  
+[CREATE MODEL statement for remote models over Google models in Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)  
   
-[CREATE MODEL statement for remote models over hosted models in Vertex AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)  
+[CREATE MODEL statement for remote models over hosted models in Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)  
   
 [CREATE MODEL statement for remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
 
@@ -539,12 +539,12 @@ When the applied model types are supervised learning models, unless "regressor" 
 </tr>
 <tr class="even">
 <td>VERTEX_AI_MODEL_ID</td>
-<td>The Vertex AI model ID to register the model with.</td>
+<td>The Agent Platform model ID to register the model with.</td>
 <td>All model types are supported.</td>
 </tr>
 <tr class="odd">
 <td>VERTEX_AI_MODEL_VERSION_ALIASES</td>
-<td>The Vertex AI model alias to register the model with.</td>
+<td>The Agent Platform model alias to register the model with.</td>
 <td>All model types are supported.</td>
 </tr>
 <tr class="even">
@@ -1014,9 +1014,9 @@ A weight must be present for every class label. The weights are not required to 
 </tr>
 <tr class="odd">
 <td>ENDPOINT</td>
-<td>Specifies the Vertex AI endpoint to use for a remote model. This can be the name of a Google model in Vertex AI or the HTTPS endpoint of a model deployed to Vertex AI.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint">Remote models over Google models in Vertex AI</a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint">Remote models over hosted models in Vertex AI</a><br />
+<td>Specifies the Gemini Enterprise Agent Platform endpoint to use for a remote model. This can be the name of a Google model in Agent Platform or the HTTPS endpoint of a model deployed to Agent Platform.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint">Remote models over Google models in Agent Platform</a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint">Remote models over hosted models in Agent Platform</a><br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#manually-deployed">Remote models over open models</a></td>
 </tr>
 <tr class="even">
@@ -1026,7 +1026,7 @@ A weight must be present for every class label. The weights are not required to 
 </tr>
 <tr class="odd">
 <td>MODEL_GARDEN_MODEL_NAME</td>
-<td>Specifies the model ID and model version of a supported Vertex AI Model Garden model.</td>
+<td>Specifies the model ID and model version of a supported Agent Platform Model Garden model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
 <tr class="even">
@@ -1036,17 +1036,17 @@ A weight must be present for every class label. The weights are not required to 
 </tr>
 <tr class="odd">
 <td>MACHINE_TYPE</td>
-<td>Specifies the machine type to use when deploying the model to Vertex AI.</td>
+<td>Specifies the machine type to use when deploying the model to Agent Platform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
 <tr class="even">
 <td>MIN_REPLICA_COUNT</td>
-<td>Specifies the minimum number of machine replicas used when deploying the model to Vertex AI.</td>
+<td>Specifies the minimum number of machine replicas used when deploying the model to Agent Platform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
 <tr class="odd">
 <td>MAX_REPLICA_COUNT</td>
-<td>Specifies the maximum number of machine replicas used when deploying the model to Vertex AI.</td>
+<td>Specifies the maximum number of machine replicas used when deploying the model to Agent Platform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
 <tr class="even">
@@ -1066,7 +1066,7 @@ A weight must be present for every class label. The weights are not required to 
 </tr>
 <tr class="odd">
 <td>ENDPOINT_IDLE_TTL</td>
-<td>Specifies the duration of inactivity after which a BigQuery-managed Vertex AI model is automatically undeployed from a Vertex AI endpoint.</td>
+<td>Specifies the duration of inactivity after which a BigQuery-managed Agent Platform model is automatically undeployed from an Agent Platform endpoint.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
 <tr class="even">
@@ -1187,17 +1187,17 @@ A weight must be present for every class label. The weights are not required to 
 <tr class="even">
 <td>PROMPT_COL</td>
 <td>The name of the prompt column in the training data table to use when performing supervised tuning.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#prompt_col">Remote models over Google models in Vertex AI</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#prompt_col">Remote models over Google models in Agent Platform</a></td>
 </tr>
 <tr class="odd">
 <td>LEARNING_RATE_MULTIPLIER</td>
 <td>A multiplier to apply to the recommended learning rate when performing supervised tuning.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#learning_rate_multiplier">Remote models over Google models in Vertex AI</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#learning_rate_multiplier">Remote models over Google models in Agent Platform</a></td>
 </tr>
 <tr class="even">
 <td>EVALUATION_TASK</td>
 <td>When performing supervised tuning, the type of task that you want to tune the model to perform.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#evaluation_task">Remote models over Google models in Vertex AI</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#evaluation_task">Remote models over Google models in Agent Platform</a></td>
 </tr>
 <tr class="odd">
 <td>DOCUMENT_PROCESSOR</td>

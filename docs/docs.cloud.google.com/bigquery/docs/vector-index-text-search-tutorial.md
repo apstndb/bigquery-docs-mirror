@@ -12,7 +12,7 @@ This tutorial guides you through the end-to-end process of creating and using [t
 
 This tutorial covers the following tasks:
 
-  - Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over a Vertex AI embedding model.
+  - Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over a Gemini Enterprise Agent Platform embedding model.
   - Using the remote model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text in a BigQuery table.
   - Creating a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) to index the embeddings in order to improve search performance.
   - Using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) with the embeddings to search for similar text.
@@ -49,7 +49,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
-  - **Vertex AI** : You incur costs for calls to the Vertex AI service that's represented by the remote model.
+  - **Gemini Enterprise Agent Platform** : You incur costs for calls to the Agent Platform service that's represented by the remote model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -57,7 +57,7 @@ New Google Cloud users might be eligible for a [free trial](https://docs.cloud.g
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
-For more information about Vertex AI pricing, see the [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) page.
+For more information about Agent Platform pricing, see the [Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) page.
 
 ## Before you begin
 
@@ -72,7 +72,7 @@ For more information about Vertex AI pricing, see the [Vertex AI pricing](https:
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
     
     **Roles required to enable APIs**
     
@@ -125,7 +125,7 @@ Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/referen
 
 ## Create the remote model for text embedding generation
 
-Create a remote model that represents a hosted Vertex AI text embedding generation model:
+Create a remote model that represents a hosted Agent Platform text embedding generation model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -158,7 +158,7 @@ Generate text embeddings from patent abstracts using the [`AI.GENERATE_EMBEDDING
 
 This query takes approximately 5 minutes to complete.
 
-Embedding generation using the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) might fail due to Vertex AI LLM [quotas](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) or service unavailability. Error details are returned in the `status` column. An empty `status` column indicates successful embedding generation.
+Embedding generation using the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) might fail due to Agent Platform LLM [quotas](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) or service unavailability. Error details are returned in the `status` column. An empty `status` column indicates successful embedding generation.
 
 For alternative text embedding generation methods in BigQuery, see the [Embed text with pretrained TensorFlow models tutorial](https://docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models) .
 
@@ -231,7 +231,7 @@ The model you use to generate the embeddings in this query must be the same as t
 
 ## Create the remote model for text generation
 
-Create a remote model that represents a hosted Vertex AI text generation model:
+Create a remote model that represents a hosted Agent Platform text generation model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

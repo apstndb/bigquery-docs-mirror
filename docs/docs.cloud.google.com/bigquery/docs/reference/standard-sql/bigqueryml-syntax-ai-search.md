@@ -131,7 +131,7 @@ The `AI.SEARCH` and [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/doc
 
 ## Locations
 
-You can run `AI.SEARCH` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Vertex AI embedding models, and also in the `US` and `EU` multi-regions.
+You can run `AI.SEARCH` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Gemini Enterprise Agent Platform embedding models, and also in the `US` and `EU` multi-regions.
 
 ## Quotas
 

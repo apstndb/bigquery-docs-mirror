@@ -16,7 +16,7 @@ To run this tutorial, you need the following Identity and Access Management (IAM
 
   - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `roles/bigquery.admin` ).
   - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ).
-  - Deploy and undeploy models in Vertex AI: Vertex AI Administrator ( `roles/aiplatform.admin` ).
+  - Deploy and undeploy models in Gemini Enterprise Agent Platform: Vertex AI Administrator ( `roles/aiplatform.admin` ).
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -26,7 +26,7 @@ These predefined roles contain the permissions required to perform the tasks in 
   - Create, delegate, and use a connection: `bigquery.connections.*`
   - Set the default connection: `bigquery.config.*`
   - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
-  - Deploy and undeploy a Vertex AI model:
+  - Deploy and undeploy an Agent Platform model:
       - `aiplatform.endpoints.deploy`
       - `aiplatform.endpoints.undeploy`
   - Create a model and run inference:
@@ -43,7 +43,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
-  - **Vertex AI** : You incur costs for calls to the Vertex AI model that's represented by the remote model.
+  - **Gemini Enterprise Agent Platform** : You incur costs for calls to the Agent Platform model that's represented by the remote model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -51,7 +51,7 @@ New Google Cloud users might be eligible for a [free trial](https://docs.cloud.g
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
-Open models that you deploy to Vertex AI are charged per machine-hour. This means billing starts as soon as the endpoint is fully set up, and continues until you un-deploy it. For more information about Vertex AI pricing, see the [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing#prediction-prices) page.
+Open models that you deploy to Agent Platform are charged per machine-hour. This means billing starts as soon as the endpoint is fully set up, and continues until you un-deploy it. For more information about Agent Platform pricing, see the [Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing#prediction-prices) page.
 
 ## Before you begin
 
@@ -66,7 +66,7 @@ Open models that you deploy to Vertex AI are charged per machine-hour. This mean
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
     
     **Roles required to enable APIs**
     
@@ -119,7 +119,7 @@ Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/referen
 
 ## Create the remote model
 
-Create a remote model that represents a hosted Vertex AI model:
+Create a remote model that represents a hosted Agent Platform model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -243,7 +243,7 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 ## Undeploy model
 
-If you choose not to [delete your project as recommended](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma#clean_up) , you must undeploy the Gemma model in Vertex AI to avoid continued billing for it. BigQuery automatically undeploys the model after a specified period of idleness (6.5 hours by default). Alternatively, you can immediately undeploy the model by using the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) , as shown in the following example:
+If you choose not to [delete your project as recommended](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma#clean_up) , you must undeploy the Gemma model in Agent Platform to avoid continued billing for it. BigQuery automatically undeploys the model after a specified period of idleness (6.5 hours by default). Alternatively, you can immediately undeploy the model by using the [`ALTER MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) , as shown in the following example:
 
     ALTER MODEL `bqml_tutorial.gemma_model`
     SET OPTIONS (deploy_model = false);

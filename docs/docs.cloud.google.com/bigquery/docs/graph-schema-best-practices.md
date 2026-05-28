@@ -65,3 +65,4 @@ The following example defines primary and foreign key constraints on the node ta
   - For more information about graphs, see [Introduction to BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
   - For more information about defining a schema, see [Schema overview](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .
   - For more information about writing graph queries, see [Graph query overview](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
+  - For more information about building graphs for measures and modeling many-to-many relationships, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures#best-practices-for-building-graphs-for-measures) .

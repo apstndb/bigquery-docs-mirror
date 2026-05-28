@@ -46,7 +46,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
-  - **Vertex AI** : You incur costs for calls to the Vertex AI model.
+  - **Gemini Enterprise Agent Platform** : You incur costs for calls to the Agent Platform model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -54,7 +54,7 @@ New Google Cloud users might be eligible for a [free trial](https://docs.cloud.g
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
-For more information about Vertex AI pricing, see [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
+For more information about Agent Platform pricing, see [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
 
 ## Before you begin
 
@@ -69,7 +69,7 @@ For more information about Vertex AI pricing, see [Vertex AI pricing](https://do
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
     
     **Roles required to enable APIs**
     
@@ -95,7 +95,7 @@ Create a BigQuery dataset to store your models and sample data:
 
 ## Create the text embedding generation model
 
-Create a remote model that represents a hosted Vertex AI `text-embedding-005` model:
+Create a remote model that represents a hosted Agent Platform `text-embedding-005` model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
