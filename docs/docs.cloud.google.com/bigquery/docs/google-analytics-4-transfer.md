@@ -54,6 +54,11 @@ For information about the data retention policy for Google Analytics, see <a hre
 </tbody>
 </table>
 
+## Limitations
+
+  - Aggregated totals for distinct users and session metrics might not be accurate and might not match the values in Google Analytics.
+  - The Google Analytics 4 connector doesn't support the transfer of custom properties.
+
 ## Data ingestion from Google Analytics 4 transfers
 
 When you transfer data from Google Analytics 4 into BigQuery, the data is loaded into BigQuery tables that are partitioned by date. The table partition that the data is loaded into corresponds to the date from the data source. If you schedule multiple transfers for the same date, BigQuery Data Transfer Service overwrites the partition for that specific date with the latest data. Multiple transfers in the same day or running backfills don't result in duplicate data, and partitions for other dates are not affected.
@@ -204,10 +209,6 @@ The data transfer is created in the default project:
 ### API
 
 Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
-
-## Limitations
-
-  - Aggregated totals for distinct users and session metrics might not be accurate and might not match the values in Google Analytics.
 
 ## Specify encryption key with transfers
 
