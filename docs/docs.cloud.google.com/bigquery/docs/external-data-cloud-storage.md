@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/external-data-cloud-storage
 uri: https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage
-title: External tables for Cloud Storage
+title: Create Cloud Storage external tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# External tables for Cloud Storage
+# Create Cloud Storage external tables
 
 BigQuery supports querying Cloud Storage data in the following formats:
 

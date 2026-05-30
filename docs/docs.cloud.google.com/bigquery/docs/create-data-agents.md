@@ -604,14 +604,26 @@ As the Gemini Enterprise administrator, you can make a published agent available
 6.  Click **Preview agent details \> Next** .
 
 7.  To enable the agent to access Google Cloud resources on your behalf, complete the following steps:
+    
+    1.  Enter the **Client ID** and **Client secret** that you generated in the [Configure authorization details](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) section.
+    
+    2.  In the **Authorization URI** field, enter the following:
+        
+            https://accounts.google.com/o/oauth2/v2/auth?client_id=client_id&redirect_uri=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fstatic%2Foauth%2Foauth.html&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&include_granted_scopes=true&response_type=code&access_type=offline&prompt=consent
+        
+        Replace client\_id with the client ID that you generated in the [Configure authorization details](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) section.
+    
+    3.  In the **Token URI** field, enter the following:
+        
+            https://oauth2.googleapis.com/token
+    
+    4.  In the **Scopes** field, enter the following:
+        
+            https://www.googleapis.com/auth/cloud-platform
 
-8.  Enter the **Client ID** , **Client secret** , **Authorization URI** , and **Token URI** that you generated in the [Configure authorization details](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) section.
+8.  Click **Finish** .
 
-9.  Enter the **Scopes** .
-
-10. Click **Finish** .
-
-11. [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups that the data analyst provides.
+9.  [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups that the data analyst provides.
 
 For more information about working with A2A agents in Gemini Enterprise, see [Register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent) .
 

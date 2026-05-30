@@ -242,7 +242,7 @@ Set a data policy on a column by attaching the policy tag associated with the da
 
 The user or service account that sets a policy tag needs the `datacatalog.taxonomies.get` and `bigquery.tables.setCategory` permissions. `datacatalog.taxonomies.get` is included in the Data Catalog Policy Tags Admin and Project Viewer roles. `bigquery.tables.setCategory` is included in the BigQuery Admin ( `roles/bigquery.admin` ) and BigQuery Data Owner ( `roles/bigquery.dataOwner` ) roles.
 
-To view taxonomies and policy tags across all projects in an organization in Google Cloud console, users need the `resourcemanager.organizations.get` permission, which is included in the Organization Viewer role.
+To view taxonomies and policy tags across all projects in an organization in Google Cloud console, users need the `resourcemanager.organizations.get` permission, which is included in the Organization Viewer role. This permission is **not** required when using the API or the `bq` command-line tool.
 
 > **Note:** You can assign only one policy tag per column.
 

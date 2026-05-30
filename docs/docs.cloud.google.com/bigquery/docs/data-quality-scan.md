@@ -444,7 +444,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     'use strict';
     
-    function main(parent, dataScan, dataScanId) {
+    function main(parent, dataScan) {
       /**
        * This snippet has been automatically generated and should be regarded as a code template only.
        * It will require modifications to work.
@@ -463,7 +463,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
        */
       // const dataScan = {}
       /**
-       *  Required. DataScan identifier.
+       *  Optional. DataScan identifier. If not provided, a unique ID will be
+       *  generated with the prefix "data-scan-".
        *  * Must contain only lowercase letters, numbers and hyphens.
        *  * Must start with a letter.
        *  * Must end with a number or a letter.
@@ -488,7 +489,6 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         const request = {
           parent,
           dataScan,
-          dataScanId,
         };
     
         // Run request
@@ -533,7 +533,6 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         request = dataplex_v1.CreateDataScanRequest(
             parent="parent_value",
             data_scan=data_scan,
-            data_scan_id="data_scan_id_value",
         )
     
         # Make the request

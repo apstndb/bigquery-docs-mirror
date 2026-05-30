@@ -29,7 +29,7 @@ If you are using [Maven](https://maven.apache.org/) , add the following to your 
         <dependency>
           <groupId>com.google.cloud</groupId>
           <artifactId>libraries-bom</artifactId>
-          <version>26.82.0</version>
+          <version>26.83.0</version>
           <type>pom</type>
           <scope>import</scope>
         </dependency>

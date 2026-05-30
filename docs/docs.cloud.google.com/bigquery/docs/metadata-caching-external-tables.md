@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables
 uri: https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables
-title: Metadata caching for external tables
+title: Use metadata caching for external data sources
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Metadata caching for external tables
+# Use metadata caching for external data sources
 
 This document describes how to use metadata caching (also known as *column metadata indexing* ) to improve query performance on object tables and some types of BigLake tables.
 

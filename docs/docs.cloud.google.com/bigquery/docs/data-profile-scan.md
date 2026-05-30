@@ -423,7 +423,6 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         request = dataplex_v1.CreateDataScanRequest(
             parent="parent_value",
             data_scan=data_scan,
-            data_scan_id="data_scan_id_value",
         )
     
         # Make the request

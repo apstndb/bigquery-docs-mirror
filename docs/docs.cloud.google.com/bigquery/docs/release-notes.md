@@ -243,13 +243,13 @@ Feature
 
 BigQuery Apache Iceberg external tables now support [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) , including binary deletion vectors. For more information, see [Apache Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
 
+Announcement
+
+A known issue has been resolved where a materialized view refresh could expose masked or filtered data from fine grained access control policies in error messages. No further action is needed.
+
 Feature
 
 BigQuery agent analytics is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in the Google Agent Developer Kit. [BigQuery agent analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics) is an open source solution that lets you capture, analyze, and visualize multimodal agent interaction data at scale.
-
-Announcement
-
-A known issue has been resolved where a materialized view refresh could expose could expose masked or filtered data from fine grained access control policies in error messages. No further action is needed.
 
 Feature
 

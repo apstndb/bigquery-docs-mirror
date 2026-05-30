@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/query-azure-data
 uri: https://docs.cloud.google.com/bigquery/docs/query-azure-data
-title: Query Blob Storage data
+title: Query Blob Storage BigLake tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Query Blob Storage data
+# Query Blob Storage BigLake tables
 
 This document describes how to query data stored in an [Azure Blob Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
 

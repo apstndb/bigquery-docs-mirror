@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/biglake-intro
 uri: https://docs.cloud.google.com/bigquery/docs/biglake-intro
-title: Introduction to BigLake external tables
+title: Introduction to BigLake tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Introduction to BigLake external tables
+# Introduction to BigLake tables
 
 This document provides an overview of BigLake and assumes familiarity with database tables and Identity and Access Management (IAM). To query data stored in the [supported data stores](https://docs.cloud.google.com/bigquery/docs/biglake-intro#supported-data-stores) , you must first create BigLake tables and then query them using GoogleSQL syntax:
 

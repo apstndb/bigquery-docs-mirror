@@ -49,6 +49,7 @@ Use the `format` option to specify the format of the exported data. The followin
 
   - You cannot export nested and repeated data in CSV format.
   - If you export data in JSON format, `INT64` data types are encoded as JSON strings to preserve 64-bit precision.
+  - If your `query_statement` includes an `ORDER BY` clause and you export to multiple files using a wildcard, the globally sorted result set is distributed sequentially across the generated files.
 
 You are not billed for the export operation, but you are billed for running the query and for storing data in Cloud Storage, Amazon S3, or Blob Storage. For more information, see [Cloud Storage pricing](https://cloud.google.com/storage/pricing) , [Amazon S3 pricing](https://aws.amazon.com/s3/pricing) , or [Blob Storage pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/) .
 
@@ -98,7 +99,7 @@ Note: When `overwrite` is `true` , files are only overwritten, no files are ever
 
 `STRING`
 
-Required. The destination URI for the export. The `uri` option must be a single-wildcard URI as described in [Exporting data into one or more files](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) .
+Required. The destination URI for the export. The `uri` option must be a single-wildcard URI as described in [Exporting data into one or more files](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) . If your query includes an \`ORDER BY\` clause, the globally sorted rows are distributed sequentially across the generated files.
 
 Examples: `"gs://bucket/path/file_*.csv"` or `"s3://bucket/path/file_*.csv"`
 

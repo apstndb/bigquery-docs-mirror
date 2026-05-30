@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake
 uri: https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake
-title: Query Cloud Storage data in BigLake tables
+title: Query Cloud Storage BigLake tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Query Cloud Storage data in BigLake tables
+# Query Cloud Storage BigLake tables
 
 This document describes how to query data stored in a [Cloud Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
 

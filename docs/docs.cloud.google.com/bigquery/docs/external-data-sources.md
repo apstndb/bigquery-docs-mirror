@@ -17,20 +17,17 @@ Use cases for external data sources include the following:
   - For extract-load-transform (ELT) workloads, loading and cleaning your data in one pass and writing the cleaned result into BigQuery storage, by using a `CREATE TABLE ... AS SELECT` query.
   - Joining BigQuery tables with frequently changing data from an external data source. By querying the external data source directly, you don't need to reload the data into BigQuery storage every time it changes.
 
-BigQuery has two different mechanisms for querying external data: external tables and federated queries.
+## External data source tables
 
-## External tables
+External data source tables are similar to standard BigQuery tables, in that these tables store their metadata and schema in BigQuery storage. However, their data resides in an external source.
 
-External tables are similar to standard BigQuery tables, in that these tables store their metadata and schema in BigQuery storage. However, their data resides in an external source.
+External data source tables are contained inside a dataset, and you manage them in the same way that you manage a standard BigQuery table. For example, you can [view the table's properties](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) , [set access controls](https://docs.cloud.google.com/bigquery/docs/table-access-controls) , and so forth. You can query these tables and in most cases you can join them with other tables.
 
-External tables are contained inside a dataset, and you manage them in the same way that you manage a standard BigQuery table. For example, you can [view the table's properties](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) , [set access controls](https://docs.cloud.google.com/bigquery/docs/table-access-controls) , and so forth. You can query these tables and in most cases you can join them with other tables.
-
-There are four kinds of external tables:
+There are three kinds of external data source tables:
 
   - BigLake tables
-  - BigQuery Omni tables
   - Object tables
-  - Non-BigLake external tables
+  - External tables
 
 ### BigLake tables
 
@@ -46,9 +43,9 @@ Like BigLake tables, object tables use access delegation, which decouples access
 
 For more information, see [Introduction to object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
-### Non-BigLake external tables
+### External tables
 
-Non-BigLake external tables let you query structured data in external data stores. To query a non-BigLake external table, you must have permissions to both the external table and the external data source. For example, to query a non-BigLake external table that uses a data source in Cloud Storage, you must have the following permissions:
+External tables let you query structured data in external data stores. To query an external table, you must have permissions to both the external table and the external data source. For example, to query an external table that uses a data source in Cloud Storage, you must have the following permissions:
 
   - `bigquery.tables.getData`
   - `bigquery.jobs.create`
@@ -67,7 +64,7 @@ For more information, see [Introduction to federated queries](https://docs.cloud
 
 The following table compares the behavior of external data sources:
 
-|                                                                   | **BigLake tables**                                                                   | **Object tables**                                                | **Non-BigLake external tables**                                                | **Federated queries**                                                          |
+|                                                                   | **BigLake tables**                                                                   | **Object tables**                                                | **External tables**                                                            | **Federated queries**                                                          |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | **Uses access delegation**                                        | Yes, through a service account                                                       | Yes, through a service account                                   | No                                                                             | Yes, through a database user account (Cloud SQL only)                          |
 | **Can be based on multiple source URIs**                          | Yes                                                                                  | Yes                                                              | Yes (Cloud Storage only)                                                       | Not applicable                                                                 |

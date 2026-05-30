@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/query-drive-data
 uri: https://docs.cloud.google.com/bigquery/docs/query-drive-data
-title: Query Drive data
+title: Query Drive external tables
 description: Describes how to use BigQuery to query data stored in Google Drive
 data_source: docs.cloud.google.com
 ---
 
-# Query Drive data
+# Query Drive external tables
 
 This document describes how to query data stored in an [Google Drive external table](https://docs.cloud.google.com/bigquery/docs/external-data-drive) .
 

@@ -31,7 +31,7 @@ When you export data from BigQuery, note the following:
   - You cannot export data from multiple tables in a single extract job.
   - You cannot choose a compression type other than `GZIP` when you export data using the Google Cloud console.
   - When you export a table in JSON format, the symbols `<` , `>` , and `&` are converted by using the unicode notation `\uNNNN` , where `N` is a hexadecimal digit. For example, `profit&loss` becomes `profit\u0026loss` . This unicode conversion is done to avoid security vulnerabilities.
-  - The order of exported table data is not guaranteed unless you use the [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) statement and specify an `ORDER BY` clause in the `query_statement` .
+  - The order of exported table data is not guaranteed unless you use the [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) statement and specify an `ORDER BY` clause in the `query_statement` . When you export to multiple files, the ordered sequence is preserved globally across all generated files.
   - BigQuery doesn't support Cloud Storage resource paths that include multiple consecutive slashes after the initial double slash. Cloud Storage object names can contain multiple consecutive slash ("/") characters. However, BigQuery converts multiple consecutive slashes into a single slash. For example, the following resource path, though valid in Cloud Storage, doesn't work in BigQuery: `gs:// bucket /my//object//name` .
   - Any new data loaded into BigQuery while an extract job is running won't be included in that extract job. You must create a new extract job to export the new data.
 
@@ -697,7 +697,7 @@ Single wildcard URI
 
 A single wildcard can be used only in the filename component of the URI.
 
-Use a single wildcard URI if you think your exported data will be larger than the 1 GB maximum value. BigQuery shards your data into multiple files based on the provided pattern. The size of the exported files will vary.
+Use a single wildcard URI if you think your exported data will be larger than the 1 GB maximum value. BigQuery shards your data into multiple files based on the provided pattern. The size of the exported files will vary. If your query includes an \`ORDER BY\` clause, the globally sorted result set is distributed sequentially across the generated files.
 
 **Property definition:**
 

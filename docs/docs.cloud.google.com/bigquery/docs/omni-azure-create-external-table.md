@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table
 uri: https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table
-title: External tables for Azure Blob storage
+title: Create Azure Blob Storage BigLake tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# External tables for Azure Blob storage
+# Create Azure Blob Storage BigLake tables
 
 This document describes how to create an Azure Blob Storage BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Blob Storage. Access delegation decouples access to the BigLake table from access to the underlying datastore.
 
