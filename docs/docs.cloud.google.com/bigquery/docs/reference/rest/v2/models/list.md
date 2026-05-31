@@ -17,6 +17,10 @@ data_source: docs.cloud.google.com
 
 Lists all models in the specified dataset. Requires the READER dataset role. After retrieving the list of models, you can get information about a particular model by calling the models.get method.
 
+### IAM Permissions
+
+Requires the `bigquery.models.list` permission on the dataset.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/models`

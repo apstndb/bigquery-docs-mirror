@@ -17,6 +17,10 @@ data_source: docs.cloud.google.com
 
 Lists all row access policies on the specified table.
 
+### IAM Permissions
+
+Requires the `bigquery.rowAccessPolicies.list` permission on the table.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies`

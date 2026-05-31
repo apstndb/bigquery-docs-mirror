@@ -17,6 +17,18 @@ data_source: docs.cloud.google.com
 
 RPC to get the results of a query job.
 
+### IAM Permissions
+
+Requires the following IAM permission(s) to use this method:
+
+  - `bigquery.jobs.get` on the job.
+  - `bigquery.tables.getData` on the destination table.
+
+If the user matches the creator of the job, the following IAM permission(s) are required instead:
+
+  - `bigquery.jobs.create` on the project.
+  - `bigquery.tables.getData` on the destination table.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/queries/{jobId}`

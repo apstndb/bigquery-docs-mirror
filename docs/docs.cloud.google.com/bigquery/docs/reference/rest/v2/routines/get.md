@@ -16,6 +16,10 @@ data_source: docs.cloud.google.com
 
 Gets the specified routine resource by routine ID.
 
+### IAM Permissions
+
+Requires the `bigquery.routines.get` permission on the routine.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}`

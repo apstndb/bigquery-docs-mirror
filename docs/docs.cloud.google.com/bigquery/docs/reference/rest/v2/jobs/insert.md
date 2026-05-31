@@ -20,6 +20,15 @@ This API has two different kinds of endpoint URIs, as this method supports a var
   - The *Metadata* URI is used for most interactions, as it accepts the job configuration directly.
   - The *Upload* URI is ONLY for the case when you're sending both a load job configuration and a data stream together. In this case, the Upload URI accepts the job configuration and the data as two distinct multipart MIME parts.
 
+### IAM Permissions
+
+Requires the `bigquery.jobs.create` permission on the project resource.
+
+Additional permissions are required depending on the job type:
+
+  - **Load, Export, and Copy jobs** : Generally require data-level permissions such as `bigquery.tables.export` or access to external storage.
+  - **Query jobs** : Permissions are dependent on the SQL statement. Complex queries (DDL, DCL) may require additional permissions to create reservations, modify IAM policies, or update project settings.
+
 ### HTTP request
 
   - Upload URI, for media upload requests:  

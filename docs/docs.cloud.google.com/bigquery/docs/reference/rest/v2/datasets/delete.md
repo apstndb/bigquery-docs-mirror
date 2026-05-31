@@ -16,6 +16,10 @@ data_source: docs.cloud.google.com
 
 Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.
 
+### IAM Permissions
+
+Requires the `bigquery.datasets.delete` permission on the dataset.
+
 ### HTTP request
 
 `DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}`

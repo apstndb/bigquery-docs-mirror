@@ -17,6 +17,15 @@ data_source: docs.cloud.google.com
 
 Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.
 
+### IAM Permissions
+
+Requires no specific IAM permission(s) to use this method. Users are able to list the jobs they created.
+
+Additional access is granted based on the following permissions:
+
+  - Users with the `bigquery.jobs.listAll` permission can list all jobs with all metadata.
+  - Users with the `bigquery.jobs.list` permission can list all jobs, but with redacted information for jobs they did not create.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs`

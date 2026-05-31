@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Patch specific fields in the specified model.
 
+### IAM Permissions
+
+Requires the `bigquery.models.updateMetadata` permission on the model.
+
 ### HTTP request
 
 `PATCH https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}`

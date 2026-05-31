@@ -15,6 +15,14 @@ data_source: docs.cloud.google.com
 
 Creates a row access policy.
 
+### IAM Permissions
+
+Requires the following IAM permission(s) on the table:
+
+  - `bigquery.rowAccessPolicies.create`
+  - `bigquery.rowAccessPolicies.setIamPolicy`
+  - `bigquery.tables.getData`
+
 ### HTTP request
 
 `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies`

@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Creates a new routine in the dataset.
 
+### IAM Permissions
+
+Requires the `bigquery.routines.create` permission on the dataset.
+
 ### HTTP request
 
 `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines`

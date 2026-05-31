@@ -16,6 +16,10 @@ data_source: docs.cloud.google.com
 
 Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.
 
+### IAM Permissions
+
+Requires the `bigquery.datasets.update` permission on the dataset.
+
 ### HTTP request
 
 `PUT https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}`

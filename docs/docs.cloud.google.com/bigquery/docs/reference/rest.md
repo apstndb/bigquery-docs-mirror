@@ -143,7 +143,7 @@ Methods
 `  getServiceAccount  `
 
 `GET /bigquery/v2/projects/{projectId}/serviceAccount`  
-RPC to get the service account for a project used for interactions with Google Cloud KMS
+RPC to get the service account for a project used for interactions with Google Cloud KMS.
 
 `  list  `
 

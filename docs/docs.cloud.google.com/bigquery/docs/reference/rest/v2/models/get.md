@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Gets the specified model resource by model ID.
 
+### IAM Permissions
+
+Requires the `bigquery.models.getMetadata` permission on the model.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}`

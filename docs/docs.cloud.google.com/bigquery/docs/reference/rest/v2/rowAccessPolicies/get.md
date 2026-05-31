@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Gets the specified row access policy by policy ID.
 
+### IAM Permissions
+
+Requires the `bigquery.rowAccessPolicies.get` permission on the table.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}`

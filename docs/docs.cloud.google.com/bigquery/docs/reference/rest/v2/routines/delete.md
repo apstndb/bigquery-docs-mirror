@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Deletes the routine specified by routineId from the dataset.
 
+### IAM Permissions
+
+Requires the `bigquery.routines.delete` permission on the routine.
+
 ### HTTP request
 
 `DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}`

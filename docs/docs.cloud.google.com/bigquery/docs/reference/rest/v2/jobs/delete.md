@@ -16,6 +16,10 @@ data_source: docs.cloud.google.com
 
 Requests the deletion of the metadata of a job. This call returns when the job's metadata is deleted.
 
+### IAM Permissions
+
+Requires the `bigquery.jobs.delete` permission on the job resource.
+
 ### HTTP request
 
 `DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/jobs/{jobId}/delete`

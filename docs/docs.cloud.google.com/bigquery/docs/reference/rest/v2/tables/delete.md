@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.
 
+### IAM Permissions
+
+Requires the `bigquery.tables.delete` permission on the table.
+
 ### HTTP request
 
 `DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`

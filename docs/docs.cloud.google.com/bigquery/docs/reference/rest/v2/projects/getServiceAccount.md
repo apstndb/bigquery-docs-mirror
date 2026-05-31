@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
   - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/getServiceAccount#body.aspect)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/getServiceAccount#try-it)
 
-RPC to get the service account for a project used for interactions with Google Cloud KMS
+RPC to get the service account for a project used for interactions with Google Cloud KMS. Requires the `bigquery.jobs.create` permission on the project resource. This permission is required to authorize the retrieval of the project's service identity for technical management tasks like encryption configuration.
 
 ### HTTP request
 

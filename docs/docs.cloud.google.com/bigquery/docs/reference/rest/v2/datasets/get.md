@@ -17,6 +17,10 @@ data_source: docs.cloud.google.com
 
 Returns the dataset specified by datasetID.
 
+### IAM Permissions
+
+Requires the `bigquery.datasets.get` permission on the dataset.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}`

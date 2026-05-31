@@ -16,6 +16,10 @@ data_source: docs.cloud.google.com
 
 Updates information in an existing table. The update method replaces the entire Table resource, whereas the patch method only replaces fields that are provided in the submitted Table resource.
 
+### IAM Permissions
+
+Requires the `bigquery.tables.update` permission on the table.
+
 ### HTTP request
 
 `PUT https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`

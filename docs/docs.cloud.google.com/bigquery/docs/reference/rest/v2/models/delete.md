@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Deletes the model specified by modelId from the dataset.
 
+### IAM Permissions
+
+Requires the `bigquery.models.delete` permission on the model.
+
 ### HTTP request
 
 `DELETE https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}`

@@ -17,6 +17,14 @@ data_source: docs.cloud.google.com
 
 Streams data into BigQuery one record at a time without needing to run a load job.
 
+### IAM Permissions
+
+Requires the following IAM permission(s) to use this method:
+
+  - `bigquery.tables.updateData` on the table.
+  - `bigquery.tables.get` on the table.
+  - `bigquery.datasets.get` on the dataset.
+
 ### HTTP request
 
 `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll`

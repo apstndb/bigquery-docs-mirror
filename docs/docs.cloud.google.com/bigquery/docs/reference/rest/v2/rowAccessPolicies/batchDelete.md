@@ -16,6 +16,13 @@ data_source: docs.cloud.google.com
 
 Deletes provided row access policies.
 
+### IAM Permissions
+
+Requires the following IAM permission(s) on the table:
+
+  - `bigquery.rowAccessPolicies.delete`
+  - `bigquery.rowAccessPolicies.setIamPolicy`
+
 ### HTTP request
 
 `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies:batchDelete`

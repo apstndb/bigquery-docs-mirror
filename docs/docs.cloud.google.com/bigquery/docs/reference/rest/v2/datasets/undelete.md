@@ -15,6 +15,13 @@ data_source: docs.cloud.google.com
 
 Undeletes a dataset which is within time travel window based on datasetId. If a time is specified, the dataset version deleted at that time is undeleted, else the last live version is undeleted.
 
+### IAM Permissions
+
+Requires the following IAM permission(s) to use this method:
+
+  - `bigquery.datasets.create` on the project.
+  - `bigquery.datasets.get` on the dataset.
+
 ### HTTP request
 
 `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}:undelete`

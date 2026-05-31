@@ -18,6 +18,10 @@ data_source: docs.cloud.google.com
 
 Lists all tables in the specified dataset. Requires the READER dataset role.
 
+### IAM Permissions
+
+Requires the `bigquery.tables.list` permission on the dataset.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables`

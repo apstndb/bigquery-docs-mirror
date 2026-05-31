@@ -17,6 +17,10 @@ data_source: docs.cloud.google.com
 
 Lists all datasets in the specified project to which the user has been granted the READER dataset role.
 
+### IAM Permissions
+
+Requires no specific IAM permission(s) to use this method. Results are filtered to only include datasets on which the caller has the `bigquery.datasets.get` permission.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets`

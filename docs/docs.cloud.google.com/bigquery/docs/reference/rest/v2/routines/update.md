@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Updates information in an existing routine. The update method replaces the entire Routine resource.
 
+### IAM Permissions
+
+Requires the `bigquery.routines.update` permission on the routine.
+
 ### HTTP request
 
 `PUT https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}`

@@ -17,6 +17,10 @@ data_source: docs.cloud.google.com
 
 tabledata.list the content of a table in rows.
 
+### IAM Permissions
+
+Requires the `bigquery.tables.getData` permission on the table.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data`

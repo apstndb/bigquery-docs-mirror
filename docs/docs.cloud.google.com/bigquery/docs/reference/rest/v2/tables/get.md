@@ -17,6 +17,10 @@ data_source: docs.cloud.google.com
 
 Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.
 
+### IAM Permissions
+
+Requires the `bigquery.tables.get` permission on the table.
+
 ### HTTP request
 
 `GET https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}`

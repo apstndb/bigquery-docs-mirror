@@ -19,6 +19,12 @@ data_source: docs.cloud.google.com
 
 Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
 
+### IAM Permissions
+
+Requires the `bigquery.jobs.create` permission on the project resource.
+
+Data-level permissions are highly dependent on the SQL statement being executed. While standard queries require data access (such as `bigquery.tables.getData` ), complex operations like DDL or DCL may require permissions to manage reservations, IAM policies, or project settings.
+
 ### HTTP request
 
 `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/queries`

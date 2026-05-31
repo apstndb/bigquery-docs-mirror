@@ -15,6 +15,10 @@ data_source: docs.cloud.google.com
 
 Creates a new, empty table in the dataset.
 
+### IAM Permissions
+
+Requires the `bigquery.tables.create` permission on the dataset.
+
 ### HTTP request
 
 `POST https://bigquery.googleapis.com/bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables`
