@@ -24,6 +24,12 @@ With the Hive Metastore migration connector, you can use Cloud Storage as the fi
     
     The Lakehouse runtime catalog Iceberg REST Catalog creates interoperability between your query engines by offering a single source of truth for all of your Iceberg data. You can use BigQuery to query the data, in addition to Apache Spark and other OSS engines. The Lakehouse runtime catalog Iceberg REST Catalog only supports Iceberg table formats.
 
+  - [Lakehouse runtime catalog Hive Catalog](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore)
+    
+    We recommend using the Lakehouse runtime catalog Hive Catalog for all your Hive tables.
+    
+    The Lakehouse runtime catalog Hive Catalog lets you register your migrated Hive tables with [Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore) using a Hive Catalog. This offers a serverless metastore for Apache Hive tables. You can use BigQuery to query the data (subject to format limitations), in addition to Apache Spark and other OSS engines.
+
   - [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview)
     
     Dataproc Metastore supports both Hive and Iceberg table formats. You can only use Apache Spark and other OSS engines to read and write data to Dataproc Metastore.
@@ -39,10 +45,19 @@ The following diagram provides an overview of the migration process.
 Hive Metastore table transfers are subject to the following limitations:
 
   - Hive Metastore transfers must have a minimum of 30 minutes between 2 scheduled runs. On demand runs can still be triggered at any interval.
-  - To migrate Hive tables, you must use Dataproc Metastore as your destination metastore.
   - File names must comply with [Cloud Storage object naming requirements](https://docs.cloud.google.com/storage/docs/objects#naming) .
   - Cloud Storage has a 5 TiB limit for single objects. Files within your Hive Metastore tables larger than 5 TiB will fail to transfer.
   - Storage Transfer Service has specific behaviors if data is changed at the source while a transfer is in progress. We don't recommend writing to tables while the table is being actively migrated. For a list of other Storage Transfer Service limitations, see [known limitations](https://docs.cloud.google.com/storage-transfer/docs/known-limitations-transfer) .
+
+### Lakehouse runtime catalog Hive Catalog limitations
+
+When using the Lakehouse runtime catalog Hive Catalog ( `BIGLAKE_HIVE_CATALOG` ) as your destination metastore, the following limitations and considerations apply:
+
+  - The Lakehouse runtime catalog Hive Catalog ID must only contain lowercase letters, numbers, and underscores ( `_` ). It must not contain dashes ( `-` ) or uppercase letters.
+  - You can't view or manage Lakehouse runtime catalog Hive Catalogs in the Google Cloud console. However, the migrated tables are visible and queryable under the target BigQuery dataset.
+  - All Lakehouse runtime catalog Hive Catalog limitations for open-source metadata formats and data types apply.
+      - For information about compatibility with formats like CSV and JSON, see [Supported storage formats](https://docs.cloud.google.com/lakehouse/docs/spark-hive-formats-types) .
+      - For information about unsupported data types (such as `UNION` or nested arrays) and column statistics, see [metastore limitations](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations#bigquery-limitations) and [partition limitations](https://docs.cloud.google.com/lakehouse/docs/spark-hive-limitations#partition-limitations) .
 
 ## Data ingestion options
 
@@ -112,6 +127,9 @@ Before you schedule Hive Metastore transfer, perform the steps in this section.
 
   - Data Transfer API
   - Storage Transfer API
+  - BigLake API
+
+> **Note:** You must enable the BigLake API to use the Lakehouse runtime catalog Iceberg REST Catalog or the Lakehouse runtime catalog Hive Catalog as your destination metastore.
 
 A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) is created when you enable the Data Transfer API.
 
@@ -130,7 +148,7 @@ To configure permissions for a Hive Metastore transfer, do the steps in the foll
       - [Storage Transfer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer#storagetransfer.admin) ( `roles/storagetransfer.admin` )
       - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
       - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
-      - To migrate metadata to Lakehouse runtime catalog Iceberg REST Catalog : [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
+      - To migrate metadata to Lakehouse runtime catalog (Iceberg REST Catalog or Hive Catalog): [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
       - To migrate metadata to Dataproc Metastore: [Dataproc Metastore Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/metastore#metastore.metadataOwner) ( `roles/metastore.metadataOwner` )
     
     For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -233,6 +251,7 @@ Select one of the following options:
     6.  Choose the Destination Metastore type from the drop-down list:
           - `DATAPROC_METASTORE` (legacy): Select this option to store your metadata in [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) . You must provide the URL for the Dataproc Metastore in **Dataproc metastore url** .
           - `BIGLAKE_REST_CATALOG` : Select this option to store your metadata in the Lakehouse runtime catalog Iceberg REST catalog. Catalog is created based on the destination Cloud Storage bucket.
+          - `BIGLAKE_HIVE_CATALOG` : Select this option to store your metadata in the Lakehouse runtime catalog Hive Catalog. You must provide a catalog name in **BigLake Metastore Hive Catalog ID** . If the catalog does not exist, it will be automatically created.
     7.  Optional: For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created.
 
 ### bq
@@ -252,6 +271,7 @@ To schedule Hive Metastore transfer, enter the `bq mk` command and supply the tr
     "metastore":"METASTORE",
     "destination_dataproc_metastore":"DATAPROC_METASTORE_URL",
     "destination_bigquery_dataset":"BIGLAKE_METASTORE_DATASET",
+    "blms_hive_catalog_id":"HIVE_CATALOG_ID",
     "translation_output_gcs_path":"gs://TRANSLATION_OUTPUT_BUCKET/metadata/config/default_database/",
     "storage_type":"STORAGE_TYPE",
     "agent_pool_name":"AGENT_POOL_NAME",
@@ -278,9 +298,10 @@ Replace the following:
   - `MIGRATION_BUCKET` : Destination GCS path to which all underlying files will be loaded. Available only if `transfer_strategy` is `FULL_TRANSFER` .
   - `METASTORE` : The type of metastore to migrate to. Set this to one of the following values:
       - `DATAPROC_METASTORE` : To transfer metadata to Dataproc Metastore.
-      - `BIGLAKE_REST_CATALOG` : To transfer metadata to Lakehouse runtime catalog Iceberg REST Catalog.
+      - `BIGLAKE_REST_CATALOG` : To transfer metadata to Lakehouse runtime catalog Iceberg REST Catalog (recommended for Iceberg tables).
+      - `BIGLAKE_HIVE_CATALOG` : To transfer metadata to Lakehouse runtime catalog Hive Catalog (recommended for Apache Hive tables).
   - `DATAPROC_METASTORE_URL` : The URL of your Dataproc Metastore. Required if `metastore` is `DATAPROC_METASTORE` .
-  - `BIGLAKE_METASTORE_DATASET` : The BigQuery dataset for your Lakehouse runtime catalog. Required if `metastore` is `BIGLAKE_METASTORE` and `transfer_strategy` is `FULL_TRANSFER` .
+  - `HIVE_CATALOG_ID` : The ID of the Lakehouse runtime catalog Hive Catalog. Required if `metastore` is `BIGLAKE_HIVE_CATALOG` . If the catalog does not exist, it will be automatically created.
   - `STORAGE_TYPE` : Specify the underlying file storage for your tables. Supported types are `HDFS` , `S3` , and `AZURE` . Required if `transfer_strategy` is `FULL_TRANSFER` .
   - `AGENT_POOL_NAME` : the name of the agent pool used for creating agents. Required if `storage_type` is `HDFS` .
   - `AWS_ACCESS_KEY_ID` : the access key ID from [access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-sts) . Required if `storage_type` is `S3` .

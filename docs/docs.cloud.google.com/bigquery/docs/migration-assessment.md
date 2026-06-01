@@ -36,6 +36,58 @@ Both metadata and query logs are needed for preparing the assessment with recomm
 
 To extract the metadata and query logs necessary to run the assessment, select your data warehouse:
 
+### Databricks
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
+
+Metadata extraction for the Databricks Assessment starts with downloading and running the extraction tool in your Databricks environment.
+
+The extraction tool is a notebook that produces a ZIP archive with files that contain a representation of a number of Databricks views. The views contain the data necessary for the assessment.
+
+## Download the extraction tool
+
+A download link for the notebook is provided in the Assessment section of the Google Cloud console. The files are available as a ZIP archive, containing the following:
+
+  - The extraction notebook
+  - The utility Python scripts that the notebook runs during the extraction process.
+
+## Import and configure the extraction tool
+
+> **Note:** This step requires the entire downloaded archive, as the extraction notebook depends on the additional files to complete the necessary extraction tasks.
+
+1.  [Import](https://docs.databricks.com/aws/en/notebooks/notebook-export-import) the ZIP file from the previous step using the Databricks user interface.
+2.  After import, open the extraction notebook and complete all steps labeled "Configuration".
+
+Authentication for the notebook is a part of the configuration steps. The notebook supports two Databricks authentication methods:
+
+  - [Service principal](https://docs.databricks.com/aws/en/admin/users-groups/service-principals)
+  - [Personal Access Token (PAT)](https://docs.databricks.com/aws/en/dev-tools/auth/pat)
+
+you will need to use one of these methods to proceed to the next section. We recommend using a service principal over the PAT if available, since the PAT option is considered legacy by Databricks.
+
+## Obtain the data for assessment
+
+After you complete all of the configuration steps, your notebook is ready to run. When the extraction notebook is active, use the "Run all" option to run the notebook.
+
+Running the notebook could take up to a day for very large systems. For a typical system with about 50,000 tables, the extraction takes less than an hour.
+
+## Optional: Monitor the extraction notebook progress
+
+The extraction notebook provides logs that contain progress and error information for monitoring purposes. The latest log messages for a given notebook run contain information on what is being extracted.
+
+Because notebook execution doesn't stop at the first error, review errors in two steps:
+
+1.  Check the summary after an extraction for an error count or other error indicators after the extraction completes; for example, less data was found than was expected. If the results look acceptable, you can skip the next step.
+2.  Copy the log output and save it to a text file.
+
+## Complete the extraction process
+
+After the notebook finishes the extraction process, you can download the results by clicking the download button in the last section of the notebook.
+
 ### Teradata
 
 ### Requirements
@@ -742,6 +794,16 @@ Replace the following:
 ## Upload metadata and query logs to Cloud Storage
 
 Once you have extracted the metadata and query logs from your data warehouse, you can upload the files to a Cloud Storage bucket to proceed with the migration assessment.
+
+### Databricks
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
+
+Upload the ZIP file to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ### Teradata
 

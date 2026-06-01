@@ -98,6 +98,10 @@ BigQuery dataset replication is subject to the following limitations:
       - Only the search index metadata is replicated to the secondary region, not index data itself.
       - If you switch over to the replica, then your index is deleted from the previous primary region and regenerated in the promoted region.
       - If you switch back and forth within 8 hours, then your index generation is delayed by 8 hours.
+  - [Scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to a new primary location if you promote a secondary replica. They remain bound to the region specified at the time of their creation.
+      - If the original primary replica becomes a read-only secondary replica after promotion, scheduled queries that attempt to write data to the dataset fail.
+      - If the original primary region becomes unavailable, scheduled queries fail, even if they only perform read operations.
+      - To ensure scheduled queries continue running against the promoted primary replica, you must manually recreate them in the new primary location.
   - You can't replicate hidden datasets.
 
 ### Resource behavior
