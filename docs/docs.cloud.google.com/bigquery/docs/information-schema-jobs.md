@@ -12,13 +12,25 @@ The `INFORMATION_SCHEMA.JOBS` view contains near real-time metadata about all Bi
 
 > **Note:** The view names `INFORMATION_SCHEMA.JOBS` and `INFORMATION_SCHEMA.JOBS_BY_PROJECT` are synonymous and can be used interchangeably.
 
-## Required role
+## Required roles
 
-To get the permission that you need to query the `INFORMATION_SCHEMA.JOBS` view, ask your administrator to grant you the [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to query the `INFORMATION_SCHEMA.JOBS` view, ask your administrator to grant you the following IAM roles on the project:
 
-This predefined role contains the `bigquery.jobs.listAll` permission, which is required to query the `INFORMATION_SCHEMA.JOBS` view.
+  - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+  - [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` )
 
-You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+These predefined roles contain the permissions required to query the `INFORMATION_SCHEMA.JOBS` view. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to query the `INFORMATION_SCHEMA.JOBS` view:
+
+  - `bigquery.jobs.listAll`
+  - `bigquery.jobs.create`
+
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 

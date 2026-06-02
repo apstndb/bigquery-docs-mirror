@@ -96,11 +96,9 @@ Additional scopes might be required on the resources accessed during a tool call
 
 ## Configure an MCP client to use the BigQuery MCP server
 
-Host programs, such as Claude or Gemini CLI, can instantiate MCP clients that connect to a single MCP server. A host program can have multiple clients that connect to different MCP servers. To connect to an MCP server, the MCP client must know at a minimum the URL of the MCP server.
+AI applications and agents, such as Claude or Antigravity, can instantiate an MCP client that connects to a single MCP server. An AI application can have multiple clients that connect to different MCP servers. If your application isn't listed in the [client-specific guidance](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#client-specific-guidance) , then you can use the following information to connect from most applications.
 
-In your host, look for a way to connect to an MCP server. You're prompted to enter details about the server, such as its name and URL.
-
-For the BigQuery MCP server, enter the following as required:
+In your AI application, look for a way to add or connect to a remote MCP server. For the BigQuery MCP server, enter the following information as required:
 
   - **Server name** : BigQuery MCP server
 
@@ -112,12 +110,12 @@ For the BigQuery MCP server, enter the following as required:
     
     Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
 
-For host-specific guidance, see the following:
+For application-specific guidance about setting up and connecting to MCP server, see [Client-specific guidance](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#client-specific-guidance) .
 
-  - [Gemini CLI MCP server setup](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#gemini-cli)
-  - [Claude support: Getting started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)
+For more general guidance, see the following resources:
 
-For more general guidance, see [Connect to remote MCP servers](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) .
+  - [Connect to remote MCP servers](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) .
+  - [Configure MCP in an AI application](https://docs.cloud.google.com/mcp/configure-mcp-ai-application) .
 
 ## Available tools
 

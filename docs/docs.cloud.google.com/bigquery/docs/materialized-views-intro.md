@@ -89,7 +89,7 @@ Materialized views are subject to the following limitations:
   - You can't directly update or manipulate materialized view data using operations such as `COPY` , `EXPORT` , `LOAD` , `WRITE` , or data manipulation language (DML) statements.
   - You can't update the query for a materialized view after you create it.
   - A materialized view must reside in the same organization as its base tables, or in the same project if the project does not belong to an organization.
-  - Materialized views use a restricted SQL syntax and a limited set of aggregation functions. For more information, see [Materialized views query support](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#query_patterns_and_definitions) .
+  - Materialized views use a restricted SQL syntax and a limited set of aggregation functions. For more information, see [Materialized views query support](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#supported-mvs) .
   - You can't nest materialized views over other materialized views.
   - Materialized views can't query external or wildcard tables, logical views <sup>1</sup> , or snapshots.
   - Materialized views don't support [system variables](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) —for example, the `@@session_id` system variable.

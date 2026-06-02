@@ -14,6 +14,22 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 01, 2026
+
+Change
+
+The Facebook Ads connector for the BigQuery Data Transfer Service now supports data transfers from the following Facebook Ads reports:
+
+  - `AdInsightsMMM`
+  - `Ads`
+  - `AdCreatives`
+  - `AdSets`
+  - `Campaigns`
+  - `AdImages`
+  - `AdLabels`
+  - `Businesses`
+  - `CustomAudiences`
+
 ## May 27, 2026
 
 Change

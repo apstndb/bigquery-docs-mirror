@@ -995,3 +995,217 @@ ActionConvertedProductId
 *String*
 
 Converted product ids - for Collaborative Ads.
+
+### `AdInsightsMMM` report
+
+| **Meta API field name** | **Mapped BigQuery field name** | **Type**  | **Description**                                   |
+| ----------------------- | ------------------------------ | --------- | ------------------------------------------------- |
+| `  `                    | Target                         | *String*  | The ID of the Account to get insights for.        |
+| `  `                    | TimeIncrement                  | *String*  | The number of days of data aggregation.           |
+| `account_id`            | AccountId                      | *String*  | The ID of the Ad Account associated with the row. |
+| `campaign_id`           | CampaignId                     | *String*  | The ID of the Campaign associated with the row.   |
+| `adset_id`              | AdSetId                        | *String*  | The ID of the Ad Set associated with the row.     |
+| `date_start`            | DateStart                      | *Date*    | The starting date for insights retrieval.         |
+| `date_stop`             | DateEnd                        | *Date*    | The ending date for insights retrieval.           |
+| `impressions`           | Impressions                    | *Long*    | The number of times the ad was served.            |
+| `spend`                 | Spend                          | *Decimal* | The total amount spent.                           |
+| `country`               | Country                        | *String*  | The country for the metrics.                      |
+| `region`                | Region                         | *String*  | The region from which the ad was viewed.          |
+| `dma`                   | DMA                            | *String*  | The Designated Market Area for the metrics.       |
+| `device_platform`       | DevicePlatform                 | *String*  | The platform of the device used.                  |
+| `platform_position`     | PlatformPosition               | *String*  | The position on the platform.                     |
+| `publisher_platform`    | PublisherPlatform              | *String*  | The publisher platform.                           |
+| `creative_media_type`   | CreativeMediaType              | *String*  | The type of media used in the creative.           |
+
+### `Ads` report
+
+| **Meta API field name**  | **Mapped BigQuery field name** | **Type**   | **Description**                               |
+| ------------------------ | ------------------------------ | ---------- | --------------------------------------------- |
+| `id`                     | ID                             | *String*   | The ID of the Ad.                             |
+| `  `                     | Target                         | *String*   | The target field used to retrieve the ad.     |
+| `name`                   | Name                           | *String*   | The name of the Ad.                           |
+| `status`                 | AdStatus                       | *String*   | The status of the Ad.                         |
+| `bid_info`               | BidInfo                        | *String*   | Bid information associated with the Ad.       |
+| `bid_type`               | BidType                        | *String*   | Bid type associated with the Ad.              |
+| `campaign_id`            | CampaignId                     | *String*   | The ID of the campaign.                       |
+| `adset_id`               | AdSetId                        | *String*   | The ID of the ad set.                         |
+| `creative`               | AdCreativeId                   | *String*   | The ID of the ad creative.                    |
+| `configured_status`      | ConfiguredStatus               | *String*   | The configured status of the Ad.              |
+| `created_time`           | CreatedTime                    | *Datetime* | The creation time of the Ad.                  |
+| `updated_time`           | UpdatedTime                    | *Datetime* | The last update time of the Ad.               |
+| `conversion_specs`       | ConversionSpecs                | *String*   | Conversion specifications.                    |
+| `failed_delivery_checks` | FailedDeliveryChecks           | *String*   | Information regarding failed delivery checks. |
+| `recommendations`        | Recommendations                | *String*   | Recommendations for the Ad.                   |
+| `tracking_specs`         | TrackingSpecs                  | *JSON*     | Tracking specifications.                      |
+| `ad_active_time`         | AdActiveTime                   | *String*   | Active time parameters.                       |
+| `ad_schedule_end_time`   | AdScheduleEndTime              | *Datetime* | Scheduled end time.                           |
+| `ad_schedule_start_time` | AdScheduleStartTime            | *Datetime* | Scheduled start time.                         |
+| `bid_amount`             | BidAmount                      | *Integer*  | The bid amount.                               |
+| `last_updated_by_app_id` | LastUpdatedByAppId             | *String*   | App ID that last updated the ad.              |
+| `preview_shareable_link` | PreviewShareableLink           | *String*   | Shareable preview link.                       |
+| `source_ad_id`           | SourceAdId                     | *String*   | The source Ad ID.                             |
+
+### `AdCreatives` report
+
+| **Meta API field name**           | **Mapped BigQuery field name** | **Type** | **Description**                          |
+| --------------------------------- | ------------------------------ | -------- | ---------------------------------------- |
+| `id`                              | ID                             | *String* | The ID of the ad creative.               |
+| `  `                              | Target                         | *String* | The target field.                        |
+| `name`                            | Name                           | *String* | The name of the creative.                |
+| `applink_treatment`               | ApplinkTreatment               | *String* | Deep link treatment for the ad creative. |
+| `body`                            | Body                           | *String* | The body text of the ad block.           |
+| `call_to_action_type`             | CallToActionType               | *String* | Type of call to action.                  |
+| `effective_instagram_media_id`    | EffectiveInstagramMediaId      | *String* | Effective ID of the Instagram media.     |
+| `image_hash`                      | ImageHash                      | *String* | The hash of the associated image.        |
+| `image_url`                       | ImageUrl                       | *String* | The URL to the creative image.           |
+| `instagram_permalink_url`         | InstagramPermalinkUrl          | *String* | Permalink URL for Instagram.             |
+| `instagram_user_id`               | InstagramUserId                | *String* | Instagram user ID.                       |
+| `link_og_id`                      | LinkOgId                       | *String* | Open Graph ID of the link.               |
+| `link_url`                        | LinkUrl                        | *String* | The landing page URL.                    |
+| `object_id`                       | ObjectId                       | *String* | The associated object ID.                |
+| `object_story_id`                 | ObjectStoryId                  | *String* | Object story ID.                         |
+| `object_type`                     | ObjectType                     | *String* | The type of the object.                  |
+| `object_url`                      | ObjectUrl                      | *String* | URL of the object.                       |
+| `page_id`                         | PageId                         | *String* | The associated Facebook Page ID.         |
+| `product_set_id`                  | ProductSetId                   | *String* | Product set ID.                          |
+| `run_status`                      | RunStatus                      | *String* | The run status of the creative.          |
+| `source_instagram_media_id`       | SourceInstagramMediaId         | *String* | Source Instagram media ID.               |
+| `template_url`                    | TemplateUrl                    | *String* | Template URL.                            |
+| `thumbnail_url`                   | ThumbnailUrl                   | *String* | Thumbnail URL.                           |
+| `title`                           | Title                          | *String* | The title text of the ad creative.       |
+| `url_tags`                        | UrlTags                        | *String* | URL tags parameters.                     |
+| `adlabels`                        | AdLabels                       | *String* | Labels associated with the creative.     |
+| `object_story_spec.link_data`     | ObjectStorySpecLinkData        | *JSON*   | Link data specification.                 |
+| `object_story_spec.photo_data`    | ObjectStorySpecPhotoData       | *JSON*   | Photo data specification.                |
+| `object_story_spec.video_data`    | ObjectStorySpecVideoData       | *JSON*   | Video data specification.                |
+| `object_story_spec.text_data`     | ObjectStorySpecTextData        | *JSON*   | Text data specification.                 |
+| `object_story_spec.template_data` | ObjectStorySpecTemplateData    | *JSON*   | Template data specification.             |
+
+### `AdSets` report
+
+| **Meta API field name**                   | **Mapped BigQuery field name**      | **Type**   | **Description**                               |
+| ----------------------------------------- | ----------------------------------- | ---------- | --------------------------------------------- |
+| `id`                                      | ID                                  | *String*   | The ID of the Ad Set.                         |
+| `  `                                      | Target                              | *String*   | The target field.                             |
+| `name`                                    | Name                                | *String*   | The name of the Ad Set.                       |
+| `budget_remaining`                        | BudgetRemaining                     | *Integer*  | The remaining budget.                         |
+| `campaign_id`                             | CampaignId                          | *String*   | The associated Campaign ID.                   |
+| `status`                                  | AdSetStatus                         | *String*   | The Ad Set status.                            |
+| `billing_event`                           | BillingEvent                        | *String*   | Billing event criteria.                       |
+| `created_time`                            | CreatedTime                         | *Datetime* | Ad Set creation time.                         |
+| `daily_budget`                            | DailyBudget                         | *Integer*  | The daily budget limit.                       |
+| `lifetime_budget`                         | LifetimeBudget                      | *Integer*  | The lifetime budget limit.                    |
+| `end_time`                                | EndTime                             | *Datetime* | Scheduled end time.                           |
+| `start_time`                              | StartTime                           | *Datetime* | Scheduled start time.                         |
+| `updated_time`                            | UpdatedTime                         | *Datetime* | Time when the Ad Set was last updated.        |
+| `recommendations`                         | Recommendations                     | *String*   | Recommendations for the Ad Set.               |
+| `targeting.genders`                       | TargetingGenders                    | *String*   | Targeted genders.                             |
+| `targeting.age_max`                       | TargetingAgeMax                     | *Integer*  | Targeted maximum age.                         |
+| `targeting.age_min`                       | TargetingAgeMin                     | *Integer*  | Targeted minimum age.                         |
+| `targeting.countries`                     | TargetingCountries                  | *String*   | Targeted countries.                           |
+| `targeting.location_types`                | TargetingLocationTypes              | *String*   | Targeted location types.                      |
+| `targeting.regions`                       | TargetingRegions                    | *String*   | Targeted regions or states.                   |
+| `targeting.cities`                        | TargetingCities                     | *String*   | Targeted cities.                              |
+| `targeting.zips`                          | TargetingZips                       | *String*   | Targeted zip codes.                           |
+| `targeting.custom_locations`              | TargetingCustomLocations            | *String*   | Targeted custom locations.                    |
+| `targeting.geo_markets`                   | TargetingGeoMarkets                 | *String*   | Targeted geographic markets.                  |
+| `targeting.interests`                     | TargetingInterests                  | *String*   | Targeted personal interests.                  |
+| `targeting.behaviors`                     | TargetingBehaviors                  | *String*   | Targeted user behaviors.                      |
+| `targeting.device_platforms`              | TargetingDevicePlatforms            | *String*   | Targeted platforms.                           |
+| `targeting.publisher_platforms`           | TargetingPublisherPlatforms         | *String*   | Targeted publisher platforms.                 |
+| `targeting.instagram_positions`           | TargetingInstagramPositions         | *String*   | Targeted Instagram placement positions.       |
+| `targeting.page_types`                    | TargetingPageTypes                  | *String*   | Targeted page types.                          |
+| `learning_stage_info.status`              | LearningStageInfoStatus             | *String*   | Status of the learning stage.                 |
+| `learning_stage_info.conversions`         | LearningStageInfoConversions        | *Integer*  | Conversions during the learning stage.        |
+| `learning_stage_info.attribution_windows` | LearningStageInfoAttributionWindows | *String*   | Attribution windows for learning stage.       |
+| `learning_stage_info.last_sig_edit_time`  | LearningStageInfoLastSigEditTime    | *Datetime* | Last significant edit time in learning phase. |
+
+### `Campaigns` report
+
+| **Meta API field name** | **Mapped BigQuery field name** | **Type**   | **Description**                        |
+| ----------------------- | ------------------------------ | ---------- | -------------------------------------- |
+| `id`                    | ID                             | *String*   | The ID of the Campaign.                |
+| `  `                    | Target                         | *String*   | The target field.                      |
+| `name`                  | Name                           | *String*   | The name of the Campaign.              |
+| `buying_type`           | BuyingType                     | *String*   | The buying type.                       |
+| `configured_status`     | ConfiguredStatus               | *String*   | The configured status.                 |
+| `effective_status`      | EffectiveStatus                | *String*   | The effective status.                  |
+| `status`                | Status                         | *String*   | The current status of the Campaign.    |
+| `created_time`          | CreatedTime                    | *Datetime* | Creation time.                         |
+| `objective`             | Objective                      | *String*   | The selected campaign objective.       |
+| `spend_cap`             | SpendCap                       | *Integer*  | The maximum lifetime spending cap.     |
+| `daily_budget`          | DailyBudget                    | *Integer*  | The daily budget.                      |
+| `budget_remaining`      | BudgetRemaining                | *Integer*  | The remaining budget for the campaign. |
+| `lifetime_budget`       | LifetimeBudget                 | *Integer*  | The total lifetime budget.             |
+| `bid_strategy`          | BidStrategy                    | *String*   | The strategy used for bidding.         |
+| `start_time`            | StartTime                      | *Datetime* | Scheduled start time.                  |
+| `stop_time`             | StopTime                       | *Datetime* | Scheduled stop/end time.               |
+| `updated_time`          | UpdatedTime                    | *Datetime* | Last updated time.                     |
+| `boosted_object_id`     | BoostedObjectId                | *String*   | The ID of any boosted object.          |
+
+### `AdImages` report
+
+| **Meta API field name** | **Mapped BigQuery field name** | **Type**   | **Description**                      |
+| ----------------------- | ------------------------------ | ---------- | ------------------------------------ |
+| `id`                    | ID                             | *String*   | The ID of the image.                 |
+| `  `                    | Target                         | *String*   | Target field.                        |
+| `account_id`            | AccountId                      | *String*   | Ad account ID owning the image.      |
+| `created_time`          | CreatedTime                    | *Datetime* | Creation time of the image.          |
+| `hash`                  | hash                           | *String*   | Unique hash of the image content.    |
+| `height`                | height                         | *Integer*  | Height of the image in pixels.       |
+| `width`                 | width                          | *Integer*  | Width of the image in pixels.        |
+| `creatives`             | AssociatedWithCreatives        | *String*   | Associated creatives info.           |
+| `name`                  | name                           | *String*   | Name identifier for the image.       |
+| `original_height`       | OriginalHeight                 | *Integer*  | Original uploaded height.            |
+| `original_width`        | OriginalWidth                  | *Integer*  | Original uploaded width.             |
+| `status`                | Status                         | *String*   | Validation status of the image.      |
+| `permalink_url`         | PermalinkUrl                   | *String*   | URL pointing to the image permalink. |
+
+### `AdLabels` report
+
+| **Meta API field name** | **Mapped BigQuery field name** | **Type**   | **Description**                  |
+| ----------------------- | ------------------------------ | ---------- | -------------------------------- |
+| `id`                    | ID                             | *String*   | The ID of the ad label.          |
+| `  `                    | Target                         | *String*   | Target field.                    |
+| `name`                  | Name                           | *String*   | The display name of the label.   |
+| `created_time`          | CreatedTime                    | *Datetime* | Time the label was created.      |
+| `updated_time`          | UpdatedTime                    | *Datetime* | Time the label was last updated. |
+
+### `Businesses` report
+
+| **Meta API field name** | **Mapped BigQuery field name** | **Type**   | **Description**                            |
+| ----------------------- | ------------------------------ | ---------- | ------------------------------------------ |
+| `id`                    | ID                             | *String*   | The ID of the business.                    |
+| `name`                  | Name                           | *String*   | The name of the business.                  |
+| `primary_page`          | PrimaryPage                    | *String*   | Primary page associated with the business. |
+| `timezone_id`           | TimezoneId                     | *String*   | Timezone identifier for the business.      |
+| `link`                  | Link                           | *String*   | Link to the business profile.              |
+| `created_time`          | CreatedTime                    | *Datetime* | Business creation time.                    |
+| `updated_time`          | UpdatedTime                    | *Datetime* | Last updated time.                         |
+
+### `CustomAudiences` report
+
+| **Meta API field name**         | **Mapped BigQuery field name** | **Type**   | **Description**                               |
+| ------------------------------- | ------------------------------ | ---------- | --------------------------------------------- |
+| `id`                            | ID                             | *String*   | The ID of the custom audience.                |
+| `  `                            | Target                         | *String*   | The target field.                             |
+| `account_id`                    | AccountID                      | *String*   | The ad account ID mapped from Account\_ID.    |
+| `name`                          | Name                           | *String*   | The name of the custom audience.              |
+| `description`                   | Description                    | *String*   | Description of the audience.                  |
+| `subtype`                       | Subtype                        | *String*   | Subtype category of the audience.             |
+| `time_created`                  | TimeCreated                    | *Datetime* | Audience creation time.                       |
+| `time_updated`                  | TimeUpdated                    | *Datetime* | Audience last updated time.                   |
+| `time_content_updated`          | TimeContentUpdated             | *Datetime* | Time when audience content was last modified. |
+| `rule`                          | Rule                           | *String*   | Rules used to govern audience membership.     |
+| `rule_aggregation`              | RuleAggregation                | *String*   | Aggregation setting for audience rules.       |
+| `approximate_count_lower_bound` | ApproximateCountLowerBound     | *Integer*  | Lower bound approximation for audience size.  |
+| `approximate_count_upper_bound` | ApproximateCountUpperBound     | *Integer*  | Upper bound approximation for audience size.  |
+| `pixel_id`                      | PixelID                        | *String*   | Associated pixel ID.                          |
+| `retention_days`                | RetentionDays                  | *Integer*  | Number of days members are retained.          |
+| `customer_file_source`          | CustomerFileSource             | *String*   | The original source of the customer file.     |
+| `data_source`                   | DataSource                     | *JSON*     | Primary data source.                          |
+| `delivery_status`               | DeliveryStatus                 | *JSON*     | Current delivery status.                      |
+| `operation_status`              | OperationStatus                | *JSON*     | Status of recent operations.                  |
+| `permission_for_actions`        | PermissionForActions           | *JSON*     | Permissions for actions.                      |
+| `is_value_based`                | IsValueBased                   | *Boolean*  | Flag indicating if audience is value based.   |
+| `opt_out_link`                  | OptOutLink                     | *String*   | Opt out link.                                 |

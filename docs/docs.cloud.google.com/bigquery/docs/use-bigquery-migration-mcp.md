@@ -85,11 +85,9 @@ Resources accessed during a tool call might require additional scopes.
 
 ## Configure an MCP client to use the BigQuery Migration Service MCP server
 
-Host programs, such as Claude or Gemini CLI, can instantiate MCP clients that connect to a single MCP server. A host program can have multiple clients that connect to different MCP servers. To connect to an MCP server, the MCP client must know at least the URL of the MCP server.
+AI applications and agents, such as Claude or Antigravity, can instantiate an MCP client that connects to a single MCP server. An AI application can have multiple clients that connect to different MCP servers. If your application isn't listed in the [client-specific guidance](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#client-specific-guidance) , then you can use the following information to connect from most applications.
 
-In your host, look for a way to connect to a MCP server. You're prompted to enter details about the server, such as its name and URL.
-
-For the BigQuery Migration Service MCP server, enter the following as required:
+In your AI application, look for a way to add or connect to a remote MCP server. For the BigQuery Migration Service MCP server, enter the following information as required:
 
   - **Server name** : BigQuery Migration Service MCP server
 
@@ -101,12 +99,35 @@ For the BigQuery Migration Service MCP server, enter the following as required:
     
     Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
 
-For host-specific guidance, see the following:
+The following is an example configuration for the [Gemini CLI](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#gemini-cli) :
 
-  - [Gemini CLI MCP server setup](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#gemini-cli)
-  - [Claude support: Getting started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)
+    {
+      "name": "BQMS-MCP",
+      "version": "1.0.0",
+      "mcpServers": {
+        "BigQueryMigration": {
+          "httpUrl": "https://bigquerymigration.googleapis.com/mcp",
+          "authProviderType": "google_credentials",
+          "oauth": {
+            "scopes": [
+              "https://www.googleapis.com/auth/bigquerymigration",
+              "https://www.googleapis.com/auth/devstorage.read_only"
+            ]
+          },
+          "timeout": 30000,
+          "headers": {
+            "x-goog-user-project": "PROJECT_ID"
+          }
+        }
+      }
+    }
 
-For more general guidance, see [Connect to remote MCP servers](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) .
+For application-specific guidance about setting up and connecting to MCP server, see [Client-specific guidance](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#client-specific-guidance) .
+
+For more general guidance, see the following resources:
+
+  - [Connect to remote MCP servers](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) .
+  - [Configure MCP in an AI application](https://docs.cloud.google.com/mcp/configure-mcp-ai-application) .
 
 ## Available tools
 

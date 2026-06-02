@@ -33,6 +33,15 @@ The BigQuery Data Transfer Service for the Facebook Ads connector supports the f
 <li><code dir="ltr" translate="no">AdAccounts</code></li>
 <li><code dir="ltr" translate="no">AdInsights</code></li>
 <li><code dir="ltr" translate="no">AdInsightsActions</code></li>
+<li><code dir="ltr" translate="no">AdInsightsMMM</code></li>
+<li><code dir="ltr" translate="no">Ads</code></li>
+<li><code dir="ltr" translate="no">AdCreatives</code></li>
+<li><code dir="ltr" translate="no">AdSets</code></li>
+<li><code dir="ltr" translate="no">Campaigns</code></li>
+<li><code dir="ltr" translate="no">AdImages</code></li>
+<li><code dir="ltr" translate="no">AdLabels</code></li>
+<li><code dir="ltr" translate="no">Businesses</code></li>
+<li><code dir="ltr" translate="no">CustomAudiences</code></li>
 </ul>
 <p>For information about how Facebook Ads reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation">Facebook Ads report transformation</a> .</p></td>
 </tr>
@@ -65,9 +74,9 @@ Facebook Ads data transfers are subject to the following limitations:
 
   - Facebook Ads data transfers have a maximum duration of six hours. A transfer fails if it takes longer than this maximum duration.
 
-  - Incremental transfers aren't supported for `AdInsights` and `AdInsightsActions` tables. When you create a data transfer that includes `AdInsights` and `AdInsightsActions` tables, and you specified a date in **Schedule options** , all data that is available for that date is transferred.
+  - Incremental transfers aren't supported for `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` , `Ads` , `Campaigns` , and `AdSets` tables. When you create a data transfer that includes `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` , `Ads` , `Campaigns` , and `AdSets` tables, and you specified a date in **Schedule options** , all data that is available for that date is transferred.
 
-  - The BigQuery Data Transfer Service supports a refresh window of up to 30 days to the `AdInsights` and `AdInsightsActions` tables. The refresh window refers to the number of days that a data transfer will retrieve source data from. When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window.
+  - The BigQuery Data Transfer Service supports a refresh window of up to 30 days to the `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` , `Ads` , `Campaigns` , and `AdSets` tables. The refresh window refers to the number of days that a data transfer will retrieve source data from. When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window.
 
   - The long-lived user access token that is required for Facebook Ads transfers expires after 60 days.
     
@@ -81,9 +90,15 @@ Facebook Ads data transfers are subject to the following limitations:
 
 When you transfer data from Facebook Ads into BigQuery, the data is loaded into BigQuery tables that are partitioned by date. The table partition that the data is loaded into corresponds to the date from the data source. If you schedule multiple transfers for the same date, BigQuery Data Transfer Service overwrites the partition for that specific date with the latest data. Multiple transfers in the same day or running backfills don't result in duplicate data, and partitions for other dates are not affected.
 
-For `AdInsights` and `AdInsightsActions` tables, the table partition that the data is loaded into corresponds to the date from the data source.
+Some ingestion behaviors differ between different Facebook Ads reports:
 
-For `AdAccounts` tables, snapshots are taken once a day and stored in the partition of the last transfer run date. The refresh window does not apply to the `AdAccounts` table.
+  - For `AdAccounts` , `AdCreatives` , `AdImages` , `AdLabels` , `Businesses` , and `CustomAudiences` tables, snapshots are taken once a day and stored in the partition of the last transfer run date.
+
+  - Data transfers for the `AdInsights` , `AdInsightActions` , `AdInsightsMMM` , `Ads` , `AdSets` and `Campaigns` tables will transfer Facebook Ads data that corresponds to the run date of the transfer. For these tables, if you specify a `insightsTimeIncrement` value that is more than 1, then the data transfer includes data from a number of days before the run date according to the `insightsTimeIncrement` value, including the run date. For example, if the `insightsTimeIncrement` value is 3, then the data transfer only includes data from the run date and data from 2 days before the run date, for a total of 3 days of data.
+
+  - For `AdInsights` , `AdInsightsActions` , and `AdInsightsMMM` tables, the table partition that the data is loaded into corresponds to the date from the data source.
+
+  - The [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh) only applies to the `AdInsights` , `AdInsightsActions` , and `AdInsightsMMM` tables.
 
 ### Refresh windows
 
@@ -214,11 +229,20 @@ Select one of the following options:
 
 When this data transfer runs, the BigQuery Data Transfer Service automatically populates the following tables.
 
-| Table Name          | Description                                     |
-| ------------------- | ----------------------------------------------- |
-| `AdAccounts`        | The ad accounts available for a user.           |
-| `AdInsights`        | Ad insights report for all ad accounts.         |
-| `AdInsightsActions` | Ad insights actions report for all ad accounts. |
+| Table Name          | Description                                                          |
+| ------------------- | -------------------------------------------------------------------- |
+| `AdAccounts`        | The ad accounts available for a user.                                |
+| `AdInsights`        | Ad insights report for all ad accounts.                              |
+| `AdInsightsActions` | Ad insights actions report for all ad accounts.                      |
+| `AdInsightsMMM`     | Ad insights marketing mix modeling (MMM) report for all ad accounts. |
+| `Ads`               | Ad reports for all ad accounts.                                      |
+| `AdCreatives`       | Ad creative reports for all ad accounts.                             |
+| `AdSets`            | Ad set reports for all ad accounts.                                  |
+| `Campaigns`         | Campaign reports for all ad accounts.                                |
+| `AdImages`          | Ad images reports for all ad accounts.                               |
+| `AdLabels`          | Ad labels reports for all ad accounts.                               |
+| `Businesses`        | Meta business accounts associated with the user.                     |
+| `CustomAudiences`   | Custom audience reports for all ad accounts.                         |
 
 ### bq
 
@@ -247,6 +271,9 @@ Where:
           - For more information, see [Ad Insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights) .
       - `connector.genericBreakdowns` : Specify the generic breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. Facebook Ads only permits certain combinations of breakdowns. For more information about permitted breakdown combinations, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
       - `actionBreakdowns` : Specify the action breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. For information about combining breakdowns, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
+      - `connector.insightsLevel` : Aggregation level for fetching insights data (e.g., Ad, Adset, Campaign, Account).
+      - `connector.insightsTimeIncrement` : Number of days over which to group aggregated insights data (between 1 and 7).
+      - **Note:** The chosen window range applies not only to the insights tables ( `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` ), but also filters the `Ads` , `Campaigns` , and `AdSets` tables using Facebook's `time_range` parameter.
 
 For example, the following command creates a Facebook Ads data transfer in the default project with all the required parameters:
 
@@ -366,17 +393,63 @@ You might encounter the following error messages related to Meta API rate limit 
 
 You can also check the [BigQuery Data Transfer Service monitoring metrics](https://docs.cloud.google.com/bigquery/docs/dts-monitor#monitor) to determine the cause of a data transfer failure. The following table lists some common `ERROR_CODE` messages for Facebook Ads data transfers.
 
-| Error                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `INVALID_ARGUMENT`    | The supplied configuration is invalid. You might also encounter this error with the message `This combination of action and generic breakdowns is not allowed.` For information about valid breakdown combinations, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .                                                                                                                                              |
-| `PERMISSION_DENIED`   | The credentials are invalid                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `UNAUTHENTICATED`     | Authentication is required                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `SERVICE_UNAVAILABLE` | The service is temporarily unable to handle this data transfer                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `DEADLINE_EXCEEDED`   | The data transfer did not finish within the maximum duration of six hours                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `NOT_FOUND`           | A requested resource is not found                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `INTERNAL`            | Something else caused the connector to fail                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `FAILED_PRECONDITION` | This error can appear with the message `There was an issue connecting to Facebook Ads API.` This error can occur when you include a network attachment with your transfer but have not configured your public network address translation (NAT) correctly. To resolve this error, follow the steps [to create your network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) . |
-| `RESOURCE_EXHAUSTED`  | A data source quota or limit was exhausted                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">INVALID_ARGUMENT</code></td>
+<td>The supplied configuration is invalid. You might also encounter this error with the message <code dir="ltr" translate="no">This combination of action and generic breakdowns is not allowed.</code> For information about valid breakdown combinations, see <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns">Combining breakdowns</a> .</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">PERMISSION_DENIED</code></td>
+<td>The credentials are invalid</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">UNAUTHENTICATED</code></td>
+<td>Authentication is required</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">SERVICE_UNAVAILABLE</code></td>
+<td>The service is temporarily unable to handle this data transfer</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">DEADLINE_EXCEEDED</code></td>
+<td>The data transfer did not finish within the maximum duration of six hours</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">NOT_FOUND</code></td>
+<td>A requested resource is not found</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">INTERNAL</code></td>
+<td>Something else caused the connector to fail</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">FAILED_PRECONDITION</code></td>
+<td>This error can appear with the message <code dir="ltr" translate="no">There was an issue connecting to Facebook Ads API.</code> This error can occur when you include a network attachment with your transfer but have not configured your public network address translation (NAT) correctly. To resolve this error, follow the steps <a href="https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment">to create your network attachment by defining a static IP address</a> .<br />
+<br />
+This error can also appear due to rate limit throttling. In these cases, do the following:
+<ul>
+<li>Parallel workflows using the same Facebook Ads user or app credentials can lead to you reaching your rate limits more frequently. Ensure that you are using different user or app credentials outside of your transfer configuration.</li>
+<li>Split up your data transfers to have less data in each transfer, and run each data transfer independently to have some time between transfers to allow rate limits to recover.</li>
+<li>Verify that your data transfer don't include a costly breakdown compute, too many breakdowns, or too many action collections.</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">RESOURCE_EXHAUSTED</code></td>
+<td>A data source quota or limit was exhausted</td>
+</tr>
+</tbody>
+</table>
 
 ## Pricing
 

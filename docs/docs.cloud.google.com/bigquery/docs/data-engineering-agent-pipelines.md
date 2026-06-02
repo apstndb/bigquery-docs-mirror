@@ -27,7 +27,7 @@ The Data Engineering Agent has the following limitations:
       - Data preparation
   - The Data Engineering Agent cannot execute pipelines. You must review and run or schedule pipelines.
   - The Data Engineering Agent cannot search any web links or URLs provided through instructions or direct prompts.
-  - When importing files in an [agent instruction file](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/data-engineering-agent-overview#agent_instructions) , the `@` import syntax supports only paths that begin with `./` , `/` , or a letter.
+  - When importing files in an [agent instruction file](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/agent-overview#agent_instructions) , the `@` import syntax supports only paths that begin with `./` , `/` , or a letter.
   - The [data preview](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is supported only for tables, declarations, or queries with the `hasOutput` flag set to `true` .
   - The Data Engineering Agent is subject to the [general limitations of AI technology](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
