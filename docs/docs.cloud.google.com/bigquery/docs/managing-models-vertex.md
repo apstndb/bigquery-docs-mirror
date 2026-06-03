@@ -26,7 +26,7 @@ To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.
 
 ## Required permissions
 
-To get the permissions that you need to register BigQuery ML models to the Model Registry, ask your administrator to grant you the [Vertex AI Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.admin) ( `roles/aiplatform.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to register BigQuery ML models to the Model Registry, ask your administrator to grant you the [Agent Platform Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.admin) ( `roles/aiplatform.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -146,7 +146,7 @@ For information about how to update model locations, see [Choosing your location
 
 ## Deploy a model in Agent Platform
 
-You can use a variety of methods to deploy a model to an endpoint in Vertex AI. For more information, see [Deploy a model to an endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment) .
+You can use a variety of methods to deploy a model to an endpoint in Agent Platform. For more information, see [Deploy a model to an endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment) .
 
 ## Delete BigQuery ML models from the Model Registry
 

@@ -97,9 +97,9 @@ Before you begin, assign the IAM permissions to the Knowledge Catalog service ac
 
 Replace `  PROJECT_NUMBER  ` with the project in which the Dataplex API is enabled.
 
-To ensure that the Dataplex service account has the necessary permissions to create and run a discovery scan, ask your administrator to grant the following IAM roles to the Dataplex service account:
+To ensure that the Knowledge Catalog service account has the necessary permissions to create and run a discovery scan, ask your administrator to grant the following IAM roles to the Knowledge Catalog service account:
 
-> **Important:** You must grant these roles to the Dataplex service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+> **Important:** You must grant these roles to the Knowledge Catalog service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - [Dataplex Discovery Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `roles/dataplex.discoveryServiceAgent` ) on the storage bucket
   - [Dataplex Discovery Publishing Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryPublishingServiceAgent) ( `roles/dataplex.discoveryPublishingServiceAgent` ) on the user project
@@ -122,7 +122,7 @@ The following permissions are required to create and run a discovery scan:
       - `bigquery.connections.delegate` on the BigQuery connection
       - `bigquery.connections.use` on the BigQuery connection
 
-Your administrator might also be able to give the Dataplex service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the Knowledge Catalog service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Required roles for the BigQuery connection service account
 

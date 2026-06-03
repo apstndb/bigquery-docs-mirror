@@ -153,10 +153,11 @@ In a graph, labels and properties are uniquely identified by their names. Labels
       - Standard tables
       - External tables
       - Managed BigLake Iceberg tables
+      - Iceberg REST catalog tables
       - Views, including authorized views
       - Non-incremental materialized views
     
-    You can't use incremental materialized views or Iceberg REST catalog tables.
+    You can't use incremental materialized views tables.
 
   - `element_alias` : An optional alias. You must use an alias if you use an input table for more than one element definition.
 

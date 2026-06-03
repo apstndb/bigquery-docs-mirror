@@ -414,6 +414,23 @@ To resolve this error, you can request a quota increase by contacting [support](
 
 You can't increase the following quotas or limits, but you can apply the suggested workarounds or best practices to mitigate them.
 
+### Maximum number of pending jobs errors
+
+This limit [can't be increased](https://docs.cloud.google.com/bigquery/quotas#pending_jobs) .
+
+**Error message**
+
+    Quota exceeded: concurrent number of jobs that can be in the pending state
+
+#### Resolution
+
+This quota cannot be increased.
+
+To resolve this error, do the following:
+
+  - **Reduce submission rate:** reduce the rate at which you submit jobs to BigQuery.
+  - **Limit concurrency:** avoid submitting a large number of jobs in parallel that might get stuck in the pending state.
+
 ### Query queue limit errors
 
 You might encounter this error if a project queues more interactive or batch queries than its [queue limit](https://docs.cloud.google.com/bigquery/quotas#queued_interactive_queries) permits.

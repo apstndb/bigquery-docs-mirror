@@ -50,9 +50,21 @@ A BigQuery remote function lets you incorporate GoogleSQL functionality with sof
 
   - If the dataset associated with the remote function is replicated to a destination region through [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) , the remote function can only be queried in the region that it was created in.
 
+  - 
+    
+    <div id="custom-path-limitations">
+    
+    Remote functions support a custom path in the endpoint URL. The custom paths have the following limitations:
+    
+      - Only uppercase letters (A-Z), lowercase letters (a-z), digits (0-9), hyphens ( `-` ), and underscores ( `_` ) are allowed in the path.
+      - Fragment identifiers ( `#` ), query parameters ( `?` ), and tildes ( `~` ) aren't allowed.
+      - Paths starting with `/_ah/` , the specific path `/eventlog` , and any path ending in the letter `z` aren't allowed.
+    
+    </div>
+
 ## Create an endpoint
 
-To create a remote function that can implement business logic, you must create an HTTP endpoint by using either Cloud Run functions or Cloud Run. The endpoint must be able to process a batch of rows in a single HTTP POST request and return the results for the batch as an HTTP response.
+To create a remote function that can implement business logic, you must create an HTTP endpoint by using either Cloud Run functions or Cloud Run. The endpoint must be able to process a batch of rows in a single HTTP POST request and return the results for the batch as an HTTP response. Remote functions support a custom path in the endpoint URL (see [limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ).
 
 If you are creating the remote function by using [BigQuery DataFrames](https://dataframes.bigquery.dev/) , you don't have to manually create the HTTP endpoint; the service does that for you automatically.
 
@@ -242,6 +254,30 @@ The following sample Python code implements a web service, which can be built an
 See the [guide](https://docs.cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service) on how to build and deploy the code.
 
 Assuming that the Cloud Run service is deployed in the project `my_gcf_project` in region `us-east1` as the service name `remote_add` , it can be accessed via the endpoint `https://remote_add-<project_id_hash>-ue.a.run.app` .
+
+The following Python example implements a different route path `/subtract_list` (see [custom URL path limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ) in the above web service:
+
+    @app.route("/subtract_list", methods=['POST'])
+    def batch_subtract():
+      """
+      Processes batch requests to subtract numbers within inner lists (e.g., a - b - c).
+      Handles integers, string representations of integers, and None values.
+      """
+      try:
+        return_value = []
+        request_json = request.get_json()
+        calls = request_json['calls']
+        for call in calls:
+          nums_to_process = [int(x) if isinstance(x, str) else x for x in call if x is not None]
+          if not nums_to_process:
+            result = 0
+          else:
+            result = nums_to_process[0] - sum(nums_to_process[1:])
+          return_value.append(result)
+        replies = [str(x) if abs(x) > _MAX_LOSSLESS else x for x in return_value]
+        return jsonify({"replies": replies})
+      except Exception as e:
+        return jsonify({"errorMessage": str(e)}), 400
 
 ## Create a remote function
 
@@ -568,9 +604,10 @@ Run the following [`CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/doc
     Replace the following:
     
       - `  DATASET_ID  ` : the ID of your BigQuery dataset.
-      - `  ENDPOINT_URL  ` : the URL of your Cloud Run function or Cloud Run remote function endpoint.
-
-3.  Click play\_circle **Run** .
+    
+      - `  ENDPOINT_URL  ` : a URL of your Cloud Run function or Cloud Run remote function endpoint. Remote functions support a custom path in the endpoint URL (see [limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ). Different remote functions can be created on each route path in the same application. The `endpoint` option in the `CREATE FUNCTION` statement can include a route path immediately following a Cloud Run URL (for example, `https:// service_name - project_number . region .run.app/subtract_list` ).
+    
+      - Click play\_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

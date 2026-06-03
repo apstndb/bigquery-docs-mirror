@@ -30,8 +30,6 @@ To grant permissions to many related BigQuery resources at the same time, includ
 
   - Some services outside of BigQuery cannot properly verify IAM tag conditions. If the tag condition is positive, meaning that a user is granted a role on a resource only if that resource has a particular tag, then access is denied to the resource regardless of what tags are attached to it. If the tag condition is negative, meaning that a user is granted a role on a resource only if that resource *doesn't* have a particular tag, then the tag condition is not checked.
     
-    For example, Data Catalog cannot verify IAM tag conditions on BigQuery datasets and tables. Suppose there is a conditional IAM policy that gives an intern the BigQuery Data Viewer role on datasets with the `employee_type=intern` tag. Since this is a positive tag condition, the intern cannot view datasets by searching in Data Catalog even if those datasets do have the `employee_type=intern` tag. If the tag condition was changed to a negative one, so that the intern could only view datasets that did *not* have the `employee_type=intern` tag, then the check would be skipped entirely and the intern could view the datasets that they couldn't normally access in BigQuery.
-    
     > **Best practice:** Use positive IAM tag conditions rather than negative ones to prevent granting roles unintentionally.
 
 ## Required roles

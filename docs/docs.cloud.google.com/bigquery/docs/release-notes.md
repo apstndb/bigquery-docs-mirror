@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 02, 2026
+
+Feature
+
+[Remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function) now support a custom path in the endpoint URL. You can reuse a single Cloud Run service for multiple BigQuery remote functions by specifying different path suffixes on the same endpoint. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
 ## June 01, 2026
 
 Change

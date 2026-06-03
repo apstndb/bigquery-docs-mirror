@@ -88,6 +88,197 @@ Because notebook execution doesn't stop at the first error, review errors in two
 
 After the notebook finishes the extraction process, you can download the results by clicking the download button in the last section of the notebook.
 
+### Snowflake
+
+### Requirements
+
+You must meet the following requirements in order to extract metadata and query logs from Snowflake:
+
+  - A machine that can connect to your Snowflake instance(s).
+  - A Google Cloud account with a Cloud Storage bucket to store the data.
+  - An empty BigQuery dataset to store the results. Alternatively, you can create a BigQuery dataset when you create the assessment job using the Google Cloud console UI.
+  - Snowflake user with `IMPORTED PRIVILEGES` access on the database `Snowflake` . We recommend creating a [`SERVICE`](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) user with a key-pair based authentication. This provides the secure method for accessing Snowflake data platform without a need to generate MFA tokens.
+      - To create a new service user follow the [official Snowflake guide](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication) . You will have to generate the RSA key-pair and assign public key to the Snowflake user.
+      - Service user should have the `ACCOUNTADMIN` role, or be [granted a role with the `IMPORTED PRIVILEGES` privileges on the database `Snowflake`](https://docs.snowflake.com/en/sql-reference/account-usage#enabling-snowflake-database-usage-for-other-roles) by an account administrator.
+      - Alternatively to key-pair authentication, you can use the password-based authentication. However, starting from August 2025, Snowflake enforces MFA on all password-based users. This requires you to approve the MFA push notification when using our extraction tool.
+
+### Run the `dwh-migration-dumper` tool
+
+Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+
+Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
+
+### Bash
+
+    sha256sum --check SHA256SUMS.txt
+
+### Windows PowerShell
+
+    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
+
+Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
+
+The `True` result confirms successful checksum verification.
+
+The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
+
+For details about how to use the `dwh-migration-dumper` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
+
+Use the `dwh-migration-dumper` tool to extract logs and metadata from your Snowflake data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
+
+Generate the metadata zip file:
+
+    dwh-migration-dumper \
+      --connector snowflake \
+      --host HOST_NAME \
+      --user USER_NAME \
+      --role ROLE_NAME \
+      --warehouse WAREHOUSE \
+      --assessment \
+      --private-key-file PRIVATE_KEY_PATH \
+      --private-key-password PRIVATE_KEY_PASSWORD
+
+Generate the zip file containing query logs:
+
+    dwh-migration-dumper \
+      --connector snowflake-logs \
+      --host HOST_NAME \
+      --user USER_NAME \
+      --role ROLE_NAME \
+      --warehouse WAREHOUSE \
+      --query-log-start STARTING_DATE \
+      --query-log-end ENDING_DATE \
+      --assessment \
+      --private-key-file PRIVATE_KEY_PATH \
+      --private-key-password PRIVATE_KEY_PASSWORD
+
+Replace the following:
+
+  - `  HOST_NAME  ` : the hostname of your Snowflake instance.
+  - `  USER_NAME  ` : the username to use for the database connection, where the user must have the access permissions as detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) .
+  - `  PRIVATE_KEY_PATH  ` : the path to the RSA private key used for authentication.
+  - `  PRIVATE_KEY_PASSWORD  ` : (Optional) the password that was used when creating the RSA private key. It is required only if private key is encrypted.
+  - `  ROLE_NAME  ` : (Optional) the user role when running the `dwh-migration-dumper` tool—for example, `ACCOUNTADMIN` .
+  - `  WAREHOUSE  ` : the warehouse used to execute the dumping operations. If you have multiple virtual warehouses, you can specify any warehouse to execute this query. Running this query with the access permissions detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) extracts all warehouse artefacts in this account.
+  - `  STARTING_DATE  ` : (Optional) used to indicate the start date in a date range of query logs, written in the format `YYYY-MM-DD` .
+  - `  ENDING_DATE  ` : (Optional) used to indicate the end date in a date range of query logs, written in the format `YYYY-MM-DD` .
+
+You can also generate multiple zip files containing query logs covering non-overlapping periods and provide all of them for assessment.
+
+### Hadoop / Cloudera
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
+
+### Requirements
+
+You must have the following to extract metadata from Cloudera:
+
+  - A machine that can connect to the Cloudera Manager API.
+  - A Google Cloud account with a Cloud Storage bucket to store the data.
+  - An empty BigQuery dataset to store the results. Alternatively, you can create a BigQuery dataset when you create the assessment job.
+
+### Run the `dwh-migration-dumper` tool
+
+1.  Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
+
+2.  Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) .
+
+3.  In your command-line environment, verify zip correctness:
+    
+    ``` 
+      sha256sum --check SHA256SUMS.txt
+      
+    ```
+    
+    For details about how to use the `dwh-migration-dumper` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
+
+4.  Use the `dwh-migration-dumper` tool to extract metadata and performance statistics to the zip file:
+    
+        dwh-migration-dumper \
+            --connector cloudera-manager \
+            --user USER_NAME \
+            --password PASSWORD \
+            --url URL_PATH \
+            --yarn-application-types "APP_TYPES" \
+            --spark-history-service-names "SPARK_HISTORY_SERVICE_NAMES" \
+            --pagination-page-size PAGE_SIZE \
+            --start-date START_DATE \
+            --end-date END_DATE \
+            --assessment
+    
+    Replace the following:
+    
+      - `USER_NAME` : the name of the user to connect to your Cloudera Manager instance.
+      - `PASSWORD` : the password for your Cloudera Manager instance.
+      - `URL_PATH` : the URL path to the Cloudera Manager API, for example, `https://localhost:7183/api/v55/` .
+      - `APP_TYPES` (optional): the comma-separated YARN application types that are dumped from the cluster. The default value is `MAPREDUCE,SPARK,Oozie Launcher` .
+      - `SPARK_HISTORY_SERVICE_NAMES` (optional): the comma-separated list of service names for your Spark History Server, used to query Spark event logs through Apache Knox for application metadata extraction. If not provided, the default value is `sparkhistory,spark3history` .
+      - `PAGE_SIZE` (optional): the number of records per Cloudera response. The default value is `1000` .
+      - `START_DATE` (optional): the start date for your history dump in ISO 8601 format, for example `2025-05-29` . The default value is 90 days before the current date.
+      - `END_DATE` (optional): the end date for your history dump in ISO 8601 format, for example `2025-05-30` . The default value is the current date.
+
+#### Use Oozie in your Cloudera cluster
+
+If you use Oozie in your Cloudera cluster, you can dump Oozie job history with the Oozie connector. You can use Oozie with Kerberos authentication or basic authentication.
+
+For Kerberos authentication, run the following:
+
+    kinit
+    dwh-migration-dumper \
+        --connector oozie \
+        --url URL_PATH \
+        --assessment
+
+Replace the following:
+
+  - `URL_PATH` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `OOZIE_URL` environment variable.
+
+For basic authentication, run the following:
+
+    dwh-migration-dumper \
+        --connector oozie \
+        --user USER_NAME \
+        --password PASSWORD \
+        --url URL_PATH \
+        --assessment
+
+Replace the following:
+
+  - `USER_NAME` : the name of the Oozie user.
+  - `PASSWORD` : the user password.
+  - `URL_PATH` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `OOZIE_URL` environment variable.
+
+#### Use Airflow in your Cloudera cluster
+
+If you use Airflow in your Cloudera cluster, you can dump DAGs history with the Airflow connector:
+
+    dwh-migration-dumper \
+        --connector airflow \
+        --user USER_NAME \
+        --password PASSWORD \
+        --url URL \
+        --driver "DRIVER_PATH" \
+        --start-date START_DATE \
+        --end-date END_DATE \
+        --assessment
+
+Replace the following:
+
+  - `USER_NAME` : the name of the Airflow user
+  - `PASSWORD` : the user password
+  - `URL` : the JDBC string to the Airflow database
+  - `DRIVER_PATH` : the path to the JDBC driver
+  - `START_DATE` (optional): the start date for your history dump in ISO 8601 format
+  - `END_DATE` (optional): the end date for your history dump in ISO 8601 format
+
+#### Use Hive in your Cloudera cluster
+
+To use the Hive connector, see the Apache Hive tab.
+
 ### Teradata
 
 ### Requirements
@@ -357,83 +548,6 @@ Replace the following:
 
 Amazon Redshift Serverless stores usage logs for seven days. If a wider range is required, Google recommends extracting data multiple times over a longer period.
 
-### Snowflake
-
-### Requirements
-
-You must meet the following requirements in order to extract metadata and query logs from Snowflake:
-
-  - A machine that can connect to your Snowflake instance(s).
-  - A Google Cloud account with a Cloud Storage bucket to store the data.
-  - An empty BigQuery dataset to store the results. Alternatively, you can create a BigQuery dataset when you create the assessment job using the Google Cloud console UI.
-  - Snowflake user with `IMPORTED PRIVILEGES` access on the database `Snowflake` . We recommend creating a [`SERVICE`](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) user with a key-pair based authentication. This provides the secure method for accessing Snowflake data platform without a need to generate MFA tokens.
-      - To create a new service user follow the [official Snowflake guide](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication) . You will have to generate the RSA key-pair and assign public key to the Snowflake user.
-      - Service user should have the `ACCOUNTADMIN` role, or be [granted a role with the `IMPORTED PRIVILEGES` privileges on the database `Snowflake`](https://docs.snowflake.com/en/sql-reference/account-usage#enabling-snowflake-database-usage-for-other-roles) by an account administrator.
-      - Alternatively to key-pair authentication, you can use the password-based authentication. However, starting from August 2025, Snowflake enforces MFA on all password-based users. This requires you to approve the MFA push notification when using our extraction tool.
-
-### Run the `dwh-migration-dumper` tool
-
-Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
-
-Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
-
-### Bash
-
-    sha256sum --check SHA256SUMS.txt
-
-### Windows PowerShell
-
-    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-
-Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
-
-The `True` result confirms successful checksum verification.
-
-The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
-
-For details about how to use the `dwh-migration-dumper` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
-
-Use the `dwh-migration-dumper` tool to extract logs and metadata from your Snowflake data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
-
-Generate the metadata zip file:
-
-    dwh-migration-dumper \
-      --connector snowflake \
-      --host HOST_NAME \
-      --user USER_NAME \
-      --role ROLE_NAME \
-      --warehouse WAREHOUSE \
-      --assessment \
-      --private-key-file PRIVATE_KEY_PATH \
-      --private-key-password PRIVATE_KEY_PASSWORD
-
-Generate the zip file containing query logs:
-
-    dwh-migration-dumper \
-      --connector snowflake-logs \
-      --host HOST_NAME \
-      --user USER_NAME \
-      --role ROLE_NAME \
-      --warehouse WAREHOUSE \
-      --query-log-start STARTING_DATE \
-      --query-log-end ENDING_DATE \
-      --assessment \
-      --private-key-file PRIVATE_KEY_PATH \
-      --private-key-password PRIVATE_KEY_PASSWORD
-
-Replace the following:
-
-  - `  HOST_NAME  ` : the hostname of your Snowflake instance.
-  - `  USER_NAME  ` : the username to use for the database connection, where the user must have the access permissions as detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) .
-  - `  PRIVATE_KEY_PATH  ` : the path to the RSA private key used for authentication.
-  - `  PRIVATE_KEY_PASSWORD  ` : (Optional) the password that was used when creating the RSA private key. It is required only if private key is encrypted.
-  - `  ROLE_NAME  ` : (Optional) the user role when running the `dwh-migration-dumper` tool—for example, `ACCOUNTADMIN` .
-  - `  WAREHOUSE  ` : the warehouse used to execute the dumping operations. If you have multiple virtual warehouses, you can specify any warehouse to execute this query. Running this query with the access permissions detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) extracts all warehouse artefacts in this account.
-  - `  STARTING_DATE  ` : (Optional) used to indicate the start date in a date range of query logs, written in the format `YYYY-MM-DD` .
-  - `  ENDING_DATE  ` : (Optional) used to indicate the end date in a date range of query logs, written in the format `YYYY-MM-DD` .
-
-You can also generate multiple zip files containing query logs covering non-overlapping periods and provide all of them for assessment.
-
 ### Oracle
 
 > **Preview**
@@ -486,120 +600,6 @@ Replace the following:
   - `  SERVICE_NAME  ` : the Oracle service name to use for the connection.
   - `  JDBC_DRIVER_PATH  ` : the absolute or relative path to the driver JAR file. You can download this file from the [Oracle JDBC driver downloads](https://www.oracle.com/pl/database/technologies/appdev/jdbc-downloads.html) page. You should select the driver version that is compatible with your database version.
   - `  USER_NAME  ` : name of the user used to connect to your Oracle instance. The user must have the access permissions as detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-oracle) .
-
-### Hadoop / Cloudera
-
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
-
-### Requirements
-
-You must have the following to extract metadata from Cloudera:
-
-  - A machine that can connect to the Cloudera Manager API.
-  - A Google Cloud account with a Cloud Storage bucket to store the data.
-  - An empty BigQuery dataset to store the results. Alternatively, you can create a BigQuery dataset when you create the assessment job.
-
-### Run the `dwh-migration-dumper` tool
-
-1.  Download the [`dwh-migration-dumper` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
-
-2.  Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) .
-
-3.  In your command-line environment, verify zip correctness:
-    
-    ``` 
-      sha256sum --check SHA256SUMS.txt
-      
-    ```
-    
-    For details about how to use the `dwh-migration-dumper` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
-
-4.  Use the `dwh-migration-dumper` tool to extract metadata and performance statistics to the zip file:
-    
-        dwh-migration-dumper \
-            --connector cloudera-manager \
-            --user USER_NAME \
-            --password PASSWORD \
-            --url URL_PATH \
-            --yarn-application-types "APP_TYPES" \
-            --spark-history-service-names "SPARK_HISTORY_SERVICE_NAMES" \
-            --pagination-page-size PAGE_SIZE \
-            --start-date START_DATE \
-            --end-date END_DATE \
-            --assessment
-    
-    Replace the following:
-    
-      - `USER_NAME` : the name of the user to connect to your Cloudera Manager instance.
-      - `PASSWORD` : the password for your Cloudera Manager instance.
-      - `URL_PATH` : the URL path to the Cloudera Manager API, for example, `https://localhost:7183/api/v55/` .
-      - `APP_TYPES` (optional): the comma-separated YARN application types that are dumped from the cluster. The default value is `MAPREDUCE,SPARK,Oozie Launcher` .
-      - `SPARK_HISTORY_SERVICE_NAMES` (optional): the comma-separated list of service names for your Spark History Server, used to query Spark event logs through Apache Knox for application metadata extraction. If not provided, the default value is `sparkhistory,spark3history` .
-      - `PAGE_SIZE` (optional): the number of records per Cloudera response. The default value is `1000` .
-      - `START_DATE` (optional): the start date for your history dump in ISO 8601 format, for example `2025-05-29` . The default value is 90 days before the current date.
-      - `END_DATE` (optional): the end date for your history dump in ISO 8601 format, for example `2025-05-30` . The default value is the current date.
-
-#### Use Oozie in your Cloudera cluster
-
-If you use Oozie in your Cloudera cluster, you can dump Oozie job history with the Oozie connector. You can use Oozie with Kerberos authentication or basic authentication.
-
-For Kerberos authentication, run the following:
-
-    kinit
-    dwh-migration-dumper \
-        --connector oozie \
-        --url URL_PATH \
-        --assessment
-
-Replace the following:
-
-  - `URL_PATH` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `OOZIE_URL` environment variable.
-
-For basic authentication, run the following:
-
-    dwh-migration-dumper \
-        --connector oozie \
-        --user USER_NAME \
-        --password PASSWORD \
-        --url URL_PATH \
-        --assessment
-
-Replace the following:
-
-  - `USER_NAME` : the name of the Oozie user.
-  - `PASSWORD` : the user password.
-  - `URL_PATH` (optional): the Oozie server URL path. If you don't specify the URL path, it's taken from the `OOZIE_URL` environment variable.
-
-#### Use Airflow in your Cloudera cluster
-
-If you use Airflow in your Cloudera cluster, you can dump DAGs history with the Airflow connector:
-
-    dwh-migration-dumper \
-        --connector airflow \
-        --user USER_NAME \
-        --password PASSWORD \
-        --url URL \
-        --driver "DRIVER_PATH" \
-        --start-date START_DATE \
-        --end-date END_DATE \
-        --assessment
-
-Replace the following:
-
-  - `USER_NAME` : the name of the Airflow user
-  - `PASSWORD` : the user password
-  - `URL` : the JDBC string to the Airflow database
-  - `DRIVER_PATH` : the path to the JDBC driver
-  - `START_DATE` (optional): the start date for your history dump in ISO 8601 format
-  - `END_DATE` (optional): the end date for your history dump in ISO 8601 format
-
-#### Use Hive in your Cloudera cluster
-
-To use the Hive connector, see the Apache Hive tab.
 
 ### Apache Hive
 
@@ -805,6 +805,30 @@ To request feedback or support for this feature, send an email to <bq-edw-migrat
 
 Upload the ZIP file to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
+### Snowflake
+
+Upload the metadata and the zip file(s) containing query logs and usage histories to your Cloud Storage bucket. When uploading these files to Cloud Storage, the following requirements must be met:
+
+  - The total uncompressed size of all the files inside the metadata zip file must be less than 50 GB.
+  - The metadata zip file and the zip file containing query logs must be uploaded to a Cloud Storage folder. If you have multiple zip files containing non-overlapping query logs, you can upload all of them.
+  - You must upload all the files to the same Cloud Storage folder.
+  - You must upload all of the metadata and query logs zip files exactly as they are output by `dwh-migration-dumper` tool. Don't extract, combine, or otherwise modify them.
+  - The total uncompressed size of all the query history files must be less than 5 TB.
+
+For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
+
+### Hadoop / Cloudera
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
+
+Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `dwh-migration-cloudera-manager- RUN_DATE .zip` (for example `dwh-migration-cloudera-manager-20250312T145808.zip` ), but you can customize it with the `--output` flag. The limit for the total uncompressed size of all files inside the zip file is 50 GB.
+
+For more information about creating buckets and uploading files to Cloud Storage, see [Create a bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a file system](https://docs.cloud.google.com/storage/docs/uploading-objects) .
+
 ### Teradata
 
 Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) . The limit for the total uncompressed size of all the files inside the metadata zip file is 50 GB.
@@ -835,18 +859,6 @@ The limit for the total uncompressed size of all the query history files is 5 TB
 
 Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
-### Snowflake
-
-Upload the metadata and the zip file(s) containing query logs and usage histories to your Cloud Storage bucket. When uploading these files to Cloud Storage, the following requirements must be met:
-
-  - The total uncompressed size of all the files inside the metadata zip file must be less than 50 GB.
-  - The metadata zip file and the zip file containing query logs must be uploaded to a Cloud Storage folder. If you have multiple zip files containing non-overlapping query logs, you can upload all of them.
-  - You must upload all the files to the same Cloud Storage folder.
-  - You must upload all of the metadata and query logs zip files exactly as they are output by `dwh-migration-dumper` tool. Don't extract, combine, or otherwise modify them.
-  - The total uncompressed size of all the query history files must be less than 5 TB.
-
-For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
-
 ### Oracle
 
 > **Preview**
@@ -858,18 +870,6 @@ To request feedback or support for this feature, send email to <bq-edw-migration
 Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `dwh-migration-oracle-stats.zip` , but you can customize this by specifying it in the `--output` flag. The limit for the total uncompressed size of all the files inside the zip file is 50 GB.
 
 For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
-
-### Hadoop / Cloudera
-
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
-
-Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `dwh-migration-cloudera-manager- RUN_DATE .zip` (for example `dwh-migration-cloudera-manager-20250312T145808.zip` ), but you can customize it with the `--output` flag. The limit for the total uncompressed size of all files inside the zip file is 50 GB.
-
-For more information about creating buckets and uploading files to Cloud Storage, see [Create a bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a file system](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ### Apache Hive
 
@@ -1149,6 +1149,75 @@ The report looks similar to the following screenshot:
 
 To see which views are contained in the report, select your data warehouse:
 
+### Snowflake
+
+The report consists of different sections that can be used either separately or together. The following diagram organizes these sections into three common user goals to help you assess your migration needs:
+
+![Migration assessment report flowchart for Snowflake](https://docs.cloud.google.com/static/bigquery/images/migration-assessment-snowflake-flowchart.png)
+
+### Migration Highlights views
+
+The **Migration Highlights** section contains the following views:
+
+  - Snowflake versus BigQuery Pricing Models  
+    Listing of the pricings with different tiers/editions. Also includes an illustration of how BigQuery autoscaling can help save more cost compared to that of Snowflake.
+  - Total Cost of Ownership  
+    Interactive table, allowing the user to define: BigQuery Edition, commitment, baseline slot commitment, percentage of active storage, and percentage of data loaded or changed. Helps better estimate the cost for custom cases.
+  - Automatic Translation Highlights  
+    Aggregated translation ratio, grouped by either user or database, ordered ascending or descending. Also includes the most common error message for failed auto translation.
+
+### Existing System views
+
+The **Existing System** section contains the following views:
+
+  - System Overview  
+    The System Overview view provides the high-level volume metrics of the key components in the existing system for a specified time period. The timeline that is evaluated depends on the logs that were analyzed by the BigQuery migration assessment. This view gives you quick insight into the source data warehouse utilization, which you can use for migration planning.
+  - Virtual Warehouses Overview  
+    Shows the Snowflake cost by warehouse, as well as the node-based rescaling over the period.
+  - Table Volume  
+    The Table Volume view provides statistics on the largest tables and databases found by the BigQuery migration assessment. Because large tables may take longer to extract from the source data warehouse system, this view can be helpful in migration planning and sequencing.
+  - Table Usage  
+    The Table Usage view provides statistics on which tables are heavily used within the source data warehouse system. Heavily used tables can help you to understand which tables might have many dependencies and require additional planning during the migration process.
+  - Queries  
+    The Queries view gives a breakdown of the types of SQL statements executed and statistics of their usage. You can use the histogram of Query Type and Time to identify low periods of system utilization and optimal times of day to transfer data. You can also use this view to identify frequently executed queries and the users invoking those executions.
+  - Databases  
+    The Databases view provides metrics on the size, tables, views, and procedures defined in the source data warehouse system. This view provides insight into the volume of objects that you need to migrate.
+
+### BigQuery steady state views
+
+The **BigQuery steady state** section contains the following views:
+
+  - Tables With No Usage  
+    The Tables With No Usage view displays tables in which the BigQuery migration assessment couldn't find any usage during the logs period that was analyzed. This can indicate which tables might not need to be transferred to BigQuery during migration or that the costs of storing data in BigQuery could be lower. You must validate the list of unused tables since they could have usage outside of the logs period analyzed, such as a table which is only used once per quarter or half.
+  - Tables With No Writes  
+    The Tables With No Writes view displays tables in which the BigQuery migration assessment couldn't find any updates during the logs period that was analyzed. This can indicate that the costs of storing data in BigQuery could be lower.
+
+### Migration Plan views
+
+The **Migration Plan** section of the report contains the following views:
+
+  - SQL Translation  
+    The SQL Translation view lists the count and details of queries that were automatically converted by BigQuery migration assessment and don't need manual intervention. Automated SQL Translation typically achieves high translation rates if metadata is provided. This view is interactive and allows analysis of common queries and how these are translated.
+  - SQL Translation Offline Effort  
+    The Offline Effort view captures the areas that need manual intervention, including specific UDFs and potential lexical structure and syntax violations for tables or columns.
+  - SQL Warnings - To Review  
+    The Warnings To Review view captures the areas that are mostly translated but requires some human inspection.
+  - BigQuery Reserved Keywords  
+    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( `` ` `` ) characters.
+  - Database and Table Coupling  
+    The Database Coupling view provides a high-level view on databases and tables that are accessed together in a single query. This view can show what tables and databases are often referenced and what can be used for migration planning.
+  - Table Updates Schedule  
+    The Table Updates Schedule view shows when and how frequently tables are updated to help you plan how and when to move them.
+
+### Proof of Concept views
+
+The **PoC** (proof of concept) section contains the following views:
+
+  - PoC for demonstrating steady state BigQuery savings  
+    Includes the most frequent queries, the queries reading the most data, the slowest queries, and the tables impacted by these aforementioned queries.
+  - PoC for demonstrating BigQuery migration plan  
+    Showcases how BigQuery translate the most complex queries and the tables they impact.
+
 ### Teradata
 
 The report is a three-part narrative that's prefaced by a summary highlights page. That page includes the following sections:
@@ -1392,75 +1461,6 @@ The **Appendix** section contains this view:
 
   - Assessment Execution Summary  
     Provides the assessment execution details including the list of processed files, errors and report completeness. You can use this page to investigate missing data in the report and to better understand the report's completeness.
-
-### Snowflake
-
-The report consists of different sections that can be used either separately or together. The following diagram organizes these sections into three common user goals to help you assess your migration needs:
-
-![Migration assessment report flowchart for Snowflake](https://docs.cloud.google.com/static/bigquery/images/migration-assessment-snowflake-flowchart.png)
-
-### Migration Highlights views
-
-The **Migration Highlights** section contains the following views:
-
-  - Snowflake versus BigQuery Pricing Models  
-    Listing of the pricings with different tiers/editions. Also includes an illustration of how BigQuery autoscaling can help save more cost compared to that of Snowflake.
-  - Total Cost of Ownership  
-    Interactive table, allowing the user to define: BigQuery Edition, commitment, baseline slot commitment, percentage of active storage, and percentage of data loaded or changed. Helps better estimate the cost for custom cases.
-  - Automatic Translation Highlights  
-    Aggregated translation ratio, grouped by either user or database, ordered ascending or descending. Also includes the most common error message for failed auto translation.
-
-### Existing System views
-
-The **Existing System** section contains the following views:
-
-  - System Overview  
-    The System Overview view provides the high-level volume metrics of the key components in the existing system for a specified time period. The timeline that is evaluated depends on the logs that were analyzed by the BigQuery migration assessment. This view gives you quick insight into the source data warehouse utilization, which you can use for migration planning.
-  - Virtual Warehouses Overview  
-    Shows the Snowflake cost by warehouse, as well as the node-based rescaling over the period.
-  - Table Volume  
-    The Table Volume view provides statistics on the largest tables and databases found by the BigQuery migration assessment. Because large tables may take longer to extract from the source data warehouse system, this view can be helpful in migration planning and sequencing.
-  - Table Usage  
-    The Table Usage view provides statistics on which tables are heavily used within the source data warehouse system. Heavily used tables can help you to understand which tables might have many dependencies and require additional planning during the migration process.
-  - Queries  
-    The Queries view gives a breakdown of the types of SQL statements executed and statistics of their usage. You can use the histogram of Query Type and Time to identify low periods of system utilization and optimal times of day to transfer data. You can also use this view to identify frequently executed queries and the users invoking those executions.
-  - Databases  
-    The Databases view provides metrics on the size, tables, views, and procedures defined in the source data warehouse system. This view provides insight into the volume of objects that you need to migrate.
-
-### BigQuery steady state views
-
-The **BigQuery steady state** section contains the following views:
-
-  - Tables With No Usage  
-    The Tables With No Usage view displays tables in which the BigQuery migration assessment couldn't find any usage during the logs period that was analyzed. This can indicate which tables might not need to be transferred to BigQuery during migration or that the costs of storing data in BigQuery could be lower. You must validate the list of unused tables since they could have usage outside of the logs period analyzed, such as a table which is only used once per quarter or half.
-  - Tables With No Writes  
-    The Tables With No Writes view displays tables in which the BigQuery migration assessment couldn't find any updates during the logs period that was analyzed. This can indicate that the costs of storing data in BigQuery could be lower.
-
-### Migration Plan views
-
-The **Migration Plan** section of the report contains the following views:
-
-  - SQL Translation  
-    The SQL Translation view lists the count and details of queries that were automatically converted by BigQuery migration assessment and don't need manual intervention. Automated SQL Translation typically achieves high translation rates if metadata is provided. This view is interactive and allows analysis of common queries and how these are translated.
-  - SQL Translation Offline Effort  
-    The Offline Effort view captures the areas that need manual intervention, including specific UDFs and potential lexical structure and syntax violations for tables or columns.
-  - SQL Warnings - To Review  
-    The Warnings To Review view captures the areas that are mostly translated but requires some human inspection.
-  - BigQuery Reserved Keywords  
-    The BigQuery Reserved Keywords view displays detected usage of keywords that have special meaning in the GoogleSQL language, and cannot be used as identifiers unless enclosed by backtick ( `` ` `` ) characters.
-  - Database and Table Coupling  
-    The Database Coupling view provides a high-level view on databases and tables that are accessed together in a single query. This view can show what tables and databases are often referenced and what can be used for migration planning.
-  - Table Updates Schedule  
-    The Table Updates Schedule view shows when and how frequently tables are updated to help you plan how and when to move them.
-
-### Proof of Concept views
-
-The **PoC** (proof of concept) section contains the following views:
-
-  - PoC for demonstrating steady state BigQuery savings  
-    Includes the most frequent queries, the queries reading the most data, the slowest queries, and the tables impacted by these aforementioned queries.
-  - PoC for demonstrating BigQuery migration plan  
-    Showcases how BigQuery translate the most complex queries and the tables they impact.
 
 ### Oracle
 

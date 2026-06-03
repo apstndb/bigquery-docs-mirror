@@ -1680,7 +1680,7 @@ Output only. Statistics of a Spark procedure job.
 
 `string ( Int64Value format)`
 
-Output only. Total bytes transferred for cross-cloud queries such as Cross Cloud Transfer and CREATE TABLE AS SELECT (CTAS).
+Output only. Total bytes transferred for BigQuery Omni queries from the remote cloud back to Google Cloud. This tracks data movement over Google-managed connections (like query results). It doesn't include input data read from the external data lake (for example, S3) because that data stays within the remote cloud.
 
 `materializedViewStatistics`
 

@@ -59,6 +59,14 @@ For information about troubleshooting errors related to quotas and limits, see [
 
 Quotas and limits apply to jobs that BigQuery runs on your behalf whether they are run by using Google Cloud console, the bq command-line tool, or programmatically using the REST API or client libraries.
 
+### Pending jobs
+
+The following limit applies to pending jobs in BigQuery:
+
+| Limit                          | Default                             | Notes                                                                                                                                                                                                                               |
+| ------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Maximum number of pending jobs | 50,000 jobs per project, per region | The concurrent number of jobs that can be in the pending state. This limit cannot be increased. For more information, see [Troubleshooting BigQuery quota errors.](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas) |
+
 ### Query jobs
 
 The following quotas apply to query jobs created automatically by running interactive queries, scheduled queries, and jobs submitted by using the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) and query-type [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) API methods.
