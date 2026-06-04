@@ -281,7 +281,6 @@ https://docs.cloud.google.com/bigquery/docs/graph-modeler	2026-05-30T03:38:48Z
 https://docs.cloud.google.com/bigquery/docs/graph-overview	2026-05-30T03:38:48Z
 https://docs.cloud.google.com/bigquery/docs/graph-query-best-practices	2026-05-30T03:38:48Z
 https://docs.cloud.google.com/bigquery/docs/graph-query-overview	2026-05-30T03:38:48Z
-https://docs.cloud.google.com/bigquery/docs/graph-schema-best-practices	2026-06-01T14:53:39Z
 https://docs.cloud.google.com/bigquery/docs/graph-schema-overview	2026-05-30T03:38:48Z
 https://docs.cloud.google.com/bigquery/docs/graph-visualization	2026-05-30T03:38:48Z
 https://docs.cloud.google.com/bigquery/docs/graph-visualization-integrations	2026-05-30T03:38:48Z
