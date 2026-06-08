@@ -44,23 +44,33 @@ When your graph data is represented as tables, you must perform self joins or re
 
   - **Integration with Spanner Graph** . BigQuery Graph and Spanner Graph share the same graph schema and query language. You can execute operational graph workloads in Spanner and run complex graph analytics in BigQuery without needing to remodel your data or translate your queries.
 
-  - **Query using natural language** . Ask questions about your graph using [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) . Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. To try querying an agent about a graph, chat with the [`Look Graph` agent](https://console.cloud.google.com/bigquery/agents_hub;agentsHubTab=Agents;agentsPath=%2Fbq%2Fagents%2Fagent_59ff15ce-e31b-4ba6-ac72-57788dfe0d48) about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph.
+  - **Query using natural language** . Ask questions about your graph using [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) . Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. To try chatting with an agent about a graph, use the `Look Graph` sample agent on the BigQuery on the [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph.
 
 ### Use cases
 
 You can use BigQuery Graph to build many types of analytic graph workloads, including the following:
 
-  - **Financial fraud detection** . Analyze complex relationships among users, accounts, and transactions to identify suspicious patterns and anomalies, such as money laundering and irregular connections between entities, which can be difficult to detect using relational databases. For a tutorial about fraud detection, see [Fraud detection with BigQuery Graph](https://codelabs.developers.google.com/codelabs/fraud-bigquery-graph) .
+  - **Financial fraud detection** . Analyze complex relationships among users, accounts, and transactions to identify suspicious patterns and anomalies, such as money laundering and irregular connections between entities, which can be difficult to detect using relational databases.
 
-  - **Customer profiles** . Track customer relationships, preferences, and purchase histories. Gain a holistic understanding of each customer to enable personalized recommendations, targeted marketing campaigns, and improved customer service experiences. For a tutorial about customer profiles, see [Build customer 360 recommendations with BigQuery Graph](https://codelabs.developers.google.com/codelabs/c360-bigquery-graph) .
+  - **Customer profiles** . Track customer relationships, preferences, and purchase histories. Gain a holistic understanding of each customer to enable personalized recommendations, targeted marketing campaigns, and improved customer service experiences.
 
   - **Social networks** . Capture user activities and interactions and use graph pattern matching for friend recommendations and content discovery.
 
-  - **Manufacturing and supply chain management** . Use graph patterns for efficient impact analysis, cost rollups, and compliance checks by modeling parts, suppliers, orders, availability, and defects in the graph. For a tutorial about supply chains, see [Supply chain traceability with BigQuery Graph](https://codelabs.developers.google.com/codelabs/supplychaingraph) .
+  - **Manufacturing and supply chain management** . Use graph patterns for efficient impact analysis, cost rollups, and compliance checks by modeling parts, suppliers, orders, availability, and defects in the graph.
 
   - **Health care** . Capture patient relationships, conditions, diagnosis, and treatments to facilitate patient similarity analysis and treatment planning.
 
   - **Transportation** . Model places, connections, distances, and costs in the graph, and then use graph queries to find the optimal route.
+
+## Tutorials
+
+The following tutorials show how to use BigQuery Graph in different scenarios:
+
+  - [Fraud detection with BigQuery Graph](https://codelabs.developers.google.com/codelabs/fraud-bigquery-graph)
+  - [Build customer 360 recommendations with BigQuery Graph](https://codelabs.developers.google.com/codelabs/c360-bigquery-graph)
+  - [Supply chain traceability with BigQuery Graph](https://codelabs.developers.google.com/codelabs/supplychaingraph)
+  - [Spanner & BigQuery:Real-Time Fraud Defense Shield](https://codelabs.developers.google.com/next26/spanner-bigquery-graph#0)
+  - [Perform semantic search on a graph](https://docs.cloud.google.com/bigquery/docs/graph-search)
 
 ## Pricing
 

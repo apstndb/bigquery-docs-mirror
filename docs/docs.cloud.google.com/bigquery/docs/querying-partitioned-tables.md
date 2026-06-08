@@ -268,7 +268,7 @@ The following query select the first day of each month in the table, and it supp
 
     SELECT COUNT(*) FROM bigquery-public-data.wikipedia.pageviews_2025WHERE DATE(datehour) IN UNNEST(GENERATE_DATE_ARRAY(  DATE_TRUNC(CURRENT_DATE(), YEAR),  DATE(DATE_TRUNC(CURRENT_DATE(), YEAR) + INTERVAL 1 YEAR - INTERVAL 1 DAY),  INTERVAL 1 MONTH))
 
-Queries with the following predicates doesn't prune partitions because it manipulates the partitioning column with unsupported functions:
+Queries with the following predicates don't prune partitions because they manipulate the partitioning column with unsupported functions:
 
     WHERE FORMAT_DATE('%Y-%m-%d %H', ts) = '2025-03-28 20';
     

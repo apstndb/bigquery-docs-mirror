@@ -115,7 +115,7 @@ At any given time, some slots might be idle. This can include:
 
 Idle slots are not applicable when using the on-demand pricing model.
 
-By default, queries running in a reservation automatically use idle slots from other reservations within the same region and administration project. BigQuery immediately allocates idle slots to an assigned reservation when they are needed. Idle slots that were in use by another reservation are quickly preempted if required by the original reservation. There might be a short time when you see total slot consumption exceed the maximum you specified across all reservations, but you aren't charged for this additional slot usage.
+By default, queries running in a reservation automatically use idle slots from other reservations within the same region and administration project. BigQuery immediately allocates idle slots to an assigned reservation when they are needed. Idle slots that were in use by another reservation are quickly preempted if required by the original reservation. Since this preemption isn't instantaneous, there might be short periods where idle slots are unevenly distributed across reservations, but these are quickly corrected by BigQuery. There might be a short time when you see total slot consumption exceed the maximum you specified across all reservations, but you aren't charged for this additional slot usage.
 
 For example, suppose you have the following reservation setup:
 
@@ -181,7 +181,9 @@ When you create autoscaling reservations, consider the following:
   - Scaling up is based on actual usage, and is rounded up to the nearest 50 slot increment.
   - Your autoscaled slots are charged at [capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) for your associated edition while scaling up. You are charged for the number of scaled slots, not the number of slots used. This charge applies even if the job that causes BigQuery to scale up fails. For this reason, don't use the [jobs information schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to match the billing. Instead, see [Monitor autoscaling with information schema](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#monitor_autoscaling_with_information_schema) .
   - While the number of slots always scales by multiples of 50, it might scale more than 50 slots within one step. For example, if your workload requires an additional 450 slots, BigQuery can attempt to scale by 450 slots at once to meet the capacity requirement.
-  - BigQuery scales down when the jobs associated with the reservation no longer need the capacity (subject to a 1 minute minimum).
+  - BigQuery scales down when the jobs associated with the reservation no longer need the capacity. By default, capacity is billed per second with a one-minute minimum duration. You can opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) at the reservation level for per-second billing with no minimum duration.
+
+> **Note:** Changes to the maximum slots value for a reservation can take a few seconds to propagate.
 
 Any autoscaled capacity is retained for at least 60 seconds. This 60-second period is called the scale-down window. Any new peak in capacity resets the scale-down window, treating the entire capacity level as a new grant. However, if 60 seconds or more have passed since the last capacity increase and there is less demand, the system reduces the capacity without resetting the scale-down window, enabling consecutive decreases without an imposed delay.
 
@@ -189,7 +191,15 @@ For example, if your initial workload capacity scales to 100 slots, the peak is 
 
 Consider the following detailed example: At 12:00:00, your initial capacity scales to 100 slots and the usage lasts for one second. That peak is retained for at least 60 seconds, beginning at 12:00:00. After the 60 seconds have elapsed (at 12:01:01), if the new usage is 50 slots, BigQuery scales down to 50 slots. If, at 12:01:02, the new usage is 0 slots, BigQuery again scales down immediately to 0 slots. After the scale-down window has ended, BigQuery can scale down multiple times consecutively without requiring a new scale-down window.
 
-To learn how to work with autoscaling, see [Work with autoscaling slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
+#### BigQuery fluid scaling
+
+BigQuery fluid scaling removes the one-minute minimum duration required by standard autoscaling, and adjusts your slot capacity from second to second. This feature doesn't change the 50-slot scaling increments.
+
+To quickly adjust to reservation demands, BigQuery fluid scaling impacts idle slot sharing distribution between reservations over short increments of time, resulting in slightly more or fewer idle slots given than a reservation's exact fair share.
+
+For instructions on how to enable this feature, see [Update reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#update_reservations) .
+
+To learn how to work with autoscaling, see [Manage workload reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
 
 ### Using reservations with baseline and autoscaling slots
 

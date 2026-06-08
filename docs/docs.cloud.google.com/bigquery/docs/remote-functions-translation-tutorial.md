@@ -224,10 +224,10 @@ Using Cloud Run functions, create a function that translates input text into Spa
 
 3.  In the file list, select **requirements.txt** , and then paste the following text:
     
-        Flask==2.2.2
+        Flask==3.1.3; python_version >= '3.9'
         functions-framework==3.9.2
         google-cloud-translate==3.18.0
-        Werkzeug==2.3.8
+        Werkzeug==3.1.8; python_version >= '3.9'
 
 4.  Click **Deploy** and wait for the function to deploy.
 

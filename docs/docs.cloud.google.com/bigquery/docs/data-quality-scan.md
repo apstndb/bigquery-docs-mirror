@@ -341,6 +341,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -694,6 +696,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -903,6 +907,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -1163,6 +1169,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -1521,6 +1529,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -1764,6 +1774,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (

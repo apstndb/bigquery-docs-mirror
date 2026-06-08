@@ -40,9 +40,9 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <tbody>
 <tr class="odd">
 <td><strong><a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">Pricing model</a></strong></td>
-<td>Slot-hours (1 minute minimum)</td>
-<td>Slot-hours (1 minute minimum)</td>
-<td>Slot-hours (1 minute minimum)</td>
+<td>Slot-hours (1 minute minimum by default; opt in to <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list">BigQuery fluid scaling</a> for no minimum duration)</td>
+<td>Slot-hours (1 minute minimum by default; opt in to <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list">BigQuery fluid scaling</a> for no minimum duration)</td>
+<td>Slot-hours (1 minute minimum by default; opt in to <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list">BigQuery fluid scaling</a> for no minimum duration)</td>
 <td>Pay per query with free tier</td>
 </tr>
 <tr class="even">

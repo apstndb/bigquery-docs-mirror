@@ -23,6 +23,8 @@ The slot recommender estimates your autoscaling usage based on slot usage over t
 
 The slot recommender offers recommendations for different pricing types, including pay as you go (no commitments), 1-year and 3-year commitments. It displays the monthly cost for each option based on custom pricing.
 
+The slot recommender models autoscaler usage with a one-minute minimum duration by default. For organizations with multiple reservations, the recommender continues to use the one-minute minimum model until at least 80% of your total reservation capacity is opted in to BigQuery fluid scaling. As a result, the recommender might overestimate your required autoscaling usage.
+
 ![Slot usage chart in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/slot-recommender-usage-chart.png)
 
 ![Slot recommendations in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/slot-recommender.png)

@@ -14,7 +14,7 @@ This page describes how to use slot reservations to manage your BigQuery workloa
 
 In BigQuery, [slots](https://docs.cloud.google.com/bigquery/docs/slots) are allocated in pools called *reservations* . Reservations let you manage capacity and isolate workloads in ways that make sense for your organization. For example, you might create a reservation named `prod` for production workloads, and a separate reservation named `test` for testing, so that test jobs don't compete for resources with production jobs. Or, you might create reservations for different departments in your organization to allocate compute costs.
 
-Reservations also let administrators configure slot capacity based on the workloads assigned to them. For example, if you have production-level, time-sensitive workloads, create a reservation with adequate baseline slots. Baseline slots are always available and ensure the reservation always has sufficient capacity. However, if you use autoscaling reservations, the capacity in a reservation isn't necessarily reserved. When you use [autoscaling reservations](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) , the capacity is automatically scaled up and down based on the demand. In addition, [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) can be shared across reservations.
+Reservations also let administrators configure slot capacity based on the workloads assigned to them. For example, if you have production-level, time-sensitive workloads, create a reservation with adequate baseline slots. Baseline slots are always available and ensure the reservation always has sufficient capacity. However, if you use autoscaling reservations, the capacity in a reservation isn't necessarily reserved. When you use [autoscaling reservations](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) , the capacity is automatically scaled up and down based on the demand. Autoscaling reservations are billed per second with a one-minute minimum duration by default. You can opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) at the reservation level for per-second billing with no minimum duration. In addition, [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) can be shared across reservations.
 
 ## Reservation assignments
 
@@ -119,7 +119,7 @@ For example, you might have a total committed capacity of 1,000 slots and three 
 
 ![Commitments delete.](https://docs.cloud.google.com/static/bigquery/images/reservations-reservations.svg)
 
-Instead of partitioning your capacity across workload types, you might choose to create reservations for individual teams or departments.
+Instead of partitioning your capacity across workload types, you might choose to create reservations for individual teams or departments. With autoscaling, you can isolate workloads across many reservations, providing more flexible and granular workload management.
 
 ### Manage reservations in different regions
 

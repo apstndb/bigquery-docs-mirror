@@ -121,4 +121,4 @@ You can also improve query efficiency by using `ROW_NUMBER()` to sample intermed
 ## What's next
 
   - To learn more about writing graph queries, see the [query overview](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
-  - Learn more about [schema best practices](https://docs.cloud.google.com/bigquery/docs/graph-schema-best-practices) .
+  - Learn more about designing your [graph schema](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .

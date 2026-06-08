@@ -24,7 +24,7 @@ With the Hive Metastore migration connector, you can use Cloud Storage as the fi
     
     The Lakehouse runtime catalog Iceberg REST Catalog creates interoperability between your query engines by offering a single source of truth for all of your Iceberg data. You can use BigQuery to query the data, in addition to Apache Spark and other OSS engines. The Lakehouse runtime catalog Iceberg REST Catalog only supports Iceberg table formats.
 
-  - [Lakehouse runtime catalog Hive Catalog](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore)
+  - [Lakehouse runtime catalog Hive Catalog](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore) ( [Preview](https://cloud.google.com/products#product-launch-stages) )
     
     We recommend using the Lakehouse runtime catalog Hive Catalog for all your Hive tables.
     
@@ -249,9 +249,9 @@ Select one of the following options:
     4.  Optional: For **Partition Filter gcs path** , enter a full Cloud Storage path to a custom filter JSON file to [filter partitions](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#filter-partitions) from source tables.
     5.  For **Destination gcs path** , enter a path to a Cloud Storage bucket to store your migrated data.
     6.  Choose the Destination Metastore type from the drop-down list:
-          - `DATAPROC_METASTORE` (legacy): Select this option to store your metadata in [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) . You must provide the URL for the Dataproc Metastore in **Dataproc metastore url** .
+          - `DATAPROC_METASTORE` : Select this option to store your metadata in [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) . You must provide the URL for the Dataproc Metastore in **Dataproc metastore url** .
           - `BIGLAKE_REST_CATALOG` : Select this option to store your metadata in the Lakehouse runtime catalog Iceberg REST catalog. Catalog is created based on the destination Cloud Storage bucket.
-          - `BIGLAKE_HIVE_CATALOG` : Select this option to store your metadata in the Lakehouse runtime catalog Hive Catalog. You must provide a catalog name in **BigLake Metastore Hive Catalog ID** . If the catalog does not exist, it will be automatically created.
+          - `BIGLAKE_HIVE_CATALOG` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Select this option to store your metadata in the Lakehouse runtime catalog Hive Catalog. You must provide a catalog name in **BigLake Metastore Hive Catalog ID** . If the catalog does not exist, it will be automatically created.
     7.  Optional: For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created.
 
 ### bq
@@ -299,7 +299,7 @@ Replace the following:
   - `METASTORE` : The type of metastore to migrate to. Set this to one of the following values:
       - `DATAPROC_METASTORE` : To transfer metadata to Dataproc Metastore.
       - `BIGLAKE_REST_CATALOG` : To transfer metadata to Lakehouse runtime catalog Iceberg REST Catalog (recommended for Iceberg tables).
-      - `BIGLAKE_HIVE_CATALOG` : To transfer metadata to Lakehouse runtime catalog Hive Catalog (recommended for Apache Hive tables).
+      - `BIGLAKE_HIVE_CATALOG` : To transfer metadata to Lakehouse runtime catalog Hive Catalog (recommended for Apache Hive tables) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
   - `DATAPROC_METASTORE_URL` : The URL of your Dataproc Metastore. Required if `metastore` is `DATAPROC_METASTORE` .
   - `HIVE_CATALOG_ID` : The ID of the Lakehouse runtime catalog Hive Catalog. Required if `metastore` is `BIGLAKE_HIVE_CATALOG` . If the catalog does not exist, it will be automatically created.
   - `STORAGE_TYPE` : Specify the underlying file storage for your tables. Supported types are `HDFS` , `S3` , and `AZURE` . Required if `transfer_strategy` is `FULL_TRANSFER` .

@@ -317,6 +317,8 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -616,6 +618,8 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -835,6 +839,8 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -1135,6 +1141,8 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (
@@ -1449,6 +1457,8 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
+    //go:build examples
+    
     package main
     
     import (

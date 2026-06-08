@@ -22,19 +22,19 @@ You can switch between on-demand and capacity-based billing models at any time. 
 
 Consider the following when choosing a workload management model:
 
-|                            | **On-demand**                                                      | **Capacity-based**                                             |
-| -------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------- |
-| **Usage model**            | Data scanned or processed by your queries                          | Dedicated slots or autoscaling slots                           |
-| **Unit of metering**       | TiB                                                                | slot-hours                                                     |
-| **Minimum capacity**       | Up to 2,000 slots per project                                      | 50 slots per reservation                                       |
-| **Maximum capacity**       | Up to 2,000 slots per project                                      | Configurable per reservation up to regional quota              |
-| **Cost control**           | Optionally configure project-level or user-level quotas (hard cap) | Configure a budget expressed in slots for each reservation     |
-| **Configuration**          | No configuration required                                          | Create slot reservations and assign to projects                |
-| **Editions support**       | Fixed feature set                                                  | Available in 3 editions                                        |
-| **Capacity discounts**     | Pay-as-you-go only                                                 | Optional slot commitments for steady-state workloads           |
-| **Predictability**         | Variable usage and billing                                         | Predictable billing through baselines and commitments          |
-| **Centralized purchasing** | Per project billing                                                | Allocate and bill slots centrally rather than for each project |
-| **Flexibility**            | Capacity on-demand (minimum 10 MiB per query)                      | Baseline or autoscaled slots (1 minute minimum)                |
+|                            | **On-demand**                                                      | **Capacity-based**                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| **Usage model**            | Data scanned or processed by your queries                          | Dedicated slots or autoscaling slots                                                                                 |
+| **Unit of metering**       | TiB                                                                | slot-hours                                                                                                           |
+| **Minimum capacity**       | Up to 2,000 slots per project                                      | 50 slots per reservation                                                                                             |
+| **Maximum capacity**       | Up to 2,000 slots per project                                      | Configurable per reservation up to regional quota                                                                    |
+| **Cost control**           | Optionally configure project-level or user-level quotas (hard cap) | Configure a budget expressed in slots for each reservation                                                           |
+| **Configuration**          | No configuration required                                          | Create slot reservations and assign to projects                                                                      |
+| **Editions support**       | Fixed feature set                                                  | Available in 3 editions                                                                                              |
+| **Capacity discounts**     | Pay-as-you-go only                                                 | Optional slot commitments for steady-state workloads                                                                 |
+| **Predictability**         | Variable usage and billing                                         | Predictable billing through baselines and commitments                                                                |
+| **Centralized purchasing** | Per project billing                                                | Allocate and bill slots centrally rather than for each project                                                       |
+| **Flexibility**            | Capacity on-demand (minimum 10 MiB per query)                      | Baseline or autoscaled slots (1-minute minimum by default; opt in to BigQuery fluid scaling for no minimum duration) |
 
 ## Jobs
 

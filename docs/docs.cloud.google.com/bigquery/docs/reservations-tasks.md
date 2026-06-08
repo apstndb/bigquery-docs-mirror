@@ -500,9 +500,29 @@ Each of the following predefined IAM roles includes this permission:
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
+### Enable BigQuery fluid scaling
+
+To enable per-second billing with no minimum duration for a reservation, enable it at the administration-project level by listing the reservation in the `preflight_fluid_autoscaling_reservations` option.
+
+### SQL
+
+Use the `ALTER PROJECT SET OPTIONS` statement:
+
+    ALTER PROJECT `ADMIN_PROJECT_ID`
+    SET OPTIONS (
+      `region-LOCATION.preflight_fluid_autoscaling_reservations` = ["RESERVATION_NAME"]);
+
+Replace the following:
+
+  - `  ADMIN_PROJECT_ID  ` : the ID of the administration project.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `us-central1` .
+  - `  RESERVATION_NAME  ` : the name of the reservation to enable fluid scaling for.
+
 ### Change the size of a reservation
 
 You can add or remove slots from an existing reservation.
+
+> **Note:** Changes to the maximum slots value for a reservation can take up to a minute to propagate.
 
 ### Console
 

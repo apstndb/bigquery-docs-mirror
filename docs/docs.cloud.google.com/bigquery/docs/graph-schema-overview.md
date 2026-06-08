@@ -301,8 +301,57 @@ To make any change to an existing graph's schema, you must redefine the graph sc
 
 To delete a property graph, use the [`DROP PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_drop_graph) .
 
+## Best practices
+
+The following sections describe best practices for defining your graph schema to improve your graph query performance.
+
+### Scope your property definitions
+
+Properties are key-value pairs that provide additional information attached to nodes or edges. We recommend that you only include necessary properties in nodes or edges, and avoid using the `PROPERTIES ALL COLUMNS` syntax or the default syntax that attaches all columns from the node or edge tables to the property list. Having many properties in nodes or edges might cause unnecessary column scans in graph queries, which degrades performance.
+
+To restrict the properties that you include in a node or edge definition, use the `PROPERTIES` keyword when you [define element properties](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) in your [`CREATE PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) .
+
+The following node table definition restricts the properties for the `Person` node table to `id` and `name` :
+
+    NODE TABLES (
+      graph_db.Person PROPERTIES (id, name)
+    )
+
+### Define primary and foreign key constraints on graph nodes and edges
+
+BigQuery can use [primary and foreign key constraints](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) on your node and edge tables to optimize your graph queries by reducing unnecessary table scans. However, BigQuery doesn't enforce primary or foreign key constraints on tables. If your application can't guarantee referential integrity or uniqueness on primary keys, then using primary or foreign keys for query optimization might lead to incorrect query results.
+
+The following example defines primary and foreign key constraints on the node tables `Person` and `Account` , and the edge table `PersonOwnAccount` :
+
+    CREATE OR REPLACE TABLE graph_db.Person (
+      id               INT64,
+      name             STRING,
+      birthday         TIMESTAMP,
+      country          STRING,
+      city             STRING,
+      PRIMARY KEY (id) NOT ENFORCED
+    );
+    
+    CREATE OR REPLACE TABLE graph_db.Account (
+      id               INT64,
+      create_time      TIMESTAMP,
+      is_blocked       BOOL,
+      nick_name        STRING,
+      PRIMARY KEY (id) NOT ENFORCED
+    );
+    
+    CREATE OR REPLACE TABLE graph_db.PersonOwnAccount (
+      id               INT64 NOT NULL,
+      account_id       INT64 NOT NULL,
+      create_time      TIMESTAMP,
+      PRIMARY KEY (id, account_id) NOT ENFORCED,
+      FOREIGN KEY (id) references graph_db.Person(id) NOT ENFORCED,
+      FOREIGN KEY (account_id) references graph_db.Account(id) NOT ENFORCED
+    );
+
 ## What's next
 
   - Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
   - Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
-  - Learn about [graph schema best practices](https://docs.cloud.google.com/bigquery/docs/graph-schema-best-practices) .
+  - Learn how to [write graph queries](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
+  - Learn more about [building graphs with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .

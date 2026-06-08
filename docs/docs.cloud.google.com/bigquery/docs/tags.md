@@ -505,6 +505,27 @@ The output is similar to the following:
     parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
     tagValue: tagValues/4567890123
 
+You can list the inherited tags by BigQuery datasets using the `gcloud resource-manager tags bindings list` . You can also use the [`--filter`](https://docs.cloud.google.com/sdk/gcloud/reference/topic/filters) option on the `namespacedTagValue` attribute to filter tags according to project ID, tag value, or tag key.
+
+    gcloud resource-manager tags bindings list \
+        --parent=//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID \
+        --effective \
+        --filter=namespacedTagValue:TAG_FILTER
+
+Replace the following :
+
+  - `  PROJECT_ID  ` : the ID of the project containing your dataset.
+
+  - `  DATASET_ID  ` : the ID of the dataset.
+
+  - `  TAG_FILTER  ` : specify a value to filter for inherited tags based on one of the following:
+    
+      - Filter for tags by project ID. For example, `myproject` .
+    
+      - Filter for tag values by specifying the permanent ID or namespaced name of the tag value. For example, `tagValues/4567890123` or `1234567/my_tag_key/my_tag_value` .
+    
+      - Filter for tag keys by specifying the display name for the tag key. For example `tagkey` .
+
 ### Terraform
 
 Use the `terraform state show` command to list the attributes of the dataset, including the `resource_tags` field. Run this command in the directory where the dataset's Terraform configuration file has been run.
@@ -529,6 +550,8 @@ WHERE option_name='tags'
 Replace the following:
 
   - `  REGION  ` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) where your datasets are located.
+
+> **Note:** You can list the inherited tags by BigQuery dataset and tables using the [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags#gcloud_1) command.
 
 ### Detach tags from a dataset
 
@@ -1011,6 +1034,27 @@ The output is similar to the following:
     parent: //bigquery.googleapis.com/projects/my_project/datasets/my_dataset
     tagValue: tagValues/4567890123
 
+You can list the inherited tags by BigQuery tables using the `gcloud resource-manager tags bindings list` . You can also use the [`--filter`](https://docs.cloud.google.com/sdk/gcloud/reference/topic/filters) option on the `namespacedTagValue` attribute to filter tags according to project ID, tag value, or tag key.
+
+    gcloud resource-manager tags bindings list \
+        --parent=//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID \
+        --effective \
+        --filter=namespacedTagValue:TAG_FILTER
+
+Replace the following :
+
+  - `  PROJECT_ID  ` : the ID of the project containing your dataset.
+
+  - `  DATASET_ID  ` : the ID of the dataset.
+
+  - `  TAG_FILTER  ` : specify a value to filter for inherited tags based on one of the following:
+    
+      - Filter for tags by project ID. For example, `myproject` .
+    
+      - Filter for tag values by specifying the permanent ID or namespaced name of the tag value. For example, `tagValues/4567890123` or `1234567/my_tag_key/my_tag_value` .
+    
+      - Filter for tag keys by specifying the display name for the tag key. For example `tagkey` .
+
 ### Terraform
 
 Use the `terraform state show` command to list the attributes of the table, including the `resource_tags` field. Run this command in the directory where the table's Terraform configuration file has been run.
@@ -1033,6 +1077,8 @@ WHERE option_name='tags'
 ```
 
 Replace `  DATASET_ID  ` with the ID of the dataset that contains your table.
+
+> **Note:** You can list the inherited tags by BigQuery dataset and tables using the [`gcloud resource-manager tags bindings list`](https://docs.cloud.google.com/bigquery/docs/tags#gcloud_4) command.
 
 ### Detach tags from a table
 

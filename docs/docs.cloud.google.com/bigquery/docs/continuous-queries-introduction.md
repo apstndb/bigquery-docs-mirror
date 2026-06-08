@@ -194,6 +194,8 @@ Continuous queries can use [idle slot sharing](https://docs.cloud.google.com/big
 
 ## Pricing
 
+Continuous queries can use [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) .
+
 Continuous queries use [BigQuery capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , which is measured in [slots](https://docs.cloud.google.com/bigquery/docs/slots) . To run continuous queries, you must have a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) that uses the [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , and a [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) that uses the `CONTINUOUS` job type.
 
 Usage of other BigQuery resources, such as data ingestion and storage, are charged at the rates shown in [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .

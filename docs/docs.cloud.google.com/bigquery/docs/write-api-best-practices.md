@@ -49,6 +49,10 @@ Before using stream offsets, consider whether you need exactly-once semantics. F
 
 The `AppendRows` method is asynchronous. You can send a series of writes without blocking on a response for each write individually. The response messages on the bidirectional connection arrive in the same order as the requests were enqueued. For the highest throughput, call `AppendRows` without blocking to wait on the response.
 
+## Prefer larger requests
+
+There is processing overhead on both the client side and the server side for each sent request. To improve efficiency, send large requests (greater than 1 MB) whenever possible.
+
 ## Handle schema updates
 
 For data streaming scenarios, table schemas are usually managed outside of the streaming pipeline. It's common for the schema to evolve over time, for example by adding new nullable fields. A robust pipeline must handle out-of-band schema updates.

@@ -103,10 +103,10 @@ The following table shows examples of one-shot prompts that activate the use of 
 
 Conversational analytics supports using a [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a data source. When you ask questions about your graph, the agent constructs GQL or SQL queries to answer them. Agents can use [descriptions and synonyms](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) that you define on your graph labels and properties to improve the quality of the results. Agents can also take advantage of [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to perform multi-level aggregation. If the response includes graph paths, graph visualizations are provided.
 
-For example, you can use the [`Look Graph` agent](https://console.cloud.google.com/bigquery/agents_hub;agentsHubTab=Agents;agentsPath=%2Fbq%2Fagents%2Fagent_59ff15ce-e31b-4ba6-ac72-57788dfe0d48) to ask questions similar to the following about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph:
+For example, you can use the `Look Graph` sample agent on the BigQuery on the [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions similar to the following about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph:
 
   - `Which product is most popular among 25-year-olds?`
-  - `Show me all bow tie orders in Chicago from users under 25`
+  - `Show me the connection between bow tie orders and distribution centers`
 
 The following limitations apply when you use a graph as a data source:
 
