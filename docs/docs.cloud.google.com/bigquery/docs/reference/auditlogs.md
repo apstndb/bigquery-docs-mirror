@@ -59,12 +59,15 @@ API methods in the following list that are marked with (LRO) are long-running op
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.DatasetService.PatchDataset</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.DatasetService.UndeleteDataset</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.DatasetService.UpdateDataset</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.v2.JobService.CancelJob</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.JobService.InsertJob</code> (LRO)<br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.JobService.Query</code> (LRO)<br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.RoutineService.DeleteRoutine</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.RoutineService.InsertRoutine</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy</code><br />
+<code dir="ltr" translate="no">google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.TableService.DeleteTable</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.TableService.InsertTable</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.v2.TableService.PatchTable</code><br />
@@ -178,6 +181,15 @@ The following audit logs are associated with methods belonging to `google.cloud.
 
 The following audit logs are associated with methods belonging to `google.cloud.bigquery.v2.JobService` .
 
+#### `CancelJob`
+
+  - **Method** : `google.cloud.bigquery.v2.JobService.CancelJob`  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `bigquery.jobs.create - ADMIN_WRITE`
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.v2.JobService.CancelJob"`  
+
 #### `DeleteJob`
 
   - **Method** : `google.cloud.bigquery.v2.JobService.DeleteJob`  
@@ -275,6 +287,8 @@ The following audit logs are associated with methods belonging to `google.cloud.
   - **Method** : `google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
+      - `bigquery.rowAccessPolicies.delete - ADMIN_WRITE`
+      - `bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
   - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies"`  
 
@@ -285,6 +299,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
   - **Permissions** :
       - `bigquery.rowAccessPolicies.create - ADMIN_WRITE`
       - `bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE`
+      - `bigquery.tables.getData - DATA_READ`
   - **Method is a long-running or streaming operation** : No.  
   - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy"`  
 
@@ -303,8 +318,9 @@ The following audit logs are associated with methods belonging to `google.cloud.
   - **Method** : `google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
-      - `bigquery.rowAccessPolicies.setIamPolicy - PERMISSION_TYPE_UNSPECIFIED`
-      - `bigquery.rowAccessPolicies.update - PERMISSION_TYPE_UNSPECIFIED`
+      - `bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE`
+      - `bigquery.rowAccessPolicies.update - ADMIN_WRITE`
+      - `bigquery.tables.getData - DATA_READ`
   - **Method is a long-running or streaming operation** : No.  
   - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy"`  
 
@@ -370,6 +386,7 @@ The following audit logs are associated with methods belonging to `google.iam.v1
   - **Method** : `google.iam.v1.IAMPolicy.SetIamPolicy`  
   - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
+      - `bigquery.datasets.update - ADMIN_WRITE`
       - `bigquery.tables.setIamPolicy - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
   - **Filter for this method** : `protoPayload.methodName="google.iam.v1.IAMPolicy.SetIamPolicy"`  
@@ -409,6 +426,14 @@ The following audit logs are associated with methods belonging to `jobservice` .
       - `bigquery.tables.updateData - DATA_WRITE`
   - **Method is a long-running or streaming operation** : No.  
   - **Filter for this method** : `protoPayload.methodName="jobservice.insert"`  
+
+#### `jobcompleted`
+
+  - **Method** : `jobservice.jobcompleted`  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+  - **Permissions** :
+  - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
+  - **Filter for this method** : `protoPayload.methodName="jobservice.jobcompleted"`  
 
 #### `query`
 

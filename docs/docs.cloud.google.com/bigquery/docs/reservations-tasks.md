@@ -502,21 +502,33 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 ### Enable BigQuery fluid scaling
 
-To enable per-second billing with no minimum duration for a reservation, enable it at the administration-project level by listing the reservation in the `preflight_fluid_autoscaling_reservations` option.
+To enable per-second billing with no minimum duration for a reservation, enable it at the administration-project level by listing the reservation in the `preflight_fluid_autoscaling_reservations` option. Changes to the BigQuery fluid scaling configuration can take a few minutes to propagate.
+
+For reservations using [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) , you must enable BigQuery fluid scaling in both the primary and secondary regions to ensure per-second billing after a failover.
+
+To update the list of reservations with BigQuery fluid scaling, modify the list in the `preflight_fluid_autoscaling_reservations` option. To disable the feature for all reservations in a region, set the `preflight_fluid_autoscaling_reservations` option to NULL.
 
 ### SQL
 
 Use the `ALTER PROJECT SET OPTIONS` statement:
 
-    ALTER PROJECT `ADMIN_PROJECT_ID`
-    SET OPTIONS (
-      `region-LOCATION.preflight_fluid_autoscaling_reservations` = ["RESERVATION_NAME"]);
+  - To enable or update the feature for a list of reservations:
+    
+        ALTER PROJECT `ADMIN_PROJECT_ID`
+        SET OPTIONS (
+          `region-LOCATION.preflight_fluid_autoscaling_reservations` = ["RESERVATION_NAME"]);
+
+  - To disable the feature for all reservations in a region:
+    
+        ALTER PROJECT `ADMIN_PROJECT_ID`
+        SET OPTIONS (
+          `region-LOCATION.preflight_fluid_autoscaling_reservations` = NULL);
 
 Replace the following:
 
   - `  ADMIN_PROJECT_ID  ` : the ID of the administration project.
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `us-central1` .
-  - `  RESERVATION_NAME  ` : the name of the reservation to enable fluid scaling for.
+  - `  RESERVATION_NAME  ` : the name of the reservation to enable BigQuery fluid scaling for.
 
 ### Change the size of a reservation
 

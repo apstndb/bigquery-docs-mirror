@@ -199,6 +199,8 @@ To quickly adjust to reservation demands, BigQuery fluid scaling impacts idle sl
 
 For instructions on how to enable this feature, see [Update reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#update_reservations) .
 
+For reservations using [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) , BigQuery fluid scaling must be enabled in both the primary and secondary regions to ensure per-second billing after a failover.
+
 To learn how to work with autoscaling, see [Manage workload reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
 
 ### Using reservations with baseline and autoscaling slots

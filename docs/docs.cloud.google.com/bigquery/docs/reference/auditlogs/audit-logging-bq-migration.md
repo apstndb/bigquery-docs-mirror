@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # BigQuery Migration Service audit logging
 
-This document describes audit logging for BigQuery Migration Service. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
+This document lists the audited methods for BigQuery Migration Service. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
 
   - [Types of audit logs](https://docs.cloud.google.com/logging/docs/audit#types)
   - [Audit log entry structure](https://docs.cloud.google.com/logging/docs/audit#audit_log_entry_structure)
@@ -18,12 +18,16 @@ This document describes audit logging for BigQuery Migration Service. Google Clo
 
 ## Service name
 
-BigQuery Migration Service audit logs use the service name `bigquerymigration.googleapis.com` . Filter for this service:
+To view the BigQuery Migration Service audit logs, do the following:
 
-``` 
-    protoPayload.serviceName="bigquerymigration.googleapis.com"
-  
-```
+1.  In the Google Cloud console, go to the Logs Explorer page:
+
+2.  Copy and paste the following query into the **Query** field of the Logs Explorer, and then click **Run query** .
+    
+    ``` 
+        protoPayload.serviceName="bigquerymigration.googleapis.com"
+      
+    ```
 
 ## Methods by permission type
 
@@ -61,7 +65,6 @@ API methods in the following list that are marked with (LRO) are long-running op
 <td><code dir="ltr" translate="no">google.cloud.bigquery.migration.v2.MigrationService.CreateMigrationWorkflow</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.migration.v2.MigrationService.DeleteMigrationWorkflow</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.migration.v2.MigrationService.StartMigrationWorkflow</code><br />
-<code dir="ltr" translate="no">google.cloud.bigquery.migration.v2alpha.MigrationService.CreateMigrationWorkflow</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.migration.v2alpha.MigrationService.DeleteMigrationWorkflow</code><br />
 <code dir="ltr" translate="no">google.cloud.bigquery.migration.v2alpha.MigrationService.StartMigrationWorkflow</code></td>
 </tr>
@@ -155,15 +158,6 @@ The following audit logs are associated with methods belonging to `google.cloud.
 ### `google.cloud.bigquery.migration.v2alpha.MigrationService`
 
 The following audit logs are associated with methods belonging to `google.cloud.bigquery.migration.v2alpha.MigrationService` .
-
-#### `CreateMigrationWorkflow`
-
-  - **Method** : `google.cloud.bigquery.migration.v2alpha.MigrationService.CreateMigrationWorkflow`  
-  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
-  - **Permissions** :
-      - `bigquerymigration.workflows.create - DATA_WRITE`
-  - **Method is a long-running or streaming operation** : No.  
-  - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.migration.v2alpha.MigrationService.CreateMigrationWorkflow"`  
 
 #### `DeleteMigrationWorkflow`
 

@@ -12,7 +12,7 @@ This document describes the `AI.EMBED` function, which lets you create [embeddin
 
 The function works by sending a request to a [stable Gemini Enterprise Agent Platform embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions#latest-stable) or a [built-in embedding model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) in BigQuery, and then returning that model's response.
 
-    SELECT AI.EMBED("Some text to embed!", endpoint => 'text-embedding-005');
+    SELECT AI.EMBED("Some text to embed!", >endpoint = 'text-embedding-005');
 
 ## Embeddings
 
@@ -42,8 +42,8 @@ When you analyze image data, the content must be in one of the supported image f
 
     AI.EMBED(
       [ content => ] 'content',
-      { endpoint => 'endpoint' | model => 'model' }
-      [, task_type => 'task_type']
+      { endpoint => 'endpoint&#39; | model => ';model9; }
+      [, task_type =&gt; 'task_type']
       [, title => 'title']
       [, model_params => model_params]
       [, connection_id => 'connection']
@@ -106,7 +106,7 @@ When you analyze image data, the content must be in one of the supported image f
 
     AI.EMBED(
       [ content => ] 'content',
-      connection_id => 'connection',
+      connection_id =&gt; 'connection',
       endpoint => 'endpoint'
       [, model_params => model_params]
     )
@@ -165,7 +165,7 @@ The following example shows how to embed a string literal using an Agent Platfor
     SELECT
       AI.EMBED(
         'A piece of text to embed',
-        endpoint => 'text-embedding-005') AS embedding;
+        en>dpoint = 'text-embedding-005') AS embedding;
 
 The result is similar to the following:
 
@@ -184,7 +184,7 @@ Alternatively, you can perform the embedding by using a built-in embedding model
     SELECT
       AI.EMBED(
         'A piece of text to embed',
-        model => 'embeddinggemma-300m') AS embedding;
+       > model = 'embeddinggemma-300m') AS embedding;
 
 If you need to reuse embeddings of the same data across many queries, you should save the results to table. The following example generates 768-dimensional embeddings for publicly available BBC news articles and writes the results to a table:
 
@@ -195,7 +195,7 @@ If you need to reuse embeddings of the same data across many queries, you should
       AI.EMBED(
         body,
         endpoint => 'text-embedding-005',
-        model_params => JSON '{"outputDimensionality": 768}'
+        model_>params = JSON '{"outputDimensionality": 768}'
       ).result AS embedding
     FROM
       `bigquery-public-data.bbc_news.fulltext`;
@@ -209,8 +209,7 @@ The following example queries the table that you just created for the five artic
         # The name of the column that contains the embedding
         'embedding',
         # The embedding to search
-        (SELECT AI.EMBED('latest news in tech', endpoint => 'text-embedding-005').result),
-        top_k => 5);
+        (SELECT AI.EMBED('latest news in tech&>#39;, endpoint = 'text-embedding-005>9;).result),    top_k = 5);
 
 ### multimodal embedding
 

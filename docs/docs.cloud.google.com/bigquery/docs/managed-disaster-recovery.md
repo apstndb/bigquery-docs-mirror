@@ -151,6 +151,8 @@ Customers are only required to pay for compute capacity in the primary region. S
 
 If you need to perform stale reads in the secondary region, you must [purchase](https://cloud.google.com/bigquery/pricing#overview_of_pricing) additional compute capacity.
 
+Managed disaster recovery supports [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) . To ensure per-second billing with no minimum duration after a failover, you must enable BigQuery fluid scaling in both the primary and secondary regions.
+
 ## Create or alter an Enterprise Plus reservation
 
 > **Caution:** Before creating a failover reservation, verify that no reservation with the same name already exists in the secondary region. Similarly, make sure a new assignment to a failover reservation does not reassign the same resource with the same job type in the secondary location. Such conflicts can cause replication failures, which results in an inconsistency between the primary and secondary locations. That can in turn prevent a successful failover operation later.

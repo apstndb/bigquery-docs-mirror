@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Manage Sharing data exchanges and listings using custom constraints
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support, contact <bq-data-sharing-feedback@google.com> .
-
 This page shows you how to use Organization Policy Service custom constraints to restrict specific operations on the following Google Cloud resources:
 
   - `analyticshub.googleapis.com/DataExchange`
@@ -36,7 +30,6 @@ By default, organization policies are inherited by the descendants of the resour
   - You can set up custom constraints for BigQuery sharing resources only by using the Google Cloud console or Google Cloud CLI.
   - You can enforce custom constraints only on the `CREATE` or `UPDATE` methods for BigQuery sharing resources.
   - New custom constraints don't automatically apply to existing resources. You must update existing resources for the constraint to apply. To find existing resources that need to be updated, enforce a [dry-run organization policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/dry-run-policy) . Existing [listings published to data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#add-data) aren't checked during the dry run of existing resources.
-  - Simulating constraints on current resources is not supported.
   - You must set the value in the `resource.bigqueryDataset.replicaLocations` field in lowercase letters. For more information, see [Supported resources](https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints#supported_resources) .
 
 ## Before you begin

@@ -32,6 +32,7 @@ The BigQuery Data Transfer Service for the Google Ad Manager connector supports 
 
 <ul>
 <li><a href="https://support.google.com/admanager/answer/1733124">Data Transfer (Google Ad Manager DT) files</a></li>
+<li><a href="https://support.google.com/admanager/answer/14260907">Regional Data Access files</a></li>
 <li><a href="https://support.google.com/admanager/table/7401123">Data Transfer fields</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation">Match tables provided by the BigQuery Data Transfer Service</a> . These are automatically created and updated.</li>
 <li><a href="https://developers.google.com/doubleclick-publishers/docs/pqlreference#matchtables">Match tables fetched with PQL</a></li>

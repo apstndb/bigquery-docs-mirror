@@ -31,6 +31,9 @@ The following aggregation functions are supported:
   - [`APPROX_QUANTILES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)
   - [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)
   - [`APPROX_TOP_SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)
+  - [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg) with the following requirements:
+      - A `LIMIT` clause is required, with a maximum value of 100.
+      - An `ORDER BY` clause is optional.
   - [`ARRAY_CONCAT_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg)
   - [`AVG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg)
   - [`BIT_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and)
@@ -50,6 +53,9 @@ The following aggregation functions are supported:
   - [`STDDEV`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev)
   - [`STDDEV_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)
   - [`STDDEV_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp)
+  - [`STRING_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg) with the following requirements:
+      - A `LIMIT` clause is required, with a maximum value of 100.
+      - An `ORDER BY` clause is optional.
   - [`SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum)
   - [`VAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)
   - [`VAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp)
@@ -59,7 +65,6 @@ The following aggregation functions are supported:
 
 The following aggregation functions are unsupported:
 
-  - [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)
   - [`AVG` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg)
   - [`COUNT` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count)
   - Functions containing `DISTINCT` expressions.
@@ -68,7 +73,6 @@ The following aggregation functions are unsupported:
   - [`ST_CENTROID_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_centroid_agg)
   - [`ST_EXTENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_extent)
   - [`ST_UNION_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_union_agg)
-  - [`STRING_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg)
   - [`SUM` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum)
 
 ## The TUMBLE function
