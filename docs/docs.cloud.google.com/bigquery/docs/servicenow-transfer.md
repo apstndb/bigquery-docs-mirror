@@ -421,7 +421,7 @@ For information about other errors that occurred during a ServiceNow data transf
 
 ## Pricing
 
-For pricing information about ServiceNow transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#bqdts) .
+For pricing information about ServiceNow transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#data-transfer-service-pricing) .
 
 ## What's next
 

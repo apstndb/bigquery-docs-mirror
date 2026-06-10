@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/optimize-ai-functions
 uri: https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions
-title: Optimize AI function costs
+title: Optimize AI function costs with model distillation
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Optimize AI function costs
+# Optimize AI function costs with model distillation
 
 > **Preview**
 > 
@@ -14,9 +14,13 @@ data_source: docs.cloud.google.com
 
 > **Note:** For support during the preview, contact <bqml-feedback@google.com> .
 
-This document describes how to use the optimized mode for [managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) in BigQuery. This mode lets you process large-scale datasets containing thousands, or even billions, of rows with significantly reduced large language model (LLM) token consumption and query latency compared to standard per-row LLM inference.
+This document describes how to use the optimized mode for [managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) in BigQuery. You can use optimized mode to process large-scale datasets containing thousands, or even billions, of rows with significantly reduced large language model (LLM) token consumption and query latency compared to standard per-row LLM inference. This optimization only applies to the `AI.IF` and `AI.CLASSIFY` functions.
 
-The following example demonstrates how to use the [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) function with the optimized mode to identify news articles about natural disasters, using `text-embedding-005` as the embedding model:
+If you want to set a limit on your total token consumption to prevent budget overruns, rather than optimizing the token efficiency of your queries, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) instead.
+
+To better understand your token consumption, you can [view the number of tokens used by a query](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#token_usage) in the Google Cloud console. To estimate this usage before you run a query, use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) .
+
+The following example demonstrates how to use the [`AI.IF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) with the optimized mode to identify news articles about natural disasters, using `text-embedding-005` as the embedding model:
 
     SELECT
       title,
@@ -110,7 +114,7 @@ The following example creates a table with an autonomously generated embedding c
 
 ### Manual column specification
 
-If you have an existing embedding column, specify it in the `embeddings` argument of `AI.IF` or `AI.CLASSIFY` . You can generate this using the [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) function.
+If you have an existing embedding column, specify it in the `embeddings` argument of `AI.IF` or `AI.CLASSIFY` . You can generate this using the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
 
 The following example demonstrates how to create a table with an embedding column, using `text-embedding-005` as the embedding model, and then use that column in an `AI.CLASSIFY` query:
 
@@ -238,5 +242,6 @@ The following sections explain how to diagnose and resolve common issues with us
 ## What's next
 
   - Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) .
+  - Learn more about [controlling generative AI costs with daily quotas in BigQuery](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
   - Refer to the [`AI.IF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) documentation.
   - Refer to the [`AI.CLASSIFY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) documentation.

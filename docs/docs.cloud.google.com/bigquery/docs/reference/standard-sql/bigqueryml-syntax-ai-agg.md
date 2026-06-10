@@ -54,7 +54,7 @@ The `AI.AGG` function takes the following arguments:
 
   - `  ENDPOINT  ` : the [Vertex AI endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) to use, which can consist of any [Gemini model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models) that doesn't require thinking budget. If you only include the model ID, BigQuery automatically identifies and uses the full endpoint in the region where the query is processed. If you don't specify any endpoint information, BigQuery chooses a model for you.
     
-    Beginning June 15, 2026, Vertex AI will limit access to Gemini 2.5 Flash, which is used by default, to projects that have already used it in the last 90 days. If your project doesn't have access to Gemini 2.5 Flash, you can specify a Gemini 3 model using the `endpoint` parameter.
+    Beginning June 15, 2026, Vertex AI will limit access to Gemini 2.5 Flash, which is used by default. Only projects that have already used it in the last 90 days will have access. If your project doesn't have access to Gemini 2.5 Flash, you can specify a Gemini 3 model using the `endpoint` parameter.
     
     ```sh
     https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/gemini-3.1-flash-lite
@@ -315,7 +315,7 @@ Because the `AI.AGG` function uses batching and aggregation to analyze data that
 
 ## Quotas and limits
 
-For quota and limit information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) in the BigQuery quotas and limits reference.
+For quota and limit information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) in the BigQuery quotas and limits reference. For information about managing the cost of this function, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
 
 ## Known issues
 

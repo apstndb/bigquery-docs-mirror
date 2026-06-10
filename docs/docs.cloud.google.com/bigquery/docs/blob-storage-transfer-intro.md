@@ -218,7 +218,7 @@ However, only the `folder/any/subfolder/file1.csv` file is loaded into BigQuery,
 
 ## Pricing
 
-For more information, see [BigQuery Data Transfer Service pricing](https://cloud.google.com/bigquery/pricing#bqdts) .
+For more information, see [BigQuery Data Transfer Service pricing](https://cloud.google.com/bigquery/pricing#data-transfer-service-pricing) .
 
 You can also incur costs outside of Google by using this service. For more information, see [Blob Storage pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/) .
 

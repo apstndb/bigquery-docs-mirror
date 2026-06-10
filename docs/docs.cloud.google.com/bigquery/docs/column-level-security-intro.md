@@ -291,6 +291,8 @@ You can't use references across organizations. A table and any policy tags that 
 
 ## Limitations
 
+  - When you migrate a project between organization resources, policy tag taxonomies don't automatically update. You must manually recreate taxonomies in the destination organization to make them visible in the Google Cloud console. For more information, see [Handle special cases](https://docs.cloud.google.com/resource-manager/docs/handle-special-cases#policy-tag-taxonomies) .
+
   - This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
   - BigQuery only supports column-level access control for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , [BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) , and [BigQuery Omni tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .

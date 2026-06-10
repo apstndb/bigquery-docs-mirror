@@ -255,9 +255,9 @@ The model and input table must be in the same region.
 
 You can create remote models over Gemini models in the [supported regions](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#available-regions) for the given Gemini model, and also in the `US` and `EU` multi-regions.
 
-## Quotas
+## Quotas and limits
 
-See [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+See [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## Known issues
 

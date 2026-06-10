@@ -288,7 +288,7 @@ You can also use [project default keys](https://docs.cloud.google.com/bigquery/d
 
 > **Tip:** You can also use the [**Pipelines & Connections** page](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) to set up a scheduled query. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
-For a description of the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . For details about schedule syntax, see [Resource: `TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
+To schedule a query, select one of the following options. For a description of the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . For details about schedule syntax, see [Resource: `TransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) . Alternatively, you can [use Gemini Cloud Assist to schedule a query](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#schedule_a_query) by providing the scheduling details in your prompt.
 
 ### Console
 

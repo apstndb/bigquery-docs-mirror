@@ -8,11 +8,13 @@ data_source: docs.cloud.google.com
 
 # Visualize query results
 
-You can use [visualization cells](https://docs.cloud.google.com/colab/docs/visualization-cells) to generate and customize charts and graphs for large-scale analysis without leaving your notebook environment. In this quickstart, you learn how to complete the following tasks:
+You can use [visualization cells](https://docs.cloud.google.com/colab/docs/visualization-cells) in Colab Enterprise notebooks to generate and customize charts and graphs for large-scale analysis without leaving your notebook environment.
 
-1.  Run a SQL query by using the `bigquery-public-data.ml_datasets.penguins` public dataset.
-2.  Iterate on your query results by using SQL cells.
-3.  Use a visualization cell to analyze penguin characteristics across species.
+This guide shows you how to use visualization cells in Colab Enterprise notebooks to analyze data from the `bigquery-public-data.ml_datasets.penguins` public dataset. You will complete the following tasks:
+
+1.  Execute SQL queries directly in a notebook.
+2.  Filter query results using Python DataFrames.
+3.  Generate and customize vertical bar charts without writing code.
 
 ## Before you begin
 
@@ -29,15 +31,15 @@ To create and run notebooks, you need the following Identity and Access Manageme
   - [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
   - [Colab Enterprise User ( `roles/aiplatform.colabEnterpriseUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.colabEnterpriseUser)
 
-## Create a notebook
+## Create a Colab Enterprise notebook
 
 To create a new notebook, follow the instructions in [Create a notebook from the BigQuery editor](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 
-## Run a query
+## Run a SQL query in a Colab Enterprise notebook
 
 To run a SQL query in a notebook, follow these steps:
 
-1.  To create a new SQL cell in your notebook, click add **SQL** .
+1.  In your notebook, click the add **Code** drop-down and select **Add SQL cell** .
 
 2.  Enter the following query:
     
@@ -57,9 +59,9 @@ To run a SQL query in a notebook, follow these steps:
     
     The results of the query are automatically saved in a DataFrame called `female_penguins` .
 
-## Visualize results
+## Visualize results in a Colab Enterprise notebook
 
-1.  To create a new visualization cell in your notebook, click add **Visualization** .
+1.  In your notebook, click the add **Code** drop-down and select **Add visualization cell** .
 
 2.  Click **Choose a dataframe** and then select `female_penguins` .
     
@@ -69,7 +71,7 @@ To run a SQL query in a notebook, follow these steps:
 
 4.  In the **Metric** section, check that `culmen_length_mm` and `culmen_depth_mm` appear. If a metric is missing, click add\_circle\_outline **Add metric** and select it. To remove a metric, hold the pointer over the metric name and then click close **Close** .
 
-5.  For each metric, click edit **Edit** . For **Aggregation** select **Average** .
+5.  Hold the pointer over the aggregation type (for example, **AVG** or **SUM** ) to reveal the edit icon, then click it to change the aggregation type to **Average** .
 
 ![Bar chart showing visualization](https://docs.cloud.google.com/static/bigquery/images/penguin-visualization.png)
 

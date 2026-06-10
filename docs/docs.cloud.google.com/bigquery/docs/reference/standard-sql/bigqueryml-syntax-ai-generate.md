@@ -342,9 +342,9 @@ After you have purchased Provisioned Throughput quota, use the `REQUEST_TYPE` ar
 
 You can run `AI.GENERATE` in all of the [regions](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) that support Gemini models, and also in the `US` and `EU` multi-regions.
 
-## Quotas
+## Quotas and limits
 
-See [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+For quota and limit information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) in the BigQuery quotas and limits reference. For information about managing the cost of this function, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
 
 ## What's next
 

@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Use the Simba ODBC and JDBC drivers for BigQuery
 
+> **Note:** As an alternative to the Simba JDBC driver, consider using the [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
+
 The Simba Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers for BigQuery connect your applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. Generally, the JDBC driver is used with Java applications, and the ODBC driver is used otherwise.
 
-The Simba ODBC and JDBC drivers are developed by [insightsoftware](https://insightsoftware.com/simba/) , a [Google Cloud Ready - BigQuery partner](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview) . As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+The Simba ODBC and JDBC drivers are developed by [insightsoftware](https://insightsoftware.com/simba/) , a [Google Cloud Ready - BigQuery partner](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview) .
 
 ## Limitations
 
@@ -218,7 +220,7 @@ To see a list of previous driver versions, expand the following section:
 
 ## Install and configure the Simba JDBC driver for BigQuery
 
-> **Note:** As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+> **Note:** As an alternative to the Simba JDBC driver, consider using the [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
 
 1.  Download the [1.7.0.1001 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.7.0.1001.zip) .
 

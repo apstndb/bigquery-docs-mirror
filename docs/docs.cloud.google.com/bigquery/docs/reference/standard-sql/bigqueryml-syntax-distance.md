@@ -44,7 +44,7 @@ ML.DISTANCE(vector1, vector2 [, type])
     
     When `vector1` and `vector2` are `ARRAY<Numerical type>` columns, they must have the same array length.
 
-  - `type` : a `STRING` value that specifies the type of distance to calculate. Valid values are [`EUCLIDEAN`](https://xlinux.nist.gov/dads/HTML/euclidndstnc.html) , [`MANHATTAN`](https://xlinux.nist.gov/dads/HTML/manhattanDistance.html) , and [`COSINE`](https://en.wikipedia.org/wiki/Cosine_similarity#Cosine_Distance) . If this argument isn't specified, the default value is `EUCLIDEAN` .
+  - `type` : a `STRING` value that specifies the type of distance to calculate. Valid values are [`EUCLIDEAN`](https://en.wikipedia.org/wiki/Euclidean_distance) , [`MANHATTAN`](https://en.wikipedia.org/wiki/Taxicab_geometry) , and [`COSINE`](https://en.wikipedia.org/wiki/Cosine_similarity#Cosine_Distance) . If this argument isn't specified, the default value is `EUCLIDEAN` .
 
 ## Output
 

@@ -116,7 +116,7 @@ Possible values are:
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">job_stages</code></td>
-<td><code dir="ltr" translate="no">RECORD</code></td>
+<td><code dir="ltr" translate="no">RECORD REPEATED</code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>

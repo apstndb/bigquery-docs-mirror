@@ -112,7 +112,7 @@ The following table lists the multi-regions where BigQuery is available. When yo
 
 <sup>2</sup> Data located in the `US` multi-region is only stored in one of the following locations: `us-central1` (Iowa), `us-west1` (Oregon), or `us-central2` (Oklahoma). The exact location in which the data is stored and processed is determined automatically by BigQuery.
 
-## BigQuery Studio locations
+## BigQuery Studio code asset locations
 
 BigQuery Studio lets you save, share, and manage versions of code assets such as [notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) and [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) .
 

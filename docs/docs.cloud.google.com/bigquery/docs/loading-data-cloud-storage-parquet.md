@@ -972,8 +972,10 @@ BigQuery converts Parquet data types to the BigQuery data types that are describ
 | INT32                   | None, `INTEGER` ( `UINT_8` , `UINT_16` , `UINT_32` , `INT_8` , `INT_16` , `INT_32` )                           | INT64                          |
 | INT32                   | [DECIMAL](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#decimal_logical_type) | NUMERIC, BIGNUMERIC, or STRING |
 | `INT32`                 | `DATE`                                                                                                         | DATE                           |
+| `INT32`                 | `TIME` , `precision=MILLIS` ( `TIME_MILLIS` )                                                                  | TIME                           |
 | `INT64`                 | None, `INTEGER` ( `UINT_64` , `INT_64` )                                                                       | INT64                          |
 | INT64                   | [DECIMAL](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#decimal_logical_type) | NUMERIC, BIGNUMERIC, or STRING |
+| `INT64`                 | `TIME` , `precision=MICROS` ( `TIME_MICROS` )                                                                  | TIME                           |
 | `INT64`                 | `TIMESTAMP` , `precision=MILLIS` ( `TIMESTAMP_MILLIS` )                                                        | TIMESTAMP                      |
 | `INT64`                 | `TIMESTAMP` , `precision=MICROS` ( `TIMESTAMP_MICROS` )                                                        | TIMESTAMP                      |
 | `INT96`                 | None                                                                                                           | TIMESTAMP                      |

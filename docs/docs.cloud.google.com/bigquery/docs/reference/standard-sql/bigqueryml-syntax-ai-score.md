@@ -106,7 +106,7 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
     
-    Beginning June 15, 2026, Vertex AI will limit access to Gemini 2.5 Flash, which is used by default, to projects that have already used it in the last 90 days. If your project doesn't have access to Gemini 2.5 Flash, you can specify a Gemini 3 model using the `endpoint` parameter.
+    Beginning June 15, 2026, Vertex AI will limit access to Gemini 2.5 Flash, which is used by default. Only projects that have already used it in the last 90 days will have access. If your project doesn't have access to Gemini 2.5 Flash, you can specify a Gemini 3 model using the `endpoint` parameter.
     
     ```sh
     https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/gemini-3.1-flash-lite
@@ -239,9 +239,9 @@ The `AI.SCORE` and [`AI.GENERATE_DOUBLE`](https://docs.cloud.google.com/bigquery
 
 You can run `AI.SCORE` in all of the [regions](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) that support Gemini models, and also in the `US` and `EU` multi-regions.
 
-## Quotas
+## Quotas and limits
 
-See [Generative AI functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
+For quota and limit information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) in the BigQuery quotas and limits reference. For information about managing the cost of this function, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
 
 ## What's next
 

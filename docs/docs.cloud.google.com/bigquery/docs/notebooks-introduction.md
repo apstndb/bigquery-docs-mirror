@@ -2,39 +2,35 @@
 name: documents/docs.cloud.google.com/bigquery/docs/notebooks-introduction
 uri: https://docs.cloud.google.com/bigquery/docs/notebooks-introduction
 title: Introduction to notebooks
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: This page provides an overview of Colab Enterprise notebooks in BigQuery, including benefits, setup steps, and management tips.
 data_source: docs.cloud.google.com
 ---
 
 # Introduction to notebooks
 
-This document provides an introduction to [Colab Enterprise notebooks](https://docs.cloud.google.com/colab/docs/introduction) in BigQuery. You can use notebooks to complete analysis and machine learning (ML) workflows by using SQL, Python, and other common packages and APIs. Notebooks offer improved collaboration and management with the following options:
+[Colab Enterprise notebooks](https://docs.cloud.google.com/colab/docs/introduction) in BigQuery let you perform end-to-end data science and machine learning workflows within a single, integrated interface. Unlike standard SQL editors, notebooks let you combine SQL queries with Python code, rich text, and visualizations to tell a comprehensive story with your data. Notebooks are ideal for the following use cases:
 
-  - Share notebooks with specific users and groups by using Identity and Access Management (IAM).
-  - Review the notebook version history.
-  - Revert to or branch from previous versions of the notebook.
+  - **End-to-end ML workflows** : build, evaluate, and deploy a BigQuery ML model within a single notebook interface.
+  - **Data exploration** : clean and analyze large datasets using BigQuery DataFrames.
+  - **Collaborative research** : share notebooks with colleagues using IAM and track version history.
 
-Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . [Saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) are also code assets. All code assets are stored in a default [region](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction#supported_regions) . Updating the default region changes the region for all code assets created after that point.
-
-Notebook capabilities are available only in the Google Cloud console.
+Notebooks are code assets in BigQuery Studio, alongside saved queries, and are powered by Dataform. These capabilities are available only in the Google Cloud console.
 
 ## Benefits
 
 Notebooks in BigQuery offer the following benefits:
 
-  - [BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) is integrated into notebooks, no setup required. BigQuery DataFrames is a Python API that you can use to analyze BigQuery data at scale by using the [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [scikit-learn](https://scikit-learn.org/stable/modules/classes.html) APIs.
-  - Assistive code development powered by [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
-  - Auto-completion of SQL statements, the same as in the BigQuery editor.
-  - The ability to save, share, and manage versions of notebooks.
-  - The ability to use [matplotlib](https://matplotlib.org/) , [seaborn](https://seaborn.pydata.org/) , and other popular libraries to visualize data at any point in your workflow.
-  - The ability to write and [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in a cell that can reference Python variables from your notebook.
-  - Interactive [DataFrame visualization](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) that supports aggregation and customization.
+  - **Seamless Python integration** : use the BigQuery DataFrames API without any additional setup.
+  - **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/\(/bigquery/docs/write-sql-gemini\)) for assistive code development.
+  - **Familiar editor features** : use SQL auto-completion, similar to the BigQuery SQL editor.
+  - **Integrated visualizations** : use interactive [DataFrame visualizations](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) , or libraries like [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) , to visualize data directly in your workflow.
+  - **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/\(/bigquery/docs/create-notebooks#cells\)) in cells that reference Python variables.
 
 ## Notebook gallery
 
 The notebook gallery is a central hub for discovering and using prebuilt notebook templates. These templates let you perform common tasks like data preparation, data analysis, and visualization. Notebook templates also help you explore BigQuery Studio features, manage workflows, and promote best practices.
 
-You can use notebook gallery templates to streamline your entire intent-to-insights workflow across each stage of the data lifecycle-from ingestion and exploration to advanced analytics and BigQuery ML.
+You can use notebook gallery templates to streamline your entire intent-to-insights workflow across each stage of the data lifecycle—from ingestion and exploration to advanced analytics and BigQuery ML.
 
 The notebook gallery provides templates for every skill level. The gallery includes fundamental templates for SQL, Python, Apache Spark, and DataFrames. You can also explore topics like generative AI and multimodal data analytics in BigQuery.
 
@@ -42,9 +38,9 @@ To get started with the notebook gallery, follow these steps:
 
 1.  Go to the **BigQuery** page.
 
-2.  From the BigQuery Studio home page, click **View notebook gallery** .
-    
-    ![The View notebook gallery link on the BigQuery Studio home page.](https://docs.cloud.google.com/bigquery/images/template-gallery.png)
+2.  Click **Notebooks** in the **Explorer** menu.
+
+3.  Click the **New notebook** drop-down and select **All templates** .
 
 For more information on using notebook gallery templates, see [Create a notebook using the notebook gallery](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 
@@ -52,7 +48,7 @@ For more information on using notebook gallery templates, see [Create a notebook
 
 BigQuery uses [Colab Enterprise runtimes](https://docs.cloud.google.com/colab/docs/create-runtime) to run notebooks.
 
-A notebook runtime is a Compute Engine virtual machine allocated to a particular user to enable code execution in a notebook. Multiple notebooks can share the same runtime. However, each runtime belongs to only one user and can't be used by others. Notebook runtimes are created based on template, which are typically defined by users with administrative privileges. You can change to a runtime that uses a different template type at any time.
+A notebook runtime is a Compute Engine virtual machine allocated to a particular user to enable code execution in a notebook. Multiple notebooks can share the same runtime. However, each runtime belongs to only one user and can't be used by others. Notebook runtimes are created based on templates, which are typically defined by users with administrative privileges. You can change to a runtime that uses a different template type at any time.
 
 ## Notebook security
 
@@ -212,13 +208,15 @@ Dammam
 
 `me-central2`
 
+> **Note:** All code assets are stored in a default region. Updating the default region changes the region for all code assets created after that point.
+
 ## Pricing
 
 For pricing information about BigQuery Studio notebooks, see [Notebook runtime pricing](https://cloud.google.com/bigquery/pricing#external_services) .
 
 ## Monitor slot usage
 
-You can monitor your BigQuery Studio notebook slot usage by viewing your [Cloud Billing report](https://docs.cloud.google.com/billing/docs/reports) in the Google Cloud console. In the Cloud Billing report, apply a filter with the label **goog-bq-feature-type** with the value **BQ\_STUDIO\_NOTEBOOK** to view slot usage and costs from BigQuery Studio notebook.
+You can monitor your BigQuery Studio notebook slot usage by viewing your [Cloud Billing report](https://docs.cloud.google.com/billing/docs/reports) in the Google Cloud console. In the Cloud Billing report, apply a filter with the label **goog-bq-feature-type** with the value **BQ\_STUDIO\_NOTEBOOK** to view slot usage and costs from BigQuery Studio notebooks.
 
 ![BigQuery Studio notebook slot usage report.](https://docs.cloud.google.com/static/bigquery/images/studio-notebook-slot-usage.png)
 

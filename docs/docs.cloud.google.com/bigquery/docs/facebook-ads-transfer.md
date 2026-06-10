@@ -453,7 +453,7 @@ This error can also appear due to rate limit throttling. In these cases, do the 
 
 ## Pricing
 
-For pricing information about Facebook Ads transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#bqdts) .
+For pricing information about Facebook Ads transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#data-transfer-service-pricing) .
 
 ## What's next
 

@@ -3010,7 +3010,11 @@ Here is an example that includes groupable item sets in `GROUP BY GROUPING SETS 
 | `((b, c))`               | `(b, c)`             |
 | `(d)`                    | `(d)`                |
 
-`GROUP BY GROUPING SETS` can include `ROLLUP` and `CUBE` operations, which generate grouping sets. If `ROLLUP` is added, it generates rolled up grouping sets. If `CUBE` is added, it generates grouping set permutations.
+`GROUP BY GROUPING SETS` can include `ROLLUP` and `CUBE` operations, which generate grouping sets. If `ROLLUP` is added, it generates rolled up grouping sets. If `CUBE` is added, it generates all grouping set combinations.
+
+`ROLLUP` and `CUBE` are expanded into a list of grouping sets using the normal rules, and the resulting list is combined with the sets explicitly listed in the grouping sets list.
+
+For more details, see [Group rows by `ROLLUP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_rollup) and [Group rows by `CUBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_cube) .
 
 The following grouping sets are generated for `GROUP BY GROUPING SETS (a, ROLLUP(b, c), d)` .
 
@@ -3359,7 +3363,7 @@ You can include groupable item sets in a `GROUP BY ROLLUP` clause. In the follow
 
 **Description**
 
-The `GROUP BY CUBE` clause produces aggregated data for all *grouping set* permutations. A grouping set is a group of columns by which rows can be grouped together. This clause is helpful if you need to create a [contingency table](https://en.wikipedia.org/wiki/Contingency_table) to find interrelationships between items in a set of data.
+The `GROUP BY CUBE` clause produces aggregated data for all *grouping set* combinations. A grouping set is a group of columns by which rows can be grouped together. This clause is helpful if you need to create a [contingency table](https://en.wikipedia.org/wiki/Contingency_table) to find interrelationships between items in a set of data.
 
 **Definitions**
 
@@ -3369,7 +3373,7 @@ The `GROUP BY CUBE` clause produces aggregated data for all *grouping set* permu
 
 **Details**
 
-`GROUP BY CUBE` is similar to `GROUP BY ROLLUP` , except that it takes a grouping list and generates grouping sets from all permutations in this list, including an empty grouping set. In the empty grouping set, all rows are aggregated down to a single group.
+`GROUP BY CUBE` is similar to `GROUP BY ROLLUP` , except that it takes a grouping list and generates grouping sets from all combinations in this list, including an empty grouping set. In the empty grouping set, all rows are aggregated down to a single group.
 
 For example, `GROUP BY CUBE (a, b, c)` generates the following grouping sets from the grouping list, `a, b, c` , and then produces aggregated rows for each of them:
 

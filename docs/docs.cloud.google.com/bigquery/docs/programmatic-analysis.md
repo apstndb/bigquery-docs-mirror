@@ -28,13 +28,11 @@ Notebook capabilities are available only in the Google Cloud console.
 
 Notebooks in BigQuery offer the following benefits:
 
-  - [BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) is integrated into notebooks, no setup required. BigQuery DataFrames is a Python API that you can use to analyze BigQuery data at scale by using the [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [scikit-learn](https://scikit-learn.org/stable/modules/classes.html) APIs.
-  - Assistive code development powered by [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
-  - Auto-completion of SQL statements, the same as in the BigQuery editor.
-  - The ability to save, share, and manage versions of notebooks.
-  - The ability to use [matplotlib](https://matplotlib.org/) , [seaborn](https://seaborn.pydata.org/) , and other popular libraries to visualize data at any point in your workflow.
-  - The ability to write and [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in a cell that can reference Python variables from your notebook.
-  - Interactive [DataFrame visualization](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) that supports aggregation and customization.
+  - **Seamless Python integration** : use the BigQuery DataFrames API without any additional setup.
+  - **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/\(/bigquery/docs/write-sql-gemini\)) for assistive code development.
+  - **Familiar editor features** : use SQL auto-completion, similar to the BigQuery SQL editor.
+  - **Integrated visualizations** : use interactive [DataFrame visualizations](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) , or libraries like [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) , to visualize data directly in your workflow.
+  - **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/\(/bigquery/docs/create-notebooks#cells\)) in cells that reference Python variables.
 
 You can get started with notebooks by using notebook gallery templates. For more information, see [Create a notebook using the notebook gallery](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 

@@ -808,9 +808,9 @@ After you have purchased Provisioned Throughput quota, use the `request_type` ar
   - For Gemini model supported regions, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) . Gemini models are also available in the `US` and `EU` multi-regions.
   - For Claude, Llama, and Mistral AI model supported regions, see [Google Cloud partner model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#genai-partner-models) .
 
-## Quotas
+## Quotas and limits
 
-See [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+For quota and limit information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) in the BigQuery quotas and limits reference. For information about managing the cost of this function, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
 
 ## Known issues
 

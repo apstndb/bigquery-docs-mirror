@@ -8,13 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use the JDBC driver for BigQuery
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request feedback or support for this feature, send an email to <bigquery-drivers-feedback@google.com> .
-
-The Java Database Connectivity (JDBC) driver for BigQuery connects your Java applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. To connect non-Java applications to BigQuery, use the [Simba Open Database Connectivity (ODBC) driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
+The Java Database Connectivity (JDBC) driver for BigQuery connects your Java applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. To connect non-Java applications to BigQuery, use the [Open Database Connectivity (ODBC) driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) .
 
 ## Limitations
 
@@ -954,9 +948,9 @@ For example, in a Linux or macOS environment, run the following:
 
 ## Pricing
 
-You can download the JDBC driver for BigQuery at no cost, and you don't need any additional licenses to use the drivers. However, when you use the driver, [standard BigQuery pricing](https://cloud.google.com/bigquery/pricing) applies.
+You can download the JDBC driver for BigQuery at no cost. However, when you use the driver, [standard BigQuery pricing](https://cloud.google.com/bigquery/pricing) applies.
 
 ## What's next
 
-  - Learn more about the [Simba ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
+  - Learn more about the [ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) .
   - Explore other [BigQuery developer tools](https://docs.cloud.google.com/bigquery/docs/developer-overview) .

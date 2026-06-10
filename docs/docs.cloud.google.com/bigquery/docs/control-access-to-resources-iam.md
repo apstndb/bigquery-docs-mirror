@@ -2882,12 +2882,6 @@ You can examine the inherited IAM roles for a resource by using the BigQuery web
 
 ## Deny access to a resource
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or ask questions that are related to this preview release, contact <bigquery-security@google.com> .
-
 [IAM deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) let you set guardrails on access to BigQuery resources. You can define deny rules that prevent selected principals from using [certain permissions](https://docs.cloud.google.com/iam/docs/deny-permissions-support) , regardless of the roles they're granted.
 
 For information about how to create, update, and delete deny policies, see [Deny access to resources](https://docs.cloud.google.com/iam/docs/deny-access) .
@@ -2917,6 +2911,8 @@ Consider the following scenarios when you create [IAM deny policies](https://doc
     | `principalSet://goog/public:all`                                                        | Blocks all principals including authorized resources.                                                                                                                                                                                                                                          |
     | `principalSet://bigquery.googleapis.com/projects/           PROJECT_NUMBER          /*` | Blocks all BigQuery authorized resources in the specified project. [`            PROJECT_NUMBER           `](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) is an automatically generated unique identifier for your project of type `INT64` . |
     
+
+  - View authorization is granted at the dataset level. Therefore, if an IAM deny policy is applied to a tag on a specific table in the dataset, a user can still query that table using an authorized view. To block access, apply the tag at the dataset level, which denies view access to all tables in the dataset.
 
   - To exempt certain principals from the deny policy, specify those principals in the [`exceptionPrincipals`](https://docs.cloud.google.com/iam/docs/deny-overview#deny-rules) field of your deny policy. For example, `exceptionPrincipals: "principalSet://bigquery.googleapis.com/projects/1234/*"` .
 

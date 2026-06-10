@@ -30,6 +30,7 @@ The Data Engineering Agent has the following limitations:
   - When importing files in an [agent instruction file](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/agent-overview#agent_instructions) , the `@` import syntax supports only paths that begin with `./` , `/` , or a letter.
   - The [data preview](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is supported only for tables, declarations, or queries with the `hasOutput` flag set to `true` .
   - The Data Engineering Agent is subject to the [general limitations of AI technology](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
+  - When creating pipelines over Apache Iceberg external tables managed by the Lakehouse runtime catalog (formerly BigLake metastore), all [Lakehouse runtime catalog limitations](https://docs.cloud.google.com/lakehouse/docs/about-lakehouse-catalogs#limitations) apply. Most notably, the agent cannot generate write mutations (such as `INSERT` , `UPDATE` , `DELETE` , or `MERGE` ) or DDL statements (such as `CREATE TABLE` or `DROP TABLE` ) on Iceberg tables. For more information, see [Apache Iceberg REST catalog endpoint concepts](https://docs.cloud.google.com/lakehouse/docs/understand-catalog-types) .
 
 ## Before you begin
 
@@ -72,6 +73,8 @@ For more information about granting roles, see [Manage access to projects, folde
 This predefined role contains the `geminidataanalytics.locations.useDataEngineeringAgent` permission, which is required to use the Data Engineering Agent.
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+For details on the required roles to query Apache Iceberg tables, see [Required roles for Lakehouse Apache Iceberg support](https://docs.cloud.google.com/lakehouse/docs/lakehouse-iceberg-rest-catalog#required_roles) .
 
 ### Knowledge Catalog integration prerequisites
 

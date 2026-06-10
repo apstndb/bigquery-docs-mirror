@@ -382,7 +382,7 @@ If you are having issues setting up your data transfer, see [Oracle transfer iss
 
 ## Pricing
 
-For pricing information about Oracle transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#bqdts) .
+For pricing information about Oracle transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#data-transfer-service-pricing) .
 
 ## What's next
 
