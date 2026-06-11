@@ -70,7 +70,7 @@ For more information about the BigQuery Data Transfer Service service agent, see
 
 If the transfer owner creating the transfer configuration is a user account (not a service account), you must manually grant permission for the BigQuery Data Transfer Service to get the access token for the user account and access the source data on the transfer owner's behalf. You can grant manual approval with the OAuth dialog interface.
 
-You only need to give permission to the BigQuery Data Transfer Service for the first time when creating a transfer for a given data source. You must give the permission again when you create the first transfer for a newly used region, even if you are using the same data source. Data transfers from Youtube Channels are the exception - you must manually grant permissions approval every time you create a Youtube Channel data transfer.
+You only need to give permission to the BigQuery Data Transfer Service for the first time when creating a transfer for a given data source. You must give the permission again when you create the first transfer for a newly used region, even if you are using the same data source. Data transfers from YouTube channels are the exception - you must manually grant permissions approval every time you create a YouTube Channel data transfer.
 
 Changing the transfer owner by updating credentials also requires manual approval if the new owner has never created a transfer for the data source in that region before.
 
@@ -78,7 +78,7 @@ The following screenshot shows the OAuth dialog interface when you are creating 
 
 ![Allow BigQuery Data Transfer Service to access Google Ads.](https://docs.cloud.google.com/static/bigquery/images/dts-auth-allow.png)
 
-> **Note:** The BigQuery Data Transfer Service no longer supports the `authorization_code` parameter for Youtube Channel data transfers. You can use the `version_info` parameter to provide your authorization result to the transfer to allow it to get credentials. The `version_info` parameter is only required in the `bq` CLI or API calls.
+> **Note:** The BigQuery Data Transfer Service no longer supports the `authorization_code` parameter for YouTube Channel data transfers. You can use the `version_info` parameter to provide your authorization result to the transfer to allow it to get credentials. The `version_info` parameter is only required in the `bq` CLI or API calls.
 
 To revoke the permissions that were given, follow these steps:
 
@@ -105,6 +105,10 @@ When you migrate using [scheduled queries](https://docs.cloud.google.com/bigquer
 > **Note:** The `roles/bigquery.dataEditor` role granted to the BigQuery Data Transfer Service agent is only limited to the destination dataset that is used in a transfer configuration. Other BigQuery datasets under the same project are not affected.
 
 > **Warning:** Don't remove the service agent's `roles/bigquery.dataEditor` role from the destination dataset. The `roles/bigquery.dataEditor` role is required for BigQuery Data Transfer Service to work.
+
+## Authorization considerations for YouTube Channel transfers
+
+In a [YouTube Channel data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer) , the YouTube Channel connector can only transfer data from the YouTube Channel associated to the user credential that creates the data transfer. To transfer data from different YouTube channels, you must create a data transfer for each channel, and for each data transfer created, you must use the user credential that is associated with that YouTube Channel.
 
 ## Troubleshoot permission errors
 

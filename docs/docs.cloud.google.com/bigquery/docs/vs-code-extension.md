@@ -27,7 +27,7 @@ The Google Cloud [Visual Studio Code (VS Code)](https://code.visualstudio.com/) 
 
 2.  [Install the Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install) .
 
-3.  In your local terminal, [initialize the gcloud CLI](https://docs.cloud.google.com/sdk/docs/initializing) :
+3.  In your local terminal, [initialize the gcloud CLI](https://docs.cloud.google.com/sdk/docs/initialize) :
     
         gcloud init
 

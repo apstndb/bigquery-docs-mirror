@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # BigQuery interactive walkthroughs and videos
 
+This document lists the interactive walkthroughs and video tutorials available to help you learn about and get started with BigQuery. These resources provide guided, step-by-step instruction for common tasks and visual explanations of concepts and features.
+
 ## BigQuery interactive walkthroughs
 
-The following interactive walkthroughs help you get started with BigQuery.
+The following guided walkthroughs lead you through common tasks directly in the Google Cloud console. Click a link to launch a walkthrough.
 
 ### Before you begin
 

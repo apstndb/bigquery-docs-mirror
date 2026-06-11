@@ -40,6 +40,8 @@ Amazon S3 data transfers are subject to the following limitations:
 
   - The minimum interval time between recurring data transfers is 1 hour. The default interval for a recurring data transfer is 24 hours.
 
+  - Amazon S3 data transfers are supported by the same Amazon S3 region limitations as the Storage Transfer Service. For more information, see [Supported regions](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#supported_regions) .
+
 ## Required permissions
 
 Ensure that you have granted the following permissions.

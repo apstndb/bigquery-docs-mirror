@@ -85,6 +85,7 @@ The following limitations apply when you identify where Gemini in BigQuery proce
 
   - Gemini in BigQuery doesn't provide data residency for individual locations. Data processing can be specified for `US` and `EU` supported jurisdictions. Data outside these jurisdictions is processed globally.
   - Gemini in BigQuery jurisdiction processing is only available for Gemini in BigQuery features that are generally available (GA). For a list of Gemini in BigQuery features, see [Overview of Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
+  - BigQuery Python notebook code assist only supports global Gemini processing.
   - Gemini in Cloud Assist chat (GCA) only supports global Gemini processing. You can deny access to the GCA chat panel by removing the `geminicloudassist.agents.invoke` Identity and Access Management (IAM) permission for your users. To learn more about how to create custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 ## What's next

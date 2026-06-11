@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use the Simba ODBC and JDBC drivers for BigQuery
 
-> **Note:** As an alternative to the Simba JDBC driver, consider using the [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
+> **Note:** As an alternative to the Simba drivers, consider using the Google-developed [JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) and [ODBC driver for BigQuery (Preview)](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) .
 
 The Simba Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers for BigQuery connect your applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. Generally, the JDBC driver is used with Java applications, and the ODBC driver is used otherwise.
 
@@ -48,6 +48,8 @@ The following permissions are required to use the High-Throughput API:
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Install and configure the Simba ODBC driver for BigQuery
+
+> **Note:** As an alternative to the Simba ODBC driver, consider using the [Google-developed ODBC driver for BigQuery (Preview)](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) .
 
 1.  Download the 3.2.1.3001 version of the driver for your operating system:
     

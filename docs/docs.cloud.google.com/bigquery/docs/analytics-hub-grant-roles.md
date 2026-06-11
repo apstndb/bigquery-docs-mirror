@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Configure BigQuery sharing roles
 
-This document describes the Identity and Access Management (IAM) roles for BigQuery sharing (formerly Analytics Hub) and how to grant them. For more information, see [BigQuery sharing roles and permissions](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub) .
+To securely manage access to your BigQuery sharing data exchanges and listings, grant specific Identity and Access Management (IAM) roles for BigQuery sharing (formerly Analytics Hub). You control user permissions for your data by assigning these roles, ensuring that only authorized users can discover, subscribe to, and manage your data sharing resources.
 
 > **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
@@ -304,7 +304,7 @@ You can delete and update listing roles using the same IAM panel.
 
 ## What's next
 
-  - Learn about [BigQuery IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control) .
+  - Learn more about [BigQuery sharing roles and permissions](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub) .
   - Learn about [BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
   - Learn how to [manage data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) .
   - Learn how to [manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # BigQuery data preparation overview
 
-This document describes AI-augmented data preparation in BigQuery. Data preparations are [BigQuery](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) resources, which use Gemini in BigQuery to analyze your data and provide intelligent suggestions for cleaning, transforming, and enriching it. You can significantly reduce the time and effort required for manual data preparation tasks. Scheduling of data preparations is powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
+You can significantly reduce the time and effort required for manual data tasks by using AI-augmented data preparation in BigQuery. Data preparation uses Gemini in BigQuery to analyze your data and provide intelligent suggestions for cleaning, transforming, and enriching it. Dataform schedules these data preparations.
 
 ## Benefits
 

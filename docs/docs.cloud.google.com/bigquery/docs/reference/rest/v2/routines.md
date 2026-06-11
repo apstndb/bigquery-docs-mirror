@@ -682,7 +682,8 @@ Options for the runtime of the external system.
   &quot;containerCpu&quot;: number,
   &quot;runtimeConnection&quot;: string,
   &quot;maxBatchingRows&quot;: string,
-  &quot;runtimeVersion&quot;: string
+  &quot;runtimeVersion&quot;: string,
+  &quot;containerRequestConcurrency&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -719,6 +720,12 @@ Optional. Maximum number of rows in each batch sent to the external runtime. If 
 `string`
 
 Optional. Language runtime version. Example: `python-3.11` .
+
+`containerRequestConcurrency`
+
+`string ( int64 format)`
+
+Optional. Maximum number of requests that a Python UDF instance can handle concurrently. If absent or if `0` , the default concurrency value is used. For more information, see [Configure container limits for Python UDFs](https://cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits) .
 
 ## RoutineBuildStatus
 

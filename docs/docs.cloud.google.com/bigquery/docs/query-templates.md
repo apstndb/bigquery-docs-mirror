@@ -208,7 +208,7 @@ You can [update the query template](https://docs.cloud.google.com/bigquery/docs/
 
 The following example shows how to create a query template with a `curl` command:
 
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID -d
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID -d
       'query_template {
       display_name: "DISPLAY_NAME",
       routine {
@@ -272,7 +272,7 @@ The following example shows how to update a query template with a `curl` command
 ``` 
  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
  -H "Content-Type: application/json" \
- -H 'x-goog-user-project:DCR_PROJECT_ID' \
+ -H &#39;x-goog-user-project:DCR_PROJECT_ID' \
  -X PATCH "https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID?updateMask=description" \
  -d '{
    "query_template": {
@@ -313,7 +313,7 @@ Select one of the following options:
 The following example shows how to submit a query template for review with a `curl` command:
 
 ``` 
-  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID:submit
+  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID:submit
 ```
 
 Replace the following:
@@ -344,7 +344,7 @@ Select one of the following options:
 The following example shows how to delete a query template with a `curl` command:
 
 ``` 
-  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID
+  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID
 ```
 
 Replace the following:
@@ -397,8 +397,8 @@ Select one of the following options:
 
 2.  Add the routine you created to the data clean room:
     
-        curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
-        '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}],},"displayName":"LISTING_NAME"}'
+        curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
+        '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources";:[{"routine&quot;:"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}],},"displayName":"LISTING_NAME"}'
     
     Replace the following:
     
@@ -463,7 +463,7 @@ Use the [`projects.locations.dataExchanges.subscribe` method](https://docs.cloud
 The following example shows how to call the `projects.locations.dataExchanges.subscribe` method using the `curl` command:
 
 ``` 
-  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination":"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
+  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination&quot;:"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
 ```
 
 Replace the following:

@@ -74,7 +74,7 @@ Request the appropriate [OAuth scope for Drive](https://developers.google.com/id
 
 2.  Set up [Application Default Credentials (ADC)](https://docs.cloud.google.com/docs/authentication/application-default-credentials) in your local environment with the required scopes by doing the following:
     
-    1.  [Install](https://docs.cloud.google.com/sdk/docs/install) the Google Cloud CLI, then [initialize](https://docs.cloud.google.com/sdk/docs/initializing) it by running the following command:
+    1.  [Install](https://docs.cloud.google.com/sdk/docs/install) the Google Cloud CLI, then [initialize](https://docs.cloud.google.com/sdk/docs/initialize) it by running the following command:
         
             gcloud init
     
@@ -94,7 +94,7 @@ Request the appropriate [OAuth scope for Drive](https://developers.google.com/id
 
 2.  Set up [Application Default Credentials (ADC)](https://docs.cloud.google.com/docs/authentication/application-default-credentials) in your local environment with the required scopes by doing the following:
     
-    1.  [Install](https://docs.cloud.google.com/sdk/docs/install) the Google Cloud CLI, then [initialize](https://docs.cloud.google.com/sdk/docs/initializing) it by running the following command:
+    1.  [Install](https://docs.cloud.google.com/sdk/docs/install) the Google Cloud CLI, then [initialize](https://docs.cloud.google.com/sdk/docs/initialize) it by running the following command:
         
             gcloud init
     

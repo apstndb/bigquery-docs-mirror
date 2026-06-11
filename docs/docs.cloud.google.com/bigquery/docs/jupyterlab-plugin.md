@@ -32,7 +32,7 @@ To install and use the BigQuery JupyterLab plugin, follow these steps:
 
 2.  [Install the gcloud CLI.](https://docs.cloud.google.com/sdk/docs/install)
 
-3.  In your local terminal, [initialize the gcloud CLI](https://docs.cloud.google.com/sdk/docs/initializing) :
+3.  In your local terminal, [initialize the gcloud CLI](https://docs.cloud.google.com/sdk/docs/initialize) :
     
         gcloud init
 

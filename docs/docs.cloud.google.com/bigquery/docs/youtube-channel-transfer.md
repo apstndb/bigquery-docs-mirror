@@ -70,6 +70,7 @@ To retrieve data outside the refresh window, such as historical data, or to reco
   - The minimum frequency that you can schedule a data transfer for is once every 24 hours. By default, a data transfer starts at the time that you create the transfer. However, you can configure the data transfer start time when you [set up your transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer) .
   - The BigQuery Data Transfer Service does not support incremental data transfers during a YouTube Content Owner transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
   - You cannot create a YouTube Channel data transfer if you are signed in as a federated identity. You can only create a YouTube Channel transfer while signed in using a Google Account.
+  - You can only transfer data from the YouTube Channel associated to the Google Account that creates the data transfer. For more information, see [Authorization considerations for YouTube Channel transfers](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#youtube_channel_transfers) .
 
 ## Before you begin
 
@@ -260,6 +261,12 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     }
 
 > **Note:** If you are setting up YouTube reporting jobs for the first time, you will experience a delay of up to 48 hours before your first reports are ready. For more information, see [Create a reporting job](https://developers.google.com/youtube/reporting/v1/reports/#step-3-create-a-reporting-job) in the YouTube Reporting API documentation.
+
+When you save the transfer configuration, the YouTube Channel connector automatically triggers a transfer run according to your schedule option. With every transfer run, the YouTube Channel connector transfers all available data from the YouTube Channel associated with the user credentials that created this data transfer.
+
+For more information about the data included in each YouTube Channel transfer, see [Authorization considerations for YouTube Channel transfers](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#youtube_channel_transfers) .
+
+To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Query your data
 

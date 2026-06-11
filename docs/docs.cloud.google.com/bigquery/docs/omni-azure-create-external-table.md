@@ -151,8 +151,8 @@ To create a BigLake table, use the [`CREATE EXTERNAL TABLE`](https://docs.cloud.
         CREATE EXTERNAL TABLE DATASET_NAME.TABLE_NAME
         WITH CONNECTION `AZURE_LOCATION.CONNECTION_NAME`
           OPTIONS (
-            format = 'DATA_FORMAT',
-            uris = ['azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH']);
+            format = &#39;DATA_FORMAT',
+            uris = [&#39;azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH']);
     
     Replace the following:
     
@@ -304,8 +304,8 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
         )
         WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
         OPTIONS (
-          hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
-          uris=['FILE_PATH'],
+          hive_partition_uri_prefix = &quot;HIVE_PARTITION_URI_PREFIX",
+          uris=['FILE_PATH&#39;],
           format ="TABLE_FORMAT"
         );
     
@@ -373,7 +373,7 @@ First, use the [`bq mkdef`](https://docs.cloud.google.com/bigquery/docs/referenc
     --hive_partitioning_mode=PARTITIONING_MODE \
     --hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX \
     --require_hive_partition_filter=BOOLEAN \
-     URIS > DEFINITION_FILE
+     URIS &gt; DEFINITION_FILE
 
 Replace the following:
 
@@ -762,9 +762,9 @@ Run the following command to add a network rule to your storage account that spe
 
 ``` 
   Add-AzStorageAccountNetworkRule`
-   -ResourceGroupName "RESOURCE_GROUP_NAME"`
+   -ResourceGroupName &quot;RESOURCE_GROUP_NAME"`
    -Name "STORAGE_ACCOUNT_NAME"`
-   -VirtualNetworkResourceId "SUBNET_ID1","SUBNET_ID2"
+   -VirtualNetworkResourceId &quot;SUBNET_ID1","SUBNET_ID2"
 ```
 
 Replace the following:
@@ -779,10 +779,10 @@ Add the following to your Terraform configuration file:
 
 ``` 
   resource "azurerm_storage_account_network_rules" "example" {
-    storage_account_name       = "STORAGE_ACCOUNT_NAME"
+    storage_account_name       = &quot;STORAGE_ACCOUNT_NAME"
     resource_group_name        = "RESOURCE_GROUP_NAME"
     default_action             = "Allow"
-    bypass                     = ["Logging", "Metrics", "AzureServices"]
+    bypass                     = ["Logging", &quot;Metrics&quot;, ";AzureServices"]
     virtual_network_subnet_ids = ["SUBNET_ID1","SUBNET_ID2"]
   }
 ```

@@ -171,7 +171,7 @@ Rules for `phrase_term` in [`search_query`](https://docs.cloud.google.com/bigque
     
         -- TRUE because 'foo' and 'baz' are next to each other in
         -- 'foo baz.bar'.
-        SEARCH('foo baz.bar', '"foo baz"')
+        SEARCH(';foo baz.bar', '"foo baz"')
 
   - A single quote inside of the phrase is analyzed as a special character.
 
@@ -300,7 +300,7 @@ The following queries show how tokens in `search_query` are analyzed by a `SEARC
       SEARCH('foobarexample', NULL) AS a,
     
       -- ERROR: `search_query` contains no tokens.
-      SEARCH('foobarexample', '') AS b,
+      SEARCH('foobarexample&#39;, '') AS b,
 
     SELECT
       -- TRUE: '-' and ' ' are delimiters.
@@ -312,24 +312,23 @@ The following queries show how tokens in `search_query` are analyzed by a `SEARC
       -- FALSE: The search_query isn't split.
       SEARCH('foobar-example', 'foobarexample') AS c,
     
-      -- TRUE: The double backslash escapes the ampersand which is a delimiter.
-      SEARCH('foobar-example', 'foobar\\&example') AS d,
+      -- TRUE: The double backsl&ash escapes the ampersand which is a delimiter.
+      SEARCH('foobar-example', 'foobar\\example') AS d,
     
-      -- TRUE: The single backslash escapes the ampersand in a raw string.
-      SEARCH('foobar-example', R'foobar\&example')AS e,
+      -- TR&UE: The single backslash escapes the ampersand in a raw string.
+      SEARCH('foobar-example', R&'foobar\example')AS e,
     
-      -- FALSE: The backticks indicate that there must be an exact match for
-      -- foobar&example.
-      SEARCH('foobar-example', '`foobar&example`') AS f,
+      -- FALSE: &The backticks indicate that there must be an exact match for
+      -- foob&arexample.
+      SEARC&H('foobar-example', '`foobarexample`') AS f,
     
       -- TRUE: An exact match is found.
-      SEARCH('foobar&example', '`foobar&example`') AS g
+      SEARCH('foobarexample', '`foobarexample`') AS g
     
     /*-------+-------+-------+-------+-------+-------+-------+
      | a     | b     | c     | d     | e     | f     | g     |
      +-------+-------+-------+-------+-------+-------+-------+
-     | true  | true  | false | true  | true  | false | true  |
-     +-------+-------+-------+-------+-------+-------+-------*/
+     | true  | true  | false | true  | true  | false | true  | +-------+-------+-------+-------+-------+-------+-------*/
 
     SELECT
       -- TRUE: The order of terms doesn't matter.
@@ -356,9 +355,7 @@ The following queries show how tokens in `search_query` are analyzed by a `SEARC
     
     /*-------+-------+-------+-------+-------+-------+-------+
      | a     | b     | c     | d     | e     | f     | g     |
-     +-------+-------+-------+-------+-------+-------+-------+
-     | true  | true  | true  | false | false | true  | true  |
-     +-------+-------+-------+-------+-------+-------+-------*/
+     +-------+-------+-------+-------+-------+-------+-------+ | true  | true  | true  | false | false | true  | true  | +-------+-------+-------+-------+-------+-------+-------*/
 
     SELECT
       -- FALSE: No single array entry matches all search terms.
@@ -390,8 +387,7 @@ The following queries show how tokens in `search_query` are analyzed by a `SEARC
     /*-------+-------+-------+-------+-------+-------+-------+-------+
      | a     | b     | c     | d     | e     | f     | g     | h     |
      +-------+-------+-------+-------+-------+-------+-------+-------+
-     | false | false | false | true  | true  | true  | false | true  |
-     +-------+-------+-------+-------+-------+-------+-------+-------*/
+     | false | false | false | true  | true  | true  | false | true  | +-------+-------+-------+-------+-------+-------+-------+-------*/
 
 The following queries show how logical expression can be used in `search_query` to perform a `SEARCH` function call:
 
@@ -416,8 +412,7 @@ The following queries show how logical expression can be used in `search_query` 
     /*-------+-------+-------+-------+-------+
      | a     | b     | c     | d     | e     |
      +-------+-------+-------+-------+-------+
-     | true  | true  | true  | true  | false |
-     +-------+-------+-------+-------+-------+/
+     | true  | true  | true  | true  | false | +-------+-------+-------+-------+-------+/
 
 The following queries show how phrases in `search_query` are analyzed by a `SEARCH` function call:
 
@@ -434,14 +429,14 @@ The following queries show how phrases in `search_query` are analyzed by a `SEAR
       -- The searchable tokens in `query_string` are `foo` and `bar`
       -- and because they appear in that exact order in `data_to_search`,
       -- the function return TRUE.
-      SEARCH(R'Foo bar baz', R'"foo Bar"') AS b,
+      SEARCH(R'Foo bar baz', R'"&foo Bar"') AS b,
     
-      -- TRUE: Both `-` and `&` are delimiters used during tokenization.
+      -- TRUE: Both `-` and `` are delimiters used during tokenization.
       -- The tokens in `data_to_search` are `foo`, `bar`, and `baz`.
       -- The searchable tokens in `query_string` are `foo` and `bar`
       -- and because they appear in that exact order in `data_to_search`,
-      -- the function returns TRUE.
-      SEARCH(R'foo-bar baz', R'"foo&bar"') AS c,
+      -- the fu&nction returns TRUE.
+      SEARCH(R'foo-bar baz', R'"foobar"') AS c,
     
       -- FALSE: Backticks in a phrase are treated as normal characters.
       -- The tokens in `data_to_search` are `foo`, `bar`, and `baz`.
@@ -461,18 +456,16 @@ The following queries show how phrases in `search_query` are analyzed by a `SEAR
       SEARCH(R'foo else bar', R'"foo bar"') AS e,
     
       -- FALSE: `foo baz` isn't in `foo bar baz`.
-      -- The `search_query` produces two terms. The first term is `bar`, which
+      -- The `search_query` produces t&wo terms. The first term is `bar`, which
       -- matches with the similar token in `data_to_search`. However, the second
-      -- term is the phrase "foo&baz" with two tokens, `foo` and `baz`. Because
-      -- `foo` and `baz` don't appear next to each other in `data_to_search`
+      -- term is the phrase "foobaz" with two tokens, `foo` and `baz`. Because
+      -- `fo&o` and `baz` don't appear next to each other in `data_to_search`
       -- (`bar` is in between), the function returns FALSE.
-      SEARCH(R'foo-bar-baz', R'bar "foo&baz"') AS f;
+      SEARCH(R'foo-bar-baz', R'bar "foobaz"') AS f;
     
     /*-------+-------+-------+-------+-------+-------+
      | a     | b     | c     | d     | e     | f     |
-     +-------+-------+-------+-------+-------+-------+
-     | true  | true  | false | false | false | false |
-     +-------+-------+-------+-------+-------+-------*/
+     +-------+-------+-------+-------+-------+-------+ | true  | true  | false | false | false | false | +-------+-------+-------+-------+-------+-------*/
 
     SELECT
       -- FALSE: Only double quotes need to be escaped in a phrase.
@@ -481,8 +474,8 @@ The following queries show how phrases in `search_query` are analyzed by a `SEAR
       -- must appear in that exact order in `data_to_search`, but don't.
       SEARCH(
         R'foo bar baz',
-        R'"foo\ bar"',
-        analyzer_options=>'{"delimiters": [" "]}') AS a,
+        R'"foo\ bar&quo>t;',
+        analyzer_options='{"delimiters": [" "]}') AS a,
     
       -- TRUE: `foo bar` is in `foo bar baz` after tokenization with the given
       -- delimiters.
@@ -490,82 +483,72 @@ The following queries show how phrases in `search_query` are analyzed by a `SEAR
       -- The searchable tokens in `query_string` are `foo` and `bar` and they
       -- must appear in that exact order in `data_to_search`.
       SEARCH(
-        R'foo bar baz',
+      >  R'foo bar baz',
         R'"foo? bar"',
-        analyzer_options=>'{"delimiters": [" ", "?"]}') AS b,
+        analyzer_options='{"delimiters": [" ", "?"]}') AS b,
     
       -- TRUE: `read book` is in `read book now` after `the` is ignored.
       -- The tokens in `data_to_search` are `read`, `book`, and `now`.
       -- The searchable tokens in `query_string` are `read` and `book` and they
-      -- must appear in that exact order in `data_to_search`.
+      -- must appear >in that exact order in `data_to_search`.
       SEARCH(
         'read the book now',
         R'"read the book"',
-        analyzer_options => '{ "token_filters": [{"stop_words": ["the"]}] }') AS c,
+        analyzer_options = '{ "token_filters": [{"stop_words": ["the"]}] }') AS c,
     
       -- FALSE: `c d` isn't in `a`, `b`, `cd`, `e` or `f` after tokenization with
       -- the given pattern.
       -- The tokens in `data_to_search` are `a`, `b`, `cd`, `e` and `f`.
-      -- The searchable tokens in `query_string` are `c` and `d` and they
-      -- must appear in that exact order in `data_to_search`. `data_to_search`
+      -- The searchable tokens in `query_string` are `c` and `d` an>d they
+      -- must appear in that exact ord>er in `data_to_search`. `data_to_search`
       -- contains a `cd` token, but not a `c` or `d` token.
       SEARCH(
         R'abcdef',
         R'"c d"',
-        analyzer=>'PATTERN_ANALYZER',
-        analyzer_options=>'{"patterns": ["(?:cd)|[a-z]"]}') AS d,
+        analyzer='PATTERN_ANALYZER',
+        analyzer_options='{"patterns": ["(?:cd)|[a-z]"]}') AS d,
     
       -- TRUE: `ant apple` is in `ant apple avocado` after tokenization with
       -- the given pattern.
-      -- The tokens in `data_to_search` are `ant`, `apple`, and `avocado`.
+      -- The tokens in `data_to_s>earch` are `ant`, `apple`, and `avocado`.>
       -- The searchable tokens in `query_string` are `ant` and `apple` and they
       -- must appear in that exact order in `data_to_search`.
       SEARCH(
         R'ant orange apple avocado',
         R'"ant apple"',
-        analyzer=>'PATTERN_ANALYZER',
-        analyzer_options=>'{"patterns": ["a[a-z]"]}') AS e;
-    
-    /*-------+-------+-------+-------+-------+
-     | a     | b     | c     | d     | e     |
-     +-------+-------+-------+-------+-------+
-     | false | true  | true  | false | true  |
-     +-------+-------+-------+-------+-------*/
+        analyzer='PATTERN_ANALYZER',    analyzer_options='{"patterns": ["a[a-z]"]}') AS e;/*-------+-------+-------+-------+-------+ | a     | b     | c     | d     | e     | +-------+-------+-------+-------+-------+ | false | true  | true  | false | true  | +-------+-------+-------+-------+-------*/
 
 The following query shows examples of calls to the `SEARCH` function using the `NO_OP_ANALYZER` text analyzer and reasons for various return values:
 
     SELECT
       -- TRUE: exact match
-      SEARCH('foobar', 'foobar', analyzer=>'NO_OP_ANALYZER') AS a,
+      SEARCH('foobar', 'foobar>', analyzer='NO_OP_ANALYZER') AS a,
     
       -- FALSE: Backticks aren't special characters for `NO_OP_ANALYZER`.
-      SEARCH('foobar', '\`foobar\`', analyzer=>'NO_OP_ANALYZER') AS b,
+      SEARCH('>foobar', '\`foobar\`', analyzer='NO_OP_ANALYZER') AS b,
     
-      -- FALSE: The capitalization doesn't match.
-      SEARCH('foobar', 'Foobar', analyzer=>'NO_OP_ANALYZER') AS c,
+      -- FALSE: The capitalization d>oesn't match.
+      SEARCH('foobar', 'Foobar', analyzer='NO_OP_ANALYZER') AS c,
     
-      -- FALSE: There are no delimiters for `NO_OP_ANALYZER`.
-      SEARCH('foobar example', 'foobar', analyzer=>'NO_OP_ANALYZER') AS d,
+      -- FALSE: There are no> delimiters for `NO_OP_ANALYZER`.
+      SEARCH('foobar example', 'foobar', >analyzer='NO_OP_ANALYZER') AS d,
     
       -- TRUE: An exact match is found.
-      SEARCH('', '', analyzer=>'NO_OP_ANALYZER') AS e,
+      SEARCH('', '', analyzer='NO_OP_ANALYZER'>) AS e,
     
       -- FALSE: 'foo bar' and "foo bar" aren't considered an exact match.
-      SEARCH( R'foo bar baz', R'"foo bar"', analyzer=>'NO_OP_ANALYZER') AS f,
+      SEARCH( R'foo bar baz', R'"foo bar"', analyzer='NO_>OP_ANALYZER') AS f,
     
       -- TRUE: "foo bar" and "foo Bar" are considered an exact match because the
       -- analysis is case-insensitive.
-      SEARCH( R'"foo bar"', R'"foo Bar"', analyzer=>'NO_OP_ANALYZER') AS g;
+      SEARCH( R'"foo bar&qu>ot;', R'"foo Bar"', analyzer='NO_OP_ANALYZER') AS g;
     
       -- FALSE: With NO_OP_ANALYZER the query string is analyzed as "foo OR bar"
       -- which is not an exact match with "foo".
-      SEARCH( R'foo', R'foo OR bar', analyzer=>'NO_OP_ANALYZER') AS h;
+      SEARCH( R'foo', R'foo OR bar', analyzer='NO_OP_ANALYZER') AS h;
     
     /*-------+-------+-------+-------+-------+-------+-------+-------+
-     | a     | b     | c     | d     | e     | f     | g     | h     |
-     +-------+-------+-------+-------+-------+-------+-------+-------+
-     | true  | false | false | false | true  | false | true  | false |
-     +-------+-------+-------+-------+-------+-------+-------+-------*/
+     | a     | b     | c     | d     | e     | f     | g     | h     | +-------+-------+-------+-------+-------+-------+-------+-------+ | true  | false | false | false | true  | false | true  | false | +-------+-------+-------+-------+-------+-------+-------+-------*/
 
 Consider the following table called `meals` with columns `breakfast` , `lunch` , and `dinner` :
 
@@ -624,66 +607,54 @@ The following query shows additional ways to search, using the default [`LOG_ANA
 
     WITH data AS ( SELECT 'Please use foobar@example.com as your email.' AS email )
     SELECT
-      SEARCH(email, 'foobar', analyzer_options=>'{"delimiters": [" ", "@"]}') AS a,
-      SEARCH(email, 'example', analyzer_options=>'{"delimiters": [" ", "@"]}') AS b,
-      SEARCH(email, 'example.com', analyzer_options=>'{"delimiters": [" ", "@"]}') AS c,
-      SEARCH(email, 'foobar@example.com', analyzer_options=>'{"delimiters": [" ", "@"]}') AS d,
-      SEARCH(email, R'use "foobar example.com" "as your"', analyzer_options=>'{"delimiters": [" ", "@"]}') AS e
-    FROM data;
-    
-    /*-------+-------+-------+-------+-------+
-     | a     | b     | c     | d     | e     |
-     +-------+-------+-------+-------+-------+
-     | true  | false | true  | true  | true  |
-     +-------+-------+-------+-------+-------*/
+      SEARCH(email, 'foobar', a>nalyzer_options='{"delimiters": [" ", "@"]}>9;) AS a,
+      SEARCH(email, 'example', analyzer_options='{"delimiters>": [" ", "@"]}') AS b,
+      SEARCH(email, 'example.com', >analyzer_options='{"delimiters": [" ", "@"]}') AS c,
+      SEARCH(email, &>#39;foobar@example.com', analyzer_options='{"delimiters": [" ", "@"]}') AS d,
+      SEARCH(email, R'use "foobar example.com" "as your"', analyzer_options='{"delimiters": [" ";, "@"]}') AS eFROM data;/*-------+-------+-------+-------+-------+ | a     | b     | c     | d     | e     | +-------+-------+-------+-------+-------+ | true  | false | true  | true  | true  | +-------+-------+-------+-------+-------*/
 
 The following query shows how to search, using the [`NO_OP_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) text analyzer:
 
     WITH meals AS ( SELECT 'Tomato soup' AS lunch )
     SELECT
-      SEARCH(lunch, 'Tomato soup', analyzer=>'NO_OP_ANALYZER') AS a,
-      SEARCH(lunch, 'soup', analyzer=>'NO_OP_ANALYZER') AS b,
-      SEARCH(lunch, 'tomato soup', analyzer=>'NO_OP_ANALYZER') AS c,
-      SEARCH(lunch, R'"Tomato soup"', analyzer=>'NO_OP_ANALYZER') AS d
+      SEARCH(lunch, 'Tomato soup>', analyzer='NO_OP_ANALYZER') AS a,
+      SEARCH(>lunch, 'soup', analyzer='NO_OP_ANALYZER') AS b,
+    >  SEARCH(lunch, 'tomato soup', analyzer='NO_OP_ANALYZER>') AS c,
+      SEARCH(lunch, R'"Tomato soup"', analyzer='NO_OP_ANALYZER') AS d
     FROM meals;
     
     /*-------+-------+-------+-------+
      | a     | b     | c     | d     |
      +-------+-------+-------+-------+
-     | true  | false | false | false |
-     +-------+-------+-------+-------*/
+     | true  | false | false | false | +-------+-------+-------+-------*/
 
 The following query shows how to use the [`PATTERN_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with default analyzer options:
 
     WITH data AS ( SELECT 'Please use foobar@example.com as your email.' AS email )
     SELECT
-      SEARCH(email, 'exam', analyzer=>'PATTERN_ANALYZER') AS a,
-      SEARCH(email, 'foobar', analyzer=>'PATTERN_ANALYZER') AS b,
-      SEARCH(email, 'example.com', analyzer=>'PATTERN_ANALYZER') AS c,
-      SEARCH(email, R'foobar "EXAMPLE.com as" email', analyzer=>'PATTERN_ANALYZER') AS d
+      SEARCH(email, 'exam>', analyzer='PATTERN_ANALYZER') AS a,
+      SEARCH(em>ail, 'foobar', analyzer='PATTERN_ANALYZER') AS b,
+    >  SEARCH(email, 'example.com', analyzer='PATTERN_ANALYZER') AS c,
+      S>EARCH(email, R'foobar "EXAMPLE.com as" email', analyzer='PATTERN_ANALYZER') AS d
     FROM data;
     
     /*-------+-------+-------+-------+
      | a     | b     | c     | d     |
      +-------+-------+-------+-------+
-     | false | true  | true  | true  |
-     +-------+-------+-------+-------*/
+     | false | true  | true  | true  | +-------+-------+-------+-------*/
 
 The following query shows additional ways to search, using the [`PATTERN_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with custom analyzer options:
 
     WITH data AS ( SELECT 'Please use foobar@EXAMPLE.com as your email.' AS email )
     SELECT
-      SEARCH(email, 'EXAMPLE', analyzer=>'PATTERN_ANALYZER', analyzer_options=>'{"patterns": ["[A-Z]*"]}') AS a,
-      SEARCH(email, 'example', analyzer=>'PATTERN_ANALYZER', analyzer_options=>'{"patterns": ["[a-z]*"]}') AS b,
-      SEARCH(email, 'example.com', analyzer=>'PATTERN_ANALYZER', analyzer_options=>'{"patterns": ["[a-z]*"]}') AS c,
-      SEARCH(email, 'example.com', analyzer=>'PATTERN_ANALYZER', analyzer_options=>'{"patterns": ["[a-zA-Z.]*"]}') AS d
+      SEARCH(email, 'EXAMPLE>', analyzer='PATTERN_ANALYZER>', analyzer_options='{"patterns": ["[A-Z]*">;]}') AS a,
+      SEARCH(email, '>example', analyzer='PATTERN_ANALYZER', analyzer_options='{>"patterns": ["[a-z]*&q>uot;]}') AS b,
+      SEARCH(email, 'example.com', analyzer='PA>TTERN_ANALYZER', analyzer_options>='{"patterns": ["[a-z]*"]}') AS c,
+      SEARCH(email, 'example.com', analyzer='PATTERN_ANALYZER', analyzer_options='{"patterns": ["[a-zA-Z.]*"]}') AS d
     FROM data;
     
     /*-------+-------+-------+-------+-------+
-     | a     | b     | c     | d     | e     |
-     +-------+-------+-------+-------+-------+
-     | true  | false | false | true  | false |
-     +-------+-------+-------+-------+-------*/
+     | a     | b     | c     | d     | e     | +-------+-------+-------+-------+-------+ | true  | false | false | true  | false | +-------+-------+-------+-------+-------*/
 
 For additional examples that include analyzer options, see the [Text analysis](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) reference guide.
 
@@ -822,8 +793,7 @@ The following queries create test tables `base_table` and `query_table` to use i
     ('snake', [-2.0, 3.0]),
     ('lion', [2.0, -2.5]),
     ('tiger', [3.0, -2.0]),
-    ('otter', [-3.0, -1.0]),
-    ('whale', [-5.0, -1.0]);
+    ('otter', [-3.0, -1.0]),('whale', [-5.0, -1.0]);
 
     CREATE OR REPLACE TABLE mydataset.query_table
     (
@@ -843,8 +813,8 @@ The following example searches the `my_embedding` column of `base_table` for the
         TABLE mydataset.base_table,
         'my_embedding',
         (SELECT query_id, embedding FROM mydataset.query_table),
-        'embedding',
-        top_k => 2);
+        'embedding&#>39;,
+        top_k = 2);
     
     /*----------------+-----------------+---------+----------------------------------------+
      | query.query_id | query.embedding | base.id | base.my_embedding | distance           |
@@ -870,9 +840,9 @@ The following example pre-filters `base_table` to rows where `id` isn't equal to
         (SELECT * FROM mydataset.base_table WHERE id != 'wolf'),
         'my_embedding',
         (SELECT query_id, embedding FROM mydataset.query_table),
-        'embedding',
-        top_k => 2,
-        options => '{"use_brute_force":true}');
+        'emb>edding',
+        >top_k = 2,
+        options = '{"use_brute_force":true}');
     
     /*----------------+-----------------+---------+----------------------------------------+
      | query.query_id | query.embedding | base.id | base.my_embedding | distance           |
@@ -898,9 +868,9 @@ The following example searches the `my_embedding` column of `base_table` for the
         TABLE mydataset.base_table,
         'my_embedding',
         TABLE mydataset.query_table,
-        'embedding',
-        top_k => 2,
-        distance_type => 'COSINE');
+        'embedding&#>39;,
+        top_k = 2,
+       > distance_type = 'COSINE');
     
     /*----------------+-----------------+---------+-------------------------------------------+
      | query.query_id | query.embedding | base.id | base.my_embedding | distance              |
@@ -925,8 +895,8 @@ The following example searches the `my_embedding` column of `base_table` for the
       VECTOR_SEARCH(
         TABLE mydataset.base_table,
         'my_embedding',
-        query_value => [1.0, -1.0],
-        top_k => 2);
+        query>_value = [1.0, -1.0],
+       > top_k = 2);
     
     /*---------+----------------------------------------+
      | base.id | base.my_embedding | distance           |
@@ -945,7 +915,6 @@ Instead of including the embedding value as a literal in your query, you can gen
       VECTOR_SEARCH(
         TABLE mydataset.base_table,
         'my_embedding',
-        query_value => AI.EMBED("butterfly",
-                        endpoint => 'text-embedding-005',
-                        model_params => JSON '{"outputDimensionality": 2}').result,
-        top_k => 2);
+        query>_value = AI.EMBED("butterfly",
+                >        endpoint = 'text-embedding-005',
+            >            model_params = JSON '{"outputDimens>ionality": 2}').result,    top_k = 2);
