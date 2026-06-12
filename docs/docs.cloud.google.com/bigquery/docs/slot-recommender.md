@@ -8,12 +8,12 @@ data_source: docs.cloud.google.com
 
 # View edition slot recommendations
 
-The BigQuery slot recommender creates recommendations for [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) or on-demand workloads. The recommender analyzes historical slot usage for query jobs and calculates the cost-optimal settings for edition commitment slots and [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) slots while maintaining similar performance. The slot recommender can also recommend a maximum reservation size that can improve performance.
+You can optimize your BigQuery slot usage with the BigQuery slot recommender. It creates recommendations for [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) or on-demand workloads. The recommender analyzes your historical slot usage for query jobs. This analysis helps it calculate cost-optimal settings for edition commitment slots and [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) slots, maintaining similar query performance. It also recommends a maximum reservation size to improve performance.
 
 You can use the slot recommender for both reservations billing and on-demand billing:
 
-  - For reservations billing, you can get a cost-optimized recommendation for Enterprise or Enterprise Plus edition workloads and performance-based recommendations for your reservations.
-  - For on-demand billing, you can get cost-optimized recommendations for on-demand workloads across the organization, for a specific project, or a group of projects if you were to convert one or more projects to the Enterprise edition.
+  - For reservations billing, get cost-optimized recommendations for Enterprise or Enterprise Plus edition workloads. You also receive performance-based recommendations for your reservations.
+  - For on-demand billing, receive cost-optimized recommendations for on-demand workloads across your organization or for specific projects. This includes recommendations if you convert projects to the Enterprise edition.
 
 For more information about the recommender service, see the [Recommender overview](https://docs.cloud.google.com/recommender/docs/overview) .
 
@@ -31,7 +31,7 @@ The slot recommender models autoscaler usage with a one-minute minimum duration 
 
 The recommendation includes the following details:
 
-  - Baseline commitment slots: The number of commitment slots to achieve optimal cost without affecting performance. You can also view the optimal commitments in the usage chart above by selecting **View optimal commitments** .
+  - Baseline commitment slots: The number of commitment slots to achieve optimal cost without affecting performance. You can also view the optimal commitments in the preceding usage chart by selecting **View optimal commitments** .
   - Baseline commitment monthly cost: The monthly cost of the optimal commitment slots, calculated using the custom edition commitment price. A month is defined as 730 hours.
   - Autoscale slots: The maximum number of autoscale slots used at a time. This represents the additional slots beyond the optimal commitment slots that are covered by autoscaling. This value does not include the commitment or baseline slots.
   - Expected autoscale utilization: The expected monthly utilization of autoscale slots, calculated as the expected autoscale slots used divided by the maximum autoscale slots.

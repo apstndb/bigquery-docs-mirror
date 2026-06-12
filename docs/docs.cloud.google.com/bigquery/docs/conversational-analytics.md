@@ -74,30 +74,43 @@ When you create a direct conversation with a data source, the [Conversational An
 
 You can create and manage conversations in BigQuery using the Google Cloud console. For more information, see [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
 
-## BigQuery ML support
+## BigQuery AI and ML support
 
-Conversational analytics supports the following BigQuery ML functions in response to chats with data agents and data sources, and in verified SQL queries that you create.
+Conversational analytics supports the following AI functions in response to chats with data agents and data sources, and in verified SQL queries that you create.
 
   - [`AI.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
   - [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
+  - [`AI.KEY_DRIVERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
   - [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
+  - [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
+  - [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score)
+  - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
+  - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
+  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
 
-To use the supported `AI.GENERATE` function, you must have [the required permissions](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
+You must have [the required permissions](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
 
-### BigQuery ML use cases
+The agent only uses the `AI.SEARCH` function on tables that have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. Otherwise, the agent uses the `AI.SIMILARITY` function, which requires real-time embedding generation.
 
-To activate supported BigQuery ML functions, use them in the following ways:
+### Use cases
 
-  - When you create an agent and add a verified query—for example, if you are a data scientist who prepares a recurring report—you can use supported BigQuery ML functions in a verified query to describe defaults and automate the report.
-  - When you ask high-level questions about data to an agent, in a conversation, or in a verified query using keywords, the agent generates the BigQuery ML SQL in response to your questions.
+To activate supported functions, use them in the following ways:
 
-The following table shows examples of one-shot prompts that activate the use of BigQuery ML:
+  - When you create an agent and add a verified query—for example, if you are a data scientist who prepares a recurring report—you can use supported AI functions in a verified query to describe defaults and automate the report.
+  - When you ask high-level questions about data to an agent, in a conversation, or in a verified query using keywords, the agent generates SQL in response to your questions.
 
-| Use case            | Sample usage                                                                             | [Public dataset](https://docs.cloud.google.com/bigquery/public-data)                                                                                                                      |
-| :------------------ | :--------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Forecasting         | "Predict the number of trips for the next month."                                        | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
-| Anomaly detection   | "Find outliers in trips per day for 2018 using 2017 as a baseline."                      | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
-| LLM text generation | "For each article in the 'sports' category, summarize the body column in 1-2 sentences." | [`bigquery-public-data.bbc_news.fulltext`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news.fulltext)                                                          |
+The following table shows examples of one-shot prompts that activate the use of AI or ML functions:
+
+| Use case                | Sample usage                                                                                                       | [Public dataset](https://docs.cloud.google.com/bigquery/public-data)                                                                                                                      |
+| :---------------------- | :----------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Forecasting             | "Predict the number of trips for the next month."                                                                  | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
+| Anomaly detection       | "Find outliers in trips per day for 2018 using 2017 as a baseline."                                                | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
+| Key drivers             | "Identify the key drivers for changes in trip volume between 2017 and 2018."                                       | [`bigquery-public-data.austin_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=austin_bikeshare&t=bikeshare_trips&page=table)               |
+| LLM text generation     | "For each article in the 'sports' category, summarize the body column in 1-2 sentences."                           | [`bigquery-public-data.bbc_news.fulltext`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news&t=fulltext&page=table)                                             |
+| Semantic filtering      | "For the articles in the tech category, filter to find those discussing breakthroughs in artificial intelligence." | [`bigquery-public-data.bbc_news.fulltext`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news&t=fulltext&page=table)                                             |
+| Semantic scoring        | "For the articles in the entertainment category, provide a rating indicating their degree of positive sentiment."  | [`bigquery-public-data.bbc_news.fulltext`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news&t=fulltext&page=table)                                             |
+| Semantic categorization | "Tag each review with the reviewer's main focus: Acting, Plot, Cinematography, Directing, or Other"                | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
+| Semantic search         | "Find the top 5 reviews that most closely match 'tension-building psychological thriller'"                         | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
 
 ## Graph support
 

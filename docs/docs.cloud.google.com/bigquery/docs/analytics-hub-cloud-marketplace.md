@@ -182,4 +182,4 @@ Standard [BigQuery sharing pricing](https://docs.cloud.google.com/bigquery/docs/
 ## What's next
 
   - Learn more about [Cloud Marketplace](https://docs.cloud.google.com/marketplace/docs) .
-  - If you're a VPC Service Controls user, see [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#vpc-service) .
+  - If you're a VPC Service Controls user, see [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#vpc-service-controls) .

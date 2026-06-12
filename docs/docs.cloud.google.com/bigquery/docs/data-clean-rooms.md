@@ -689,4 +689,4 @@ Data contributors are only charged for [data storage](https://cloud.google.com/b
 
   - Learn how to [use query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) .
   - Learn how to [restrict data access with analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) .
-  - Learn how to [use VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#vpc-service) .
+  - Learn how to [use VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#vpc-service-controls) .

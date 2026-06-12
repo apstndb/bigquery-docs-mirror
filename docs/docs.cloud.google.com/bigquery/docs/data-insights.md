@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Data insights overview
 
-This document provides an overview of data insights, a Gemini in BigQuery feature that helps accelerate initial exploration and analysis when facing new or unfamiliar data. Data insights automatically generates descriptions, relationship graphs, and SQL queries, along with suggested questions in natural language, from your table and dataset metadata. This information helps you quickly understand data structure, content, and relationships without extensive manual setup.
+You can use data insights to explore unfamiliar data through AI-generated descriptions, relationship graphs, and SQL queries. This Gemini in BigQuery feature analyzes your metadata to help you understand data structures and content quickly. These insights let you begin your analysis without extensive manual setup.
 
 > **Note:** To give feedback for this feature, contact <dataplex-data-insights-help@google.com> .
 

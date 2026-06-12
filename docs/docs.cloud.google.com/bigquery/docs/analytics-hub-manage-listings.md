@@ -576,13 +576,13 @@ For more information about the tasks that you can perform on listings using APIs
 
 ## Display a listing in the featured section
 
-To increase visibility and awareness of your listing in the BigQuery sharing catalog, listings can be displayed in the **Featured** section. Featured listings are governed by the Google Cloud Partner Advantage Agreement.
+To increase visibility and awareness of your listing in the BigQuery sharing catalog, listings can be displayed in the **Featured** section. Featured listings are governed by the Google Cloud Partner Program Agreement.
 
 Partners that are interested in their listings being in the **Featured** section of the BigQuery sharing catalog must meet the following criteria:
 
   - Shared data must reside in BigQuery.
 
-  - They must be enrolled in the [Partner Advantage Program](https://partners.cloud.google.com/) with the Build designation.
+  - They must be enrolled in the [Google Cloud Partner Network program](https://partners.cloud.google.com/) in the Google Cloud Technology Partner Path.
 
   - The listing must be created and have [public discoverability](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) enabled.
 

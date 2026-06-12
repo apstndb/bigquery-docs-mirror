@@ -8,21 +8,9 @@ data_source: docs.cloud.google.com
 
 # Manage tables
 
-This document describes how to manage tables in BigQuery. You can manage your BigQuery tables in the following ways:
+You can manage BigQuery tables to control their lifecycle, optimize storage costs, and ensure data governance. Table management includes tasks such as updating properties, renaming, copying, and deleting tables. When you update BigQuery table properties, you can modify their expiration time, description, schema definition, labels, and default rounding mode.
 
-  - [Update table properties](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_table_properties) :
-      - [Expiration time](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time)
-      - [Description](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_description)
-      - [Schema definition](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_schema_definition)
-      - [Labels](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_table_and_view_labels)
-      - [Default rounding mode](https://docs.cloud.google.com/bigquery/docs/managing-tables#update_rounding_mode)
-  - [Rename (copy) a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#renaming-table)
-  - [Copy a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table)
-  - [Delete a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#deleting_tables)
-
-For information about how to restore (or *undelete* ) a deleted table, see [Restore deleted tables](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) .
-
-For more information about creating and using tables including getting table information, listing tables, and controlling access to table data, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
+To restore a deleted table, see [Restore deleted tables](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) . To learn more about creating and using tables, including getting table information, listing tables, and controlling access to table data, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
 
 ## Before you begin
 

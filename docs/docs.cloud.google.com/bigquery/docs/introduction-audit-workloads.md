@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to audit logs in BigQuery
 
-Logs are text records that are generated in response to particular events or actions. For instance, BigQuery creates log entries for actions such as creating or deleting a table, purchasing slots, or running a load job.
+You can use BigQuery audit logs to monitor administrative and data access activities in your projects. Logs are text files that are automatically created and record who performed specific actions, like creating tables or running jobs, to help you maintain security and ensure compliance. This document explains when to use audit logs and provides an overview of their format.
 
 Google Cloud also writes logs, including audit logs that provide insight into operational concerns related to your use of Google Cloud services. For more information about how Google Cloud handles logging, see the [Cloud Logging](https://docs.cloud.google.com/logging/docs) documentation and [Cloud Audit Logs overview](https://docs.cloud.google.com/logging/docs/audit) .
 

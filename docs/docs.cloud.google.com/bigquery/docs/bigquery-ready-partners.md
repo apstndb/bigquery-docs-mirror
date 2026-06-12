@@ -42,7 +42,7 @@ Actable is a customer data accelerator that helps enterprises organize, analyze,
 
   - [Predictable BigQuery User Guide](https://docs.getpredictable.io/bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/actable)
 
@@ -123,7 +123,7 @@ Astrato is a cloud-native business intelligence and analytics platform built for
   - [Unified AI-Ready analytics directly from BigQuery](https://www.astrato.io/data-integratations/bigquery2)
   - [Connecting to Google BigQuery from Astrato](https://help.astrato.io/en/articles/6557470-connecting-to-google-bigquery-oauth-jwt)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/astrato-analytics)
 
@@ -146,7 +146,7 @@ AtScale enables smarter decision-making by accelerating the flow of data-driven 
   - [AtScale and BigQuery](https://www.atscale.com/solutions/atscale-and-google-bigquery/)
   - [Integration with BigQuery](https://www.atscale.com/resource/atscale-and-google-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/atscale)
 
@@ -169,7 +169,7 @@ Use BoostKPI to identify and receive alerts about granular anomalies in your bus
   - [Integration with BigQuery](https://boostkpi.com/data-sources/bigquery)
   - [BigQuery as a data source](https://docs.boostkpi.com/docs/data-import/data-sources/source/bigquery.html)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/boostkpi-inc)
 
@@ -229,7 +229,7 @@ CARTO is the spatial analysis (or GIS) platform of choice for market-leading loc
   - [Visualize massive spatial datasets directly in BigQuery](https://carto.com/bigquery-tiler/)
   - [Creating a connection to BigQuery](https://docs.carto.com/carto-user-manual/connections/bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/carto)
 
@@ -252,7 +252,7 @@ Coginiti Team is a collaborative data operations platform built to deliver trust
   - [Configuring BigQuery](https://support.coginiti.co/hc/en-us/articles/4412239470231-Google-BigQuery)
   - [Data Transformation in BigQuery](https://www.coginiti.co/databases/bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/coginiti)
 
@@ -277,7 +277,7 @@ The Databricks Lakehouse Platform combines the best elements of data lakes and d
   - [How to read from and write to BigQuery tables in Databricks](https://docs.databricks.com/data/data-sources/google/bigquery.html)
   - [Databricks on Google Cloud](https://www.databricks.com/product/google-cloud)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/databricks)
 
@@ -299,7 +299,7 @@ DataChat is a no-code, generative AI analytics platform that enables business us
 
   - [BigQuery Setup in DataChat](https://docs.datachat.ai/datachat/load-data/databases)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/datachat-inc)
 
@@ -323,7 +323,7 @@ Key features of Dataiku DSS include data exploration, data preparation, model de
 
 [Dataiku DSS for BigQuery](https://doc.dataiku.com/dss/latest/connecting/sql/bigquery.html)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/dataiku-1)
 
@@ -349,7 +349,7 @@ DataRobot lets business analysts build predictive analytics with no knowledge of
   - [End-to-end scoring with BigQuery](https://docs.datarobot.com/en/docs/api/reference/batch-prediction-api/pred-examples.html#end-to-end-scoring-with-bigquery)
   - [BigQuery adapter for batch predictions](https://docs.datarobot.com/en/docs/release/archive-release-notes/v7.2/v7.2-mlops.html#bigquery-adapter-for-batch-predictions)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/datarobot-inc)
 
@@ -371,7 +371,7 @@ DBeaver is a universal database management tool for everyone who needs to work w
 
   - [Configure and utilize BigQuery with DBeaver](https://dbeaver.com/docs/dbeaver/Database-driver-BigQuery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/dbeaver)
 
@@ -395,7 +395,7 @@ Deepnote is a new kind of data science notebook. Jupyter-compatible with real-ti
   - [Getting started with BigQuery in Deepnote](https://deepnote.com/docs/google-bigquery)
   - [BigQuery with Google OAuth](https://deepnote.com/docs/bigquery-oauth)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/deepnote-inc)
 
@@ -438,7 +438,7 @@ Domo's Business Cloud is the world's first customizable platform that enables yo
   - [Connecting to BigQuery](https://domo-support.domo.com/s/article/360042928734?language=en_US)
   - [BigQuery Writeback Connector](https://www.domo.com/appstore/connector/google-bigquery-writeback/overview)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/domo-inc)
 
@@ -462,7 +462,7 @@ Dreamdata gathers, joins and cleans all revenue-related data to present transpar
   - [Integration with BigQuery](https://dreamdata.io/integration/bigquery)
   - [Data export to BigQuery](https://docs.dreamdata.io/article/2djlu7ctlx-crm-properties)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/dreamdata)
 
@@ -486,7 +486,7 @@ Email Meter is an email analytics platform that gives companies detailed insight
   - [BigQuery integration guides](https://docs.enterprise.emailmeter.com/integrations/bigquery#bigquery)
   - [Export data to BigQuery](https://docs.enterprise.emailmeter.com/integrations/exporting-data#export-using-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/email-meter)
 
@@ -529,7 +529,7 @@ GrowthLoop is a lightweight 1st Party Data Platform that enables your analytics 
   - [How GrowthLoop & BigQuery Works](https://www.growthloop.com/data-warehouses/bigquery)
   - [Sync Audiences to BigQuery](https://www.growthloop.com/help-center-articles/bigquery-destination)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/flywheel-technologies)
 
@@ -552,7 +552,7 @@ Hex is a platform for collaborative analytics and data science. Users can connec
   - [Power interactive insights with data from BigQuery](https://hex.tech/integrations/bigquery)
   - [BigQuery data connection](https://learn.hex.tech/docs/connect-to-data/data-connections/data-connections-introduction)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/hex)
 
@@ -576,7 +576,7 @@ Improvado is a marketing and sales intelligence platform that automates data int
   - [Centralize your data in BigQuery](https://improvado.io/products/googlebigquery)
   - [BigQuery managed by Improvado](https://improvado.io/docs/gbq-managed-by-improvado)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/improvado-io)
 
@@ -617,7 +617,7 @@ Lytics is a customer data platform (CDP) that helps businesses collect, unify, a
   - [Configure BigQuery as a Destination](https://docs.lytics.com/docs/google-bigquery-overview)
   - [How Lytics is built on BigQuery](https://cloud.google.com/blog/products/data-analytics/lytics-launches-secure-data-sharing-and-enrichment-solution-using-google-cloud)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/lytics)
 
@@ -639,7 +639,7 @@ Lyzr is a full-stack framework for building autonomous AI agents. Lyzr Agent Stu
 
   - [Lyzr Partners with Google Cloud to Accelerate AI Agent Adoption](https://wgntv.com/business/press-releases/ein-presswire/744792689/lyzr-partners-with-google-cloud-to-accelerate-ai-agent-adoption-for-enterprises-and-smbs/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/lyzr-ai)
 
@@ -661,7 +661,7 @@ MessageGears is a warehouse-native customer engagement platform that delivers ad
 
   - [Setting Up a Native BigQuery Connection](https://support.messagegears.com/hc/en-us/articles/360045140311-Setting-Up-a-Native-BigQuery-Connection)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/messagegears)
 
@@ -703,7 +703,7 @@ MetaRouter provides streaming data routing solutions for organizations intereste
   - [Integration with BigQuery](https://docs.metarouter.io/docs/google-bigquery-streaming)
   - [Additional Metarouter Documentation for BigQuery](https://docs.metarouter.io/docs/google-bigquery-streaming#additional-google-bigquery-documentation)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/metarouter)
 
@@ -726,7 +726,7 @@ MicroStrategy is business intelligence software that offers a wide range of data
   - [MicroStrategy with Google BigQuery](https://www.microstrategy.com/en/resources/events/world-2021/on-demand/microstrategy-with-google-big-query)
   - [Connecting to Google BigQuery](https://www2.microstrategy.com/producthelp/Current/Gateway_Connections/WebHelp/Lang_1033/Content/Google_BigQuery.htm)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/microstrategy-inc)
 
@@ -749,7 +749,7 @@ Mixpanel is an event analytics service company that tracks user interactions wit
   - [Setting up BigQuery connection](https://www.loom.com/share/04f4ea75310744cdab477e1b47684db3)
   - [Configuring BigQuery warehouse connectivity](https://docs.mixpanel.com/docs/migration/google-analytics#setting-up-bigquery-warehouse-connectors)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/mixpanel)
 
@@ -773,7 +773,7 @@ Mode is a modern analytics and BI solution that brings together a SQL editor, Py
   - [Use BigQuery to query Google Sheets](https://mode.com/help/articles/supported-databases/#use-bigquery-to-query-google-sheets)
   - [BigQuery supported versions](https://mode.com/help/articles/supported-databases/#google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/mode-analytics)
 
@@ -796,7 +796,7 @@ Neo4j gives developers and data scientists the most trusted and advanced tools t
   - [neo4j and BigQuery data](https://neo4j.com/partners/google/big-query/)
   - [Exchange data between BigQuery and Neo4j](https://neo4j.com/docs/spark/current/dwh/#_exchange_data_between_bigquery_and_neo4j)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/neo4j)
 
@@ -821,7 +821,7 @@ NetSpring offers next-generation, warehouse-native Product & Behavioral Analytic
   - [Product & Behavioral Analytics on Google BigQuery](https://www.optimizely.com/insights/blog/netspring-bigquery/)
   - [Optimizely's partnership with Google Cloud](https://www.optimizely.com/google/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/netspring)
 
@@ -863,7 +863,7 @@ OWOX BI is a leading data democratization platform, designed for collaboration b
   - [Getting started with BigQuery Sandbox](https://www.owox.com/blog/articles/bigquery-sandbox/)
   - [Collect your marketing data into Google BigQuery with no-code](https://www.owox.com/data-destination/google-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/owox-bi)
 
@@ -886,7 +886,7 @@ Pega Systems provides customer relationship management, business process managem
   - [Consuming data from BigQuery](https://docs.pega.com/bundle/customer-decision-hub/page/customer-decision-hub/implement/consume-data-google-bigquery.html)
   - [Connecting to BigQuery through a BigQuery Dataset](https://docs.pega.com/bundle/platform/page/platform/decision-management/bigquery-data-set.html)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/pegasystems)
 
@@ -963,7 +963,7 @@ Luria AI from Pxdata.ai is a data and analytics platform designed to simplify ho
   - [Luria BigQuery Integration](https://www.luria.ai/integracoes)
   - [Luria receives Cloud Ready designation](https://www.luria.ai/blog/luria-recebe-selo-google-cloud-ready-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/pxdata)
 
@@ -986,7 +986,7 @@ Qlik Sense is a business intelligence (BI) and visual analytics platform that su
   - [BigQuery connection from Qlik](https://help.qlik.com/en-US/connectors/Subsystems/ODBC_connector_help/Content/Connectors_ODBC/GoogleBigQuery/Create-GBQ-Connection.htm)
   - [Connecting Qlik Sense to Google BigQuery](https://www.youtube.com/watch?v=BjgpJ7L45E4)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/qliktech-inc)
 
@@ -1009,7 +1009,7 @@ SAS Viya is for high-performance in-memory analytics and machine learning. SAS S
   - [SAS/ACCESS BigQuery Interface Guide](https://www.sas.com/content/dam/SAS/support/en/sas-global-forum-proceedings/2020/4626-2020.pdf)
   - [SAS Google BigQuery Data Connector](https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/casref/n0nyns1ar57pcan111mfnr5nm14h.htm)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/sas)
 
@@ -1033,7 +1033,7 @@ Twilio Segment provides AI-ready data for personalized customer experiences acro
   - [BigQuery Destination](https://segment.com/docs/connections/storage/catalog/bigquery/)
   - [BigQuery Reverse ETL Setup](https://segment.com/docs/connections/reverse-etl/reverse-etl-source-setup-guides/bigquery-setup/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/segment)
 
@@ -1060,7 +1060,7 @@ Sigma eliminates BI bottlenecks and inaccurate analyses by establishing a single
   - [Sigma platform](https://www.sigmacomputing.com/product/)
   - [Connecting Sigma to BigQuery](https://help.sigmacomputing.com/hc/en-us/articles/360037429873-Connect-to-BigQuery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/sigma-computing)
 
@@ -1103,7 +1103,7 @@ The Sisense data and analytics platform is a complete end-to-end BI platform tha
   - [Connecting to BigQuery](https://docs.sisense.com/main/SisenseLinux/connecting-to-google-bigquery.htm)
   - [Configuring BigQuery Connector](https://dtdocs.sisense.com/article/connecting-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/sisense-inc)
 
@@ -1128,7 +1128,7 @@ Snowplow is a best-in-class data collection platform built for Data Teams. With 
   - [Measure the latency of your data in BigQuery](https://snowplow.io/blog/introducing-a-better-way-to-measure-the-latency-of-your-data-in-bigquery/)
   - [Debugging bad data in Google Cloud with BigQuery](https://snowplow.io/blog/debugging-bad-rows-on-gcp-with-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/snowplow-analytics)
 
@@ -1152,7 +1152,7 @@ Starburst Galaxy is the cloud-born and fully-managed service of the Starburst ma
   - [Starburst BigQuery catalogs](https://docs.starburst.io/starburst-galaxy/catalogs/bigquery.html)
   - [Starburst Enriches BigQuery Customer Experience](https://www.starburst.io/blog/starburst-enriches-google-bigquerys-customer-experience-with-access-to-data-across-hybrid-cross-cloud-salesforce-and-data-warehouses/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/starburst-data)
 
@@ -1176,7 +1176,7 @@ Tableau integrates seamlessly with the entire Google Cloud platform to ensure ma
   - [Making Sense of Google BigQuery Data with Tableau](https://www.tableau.com/solutions/workbook/explore-your-big-data-cloud)
   - [Analyze BigQuery data by using BI Engine and Tableau](https://cloud.google.com/bigquery/docs/analyze-data-tableau)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/tableau)
 
@@ -1209,7 +1209,7 @@ Tableau integrates seamlessly with the entire Google Cloud platform to ensure ma
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/tecton">Direct link</a></td>
 </tr>
 </tbody>
@@ -1246,7 +1246,7 @@ Tableau integrates seamlessly with the entire Google Cloud platform to ensure ma
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/tellius">Direct link</a></td>
 </tr>
 </tbody>
@@ -1282,7 +1282,7 @@ Tableau integrates seamlessly with the entire Google Cloud platform to ensure ma
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/thoughtspot">Direct link</a></td>
 </tr>
 </tbody>
@@ -1308,7 +1308,7 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
   - [BigQuery Import Integration](https://docs.treasuredata.com/articles/#!int/google-bigquery-import-integration/q/bigquery/qid/69885/qp/2)
   - [BigQuery Version 2 Export](https://docs.treasuredata.com/articles/#!int/google-bigquery-export-integration-v2/q/bigquery/qid/69885/qp/3)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/treasure-data)
 
@@ -1342,7 +1342,7 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/union-ai">Direct link</a></td>
 </tr>
 </tbody>
@@ -1377,7 +1377,7 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/vanna-ai">Direct link</a></td>
 </tr>
 </tbody>
@@ -1413,7 +1413,7 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/windsor-ai">Direct link</a></td>
 </tr>
 </tbody>
@@ -1449,7 +1449,7 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/wisdomai">Direct link</a></td>
 </tr>
 </tbody>
@@ -1517,7 +1517,7 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/zeotap">Direct link</a></td>
 </tr>
 </tbody>
@@ -1553,7 +1553,7 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/zing-data">Direct link</a></td>
 </tr>
 </tbody>
@@ -1583,7 +1583,7 @@ The Google BigQuery ODBC Driver is a powerful tool that lets you connect with li
 
   - [CData ODBC Driver for BigQuery in MicroStrategy Web](https://www.cdata.com/kb/tech/bigquery-odbc-microstrategy-web.rst)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/cdata-software)
 
@@ -1630,7 +1630,7 @@ BigQuery can be accessed using both ODBC and JDBC drivers. There are two primary
   - [Magnitude Simba Google BigQuery JDBC Data Connector: Installation and Configuration Guide](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide-1.3.2.1003.pdf)
   - [Drivers for Google BigQuery](https://www.magnitude.com/drivers/bigquery-odbc-jdbc)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers)
 
@@ -1655,7 +1655,7 @@ The Simba Google BigQuery ODBC Connector enables business intelligence (BI), ana
   - [Magnitude Simba Google BigQuery ODBC Data Connector: Installation and Configuration Guide](https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-2.5.2.1004.pdf)
   - [Drivers for Google BigQuery](https://www.magnitude.com/drivers/bigquery-odbc-jdbc)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers)
 
@@ -1678,7 +1678,7 @@ Progress drivers have costs associated with them. Use these in situations where 
   - [Powerful Connectivity to Google BigQuery](https://www.progress.com/connectors/google-bigquery)
   - [Progress DataDirect for ODBC for Google BigQuery Driver](https://docs.progress.com/bundle/datadirect-google-bigquery-odbc-80/page/Welcome-to-the-Progress-DataDirect-for-ODBC-for-Google-BigQuery-Driver.html)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://www.progress.com/connectors/google-bigquery)
 
@@ -1723,7 +1723,7 @@ Alation automatically catalogs data quality information including metrics, repor
 
   - [Alation Connectors](https://www.alation.com/product/connectors/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/alation)
 
@@ -1746,7 +1746,7 @@ Atlan is a modern data catalog and governance platform that helps teams find, tr
   - [Atlan BigQuery Integration](https://docs.atlan.com/apps/connectors/data-warehouses/google-bigquery/references/what-does-atlan-crawl-from-google-bigquery)
   - [Connecting Atlan to BigQuery](https://docs.atlan.com/apps/connectors/data-warehouses/google-bigquery/how-tos/set-up-google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/atlan)
 
@@ -1772,7 +1772,7 @@ Collibra Data Intelligence Platform is the system of record for data. Collibra d
   - [Enterprise-scale data quality: Collibra + BigQuery](https://www.collibra.com/blog/enabling-enterprise-scale-data-quality-collibra-bigquery)
   - [Data quality without the complexity: BigQuery & Collibra](https://www.collibra.com/resources/data-quality-bigquery-collibra)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/collibra)
 
@@ -1814,7 +1814,7 @@ Immuta provides data access and security mechanisms to complex data policies. Th
   - [Simplify and Automate BigQuery Data Security](https://www.immuta.com/partners/google-big-query/)
   - [Adding Google BigQuery data sources](https://documentation.immuta.com/SaaS/preview/bigquery/google-bigquery/#adding-google-bigquery-data-sources)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/immuta-inc)
 
@@ -1856,7 +1856,7 @@ Privacera simplifies BigQuery access control capabilities. It defines, manages, 
   - [Privacera Enhances Data Access Governance](https://privacera.com/blog/privacera-enhances-data-access-governance-for-google-bigquery-starburst-enterprise-and-cloud-partner-ecosystem/)
   - [Add Google BigQuery (GBQ) data source on Privacera Platform](https://privacera.com/docs/en/add-google-bigquery--gbq--data-source-on-privacera-platform.html)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/privacera)
 
@@ -1883,7 +1883,7 @@ The Reltio Connected Data Platform is built on the foundation of Master Data Man
   - [Reltio Google BigQuery (GBQ) Connector](https://docs.reltio.com/en/integrate/export-data-from-reltio-in-bulk/export-data-from-reltio-to-business-intelligence-tools/reltio-google-bigquery-gbq-connector)
   - [Partner Spotlight: Google Cloud Platform](https://www.reltio.com/partners/partner-spotlight-gcp/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/reltio-inc)
 
@@ -1907,7 +1907,7 @@ Secoda is a data management platform that helps organizations centralize and man
   - [Connect to BigQuery from Secoda](https://www.secoda.co/integrations/big-query)
   - [BigQuery integration guides](https://www.secoda.co/learn-topics/bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/secoda)
 
@@ -1930,7 +1930,7 @@ SecuPi offers a Data Centric, Privacy, Governance and Security Platform and help
   - [SecuPi for BigQuery](https://secupi.com/solution/secupi-for-google-cloud/)
   - [Secupi + Google Cloud](https://secupi.com/secupi-now-available-on-google-cloud-marketplace/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/secupi)
 
@@ -1954,7 +1954,7 @@ Tamr Mastering is a template-based SaaS MDM solution, built on Google Cloud tech
   - [BigQuery Import](https://docs.tamr.com/new/reference/core-connect-api-example-requests#google-bigquery-examples)
   - [Getting The Most From Your Migration](https://www.tamr.com/leading-with-data-mastering-getting-the-most-from-your-google-cloud-migration-ungated/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/tamr)
 
@@ -1977,7 +1977,7 @@ Vaultree offers a data-in-use encryption solution that solves the industry's fun
   - [Secure Data Warehousing with BigQuery](https://www.vaultree.com/solutions/bigquery)
   - [Vaultree's Data-In-Use Encryption for BigQuery](https://old.vaultree.com/press-release/vaultree-unveils-data-in-use-encryption-for-data-warehouse-via-big-query/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/vaultree)
 
@@ -2020,7 +2020,7 @@ Anomalo is a complete data quality platform that automatically detects and expla
   - [Deep Data Observability on BigQuery](https://www.anomalo.com/post/anomalo-to-offer-deep-data-observability-on-google-bigquery-through-partnership-with-google-cloud)
   - [Connect Anomalo to BigQuery](https://www.anomalo.com/integrations/google-cloud)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/anomalo)
 
@@ -2042,7 +2042,7 @@ Costory unifies cloud billing, usage data, and engineering events with business 
 
   - [DBT and BigQuery: How to gain visibility and control over your data cost](https://www.costory.io/how-to-increase-visibility-on-your-dbt-x-bigquery-workloads-ep-1/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/costory)
 
@@ -2066,7 +2066,7 @@ Datadog offers services in infrastructure performance, availability, and monitor
   - [Query Results Save Detection](https://docs.datadoghq.com/security/default_rules/google-cloud-bq-exfil-via-cloud-storage/)
   - [Google Cloud Monitoring](https://www.datadoghq.com/solutions/gcp/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/datadog)
 
@@ -2108,7 +2108,7 @@ Decube is a unified platform that integrates with your data stack enabling you t
   - [Integration with BigQuery](https://docs.decube.io/warehouses/google-big-query)
   - [Decube supported sources for report](https://docs.decube.io/reports/supported-sources-for-reports)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/decube)
 
@@ -2131,7 +2131,7 @@ Dynatrace is a software-intelligence monitoring platform that simplifies enterpr
   - [BigQuery monitoring by Dynatrace](https://www.dynatrace.com/support/help/setup-and-configuration/setup-on-cloud-platforms/google-cloud-platform/gcp-integrations/gcp-supported-service-metrics-new/bigquery-monitoring)
   - [Dynatrace extension for BigQuery](https://www.dynatrace.com/hub/detail/google-big-query/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/dynatrace)
 
@@ -2154,7 +2154,7 @@ Rabbit is a comprehensive FinOps platform, specializing in cloud cost management
   - [Rabbit + Bitrise Success Story](https://followrabbit.ai/blog/case-study-bitrise)
   - [Getting started with BigQuery Editions & Rabbit](https://followrabbit.ai/blog/how-to-start-bigquery-editions)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/aliz-tech-kft)
 
@@ -2178,7 +2178,7 @@ Grafana allows you to query, visualize, alert on, and understand your metrics no
   - [Community Spotlight: BigQuery Plugin](https://grafana.com/blog/2019/06/25/community-spotlight-bigquery-plugin/)
   - [Connect Grafana to BigQuery using Workload Identity Federation](https://grafana.com/blog/2024/12/17/how-to-securely-connect-grafana-to-google-bigquery-using-workload-identity-federation/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/grafana-labs)
 
@@ -2200,7 +2200,7 @@ LogicLoop empowers operations teams to set up alerts and automations on top of c
 
   - [BigQuery data source](https://docs.logicloop.com/data-sources/supported-data-sources/bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/logicloop)
 
@@ -2222,7 +2222,7 @@ Masthead Data is a data reliability platform that helps organizations govern the
 
   - [Masthead Data boosts data confidence](https://cloud.google.com/blog/topics/startups/masthead-boosts-data-confidence-with-google-cloud)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/masthead-data)
 
@@ -2264,7 +2264,7 @@ New Relic provides performance, availability, and monitoring services that impro
   - [BigQuery instant observability](https://newrelic.com/instant-observability/google-bigquery)
   - [BigQuery monitoring integration](https://docs.newrelic.com/docs/infrastructure/google-cloud-platform-integrations/gcp-integrations-list/google-bigquery-monitoring-integration/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/new-relic)
 
@@ -2287,7 +2287,7 @@ Sifflet is a data observability platform that helps companies trust their data a
   - [BigQuery data source integration](https://docs.siffletdata.com/docs/bigquery)
   - [BigQuery URI format](https://docs.siffletdata.com/docs/bigquery-uri-format)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/sifflet)
 
@@ -2310,7 +2310,7 @@ Soda provides a way to define data quality expectations, write data quality chec
   - [Google BigQuery integration](https://www.soda.io/integrations/google-bigquery)
   - [Connect to BigQuery monitoring](https://docs.soda.io/soda/connect-bigquery.html)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/soda-data-quality-testing)
 
@@ -2335,7 +2335,7 @@ Unravel is a DataOps platform that enables data teams to intelligently optimize,
   - [Understanding BigQuery costs](https://www.unraveldata.com/resources/understanding-bigquery-cost/)
   - [Unravel for BigQuery datasheet](https://www.unraveldata.com/resources/unravel-for-google-bigquery-datasheet/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/unravel-data)
 
@@ -2357,7 +2357,7 @@ Validio is the next generation data quality and reliability platform and offers 
 
   - [Google BigQuery as a source in Validio](https://docs.validio.io/docs/bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/validio)
 
@@ -2382,7 +2382,7 @@ Ab Initio provides a high-performance software suite for data integration, batch
   - [Cloud Connectors](https://www.abinitio.com/en/cloud-native/cloud-connectors/)
   - [Unlocking enterprise data to accelerate agentic AI: How Ab Initio does it](https://cloud.google.com/blog/products/data-analytics/unlocking-enterprise-data-to-accelerate-agentic-ai-how-ab-initio-does-it)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/ab-initio-software-llc)
 
@@ -2406,7 +2406,7 @@ AgileData reduces the complexity of managing your data in a Simply Magical Way. 
   - [Optimize BigQuery Cost](https://agiledata.io/blog/agiledata-dataops/new-google-cloud-feature-to-optimise-bigquery-costs/)
   - [AgileData for BigQuery](https://agiledata.io/network/partners/google-cloud-ready-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/agiledata-io)
 
@@ -2431,7 +2431,7 @@ Airbyte is an open source data integration platform that syncs data from applica
   - [S3 to BigQuery in minutes](https://airbyte.com/connections/s3-to-bigquery)
   - [Redshift to BigQuery in minutes](https://airbyte.com/connections/redshift-to-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/airbyte)
 
@@ -2457,7 +2457,7 @@ Apache Kafka as a fully managed service, deployed in Google Cloud and a full set
   - [Aiven and BigQuery ML](https://aiven.io/webinar/setting-the-stage-with-Aiven-for-Apache-Kafka-and-Google-BigQuery-ML)
   - [Try Aiven for BigQuery](https://aiven.io/gcp/bigquery-trial)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/aiven)
 
@@ -2502,7 +2502,7 @@ Arcion is a cloud-native, zero-code data mobility platform that helps organizati
   - [Source set up BigQuery](https://docs.arcion.io/docs/source-setup/bigquery/)
   - [Destination Google BigQuery](https://docs.arcion.io/docs/target-setup/bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/arcion-labs-inc)
 
@@ -2525,7 +2525,7 @@ Ascend.io is a data pipeline automation platform that helps businesses build, ma
   - [Google BigQuery Data Plane](https://developer.ascend.io/docs/google-bigquery-data-plane)
   - [Integration with BigQuery](https://developer.ascend.io/docs/google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/ascend-io)
 
@@ -2549,7 +2549,7 @@ Astronomer allows you to easily run, monitor, and scale Apache Airflow deploymen
   - [BigQuery AirFlow modules](https://registry.astronomer.io/modules?query=bigquery)
   - [Example BigQuery AirFlow Dags](https://registry.astronomer.io/dags?query=bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/astronomer-inc)
 
@@ -2572,7 +2572,7 @@ Automic Automation is a market-leading enterprise automation solution benefittin
   - [Automic BigQuery Agent](https://marketplace.automic.com/marketplace/browse/integration-gcp-bigquery)
   - [Automic Automation Cloud Integrations: BigQuery Agent Integration](https://academy.broadcom.com/automation/automic-automation/gcp-bigquery-agent-integration-demo)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/broadcom-inc)
 
@@ -2632,7 +2632,7 @@ SQL Server Integration Services (SSIS) is a component of the Microsoft SQL Serve
   - [SSIS BigQuery](https://www.cdata.com/drivers/bigquery/ssis)
   - [Export Data from SQL Server to BigQuery through SSIS](https://www.cdata.com/kb/tech/bigquery-ssis-task-export-2008.rst)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/cdata-software)
 
@@ -2659,7 +2659,7 @@ Operational analytics lets you sync data directly from your data warehouse into 
   - [How to sync data from BigQuery to Salesforce](https://www.getcensus.com/blog/how-to-sync-data-from-bigquery-to-salesforce)
   - [How to send data from BigQuery to Slack](https://www.getcensus.com/blog/send-data-from-bigquery-to-slack)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/census-1)
 
@@ -2681,7 +2681,7 @@ ClearBlade IoT Core+ is a fully managed service designed to seamlessly connect, 
 
   - [ClearBlade's Integration with Google Cloud BigQuery](https://www.clearblade.com/blog/clearblades-integration-with-google-cloud-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/clearblade)
 
@@ -2704,7 +2704,7 @@ CloudQuery is a high-performance data integration framework built for developers
   - [BigQuery Destination Plugin](https://hub.cloudquery.io/plugins/destination/cloudquery/bigquery/latest/docs)
   - [Harnessing the Power of BigQuery and CloudQuery](https://www.cloudquery.io/blog/analysing-gcp-cost-with-bigquery-and-cq)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/cloudquery)
 
@@ -2729,7 +2729,7 @@ You can use the Kafka Connect Google BigQuery Sink connector for Confluent Cloud
   - [BigQuery connector for Confluent Cloud](https://docs.confluent.io/cloud/current/connectors/cc-gcp-bigquery-sink.html)
   - [Kafka Connect BigQuery Connector](https://github.com/confluentinc/kafka-connect-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/confluent-inc)
 
@@ -2762,7 +2762,7 @@ You can use the Kafka Connect Google BigQuery Sink connector for Confluent Cloud
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/cube">Direct link</a></td>
 </tr>
 </tbody>
@@ -2798,7 +2798,7 @@ You can use the Kafka Connect Google BigQuery Sink connector for Confluent Cloud
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/dataddo">Direct link</a></td>
 </tr>
 </tbody>
@@ -2834,7 +2834,7 @@ You can use the Kafka Connect Google BigQuery Sink connector for Confluent Cloud
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/fishtown-analytics">Direct link</a></td>
 </tr>
 </tbody>
@@ -2870,7 +2870,7 @@ You can use the Kafka Connect Google BigQuery Sink connector for Confluent Cloud
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/dell-boomi">Direct link</a></td>
 </tr>
 </tbody>
@@ -2901,7 +2901,7 @@ Data virtualization is the modern approach to data integration. Unlike ETL solut
   - [Google Cloud integration with the Denodo Platform](https://www.datavirtualizationblog.com/kickstart-your-google-cloud-integration-with-the-denodo-platform/)
   - [Denodo Platform for Google Cloud](https://www.denodo.com/en/denodo-platform/denodo-platform-google-cloud-platform)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/denodo-technologies)
 
@@ -2923,7 +2923,7 @@ Elton is a modern data movement platform that focuses on helping organizations s
 
   - [Elton Data platform with BigQuery](https://docs.eltondata.com/docs/destinations/google-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/elton-data)
 
@@ -2947,7 +2947,7 @@ Estuary builds a DataOps platform called Estuary Flow that integrates all of the
   - [BigQuery materialization connector](https://docs.estuary.dev/reference/Connectors/materialization-connectors/BigQuery/)
   - [BigQuery Batch Query Connector](https://docs.estuary.dev/reference/Connectors/capture-connectors/bigquery-batch/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/estuary)
 
@@ -2984,7 +2984,7 @@ Estuary builds a DataOps platform called Estuary Flow that integrates all of the
 </ul></td>
 </tr>
 <tr class="even">
-<td><strong>Partner Advantage page</strong></td>
+<td><strong>Partner profile</strong></td>
 <td><a href="https://cloud.google.com/find-a-partner/partner/fivetran-inc">Direct link</a></td>
 </tr>
 </tbody>
@@ -2992,12 +2992,12 @@ Estuary builds a DataOps platform called Estuary Flow that integrates all of the
 
 #### HVR hub
 
-| **Solution**               | [HVR hub](https://www.fivetran.com/data-movement/database-replication)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Category**               | ETL & Data Integration                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **Description**            | HVR is a scalable enterprise data replication and validation platform that lets you simplify high-volume, real-time data movement. HVR's simple yet powerful data integration and synchronization solution reduces infrastructure costs while allowing you to create new and improved services driven by data stored on-premises and in the cloud. With HVR, you can replace your batch processes with a variety of real-time data delivery and integration scenarios and enable consolidated, real-time analytics that improve your business insights. |
-| **Partner references**     | [Real-time data integration - Google BigQuery](https://www.fivetran.com/connectors/bigquery)                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| **Partner Advantage page** | [Direct link](https://cloud.google.com/find-a-partner/partner/hvr)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Solution**           | [HVR hub](https://www.fivetran.com/data-movement/database-replication)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Category**           | ETL & Data Integration                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Description**        | HVR is a scalable enterprise data replication and validation platform that lets you simplify high-volume, real-time data movement. HVR's simple yet powerful data integration and synchronization solution reduces infrastructure costs while allowing you to create new and improved services driven by data stored on-premises and in the cloud. With HVR, you can replace your batch processes with a variety of real-time data delivery and integration scenarios and enable consolidated, real-time analytics that improve your business insights. |
+| **Partner references** | [Real-time data integration - Google BigQuery](https://www.fivetran.com/connectors/bigquery)                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| **Partner profile**    | [Direct link](https://cloud.google.com/find-a-partner/partner/hvr)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ### Fullstory
 
@@ -3018,7 +3018,7 @@ Fullstory is on a mission to help technology leaders make better, more informed 
   - [Google BigQuery Setup](https://help.fullstory.com/hc/en-us/articles/6295305958551-Google-BigQuery)
   - [BigQuery Developer Guide](https://developer.fullstory.com/destinations/bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/fullstory)
 
@@ -3041,7 +3041,7 @@ With Funnel, you get all the benefits of a typical ETL and more. Funnel helps di
   - [Google BigQuery Dataset configuration](https://help.funnel.io/en/articles/1494331-google-bigquery-dataset-configuration)
   - [Get up-to-date marketing data to Google BigQuery](https://funnel.io/data-destination/google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/funnel-io)
 
@@ -3082,7 +3082,7 @@ Harbrdata is a company that provides a cloud-based platform for data sharing and
 
   - [Harbr for BigQuery](https://www.harbrdata.com/bigquery-trial/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/harbr-group-limited)
 
@@ -3105,7 +3105,7 @@ Hasura is helping to build the modern world of globally relevant, data-driven ap
   - [Get Started with Hasura Cloud & BigQuery](https://hasura.io/docs/latest/databases/bigquery/getting-started/cloud/)
   - [Hasura GraphQL API on BigQuery](https://hasura.io/docs/latest/databases/bigquery/index/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/hasura)
 
@@ -3129,7 +3129,7 @@ Hevo is a no-code data pipeline (ETL) as a service. It helps enterprise customer
   - [Load Data from Shopify to BigQuery in Minutes](https://hevo.engineering/integrations/shopify/bigquery/)
   - [Build Your Single Source of Truth with BigQuery](https://hevo.engineering/integrations/destination/bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/hevo-data)
 
@@ -3153,7 +3153,7 @@ Hightouch is the easiest way to sync customer data from a data warehouse into to
   - [Hightouch for BigQuery documentation](https://hightouch.com/docs/sources/google-bigquery)
   - [Sync data from BigQuery to Segment](https://hightouch.com/integrations/google-bigquery-to-segment)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/hightouch)
 
@@ -3176,7 +3176,7 @@ Incorta is a self-service data analytics platform that helps users gain a deeper
   - [Incorta unified data & analytics platform](https://www.incorta.com/platform/cloud)
   - [Incorta Google BigQuery Connector](https://docs.incorta.com/cloud/references-connectors-google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/incorta-inc)
 
@@ -3201,7 +3201,7 @@ This Informatica Data Integration platform brings in faster time-to-value (TTV) 
   - [Informatica BigQuery Connector](https://docs.informatica.com/integration-cloud/data-integration-connectors/current-version/google-bigquery-connectors/preface.html)
   - [Creating a Google BigQuery V2 Connection in IICS Administrator](https://www.youtube.com/watch?v=dbOdUrBTpSc)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/informatica-llc)
 
@@ -3224,7 +3224,7 @@ Xplenty (ETL) is an ETL platform that requires no coding or deployment. It has a
   - [Integrate with BigQuery](https://www.integrate.io/integrations/google-big-query/)
   - [Accessing Google BigQuery dataset using Xplenty](https://www.integrate.io/docs/etl/allowing-xplenty-access-to-my-google-bigquery-dataset/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/xplenty)
 
@@ -3247,7 +3247,7 @@ Keboola's Data Stack as a Service provides the first complete solution for gathe
   - [BigQuery Continuous Query](https://www.keboola.com/blog/how-to-stream-data-into-keboola-using-bigquery-continuous-query)
   - [Keboola Integration with BigQuery](https://www.keboola.com/components/export-data-from-google-bigquery-v2)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/keboola-s-r-o)
 
@@ -3269,7 +3269,7 @@ Matillion is a data integration and transformation tool for cloud data warehouse
 
 [Matillion ETL for BigQuery](https://www.matillion.com/technology/cloud-data-warehouse/google-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/matillion)
 
@@ -3295,7 +3295,7 @@ Nexla is a data operations platform that helps teams create scalable, repeatable
 
   - [Top national retail chain uses Nexla](https://www.nexla.com/retail-chain-uses-nexla/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/nexla-inc)
 
@@ -3336,7 +3336,7 @@ The world's first and only AI-powered data loading and transformation solution. 
   - [Self-service Data in BigQuery](https://precog.com/destination/google-bigquery/)
   - [No Code ELT with BigQuery](https://precog.com/use-cases/no-code-elt-for-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/precog)
 
@@ -3359,18 +3359,18 @@ Prophecy is a low-code data transformation platform for data engineers. The inte
   - [Prophecy BigQuery Integration](https://docs.prophecy.ai/data-analysis/environment/connections/bigquery)
   - [Read and write to catalog tables in BigQuery](https://docs.prophecy.ai/data-analysis/gems/source-target/external-table/bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/prophecy-io)
 
 ### Qlik
 
-| **Solution**               | [Qlik Replicate](https://www.qlik.com/us/products/qlik-replicate)                                                                                                                                                                                                                                                                                                                               |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Category**               | ETL & Data Integration                                                                                                                                                                                                                                                                                                                                                                          |
-| **Description**            | Qlik Replicate (formerly Attunity Replicate) is a high-performance data-replication tool offering optimized data ingestion from a broad array of data sources and platforms and seamless integration with all major big data analytics platforms. Qlik Replicate is primarily used for data migration and CDC (change data capture) and can be used in conjunction with other ETL or DBA tools. |
-| **Partner references**     | [Using BigQuery as a target - Qlik Replicate](https://help.qlik.com/en-US/replicate/November2021/Content/Replicate/Main/Google%20Cloud%20BigQuery/bigquery_postgresql.htm)                                                                                                                                                                                                                      |
-| **Partner Advantage page** | [Direct link](https://cloud.google.com/find-a-partner/partner/qliktech-inc)                                                                                                                                                                                                                                                                                                                     |
+| **Solution**           | [Qlik Replicate](https://www.qlik.com/us/products/qlik-replicate)                                                                                                                                                                                                                                                                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Category**           | ETL & Data Integration                                                                                                                                                                                                                                                                                                                                                                          |
+| **Description**        | Qlik Replicate (formerly Attunity Replicate) is a high-performance data-replication tool offering optimized data ingestion from a broad array of data sources and platforms and seamless integration with all major big data analytics platforms. Qlik Replicate is primarily used for data migration and CDC (change data capture) and can be used in conjunction with other ETL or DBA tools. |
+| **Partner references** | [Using BigQuery as a target - Qlik Replicate](https://help.qlik.com/en-US/replicate/November2021/Content/Replicate/Main/Google%20Cloud%20BigQuery/bigquery_postgresql.htm)                                                                                                                                                                                                                      |
+| **Partner profile**    | [Direct link](https://cloud.google.com/find-a-partner/partner/qliktech-inc)                                                                                                                                                                                                                                                                                                                     |
 
 ### Quix
 
@@ -3410,7 +3410,7 @@ Redpanda is a streaming data platform for developers that's compatible with Apac
   - [BigQuery as a Target](https://docs.redpanda.com/redpanda-connect/components/outputs/gcp_bigquery/)
   - [BigQuery as a Source](https://docs.redpanda.com/redpanda-cloud/develop/connect/components/inputs/gcp_bigquery_select/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/vectorized-inc)
 
@@ -3433,7 +3433,7 @@ Retool is the fast way to build internal tools. Visually design apps that interf
   - [Build internal tools with BigQuery](https://retool.com/integrations/bigquery)
   - [Integrate Retool with BigQuery](https://docs.retool.com/data-sources/quickstarts/database/bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/retool)
 
@@ -3455,7 +3455,7 @@ RisingWave is a distributed SQL streaming database engineered to make real-time 
 
   - [Sink data from RisingWave to Google BigQuery](https://docs.risingwave.com/integrations/destinations/bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/singularity-data-pte-ltd)
 
@@ -3478,7 +3478,7 @@ Rivery is a SaaS ELT platform for modern teams and data professionals. Rivery is
   - [Integration to BigQuery with Rivery](https://rivery.io/integration/bq/)
   - [Google BigQuery as a Target](https://docs.rivery.io/docs/bq)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/rivery)
 
@@ -3506,7 +3506,7 @@ RudderStack allows you to see the flow of your customer data across the entire s
 
   - [Real-time eCommerce Analytics with BigQuery and RudderStack](https://www.youtube.com/watch?v=M9vB77cDX84)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/rudderstack)
 
@@ -3530,7 +3530,7 @@ Skyvia is a powerful data platform for solving a wide range of data challenges. 
   - [Simple and Easy Data Loading to Google BigQuery](https://skyvia.com/connectors/google-bigquery#:~:text=Simple%20and%20Easy%20Data%20Loading%20to%20Google%20BigQuery&text=Skyvia%20allows%20users%20to%20load,premise%20databases%20to%20Google%20BigQuery.)
   - [Integration with BigQuery](https://skyvia.com/data-integration/integrate-googleapps-google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/devart-s-r-o)
 
@@ -3556,7 +3556,7 @@ SnapLogic powers the automated enterprise. The company's self-service, AI-powere
   - [SnapLogic and Google BigQuery - Bulk loading for high-speed Google analytics](https://www.snaplogic.com/blog/snaplogic-google-bigquery-bulk-loading-for-high-speed-analytics)
   - [Automate Data-driven Insights with SnapLogic and Google BigQuery](https://www.snaplogic.com/resources/data-sheets/automate-data-driven-insights-with-google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/snaplogic-inc)
 
@@ -3579,7 +3579,7 @@ SqlDBM is a cloud-native database design and modeling tool that enables teams to
   - [SqlDBM + BigQuery](https://sqldbm.com/sqldbm-plus-bigquery/)
   - [Google BigQuery - Direct Connect and Reverse Engineer](https://support.sqldbm.com/hc/en-us/articles/37028460572557-Google-BigQuery-Direct-Connect-and-Reverse-Engineer)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/sqldbm)
 
@@ -3601,7 +3601,7 @@ Stelo is an enterprise-class Change Data Capture (CDC) tool that delivers data d
 
   - [Using SQDR with BigQuery](https://docs.stelodata.com/Supportdocs/techSQDR/DR054_GoogleBigQuery.shtml)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/starquest-ventures-llc)
 
@@ -3644,7 +3644,7 @@ It includes a large number of [built-in adapters](https://www.striim.com/sources
   - [Striim for Google Cloud](https://www.striim.com/google-cloud-and-striim/)
   - [Continuous data replication to BigQuery using Striim](https://cloud.google.com/architecture/partners/continuous-data-replication-bigquery-striim)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/striim)
 
@@ -3674,7 +3674,7 @@ Supermetrics is the leading marketing data engine for effortless cross-channel d
   - [Supermetrics for BigQuery: Overview](https://supermetrics.com/docs/product-bigquery-overview/)
   - [Supermetrics for BigQuery](https://www.youtube.com/watch?v=9EUXjMdKVtk) (video tutorial)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/supermetrics)
 
@@ -3698,7 +3698,7 @@ Tableau Prep changes the way traditional data prep is performed in an organizati
 
 [Connect to BigQuery data using Tableau Prep Builder](https://help.tableau.com/current/prep/en-gb/prep_connect.htm#:~:text=Connect%20to%20Google%20BigQuery%20data)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/tableau)
 
@@ -3724,7 +3724,7 @@ Stitch's goal is to get data from your data sources to your destination in a use
 
   - [Connecting BigQuery to Stitch](https://stitch-docs.netlify.app/docs/destinations/bigquery/connecting-google-bigquery-to-stitch)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/talend-inc)
 
@@ -3749,7 +3749,7 @@ Talend's more than 1,000 connectors and components make it easy to integrate dat
   - [Talend Cloud with BigQuery](https://www.talend.com/resources/google-bigquery/)
   - [BigQuery connector guide](https://help.talend.com/r/en-US/Cloud/connectors-guide/google-bigquery)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/talend-inc)
 
@@ -3773,7 +3773,7 @@ Dataprep by Trifacta is an intelligent data service for visually exploring, clea
   - [BigQuery Optimization from Trifacta](https://www.trifacta.com/blog/bigquery-optimization-from-trifacta/)
   - [Analyze YouTube Channel Data With Dataprep and BigQuery](https://www.trifacta.com/blog/analyze-yt-dataprep-bigquery/)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/trifacta)
 
@@ -3817,7 +3817,7 @@ Y42's Turnkey Data Orchestration Platform with embedded observability gives data
   - [Reference tables from a shared schema](https://www.y42.com/docs/reference-data-from-data-warehouse#reference-tables-from-a-shared-schema-bigquery-only)
   - [BigQuery Integration with Y42](https://help.y42.com/hc/en-us/articles/360017030618-Google-BigQuery-Integration)
 
-**Partner Advantage page**
+**Partner profile**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/datos-intelligence)
 

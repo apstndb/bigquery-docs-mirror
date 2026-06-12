@@ -14,6 +14,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 11, 2026
+
+Feature
+
+You can [monitor performance, analyze capacity, and optimize costs with Gemini Cloud Assist in BigQuery](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#administer_bigquery) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+Support for the [`AI.KEY_DRIVERS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers) is restored. You can use the `AI.KEY_DRIVERS` function to identify segments of data that cause statistically significant changes to a summable metric.
+
+This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## June 10, 2026
 
 Feature

@@ -110,6 +110,13 @@ Use the following table to determine whether to use TimesFM, `ARIMA_PLUS` , or `
 </tbody>
 </table>
 
+## Component analysis
+
+To gain insight into your data and improve forecasting, use time series component analysis to decompose your time series into fundamental underlying patterns. The following functions are available for component analysis and forecasting:
+
+  - [`ML.SEASONALITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality) : extracts the *seasonality component* of a time series, which represents repeating patterns over fixed time periods such as years, weeks, or days.
+  - [`ML.TREND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend) : extracts the *trend component* of a time series, which represents the directional trajectory of a metric over time and ignores short-term fluctuations or noise.
+
 ## Recommended knowledge
 
 By using the default settings of BigQuery ML's statements and functions, you can create and use a forecasting model even without much ML knowledge. However, having basic knowledge about ML development, and forecasting models in particular, helps you optimize both your data and your model to deliver better results. We recommend using the following resources to develop familiarity with ML techniques and processes:

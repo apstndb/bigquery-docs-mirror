@@ -42,7 +42,7 @@ During SQL query processing, BigQuery breaks down the computational capacity req
 
 Queries that require more slots than are available are [queued](https://docs.cloud.google.com/bigquery/docs/query-queues) until processing resources become available. After a query begins execution, BigQuery calculates how many slots each query stage uses based on the stage size and complexity and the number of slots available. BigQuery uses a technique called [fair scheduling](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) to ensure that each query has enough capacity to progress.
 
-Access to more slots doesn't always result in faster performance for a query. However, a larger pool of slots can improve the performance of large or complex queries, and the performance of highly concurrent workloads. To improve query performance, you can [modify your slot reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) or set a higher limit for [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) .
+Access to more slots doesn't always result in faster performance for a query. However, a larger pool of slots can improve the performance of large or complex queries, and the performance of highly concurrent workloads. To improve query performance, you can [modify your slot reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) or set a higher limit for [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) . You can also use Gemini Cloud Assist to [manage your reservations and capacity with natural language prompts](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#administer_bigquery) .
 
 ## Query plan and execution graph
 

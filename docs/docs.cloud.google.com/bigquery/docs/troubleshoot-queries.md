@@ -177,15 +177,19 @@ If the reservation was fully utilized during the slow job execution and the perc
 
 If you still can't find the reason to explain slower than expected query performance, [contact Cloud Customer Care](https://docs.cloud.google.com/support) for assistance.
 
-## Troubleshoot query failure using Gemini Cloud Assist
+## Troubleshoot queries using Gemini Cloud Assist
 
-To use Gemini Cloud Assist to help you [identify the cause of a query failure](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#analyze_jobs) , do the following:
+To use Gemini Cloud Assist to help you [troubleshoot a query failure or performance issue](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#analyze_jobs) , do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  On the Google Cloud toolbar, click spark **Open or close Gemini Cloud Assist chat** .
 
-3.  In the **Cloud Assist** panel, enter a prompt that includes the job ID—for example, `Why did JOB_ID fail?`
+3.  In the **Cloud Assist** panel, enter a prompt that includes the job ID to investigate its execution, performance metrics, or failure reasons. For example:
+    
+      - `Why did JOB_ID fail?`
+      - ` Why is this job taking so long? JOB_ID  `
+      - `Summarize my job performance for the last 24 hours.`
 
 ## Troubleshoot query failure using `gcpdiag`
 

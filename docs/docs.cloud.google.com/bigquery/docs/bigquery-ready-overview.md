@@ -33,7 +33,7 @@ The following is a list of the benefits offered to participating ISVs :
 1.  Increased customer confidence in partner solutions validated to work with BigQuery.
 2.  Partner Badging and ***Google Cloud Ready - BigQuery*** designation.
 3.  Priority placement and recognition on the Google Cloud [BigQuery Partner Page](https://docs.cloud.google.com/bigquery#section-13) .
-4.  Support for additional GTM activities that are in addition to those available through the standard Partner Advantage program. These additional benefits include joint blogs, PR, workshops, webinars and more.
+4.  Support for additional GTM activities that are in addition to those available through the standard Google Cloud Partner Network program. These additional benefits include joint blogs, PR, workshops, webinars and more.
 5.  Access to Google Cloud Partner Engineering and BigQuery Product teams for joint roadmap development and quarterly exclusive feature release previews.
 6.  Support for creating best practice guides, solution briefs and joint reference architecture.
 
@@ -59,7 +59,7 @@ Eligible Google Cloud partners can participate in the Google Cloud Ready - BigQu
 
 Each category requires successful completion of category-specific integration and interoperability testing.
 
-If you are already a Google Cloud Partner and are interested in participating in this program, please contact your Partner Manager, apply directly from the [Partner Advantage Portal](https://www.partneradvantage.goog/GCPPRM/s/partneradvantageportallogin) , or by filling out this [form](https://forms.gle/HecFemUBqxyiAwAU6) . If you are not already a Google Cloud Partner, you can start the application process by completing our [enrollment form](https://partners.cloud.google.com/enrollment/) . If you have any questions related to the program, [Contact us](mailto:google_cloud_ready_bq@google.com) .
+If you are already a Google Cloud Partner and are interested in participating in this program, please contact your Partner Manager, apply directly from the [Google Cloud Ready page](https://www.partneradvantage.goog/GCPPRM/s/google-cloud-ready-framework) , or by filling out this [form](https://forms.gle/HecFemUBqxyiAwAU6) . If you are not already a Google Cloud Partner, you can start the application process by completing our [enrollment form](https://partners.cloud.google.com/enrollment/) . If you have any questions related to the program, [Contact us](mailto:google_cloud_ready_bq@google.com) .
 
 ## Partner Center
 
