@@ -395,9 +395,9 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 Grant the connection's service account the Vertex AI User role.
 
-If you plan to specify the endpoint as a URL when you create the remote model— for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-flash'` — grant this role in the same project you specify in the URL.
+If you plan to specify the endpoint as a URL when you create the remote model— for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-pro'` — grant this role in the same project you specify in the URL.
 
-If you plan to specify the endpoint by using the model name when you create the remote model, for example `endpoint = 'gemini-2.5-flash'` , grant this role in the same project where you plan to create the remote model.
+If you plan to specify the endpoint by using the model name when you create the remote model, for example `endpoint = 'gemini-2.5-pro'` , grant this role in the same project where you plan to create the remote model.
 
 Granting the role in a different project results in the error `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 

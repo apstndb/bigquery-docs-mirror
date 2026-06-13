@@ -848,8 +848,9 @@ When an expression of one type is cast to another type, you can use the [format 
 
 GoogleSQL supports [casting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) to `TIMESTAMP` . The `expression` parameter can represent an expression for these data types:
 
-  - `STRING`
+  - `DATE`
   - `DATETIME`
+  - `STRING`
   - `TIMESTAMP`
 
 **Format clause**

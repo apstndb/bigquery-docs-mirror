@@ -15,7 +15,7 @@ Embeddings are high-dimensional numerical vectors that represent a given entity.
 You can create embeddings for the following types of data:
 
   - Text data from standard tables.
-  - Visual data that is returned as [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`OBJ.GET_ACCESS_URL` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values from standard tables as input to the `OBJ.GET_ACCESS_URL` function.
+  - [`ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) . You can create an `ObjectRef` value by passing a Cloud Storage URI to the [`OBJ.MAKE_REF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) or using an `ObjectRef` column from a table.
   - Visual data in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
   - Combinations of unstructured data, including text, images, audio, video, and PDFs, represented by a `STRUCT` that contains `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
   - Output data from [PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) , [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) , or [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models.
@@ -149,9 +149,7 @@ The model and input table must be in the same region.
         
           - For text embeddings, you can pull the value from a `STRING` column, or you can specify a string literal in the query.
         
-          - For visual content embeddings, you can provide an [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) value for the `content` column. You can generate `ObjectRefRuntime` values by using the [`OBJ.GET_ACCESS_URL` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . The `OBJ.GET_ACCESS_URL` function takes an [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#objectref_values) value as input, which you can provide by either specifying the name of a column that contains `ObjectRef` values, or by constructing an `ObjectRef` value.
-            
-            `ObjectRefRuntime` values must have the `access_url.read_url` and `details.gcs_metadata.content_type` elements of the JSON value populated.
+          - For visual content embeddings, you can provide an [`ObjectRef` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectref) for the `content` column.
     
       - If you are creating embeddings from an object table, the query doesn't have to return a `content` column. You can only specify `WHERE` , `ORDER BY` , and `LIMIT` clauses in the query.
 
@@ -341,16 +339,18 @@ Create the remote model:
       REMOTE WITH CONNECTION `us.test_connection`
       OPTIONS(ENDPOINT = 'multimodalembedding@001')
 
-**Use an `ObjectRefRuntime` value**
+**Use an `ObjectRef` value**
 
-Generate embeddings from visual content in an `ObjectRef` column in a standard table:
+Generate embeddings from visual content in an `ObjectRef` value:
 
     SELECT *
     FROM AI.GENERATE_EMBEDDING(
       MODEL `mydataset.multimodalembedding`,
         (
-          SELECT OBJ.GET_ACCESS_URL(art_image, 'r') as content
-          FROM `mydataset.art`)
+          SELECT
+            OBJ.MAKE_REF("gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/aquaclear-aquarium-background-poster.png",
+              "us.test_connection") AS content
+        )
      );
 
 **Use an object table**

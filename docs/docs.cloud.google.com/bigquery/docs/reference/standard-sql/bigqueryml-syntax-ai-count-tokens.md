@@ -51,7 +51,7 @@ The following example counts tokens in sample reviews from the `bigquery-public-
 
     SELECT
       review,
-      AI.COUNT_TOKENS(review, endpoint => 'gemini-2.5-flash').*
+      AI.COUNT_TOKENS(review, endpoint => 'gemini-2.5-pro').*
     FROM
       `bigquery-public-data.imdb.reviews`
     LIMIT 2;

@@ -6,101 +6,83 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# Parse PDFs in a retrieval-augmented generation pipeline
-
 This tutorial guides you through the process of creating a retrieval-augmented generation (RAG) pipeline based on parsed PDF content.
 
-PDF files, such as financial documents, can be challenging to use in RAG pipelines because of their complex structure and mix of text, figures, and tables. This tutorial shows you how to use BigQuery ML capabilities in combination with Document AI's Layout Parser to build a RAG pipeline based on key information extracted from a PDF file.
-
-You can alternatively perform this tutorial by using a [Colab Enterprise notebook](https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/use-cases/retrieval-augmented-generation/rag_with_bigquery.ipynb) .
+PDF files, such as financial documents, can be challenging to use in RAG pipelines because of their complex structure and mix of text, figures, and tables. This tutorial shows you how to use the [`ML.PROCESS_DOCUEMNT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document) in combination with Document AI's layout parser to build a RAG pipeline based on key information extracted from a PDF file.
 
 ## Objectives
 
 This tutorial covers the following tasks:
 
-  - Creating a Cloud Storage bucket and uploading a sample PDF file.
   - Creating a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) so that you can connect to Cloud Storage and Vertex AI from BigQuery.
+  - Create a Cloud Storage bucket and upload a sample PDF file.
   - Creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) over the PDF file to make the PDF file available in BigQuery.
-  - [Creating a Document AI processor](https://docs.cloud.google.com/document-ai/docs/create-processor#create-processor) that you can use to parse the PDF file.
+  - [Create a Document AI processor](https://docs.cloud.google.com/document-ai/docs/create-processor#create-processor) that you can use to parse the PDF file.
   - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) that lets you use the Document AI API to access the document processor from BigQuery.
   - Using the remote model with the [`ML.PROCESS_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) to parse the PDF contents into chunks and then write that content to a BigQuery table.
   - Extracting PDF content from the JSON data returned by the `ML.PROCESS_DOCUMENT` function, and then writing that content to a BigQuery table.
-  - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that lets you use the Vertex AI `text-embedding-004` embedding generation model from BigQuery.
-  - Using the remote model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from the parsed PDF content, and then writing those embeddings to a BigQuery table. Embeddings are numerical representations of the PDF content that enable you to perform semantic search and retrieval on the PDF content.
-  - Using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the embeddings to identify semantically similar PDF content.
-  - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that lets you use a Gemini text generation model from BigQuery.
-  - Perform retrieval-augmented generation (RAG) by using the remote model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text, using vector search results to augment the prompt input and improve results.
+  - Generate embeddings from the parsed PDF content, and then write those embeddings to a BigQuery table. Embeddings are numerical representations of the PDF content that enable you to perform semantic search and retrieval on the PDF content.
+  - Use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the embeddings to identify semantically similar PDF content.
+  - Perform retrieval-augmented generation (RAG) by using the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) to generate text, using vector search results to augment the prompt input and improve results.
 
 ## Costs
 
 In this document, you use the following billable components of Google Cloud:
 
-  - **BigQuery** : You incur costs for the data that you process in BigQuery.
-  - **Vertex AI** : You incur costs for calls to Vertex AI models.
-  - **Document AI** : You incur costs for calls to the Document AI API.
-  - **Cloud Storage** : You incur costs for object storage in Cloud Storage.
+  - [BigQuery](https://cloud.google.com/bigquery/pricing) : You incur costs for the data that you process in BigQuery.
+  - [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing) : You incur costs for calls to Agent Platform models.
+  - [Document AI](https://cloud.google.com/document-ai/pricing) : You incur costs for calls to the Document AI API.
+  - [Cloud Storage](https://cloud.google.com/storage/pricing) : You incur costs for object storage in Cloud Storage.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
 New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-For more information, see the following pricing pages:
-
-  - [BigQuery pricing](https://cloud.google.com/bigquery/pricing)
-  - [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing#generative_ai_models)
-  - [Document AI pricing](https://cloud.google.com/document-ai/pricing)
-  - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
+When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf#clean-up) .
 
 ## Before you begin
 
-1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
+### Console
+
+1.  Make sure that you have the following role or roles on the project: **Storage Admin** , **Document AI Editor** , **BigQuery Admin** , **Project IAM Admin**
     
-    **Roles required to select or create a project**
+    #### Check for the roles
     
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    1.  In the Google Cloud console, go to the **IAM** page.
     
-    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
-
-3.  Enable the BigQuery, BigQuery Connection, Vertex AI, Document AI, and Cloud Storage APIs.
+    2.  Select the project.
     
-    **Roles required to enable APIs**
+    3.  In the **Principal** column, find all rows that identify you or a group that you're included in. To learn which groups you're included in, contact your administrator.
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    4.  For all rows that specify or include you, check the **Role** column to see whether the list of roles includes the required roles.
+    
+    #### Grant the roles
+    
+    1.  In the Google Cloud console, go to the **IAM** page.
+    
+    2.  Select the project.
+    
+    3.  Click person\_add **Grant access** .
+    
+    4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
+    
+    5.  Click **Select a role** , then search for the role.
+    
+    6.  To grant additional roles, click add **Add another role** and add each additional role.
+    
+    7.  Click **Save** .
 
-## Required roles
+### gcloud
 
-To run this tutorial, you need the following Identity and Access Management (IAM) roles:
-
-  - Create Cloud Storage buckets and objects: Storage Admin ( `roles/storage.storageAdmin` )
-  - Create a document processor: Document AI Editor ( `roles/documentai.editor` )
-  - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `roles/bigquery.admin` )
-  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` )
-
-These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
-
-#### Required permissions
-
-  - Create a dataset: `bigquery.datasets.create`
-  - Create, delegate, and use a connection: `bigquery.connections.*`
-  - Set the default connection: `bigquery.config.*`
-  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
-  - Create an object table: `bigquery.tables.create` and `bigquery.tables.update`
-  - Create Cloud Storage buckets and objects: `storage.buckets.*` and `storage.objects.*`
-  - Create a model and run inference:
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
-      - `bigquery.models.updateMetadata`
-  - Create a document processor:
-      - `documentai.processors.create`
-      - `documentai.processors.update`
-      - `documentai.processors.delete`
-
-You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
+1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/storage.admin, roles/documentai.editor, roles/bigquery.admin, roles/resourcemanager.projectIamAdmin`
+    
+        gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : Your project ID.
+      - `  USER_IDENTIFIER  ` : The identifier for your user account. For example, `myemail@example.com` .
+      - `  ROLE  ` : The IAM role that you grant to your user account.
 
 ## Create a dataset
 
@@ -505,7 +487,7 @@ Create an object table over the PDF file in Cloud Storage:
 
 ## Create a document processor
 
-[Create a document processor](https://docs.cloud.google.com/document-ai/docs/create-processor#create-processor) based on the [Layout Parser processor](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) in the `us` multi-region.
+[Create a document processor](https://docs.cloud.google.com/document-ai/docs/create-processor#create-processor) based on the [layout parser processor](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk) in the `us` multi-region. Copy the prediction endpoint from the **Processor details** page to use in the next section.
 
 ## Create the remote model for the document processor
 
@@ -571,26 +553,6 @@ Extract the PDF content and metadata information from the JSON data returned by 
      
     ```
 
-## Create the remote model for embedding generation
-
-Create a remote model that represents a hosted Vertex AI text embedding generation model:
-
-1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  In the query editor, run the following statement:
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.embedding_model`
-          REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-          OPTIONS (ENDPOINT = 'text-embedding-005');
-    
-    Replace the following:
-    
-      - `  LOCATION  ` : the connection location.
-    
-      - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
-        
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
-
 ## Generate embeddings
 
 Generate embeddings for the parsed PDF content and then write them to a table:
@@ -599,135 +561,97 @@ Generate embeddings for the parsed PDF content and then write them to a table:
 
 2.  In the query editor, run the following statement:
     
-        CREATE OR REPLACE TABLE `bqml_tutorial.embeddings` AS
-        SELECT * FROM AI.GENERATE_EMBEDDING(
-          MODEL `bqml_tutorial.embedding_model`,
-          TABLE `bqml_tutorial.parsed_pdf`
+        CREATE OR REPLACE TABLE `bqml_tutorial.embeddings` AS (
+          SELECT *, AI.EMBED(content, endpoint => 'text-embedding-005').result AS embedding
+          FROM bqml_tutorial.parsed_pdf
         );
 
 ## Run a vector search
 
 Run a vector search against the parsed PDF content.
 
-The following query takes text input, creates an embedding for that input using the `AI.GENERATE_EMBEDDING` function, and then uses the `VECTOR_SEARCH` function to match the input embedding with the most similar PDF content embeddings. The results are the top ten PDF chunks that are most semantically similar to the input.
+The following query takes text input, creates an embedding for that input using the `AI.EMBED` function, and then uses the `VECTOR_SEARCH` function to match the input embedding with the most similar PDF content embeddings. The results are the top ten PDF chunks that are most related to changes in family net worth.
 
 1.  Go to the **BigQuery** page.
 
 2.  In the query editor, run the following SQL statement:
     
-        SELECT query.query, base.id AS pdf_chunk_id, base.content, distance
+        SELECT
+          distance,
+          base.id AS chunk_id,
+          base.page_span_start AS start_page,
+          base.page_span_end AS end_page,
+          base.content
         FROM
-          VECTOR_SEARCH( TABLE `bqml_tutorial.embeddings`,
+          VECTOR_SEARCH(
+            TABLE `bqml_tutorial.embeddings`,
             'embedding',
-            (
-            SELECT
-              embedding,
-              content AS query
-            FROM
-              AI.GENERATE_EMBEDDING( MODEL `bqml_tutorial.embedding_model`,
-                ( SELECT 'Did the typical family net worth increase? If so, by how much?' AS content)
-              )
-            ),
-            top_k => 10,
+            query_value =>
+              AI.EMBED(
+                'Did the typical family net worth increase? If so, by how much?',
+                endpoint => 'text-embedding-005').result,
+            top_k => 3,
             OPTIONS => '{"fraction_lists_to_search": 0.01}')
         ORDER BY distance DESC;
     
     The output is similar to the following:
     
-    ``` 
-    +-------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------+---------------------+
-    |                query                            | pdf_chunk_id |                                                 content                                              | distance            |
-    +-------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------+---------------------+
-    | Did the typical family net worth increase? ,... | c9           | ## Assets                                                                                            | 0.31113668174119469 |
-    |                                                 |              |                                                                                                      |                     |
-    |                                                 |              | The homeownership rate increased slightly between 2019 and 2022, to 66.1 percent. For ...            |                     |
-    +-------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------+---------------------+
-    | Did the typical family net worth increase? ,... | c50          | # Box 3. Net Housing Wealth and Housing Affordability                                                | 0.30973592073929113 |
-    |                                                 |              |                                                                                                      |                     |
-    |                                                 |              | For families that own their primary residence ...                                                    |                     |
-    +-------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------+---------------------+
-    | Did the typical family net worth increase? ,... | c50          | 3 In the 2019 SCF, a small portion of the data collection overlapped with early months of            | 0.29270064592817646 |
-    |                                                 |              | the COVID- ...                                                                                       |                     |
-    +-------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------+---------------------+
-     
-    ```
-
-## Create the remote model for text generation
-
-Create a remote model that represents a hosted Vertex AI text generation model:
-
-1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  In the query editor, run the following statement:
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.text_model`
-          REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-          OPTIONS (ENDPOINT = 'gemini-2.0-flash-001');
-    
-    Replace the following:
-    
-      - `  LOCATION  ` : the connection location.
-    
-      - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
-        
-        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the `  CONNECTION_ID  ` is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        +----------+----------+------------+----------+-----------------------------------+
+        | distance | chunk_id | start_page | end_page | content                           |
+        +----------+----------+------------+----------+-----------------------------------+
+        | 0.645685 | 26       | 17         | 18       | 18 Between the first quarter of   |
+        |          |          |            |          | 2019 and the first quarter of...  |
+        +----------+----------+------------+----------+-----------------------------------+
+        | 0.602665 | 30       | 19         | 21       | ## Net Worth by Family            |
+        |          |          |            |          | Characteristics...                |
+        +----------+----------+------------+----------+-----------------------------------+
+        | 0.599438 | 24       | 17         | 21       | # Net Worth                       |
+        |          |          |            |          | The net improvements in...        |
+        +----------+----------+------------+----------+-----------------------------------+
 
 ## Generate text augmented by vector search results
 
-Perform a vector search on the embeddings to identify semantically similar PDF content, and then use the `AI.GENERATE_TEXT` function with the vector search results to augment the prompt input and improve the text generation results. In this case, the query uses information from the PDF chunks to answer a question about the change in family net worth over the past decade.
+Perform a vector search on the embeddings to identify semantically similar PDF content, and then use the `AI.GENERATE` function with the vector search results to augment the prompt input and improve the text generation results. In this case, the query uses information from the PDF chunks to answer a question about the change in family net worth over the past decade.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement:
     
         SELECT
-          result AS generated
-          FROM
-          AI.GENERATE_TEXT( MODEL `bqml_tutorial.text_model`,
-            (
-            SELECT
-            CONCAT( 'Did the typical family net worth change? How does this compare the SCF survey a decade earlier? Be concise and use the following context:',
-            STRING_AGG(FORMAT("context: %s and reference: %s", base.content, base.uri), ',\n')) AS prompt,
-            FROM
-              VECTOR_SEARCH( TABLE
-                `bqml_tutorial.embeddings`,
-                'embedding',
-                (
-                SELECT
-                  embedding,
-                  content AS query
-                FROM
-                  AI.GENERATE_EMBEDDING( MODEL `bqml_tutorial.embedding_model`,
-                    (
-                    SELECT
-                      'Did the typical family net worth change? How does this compare the SCF survey a decade earlier?' AS content
-                    )
-                  )
-                ),
-                top_k => 10,
-                OPTIONS => '{"fraction_lists_to_search": 0.01}')
-              ),
-              STRUCT(512 AS max_output_tokens)
-          );
+          AI.GENERATE(
+            CONCAT('Did the typical family net worth change? How does this compare the SCF survey a decade earlier? Be concise and use the following context:',
+                    STRING_AGG(FORMAT("context: %s", base.content), ',\n')
+            ),
+            endpoint => 'gemini-2.5-pro'
+          ).result AS response
+        FROM
+          VECTOR_SEARCH(
+            TABLE `bqml_tutorial.embeddings`,
+            'embedding',
+            query_value =>
+              AI.EMBED(
+                'Did the typical family net worth increase? If so, by how much?',
+                endpoint => 'text-embedding-005').result,
+            top_k => 3,
+            OPTIONS => '{"fraction_lists_to_search": 0.01}')
     
     The output is similar to the following:
     
-    ``` 
-    +-------------------------------------------------------------------------------+
-    |               generated                                                       |
-    +-------------------------------------------------------------------------------+
-    | Between the 2019 and 2022 Survey of Consumer Finances (SCF), real median      |
-    | family net worth surged 37 percent to $192,900, and real mean net worth       |
-    | increased 23 percent to $1,063,700.  This represents the largest three-year   |
-    | increase in median net worth in the history of the modern SCF, exceeding the  |
-    | next largest by more than double.  In contrast, between 2010 and 2013, real   |
-    | median net worth decreased 2 percent, and real mean net worth remained        |
-    | unchanged.                                                                    |
-    +-------------------------------------------------------------------------------+
-     
-    ```
+        +-------------------------------------------------------------------------+
+        | response                                                                |
+        +-------------------------------------------------------------------------+
+        | Yes, the typical family net worth changed significantly.                |
+        |                                                                         |
+        | Real median net worth surged 37% between the 2019 and 2022 SCF surveys. |
+        | This contrasts sharply with a decade earlier (2010-2013), when real     |
+        | median net worth decreased 2%.                                          |
+        +-------------------------------------------------------------------------+
 
 ## Clean up
+
+To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
+
+### Delete the project
 
 > **Caution** : Deleting a project has the following effects:
 > 
@@ -736,8 +660,11 @@ Perform a vector search on the embeddings to identify semantically similar PDF c
 > 
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
+Delete a Google Cloud project:
 
-In the project list, select the project that you want to delete, and then click **Delete** .
+    gcloud projects delete PROJECT_ID
 
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+## What's next
+
+  - Learn more about the [`ML.PROCESS_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) .
+  - Learn more about performing [semantic search and RAG](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) .

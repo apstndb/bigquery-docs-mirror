@@ -128,7 +128,8 @@ The following example shows a query that uses direct access:
     -- Requires that the end user can read the object "gs://cloud-samples-data/vision/demo-img.jpg" and use the Vertex AI model.
     SELECT AI.GENERATE(
       ("Describe this image:",
-      OBJ.GET_ACCESS_URL(OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg"), 'r')));
+      OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg")),
+      endpoint => 'gemini-2.5-pro');
 
 ### Delegated access
 
@@ -154,7 +155,8 @@ The following example shows a query that uses delegated access. It requires the 
 
     SELECT AI.GENERATE(
       ("Describe this image:",
-        OBJ.GET_ACCESS_URL(OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg", "us.connection1"), 'r')),
+        OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg", "us.connection1")),
+      endpoint => 'gemini-2.5-pro',
       connection_id => "us.connection2");
 
 ### Best practices

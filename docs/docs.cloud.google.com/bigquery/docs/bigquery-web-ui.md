@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Explore BigQuery in the Google Cloud console
 
-The BigQuery Google Cloud console provides a graphical interface that you can use to create and manage BigQuery resources. You can also use the console to complete tasks such as running SQL queries and creating pipelines.
-
-In this walkthrough, you explore the components of the BigQuery Google Cloud console.
+The BigQuery Google Cloud console is a graphical interface where you can create and manage your BigQuery resources. You can use the Google Cloud console to view tables and datasets, create and run SQL queries, build pipelines, and perform other tasks to help you manage your BigQuery workflows.
 
 ## Before you begin
 

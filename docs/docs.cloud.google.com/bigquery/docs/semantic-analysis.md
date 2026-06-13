@@ -95,7 +95,8 @@ The following query shows how to use the `AI.CLASSIFY` function to classify revi
       review_text,
       AI.CLASSIFY(
         review_text,
-        categories => ['positive', 'negative', 'neutral']) AS sentiment
+        categories => ['positive', 'negative', 'neutral'],
+        endpoint => 'gemini-2.5-pro') AS sentiment
     FROM
       my_dataset.customer_feedback;
 
@@ -155,13 +156,16 @@ The following example shows how to use the `AI.SCORE` function to rate user sent
       review_text,
       AI.SCORE(
         ("Score 0.0 to 10 on positive sentiment about PRICE for review: ", review_text,
-        "If price is not mentioned, return -1.0")) AS price_score,
+        "If price is not mentioned, return -1.0"),
+        endpoint => 'gemini-2.5-pro') AS price_score,
       AI.SCORE(
         ("Score 0.0 to 10 on positive sentiment about CUSTOMER SERVICE for review: ", review_text,
-        "If customer service is not mentioned, return -1.0")) AS service_score,
+        "If customer service is not mentioned, return -1.0"),
+        endpoint => 'gemini-2.5-pro') AS service_score,
       AI.SCORE(
         ("Score 0.0 to 10 on positive sentiment about QUALITY for review: ", review_text,
-        "If quality is not mentioned, return -1.0")) AS quality_score
+        "If quality is not mentioned, return -1.0"),
+        endpoint => 'gemini-2.5-pro') AS quality_score
     FROM
       my_dataset.customer_feedback
     LIMIT 3;
@@ -198,7 +202,8 @@ In addition to positive or negative sentiment, you can classify text based on sp
       review_text,
       AI.CLASSIFY(
         review_text,
-        categories => ['joy', 'anger', 'sadness', 'surprise', 'fear', 'disgust', 'neutral', 'other']
+        categories => ['joy', 'anger', 'sadness', 'surprise', 'fear', 'disgust', 'neutral', 'other'],
+        endpoint => 'gemini-2.5-pro'
       ) AS emotion
     FROM
       my_dataset.customer_feedback;
@@ -263,7 +268,8 @@ The following example shows how to classify customer feedback into various types
         review_text,
         categories => ['Billing Issue', 'Account Access',
                        'Product Bug', 'Feature Request',
-                       'Shipping Delay', 'Other']) AS topic,
+                       'Shipping Delay', 'Other'],
+        endpoint => 'gemini-2.5-pro') AS topic,
         COUNT(*) AS number_of_reviews,
     FROM
       my_dataset.customer_feedback
@@ -299,7 +305,8 @@ The following query finds reviews that discuss difficulty setting up the product
         (
           """How similar is the review to the concept of 'difficulty in setting up the product'?
              A higher score indicates more similarity. Review: """,
-          review_text)) AS setup_difficulty
+          review_text),
+        endpoint => 'gemini-2.5-pro') AS setup_difficulty
     FROM my_dataset.customer_feedback
     ORDER BY setup_difficulty DESC
     LIMIT 2;
@@ -331,7 +338,8 @@ You can also use the `AI.IF` function to find reviews that relate to text:
       AI.IF(
         (
           "Does this review discuss difficulty setting up the product? Review: ",
-          review_text));
+          review_text),
+        endpoint => 'gemini-2.5-pro');
 
 ## Combine functions
 
@@ -343,11 +351,13 @@ It can be helpful to combine these functions in a single query. For example, the
       AI.CLASSIFY(
         review_text,
         categories => [
-          'Poor Quality', 'Bad Customer Service', 'High Price', 'Other Negative']) AS negative_topic
+          'Poor Quality', 'Bad Customer Service', 'High Price', 'Other Negative'],
+        endpoint => 'gemini-2.5-pro') AS negative_topic
     FROM my_dataset.customer_feedback
     WHERE
       AI.IF(
-        ("Does this review express a negative sentiment? Review: ", review_text));
+        ("Does this review express a negative sentiment? Review: ", review_text),
+        endpoint => 'gemini-2.5-pro');
 
 ## Create reusable prompt UDFs
 
@@ -357,7 +367,8 @@ To keep your queries readable, you can reuse your prompt logic by creating [user
     RETURNS BOOL
     AS (
         AI.IF(
-          ("Does this review express a negative sentiment? Review: ", review_text))
+          ("Does this review express a negative sentiment? Review: ", review_text),
+          endpoint => 'gemini-2.5-pro')
     );
     
     SELECT

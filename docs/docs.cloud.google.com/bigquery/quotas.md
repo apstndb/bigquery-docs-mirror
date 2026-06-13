@@ -1572,7 +1572,7 @@ For troubleshooting information, see the <a href="https://docs.cloud.google.com/
 <tr class="odd">
 <td>Maximum rows per <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list"><code dir="ltr" translate="no">tabledata.list</code></a> response</td>
 <td>100,000 rows</td>
-<td>A <code dir="ltr" translate="no">tabledata.list</code> call can return up to 100,000 table rows. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/paging-results#paging">Paging through results using the API</a> .</td>
+<td>A <code dir="ltr" translate="no">tabledata.list</code> call can return up to 100,000 table rows. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/paging-results#api-limits">Reference: API limits and criteria</a> .</td>
 </tr>
 <tr class="even">
 <td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list"><code dir="ltr" translate="no">tabledata.list</code></a> row size</td>

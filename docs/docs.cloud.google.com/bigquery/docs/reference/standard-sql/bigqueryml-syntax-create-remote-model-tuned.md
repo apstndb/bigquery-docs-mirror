@@ -105,7 +105,7 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 **Description**
 
-The endpoint for an Agent Platform Gemini model that [supports](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) supervised fine tuning. You can specify the name of the Agent Platform Gemini model, for example `gemini-2.5-flash` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
+The endpoint for an Agent Platform Gemini model that [supports](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) supervised fine tuning. You can specify the name of the Agent Platform Gemini model, for example `gemini-2.5-pro` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-pro` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
 
 **Arguments**
 

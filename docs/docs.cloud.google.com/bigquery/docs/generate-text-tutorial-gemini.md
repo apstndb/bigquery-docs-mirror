@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`gemini-2.5-flash` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
+This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`gemini-2.5-pro` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
 
 ## Costs
 
@@ -392,7 +392,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ## Grant permissions to the connection's service account
 
-Grant the connection's service account the Vertex AI User role. You must grant this role in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemini#before_you_begin) section. Granting the role in a different project results in the error `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
+Grant the connection's service account the Agent Platform User ( `roles/aiplatform.user` ) role. You must grant this role in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemini#before_you_begin) section. Granting the role in a different project results in the error `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 To grant the role, follow these steps:
 
@@ -402,7 +402,7 @@ To grant the role, follow these steps:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, choose **Vertex AI** , and then select **Vertex AI User role** .
+4.  In the **Select a role** field, search for the **Agent Platform User role** .
 
 5.  Click **Save** .
 
@@ -418,7 +418,7 @@ Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/s
 
     CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
       REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-      OPTIONS (ENDPOINT = 'gemini-2.5-flash');
+      OPTIONS (ENDPOINT = 'gemini-2.5-pro');
 
 Replace the following:
 

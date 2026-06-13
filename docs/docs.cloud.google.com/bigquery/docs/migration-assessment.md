@@ -158,7 +158,7 @@ Replace the following:
   - `  USER_NAME  ` : the username to use for the database connection, where the user must have the access permissions as detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) .
   - `  PRIVATE_KEY_PATH  ` : the path to the RSA private key used for authentication.
   - `  PRIVATE_KEY_PASSWORD  ` : (Optional) the password that was used when creating the RSA private key. It is required only if private key is encrypted.
-  - `  ROLE_NAME  ` : (Optional) the user role when running the `dwh-migration-dumper` tool—for example, `ACCOUNTADMIN` .
+  - `  ROLE_NAME  ` : (Optional, but highly recommended) the user role when running the `dwh-migration-dumper` tool—for example, `ACCOUNTADMIN` . While technically optional if your default role has sufficient privileges, specifying a role ensures that the session has access to the `SNOWFLAKE.ACCOUNT_USAGE` schema.
   - `  WAREHOUSE  ` : the warehouse used to execute the dumping operations. If you have multiple virtual warehouses, you can specify any warehouse to execute this query. Running this query with the access permissions detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) extracts all warehouse artefacts in this account.
   - `  STARTING_DATE  ` : (Optional) used to indicate the start date in a date range of query logs, written in the format `YYYY-MM-DD` .
   - `  ENDING_DATE  ` : (Optional) used to indicate the end date in a date range of query logs, written in the format `YYYY-MM-DD` .

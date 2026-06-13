@@ -49,7 +49,7 @@ Create `ObjectRefRuntime` values by using the [`OBJ.GET_ACCESS_URL` function](ht
 
 ## Generative AI functions
 
-Generate text, embeddings, and scalar values based on `ObjectRef` or `ObjectRefRuntime` input by using the following generative AI functions with Gemini models:
+Generate text, embeddings, and scalar values based on `ObjectRef` input by using the following generative AI functions with Gemini models:
 
   - [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
   - [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)

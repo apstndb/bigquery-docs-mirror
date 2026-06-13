@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Migrate to managed disaster recovery
 
-This page describes how to migrate from BigQuery cross-region replication to BigQuery managed disaster recovery.
+This page describes how to migrate from BigQuery cross-region replication to BigQuery-managed disaster recovery.
 
 ## Overview
 

@@ -40,7 +40,6 @@ The `AI.EMBED` function supports the following types of input:
 
   - Text data.
   - Image data represented by [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values.
-  - Image data represented by [`ObjectRefRuntime`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values.
 
 ### Generate a table of embeddings
 

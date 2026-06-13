@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Managed disaster recovery
 
-This document provides an overview of BigQuery managed disaster recovery and how to implement it for your data and workloads.
+To protect your data and maintain business continuity during regional outages, you can configure and use BigQuery-managed disaster recovery for your BigQuery data and workloads.
 
 ## Overview
 
@@ -48,7 +48,7 @@ The following limitations apply to BigQuery disaster recovery:
 
   - Soft failover can only be triggered if both the source and destination regions are available.
 
-  - If replication fails during the initial creation of the resources, the reservation will not be created in the secondary location, meaning neither hard nor soft failover will be available.
+  - If replication fails during the initial creation of the resources, the reservation won't be created in the secondary location, meaning neither hard nor soft failover will be available.
 
   - Soft failover cannot be triggered if reservation configuration changes have not been successfully replicated to the secondary region. Any errors during reservation replication, such as insufficient slot quota in the secondary region or other transient issues will prevent the soft failover from being initiated.
 
@@ -125,7 +125,7 @@ Turbo replication doesn't apply to the initial backfill operation. After the ini
 
 ### Recovery time objective
 
-A recovery time objective (RTO) is the target time allowed for recovery in BigQuery in the event of a disaster. For more information on RTO, see [Basics of DR planning](https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide) .Managed disaster recovery has a five minute RTO after you initiate a failover. Because of the RTO, capacity is available in the secondary region within five minutes of starting the failover process.
+A recovery time objective (RTO) is the target time allowed for recovery in BigQuery in the event of a disaster. For more information on RTO, see [Basics of DR planning](https://docs.cloud.google.com/architecture/dr-scenarios-planning-guide) .Managed disaster recovery has a five-minute RTO after you initiate a failover. Because of the RTO, capacity is available in the secondary region within five minutes of starting the failover process.
 
 ### Recovery point objective
 

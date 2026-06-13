@@ -89,7 +89,7 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 **Description**
 
-The Agent Platform endpoint for the remote model to use. You can specify the name of the Agent Platform model, for example `gemini-2.5-flash` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
+The Agent Platform endpoint for the remote model to use. You can specify the name of the Agent Platform model, for example `gemini-2.5-pro` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-pro` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
 
 **Arguments**
 
@@ -104,7 +104,7 @@ All of the [generally available](https://docs.cloud.google.com/vertex-ai/generat
 For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
 
 ``` 
-  https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.5-flash
+  https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.5-pro
 ```
 
 Using the global endpoint for your requests can improve overall availability while reducing resource exhausted (429) errors, which occur when you exceed your quota for a regional endpoint. If you want to use Gemini in a region where it isn't available, you can avoid migrating your data to a different region by using the global endpoint instead. You can only use the global endpoint with the `AI.GENERATE_TEXT` function.
@@ -182,7 +182,7 @@ The following example creates a BigQuery ML remote model over a Gemini model:
 
     CREATE OR REPLACE MODEL `mydataset.gemini_model`
     REMOTE WITH CONNECTION DEFAULT
-    OPTIONS(ENDPOINT = 'gemini-2.5-flash');
+    OPTIONS(ENDPOINT = 'gemini-2.5-pro');
 
 ### Create a partner model that uses the default connection
 

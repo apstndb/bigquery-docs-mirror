@@ -14,7 +14,7 @@ To review the source code for the `bqutil.procedure.bqml_generate_text` stored p
 
 This tutorial guides you through the following tasks:
 
-  - Creating a [remote model over a `gemini-2.5-flash` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - Creating a [remote model over a `gemini-2.5-pro` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
   - Iterating through calls to the `ML.GENERATE_TEXT` function, using the remote model and the `bigquery-public-data.bbc_news.fulltext` public data table with the `bqutil.procedure.bqml_generate_text` stored procedure.
 
 ## Required permissions
@@ -95,7 +95,7 @@ Create a BigQuery dataset to store your models and sample data:
 
 ## Create the text generation model
 
-Create a remote model that represents a hosted Agent Platform `gemini-2.5-flash` model:
+Create a remote model that represents a hosted Agent Platform `gemini-2.5-pro` model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -103,7 +103,7 @@ Create a remote model that represents a hosted Agent Platform `gemini-2.5-flash`
     
         CREATE OR REPLACE MODEL `sample.generate_text`
           REMOTE WITH CONNECTION DEFAULT
-          OPTIONS (ENDPOINT = 'gemini-2.5-flash');
+          OPTIONS (ENDPOINT = 'gemini-2.5-pro');
     
     The query takes several seconds to complete, after which the `generate_text` model appears in the `sample` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 

@@ -1015,8 +1015,8 @@ The following table describes the commonly used flags for extracting Snowflake m
 <tr class="even">
 <td><code dir="ltr" translate="no">--role</code></td>
 <td></td>
-<td>The Snowflake role to use for authorization. You only need to specify this for large installations where you need to get metadata from the <code dir="ltr" translate="no">SNOWFLAKE.ACCOUNT_USAGE</code> schema instead of <code dir="ltr" translate="no">INFORMATION_SCHEMA</code> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/generate-metadata#large-instance">Working with large Snowflake instances</a> .</td>
-<td>No</td>
+<td>The Snowflake role to use for authorization. While technically optional if your default role has sufficient privileges, we highly recommend specifying a role, such as <code dir="ltr" translate="no">ACCOUNTADMIN</code> , to ensure that the session has the necessary privileges to access the <code dir="ltr" translate="no">SNOWFLAKE.ACCOUNT_USAGE</code> schema. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/generate-metadata#large-instance">Working with large Snowflake instances</a> .</td>
+<td>No, but highly recommended.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">--user</code></td>

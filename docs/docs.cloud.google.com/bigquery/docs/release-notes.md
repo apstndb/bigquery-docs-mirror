@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 12, 2026
+
+Feature
+
+[BigQuery AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) can use [`ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) directly as input, without calling the `OBJ.GET_ACCESS_URL` function. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## June 11, 2026
 
 Feature
