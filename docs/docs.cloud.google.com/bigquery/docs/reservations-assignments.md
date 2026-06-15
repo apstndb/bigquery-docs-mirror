@@ -469,7 +469,7 @@ To assign a query to run in a specific reservation, do one of the following:
 
 3.  In the query editor, enter a valid GoogleSQL query.
 
-4.  Click settings **More** , and then click **Query settings** .
+4.  Click **Edit** \> **Query settings** .
 
 5.  Clear the **Automatic location setting** checkbox, and then select the region or multi-region the reservation is in.
 

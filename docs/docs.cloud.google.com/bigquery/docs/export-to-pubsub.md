@@ -68,7 +68,7 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the query editor, click **More** \> **Query settings** .
+2.  In the query editor, click **Edit** \> **Query settings** .
 
 3.  In the **Continuous Query** section, select the **Use continuous query mode** checkbox.
 

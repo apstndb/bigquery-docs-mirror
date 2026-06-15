@@ -155,15 +155,19 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
         
           - If you choose **Incremental** : In the **Timestamp column** field, select a column of type `DATE` or `TIMESTAMP` from your BigQuery table that increases as new records are added, and that can be used to identify new records. It can be a column that partitions the table.
     
-    6.  To filter your data, select the **Filter rows** checkbox. Provide a row filter consisting of a valid SQL expression that can be used as a part of a [`WHERE` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example, `col1 >= 0` . The filter can be a combination of multiple column conditions. For example, `col1 >= 0 AND col2 < 10` .
+    6.  Optional: To filter your data, select the **Filter rows** checkbox. Provide a row filter consisting of a valid SQL expression that can be used as a part of a [`WHERE` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example, `col1 >= 0` . The filter can be a combination of multiple column conditions. For example, `col1 >= 0 AND col2 < 10` .
     
     7.  To sample your data, in the **Sampling size** list, select a sampling percentage. Choose a percentage value that ranges between 0.0% and 100.0% with up to 3 decimal digits. For larger datasets, choose a lower sampling percentage. For example, for a 1 PB table, if you enter a value between 0.1% and 1.0%, the data quality scan samples between 1-10 TB of data. For incremental data scans, the data quality scan applies sampling to the latest increment.
     
-    8.  To publish the data quality scan results as Knowledge Catalog metadata, select the **Publish results to Knowledge Catalog** checkbox.
+    8.  Optional: To publish the data quality scan results as Knowledge Catalog metadata, select the **Publish results to Knowledge Catalog** checkbox.
         
         You can view the latest scan results on the **Data quality** tab in the BigQuery and Knowledge Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data quality scan results](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#share-results) section of this document.
     
-    9.  In the **Schedule** section, choose one of the following options:
+    9.  For **Credential type** , see [Configure execution identity](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#configure-execution-identity) .
+    
+    10. To [create a data quality scan using rules](https://docs.cloud.google.com/dataplex/docs/reuse-data-quality-rules#create-scan-catalog) , select **Rule type \> Create with entry based rule** .
+    
+    11. In the **Schedule** section, choose one of the following options:
         
           - **Repeat** : Run the data quality scan on a schedule: hourly, daily, weekly, monthly, or custom. Specify how often the scan runs and at what time. If you choose custom, use [cron](https://en.wikipedia.org/wiki/Cron) format to specify the schedule.
         
@@ -173,7 +177,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
             
               - **Set post-scan results auto-deletion** : The auto-deletion time is the time span between when the scan is executed and when the scan is deleted. A data quality scan without a specified auto-deletion time is automatically deleted 24 hours after its execution. The auto-deletion time can range from 0 seconds (immediate deletion) to 365 days.
     
-    10. Click **Continue** .
+    12. Click **Continue** .
 
 4.  In the **Data quality rules** window, define the rules to configure for this data quality scan.
     

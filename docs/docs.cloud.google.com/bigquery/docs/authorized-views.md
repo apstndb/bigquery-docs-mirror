@@ -187,7 +187,7 @@ To create an authorized view, choose one of the following options. For complete 
 
 2.  In the query editor, type the query that you want to base the authorized view on.
 
-3.  Click **Save** \> **Save view** .
+3.  Click **File** \> **Save** \> **Save view** .
 
 4.  In the **Save view** dialog, do the following:
     

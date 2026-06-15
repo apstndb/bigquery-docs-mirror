@@ -356,7 +356,7 @@ To set the maximum bytes billed:
 
 ### Console
 
-1.  In the **Query editor** , click **More \> Query settings \> Advanced options** .
+1.  In the **Query editor** , click **Edit** \> **Query settings** \> **Advanced options** .
 2.  In the **Maximum bytes billed** field, enter an integer.
 3.  Click **Save** .
 

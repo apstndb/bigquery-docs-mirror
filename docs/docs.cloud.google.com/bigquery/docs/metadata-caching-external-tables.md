@@ -98,7 +98,7 @@ The following limitations apply to the metadata cache:
     
     2.  Select a tab in the Editor.
     
-    3.  Click settings **More** , and then click **Query settings** .
+    3.  Click **Edit** \> **Query settings** .
     
     4.  In the **Location** section, unselect the **Automatic location selection** checkbox, and then specify the target region.
     

@@ -49,7 +49,7 @@ The default dialect for the Google Cloud console is GoogleSQL. To change the dia
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the query editor, click the **More \> Query settings** button.
+2.  In the query editor, click **Edit** \> **Query settings** .
 
 3.  In the **Advanced options** section, for **SQL dialect** , click **Legacy** , then click **Save** . This sets the legacy SQL option for this query. When you click add\_box **SQL Query** to create a new query, you must select the legacy SQL option again.
 

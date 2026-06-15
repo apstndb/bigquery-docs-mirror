@@ -340,7 +340,7 @@ Follow these steps to translate a query into GoogleSQL:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Editor** pane, click **More** , and then select **Translation settings** .
+2.  In the **Editor** pane, click **Tools** \> **Translation settings** .
 
 3.  For **Source dialect** , select the SQL dialect that you want to translate.
 
@@ -348,7 +348,7 @@ Follow these steps to translate a query into GoogleSQL:
 
 5.  Click **Save** .
 
-6.  In the **Editor** pane, click **More** , and then select **Enable SQL translation** .
+6.  In the **Editor** pane, click **Tools** \> **Enable SQL translation** .
     
     The **Editor** pane splits into two panes.
 
@@ -362,7 +362,7 @@ Follow these steps to translate a query into GoogleSQL:
 
 9.  Optional: To run the translated GoogleSQL query, click **Run** .
 
-10. Optional: To return to the SQL editor, click **More** , and then select **Disable SQL translation** .
+10. Optional: To return to the SQL editor, click **More** \> **Disable SQL translation** .
     
     The **Editor** pane returns to a single pane.
 
@@ -420,7 +420,7 @@ Once you have uploaded a Gemini-enhanced SQL translation rule and uploaded it to
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the query editor, click **More \> Translation settings** .
+2.  In the query editor, click **Tools** \> **Translation settings** .
 
 3.  In the **Translation Configuration Source Location** field, specify the path to the Gemini-based YAML file stored in a Cloud Storage folder.
 
@@ -474,7 +474,7 @@ To get Gemini-generate SQL translation explanation, do the following:
 
 You can run an interactive query with the same translation configurations as a batch translation job by providing a batch translation configuration ID.
 
-1.  In the query editor, click **More \> Translation settings** .
+1.  In the query editor, click **Tools** \> **Translation settings** .
 
 2.  In the **Translation Configuration ID** field, provide a batch translation configuration ID to apply the same translation configuration from a completed BigQuery batch migration job.
     
@@ -488,7 +488,7 @@ You can run an interactive query with additional translation configurations by s
 
 To specify translation configurations by providing a location to the translation configuration source files, do the following:
 
-1.  In the query editor, click **More \> Translation settings** .
+1.  In the query editor, click **Tools** \> **Translation settings** .
 
 2.  In the **Translation Configuration Source Location** field, specify the path to the translation configuration files stored in a Cloud Storage folder.
     

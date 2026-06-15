@@ -569,7 +569,7 @@ To query `JOBS_*` and `RESERVATION*` system tables, select one of the following 
 
 2.  If the **Editor** tab isn't visible, then click add\_box **Compose new query** .
 
-3.  Click **More** \> **Query settings** . The **Query settings** dialog opens.
+3.  Click **Edit** \> **Query settings** . The **Query settings** dialog opens.
 
 4.  In the **Query settings** dialog, for **Additional settings** \> **Data location** , select the [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) that is collocated with the BigQuery Omni region. For example, if your BigQuery Omni region is `aws-us-east-1` , specify `us-east4` .
 

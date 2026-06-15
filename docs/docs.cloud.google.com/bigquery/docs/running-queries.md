@@ -90,9 +90,9 @@ To run an interactive query, select one of the following options:
     
     Alternatively, you can use the [**Reference** panel](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) to construct new queries.
 
-4.  Optional: To automatically display code suggestions when you type a query, click settings **More** , and then select **SQL autocomplete** . If you don't need autocomplete suggestions, deselect **SQL autocomplete** . This also turns off the project name autofill suggestions.
+4.  Optional: To automatically display code suggestions when you type a query, click **Tools** \> **Parser-based auto-completion** . If you don't need autocomplete suggestions, deselect **Parser-based auto-completion** . This also turns off the project name autofill suggestions.
 
-5.  Optional: To select additional [query settings](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click settings **More** , and then click **Query settings** .
+5.  Optional: To select additional [query settings](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click **Edit** \> **Query settings** .
 
 6.  Click play\_circle **Run** .
     
@@ -546,7 +546,7 @@ To run a batch query, select one of the following options:
         LIMIT
           10;
 
-4.  Click settings **More** , and then click **Query settings** .
+4.  Click **Edit** \> **Query settings** .
 
 5.  In the **Resource management** section, select **Batch** .
 
@@ -910,7 +910,7 @@ To run a query using optional job creation mode, select one of the following opt
         LIMIT
           10;
 
-4.  Click settings **More** , and then choose the **Optional job creation** query mode. To confirm this choice, click **Confirm** .
+4.  Click **Edit** \> **Query mode** \> **Optional job creation** . To confirm this choice, click **Confirm** .
 
 5.  Click play\_circle **Run** .
 

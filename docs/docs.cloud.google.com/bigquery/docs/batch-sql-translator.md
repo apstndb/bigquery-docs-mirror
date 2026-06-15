@@ -690,7 +690,7 @@ To start an interactive SQL translation by using a batch translation configurati
 
 2.  In the list of translation jobs, locate the job that you are interested in, and then click more\_vert **More Options \> Open Interactive Translation** .
     
-    The BigQuery interactive SQL translator now opens with the corresponding batch translation configuration ID. To view the translation configuration ID for the interactive translation, click **More \> Translation settings** in the interactive SQL translator.
+    The BigQuery interactive SQL translator now opens with the corresponding batch translation configuration ID. To view the translation configuration ID for the interactive translation, click **Tools** \> **Query translation** \> **Translation settings** in the interactive SQL translator.
 
 To debug a batch translation file in the interactive SQL translator, follow these steps:
 

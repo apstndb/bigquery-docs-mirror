@@ -24,7 +24,7 @@ In the Google Cloud console, each session is assigned to an editor tab.
 
 2.  Click add\_box **Compose new query** . A new editor tab opens.
 
-3.  Click **More \> Query settings** . The **Query settings** panel appears.
+3.  Click **Edit** \> **Query settings** . The **Query settings** panel appears.
 
 4.  In the **Session management** section, click **Use session mode** to enable the session mode.
 

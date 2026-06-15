@@ -1274,7 +1274,7 @@ When using `CAST` , a query can fail if BigQuery is unable to perform the cast. 
         FROM
          mydataset.mytable;
 
-3.  Click **More** and select **Query settings** .
+3.  Click **Edit** \> **Query settings** .
 
 4.  In the **Destination** section, do the following:
     

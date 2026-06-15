@@ -44,7 +44,7 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 
 1.  Go to the **BigQuery** page.
 
-2.  In the query editor toolbar, click settings **More** and select **Query settings** .
+2.  In the query editor toolbar, click **Edit** \> **Query settings** .
 
 3.  In the **Query settings** pane, locate the **Query parameters** section and click **Add parameter** .
 

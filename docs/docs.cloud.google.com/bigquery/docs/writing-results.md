@@ -92,7 +92,7 @@ Use the following procedure to write your query results to a permanent table. To
 
 4.  In the query editor, enter a valid SQL query.
 
-5.  Click **More** and then select **Query settings** .
+5.  Click **Edit** \> **Query settings** .
     
     ![Query settings](https://docs.cloud.google.com/static/bigquery/images/query-settings.png)
 
@@ -454,7 +454,7 @@ To write large result sets using legacy SQL:
 
 3.  Enter a valid SQL query in the **Query editor** text area. Use the `#legacySQL` prefix or be sure you have **Use Legacy SQL** checked in the query settings.
 
-4.  Click **More** then select **Query settings** .
+4.  Click **Edit** \> **Query settings** .
     
     ![Query settings](https://docs.cloud.google.com/static/bigquery/images/query-settings.png)
 

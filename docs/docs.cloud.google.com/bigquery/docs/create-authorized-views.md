@@ -136,7 +136,7 @@ After you create the source dataset, you populate a table in it by saving the re
         LIMIT
           1000;
 
-3.  Click **More** and select **Query settings** .
+3.  Click **Edit** \> **Query settings** .
 
 4.  For **Destination** , select **Set a destination table for query results** .
 
@@ -286,7 +286,7 @@ To create the view in the new dataset, choose one of the following options:
     
     Replace `  PROJECT_ID  ` with your project ID.
 
-3.  Click **Save** \> **Save view** .
+3.  Click **File** \> **Save** \> **Save view** .
 
 4.  In the **Save view** dialog, do the following:
     

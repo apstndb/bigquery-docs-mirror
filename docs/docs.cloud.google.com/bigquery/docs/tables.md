@@ -771,7 +771,7 @@ To create a table from a query result, write the results to a destination table.
 
 4.  In the query editor, enter a valid SQL query.
 
-5.  Click **More** and then select **Query settings** .
+5.  Click **Edit** \> **Query settings** .
     
     ![Query settings](https://docs.cloud.google.com/static/bigquery/images/query-settings.png)
 

@@ -294,9 +294,7 @@ To schedule a query, select one of the following options. For a description of t
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  Run the query that you're interested in. When you are satisfied with your results, click **Schedule** .
-    
-    ![Create new scheduled query in Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/scheduled-query-button-console.png)
+2.  Run the query that you're interested in. When you are satisfied with your results, click **File** \> **Schedule** .
 
 3.  The scheduled query options open in the **New scheduled query** pane.
     

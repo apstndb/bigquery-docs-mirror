@@ -22,7 +22,7 @@ To download query results as a CSV or newline-delimited JSON file, use the Googl
 
 3.  Enter a valid GoogleSQL query in the **Query editor** text area.
 
-4.  Optional: To change the processing location, click **More** and select **Query settings** . For **Data location** , choose the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your data.
+4.  Optional: To change the processing location, click **Edit** \> **Query settings** . For **Data location** , choose the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your data.
 
 5.  Click **Run** .
 
@@ -74,7 +74,7 @@ To save query results to Google Sheets, use the Google Cloud console:
 
 3.  Enter a valid GoogleSQL query in the **Query editor** text area.
 
-4.  Optional: To change the processing location, click **More** and select **Query settings** . For **Data location** , choose the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your data.
+4.  Optional: To change the processing location, click **Edit** \> **Query settings** . For **Data location** , choose the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your data.
 
 5.  Click **Run** .
 

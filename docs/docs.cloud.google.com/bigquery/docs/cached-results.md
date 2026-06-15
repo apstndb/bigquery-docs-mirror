@@ -78,9 +78,7 @@ To disable the **Use cached results** option:
 
 3.  Enter a valid SQL query in the **Query editor** text area.
 
-4.  Click **More** and select **Query settings** .
-    
-    ![Query settings](https://docs.cloud.google.com/static/bigquery/images/query-settings.png)
+4.  Click **Edit** \> **Query settings** .
 
 5.  For **Cache preference** , clear **Use cached results** .
 

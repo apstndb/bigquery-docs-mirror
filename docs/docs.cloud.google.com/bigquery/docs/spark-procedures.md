@@ -182,7 +182,7 @@ To create a stored procedure for Spark in the PySpark editor, follow these steps
 
 1.  Go to the **BigQuery** page.
 
-2.  If you want to type in the PySpark code directly, open the PySpark editor. To open the PySpark editor, click the arrow\_drop\_down menu next to add\_box **Create SQL query** , and then select **Create PySpark Procedure** .
+2.  If you want to type in the PySpark code directly, open the PySpark editor. To open the PySpark editor, click **Tools** \> **Create PySpark stored procedure** .
 
 3.  To set options, click **More \> PySpark Options** , and then do the following:
     

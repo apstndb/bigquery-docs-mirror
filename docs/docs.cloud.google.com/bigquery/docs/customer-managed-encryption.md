@@ -506,7 +506,7 @@ By default, query results are stored in a temporary table encrypted with a Googl
 
 3.  Enter a valid GoogleSQL query in the query text area.
 
-4.  Click **More** , click **Query settings** , then click **Advanced options** .
+4.  Click **Edit** \> **Query settings** , then click **Advanced options** .
 
 5.  Select **Customer-managed encryption** .
 

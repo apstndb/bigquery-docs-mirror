@@ -233,15 +233,13 @@ Follow these steps to run a continuous query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the query editor, click settings **More** .
-    
-    1.  In the **Choose query mode** section, choose **Continuous query** .
-    2.  Click **Confirm** .
-    3.  Optional: To control how long the query runs, click **Query settings** and set the **Job timeout** in milliseconds.
+2.  In the query editor, click **Edit** \> **Query mode** \> **Continuous query** . To confirm this choice, click **Confirm** .
 
-3.  In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
+3.  Optional: To control how long the query runs, click **Edit** \> **Query settings** and set the **Job timeout** in milliseconds.
 
-4.  Click **Run** .
+4.  In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
+
+5.  Click **Run** .
 
 ### bq
 
@@ -286,23 +284,19 @@ Follow these steps to use a service account to run a continuous query:
 
 3.  In the Google Cloud console, go to the **BigQuery** page.
 
-4.  In the query editor, click **More** .
+4.  In the query editor, click **Edit** \> **Query mode** \> **Continuous query** . To confirm this choice, click **Confirm** .
 
-5.  In the **Choose query mode** section, choose **Continuous query** .
+5.  In the query editor, click **Edit** \> **Query settings** .
 
-6.  Click **Confirm** .
+6.  In the **Continuous query** section, use the **Service account** box to select the service account that you created.
 
-7.  In the query editor, click **More** \> **Query settings** .
+7.  Optional: To control how long the query runs, set the **Job timeout** in milliseconds.
 
-8.  In the **Continuous query** section, use the **Service account** box to select the service account that you created.
+8.  Click **Save** .
 
-9.  Optional: To control how long the query runs, set the **Job timeout** in milliseconds.
+9.  In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
 
-10. Click **Save** .
-
-11. In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality) .
-
-12. Click **Run** .
+10. Click **Run** .
 
 ### bq
 
@@ -364,17 +358,15 @@ Every query job is assigned a job ID that you can use to search for and manage t
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the query editor, click **More** .
+2.  In the query editor, click **Edit** \> **Query mode** \> **Continuous query** .
 
-3.  In the **Choose query mode** section, choose **Continuous query** .
+3.  Click **Confirm** .
 
-4.  Click **Confirm** .
+4.  In the query editor, click **Edit** \> **Query settings** .
 
-5.  In the query editor, click **More \> Query settings** .
+5.  In the **Custom job ID prefix** section, enter a custom name prefix.
 
-6.  In the **Custom job ID prefix** section, enter a custom name prefix.
-
-7.  Click **Save** .
+6.  Click **Save** .
 
 ## Stateful processing with `JOIN` s and windowing aggregations
 
