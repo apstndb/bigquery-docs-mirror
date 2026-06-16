@@ -76,8 +76,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
             QueryOptions queryOptions = new QueryOptions
             {
                 JobLocation = "us",
-                JobIdPrefix = "code_sample_&qu<ot;,
-             >   Labels = new Dictionarystring, string
+                JobIdPrefix = "code_sample_",
+                Labels = new Dictionary<string, string>
                 {
                     ["example-label"] = "example-value"
                 },
@@ -89,7 +89,10 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
                 parameters: null,
                 options: queryOptions);
     
-            Console.WriteLine($"Started job: {queryJob.Reference.JobId}");        return queryJob;    }}
+            Console.WriteLine($"Started job: {queryJob.Reference.JobId}");
+            return queryJob;
+        }
+    }
 
 ### Java
 
@@ -130,7 +133,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
           // The location and job name are optional,
           // if both are not specified then client will auto-create.
-          String jobName = "jobId_"; + UUID.randomUUID().toString();
+          String jobName = "jobId_" + UUID.randomUUID().toString();
           JobId jobId = JobId.newBuilder().setLocation("us").setJob(jobName).build();
     
           // Create a job with job ID
@@ -141,10 +144,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
           if (job.getJobId().getJob().equals(jobId.getJob())) {
             System.out.print("Job created successfully." + job.getJobId().getJob());
           } else {
-            System.out.print(&quot;Job was not created");
+            System.out.print("Job was not created");
           }
         } catch (BigQueryException e) {
-          System.out.print("Job was not created. \n" + e.toString());    }  }}
+          System.out.print("Job was not created. \n" + e.toString());
+        }
+      }
+    }
 
 ### Python
 
@@ -170,6 +176,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         # generated ID with either the job_id_prefix or job_id parameters.
         job_id_prefix="code_sample_",
     )  # Make an API request.
+    
     print("Started job: {}".format(query_job.job_id))
 
 ## Adding job labels

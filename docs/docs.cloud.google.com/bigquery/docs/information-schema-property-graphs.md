@@ -18,11 +18,27 @@ The `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view contains one row for each [propert
 
 ## Required permissions
 
-To query the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view, ask your administrator to grant you one of the following predefined IAM roles:
+To get the permissions that you need to query the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view, ask your administrator to grant you the following IAM roles on the project:
 
-  - `roles/bigquery.metadataViewer`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.admin`
+  - [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
+  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
+  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+These predefined roles contain the permissions required to query the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to query the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view:
+
+  - `bigquery.propertyGraphs.get`
+  - `bigquery.propertyGraphs.list`
+
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 

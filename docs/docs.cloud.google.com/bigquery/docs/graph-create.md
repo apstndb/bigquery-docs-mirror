@@ -18,9 +18,21 @@ This document shows you how to use [BigQuery Graph](https://docs.cloud.google.co
 
 ## Required roles
 
-To get the permissions that you need to create and query graphs, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on the dataset in which you create the node tables, edge tables, and graph. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to work with graphs, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on the dataset in which you create the node tables, edge tables, and graph. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+This predefined role contains the permissions required to work with graphs. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to work with graphs:
+
+  - Create a graph: `bigquery.propertyGraphs.create`
+  - List graphs and their metadata: `bigquery.propertyGraphs.list`
+  - Get the metadata and definition of a graph: `bigquery.propertyGraphs.get`
+  - Update the metadata and definition of a graph: `bigquery.propertyGraphs.update`
+  - Delete a graph: `bigquery.propertyGraphs.delete`
+
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Create node and edge tables
 

@@ -13,7 +13,7 @@ You can monitor BigQuery [continuous queries](https://docs.cloud.google.com/bigq
   - [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro)
   - [Query execution graphs](https://docs.cloud.google.com/bigquery/docs/query-insights#view_query_performance_insights)
   - [Job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job)
-  - [Administrative jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer)
+  - [Jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer)
 
 Due to the long running nature of a BigQuery continuous query, metrics that are usually generated upon the completion of a SQL query might be absent or inaccurate.
 
@@ -138,9 +138,9 @@ You can view continuous query job details in your personal job history or the pr
 
 Be aware that the historical list of jobs is sorted by the job start time, so continuous queries that have been running for a while might not be close to the start of the list.
 
-## Use the administrative jobs explorer
+## Use the jobs explorer
 
-In the administrative jobs explorer, [filter your jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) to show continuous queries by setting the **Job category** filter to **Continuous query** .
+In the jobs explorer, [filter your jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) to show continuous queries by setting the **Job category** filter to **Continuous query** .
 
 ## Use Cloud Monitoring
 

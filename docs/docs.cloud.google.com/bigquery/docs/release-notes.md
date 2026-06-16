@@ -14,6 +14,24 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 15, 2026
+
+Feature
+
+Use Gemini Cloud Assist to analyze your SQL queries and receive recommendations to [optimize query performance in BigQuery](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#optimize-query) . This feature is available to customers who use BigQuery editions. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Issue
+
+Support for configuring daily token quotas for BigQuery generative AI functions has been temporarily disabled. We are working to restore this feature as soon as possible.
+
+Feature
+
+You can resize the width of table columns in BigQuery Studio for BigQuery listings such as datasets, repositories, job history, and connections. To resize a column, hover over the column divider and drag it to your preferred width.
+
+Feature
+
+You can use Gemini Code Assist directly within the BigQuery **Jobs explorer** , **Job details** , **Job history** , and **Capacity management** pages to help you troubleshoot and analyze performance issues. For more information, see [Troubleshoot job performance](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#get-job-details) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## June 12, 2026
 
 Feature
@@ -563,7 +581,7 @@ Change
 
 Feature
 
-You can now understand and debug BigQuery query performance with a [visual mapping of your SQL query in the query execution graph](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#query_text_heatmap) . A heatmap highlights the steps that consume more slot-time. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+You can now understand and debug BigQuery query performance with a [visual mapping of your SQL query in the query execution graph](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#query_text_heatmap) . A heatmap highlights the steps that consume more slot time. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## March 09, 2026
 

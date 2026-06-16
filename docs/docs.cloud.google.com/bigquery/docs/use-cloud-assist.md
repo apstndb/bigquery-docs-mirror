@@ -172,6 +172,22 @@ In the Jobs explorer, you can chat with Gemini Cloud Assist to monitor performan
       - `What are the top users with the most slot usage in my project?`
       - `Show me the top jobs consuming the most slots in reservation RESERVATION_NAME in the last hour.`
 
+## Optimize a query
+
+Use Gemini Cloud Assist to analyze your SQL queries and receive recommendations to optimize them. Gemini Cloud Assist analyzes your query structure and suggests improvements to potentially reduce query slot time, where possible. You can optimize a query by using either of the following methods:
+
+  - Click **Optimize** in the query editor. This button is only available when you use [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+    
+    1.  Go to the **BigQuery** page.
+    
+    2.  In the query editor, enter your SQL query and run it.
+    
+    3.  In the query editor toolbar, click **Optimize** . Gemini Cloud Assist analyzes the executed query and displays recommendations in the **Cloud Assist** panel.
+
+  - Use the Cloud Assist panel. You can either open the query in an active tab or paste the SQL code directly into the **Cloud Assist** panel and ask for an optimization. This feature is available to all customers, regardless of whether you use capacity pricing (BigQuery editions) or on-demand pricing.
+
+> **Note:** Optimization suggestions are intended to improve query performance and efficiency. While these optimizations often yield cost benefits by reducing slot milliseconds, an optimized query might not always result in a direct cost reduction depending on your specific pricing model constraints (for example, minimum billing thresholds).
+
 ## What's next
 
   - Learn more about [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/overview) .

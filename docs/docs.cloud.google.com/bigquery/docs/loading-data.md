@@ -130,4 +130,4 @@ You can run queries on logs without creating additional load jobs:
 
   - Learn how to [prepare data](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction) with Gemini in BigQuery.
   - Learn more about transforming data with [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
-  - Learn more about monitoring load jobs in the [administrative jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) and [BigQuery metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquery) .
+  - Learn more about monitoring load jobs in the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) and [BigQuery metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquery) .

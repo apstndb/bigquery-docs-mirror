@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 This tutorial guides you through the process of creating a retrieval-augmented generation (RAG) pipeline based on parsed PDF content.
 
-PDF files, such as financial documents, can be challenging to use in RAG pipelines because of their complex structure and mix of text, figures, and tables. This tutorial shows you how to use the [`ML.PROCESS_DOCUEMNT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document) in combination with Document AI's layout parser to build a RAG pipeline based on key information extracted from a PDF file.
+PDF files, such as financial documents, can be challenging to use in RAG pipelines because of their complex structure and mix of text, figures, and tables. This tutorial shows you how to use the [`ML.PROCESS_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) in combination with Document AI's layout parser to build a RAG pipeline based on key information extracted from a PDF file.
 
 ## Objectives
 

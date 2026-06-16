@@ -366,9 +366,15 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     public class SimpleQuery {
     
-      public static void runSimpleQuery() {
+      public static void main(String[] args) {
         // TODO(developer): Replace this query before running the sample.
-        String query = "SELECT corpus FROM `bigquery-public-data.samples.shakespeare` GROUP BY corpus;";
+        String query =
+            "SELECT name, SUM(number) as total_people "
+                + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+                + "WHERE state = 'TX' "
+                + "GROUP BY name, state "
+                + "ORDER BY total_people DESC "
+                + "LIMIT 100;";
         simpleQuery(query);
       }
     
@@ -385,7 +391,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
           TableResult result = bigquery.query(queryConfig);
     
           // Print the results.
-          result.iterateAll().forEach(rows -> rows.forEach(row -> System.out.println(row.getValue())));
+          result
+              .iterateAll()
+              .forEach(
+                  row -> {
+                    System.out.print("name:" + row.get("name").getStringValue());
+                    System.out.print(", count:" + row.get("total_people").getLongValue());
+                    System.out.println();
+                  });
     
           System.out.println("Query ran successfully");
         } catch (BigQueryException | InterruptedException e) {

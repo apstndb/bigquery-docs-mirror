@@ -16,7 +16,7 @@ To troubleshoot slow query performance, do the following:
 
   - Check the [Google Cloud Service Health](https://status.cloud.google.com/) page for known BigQuery service outages that might impact query performance.
 
-  - Review the job timeline for your query on the [administrative jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to see how long each stage of the query took to run.
+  - Review the job timeline for your query in the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to see how long each stage of the query took to run.
     
       - If most of the elapsed time was due to long creation times, [contact Cloud Customer Care](https://docs.cloud.google.com/support) for assistance.
     

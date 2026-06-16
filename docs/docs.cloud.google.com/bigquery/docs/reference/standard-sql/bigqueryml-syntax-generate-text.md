@@ -791,7 +791,7 @@ After you have purchased Provisioned Throughput quota, use the `request_type` ar
 
 ## Quotas and limits
 
-For quota and limit information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) in the BigQuery quotas and limits reference. For information about managing the cost of this function, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
+For quota and limit information, see [Generative AI functions](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) in the BigQuery quotas and limits reference.
 
 ## Known issues
 

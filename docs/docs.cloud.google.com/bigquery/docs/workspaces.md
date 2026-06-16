@@ -14,12 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To provide feedback or ask questions that are related to this Preview feature, contact [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com) .
 
-This document shows you how to work with workspaces in BigQuery, including the following tasks:
-
-  - Creating workspaces
-  - Deleting workspaces
-  - Working with files in workspaces
-  - Performing version control on files in workspaces
+When you use BigQuery [repositories](https://docs.cloud.google.com/bigquery/docs/repository-intro) to version control your files, you use [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) to edit the code within those repositories. This document shows you how to create, delete, and manage files in a workspace.
 
 ## Before you begin
 

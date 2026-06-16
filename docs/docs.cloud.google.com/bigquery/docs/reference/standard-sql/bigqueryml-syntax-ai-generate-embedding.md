@@ -149,7 +149,7 @@ The model and input table must be in the same region.
         
           - For text embeddings, you can pull the value from a `STRING` column, or you can specify a string literal in the query.
         
-          - For visual content embeddings, you can provide an [`ObjectRef` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectref) for the `content` column.
+          - For visual content embeddings, you can provide an [`ObjectRef` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions) for the `content` column.
     
       - If you are creating embeddings from an object table, the query doesn't have to return a `content` column. You can only specify `WHERE` , `ORDER BY` , and `LIMIT` clauses in the query.
 

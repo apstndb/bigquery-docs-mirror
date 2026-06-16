@@ -849,9 +849,11 @@ The following example shows how to extract metadata for a PostgreSQL database on
       --password password \
       --user user
 
-### Oracle
+### Oracle / Oracle Exadata
 
 To allow the `dwh-migration-dumper` tool to connect to Oracle, download their JDBC driver from Oracle's [download page](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) .
+
+The `oracle` and `oracle-stats` connectors also support Oracle Exadata.
 
 The following table describes the commonly used flags for extracting Oracle metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 

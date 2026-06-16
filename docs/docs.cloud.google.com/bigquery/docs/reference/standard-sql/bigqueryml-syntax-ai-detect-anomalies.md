@@ -94,6 +94,8 @@ Optionally, if the `TARGET_TABLE` or `TARGET_QUERY_STATEMENT` argument is not pr
     
       - `STRING`
       - `INT64`
+      - `ARRAY<STRING>`
+      - `ARRAY<INT64>`
 
   - `  ANOMALY_PROB_THRESHOLD  ` : a `FLOAT64` value that specifies the custom threshold to use for anomaly detection. The value must be in the range `[0, 1)` . The default value is `0.95` .
     

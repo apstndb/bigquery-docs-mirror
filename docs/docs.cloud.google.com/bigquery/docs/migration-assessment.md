@@ -548,7 +548,7 @@ Replace the following:
 
 Amazon Redshift Serverless stores usage logs for seven days. If a wider range is required, Google recommends extracting data multiple times over a longer period.
 
-### Oracle
+### Oracle / Oracle Exadata
 
 > **Preview**
 > 
@@ -558,7 +558,7 @@ To request feedback or support for this feature, send an email to <bq-edw-migrat
 
 ### Requirements
 
-You must meet the following requirements in order to extract metadata and query logs from Oracle:
+You must meet the following requirements in order to extract metadata and query logs from Oracle and Oracle Exadata:
 
   - Your Oracle database must be version 11g R1 or higher.
   - A machine that can connect to your Oracle instance(s).
@@ -577,7 +577,7 @@ Download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-too
 
 For details about how to use the `dwh-migration-dumper` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
-Use the `dwh-migration-dumper` tool to extract metadata and performance statistics to the zip file. By default, statistics are extracted from the Oracle AWR that requires the Oracle Tuning and Diagnostics Pack. If this data is not available, `dwh-migration-dumper` uses STATSPACK instead.
+Use the `dwh-migration-dumper` tool to extract metadata and performance statistics to the zip file. By default, statistics are extracted from the Oracle AWR that requires the Oracle Tuning and Diagnostics Pack. If this data is not available, `dwh-migration-dumper` uses STATSPACK instead. The `oracle-stats` connector also supports Oracle Exadata.
 
 For multitenant databases, the `dwh-migration-dumper` tool must be executed in the root container. Running it in one of the pluggable databases results in missing performance statistics and metadata about other pluggable databases.
 
@@ -859,7 +859,7 @@ The limit for the total uncompressed size of all the query history files is 5 TB
 
 Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
-### Oracle
+### Oracle / Oracle Exadata
 
 > **Preview**
 > 
@@ -1462,7 +1462,7 @@ The **Appendix** section contains this view:
   - Assessment Execution Summary  
     Provides the assessment execution details including the list of processed files, errors and report completeness. You can use this page to investigate missing data in the report and to better understand the report's completeness.
 
-### Oracle
+### Oracle / Oracle Exadata
 
 > **Preview**
 > 

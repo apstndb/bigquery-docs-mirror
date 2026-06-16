@@ -29,10 +29,10 @@ Notebook capabilities are available only in the Google Cloud console.
 Notebooks in BigQuery offer the following benefits:
 
   - **Seamless Python integration** : use the BigQuery DataFrames API without any additional setup.
-  - **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/\(/bigquery/docs/write-sql-gemini\)) for assistive code development.
+  - **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) for assistive code development.
   - **Familiar editor features** : use SQL auto-completion, similar to the BigQuery SQL editor.
   - **Integrated visualizations** : use interactive [DataFrame visualizations](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) , or libraries like [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) , to visualize data directly in your workflow.
-  - **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/\(/bigquery/docs/create-notebooks#cells\)) in cells that reference Python variables.
+  - **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in cells that reference Python variables.
 
 You can get started with notebooks by using notebook gallery templates. For more information, see [Create a notebook using the notebook gallery](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 
