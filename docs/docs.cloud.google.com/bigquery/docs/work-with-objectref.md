@@ -149,7 +149,7 @@ The following example shows a query that uses delegated access. It requires the 
 
   - The user has the `bigquery.objectRefs.read` permission on `connection1` .
   - The service account for `connection1` has the `storage.objects.get` permission on the object.
-  - The service account for `connection2` has the Vertex AI User role.
+  - The service account for `connection2` has the Agent Platform User role.
 
 <!-- end list -->
 

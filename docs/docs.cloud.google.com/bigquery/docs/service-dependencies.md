@@ -146,7 +146,7 @@ The following services are enabled by default for every new Google Cloud project
 <li><a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings">BigQuery sharing (formerly Analytics Hub) search for listings</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/data-profile-scan">Profile insights</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/data-quality-scan">Data quality scans</a></li>
-<li><a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#view-bq-lineage">Data lineage</a> viewing</li>
+<li><a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#view-lineage">Data lineage</a> viewing</li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/data-insights">Table and dataset insights</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/data-canvas">Data canvas</a></li>
 </ul></li>
@@ -292,7 +292,7 @@ You must manually enable the following services for the corresponding capabiliti
 <tr class="odd">
 <td><code dir="ltr" translate="no">datalineage.googleapis.com</code></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#view-bq-lineage">Data lineage</a> capture and viewing</li>
+<li><a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#view-lineage">Data lineage</a> capture and viewing</li>
 </ul></td>
 <td><ul>
 <li>Data lineage isn't captured for your project.</li>

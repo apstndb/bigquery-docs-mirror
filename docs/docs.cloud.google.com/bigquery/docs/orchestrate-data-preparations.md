@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Schedule data preparations
 
-This document describes how to schedule data preparation pipelines and perform manual runs.
+This document describes how to schedule and manually run data preparation jobs in BigQuery to automate your data transformation workflows. While scheduling ensures that your data remains up to date and accurate without requiring manual intervention, you can also perform manual runs of your data preparations to test and validate transformations before deployment. Data preparations are powered by Dataform.
 
-Data preparations are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . Each data preparation schedule is run using your Google Account user credentials or a [custom service account](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) that you select when you configure the schedule or test run.
-
-Changes you make to the data preparation steps aren't automatically saved. You must save and deploy the changes before they can be executed with a schedule. Schedules always run the latest deployed version of your data preparation and exclude any undeployed changes you might be developing.
+You can schedule data preparations with user credentials for a Google Account or with a [custom service account](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) .
 
 ## Before you begin
 
@@ -74,7 +72,7 @@ To test your data preparation steps and validate the results in your destination
 
 ## Deploy a data preparation
 
-To schedule runs for a version of your data preparation, you must first deploy it. Schedules run the most recently deployed version.
+To schedule runs for a version of your data preparation, you must first save and deploy your changes. Schedules always run the latest deployed version, ignoring any undeployed changes.
 
 To deploy a data preparation, follow these steps:
 

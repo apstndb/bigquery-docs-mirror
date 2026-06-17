@@ -390,7 +390,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### Give the service account access
 
-Grant the connection's service account the Vertex AI User and Storage Object Viewer roles.
+Grant the connection's service account the Agent Platform User and Storage Object Viewer roles.
 
 If you plan to specify the endpoint as a URL when you create the remote model, for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.0-flash'` , grant these roles in the same project you specify in the URL.
 
@@ -410,7 +410,7 @@ To grant these roles, follow these steps:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, select **Vertex AI** , and then select **Vertex AI User** .
+4.  In the **Select a role** field, select **Vertex AI** , and then select **Agent Platform User** .
 
 5.  Click **Add another role** .
 
@@ -559,7 +559,7 @@ Replace the following:
     
       - `  ENDPOINT  ` : the [embedding model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) to use, for example `gemini-embedding-2-preview` or `multimodalembedding@001` .
         
-        If you specify a URL as the endpoint when you create the remote model, for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-embedding-2-preview'` , make sure that the project that you specify in the URL is the project in which you have granted the Vertex AI user role to the connection's service account.
+        If you specify a URL as the endpoint when you create the remote model, for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-embedding-2-preview'` , make sure that the project that you specify in the URL is the project in which you have granted the Agent Platform User role to the connection's service account.
         
         The model must be available in the location where you are creating the remote model. The `gemini-embedding-2-preview` model is only supported in the `us-central1` and `US` regions. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#locations) .
 

@@ -163,7 +163,7 @@ Prompt design can strongly affect the responses returned by the model. For more 
 
 ## Examples
 
-The following examples assume that you have granted the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to your personal account. For more information, see [Run generative AI queries with end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
+The following examples assume that you have granted the [Agent Platform User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to your personal account. For more information, see [Run generative AI queries with end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
 
 ### Translate
 

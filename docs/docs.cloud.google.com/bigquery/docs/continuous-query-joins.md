@@ -12,11 +12,11 @@ data_source: docs.cloud.google.com
 > 
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-To request support or provide feedback for this feature, send an email to <bq-continuous-queries-feedback@google.com> .
+> **Note:** To request support or provide feedback for this feature, send an email to <bq-continuous-queries-feedback@google.com> .
 
-Continuous queries support `JOIN` as a stateful operation. Stateful operations let continuous queries perform complex analysis that requires retaining information across multiple rows or time intervals. This capability lets you correlate events from different streams by storing necessary data in memory while the query runs. For more information about stateful operations, see [Supported stateful operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) .
+In BigQuery, you can use stream-to-stream joins in continuous queries to analyze and correlate data from two or more real-time data streams. Stream-to-stream joins are a join operation between two or more tables that receive time-oriented data ingestion.
 
-Stream-to-stream joins are a join operation between two or more tables that receive time-oriented data ingestion.
+Common use cases for stream-to-stream joins include financial fraud detection, building customer profiles, and optimizing supply chain management. These joins are a key type of stateful operation. For more information about stateful operations, see [Supported stateful operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) .
 
 ### Supported JOIN types
 

@@ -71,10 +71,11 @@ The following tutorials show how to use BigQuery Graph in different scenarios:
   - [Supply chain traceability with BigQuery Graph](https://codelabs.developers.google.com/codelabs/supplychaingraph)
   - [Spanner & BigQuery:Real-Time Fraud Defense Shield](https://codelabs.developers.google.com/next26/spanner-bigquery-graph#0)
   - [Perform semantic search on a graph](https://docs.cloud.google.com/bigquery/docs/graph-search)
+  - [Analyze drug interactions with BigQuery Graph](https://codelabs.developers.google.com/codelabs/drug-interaction-bigquery-graph)
 
 ## Pricing
 
-BigQuery Graph uses the standard BigQuery capacity-based [pricing model](https://cloud.google.com/bigquery/pricing) to ensure that you only pay for what you use across compute and storage.
+BigQuery Graph uses the BigQuery capacity-based [pricing model](https://cloud.google.com/bigquery/pricing) to ensure that you only pay for what you use across compute and storage.
 
 ### Compute
 

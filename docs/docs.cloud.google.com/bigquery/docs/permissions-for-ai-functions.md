@@ -26,7 +26,7 @@ To run generative AI queries using end-user credentials, configure the necessary
 To get the permissions that you need to run a query job that calls a Vertex AI model, ask your administrator to grant you the following IAM roles on the project:
 
   - Run query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-  - Access a foundation model in Gemini Enterprise Agent Platform: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
+  - Access a foundation model in Gemini Enterprise Agent Platform: [Agent Platform User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -54,7 +54,7 @@ You can use the Google Cloud console or SQL to grant the required roles for a pr
     
     4.  In the **Assign roles** section, for **Select a role** , click the drop-down arrow.
     
-    5.  Search for the **Vertex AI User** role and select it.
+    5.  Search for the **Agent Platform User** role and select it.
     
     6.  Click **Add another role** .
     
@@ -379,7 +379,7 @@ For more information, see [Create and set up a Cloud resource connection](https:
 
 ### Grant access to the service account
 
-To run queries that use generative `AI.*` functions that call Gemini Enterprise Agent Platform models, you must grant appropriate permissions to the service account that was created when you created your connection. To run functions that call a Gemini Enterprise Agent Platform foundation model, the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) is required.
+To run queries that use generative `AI.*` functions that call Gemini Enterprise Agent Platform models, you must grant appropriate permissions to the service account that was created when you created your connection. To run functions that call a Gemini Enterprise Agent Platform foundation model, the [Agent Platform User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) is required.
 
 Select one of the following options:
 
@@ -395,7 +395,7 @@ Select one of the following options:
 
 4.  In the **Assign roles** section, click **Add roles** .
 
-5.  Search for the **Vertex AI User** role, select it, and then click **Apply** .
+5.  Search for the **Agent Platform User** role, select it, and then click **Apply** .
 
 6.  Click **Save** .
 

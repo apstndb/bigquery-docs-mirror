@@ -47,7 +47,7 @@ To get the permissions that you need to enable autonomous embedding generation, 
 
   - To use a connection resource: [BigQuery Connections User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `roles/bigquery.connectionUser` ) on the connection
   - To create or alter a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table
-  - Grant the connection's service account the following role so that it can access models hosted in Agent Platform endpoints: [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) on the project that has the connection
+  - Grant the connection's service account the following role so that it can access models hosted in Agent Platform endpoints: [Agent Platform User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) on the project that has the connection
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -55,7 +55,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ### Create a connection and grant permission to a service account
 
-To enable autonomous embedding generation on a table, you must [create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#create_a_connection) . Then, [grant](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#grant_access_to_the_service_account) the [Vertex AI User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) to the service account that was created when you created the connection.
+To enable autonomous embedding generation on a table, you must [create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#create_a_connection) . Then, [grant](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#grant_access_to_the_service_account) the [Agent Platform User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` ) to the service account that was created when you created the connection.
 
 ## Create an automatically generated embedding column
 
@@ -93,7 +93,7 @@ Replace the following:
 
   - `EMBEDDING_COL_NAME` : The name of the automatically generated embedding column.
 
-  - `CONNECTION_ID` : A `STRING` value that contains the name of a connection to use, such as `my_project.us.example_connection` . You must grant the [Vertex AI User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) role to the connection's service account in the project in which you create the table.
+  - `CONNECTION_ID` : A `STRING` value that contains the name of a connection to use, such as `my_project.us.example_connection` . You must grant the [Agent Platform User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) role to the connection's service account in the project in which you create the table.
 
   - `ENDPOINT` : a `STRING` value that specifies a supported Agent Platform [text embedding model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/text-embeddings-api) endpoint to use for the text embedding model. The endpoint value that you specify must include the model version, for example `text-embedding-005` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 

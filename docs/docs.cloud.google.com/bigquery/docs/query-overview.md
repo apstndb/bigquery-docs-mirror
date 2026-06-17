@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Overview of BigQuery analytics
 
-This document describes how BigQuery processes queries, and it provides an overview of several features that are useful for understanding and analyzing your data.
+This document provides an overview of how BigQuery processes queries and an overview of several features that are useful for understanding and analyzing your data.
 
-BigQuery is optimized to run analytic queries on large datasets, including terabytes of data in seconds and petabytes in minutes. Understanding its capabilities and how it processes queries can help you maximize your data analysis investments.
+BigQuery is optimized to run analytic queries on large datasets, including terabytes of data in seconds and petabytes in minutes. Understanding BigQuery capabilities and how it processes queries can help you maximize your data analysis investments.
 
 ## Analytic workflows
 

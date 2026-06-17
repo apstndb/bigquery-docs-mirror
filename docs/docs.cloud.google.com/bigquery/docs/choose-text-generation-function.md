@@ -83,7 +83,7 @@ Use the following table to evaluate the differences between the `AI.GENERATE_TEX
 </tr>
 <tr class="even">
 <td>Permission setup</td>
-<td>You must manually create a BigQuery connection, and grant the Vertex AI User role permission to the service account of the connection. You can skip this step if you are using the BigQuery <a href="https://docs.cloud.google.com/bigquery/docs/default-connections#example-remote-model">default connection</a> .</td>
+<td>You must manually create a BigQuery connection, and grant the Agent Platform User role permission to the service account of the connection. You can skip this step if you are using the BigQuery <a href="https://docs.cloud.google.com/bigquery/docs/default-connections#example-remote-model">default connection</a> .</td>
 <td>You can call this function using your <a href="https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions">end-user credentials</a> .</td>
 </tr>
 <tr class="odd">

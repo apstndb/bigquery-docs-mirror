@@ -1350,17 +1350,6 @@ The following limits apply to Agent Platform models that use a tokens per minute
 | [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`ML.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) when using a remote model over a `gemini-embedding-001` model       | 10,000,000            | 12,000,000, for a call with an average of 300 tokens per row | 5                                       |
 | [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`ML.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) when using a remote model over a `gemini-embedding-2-preview` model | 5,000,000             | 1,440,000                                                    | 5                                       |
 
-#### Tokens per day limits
-
-The following daily limits apply to token usage for large language models accessed through BigQuery generative AI functions. These limits apply globally across all regions, and you can [request an adjustment](https://docs.cloud.google.com/docs/quotas/view-manage#requesting_higher_quota) to them. For more information, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
-
-| **Quota name**                   | **Metric**                                | **Scope**           | **Default value** |
-| -------------------------------- | ----------------------------------------- | ------------------- | ----------------- |
-| `GenAiInputTokensPerDay`         | Input tokens used by the LLM              | Per day per project | 200,000,000,000   |
-| `GenAiInputTokensPerUserPerDay`  | Input tokens used by the LLM              | Per day per user    | 40,000,000,000    |
-| `GenAiOutputTokensPerDay`        | Output and thought tokens used by the LLM | Per day per project | 20,000,000,000    |
-| `GenAiOutputTokensPerUserPerDay` | Output and thought tokens used by the LLM | Per day per user    | 4,000,000,000     |
-
 ### Cloud AI service functions
 
 The following limits apply to functions that use Cloud AI services:

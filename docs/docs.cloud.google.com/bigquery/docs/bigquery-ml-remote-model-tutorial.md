@@ -55,7 +55,7 @@ If you are using an existing project do the following.
 Make sure that you have the following role or roles on the project:
 
   - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) ( `roles/bigquery.studioAdmin` )
-  - [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
+  - [Agent Platform User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
   - [BigQuery Connection Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
 
 #### Check for the roles
@@ -277,7 +277,7 @@ You must have a Cloud resource connection to connect to a Gemini Enterprise Agen
 
 ## Set up connection access
 
-Grant the Vertex AI User role to the Cloud resource connection's service account. You must grant this role in the same project where you created the remote model endpoint.
+Grant the Agent Platform User role to the Cloud resource connection's service account. You must grant this role in the same project where you created the remote model endpoint.
 
 > **Note:** If the connection is in a different project, this error is returned: `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
@@ -289,7 +289,7 @@ To grant the role, follow these steps:
 
 3.  In the **New principals** field, enter the Cloud resource connection's service account ID that you copied previously.
 
-4.  In the **Select a role** field, choose **Vertex AI** , and then select **Vertex AI User** .
+4.  In the **Select a role** field, choose **Vertex AI** , and then select **Agent Platform User** .
 
 5.  Click **Save** .
 

@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Create queries with table explorer
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Warning:** Table Explorer behavior is moving to the Reference panel. For more information about how the Reference panel dynamically displays context-aware information about tables, snapshots, views, and materialized views, see [Use the Reference panel](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) . For deeper insights about data or help writing code with Gemini Cloud Assist, see [Use Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist) .
 
-To request support or provide feedback for this feature, email <bq-studio-product-team@google.com> .
+To request support or provide feedback for this feature, email <bigquery-explorer-feedback@google.com> .
 
 This document shows you how to use table explorer to examine table data and create data exploration queries.
 

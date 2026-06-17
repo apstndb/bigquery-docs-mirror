@@ -136,25 +136,23 @@ To share a saved query with a user, you first grant that user access to the save
 
 Users that you share a query with only see the most recent version of a query. Autosaved changes that you haven't explicitly saved don't appear in the shared query.
 
+To share a saved query, follow these steps:
+
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
-    
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+2.  In the left pane, click folder **Files** to open the file browser.
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, expand your project and click **Queries** .
+3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to share.
 
-4.  Find and click the saved query that you want to grant access to. You can use the search feature or filters to find your query.
+4.  Click more\_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
 
-5.  Click person\_add **Share** , and then click **Manage permissions** .
+5.  In the **Manage permissions** pane, click **Add user/group** .
 
-6.  In the **Manage permissions** pane, click **Add user/group** .
+6.  In the **New principals** field, enter a principal.
 
-7.  In the **New principals** field, enter a principal.
-
-8.  In the **Role** list, select one of the following roles:
+7.  In the **Role** list, select one of the following roles:
     
       - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : can perform any action on the saved query, including deleting or sharing it.
       - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
@@ -162,13 +160,13 @@ Users that you share a query with only see the most recent version of a query. A
     
     > **Note:** The principal must also have the [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
 
-9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
+8.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
-10. Click **Save** .
+9.  Click **Save** .
 
-11. To return to the saved query info, click **Close** .
+10. To return to the saved query details, click **Close** .
 
-12. To generate a link to the saved query, click person\_add **Share** , and then click **Get link** .
+11. To generate a link to the saved query, click more\_vert **View actions** \> **Share** \> **Copy link** .
     
     The link is copied to your clipboard.
 
@@ -178,19 +176,17 @@ To open any version of an existing saved query as a new query, follow these step
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click folder **Files** to open the file browser:
     
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, expand your project and click **Queries** .
+3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to open.
 
-4.  Select a saved query. You can use the search feature or filters to find your query.
+4.  Click the saved query, and then click history **Version history** .
 
-5.  Click history **Version history** .
-
-6.  Click more\_vert **View actions** next to a saved query version and then click **Open as new query** .
+5.  Click more\_vert **View actions** next to a saved query version and then click **Open as new query** .
 
 ## Update saved queries
 
@@ -198,13 +194,15 @@ Changes that you make to the text of a saved query are automatically saved two s
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click folder **Files** to open the file browser:
     
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, expand your project and click **Queries** .
+3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to update.
 
-4.  Select a saved query. You can use the search feature or filters to find your query.
+4.  Click the saved query to open it.
 
 5.  Modify the query.
 
@@ -220,14 +218,13 @@ To upload a saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click folder **Files** to open the file browser:
     
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, expand your project, and then do one of the following:
-    
-      - Next to **Queries** , click more\_vert **View actions** \> **Upload SQL query** .
-      - Next to the Google Cloud project name, click more\_vert **View actions** \> **Upload to project** \> **SQL query** .
+3.  In the **Files** pane, click more\_vert **View actions** next to the folder that you want to upload the query to, and then click **Upload** \> **Query** .
 
 4.  In the **Upload SQL** dialog, in the **SQL** field, click **Browse** , and then select the query that you want to upload.
 
@@ -237,7 +234,7 @@ To upload a saved query, follow these steps:
 
 7.  Click **Upload** .
 
-Your saved query can be accessed through the **Explorer** pane.
+Your saved query can be accessed through the **Files** or the **Explorer** pane.
 
 ## Classic saved queries
 
@@ -245,7 +242,7 @@ Your saved query can be accessed through the **Explorer** pane.
 
 Use the following sections to learn how to create and update [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries) . For more information on sharing, migrating, and deleting classic saved queries, see [Classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#classic_saved_queries) .
 
-> **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Classic explorer** pane instead of the **(Classic) Queries** folder.
+> **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Explorer** pane instead of the **(Classic) Queries** folder.
 
 ### Required permissions for classic saved queries
 
@@ -303,29 +300,33 @@ You share a classic saved query with other users by generating and sharing a lin
 
 To run a classic shared query, users must have access to the data that the query accesses. For more information, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
 
-If you are plan to share a classic saved query, consider including a comment in the query that describes its purpose.
+If you are planning to share a classic saved query, consider including a comment in the query that describes its purpose.
 
-1.  In the left pane, click category **Classic Explorer** :
-    
-    ![Highlighted button for the Classic Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/classic-explorer-tab.png)
+To share a classic saved query, follow these steps:
+
+1.  In the left pane, click explore **Explorer** .
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-2.  In the **Classic Explorer** pane, expand your project, click **(Classic) Queries** , and then find the classic saved query you want to share.
+2.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
-3.  Click more\_vert **View actions** next to the query and then click **Get link** .
+3.  Find and click the classic saved query that you want to grant access to. You can use the search feature or filters to find your query.
 
-4.  Share the link with the users you want to grant access to the query.
+4.  Click more\_vert **View actions** next to the query and then click **Copy link** .
+
+5.  Share the link with the users you want to grant access to the query.
 
 ### Update classic saved queries
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click category **Classic Explorer** :
+2.  In the left pane, click explore **Explorer** :
     
-    ![Highlighted button for the Classic Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/classic-explorer-tab.png)
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Classic Explorer** pane, expand your project and the **(Classic) Queries** folder, and if necessary, the **Project queries** folder.
+3.  In the **Explorer** pane, expand your project and the **(Classic) Queries** folder, and if necessary, the **Project queries** folder.
 
 4.  Click the name of a classic saved query to open it.
 

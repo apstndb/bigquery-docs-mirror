@@ -399,7 +399,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### Grant a role to the remote model connection's service account
 
-You must grant the Vertex AI User role to the service account of the connection that the remote model uses.
+You must grant the Agent Platform User role to the service account of the connection that the remote model uses.
 
 If you plan to specify the remote model's endpoint as a URL, for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.0-flash'` , grant this role in the same project you specify in the URL.
 
@@ -407,7 +407,7 @@ If you plan to specify the remote model's endpoint by using the model name, for 
 
 Granting the role in a different project results in the error `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
-To grant the Vertex AI User role, follow these steps:
+To grant the Agent Platform User role, follow these steps:
 
 ### Console
 
@@ -419,7 +419,7 @@ To grant the Vertex AI User role, follow these steps:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, select **Vertex AI** , and then select **Vertex AI User** .
+4.  In the **Select a role** field, select **Vertex AI** , and then select **Agent Platform User** .
 
 5.  Click **Save** .
 
@@ -436,7 +436,7 @@ Replace the following:
 
 ## Grant a role to the object table connection's service account
 
-If you are using the remote model to generate text from object table data, grant the object table connection's service account the Vertex AI User role in the same project where you plan to create the remote model. Otherwise, you can skip this step.
+If you are using the remote model to generate text from object table data, grant the object table connection's service account the Agent Platform User role in the same project where you plan to create the remote model. Otherwise, you can skip this step.
 
 To find the service account for the object table connection, follow these steps:
 
@@ -474,7 +474,7 @@ To grant the role, follow these steps:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, select **Vertex AI** , and then select **Vertex AI User** .
+4.  In the **Select a role** field, select **Vertex AI** , and then select **Agent Platform User** .
 
 5.  Click **Save** .
 

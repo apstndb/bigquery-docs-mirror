@@ -8,17 +8,13 @@ data_source: docs.cloud.google.com
 
 # Schedule notebooks
 
-This document describes how to schedule [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) , and inspect scheduled notebook runs.
-
-Notebooks are code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . However, notebooks aren't visible in [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
-
-You can schedule a notebook to automatically run at a specified time and frequency—for example, to train an ML model, call external APIs, or run BigQuery DataFrames code.
+This document describes how to schedule and deploy [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) to automate various tasks. For example, you can run notebooks at a specified time and frequency to automate training machine learning models, call external APIs, or run BigQuery DataFrames code.
 
 Changes that you make to a notebook are automatically saved, but are available only to you and to users who have [access to the notebook](https://docs.cloud.google.com/bigquery/docs/manage-notebooks#grant_access_to_notebooks) . To update the schedule with a new version of the notebook, you need to [deploy the notebook](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#deploy) . By deploying a notebook, you update its schedule with your current version of the notebook. Schedules run the latest deployed version of the notebook.
 
 Each notebook schedule is run using your Google Account user credentials or a [custom service account](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) that you select when you configure the schedule.
 
-Dataform writes the output of scheduled notebook runs to the [Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/buckets) selected during schedule creation.
+Notebooks are code assets that are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . However, notebooks aren't visible in Dataform. Dataform writes the output of scheduled notebook runs to the [Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/buckets) selected during schedule creation.
 
 Notebook schedules use a [standard E2 runtime](https://docs.cloud.google.com/colab/docs/runtimes) . Colab Enterprise charges for runtimes apply. You are charged for runtime processing based on the E2 machine type. For information about pricing of standard E2 runtimes, see [Colab Enterprise pricing](https://cloud.google.com/colab/pricing) .
 

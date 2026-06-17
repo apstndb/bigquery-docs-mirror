@@ -393,7 +393,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### Give the service account access
 
-Grant the connection's service account the Vertex AI User role.
+Grant the connection's service account the Agent Platform User role.
 
 If you plan to specify the endpoint as a URL when you create the remote model— for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.5-pro'` — grant this role in the same project you specify in the URL.
 
@@ -413,7 +413,7 @@ To grant the role, follow these steps:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, select **Vertex AI** , and then select **Vertex AI User** .
+4.  In the **Select a role** field, select **Vertex AI** , and then select **Agent Platform User** .
 
 5.  Click **Save** .
 

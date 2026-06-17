@@ -16,7 +16,7 @@ To run this tutorial, you need the following Identity and Access Management (IAM
 
   - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `roles/bigquery.admin` ).
   - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ).
-  - Deploy and undeploy models in Gemini Enterprise Agent Platform: Vertex AI Administrator ( `roles/aiplatform.admin` ).
+  - Deploy and undeploy models in Gemini Enterprise Agent Platform: Agent Platform Administrator ( `roles/aiplatform.admin` ).
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 

@@ -141,7 +141,7 @@ Follow these steps to create a connection:
 
 ### Give the service account access
 
-Grant the connection's service account the Vertex AI User role.
+Grant the connection's service account the Agent Platform User role.
 
 To grant the role, follow these steps:
 
@@ -153,7 +153,7 @@ To grant the role, follow these steps:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, select **Vertex AI** , and then select **Vertex AI User** .
+4.  In the **Select a role** field, select **Vertex AI** , and then select **Agent Platform User** .
 
 5.  Click **Add another role** .
 

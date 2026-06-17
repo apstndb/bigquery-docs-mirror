@@ -28,7 +28,7 @@ Some examples of context and instructions that you provide to the agent are the 
 
 After creating data agents, you can then have [conversations](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#conversations) with them to ask questions about BigQuery data by using natural language. You can also create [direct conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) with one or more data sources to answer basic, one-off questions.
 
-Conversational analytics is powered by [Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/overview) and supports some BigQuery ML functions. For more information, see [BigQuery ML support](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) .
+Conversational analytics is powered by [Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/overview) and supports some BigQuery AI and ML functions. For more information, see [BigQuery AI and ML support](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) .
 
 Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .
 
@@ -43,7 +43,7 @@ Data agents consist of one or more knowledge sources, and a set of instructions 
   - Provide instructions for interpreting and querying the data, such as defining the following:
       - Synonyms and business terms for field names
       - Most important fields and defaults for filtering and grouping
-  - Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) and support [query parameters](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) .
+  - Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery AI and ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) and support [query parameters](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) .
   - Create BigQuery custom glossary terms for each agent or import business glossary terms from Knowledge Catalog. These terms help an agent interpret user prompts. For advice on when to use each type, see [Create or review glossary terms](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-review-glossary-terms) .
 
 ### Manage data agents
@@ -60,13 +60,12 @@ Other services in the project that support data agents, such as the [Conversatio
 
 ## Conversations
 
-Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs.
+Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can determine which data sources to query and take advantage of optimizations, such as table partitions or search indexes, when it constructs a response.
 
 The chat response returned to you provides the following features:
 
-  - The answer to your question as text, code, or images (multimodal). The answer can include supported BigQuery ML functions.
+  - The answer to your question as text, code, or images (multimodal). The answer can include supported BigQuery AI and ML functions.
   - Generated charts where appropriate.
-  - Graph visualizations for GQL query paths.
   - The agent's reasoning behind the results.
   - Metadata about the conversation, such as the agent and data sources used.
 
@@ -121,6 +120,8 @@ For example, you can use the `Look Graph` sample agent on the BigQuery on the [A
   - `Which product is most popular among 25-year-olds?`
   - `Show me the connection between bow tie orders and distribution centers`
 
+### Limitations
+
 The following limitations apply when you use a graph as a data source:
 
   - You can use at most one graph as a data source per agent or conversation.
@@ -130,20 +131,64 @@ The following limitations apply when you use a graph as a data source:
 
 You can manage access to conversational analytics in BigQuery using [Conversational Analytics API IAM roles and permissions](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) . For information about the roles needed for specific operations, see the [data agent required roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required-roles) and the [conversation required roles](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
 
+Conversational analytics includes the following security features and safeguards:
+
+  - It can only access data and resources that you have permission to access.
+  - It respects VPC-SC security controls.
+  - It can't perform write operations and can't run DML queries.
+  - It can't execute remote functions.
+  - It can only access the knowledge sources that you explicitly select.
+  - Your conversation history is only shared with you. You can't share it with other users.
+  - When you create a data agent, you must have access to query every knowledge source that you add.
+
 ## Locations
 
-Conversational analytics operates globally; you can't choose which region to use.
+Conversational analytics supports three locations that govern the storage of agent and conversation resources, and the location used for ML processing:
+
+  - US MREP
+  - EU MREP
+  - Global
+
+The following default behaviors apply when you create agents and conversations:
+
+  - If all of your knowledge sources come from regions in the US, then the US MREP is used.
+  - If all of your knowledge sources come from regions in the EU, then the EU MREP is used.
+  - Otherwise, the global location is used.
+
+When you create an agent, you can optionally select a different location. After you save the agent you can't change its location.
+
+Agents created prior to June 4, 2026 are in the global location.
 
 ## Pricing
 
-You are charged at [BigQuery compute pricing](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) for queries that run when you create data agents and have conversations with data agents or data sources. There is no additional charge for creating and using data agents and conversations during the Preview period.
+You are charged at [BigQuery compute pricing](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) for queries that run when you create data agents and have conversations with data agents or data sources. For more information, read about [agent pricing](https://cloud.google.com/products/data-agents/pricing) .
 
 ## Best practices
 
-Review the following guides to learn about best practices for using the Conversational Analytics API:
+Follow these best practices when you work with conversational analytics:
+
+  - Perform data cleaning on your tables before adding them as data sources.
+
+  - Join related tables in a view and use that view as a data source, rather than relying on the agent to determine the correct way to join your data.
+
+  - [Run profile scans](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) on your data.
+
+  - Scope your agents. Broadly scoped agents can have instructional conflicts, ambiguous outputs, and inconsistent performance. If your agent requires more than 20 data sources, is used across teams that have different metric definitions, or prioritizes one type of result at the expense of another, consider creating additional agents.
+
+  - Provide context to your agent. Prioritize types of context in the following way:
+    
+    1.  **Verified queries.** Deterministic SQL that executes when it matches a user prompt.
+    2.  **Glossaries.** Definitions of terms that link columns to semantic context.
+    3.  **Agent instructions.** Global behavior rules and definitions that are written using natural language, such as fiscal calendar definitions or formatting rules.
+
+  - Add table and column descriptions to your tables.
+
+  - Don't duplicate glossary definitions in Knowledge Catalog and the BigQuery custom glossary.
 
   - Set project-level, user-level, and query-level spending limits to [manage costs for your agents](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/manage-costs) .
+
   - [Ask effective questions](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/ask-effective-questions) in your conversations.
+
   - Understand how [data retention and deletion](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/retention-deletion) works for data agents and conversations.
 
 ## Limitations

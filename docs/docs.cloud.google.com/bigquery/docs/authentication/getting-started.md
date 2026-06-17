@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Get started with authentication
 
-Application Default Credentials (ADC) let your application use service account credentials to access BigQuery resources as its own identity.
-
-Note that BigQuery doesn't support the use of [API keys](https://docs.cloud.google.com/docs/authentication/api-keys-use) .
+To authenticate your application to BigQuery resources, you can use Application Default Credentials (ADC). ADC uses service account credentials, providing a consistent authentication method for both local development and deployed environments. This approach removes the need to modify authentication code when you move from development to production. BigQuery doesn't support the use of [API keys](https://docs.cloud.google.com/docs/authentication/api-keys-use) for authentication.
 
 ## Before you begin
 
@@ -148,7 +146,7 @@ For information about setting up authentication for a production environment, se
 
 Client libraries can use [Application Default Credentials](https://docs.cloud.google.com/docs/authentication/application-default-credentials) to easily authenticate with Google APIs and send requests to those APIs. With Application Default Credentials, you can test your application locally and deploy it without changing the underlying code. For more information, see [Authenticate for using client libraries](https://docs.cloud.google.com/docs/authentication/client-libraries) .
 
-When you create a service object with the [BigQuery Client Libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) and don't pass in explicit credentials, your application authenticates using Application Default Credentials. The following samples show how to authenticate to BigQuery by using ADC.
+When you create a service object with the [BigQuery API Client Libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) and don't pass in explicit credentials, your application authenticates using Application Default Credentials. The following samples show how to authenticate to BigQuery by using ADC.
 
 ### C\#
 
