@@ -528,10 +528,6 @@ Grant these roles at the project level:
   - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) : To run queries against BigQuery data.
   - [Gemini for Google Cloud User ( `roles/cloudaicompanion.user` )](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) or [BigQuery Studio User ( `roles/bigquery.studioUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) : Required for interacting with the Gemini-powered chat interface in Data Studio. These roles provide the `cloudaicompanion.topics.create` permission.
 
-**Data Studio Pro**
-
-Accessing BigQuery data agents in Data Studio's **Chat with your data** page typically requires a Data Studio Pro subscription, with Gemini features enabled for the project.
-
 ##### Troubleshoot common issues
 
 The following are common issues when sharing data agents with Data Studio users:

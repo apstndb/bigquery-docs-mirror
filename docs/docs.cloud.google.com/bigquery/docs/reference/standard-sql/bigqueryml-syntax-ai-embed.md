@@ -254,6 +254,64 @@ Use the following table to help you choose an embedding model for your data:
 | `endpoint => 'text-multilingual-embedding-002'` | up to 768        | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) | Best for embedding long strings. Specialized in multilingual tasks.                                                                         | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
 | `endpoint => 'gemini-embedding-2-preview'`      | up to 3072       | 8192 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#expandable-4)                                          | Best for embedding long strings, including multilingual and unstructured data. Supports a mix of text, images, audio, video, and PDF files. | Agent Platform endpoint | Incurs Agent Platform charges. Might require Agent Platform permission setup depending on your project settings. |
 
+## Billing and permissions
+
+The project that is billed for Agent Platform usage and the permissions required for the connection depend on how you specify the `endpoint` value and the context in which the `AI.EMBED` function is called.
+
+### Billing model
+
+The following table describes which project is billed for Agent Platform usage based on the `endpoint` value and the context:
+
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Endpoint format</th>
+<th>Context</th>
+<th>Billed project</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full path URL.<br />
+For example, <code dir="ltr" translate="no">projects/         PROJECT_ID        /locations/us-central1/publishers/google/models/text-embedding-005</code></td>
+<td>Standard query or search query</td>
+<td>The project ID specified in the full path URL.</td>
+</tr>
+<tr class="even">
+<td>Full path URL.<br />
+For example, <code dir="ltr" translate="no">projects/         PROJECT_ID        /locations/us-central1/publishers/google/models/text-embedding-005</code></td>
+<td>Autonomous embedding background job</td>
+<td>The project ID specified in the full path URL.</td>
+</tr>
+<tr class="odd">
+<td>Model name only.<br />
+For example, <code dir="ltr" translate="no">text-embedding-005</code></td>
+<td>Standard query or search query</td>
+<td>The project ID in which the query is run.</td>
+</tr>
+<tr class="even">
+<td>Model name only.<br />
+For example, <code dir="ltr" translate="no">text-embedding-005</code></td>
+<td>Autonomous embedding background job</td>
+<td>The project ID that contains the table.</td>
+</tr>
+</tbody>
+</table>
+
+### Connection permissions
+
+The connection used by the `AI.EMBED` function must have the Agent Platform User ( `roles/aiplatform.user` ) role in the project that is billed for Agent Platform usage.
+
+  - If you specify a full path for the endpoint, the connection must have permissions in the project specified in that path.
+  - If you specify only a model name:
+      - For standard queries or search queries, the connection must have permissions in the project in which the query is run.
+      - For autonomous embedding background jobs, the connection must have permissions in the project that contains the table.
+
 ## Locations
 
 You can run `AI.EMBED` in all of the [locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) that support Agent Platform embedding models, and also in the `US` and `EU` multi-regions.

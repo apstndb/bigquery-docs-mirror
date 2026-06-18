@@ -722,6 +722,8 @@ The `VECTOR_SEARCH` function lets you search embeddings to find semantically sim
 
 Embeddings are high-dimensional numerical vectors that represent a given entity, like a piece of text or an audio file. Machine learning (ML) models use embeddings to encode semantics about such entities to make it easier to reason about and compare them. For example, a common operation in clustering, classification, and recommendation models is to measure the distance between vectors in an [embedding space](https://en.wikipedia.org/wiki/Latent_space) to find items that are most semantically similar.
 
+You can also use the `VECTOR_SEARCH` function with `ObjectRef` input. For more information, see [Search with `ObjectRef` input](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#objectref-search) .
+
 **Definitions**
 
   - `base_table` : The table to search for nearest neighbor embeddings.
@@ -731,18 +733,20 @@ Embeddings are high-dimensional numerical vectors that represent a given entity,
   - `column_to_search` : The name of the base table column to search for nearest neighbor embeddings. The column must be one of the following types:
     
       - `ARRAY<FLOAT64>` : All elements in the array must be non- `NULL` , and all values in the column must have the same array dimensions.
-      - `STRING` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) The table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled on this column. Rows with missing embeddings in the base table are skipped during the search.
+      - `STRING` : The table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled on this column. Rows with missing embeddings in the base table are skipped during the search.
+      - `STRUCT` : An `ObjectRef` column. An `ObjectRef` is a `STRUCT` with fixed fields that can reference unstructured data. For more information, see [Work with object references](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) . The table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled on this column. Rows with missing embeddings in the base table are skipped during the search.
     
     If the column has a vector index, BigQuery attempts to use it. To determine if an index was used in the vector search, see [Vector index usage](https://docs.cloud.google.com/bigquery/docs/vector-index#vector_index_usage) .
 
-  - `query_table` : The table that provides the embeddings for which to find nearest neighbors. All columns are passed through as output columns.
+  - `query_table` : The table that provides the embeddings, strings, or `ObjectRef` s for which to find nearest neighbors. All columns are passed through as output columns.
 
-  - `query_table_query` : A query that provides the embeddings for which to find nearest neighbors. All columns are passed through as output columns.
+  - `query_table_query` : A query that provides the embeddings, strings, or `ObjectRef` s for which to find nearest neighbors. All columns are passed through as output columns.
 
   - `query_column_to_search` : A named argument with a `STRING` value. `query_column_to_search_value` specifies the name of the column in the query table or statement that contains the strings or embeddings for which to find nearest neighbors. The column must be one of the following types:
     
       - `ARRAY<FLOAT64>` : All elements in the array must be non- `NULL` and all values in the column must have the same array dimensions as the values in the `column_to_search` column.
-      - `STRING` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The string values are embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. These embeddings are used to return query results but aren't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
+      - `STRING` : The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The string values are embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. These embeddings are used to return query results but aren't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
+      - `STRUCT` : An `ObjectRef` column. An `ObjectRef` is a `STRUCT` with fixed fields that can reference unstructured data. For more information, see [Work with object references](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) . The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The `ObjectRef` values are embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. These embeddings are used to return query results but aren't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation. Rows with missing embeddings in the base table are skipped during the search.
     
     If you don't specify `query_column_to_search_value` , the function uses the `column_to_search` value or picks the most appropriate column.
 
@@ -750,6 +754,7 @@ Embeddings are high-dimensional numerical vectors that represent a given entity,
     
       - `ARRAY<FLOAT64>` : The `single_query_value` is a single embedding for which to find nearest neighbors.
       - `STRING` : The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The `single_query_value` is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. The embedding is used to return query results but isn't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
+      - `STRUCT` : The `single_query_value` is an `ObjectRef` for which to find nearest neighbors. An `ObjectRef` is a `STRUCT` with fixed fields that can reference unstructured data. For more information, see [Work with object references](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) . The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The `single_query_value` is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. The embedding is used to return query results but isn't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
 
   - `top_k` : A named argument with an `INT64` value. `top_k_value` specifies the number of nearest neighbors to return. The default is `10` . If the value is negative, all values are counted as neighbors and returned.
 
@@ -789,6 +794,20 @@ The output includes the following columns:
   - `base` : A `STRUCT` value that contains all columns from `base_table` or a subset of the columns from `base_table` that you selected in the `base_table_query` query.
   - `distance` : A `FLOAT64` value that represents the distance between the base data and the query data.
 
+**Search with `ObjectRef` input**
+
+In addition to performing `VECTOR_SEARCH` using `STRING` input, you can also use `ObjectRef` input.
+
+The following example shows how to use the `VECTOR_SEARCH` function to perform semantic search using on `ObjectRef` s:
+
+    SELECT *
+    FROM
+      VECTOR_SEARCH(
+        TABLE mydataset.images,
+        'image_ref',
+        (SELECT image_ref FROM mydataset.images_query)
+    );
+
 **Limitations**
 
 BigQuery data security and governance rules apply to the use of `VECTOR_SEARCH` , which results in the following behavior:
@@ -805,6 +824,10 @@ BigQuery data security and governance rules apply to the use of `VECTOR_SEARCH` 
     
       - If embedding generation for the query string fails, then the entire query fails.
       - Your query is subject to the [generative AI function limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
+
+  - The base table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled to use `ObjectRef` as the `query_value` or as the referenced column in `query_column_to_search` .
+
+  - When `column_to_search` is an `ARRAY` of embeddings (BYO embeddings), you can't use `ObjectRef` or `STRING` as the `query_value` .
 
 **Examples**
 

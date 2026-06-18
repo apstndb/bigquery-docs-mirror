@@ -8,18 +8,22 @@ data_source: docs.cloud.google.com
 
 # The AI.SEARCH function
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature during the preview, contact <bq-vector-search@google.com> .
-
 This document describes the `AI.SEARCH` function, which is a table-valued function for semantic search on tables that have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
 
 For example, you could use a query like the following to search a table of product descriptions for anything described as a fun toy. In this example, the `product_description` column has autonomous embedding generation enabled.
 
     SELECT *
-    FROM AI.SEARCH(TABLE product_table, product_description, "A really fun toy");
+    FROM AI.SEARCH(TABLE product_table, 'product_description', "A really fun toy");
+
+You can also perform semantic search using an `ObjectRef` input if the base table has autonomous embedding generation enabled for an `ObjectRef` column, as long as that table's embedding generation model supports the `ObjectRef` data type:
+
+    SELECT *
+    FROM AI.SEARCH(
+      TABLE mydataset.images,
+      'ref',
+      'A really fun toy'  -- Searching a table of images with a text query is
+                          -- possible with a multimodal embedding model
+    );
 
 Embeddings are high-dimensional numerical vectors that represent a given entity. Embeddings encode semantics about entities to make it easier to reason about and compare them. If two entities are semantically similar, then their respective embeddings are located near each other in the embedding vector space. The `AI.SEARCH` function embeds your search query and searches the table that you provide for embeddings in the input table that are close to it. If your table has a vector index on the embedding column, then `AI.SEARCH` uses it to optimize the search.
 
@@ -50,9 +54,9 @@ You can use `AI.SEARCH` to help with the following tasks:
 
   - `base_table_query` : A query that you can use to pre-filter the base table. Only `SELECT` , `FROM` , and `WHERE` clauses are allowed in this query. Don't apply any filters to the embedding column. You can't use [logical views](https://docs.cloud.google.com/bigquery/docs/views-intro) in this query. Using a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) might interfere with index usage or cause your query to fail. If the base table is indexed and the `WHERE` clause contains columns that are not stored in the index, then `AI.SEARCH` uses post-filters on those columns instead. To learn more, see [Store columns and pre-filter](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) .
 
-  - `column_to_search` : A `STRING` literal that contains the name of the string column to search. This must be the name of the source column that the automatically generated embedding column is based on, but it's not the name of the generated embedding column itself. If the column has a vector index, BigQuery attempts to use it. To determine if an index was used in the vector search, see [Vector index usage](https://docs.cloud.google.com/bigquery/docs/vector-index#vector_index_usage) .
+  - `column_to_search` : A `STRING` literal that contains the name of the column to search. This must be the name of the source column (of type `STRING` or `ObjectRef` ) that the automatically generated embedding column is based on, but it's not the name of the generated embedding column itself. If the column has a vector index, BigQuery attempts to use it. To determine if an index was used in the vector search, see [Vector index usage](https://docs.cloud.google.com/bigquery/docs/vector-index#vector_index_usage) .
 
-  - `query_value` : A string literal that represents the search query. This value is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation. If embedding generation fails for `query_value` , then the whole query fails. Rows with missing embeddings in the base table are skipped during the search.
+  - `query_value` : A string literal or `ObjectRef` value that represents the search query. This value is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation. If embedding generation fails for `query_value` , then the whole query fails. Rows with missing embeddings in the base table are skipped during the search.
 
   - `top_k` : A named argument with an `INT64` value. `top_k_value` specifies the number of nearest neighbors to return. The default is `10` . If the value is negative, all values are counted as neighbors and returned.
 

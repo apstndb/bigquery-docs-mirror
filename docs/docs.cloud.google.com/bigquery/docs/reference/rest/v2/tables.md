@@ -18,6 +18,11 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DataPolicyList.SCHEMA_REPRESENTATION)
   - [FieldElementType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FieldElementType)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FieldElementType.SCHEMA_REPRESENTATION)
+  - [GeneratedColumn](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GeneratedColumn)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GeneratedColumn.SCHEMA_REPRESENTATION)
+  - [GeneratedMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GeneratedMode)
+  - [GeneratedExpressionInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GeneratedExpressionInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GeneratedExpressionInfo.SCHEMA_REPRESENTATION)
   - [TimePartitioning](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.SCHEMA_REPRESENTATION)
   - [RangePartitioning](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#RangePartitioning)
@@ -444,7 +449,7 @@ A field in TableSchema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {&quot;names&quot;: [string]},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {&quot;names&quot;: [string]},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -601,6 +606,12 @@ Optional. The subtype of the RANGE, if the type of this field is RANGE. If the t
   - DATETIME
   - TIMESTAMP
 
+`generatedColumn`
+
+` object ( GeneratedColumn  ` )
+
+Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields).
+
 ## DataPolicyOption
 
 Data policy option. For more information, see [Mask data by applying data policies to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) .
@@ -688,6 +699,104 @@ Fields
 `string`
 
 Required. The type of a field element. For more information, see `  TableFieldSchema.type  ` .
+
+## GeneratedColumn
+
+Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields).
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;generatedMode&quot;: enum (GeneratedMode),// Union field definition can be only one of the following:&quot;generatedExpressionInfo&quot;: {object (GeneratedExpressionInfo)}// End of list of possible types for union field definition.}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`generatedMode`
+
+` enum ( GeneratedMode  ` )
+
+Optional. Dictates when system generated values are used to populate the field.
+
+Union field `definition` . Captures the metadata for the generated column. `definition` can be only one of the following:
+
+`generatedExpressionInfo`
+
+` object ( GeneratedExpressionInfo  ` )
+
+Definition of the expression used to generate the field.
+
+## GeneratedMode
+
+Dictates when system generated values are used to populate the field.
+
+Enums
+
+`GENERATED_MODE_UNSPECIFIED`
+
+Unspecified GeneratedMode will default to GENERATED\_ALWAYS.
+
+`GENERATED_ALWAYS`
+
+Field can only have system generated values. Users cannot manually insert values into the field.
+
+`GENERATED_BY_DEFAULT`
+
+Use system generated values only if the user does not explicitly provide a value.
+
+## GeneratedExpressionInfo
+
+Definition of the expression used to generate the field.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;generationExpression&quot;: string,
+  &quot;asynchronous&quot;: boolean,
+  &quot;stored&quot;: boolean
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`generationExpression`
+
+`string`
+
+Optional. The generation expression (e.g. AI.EMBED(...)) used to generate the field.
+
+`asynchronous`
+
+`boolean`
+
+Optional. Whether the column generation is done asynchronously.
+
+`stored`
+
+`boolean`
+
+Optional. Whether the generated column is stored in the table.
 
 ## TimePartitioning
 

@@ -97,7 +97,7 @@ You can't perform a [dry run](https://docs.cloud.google.com/bigquery/docs/runnin
 
 ### Remote models
 
-You can create [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) in BigQuery that use models deployed to [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) . You reference the deployed model by specifying the model's [HTTPS endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment#what_happens_when_you_deploy_a_model) in the remote model's `CREATE MODEL` statement.
+You can create [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) in BigQuery that use models deployed to [Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview) . You reference the deployed model by specifying the model's [HTTPS endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment#what_happens_when_you_deploy_a_model) in the remote model's `CREATE MODEL` statement.
 
 The `CREATE MODEL` statements for remote models don't process any bytes and don't incur BigQuery charges.
 

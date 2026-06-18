@@ -16,6 +16,12 @@ When your Google Ads reports are transferred to BigQuery, the reports are transf
 
 When you view the tables and views in BigQuery, the value for customer\_id is your Google Ads customer ID.
 
+The following sections categorize report transformations based on report types and specialized datasets.
+
+### Account reports
+
+The following reports focus on high-level account performance, bidding strategies, and budget management.
+
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -60,95 +66,6 @@ AccountBasicStats_ customer_id<br />
 AccountStats_ customer_id</td>
 </tr>
 <tr class="even">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/ad-performance-report">Ad Performance Report</a></td>
-<td>p_AdBasicStats_ customer_id<br />
-p_AdCrossDeviceStats_ customer_id<br />
-p_AdConversionStats_ customer_id<br />
-p_AdStats_ customer_id<br />
-p_AdCrossDeviceConversionStats_ customer_id<br />
-p_Ad_ customer_id</td>
-<td>p_ads_AdBasicStats_ customer_id<br />
-p_ads_AdCrossDeviceStats_ customer_id<br />
-p_ads_AdConversionStats_ customer_id<br />
-p_ads_AdStats_ customer_id<br />
-p_ads_AdCrossDeviceConversionStats_ customer_id<br />
-p_ads_Ad_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_ad">Ad Group Ad</a></td>
-<td>AdBasicStats_ customer_id<br />
-AdCrossDeviceStats_ customer_id<br />
-AdConversionStats_ customer_id<br />
-AdStats_ customer_id<br />
-AdCrossDeviceConversionStats_ customer_id<br />
-Ad_ customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/adgroup-performance-report">Adgroup Performance Report</a></td>
-<td>p_AdGroupStats_ customer_id<br />
-p_AdGroupBasicStats_ customer_id<br />
-p_AdGroupCrossDeviceStats_ customer_id<br />
-p_HourlyAdGroupConversionStats_ customer_id<br />
-p_HourlyAdGroupStats_ customer_id<br />
-p_AdGroupConversionStats_ customer_id<br />
-p_AdGroupCrossDeviceConversionStats_ customer_id<br />
-p_AdGroup_ customer_id</td>
-<td>p_ads_AdGroupStats_ customer_id<br />
-p_ads_AdGroupBasicStats_ customer_id<br />
-p_ads_AdGroupCrossDeviceStats_ customer_id<br />
-p_ads_HourlyAdGroupConversionStats_ customer_id<br />
-p_ads_HourlyAdGroupStats_ customer_id<br />
-p_ads_AdGroupConversionStats_ customer_id<br />
-p_ads_AdGroupCrossDeviceConversionStats_ customer_id<br />
-p_ads_AdGroup_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group">Ad Group</a></td>
-<td>AdGroupStats_ customer_id<br />
-AdGroupBasicStats_ customer_id<br />
-AdGroupCrossDeviceStats_ customer_id<br />
-HourlyAdGroupConversionStats_ customer_id<br />
-HourlyAdGroupStats_ customer_id<br />
-AdGroupConversionStats_ customer_id<br />
-AdGroupCrossDeviceConversionStats_ customer_id<br />
-AdGroup_ customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/age-range-performance-report">Age Range Performance Report</a></td>
-<td>p_AgeRange_ customer_id<br />
-p_AgeRangeBasicStats_ customer_id<br />
-p_AgeRangeStats_ customer_id<br />
-p_AgeRangeConversionStats_ customer_id<br />
-p_AgeRangeNonClickStats_ customer_id</td>
-<td>p_ads_AgeRange_ customer_id<br />
-p_ads_AgeRangeBasicStats_ customer_id<br />
-p_ads_AgeRangeStats_ customer_id<br />
-p_ads_AgeRangeConversionStats_ customer_id<br />
-p_ads_AgeRangeNonClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/age_range_view">Age Range View</a></td>
-<td>AgeRange_ customer_id<br />
-AgeRangeBasicStats_ customer_id<br />
-AgeRangeStats_ customer_id<br />
-AgeRangeConversionStats_ customer_id<br />
-AgeRangeNonClickStats_ customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/audience-performance-report">Audience Performance Report</a></td>
-<td>p_Audience_ customer_id<br />
-p_AudienceConversionStats_ customer_id<br />
-p_AudienceNonClickStats_ customer_id<br />
-p_AudienceBasicStats_ customer_id<br />
-p_AudienceStats_ customer_id</td>
-<td><code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code></td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view">Ad Group Audience View</a><br />
-<a href="https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view">Campaign Audience View</a></td>
-<td>Audience_ customer_id<br />
-AudienceConversionStats_ customer_id<br />
-AudienceNonClickStats_ customer_id<br />
-AudienceBasicStats_ customer_id<br />
-AudienceStats_ customer_id</td>
-</tr>
-<tr class="even">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/bid-goal-performance-report">Bid Goal Performance Report</a></td>
 <td>p_BidGoal_ customer_id<br />
 p_BidGoalStats_ customer_id<br />
@@ -174,7 +91,32 @@ p_ads_BudgetStats_ customer_id</td>
 <td>Budget_ customer_id<br />
 BudgetStats_ customer_id</td>
 </tr>
-<tr class="even">
+</tbody>
+</table>
+
+### Campaign reports
+
+The following reports contain metrics for campaign-level performance and location-based targeting.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/campaign-location-target-report">Campaign Location Target Report</a></td>
 <td>p_CampaignLocationTargetStats_ customer_id<br />
 p_LocationBasedCampaignCriterion_ customer_id</td>
@@ -184,7 +126,7 @@ p_ads_LocationBasedCampaignCriterion_ customer_id</td>
 <td>CampaignLocationTargetStats_ customer_id<br />
 LocationBasedCampaignCriterion_ customer_id</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/campaign-performance-report">Campaign Performance Report</a></td>
 <td>p_Campaign_ customer_id<br />
 p_CampaignBasicStats_ customer_id<br />
@@ -215,31 +157,149 @@ HourlyCampaignStats_ customer_id<br />
 CampaignCrossDeviceConversionStats_ customer_id<br />
 CampaignCookieStats_ customer_id</td>
 </tr>
-<tr class="even">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/click-performance-report">Click Performance Report</a></td>
-<td>p_ClickStats_ customer_id</td>
-<td>p_ads_ClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/click_view">Click View</a></td>
-<td>ClickStats_ customer_id</td>
+</tbody>
+</table>
+
+### Ad group reports
+
+The following reports focus on metrics at the ad group level.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
 </tr>
+</thead>
+<tbody>
 <tr class="odd">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/criteria-performance-report">Criteria Performance Report</a></td>
-<td>p_Criteria_ customer_id<br />
-p_CriteriaBasicStats_ customer_id<br />
-p_CriteriaStats_ customer_id<br />
-p_CriteriaConversionStats_ customer_id<br />
-p_CriteriaNonClickStats_ customer_id</td>
-<td><code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NULL</code></td>
-<td></td>
-<td>Criteria_ customer_id<br />
-CriteriaBasicStats_ customer_id<br />
-CriteriaStats_ customer_id<br />
-CriteriaConversionStats_ customer_id<br />
-CriteriaNonClickStats_ customer_id</td>
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/adgroup-performance-report">Adgroup Performance Report</a></td>
+<td>p_AdGroupStats_ customer_id<br />
+p_AdGroupBasicStats_ customer_id<br />
+p_AdGroupCrossDeviceStats_ customer_id<br />
+p_HourlyAdGroupConversionStats_ customer_id<br />
+p_HourlyAdGroupStats_ customer_id<br />
+p_AdGroupConversionStats_ customer_id<br />
+p_AdGroupCrossDeviceConversionStats_ customer_id<br />
+p_AdGroup_ customer_id</td>
+<td>p_ads_AdGroupStats_ customer_id<br />
+p_ads_AdGroupBasicStats_ customer_id<br />
+p_ads_AdGroupCrossDeviceStats_ customer_id<br />
+p_ads_HourlyAdGroupConversionStats_ customer_id<br />
+p_ads_HourlyAdGroupStats_ customer_id<br />
+p_ads_AdGroupConversionStats_ customer_id<br />
+p_ads_AdGroupCrossDeviceConversionStats_ customer_id<br />
+p_ads_AdGroup_ customer_id</td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group">Ad Group</a></td>
+<td>AdGroupStats_ customer_id<br />
+AdGroupBasicStats_ customer_id<br />
+AdGroupCrossDeviceStats_ customer_id<br />
+HourlyAdGroupConversionStats_ customer_id<br />
+HourlyAdGroupStats_ customer_id<br />
+AdGroupConversionStats_ customer_id<br />
+AdGroupCrossDeviceConversionStats_ customer_id<br />
+AdGroup_ customer_id</td>
+</tr>
+</tbody>
+</table>
+
+### Ad reports
+
+The following reports are for individual ad performance.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/ad-performance-report">Ad Performance Report</a></td>
+<td>p_AdBasicStats_ customer_id<br />
+p_AdCrossDeviceStats_ customer_id<br />
+p_AdConversionStats_ customer_id<br />
+p_AdStats_ customer_id<br />
+p_AdCrossDeviceConversionStats_ customer_id<br />
+p_Ad_ customer_id</td>
+<td>p_ads_AdBasicStats_ customer_id<br />
+p_ads_AdCrossDeviceStats_ customer_id<br />
+p_ads_AdConversionStats_ customer_id<br />
+p_ads_AdStats_ customer_id<br />
+p_ads_AdCrossDeviceConversionStats_ customer_id<br />
+p_ads_Ad_ customer_id</td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_ad">Ad Group Ad</a></td>
+<td>AdBasicStats_ customer_id<br />
+AdCrossDeviceStats_ customer_id<br />
+AdConversionStats_ customer_id<br />
+AdStats_ customer_id<br />
+AdCrossDeviceConversionStats_ customer_id<br />
+Ad_ customer_id</td>
+</tr>
+</tbody>
+</table>
+
+### Demographics reports
+
+The following reports include performance data broken down by user demographic characteristics.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/age-range-performance-report">Age Range Performance Report</a></td>
+<td>p_AgeRange_ customer_id<br />
+p_AgeRangeBasicStats_ customer_id<br />
+p_AgeRangeStats_ customer_id<br />
+p_AgeRangeConversionStats_ customer_id<br />
+p_AgeRangeNonClickStats_ customer_id</td>
+<td>p_ads_AgeRange_ customer_id<br />
+p_ads_AgeRangeBasicStats_ customer_id<br />
+p_ads_AgeRangeStats_ customer_id<br />
+p_ads_AgeRangeConversionStats_ customer_id<br />
+p_ads_AgeRangeNonClickStats_ customer_id</td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/age_range_view">Age Range View</a></td>
+<td>AgeRange_ customer_id<br />
+AgeRangeBasicStats_ customer_id<br />
+AgeRangeStats_ customer_id<br />
+AgeRangeConversionStats_ customer_id<br />
+AgeRangeNonClickStats_ customer_id</td>
 </tr>
 <tr class="even">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/gender-performance-report">Gender Performance Report</a></td>
@@ -261,16 +321,50 @@ GenderConversionStats_ customer_id<br />
 GenderNonClickStats_ customer_id</td>
 </tr>
 <tr class="odd">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/geo-performance-report">Geo Performance Report</a></td>
-<td>p_GeoConversionStats_ customer_id<br />
-p_GeoStats_ customer_id</td>
-<td>p_ads_GeoConversionStats_ customer_id<br />
-p_ads_GeoStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/geographic_view">Geographic View</a></td>
-<td>GeoConversionStats_ customer_id<br />
-GeoStats_ customer_id</td>
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/parental-status-performance-report">Parental Status Performance Report</a></td>
+<td>p_ParentalStatus_ customer_id<br />
+p_ParentalStatusBasicStats_ customer_id<br />
+p_ParentalStatusStats_ customer_id<br />
+p_ParentalStatusConversionStats_ customer_id<br />
+p_ParentalStatusNonClickStats_ customer_id</td>
+<td>p_ads_ParentalStatus_ customer_id<br />
+p_ads_ParentalStatusBasicStats_ customer_id<br />
+p_ads_ParentalStatusStats_ customer_id<br />
+p_ads_ParentalStatusConversionStats_ customer_id<br />
+p_ads_ParentalStatusNonClickStats_ customer_id</td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/parental_status_view">Parental Status View</a></td>
+<td>ParentalStatus_ customer_id<br />
+ParentalStatusBasicStats_ customer_id<br />
+ParentalStatusStats_ customer_id<br />
+ParentalStatusConversionStats_ customer_id<br />
+ParentalStatusNonClickStats_ customer_id</td>
 </tr>
-<tr class="even">
+</tbody>
+</table>
+
+### Keywords and search reports
+
+The following reports cover keyword performance, search terms, and combined paid and organic query data.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/keywords-performance-report">Keywords Performance Report</a></td>
 <td>p_Keyword_ customer_id<br />
 p_KeywordBasicStats_ customer_id<br />
@@ -292,31 +386,86 @@ KeywordStats_ customer_id<br />
 KeywordCrossDeviceConversionStats_ customer_id<br />
 KeywordConversionStats_ customer_id</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/paid-organic-query-report">Paid Organic Query Report</a></td>
 <td>p_PaidOrganicStats_ customer_id</td>
 <td>p_ads_PaidOrganicStats_ customer_id</td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/paid_organic_search_term_view">Paid Organic Search Term View</a></td>
 <td>PaidOrganicStats_ customer_id</td>
 </tr>
+<tr class="odd">
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/search-query-performance-report">Search Query Performance Report</a></td>
+<td>p_SearchQueryStats_ customer_id<br />
+p_SearchQueryConversionStats_ customer_id</td>
+<td>p_ads_SearchQueryStats_ customer_id<br />
+p_ads_SearchQueryConversionStats_ customer_id</td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/search_term_view">Search Term View</a></td>
+<td>SearchQueryStats_ customer_id<br />
+SearchQueryConversionStats_ customer_id</td>
+</tr>
+</tbody>
+</table>
+
+### Audience and targeting reports
+
+The following reports are related to audience views, criteria, and managed placements.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/audience-performance-report">Audience Performance Report</a></td>
+<td>p_Audience_ customer_id<br />
+p_AudienceConversionStats_ customer_id<br />
+p_AudienceNonClickStats_ customer_id<br />
+p_AudienceBasicStats_ customer_id<br />
+p_AudienceStats_ customer_id</td>
+<td><code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view">Ad Group Audience View</a><br />
+<a href="https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view">Campaign Audience View</a></td>
+<td>Audience_ customer_id<br />
+AudienceConversionStats_ customer_id<br />
+AudienceNonClickStats_ customer_id<br />
+AudienceBasicStats_ customer_id<br />
+AudienceStats_ customer_id</td>
+</tr>
 <tr class="even">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/parental-status-performance-report">Parental Status Performance Report</a></td>
-<td>p_ParentalStatus_ customer_id<br />
-p_ParentalStatusBasicStats_ customer_id<br />
-p_ParentalStatusStats_ customer_id<br />
-p_ParentalStatusConversionStats_ customer_id<br />
-p_ParentalStatusNonClickStats_ customer_id</td>
-<td>p_ads_ParentalStatus_ customer_id<br />
-p_ads_ParentalStatusBasicStats_ customer_id<br />
-p_ads_ParentalStatusStats_ customer_id<br />
-p_ads_ParentalStatusConversionStats_ customer_id<br />
-p_ads_ParentalStatusNonClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/parental_status_view">Parental Status View</a></td>
-<td>ParentalStatus_ customer_id<br />
-ParentalStatusBasicStats_ customer_id<br />
-ParentalStatusStats_ customer_id<br />
-ParentalStatusConversionStats_ customer_id<br />
-ParentalStatusNonClickStats_ customer_id</td>
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/criteria-performance-report">Criteria Performance Report</a></td>
+<td>p_Criteria_ customer_id<br />
+p_CriteriaBasicStats_ customer_id<br />
+p_CriteriaStats_ customer_id<br />
+p_CriteriaConversionStats_ customer_id<br />
+p_CriteriaNonClickStats_ customer_id</td>
+<td><code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code><br />
+<code dir="ltr" translate="no">NULL</code></td>
+<td></td>
+<td>Criteria_ customer_id<br />
+CriteriaBasicStats_ customer_id<br />
+CriteriaStats_ customer_id<br />
+CriteriaConversionStats_ customer_id<br />
+CriteriaNonClickStats_ customer_id</td>
 </tr>
 <tr class="odd">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/placement-performance-report">Placement Performance Report</a></td>
@@ -337,16 +486,31 @@ PlacementStats_ customer_id<br />
 Placement_ customer_id<br />
 PlacementConversionStats_ customer_id</td>
 </tr>
-<tr class="even">
-<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/search-query-performance-report">Search Query Performance Report</a></td>
-<td>p_SearchQueryStats_ customer_id<br />
-p_SearchQueryConversionStats_ customer_id</td>
-<td>p_ads_SearchQueryStats_ customer_id<br />
-p_ads_SearchQueryConversionStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/search_term_view">Search Term View</a></td>
-<td>SearchQueryStats_ customer_id<br />
-SearchQueryConversionStats_ customer_id</td>
+</tbody>
+</table>
+
+### Shopping and video reports
+
+The following reports focus on specialized campaign channels.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
 </tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/shopping-performance-report">Shopping Performance Report</a></td>
 <td>p_ShoppingProductConversionStats_ customer_id<br />
@@ -376,96 +540,110 @@ VideoStats_ customer_id<br />
 Video_ customer_id<br />
 VideoNonClickStats_ customer_id</td>
 </tr>
+</tbody>
+</table>
+
+### Geography and click reports
+
+The following reports present detailed metrics on user geography and click-level data.
+
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>AdWords reports (deprecated)</th>
+<th>BigQuery AdWords tables</th>
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+<th>BigQuery views</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
-<td></td>
-<td></td>
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/click-performance-report">Click Performance Report</a></td>
+<td>p_ClickStats_ customer_id</td>
+<td>p_ads_ClickStats_ customer_id</td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/click_view">Click View</a></td>
+<td>ClickStats_ customer_id</td>
+</tr>
+<tr class="even">
+<td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/geo-performance-report">Geo Performance Report</a></td>
+<td>p_GeoConversionStats_ customer_id<br />
+p_GeoStats_ customer_id</td>
+<td>p_ads_GeoConversionStats_ customer_id<br />
+p_ads_GeoStats_ customer_id</td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v22/geographic_view">Geographic View</a></td>
+<td>GeoConversionStats_ customer_id<br />
+GeoStats_ customer_id</td>
+</tr>
+</tbody>
+</table>
+
+### Attribute and label tables
+
+The following tables provide mapping information for attribute settings and label assignments, such as CampaignLabel, AdGroupLabel, and AdGroupBidModifier.
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Google Ads tables</th>
+<th>Google Ads API resources (v22.0.0)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td>AdGroupBidModifier</td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_bid_modifier">Ad Group Bid Modifier</a></td>
-<td></td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
 <td>AdGroupAdLabel</td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_ad_label">Ad Group Ad Label</a></td>
-<td></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
 <td>CampaignLabel</td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/campaign_label">Campaign Label</a></td>
-<td></td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
 <td>CampaignCriterion</td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/campaign_criterion">Campaign Criterion</a></td>
-<td></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
 <td>AdGroupLabel</td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_label">Ad Group Label</a></td>
-<td></td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
 <td>AdGroupAudience<br />
 AdGroupAudienceStats<br />
 AdGroupAudienceConversionStats<br />
 AdGroupAudienceNonClickStats<br />
 AdGroupAudienceBasicStats</td>
 <td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view">Ad Group Audience View</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>Assets (available if <a href="https://developers.google.com/google-ads/api/docs/performance-max/overview">Pmax</a> data is enabled)</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/asset">Assets</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>AssetGroup (available if <a href="https://developers.google.com/google-ads/api/docs/performance-max/overview">Pmax</a> data is enabled)</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/asset_group">Asset Groups</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>AssetGroupAsset (available if <a href="https://developers.google.com/google-ads/api/docs/performance-max/overview">Pmax</a> data is enabled)</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/asset_group_asset">Asset Group Assets</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>AssetGroupSignal (available if <a href="https://developers.google.com/google-ads/api/docs/performance-max/overview">Pmax</a> data is enabled)</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/asset_group_signal">Asset Group Signal</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>AssetGroupProductGroupStats (available if <a href="https://developers.google.com/google-ads/api/docs/performance-max/overview">Pmax</a> data is enabled)</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/asset_group_product_group_view">AssetGroupProductGroupStats</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>CampaignAssetStats (available if <a href="https://developers.google.com/google-ads/api/docs/performance-max/overview">Pmax</a> data is enabled)</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/campaign_asset">CampaignAssetStats</a></td>
-<td></td>
 </tr>
 </tbody>
 </table>
+
+### Performance Max (PMax) tables
+
+The following tables are dedicated to Performance Max assets and signals, such as AssetGroup and CampaignAssetStats.
+
+| Google Ads tables                                                                                                                             | Google Ads API resources (v22.0.0)                                                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Assets (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)                      | [Assets](https://developers.google.com/google-ads/api/fields/v22/asset)                                               |
+| AssetGroup (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)                  | [Asset Groups](https://developers.google.com/google-ads/api/fields/v22/asset_group)                                   |
+| AssetGroupAsset (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)             | [Asset Group Assets](https://developers.google.com/google-ads/api/fields/v22/asset_group_asset)                       |
+| AssetGroupSignal (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)            | [Asset Group Signal](https://developers.google.com/google-ads/api/fields/v22/asset_group_signal)                      |
+| AssetGroupProductGroupStats (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled) | [AssetGroupProductGroupStats](https://developers.google.com/google-ads/api/fields/v22/asset_group_product_group_view) |
+| CampaignAssetStats (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)          | [CampaignAssetStats](https://developers.google.com/google-ads/api/fields/v22/campaign_asset)                          |
 
 ## Column mapping for Google Ads reports
 
@@ -523,7 +701,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
 | customer\_id                                        | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                            | ExternalCustomerId               |
 | metrics\_all\_conversions                           | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                                                                                                                                                                                            | AllConversions                   |
-| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                                                                                                | AllConversionRate                |
+| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                                                                                               | AllConversionRate                |
 | metrics\_all\_conversions\_value                    | The total value of all conversions.                                                                                                                                                                                                                                                                                                                                                                | AllConversionValue               |
 | metrics\_average\_cpe                               | The average amount that you've been charged for an ad engagement. This amount is the total cost of all ad engagements divided by the total number of ad engagements.                                                                                                                                                                                                                               | AverageCpe                       |
 | metrics\_trueview\_average\_cpv                     | The average amount you pay each time someone views your ad. The average CPV is defined by the total cost of all ad views divided by the number of TrueView views.                                                                                                                                                                                                                                  | AverageCpv                       |
@@ -773,7 +951,7 @@ Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ad
 | customer\_id                                        | The ID of the customer.                                                                                                                                                                                                                                                                                            | ExternalCustomerId              |
 | metrics\_absolute\_top\_impression\_percentage      | The percent of your ad impressions that are shown as the very first ad above the organic search results.                                                                                                                                                                                                           | AbsoluteTopImpressionPercentage |
 | metrics\_all\_conversions                           | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                                                                                                            | AllConversions                  |
-| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                | AllConversionRate               |
+| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                               | AllConversionRate               |
 | metrics\_all\_conversions\_value                    | The total value of all conversions.                                                                                                                                                                                                                                                                                | AllConversionValue              |
 | metrics\_average\_cpe                               | The average amount that you've been charged for an ad engagement. This amount is the total cost of all ad engagements divided by the total number of ad engagements.                                                                                                                                               | AverageCpe                      |
 | metrics\_trueview\_average\_cpv                     | The average amount you pay each time someone views your ad. The average CPV is defined by the total cost of all ad views divided by the number of TrueView views.                                                                                                                                                  | AverageCpv                      |
@@ -1247,7 +1425,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 | customer\_id                                                    | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                            | ExternalCustomerId                         |
 | metrics\_absolute\_top\_impression\_percentage                  | The percent of your ad impressions that are shown as the very first ad above the organic search results.                                                                                                                                                                                                                                                                                           | AbsoluteTopImpressionPercentage            |
 | metrics\_all\_conversions                                       | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                                                                                                                                                                                            | AllConversions                             |
-| metrics\_all\_conversions\_from\_interactions\_rate             | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                                                                                                | AllConversionRate                          |
+| metrics\_all\_conversions\_from\_interactions\_rate             | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                                                                                               | AllConversionRate                          |
 | metrics\_all\_conversions\_value                                | The total value of all conversions.                                                                                                                                                                                                                                                                                                                                                                | AllConversionValue                         |
 | metrics\_average\_cpe                                           | The average amount that you've been charged for an ad engagement. This amount is the total cost of all ad engagements divided by the total number of ad engagements.                                                                                                                                                                                                                               | AverageCpe                                 |
 | metrics\_trueview\_average\_cpv                                 | The average amount you pay each time someone views your ad. The average CPV is defined by the total cost of all ad views divided by the number of TrueView views.                                                                                                                                                                                                                                  | AverageCpv                                 |
@@ -1582,7 +1760,7 @@ Google Ads API Resource: [age\_range\_view](https://developers.google.com/google
 | metrics\_active\_view\_measurable\_impressions      | The number of times your ads are appearing on placements in positions where they can be seen.                                                                                                                                                                                                                      | ActiveViewMeasurableImpressions |
 | metrics\_active\_view\_viewability                  | The percentage of time when your ad appeared on an Active View enabled site (measurable impressions) and was viewable (viewable impressions).                                                                                                                                                                      | ActiveViewViewability           |
 | metrics\_all\_conversions                           | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                                                                                                            | AllConversions                  |
-| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                | AllConversionRate               |
+| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                               | AllConversionRate               |
 | metrics\_all\_conversions\_value                    | The total value of all conversions.                                                                                                                                                                                                                                                                                | AllConversionValue              |
 | metrics\_average\_cost                              | The average amount you pay per interaction. This amount is the total cost of your ads divided by the total number of interactions.                                                                                                                                                                                 | AverageCost                     |
 | metrics\_average\_cpc                               | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                                       | AverageCpc                      |
@@ -1731,7 +1909,7 @@ Google Ads API Resource: [campaign\_budget](https://developers.google.com/google
 | campaign\_status                                                               | The status of the campaign. When a new campaign is added, the status defaults to ENABLED.                                                                                                                                                                                                           | AssociatedCampaignStatus                             |
 | customer\_id                                                                   | The ID of the customer.                                                                                                                                                                                                                                                                             | ExternalCustomerId                                   |
 | metrics\_all\_conversions                                                      | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                                                                                             | AllConversions                                       |
-| metrics\_all\_conversions\_from\_interactions\_rate                            | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                 | AllConversionRate                                    |
+| metrics\_all\_conversions\_from\_interactions\_rate                            | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                | AllConversionRate                                    |
 | metrics\_all\_conversions\_value                                               | The total value of all conversions.                                                                                                                                                                                                                                                                 | AllConversionValue                                   |
 | metrics\_average\_cost                                                         | The average amount you pay per interaction. This amount is the total cost of your ads divided by the total number of interactions.                                                                                                                                                                  | AverageCost                                          |
 | metrics\_average\_cpc                                                          | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                        | AverageCpc                                           |
@@ -1915,7 +2093,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 | customer\_id                                                    | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                            | ExternalCustomerId                         |
 | metrics\_absolute\_top\_impression\_percentage                  | The percent of your ad impressions that are shown as the very first ad above the organic search results.                                                                                                                                                                                                                                                                                           | AbsoluteTopImpressionPercentage            |
 | metrics\_all\_conversions                                       | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                                                                                                                                                                                            | AllConversions                             |
-| metrics\_all\_conversions\_from\_interactions\_rate             | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                                                                                                | AllConversionRate                          |
+| metrics\_all\_conversions\_from\_interactions\_rate             | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                                                                                               | AllConversionRate                          |
 | metrics\_all\_conversions\_value                                | The total value of all conversions.                                                                                                                                                                                                                                                                                                                                                                | AllConversionValue                         |
 | metrics\_average\_cpe                                           | The average amount that you've been charged for an ad engagement. This amount is the total cost of all ad engagements divided by the total number of ad engagements.                                                                                                                                                                                                                               | AverageCpe                                 |
 | metrics\_trueview\_average\_cpv                                 | The average amount you pay each time someone views your ad. The average CPV is defined by the total cost of all ad views divided by the number of TrueView views.                                                                                                                                                                                                                                  | AverageCpv                                 |
@@ -1988,7 +2166,7 @@ Google Ads API Resource: [location\_view](https://developers.google.com/google-a
 | campaign\_id                                        | The ID of the campaign.                                                                                                                                                                                                             | CampaignId                |
 | customer\_id                                        | The ID of the customer.                                                                                                                                                                                                             | ExternalCustomerId        |
 | metrics\_all\_conversions                           | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                             | AllConversions            |
-| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                 | AllConversionRate         |
+| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                | AllConversionRate         |
 | metrics\_all\_conversions\_value                    | The total value of all conversions.                                                                                                                                                                                                 | AllConversionValue        |
 | metrics\_average\_cost                              | The average amount you pay per interaction. This amount is the total cost of your ads divided by the total number of interactions.                                                                                                  | AverageCost               |
 | metrics\_average\_cpc                               | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                        | AverageCpc                |
@@ -2261,7 +2439,7 @@ Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads
 | metrics\_active\_view\_measurable\_impressions      | The number of times your ads are appearing on placements in positions where they can be seen.                                                                                                                                                                                                                      | ActiveViewMeasurableImpressions |
 | metrics\_active\_view\_viewability                  | The percentage of time when your ad appeared on an Active View enabled site (measurable impressions) and was viewable (viewable impressions).                                                                                                                                                                      | ActiveViewViewability           |
 | metrics\_all\_conversions                           | The total number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true.                                                                                                                                                                            | AllConversions                  |
-| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as oppose to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                                | AllConversionRate               |
+| metrics\_all\_conversions\_from\_interactions\_rate | All conversions from interactions (as opposed to view through conversions) divided by the number of ad interactions.                                                                                                                                                                                               | AllConversionRate               |
 | metrics\_all\_conversions\_value                    | The total value of all conversions.                                                                                                                                                                                                                                                                                | AllConversionValue              |
 | metrics\_average\_cost                              | The average amount you pay per interaction. This amount is the total cost of your ads divided by the total number of interactions.                                                                                                                                                                                 | AverageCost                     |
 | metrics\_average\_cpc                               | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                                       | AverageCpc                      |

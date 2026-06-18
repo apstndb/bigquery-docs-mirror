@@ -103,3 +103,63 @@ You can manually define your schema mapping with the following steps:
     ```
     
       - You can check the status of this command in the [SQL Translation page](https://console.cloud.google.com/bigquery/migrations/batch-translation) in BigQuery. The output of the batch translation job is stored in `gs://translation_target_base_uri/metadata/config/` .
+
+### Custom Schema File
+
+We recommend specifying custom schema if you need to capture important information about a table, like the primary key, that would otherwise be lost in the migration. For example, when making an [incremental transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental) , we recommend specifying a custom schema file so that data from subsequent transfers can be properly partitioned when loaded into BigQuery. Without a schema file, all information about primary keys and change tracking can be lost as the BigQuery Data Transfer Service automatically applies a table schema by using the source data being transferred.
+
+Custom schema can also be helpful when you have to change column names or data types during the data transfer.
+
+A custom schema file is a JSON file that describes database objects. The schema contains a set of databases, each containing a set of tables, each of which contains a set of columns. Each object has an `originalName` field that indicates the object name in Snowflake, and a `name` field that indicates the target name for the object in BigQuery.
+
+Columns have the following fields:
+
+  - `originalType` : indicates the column data type in Snowflake
+
+  - `type` : indicates the target data type for the column in BigQuery.
+
+  - `usageType` : information about the way the column is used by the system. The following usage types are supported:
+    
+      - `DEFAULT` : You can annotate multiple columns in one target table with this usage type. The `DEFAULT` usage type indicates that the column has no special use in the source system. This is the default value.
+      - `PRIMARY_KEY` : You can annotate columns in each target table with this usage type. Use the `PRIMARY_KEY` usage type to identify just one column as the primary key, or in the case of a composite key, use the same usage type on multiple columns to identify the unique entities of a table. These columns work together with `COMMIT_TIMESTAMP` to extract rows created or updated since the last transfer run.
+
+The following example shows a custom schema file to transfer a Snowflake table called `orders` in the `my_db` database, to rename the `O_ORDERKEY` column to `ORDERKEY` , and to identify `O_ORDERSTATUS` as the primary key.
+
+    {
+      "databases": [
+        {
+          "name": "my_db",
+          "originalName": "my_db",
+          "tables": [
+            {
+              "name": "orders",
+              "originalName": "orders",
+              "columns": [
+                {
+                  "name": "ORDERKEY",
+                  "originalName": "O_ORDERKEY",
+                  "type": "INT64",
+                  "originalType": "NUMERIC",
+                  "usageType": [
+                    "PRIMARY_KEY"
+                  ],
+                  "isRequired": true,
+                  "originalColumnLength": 4
+                },
+                {
+                  "name": "O_ORDERSTATUS",
+                  "originalName": "O_ORDERSTATUS",
+                  "type": "STRING",
+                  "originalType": "VARCHAR",
+                  "usageType": [
+                    "DEFAULT"
+                  ],
+                  "isRequired": true,
+                  "originalColumnLength": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }

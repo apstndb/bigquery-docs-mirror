@@ -176,6 +176,14 @@ Due to the [deprecation of single factor password sign-ins by Snowflake](https:/
 
 You can configure a key pair by generating an encrypted or unencrypted RSA key pair, then assigning the public key to a Snowflake user. For more information, see [Configuring key-pair authentication](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication) .
 
+#### Allow unloading to inline external locations
+
+The Snowflake connector unloads data to inline external locations during the transfer. If your Snowflake account restricts unloading to inline locations, the transfer fails.
+
+To allow unloading to inline locations, run the following SQL command in your Snowflake account. You must have the `ACCOUNTADMIN` role in Snowflake to run this command.
+
+    ALTER ACCOUNT SET PREVENT_UNLOAD_TO_INLINE_URL = false;
+
 ### Add network policies
 
 For public connectivity, the Snowflake account allows public connection with database credentials by default. However, you might have configured network rules or policies that could prevent the Snowflake connector from connecting to your account. In this case, you must add the necessary IP addresses to your allowlist. For more information, see [Configure network policies for Snowflake transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-network-policies) .

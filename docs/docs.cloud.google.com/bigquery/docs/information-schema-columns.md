@@ -97,53 +97,65 @@ The `INFORMATION_SCHEMA.COLUMNS` view has the following schema:
 <td>The value is <code dir="ltr" translate="no">YES</code> if the column is an automatically generated embedding column; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
 </tr>
 <tr class="odd">
+<td><code dir="ltr" translate="no">async_generation_status</code></td>
+<td><code dir="ltr" translate="no">STRUCT</code></td>
+<td>Contains blocking errors for background embedding generation jobs if the column is an automatically generated embedding column; otherwise, the value is <code dir="ltr" translate="no">NULL</code> . For information about blocking errors, see the <code dir="ltr" translate="no">async_generation_status.blocking_error.message</code> field. Blocking errors can include the following:
+<ul>
+<li>Permission denied errors</li>
+<li>Not found errors</li>
+<li>Unsupported embedding model endpoint errors</li>
+<li>Vertex AI API not enabled errors</li>
+</ul>
+Once the next embedding generation job succeeds, the <code dir="ltr" translate="no">async_generation_status</code> column is cleared.</td>
+</tr>
+<tr class="even">
 <td><code dir="ltr" translate="no">is_hidden</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column is a pseudo column such as _PARTITIONTIME or _PARTITIONDATE.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">is_updatable</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The value is always <code dir="ltr" translate="no">NULL</code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">is_system_defined</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column is a pseudo column such as _PARTITIONTIME or _PARTITIONDATE.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">is_partitioning_column</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column is a <a href="https://docs.cloud.google.com/bigquery/docs/partitioned-tables">partitioning column</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">clustering_ordinal_position</code></td>
 <td><code dir="ltr" translate="no">INT64</code></td>
 <td>The 1-indexed offset of the column within the table's clustering columns; the value is <code dir="ltr" translate="no">NULL</code> if the table is not a clustered table.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">collation_name</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The name of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code dir="ltr" translate="no">NULL</code> .<br />
 <br />
 If a <code dir="ltr" translate="no">STRING</code> or <code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code> is passed in, the collation specification is returned if it exists; otherwise <code dir="ltr" translate="no">NULL</code> is returned.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">column_default</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The <a href="https://docs.cloud.google.com/bigquery/docs/default-values">default value</a> of the column if it exists; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">rounding_mode</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The mode of rounding that's used for values written to the field if its type is a parameterized <code dir="ltr" translate="no">NUMERIC</code> or <code dir="ltr" translate="no">BIGNUMERIC</code> ; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">data_policies.name</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The list of data policies that are attached to the column to control access and masking. This field is in ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> ).</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">policy_tags</code></td>
 <td><code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code></td>
 <td>The list of policy tags that are attached to the column.</td>

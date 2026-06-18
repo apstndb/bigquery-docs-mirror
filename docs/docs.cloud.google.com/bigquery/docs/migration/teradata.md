@@ -69,7 +69,630 @@ Complete the tasks in this section to prepare your local environment for the tra
 
 ### Update the VPC Service Controls egress rule
 
-Add a BigQuery Data Transfer Service managed Google Cloud project (project number: 990232121269) to the [egress rule](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#egress_rules_reference) in the VPC Service Controls perimeter.
+Add the BigQuery Data Transfer Service managed Google Cloud project corresponding to your region to the [egress rule](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#egress_rules_reference) in the VPC Service Controls perimeter.
+
+The following table is a list of project numbers for the regional locations used for data transfers. Add the project numbers that correspond to your dataset's location.
+
+#### Multi-regional locations
+
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Multi-region description</th>
+<th>Multi-region name</th>
+<th>Project numbers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data centers within member states of the European Union</td>
+<td><code dir="ltr" translate="no">eu</code></td>
+<td>17253722542<br />
+272853474138<br />
+420718595790<br />
+929473878322<br />
+990232121269</td>
+</tr>
+<tr class="even">
+<td>Data centers in the United States</td>
+<td><code dir="ltr" translate="no">us</code></td>
+<td>1005756709729<br />
+140222280645<br />
+247872939591<br />
+312976397333<br />
+521896999118<br />
+525821192359<br />
+892499355189<br />
+949134172629<br />
+990232121269</td>
+</tr>
+</tbody>
+</table>
+
+#### Regional locations
+
+Region description
+
+Region name
+
+Project numbers
+
+**Americas**
+
+Montréal
+
+`northamerica-northeast1`
+
+603911341430  
+644379120249  
+665941355665  
+743643531530  
+990232121269
+
+Toronto
+
+`northamerica-northeast2`
+
+181203883014  
+569023246094  
+814935732186  
+833015518790  
+990232121269
+
+Mexico
+
+`northamerica-south1`
+
+439376105624  
+737643102222  
+746316165749  
+863053761002  
+990232121269
+
+São Paolo
+
+`southamerica-east1`
+
+133435938206  
+376122552368  
+485381725001  
+796391836836  
+990232121269
+
+Santiago
+
+`southamerica-west1`
+
+1087357303029  
+348543783783  
+659924941015  
+862900136725  
+990232121269
+
+Iowa
+
+`us-central1`
+
+298453567688  
+788415223852  
+850878823175  
+986263347210  
+990232121269
+
+South Carolina
+
+`us-east1`
+
+1055108947046  
+1084124504460  
+335013112247  
+724101498857  
+990232121269
+
+Northern Virginia
+
+`us-east4`
+
+1029854080039  
+517474920593  
+970314007431  
+98298633330  
+990232121269
+
+Columbus, Ohio
+
+`us-east5`
+
+1018267783826  
+386306739011  
+420397636038  
+778968775575  
+990232121269
+
+Dallas
+
+`us-south1`
+
+1000457898916  
+1047122215716  
+241710172671  
+955278753983  
+990232121269
+
+Oregon
+
+`us-west1`
+
+232019391832  
+341405773774  
+376906440760  
+477215631937  
+990232121269
+
+Los Angeles
+
+`us-west2`
+
+1082081077124  
+593499865061  
+796558996990  
+812061960238  
+990232121269
+
+Salt Lake City
+
+`us-west3`
+
+34769458069  
+488393466740  
+870087576864  
+878441810105  
+990232121269
+
+Las Vegas
+
+`us-west4`
+
+219770299440  
+421529192039  
+516260452158  
+653925368482  
+990232121269
+
+**Europe**
+
+Warsaw
+
+`europe-central2`
+
+408105394529  
+556626738827  
+613447812609  
+875068591969  
+990232121269
+
+Finland
+
+`europe-north1`
+
+1049140453480  
+148002628360  
+610856287987  
+657186468367  
+990232121269
+
+Stockholm
+
+`europe-north2`
+
+264708615094  
+275871864623  
+353052212156  
+915614473443  
+990232121269
+
+Madrid
+
+`europe-southwest1`
+
+1035291313153  
+1048466610864  
+16585749286  
+684773867031  
+990232121269
+
+Belgium
+
+`europe-west1`
+
+311010690362  
+337985836396  
+348525528820  
+874692481832  
+990232121269
+
+Berlin
+
+`europe-west10`
+
+1014021387408  
+1021109191575  
+1076988971454  
+965306537493  
+990232121269
+
+Turin
+
+`europe-west12`
+
+624998300135  
+664251133452  
+672417986210  
+702529954322  
+990232121269
+
+London
+
+`europe-west2`
+
+1013046052024  
+424062913611  
+625972158490  
+707263280432  
+990232121269
+
+Frankfurt
+
+`europe-west3`
+
+1087781646048  
+143240061766  
+312688138599  
+715827071311  
+990232121269
+
+Netherlands
+
+`europe-west4`
+
+110044889848  
+398757511504  
+557234723212  
+769143166592  
+990232121269
+
+Zürich
+
+`europe-west6`
+
+163551586425  
+378713015688  
+416925392034  
+669890417706  
+990232121269
+
+Milan
+
+`europe-west8`
+
+103481800693  
+1082157965924  
+23655501621  
+555661886352  
+990232121269
+
+Paris
+
+`europe-west9`
+
+1085882338778  
+176207547936  
+221990904254  
+670920836007  
+990232121269
+
+**Asia Pacific**
+
+Taiwan
+
+`asia-east1`
+
+21873972082  
+271898158674  
+389278959284  
+922460772707  
+990232121269
+
+Hong Kong
+
+`asia-east2`
+
+263483805684  
+773980783174  
+865347783058  
+90665746791  
+990232121269
+
+Tokyo
+
+`asia-northeast1`
+
+415417931028  
+53965067050  
+953665196151  
+983967577764  
+990232121269
+
+Osaka
+
+`asia-northeast2`
+
+205726704771  
+478186599828  
+57312416489  
+861476638029  
+990232121269
+
+Seoul
+
+`asia-northeast3`
+
+320159292295  
+548035635347  
+791473645597  
+935702892639  
+990232121269
+
+Mumbai
+
+`asia-south1`
+
+13592990997  
+229940966341  
+68960523189  
+901420668689  
+990232121269
+
+Delhi
+
+`asia-south2`
+
+496191507005  
+54806403576  
+741779061357  
+809478923584  
+990232121269
+
+Singapore
+
+`asia-southeast1`
+
+541653567103  
+60558171982  
+753901882843  
+944188302893  
+990232121269
+
+Jakarta
+
+`asia-southeast2`
+
+1074047252998  
+17464964742  
+271871433529  
+427023413305  
+990232121269
+
+Bangkok
+
+`asia-southeast3`
+
+1020436856624  
+355273974477  
+603543103680  
+777922772431  
+990232121269
+
+Sydney
+
+`australia-southeast1`
+
+163046745040  
+591848239128  
+623326425100  
+814418810594  
+990232121269
+
+Melbourne
+
+`australia-southeast2`
+
+1062391852597  
+441829466914  
+714897033691  
+748594785463  
+990232121269
+
+**Middle East**
+
+Doha
+
+`me-central1`
+
+260539430499  
+380691191456  
+707684919235  
+799708208022  
+990232121269
+
+Dammam
+
+`me-central2`
+
+1067269861014  
+364585730608  
+702115426609  
+932431265647  
+990232121269
+
+Tel Aviv
+
+`me-west1`
+
+356023739839  
+748664533815  
+869899828196  
+940471234508  
+990232121269
+
+**Africa**
+
+Johannesburg
+
+`africa-south1`
+
+366497204741  
+900693348777  
+930834390708  
+990232121269  
+995904484959
+
+**Other**
+
+AWS ap-northeast-2
+
+`aws-ap-northeast-2`
+
+118757274428  
+227045504542  
+31525566793  
+415505940944  
+990232121269
+
+AWS ap-southeast-2
+
+`aws-ap-southeast-2`
+
+179772227799  
+236687515237  
+779037664799  
+925378406445  
+990232121269
+
+AWS eu-central-1
+
+`aws-eu-central-1`
+
+469423327197  
+5211207427  
+905007897524  
+989902812500  
+990232121269
+
+AWS eu-west-1
+
+`aws-eu-west-1`
+
+477582827438  
+653238211450  
+795832028199  
+961178626984  
+990232121269
+
+AWS us-east-1
+
+`aws-us-east-1`
+
+1005783963369  
+293187121246  
+622189180485  
+78860240845  
+990232121269
+
+AWS us-west-2
+
+`aws-us-west-2`
+
+206681800614  
+264089603202  
+419256100048  
+79353630998  
+990232121269
+
+Azure eastus2
+
+`azure-eastus2`
+
+1021739993926  
+1054000274357  
+495696597482  
+590387575526  
+990232121269
+
+Azure westus2
+
+`azure-westus2`
+
+118244543872  
+242088193076  
+278777007439  
+662989519829  
+990232121269
+
+Internal-only location (europe-west15)
+
+`europe-west15`
+
+1075380375245  
+635354739083  
+663432613496  
+904125362271  
+990232121269
+
+Internal-only location (us-central2)
+
+`us-central2`
+
+1085843140251  
+269725830808  
+498892726043  
+68311303080  
+990232121269
+
+Internal-only location (us-east7)
+
+`us-east7`
+
+173063949542  
+661852837608  
+704905947583  
+956740768291  
+990232121269
+
+Synthetic location (us-synthetic1)
+
+`us-synthetic1`
+
+131957618958  
+250975404179  
+740244847288  
+787843086952  
+990232121269
+
+Internal-only location (us-west8)
+
+`us-west8`
+
+13105749132  
+248649202605  
+477355088721  
+653053504449  
+990232121269
 
 The communication channel between the agent running on premises and BigQuery Data Transfer Service is by publishing Pub/Sub messages to a per transfer topic. BigQuery Data Transfer Service needs to send commands to the agent to extract data, and the agent needs to publish messages back to BigQuery Data Transfer Service to update the status and return data extraction responses.
 
