@@ -798,7 +798,7 @@ The output includes the following columns:
 
 In addition to performing `VECTOR_SEARCH` using `STRING` input, you can also use `ObjectRef` input.
 
-The following example shows how to use the `VECTOR_SEARCH` function to perform semantic search using on `ObjectRef` s:
+The following example shows how to use the `VECTOR_SEARCH` function to perform semantic search on `ObjectRef` s:
 
     SELECT *
     FROM
@@ -820,14 +820,10 @@ BigQuery data security and governance rules apply to the use of `VECTOR_SEARCH` 
 
   - The project that runs the query containing `VECTOR_SEARCH` must match the project that contains the base table.
 
-  - If the base table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled and your `query_column_to_search` column is a `STRING` column, then the following limitations apply:
+  - If the base table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled and your `query_column_to_search` column is a `STRING` or `ObjectRef` column, then the following limitations apply:
     
-      - If embedding generation for the query string fails, then the entire query fails.
+      - If embedding generation for the query `STRING` or `ObjectRef` fails, then the entire query fails.
       - Your query is subject to the [generative AI function limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
-
-  - The base table must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled to use `ObjectRef` as the `query_value` or as the referenced column in `query_column_to_search` .
-
-  - When `column_to_search` is an `ARRAY` of embeddings (BYO embeddings), you can't use `ObjectRef` or `STRING` as the `query_value` .
 
 **Examples**
 

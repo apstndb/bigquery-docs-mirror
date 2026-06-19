@@ -127,12 +127,6 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
     
-    Beginning June 15, 2026, Agent Platform will limit access to Gemini 2.5 Flash, which is used by default. Only existing projects that have used it in the last 90 days will have access. If your project doesn't have access to Gemini 2.5 Flash, you can specify a Gemini 3 model using the `endpoint` parameter.
-    
-    ```sh
-    https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/publishers/google/models/gemini-3.1-flash-lite
-    ```
-    
     Agent Platform doesn't support regional endpoints for Gemini 3 models. For these models, use `global` , `us` , or `eu` as the location.
 
   - `  OUTPUT_MODE  ` : a `STRING` value that indicates whether a single input can be classified into multiple categories. Specifying an output mode changes the return type of the function to `ARRAY<STRING>` . The supported values are the following:

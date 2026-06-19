@@ -3079,11 +3079,11 @@ The following queries produce the same results, but the first one uses `GROUP BY
         SELECT 'shirt', 'polo', 25 UNION ALL
         SELECT 'pants', 'jeans', 6
       )
-    SELECT product_type, NULL, SUM(product_count) AS product_sum
+    SELECT product_type, NULL AS product_name, SUM(product_count) AS product_sum
     FROM Products
     GROUP BY product_type
     UNION ALL
-    SELECT NULL, product_name, SUM(product_count) AS product_sum
+    SELECT NULL AS product_type, product_name, SUM(product_count) AS product_sum
     FROM Products
     GROUP BY product_name
     ORDER BY product_name
@@ -3124,7 +3124,7 @@ You can include groupable item sets in a `GROUP BY GROUPING SETS` clause. In the
         SELECT 'shirt', 'polo', 25 UNION ALL
         SELECT 'pants', 'jeans', 6
       )
-    SELECT product_type, NULL, SUM(product_count) AS product_sum
+    SELECT product_type, NULL AS product_name, SUM(product_count) AS product_sum
     FROM Products
     GROUP BY product_type
     UNION ALL

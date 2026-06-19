@@ -320,6 +320,83 @@ To make a project that only uses [idle slots](https://docs.cloud.google.com/bigq
 
 > **Note:** A project can be assigned to at most one reservation in a single region.
 
+### User-specific assignments
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+You can assign a reservation to a specific principal such as a user or service account within a project, folder, or organization. This is useful for routing specific users' workloads to dedicated reservations.
+
+When resolving which reservation to use for a job, BigQuery evaluates assignments in the following order:
+
+1.  Evaluate the resource hierarchy, starting with the project, then parent folders, and then the organization.
+2.  At each level of the hierarchy, BigQuery first checks for an assignment that matches the specific principal that is running the job.
+3.  If no assignment matches the principal at that level, check for a general assignment without a principal at the same level.
+4.  If no assignment is found, move to the next level in the hierarchy.
+
+A project-level assignment without a principal overrides a folder-level assignment with a principal.
+
+#### Supported principal formats
+
+The `principal` option supports the following [IAM v2 principal](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
+
+| Identity type                      | Principal format                                                                                                                                                               |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Users                              | ` principal://goog/subject/         EMAIL_ADDRESS        `                                                                                                                     |
+| Service accounts                   | ` principal://iam.googleapis.com/projects/-/serviceAccounts/         EMAIL_ADDRESS        `                                                                                    |
+| Workforce identity pool identities | ` principal://iam.googleapis.com/locations/global/workforcePools/         POOL_ID        /subject/         SUBJECT_ID        `                                                 |
+| Workload identity pool identities  | ` principal://iam.googleapis.com/projects/         PROJECT_NUMBER        /locations/global/workloadIdentityPools/         POOL_ID        /subject/         SUBJECT_ID        ` |
+
+> **Note:** The value `unknown_or_deleted_user` is a sentinel value used by the system to represent a deleted or disabled user account. You can't assign reservations using this value.
+
+#### Assign a principal to a reservation
+
+### SQL
+
+To create a user-specific assignment, use the `CREATE ASSIGNMENT` DDL statement with the `principal` option.
+
+    CREATE ASSIGNMENT
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+    OPTIONS (
+      assignee = 'projects/PROJECT_ID',
+      principal = 'principal://goog/subject/EMAIL_ADDRESS',
+      job_type = 'QUERY');
+
+Replace the following:
+
+  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+  - `  RESERVATION_NAME  ` : the name of the reservation
+  - `  ASSIGNMENT_ID  ` : the assignment ID
+  - `  PROJECT_ID  ` : the project ID
+  - \` EMAIL\_ADDRESS : the user's email address
+  - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+
+### bq
+
+To create a user-specific assignment, use the `bq mk` command with the `--principal` flag:
+
+    bq mk \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --reservation_id=RESERVATION_NAME \
+        --assignee_id=PROJECT_ID \
+        --assignee_type=PROJECT \
+        --principal=PRINCIPAL \
+        --job_type=JOB_TYPE
+
+Replace the following:
+
+  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+  - `  RESERVATION_NAME  ` : the name of the reservation
+  - `  ASSIGNMENT_ID  ` : the assignment ID
+  - `  PROJECT_ID  ` : the project ID
+  - `  PRINCIPAL: the principal identifier, for example,  ` principal://goog/subject/ EMAIL\_ADDRESS \`
+  - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+
 ### Assign a project to `none`
 
 Assignments to `none` represent the absence of an assignment. Projects assigned to `none` use on-demand pricing.
@@ -633,12 +710,24 @@ To find which reservation your project's query jobs are assigned to, use the `bq
         --assignee_id=PROJECT_ID \
         --assignee_type=PROJECT
 
+To find a user-specific assignment, include the `--principal` flag:
+
+    bq show \
+        --project_id=ADMIN_PROJECT_ID \
+        --location=LOCATION \
+        --reservation_assignment \
+        --job_type=JOB_TYPE \
+        --assignee_id=PROJECT_ID \
+        --assignee_type=PROJECT \
+        --principal=PRINCIPAL
+
 Replace the following:
 
   - `  ADMIN_PROJECT_ID  ` : the ID of the project that owns the reservation resource
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of reservations to view
   - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
   - `  PROJECT_ID  ` : the ID of the project
+  - `  PRINCIPAL  ` : the principal identifier, for example, ` principal://goog/subject/ EMAIL_ADDRESS  `
 
 ## Update reservation assignments
 

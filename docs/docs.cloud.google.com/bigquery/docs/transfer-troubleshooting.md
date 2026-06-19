@@ -515,6 +515,9 @@ The following are common issues you might encounter when [creating a MySQL trans
   - Error: `INVALID_ARGUMENT. Connection to the host and port failed. Please check that the host, port, encryptionMode and network attachment are correct.`  
     **Resolution:** Ensure the host, port, encryption mode, and network settings are correctly configured. Verify network connectivity and that the database server is accessible. If `EncryptionMode` is set to `FULL` , confirm that the server supports the required protocols, has a valid certificate, and allows secure connections. If `EncryptionMode` is set to `DISABLE` , check that the server permits non-SSL connections. Review the application and database logs for connection-related or SSL/TLS-related errors.
 
+  - Error: `Failed to connect to MySQL instance INSTANCE_NAME . : Failed to connect to MySQL instance. Please ensure provided instance details are correct.`  
+    **Resolution:** Ensure that the instance details in your transfer configuration are correct. Instance details include parameters such as the name, hostname, IP address, and the port number of the MySQL database, or the username and password of the database user.
+
 ## Oracle transfer issues
 
 The following are common issues you might encounter when [creating an Oracle transfer](https://docs.cloud.google.com/bigquery/docs/oracle-transfer) .

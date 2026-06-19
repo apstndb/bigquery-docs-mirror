@@ -8,14 +8,9 @@ data_source: docs.cloud.google.com
 
 # Manage BigQuery API dependencies
 
-This document describes the Google Cloud services and APIs that BigQuery depends on. It also explains the effects on BigQuery behavior when you disable those services. Review this document before you enable or disable services in your project.
+You can manage BigQuery behavior by understanding how each API affects the Google Cloud features that depend on those APIs. Some API services are enabled by default in every Google Cloud project that you create, while others are automatically enabled for all Google Cloud projects that use BigQuery. You must explicitly enable the remaining API services before you can use their functionality.
 
-Some services are enabled by default in every Google Cloud project that you create. Other APIs are automatically enabled for all Google Cloud projects that use BigQuery. The remaining services must be explicitly enabled before you can use their functionality. For more information, see the following resources:
-
-  - [Services enabled by default](https://docs.cloud.google.com/service-usage/docs/enabled-service#default)
-  - [Enabling and disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable)
-
-This document is intended for administrators.
+Incorrectly disabling a dependency can affect BigQuery functionality. Understand these dependencies to make informed decisions when you enable or disable services in your Google Cloud project.
 
 ## Services enabled by default
 

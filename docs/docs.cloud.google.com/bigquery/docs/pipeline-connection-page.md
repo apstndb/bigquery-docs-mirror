@@ -14,20 +14,16 @@ data_source: docs.cloud.google.com
 
 > **Note:** To provide feedback, to ask questions, or to request to opt out of this Preview feature, contact <bigquery-pc-feedback@google.com> .
 
-The BigQuery **Pipelines & Connections** page in the console streamlines your data integration tasks by providing guided, BigQuery-specific configuration workflows for services like BigQuery Data Transfer Service, Datastream, and Pub/Sub.
+You can manage and streamline data integration tasks directly within the Google Cloud console by using the BigQuery **Pipelines & Connections** page. This page provides guided, BigQuery-specific configuration workflows for services such as BigQuery Data Transfer Service, Datastream, and Pub/Sub.
 
 You can use the **Pipelines & Connections** page to perform the following tasks:
 
-  - **Loading data** . Find and load data from supported data sources using a guided experience.
-  - **Scheduling data tasks** . Schedule your data processes to run automatically, including scheduled queries, notebooks, data preparations, and pipelines.
-  - **Transforming data** . Create pipelines and data preparations that perform operations such as cleaning, structuring, and readying your data for analysis and reporting.
-  - **Creating connections to data sources** . Connect to external data sources, compute runtimes, and AI services for data access and remote execution.
+  - **Load data** . Find and load data from supported data sources using a guided experience.
+  - **Schedule data tasks** . Schedule your data processes to run automatically, including scheduled queries, notebooks, data preparations, and pipelines.
+  - **Transform data** . Create pipelines and data preparations that perform operations such as cleaning, structuring, and readying your data for analysis and reporting.
+  - **Create connections to data sources** . Connect to external data sources, compute runtimes, and AI services for data access and remote execution.
 
-After you create your tasks, the **Pipelines & Connections** page provides a single location for managing and monitoring your assets. You can see the status of your assets in the list view, and you can use the detailed monitoring pages to see operational metrics for each configured asset such as scheduled queries, pipelines, transfers, connections, streams, and subscriptions.
-
-Operational metrics include BigQuery Data Transfer Service run histories, throughput and latency for Pub/Sub subscriptions, and data freshness and event counts for Datastream pipelines.
-
-The monitoring pages also include troubleshooting information such as logs for BigQuery Data Transfer Service runs and Datastream object status.
+After you set up the **Pipelines & Connections** page, it offers a centralized location to manage and monitor your data integration assets by displaying their status and providing operational metrics.
 
 ## Opt in or out
 
@@ -99,7 +95,7 @@ To create assets such as scheduled queries, data transfers, and external connect
 
 ## Monitor your assets
 
-After you create your assets, you can view and monitor them.
+After you create your assets, you can view and monitor them. Operational metrics available in the **Pipelines & Connections** page include BigQuery Data Transfer Service run histories, throughput and latency for Pub/Sub subscriptions, and data freshness and event counts for Datastream pipelines. You can also find troubleshooting information such as logs for BigQuery Data Transfer Service runs and Datastream object status.
 
 1.  Go to the **Pipelines & Connections** page.
 

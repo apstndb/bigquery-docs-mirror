@@ -112,12 +112,6 @@ When you analyze unstructured data, that data must meet the following requiremen
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
     
-    Beginning June 15, 2026, Agent Platform will limit access to Gemini 2.5 Flash, which is used by default. Only existing projects that have used it in the last 90 days will have access. If your project doesn't have access to Gemini 2.5 Flash, you can specify a Gemini 3 model using the `endpoint` parameter.
-    
-    ```sh
-    https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/publishers/google/models/gemini-3.1-flash-lite
-    ```
-    
     Agent Platform doesn't support regional endpoints for Gemini 3 models. For these models, use `global` , `us` , or `eu` as the location.
     
     Using Gemini 2.5 and later models incurs charges for the [thinking process](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking) . You can control the thinking process by using the `model_params` argument to set fields in the [`ThinkingConfig` object](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/GenerationConfig#ThinkingConfig) . Setting these fields lets you balance the model's reasoning depth with response latency and cost. For tasks where extensive internal reasoning isn't required, you can adjust the thinking configuration to receive faster responses and reduce token usage. For more information, see [Thinking budgets](https://ai.google.dev/gemini-api/docs/thinking#set-budget) and [Thinking levels](https://ai.google.dev/gemini-api/docs/thinking#thinking-levels) . For an example of this, see [Disable the thinking budget](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double#thinking-budget) .

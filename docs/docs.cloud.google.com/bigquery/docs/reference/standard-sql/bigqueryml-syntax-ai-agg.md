@@ -54,12 +54,6 @@ The `AI.AGG` function takes the following arguments:
 
   - `  ENDPOINT  ` : the [Vertex AI endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) to use, which can consist of any [Gemini model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models) that doesn't require thinking budget. If you only include the model ID, BigQuery automatically identifies and uses the full endpoint in the region where the query is processed. If you don't specify any endpoint information, BigQuery chooses a model for you.
     
-    Beginning June 15, 2026, Agent Platform will limit access to Gemini 2.5 Flash, which is used by default. Only existing projects that have used it in the last 90 days will have access. If your project doesn't have access to Gemini 2.5 Flash, you can specify a Gemini 3 model using the `endpoint` parameter.
-    
-    ```sh
-    https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/publishers/google/models/gemini-3.1-flash-lite
-    ```
-    
     Agent Platform doesn't support regional endpoints for Gemini 3 models. For these models, use `global` , `us` , or `eu` as the location.
 
 ### Output
