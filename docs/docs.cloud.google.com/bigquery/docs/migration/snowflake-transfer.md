@@ -379,6 +379,8 @@ You can configure the following parameters for your Snowflake transfer configura
 
   - `storage_integration_object_name` : specify the name of the Snowflake storage integration object.
 
+  - `max_file_size_mb` : (Optional) specify the maximum size of each file unloaded from Snowflake to the staging location in MB. The value must be between `16` and `5120` . The default value is `512` .
+
   - `cloud_provider` : enter `AWS` or `AZURE` or `GCP` depending on which cloud provider is hosting your Snowflake account.
 
   - `staging_s3_uri` : enter the [URI of the S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) to use as a staging area. Only required when your `cloud_provider` is `AWS` .
@@ -416,6 +418,7 @@ For example, for an AWS-hosted Snowflake account, the following command creates 
   "schema": "your_snowflake_schema",
   "service_account": "your_service_account",
   "storage_integration_object_name": "your_storage_integration_object",
+  "max_file_size_mb": "512",
   "staging_s3_uri": "s3://your/s3/bucket/uri",
   "table_name_patterns": ".*",
   "translation_output_gcs_path": "gs://sf_test_translation/output/metadata/config/database_name/schema_name/",

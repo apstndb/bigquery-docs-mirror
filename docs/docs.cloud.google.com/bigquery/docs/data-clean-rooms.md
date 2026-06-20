@@ -172,7 +172,7 @@ The following example shows how to call the `projects.locations.dataExchanges.cr
 
 ``` 
   curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges?data_exchange_id=CLEAN_ROOM_ID -d
-  '{
+  &#39;{
     display_name: "CLEAN_ROOM_NAME",
     sharing_environment_config: {dcr_exchange_config: {}}
   }'
@@ -300,8 +300,8 @@ The following example shows how to call the `projects.locations.dataExchanges.se
       "policy": {
         "bindings": [
           {
-            "members": [
-              "my-service-account@my-project.iam.gserviceaccount.com"
+            "membiam.gserviceaccount.comers": [
+              "my-service-account@my-project."
             ],
             "role": "roles/analyticshub.publisher"
           }
@@ -440,8 +440,8 @@ Use the [`projects.locations.dataExchanges.listings.create` method](https://docs
 The following example shows how to call the `projects.locations.dataExchanges.listings.create` method using the `curl` command:
 
 ``` 
-  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
-  '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"table":"projects/PROJECT_ID/datasets/DATASET_ID/tables/VIEW_ID"}],},"displayName":LISTING_NAME"}'
+  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
+  '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID";,"selectedResources":[{"table":";projects/PROJECT_ID/datasets/DATASET_ID/tables/VIEW_ID"}],},"displayName":LISTING_NAME"}'
 ```
 
 Replace the following:
@@ -487,7 +487,7 @@ Use the [`projects.locations.dataExchanges.listings.patch` method](https://docs.
 
 The following example shows how to call the `projects.locations.dataExchanges.listings.patch` method using the `curl` command:
 
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X PATCH https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings/listingId=LISTING_ID?updateMask=displayName -d
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X PATCH https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings/listingId=LISTING_ID?updateMask=displayName -d
     '{"displayName":LISTING_NAME"}'
 
 Replace the following:
@@ -518,7 +518,7 @@ Use the [`projects.locations.dataExchanges.listings.delete` method](https://docs
 
 The following example shows how to call the `projects.locations.dataExchanges.listings.delete` method using the `curl` command:
 
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID
 
 Replace the following:
 
@@ -590,7 +590,7 @@ Use the [`projects.locations.dataExchanges.subscribe` method](https://docs.cloud
 The following example shows how to call the `projects.locations.dataExchanges.subscribe` method using the `curl` command:
 
 ``` 
-  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination":"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
+  curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID:subscribe  --data '{"destination&quot;:"projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION","subscription":"SUBSCRIPTION"}'
 ```
 
 Replace the following:
