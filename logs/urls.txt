@@ -153,7 +153,7 @@ https://docs.cloud.google.com/bigquery/docs/custom-quotas	2026-06-18T13:42:06Z
 https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption	2026-06-18T13:42:06Z
 https://docs.cloud.google.com/bigquery/docs/data-analysis-tools-intro	2026-06-18T13:42:06Z
 https://docs.cloud.google.com/bigquery/docs/data-canvas	2026-06-18T13:42:06Z
-https://docs.cloud.google.com/bigquery/docs/data-clean-rooms	2026-06-20T04:06:09Z
+https://docs.cloud.google.com/bigquery/docs/data-clean-rooms	2026-06-20T14:12:08Z
 https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines	2026-06-18T13:30:13Z
 https://docs.cloud.google.com/bigquery/docs/data-governance	2026-06-18T13:30:13Z
 https://docs.cloud.google.com/bigquery/docs/data-insights	2026-06-18T13:30:13Z
@@ -218,7 +218,7 @@ https://docs.cloud.google.com/bigquery/docs/export-to-alloydb	2026-06-18T13:56:2
 https://docs.cloud.google.com/bigquery/docs/export-to-bigtable	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/export-to-pubsub	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/export-to-spanner	2026-06-18T13:56:29Z
-https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-06-20T04:13:33Z
+https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-06-20T14:16:12Z
 https://docs.cloud.google.com/bigquery/docs/exporting-models	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/extend-differential-privacy	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/external-data-bigtable	2026-06-18T13:56:29Z
@@ -377,7 +377,7 @@ https://docs.cloud.google.com/bigquery/docs/install-dataframes	2026-06-18T13:30:
 https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator	2026-06-18T13:30:36Z
 https://docs.cloud.google.com/bigquery/docs/introduction	2026-06-18T13:30:36Z
 https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads	2026-06-18T13:30:36Z
-https://docs.cloud.google.com/bigquery/docs/introduction-sql	2026-06-18T13:30:36Z
+https://docs.cloud.google.com/bigquery/docs/introduction-sql	2026-06-20T14:16:24Z
 https://docs.cloud.google.com/bigquery/docs/iterate-generate-embedding-calls	2026-06-18T13:30:36Z
 https://docs.cloud.google.com/bigquery/docs/iterate-generate-text-calls	2026-06-18T13:30:36Z
 https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery	2026-06-18T13:30:36Z
@@ -404,7 +404,7 @@ https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore	2026-06
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro	2026-06-18T13:30:36Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv	2026-06-20T04:02:17Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json	2026-06-20T04:02:17Z
-https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc	2026-06-18T13:35:17Z
+https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc	2026-06-20T14:11:39Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet	2026-06-18T13:35:17Z
 https://docs.cloud.google.com/bigquery/docs/locations	2026-06-18T13:35:17Z
 https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview	2026-06-18T13:35:17Z
@@ -848,7 +848,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/proje
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/delete	2026-05-12T19:13:00Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/get	2026-05-12T19:13:00Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/list	2026-05-12T19:13:00Z
-https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch	2026-06-20T04:06:11Z
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/patch	2026-06-20T14:16:32Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/scheduleRuns	2026-05-12T19:13:00Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/startManualRuns	2026-05-12T19:13:00Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources	2026-05-12T19:13:00Z
@@ -1267,7 +1267,7 @@ https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction	2026-06-1
 https://docs.cloud.google.com/bigquery/docs/scan-with-dlp	2026-06-18T13:35:37Z
 https://docs.cloud.google.com/bigquery/docs/schedule-pipelines	2026-06-18T13:35:37Z
 https://docs.cloud.google.com/bigquery/docs/scheduling-queries	2026-06-18T13:35:37Z
-https://docs.cloud.google.com/bigquery/docs/schema-detect	2026-06-20T04:06:14Z
+https://docs.cloud.google.com/bigquery/docs/schema-detect	2026-06-20T14:16:28Z
 https://docs.cloud.google.com/bigquery/docs/schemas	2026-06-18T13:35:37Z
 https://docs.cloud.google.com/bigquery/docs/search	2026-06-18T13:35:37Z
 https://docs.cloud.google.com/bigquery/docs/search-ads-migration-guide	2026-06-18T13:35:37Z
@@ -1374,7 +1374,7 @@ https://docs.cloud.google.com/bigquery/docs/workspaces	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/workspaces-intro	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/write-api	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/write-api-batch	2026-06-20T04:06:16Z
-https://docs.cloud.google.com/bigquery/docs/write-api-batch-load	2026-06-18T13:54:13Z
+https://docs.cloud.google.com/bigquery/docs/write-api-batch-load	2026-06-20T14:16:42Z
 https://docs.cloud.google.com/bigquery/docs/write-api-best-practices	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/write-api-streaming	2026-06-20T04:06:16Z
 https://docs.cloud.google.com/bigquery/docs/write-sql-gemini	2026-06-18T13:54:13Z
