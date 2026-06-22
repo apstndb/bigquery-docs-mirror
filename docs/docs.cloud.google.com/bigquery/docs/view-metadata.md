@@ -133,13 +133,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
          if err == iterator.Done {
              break
          }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintf(w, "Table: %q\n", t.TableID)
-     }
-     return nil
-    }
+         if err != nil {            return err     }       fmt.Fprintf(w, "Table: %q\n", t.TableID) }   return nil}
 
 ### Python
 
@@ -160,7 +154,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     print("Tables contained in '{}':".format(dataset_id))
     for table in tables:
-        print("{}.{}.{}".format(table.project, table.dataset_id, table.table_id))
+        print("{}.{}.{}".format(table.project,table.dataset_id,table.table_id))
 
 ## Get information about views
 
@@ -277,9 +271,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
      if err != nil {
          return err
      }
-     fmt.Fprintf(w, "View %s, query: %s\n", view.FullyQualifiedName(), meta.ViewQuery)
-     return nil
-    }
+     fmt.Fprintf(w, &quot;View %s, query: %s\n", view.FullyQualifiedName(), meta.ViewQuery)    return nil}
 
 ### Java
 
@@ -313,10 +305,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
           Table view = bigquery.getTable(tableId);
           System.out.println("View retrieved successfully" + view.getDescription());
         } catch (BigQueryException e) {
-          System.out.println("View not retrieved. \n" + e.toString());
-        }
-      }
-    }
+          System.out.println("View not retrieved. \n" + e.toString());    }  }}
 
 ### Node.js
 
@@ -325,7 +314,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
+    const {BigQuery} = require(&#39;@google-cloud/bigquery');
     const bigquery = new BigQuery();
     
     async function getView() {
@@ -346,9 +335,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
       // Display view properties
       console.log(`View at ${fullTableId}`);
-      console.log(`View query: ${viewQuery}`);
-    }
-    getView();
+      console.log(`View query: ${viewQuery}`);}getView();
 
 ### Python
 
@@ -365,7 +352,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     view = client.get_table(view_id)
     
     # Display view properties
-    print(f"Retrieved {view.table_type}: {str(view.reference)}")
+    print(f&quot;Retrieved {view.table_type}: {str(view.reference)}")
     print(f"View Query:\n{view.view_query}")
 
 ## View security

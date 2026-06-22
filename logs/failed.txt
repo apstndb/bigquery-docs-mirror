@@ -1,3 +1,8 @@
+200 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/delete_transfer_config
+200 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/delete_transfer_run
+200 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_logs
+200 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/update_transfer_config
+200 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo
 404 https://docs.cloud.google.com/sdk/gcloud/reference/bigquery

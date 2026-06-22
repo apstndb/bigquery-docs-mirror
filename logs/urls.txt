@@ -1355,7 +1355,7 @@ https://docs.cloud.google.com/bigquery/docs/vector-index-intro	2026-06-18T13:54:
 https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/vector-search	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/vector-search-intro	2026-06-18T13:54:13Z
-https://docs.cloud.google.com/bigquery/docs/view-metadata	2026-06-18T13:54:13Z
+https://docs.cloud.google.com/bigquery/docs/view-metadata	2026-06-22T03:41:13Z
 https://docs.cloud.google.com/bigquery/docs/viewing-labels	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/views	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/views-intro	2026-06-18T13:54:13Z
