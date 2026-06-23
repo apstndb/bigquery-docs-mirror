@@ -169,7 +169,7 @@ Api auth scopes for which refresh token needs to be obtained. These are scopes n
 
 ` transferType (deprecated)  `
 
-`enum ( TransferType` )
+` enum ( TransferType  ` )
 
 > This item is deprecated\!
 
@@ -215,13 +215,13 @@ Url for the help document for this data source.
 
 `authorizationType`
 
-`enum ( AuthorizationType` )
+` enum ( AuthorizationType  ` )
 
 Indicates the type of authorization.
 
 `dataRefreshType`
 
-`enum ( DataRefreshType` )
+` enum ( DataRefreshType  ` )
 
 Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data might not be complete until a few days later, so it's useful to refresh data automatically.
 
@@ -285,7 +285,7 @@ Parameter description.
 
 `type`
 
-`enum ( Type` )
+` enum ( Type  ` )
 
 Parameter type.
 
@@ -433,6 +433,102 @@ Signed seconds of the span of time. Must be from -315,576,000,000 to +315,576,00
 `integer`
 
 Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field. Must be from -999,999,999 to +999,999,999 inclusive.
+
+### TransferType
+
+DEPRECATED. Represents data transfer type.
+
+Enums
+
+`TRANSFER_TYPE_UNSPECIFIED`
+
+Invalid or Unknown transfer type placeholder.
+
+`BATCH`
+
+Batch data transfer.
+
+`STREAMING`
+
+Streaming data transfer. Streaming data source currently doesn't support multiple transfer configs per project.
+
+### Type
+
+Parameter type.
+
+Enums
+
+`TYPE_UNSPECIFIED`
+
+Type unspecified.
+
+`STRING`
+
+String parameter.
+
+`INTEGER`
+
+Integer parameter (64-bits). Will be serialized to json as string.
+
+`DOUBLE`
+
+Double precision floating point parameter.
+
+`BOOLEAN`
+
+Boolean parameter.
+
+`RECORD`
+
+Deprecated. This field has no effect.
+
+`PLUS_PAGE`
+
+Page ID for a Google+ Page.
+
+`LIST`
+
+List of strings parameter.
+
+### AuthorizationType
+
+The type of authorization needed for this data source.
+
+Enums
+
+`AUTHORIZATION_TYPE_UNSPECIFIED`
+
+Type unspecified.
+
+`AUTHORIZATION_CODE`
+
+Use OAuth 2 authorization codes that can be exchanged for a refresh token on the backend.
+
+`GOOGLE_PLUS_AUTHORIZATION_CODE`
+
+Return an authorization code for a given Google+ page that can then be exchanged for a refresh token on the backend.
+
+`FIRST_PARTY_OAUTH`
+
+Use First Party OAuth.
+
+### DataRefreshType
+
+Represents how the data source supports data auto refresh.
+
+Enums
+
+`DATA_REFRESH_TYPE_UNSPECIFIED`
+
+The data source won't support data auto refresh, which is default value.
+
+`SLIDING_WINDOW`
+
+The data source supports data auto refresh, and runs will be scheduled for the past few days. Does not allow custom values to be set for each transfer config.
+
+`CUSTOM_SLIDING_WINDOW`
+
+The data source supports data auto refresh, and runs will be scheduled for the past few days. Allows custom values to be set for each transfer config.
 
 ### Tool Annotations
 

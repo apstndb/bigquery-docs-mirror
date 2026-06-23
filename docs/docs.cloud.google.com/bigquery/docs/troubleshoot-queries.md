@@ -580,6 +580,8 @@ This error occurs when a query can't access sufficient shuffle resources.
 
 To address this error, provision more slots or reduce the amount of data processed by the query. For more information about ways to do this, see [Insufficient shuffle quota](https://docs.cloud.google.com/bigquery/docs/query-insights#insufficient_shuffle_quota) .
 
+If you are using the [on-demand](https://cloud.google.com/bigquery/pricing#on_demand_pricing) pricing model, you are limited to a [maximum of 2,000 slots](https://docs.cloud.google.com/bigquery/quotas#query_jobs) . To increase the number of slots, you must change to a [capacity-based](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) pricing model.
+
 For additional information on how to resolve these issues, see [Troubleshoot resources exceeded issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-resources-exceeded) .
 
 ### Query is too complex

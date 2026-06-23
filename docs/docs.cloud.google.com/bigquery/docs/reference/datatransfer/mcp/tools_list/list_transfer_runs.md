@@ -87,7 +87,7 @@ If you are using the regionalized method, the name should be in the following fo
 
 `states[]`
 
-`enum ( TransferState` )
+` enum ( TransferState  ` )
 
 When specified, only transfer runs with requested states are returned.
 
@@ -105,9 +105,53 @@ Page size. The default page size is the maximum value of 1000 results.
 
 `runAttempt`
 
-`enum ( RunAttempt` )
+` enum ( RunAttempt  ` )
 
 Indicates how run attempts are to be pulled.
+
+### TransferState
+
+Represents data transfer run state.
+
+Enums
+
+`TRANSFER_STATE_UNSPECIFIED`
+
+State placeholder (0).
+
+`PENDING`
+
+Data transfer is scheduled and is waiting to be picked up by data transfer backend (2).
+
+`RUNNING`
+
+Data transfer is in progress (3).
+
+`SUCCEEDED`
+
+Data transfer completed successfully (4).
+
+`FAILED`
+
+Data transfer failed (5).
+
+`CANCELLED`
+
+Data transfer is cancelled (6).
+
+### RunAttempt
+
+Represents which runs should be pulled.
+
+Enums
+
+`RUN_ATTEMPT_UNSPECIFIED`
+
+All runs should be returned.
+
+`LATEST`
+
+Only latest run per day should be returned.
 
 ## Output Schema
 
@@ -231,7 +275,7 @@ Output only. Data source id.
 
 `state`
 
-`enum ( TransferState` )
+` enum ( TransferState  ` )
 
 Data transfer run state. Ignored for input requests.
 
@@ -580,6 +624,50 @@ Fields
 `boolean`
 
 If true, email notifications will be sent on transfer run failures.
+
+### NullValue
+
+Represents a JSON `null` .
+
+`NullValue` is a sentinel, using an enum with only one value to represent the null value for the `Value` type union.
+
+A field of type `NullValue` with any value other than `0` is considered invalid. Most ProtoJSON serializers will emit a `Value` with a `null_value` set as a JSON `null` regardless of the integer value, and so will round trip to a `0` value.
+
+Enums
+
+`NULL_VALUE`
+
+Null value.
+
+### TransferState
+
+Represents data transfer run state.
+
+Enums
+
+`TRANSFER_STATE_UNSPECIFIED`
+
+State placeholder (0).
+
+`PENDING`
+
+Data transfer is scheduled and is waiting to be picked up by data transfer backend (2).
+
+`RUNNING`
+
+Data transfer is in progress (3).
+
+`SUCCEEDED`
+
+Data transfer completed successfully (4).
+
+`FAILED`
+
+Data transfer failed (5).
+
+`CANCELLED`
+
+Data transfer is cancelled (6).
 
 ### Tool Annotations
 

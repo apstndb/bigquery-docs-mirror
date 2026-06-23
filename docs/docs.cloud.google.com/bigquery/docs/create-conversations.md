@@ -84,8 +84,8 @@ To create a conversation with an existing data agent in the Google Cloud console
 
 4.  In the **Ask a question** field, enter your question and choose a mode:
     
-      - **Thinking** (default): detailed reasoning.
-      - **Fast** : best for most questions.
+      - **Fast** (default): best for most questions.
+      - **Thinking** : detailed reasoning.
     
     You can also click one of the Gemini-suggested questions to get started.
 
@@ -182,8 +182,8 @@ After you click the **Chat** option for your data source, you can start your con
 
 1.  In the **Ask a question** field, enter your question and choose a mode:
     
-      - **Thinking** (default): detailed reasoning.
-      - **Fast** : best for most questions.
+      - **Fast** (default): best for most questions.
+      - **Thinking** : detailed reasoning.
 
 2.  Click send\_spark **Send** .
     

@@ -488,20 +488,18 @@ BigQuery returns this error when your project exceeds the maximum disk and memor
 
 This quota is computed per-reservation and sliced across projects for the reservations. The quota cannot be modified by Cloud Customer Care. You can learn more about your usage by querying the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#schema) .
 
+If you are using the [on-demand](https://cloud.google.com/bigquery/pricing#on_demand_pricing) pricing model, you are limited to a [maximum of 2,000 slots](https://docs.cloud.google.com/bigquery/quotas#query_jobs) . To increase the number of slots, you must change to a [capacity-based](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) pricing model.
+
 **Error message**
 
 You receive one of the following error messages:
 
-  - ``` 
     Quota exceeded: Your project exceeded quota for total shuffle size limit.
-    ```
 
-  - ``` 
     Resources exceeded: Your project or organization exceeded the maximum
-    disk and memory limit available for shuffle operations. Consider provisioning
-    more slots, reducing query concurrency, or using more efficient logic in this
-    job.
-    ```
+      disk and memory limit available for shuffle operations. Consider provisioning
+      more slots, reducing query concurrency, or using more efficient logic in this
+      job.
 
 #### Resolution
 

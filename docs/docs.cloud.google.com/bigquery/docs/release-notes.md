@@ -14,6 +14,17 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 22, 2026
+
+Feature
+
+You can use the BigQuery Data Transfer Service to transfer metadata from the following data sources into Knowledge Catalog:
+
+  - [Oracle](https://docs.cloud.google.com/bigquery/docs/oracle-transfer#transfer_metadata)
+  - [MySQL](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#transfer_metadata)
+
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## June 17, 2026
 
 Feature

@@ -6,19 +6,19 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
+BigQuery DTS MCP server provides tools to interact with BigQuery DTS
+
 A [Model Context Protocol (MCP) server](https://modelcontextprotocol.io/docs/learn/server-concepts) acts as a proxy between an external service that provides context, data, or capabilities to a Large Language Model (LLM) or AI application. MCP servers connect AI applications to external systems such as databases and web services, translating their responses into a format that the AI application can understand.
 
 ### Server Setup
 
 You must [enable MCP servers](https://docs.cloud.google.com/mcp/enable-disable-mcp-servers) and [set up authentication](https://docs.cloud.google.com/mcp/authenticate-mcp) before use. For more information about using Google and Google Cloud remote MCP servers, see [Google Cloud MCP servers overview](https://docs.cloud.google.com/mcp/overview) .
 
-The BigQuery Data Transfer Service MCP server provides tools to interact with the BigQuery Data Transfer Service.
-
 ### Server Endpoints
 
 An MCP service endpoint is the network address and communication interface (usually a URL) of the MCP server that an AI application (the Host for the MCP client) uses to establish a secure, standardized connection. It is the point of contact for the LLM to request context, call a tool, or access a resource. Google MCP endpoints can be global or regional.
 
-The bigquerydatatransfer.googleapis.com MCP server has the following MCP endpoint:
+The BigQuery Data Transfer API MCP server has the following global MCP endpoint:
 
   - https://bigquerydatatransfer.googleapis.com/mcp
 
@@ -26,11 +26,13 @@ The bigquerydatatransfer.googleapis.com MCP server has the following MCP endpoin
 
 An [MCP tool](https://modelcontextprotocol.io/legacy/concepts/tools) is a function or executable capability that an MCP server exposes to a LLM or AI application to perform an action in the real world.
 
+### Tools
+
 The bigquerydatatransfer.googleapis.com MCP server has the following tools:
 
 MCP Tools
 
-[list\_data\_sources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_data_sources)
+`  list_data_sources  `
 
 List all the data sources that the project has access to.
 
@@ -40,11 +42,11 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 `list_data_sources(project_id="myproject", location="myregion")`
 
-[get\_data\_source](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/get_data_source)
+`  get_data_source  `
 
 Get details about a data source.
 
-[create\_transfer\_config](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/create_transfer_config)
+`  create_transfer_config  `
 
 Create a transfer configuration.
 
@@ -71,7 +73,23 @@ To create a transfer configuration, do the following:
       - Provide the `version_info` .
       - If you have valid credentials, then `version_info` is not required.
 
-[get\_transfer\_config](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/get_transfer_config)
+`  update_transfer_config  `
+
+Update a transfer configuration.
+
+The following example shows a MCP call to update a transfer configuration named `transfer_config_id` in the project `myproject` in the location `myregion` .
+
+`update_transfer_config(data_source=GOOGLE_ADS, project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", display_name="Updated Name")`
+
+`  delete_transfer_config  `
+
+Delete a transfer configuration.
+
+The following example shows a MCP call to delete a transfer configuration by its resource name.
+
+`delete_transfer_config(name="projects/myproject/locations/myregion/transferConfigs/mytransferconfig")`
+
+`  get_transfer_config  `
 
 Get details about a transfer config.
 
@@ -81,7 +99,7 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 `get_transfer_config(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig")`
 
-[list\_transfer\_configs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_configs)
+`  list_transfer_configs  `
 
 List all transfer configurations for a project.
 
@@ -89,7 +107,7 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 `list_transfer_configs(project_id="myproject", location="myregion")`
 
-[start\_manual\_transfer\_runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/start_manual_transfer_runs)
+`  start_manual_transfer_runs  `
 
 Start manual transfer runs for a transfer config.
 
@@ -101,7 +119,7 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 `start_manual_transfer_runs(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", run_date="2024-01-01", run_date_range=("2024-01-01", "2024-01-02"))`
 
-[list\_transfer\_runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_runs)
+`  list_transfer_runs  `
 
 List all the transfer runs for a transfer config.
 
@@ -111,7 +129,7 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 `list_transfer_runs(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig")`
 
-[get\_transfer\_run](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/get_transfer_run)
+`  get_transfer_run  `
 
 Get details about a transfer run.
 
@@ -121,7 +139,23 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 `get_transfer_run(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", transfer_run_id="mytransferrun")`
 
-[check\_valid\_creds](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/check_valid_creds)
+`  delete_transfer_run  `
+
+Delete a transfer run.
+
+The following example shows an MCP call to delete a transfer run by its resource name.
+
+`delete_transfer_run(name="projects/myproject/locations/myregion/transferConfigs/mytransferconfig/runs/mytransferrun")`
+
+`  list_transfer_logs  `
+
+List transfer logs for a transfer run by its resource name.
+
+The following example shows a MCP call to list transfer logs for a transfer run.
+
+`list_transfer_logs(parent="projects/myproject/locations/myregion/transferConfigs/mytransferconfig/runs/mytransferrun")`
+
+`  check_valid_creds  `
 
 Check for valid credentials for a data source.
 
@@ -148,7 +182,8 @@ To get the MCP tool specifications for all tools in an MCP server, use the `tool
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                      curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                      
+curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{

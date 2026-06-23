@@ -180,6 +180,10 @@ To configure this alert, do the following:
 
 7.  Click **Create** .
 
+## Performance considerations
+
+While BigQuery automatically prunes data using partitioning and clustering, metadata indexing can further optimize queries by pruning data based on columns that aren't used for partitioning or clustering. The effectiveness of this pruning increases when there is an ordering dependency between the filter column and the table's partitioning or clustering columns. In these cases, you might observe fewer bytes scanned than expected, even when filtering on columns that are not explicitly part of the table's clustering configuration. If a table is only partitioned but not clustered, pruning effectiveness is limited for on-demand queries, and you might not see a reduction in bytes scanned.
+
 ## Limitations
 
 Metadata query performance enhancements only apply to `SELECT` , `INSERT` , and `CREATE TABLE AS SELECT` statements. Data manipulation language (DML) statements won't see improvements from metadata indexing.

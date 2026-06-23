@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Organizing BigQuery resources
 
-Like other Google Cloud services, BigQuery resources are organized in a hierarchy. You can use this hierarchy to manage aspects of your BigQuery workloads such as permissions, quotas, slot reservations, and billing.
+BigQuery resources are organized hierarchically, like other Google Cloud services. Understanding this hierarchy helps you structure your BigQuery resources to manage workloads, control permissions, allocate quotas, assign slot reservations, and track billing.
 
 ## Resource hierarchy
 

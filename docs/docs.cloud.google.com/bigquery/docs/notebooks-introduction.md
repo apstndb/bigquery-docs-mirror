@@ -166,6 +166,12 @@ Belgium
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
+Finland
+
+`europe-north1`
+
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+
 Frankfurt
 
 `europe-west3`
@@ -182,6 +188,10 @@ Madrid
 
 ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
+Milan
+
+`europe-west8`
+
 Netherlands
 
 `europe-west4`
@@ -192,6 +202,10 @@ Turin
 
 `europe-west12`
 
+Warsaw
+
+`europe-central2`
+
 Zürich
 
 `europe-west6`
@@ -200,13 +214,17 @@ Zürich
 
 **Middle East**
 
+Dammam
+
+`me-central2`
+
 Doha
 
 `me-central1`
 
-Dammam
+Tel Aviv
 
-`me-central2`
+`me-west1`
 
 > **Note:** All code assets are stored in a default region. Updating the default region changes the region for all code assets created after that point.
 

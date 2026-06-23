@@ -112,7 +112,7 @@ Fields
 
 `dataSource`
 
-`enum ( DataSource` )
+` enum ( DataSource  ` )
 
 Required. Data source.
 
@@ -518,6 +518,86 @@ Fields
 
 If true, email notifications will be sent on transfer run failures.
 
+### DataSource
+
+Data sources that are currently supported.
+
+Enums
+
+`DATA_SOURCE_UNSPECIFIED`
+
+Unspecified data source.
+
+`CROSS_REGION_COPY`
+
+data\_source\_id: cross\_region\_copy
+
+`CSS_CENTER`
+
+data\_source\_id: css\_center
+
+`DCM_DT`
+
+data\_source\_id: dcm\_dt
+
+`DFP_DT`
+
+data\_source\_id: dfp\_dt
+
+`DISPLAYVIDEO`
+
+data\_source\_id: displayvideo
+
+`GA4`
+
+data\_source\_id: ga4
+
+`GOOGLE_ADS`
+
+data\_source\_id: google\_ads
+
+`GOOGLE_CLOUD_STORAGE`
+
+data\_source\_id: google\_cloud\_storage
+
+`MERCHANT_CENTER`
+
+data\_source\_id: merchant\_center
+
+`PLAY`
+
+data\_source\_id: play
+
+`SCHEDULED_QUERY`
+
+data\_source\_id: scheduled\_query
+
+`SEARCH_ADS`
+
+data\_source\_id: search\_ads
+
+`YOUTUBE_CHANNEL`
+
+data\_source\_id: youtube\_channel
+
+`YOUTUBE_CONTENT_OWNER`
+
+data\_source\_id: youtube\_content\_owner
+
+### NullValue
+
+Represents a JSON `null` .
+
+`NullValue` is a sentinel, using an enum with only one value to represent the null value for the `Value` type union.
+
+A field of type `NullValue` with any value other than `0` is considered invalid. Most ProtoJSON serializers will emit a `Value` with a `null_value` set as a JSON `null` regardless of the integer value, and so will round trip to a `0` value.
+
+Enums
+
+`NULL_VALUE`
+
+Null value.
+
 ## Output Schema
 
 Represents a data transfer configuration. A transfer configuration contains all metadata needed to perform a data transfer. For example, `destination_dataset_id` specifies where data should be stored. When a new transfer configuration is created, the specified `destination_dataset_id` is created when needed and shared with the appropriate data source service account.
@@ -616,7 +696,7 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 
 `state`
 
-`enum ( TransferState` )
+` enum ( TransferState  ` )
 
 Output only. State of the most recently updated transfer run.
 
@@ -660,7 +740,7 @@ Output only. Error code with detailed information about reason of the latest con
 
 `managedTableType`
 
-`enum ( ManagedTableType` )
+` enum ( ManagedTableType  ` )
 
 The classification of the destination table.
 
@@ -1241,6 +1321,68 @@ In the original design of `Any` , the possibility of launching a type resolution
 Holds a Protobuf serialization of the type described by type\_url.
 
 A base64-encoded string.
+
+### NullValue
+
+Represents a JSON `null` .
+
+`NullValue` is a sentinel, using an enum with only one value to represent the null value for the `Value` type union.
+
+A field of type `NullValue` with any value other than `0` is considered invalid. Most ProtoJSON serializers will emit a `Value` with a `null_value` set as a JSON `null` regardless of the integer value, and so will round trip to a `0` value.
+
+Enums
+
+`NULL_VALUE`
+
+Null value.
+
+### TransferState
+
+Represents data transfer run state.
+
+Enums
+
+`TRANSFER_STATE_UNSPECIFIED`
+
+State placeholder (0).
+
+`PENDING`
+
+Data transfer is scheduled and is waiting to be picked up by data transfer backend (2).
+
+`RUNNING`
+
+Data transfer is in progress (3).
+
+`SUCCEEDED`
+
+Data transfer completed successfully (4).
+
+`FAILED`
+
+Data transfer failed (5).
+
+`CANCELLED`
+
+Data transfer is cancelled (6).
+
+### ManagedTableType
+
+The classifications of managed tables that can be created, native or BigLake.
+
+Enums
+
+`MANAGED_TABLE_TYPE_UNSPECIFIED`
+
+Type unspecified. This defaults to `NATIVE` table.
+
+`NATIVE`
+
+The managed table is a native BigQuery table. This is the default value.
+
+`BIGLAKE`
+
+The managed table is a BigQuery table for Apache Iceberg (formerly BigLake managed tables), with a BigLake configuration.
 
 ### Tool Annotations
 

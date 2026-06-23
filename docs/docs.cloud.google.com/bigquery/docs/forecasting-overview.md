@@ -116,6 +116,7 @@ To gain insight into your data and improve forecasting, use time series componen
 
   - [`ML.SEASONALITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality) : extracts the *seasonality component* of a time series, which represents repeating patterns over fixed time periods such as years, weeks, or days.
   - [`ML.TREND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend) : extracts the *trend component* of a time series, which represents the directional trajectory of a metric over time and ignores short-term fluctuations or noise.
+  - [`ML.DETECT_CHANGE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points) : identifies intervals where the statistical behavior or properties of time series data have shifted. This function provides insight into significant structural breaks, rather than transient or isolated events.
 
 ## Recommended knowledge
 
