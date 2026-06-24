@@ -14,6 +14,39 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 23, 2026
+
+Feature
+
+You can now configure your BigQuery pipelines to automatically trigger executions based on updates to specific BigQuery tables. For more information, see [Trigger-based scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#trigger-based-scheduling) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+[Conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) in BigQuery is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) and includes the following features:
+
+  - You can select whether an agent can only use generally available models, or a mix of preview and generally available models.
+
+  - You can change the thinking mode of an agent within a conversation.
+
+  - Agents can ask clarifying questions about your input prompt.
+
+  - Agent responses include context citations, to help you understand the specific sources used to generate the answer.
+
+  - Parameters are supported in verified queries.
+
+  - Agents can use the following AI functions to answer your questions:
+    
+      - [`AI.KEY_DRIVERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
+      - [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
+      - [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score)
+      - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
+      - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
+      - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
+
+  - Conversational analytics supports US MREP and EU MREP [locations](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#locations) that govern the storage of agent and conversation resources, and the location used for ML processing.
+
+You can also create a [conversation with a dataset](https://docs.cloud.google.com/bigquery/docs/create-conversations#datasets) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## June 22, 2026
 
 Feature

@@ -2888,7 +2888,7 @@ For information about how to create, update, and delete deny policies, see [Deny
 
 ### Special cases
 
-Consider the following scenarios when you create [IAM deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) on a few BigQuery permissions:
+Consider the following scenarios when you create [IAM deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) :
 
   - Access to authorized resources ( [views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , [routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) , [datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , or [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#authorize_routines) ) lets you [create](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , [drop](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement) , or [manipulate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) a table, along with reading and modifying table data, even if you don't have direct permission to perform those operations. It can also [get model data or metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata) and [invoke other stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#call_a_stored_procedure) on the underlying table. This capability implies that the authorized resources have the following permissions:
     
@@ -2911,6 +2911,8 @@ Consider the following scenarios when you create [IAM deny policies](https://doc
     | `principalSet://goog/public:all`                                                        | Blocks all principals including authorized resources.                                                                                                                                                                                                                                          |
     | `principalSet://bigquery.googleapis.com/projects/           PROJECT_NUMBER          /*` | Blocks all BigQuery authorized resources in the specified project. [`            PROJECT_NUMBER           `](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) is an automatically generated unique identifier for your project of type `INT64` . |
     
+
+    For a list of allowed principals, see [Principal identifiers for deny policies](https://docs.cloud.google.com/iam/docs/principal-identifiers#deny) .
 
   - View authorization is granted at the dataset level. Therefore, if an IAM deny policy is applied to a tag on a specific table in the dataset, a user can still query that table using an authorized view. To block access, apply the tag at the dataset level, which denies view access to all tables in the dataset.
 

@@ -17,6 +17,7 @@ data_source: docs.cloud.google.com
   - `  DataSource.DataRefreshType  ` (enum)
   - `  DataSourceParameter  ` (message)
   - `  DataSourceParameter.Type  ` (enum)
+  - `  DataplexConfiguration  ` (message)
   - `  DeleteTransferConfigRequest  ` (message)
   - `  DeleteTransferRunRequest  ` (message)
   - `  EmailPreferences  ` (message)
@@ -41,6 +42,7 @@ data_source: docs.cloud.google.com
   - `  ListTransferRunsResponse  ` (message)
   - `  ManagedTableType  ` (enum)
   - `  ManualSchedule  ` (message)
+  - `  MetadataDestination  ` (message)
   - `  PartitionDetail  ` (message)
   - `  ResourceDestination  ` (enum)
   - `  ResourceTransferState  ` (enum)
@@ -950,6 +952,18 @@ Page ID for a Google+ Page.
 
 List of strings parameter.
 
+## DataplexConfiguration
+
+Configuration for Dataplex destination.
+
+Fields
+
+`entry_group`
+
+`string`
+
+Required. The Dataplex Universal Catalog entry group for importing the metadata. entry\_group has the format of `projects/{project_id}/locations/{region}/entryGroups/{entry_group_id}` .
+
 ## DeleteTransferConfigRequest
 
 A request to delete data transfer information. All associated transfer runs and log messages will be deleted as well.
@@ -1493,6 +1507,20 @@ This type has no fields.
 
 Options customizing manual transfers schedule.
 
+## MetadataDestination
+
+The metadata destination of the transfer config.
+
+Fields
+
+Union field `destination` . The metadata destination of the transfer config can be one of the following: `destination` can be only one of the following:
+
+`dataplex_configuration`
+
+`  DataplexConfiguration  `
+
+The Dataplex Universal Catalog configuration.
+
 ## PartitionDetail
 
 Partition details related to hierarchy.
@@ -1906,6 +1934,12 @@ Output only. Error code with detailed information about reason of the latest con
 `  ManagedTableType  `
 
 The classification of the destination table.
+
+`metadata_destination`
+
+`  MetadataDestination  `
+
+The metadata destination of the transfer config.
 
 Union field `destination` . The destination of the transfer config. `destination` can be only one of the following:
 

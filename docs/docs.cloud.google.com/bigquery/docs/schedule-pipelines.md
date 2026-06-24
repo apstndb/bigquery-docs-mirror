@@ -110,15 +110,17 @@ To create a pipeline schedule, follow these steps:
     
     Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
 
-9.  In the **Schedule frequency** section, do the following:
+9.  Under **Configuration Type** , select **Schedule (time-based recurrence)** .
+
+10. Under **Schedule frequency** , do the following:
     
     1.  In the **Repeats** menu, select the frequency of scheduled pipeline runs.
     2.  In the **At time** field, enter the time for scheduled pipeline runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
 
-10. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
+11. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
-11. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+12. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 When you create the schedule, the current version of the pipeline is automatically deployed. To update the schedule with a new version of the pipeline, [deploy the pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy) .
 
@@ -151,15 +153,17 @@ The latest deployed version of the pipeline runs at the selected time and freque
     
     Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
 
-8.  In the **Schedule frequency** section, do the following:
+8.  Under **Configuration Type** , select **Schedule (time-based recurrence)** .
+
+9.  Under **Schedule frequency** , do the following:
     
     1.  In the **Repeats** menu, select the frequency of scheduled pipeline runs.
     2.  In the **At time** field, enter the time for scheduled pipeline runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
 
-9.  Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
+10. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
-10. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+11. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 > **Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
@@ -188,6 +192,90 @@ To revoke the permission that you granted, follow these steps:
 Changing the pipeline schedule owner by updating credentials also requires manual approval if the new Google Account owner has never created a schedule before.
 
 If your pipeline contains a notebook, you must also manually grant permission for Colab Enterprise to get the access token for your Google Account and access the source data on your behalf. You only need to give permission once. You can revoke this permission on the [Google Account page](https://myaccount.google.com/) .
+
+## Trigger-based scheduling
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To get support or provide feedback for this feature, contact <bigquery-event-based-triggers@google.com> .
+
+You can configure BigQuery pipelines to automatically trigger executions based on updates to specified BigQuery tables. You can create trigger-based schedules to automate pipeline executions in response to changes to your BigQuery data, rather than on a fixed schedule.
+
+When the pipeline detects changes to the specified table or tables, it triggers a new execution of the associated workflow. You can define conditions based on updates to a single table, to all of a set of tables, or to any of a set of tables.
+
+You can also adjust the optional settings of your trigger-based schedules to control the minimum interval between pipeline triggers. For example, adjust the **Min Execution Duration** value to ensure that trigger-based schedules aren't activated more frequently than intended. You can also adjust the **Max Wait Duration** value to ensure that the trigger-based schedule is forced to activate once within that duration, even if no table updates were detected.
+
+### Limitations
+
+Trigger-based schedules are subject to the following limitations:
+
+  - Trigger-based schedules aren't instantaneous. When you configure a trigger-based schedule, the pipeline checks the status of the BigQuery table approximately once every 3 minutes. This time period is called the polling interval and can result in a delay between a table modification and the trigger activation.
+  - Each monitored table results in API calls to BigQuery during every polling interval. Monitoring a very large number of tables can contribute to [BigQuery API quota consumption](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-api-request-limit) .
+
+### Create a trigger
+
+To create a trigger, follow these steps:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
+
+4.  Click **Trigger** .
+
+5.  In the **Trigger** field, enter a name for the trigger.
+
+6.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
+    
+      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use a service account, select **Execute with selected service account** , and then select a service account.
+
+7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
+    
+    > **Note:** A notebook runtime template must be in the same region as the pipeline.
+    
+    > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
+
+8.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
+    
+    Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
+
+9.  Under **Configuration Type** , select **Trigger (event-based execution)** .
+
+10. In the **Search tables** field, add a table or tables to be monitored for the trigger.
+
+11. Under **Trigger Condition** , select one of the following options:
+    
+      - **Wait for ALL tables to update** : trigger the workflow only when all listed tables have been updated since the last check.
+      - **Trigger if ANY table updates** : trigger this workflow if any of the listed tables are updated since the last check.
+
+12. (Optional) For **Max Wait Duration** , enter a duration to force the activation of a trigger if no table updates are detected within this duration. Supports values between 1 second to 7 days. If not specified, then the workflow will only run if the monitored table is updated, and the minimum execution duration is satisfied.
+
+13. (Optional) For **Min Execution Duration** , select a duration to prevent triggers from activating more frequently than this minimum duration. Supports values between 3 minutes to 24 hours. If not specified, the default value is 3 minutes.
+
+14. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+
+### Troubleshooting trigger-based schedules
+
+This section describes common issues with trigger-based schedules and how to resolve them.
+
+  - Issue: The trigger isn't activating  
+    **Resolution:** Try one of the following steps:
+      - Verify that the user credentials or the service account has all the [required permissions](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) .
+      - Verify that the specified BigQuery table is being modified.
+      - Check that the trigger isn't being affected by the [polling interval](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#limitations) .
+      - Check if the minimum execution duration, or the **Min Execution Duration** value, is preventing more frequent runs. You can decrease this value to increase the frequency of the trigger activation.
+      - Check if the trigger condition option ( **ALL** or **ANY** ) is affecting the trigger activation.
+      - Examine the [audit logs](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) to check for errors when Dataform attempts to call the BigQuery API to check the status of the monitored table.
+  - Issue: The trigger is activating too often  
+    **Resolution:** Adjust the minimum execution duration, or the **Min Execution Duration** value. You can increase this value to decrease the frequency of the trigger activation.
 
 ## Deploy a pipeline
 

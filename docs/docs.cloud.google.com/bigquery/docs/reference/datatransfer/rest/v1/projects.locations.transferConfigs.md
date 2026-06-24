@@ -22,6 +22,10 @@ data_source: docs.cloud.google.com
       - [EncryptionConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.EncryptionConfiguration)
           - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.EncryptionConfiguration.SCHEMA_REPRESENTATION)
       - [ManagedTableType](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.ManagedTableType)
+      - [MetadataDestination](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.MetadataDestination)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.MetadataDestination.SCHEMA_REPRESENTATION)
+      - [DataplexConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.DataplexConfiguration)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.DataplexConfiguration.SCHEMA_REPRESENTATION)
   - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#METHODS_SUMMARY)
 
 ## Resource: TransferConfig
@@ -39,7 +43,7 @@ Represents a data transfer configuration. A transfer configuration contains all 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;dataSourceId&quot;: string,&quot;params&quot;: {object},&quot;schedule&quot;: string,&quot;scheduleOptions&quot;: {object (ScheduleOptions)},&quot;scheduleOptionsV2&quot;: {object (ScheduleOptionsV2)},&quot;dataRefreshWindowDays&quot;: integer,&quot;disabled&quot;: boolean,&quot;updateTime&quot;: string,&quot;nextRunTime&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;datasetRegion&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;encryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;error&quot;: {object (Status)},&quot;managedTableType&quot;: enum (ManagedTableType),// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.&quot;ownerInfo&quot;: {object (UserInfo)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;dataSourceId&quot;: string,&quot;params&quot;: {object},&quot;schedule&quot;: string,&quot;scheduleOptions&quot;: {object (ScheduleOptions)},&quot;scheduleOptionsV2&quot;: {object (ScheduleOptionsV2)},&quot;dataRefreshWindowDays&quot;: integer,&quot;disabled&quot;: boolean,&quot;updateTime&quot;: string,&quot;nextRunTime&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;datasetRegion&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;encryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;error&quot;: {object (Status)},&quot;managedTableType&quot;: enum (ManagedTableType),&quot;metadataDestination&quot;: {object (MetadataDestination)},// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.&quot;ownerInfo&quot;: {object (UserInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -163,6 +167,12 @@ Output only. Error code with detailed information about reason of the latest con
 ` enum ( ManagedTableType  ` )
 
 The classification of the destination table.
+
+`metadataDestination`
+
+` object ( MetadataDestination  ` )
+
+The metadata destination of the transfer config.
 
 Union field `destination` . The destination of the transfer config. `destination` can be only one of the following:
 
@@ -423,6 +433,66 @@ The managed table is a native BigQuery table. This is the default value.
 `BIGLAKE`
 
 The managed table is a BigQuery table for Apache Iceberg (formerly BigLake managed tables), with a BigLake configuration.
+
+### MetadataDestination
+
+The metadata destination of the transfer config.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field destination can be only one of the following:&quot;dataplexConfiguration&quot;: {object (DataplexConfiguration)}// End of list of possible types for union field destination.}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+Union field `destination` . The metadata destination of the transfer config can be one of the following: `destination` can be only one of the following:
+
+`dataplexConfiguration`
+
+` object ( DataplexConfiguration  ` )
+
+The Dataplex Universal Catalog configuration.
+
+### DataplexConfiguration
+
+Configuration for Dataplex destination.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;entryGroup&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`entryGroup`
+
+`string`
+
+Required. The Dataplex Universal Catalog entry group for importing the metadata. entryGroup has the format of `projects/{projectId}/locations/{region}/entryGroups/{entry_group_id}` .
 
 ## Methods
 

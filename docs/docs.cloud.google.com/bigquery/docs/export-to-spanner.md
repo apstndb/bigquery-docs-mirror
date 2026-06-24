@@ -90,7 +90,8 @@ You might also be able to get the required permissions through [custom roles](ht
 
 You can use the `spanner_options` option to specify a destination Spanner database and table. The configuration is expressed in the form of a JSON string, as the following example shows:
 
-    EXPORT DATA OPTIONS(   uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',   spanner_options = """{      "table": "TABLE_NAME",      "change_timestamp_column": "CHANGE_TIMESTAMP",      "priority": "PRIORITY",      "tag": "TAG",   }""")
+    EXPORT DATA OPTIONS(   uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',   spanner_options = &quot;"&quot;{      "table": ";TABLE_NAME";,
+          "change_timestamp_column": &quot;CHANGE_TIMESTAMP",      "priority": "PRIORITY",      "tag": "TAG",   }""")
 
 Replace the following:
 
@@ -128,7 +129,7 @@ You can use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery
 
 The following example exports selected fields from a table that's named `mydataset.table1` :
 
-    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME" }""")AS SELECT * FROM mydataset.table1;
+    EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="&quot;"{ "table": "TABLE_NAME" }""")AS SELECT * FROM mydataset.table1;
 
 Replace the following:
 
@@ -453,7 +454,7 @@ To grant access to database-level roles for the service account, do the followin
 
 With the connection created and the appropriate access granted to it, you can run the export using the `CLOUD_RESOURCE` connection. The following example shows an `EXPORT` command that exports with a `CLOUD_RESOURCE` connection.
 
-    EXPORT DATA WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_NAME` OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "SPANNER_TABLE_NAME" }""")AS SELECT * FROM my_bq_dataset.table1;
+    EXPORT DATA WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_NAME` OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options=""&quot;{ "table": "SPANNER_TABLE_NAME" }""")AS SELECT * FROM my_bq_dataset.table1;
 
 Replace the following:
 
@@ -480,7 +481,7 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
     
     The following example shows a Spanner export command set to `HIGH` priority:
     
-        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "LOW" }""")
+        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="&quot;"{ "table": "TABLE_NAME", "priority": "LOW" }""")
 
   - Avoid ordering the query results. If the result set contains all primary key columns, the exporter automatically sorts the primary keys of the destination table to streamline writes and minimize contention.
     
@@ -506,7 +507,7 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
 
   - To prevent long running jobs, export data by partition. Shard your BigQuery data using a partition key, such as a timestamp in your query:
     
-        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "MEDIUM" }""")AS SELECT *FROM 'mydataset.table1' dWHEREd.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' ANDd.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
+        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="&quot;"{ "table": "TABLE_NAME", "priority": "MEDIUM" }""")AS SELECT *FROM 'mydataset.table1' dWHEREd.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' ANDd.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
     
     This lets the query complete within the 6-hour job runtime. For more information about these limits, see the [query job limits](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
 

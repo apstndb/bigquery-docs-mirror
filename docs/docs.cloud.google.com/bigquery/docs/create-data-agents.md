@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Create data agents
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
-
 This document describes how to create, edit, manage, and delete data agents in BigQuery.
 
 In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) with data agents to ask questions about BigQuery data using natural language. Data agents contain table metadata and use-case-specific query processing instructions that define the best way to answer user questions about a set of knowledge sources, such as tables, views, or user-defined functions (UDFs) that you select.

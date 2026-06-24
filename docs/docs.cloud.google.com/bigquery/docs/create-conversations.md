@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Analyze data with conversations
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
-
 This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables, views or graphs, that you select.
 
 Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can determine which data sources to query and take advantage of optimizations, such as table partitions or search indexes, when it constructs a response.
