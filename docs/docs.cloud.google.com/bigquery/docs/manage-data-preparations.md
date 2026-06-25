@@ -49,6 +49,15 @@ To ensure that the Dataform service account has the necessary permissions to exe
 
 The Dataform service account might require additional permissions, depending on your data preparation pipeline. For more information, see [Grant Dataform required access](https://docs.cloud.google.com/dataform/docs/access-control#grant-dataform-required-access) .
 
+#### Security considerations for data preparations
+
+Because code assets in BigQuery are powered by Dataform, you should consider the following security implications for users with access to these assets:
+
+  - Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
+  - Any secrets shared with the Dataform service agent can potentially be accessed by users who can edit these assets. To secure your credentials, restrict creation and edit access to trusted users, and limit the secrets accessible to the Dataform service agent. For more information, see [Secrets access during package installation](https://docs.cloud.google.com/dataform/docs/access-control#secret-access-risk) .
+
+For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions) .
+
 ## View existing data preparations
 
 To view a list of existing data preparations, follow these steps:

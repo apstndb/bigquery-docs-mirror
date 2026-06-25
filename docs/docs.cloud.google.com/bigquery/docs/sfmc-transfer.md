@@ -17,6 +17,7 @@ Salesforce Marketing Cloud data transfers are subject to the following limitatio
   - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
       - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
   - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
+  - Salesforce Marketing Cloud transfers don't support data extensions that contain binary or large blob fields.
   - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Salesforce Marketing Cloud.
 
 ## Before you begin
@@ -241,10 +242,12 @@ The following table maps Salesforce Marketing Cloud data types to the correspond
 
 ## Troubleshoot transfer setup
 
-If you are having issues setting up a Salesforce Marketing Cloud data transfer, try the following troubleshooting steps:
+If you are having issues setting up or running a Salesforce Marketing Cloud data transfer, try the following troubleshooting steps:
 
-  - Ensure that the [configured authentication for the API integration package](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-prereqs) is configured to **Server-to-server** .
-  - Ensure that the authentication app is configured with the [required permissions](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html) under **Scope** .
+  - Verify that the API integration package in Salesforce Marketing Cloud is [configured specifically](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-package) for **Server-to-Server** authentication.
+  - Ensure that the authentication app is configured with all [required permissions](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/data-access-permissions.html) under **Scope** , including `Data Extensions: Read` .
+  - To avoid timeouts and intermittent failures, limit each transfer configuration to no more than **10 assets** .
+  - Verify that you aren't transferring data extensions that contain binary or large blob fields.
 
 ### Error messages
 
@@ -255,7 +258,10 @@ If you are having issues setting up a Salesforce Marketing Cloud data transfer, 
       - Configure your Google Cloud environment and your Salesforce Marketing Cloud account to add static IP addresses to the allowlist. For more information, see [Set up IP allowlist for Salesforce Marketing Cloud transfers](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-allowlist) .
 
   - Error: `INVALID_ARGUMENT. Table tableName does not exist in asset TableName`  
-    **Resolution:** Ensure that you have the correct scope permissions configured in the Salesforce Marketing Cloud application. For more information, see [Salesforce Marketing Cloud prerequisites](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-prereqs) .
+    **Resolution:** Ensure the asset name is an exact, case-sensitive match with the name in your Salesforce Marketing Cloud account and that the `Data Extensions: Read` scope is granted. When transferring row data for a Data Extension, the name must follow the exact pattern: `DataExtensionObject_DATA_EXTENSION_NAME` . For more information, see [Salesforce Marketing Cloud prerequisites](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-prereqs) .
+
+  - Issue: Transfer succeeds but zero records are loaded  
+    **Resolution:** You must have both `Read` and `Write` permissions for **File Locations** in order to read the contents of a data extension. Verify that your Salesforce Marketing Cloud scopes include `File Locations: Read, Write` .
 
   - Error: `FAILED_PRECONDITION: There was an issue connecting to API.`  
     **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allowlist. To resolve this error, follow the steps in [Create a network attachment](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) and follow the steps to create your network attachment by defining a static IP address.

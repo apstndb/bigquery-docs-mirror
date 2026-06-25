@@ -14,21 +14,23 @@ The following sections show you the required steps to configure private connecti
 
 Private transfers are supported for Snowflake instances that are hosted on Amazon Web Services (AWS), Microsoft Azure, and Google Cloud.
 
+![Private Data transfers from AWS or Azure or Google Cloud-hosted Snowflake accounts to BigQuery](https://docs.cloud.google.com/static/bigquery/images/snowflake-private-overview.png)
+
 ## Create a private link to Snowflake
 
 Create a private link that connects your Snowflake account to your cloud provider. For more information, select one of the following options:
 
 ### AWS
 
-[Configure AWS PrivateLink](https://docs.snowflake.com/en/user-guide/admin-security-privatelink) to connect your Snowflake account to your AWS account. Your AWS account must contain the [Amazon S3 staging bucket required for a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) .
+[Configure AWS PrivateLink](https://docs.snowflake.com/en/user-guide/admin-security-privatelink) to connect your Snowflake account to your AWS account. Your AWS account must contain the [Amazon S3 staging bucket required for a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#aws_3) .
 
 ### Azure
 
-[Configure Azure Private Link](https://docs.snowflake.com/en/user-guide/privatelink-azure) to connect your Azure Virtual Network (VNet) to the Snowflake VNet in Azure. Your Azure account must contain the [Blob staging bucket required for a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) .
+[Configure Azure Private Link](https://docs.snowflake.com/en/user-guide/privatelink-azure) to connect your Azure Virtual Network (VNet) to the Snowflake VNet in Azure. Your Azure account must contain the [Blob staging bucket required for a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#azure_3) .
 
 ### Google Cloud
 
-[Configure Google Cloud Private Service Connect to connect your Virtual Private Cloud (VPC) network subnet](https://docs.snowflake.com/en/user-guide/private-service-connect-google) to your Snowflake account hosted on Google Cloud. Your Google Cloud must have a [Cloud Storage staging bucket required for a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcs-bucket) .
+[Configure Google Cloud Private Service Connect to connect your Virtual Private Cloud (VPC) network subnet](https://docs.snowflake.com/en/user-guide/private-service-connect-google) to your Snowflake account hosted on Google Cloud. Your Google Cloud must have a [Cloud Storage staging bucket required for a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#dynamic_data.site_values.cloud_name_short_1) .
 
 ## Set up Cross-Cloud Interconnect or HA VPN
 
@@ -101,6 +103,49 @@ After creating your network NLB, register it in the Service Directory in the Sto
 
 Note the link to the service directory. You'll need the self-link to the service when you create your Snowflake transfer configuration.
 
+## Prepare staging bucket
+
+To complete a Snowflake data transfer, you must create a staging bucket and then configure it to allow write access from Snowflake.
+
+Select one of the following options:
+
+### AWS
+
+For AWS-hosted Snowflake accounts, create an Amazon S3 bucket to stage the Snowflake data before it is loaded into BigQuery.
+
+1.  [Create an Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) .
+
+2.  [Create and configure a Snowflake storage integration object](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration) to allow Snowflake to write data into the Amazon S3 bucket as an external stage.
+
+To allow read access on your Amazon S3 bucket, you must also do the following:
+
+1.  Create a dedicated [Amazon IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) and grant it the [`AmazonS3ReadOnlyAccess`](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonS3ReadOnlyAccess.html) policy.
+
+2.  [Create an Amazon access key pair](https://docs.aws.amazon.com/keyspaces/latest/devguide/create.keypair.html) for the IAM user.
+
+### Azure
+
+For Azure-hosted Snowflake accounts, create a Azure Blob Storage container to stage the Snowflake data before it is loaded into BigQuery.
+
+1.  [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create) and a [storage container](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal#create-a-container) within it.
+2.  <span id="storage-azure-integration-container">[Create and configure a Snowflake storage integration object](https://docs.snowflake.com/en/user-guide/data-load-azure-config#option-1-configuring-a-snowflake-storage-integration) to allow Snowflake to write data into the Azure storage container as an external stage. You can skip the steps to create an external stage, as this is not required.</span>
+
+To allow read access on your Azure container, [generate a SAS Token](https://learn.microsoft.com/en-us/azure/ai-services/translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers#create-sas-tokens-in-the-azure-portal) for it.
+
+### Google Cloud
+
+For Google Cloud-hosted Snowflake accounts, create a Cloud Storage bucket to stage the Snowflake data before it is loaded into BigQuery.
+
+1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
+
+2.  <span id="storage-gcs-integration-bucket">[Create and configure a Snowflake storage integration object](https://docs.snowflake.com/en/user-guide/data-load-gcs-config) to allow Snowflake to write data into the Cloud Storage bucket as an external stage.</span>
+
+3.  To allow access to staging bucket, Grant [DTS service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) the `roles/storage.objectViewer` role with the following command:
+    
+        gcloud storage buckets add-iam-policy-binding gs://STAGING_BUCKET_NAME \
+          --member=serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
+          --role=roles/storage.objectViewer
+
 ## Create a private Snowflake transfer configuration
 
 [Create the Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer) . When you set up the transfer configuration, do the following:
@@ -108,11 +153,43 @@ Note the link to the service directory. You'll need the self-link to the service
 ### Console
 
   - For **Use Private Network** , select **True** .
+
   - For **PSC Service Attachment** , enter the service attachment URI. For information about finding the service attachment URI, see [View details for a published service](https://docs.cloud.google.com/vpc/docs/configure-private-service-connect-producer#attachment-details) . The service attachment URI is in the format ` projects/ PROJECT_ID /regions/ REGION /serviceAttachments/ SERVICE_ATTACHMENT  ` .
+
   - For **Private Network Service** , enter [the self-link of the NLB service](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#register-your-nlb-with-service-directory) . It uses the format ` projects/ PROJECT_ID /locations/ LOCATION /namespaces/ NAMESPACE /services/ SERVICE_NAME  ` .
+
+  - The URI of the staging bucket that you want to use for the transfer:
+    
+      - For an AWS-hosted Snowflake account, an [Amazon S3 bucket URI](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#aws_3) is required along with access credentials.
+      - For an Azure-hosted Snowflake, an [Azure Blob Storage account and container](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#azure_3) is required.
+      - For a Google Cloud-hosted Snowflake account, a [Cloud Storage bucket URI](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#dynamic_data.site_values.cloud_name_short_1) is required.
+
+  - For **Cloud Provider** , select `AWS` or `AZURE` or `GCP` depending on which cloud provider is hosting your Snowflake account.
+    
+    ### AWS
+    
+      - For **Amazon S3 URI** , enter the [URI of the Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#aws_3) to use as a staging bucket.
+      - For **Access key ID** and **Secret access key** , enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#snowflake_key_pair) .
+    
+    ### Azure
+    
+      - For **Azure storage account name** and **The container in the Azure storage account** , enter the [storage account and container name of the Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#azure_3) to use as a staging bucket.
+      - For **SAS Token** , enter the [SAS token generated for the container](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#azure_sas_token) .
+    
+    ### Google Cloud
+    
+      - For **GCS URI** , enter the [URI of the Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#dynamic_data.site_values.cloud_name_short_1) to use as a staging bucket.
 
 ### bq
 
   - For the `use_private_network` parameter, set to `TRUE` .
   - For the `service_attachment` parameter, specify the service attachment URI. For information about finding the service attachment URI, see [View details for a published service](https://docs.cloud.google.com/vpc/docs/configure-private-service-connect-producer#attachment-details) . The service attachment URI is in the format ` projects/ PROJECT_ID /regions/ REGION /serviceAttachments/ SERVICE_ATTACHMENT  ` .
   - For the `private_network_service` parameter, provide the [the self-link of the NLB service](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#register-your-nlb-with-service-directory) . It uses the format ` projects/ PROJECT_ID /locations/ LOCATION /namespaces/ NAMESPACE /services/ SERVICE_NAME  ` .
+  - `cloud_provider` : enter `AWS` or `AZURE` or `GCP` depending on which cloud provider is hosting your Snowflake account.
+  - `staging_s3_uri` : enter the [URI of the S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#aws_3) to use as a staging bucket. Only required when your `cloud_provider` is `AWS` .
+  - `aws_access_key_id` : enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#snowflake_key_pair) . Only required when your `cloud_provider` is `AWS` .
+  - `aws_secret_access_key` : enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#snowflake_key_pair) . Only required when your `cloud_provider` is `AWS` .
+  - `azure_storage_account` : enter the [storage account name](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#azure_3) to use as a staging bucket. Only required when your `cloud_provider` is `AZURE` .
+  - `staging_azure_container` : enter the [container within Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#azure_3) to use as a staging bucket. Only required when your `cloud_provider` is `AZURE` .
+  - `azure_sas_token` : enter the [SAS token](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#azure_sas_token) . Only required when your `cloud_provider` is `AZURE` .
+  - `staging_gcs_uri` : enter the [URI of the Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#dynamic_data.site_values.cloud_name_short_1) to use as a staging bucket. Only required when your `cloud_provider` is `GCP` .

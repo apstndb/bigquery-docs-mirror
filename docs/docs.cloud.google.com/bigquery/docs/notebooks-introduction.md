@@ -52,7 +52,7 @@ A notebook runtime is a Compute Engine virtual machine allocated to a particular
 
 ## Notebook security
 
-You control access to notebooks by using Identity and Access Management (IAM) roles. For more information, see [Grant access to notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks#grant_access_to_notebooks) .
+You control access to notebooks by using Identity and Access Management (IAM) roles. For more information, see [Grant access to notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks#grant_access_to_notebooks) and [Security considerations for notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks#notebooks-security) .
 
 To detect vulnerabilities in Python packages that you use in your notebooks, install and use [Notebook Security Scanner](https://docs.cloud.google.com/security-command-center/docs/enable-notebook-security-scanner) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 

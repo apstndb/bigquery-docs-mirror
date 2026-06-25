@@ -43,6 +43,15 @@ Principals that have the Code Editor role on a repository are able to edit all w
 
 Private repositories that you create are still visible to principals who are granted the BigQuery Admin or BigQuery Studio Admin roles at the project level. These principals can share your private repository with other users.
 
+#### Security considerations for repositories
+
+Because code assets in BigQuery are powered by Dataform, you should consider the following security implications for users with access to these assets:
+
+  - Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
+  - Any secrets shared with the Dataform service agent can potentially be accessed by users who can edit these assets. To secure your credentials, restrict creation and edit access to trusted users, and limit the secrets accessible to the Dataform service agent. For more information, see [Secrets access during package installation](https://docs.cloud.google.com/dataform/docs/access-control#secret-access-risk) .
+
+For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions) .
+
 ## Create a repository
 
 To create a BigQuery repository, follow these steps:
@@ -88,7 +97,7 @@ You can connect a remote repository through HTTPS or SSH. Connecting a BigQuery 
 
 ### Connect a remote repository through SSH
 
-To connect a remote repository through SSH, you must generate an SSH key and a Secret Manager secret. The SSH key consists of a public SSH key and a private SSH key. You must share the public SSH key with your Git provider, and create a Secret Manager secret with the private SSH key. Then, share the secret with your custom service account.
+To connect a remote repository through SSH, you must generate an SSH key and a Secret Manager secret. The SSH key consists of a public SSH key and a private SSH key. You must share the public SSH key with your Git provider, and create a Secret Manager secret with the private SSH key. Then, share the secret with the Dataform service agent.
 
 BigQuery uses the secret with the private SSH key to sign in to your Git provider to commit changes on behalf of users. BigQuery makes these commits using the user's Google Cloud email address so you can tell who made each commit.
 
@@ -121,9 +130,9 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
 
 2.  In Secret Manager, [create a secret](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) and paste in your private SSH key as the secret value. Your private SSH key should be stored in a file similar to `~/.ssh/id_ed25519` . Give a name to the secret so you can find it in the future.
 
-3.  [Grant access to the secret to your default Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
+3.  [Grant access to the secret to the Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
     
-    Your default Dataform service agent is in the following format:
+    The Dataform service agent ID is in the following format:
     
         service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
@@ -222,7 +231,7 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
 
 ### Connect a remote repository through HTTPS
 
-To connect a remote repository through HTTPS, you must create a Secret Manager secret with a personal access token, and share the secret with your custom service account.
+To connect a remote repository through HTTPS, you must create a Secret Manager secret with a personal access token, and share the secret with the Dataform service agent.
 
 BigQuery then uses the access token to sign in to your Git provider to commit changes on behalf of users. BigQuery makes these commits using the user's Google Cloud email address so you can tell who made each commit.
 
@@ -270,9 +279,9 @@ To connect a remote repository to a BigQuery repository through HTTPS, follow th
 
 2.  In Secret Manager, [create a secret](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) containing the personal access token of your remote repository.
 
-3.  [Grant access to the secret to your default Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
+3.  [Grant access to the secret to the Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
     
-    Your default Dataform service agent is in the following format:
+    The Dataform service agent ID is in the following format:
     
         service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 

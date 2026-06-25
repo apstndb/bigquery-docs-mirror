@@ -12,15 +12,13 @@ The Snowflake connector provided by the BigQuery Data Transfer Service lets you 
 
 ## Overview
 
-The Snowflake connector engages migration agents in the Google Kubernetes Engine and triggers a load operation from Snowflake to a staging area within the same cloud provider where Snowflake is hosted.
+The Snowflake connector engages migration agents in the Google Kubernetes Engine and triggers a load operation from Snowflake to a staging area within the Cloud Storage bucket.
 
-  - For Amazon Web Services (AWS)-hosted Snowflake accounts, the data is first staged in your Amazon S3 bucket, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
-  - For Google Cloud-hosted Snowflake accounts, the data is first staged in your Cloud Storage bucket, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
-  - For Azure-hosted Snowflake accounts, the data is first staged in your Azure Blob Storage container, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
+  - For Amazon Web Services (AWS) or Azure or Google Cloud-hosted Snowflake accounts, the data is first staged in your Cloud Storage bucket, which is then transferred to BigQuery with the BigQuery Data Transfer Service.
 
-The following diagram compares data transfers from Snowflake accounts hosted on other cloud providers, and Snowflake accounts hosted on Google Cloud.
+The following diagram illustrates public data transfers from Snowflake accounts hosted on Amazon Web Services (AWS) or Azure or Google Cloud-hosted Snowflake accounts.
 
-![Data transfers from AWS or Azure-hosted Snowflake accounts and Google Cloud-hosted Snowflake accounts to BigQuery](https://docs.cloud.google.com/static/bigquery/images/snowflake-dts-overview-diagram.png)
+![Public Data transfers from AWS or Azure or Google Cloud-hosted Snowflake accounts to BigQuery](https://docs.cloud.google.com/static/bigquery/images/snowflake-public-overview.png)
 
 ## Limitations
 
@@ -86,52 +84,26 @@ For more information, see [Grant `bigquery.admin` access](https://docs.cloud.goo
 
 ### Prepare staging bucket
 
-To complete a Snowflake data transfer, you must create a staging bucket and then configure it to allow write access from Snowflake.
-
-Select one of the following options:
-
-### AWS
-
-**Staging bucket for AWS-hosted Snowflake account**
-
-For AWS-hosted Snowflake account, create an Amazon S3 bucket to stage the Snowflake data before it is loaded into BigQuery.
-
-1.  [Create an Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) .
-
-2.  [Create and configure a Snowflake storage integration object](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration) to allow Snowflake to write data into the Amazon S3 bucket as an external stage.
-
-To allow read access on your Amazon S3 bucket, you must also do the following:
-
-1.  Create a dedicated [Amazon IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) and grant it the [AmazonS3ReadOnlyAccess](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonS3ReadOnlyAccess.html) policy.
-
-2.  [Create an Amazon access key pair](https://docs.aws.amazon.com/keyspaces/latest/devguide/create.keypair.html) for the IAM user.
-
-### Azure
-
-**Staging Azure Blob Storage container for Azure-hosted Snowflake account**
-
-For Azure-hosted Snowflake accounts, create a Azure Blob Storage container to stage the Snowflake data before it is loaded into BigQuery.
-
-1.  [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create) and a [storage container](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal#create-a-container) within it.
-2.  <span id="storage-azure-integration-container">[Create and configure a Snowflake storage integration object](https://docs.snowflake.com/en/user-guide/data-load-azure-config#option-1-configuring-a-snowflake-storage-integration) to allow Snowflake to write data into the Azure storage container as an external stage. Note that 'Step 3: Creating an external stage' can be skipped as we don't use it.</span>
-
-To allow read access on your Azure container, [generate a SAS Token](https://learn.microsoft.com/en-us/azure/ai-services/translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers#create-sas-tokens-in-the-azure-portal) for it.
-
-### Google Cloud
-
-**Staging bucket for Google Cloud-hosted Snowflake account**
-
-For Google Cloud-hosted Snowflake accounts, create a Cloud Storage bucket to stage the Snowflake data before it is loaded into BigQuery.
+To prepare for a Snowflake data transfer, create a staging bucket and then configure it to allow write access from Snowflake. You must stage the Snowflake data in a Cloud Storage bucket before you can load it into BigQuery.
 
 1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
 
 2.  <span id="storage-gcs-integration-bucket">[Create and configure a Snowflake storage integration object](https://docs.snowflake.com/en/user-guide/data-load-gcs-config) to allow Snowflake to write data into the Cloud Storage bucket as an external stage.</span>
 
-3.  To allow access to staging bucket, Grant [DTS service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) the `roles/storage.objectViewer` role with the following command:
+3.  When you run the [`DESCRIBE INTEGRATION` command](https://docs.snowflake.com/en/user-guide/data-load-gcs-config#step-2-retrieve-the-cloud-storage-service-account-for-your-snowflake-account) , the Cloud Storage service account is listed under the `STORAGE_GCP_SERVICE_ACCOUNT` field. Grant the Cloud Storage service account the following permissions on the Cloud Storage bucket:
+    
+      - `storage.objects.create`
+      - `storage.objects.delete`
+      - `storage.objects.get`
+      - `storage.objects.list`
+
+4.  To allow access to staging bucket, Grant [DTS service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) the `roles/storage.objectViewer` role with the following command:
     
         gcloud storage buckets add-iam-policy-binding gs://STAGING_BUCKET_NAME \
           --member=serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
           --role=roles/storage.objectViewer
+
+For a Snowflake private data transfer, [create the staging bucket and configure it for private connectivity](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#prepare_staging_bucket) .
 
 ### Create a Snowflake user with the required permissions
 
@@ -208,10 +180,7 @@ Gather the information that you need to set up the migration with the BigQuery D
 
   - Your Snowflake account identifier, which is the prefix in your Snowflake account URL. For example, `  ACCOUNT_IDENTIFIER .snowflakecomputing.com ` .
   - The username and the associated private key with appropriate permissions to your Snowflake database. It can just have the [required permissions to execute the data transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#create-snowflake-user) .
-  - The URI of the staging bucket that you want to use for the transfer:
-      - For an AWS-hosted Snowflake account, an [Amazon S3 bucket URI](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) is required along with access credentials.
-      - For an Azure-hosted Snowflake, an [Azure Blob Storage account and container](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) is required.
-      - <span id="staging_bucket_uri">For a Google Cloud-hosted Snowflake account, a [Cloud Storage bucket URI](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcs-bucket) is required. We recommend that you set up a lifecycle policy for this bucket to avoid unnecessary charges.</span>
+  - <span id="staging_bucket_uri">The [URI of the staging bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-staging-bucket) to use for the transfer. We recommend that you set up a lifecycle policy for this bucket to avoid unnecessary charges.</span>
   - The URI of the Cloud Storage bucket where you have stored the [schema mapping files obtained from the translation engine](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema) .
 
 ## Set up a Snowflake transfer
@@ -262,19 +231,7 @@ Select one of the following options:
     
     3.  For **Cloud Provider** , select `AWS` or `AZURE` or `GCP` depending on which cloud provider is hosting your Snowflake account.
         
-        ### AWS
-        
-          - For **Amazon S3 URI** , enter the [URI of the Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) to use as a staging area.
-          - For **Access key ID** and **Secret access key** , enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#snowflake_key_pair) .
-        
-        ### Azure
-        
-          - For **Azure storage account name** and **The container in the Azure storage account** , enter the [storage account and container name of the Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) to use as a staging area.
-          - For **SAS Token** , enter the [SAS token generated for the container](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#azure_sas_token) .
-        
-        ### Google Cloud
-        
-          - For **GCS URI** , enter the [URI of the Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcs-bucket) to use as a staging area.
+          - For **GCS URI** , enter the [URI of the Cloud Storage bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-staging-bucket) to use as a staging bucket.
 
 8.  In the **Service Account** section, do the following:
     
@@ -381,21 +338,7 @@ You can configure the following parameters for your Snowflake transfer configura
 
   - `max_file_size_mb` : (Optional) specify the maximum size of each file unloaded from Snowflake to the staging location in MB. The value must be between `16` and `5120` . The default value is `512` .
 
-  - `cloud_provider` : enter `AWS` or `AZURE` or `GCP` depending on which cloud provider is hosting your Snowflake account.
-
-  - `staging_s3_uri` : enter the [URI of the S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) to use as a staging area. Only required when your `cloud_provider` is `AWS` .
-
-  - `aws_access_key_id` : enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#snowflake_key_pair) . Only required when your `cloud_provider` is `AWS` .
-
-  - `aws_secret_access_key` : enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#snowflake_key_pair) . Only required when your `cloud_provider` is `AWS` .
-
-  - `azure_storage_account` : enter the [storage account name](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) to use as a staging area. Only required when your `cloud_provider` is `AZURE` .
-
-  - `staging_azure_container` : enter the [container within Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) to use as a staging area. Only required when your `cloud_provider` is `AZURE` .
-
-  - `azure_sas_token` : enter the [SAS token](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#azure_sas_token) . Only required when your `cloud_provider` is `AZURE` .
-
-  - `staging_gcs_uri` : enter the [URI of the Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcs-bucket) to use as a staging area. Only required when your `cloud_provider` is `GCP` .
+  - `staging_gcs_uri` : enter the [URI of the Cloud Storage bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-staging-bucket) to use to stage your data.
 
   - `use_private_network` : if you are creating a [private data transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity) , set to `TRUE` .
 

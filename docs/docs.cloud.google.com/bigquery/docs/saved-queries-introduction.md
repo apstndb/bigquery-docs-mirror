@@ -20,7 +20,7 @@ Saved query capabilities are available only in the Google Cloud console.
 
 ### Saved query security
 
-You control access to saved queries by using Identity and Access Management (IAM) roles. For more information, see [Share saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#share-saved-query) .
+You control access to saved queries by using Identity and Access Management (IAM) roles. For more information, see [Share saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#share-saved-query) and [Security considerations for saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#saved-queries-security) .
 
 ### Supported regions
 
@@ -248,8 +248,6 @@ To support this transition, the following BigQuery IAM roles were updated in Feb
       - `dataform.locations.list`
       - `dataform.repositories.create`
       - `dataform.repositories.list`
-
-> **Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
 
 To let users without the BigQuery Admin, BigQuery Job User, or BigQuery User roles use saved queries, grant them the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions) in IAM.
 

@@ -131,7 +131,7 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
 
   - `  OUTPUT_MODE  ` : a `STRING` value that indicates whether a single input can be classified into multiple categories. Specifying an output mode changes the return type of the function to `ARRAY<STRING>` . The supported values are the following:
     
-      - `single` : Each input is classified into exactly one category.
+      - `single` (default): Each input is classified into exactly one category.
       - `multi` : Each value is classified into zero or more categories. In this case, the function returns an array that contains each relevant category, or an empty array if no category applies.
 
   - `  EMBEDDINGS  ` : the embeddings to use for optimized mode (Preview). This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
