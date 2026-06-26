@@ -20,7 +20,6 @@ Identifiers are names that are associated with columns, tables, fields, path exp
 ### Quoted identifiers
 
   - Must be enclosed by backtick (\`) characters.
-  - Can contain any characters, including spaces and symbols.
   - Can't be empty.
   - Have the same escape sequences as [string literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) .
   - If an identifier is the same as a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , the identifier must be quoted. For example, the identifier `FROM` must be quoted. Additional rules apply for [path expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#path_expressions) , [table names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#table_names) , [column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) , and [field names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#field_names) .

@@ -4586,6 +4586,12 @@ The following options are supported:
 <p>For example <code dir="ltr" translate="no">tree_ah_options = '{"leaf_node_embedding_count": 1000, "normalization_type": "L2"}'</code></p>
 <p>The statement fails if <code dir="ltr" translate="no">tree_ah_options</code> is specified and <code dir="ltr" translate="no">index_type</code> is not <code dir="ltr" translate="no">TREE_AH</code> .</p></td>
 </tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">lexical_search_columns</code></td>
+<td><code dir="ltr" translate="no">ARRAY </code></td>
+<td><p>An <code dir="ltr" translate="no">ARRAY</code> that contains a list of unique column names. Each specified column name should refer to a column of type <code dir="ltr" translate="no">STRING</code> in the <code dir="ltr" translate="no">base_table</code> . These columns are used in the lexical search portion of a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-details">hybrid search</a> .</p>
+<p>A non-empty list indicates the search is hybrid. <code dir="ltr" translate="no">lexical_search_columns</code> can be used only when <code dir="ltr" translate="no">query_value</code> is specified with single search. Hybrid search doesn't support batch queries.</p></td>
+</tr>
 </tbody>
 </table>
 

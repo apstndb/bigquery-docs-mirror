@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes how to create and manage vector indexes to accelerate your vector searches.
 
-A vector index is a data structure designed to let the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) and [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) execute more efficiently, especially on large datasets. When using an index, these search functions use [Approximate Nearest Neighbor (ANN)](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) algorithms to reduce query latency and computational cost. While ANN introduces a degree of approximation, meaning that [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) might not be 100%, the performance improvements typically offer an advantage for most applications.
+A vector index is a data structure designed to let the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) and [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) run more efficiently, especially on large datasets. When using an index, these search functions use [Approximate Nearest Neighbor (ANN)](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) algorithms to reduce query latency and computational cost. While ANN introduces a degree of approximation, meaning that [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) might not be 100%, the performance improvements typically offer an advantage for most applications.
 
 ## Roles and permissions
 
@@ -166,6 +166,29 @@ The following example creates a vector index on the `embedding` column of `my_ta
     CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
     OPTIONS (index_type = 'TREE_AH', distance_type = 'EUCLIDEAN',
     tree_ah_options = '{"normalization_type": "L2"}');
+
+## Use vector indexes with hybrid search
+
+To improve the performance of [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-details) queries, you can add the keyword information that is needed for processing a lexical search to your vector index by specifying `lexical_search_columns` in your `CREATE VECTOR INDEX` statement. This can be done for any existing type of vector index such as IVF or TreeAH. The following example `CREATE VECTOR INDEX` statement includes keyword information. In this example, the `lexical_search_columns` option lists all the columns that are used for the lexical portion of a hybrid search query. Any column added to the `lexical_search_columns` list must also be added as a stored column in the `STORING` clause:
+
+    CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] INDEX_NAME
+    ON DATASET_NAME.TABLE_NAME(COLUMN_NAME)
+    STORING(STORED_COLUMN_NAME [, ...])
+    OPTIONS(
+      index_type = 'INDEX_TYPE',
+      distance_type = 'DISTANCE_TYPE',
+      ivf_options = '{"num_lists":NUM_LISTS}'
+      lexical_search_columns = [LEXICAL_COLUMN_NAME [, ...]])
+
+The following [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-details) example creates a vector index on the embedding column in `my_table` . The `header` , `content` , and `footer` columns are used for lexical search in hybrid search queries:
+
+    CREATE VECTOR INDEX `hybrid_index`
+    ON `my_dataset.my_table`(`embedding`)
+        STORING(`header`, `content`, `footer`)
+      OPTIONS (
+        index_type = 'IVF',
+        distance_type = 'EUCLIDEAN',
+        lexical_search_columns = ['header', 'content', 'footer']);
 
 ## Filtering
 
@@ -741,7 +764,7 @@ When you no longer need a vector index or want to change which column is indexed
 
 If an indexed table is deleted, its index is deleted automatically.
 
-## Export embeddings to Vertex AI Vector Search
+## Export embeddings to Vector Search
 
 To enable ultra-low latency online applications, use BigQuery integration with Gemini Enterprise Agent Platform [Vector Search](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search/overview) to import your BigQuery embeddings into Vector Search and deploy low latency endpoints. For more information, see [Import index data from BigQuery](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search/import-index-data-from-big-query) .
 

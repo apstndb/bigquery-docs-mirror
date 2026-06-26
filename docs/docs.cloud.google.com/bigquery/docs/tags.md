@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes how to use tags to conditionally apply [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/tags-access-control) policies to BigQuery tables, views, and datasets.
 
-You can also use tags to conditionally [deny access](https://docs.cloud.google.com/iam/docs/deny-access) with IAM policies to BigQuery tables, views, and datasets ( [Preview](https://cloud.google.com/products#product-launch-stages) ). For more information, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
+You can also use tags to conditionally [deny access](https://docs.cloud.google.com/iam/docs/deny-access) with IAM policies to BigQuery tables, views, and datasets. For more information, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
 
 A tag is a key-value pair that you can attach directly to a table, view, or dataset or a key-value pair that a table, view, or dataset can [inherit](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance) from other Google Cloud resources. You can conditionally apply policies based on whether a resource has a specific tag. For example, you might conditionally grant the BigQuery Data Viewer role to a principal on any dataset with the `environment:dev` tag.
 

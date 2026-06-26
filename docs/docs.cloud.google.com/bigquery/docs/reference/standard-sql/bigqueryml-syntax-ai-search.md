@@ -40,7 +40,8 @@ You can use `AI.SEARCH` to help with the following tasks:
     AI.SEARCH(
       { TABLE base_table | base_table_query },
       column_to_search,
-      query_value
+      query_value,
+      mode => mode_value
       [, top_k => top_k_value ]
       [, distance_type => distance_type_value ]
       [, options => options_value]
@@ -57,6 +58,8 @@ You can use `AI.SEARCH` to help with the following tasks:
   - `column_to_search` : A `STRING` literal that contains the name of the column to search. This must be the name of the source column (of type `STRING` or `ObjectRef` ) that the automatically generated embedding column is based on, but it's not the name of the generated embedding column itself. If the column has a vector index, BigQuery attempts to use it. To determine if an index was used in the vector search, see [Vector index usage](https://docs.cloud.google.com/bigquery/docs/vector-index#vector_index_usage) .
 
   - `query_value` : A string literal or `ObjectRef` value that represents the search query. This value is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation. If embedding generation fails for `query_value` , then the whole query fails. Rows with missing embeddings in the base table are skipped during the search.
+
+  - `mode` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): One of the following values: `VECTOR` , `HYBRID` , or `AUTO` . The default value is `AUTO` . When the mode is set to `AUTO` , a hybrid search is performed if a hybrid index exists. If no hybrid index exists, a semantic-only search is performed. To run a [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) , set the mode to `HYBRID` . To run a semantic-only search, set the mode to `VECTOR` .
 
   - `top_k` : A named argument with an `INT64` value. `top_k_value` specifies the number of nearest neighbors to return. The default is `10` . If the value is negative, all values are counted as neighbors and returned.
 
@@ -93,7 +96,7 @@ The output includes the following columns:
 
 Rows that are missing a generated embedding are skipped during the search.
 
-## Example
+## Examples
 
 The following example shows how to create a table of products and descriptions with autonomous embedding enabled on the description column, add some data to the table, and then search it for products that would be fun to play with.
 
@@ -128,6 +131,24 @@ The following example shows how to create a table of products and descriptions w
      | Lounger chair    | A comfortable chair for relaxing in.         | 0.938933930620146    |
      | Encyclopedia set | A collection of informational books.         | 1.1119297739353384   |
      +------------------+----------------------------------------------+----------------------*/
+
+The following example uses a hybrid search to find products that are fun to play with.
+
+    SELECT base.name, base.description, distance
+    FROM
+      AI.SEARCH(
+        TABLE mydataset.products,
+        'description',
+        "A really fun toy",
+        mode => 'HYBRID');
+    
+    /*------------------+----------------------------------------------+---------------------+
+     | name             | description                                  | distance            |
+     +------------------+----------------------------------------------+---------------------+
+     | Super slingers   | An exciting board game for the whole family. | 0.96798155737704916 |
+     | Lounger chair    | A comfortable chair for relaxing in.         | 0.96799795186891957 |
+     | Encyclopedia set | A collection of informational books.         | 0.96799795186891957 |
+     +------------------+----------------------------------------------+---------------------*/
 
 ## Related functions
 

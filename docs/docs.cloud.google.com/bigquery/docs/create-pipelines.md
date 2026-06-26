@@ -12,6 +12,16 @@ This document describes how to create [pipelines in BigQuery](https://docs.cloud
 
 ## Before you begin
 
+### VPC Service Controls requirements
+
+If you use VPC Service Controls to protect your pipelines, you should be aware that pipeline runs are powered by Dataform. When you configure VPC Service Controls for scheduled runs, ensure that the following requirements are met:
+
+  - You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
+  - Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
+  - To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
+
+For detailed configuration steps and security considerations, see [Configure VPC Service Controls for Dataform](https://docs.cloud.google.com/dataform/docs/vpc-service-controls) .
+
 ### Required roles for pipelines
 
 To get the permissions that you need to create pipelines, ask your administrator to grant you the following IAM roles on the project:

@@ -394,13 +394,15 @@ Azure - East US 2
 
 `azure-eastus2`
 
-## Example use case
+## Example use cases
 
-This section provides an example of how to use sharing in BigQuery.
+This section provides examples of how to use BigQuery sharing for partner collaboration and data monetization.
+
+### Partner collaboration
 
 Suppose you are a retailer and your organization has real-time demand forecasting data in a Google Cloud project named Forecasting. You want to share this demand forecasting data with hundreds of vendors in your supply-chain system. The following sections describe how you can share your data with vendors through BigQuery sharing.
 
-### Administrators
+#### Administrators
 
 As the owner of the Forecasting project, you must first enable the API and then assign the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ) to a user who administers the data exchange in the project. Users with the Analytics Hub Admin role are referred to as *BigQuery sharing administrators* .
 
@@ -416,7 +418,7 @@ A BigQuery sharing administrator can perform the following tasks:
 
 For more information, see [BigQuery sharing IAM roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#user_roles) and [Manage data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) .
 
-### Publishers
+#### Publishers
 
 Publishers create the following listings for their datasets in the Forecasting project or in a different project:
 
@@ -432,11 +434,39 @@ As a data provider, you can [track the usage metrics](https://docs.cloud.google.
 
 For more information, see [Manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
 
-### Subscribers
+#### Subscribers
 
 Subscribers can browse through listings that they have access to in data exchanges. They can also subscribe to these listings and add these datasets to their projects by creating a linked dataset. Vendors can then run queries on these linked datasets and retrieve results in real time.
 
 For more information, see [View and subscribe to listings and data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
+
+### Data monetization
+
+Suppose you are a financial data provider and your organization has curated historical equity pricing datasets in a Google Cloud project named `MarketDataSource` . You want to monetize this data by offering it to external financial institutions and individual traders. The following sections describe how you can monetize your data through BigQuery sharing.
+
+#### Administrators
+
+As the owner of the `MarketDataSource` project, you must first enable the Analytics Hub API and Cloud Marketplace API. You then assign the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ) to the team managing the commercial exchange.
+
+A sharing administrator can perform the following tasks:
+
+  - Create a public data exchange and [integrate it with Google Cloud Marketplace](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) .
+  - Manage *BigQuery sharing publishers* by granting the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.publisher) ( `roles/analyticshub.publisher` ) to the data engineers responsible for creating commercial listings. If you want employees to only update, delete, and share listings, but not create them, grant them the [Analytics Hub Listing Admin role](https://docs.cloud.google.com/bigquery/docs/access-control#analyticshub.listingAdmin) ( `roles/analyticshub.listingAdmin` ).
+  - Manage the commercial terms and pricing models in Google Cloud Marketplace.
+
+#### Publishers
+
+Publishers create the following listings for their financial datasets:
+
+  - Listing A: Global Equity Prices (Monthly Subscription)
+  - Listing B: Real-time Market Signals (Annual Subscription)
+  - Listing C: Historical Economic Indicators (Free Trial)
+
+As a publisher, you can track the performance of your listings using the [usage metrics dashboard](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-analytics-hub) to see consumption details by subscriber organizations and the total data volume processed.
+
+#### Subscribers
+
+Subscribers can browse the listings in BigQuery sharing or directly in Cloud Marketplace. After a subscriber purchases a subscription, they can subscribe to the listing and create a linked dataset in their own Google Cloud project. The subscriber can then run analytical queries against the historical stock data, combining it with their proprietary trading algorithms without needing to ingest, copy, or manage stale files.
 
 ## Pricing
 

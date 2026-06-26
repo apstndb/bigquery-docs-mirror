@@ -16,6 +16,16 @@ You can schedule data preparations with user credentials for a Google Account or
 
 Before you begin, [create a data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
 
+### VPC Service Controls requirements
+
+If you use VPC Service Controls to protect your data preparations, you should be aware that scheduled runs are powered by Dataform. When you configure VPC Service Controls for scheduled runs, ensure that the following requirements are met:
+
+  - You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
+  - Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
+  - To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
+
+For detailed configuration steps and security considerations, see [Configure VPC Service Controls for Dataform](https://docs.cloud.google.com/dataform/docs/vpc-service-controls) .
+
 ### Required roles
 
 To authorize a data preparation with a service account when [manually running the data preparation in development](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#run-undeployed-manually) or [scheduling the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#create-schedule) , you must grant roles to the service account that you plan to use for executing the data preparation runs. For more information, see [Give access to the Dataform service account](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations#dataform-service-account-iam) .

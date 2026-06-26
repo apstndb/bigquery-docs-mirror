@@ -239,7 +239,7 @@ You can use BigQuery data canvas in the Google Cloud console, a query, or a tabl
 
 1.  Go to the **BigQuery** page.
 
-2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , and then click **Data canvas** .
+2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , select **AI and knowledge** , and then click **Data canvas** .
     
     ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
@@ -286,7 +286,7 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 1.  In the Google Cloud console, go the **BigQuery** page.
 
-2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , and then click **Data canvas** .
+2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , select **AI and knowledge** , and then click **Data canvas** .
     
     ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
@@ -614,7 +614,7 @@ In this example, you use natural language prompts with the Gemini assistant to f
 
 1.  In the Google Cloud console, go the **BigQuery** page.
 
-2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , and then click **Data canvas** .
+2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , select **AI and knowledge** , and then click **Data canvas** .
     
     ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 

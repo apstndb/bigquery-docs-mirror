@@ -703,7 +703,7 @@ Use the following syntax for batch searches, when you want to perform a vector s
       [, options => options_value ]
     )
 
-Use the following syntax (in [Preview](https://cloud.google.com/products#product-launch-stages) ) for single searches, when you want to find the vectors closest to a single embedding value. When you call the function with this syntax, it's optimized to perform better than if you call the batch version on a table with a single row.
+Use the following syntax (in [Preview](https://cloud.google.com/products#product-launch-stages) ) for single searches, when you want to find the vectors closest to a single embedding value. When you call the function with this syntax, it's optimized to perform better than if you call the batch version on a table with a single row. Using single query syntax, you can also perform a hybrid search (in [Preview](https://cloud.google.com/products#product-launch-stages) ) that combines a semantic search with a lexical search.
 
 > **Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
 
@@ -711,6 +711,8 @@ Use the following syntax (in [Preview](https://cloud.google.com/products#product
       { TABLE base_table | (base_table_query) },
       column_to_search,
       query_value => single_query_value,
+      [, lexical_search_columns => lexical_search_columns_value]
+      [, lexical_search_query_value => single_lexical_search_query_value]
       [, top_k => top_k_value ]
       [, distance_type => distance_type_value ]
       [, options => options_value ]
@@ -742,7 +744,7 @@ You can also use the `VECTOR_SEARCH` function with `ObjectRef` input. For more i
 
   - `query_table_query` : A query that provides the embeddings, strings, or `ObjectRef` s for which to find nearest neighbors. All columns are passed through as output columns.
 
-  - `query_column_to_search` : A named argument with a `STRING` value. `query_column_to_search_value` specifies the name of the column in the query table or statement that contains the strings or embeddings for which to find nearest neighbors. The column must be one of the following types:
+  - `query_column_to_search` : A `STRING` value. `query_column_to_search_value` specifies the name of the column in the query table or statement that contains the strings or embeddings for which to find nearest neighbors. The column must be one of the following types:
     
       - `ARRAY<FLOAT64>` : All elements in the array must be non- `NULL` and all values in the column must have the same array dimensions as the values in the `column_to_search` column.
       - `STRING` : The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The string values are embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. These embeddings are used to return query results but aren't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
@@ -750,19 +752,25 @@ You can also use the `VECTOR_SEARCH` function with `ObjectRef` input. For more i
     
     If you don't specify `query_column_to_search_value` , the function uses the `column_to_search` value or picks the most appropriate column.
 
-  - `query_value` : A named argument of one of the following types:
+  - `query_value` : One of the following types:
     
       - `ARRAY<FLOAT64>` : The `single_query_value` is a single embedding for which to find nearest neighbors.
       - `STRING` : The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The `single_query_value` is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. The embedding is used to return query results but isn't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
       - `STRUCT` : The `single_query_value` is an `ObjectRef` for which to find nearest neighbors. An `ObjectRef` is a `STRUCT` with fixed fields that can reference unstructured data. For more information, see [Work with object references](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) . The `base_table` must have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled. The `single_query_value` is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. The embedding is used to return query results but isn't stored anywhere. You must have the BigQuery Connection User role ( `roles/bigquery.connectionUser` ) on the connection that the base table uses for background embedding generation.
 
-  - `top_k` : A named argument with an `INT64` value. `top_k_value` specifies the number of nearest neighbors to return. The default is `10` . If the value is negative, all values are counted as neighbors and returned.
+  - `lexical_search_columns` : An `ARRAY<STRING>` that contains a list of unique column names. Each specified column name should refer to a column of type `STRING` in the `base_table` . These columns are used in the lexical search portion of a [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-search) .
+    
+    A non-empty list indicates the search is hybrid. `lexical_search_columns` can be used only when `query_value` is specified with single search. Hybrid search doesn't support batch queries.
 
-  - `distance_type` : A named argument with a `STRING` value. `distance_type_value` specifies the type of metric to use to compute the distance between two vectors. Supported distance types are [`EUCLIDEAN`](https://en.wikipedia.org/wiki/Euclidean_distance) , [`COSINE`](https://en.wikipedia.org/wiki/Cosine_similarity#Cosine_Distance) , and [`DOT_PRODUCT`](https://en.wikipedia.org/wiki/Dot_product) . The default is `EUCLIDEAN` .
+  - `lexical_search_query_value` : A `STRING` value that represents the query text for the lexical search portion of a [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-search) . This query value is matched against all the lexical search column values in the `lexical_search_columns` parameter. This parameter must be specified when `lexical_search_columns` is used.
+
+  - `top_k` : An `INT64` value. `top_k_value` specifies the number of nearest neighbors to return. The default is `10` . If the value is negative, all values are counted as neighbors and returned.
+
+  - `distance_type` : A `STRING` value. `distance_type_value` specifies the type of metric to use to compute the distance between two vectors. Supported distance types are [`EUCLIDEAN`](https://en.wikipedia.org/wiki/Euclidean_distance) , [`COSINE`](https://en.wikipedia.org/wiki/Cosine_similarity#Cosine_Distance) , and [`DOT_PRODUCT`](https://en.wikipedia.org/wiki/Dot_product) . The default is `EUCLIDEAN` .
     
     If you don't specify `distance_type_value` and the `column_to_search` column has a vector index that's used, `VECTOR_SEARCH` uses the distance type specified in the [`distance_type` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) of the `CREATE VECTOR INDEX` statement.
 
-  - `options` : A named argument with a JSON-formatted `STRING` value. `options_value` is a literal that specifies the following vector search options:
+  - `options` : A JSON-formatted `STRING` value. `options_value` is a literal that specifies the following vector search options:
     
       - `fraction_lists_to_search` : A JSON number that specifies the percentage of lists to search. For example, `options => '{"fraction_lists_to_search":0.15}'` . The `fraction_lists_to_search` value must be in the range `0.0` to `1.0` , exclusive.
         
@@ -784,6 +792,18 @@ You can optionally use `VECTOR_SEARCH` with a [vector index](https://docs.cloud.
 
 If the base table has autonomous embedding generation enabled, then you can alternatively use the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) to simplify your search syntax.
 
+**Hybrid search**
+
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
+
+> **Note:** To provide feedback or request support for this feature, send an email to <bq-vector-search@google.com> .
+
+A hybrid search lets you use the `VECTOR_SEARCH` function to combine a semantic search with a lexical (keyword) search. You can extend a [vector index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) to include keyword information to improve the speed of the lexical search portion of a hybrid search.
+
+The lexical portion of a hybrid search can be performed on one or more `STRING` columns in the base table. The `lexical_search_columns` value doesn't have to correspond to the column from which embeddings were generated. This allows hybrid search to perform a cross-column search on the base table. Similarly, the `lexical_search_query_value` doesn't have to correspond to `query_value` .
+
 **Output**
 
 For each row in the query data, the output contains multiple rows from the base table that satisfy the search criteria. The number of results rows per query table row is either 10 or the `top_k` value if it's specified. The order of the output isn't guaranteed.
@@ -792,7 +812,7 @@ The output includes the following columns:
 
   - `query` : A `STRUCT` value that contains all selected columns from the query data. This column is only included in the output if you use the batch search syntax. For single vector searches, this column is omitted.
   - `base` : A `STRUCT` value that contains all columns from `base_table` or a subset of the columns from `base_table` that you selected in the `base_table_query` query.
-  - `distance` : A `FLOAT64` value that represents the distance between the base data and the query data.
+  - `distance` : A `FLOAT64` value that represents the distance between the base data and the query data for the semantic search portion of a vector search.
 
 **Search with `ObjectRef` input**
 
@@ -832,17 +852,18 @@ The following queries create test tables `base_table` and `query_table` to use i
     CREATE OR REPLACE TABLE mydataset.base_table
     (
       id STRING,
+      description STRING,
       my_embedding ARRAY<FLOAT64>
     );
     
-    INSERT mydataset.base_table (id, my_embedding)
-    VALUES('dog', [1.0, 2.0]),
-    ('wolf', [2.0, 4.0]),
-    ('snake', [-2.0, 3.0]),
-    ('lion', [2.0, -2.5]),
-    ('tiger', [3.0, -2.0]),
-    ('otter', [-3.0, -1.0]),
-    ('whale', [-5.0, -1.0]);
+    INSERT mydataset.base_table (id, description, my_embedding)
+    VALUES('dog', 'Man\'s best friend', [1.0, 2.0]),
+    ('wolf', 'The ultimate pack hunter', [2.0, 4.0]),
+    ('snake', 'The slithering serpent', [-2.0, 3.0]),
+    ('lion', 'King of the jungle', [2.0, -2.5]),
+    ('tiger', 'The striped stalker', [3.0, -2.0]),
+    ('otter', 'The river\'s playful acrobat', [-3.0, -1.0]),
+    ('whale', 'The ocean\'s gentle giant', [-5.0, -1.0]);
 
     CREATE OR REPLACE TABLE mydataset.query_table
     (
@@ -856,7 +877,8 @@ The following queries create test tables `base_table` and `query_table` to use i
 
 The following example searches the `my_embedding` column of `base_table` for the top two embeddings that match each row of data in the `embedding` column of `query_table` :
 
-    SELECT *
+    SELECT
+      query.query_id, query.embedding, base.id, base.my_embedding, distance
     FROM
       VECTOR_SEARCH(
         TABLE mydataset.base_table,
@@ -865,8 +887,8 @@ The following example searches the `my_embedding` column of `base_table` for the
         'embedding',
         top_k => 2);
     
-    /*----------------+-----------------+---------+----------------------------------------+
-     | query.query_id | query.embedding | base.id | base.my_embedding | distance           |
+    /*----------------+-----------------+---------+-------------------+--------------------+
+     | query_id       | embedding       | id      | my_embedding      | distance           |
      +----------------+-----------------+---------+-------------------+--------------------+
      | dog            |  1.0            | dog     |  1.0              | 0.0                |
      |                |  2.0            |         |  2.0              |                    |
@@ -883,35 +905,36 @@ The following example searches the `my_embedding` column of `base_table` for the
 
 The following example pre-filters `base_table` to rows where `id` isn't equal to "wolf" and then searches the `my_embedding` column of `base_table` for the top two embeddings that match each row of data in the `embedding` column of `query_table` .
 
-    SELECT *
+    SELECT
+      query.query_id, query.embedding, base.id, base.my_embedding, distance
     FROM
       VECTOR_SEARCH(
         (SELECT * FROM mydataset.base_table WHERE id != 'wolf'),
         'my_embedding',
         (SELECT query_id, embedding FROM mydataset.query_table),
         'embedding',
-        top_k => 2,
-        options => '{"use_brute_force":true}');
+        top_k => 2);
     
-    /*----------------+-----------------+---------+----------------------------------------+
-     | query.query_id | query.embedding | base.id | base.my_embedding | distance           |
-     +----------------+-----------------+---------+-------------------+--------------------+
-     | dog            |  1.0            | dog     |  1.0              | 0.0                |
-     |                |  2.0            |         |  2.0              |                    |
-     +----------------+-----------------+---------+-------------------+--------------------+
-     | dog            |  1.0            | snake   | -2.0              | 3.1622776601683795 |
-     |                |  2.0            |         |  3.0              |                    |
+    /*----------------+-----------------+---------+-------------------+--------------------+
+     | query_id       | embedding       | id      | my_embedding      | distance           |
      +----------------+-----------------+---------+-------------------+--------------------+
      | cat            |  1.0            | lion    |  2.0              | 1.8027756377319946 |
      |                | -1.0            |         | -2.5              |                    |
      +----------------+-----------------+---------+-------------------+--------------------+
      | cat            |  1.0            | tiger   |  3.0              | 2.23606797749979   |
      |                | -1.0            |         | -2.0              |                    |
+     +----------------+-----------------+---------+-------------------+--------------------+
+     | dog            |  1.0            | dog     |  1.0              | 0.0                |
+     |                |  2.0            |         |  2.0              |                    |
+     +----------------+-----------------+---------+-------------------+--------------------+
+     | dog            |  1.0            | snake   | -2.0              | 3.1622776601683795 |
+     |                |  2.0            |         |  3.0              |                    |
      +----------------+-----------------+---------+-------------------+--------------------*/
 
 The following example searches the `my_embedding` column of `base_table` for the top two embeddings that match each row of data in the `embedding` column of `query_table` , and uses the `COSINE` distance type to measure the distance between the embeddings:
 
-    SELECT *
+    SELECT
+      query.query_id, query.embedding, base.id, base.my_embedding, distance
     FROM
       VECTOR_SEARCH(
         TABLE mydataset.base_table,
@@ -921,25 +944,26 @@ The following example searches the `my_embedding` column of `base_table` for the
         top_k => 2,
         distance_type => 'COSINE');
     
-    /*----------------+-----------------+---------+-------------------------------------------+
-     | query.query_id | query.embedding | base.id | base.my_embedding | distance              |
-     +----------------+-----------------+---------+-------------------+-----------------------+
-     | dog            |  1.0            | wolf    |  2.0              | 0                     |
-     |                |  2.0            |         |  4.0              |                       |
-     +----------------+-----------------+---------+-------------------+-----------------------+
-     | dog            |  1.0            | dog     |  1.0              | 0                     |
-     |                |  2.0            |         |  2.0              |                       |
+    /*----------------+-----------------+---------+-------------------+-----------------------+
+     | query_id       | embedding       | id      | my_embedding      | distance              |
      +----------------+-----------------+---------+-------------------+-----------------------+
      | cat            |  1.0            | lion    |  2.0              | 0.0061162653263812095 |
      |                | -1.0            |         | -2.5              |                       |
      +----------------+-----------------+---------+-------------------+-----------------------+
      | cat            |  1.0            | tiger   |  3.0              | 0.019419324309079777  |
      |                | -1.0            |         | -2.0              |                       |
+     +----------------+-----------------+---------+-------------------+-----------------------+
+     | dog            |  1.0            | dog     |  1.0              | 0.0                   |
+     |                |  2.0            |         |  2.0              |                       |
+     +----------------+-----------------+---------+-------------------+-----------------------+
+     | dog            |  1.0            | wolf    |  2.0              | 0.0                   |
+     |                |  2.0            |         |  4.0              |                       |
      +----------------+-----------------+---------+-------------------+-----------------------*/
 
 The following example searches the `my_embedding` column of `base_table` for the top two embeddings that match the single embedding value `[1.0, -1.0]` . It uses the optimized syntax for single searches:
 
-    SELECT *
+    SELECT
+      base.id, base.my_embedding, distance
     FROM
       VECTOR_SEARCH(
         TABLE mydataset.base_table,
@@ -947,8 +971,8 @@ The following example searches the `my_embedding` column of `base_table` for the
         query_value => [1.0, -1.0],
         top_k => 2);
     
-    /*---------+----------------------------------------+
-     | base.id | base.my_embedding | distance           |
+    /*---------+-------------------+--------------------+
+     | id      | my_embedding      | distance           |
      +---------+-------------------+--------------------+
      | lion    |  2.0              | 1.8027756377319946 |
      |         | -2.5              |                    |
@@ -968,3 +992,25 @@ Instead of including the embedding value as a literal in your query, you can gen
                         endpoint => 'text-embedding-005',
                         model_params => JSON '{"outputDimensionality": 2}').result,
         top_k => 2);
+
+The following example shows a hybrid search query. The query combines a semantic search of the embedded name column `my_embedding` with a keyword search of the `description` column for `striped hunter` :
+
+    SELECT *
+    FROM
+      VECTOR_SEARCH(
+        TABLE mydataset.base_table,
+        "my_embedding",
+        query_value => [1.0, -1.0],
+        lexical_search_columns => ["description"],
+        lexical_search_query_value => "striped hunter",
+        top_k => 2);
+    
+    /*-----------+-------------------------+-------------------+---------------------+
+     | base.id   | base.description        | base.my_embedding | distance            |
+     +-----------+-------------------------+-------------------+---------------------+
+     | tiger     | The striped stalker     | 3.0               | 0.967741935483871   |
+     |           |                         | -2.0              |                     |
+     +-----------+-------------------------+-----------------------------+-----------+
+     | lion      | King of the jungle      | 2.0               | 0.96798155737704916 |
+     |           |                         | -2.5              |                     |
+     +-----------+-------------------------+-------------------+---------------------*/
