@@ -30,7 +30,7 @@ https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau	2026-06-18T13:3
 https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/annotate-image	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview	2026-06-18T13:34:47Z
-https://docs.cloud.google.com/bigquery/docs/api-performance	2026-06-18T13:34:47Z
+https://docs.cloud.google.com/bigquery/docs/api-performance	2026-06-27T08:58:03Z
 https://docs.cloud.google.com/bigquery/docs/api-sql-translator	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-multiple-time-series-forecasting-tutorial	2026-06-18T13:34:47Z
@@ -160,7 +160,7 @@ https://docs.cloud.google.com/bigquery/docs/data-insights	2026-06-18T13:30:13Z
 https://docs.cloud.google.com/bigquery/docs/data-manipulation-language	2026-06-18T13:30:13Z
 https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions	2026-06-18T13:30:13Z
 https://docs.cloud.google.com/bigquery/docs/data-prep-introduction	2026-06-18T13:30:13Z
-https://docs.cloud.google.com/bigquery/docs/data-profile-scan	2026-06-18T13:30:13Z
+https://docs.cloud.google.com/bigquery/docs/data-profile-scan	2026-06-26T18:19:37Z
 https://docs.cloud.google.com/bigquery/docs/data-quality-scan	2026-06-25T17:56:35Z
 https://docs.cloud.google.com/bigquery/docs/data-replication	2026-06-18T13:30:13Z
 https://docs.cloud.google.com/bigquery/docs/data-types	2026-06-18T13:30:13Z
@@ -915,6 +915,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.rpc	2
 https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers	2026-06-24T18:34:20Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations	2026-06-20T04:08:38Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest	2025-12-19T17:36:29Z
+https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/Shared.Types/Status	2025-10-17T21:04:04Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/BiReservation	2025-10-17T21:04:25Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/Edition	2025-10-17T21:04:42Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/GetPolicyOptions	2025-10-17T21:03:24Z
@@ -922,7 +923,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/Polic
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/Status	2025-10-17T21:04:25Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/TestIamPermissionsResponse	2025-10-17T21:04:42Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations	2025-10-17T21:05:17Z
-https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments	2025-10-17T21:04:36Z
+https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments	2026-06-26T21:37:44Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments/create	2025-10-17T21:05:17Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments/delete	2025-10-17T21:04:32Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments/get	2025-10-17T21:04:32Z
@@ -959,7 +960,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/proje
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAssignments	2025-10-17T21:04:20Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation	2025-10-17T21:04:25Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc	2025-12-19T17:36:29Z
-https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1	2026-04-09T08:38:40Z
+https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1	2026-06-26T21:37:44Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.iam.v1	2025-10-17T21:04:32Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.rpc	2025-10-17T21:03:18Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.type	2025-10-17T21:03:59Z
@@ -1249,7 +1250,7 @@ https://docs.cloud.google.com/bigquery/docs/reservations-get-started	2026-06-18T
 https://docs.cloud.google.com/bigquery/docs/reservations-intro	2026-06-18T13:35:26Z
 https://docs.cloud.google.com/bigquery/docs/reservations-intro-legacy	2026-06-18T13:35:26Z
 https://docs.cloud.google.com/bigquery/docs/reservations-monitoring	2026-06-18T13:35:26Z
-https://docs.cloud.google.com/bigquery/docs/reservations-tasks	2026-06-18T13:35:37Z
+https://docs.cloud.google.com/bigquery/docs/reservations-tasks	2026-06-26T21:11:38Z
 https://docs.cloud.google.com/bigquery/docs/reservations-tasks-legacy	2026-06-18T13:35:37Z
 https://docs.cloud.google.com/bigquery/docs/reservations-workload-management	2026-06-18T13:35:37Z
 https://docs.cloud.google.com/bigquery/docs/resource-hierarchy	2026-06-22T19:20:16Z

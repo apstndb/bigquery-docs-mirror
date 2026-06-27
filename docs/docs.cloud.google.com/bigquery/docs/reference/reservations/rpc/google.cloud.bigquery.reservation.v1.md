@@ -1135,7 +1135,9 @@ Invalid plan value. Requests with this value will be rejected with error code `g
 
 `FLEX`
 
-Flex commitments have committed period of 1 minute after becoming ACTIVE. After that, they are not in a committed period anymore and can be removed any time.
+Deprecated: Flex commitments are deprecated. Please use Edition-based capacity commitments. Flex commitments have committed period of 1 minute after becoming ACTIVE. After that, they are not in a committed period anymore and can be removed any time.
+
+> This item is deprecated\!
 
 `FLEX_FLAT_RATE`
 

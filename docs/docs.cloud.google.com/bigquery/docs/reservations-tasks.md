@@ -528,7 +528,7 @@ Replace the following:
 
   - `  ADMIN_PROJECT_ID  ` : the ID of the administration project.
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `us-central1` .
-  - `  RESERVATION_NAME  ` : the name of the reservation to enable BigQuery fluid scaling for.
+  - `  RESERVATION_NAME  ` : the name of the reservation to enable BigQuery fluid scaling for. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
 ### Change the size of a reservation
 

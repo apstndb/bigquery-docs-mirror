@@ -242,7 +242,7 @@ Response:
     200 OK
 
     {
-      "title": "New title",
+      "title": &quot;New title",
       "comment": "First comment.",
       "characteristics": {
         "length": "short",
@@ -279,7 +279,7 @@ This is the partial response:
     200 OK
 
     {
-      "etag": "ETagString"
+      "etag": &quot;ETagString"
       "title": "New title"
       "comment": "First comment.",
       "characteristics": {
@@ -297,12 +297,12 @@ The following patch request is based on that response. As shown below, it also u
     If-Match: "ETagString"
 
     {
-      "etag": "ETagString"
+      "etag": &quot;ETagString"
       "title": "",                  /* Clear the value of the title by setting it to the empty string. */
       "comment": null,              /* Delete the comment by replacing its value with null. */
       "characteristics": {
         "length": "short",
-        "level": "10",              /* Modify the level value. */
+        &quot;level": "10",              /* Modify the level value. */
         "followers": ["Jo", "Liz"], /* Replace the followers array to delete Will and add Liz. */
         "accuracy": "high"          /* Add a new characteristic. */
       },
@@ -313,12 +313,12 @@ The server responds with a 200 OK HTTP status code, and the partial representati
     200 OK
 
     {
-      "etag": "newETagString"
+      "etag": &quot;newETagString"
       "title": "",                 /* Title is cleared; deleted comment field is missing. */
       "characteristics": {
         "length": "short",
-        "level": "10",             /* Value is updated.*/
-        "followers": ["Jo" "Liz"], /* New follower Liz is present; deleted Will is missing. */
+        &quot;level": "10",             /* Value is updated.*/
+        &quot;followers&quot;: ["Jo" "Liz"], /* New follower Liz is present; deleted Will is missing. */
         "accuracy": "high"         /* New characteristic is present. */
       }
     }
