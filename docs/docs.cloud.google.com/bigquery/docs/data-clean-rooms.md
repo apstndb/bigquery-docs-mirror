@@ -596,12 +596,28 @@ The following example shows how to call the `projects.locations.dataExchanges.su
 Replace the following:
 
   - `  DCR_PROJECT_ID  ` : the project ID of the project where the clean room was created.
-  - `  SUBSCRIBER_PROJECT_ID  ` : the project ID of the subscriber project.
   - `  LOCATION  ` : the location of the data clean room.
   - `  CLEAN_ROOM_ID  ` : your data clean room ID.
+  - `  SUBSCRIBER_PROJECT_ID  ` : the project ID of the subscriber project.
   - `  SUBSCRIPTION  ` : the name of your subscription.
+  - `  LINKED_DATASET_ID  ` : the ID you want to give to the linked dataset.
+  - `  PRIMARY_REGION  ` : the primary geographic region where you want to create the linked dataset.
 
-In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) . If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#response-body) .
+In the body of the request, specify the destination location, subscription name, and the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) :
+
+    {
+      "destination": "projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION",
+      "subscription": "SUBSCRIPTION",
+      "destinationDataset": {
+        "datasetReference": {
+          "projectId": "SUBSCRIBER_PROJECT_ID",
+          "datasetId": "LINKED_DATASET_ID"
+        },
+        "location": "PRIMARY_REGION"
+      }
+    }
+
+If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#response-body) .
 
 If you enable subscriber email logging for the data clean room with the `logLinkedDatasetQueryUserEmail` field, the subscription response contains `log_linked_dataset_query_user_email: true` . The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
 

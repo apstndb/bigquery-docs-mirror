@@ -23,14 +23,14 @@ https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings	2026-0
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing	2026-06-18T13:34:47Z
-https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings	2026-06-18T13:34:47Z
+https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings	2026-06-29T04:56:13Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/analyze-data-pipe-syntax	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/annotate-image	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview	2026-06-18T13:34:47Z
-https://docs.cloud.google.com/bigquery/docs/api-performance	2026-06-27T08:58:03Z
+https://docs.cloud.google.com/bigquery/docs/api-performance	2026-06-29T04:08:53Z
 https://docs.cloud.google.com/bigquery/docs/api-sql-translator	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial	2026-06-18T13:34:47Z
 https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-multiple-time-series-forecasting-tutorial	2026-06-18T13:34:47Z
@@ -153,7 +153,7 @@ https://docs.cloud.google.com/bigquery/docs/custom-quotas	2026-06-18T13:42:06Z
 https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption	2026-06-18T13:42:06Z
 https://docs.cloud.google.com/bigquery/docs/data-analysis-tools-intro	2026-06-18T13:42:06Z
 https://docs.cloud.google.com/bigquery/docs/data-canvas	2026-06-25T23:53:06Z
-https://docs.cloud.google.com/bigquery/docs/data-clean-rooms	2026-06-20T14:12:08Z
+https://docs.cloud.google.com/bigquery/docs/data-clean-rooms	2026-06-29T04:56:13Z
 https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines	2026-06-18T13:30:13Z
 https://docs.cloud.google.com/bigquery/docs/data-governance	2026-06-23T08:40:53Z
 https://docs.cloud.google.com/bigquery/docs/data-insights	2026-06-18T13:30:13Z
@@ -218,7 +218,7 @@ https://docs.cloud.google.com/bigquery/docs/export-to-alloydb	2026-06-18T13:56:2
 https://docs.cloud.google.com/bigquery/docs/export-to-bigtable	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/export-to-pubsub	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/export-to-spanner	2026-06-25T21:54:02Z
-https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-06-27T10:02:31Z
+https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-06-29T04:11:27Z
 https://docs.cloud.google.com/bigquery/docs/exporting-models	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/extend-differential-privacy	2026-06-18T13:56:29Z
 https://docs.cloud.google.com/bigquery/docs/external-data-bigtable	2026-06-27T10:02:31Z
@@ -422,7 +422,7 @@ https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendat
 https://docs.cloud.google.com/bigquery/docs/manage-pipelines	2026-06-18T13:35:17Z
 https://docs.cloud.google.com/bigquery/docs/manage-saved-queries	2026-06-18T13:35:17Z
 https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery	2026-06-18T13:35:17Z
-https://docs.cloud.google.com/bigquery/docs/managing-datasets	2026-06-27T08:58:11Z
+https://docs.cloud.google.com/bigquery/docs/managing-datasets	2026-06-29T04:03:37Z
 https://docs.cloud.google.com/bigquery/docs/managing-jobs	2026-06-18T13:35:17Z
 https://docs.cloud.google.com/bigquery/docs/managing-models	2026-06-18T13:35:17Z
 https://docs.cloud.google.com/bigquery/docs/managing-models-vertex	2026-06-18T13:35:17Z
@@ -554,7 +554,7 @@ https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables	2026-06-18T
 https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq	2026-06-18T13:35:51Z
 https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-console	2026-06-18T13:35:51Z
 https://docs.cloud.google.com/bigquery/docs/quickstarts/notebook-gallery-quickstart	2026-06-18T13:35:51Z
-https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries	2026-06-27T10:00:38Z
+https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries	2026-06-29T04:08:24Z
 https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf	2026-06-18T13:35:26Z
 https://docs.cloud.google.com/bigquery/docs/raster-data	2026-06-18T13:35:26Z
 https://docs.cloud.google.com/bigquery/docs/raster-tutorial-weather	2026-06-18T13:35:26Z
@@ -776,7 +776,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2
 https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/removeGrantees	2025-10-17T21:03:48Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/setIamPolicy	2025-10-17T21:03:24Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies/testIamPermissions	2025-10-17T21:05:11Z
-https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference	2026-06-18T13:35:51Z
+https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference	2026-06-29T05:49:28Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/libraries	2025-12-17T03:15:19Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp	2026-06-22T14:15:59Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/check_valid_creds	2026-03-25T00:42:13Z
@@ -1375,7 +1375,7 @@ https://docs.cloud.google.com/bigquery/docs/work-with-objectref	2026-06-18T13:54
 https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries	2026-06-24T11:51:01Z
 https://docs.cloud.google.com/bigquery/docs/working-with-connections	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/working-with-time-series	2026-06-18T13:54:13Z
-https://docs.cloud.google.com/bigquery/docs/working-with-transfers	2026-06-18T13:54:13Z
+https://docs.cloud.google.com/bigquery/docs/working-with-transfers	2026-06-29T05:49:28Z
 https://docs.cloud.google.com/bigquery/docs/workspaces	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/workspaces-intro	2026-06-18T13:54:13Z
 https://docs.cloud.google.com/bigquery/docs/write-api	2026-06-18T13:54:13Z

@@ -887,6 +887,7 @@ The `bq ls` command uses the following flags and arguments:
   - `youtube_content_owner` - [YouTube Content Owner data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
   - `redshift` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
   - `on_premises` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
+  - `snowflake_migration` - [Snowflake migration](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#bq)
 
 For example:
 
@@ -1460,6 +1461,7 @@ Creates a transfer configuration. The following flags are supported:
   - `youtube_content_owner` - [YouTube Content Owner data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
   - `redshift` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
   - `on_premises` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
+  - `snowflake_migration` - [Snowflake migration](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#bq)
 
 > **Note:** The `redshift` and `on_premises` values are for data migrations; before you use the `bq mk --transfer_config` command with these values, consult the linked documentation from the preceding list.
 
@@ -1494,6 +1496,7 @@ For information about using the `bq mk` command with the BigQuery Data Transfer 
   - [Set up a YouTube Content Owner transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
   - [Migrate data from Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift)
   - [Migrate data from Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
+  - [Migrate data from Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer)
 
 #### `bq mk --transfer_run`
 

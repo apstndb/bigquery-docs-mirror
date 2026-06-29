@@ -135,8 +135,21 @@ Replace the following:
   - `  LOCATION  ` : the location for your listing that you want to subscribe to.
   - `  DATAEXCHANGE_ID  ` : the data exchange ID of the listing that you want to subscribe to.
   - `  LISTING_ID  ` : the listing ID that you want to subscribe to.
+  - `  SUBSCRIBER_PROJECT_ID  ` : the project ID of your subscriber project where you want to create the linked dataset.
+  - `  LINKED_DATASET_ID  ` : the ID you want to give to the linked dataset.
+  - `  PRIMARY_REGION  ` : the primary geographic region where you want to create the linked dataset.
 
-In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
+In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) :
+
+    {
+    "destinationDataset": {
+      "datasetReference": {
+        "projectId": "SUBSCRIBER_PROJECT_ID",
+        "datasetId": "LINKED_DATASET_ID"
+      },
+      "location": "PRIMARY_REGION"
+    }
+    }
 
 To create a subscription with linked dataset replicas available in multiple regions, specify the primary region of the linked dataset using the `location` field in the request body. For the secondary regions where you want to create linked dataset replicas, you can optionally use the `destinationDataset.replica_locations` field in the request body and list all the selected secondary replica regions. Ensure that the specified regions in the `location` property and in the `destinationDataset.replica_locations` field are regions where the associated listing is available.
 
@@ -183,8 +196,24 @@ Replace the following:
   - `  PROJECT_ID  ` : the project ID of the data exchange that you want to subscribe to.
   - `  LOCATION  ` : the location for your data exchange that you want to subscribe to.
   - `  DATAEXCHANGE_ID  ` : the data exchange ID that you want to subscribe to.
+  - `  SUBSCRIBER_PROJECT_ID  ` : the project ID of your subscriber project where you want to create the linked dataset.
+  - `  SUBSCRIPTION_ID  ` : the name of the subscription to create.
+  - `  LINKED_DATASET_ID  ` : the ID you want to give to the linked dataset.
+  - `  PRIMARY_REGION  ` : the primary geographic region where you want to create the linked dataset.
 
-In the body of the request, specify the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
+In the body of the request, specify the destination location, subscription name, and the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) :
+
+    {
+    "destination": "projects/SUBSCRIBER_PROJECT_ID/locations/LOCATION",
+    "subscription": "SUBSCRIPTION_ID",
+    "destinationDataset": {
+      "datasetReference": {
+        "projectId": "SUBSCRIBER_PROJECT_ID",
+        "datasetId": "LINKED_DATASET_ID"
+      },
+      "location": "PRIMARY_REGION"
+    }
+    }
 
 If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/subscribe#response-body) . If you have enabled subscriber email logging for the data exchange, the subscription response contains `log_linked_dataset_query_user_email: true` .
 

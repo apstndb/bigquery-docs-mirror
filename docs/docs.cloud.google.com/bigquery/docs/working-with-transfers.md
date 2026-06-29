@@ -145,6 +145,7 @@ Replace the following:
       - `youtube_content_owner` - [YouTube Content Owner data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
       - `redshift` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
       - `on_premises` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
+      - `snowflake_migration` - [Snowflake migration](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#bq)
 
 Examples:
 
