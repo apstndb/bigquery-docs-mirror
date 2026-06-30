@@ -108,6 +108,13 @@ To create a pipeline schedule, follow these steps:
 6.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+        
+        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+        
+          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+          - **Google Drive** : Allows read-only access to Google Drive files.
+          - **Bigtable** : Allows read-only access to Google Bigtable data.
+    
       - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
@@ -151,6 +158,13 @@ The latest deployed version of the pipeline runs at the selected time and freque
 5.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+        
+        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+        
+          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+          - **Google Drive** : Allows read-only access to Google Drive files.
+          - **Bigtable** : Allows read-only access to Google Bigtable data.
+    
       - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 6.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
@@ -185,7 +199,7 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 > **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
-To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
+To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface. If you select any **Extended access options** , you must grant access to those services—for example, Google Drive or Knowledge Catalog.
 
 > **Note:** Context-Aware Access (CAA) policies—including IP-based, geolocation-based, and device compliance policies—aren't supported when executing or scheduling BigQuery pipelines with user credentials for a Google Account, because the token requests originate from Google infrastructure. CAA policies block these executions unless the Dataform OAuth client ID is [exempted from the policies](https://docs.cloud.google.com/dataform/docs/troubleshooting#euc-permission-denied) .
 

@@ -14,6 +14,20 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## June 29, 2026
+
+Change
+
+Effective *March 9, 2026* , new users are required to have a Cloud Billing account to use the [BigQuery Migration Service](https://docs.cloud.google.com/bigquery/docs/migration-intro) . This change applies to users starting new projects using BigQuery Migration Service features, such as SQL translation and migration assessment.
+
+After *May 18, 2026* , all users are required to have a Cloud Billing account to use the BigQuery Migration Service.
+
+[Pricing for the BigQuery Migration Service](https://docs.cloud.google.com/bigquery/docs/migration-intro#pricing) remains without charge.
+
+Feature
+
+You can now grant data preparations and pipelines access to additional services when running or scheduling them with user credentials for a Google Account. You can grant [data preparations access to Google Drive](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) , and [grant pipelines access to Google Drive, Bigtable, and Knowledge Catalog](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) . Extended access options are available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## June 25, 2026
 
 Change

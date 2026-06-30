@@ -62,9 +62,14 @@ To test your data preparation steps and validate the results in your destination
 6.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** . This is the default option.
+        
+        Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
+        
+          - **Google Drive** : Allows read-only access to Google Drive files.
+    
       - To use a service account, select **Execute with selected service account** , and then select a service account. If the service account needs additional permissions, grant it the required roles by clicking **Grant all** .
     
-    > **Note:** If your data preparation uses Google Drive as a data source, you must select **Execute with selected service account** . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
+    > **Note:** To authenticate a data preparation that uses Google Drive as a data source with Google Account user credentials, select the **Google Drive** service in the **Extended access options** section. To authenticate the data preparation with a service account, share the Google Drive file with that service account.
 
 7.  Click **Save** .
 
@@ -127,9 +132,14 @@ To create a data preparation schedule, follow these steps:
 7.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+        
+        Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
+        
+          - **Google Drive** : Allows read-only access to Google Drive files.
+    
       - To use a service account, select **Execute with selected service account** , and then select a service account.
     
-    > **Note:** If your data preparation uses Google Drive as a data source, you must select **Execute with selected service account** . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
+    > **Note:** To authenticate a data preparation that uses Google Drive as a data source with Google Account user credentials, select the **Google Drive** service in the **Extended access options** section. To authenticate the data preparation with a service account, share the Google Drive file with that service account.
 
 8.  Schedule a frequency.
 
@@ -148,9 +158,14 @@ To create a data preparation schedule, follow these steps:
 5.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+        
+        Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
+        
+          - **Google Drive** : Allows read-only access to Google Drive files.
+    
       - To use a service account, select **Execute with selected service account** , and then select a service account.
     
-    > **Note:** If your data preparation uses Google Drive as a data source, you must select **Execute with selected service account** . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
+    > **Note:** To authenticate a data preparation that uses Google Drive as a data source with Google Account user credentials, select the **Google Drive** service in the **Extended access options** section. To authenticate the data preparation with a service account, share the Google Drive file with that service account.
 
 6.  In the **Schedule frequency** section, do the following:
     
@@ -168,7 +183,7 @@ To create a data preparation schedule, follow these steps:
 
 > **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
-To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
+To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface. If you select any **Extended access options** , you must grant access to those services—for example, Google Drive or Knowledge Catalog.
 
 > **Note:** Context-Aware Access (CAA) policies—including IP-based, geolocation-based, and device compliance policies—aren't supported when executing or scheduling BigQuery pipelines with user credentials for a Google Account, because the token requests originate from Google infrastructure. CAA policies block these executions unless the Dataform OAuth client ID is [exempted from the policies](https://docs.cloud.google.com/dataform/docs/troubleshooting#euc-permission-denied) .
 

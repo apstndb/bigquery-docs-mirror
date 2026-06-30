@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes the `ML.GENERATE_EMBEDDING` function, which lets you create [embeddings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding#embeddings) that describe an entity—for example, a piece of text or an image.
 
-The [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) offers the same functionality with simplified column names in the output. For new queries, we recommend that you use `AI.GENERATE_EMBEDDING` instead.
+> **Note:** The [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) offers the same functionality with simplified column names in the output. For new queries, we recommend that you use `AI.GENERATE_EMBEDDING` instead.
 
 You can create embeddings for the following types of data:
 

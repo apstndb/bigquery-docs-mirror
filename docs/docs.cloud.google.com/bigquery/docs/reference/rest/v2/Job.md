@@ -279,7 +279,7 @@ The labels associated with this job. You can use these to organize and group you
 
 `string`
 
-Optional. The reservation that job would use. User can specify a reservation to execute the job. If reservation is not set, reservation is determined based on the rules defined by the reservation assignments. The expected format is `projects/{project}/locations/{location}/reservations/{reservation}` .
+Optional. The reservation that job would use. User can specify a reservation to execute the job. If reservation is not set, reservation is determined based on the rules defined by the reservation assignments. The expected format is `projects/{project}/locations/{location}/reservations/{reservation}` . Forces the query to use on-demand billing when set to `none` , which requires the project or organization to have `reservation_override_mode` set to `ALLOW_ANY_OVERRIDE` .
 
 ## JobConfigurationQuery
 

@@ -4589,7 +4589,7 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">lexical_search_columns</code></td>
 <td><code dir="ltr" translate="no">ARRAY </code></td>
-<td><p>An <code dir="ltr" translate="no">ARRAY</code> that contains a list of unique column names. Each specified column name should refer to a column of type <code dir="ltr" translate="no">STRING</code> in the <code dir="ltr" translate="no">base_table</code> . These columns are used in the lexical search portion of a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-details">hybrid search</a> .</p>
+<td><p>An <code dir="ltr" translate="no">ARRAY</code> that contains a list of unique column names. Each specified column name should refer to a column of type <code dir="ltr" translate="no">STRING</code> in the <code dir="ltr" translate="no">base_table</code> . These columns are used in the lexical search portion of a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-search">hybrid search</a> .</p>
 <p>A non-empty list indicates the search is hybrid. <code dir="ltr" translate="no">lexical_search_columns</code> can be used only when <code dir="ltr" translate="no">query_value</code> is specified with single search. Hybrid search doesn't support batch queries.</p></td>
 </tr>
 </tbody>

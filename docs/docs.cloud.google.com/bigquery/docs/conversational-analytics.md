@@ -205,15 +205,19 @@ You can use these labels for the following tasks:
   - Audit agent activity.
   - Analyze query performance.
 
-### Identify the data agent labels in the Google Cloud console
+### Identify data agent labels
 
-BigQuery applies labels to jobs that are run by a data agent. To get the label key for filtering and other analysis, view the label key in the Google Cloud console.
+BigQuery applies labels to jobs that are run by conversational analytics. These labels count towards your 64 label limit on the job resource. To get the label for filtering and other analysis, view the label in the Google Cloud console. You can also [apply custom labels](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure_settings) to your data agent. You can't use custom labels to override the system-generated labels.
 
-To view a data agent's label key, follow these steps:
+To view a data agent's labels, follow these steps:
 
 1.  In the Google Cloud console, [view the job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
 
-2.  In the **Query job details** pane, locate the **Labels** section and look for labels prefixed with `ca` , such as `ca-bq-job: true` .
+2.  In the **Query job details** pane, locate the **Labels** section, and look for the following labels:
+    
+      - `ca-bq-job: true` indicates that your job was run using conversational analytics.
+      - ` data-agent-id: DATA_AGENT_ID  ` indicates that the job was run by a data agent. The value is the resource ID segment extracted from the data agent resource name.
+      - ` conversation-id: CONVERSATION_ID  ` indicates that the job is associated with a conversation. The value is the ID segment extracted from the conversation resource name.
 
 ### Analyze agent-generated jobs
 

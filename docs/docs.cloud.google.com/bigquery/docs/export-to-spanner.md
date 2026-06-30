@@ -480,7 +480,11 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
     
     The following example shows a Spanner export command set to `HIGH` priority:
     
-        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "LOW" }""")
+        EXPORT DATA OPTIONS (
+          uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
+          format='CLOUD_SPANNER',
+          spanner_options="""{ "table": "TABLE_NAME", "priority": "LOW" }"""
+        )
 
   - Avoid ordering the query results. If the result set contains all primary key columns, the exporter automatically sorts the primary keys of the destination table to streamline writes and minimize contention.
     
@@ -502,11 +506,33 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
     
     The following example exports data to a Spanner `Sales` table whose primary key uses generated columns. To optimize write performance, the query includes `EXTRACT` expressions that match the generated `SaleYear` and `SaleMonth` columns, letting BigQuery pre-sort the data before export:
     
-        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "Sales" }""")AS SELECT  s.SaleId,  s.ProductId,  s.SaleTimestamp,  s.Amount,  -- Add expressions that match the generated columns in the Spanner PK  EXTRACT(YEAR FROM s.SaleTimestamp) AS SaleYear,  EXTRACT(MONTH FROM s.SaleTimestamp) AS SaleMonthFROM my_dataset.sales_export AS s;
+        EXPORT DATA OPTIONS (
+          uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
+          format='CLOUD_SPANNER',
+          spanner_options="""{ "table": "Sales" }"""
+        )
+        AS SELECT
+          s.SaleId,
+          s.ProductId,
+          s.SaleTimestamp,
+          s.Amount,
+          -- Add expressions that match the generated columns in the Spanner PK
+          EXTRACT(YEAR FROM s.SaleTimestamp) AS SaleYear,
+          EXTRACT(MONTH FROM s.SaleTimestamp) AS SaleMonth
+        FROM my_dataset.sales_export AS s;
 
   - To prevent long running jobs, export data by partition. Shard your BigQuery data using a partition key, such as a timestamp in your query:
     
-        EXPORT DATA OPTIONS (  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",  format='CLOUD_SPANNER',  spanner_options="""{ "table": "TABLE_NAME", "priority": "MEDIUM" }""")AS SELECT *FROM 'mydataset.table1' dWHEREd.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' ANDd.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
+        EXPORT DATA OPTIONS (
+          uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
+          format='CLOUD_SPANNER',
+          spanner_options="""{ "table": "TABLE_NAME", "priority": "MEDIUM" }"""
+        )
+        AS SELECT *
+        FROM 'mydataset.table1' d
+        WHERE
+        d.timestamp >= TIMESTAMP '2025-08-28T00:00:00Z' AND
+        d.timestamp < TIMESTAMP '2025-08-29T00:00:00Z';
     
     This lets the query complete within the 6-hour job runtime. For more information about these limits, see the [query job limits](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
 

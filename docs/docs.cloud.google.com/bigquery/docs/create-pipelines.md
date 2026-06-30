@@ -94,7 +94,15 @@ To create a pipeline, follow these steps:
     
       - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with my user credentials** .
         
-        > **Note:** Authenticating API-based runs with user credentials isn't supported. To [run all the tasks in a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#run-pipeline-all-tasks) using the Dataform API, you must configure the pipeline to use a service account.
+        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+        
+          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+        
+          - **Google Drive** : Allows read-only access to Google Drive files.
+        
+          - **Bigtable** : Allows read-only access to Google Bigtable data.
+            
+            > **Note:** Authenticating API-based runs with user credentials isn't supported. To [run all the tasks in a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#run-pipeline-all-tasks) using the Dataform API, you must configure the pipeline to use a service account.
     
       - To use a service account, select **Run with selected service account** , and then select a service account. If you need to create a service account, click **New service account** .
 
@@ -506,6 +514,14 @@ To run selected tasks in a pipeline, do the following:
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
     
       - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+        
+            Optional: In the **Extended access options** section, select the
+            additional services that your pipeline requires:
+            
+            - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
+            - **Google Drive**: Allows read-only access to Google Drive files.
+            - **Bigtable**: Allows read-only access to Google
+              Bigtable data.
     
       - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
         
@@ -552,6 +568,14 @@ To run tasks with selected tags in a pipeline, do the following:
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
     
       - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+        
+            Optional: In the **Extended access options** section, select the
+            additional services that your pipeline requires:
+            
+            - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
+            - **Google Drive**: Allows read-only access to Google Drive files.
+            - **Bigtable**: Allows read-only access to Google
+              Bigtable data.
     
       - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
         
@@ -584,7 +608,7 @@ To run tasks with selected tags in a pipeline, do the following:
 
 > **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
-To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
+To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface. If you select any **Extended access options** , you must grant access to those services—for example, Google Drive or Knowledge Catalog.
 
 > **Note:** Context-Aware Access (CAA) policies—including IP-based, geolocation-based, and device compliance policies—aren't supported when executing or scheduling BigQuery pipelines with user credentials for a Google Account, because the token requests originate from Google infrastructure. CAA policies block these executions unless the Dataform OAuth client ID is [exempted from the policies](https://docs.cloud.google.com/dataform/docs/troubleshooting#euc-permission-denied) .
 

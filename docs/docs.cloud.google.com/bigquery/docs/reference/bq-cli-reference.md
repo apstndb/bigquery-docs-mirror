@@ -1797,8 +1797,8 @@ The `bq query` command uses the following flags and arguments:
   - **`--require_partition_filter={true|false}`**  
     If specified, then a partition filter is required for queries over the supplied table. This flag can only be used with a partitioned table.
 
-  - \*\* ` --reservation_id= RESERVATION  `  
-    [Preview](https://cloud.google.com/products/#product-launch-stages) . If specified, the reservation the query runs in.
+  - **` --reservation_id= RESERVATION  `**  
+    If specified, the reservation the query runs in. To force the query to use on-demand billing, set this value to `none` . This requires the project or organization to have the [`reservation_override_mode` configuration setting](https://docs.cloud.google.com/bigquery/docs/default-configuration#cost_and_resource_settings) set to `ALLOW_ANY_OVERRIDE` .
 
   - **`--rpc={true|false}`**  
     To use the RPC-style query API instead of the REST API `jobs.insert` method, set to `true` . The default value is `false` .

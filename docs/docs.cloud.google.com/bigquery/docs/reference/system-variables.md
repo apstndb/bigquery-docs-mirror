@@ -73,7 +73,7 @@ BigQuery supports the following system variables for [multi-statement queries](h
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Read and write</td>
 <td>Lets you specify or override the reservation to use for running the following statements. Must be in the following format: <code dir="ltr" translate="no">projects/         project_id        /locations/         location        /reservations/         reservation_id       </code> .
-<p>To force the query to use on-demand billing, set this variable to <code dir="ltr" translate="no">'none'</code> . This requires the project or organization to have <code dir="ltr" translate="no">reservation_override_mode</code> set to <code dir="ltr" translate="no">ALLOW_ANY_OVERRIDE</code> .</p>
+<p>Forces the query to use on-demand billing when set to <code dir="ltr" translate="no">'none'</code> . This requires the project or organization to have <code dir="ltr" translate="no">reservation_override_mode</code> set to <code dir="ltr" translate="no">ALLOW_ANY_OVERRIDE</code> .</p>
 <p>The location of the reservation must match the location where the query is running. If <code dir="ltr" translate="no">@@reservation</code> is <code dir="ltr" translate="no">NULL</code> , the reservation is automatically detected based on <a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">assignment settings</a> matching the query properties.</p></td>
 </tr>
 <tr class="odd">

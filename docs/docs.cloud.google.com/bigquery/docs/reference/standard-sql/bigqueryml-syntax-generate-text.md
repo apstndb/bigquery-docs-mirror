@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes the `ML.GENERATE_TEXT` function, which lets you perform generative natural language tasks by using any combination of text and unstructured data from BigQuery [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) , or unstructured data from BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
-The [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) offers the same functionality with simplified column names in the output. For new queries, we recommend that you use `AI.GENERATE_TEXT` instead.
+> **Note:** The [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) offers the same functionality with simplified column names in the output. For new queries, we recommend that you use `AI.GENERATE_TEXT` instead.
 
 The `ML.GENERATE_TEXT` function works by sending requests to a BigQuery ML remote model that represents a Gemini Enterprise Agent Platform model, and then returning that model's response. The following types of remote models are supported:
 

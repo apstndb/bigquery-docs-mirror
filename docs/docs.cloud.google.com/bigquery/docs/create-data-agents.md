@@ -563,8 +563,9 @@ The following sections describe how to publish a data agent in Gemini Enterprise
 To publish a data agent in Gemini Enterprise, complete the following steps:
 
 1.  Create and publish the data agent.
-2.  Provision the agent.
-3.  Discover and use the agent.
+2.  Configure authorization details.
+3.  Provision the agent.
+4.  Discover and use the agent.
 
 ### Create and publish an agent
 
@@ -575,6 +576,12 @@ As a data analyst, you create, edit, and publish an agent to Gemini Enterprise b
 3.  Copy the A2A endpoint JSON.
 4.  Share the A2A endpoint JSON and the list of users with your Gemini Enterprise administrator.
 5.  [Share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent with the users and groups who need access.
+
+### Configure authorization details
+
+Before your Gemini Enterprise administrator can provision the agent, you or the administrator must configure authorization details to generate Google Cloud OAuth client credentials.
+
+To create the OAuth client ID and client secret, follow the steps in [Configure authorization details](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) .
 
 ### Provision an agent
 

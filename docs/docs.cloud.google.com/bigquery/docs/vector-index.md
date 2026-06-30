@@ -169,7 +169,7 @@ The following example creates a vector index on the `embedding` column of `my_ta
 
 ## Use vector indexes with hybrid search
 
-To improve the performance of [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-details) queries, you can add the keyword information that is needed for processing a lexical search to your vector index by specifying `lexical_search_columns` in your `CREATE VECTOR INDEX` statement. This can be done for any existing type of vector index such as IVF or TreeAH. The following example `CREATE VECTOR INDEX` statement includes keyword information. In this example, the `lexical_search_columns` option lists all the columns that are used for the lexical portion of a hybrid search query. Any column added to the `lexical_search_columns` list must also be added as a stored column in the `STORING` clause:
+To improve the performance of [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-search) queries, you can add the keyword information that is needed for processing a lexical search to your vector index by specifying `lexical_search_columns` in your `CREATE VECTOR INDEX` statement. This can be done for any existing type of vector index such as IVF or TreeAH. The following example `CREATE VECTOR INDEX` statement includes keyword information. In this example, the `lexical_search_columns` option lists all the columns that are used for the lexical portion of a hybrid search query. Any column added to the `lexical_search_columns` list must also be added as a stored column in the `STORING` clause:
 
     CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] INDEX_NAME
     ON DATASET_NAME.TABLE_NAME(COLUMN_NAME)
@@ -180,7 +180,7 @@ To improve the performance of [hybrid search](https://docs.cloud.google.com/bigq
       ivf_options = '{"num_lists":NUM_LISTS}'
       lexical_search_columns = [LEXICAL_COLUMN_NAME [, ...]])
 
-The following [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-details) example creates a vector index on the embedding column in `my_table` . The `header` , `content` , and `footer` columns are used for lexical search in hybrid search queries:
+The following [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-search) example creates a vector index on the embedding column in `my_table` . The `header` , `content` , and `footer` columns are used for lexical search in hybrid search queries:
 
     CREATE VECTOR INDEX `hybrid_index`
     ON `my_dataset.my_table`(`embedding`)
