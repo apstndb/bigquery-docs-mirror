@@ -65,7 +65,16 @@ BigQuery Graph lets you use the [`CREATE PROPERTY GRAPH`](https://docs.cloud.goo
 
 ### Define a node
 
-Nodes are defined by rows in tables. To define a node, add a node definition in the [`NODE TABLES` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#property_graph_definition) . The simplest form of a node definition contains the name of an input table with a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) . BigQuery Graph maps rows from the input table to graph nodes.
+Nodes are defined by rows in the following types of tables or views:
+
+  - Standard tables
+  - External tables
+  - Apache Iceberg managed tables
+  - Lakehouse Iceberg REST catalog tables
+  - Views, including authorized views
+  - Non-incremental materialized views
+
+To define a node, add a node definition in the [`NODE TABLES` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#property_graph_definition) . The simplest form of a node definition contains the name of an input table with a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) . BigQuery Graph maps rows from the input table to graph nodes.
 
 In the following example, you use the `NODE TABLES` clause to define the `Account` node in the `FinGraph` property graph. The node definition contains the input table `Account` .
 
@@ -119,7 +128,16 @@ The same input table can be used in multiple node definitions. In this case, a g
 
 ### Define an edge
 
-Edges are defined by rows in tables. To define an edge, add an edge definition to the [`EDGE TABLES` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#property_graph_definition) . The simplest form of edge definition contains the name of an input table and defines source and destination node references. BigQuery Graph uses this definition to map rows from the input table to graph edges.
+Edges are defined by rows in the following types of tables or views:
+
+  - Standard tables
+  - External tables
+  - Apache Iceberg managed tables
+  - Lakehouse Iceberg REST catalog tables
+  - Views, including authorized views
+  - Non-incremental materialized views
+
+To define an edge, add an edge definition to the [`EDGE TABLES` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#property_graph_definition) . The simplest form of edge definition contains the name of an input table and defines source and destination node references. BigQuery Graph uses this definition to map rows from the input table to graph edges.
 
 By default, BigQuery uses the table name as the label and exposes all columns from the input table as properties.
 
