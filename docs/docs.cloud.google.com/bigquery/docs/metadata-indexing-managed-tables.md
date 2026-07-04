@@ -66,7 +66,7 @@ After setting up your reservation, select one of the following methods to assign
 
 ### Console
 
-1.  In the Google Cloud console, go to the **Capacity Management** page.
+1.  In the Google Cloud console, go to the **Workload management** page.
 
 2.  Click more\_vert **Reservation actions \> Create assignment** .
 

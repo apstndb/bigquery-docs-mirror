@@ -10,10 +10,10 @@ GoogleSQL for BigQuery supports the following search functions.
 
 ## Function list
 
-| Name                                                                                                                 | Summary                                                                            |
-| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [`SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search)               | Checks to see whether a table or other search data contains a set of search terms. |
-| [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) | Performs a vector search on embeddings to find semantically similar entities.      |
+| Name                                                                                                                 | Summary                                                                               |
+| -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [`SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search)               | Checks to see whether a table or other search data contains a set of search terms.    |
+| [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) | Performs a semantic search or a hybrid search on embeddings to find similar entities. |
 
 ## `SEARCH`
 
@@ -720,7 +720,9 @@ Use the following syntax (in [Preview](https://cloud.google.com/products#product
 
 **Description**
 
-The `VECTOR_SEARCH` function lets you search embeddings to find semantically similar entities.
+The `VECTOR_SEARCH` function lets you search embeddings to find semantically similar entities. You can also use the `VECTOR_SEARCH` function to perform a [hybrid search](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-search) that combines a semantic search with a lexical (keyword) search.
+
+For tables with autonomous embedding generation enabled, you can simplify your search syntax for semantic or hybrid searches by using the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
 
 Embeddings are high-dimensional numerical vectors that represent a given entity, like a piece of text or an audio file. Machine learning (ML) models use embeddings to encode semantics about such entities to make it easier to reason about and compare them. For example, a common operation in clustering, classification, and recommendation models is to measure the distance between vectors in an [embedding space](https://en.wikipedia.org/wiki/Latent_space) to find items that are most semantically similar.
 

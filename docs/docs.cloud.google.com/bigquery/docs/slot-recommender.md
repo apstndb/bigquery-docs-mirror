@@ -126,7 +126,7 @@ To view slot recommendations using the Google Cloud console, perform the followi
 
 3.  For on-demand workloads, if you have organization level permissions, you can select any individual project or the entire organization in the side panel options to view recommendations for the specific scope.
 
-4.  In the navigation menu, click **Capacity management** .
+4.  In the navigation menu, click **Workload management** .
 
 5.  Click the **Slot estimator** tab.
 

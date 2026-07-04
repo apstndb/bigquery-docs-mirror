@@ -91,7 +91,34 @@ In some cases, you might want to create more than one administration project:
 
 Idle slot capacity is not shared between reservations in different administration projects.
 
-When you're on the **Capacity management** page of the BigQuery Google Cloud console, you can view reservations and commitments only for the selected administrative project.
+When you're on the **Workload management** page of the BigQuery Google Cloud console, you can view reservations and commitments only for the selected administrative project.
+
+## Project caps and scheduling policies
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
+
+Project caps (also known as scheduling policies) let you customize the default [fair scheduling](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) behavior by setting usage and concurrency limits for projects using a reservation. These limits prevent projects from consuming excessive slots, even if they are eligible for more capacity under fair scheduling.
+
+You can set project caps as default limits at the reservation level, which apply to any project using that reservation unless overridden. Alternatively, you can configure project caps as [project-specific overrides](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#scheduling-policy-assignments) for individual projects.
+
+The following types of project caps are supported:
+
+  - **Maximum slots:** Limits the slot consumption of queries running for the assignee project within the reservation. The minimum allowed value is 100. This isn't a strict limit; it applies an approximate cap.
+
+  - **Maximum concurrency:** Limits the number of simultaneous queries admitted for the assignee project within the reservation.
+    
+    The concurrency cap is only applied at query admission time and doesn't cause running queries to be cancelled. If you decrease the concurrency cap below the current number of running queries, new queries are queued until enough running queries have been completed.
+
+Changing these settings has the following limitations:
+
+  - Changes take up to one minute to apply.
+  - Modifying a per-project maximum slots override requires a new query to start before taking effect.
+
+For more information on configuring these policies, see [Manage workload assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) and [Manage workload reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
 
 ## Sizing slot reservations
 
@@ -123,7 +150,7 @@ Instead of partitioning your capacity across workload types, you might choose to
 
 ### Manage reservations in different regions
 
-Reservations are regional resources. Slots purchased and reservations created in one region cannot be used in any other region. Projects, folders, and organizations can be assigned to reservations in one region and run on-demand in another. To manage reservations in another region, you must change the region in the BigQuery **Capacity Management** page:
+Reservations are regional resources. Slots purchased and reservations created in one region cannot be used in any other region. Projects, folders, and organizations can be assigned to reservations in one region and run on-demand in another. To manage reservations in another region, you must change the region in the BigQuery **Workload management** page:
 
 1.  In the BigQuery console, click **Reservations** .
 2.  Click the **Location** picker and select a region where you want to manage reservations. ![Select different region.](https://docs.cloud.google.com/static/bigquery/images/reservations-different-region.png)

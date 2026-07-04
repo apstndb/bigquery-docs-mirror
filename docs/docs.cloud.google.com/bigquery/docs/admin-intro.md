@@ -172,7 +172,7 @@ For more information, see [Creating an alert](https://docs.cloud.google.com/bigq
 
 ### Monitor reservations
 
-You can monitor your slot usage on the **Capacity management** page of the Google Cloud console. You can view your capacity commitments and see where your slot reservations have been assigned. You can also use the **Slot estimator** ( [Preview](https://cloud.google.com/products#section-22) ) to help you estimate your organization's capacity requirements based on historical performance metrics.
+You can monitor your slot usage on the **Workload management** page of the Google Cloud console. You can view your capacity commitments and see where your slot reservations have been assigned. You can also use the **Slot estimator** ( [Preview](https://cloud.google.com/products#section-22) ) to help you estimate your organization's capacity requirements based on historical performance metrics.
 
 For more information, see [Monitoring BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) .
 

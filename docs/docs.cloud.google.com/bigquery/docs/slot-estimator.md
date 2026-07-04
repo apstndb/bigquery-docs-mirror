@@ -83,7 +83,7 @@ To view slot capacity and utilization over time, navigate to the slot estimator:
     1.  Click the **Select from** drop-down list at the top of the page.
     2.  In the **Select from window** that appears, select your project.
 
-3.  In the navigation menu, click **Capacity management** .
+3.  In the navigation menu, click **Workload management** .
 
 4.  Click the **Slot estimator** tab.
 
@@ -128,7 +128,7 @@ To model slot performance, perform the following steps:
     1.  Click the **Select from** drop-down list at the top of the page.
     2.  In the **Select from window** that appears, select your project.
 
-3.  In the navigation menu, click **Capacity management** .
+3.  In the navigation menu, click **Workload management** .
 
 4.  Click the **Slot estimator** tab.
 

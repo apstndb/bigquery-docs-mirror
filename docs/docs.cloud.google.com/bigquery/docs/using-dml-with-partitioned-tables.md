@@ -133,14 +133,16 @@ If a qualifying `DELETE` statement covers all rows in a partition, BigQuery remo
 
 ### Common disqualifications
 
-Queries with the following characteristics may not benefit from the optimization:
+Eligibility for optimization can vary with the type of partitioning, the underlying storage metadata, and the filter predicates. For example, queries with the following characteristics might not benefit from using `DML DELETE` for optimization:
 
   - Partial partition coverage
   - References to non-partitioning columns
   - [Recently ingested data](https://docs.cloud.google.com/bigquery/docs/write-api#stream_into_partitioned_tables) through the BigQuery [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) or the [legacy streaming API](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery)
   - Filters with subqueries or unsupported predicates
 
-Eligibility for optimization can vary with the type of partitioning, the underlying storage metadata, and the filter predicates. As a best practice, perform a dry run to verify that the query results in 0 bytes processed.
+This optimization might also not apply to partitioned tables that are clustered using columns other than the partitioned columns.
+
+As a best practice, perform a dry run to verify that the query results in 0 bytes processed.
 
 ### Multi-statement transaction
 

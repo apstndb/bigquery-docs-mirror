@@ -463,9 +463,9 @@ To see the labels on a reservation, select one of the following options:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
-3.  Click the **Slot Reservations** tab.
+3.  Click the **Slot reservations** tab.
 
 4.  The labels for each reservation are listed in the **Labels** column.
 

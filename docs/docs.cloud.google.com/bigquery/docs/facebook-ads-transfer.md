@@ -8,61 +8,9 @@ data_source: docs.cloud.google.com
 
 # Load Facebook Ads data into BigQuery
 
-You can load data from Facebook Ads to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Facebook Ads connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Facebook Ads to BigQuery.
+To schedule recurring data transfers from Facebook Ads to BigQuery, create a transfer configuration to specify what data objects to transfer, and how often to schedule the data transfer. You can create a transfer configuration using either the Google Cloud console, the `bq` command-line tool, or the BigQuery Data Transfer Service API. Once you have set up the transfer configuration, [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) transfers the latest data into a BigQuery table on the specified schedule.
 
-## Connector overview
-
-The BigQuery Data Transfer Service for the Facebook Ads connector supports the following options for your data transfer.
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Data transfer options</th>
-<th>Support</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Supported reports</td>
-<td>The BigQuery Data Transfer Service for Facebook Ads supports the transfer of the following Facebook Ads reports:
-<ul>
-<li><code dir="ltr" translate="no">AdAccounts</code></li>
-<li><code dir="ltr" translate="no">AdInsights</code></li>
-<li><code dir="ltr" translate="no">AdInsightsActions</code></li>
-<li><code dir="ltr" translate="no">AdInsightsMMM</code></li>
-<li><code dir="ltr" translate="no">Ads</code></li>
-<li><code dir="ltr" translate="no">AdCreatives</code></li>
-<li><code dir="ltr" translate="no">AdSets</code></li>
-<li><code dir="ltr" translate="no">Campaigns</code></li>
-<li><code dir="ltr" translate="no">AdImages</code></li>
-<li><code dir="ltr" translate="no">AdLabels</code></li>
-<li><code dir="ltr" translate="no">Businesses</code></li>
-<li><code dir="ltr" translate="no">CustomAudiences</code></li>
-</ul>
-<p>For information about how Facebook Ads reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation">Facebook Ads report transformation</a> .</p></td>
-</tr>
-<tr class="even">
-<td>Repeat frequency</td>
-<td>The Facebook Ads connector supports daily data transfers.<br />
-<br />
-By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_transfer_setup">set up your data transfer</a> .</td>
-</tr>
-<tr class="odd">
-<td>Refresh window</td>
-<td>The Facebook Ads connector retrieves Facebook Ads data from up to 30 days at the time the data transfer is run. You cannot configure the refresh window for this connector.<br />
-<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh">Refresh windows</a> .</td>
-</tr>
-<tr class="even">
-<td>Backfill data availability</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.</td>
-</tr>
-</tbody>
-</table>
+To learn about how a Facebook Ads transfer works, see [Introduction to Facebook Ads transfers](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro) .
 
 ## Limitations
 
@@ -85,28 +33,6 @@ Facebook Ads data transfers are subject to the following limitations:
   - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
 
   - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Facebook Ads.
-
-## Data ingestion from Facebook Ads transfers
-
-When you transfer data from Facebook Ads into BigQuery, the data is loaded into BigQuery tables that are partitioned by date. The table partition that the data is loaded into corresponds to the date from the data source. If you schedule multiple transfers for the same date, BigQuery Data Transfer Service overwrites the partition for that specific date with the latest data. Multiple transfers in the same day or running backfills don't result in duplicate data, and partitions for other dates are not affected.
-
-Some ingestion behaviors differ between different Facebook Ads reports:
-
-  - For `AdAccounts` , `AdCreatives` , `AdImages` , `AdLabels` , `Businesses` , and `CustomAudiences` tables, snapshots are taken once a day and stored in the partition of the last transfer run date.
-
-  - Data transfers for the `AdInsights` , `AdInsightActions` , `AdInsightsMMM` , `Ads` , `AdSets` and `Campaigns` tables will transfer Facebook Ads data that corresponds to the run date of the transfer. For these tables, if you specify a `insightsTimeIncrement` value that is more than 1, then the data transfer includes data from a number of days before the run date according to the `insightsTimeIncrement` value, including the run date. For example, if the `insightsTimeIncrement` value is 3, then the data transfer only includes data from the run date and data from 2 days before the run date, for a total of 3 days of data.
-
-  - For `AdInsights` , `AdInsightsActions` , and `AdInsightsMMM` tables, the table partition that the data is loaded into corresponds to the date from the data source.
-
-  - The [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh) only applies to the `AdInsights` , `AdInsightsActions` , and `AdInsightsMMM` tables.
-
-### Refresh windows
-
-A *refresh window* is the number of days that a data transfer retrieves data when a data transfer occurs. For example, if the refresh window is three days and a daily transfer occurs, the BigQuery Data Transfer Service retrieves all data from your source table from the past three days. In this example, when a daily transfer occurs, the BigQuery Data Transfer Service creates a new BigQuery destination table partition with a copy of your source table data from the current day, then automatically triggers backfill runs to update the BigQuery destination table partitions with your source table data from the past two days. The automatically triggered backfill runs will either overwrite or incrementally update your BigQuery destination table, depending on whether or not incremental updates are supported in the BigQuery Data Transfer Service connector.
-
-When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window. For example, if the refresh window is three days and you run the data transfer for the first time, the BigQuery Data Transfer Service retrieves all source data within three days.
-
-To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Before you begin
 
@@ -205,11 +131,11 @@ Select one of the following options:
       - For **Client secret** , enter the app secret.
       - For **Refresh token** , enter the long-lived user access token ID by clicking **Authorize** . Alternatively, if you [already have a refresh token or a system user token](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh_token_alternatives) , you can enter the refresh token directly in this field. For information about retrieving a long-lived user access token, see [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) .
       - For **Facebook Ads objects to transfer** : specify Facebook Ads reports or objects to include in this transfer.
-      - Select **Fetch Data for Authorized Ad Accounts Only** to only from advertising accounts that are authorized to your Facebook App. You can find your authorized advertising accounts under **App Settings** \> **Advanced** , and in the **Advertising accounts** section.
+      - Select **Fetch Data for Authorized Ad Accounts Only** to fetch data only from advertising accounts that are authorized to your Facebook App. You can find your authorized advertising accounts under **App Settings** \> **Advanced** , and in the **Advertising accounts** section.
       - For **ActionsCollections** , specify one or more [action collections](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#action_collections) .
       - For **Generic Breakdowns** , select the generic breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. Facebook Ads only permits certain combinations of breakdowns. For more information about permitted breakdown combinations, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns)
       - For **Action Breakdowns** , select the action breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsightsActions` table. For information about combining breakdowns, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
-      - For **Refresh window** , specify a [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh) duration.
+      - For **Refresh window** , specify a [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro#refresh) duration.
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data.
 
@@ -223,7 +149,7 @@ Select one of the following options:
 8.  Optional: In the **Notification options** section, do the following:
     
       - To enable email notifications, click the **Email notification** toggle. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this data transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name, or you can click **Create a topic** to create one.
+      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this data transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/publish-message-overview#about-topics) name, or you can click **Create a topic** to create one.
 
 9.  Click **Save** .
 
@@ -450,10 +376,6 @@ This error can also appear due to rate limit throttling. In these cases, do the 
 </tr>
 </tbody>
 </table>
-
-## Pricing
-
-For pricing information about Facebook Ads transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#data-transfer-service-pricing) .
 
 ## What's next
 

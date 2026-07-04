@@ -65,7 +65,7 @@ Create a reservation named `test` in the `US` multi-region, and allocate a maxim
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click **Create reservation** .
 
@@ -89,7 +89,7 @@ You can assign any project that's in the same organization and region as the adm
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot reservations** tab.
 
@@ -138,7 +138,7 @@ When you delete a reservation, any jobs that are currently executing with slots 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot reservations** tab.
 

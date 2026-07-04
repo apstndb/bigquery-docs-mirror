@@ -52,7 +52,7 @@ Commitments are a regional resource. Commitments purchased in one region or mult
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click **Create Commitment** .
 
@@ -179,7 +179,7 @@ To view your capacity commitments by project:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot commitments** tab. Your capacity commitments are listed in the table under **Commitments** .
 
@@ -254,7 +254,7 @@ You can change your renewal plan for an annual commitment as follows:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot commitments** tab.
 
@@ -329,7 +329,7 @@ When you split a commitment, the new commitment has the same plan and the same c
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot commitments** tab.
 
@@ -373,7 +373,7 @@ You can merge multiple commitments into one commitment. The merging commitments 
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot commitments** tab.
 

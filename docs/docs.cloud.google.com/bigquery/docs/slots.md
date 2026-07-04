@@ -18,6 +18,16 @@ By default, you are charged using the *on-demand model* . With this model, you a
 
 With the *capacity-based model* , you pay for the slot capacity allocated for your queries over time. This model gives you explicit control over total slot capacity. You explicitly choose the amount of slots to use through a [*reservation*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) . You can specify the number of slots in a reservation as a baseline amount which is always allocated, or as an autoscaled amount, which is allocated when needed. Reservations with autoscaling slots scale their capacity to accommodate your workload demands. BigQuery allocates slots as workloads change. This lets you configure the number of slots in a reservation based on the performance or critical nature of the workload that uses the reservation.
 
+### Avoid unexpected on-demand costs
+
+To prevent unassigned or newly created projects from defaulting to on-demand pricing, manage your BigQuery reservations using the Google Cloud resource hierarchy with the following practices:
+
+  - **Assign at the folder or organization level** : instead of a project-by-project setup, create a reservation assignment at the folder or organization level. This ensures that all existing and future projects within that hierarchy automatically inherit the reservation and use your committed slot capacity.
+  - **Consider default behavior** : without an explicit or inherited assignment, BigQuery automatically applies the on-demand pricing model.
+  - **Override for exceptions** : if specific projects must use on-demand pricing, you can override the inherited assignment by explicitly assigning those projects to the reservation *None* .
+
+For details on assignment priority, see [Reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#reservation_assignments) .
+
 ## Query execution using slots
 
 When BigQuery executes a query job, it converts the SQL statement into an execution plan, comprised of a series of query *stages* . Stages are in turn comprised of sets of execution *steps* . BigQuery uses a distributed parallel architecture to run queries. Stages model the units of work that can be executed in parallel. Data is passed between stages by using a [distributed shuffle architecture](https://cloud.google.com/blog/products/gcp/separation-of-compute-and-state-in-google-bigquery-and-cloud-dataflow-and-why-it-matters) , which is discussed in more detail in this [Google Cloud blog post](https://cloud.google.com/blog/products/bigquery/in-memory-query-execution-in-google-bigquery) .

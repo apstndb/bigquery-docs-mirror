@@ -38,7 +38,7 @@ Select one of the following options:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click **Create reservation** .
 
@@ -201,7 +201,7 @@ You can add or remove slots from an existing reservation.
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Reservations** tab.
 
@@ -396,7 +396,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Reservations** tab.
 

@@ -1,22 +1,23 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/migration-intro
 uri: https://docs.cloud.google.com/bigquery/docs/migration-intro
-title: Introduction to BigQuery Migration Service
+title: Introduction to BigQuery migration
 description: A comprehensive solution for migrating your data warehouse to BigQuery
 data_source: docs.cloud.google.com
 ---
 
-# Introduction to BigQuery Migration Service
+# Introduction to BigQuery migration
 
-This document provides an overview of the BigQuery Migration Service.
+The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery. It includes features that help you with each phase of migration, including assessment and planning, SQL translation for [a variety of SQL dialects](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#supported_sql_dialects) , and data transfer.
 
-The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery. It includes features that help you with each phase of migration, including assessment and planning, SQL translation for [a variety of SQL dialects](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#supported_sql_dialects) , data transfer, and data validation. Together, these services help you accelerate migrations and reduce risk, shortening the time to value.
+You can find the BigQuery Migration Service in the BigQuery console when you navigate to **Migration** \> **Services** .
 
-The BigQuery Migration Service includes the following features:
+With the BigQuery Migration Service, you can do the following:
 
-  - **BigQuery migration assessment** : Assess and plan your data warehouse migration by running a [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) .
-  - **SQL translation services** : The translation services automate the conversion of your SQL queries into GoogleSQL, including Gemini-enhanced SQL customization. You can use the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate individual queries. You can also use the [SQL translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) to migrate your workloads to BigQuery.
-  - **BigQuery Data Transfer Service** : Set up a data transfer that loads data from your data source to BigQuery. For more information, see [What is the BigQuery Data Transfer Service?](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - **Assess** : Plan your data warehouse migration by running a [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) .
+  - **Translate SQL** : The translation services automate the conversion of your SQL queries into GoogleSQL, including Gemini-enhanced SQL customization. You can use the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) , the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) , or the [SQL translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) to migrate your workloads to BigQuery.
+  - **Transfer data** : Set up a data transfer that loads data from your data source to BigQuery. For more information, see [What is the BigQuery Data Transfer Service?](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - **Register or migrate open lakehouse** : Migrate metadata from external catalogs, such as Apache Hive Metastore and Apache Iceberg REST Catalogs, to Lakehouse REST catalog tables for Apache Iceberg.
 
 You can also use the following open-source tools to help you with your migration process:
 
@@ -25,6 +26,17 @@ You can also use the following open-source tools to help you with your migration
   - **BigQuery permission mapper** : Use the [permission mapper](https://github.com/GoogleCloudPlatform/professional-services-bigquery-permission-mapper) to automate the creation and maintenance of user-modifiable permission maps. You can use the permission mapper to analyze and reconcile duplicate permissions and user groups, while also generating error reports. The tool outputs JSON and Terraform scripts for BigQuery group, user, and binding creation.
   - **Managed Service for Apache Airflow templates** : Use [Managed Service for Apache Airflow templates](https://github.com/GoogleCloudPlatform/professional-services-composer-templates) to simplify the creation of new Airflow DAGs or the migration of existing orchestrated jobs from on-premises to the cloud.
   - **Cloud Foundation Fabric** : View [Terraform examples and modules for Google Cloud](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric) , including an organization-wide landing zone blueprint, reference blueprints for network patterns and product features, and a library of adaptable modules.
+
+## Migration sources
+
+The BigQuery Migration Service supports the migration of the following data warehouses to BigQuery:
+
+  - [Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift-overview)
+  - [Hadoop, Hive, and Apache Spark](https://docs.cloud.google.com/bigquery/docs/migration/hive)
+  - [IBM Netezza](https://docs.cloud.google.com/bigquery/docs/migration/netezza)
+  - [Oracle and Oracle Exadata](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration)
+  - [Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-migration-intro)
+  - [Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata-migration-intro)
 
 ## Quotas
 

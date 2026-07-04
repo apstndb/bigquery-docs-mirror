@@ -167,29 +167,31 @@ Select one of the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** , and then click **Create reservation** .
+2.  In the navigation menu, click **Workload management** .
 
-3.  In the **Reservation name** field, enter a name for the reservation.
+3.  Click **Create reservation** .
 
-4.  In the **Location** list, select the location.
+4.  In the **Reservation name** field, enter a name for the reservation.
 
-5.  In the **Edition** list, select the Enterprise Plus edition.
+5.  In the **Location** list, select the location.
 
-6.  In the **Max reservation size selector** list, select the maximum reservation size.
+6.  In the **Edition** list, select the Enterprise Plus edition.
 
-7.  Optional: In the **Baseline slots** field, enter the number of baseline slots for the reservation.
+7.  In the **Max reservation size selector** list, select the maximum reservation size.
+
+8.  Optional: In the **Baseline slots** field, enter the number of baseline slots for the reservation.
     
     The number of available autoscaling slots is determined by subtracting the **Baseline slots** value from the **Max reservation size** value. For example, if you create a reservation with 100 baseline slots and a max reservation size of 400, your reservation has 300 autoscaling slots. For more information about baseline slots, see [Using reservations with baseline and autoscaling slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#using_reservations_with_baseline_and_autoscaling_slots) .
 
-8.  In the **Secondary location** list, select the secondary location.
+9.  In the **Secondary location** list, select the secondary location.
 
-9.  To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
+10. To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
 
-10. To expand the **Advanced settings** section, click the expand\_more expander arrow.
+11. To expand the **Advanced settings** section, click the expand\_more expander arrow.
 
-11. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on, and then enter a value for **Target Job Concurrency** . The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
+12. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on, and then enter a value for **Target Job Concurrency** . The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
 
-12. Click **Save** .
+13. Click **Save** .
 
 The new reservation is visible in the **Slot reservations** tab.
 
@@ -234,7 +236,7 @@ Select one of the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot reservations** tab.
 
@@ -283,17 +285,19 @@ To enable disaster recovery for the previously created reservation, complete the
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** , and then click the **Slot Reservations** tab.
+2.  In the navigation menu, click **Workload management** .
 
-3.  Click the reservation that you want to attach a dataset to.
+3.  Click the **Slot reservations** tab.
 
-4.  Click the **Disaster recovery** tab.
+4.  Click the reservation that you want to attach a dataset to.
 
-5.  Click **Add failover dataset** .
+5.  Click the **Disaster recovery** tab.
 
-6.  Enter the name of the dataset you want to associate with the reservation.
+6.  Click **Add failover dataset** .
 
-7.  Click **Add** .
+7.  Enter the name of the dataset you want to associate with the reservation.
+
+8.  Click **Add** .
 
 ### SQL
 
@@ -326,7 +330,7 @@ To stop managing the failover behavior of a dataset through a reservation, detac
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** , and then click the **Slot Reservations** tab.
+2.  In the navigation menu, click **Workload management** , and then click the **Slot reservations** tab.
 
 3.  Click the reservation that you want to detach a dataset from.
 

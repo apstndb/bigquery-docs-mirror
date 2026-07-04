@@ -79,9 +79,9 @@ To perform BigQuery ML inference on object tables using [gemini-2.5-flash](https
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
-3.  Click **Create Reservation** .
+3.  Click **Create reservation** .
 
 4.  On the **Create reservation** page, do the following:
     
@@ -93,9 +93,9 @@ To perform BigQuery ML inference on object tables using [gemini-2.5-flash](https
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
-3.  In the **Slot Reservations** table, find the reservation that you want to assign to your project.
+3.  In the **Slot reservations** table, find the reservation that you want to assign to your project.
 
 4.  Click more\_vert **View actions \> Create assignment** .
 
@@ -316,9 +316,9 @@ If you created a BigQuery reservation as part of this tutorial, you should remov
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
-3.  In the **Slot Reservations** table, find **`bqml-tutorial-reservation`** .
+3.  In the **Slot reservations** table, find **`bqml-tutorial-reservation`** .
 
 4.  Click more\_vert **View actions** \> **Delete** .
 

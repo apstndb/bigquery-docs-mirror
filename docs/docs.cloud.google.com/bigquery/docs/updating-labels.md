@@ -496,7 +496,7 @@ To update a label to a reservation:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot reservations** tab.
 

@@ -14,6 +14,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 01, 2026
+
+Feature
+
+You can now use pre-trained TimesFM models in BigQuery ML directly from [Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) . These models let you create forecasts and detect anomalies in your data by using the [`AI.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) and [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) functions. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+## June 30, 2026
+
+Feature
+
+You can specify an optional `principal` property on [BigQuery reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) to route queries to specific reservations based on the identity of the user, service account, or third-party identity executing the job.
+
 ## June 29, 2026
 
 Change

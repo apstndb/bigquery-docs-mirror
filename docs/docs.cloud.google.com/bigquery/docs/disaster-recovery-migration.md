@@ -78,7 +78,7 @@ To enable disaster recovery, you must create a failover reservation in the prima
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** , and then click **Create reservation** .
+2.  In the navigation menu, click **Workload management** , and then click **Create reservation** .
 
 3.  In the **Reservation name** field, enter a name for the reservation.
 
@@ -145,17 +145,19 @@ Once you've created the failover reservation, attach your cross-region dataset, 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation menu, click **Capacity management** , and then click the **Slot Reservations** tab.
+2.  In the navigation menu, click **Workload management** .
 
-3.  Click the reservation that you want to attach a dataset to.
+3.  Click the **Slot reservations** tab.
 
-4.  Click the **Disaster recovery** tab.
+4.  Click the reservation that you want to attach a dataset to.
 
-5.  Click **Add failover dataset** .
+5.  Click the **Disaster recovery** tab.
 
-6.  Enter the name of the dataset you want to associate with the reservation.
+6.  Click **Add failover dataset** .
 
-7.  Click **Add** .
+7.  Enter the name of the dataset you want to associate with the reservation.
+
+8.  Click **Add** .
 
 ### SQL
 

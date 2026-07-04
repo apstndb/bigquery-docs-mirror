@@ -213,7 +213,7 @@ To initialize context-aware troubleshooting and act on performance insights, do 
 1.  To open the Gemini Cloud Assist chat pane and automatically load your relevant job or system context, do one of the following:
     
       - In the **Jobs explorer** or **Job history** pages, hover over a job and click spark **Gemini** in that table row.
-      - In the **Capacity management** page, hover over a reservation and click spark **Gemini** in that table row.
+      - In the **Workload management** page, hover over a reservation and click spark **Gemini** in that table row.
       - In the **Studio** , **Monitoring** or **Jobs explorer** , click spark **Gemini** .
 
 2.  Submit a prompt in natural language. For example, ask Gemini to explain why a job is running slow, analyze specific job statistics, analyze specific reservation performance, troubleshoot system performance issues, or compare performance variances between two similar historical jobs.

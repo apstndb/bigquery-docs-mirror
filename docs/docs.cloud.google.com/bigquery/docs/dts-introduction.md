@@ -36,7 +36,7 @@ SaaS platforms:
 
 Marketing platforms:
 
-  - [Facebook Ads](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer)
+  - [Facebook Ads](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro)
   - [HubSpot](https://docs.cloud.google.com/bigquery/docs/hubspot-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
   - [Klaviyo](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
   - [Mailchimp](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )

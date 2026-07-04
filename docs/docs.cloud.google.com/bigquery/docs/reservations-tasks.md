@@ -57,9 +57,16 @@ Select one of the following options:
 
 11. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on and enter the **Target Job Concurrency** .
 
-12. The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
+12. Optional: To set default project scheduling policies for the reservation, configure at least one of the following options:
+    
+    1.  To limit the number of simultaneous queries admitted for each project assigned to the reservation, click the **Override project concurrency** toggle to the on position, and then enter a value in the **Project Concurrency** field.
+    2.  To limit the slot consumption of each project assigned to the reservation, click the **Override project max slots** toggle to the on position, and then enter a value in the **Project Max Slots** field.
+    
+    > **Note:** These settings act as a default for all projects assigned to the reservation. You can override these limits for specific projects using [assignment rules](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#scheduling-policy-assignments) .
 
-13. Click **Save** .
+13. Review the breakdown of slots displayed in the **Cost estimate** table and the summary of the reservation in the **Capacity summary** table.
+
+14. Click **Save** .
 
 The new reservation is visible in the **Slot reservations** tab.
 
@@ -76,7 +83,9 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
         OPTIONS (
           slot_capacity = NUMBER_OF_BASELINE_SLOTS,
           edition = EDITION,
-          autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS);
+          autoscale_max_slots = NUMBER_OF_AUTOSCALING_SLOTS,
+          scheduling_policy_max_slots = MAX_SLOTS_PER_PROJECT,
+          scheduling_policy_concurrency = MAX_CONCURRENCY_PER_PROJECT);
     
     Replace the following:
     
@@ -93,6 +102,10 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
       - `  EDITION  ` : the edition of the reservation. The supported values are `STANDARD` , `ENTERPRISE` , and `ENTERPRISE_PLUS` . Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
     
       - `  NUMBER_OF_AUTOSCALING_SLOTS  ` : the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots.
+    
+      - `  MAX_SLOTS_PER_PROJECT  ` : the default limit on the slot consumption of queries running for each project assigned to the reservation.
+    
+      - `  MAX_CONCURRENCY_PER_PROJECT  ` : the default limit on the number of simultaneous queries admitted for each project assigned to the reservation.
 
 3.  Click play\_circle **Run** .
 
@@ -289,7 +302,7 @@ To create a predictable reservation with a maximum number of slots, select one o
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation panel, go to the **Capacity management** section, and then click **Create reservation** .
+2.  In the navigation panel, go to the **Workload management** section, and then click **Create reservation** .
 
 3.  In the **Reservation name** field, enter a name for the reservation.
 
@@ -306,16 +319,23 @@ To create a predictable reservation with a maximum number of slots, select one o
 8.  To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
 
 9.  To expand the **Advanced settings** section, click the expand\_more expander arrow.
+
+10. Optional: To set default project scheduling policies for the reservation, configure the following options:
     
-    In the **How to use idle slots?** list, select the configuration option.
+      - **Project Concurrency:** Limit the concurrency of jobs running for any particular project within this reservation.
+      - **Project Max Slots:** Limit the slot consumption of queries running for any particular project within this reservation.
+    
+    > **Note:** These settings act as a default for all projects assigned to the reservation. You can override these limits for specific projects using [assignment rules](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#scheduling-policy-assignments) .
+
+11. In the **How to use idle slots?** list, select the configuration option.
     
       - **Most predictable:** Consumes baseline slots first, then idle slots, and finally autoscaling slots up to the specified maximum number of slots.
       - **Less predictable:** Consumes baseline and idle slots only, up to the maximum number of slots. No autoscaling slots are used.
       - **Most variable:** All available idle slots are used to scale above baseline. Then, autoscaling slots are used, up to the difference between the maximum and baseline. This can cause the reservation to exceed the specified maximum number of slots.
 
-10. The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
+12. The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
 
-11. Click **Save** .
+13. Click **Save** .
 
 The new reservation is visible in the **Slot reservations** tab.
 
@@ -365,9 +385,11 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
         OPTIONS (
           slot_capacity = NUMBER_OF_BASELINE_SLOTS,
           edition = EDITION,
-          ignore_idle_slots=IGNORE_IDLE_SLOTS
+          ignore_idle_slots = IGNORE_IDLE_SLOTS,
           max_slots = MAX_NUMBER_OF_SLOTS,
-          scaling_mode = SCALING_MODE);
+          scaling_mode = SCALING_MODE,
+          scheduling_policy_max_slots = MAX_SLOTS_PER_PROJECT,
+          scheduling_policy_concurrency = MAX_CONCURRENCY_PER_PROJECT);
     
     Replace the following:
     
@@ -386,6 +408,10 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
       - `  MAX_NUMBER_OF_SLOTS  ` : the maximum number of slots the reservation can consume. This value must be configured with `scaling_mode` option.
     
       - `  SCALING_MODE  ` : the scaling mode of the reservation. The options are `ALL_SLOTS` , `IDLE_SLOTS_ONLY` , or `AUTOSCALE_ONLY` . This value must be configured with the `max_slots` option. This value must be aligned with `ignore_idle_slots` option. For details, see [Reservation predictability](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) .
+    
+      - `  MAX_SLOTS_PER_PROJECT  ` : the default limit on the slot consumption of queries running for each project assigned to the reservation.
+    
+      - `  MAX_CONCURRENCY_PER_PROJECT  ` : the default limit on the number of simultaneous queries admitted for each project assigned to the reservation.
 
 3.  Click play\_circle **Run** .
 
@@ -540,7 +566,7 @@ You can add or remove slots from an existing reservation.
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Click the **Slot reservations** tab.
 
@@ -745,9 +771,9 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
-3.  Click the **Reservations** tab.
+3.  Click the **Slot reservations** tab.
 
 4.  Find the reservation you want to delete.
 
@@ -943,7 +969,7 @@ To create a reservation group:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Select the checkbox next to the reservation that you want to add to a group.
 
@@ -1056,7 +1082,7 @@ To add a reservation to a reservation group, update the `reservation_group` prop
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Expand the more\_vert **Actions** option.
 
@@ -1093,7 +1119,7 @@ To list the reservation group information for your reservations, do the followin
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  In the **Slot reservations** tab, you can see both reservation groups and reservations (without a parent group) in the table.
 
@@ -1121,7 +1147,7 @@ To remove a reservation from a reservation group, update the `reservation_group`
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Expand the more\_vert **Actions** option.
 
@@ -1137,7 +1163,7 @@ If the reservation to be removed is the last one in the group:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Expand the more\_vert **Actions** option.
 
@@ -1172,7 +1198,7 @@ A reservation group can only be deleted if it does not contain any member reserv
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the navigation menu, click **Capacity management** .
+2.  In the navigation menu, click **Workload management** .
 
 3.  Find the reservation group you want to delete. Ensure it has no reservations listed under it.
 

@@ -38,6 +38,10 @@ format\_list\_numbered
 
   - [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro)
 
+  - [What is the ?](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
+
+  - [Introduction to](https://docs.cloud.google.com/bigquery/docs/migration-intro)
+
 find\_in\_page
 
 ### Reference
