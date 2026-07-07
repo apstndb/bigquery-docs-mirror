@@ -998,6 +998,8 @@ Converted product ids - for Collaborative Ads.
 
 ### `AdInsightsMMM` report
 
+> **Note:** As of July 06, 2026, support for the `AdInsightsMMM` report is temporarily disabled. For more information, see [July 06, 2026](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul06-fb-ads) .
+
 | **Meta API field name** | **Mapped BigQuery field name** | **Type**  | **Description**                                   |
 | ----------------------- | ------------------------------ | --------- | ------------------------------------------------- |
 | `  `                    | Target                         | *String*  | The ID of the Account to get insights for.        |

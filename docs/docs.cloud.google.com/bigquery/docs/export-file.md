@@ -10,6 +10,22 @@ data_source: docs.cloud.google.com
 
 This document describes how to save query results as a file, such as CSV or JSON.
 
+## Limitations
+
+BigQuery doesn't support exporting nested or repeated data ( `RECORD` / `STRUCT` or `ARRAY` data types) to CSV format. Even if `RECORD` or `STRUCT` fields don't seem deeply nested, BigQuery treats them as nested schema fields and returns an error indicating that the schema can't be nested.
+
+To export query results to a structured CSV file, your query must be normalized into a flat structure with one field per query column. You can normalize nested structs by selecting individual fields using dot notation, or normalize repeated arrays by using the `UNNEST` operator.
+
+For example, if your table contains a struct `customer` and an array `items` , normalize the query before running and saving the results to CSV:
+
+    SELECT
+      customer.id AS customer_id,
+      customer.name AS customer_name,
+      item
+    FROM
+      `my_project.my_dataset.my_table`,
+      UNNEST(items) AS item;
+
 ## Download query results to a local file
 
 Downloading query results to a local file is not supported by the bq command-line tool or the API.

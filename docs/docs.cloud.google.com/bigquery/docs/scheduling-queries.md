@@ -226,36 +226,36 @@ These examples demonstrate specifying destination table names with different tim
 </thead>
 <tbody>
 <tr class="odd">
-<td>2018-02-15 00:00:00</td>
+<td>2018-02-15 00:01:00</td>
 <td><code dir="ltr" translate="no">mytable</code></td>
 <td><code dir="ltr" translate="no">mytable</code></td>
 </tr>
 <tr class="even">
-<td>2018-02-15 00:00:00</td>
+<td>2018-02-15 00:01:00</td>
 <td><code dir="ltr" translate="no">mytable_{         run_time|"%Y%m%d"        }</code></td>
 <td><code dir="ltr" translate="no">mytable_20180215</code></td>
 </tr>
 <tr class="odd">
-<td>2018-02-15 00:00:00</td>
+<td>2018-02-15 00:01:00</td>
 <td><code dir="ltr" translate="no">mytable_{         run_time+25h|"%Y%m%d"        }</code></td>
 <td><code dir="ltr" translate="no">mytable_20180216</code></td>
 </tr>
 <tr class="even">
-<td>2018-02-15 00:00:00</td>
+<td>2018-02-15 00:01:00</td>
 <td><code dir="ltr" translate="no">mytable_{         run_time-1h|"%Y%m%d"        }</code></td>
 <td><code dir="ltr" translate="no">mytable_20180214</code></td>
 </tr>
 <tr class="odd">
-<td>2018-02-15 00:00:00</td>
+<td>2018-02-15 00:01:00</td>
 <td><code dir="ltr" translate="no">mytable_{         run_time+1.5h|"%Y%m%d%H"        }</code><br />
 or<br />
 <code dir="ltr" translate="no">mytable_{         run_time+90m|"%Y%m%d%H"        }</code></td>
 <td><code dir="ltr" translate="no">mytable_2018021501</code></td>
 </tr>
 <tr class="even">
-<td>2018-02-15 00:00:00</td>
+<td>2018-02-15 00:01:00</td>
 <td><code dir="ltr" translate="no">{         run_time+97s|"%Y%m%d"        }_mytable_{         run_time+97s|"%H%M%S"        }</code></td>
-<td><code dir="ltr" translate="no">20180215_mytable_000137</code></td>
+<td><code dir="ltr" translate="no">20180215_mytable_000237</code></td>
 </tr>
 </tbody>
 </table>

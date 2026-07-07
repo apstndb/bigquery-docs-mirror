@@ -972,8 +972,8 @@ The following table describes the commonly used flags for extracting Snowflake m
 <tr class="odd">
 <td><code dir="ltr" translate="no">--database</code></td>
 <td></td>
-<td><p>The name of the database to extract.</p>
-<p>You can only extract from one database at a time from Snowflake. This flag is not allowed in assessment mode.</p></td>
+<td><p>A comma-separated list of database names to extract.</p>
+<p>This flag is not allowed in assessment mode.</p></td>
 <td>Only for translation.</td>
 </tr>
 <tr class="even">

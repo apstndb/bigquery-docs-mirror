@@ -16,15 +16,17 @@ To learn about how a Facebook Ads transfer works, see [Introduction to Facebook 
 
 Facebook Ads data transfers are subject to the following limitations:
 
+  - Starting July 06, 2026, support for the `AdInsightsMMM` report is temporarily disabled. For more information, see [July 06, 2026](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul06-fb-ads) .
+
   - The minimum interval time between recurring Facebook Ads data transfers is 24 hours. The default interval for a recurring data transfer is 24 hours.
 
   - The BigQuery Data Transfer Service for Facebook Ads only supports a fixed set of tables. Custom reports aren't supported.
 
   - Facebook Ads data transfers have a maximum duration of six hours. A transfer fails if it takes longer than this maximum duration.
 
-  - Incremental transfers aren't supported for `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` , `Ads` , `Campaigns` , and `AdSets` tables. When you create a data transfer that includes `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` , `Ads` , `Campaigns` , and `AdSets` tables, and you specified a date in **Schedule options** , all data that is available for that date is transferred.
+  - Incremental transfers aren't supported for `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables. When you create a data transfer that includes `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables, and you specified a date in **Schedule options** , all data that is available for that date is transferred.
 
-  - The BigQuery Data Transfer Service supports a refresh window of up to 30 days to the `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` , `Ads` , `Campaigns` , and `AdSets` tables. The refresh window refers to the number of days that a data transfer will retrieve source data from. When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window.
+  - The BigQuery Data Transfer Service supports a refresh window of up to 30 days to the `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables. The refresh window refers to the number of days that a data transfer will retrieve source data from. When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window.
 
   - The long-lived user access token that is required for Facebook Ads transfers expires after 60 days.
     
@@ -155,20 +157,72 @@ Select one of the following options:
 
 When this data transfer runs, the BigQuery Data Transfer Service automatically populates the following tables.
 
-| Table Name          | Description                                                          |
-| ------------------- | -------------------------------------------------------------------- |
-| `AdAccounts`        | The ad accounts available for a user.                                |
-| `AdInsights`        | Ad insights report for all ad accounts.                              |
-| `AdInsightsActions` | Ad insights actions report for all ad accounts.                      |
-| `AdInsightsMMM`     | Ad insights marketing mix modeling (MMM) report for all ad accounts. |
-| `Ads`               | Ad reports for all ad accounts.                                      |
-| `AdCreatives`       | Ad creative reports for all ad accounts.                             |
-| `AdSets`            | Ad set reports for all ad accounts.                                  |
-| `Campaigns`         | Campaign reports for all ad accounts.                                |
-| `AdImages`          | Ad images reports for all ad accounts.                               |
-| `AdLabels`          | Ad labels reports for all ad accounts.                               |
-| `Businesses`        | Meta business accounts associated with the user.                     |
-| `CustomAudiences`   | Custom audience reports for all ad accounts.                         |
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">AdAccounts</code></td>
+<td>The ad accounts available for a user.</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">AdInsights</code></td>
+<td>Ad insights report for all ad accounts.</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">AdInsightsActions</code></td>
+<td>Ad insights actions report for all ad accounts.</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">AdInsightsMMM</code><br />
+
+<blockquote>
+<strong>Note:</strong> Support for this report is temporarily disabled. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul06-fb-ads">July 06, 2026</a>
+</blockquote></td>
+<td>Ad insights marketing mix modeling (MMM) report for all ad accounts.</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">Ads</code></td>
+<td>Ad reports for all ad accounts.</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">AdCreatives</code></td>
+<td>Ad creative reports for all ad accounts.</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">AdSets</code></td>
+<td>Ad set reports for all ad accounts.</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">Campaigns</code></td>
+<td>Campaign reports for all ad accounts.</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">AdImages</code></td>
+<td>Ad images reports for all ad accounts.</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">AdLabels</code></td>
+<td>Ad labels reports for all ad accounts.</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">Businesses</code></td>
+<td>Meta business accounts associated with the user.</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">CustomAudiences</code></td>
+<td>Custom audience reports for all ad accounts.</td>
+</tr>
+</tbody>
+</table>
 
 ### bq
 
@@ -199,7 +253,7 @@ Where:
       - `actionBreakdowns` : Specify the action breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. For information about combining breakdowns, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
       - `connector.insightsLevel` : Aggregation level for fetching insights data (e.g., Ad, Adset, Campaign, Account).
       - `connector.insightsTimeIncrement` : Number of days over which to group aggregated insights data (between 1 and 7).
-      - **Note:** The chosen window range applies not only to the insights tables ( `AdInsights` , `AdInsightsActions` , `AdInsightsMMM` ), but also filters the `Ads` , `Campaigns` , and `AdSets` tables using Facebook's `time_range` parameter.
+      - **Note:** The chosen window range applies not only to the insights tables ( `AdInsights` and `AdInsightsActions` ), but also filters the `Ads` , `Campaigns` , and `AdSets` tables using Facebook's `time_range` parameter.
 
 For example, the following command creates a Facebook Ads data transfer in the default project with all the required parameters:
 

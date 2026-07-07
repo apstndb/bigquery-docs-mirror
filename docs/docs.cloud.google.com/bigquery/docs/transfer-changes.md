@@ -102,6 +102,12 @@ The BigQuery Data Transfer Service for Facebook Ads connector periodically updat
 
 The following sections outline the changes organized by release date.
 
+### July 06, 2026
+
+On July 06, 2026, the [Facebook Ads connector](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) is temporarily disabling the `AdInsightsMMM` report from Facebook Ads data transfers. This change is made to prevent data transfer failures caused by a recent change in the Facebook Ads API, where the deprecation of the Designated Market Area (DMA) column causes queries requesting this breakdown to return empty results.
+
+Existing data transfers from Facebook Ads that include the `AdInsightsMMM` report will continue to run, but the transfer won't include data from the `AdInsightsMMM` report.
+
 ### July 25, 2026
 
 On July 25, 2026, the [Facebook Ads connector](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) plans to update its data type mapping for the `ActionValue` field in the `AdInsightsActions` report from `INT` to `FLOAT` . This change is made to more accurately reflect the source data and to ensure data integrity.
