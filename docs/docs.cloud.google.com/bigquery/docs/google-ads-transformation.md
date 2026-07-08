@@ -35,7 +35,7 @@ The following reports focus on high-level account performance, bidding strategie
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -56,7 +56,7 @@ p_ads_HourlyAccountStats_ customer_id<br />
 p_ads_AccountNonClickStats_ customer_id<br />
 p_ads_AccountBasicStats_ customer_id<br />
 p_ads_AccountStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/customer">Customer</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/customer">Customer</a></td>
 <td>Customer_ customer_id<br />
 HourlyAccountConversionStats_ customer_id<br />
 AccountConversionStats_ customer_id<br />
@@ -75,7 +75,7 @@ p_BidGoalConversionStats_ customer_id</td>
 p_ads_BidGoalStats_ customer_id<br />
 p_ads_HourlyBidGoalStats_ customer_id<br />
 p_ads_BidGoalConversionStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/bidding_strategy">Bidding Strategy</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/bidding_strategy">Bidding Strategy</a></td>
 <td>BidGoal_ customer_id<br />
 BidGoalStats_ customer_id<br />
 HourlyBidGoalStats_ customer_id<br />
@@ -87,7 +87,7 @@ BidGoalConversionStats_ customer_id</td>
 p_BudgetStats_ customer_id</td>
 <td>p_ads_Budget_ customer_id<br />
 p_ads_BudgetStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/campaign_budget">Campaign Budget</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/campaign_budget">Campaign Budget</a></td>
 <td>Budget_ customer_id<br />
 BudgetStats_ customer_id</td>
 </tr>
@@ -111,7 +111,7 @@ The following reports contain metrics for campaign-level performance and locatio
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -122,7 +122,7 @@ The following reports contain metrics for campaign-level performance and locatio
 p_LocationBasedCampaignCriterion_ customer_id</td>
 <td>p_ads_CampaignLocationTargetStats_ customer_id<br />
 p_ads_LocationBasedCampaignCriterion_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/location_view">Location View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/location_view">Location View</a></td>
 <td>CampaignLocationTargetStats_ customer_id<br />
 LocationBasedCampaignCriterion_ customer_id</td>
 </tr>
@@ -146,7 +146,7 @@ p_ads_CampaignStats_ customer_id<br />
 p_ads_HourlyCampaignStats_ customer_id<br />
 p_ads_CampaignCrossDeviceConversionStats_ customer_id<br />
 p_ads_CampaignCookieStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/campaign">Campaign</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/campaign">Campaign</a></td>
 <td>Campaign_ customer_id<br />
 CampaignBasicStats_ customer_id<br />
 CampaignConversionStats_ customer_id<br />
@@ -177,7 +177,7 @@ The following reports focus on metrics at the ad group level.
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -200,7 +200,7 @@ p_ads_HourlyAdGroupStats_ customer_id<br />
 p_ads_AdGroupConversionStats_ customer_id<br />
 p_ads_AdGroupCrossDeviceConversionStats_ customer_id<br />
 p_ads_AdGroup_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group">Ad Group</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/ad_group">Ad Group</a></td>
 <td>AdGroupStats_ customer_id<br />
 AdGroupBasicStats_ customer_id<br />
 AdGroupCrossDeviceStats_ customer_id<br />
@@ -230,7 +230,7 @@ The following reports are for individual ad performance.
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -249,7 +249,7 @@ p_ads_AdConversionStats_ customer_id<br />
 p_ads_AdStats_ customer_id<br />
 p_ads_AdCrossDeviceConversionStats_ customer_id<br />
 p_ads_Ad_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_ad">Ad Group Ad</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/ad_group_ad">Ad Group Ad</a></td>
 <td>AdBasicStats_ customer_id<br />
 AdCrossDeviceStats_ customer_id<br />
 AdConversionStats_ customer_id<br />
@@ -277,7 +277,7 @@ The following reports include performance data broken down by user demographic c
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -294,7 +294,7 @@ p_ads_AgeRangeBasicStats_ customer_id<br />
 p_ads_AgeRangeStats_ customer_id<br />
 p_ads_AgeRangeConversionStats_ customer_id<br />
 p_ads_AgeRangeNonClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/age_range_view">Age Range View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/age_range_view">Age Range View</a></td>
 <td>AgeRange_ customer_id<br />
 AgeRangeBasicStats_ customer_id<br />
 AgeRangeStats_ customer_id<br />
@@ -313,7 +313,7 @@ p_ads_GenderBasicStats_ customer_id<br />
 p_ads_GenderStats_ customer_id<br />
 p_ads_GenderConversionStats_ customer_id<br />
 p_ads_GenderNonClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/gender_view">Gender View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/gender_view">Gender View</a></td>
 <td>Gender_ customer_id<br />
 GenderBasicStats_ customer_id<br />
 GenderStats_ customer_id<br />
@@ -332,7 +332,7 @@ p_ads_ParentalStatusBasicStats_ customer_id<br />
 p_ads_ParentalStatusStats_ customer_id<br />
 p_ads_ParentalStatusConversionStats_ customer_id<br />
 p_ads_ParentalStatusNonClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/parental_status_view">Parental Status View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/parental_status_view">Parental Status View</a></td>
 <td>ParentalStatus_ customer_id<br />
 ParentalStatusBasicStats_ customer_id<br />
 ParentalStatusStats_ customer_id<br />
@@ -359,7 +359,7 @@ The following reports cover keyword performance, search terms, and combined paid
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -378,7 +378,7 @@ p_ads_KeywordCrossDeviceStats_ customer_id<br />
 p_ads_KeywordStats_ customer_id<br />
 p_ads_KeywordCrossDeviceConversionStats_ customer_id<br />
 p_ads_KeywordConversionStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/keyword_view">Keyword View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/keyword_view">Keyword View</a></td>
 <td>Keyword_ customer_id<br />
 KeywordBasicStats_ customer_id<br />
 KeywordCrossDeviceStats_ customer_id<br />
@@ -390,7 +390,7 @@ KeywordConversionStats_ customer_id</td>
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/paid-organic-query-report">Paid Organic Query Report</a></td>
 <td>p_PaidOrganicStats_ customer_id</td>
 <td>p_ads_PaidOrganicStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/paid_organic_search_term_view">Paid Organic Search Term View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/paid_organic_search_term_view">Paid Organic Search Term View</a></td>
 <td>PaidOrganicStats_ customer_id</td>
 </tr>
 <tr class="odd">
@@ -399,7 +399,7 @@ KeywordConversionStats_ customer_id</td>
 p_SearchQueryConversionStats_ customer_id</td>
 <td>p_ads_SearchQueryStats_ customer_id<br />
 p_ads_SearchQueryConversionStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/search_term_view">Search Term View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/search_term_view">Search Term View</a></td>
 <td>SearchQueryStats_ customer_id<br />
 SearchQueryConversionStats_ customer_id</td>
 </tr>
@@ -423,7 +423,7 @@ The following reports are related to audience views, criteria, and managed place
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -440,8 +440,8 @@ p_AudienceStats_ customer_id</td>
 <code dir="ltr" translate="no">NULL</code><br />
 <code dir="ltr" translate="no">NULL</code><br />
 <code dir="ltr" translate="no">NULL</code></td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view">Ad Group Audience View</a><br />
-<a href="https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view">Campaign Audience View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/ad_group_audience_view">Ad Group Audience View</a><br />
+<a href="https://developers.google.com/google-ads/api/fields/v23/campaign_audience_view">Campaign Audience View</a></td>
 <td>Audience_ customer_id<br />
 AudienceConversionStats_ customer_id<br />
 AudienceNonClickStats_ customer_id<br />
@@ -479,7 +479,7 @@ p_ads_PlacementNonClickStats_ customer_id<br />
 p_ads_PlacementStats_ customer_id<br />
 p_ads_Placement_ customer_id<br />
 p_ads_PlacementConversionStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/managed_placement_view">Managed Placement View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/managed_placement_view">Managed Placement View</a></td>
 <td>PlacementBasicStats_ customer_id<br />
 PlacementNonClickStats_ customer_id<br />
 PlacementStats_ customer_id<br />
@@ -506,7 +506,7 @@ The following reports focus on specialized campaign channels.
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -517,7 +517,7 @@ The following reports focus on specialized campaign channels.
 p_ShoppingProductStats_ customer_id</td>
 <td>p_ads_ShoppingProductConversionStats_ customer_id<br />
 p_ads_ShoppingProductStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/shopping_performance_view">Shopping Performance View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/shopping_performance_view">Shopping Performance View</a></td>
 <td>ShoppingProductConversionStats_ customer_id<br />
 ShoppingProductStats_ customer_id</td>
 </tr>
@@ -533,7 +533,7 @@ p_ads_VideoConversionStats_ customer_id<br />
 p_ads_VideoStats_ customer_id<br />
 p_ads_Video_ customer_id<br />
 p_ads_VideoNonClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/video">Video</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/video">Video</a></td>
 <td>VideoBasicStats_ customer_id<br />
 VideoConversionStats_ customer_id<br />
 VideoStats_ customer_id<br />
@@ -560,7 +560,7 @@ The following reports present detailed metrics on user geography and click-level
 <th>AdWords reports (deprecated)</th>
 <th>BigQuery AdWords tables</th>
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 <th>BigQuery views</th>
 </tr>
 </thead>
@@ -569,7 +569,7 @@ The following reports present detailed metrics on user geography and click-level
 <td><a href="https://developers.google.com/adwords/api/docs/appendix/reports/click-performance-report">Click Performance Report</a></td>
 <td>p_ClickStats_ customer_id</td>
 <td>p_ads_ClickStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/click_view">Click View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/click_view">Click View</a></td>
 <td>ClickStats_ customer_id</td>
 </tr>
 <tr class="even">
@@ -578,7 +578,7 @@ The following reports present detailed metrics on user geography and click-level
 p_GeoStats_ customer_id</td>
 <td>p_ads_GeoConversionStats_ customer_id<br />
 p_ads_GeoStats_ customer_id</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/geographic_view">Geographic View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/geographic_view">Geographic View</a></td>
 <td>GeoConversionStats_ customer_id<br />
 GeoStats_ customer_id</td>
 </tr>
@@ -597,29 +597,29 @@ The following tables provide mapping information for attribute settings and labe
 <thead>
 <tr class="header">
 <th>Google Ads tables</th>
-<th>Google Ads API resources (v22.0.0)</th>
+<th>Google Ads API resources (v23.0.0)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>AdGroupBidModifier</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_bid_modifier">Ad Group Bid Modifier</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/ad_group_bid_modifier">Ad Group Bid Modifier</a></td>
 </tr>
 <tr class="even">
 <td>AdGroupAdLabel</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_ad_label">Ad Group Ad Label</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/ad_group_ad_label">Ad Group Ad Label</a></td>
 </tr>
 <tr class="odd">
 <td>CampaignLabel</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/campaign_label">Campaign Label</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/campaign_label">Campaign Label</a></td>
 </tr>
 <tr class="even">
 <td>CampaignCriterion</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/campaign_criterion">Campaign Criterion</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/campaign_criterion">Campaign Criterion</a></td>
 </tr>
 <tr class="odd">
 <td>AdGroupLabel</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_label">Ad Group Label</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/ad_group_label">Ad Group Label</a></td>
 </tr>
 <tr class="even">
 <td>AdGroupAudience<br />
@@ -627,7 +627,7 @@ AdGroupAudienceStats<br />
 AdGroupAudienceConversionStats<br />
 AdGroupAudienceNonClickStats<br />
 AdGroupAudienceBasicStats</td>
-<td><a href="https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view">Ad Group Audience View</a></td>
+<td><a href="https://developers.google.com/google-ads/api/fields/v23/ad_group_audience_view">Ad Group Audience View</a></td>
 </tr>
 </tbody>
 </table>
@@ -636,14 +636,14 @@ AdGroupAudienceBasicStats</td>
 
 The following tables are dedicated to Performance Max assets and signals, such as AssetGroup and CampaignAssetStats.
 
-| Google Ads tables                                                                                                                             | Google Ads API resources (v22.0.0)                                                                                    |
+| Google Ads tables                                                                                                                             | Google Ads API resources (v23.0.0)                                                                                    |
 | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Assets (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)                      | [Assets](https://developers.google.com/google-ads/api/fields/v22/asset)                                               |
-| AssetGroup (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)                  | [Asset Groups](https://developers.google.com/google-ads/api/fields/v22/asset_group)                                   |
-| AssetGroupAsset (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)             | [Asset Group Assets](https://developers.google.com/google-ads/api/fields/v22/asset_group_asset)                       |
-| AssetGroupSignal (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)            | [Asset Group Signal](https://developers.google.com/google-ads/api/fields/v22/asset_group_signal)                      |
-| AssetGroupProductGroupStats (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled) | [AssetGroupProductGroupStats](https://developers.google.com/google-ads/api/fields/v22/asset_group_product_group_view) |
-| CampaignAssetStats (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)          | [CampaignAssetStats](https://developers.google.com/google-ads/api/fields/v22/campaign_asset)                          |
+| Assets (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)                      | [Assets](https://developers.google.com/google-ads/api/fields/v23/asset)                                               |
+| AssetGroup (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)                  | [Asset Groups](https://developers.google.com/google-ads/api/fields/v23/asset_group)                                   |
+| AssetGroupAsset (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)             | [Asset Group Assets](https://developers.google.com/google-ads/api/fields/v23/asset_group_asset)                       |
+| AssetGroupSignal (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)            | [Asset Group Signal](https://developers.google.com/google-ads/api/fields/v23/asset_group_signal)                      |
+| AssetGroupProductGroupStats (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled) | [AssetGroupProductGroupStats](https://developers.google.com/google-ads/api/fields/v23/asset_group_product_group_view) |
+| CampaignAssetStats (available if [Pmax](https://developers.google.com/google-ads/api/docs/performance-max/overview) data is enabled)          | [CampaignAssetStats](https://developers.google.com/google-ads/api/fields/v23/campaign_asset)                          |
 
 ## Column mapping for Google Ads reports
 
@@ -651,7 +651,7 @@ The BigQuery tables created by a Google Ads transfer consist of the following co
 
 Google Ads Table Name: AccountBasicStats
 
-Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v22/customer)
+Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v23/customer)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                               | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -671,7 +671,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: AccountConversionStats
 
-Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v22/customer)
+Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v23/customer)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -695,7 +695,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: AccountNonClickStats
 
-Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v22/customer)
+Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v23/customer)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name        |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
@@ -731,7 +731,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: AccountStats
 
-Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v22/customer)
+Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v23/customer)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
@@ -770,7 +770,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: Ad
 
-Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v22/ad_group_ad)
+Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v23/ad_group_ad)
 
 | Google Ads Field Name                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name                               |
 | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
@@ -854,7 +854,7 @@ Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ad
 
 Google Ads Table Name: AdBasicStats
 
-Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v22/ad_group_ad)
+Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v23/ad_group_ad)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -880,7 +880,7 @@ Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ad
 
 Google Ads Table Name: AdConversionStats
 
-Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v22/ad_group_ad)
+Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v23/ad_group_ad)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -910,7 +910,7 @@ Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ad
 
 Google Ads Table Name: AdCrossDeviceConversionStats
 
-Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v22/ad_group_ad)
+Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v23/ad_group_ad)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -938,7 +938,7 @@ Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ad
 
 Google Ads Table Name: AdCrossDeviceStats
 
-Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v22/ad_group_ad)
+Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v23/ad_group_ad)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -981,7 +981,7 @@ Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ad
 
 Google Ads Table Name: AdGroup
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name                          | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name    |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
@@ -1009,7 +1009,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: AdGroupAdLabel
 
-Google Ads API Resource: [ad\_group\_ad\_label](https://developers.google.com/google-ads/api/fields/v22/ad_group_ad_label)
+Google Ads API Resource: [ad\_group\_ad\_label](https://developers.google.com/google-ads/api/fields/v23/ad_group_ad_label)
 
 | Google Ads Field Name                | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1024,7 +1024,7 @@ Google Ads API Resource: [ad\_group\_ad\_label](https://developers.google.com/go
 
 Google Ads Table Name: CampaignAudience
 
-Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view)
+Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/campaign_audience_view)
 
 | Google Ads Field Name              | Description                                                                                                                                                 | Adwords Mapped Field Name |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1036,7 +1036,7 @@ Google Ads API Resource: [campaign\_audience\_view](https://developers.google.co
 
 Google Ads Table Name: AdGroupAudience
 
-Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view)
+Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/ad_group_audience_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1062,7 +1062,7 @@ Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.c
 
 Google Ads Table Name: CampaignAudienceBasicStats
 
-Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view)
+Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/campaign_audience_view)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                               | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1085,7 +1085,7 @@ Google Ads API Resource: [campaign\_audience\_view](https://developers.google.co
 
 Google Ads Table Name: AdGroupAudienceBasicStats
 
-Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view)
+Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/ad_group_audience_view)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1110,7 +1110,7 @@ Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.c
 
 Google Ads Table Name: CampaignAudienceConversionStats
 
-Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view)
+Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/campaign_audience_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                               | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1140,7 +1140,7 @@ Google Ads API Resource: [campaign\_audience\_view](https://developers.google.co
 
 Google Ads Table Name: AdGroupAudienceConversionStats
 
-Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view)
+Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/ad_group_audience_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1172,7 +1172,7 @@ Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.c
 
 Google Ads Table Name: CampaignAudienceNonClickStats
 
-Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view)
+Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/campaign_audience_view)
 
 | Google Ads Field Name                | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1197,7 +1197,7 @@ Google Ads API Resource: [campaign\_audience\_view](https://developers.google.co
 
 Google Ads Table Name: AdGroupAudienceNonClickStats
 
-Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view)
+Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/ad_group_audience_view)
 
 | Google Ads Field Name                | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1224,7 +1224,7 @@ Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.c
 
 Google Ads Table Name: CampaignAudienceStats
 
-Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/campaign_audience_view)
+Google Ads API Resource: [campaign\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/campaign_audience_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1271,7 +1271,7 @@ Google Ads API Resource: [campaign\_audience\_view](https://developers.google.co
 
 Google Ads Table Name: AdGroupAudienceStats
 
-Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v22/ad_group_audience_view)
+Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.com/google-ads/api/fields/v23/ad_group_audience_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1320,7 +1320,7 @@ Google Ads API Resource: [ad\_group\_audience\_view](https://developers.google.c
 
 Google Ads Table Name: AdGroupBasicStats
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1344,7 +1344,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: AdGroupBidModifier
 
-Google Ads API Resource: [ad\_group\_bid\_modifier](https://developers.google.com/google-ads/api/fields/v22/ad_group_bid_modifier)
+Google Ads API Resource: [ad\_group\_bid\_modifier](https://developers.google.com/google-ads/api/fields/v23/ad_group_bid_modifier)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                                 | Adwords Mapped Field Name |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1360,7 +1360,7 @@ Google Ads API Resource: [ad\_group\_bid\_modifier](https://developers.google.co
 
 Google Ads Table Name: AdGroupConversionStats
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1388,7 +1388,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: AdGroupCrossDeviceConversionStats
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1414,7 +1414,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: AdGroupCrossDeviceStats
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name                                           | Description                                                                                                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name                  |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -1470,7 +1470,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: AdGroupCriterion
 
-Google Ads API Resource: [ad\_group\_criterion](https://developers.google.com/google-ads/api/fields/v22/ad_group_criterion)
+Google Ads API Resource: [ad\_group\_criterion](https://developers.google.com/google-ads/api/fields/v23/ad_group_criterion)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1489,7 +1489,7 @@ Google Ads API Resource: [ad\_group\_criterion](https://developers.google.com/go
 
 Google Ads Table Name: AdGroupLabel
 
-Google Ads API Resource: [ad\_group\_label](https://developers.google.com/google-ads/api/fields/v22/ad_group_label)
+Google Ads API Resource: [ad\_group\_label](https://developers.google.com/google-ads/api/fields/v23/ad_group_label)
 
 | Google Ads Field Name            | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1504,7 +1504,7 @@ Google Ads API Resource: [ad\_group\_label](https://developers.google.com/google
 
 Google Ads Table Name: AdGroupCriterionLabel
 
-Google Ads API Resource: [ad\_group\_criterion\_label](https://developers.google.com/google-ads/api/fields/v22/ad_group_criterion_label)
+Google Ads API Resource: [ad\_group\_criterion\_label](https://developers.google.com/google-ads/api/fields/v23/ad_group_criterion_label)
 
 | Google Ads Field Name                             | Description                                                                                                                                                                                                 | Adwords Mapped Field Name |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1518,7 +1518,7 @@ Google Ads API Resource: [ad\_group\_criterion\_label](https://developers.google
 
 Google Ads Table Name: AdGroupStats
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name                                       | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name                |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
@@ -1568,7 +1568,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: AdStats
 
-Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v22/ad_group_ad)
+Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ads/api/fields/v23/ad_group_ad)
 
 | Google Ads Field Name                                       | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name                |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
@@ -1619,7 +1619,7 @@ Google Ads API Resource: [ad\_group\_ad](https://developers.google.com/google-ad
 
 Google Ads Table Name: AgeRange
 
-Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v22/age_range_view)
+Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v23/age_range_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1647,7 +1647,7 @@ Google Ads API Resource: [age\_range\_view](https://developers.google.com/google
 
 Google Ads Table Name: AgeRangeBasicStats
 
-Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v22/age_range_view)
+Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v23/age_range_view)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -1679,7 +1679,7 @@ Google Ads API Resource: [age\_range\_view](https://developers.google.com/google
 
 Google Ads Table Name: AgeRangeConversionStats
 
-Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v22/age_range_view)
+Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v23/age_range_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1711,7 +1711,7 @@ Google Ads API Resource: [age\_range\_view](https://developers.google.com/google
 
 Google Ads Table Name: AgeRangeNonClickStats
 
-Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v22/age_range_view)
+Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v23/age_range_view)
 
 | Google Ads Field Name                | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -1742,7 +1742,7 @@ Google Ads API Resource: [age\_range\_view](https://developers.google.com/google
 
 Google Ads Table Name: AgeRangeStats
 
-Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v22/age_range_view)
+Google Ads API Resource: [age\_range\_view](https://developers.google.com/google-ads/api/fields/v23/age_range_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -1795,7 +1795,7 @@ Google Ads API Resource: [age\_range\_view](https://developers.google.com/google
 
 Google Ads Table Name: BidGoal
 
-Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v22/bidding_strategy)
+Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v23/bidding_strategy)
 
 | Google Ads Field Name                                       | Description                                                                                                                                                                                                             | Adwords Mapped Field Name |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1816,7 +1816,7 @@ Google Ads API Resource: [bidding\_strategy](https://developers.google.com/googl
 
 Google Ads Table Name: BidGoalConversionStats
 
-Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v22/bidding_strategy)
+Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v23/bidding_strategy)
 
 | Google Ads Field Name                            | Description                                                                                                                                                                                                               | Adwords Mapped Field Name |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1844,7 +1844,7 @@ Google Ads API Resource: [bidding\_strategy](https://developers.google.com/googl
 
 Google Ads Table Name: BidGoalStats
 
-Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v22/bidding_strategy)
+Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v23/bidding_strategy)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1875,7 +1875,7 @@ Google Ads API Resource: [bidding\_strategy](https://developers.google.com/googl
 
 Google Ads Table Name: Budget
 
-Google Ads API Resource: [campaign\_budget](https://developers.google.com/google-ads/api/fields/v22/campaign_budget)
+Google Ads API Resource: [campaign\_budget](https://developers.google.com/google-ads/api/fields/v23/campaign_budget)
 
 | Google Ads Field Name                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Adwords Mapped Field Name |
 | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1895,7 +1895,7 @@ Google Ads API Resource: [campaign\_budget](https://developers.google.com/google
 
 Google Ads Table Name: BudgetStats
 
-Google Ads API Resource: [campaign\_budget](https://developers.google.com/google-ads/api/fields/v22/campaign_budget)
+Google Ads API Resource: [campaign\_budget](https://developers.google.com/google-ads/api/fields/v23/campaign_budget)
 
 | Google Ads Field Name                                                          | Description                                                                                                                                                                                                                                                                                         | Adwords Mapped Field Name                            |
 | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
@@ -1940,7 +1940,7 @@ Google Ads API Resource: [campaign\_budget](https://developers.google.com/google
 
 Google Ads Table Name: Campaign
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Adwords Mapped Field Name         |
 | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
@@ -1974,7 +1974,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: CampaignBasicStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                               | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -1996,7 +1996,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: CampaignConversionStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                          | Description                                                                                                                                                                                   | Adwords Mapped Field Name      |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
@@ -2021,7 +2021,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: CampaignCookieStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                                           | Description                                                                                                                                                                                                                                                                                                          | Adwords Mapped Field Name                  |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -2042,7 +2042,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: CampaignCriterion
 
-Google Ads API Resource: [campaign\_criterion](https://developers.google.com/google-ads/api/fields/v22/campaign_criterion)
+Google Ads API Resource: [campaign\_criterion](https://developers.google.com/google-ads/api/fields/v23/campaign_criterion)
 
 | Google Ads Field Name              | Description                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2059,7 +2059,7 @@ Google Ads API Resource: [campaign\_criterion](https://developers.google.com/goo
 
 Google Ads Table Name: CampaignCrossDeviceConversionStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                          | Description                                                                                                                                                                                   | Adwords Mapped Field Name      |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
@@ -2084,7 +2084,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: CampaignCrossDeviceStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                                           | Description                                                                                                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name                  |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -2143,7 +2143,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: CampaignLabel
 
-Google Ads API Resource: [campaign\_label](https://developers.google.com/google-ads/api/fields/v22/campaign_label)
+Google Ads API Resource: [campaign\_label](https://developers.google.com/google-ads/api/fields/v23/campaign_label)
 
 | Google Ads Field Name           | Description                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2158,7 +2158,7 @@ Google Ads API Resource: [campaign\_label](https://developers.google.com/google-
 
 Google Ads Table Name: CampaignLocationTargetStats
 
-Google Ads API Resource: [location\_view](https://developers.google.com/google-ads/api/fields/v22/location_view)
+Google Ads API Resource: [location\_view](https://developers.google.com/google-ads/api/fields/v23/location_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2201,7 +2201,7 @@ Google Ads API Resource: [location\_view](https://developers.google.com/google-a
 
 Google Ads Table Name: CampaignStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                                       | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name                |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -2249,7 +2249,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: ClickStats
 
-Google Ads API Resource: [click\_view](https://developers.google.com/google-ads/api/fields/v22/click_view)
+Google Ads API Resource: [click\_view](https://developers.google.com/google-ads/api/fields/v23/click_view)
 
 | Google Ads Field Name                               | Description                                                                            | Adwords Mapped Field Name |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------- |
@@ -2283,7 +2283,7 @@ Google Ads API Resource: [click\_view](https://developers.google.com/google-ads/
 
 Google Ads Table Name: Customer
 
-Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v22/customer)
+Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v23/customer)
 
 | Google Ads Field Name            | Description                                                                                                         | Adwords Mapped Field Name                      |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
@@ -2297,7 +2297,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: Gender
 
-Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v22/gender_view)
+Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v23/gender_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -2326,7 +2326,7 @@ Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads
 
 Google Ads Table Name: GenderBasicStats
 
-Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v22/gender_view)
+Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v23/gender_view)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -2358,7 +2358,7 @@ Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads
 
 Google Ads Table Name: GenderConversionStats
 
-Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v22/gender_view)
+Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v23/gender_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -2390,7 +2390,7 @@ Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads
 
 Google Ads Table Name: GenderNonClickStats
 
-Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v22/gender_view)
+Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v23/gender_view)
 
 | Google Ads Field Name                | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -2421,7 +2421,7 @@ Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads
 
 Google Ads Table Name: GenderStats
 
-Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v22/gender_view)
+Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads/api/fields/v23/gender_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -2474,7 +2474,7 @@ Google Ads API Resource: [gender\_view](https://developers.google.com/google-ads
 
 Google Ads Table Name: GeoConversionStats
 
-Google Ads API Resource: [geographic\_view](https://developers.google.com/google-ads/api/fields/v22/geographic_view)
+Google Ads API Resource: [geographic\_view](https://developers.google.com/google-ads/api/fields/v23/geographic_view)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2512,7 +2512,7 @@ Google Ads API Resource: [geographic\_view](https://developers.google.com/google
 
 Google Ads Table Name: GeoStats
 
-Google Ads API Resource: [geographic\_view](https://developers.google.com/google-ads/api/fields/v22/geographic_view)
+Google Ads API Resource: [geographic\_view](https://developers.google.com/google-ads/api/fields/v23/geographic_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2564,7 +2564,7 @@ Google Ads API Resource: [geographic\_view](https://developers.google.com/google
 
 Google Ads Table Name: HourlyAccountConversionStats
 
-Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v22/customer)
+Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v23/customer)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2588,7 +2588,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: HourlyAccountStats
 
-Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v22/customer)
+Google Ads API Resource: [customer](https://developers.google.com/google-ads/api/fields/v23/customer)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
@@ -2628,7 +2628,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: HourlyAdGroupConversionStats
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -2656,7 +2656,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: HourlyAdGroupStats
 
-Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v22/ad_group)
+Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/api/fields/v23/ad_group)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -2700,7 +2700,7 @@ Google Ads API Resource: [ad\_group](https://developers.google.com/google-ads/ap
 
 Google Ads Table Name: HourlyBidGoalStats
 
-Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v22/bidding_strategy)
+Google Ads API Resource: [bidding\_strategy](https://developers.google.com/google-ads/api/fields/v23/bidding_strategy)
 
 | Google Ads Field Name                            | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name |
 | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2730,7 +2730,7 @@ Google Ads API Resource: [bidding\_strategy](https://developers.google.com/googl
 
 Google Ads Table Name: HourlyCampaignConversionStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -2756,7 +2756,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: HourlyCampaignStats
 
-Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v22/campaign)
+Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api/fields/v23/campaign)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
@@ -2798,7 +2798,7 @@ Google Ads API Resource: [campaign](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: Keyword
 
-Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v22/keyword_view)
+Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v23/keyword_view)
 
 | Google Ads Field Name                                                                       | Description                                                                                                                                                                                                                                    | Adwords Mapped Field Name            |
 | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
@@ -2837,7 +2837,7 @@ Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ad
 
 Google Ads Table Name: KeywordBasicStats
 
-Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v22/keyword_view)
+Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v23/keyword_view)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -2862,7 +2862,7 @@ Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ad
 
 Google Ads Table Name: KeywordConversionStats
 
-Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v22/keyword_view)
+Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v23/keyword_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -2891,7 +2891,7 @@ Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ad
 
 Google Ads Table Name: KeywordCrossDeviceConversionStats
 
-Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v22/keyword_view)
+Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v23/keyword_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -2918,7 +2918,7 @@ Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ad
 
 Google Ads Table Name: KeywordCrossDeviceStats
 
-Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v22/keyword_view)
+Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v23/keyword_view)
 
 | Google Ads Field Name                                           | Description                                                                                                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name                  |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
@@ -2969,7 +2969,7 @@ Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ad
 
 Google Ads Table Name: KeywordStats
 
-Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v22/keyword_view)
+Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ads/api/fields/v23/keyword_view)
 
 | Google Ads Field Name                                       | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name                |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
@@ -3020,7 +3020,7 @@ Google Ads API Resource: [keyword\_view](https://developers.google.com/google-ad
 
 Google Ads Table Name: LocationBasedCampaignCriterion
 
-Google Ads API Resource: [location\_view](https://developers.google.com/google-ads/api/fields/v22/location_view)
+Google Ads API Resource: [location\_view](https://developers.google.com/google-ads/api/fields/v23/location_view)
 
 | Google Ads Field Name              | Description                                                                                                                                                                               | Adwords Mapped Field Name |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3032,7 +3032,7 @@ Google Ads API Resource: [location\_view](https://developers.google.com/google-a
 
 Google Ads Table Name: PaidOrganicStats
 
-Google Ads API Resource: [paid\_organic\_search\_term\_view](https://developers.google.com/google-ads/api/fields/v22/paid_organic_search_term_view)
+Google Ads API Resource: [paid\_organic\_search\_term\_view](https://developers.google.com/google-ads/api/fields/v23/paid_organic_search_term_view)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                                                                            | Adwords Mapped Field Name        |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
@@ -3062,7 +3062,7 @@ Google Ads API Resource: [paid\_organic\_search\_term\_view](https://developers.
 
 Google Ads Table Name: ParentalStatus
 
-Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v22/parental_status_view)
+Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v23/parental_status_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -3088,7 +3088,7 @@ Google Ads API Resource: [parental\_status\_view](https://developers.google.com/
 
 Google Ads Table Name: ParentalStatusBasicStats
 
-Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v22/parental_status_view)
+Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v23/parental_status_view)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -3120,7 +3120,7 @@ Google Ads API Resource: [parental\_status\_view](https://developers.google.com/
 
 Google Ads Table Name: ParentalStatusConversionStats
 
-Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v22/parental_status_view)
+Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v23/parental_status_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -3152,7 +3152,7 @@ Google Ads API Resource: [parental\_status\_view](https://developers.google.com/
 
 Google Ads Table Name: ParentalStatusNonClickStats
 
-Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v22/parental_status_view)
+Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v23/parental_status_view)
 
 | Google Ads Field Name                | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -3184,7 +3184,7 @@ Google Ads API Resource: [parental\_status\_view](https://developers.google.com/
 
 Google Ads Table Name: ParentalStatusStats
 
-Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v22/parental_status_view)
+Google Ads API Resource: [parental\_status\_view](https://developers.google.com/google-ads/api/fields/v23/parental_status_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -3237,7 +3237,7 @@ Google Ads API Resource: [parental\_status\_view](https://developers.google.com/
 
 Google Ads Table Name: Placement
 
-Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v22/managed_placement_view)
+Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v23/managed_placement_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -3266,7 +3266,7 @@ Google Ads API Resource: [managed\_placement\_view](https://developers.google.co
 
 Google Ads Table Name: PlacementBasicStats
 
-Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v22/managed_placement_view)
+Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v23/managed_placement_view)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name       |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- |
@@ -3298,7 +3298,7 @@ Google Ads API Resource: [managed\_placement\_view](https://developers.google.co
 
 Google Ads Table Name: PlacementConversionStats
 
-Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v22/managed_placement_view)
+Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v23/managed_placement_view)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -3330,7 +3330,7 @@ Google Ads API Resource: [managed\_placement\_view](https://developers.google.co
 
 Google Ads Table Name: PlacementNonClickStats
 
-Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v22/managed_placement_view)
+Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v23/managed_placement_view)
 
 | Google Ads Field Name                | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -3361,7 +3361,7 @@ Google Ads API Resource: [managed\_placement\_view](https://developers.google.co
 
 Google Ads Table Name: PlacementStats
 
-Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v22/managed_placement_view)
+Google Ads API Resource: [managed\_placement\_view](https://developers.google.com/google-ads/api/fields/v23/managed_placement_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                                                                                        | Adwords Mapped Field Name         |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- |
@@ -3413,7 +3413,7 @@ Google Ads API Resource: [managed\_placement\_view](https://developers.google.co
 
 Google Ads Table Name: SearchQueryConversionStats
 
-Google Ads API Resource: [search\_term\_view](https://developers.google.com/google-ads/api/fields/v22/search_term_view)
+Google Ads API Resource: [search\_term\_view](https://developers.google.com/google-ads/api/fields/v23/search_term_view)
 
 | Google Ads Field Name                   | Description                                                                                                                                                                                                               | Adwords Mapped Field Name |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3447,7 +3447,7 @@ Google Ads API Resource: [search\_term\_view](https://developers.google.com/goog
 
 Google Ads Table Name: SearchQueryStats
 
-Google Ads API Resource: [search\_term\_view](https://developers.google.com/google-ads/api/fields/v22/search_term_view)
+Google Ads API Resource: [search\_term\_view](https://developers.google.com/google-ads/api/fields/v23/search_term_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name       |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
@@ -3504,7 +3504,7 @@ Google Ads API Resource: [search\_term\_view](https://developers.google.com/goog
 
 Google Ads Table Name: ShoppingProductConversionStats
 
-Google Ads API Resource: [shopping\_performance\_view](https://developers.google.com/google-ads/api/fields/v22/shopping_performance_view)
+Google Ads API Resource: [shopping\_performance\_view](https://developers.google.com/google-ads/api/fields/v23/shopping_performance_view)
 
 | Google Ads Field Name                   | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3557,7 +3557,7 @@ Google Ads API Resource: [shopping\_performance\_view](https://developers.google
 
 Google Ads Table Name: ShoppingProductStats
 
-Google Ads API Resource: [shopping\_performance\_view](https://developers.google.com/google-ads/api/fields/v22/shopping_performance_view)
+Google Ads API Resource: [shopping\_performance\_view](https://developers.google.com/google-ads/api/fields/v23/shopping_performance_view)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                                                                       | Adwords Mapped Field Name        |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
@@ -3619,7 +3619,7 @@ Google Ads API Resource: [shopping\_performance\_view](https://developers.google
 
 Google Ads Table Name: Video
 
-Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v22/video)
+Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v23/video)
 
 | Google Ads Field Name   | Description                                | Adwords Mapped Field Name |
 | ----------------------- | ------------------------------------------ | ------------------------- |
@@ -3633,7 +3633,7 @@ Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fi
 
 Google Ads Table Name: VideoBasicStats
 
-Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v22/video)
+Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v23/video)
 
 | Google Ads Field Name               | Description                                                                                                                                                                                                               | Adwords Mapped Field Name |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3656,7 +3656,7 @@ Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fi
 
 Google Ads Table Name: VideoConversionStats
 
-Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v22/video)
+Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v23/video)
 
 | Google Ads Field Name                  | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3684,7 +3684,7 @@ Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fi
 
 Google Ads Table Name: VideoNonClickStats
 
-Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v22/video)
+Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v23/video)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3721,7 +3721,7 @@ Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fi
 
 Google Ads Table Name: VideoStats
 
-Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v22/video)
+Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fields/v23/video)
 
 | Google Ads Field Name                               | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3753,7 +3753,7 @@ Google Ads API Resource: [video](https://developers.google.com/google-ads/api/fi
 
 Google Ads Table Name: LandingPageStats
 
-Google Ads API Resource: [landing\_page\_view](https://developers.google.com/google-ads/api/fields/v22/landing_page_view)
+Google Ads API Resource: [landing\_page\_view](https://developers.google.com/google-ads/api/fields/v23/landing_page_view)
 
 | Google Ads Field Name                                          | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3779,7 +3779,7 @@ Google Ads API Resource: [landing\_page\_view](https://developers.google.com/goo
 
 Google Ads Table Name: DisplayVideoAutomaticPlacementsStats
 
-Google Ads API Resource: [group\_placement\_view](https://developers.google.com/google-ads/api/fields/v22/group_placement_view)
+Google Ads API Resource: [group\_placement\_view](https://developers.google.com/google-ads/api/fields/v23/group_placement_view)
 
 | Google Ads Field Name                   | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3808,7 +3808,7 @@ Google Ads API Resource: [group\_placement\_view](https://developers.google.com/
 
 Google Ads Table Name: DisplayVideoKeywordStats
 
-Google Ads API Resource: [display\_keyword\_view](https://developers.google.com/google-ads/api/fields/v22/display_keyword_view)
+Google Ads API Resource: [display\_keyword\_view](https://developers.google.com/google-ads/api/fields/v23/display_keyword_view)
 
 | Google Ads Field Name                          | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3841,7 +3841,7 @@ Google Ads API Resource: [display\_keyword\_view](https://developers.google.com/
 
 Google Ads Table Name: DisplayVideoTopicStats
 
-Google Ads API Resource: [topic\_view](https://developers.google.com/google-ads/api/fields/v22/topic_view)
+Google Ads API Resource: [topic\_view](https://developers.google.com/google-ads/api/fields/v23/topic_view)
 
 | Google Ads Field Name             | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3867,7 +3867,7 @@ Google Ads API Resource: [topic\_view](https://developers.google.com/google-ads/
 
 Google Ads Table Name: ProductGroupStats
 
-Google Ads API Resource: [product\_group\_view](https://developers.google.com/google-ads/api/fields/v22/product_group_view)
+Google Ads API Resource: [product\_group\_view](https://developers.google.com/google-ads/api/fields/v23/product_group_view)
 
 | Google Ads Field Name                                                                                  | Description                                                                                                                                                                                   | Adwords Mapped Field Name |
 | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3905,7 +3905,7 @@ Google Ads API Resource: [product\_group\_view](https://developers.google.com/go
 
 Google Ads Table Name: LocationsDistanceStats
 
-Google Ads API Resource: [distance\_view](https://developers.google.com/google-ads/api/fields/v22/distance_view)
+Google Ads API Resource: [distance\_view](https://developers.google.com/google-ads/api/fields/v23/distance_view)
 
 | Google Ads Field Name                          | Description                                                                                                                                                                                                                         | Adwords Mapped Field Name |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3929,7 +3929,7 @@ Google Ads API Resource: [distance\_view](https://developers.google.com/google-a
 
 Google Ads Table Name: LocationsUserLocationsStats
 
-Google Ads API Resource: [user\_location\_view](https://developers.google.com/google-ads/api/fields/v22/user_location_view)
+Google Ads API Resource: [user\_location\_view](https://developers.google.com/google-ads/api/fields/v23/user_location_view)
 
 | Google Ads Field Name                           | Description                                                                                                                                                                                                                                                                                    | Adwords Mapped Field Name |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3964,7 +3964,7 @@ Google Ads API Resource: [user\_location\_view](https://developers.google.com/go
 
 Google Ads Table Name: Asset
 
-Google Ads API Resource: [asset](https://developers.google.com/google-ads/api/fields/v22/asset)
+Google Ads API Resource: [asset](https://developers.google.com/google-ads/api/fields/v23/asset)
 
 | Google Ads Field Name        | Description                                                     | Adwords Mapped Field Name |
 | ---------------------------- | --------------------------------------------------------------- | ------------------------- |
@@ -3977,7 +3977,7 @@ Google Ads API Resource: [asset](https://developers.google.com/google-ads/api/fi
 
 Google Ads Table Name: AssetGroup
 
-Google Ads API Resource: [asset\_group](https://developers.google.com/google-ads/api/fields/v22/asset_group)
+Google Ads API Resource: [asset\_group](https://developers.google.com/google-ads/api/fields/v23/asset_group)
 
 | Google Ads Field Name             | Description                                                                                                                                         | Adwords Mapped Field Name |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -3991,7 +3991,7 @@ Google Ads API Resource: [asset\_group](https://developers.google.com/google-ads
 
 Google Ads Table Name: AssetGroupAsset
 
-Google Ads API Resource: [asset\_group\_asset](https://developers.google.com/google-ads/api/fields/v22/asset_group_asset)
+Google Ads API Resource: [asset\_group\_asset](https://developers.google.com/google-ads/api/fields/v23/asset_group_asset)
 
 | Google Ads Field Name                                        | Description                                                                                                      | Adwords Mapped Field Name |
 | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -4005,7 +4005,7 @@ Google Ads API Resource: [asset\_group\_asset](https://developers.google.com/goo
 
 Google Ads Table Name: AssetGroupListingGroupFilter
 
-Google Ads API Resource: [asset\_group\_listing\_group\_filter](https://developers.google.com/google-ads/api/fields/v22/asset_group_listing_group_filter)
+Google Ads API Resource: [asset\_group\_listing\_group\_filter](https://developers.google.com/google-ads/api/fields/v23/asset_group_listing_group_filter)
 
 | Google Ads Field Name                                                                | Description                                                                                                                                                             | Adwords Mapped Field Name |
 | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -4027,7 +4027,7 @@ Google Ads API Resource: [asset\_group\_listing\_group\_filter](https://develope
 
 Google Ads Table Name: AssetGroupSignal
 
-Google Ads API Resource: [asset\_group\_signal](https://developers.google.com/google-ads/api/fields/v22/asset_group_signal)
+Google Ads API Resource: [asset\_group\_signal](https://developers.google.com/google-ads/api/fields/v23/asset_group_signal)
 
 | Google Ads Field Name                    | Description                                                                                                                                                              | Adwords Mapped Field Name |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------- |
@@ -4037,7 +4037,7 @@ Google Ads API Resource: [asset\_group\_signal](https://developers.google.com/go
 
 Google Ads Table Name: Audience
 
-Google Ads API Resource: [audience](https://developers.google.com/google-ads/api/fields/v22/audience)
+Google Ads API Resource: [audience](https://developers.google.com/google-ads/api/fields/v23/audience)
 
 | Google Ads Field Name          | Description                                                                                                                   | Adwords Mapped Field Name |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -4050,7 +4050,7 @@ Google Ads API Resource: [audience](https://developers.google.com/google-ads/api
 
 Google Ads Table Name: AssetGroupProductGroupStats
 
-Google Ads API Resource: [asset\_group\_product\_group\_view](https://developers.google.com/google-ads/api/fields/v22/asset_group_product_group_view)
+Google Ads API Resource: [asset\_group\_product\_group\_view](https://developers.google.com/google-ads/api/fields/v23/asset_group_product_group_view)
 
 | Google Ads Field Name                                                    | Description                                                                                                                                                                                                                                                                                                                       | Adwords Mapped Field Name |
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
@@ -4078,7 +4078,7 @@ Google Ads API Resource: [asset\_group\_product\_group\_view](https://developers
 
 Google Ads Table Name: CampaignAssetStats
 
-Google Ads API Resource: [campaign\_asset](https://developers.google.com/google-ads/api/fields/v22/campaign_asset)
+Google Ads API Resource: [campaign\_asset](https://developers.google.com/google-ads/api/fields/v23/campaign_asset)
 
 | Google Ads Field Name                          | Description                                                                                                                                                                                                                                                                                                                       | Adwords Mapped Field Name |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |

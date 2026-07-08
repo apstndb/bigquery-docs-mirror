@@ -26,7 +26,7 @@ To prevent unassigned or newly created projects from defaulting to on-demand pri
   - **Consider default behavior** : without an explicit or inherited assignment, BigQuery automatically applies the on-demand pricing model.
   - **Override for exceptions** : if specific projects must use on-demand pricing, you can override the inherited assignment by explicitly assigning those projects to the reservation *None* .
 
-For details on assignment priority, see [Reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#reservation_assignments) .
+For details on assignment priority, see [Reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) .
 
 ## Query execution using slots
 

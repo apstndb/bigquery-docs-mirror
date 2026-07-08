@@ -29,7 +29,6 @@ To get the permissions that you need to copy datasets, ask your administrator to
 
   - BigQuery Admin ( `roles/bigquery.admin` ) - the destination project
   - BigQuery Data Viewer ( `roles/bigquery.dataViewer` ) - the source dataset
-  - BigQuery Data Editor ( `roles/bigquery.dataEditor` ) - the destination dataset
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 

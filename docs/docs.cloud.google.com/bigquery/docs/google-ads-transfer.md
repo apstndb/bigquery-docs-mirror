@@ -30,7 +30,7 @@ The BigQuery Data Transfer Service for the Google Ads connector supports the fol
 <tbody>
 <tr class="odd">
 <td>Supported reports</td>
-<td>The Google Ads connector supports the transfer of data from the reports in <a href="https://developers.google.com/google-ads/api/fields/v22/overview">Google Ads API v22</a> .
+<td>The Google Ads connector supports the transfer of data from the reports in <a href="https://developers.google.com/google-ads/api/fields/v23/overview">Google Ads API v23</a> .
 <p>For information about how Google Ads reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/google-ads-transformation">Google Ads report transformation</a> .</p></td>
 </tr>
 <tr class="even">
@@ -337,7 +337,7 @@ When you [manually trigger a transfer](https://docs.cloud.google.com/bigquery/do
 
 ## Custom reports
 
-The BigQuery Data Transfer Service for Google Ads connector also supports the use of custom reports using Google Ads Query Language (GAQL) queries in the Google Ads transfer configuration. These custom reports ingest data from all resources available in the [Google Ads API version supported by the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#connector_overview) . For more information about using and validating a GAQL query, see [Google Ads Query Builder](https://developers.google.com/google-ads/api/fields/v22/overview_query_builder) .
+The BigQuery Data Transfer Service for Google Ads connector also supports the use of custom reports using Google Ads Query Language (GAQL) queries in the Google Ads transfer configuration. These custom reports ingest data from all resources available in the [Google Ads API version supported by the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#connector_overview) . For more information about using and validating a GAQL query, see [Google Ads Query Builder](https://developers.google.com/google-ads/api/fields/v23/overview_query_builder) .
 
 You can specify custom reports when you [Create a Google Ads transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) .
 
@@ -346,8 +346,8 @@ You can specify custom reports when you [Create a Google Ads transfer](https://d
 Custom reports with the Google Ads connector are subject to the following limitations:
 
   - The Google Ads connector doesn't support `WHERE` , `ORDER BY` , `LIMIT` , and `PARAMETERS` clauses. Your GAQL query should be in the format similar to the following: ` SELECT FIELD_NAME , FIELD_NAME ,... FROM RESOURCE_NAME  ` .
-  - The Google Ads connector automatically appends ` WHERE segments.date = run_date  ` when there is a core date segment (for example, `segments.date` , `segments.week` , `segments.month` , `segments.quarter` , `segments.year` ) in the query. This can cause the [Google Ads Query Validator](https://developers.google.com/google-ads/api/fields/v22/query_validator) to return an error, for example, `The filtering conditions in the WHERE clause must combine to form a valid, finite date range composed of the core date segments ...` . You can safely ignore these errors.
-  - GAQL queries without a [`segments.date` field](https://developers.google.com/google-ads/api/fields/v22/segments#segments.date) acts as [match tables](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation#google_ads_match_tables) , which are only updated once per day and are not supported in backfill runs. If you want to backfill data, you must include a `segments.date` field in the GAQL query.
+  - The Google Ads connector automatically appends ` WHERE segments.date = run_date  ` when there is a core date segment (for example, `segments.date` , `segments.week` , `segments.month` , `segments.quarter` , `segments.year` ) in the query. This can cause the [Google Ads Query Validator](https://developers.google.com/google-ads/api/fields/v23/query_validator) to return an error, for example, `The filtering conditions in the WHERE clause must combine to form a valid, finite date range composed of the core date segments ...` . You can safely ignore these errors.
+  - GAQL queries without a [`segments.date` field](https://developers.google.com/google-ads/api/fields/v23/segments#segments.date) acts as [match tables](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation#google_ads_match_tables) , which are only updated once per day and are not supported in backfill runs. If you want to backfill data, you must include a `segments.date` field in the GAQL query.
   - The Google Ads connector supports up to 100 custom reports in a single transfer.
 
 ## Performance Max (PMax) campaigns

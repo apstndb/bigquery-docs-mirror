@@ -8,4 +8,4 @@ data_source: docs.cloud.google.com
 
 # All BigQuery code samples
 
-Python Java Node.js Go PHP C\# Ruby Terraform C++ BigQuery Storage BigQuery Connection API BigQuery Reservation API BigQuery DataPolicy API BigQuery BigQuery Data Transfer Service
+Java Go Python Node.js PHP C\# Ruby Terraform C++ BigQuery Connection API BigQuery DataPolicy API BigQuery Reservation API BigQuery Storage BigLake BigQuery BigQuery Data Transfer Service BigQuery ML

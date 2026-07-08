@@ -113,8 +113,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     source_dataset = bigquery.Dataset(source_dataset_id_full)
     # Specify the geographic location where the dataset should reside.
-    source_dataset.location = "US"
-    source_dataset = client.create_dataset(source_dataset)  # API request
+    source_dataset.location = "US&quot;
+    source_dataset = client.create_dataset(source_dataset)# API request
 
 ## Create a table and load your source data
 
@@ -260,7 +260,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     shared_dataset = bigquery.Dataset(shared_dataset_id_full)
     shared_dataset.location = "US"
-    shared_dataset = client.create_dataset(shared_dataset)  # API request
+    shared_dataset = client.create_dataset(shared_dataset)# API request
 
 ## Create the authorized view in the new dataset
 
@@ -358,7 +358,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     view.view_query = sql_template.format(
         client.project, source_dataset_id, source_table_id
     )
-    view = client.create_table(view)  # API request
+    view = client.create_table(view)# API request
 
 ## Grant your data analysts permission to run query jobs
 
@@ -436,8 +436,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     )
     shared_dataset.access_entries = access_entries
     shared_dataset = client.update_dataset(
-        shared_dataset, ["access_entries"]
-    )  # API request
+        shared_dataset, ["access_entries"])# API request
 
 ## Authorize the view to access the source dataset
 
@@ -549,13 +548,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     Table view =
         bigquery.create(TableInfo.of(TableId.of(sharedDatasetId, sharedViewId), viewDefinition));
     
-    // Assign access controls to the dataset containing the view
-    List<Acl> viewAcl = new ArrayList<>(sharedDataset.getAcl());
+    // Assign access controls< to> the dataset containing <>the view
+    ListAcl viewAcl = new ArrayList(sharedDataset.getAcl());
     viewAcl.add(Acl.of(new Acl.Group("example-analyst-group@google.com"), Acl.Role.READER));
     sharedDataset.toBuilder().setAcl(viewAcl).build().update();
     
-    // Authorize the view to access the source dataset
-    List<Acl> srcAcl = new ArrayList<>(sourceDataset.getAcl());
+    // Au<tho>rize the view to access<> the source dataset
+    ListAcl srcAcl = new ArrayList(sourceDataset.getAcl());
     srcAcl.add(Acl.of(new Acl.View(view.getTableId())));
     sourceDataset.toBuilder().setAcl(srcAcl).build().update();
 
@@ -576,11 +575,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
     source_dataset = bigquery.Dataset(source_dataset_id_full)
     # Specify the geographic location where the dataset should reside.
-    source_dataset.location = "US"
+    source_dataset.location = "US&quot;
     source_dataset = client.create_dataset(source_dataset)  # API request
     
     # Populate a source table
-    source_table_id = "github_contributors"
+    source_table_id = ";github_contributors&quot;
     job_config = bigquery.QueryJobConfig()
     job_config.destination = source_dataset.table(source_table_id)
     sql = """
@@ -608,7 +607,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # Create the view in the new dataset
     shared_view_id = "github_analyst_view"
     view = bigquery.Table(shared_dataset.table(shared_view_id))
-    sql_template = """
+    sql_template = ""&quot;
         SELECT
             commit, author.name as author,
             committer.name as committer, repo_name
@@ -628,18 +627,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     )
     shared_dataset.access_entries = access_entries
     shared_dataset = client.update_dataset(
-        shared_dataset, ["access_entries"]
+        shared_dataset, [&quot;access_entries"]
     )  # API request
     
     # Authorize the view to access the source dataset
     access_entries = source_dataset.access_entries
     access_entries.append(
-        bigquery.AccessEntry(None, EntityTypes.VIEW, view.reference.to_api_repr())
-    )
-    source_dataset.access_entries = access_entries
-    source_dataset = client.update_dataset(
-        source_dataset, ["access_entries"]
-    )  # API request
+        bigquery.AccessEntry(None, EntityTypes.VIEW,view.reference.to_api_repr()))source_dataset.access_entries=access_entriessource_dataset=client.update_dataset(source_dataset,["access_entries"])# API request
 
 ## Clean up
 

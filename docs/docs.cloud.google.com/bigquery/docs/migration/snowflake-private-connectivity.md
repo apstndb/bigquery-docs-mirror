@@ -89,7 +89,7 @@ In AWS, create a VPC endpoint that connects to Amazon S3. For more information, 
 
 Configure a Private Endpoint on the Storage Account in Azure. For more information, see [Use private endpoints for Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints) .
 
-Storage Transfer Service requires the `*.blob.core.microsoft.net` endpoint. The `*.dfs.core.microsoft.net` endpoint isn't supported.
+Storage Transfer Service requires the `*.blob.core.windows.net` endpoint. The `*.dfs.core.windows.net` endpoint isn't supported.
 
 Once created, note the endpoint's IP address. You'll need to specify the IP address when creating your load balancer in the following section.
 

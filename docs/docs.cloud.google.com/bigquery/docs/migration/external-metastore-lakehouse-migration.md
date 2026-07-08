@@ -109,16 +109,21 @@ For more information about granting roles, see [Manage access to projects, folde
 
 Your administrator might also be able to give the customer-provided service account the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-You must also grant the service agent the `roles/iam.serviceAccountTokenCreator` role with the following command:
+You must also create a service identity for the BigQuery Migration Service and grant it the `roles/iam.serviceAccountTokenCreator` role.
 
-    gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT --member user:bigquerymigration-management-borg@prod.google.com --role roles/iam.serviceAccountTokenCreator --project PROJECT_ID
+To create the service identity, run the following command:
 
-    gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT --member bigquerymigration-managementworker-borg@prod.google.com --role roles/iam.serviceAccountTokenCreator --project PROJECT_ID
+    gcloud beta services identity create --service=bigquerymigration.googleapis.com --project=PROJECT_ID
+
+To grant the role to the service agent, run the following command:
+
+    gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT --member serviceAccount:service-PROJECT_NUMBER@gcp-sa-bqms.iam.gserviceaccount.com --role roles/iam.serviceAccountTokenCreator --project PROJECT_ID
 
 Replace the following:
 
-  - `  SERVICE_ACCOUNT  ` : the ID of the service account
-  - `  PROJECT_ID  ` : the project iD
+  - `  SERVICE_ACCOUNT  ` : the ID of the customer-provided service account
+  - `  PROJECT_ID  ` : the project ID
+  - `  PROJECT_NUMBER  ` : the project number
 
 ### Configure secret
 
