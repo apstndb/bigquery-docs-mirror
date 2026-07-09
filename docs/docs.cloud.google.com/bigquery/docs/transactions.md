@@ -29,9 +29,11 @@ To start a transaction, use the [`BEGIN TRANSACTION`](https://docs.cloud.google.
   - The query executes a [`ROLLBACK TRANSACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) statement. This statement abandons all changes made inside the transaction.
   - The query ends before reaching either of these two statements. In that case, BigQuery automatically rolls back the transaction.
 
-If an error occurs during a transaction and the query has an [exception handler](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#beginexceptionend) , then BigQuery transfers control to the exception handler. Inside the exception block, can choose whether to commit or roll back the transaction.
+If an error occurs during a transaction and the query has an [exception handler](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#beginexceptionend) , then BigQuery transfers control to the exception handler. Inside the exception block, you can choose whether to commit or roll back the transaction.
 
-If an error occurs during a transaction and there is no exception handler, then the query fails and BigQuery automatically rolls back the transaction.
+When session mode is disabled, if an error occurs during a transaction and there is no exception handler, then the query fails and BigQuery automatically rolls back the transaction.
+
+When session mode is enabled and there is no exception handler, the transaction remains active until the session is terminated or it is explicitly rolled back. Regardless of the session mode, it is good practice to add exception handlers to ensure transactions are properly rolled back as soon as possible to avoid holding locks and resources longer than necessary.
 
 The following example shows an exception handler that rolls back a transaction:
 

@@ -6,18 +6,13 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-This document provides general information about differential privacy for BigQuery. For syntax, see the [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) . For a list of functions that you can use with this syntax, see [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .
+You can use differential privacy with BigQuery to help protect personal information in your data while you still perform computations and gain insights. This privacy standard limits the personal information that's revealed by data outputs, helping you share data and make inferences about groups without exposing individuals. Differential privacy is particularly useful when there's a risk of re-identification or when you need to quantify the tradeoff between privacy risk and analytical utility.
+
+For syntax details, see the [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) . For a list of functions that you can use with this syntax, see [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .
 
 > **Note:** In this topic, the privacy parameters in the examples aren't recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
-## What is differential privacy?
-
-Differential privacy is a standard for computations on data that limits the personal information that's revealed by an output. Differential privacy is commonly used to share data and to allow inferences about groups of people while preventing someone from learning information about an individual.
-
-Differential privacy is useful:
-
-  - Where a risk of re-identification exists.
-  - To quantify the tradeoff between risk and analytical utility.
+## Example use case for differential privacy
 
 To better understand differential privacy, let's look at a simple example.
 

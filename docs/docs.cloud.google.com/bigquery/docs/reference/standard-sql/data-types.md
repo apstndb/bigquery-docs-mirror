@@ -904,6 +904,8 @@ A measure is a special type that aggregates data without overcounting. The measu
 
 A measure is defined by a graph property, an aggregate function, and the key of the graph element. When you call the `AGG` function on the measure, the aggregation function is applied to the graph property once per unique key. For information about how to define a measure, see the [element properties definition](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) .
 
+For more information about overcounting with aggregations, see [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting) .
+
 The measure type has the following limitations:
 
   - Supported by only the `AGG` function on output from the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .

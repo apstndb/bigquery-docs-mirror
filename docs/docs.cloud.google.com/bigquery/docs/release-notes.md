@@ -14,6 +14,16 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 08, 2026
+
+Change
+
+An updated version of the [Simba ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver) is now available.
+
+Feature
+
+You can now perform [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) in GoogleSQL, which lets you use an aggregate function as an argument to another aggregate function. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## July 06, 2026
 
 Change

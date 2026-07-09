@@ -72,7 +72,7 @@ Use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.cloud.googl
         SET OPTIONS (
           size_gb = VALUE,
           preferred_tables =
-            [&#39;TABLE_PROJECT_ID.DATASET.TABLE1';,
+            ['TABLE_PROJECT_ID.DATASET.TABLE1',
             'TABLE_PROJECT_ID.DATASET.TABLE2']);
     
     Replace the following:
@@ -229,7 +229,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) and supply the DDL statement as the query parameter.
 
-    bq --project_id=&quot;PROJECT_ID" \
+    bq --project_id="PROJECT_ID" \
     update --reservation
         --bi_reservation_size=0 \
         --location=LOCATION

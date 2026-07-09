@@ -237,9 +237,7 @@ For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/r
 
 **Description**
 
-Aggregates a [measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) . A measure type encapsulates an aggregate calculation to perform, locked to a specific granularity defined by a key. The `AGG` function invokes the calculation exactly once per key with the guarantee of avoiding overcounting. Measures are useful for defining business metrics. You can perform aggregation using the `AGG` function instead of complex aggregation queries.
-
-For more information and examples of using the `AGG` function with measures, see [work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
+Aggregates a [measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) . A measure type encapsulates an aggregate calculation to perform, locked to a specific granularity defined by a key. The `AGG` function invokes the calculation exactly once per key with the guarantee of avoiding overcounting. Measures are useful for defining business metrics. You can perform aggregation using the `AGG` function instead of complex aggregation queries. For more information about overcounting with aggregations, see [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting) . For more information and examples of using the `AGG` function with measures, see [work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 
 **Supported Argument Types**
 
@@ -1055,6 +1053,8 @@ Details:
 The `GROUPING` function is helpful if you need to determine which rows are produced by which grouping sets. A grouping set is a group of columns by which rows can be grouped together. So, if you need to filter rows by a few specific grouping sets, you can use the `GROUPING` function to identify which grouping sets grouped which rows by creating a matrix of the results.
 
 In addition, you can use the `GROUPING` function to determine the type of `NULL` produced by the `GROUP BY` clause. In some cases, the `GROUP BY` clause produces a `NULL` placeholder. This placeholder represents all groupable items that are aggregated (not grouped) in the current grouping set. This is different from a standard `NULL` , which can also be produced by a query.
+
+You can't use the `GROUPING` function with [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) .
 
 For more information, see the following examples.
 

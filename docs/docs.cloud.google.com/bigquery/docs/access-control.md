@@ -1381,17 +1381,14 @@ Repository
 <p><code dir="ltr" translate="no">dataplex.operations.get</code></p>
 <p><code dir="ltr" translate="no">dataplex.operations.list</code></p>
 <p><code dir="ltr" translate="no">dataplex.projects.search</code></p>
-<p><code dir="ltr" translate="no">dataproc.batches.*</code></p>
-<ul>
-<li><code dir="ltr" translate="no">dataproc.batches.analyze</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.cancel</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.create</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.delete</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.get</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.list</code></li>
-<li><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationRead</code></li>
-<li><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationWrite</code></li>
-</ul>
+<p><code dir="ltr" translate="no">dataproc.batches.analyze</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.cancel</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.create</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.delete</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.get</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.list</code></p>
+<p><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationRead</code></p>
+<p><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationWrite</code></p>
 <p><code dir="ltr" translate="no">dataproc.operations.cancel</code></p>
 <p><code dir="ltr" translate="no">dataproc.operations.delete</code></p>
 <p><code dir="ltr" translate="no">dataproc.operations.get</code></p>
@@ -1523,17 +1520,14 @@ Repository
 <p><code dir="ltr" translate="no">dataform.repositories.create</code></p>
 <p><code dir="ltr" translate="no">dataform.repositories.list</code></p>
 <p><code dir="ltr" translate="no">dataplex.projects.search</code></p>
-<p><code dir="ltr" translate="no">dataproc.batches.*</code></p>
-<ul>
-<li><code dir="ltr" translate="no">dataproc.batches.analyze</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.cancel</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.create</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.delete</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.get</code></li>
-<li><code dir="ltr" translate="no">dataproc.batches.list</code></li>
-<li><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationRead</code></li>
-<li><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationWrite</code></li>
-</ul>
+<p><code dir="ltr" translate="no">dataproc.batches.analyze</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.cancel</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.create</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.delete</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.get</code></p>
+<p><code dir="ltr" translate="no">dataproc.batches.list</code></p>
+<p><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationRead</code></p>
+<p><code dir="ltr" translate="no">dataproc.  batches.  sparkApplicationWrite</code></p>
 <p><code dir="ltr" translate="no">dataproc.operations.cancel</code></p>
 <p><code dir="ltr" translate="no">dataproc.operations.delete</code></p>
 <p><code dir="ltr" translate="no">dataproc.operations.get</code></p>

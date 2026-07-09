@@ -41,7 +41,7 @@ Several customized connection tools are available to help you incorporate BigQue
 
 ### MCP Toolbox for Databases
 
-Model Context Protocol (MCP) is an open protocol for connecting large language models (LLMs) to data sources like BigQuery. The [MCP Toolbox for Databases](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) connects your BigQuery project to various Integrated Development Environments (IDEs) and developer tools, empowering you build more powerful AI agents with your BigQuery data.
+Model Context Protocol (MCP) is an open protocol for connecting large language models (LLMs) to data sources like BigQuery. The [MCP Toolbox for Databases](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) connects your BigQuery project to various Integrated Development Environments (IDEs) and developer tools, empowering you to build more powerful AI agents with your BigQuery data.
 
 ### BigQuery agent analytics
 
@@ -53,13 +53,15 @@ To learn more about this solution, see [Use BigQuery agent analytics](https://do
 
 Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers connect applications to databases. Google partners with [Simba](https://insightsoftware.com/simba/) to provide [ODBC and JDBC drivers for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) , which you can use to help build database-neutral software applications through your preferred tooling and infrastructure. The [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is also available in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
-### Google Cloud for Visual Studio Code extension
+### Data Agent Kit
 
 > **Preview**
 > 
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-If you're a Visual Studio Code (VS Code) user, you can use the [Google Cloud VS Code extension](https://docs.cloud.google.com/bigquery/docs/vs-code-extension) to run BigQuery notebooks and preview BigQuery datasets from your existing VS Code environment.
+[Google Cloud Data Agent Kit](https://docs.cloud.google.com/data-cloud-extension) provides an extension for agent coding tools, such as VS Code, Antigravity, and Cursor, that lets you interact with BigQuery resources directly in your agent environment. You can use this extension to browse datasets, manage pipelines, run queries, and prompt your agent to perform other BigQuery tasks directly in your preferred IDE.
+
+Data Agent Kit also provides a set of open source plugins that you can use with various command-line tools, including Antigravity CLI, Gemini CLI, Claude Code, and Codex CLI.
 
 ## Tools for developing end-to-end solutions
 

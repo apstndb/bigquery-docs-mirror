@@ -743,6 +743,7 @@ Top-level definitions:
 <span id="rules_for_pivot_agg_function"></span> Rules for `aggregate_function_call` :
 
   - Must be an aggregate function. For example, `SUM` .
+  - You can't use [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) within a `PIVOT` operator call.
   - You may reference columns in a table passed to `PIVOT` , as well as correlated columns, but may not access columns defined by the `PIVOT` clause itself.
   - A table passed to `PIVOT` may be accessed through its alias if one is provided.
   - You can only use an aggregate function that takes one argument.
@@ -4842,6 +4843,8 @@ Syntax for an aggregation threshold analysis rule–enforced view:
 
 Use the `AGGREGATION_THRESHOLD` clause to enforce an aggregation threshold. This clause counts the number of distinct privacy units (represented by the privacy unit column) for each group, and only outputs the groups where the distinct privacy unit count satisfies the aggregation threshold. If you want to use an aggregation threshold analysis rule that you defined for a view, use the syntax for an [analysis rule–enforced view](https://docs.cloud.google.com/bigquery/docs/analysis-rules#privacy_view) . When querying a privacy-enforced view, the `AGGREGATION_THRESHOLD` clause does not need to include the `OPTIONS` clause.
 
+You can't use the `AGGREGATION_THRESHOLD` clause with a [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) query.
+
 **Definitions:**
 
   - `threshold` : The minimum number of distinct privacy units (privacy unit column values) that need to contribute to each row in the query results. If a potential row doesn't satisfy this threshold, that row is omitted from the query results. `threshold_amount` must be a positive `INT64` value.
@@ -5003,6 +5006,8 @@ In the following example, an aggregation threshold analysis rule is enforced on 
 **Description**
 
 This clause lets you transform the results of a query with [differentially private aggregations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) . To learn more about differential privacy, see [Differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) .
+
+You can't use differential privacy (or the deprecated `ANONYMIZATION` clause it replaces) with a [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) query.
 
 You can use the following syntax to build a differential privacy clause:
 

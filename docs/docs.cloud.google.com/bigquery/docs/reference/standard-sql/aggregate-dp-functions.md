@@ -67,6 +67,8 @@ Gets the differentially-private sum of non- <code dir="ltr" translate="no">NULL<
 
 Returns the average of non- `NULL` , non- `NaN` values in the expression. This function first computes the average per privacy unit column, and then computes the final result by averaging these averages.
 
+You can't use an `AVG` ( `DIFFERENTIAL_PRIVACY` ) function with [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) .
+
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support the following arguments:
 
   - `expression` : The input expression. This can be any numeric input type, such as `INT64` .
@@ -135,6 +137,8 @@ The following differentially private query gets the average number of each item 
 **Description**
 
 Returns the number of rows in the [differentially private](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) `FROM` clause. The final result is an aggregation across a privacy unit column.
+
+You can't use a `COUNT` ( `DIFFERENTIAL_PRIVACY` ) function with [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) .
 
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support the following arguments:
 
@@ -264,6 +268,8 @@ The following differentially private query counts the number of requests made fo
 
 Takes an expression and computes a percentile for it. The final result is an aggregation across privacy unit columns.
 
+You can't use a `PERCENTILE_CONT` ( `DIFFERENTIAL_PRIVACY` ) function with [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) .
+
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
 
   - `expression` : The input expression. This can be most numeric input types, such as `INT64` . `NULL` values are always ignored.
@@ -310,6 +316,8 @@ The following differentially private query gets the percentile of items requeste
 **Description**
 
 Returns the sum of non- `NULL` , non- `NaN` values in the expression. The final result is an aggregation across privacy unit columns.
+
+You can't use a `SUM` ( `DIFFERENTIAL_PRIVACY` ) function with [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) .
 
 This function must be used with the [`DIFFERENTIAL_PRIVACY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) and can support these arguments:
 

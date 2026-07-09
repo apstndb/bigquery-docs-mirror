@@ -146,6 +146,7 @@ There are a few additional special cases. Chained function calls are allowed for
 Chained function calls aren't allowed for these functions:
 
   - `GROUPING`
+  - Aggregate functions with [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation)
 
 ### Example chained function calls
 

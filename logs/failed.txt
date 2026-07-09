@@ -1,4 +1,3 @@
-200 https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo
 404 https://docs.cloud.google.com/sdk/gcloud/reference/bigquery

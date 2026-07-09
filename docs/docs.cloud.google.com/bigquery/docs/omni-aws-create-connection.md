@@ -314,9 +314,7 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
 
 5.  Click the **Amazon S3 Omni: BigQuery Federation** solution card.
 
-6.  In the **Create table** dialog, in the **Connection ID** field, select **Create a new S3 connection** .
-
-7.  In the **External data source** pane, enter the following information:
+6.  In the **External data source** pane, enter the following information:
     
       - For **Connection type** , select **BigLake on AWS (via BigQuery Omni)** .
     
@@ -332,11 +330,11 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
         
             arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME
 
-8.  Click **Create connection** .
+7.  Click **Create connection** .
 
-9.  Click **Go to connection** .
+8.  Click **Go to connection** .
 
-10. In the **Connection info** pane, copy the **BigQuery Google identity** . This is a Google principal that is specific to each connection. Example:
+9.  In the **Connection info** pane, copy the **BigQuery Google identity** . This is a Google principal that is specific to each connection. Example:
     
     ``` 
       BigQuery Google identity: IDENTITY_ID

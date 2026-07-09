@@ -78,7 +78,7 @@ Select one of the following options to create an AlloyDB connection:
 
 8.  Click **Go to connection** .
 
-9.  In the **Connection Info** pane, copy the service account ID for use in the [next step](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#share_connections) to grant the correct IAM permissions.
+9.  In the **Connection info** pane, copy the service account ID for use in the [next step](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#access-alloydb) to grant the correct IAM permissions.
 
 ### bq
 
@@ -128,9 +128,11 @@ Within the BigQuery Connection API, you can invoke `CreateConnection` within the
 
 ## Grant access to the service account
 
-A [service account](https://docs.cloud.google.com/iam/docs/service-agents) is automatically created when you create the first connection within a project. The service account's name is **BigQuery Connection Service Agent** . The service account ID is of the following format:
+A [service account](https://docs.cloud.google.com/iam/docs/service-agents) is automatically created when you create the first connection within a project. The service account's name is **BigQuery Connection Service Agent** . To get the service account ID, [view your connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) . The service account ID is of the following format:
 
 `service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com` .
+
+> **Note:** The service account used by a connection is a Google-managed service agent. By design, this service account is not visible on the **IAM & Admin** page by default. To view Google-provided role grants on the **IAM & Admin** page, select the **Include Google-provided role grants** checkbox.
 
 To connect to AlloyDB, you must give the new connection access to AlloyDB so that BigQuery can access data on behalf of users. The service account must have the following permission:
 
@@ -146,9 +148,9 @@ You can grant the service account associated with the connection the [AlloyDB Cl
     
     The **Add principals** dialog opens.
 
-3.  In the **New principals** field, enter the service account name **BigQuery Connection Service Agent** or the service account ID taken from the [connection information](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
+3.  In the **New principals** field, enter the service account ID taken from the [connection information](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
 
-4.  In the **Select a role** field, select **AlloyDB** , and then select **AlloyDB Client** .
+4.  In the **Assign roles** section, select **AlloyDB Client** ( `roles/alloydb.client` ).
 
 5.  Click **Save** .
 
@@ -161,7 +163,7 @@ Use the [`gcloud projects add-iam-policy-binding`](https://docs.cloud.google.com
 Provide the following values:
 
   - `  PROJECT_ID  ` : Your Google Cloud project ID.
-  - `  SERVICE_ACCOUNT_ID  ` : Replace project number in `service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com` and use it.
+  - `  SERVICE_ACCOUNT_ID  ` : The service account ID taken from the [connection information](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
 
 > **Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#view-access) .
 

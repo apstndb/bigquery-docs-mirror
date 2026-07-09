@@ -76,7 +76,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/storage.admin, roles/documentai.editor, roles/bigquery.admin, roles/resourcemanager.projectIamAdmin`
     
-        gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
+        gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER&quot; --role=ROLE
     
     Replace the following:
     
@@ -174,7 +174,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
         CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
         OPTIONS (
           connection_type = "CLOUD_RESOURCE",
-          friendly_name = "FRIENDLY_NAME",
+          friendly_name = &quot;FRIENDLY_NAME";,
           description = "DESCRIPTION"
           );
     
@@ -270,9 +270,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     
         except google.api_core.exceptions.AlreadyExists:
             print(f"Connection with ID '{connection_id}' already exists.")
-            print("Please use a different connection ID.")
-        except Exception as e:
-            print(f"An unexpected error occurred while creating the connection: {e}")
+            print("Please use a different connection ID.")exceptExceptionase:print(f"An unexpected error occurred while creating the connection: {e}")
 
 ### Node.js
 
@@ -281,7 +279,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
     const {ConnectionServiceClient} =
-      require('@google-cloud/bigquery-connection').v1;
+      require(&#39;@google-cloud/bigquery-connection').v1;
     const {status} = require('@grpc/grpc-js');
     
     const client = new ConnectionServiceClient();
@@ -324,10 +322,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         if (err.code === status.ALREADY_EXISTS) {
           console.log(`Connection '${connectionId}' already exists.`);
         } else {
-          console.error(`Error creating connection: ${err.message}`);
-        }
-      }
-    }
+          console.error(`Error creating connection: ${err.message}`);    }  }}
 
 ### Terraform
 
@@ -473,7 +468,7 @@ Create an object table over the PDF file in Cloud Storage:
         WITH CONNECTION `LOCATION.CONNECTION_ID`
         OPTIONS(
           object_metadata = 'SIMPLE',
-          uris = ['gs://BUCKET/scf23.pdf']);
+          uris = [';gs://BUCKET/scf23.pdf']);
     
     Replace the following:
     
@@ -529,7 +524,8 @@ Extract the PDF content and metadata information from the JSON data returned by 
 
 2.  In the query editor, run the following statement to parse the PDF content:
     
-        CREATE OR REPLACE TABLE bqml_tutorial.parsed_pdf AS (SELECT  uri,  JSON_EXTRACT_SCALAR(json , '$.chunkId') AS id,  JSON_EXTRACT_SCALAR(json , '$.content') AS content,  JSON_EXTRACT_SCALAR(json , '$.pageFooters[0].text') AS page_footers_text,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageStart') AS page_span_start,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageEnd') AS page_span_endFROM bqml_tutorial.chunked_pdf, UNNEST(JSON_EXTRACT_ARRAY(ml_process_document_result.chunkedDocument.chunks, '$')) json);
+        CREATE OR REPLACE TABLE bqml_tutorial.parsed_pdf AS (SELECT  uri,  JSON_EXTRACT_SCALAR(json , '$.chunkId') AS id,  JSON_EXTRACT_SCALAR(json , '$.content') AS content,  JSON_EXTRACT_SCALAR(json , '$.pageFooters[0].text') AS page_footers_text,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageStart') AS page_span_start,  JSON_EXTRACT_SCALAR(json , '$.pageSpan.pageEnd') AS page_span_end
+        FROM bqml_tutorial.chunked_pdf, UNNEST(JSON_EXTRACT_ARRAY(ml_process_document_result.chunkedDocument.chunks, '$')) json);
 
 3.  In the query editor, run the following statement to view a subset of the parsed PDF content:
     

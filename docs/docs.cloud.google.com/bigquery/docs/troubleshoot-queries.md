@@ -396,7 +396,26 @@ This error occurs when a table in your query can't be found in the dataset or re
 
 Error string: `Too many DML statements outstanding against <table-name>, limit is 20`
 
-This error occurs when you exceed the [limit of 20 DML statements](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) in `PENDING` status in a queue for a single table. This error usually occurs when you submit DML jobs against a single table faster than what BigQuery can process.
+This error occurs when you exceed the [limit of 20 mutating DML statements](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) in `PENDING` status in a queue for a single table. This error usually occurs when you submit DML jobs against a single table faster than what BigQuery can process.
+
+To check the jobs in `PENDING` status that fill the queue alongside the `RUNNING` jobs that might be blocking them from dequeuing, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) :
+
+    SELECT
+      project_id,
+      job_id,
+      creation_time,
+      user_email,
+      statement_type,
+      state
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS
+    WHERE
+      statement_type IN ('UPDATE', 'DELETE', 'MERGE')
+      AND state IN ('RUNNING', 'PENDING')
+    ORDER BY
+      creation_time DESC;
+
+> **Note:** The `limit is 20` queue length applies specifically to mutating DML statements ( `UPDATE` , `DELETE` , and `MERGE` ). `INSERT` statements maintain a separate queue with a limit of 100, and `TRUNCATE TABLE` is a DML operation that doesn't use the mutating DML queue.
 
 One possible solution is to group multiple smaller DML operations into larger but fewer jobs—for example, by batching updates and inserts. When you group smaller jobs into larger ones, the cost to run the larger jobs is amortized and the execution is faster. Consolidating DML statements that affect the same data generally improves the efficiency of DML jobs, and is less likely to exceed the queue size quota limit. For more information about optimizing your DML operations, see [Avoid DML statements that update or insert single rows](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-dml-update-single-rows) .
 
@@ -406,10 +425,12 @@ Other solutions to improve your DML efficiency could be to partition or cluster 
 
 Error string: `403 Quota exceeded: Your table exceeded quota for total number of DML jobs writing to a table, pending + running.`
 
-Mutating DML statements such as UPDATE, DELETE, and MERGE are queued per table with a maximum queue length of 20. This error occurs if you submit additional mutating DML statements for a table that already has 20 jobs in a pending or running state. To address this error, do the following:
+This error occurs when the total number of DML jobs ( `INSERT` , `UPDATE` , `DELETE` , and `MERGE` ) writing to a single table—in both `PENDING` and `RUNNING` states—exceeds the table's concurrency quota.
+
+While the `limit is 20` error specifically restricts the `PENDING` queue for mutating DML statements ( `UPDATE` , `DELETE` , and `MERGE` ), this `403 Quota exceeded` error applies to the combined total of all DML jobs ( `INSERT` plus mutating DML) writing to a table simultaneously. Because mutating DML is already capped by its 20-job queue limit, this 403 quota error most commonly occurs when you submit too many concurrent `INSERT` queries against a single table. To address this error, do the following:
 
   - *Increase Reservation Slots* : Increase the number of slots in your reservation to help jobs complete faster and reduce job concurrency. This reduces the number of pending jobs in the queue and helps avoid reaching the limit.
-  - *Optimize Workflow Orchestration* : Limit the number of concurrent DML tasks in your orchestration tool to ensure no more than 20 mutating statements target the same table simultaneously.
+  - *Optimize Workflow Orchestration* : Limit the number of concurrent DML tasks in your orchestration tool to avoid exceeding table-level concurrency limits (including high-frequency `INSERT` queries targeting the same table).
   - *Batch DML Operations* : Combine multiple smaller DML statements into fewer, larger statements to reduce the total number of jobs queued against the table.
 
 ## Transaction aborted due to concurrent update

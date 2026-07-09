@@ -28,7 +28,24 @@ The JDBC driver for BigQuery is subject to the following limitations:
     
     **Authentication method**
 
-## Configure your development environment
+## Install and configure the JDBC driver
+
+You can install and configure the JDBC driver for BigQuery by either direcly downloading the uber-JAR file or by using Maven.
+
+### Direct download configuration
+
+To configure the JDBC driver through direct download, do the following:
+
+1.  Download the [1.1.0 version of the driver](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.1.0-all.jar) .
+2.  Copy the downloaded file to the location specified by your software.
+
+For information on feature changes and workflow updates, see [the changelog](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/CHANGELOG.md) .
+
+### Previous JDBC driver for BigQuery versions
+
+  - [1.0.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.0.0-all.jar)
+
+### Maven configuration
 
 The JDBC driver for BigQuery is available on [Maven Central](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-bigquery-jdbc) .
 
@@ -41,7 +58,24 @@ Add the following dependency to your `pom.xml` file:
     <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-bigquery-jdbc</artifactId>
-        <version>0.3.0</version>
+        <version>1.1.0</version>
+    </dependency>
+
+### Maven using uber-JAR
+
+Add the following dependency to your `pom.xml` file:
+
+    <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-bigquery-jdbc</artifactId>
+        <version>1.1.0</version>
+        <classifier>all</classifier>
+        <exclusions>
+          <exclusion>
+            <groupId>*</groupId>
+            <artifactId>*</artifactId>
+          </exclusion>
+        </exclusions>
     </dependency>
 
 ### Gradle
@@ -50,12 +84,8 @@ Add the following to your `build.gradle` file:
 
     dependencies {
     // ... other dependencies
-    implementation("com.google.cloud:google-cloud-bigquery-jdbc:0.3.0")
+    implementation("com.google.cloud:google-cloud-bigquery-jdbc:1.1.0")
     }
-
-### Other (Shaded Uber JAR)
-
-If you need a standalone JAR file, for example to include in a non-Maven or non-Gradle project, download the [shaded Uber JAR](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-latest-all.jar) . A shaded JAR file with all dependencies included is also available from Maven with the classifier `all` .
 
 ## Establish a connection
 
