@@ -252,31 +252,26 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights">Performance insights</a> for the job.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">query_info.optimization_details</code></td>
-<td><code dir="ltr" translate="no">STRUCT</code></td>
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/history-based-optimizations">history-based optimizations</a> for the job. Only the <code dir="ltr" translate="no">JOBS_BY_PROJECT</code> view has this column.</td>
-</tr>
-<tr class="odd">
 <td><code dir="ltr" translate="no">transferred_bytes</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>Total bytes transferred for BigQuery Omni queries, such as BigQuery Omni transfer jobs.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">materialized_view_statistics</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MaterializedViewStatistics">Statistics of materialized views</a> considered in a query job. ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">metadata_cache_statistics</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics">Statistics for metadata column index usage for tables</a> referenced in a query job.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">search_statistics</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SearchStatistics">Statistics for a search query.</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">query_dialect</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>This field will be available sometime in May, 2025. The query dialect used for the job. Valid values include:<br />
@@ -290,22 +285,22 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <p>For jobs submitted by users, this field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</p>
 <p>For background jobs, the value of this field isn't controlled by the default query dialect configuration settings, and doesn't impact jobs submitted by users. For some background jobs, the value is omitted.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">continuous</code></td>
 <td><code dir="ltr" translate="no">BOOLEAN</code></td>
 <td>Whether the job is a <a href="https://cloud.google.com/bigquery/docs/continuous-queries-introduction">continuous query</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">continuous_query_info.output_watermark</code></td>
 <td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>Represents the point up to which the continuous query has successfully processed data.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">vector_search_statistics</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#VectorSearchStatistics">Statistics for a vector search query.</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">external_service_costs</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td>An array of information about the external service costs for a query job.</td>

@@ -137,7 +137,7 @@ This step sets a version number (1 in this case) for the model.
 
 #### Run the Docker container
 
-    docker run -p 8500:8500 --network="host" --mount type=bind,source=`pwd`/serving_dir/iris_model,target=/models/iris_model -e MODEL_NAME=iris_model -t tensorflo&w/serving 
+    docker run -p 8500:8500 --network="host" --mount type=bind,source=`pwd`/serving_dir/iris_model,target=/models/iris_model -e MODEL_NAME=iris_model -t tensorflow/serving &
 
 #### Run the prediction
 
@@ -181,7 +181,7 @@ You should see output similar to this:
     machineType: mls1-c1-m2
     name: projects/[YOUR-PROJECT-ID]/models/IRIS_MODEL/versions/v1
     pythonVersion: '2.7'
-    runtimeVersion: ';1.15'
+    runtimeVersion: '1.15'
     state: READY
 
 #### Online prediction
@@ -287,7 +287,8 @@ You should see output similar to this:
     - gs://some/gcs/path/boosted_tree_iris_model/xgboost_predictor-0.1.tar.gz
     predictionClass: predictor.Predictor
     pythonVersion: '2.7'
-    runtimeVersion: ';1.15'state: READY
+    runtimeVersion: '1.15'
+    state: READY
 
 #### Online prediction
 

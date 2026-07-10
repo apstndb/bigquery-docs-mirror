@@ -217,9 +217,7 @@ For example, say you have a table of sales data and want to calculate the averag
       )
     GROUP BY Product
     ORDER BY Product;
-
-Results:
-
+    
     /*---------+-----------------+
      | Product | avg_daily_sales |
      +---------+-----------------+
@@ -243,9 +241,7 @@ Results:
     FROM Sales
     GROUP BY Product
     ORDER BY Product;
-
-Results:
-
+    
     /*---------+-----------------+
      | Product | avg_daily_sales |
      +---------+-----------------+
@@ -267,21 +263,20 @@ The following rules and constraints apply to multi-level aggregation:
 
   - You also can't use the following clauses in a multi-aggregation function:
     
-        - `ORDER BY`
-        
-        - `LIMIT`
-        
-        - `IGNORE NULLS` or `RESPECT NULLS`
+      - `ORDER BY`
+    
+      - `LIMIT`
+    
+      - `IGNORE NULLS` or `RESPECT NULLS`
 
   - You can't use multi-level aggregate functions in the [`PIVOT` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator) .
 
   - You can't use a `GROUPING` function within a multi-level aggregate body, or with `GROUP BY` modifiers. For example, the following expressions result in an error:
     
-    ```` 
+    ``` 
       SUM(GROUPING(...) GROUP BY Y)   -- Error
       GROUPING(... GROUP BY Y)        -- Error
     ```
-    ````
 
   - You can't use multi-level aggregation with the [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
 
@@ -295,9 +290,7 @@ The following rules and constraints apply to multi-level aggregation:
 
   - You can't use more than two nested aggregate functions in a multi-level aggregation:
     
-        ```googlesql
         SUM(AVG(MIN(X) GROUP BY Y) GROUP BY Z) -- Error; 3 nested aggregate functions.
-        ```
 
 ### Avoid overcounting with multi-level aggregation
 
@@ -324,8 +317,16 @@ Aggregating over the result of a `JOIN` operation can result in *overcounting* o
       USING (empno)
     WHERE relationship = 'Child'
     ORDER BY empno;
-
-Results: `/*-------+--------+--------------+ | empno | salary | relationship | +-------+--------+--------------+ | 1 | 150000 | Child | | 2 | 100000 | Child | | 2 | 100000 | Child | | 3 | 80000 | Child | | 3 | 80000 | Child | +-------+--------+--------------*/`
+    
+    /*-------+--------+--------------+
+     | empno | salary | relationship |
+     +-------+--------+--------------+
+     | 1     | 150000 | Child        |
+     | 2     | 100000 | Child        |
+     | 2     | 100000 | Child        |
+     | 3     |  80000 | Child        |
+     | 3     |  80000 | Child        |
+     +-------+--------+--------------*/
 
 The issue is that the `INNER JOIN` operation results in a table where the salary for a given employee appears more than once if they have more than one child listed in the `Dependents` table. For example, employees 2 and 3 are repeated for each dependent child. Taking the average ( `AVG` ) of salary on this table *overcounts* those two salaries, leading to an incorrect result.
 

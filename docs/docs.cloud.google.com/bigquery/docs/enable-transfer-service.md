@@ -74,7 +74,7 @@ If you authorize the data transfer using a service account from a project that i
     --member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
     --role roles/iam.serviceAccountTokenCreator
 
-Where:
+Replace the following:
 
   - service\_account is the cross-project service account used for authorizing the data transfer.
   - project\_number is the project number of the project where the BigQuery Data Transfer Service is enabled.
@@ -86,6 +86,22 @@ When you enable the BigQuery Data Transfer Service API through the Google Cloud 
   - **Establish permissions for cross-project transfers:** To securely access cross-project data sources, grant the DTS service agent (resident in the destination project) the `roles/iam.serviceAccountTokenCreator` role on the source service account identity.
 
   - **Enforce the principle of least privilege:** Grant this role at the resource level (on the specific service account being used) rather than the project level.
+
+#### Limitation
+
+You can't use the Google Cloud console to to attach a cross-project service account to a data transfer. Instead, you can attach the cross-project service account with the following Google Cloud CLI command:
+
+    bq update
+    --transfer_config
+    --update_credentials
+    --service_account_name="SERVICE_ACCOUNT" projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID
+
+Replace the following:
+
+  - SERVICE\_ACCOUNT : the name of the cross-project service account.
+  - PROJECT\_ID : the name of the project associated with the data transfer.
+  - LOCATION : the location of the data transfer.
+  - CONFIG\_ID : the transfer configuration ID.
 
 ### Manual Service Agent Creation
 
@@ -101,7 +117,7 @@ When you manually trigger service agent creation, Google doesn't grant the prede
     --member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
     --role roles/bigquerydatatransfer.serviceAgent
 
-Where:
+Replace the following:
 
   - project\_number is the project number of the project where the BigQuery Data Transfer Service is enabled.
 

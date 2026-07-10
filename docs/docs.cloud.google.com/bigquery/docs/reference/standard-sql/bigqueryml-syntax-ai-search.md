@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # The AI.SEARCH function
 
-This document describes the `AI.SEARCH` function, which is a table-valued function for semantic search and hybrid search on tables that have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
+This document describes the `AI.SEARCH` function, which is a table-valued function for semantic search on tables that have [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
 
 For example, you could use a query like the following to search a table of product descriptions for anything described as a fun toy. In this example, the `product_description` column has autonomous embedding generation enabled.
 
@@ -25,14 +25,11 @@ You can also perform semantic search using an `ObjectRef` input if the base tabl
                           -- possible with a multimodal embedding model
     );
 
-Embeddings are high-dimensional numerical vectors that represent a given entity. Embeddings encode semantics about entities to make it easier to reason about and compare them. If two entities are semantically similar, then their respective embeddings are located near each other in the embedding vector space. The `AI.SEARCH` function embeds your search query and searches the table that you provide for embeddings in the input table that are close to it.
-
-You can also perform a **hybrid search** that combines a semantic vector search with a lexical (keyword) search. By default, the `mode` parameter is set to `AUTO` which enables `AI.SEARCH` to automatically perform a hybrid search if your table has a vector index configured with lexical search columns. If your table has a vector index on the embedding column, then `AI.SEARCH` uses it to optimize the search.
+Embeddings are high-dimensional numerical vectors that represent a given entity. Embeddings encode semantics about entities to make it easier to reason about and compare them. If two entities are semantically similar, then their respective embeddings are located near each other in the embedding vector space. The `AI.SEARCH` function embeds your search query and searches the table that you provide for embeddings in the input table that are close to it. If your table has a vector index on the embedding column, then `AI.SEARCH` uses it to optimize the search.
 
 You can use `AI.SEARCH` to help with the following tasks:
 
   - **Semantic search** : search entities ranked by semantic similarity.
-  - **Hybrid search** : search entities combining semantic similarity and lexical keyword matching.
   - **Recommendation** : return entities with attributes similar to a given entity.
   - **Classification** : return the class of entities whose attributes are similar to the given entity.
   - **Clustering** : cluster entities whose attributes are similar to a given entity.

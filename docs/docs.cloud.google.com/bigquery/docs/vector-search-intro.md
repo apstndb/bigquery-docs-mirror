@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to embeddings and vector search
 
-This document provides an overview of embeddings and vector search in BigQuery. Vector search is a technique to compare similar objects using embeddings, and it is used to power Google products, including Google Search, YouTube, and Google Play. You can use vector search to perform semantic searches at scale, or you can perform a **hybrid search** that combines a semantic search with a lexical (keyword) search. When you use [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) with vector search, you can take advantage of foundational technologies like inverted file indexing (IVF) and the [ScaNN algorithm](https://research.google/blog/announcing-scann-efficient-vector-similarity-search/) .
+This document provides an overview of embeddings and vector search in BigQuery. Vector search is a technique to compare similar objects using embeddings, and it is used to power Google products, including Google Search, YouTube, and Google Play. You can use vector search to perform searches at scale. When you use [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) with vector search, you can take advantage of foundational technologies like inverted file indexing (IVF) and the [ScaNN algorithm](https://research.google/blog/announcing-scann-efficient-vector-similarity-search/) .
 
 Vector search is built on embeddings. Embeddings are high-dimensional numerical vectors that represent a given entity, like a piece of text or an audio file. Machine learning (ML) models use embeddings to encode semantics about such entities to make it easier to reason about and compare them. For example, a common operation in clustering, classification, and recommendation models is to measure the distance between vectors in an [embedding space](https://en.wikipedia.org/wiki/Latent_space) to find items that are most semantically similar.
 
@@ -65,11 +65,11 @@ You can use [autonomous embedding generation](https://docs.cloud.google.com/bigq
 
 ## Search
 
-You can use the following search functions to perform a semantic vector search, or a **hybrid search** that combines a semantic search with a lexical keyword search:
+The following search functions are available:
 
-  - [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a semantic vector search or hybrid search by using SQL.
+  - [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a vector search by using SQL.
 
-  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Perform a semantic or a hybrid search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
+  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
 
   - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `VECTOR_SEARCH` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
 
@@ -104,11 +104,11 @@ Queries that contain the `VECTOR_SEARCH` or `AI.SEARCH` function aren't accelera
 
 ## What's next
 
-  - Learn more about [creating a vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) and [using vector indexes with hybrid search](https://docs.cloud.google.com/bigquery/docs/vector-index#use_vector_indexes_with_hybrid_search) .
+  - Learn more about [creating a vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) .
 
-  - Learn how to perform a semantic or hybrid search using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) .
+  - Learn how to perform a vector search using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) .
 
-  - Learn how to perform semantic or hybrid search using the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
+  - Learn how to perform semantic search using the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
 
   - Learn more about [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) .
 

@@ -73,11 +73,6 @@ The `INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION` view has the following schema:
 <td>Details of any errors as <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> objects.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">folder_numbers</code></td>
-<td><code dir="ltr" translate="no">REPEATED INTEGER</code></td>
-<td>Number IDs of folders that contain the project, starting with the folder that immediately contains the project, followed by the folder that contains the child folder, and so forth. For example, if <code dir="ltr" translate="no">folder_numbers</code> is <code dir="ltr" translate="no">[1, 2, 3]</code> , then folder <code dir="ltr" translate="no">1</code> immediately contains the project, folder <code dir="ltr" translate="no">2</code> contains <code dir="ltr" translate="no">1</code> , and folder <code dir="ltr" translate="no">3</code> contains <code dir="ltr" translate="no">2</code> . This column is only populated in <code dir="ltr" translate="no">JOBS_BY_FOLDER</code> .</td>
-</tr>
-<tr class="even">
 <td><code dir="ltr" translate="no">job_creation_reason.code</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Specifies the high level reason why a job was created.<br />
@@ -89,53 +84,53 @@ Possible values are:
 <li><code dir="ltr" translate="no">OTHER</code> : the system has determined that the query needs to be executed as a job.</li>
 </ul></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">job_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The ID of the job if a job was created. Otherwise, the query ID of a query using optional job creation mode. For example, <code dir="ltr" translate="no">bquxjob_1234</code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">job_stages</code></td>
 <td><code dir="ltr" translate="no">RECORD REPEATED</code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">job_type</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The type of the job. Can be <code dir="ltr" translate="no">QUERY</code> , <code dir="ltr" translate="no">LOAD</code> , <code dir="ltr" translate="no">EXTRACT</code> , <code dir="ltr" translate="no">COPY</code> , or <code dir="ltr" translate="no">NULL</code> . A <code dir="ltr" translate="no">NULL</code> value indicates a background job.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">labels</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td>Array of labels applied to the job as key-value pairs.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">parent_job_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>ID of the parent job, if any.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">priority</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The priority of this job. Valid values include <code dir="ltr" translate="no">INTERACTIVE</code> and <code dir="ltr" translate="no">BATCH</code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">project_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>( <em>Clustering column</em> ) The ID of the project.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">project_number</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The number of the project.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">referenced_tables</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td>Array of <code dir="ltr" translate="no">STRUCT</code> values that contain the following <code dir="ltr" translate="no">STRING</code> fields for each table referenced by the query: <code dir="ltr" translate="no">project_id</code> , <code dir="ltr" translate="no">dataset_id</code> , and <code dir="ltr" translate="no">table_id</code> . Only populated for query jobs that are not cache hits.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">reservation_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Name of the primary reservation assigned to this job, in the format <code dir="ltr" translate="no">RESERVATION_ADMIN_PROJECT:RESERVATION_LOCATION.RESERVATION_NAME</code> .<br />
@@ -146,104 +141,99 @@ In this output:
 <li><code dir="ltr" translate="no">RESERVATION_NAME</code> : the name of the reservation</li>
 </ul></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">reservation_group_path</code></td>
 <td><code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code></td>
 <td>The reservation group to which the reservation is linked. For example, if the reservation is linked to group <code dir="ltr" translate="no">my-group</code> , the <code dir="ltr" translate="no">reservation_group_path</code> field contains a list such as: <code dir="ltr" translate="no">[my-group]</code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">edition</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The edition associated with the reservation assigned to this job. For more information about editions, see <a href="https://docs.cloud.google.com/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">session_info</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td>Details about the <a href="https://cloud.google.com/bigquery/docs/sessions-intro">session</a> in which this job ran, if any.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">start_time</code></td>
 <td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>The start time of this job, in milliseconds since the epoch. This field represents the time when the job transitions from the <code dir="ltr" translate="no">PENDING</code> state to either <code dir="ltr" translate="no">RUNNING</code> or <code dir="ltr" translate="no">DONE</code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">state</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Running state of the job. Valid states include <code dir="ltr" translate="no">PENDING</code> , <code dir="ltr" translate="no">RUNNING</code> , and <code dir="ltr" translate="no">DONE</code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">statement_type</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The type of query statement. For example, <code dir="ltr" translate="no">DELETE</code> , <code dir="ltr" translate="no">INSERT</code> , <code dir="ltr" translate="no">SCRIPT</code> , <code dir="ltr" translate="no">SELECT</code> , or <code dir="ltr" translate="no">UPDATE</code> . See <a href="https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType">QueryStatementType</a> for list of valid values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">timeline</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample">Query timeline</a> of the job. Contains snapshots of query execution.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">total_bytes_billed</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>If the project is configured to use <a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">on-demand pricing</a> , then this field contains the total bytes billed for the job. If the project is configured to use <a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">flat-rate pricing</a> , then you are not billed for bytes and this field is informational only.
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">total_bytes_processed</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td><p>Total bytes processed by the job.</p>
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">total_modified_partitions</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The total number of partitions the job modified. This field is populated for <code dir="ltr" translate="no">LOAD</code> and <code dir="ltr" translate="no">QUERY</code> jobs.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">total_slot_ms</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>Slot milliseconds for the job over its entire duration in the <code dir="ltr" translate="no">RUNNING</code> state, including retries.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">total_services_sku_slot_ms</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>Total slot milliseconds for the job that runs on external services and is billed on the services SKU. This field is only populated for jobs that have external service costs, and is the total of the usage for costs whose billing method is <code dir="ltr" translate="no">"SERVICES_SKU"</code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">transaction_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>ID of the <a href="https://cloud.google.com/bigquery/docs/transactions">transaction</a> in which this job ran, if any.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">user_email</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>( <em>Clustering column</em> ) Email address or service account of the user who ran the job.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">principal_subject</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>A string representation of the identity of the principal that ran the job.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">query_info.resource_warning</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The warning message that appears if the resource usage during query processing is above the internal threshold of the system.<br />
 A successful query job can have the <code dir="ltr" translate="no">resource_warning</code> field populated. With <code dir="ltr" translate="no">resource_warning</code> , you get additional data points to optimize your queries and to set up monitoring for performance trends of an equivalent set of queries by using <code dir="ltr" translate="no">query_hashes</code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">query_info.query_hashes.normalized_literals</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Contains the hash value of the query. <code dir="ltr" translate="no">normalized_literals</code> is a hexadecimal <code dir="ltr" translate="no">STRING</code> hash that ignores comments, parameter values, UDFs, and literals. The hash value will differ when underlying views change, or if the query implicitly references columns, such as <code dir="ltr" translate="no">SELECT *</code> , and the table schema changes.<br />
 This field appears for successful <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax">GoogleSQL</a> queries that are not cache hits.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">query_info.performance_insights</code></td>
 <td><code dir="ltr" translate="no">RECORD</code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights">Performance insights</a> for the job.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">query_info.optimization_details</code></td>
-<td><code dir="ltr" translate="no">STRUCT</code></td>
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/history-based-optimizations">history-based optimizations</a> for the job. Only the <code dir="ltr" translate="no">JOBS_BY_PROJECT</code> view has this column.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">transferred_bytes</code></td>

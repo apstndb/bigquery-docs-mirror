@@ -224,7 +224,7 @@ You can perform search index optimizations with several operators, functions, an
 
 ### Optimize with operators and comparison functions
 
-BigQuery can optimize some queries that use the [equal operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) ( `=` ), [`IN` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators) , [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) , or [`STARTS_WITH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#starts_with) to compare string literals with indexed data.
+BigQuery can optimize some queries that use the [equal operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) ( `=` ), [`IN` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators) , [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) , [`STARTS_WITH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#starts_with) , or [`ENDS_WITH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#ends_with) to compare string literals with indexed data.
 
 ### Optimize with string predicates
 
@@ -236,8 +236,9 @@ The following predicates are eligible for search index optimization:
   - `string_array_column[OFFSET(0)] = 'string_literal'`
   - `string_array_column[ORDINAL(1)] = 'string_literal'`
   - `column_name IN ('string_literal1', 'string_literal2', ...)`
-  - `STARTS_WITH(column_name, 'prefix')`
   - `column_name LIKE 'prefix%'`
+  - `STARTS_WITH(column_name, 'prefix')`
+  - `ENDS_WITH(column_name, 'some suffix')`
 
 ### Optimize with numeric predicates
 
