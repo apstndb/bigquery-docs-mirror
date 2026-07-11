@@ -67,7 +67,7 @@ For more information on IAM roles in BigQuery, see [Access control](https://docs
 
 When you create a table partitioned by ingestion time or time-unit column, you can specify a partition expiration. This setting specifies how long BigQuery keeps the data in each partition. The setting applies to all partitions in the table, but is calculated independently for each partition based on the partition time.
 
-A partition's expiration time is calculated from the partition boundary in UTC. For example, with daily partitioning, the partition boundary is at midnight (00:00:00 UTC). If the table's partition expiration is 6 hours, then each partition expires at 06:00:00 UTC the following day. When a partition expires, BigQuery deletes the data in that partition.
+A partition's expiration time is calculated from the partition boundary in UTC. For example, with daily partitioning, the partition boundary is at midnight (00:00:00 UTC). If the table's partition expiration is 6 hours, then each partition expires at 06:00:00 UTC the following day. When a partition expires, BigQuery begins deleting the data in that partition.
 
 You can also specify a [default partition expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#partition-expiration) at the dataset level. If you set the partition expiration on a table, then the value overrides the default partition expiration. If you don't specify any partition expiration (on the table or dataset), then partitions never expire.
 
@@ -77,7 +77,9 @@ If you set a table expiration, that value takes precedence over the partition ex
 
 At any point after a table is created, you can update the table's partition expiration. The new setting applies to all partitions in that table, regardless of when they were created. Existing partitions expire immediately if they are older than the new expiration time. Similarly, if data is being copied or inserted to a table partitioned by time-unit column, any partitions older than partition expiration configured for the table are expired immediately.
 
-When a partition expires, BigQuery deletes that partition. The partition data is retained in accordance with [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) and [fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) policies, and can be charged for, depending on your billing model. Until then, the partition counts for purposes of [table quotas](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) . To delete a partition immediately, you can [manually delete the partition](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#delete_a_partition) .
+When a partition expires, BigQuery marks the partition for deletion, but the partition is not deleted immediately. A background process handles the actual deletion asynchronously, which can take several days to complete. Until the background process deletes the partition, the partition continues to count toward [table quotas](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) . To delete a partition immediately, you can [manually delete the partition](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#delete_a_partition) .
+
+After a partition is deleted, the partition data is retained in accordance with [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) and [fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) policies, and can incur charges, depending on your billing model.
 
 > **Note:** The automatic deletion of an expired partition isn't recorded in BigQuery audit logs.
 

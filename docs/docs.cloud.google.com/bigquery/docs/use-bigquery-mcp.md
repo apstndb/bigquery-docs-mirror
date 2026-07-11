@@ -109,6 +109,10 @@ In your AI application, look for a way to add or connect to a remote MCP server.
   - **Authentication details** : your Google Cloud credentials, your OAuth Client ID and secret, or an agent identity and credentials
     
     Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
+    
+    ### Redirect URIs
+
+For web-based applications, and some desktop applications, you must allowlist a redirect URI when you create a client ID and secret for authentication. Redirect URIs are used by the authorization server to send tokens to your application. Your application's documentation should specify the redirect URI that you must use. [Custom redirect URIs](https://developers.google.com/identity/protocols/oauth2/native-app#redirect-uri_custom-scheme) aren't supported.
 
 For application-specific guidance about setting up and connecting to MCP server, see [Client-specific guidance](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#client-specific-guidance) .
 

@@ -103,6 +103,7 @@ BigQuery dataset replication is subject to the following limitations:
       - If the original primary region becomes unavailable, scheduled queries fail, even if they only perform read operations.
       - To ensure scheduled queries continue running against the promoted primary replica, you must manually recreate them in the new primary location.
   - You can't replicate hidden datasets.
+  - Cross-region replication isn't supported for datasets that contain [conditional IAM policies](https://docs.cloud.google.com/bigquery/docs/conditions) . To identify if this error is disrupting your replication, you can check the `sync_status` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) .
 
 ### Resource behavior
 

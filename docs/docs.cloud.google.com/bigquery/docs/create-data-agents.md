@@ -133,6 +133,8 @@ Follow these steps to configure table and field descriptions:
 
 7.  Repeat these steps for each table that needs customization.
 
+> **Note:** If your changes to descriptions aren't reflected in the Google Cloud console, you can use the [`list`](https://docs.cloud.google.com/gemini/data-agents/reference/rest/v1beta/projects.locations.dataAgents/list) method to verify or the [`patch`](https://docs.cloud.google.com/gemini/data-agents/reference/rest/v1beta/projects.locations.dataAgents/patch) method to update the descriptions.
+
 ### Create agent instructions
 
 The agent should understand context for user questions without needing any custom instructions. Create custom instructions for the agent only if you need to change the agent's behavior or improve the context in ways that aren't already supported by other context features—for example, custom table and field metadata, or verified queries.
