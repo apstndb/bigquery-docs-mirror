@@ -1,6 +1,10 @@
-# Google Cloud Documentation Mirror Template
+# BigQuery Documentation Mirror
 
-This repository is a template for creating a local Markdown mirror of official Google Cloud documentation. It is designed to be automatically updated via GitHub Actions.
+This repository provides a local Markdown mirror of the BigQuery technical documentation, `bq` command-line reference, and the separate Google Cloud BigQuery product page. It is automatically updated via GitHub Actions.
+
+The Developer Knowledge API treats `docs.cloud.google.com` and `cloud.google.com` as distinct corpora. The mirror keeps both hostnames in their output paths instead of rewriting the product page as documentation.
+
+The product-page seed requires `gcp-docs-mirror-tools` newer than v0.2.9 and becomes active when the workflow's `TOOL_VERSION` is bumped.
 
 ## Setup Instructions
 
