@@ -1,2 +1,1 @@
-https://docs.cloud.google.com/bigquery/pricing https://cloud.google.com/bigquery/pricing
-https://docs.cloud.google.com/bigquery/sla https://cloud.google.com/bigquery/sla
+
