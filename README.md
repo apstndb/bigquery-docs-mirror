@@ -1,6 +1,6 @@
 # BigQuery Documentation Mirror
 
-This repository provides a local Markdown mirror of the BigQuery technical documentation, `bq` command-line reference, and the separate Google Cloud BigQuery product page. It is automatically updated via GitHub Actions.
+This repository provides a local Markdown mirror of the BigQuery technical documentation, the `bq` command-line reference, the stable, alpha, and beta `gcloud bq` references, and the separate Google Cloud BigQuery product page. It is automatically updated via GitHub Actions.
 
 The Developer Knowledge API treats `docs.cloud.google.com` and `cloud.google.com` as distinct corpora. The mirror keeps both hostnames in their output paths instead of rewriting the product page as documentation.
 
