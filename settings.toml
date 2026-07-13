@@ -4,6 +4,9 @@
 seeds = [
     "https://docs.cloud.google.com/bigquery/docs",
     "https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/bq",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq",
+    "https://docs.cloud.google.com/sdk/gcloud/reference/beta/bq",
     "https://cloud.google.com/bigquery",
 ]
 
@@ -11,6 +14,16 @@ seeds = [
 # Keep the documentation and product-site corpora distinct.
 prefixes = [
     "docs.cloud.google.com/bigquery/",
+    # Stable, alpha, and beta gcloud bq command groups and subcommands use
+    # separate SDK paths.
+    "docs.cloud.google.com/sdk/gcloud/reference/bq/",
+    "docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/",
+    "docs.cloud.google.com/sdk/gcloud/reference/beta/bq/",
+    # Legacy SDK reference links are API misses but redirect to the canonical
+    # docs.cloud.google.com paths above.
+    "cloud.google.com/sdk/gcloud/reference/bq/",
+    "cloud.google.com/sdk/gcloud/reference/alpha/bq/",
+    "cloud.google.com/sdk/gcloud/reference/beta/bq/",
     # Legacy documentation links are probed for redirects, but product-site
     # descendants such as pricing are not recursively enqueued.
     "cloud.google.com/bigquery/docs/",
