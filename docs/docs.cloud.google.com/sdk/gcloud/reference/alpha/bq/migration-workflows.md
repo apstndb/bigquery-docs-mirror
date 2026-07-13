@@ -1,0 +1,46 @@
+---
+name: documents/docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows
+uri: https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows
+title: gcloud alpha bq migration-workflows
+description: Offers tools and libraries that allow you to create and manage resources across Google Cloud.
+data_source: docs.cloud.google.com
+---
+
+NAME
+
+gcloud alpha bq migration-workflows - manage Migration Workflow resources
+
+SYNOPSIS
+
+`gcloud alpha bq migration-workflows` `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+
+DESCRIPTION
+
+`(ALPHA)` Manage Migration Workflow resources.
+
+GCLOUD WIDE FLAGS
+
+These flags are available to all commands: `  --help  ` .
+
+Run ` $ gcloud help  ` for details.
+
+COMMANDS
+
+`  COMMAND  ` is one of the following:
+
+  - `  create  `  
+    `(ALPHA)` create migration workflows.
+  - `  delete  `  
+    `(ALPHA)` Delete migration workflows.
+  - `  describe  `  
+    `(ALPHA)` Describe migration workflows.
+  - `  list  `  
+    `(ALPHA)` List migration workflows.
+
+NOTES
+
+This command is currently in alpha and might change without notice. If this command fails with API permission errors despite specifying the correct project, you might be trying to access an API with an invitation-only early access allowlist. These variants are also available:
+
+    gcloud bq migration-workflows
+
+    gcloud beta bq migration-workflows

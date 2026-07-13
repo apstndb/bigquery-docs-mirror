@@ -14,6 +14,16 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 13, 2026
+
+Security
+
+A Missing Authorization vulnerability was discovered in repositories in BigQuery, Dataform, and Colab Enterprise. An authenticated attacker could potentially escalate permissions and perform cross-tenant repository takeover. For more information, see the [GCP-2026-047](https://docs.cloud.google.com/support/bulletins#gcp-2026-047) security bulletin.
+
+Feature
+
+Incremental data transfers for the [BigQuery Data Transfer Service for Salesforce](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## July 09, 2026
 
 Feature

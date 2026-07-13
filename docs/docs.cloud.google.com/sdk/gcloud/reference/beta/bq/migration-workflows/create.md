@@ -1,0 +1,51 @@
+---
+name: documents/docs.cloud.google.com/sdk/gcloud/reference/beta/bq/migration-workflows/create
+uri: https://docs.cloud.google.com/sdk/gcloud/reference/beta/bq/migration-workflows/create
+title: gcloud beta bq migration-workflows create
+description: Offers tools and libraries that allow you to create and manage resources across Google Cloud.
+data_source: docs.cloud.google.com
+---
+
+NAME
+
+gcloud beta bq migration-workflows create - create migration workflows
+
+SYNOPSIS
+
+`gcloud beta bq migration-workflows create` `  --config-file  ` = `  CONFIG_FILE  ` `  --location  ` = `  LOCATION  ` \[ `  --async  ` \] \[ `  GCLOUD_WIDE_FLAG …  ` \]
+
+DESCRIPTION
+
+`(BETA)` Create a migration workflow
+
+EXAMPLES
+
+To create a migration workflow in EU synchronously based on a config file, run:
+
+    gcloud beta bq migration-workflows create --location=EU --config-file=config_file.yaml --no-async
+
+REQUIRED FLAGS
+
+  - `--config-file` = `  CONFIG_FILE  `  
+    Path to the migration workflows config file.
+  - `--location` = `  LOCATION  `  
+    Location of the migration workflow.
+
+OPTIONAL FLAGS
+
+  - `--async`  
+    Return immediately, without waiting for the operation in progress to complete.
+
+GCLOUD WIDE FLAGS
+
+These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+
+Run ` $ gcloud help  ` for details.
+
+NOTES
+
+This command is currently in beta and might change without notice. These variants are also available:
+
+    gcloud bq migration-workflows create
+
+    gcloud alpha bq migration-workflows create

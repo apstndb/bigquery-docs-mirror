@@ -1,0 +1,48 @@
+---
+name: documents/docs.cloud.google.com/sdk/gcloud/reference/alpha/bq
+uri: https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq
+title: gcloud alpha bq
+description: Offers tools and libraries that allow you to create and manage resources across Google Cloud.
+data_source: docs.cloud.google.com
+---
+
+NAME
+
+gcloud alpha bq - interact with and manage resources in Google BigQuery
+
+SYNOPSIS
+
+`gcloud alpha bq` `  GROUP  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+
+DESCRIPTION
+
+`(ALPHA)` Interact with and manage resources in Google BigQuery.
+
+GCLOUD WIDE FLAGS
+
+These flags are available to all commands: `  --help  ` .
+
+Run ` $ gcloud help  ` for details.
+
+GROUPS
+
+`  GROUP  ` is one of the following:
+
+  - `  datasets  `  
+    `(ALPHA)` Manage Google BigQuery datasets.
+  - `  jobs  `  
+    `(ALPHA)` Interact with and manage jobs in Google BigQuery.
+  - `  migration-workflows  `  
+    `(ALPHA)` Manage Migration Workflow resources.
+  - `  tables  `  
+    `(ALPHA)` Interact with and manage Google BigQuery tables.
+  - `  translation  `  
+    `(ALPHA)` Manage BigQuery Migration Service translations.
+
+NOTES
+
+This command is currently in alpha and might change without notice. If this command fails with API permission errors despite specifying the correct project, you might be trying to access an API with an invitation-only early access allowlist. These variants are also available:
+
+    gcloud bq
+
+    gcloud beta bq

@@ -1,0 +1,40 @@
+---
+name: documents/docs.cloud.google.com/sdk/gcloud/reference/beta/bq
+uri: https://docs.cloud.google.com/sdk/gcloud/reference/beta/bq
+title: gcloud beta bq
+description: Offers tools and libraries that allow you to create and manage resources across Google Cloud.
+data_source: docs.cloud.google.com
+---
+
+NAME
+
+gcloud beta bq - manage Bq resources
+
+SYNOPSIS
+
+`gcloud beta bq` `  GROUP  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+
+DESCRIPTION
+
+`(BETA)` Manage Bq resources.
+
+GCLOUD WIDE FLAGS
+
+These flags are available to all commands: `  --help  ` .
+
+Run ` $ gcloud help  ` for details.
+
+GROUPS
+
+`  GROUP  ` is one of the following:
+
+  - `  migration-workflows  `  
+    `(BETA)` Manage Migration Workflow resources.
+
+NOTES
+
+This command is currently in beta and might change without notice. These variants are also available:
+
+    gcloud bq
+
+    gcloud alpha bq
