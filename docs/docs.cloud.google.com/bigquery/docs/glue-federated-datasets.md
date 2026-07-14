@@ -22,11 +22,11 @@ Ensure that you have a connection to access AWS Glue data.
            "glue:GetDatabase",
            "glue:GetTable",
            "glue:GetTables",
-           &quot;glue:GetPartitions"
+           "glue:GetPartitions"
          ],
          "Resource": [
-           "arn:aws:glue:REGION:ACCOUNT_ID:catalog&quot;,
-           &quot;arn:aws:glue:REGION:ACCOUNT_ID:database/DATABASE_NAME",
+           "arn:aws:glue:REGION:ACCOUNT_ID:catalog",
+           "arn:aws:glue:REGION:ACCOUNT_ID:database/DATABASE_NAME",
            "arn:aws:glue:REGION:ACCOUNT_ID:table/DATABASE_NAME/*"
          ]
         }
@@ -101,8 +101,8 @@ Use the [`CREATE EXTERNAL SCHEMA` data definition language (DDL) statement](http
         CREATE EXTERNAL SCHEMA DATASET_NAME
         WITH CONNECTION PROJECT_ID.CONNECTION_LOCATION.CONNECTION_NAME
           OPTIONS (
-            external_source = &#39;AWS_GLUE_SOURCE',
-            location = &#39;LOCATION');
+            external_source = 'AWS_GLUE_SOURCE',
+            location = 'LOCATION');
     
     Replace the following:
     

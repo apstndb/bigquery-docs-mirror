@@ -61,7 +61,9 @@ Request message for `ExplainTranslation` .
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string
+  &quot;projectNumber&quot;: string,
+  &quot;location&quot;: string,
+  &quot;translation&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -69,11 +71,23 @@ Request message for `ExplainTranslation` .
 
 Fields
 
-`name`
+`projectNumber`
 
 `string`
 
-Required. The name of the translation to explain. Format: `projects/PROJECT_ID/locations/LOCATION/translations/TRANSLATION_ID` .
+Required. The Google Cloud project number.
+
+`location`
+
+`string`
+
+Required. The location.
+
+`translation`
+
+`string`
+
+Required. The translation ID.
 
 ## Output Schema
 

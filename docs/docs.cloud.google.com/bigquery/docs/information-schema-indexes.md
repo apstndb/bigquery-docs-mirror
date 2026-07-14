@@ -129,6 +129,19 @@ The `INFORMATION_SCHEMA.SEARCH_INDEXES` view has the following schema:
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis">text analyzer</a> to use to generate tokens for the search index.</td>
 </tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">last_index_alteration_info</code></td>
+<td><code dir="ltr" translate="no">STRUCT</code></td>
+<td>The details of the latest user-triggered index alteration, containing following fields:
+<ul>
+<li><code dir="ltr" translate="no">status</code> : a <code dir="ltr" translate="no">STRING</code> value that indicates the alteration status. Possible values are <code dir="ltr" translate="no">IN_PROGRESS</code> , and <code dir="ltr" translate="no">FAILED</code> .</li>
+<li><code dir="ltr" translate="no">message</code> : the details of the <code dir="ltr" translate="no">FAILED</code> status as an <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> . The value is <code dir="ltr" translate="no">NULL</code> for other statuses.</li>
+<li><code dir="ltr" translate="no">new_coverage_percentage</code> : an <code dir="ltr" translate="no">INT64</code> value that contains the approximate percentage of table data that has been indexed for the alteration.</li>
+<li><code dir="ltr" translate="no">start_time</code> : the timestamp when the alteration is initiated.</li>
+<li><code dir="ltr" translate="no">end_time</code> : the timestamp when the alteration enters the <code dir="ltr" translate="no">FAILED</code> status.</li>
+<li><code dir="ltr" translate="no">ddl</code> : the data definition language (DDL) statement used to alter the index.</li>
+</ul></td>
+</tr>
 </tbody>
 </table>
 

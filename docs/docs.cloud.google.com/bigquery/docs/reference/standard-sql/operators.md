@@ -1341,11 +1341,10 @@ IS operators return TRUE or FALSE for the condition they are testing. They never
 
 **Description**
 
-`IS DISTINCT FROM` returns `TRUE` if the input values are considered to be distinct from each other by the [`DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct) and [`GROUP BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) clauses. Otherwise, returns `FALSE` .
+`IS DISTINCT FROM` returns `TRUE` if the input values are considered to be distinct from each other by the [`GROUP BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) clause. Otherwise, returns `FALSE` .
 
 `a IS DISTINCT FROM b` being `TRUE` is equivalent to:
 
-  - `SELECT COUNT(DISTINCT x) FROM UNNEST([a,b]) x` returning `2` .
   - `SELECT * FROM UNNEST([a,b]) x GROUP BY x` returning 2 rows.
 
 `a IS DISTINCT FROM b` is equivalent to `NOT (a = b)` , except for the following cases:

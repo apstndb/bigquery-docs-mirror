@@ -40,13 +40,17 @@ For more information, see [Canceling a job](https://docs.cloud.google.com/bigque
 
 ## BQ.CANCEL\_INDEX\_ALTERATION
 
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
 **Syntax**
 
     CALL BQ.CANCEL_INDEX_ALTERATION(table_name, index_name);
 
 **Description**
 
-Cancels a user-initiated [rebuild of a vector index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_vector_index_rebuild_statement) .
+Cancels a user-initiated [alteration of a search index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_search_index_statement) or [rebuild of a vector index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_vector_index_rebuild_statement) .
 
 Specify the name of the table as a string with the format `'[project_id.]dataset.table'` and the index name as a string. If you run this system procedure from a different project than the table, then you must include the project ID.
 

@@ -187,6 +187,8 @@ Follow these best practices when you work with conversational analytics:
 
 ## Limitations
 
+You can add at most 100 knowledge sources to an agent.
+
 For more information about limitations on queries, conversations, data, and visualizations, see [Conversational Analytics API known limitations](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/known-limitations) .
 
 ## Dynamic shared quota

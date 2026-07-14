@@ -42,7 +42,7 @@ The BigQuery Google Cloud console is a graphical interface where you can create 
 
 You can use the navigation menu to open the following pages:
 
-  - [**Overview**](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-overview) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): lets you discover tutorials, features, and resources.
+  - [**Overview**](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-overview) : lets you discover tutorials, features, and resources.
   - [**Studio**](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-ui) : lets you display your BigQuery resources and perform common tasks.
   - [**Search**](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#search-page) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): lets you search for Google Cloud resources from BigQuery by using natural language queries.
   - [**Agents**](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#agents-page) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): lets you create and chat with data agents that are designed to answer questions about BigQuery resources.
@@ -225,12 +225,6 @@ To close all tabs except for one, follow these steps:
 2.  Select cancel **Close other tabs** .
 
 ## The Overview page
-
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback on the Overview page, click **Help \> Send feedback** .
 
 The BigQuery **Overview** page is your hub for discovering tutorials, features, and resources to help you get the most out of BigQuery. It provides guided paths for users of all skill levels, whether you are running your first query or exploring advanced AI/ML capabilities.
 

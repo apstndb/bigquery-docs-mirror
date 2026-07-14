@@ -22,7 +22,7 @@ With the *capacity-based model* , you pay for the slot capacity allocated for yo
 
 To prevent unassigned or newly created projects from defaulting to on-demand pricing, manage your BigQuery reservations using the Google Cloud resource hierarchy with the following practices:
 
-  - **Assign at the folder or organization level** : instead of a project-by-project setup, create a reservation assignment at the folder or organization level. This ensures that all existing and future projects within that hierarchy automatically inherit the reservation and use your committed slot capacity.
+  - **Assign at the folder or organization level** : instead of a project-by-project setup, create a reservation assignment at the folder or organization level. This ensures that all existing and future projects within that hierarchy automatically inherit the reservation and use the reservation's slot capacity.
   - **Consider default behavior** : without an explicit or inherited assignment, BigQuery automatically applies the on-demand pricing model.
   - **Override for exceptions** : if specific projects must use on-demand pricing, you can override the inherited assignment by explicitly assigning those projects to the reservation *None* .
 
@@ -42,7 +42,7 @@ If a query requests more slots than are available, BigQuery queues up individual
 
 BigQuery can request any number of slots for a particular stage of a query. The number of slots requested is not related to the amount of capacity you purchase, but rather an indication of the most optimal parallelization factor chosen by BigQuery for that stage. Units of work queue up and get executed as slots become available.
 
-When query demands exceed slots you committed to, you are not charged for additional slots, and you are not charged for additional on-demand rates. Your individual units of work queue up.
+When query demands exceed available slots, you are not charged for additional slots, and you are not charged for additional on-demand rates. Your individual units of work queue up.
 
 For example,
 

@@ -132,7 +132,45 @@ If you make any schema change to the base table that prevents an explicitly inde
 
 If you delete the only indexed column in a table or rename the table itself, then the search index is deleted automatically.
 
-Search indexes are designed for large tables. If you create a search index on a table that is smaller than 10GB, then the index is not populated. Similarly, if you delete data from an indexed table and the table size falls below 10GB, then the index is temporarily disabled. In this case, search queries do not use the index and the [`IndexUnusedReason` code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#indexunusedreason) is `BASE_TABLE_TOO_SMALL` . This happens whether or not you use your own reservation for your index-management jobs. When an indexed table's size exceeds 10GB, then its index is populated automatically. You are not charged for storage until the search index is populated and active. Queries that use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) always return correct results even if some data is not yet indexed.
+Search indexes are designed for large tables. If you create a search index on a table that is smaller than 10GB, then the index is not populated. Similarly, if you delete data from an indexed table and the table size falls below 10GB, then the index is temporarily disabled. In this case, search queries don't use the index and the [`IndexUnusedReason` code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#indexunusedreason) is `BASE_TABLE_TOO_SMALL` . This happens whether or not you use your own reservation for your index-management jobs. When an indexed table's size exceeds 10GB, then its index is populated automatically. You are not charged for storage until the search index is populated and active. Queries that use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) always return correct results even if some data is not yet indexed.
+
+## Update a search index
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To update the configuration of a search index, use the [`ALTER SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_search_index_statement) . Updating an index is especially useful for large tables because it lets you make incremental changes, as opposed to dropping and recreating the index with a new configuration.
+
+When you update a search index, BigQuery asynchronously builds a revised index, reusing as much of the original index as possible. Once the revised index is sufficiently populated, it becomes the index for the base table.
+
+The following table can help you understand the cost of different index alterations:
+
+| Action                                                                       | Description                                                                                                                                                                                              | Cost                                                |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| Drop columns.                                                                | Updates the configuration instantly. If you don't specify `REBUILD` , then this is a metadata-only operation.                                                                                            | No additional slots are used.                       |
+| Add columns or data types.                                                   | Creates a revised index by processing the new data and reusing the existing index data.                                                                                                                  | Proportional to the amount of new data to index.    |
+| Change token granularity, combine multiple alterations, or clean up storage. | Rebuilds the index from scratch. This operation removes data from previously dropped columns or data types. This cleanup reduces the size of the index, which can potentially improve query performance. | Proportional to the total size of the indexed data. |
+
+You can use the `last_index_alteration_info` field in the [`INFORMATION_SCHEMA.SEARCH_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes) to track the coverage of the revised index. For example, the following query shows the alteration status of all indexes on tables in the dataset `my_dataset` in the project `my_project` . If an index alteration is finished, then the value for `last_index_alteration_info` is `NULL` .
+
+    SELECT
+      table_name,
+      index_name,
+      last_index_alteration_info.status AS status,
+      last_index_alteration_info.new_coverage_percentage AS coverage
+    FROM my_project.my_dataset.INFORMATION_SCHEMA.SEARCH_INDEXES
+
+The result looks similar to the following:
+
+    +------------+------------+-------------+----------+
+    | table_name | index_name | status      | coverage |
+    +------------+------------+-------------+----------+
+    | table1     | index_a    | IN_PROGRESS | 50       |
+    | table2     | index_b    | null        | null     |
+    +------------+------------+-------------+----------+
+
+To cancel an index alteration, use the [`BQ.CANCEL_INDEX_ALTERATION` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqcancel_index_alteration) . You can't cancel an alteration after it has completed.
 
 ## Get information about search indexes
 

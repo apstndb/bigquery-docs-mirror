@@ -349,7 +349,7 @@ You can use Gemini in BigQuery to fix and explain errors in your SQL queries. To
 
 1.  Highlight the text that contains the error.
 
-2.  Click auto\_awesome **Refine** and then auto\_fix\_normal **Fix it** .
+2.  Click auto\_awesome **Refine** and then astrophotography\_mode **Fix it** .
 
 3.  The Gemini Cloud Assist pane opens and shows a suggested change to your query to fix the error.
 

@@ -4368,25 +4368,28 @@ A search index enables efficient queries using the [`SEARCH`](https://docs.cloud
 
   - `WITH COLUMN OPTIONS` : Can only be used with `ALL COLUMNS` to set options on specific indexed columns.
 
-  - `column_name` : The name of a top-level column in the table which is one of the following supported data types or contains a field with one of the supported data types:
-    
-    | Supported data types         | Notes                                                                                                               |
-    | ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-    | `STRING`                     | Primitive data type.                                                                                                |
-    | `INT64`                      | Primitive data type.                                                                                                |
-    | `TIMESTAMP`                  | Primitive data type.                                                                                                |
-    | `ARRAY<PRIMITIVE_DATA_TYPE>` | Must contain a primitive data type in this list.                                                                    |
-    | `STRUCT` or `ARRAY<STRUCT>`  | Must contain at least one nested field that is a primitive data type in this list or `ARRAY<PRIMITIVE_DATA_TYPE>` . |
-    | `JSON`                       | Must contain at least one nested field of a type that matches any data types in this list.                          |
-    
+  - `column_name` : The name of a top-level column in the table which is one of the [supported data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#index_data_types) or contains a field that is one of the supported data types.
 
   - [`index_column_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#index_column_option_list) : The list of options to set on indexed columns.
 
   - [`index_option_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#index_option_list) : The list of options to set on the search index.
 
+#### Supported data types
+
+Search indexes support the following data types:
+
+| Supported data types         | Notes                                                                                                               |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `STRING`                     | Primitive data type.                                                                                                |
+| `INT64`                      | Primitive data type.                                                                                                |
+| `TIMESTAMP`                  | Primitive data type.                                                                                                |
+| `ARRAY<PRIMITIVE_DATA_TYPE>` | Must contain a primitive data type in this list.                                                                    |
+| `STRUCT` or `ARRAY<STRUCT>`  | Must contain at least one nested field that is a primitive data type in this list or `ARRAY<PRIMITIVE_DATA_TYPE>` . |
+| `JSON`                       | Must contain at least one nested field of a type that matches any data types in this list.                          |
+
 ### Details
 
-You can create only one search index per base table. You cannot create a search index on a view or materialized view. To modify which columns are indexed, [`DROP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_search_index) the current index and create a new one.
+You can create only one search index per base table. You cannot create a search index on a view or materialized view. To modify which columns are indexed, use the [`ALTER SEARCH INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_search_index_statement) or [drop](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_search_index) the current index and create a new one.
 
 BigQuery returns an error if any `column_name` is not a `STRING` or does not contain a `STRING` field, or if you call `CREATE SEARCH INDEX` on `ALL COLUMNS` of a table which contains no `STRING` fields.
 
@@ -4459,6 +4462,12 @@ The following options are supported:
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td><p>Example: <code dir="ltr" translate="no">index_granularity='GLOBAL'</code></p>
 <p>The granularity of information to store for the indexed column. This setting overrides the default granularity specified in the <code dir="ltr" translate="no">default_index_column_granularity</code> field of the index options. The supported values are <code dir="ltr" translate="no">'GLOBAL'</code> (default) and <code dir="ltr" translate="no">'COLUMN'</code> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/search-index#column-granularity">Index with column granularity</a> .</p></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">data_types</code></td>
+<td><code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code></td>
+<td><p>Example: <code dir="ltr" translate="no">data_types=['STRING', 'INT64', 'TIMESTAMP']</code></p>
+<p>An array of data types to index on the column. Supported data types are <code dir="ltr" translate="no">STRING</code> , <code dir="ltr" translate="no">INT64</code> and <code dir="ltr" translate="no">TIMESTAMP</code> . If <code dir="ltr" translate="no">data_types</code> is not set, <code dir="ltr" translate="no">STRING</code> fields are indexed by default.</p></td>
 </tr>
 </tbody>
 </table>
@@ -4589,12 +4598,6 @@ The following options are supported:
 <p><code dir="ltr" translate="no">normalization_type</code> : the type of normalization performed on each base table and query vector prior to any processing. The supported values are <code dir="ltr" translate="no">NONE</code> and <code dir="ltr" translate="no">L2</code> . <code dir="ltr" translate="no">L2</code> is also referred to as the <a href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">Euclidean norm</a> . Defaults to <code dir="ltr" translate="no">NONE</code> . Normalization happens before any processing, for both the base table data and the query data, but doesn't modify the embedding column in the table. Depending on the dataset, the embedding model, and the distance type used during <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">VECTOR_SEARCH</code></a> , normalizing the embeddings might improve recall.</p>
 <p>For example <code dir="ltr" translate="no">tree_ah_options = '{"leaf_node_embedding_count": 1000, "normalization_type": "L2"}'</code></p>
 <p>The statement fails if <code dir="ltr" translate="no">tree_ah_options</code> is specified and <code dir="ltr" translate="no">index_type</code> is not <code dir="ltr" translate="no">TREE_AH</code> .</p></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">lexical_search_columns</code></td>
-<td><code dir="ltr" translate="no">ARRAY </code></td>
-<td><p>An <code dir="ltr" translate="no">ARRAY</code> that contains a list of unique column names. Each specified column name should refer to a column of type <code dir="ltr" translate="no">STRING</code> in the <code dir="ltr" translate="no">base_table</code> . These columns are used in the lexical search portion of a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#hybrid-search">hybrid search</a> .</p>
-<p>A non-empty list indicates the search is hybrid. <code dir="ltr" translate="no">lexical_search_columns</code> can be used only when <code dir="ltr" translate="no">query_value</code> is specified with single search. Hybrid search doesn't support batch queries.</p></td>
 </tr>
 </tbody>
 </table>
@@ -6970,6 +6973,110 @@ The following example changes an autoscaling reservation to 300 baseline slots a
     SET OPTIONS (
       slot_capacity = 300,
       autoscale_max_slots = 400);
+
+## `ALTER SEARCH INDEX` statement
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Alters an existing [search index](https://docs.cloud.google.com/bigquery/docs/search-index) on a table.
+
+### Syntax
+
+    ALTER SEARCH INDEX [ IF EXISTS ] index_name ON table_name
+    alter_action [, ...]
+    [ REBUILD ]
+    
+    alter_action:
+      set_options | add_column | drop_column | alter_column
+    
+    set_options: SET OPTIONS (index_option_list)
+    add_column: ADD COLUMN [ IF NOT EXISTS ] column_name [OPTIONS (index_column_option_list)]
+    alter_column: ALTER COLUMN [ IF EXISTS ] column_name SET OPTIONS (index_column_option_list)
+    drop_column: DROP COLUMN [ IF EXISTS ] column_name
+
+### Arguments
+
+  - `IF EXISTS` : If no search index exists with that name, the statement has no effect.
+
+  - `index_name` : The name of the search index to alter.
+
+  - `table_name` : The name of the table on which the search index is built. For more information, see [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
+
+  - `index_option_list` : The [index options](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#index_option_list) to modify. Setting values for any of the options overwrites their existing values. You can use `NULL` or `[]` , depending on the type of option, to revert an option's value to its default setting. If you don't specify any options ( `SET OPTIONS()` ), then there is no change to the existing options.
+
+  - `column_name` : The name of a top-level column in the table to add, alter, or drop. The column must be one of the [supported data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#index_data_types) or contain a field that is one of the supported types.
+
+  - `REBUILD` : Fully rebuild the index content. You must specify `REBUILD` in the following situations:
+    
+      - You perform more than one type of alter action, such as if you add and drop columns.
+      - You change the `index_granularity` for an existing column.
+      - You change the `default_index_column_granularity` for the entire index.
+      - You dropped a column from the index and want to remove the indexed data of the dropped column immediately.
+
+### Details
+
+To run this statement, you must have a reservation with [job type `BACKGROUND`](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) on the project that contains the indexed table.
+
+You can't run concurrent `ALTER SEARCH INDEX` statements on the same index.
+
+If you drop a column from an index created with `ALL COLUMNS` , the index loses the `ALL COLUMNS` property; new columns added to the base table won't be indexed automatically. Dropping a column without specifying `REBUILD` is a metadata-only operation and doesn't immediately free up the index storage that is associated with the dropped column. The storage isn't freed up until the underlying data in the base table is deleted. There is no guaranteed time window within which the data is deleted. Until the index data is removed, search queries might scan more files than necessary.
+
+When you run the `ALTER SEARCH INDEX` statement without specifying `REBUILD` , BigQuery can reuse existing index data to perform the update more efficiently. To avoid causing a full rebuild, consider splitting updates into single steps that don't require a rebuild. For example, if you add and drop a column from your index in a single statement, then you must perform a rebuild. Alternatively, you can add a column in one statement, and then drop a column in another statement.
+
+### Required permissions
+
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
+
+| Permission                    | Resource                                |
+| ----------------------------- | --------------------------------------- |
+| `bigquery.tables.get`         | The table on which to update the index. |
+| `bigquery.tables.updateIndex` | The table on which to update the index. |
+
+### Examples
+
+The following example creates a search index called `my_index` on all string columns of `my_table` . In this case, columns `a` and `my_struct.string_field` are indexed.
+
+    CREATE TABLE dataset.complex_table(
+      a STRING,
+      my_struct STRUCT <string_field STRING, int_field INT64>,
+      b INT64
+    );
+    
+    CREATE SEARCH INDEX my_index
+    ON dataset.complex_table(ALL COLUMNS)
+    OPTIONS (data_types = ['STRING']);
+
+The following query adds column `b` to the index, and specifies the index granularity as `COLUMN` :
+
+    ALTER SEARCH INDEX my_index ON dataset.complex_table
+    ADD COLUMN b OPTIONS (data_types = ['INT64'],
+                          index_granularity = 'COLUMN');
+
+The following query adds the struct subfield `int_field` to the index by including `INT64` as an indexed type on the column `my_struct` :
+
+    ALTER SEARCH INDEX my_index ON dataset.complex_table
+    ALTER COLUMN my_struct SET OPTIONS(data_types = ['STRING', 'INT64']);
+
+To index all `INT64` columns and subfields, you can change the top level `data_types` option from `['STRING']` to `['STRING', 'INT64']` :
+
+    ALTER SEARCH INDEX my_index ON dataset.complex_table
+    SET OPTIONS(data_types = ['STRING', 'INT64']);
+
+To drop the indexed column `a` , run the following query:
+
+    ALTER SEARCH INDEX my_index ON dataset.complex_table
+    DROP COLUMN a;
+
+To specify multiple types of alterations in a single statement, specify `REBUILD` at the end of the statement:
+
+    ALTER SEARCH INDEX my_index ON dataset.complex_table
+      ADD COLUMN b OPTIONS(data_types = ['INT64'], index_granularity = 'COLUMN'),
+      ALTER COLUMN my_struct SET OPTIONS(data_types = ['STRING', 'INT64']),
+      DROP COLUMN a,
+      SET OPTIONS(default_index_column_granularity = 'GLOBAL'),
+      REBUILD;
 
 ## `ALTER VECTOR INDEX REBUILD` statement
 

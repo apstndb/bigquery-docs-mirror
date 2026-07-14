@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `generate_ddl_suggestion`
 
-Generates DDL statement suggestions for a given input query.
+Suggests Data Definition Language (DDL) statements for an input query. For example, `CREATE TABLE` or `CREATE VIEW` . The generated DDL provides schema definitions for tables and views that are used in the query. To get DDL suggestions, call this tool, and then use the `fetch_ddl_suggestion` tool with the returned suggestion ID to retrieve the DDL. You can then prepend the retrieved DDL to the original input query and translate it again to improve translation quality.
 
 The following sample demonstrate how to use `curl` to invoke the `generate_ddl_suggestion` MCP tool.
 
@@ -61,9 +61,11 @@ Request message for `GenerateDdlSuggestion` .
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;parent&quot;: string,
+  &quot;projectNumber&quot;: string,
+  &quot;location&quot;: string,
   &quot;inputQuery&quot;: string,
-  &quot;sourceDialect&quot;: string
+  &quot;sourceDialect&quot;: string,
+  &quot;targetDialect&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -71,11 +73,17 @@ Request message for `GenerateDdlSuggestion` .
 
 Fields
 
-`parent`
+`projectNumber`
 
 `string`
 
-Required. The parent resource name where the DDL suggestion is generated. Format: `projects/PROJECT_ID/locations/LOCATION` .
+Required. The Google Cloud project number.
+
+`location`
+
+`string`
+
+Required. The location.
 
 `inputQuery`
 
@@ -87,7 +95,13 @@ Required. The query string for which the DDL suggestion is generated.
 
 `string`
 
-Required. The dialect of the source query. Supported dialects are Teradata, Bteq, Redshift, Oracle, HiveQL, Impala, SparkSQL, Snowflake, Netezza, AzureSynapse, Vertica, SQLServer, Presto, MySQL, Postgresql, BigQuery, Db2, Greenplum, and SQLite.
+Required. The dialect of the source query. The following source to target dialect pairs are supported: source: Teradata, Bteq, Redshift, Oracle, HiveQL, Impala, SparkSQL, Snowflake, Netezza, AzureSynapse, Vertica, SQLServer, Presto, MySQL, Postgresql, Db2, SQLite, Greenplum, BigQuery; target: BigQuery.
+
+`targetDialect`
+
+`string`
+
+Required. The dialect of the target query. See list of supported pairs in source\_dialect.
 
 ## Output Schema
 
@@ -106,18 +120,18 @@ Response message for `GenerateDdlSuggestion` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;suggestionId&quot;: string,&quot;suggestionState&quot;: string,&quot;logs&quot;: [{object (Log)}],&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;suggestion&quot;: string,&quot;suggestionState&quot;: string,&quot;logs&quot;: [{object (Log)}],&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`suggestionId`
+`suggestion`
 
 `string`
 
-The suggestion ID of the DDL suggestion. Use this ID to fetch the DDL suggestion. Format: `projects/PROJECT_ID/locations/LOCATION/suggestions/SUGGESTION_ID` .
+The ID of the DDL suggestion. Use this ID for the `suggestion` field in `fetch_ddl_suggestion` tool.
 
 `suggestionState`
 

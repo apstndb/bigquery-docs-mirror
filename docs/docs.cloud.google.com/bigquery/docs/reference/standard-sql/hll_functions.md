@@ -81,11 +81,13 @@ The following query returns the number of distinct users for each country who ha
 
 An aggregate function that takes one or more `input` values and aggregates them into a [HLL++](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40671.pdf) sketch. Each sketch is represented using the `BYTES` data type. You can then merge sketches using `HLL_COUNT.MERGE` or `HLL_COUNT.MERGE_PARTIAL` . If no merging is needed, you can extract the final count of distinct values from the sketch using `HLL_COUNT.EXTRACT` .
 
-This function supports an optional parameter, `precision` . This parameter defines the accuracy of the estimate at the cost of additional memory required to process the sketches or store them on disk. The range for this value is `10` to `24` . The default value is `15` . For more information about precision, see [Precision for sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_hll) .
-
 If the input is `NULL` , this function returns `NULL` .
 
 For more information, see [HyperLogLog in Practice: Algorithmic Engineering of a State of The Art Cardinality Estimation Algorithm](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/40671.pdf) .
+
+**Definitions**
+
+  - `precision` : Defines the accuracy of the estimate at the cost of additional memory required to process the sketches or store them on disk. The range for this value is `10` to `24` . The default value is `15` . For more information about precision, see [Precision for sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_hll) .
 
 **Supported input types**
 

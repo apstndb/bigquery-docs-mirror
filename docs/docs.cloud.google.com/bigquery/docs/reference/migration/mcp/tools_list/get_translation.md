@@ -61,7 +61,9 @@ Request message for `FetchTranslation` .
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string
+  &quot;projectNumber&quot;: string,
+  &quot;location&quot;: string,
+  &quot;translation&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -69,11 +71,23 @@ Request message for `FetchTranslation` .
 
 Fields
 
-`name`
+`projectNumber`
 
 `string`
 
-Required. The name of the translation to retrieve. Format: `projects/PROJECT_ID/locations/LOCATION/translations/TRANSLATION_ID` .
+Required. The Google Cloud project number.
+
+`location`
+
+`string`
+
+Required. The location.
+
+`translation`
+
+`string`
+
+Required. The translation ID.
 
 ## Output Schema
 
@@ -131,7 +145,7 @@ The error information.
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
+  &quot;translation&quot;: string,
   &quot;translatedQuery&quot;: string,
   &quot;state&quot;: string
 }</code></pre></td>
@@ -141,11 +155,11 @@ The error information.
 
 Fields
 
-`name`
+`translation`
 
 `string`
 
-The name of the translation. Format: `projects/PROJECT_ID/locations/LOCATION/translations/TRANSLATION_ID` .
+The ID of the translation.
 
 `translatedQuery`
 

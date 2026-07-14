@@ -60,23 +60,24 @@ Request message for `TranslateQuery` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;parent&quot;: string,
-  &quot;inputQuery&quot;: string,
-  &quot;sourceDialect&quot;: string,
-  &quot;metadataFilePath&quot;: string
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;projectNumber&quot;: string,&quot;location&quot;: string,&quot;inputQuery&quot;: string,&quot;sourceDialect&quot;: string,&quot;metadataFilePath&quot;: string,&quot;translationConfigs&quot;: [{object (TranslationConfig)}],&quot;targetDialect&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`parent`
+`projectNumber`
 
 `string`
 
-Required. The parent resource name where the translation is performed. Format: `projects/PROJECT_ID/locations/LOCATION` . For more information, see [Locations](https://cloud.google.com/bigquery/docs/interactive-sql-translator#locations) . Note: If you're using an AI client, users should provide the project number and location if they aren't configured.
+Required. The Google Cloud project number.
+
+`location`
+
+`string`
+
+Required. The location. For more information, see [Locations](https://cloud.google.com/bigquery/docs/interactive-sql-translator#locations) .
 
 `inputQuery`
 
@@ -88,13 +89,60 @@ Required. The query string to be translated.
 
 `string`
 
-Required. The dialect of the source query. Supported dialects are Teradata, Bteq, Redshift, Oracle, HiveQL, Impala, SparkSQL, Snowflake, Netezza, AzureSynapse, Vertica, SQLServer, Presto, MySQL, Postgresql, BigQuery, Db2, Greenplum, and SQLite.
+Required. The dialect of the source query. The following source to target dialect pairs are supported: source: Teradata, Bteq, Redshift, Oracle, HiveQL, Impala, SparkSQL, Snowflake, Netezza, AzureSynapse, Vertica, SQLServer, Presto, MySQL, Postgresql, Db2, SQLite, Greenplum, BigQuery; target: BigQuery.
 
 `metadataFilePath`
 
 `string`
 
 Optional. The path to the metadata file in Cloud Storage. Format: `gs://BUCKET_NAME/PATH_TO_FILE.zip` . The metadata file contains information about the source database and its schema. For more information on generating a metadata file, see [Generate metadata](https://cloud.google.com/bigquery/docs/generate-metadata) . Translation may fail if the metadata file isn't generated correctly.
+
+`translationConfigs[]`
+
+` object ( TranslationConfig  ` )
+
+Optional. Specifies the translation YAML configurations for this translation. For more information, see [YAML configuration guidelines](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines) .
+
+`targetDialect`
+
+`string`
+
+Required. The dialect of the target query. See list of supported pairs in source\_dialect.
+
+### TranslationConfig
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;displayName&quot;: string,
+  &quot;content&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`displayName`
+
+`string`
+
+Required. The display name of the configuration. Important: Name has to end with `.config.yaml` extension.
+
+`content`
+
+`string`
+
+Required. The content of the configuration.
 
 ## Output Schema
 
@@ -113,7 +161,7 @@ Response message for `TranslateQuery` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;translatedQuery&quot;: string,&quot;translationId&quot;: string,&quot;translationState&quot;: string,&quot;translationLogs&quot;: [{object (Log)}],&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;translatedQuery&quot;: string,&quot;translation&quot;: string,&quot;translationState&quot;: string,&quot;translationLogs&quot;: [{object (Log)}],&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -126,11 +174,11 @@ Fields
 
 The translated query.
 
-`translationId`
+`translation`
 
 `string`
 
-The ID of the migration workflow created for this translation. Use this ID as the name for `get_translation` , `explain_translation` , and `generate_ddl` tools.
+The ID of the migration workflow created for this translation. Use this ID with `get_translation` and `explain_translation` tools.
 
 `translationState`
 

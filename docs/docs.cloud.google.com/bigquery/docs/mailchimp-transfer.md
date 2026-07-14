@@ -184,7 +184,7 @@ Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/referenc
         --data_source=DATA_SOURCE
         --display_name=NAME
         --target_dataset=DATASET
-        --params=&#39;PARAMETERS'
+        --params='PARAMETERS'
 
 Replace the following:
 

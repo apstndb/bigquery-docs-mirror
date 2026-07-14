@@ -1,16 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp
 uri: https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp
-title: Learn how to use the BigQuery Migration Service MCP server
+title: Use the BigQuery Migration Service MCP server
 description: Learn how to use the BigQuery Migration Service MCP server to perform SQL translation tasks, including translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL translations.
 data_source: docs.cloud.google.com
 ---
 
-# Learn how to use the BigQuery Migration Service MCP server
-
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) , and the [Additional Terms for Generative AI Preview Products](https://cloud.google.com/trustedtester/aitos) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+# Use the BigQuery Migration Service MCP server
 
 This document shows you how to use the BigQuery remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. You can BigQuery Migration Service Model Context Protocol (MCP) server to perform tasks such as translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL translations. The BigQuery remote MCP server is enabled when you enable the BigQuery API.
 
@@ -316,9 +312,17 @@ For more information, see [Control MCP use with Identity and Access Management](
 
 ## Quotas and limits
 
-The BigQuery Migration Service MCP server doesn't have its own quotas. There is no limit on the number of calls you can make to the MCP server.
+You are still subject to the quotas enforced by the APIs called by the MCP server tools. The following API methods are called by the MCP server tools:
 
-You are still subject to the quotas that the APIs called by the MCP server tools enforce. For more information, see [BigQuery Migration Service API](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) on the Quotas and limits page.
+| Tool                      | API method                                                                                                                                                                                                      | Quotas                                                                                                         |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `explain_translation`     | [`GetMigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2#google.cloud.bigquery.migration.v2.MigrationService.GetMigrationWorkflow)       | [BigQuery Migration API quotas and limits](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) |
+| `fetch_ddl_suggestion`    | [`GetMigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2#google.cloud.bigquery.migration.v2.MigrationService.GetMigrationWorkflow)       | [BigQuery Migration API quotas and limits](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) |
+| `get_translation`         | [`GetMigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2#google.cloud.bigquery.migration.v2.MigrationService.GetMigrationWorkflow)       | [BigQuery Migration API quotas and limits](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) |
+| `generate_ddl_suggestion` | [`CreateMigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2#google.cloud.bigquery.migration.v2.MigrationService.CreateMigrationWorkflow) | [BigQuery Migration API quotas and limits](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) |
+| `translate_query`         | [`CreateMigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2#google.cloud.bigquery.migration.v2.MigrationService.CreateMigrationWorkflow) | [BigQuery Migration API quotas and limits](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) |
+
+For more information on BigQuery quotas, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .
 
 ## What's next
 

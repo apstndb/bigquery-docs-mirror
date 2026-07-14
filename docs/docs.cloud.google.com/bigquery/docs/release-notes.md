@@ -16,13 +16,35 @@ To get the latest product updates delivered to you, add the URL of this page to 
 
 ## July 13, 2026
 
+Feature
+
+Table partitioning, multi-statement transactions, and advanced runtime are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
+
 Security
 
 A Missing Authorization vulnerability was discovered in repositories in BigQuery, Dataform, and Colab Enterprise. An authenticated attacker could potentially escalate permissions and perform cross-tenant repository takeover. For more information, see the [GCP-2026-047](https://docs.cloud.google.com/support/bulletins#gcp-2026-047) security bulletin.
 
 Feature
 
+[Project caps (also known as scheduling policies)](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#scheduling-policies) let you limit maximum slots and concurrency per project within a BigQuery reservation. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+The BigQuery [**Overview** page](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-overview) is a hub for discovering tutorials, features, and resources to help you get the most out of BigQuery. It provides guided paths for users of all skill levels. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can use the [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) to perform SQL translation tasks, including translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL translations.
+
+This feature is [Generally Available](https://cloud.google.com/products/#product-launch-stages) .
+
+Feature
+
 Incremental data transfers for the [BigQuery Data Transfer Service for Salesforce](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use the [`ALTER SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_search_index_statement) to [update the configuration](https://docs.cloud.google.com/bigquery/docs/search-index#update_a_search_index) of a search index. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 09, 2026
 
@@ -74,6 +96,10 @@ You can now use pre-trained TimesFM models in BigQuery ML directly from [Connect
 Feature
 
 You can specify an optional `principal` property on [BigQuery reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) to route queries to specific reservations based on the identity of the user, service account, or third-party identity executing the job.
+
+Change
+
+In the Google Cloud console, **Capacity management** has been renamed [**Workload management**](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
 ## June 29, 2026
 

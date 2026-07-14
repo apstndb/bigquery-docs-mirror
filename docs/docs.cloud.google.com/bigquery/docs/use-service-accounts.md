@@ -98,7 +98,7 @@ For example, the following command updates a data transfer configuration to auth
     bq update \
     --transfer_config \
     --update_credentials \
-    --service_account_name=abcdef-test-sa@abcdef-test.iam.gserviceaccount.com projects/862514376110/locations/us/transferConfigs/5dd12f26-0000-262f-bc38-089e0820fe38 \
+    --service_account_name=abcdef-test-sa@abcdef-test.iam.gserviceaccount.com projects/862514376110/locations/us/transferConfigs/5dd12f26-0000-262f-bc38-089e0820fe38
 
 > **Note:** If you are using the bq command-line tool, use the `--service_account_name` flag instead of authenticating as a service account.
 

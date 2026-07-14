@@ -61,7 +61,9 @@ Request message for `FetchDdlSuggestion` .
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string
+  &quot;projectNumber&quot;: string,
+  &quot;location&quot;: string,
+  &quot;suggestion&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -69,11 +71,23 @@ Request message for `FetchDdlSuggestion` .
 
 Fields
 
-`name`
+`projectNumber`
 
 `string`
 
-Required. The name of the DDL suggestion to retrieve. Format: `projects/PROJECT_ID/locations/LOCATION/suggestions/SUGGESTION_ID` .
+Required. The Google Cloud project number.
+
+`location`
+
+`string`
+
+Required. The location.
+
+`suggestion`
+
+`string`
+
+Required. The suggestion ID.
 
 ## Output Schema
 
@@ -131,8 +145,8 @@ The error information.
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string,
   &quot;suggestion&quot;: string,
+  &quot;suggestionContent&quot;: string,
   &quot;state&quot;: string
 }</code></pre></td>
 </tr>
@@ -141,13 +155,13 @@ The error information.
 
 Fields
 
-`name`
+`suggestion`
 
 `string`
 
-The name of the suggestion. Format: `projects/PROJECT_ID/locations/LOCATION/suggestions/SUGGESTION_ID` .
+The ID of the suggestion.
 
-`suggestion`
+`suggestionContent`
 
 `string`
 

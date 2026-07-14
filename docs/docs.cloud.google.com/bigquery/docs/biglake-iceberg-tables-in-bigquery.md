@@ -19,9 +19,10 @@ Iceberg managed tables support the following features:
   - *Automatic storage optimization* , including adaptive file sizing, automatic clustering, garbage collection, and metadata optimization.
   - [*Time travel*](https://docs.cloud.google.com/bigquery/docs/time-travel) for historical data access in BigQuery.
   - [*Column-level security*](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [*data masking*](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .
-  - [*Multi-statement transactions*](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#use_multi-statement_transactions) (in Preview).
-  - [*Table partitioning*](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#use_partitioning) (in Preview).
+  - [*Multi-statement transactions*](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#use_multi-statement_transactions) .
+  - [*Table partitioning*](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#use_partitioning) .
   - [*Table creation in Dataform workflows*](https://docs.cloud.google.com/dataform/docs/create-tables#create-iceberg-table) .
+  - [*BigQuery advanced runtime*](https://docs.cloud.google.com/bigquery/docs/advanced-runtime) .
 
 ## Architecture
 
@@ -370,25 +371,15 @@ To modify an Iceberg managed table, follow the steps shown in [Modifying table s
 
 ### Use multi-statement transactions
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> **Note:** Multi-statement transactions are only supported for Iceberg managed tables that were created after July 2, 2026.
 
-> **Note:** To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
+You can use [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) with Iceberg managed tables in the same way that you do with standard BigQuery tables. Multi-statement transactions are commonly used for performing mutations on multiple tables at the same time or for performing mutations on a single table in multiple stages. Multi-statement transactions guarantee ACID properties and support snapshot isolation.
 
-To gain access to [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) for Iceberg managed tables, fill out the [sign-up form](https://docs.google.com/forms/d/1lQMsrT_jj_bi_aJbcb65dOc8LJTf0Wjb9AZs9EQXkCg) .
+Standard [multi-statement transaction limitations](https://docs.cloud.google.com/bigquery/docs/transactions#limitations) apply.
 
 ### Use partitioning
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
-
-To gain access to [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) for Iceberg managed tables, fill out the [sign-up form](https://forms.gle/AJTG3idhjZ6RLLV98) .
-
-You partition a table by specifying a partition column, which is used to segment the table. The following column types are supported for Iceberg managed tables:
+You can use [table partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) with Iceberg managed tables in a similar way that you do with standard BigQuery tables. You partition a table by specifying a partition column, which is used to segment the table. The following column types are supported for Iceberg managed tables:
 
   - `DATE`
   - `DATETIME`
@@ -402,7 +393,6 @@ Iceberg managed tables also support [clustering](https://docs.cloud.google.com/b
 
   - All [BigQuery partitioned table limitations](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#limitations) apply.
   - Partitioning column types other than `DATE` , `DATETIME` , or `TIMESTAMP` aren't supported.
-  - Partition expiration isn't supported.
   - [Partition evolution](https://iceberg.apache.org/docs/1.5.1/evolution/#partition-evolution) isn't supported.
 
 #### Create a partitioned Iceberg managed table
@@ -412,6 +402,8 @@ To create a partitioned Iceberg managed table, follow the instructions to [creat
   - The [`PARTITION BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression)
   - The [`--time_partitioning_field` and `--time_partitioning_type` flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table)
   - The [`timePartitioning` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#timepartitioning)
+
+You can set and update the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) in the same way that you would with standard BigQuery tables. Expired partitions are garbage collected after the time travel window. If you add data to an expired partition, the data expires instantly.
 
 #### Modify and query partitioned Iceberg managed tables
 
