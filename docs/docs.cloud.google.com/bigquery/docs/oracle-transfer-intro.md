@@ -68,7 +68,7 @@ The append write mode only inserts new rows to your destination table. This opti
 
 When you select the append mode, you must select a watermark column. A watermark column is required for the Oracle connector to track changes in the source table.
 
-For Oracle transfers, we recommend selecting a column that is only updated when the record was created, and won't change with subsequent updates. For example, the `CREATED_AT` column.
+For Oracle transfers, we recommend selecting a column that is only updated when the record was created, and won't change with subsequent updates—for example, the `CREATED_AT` column.
 
 #### Upsert write mode
 

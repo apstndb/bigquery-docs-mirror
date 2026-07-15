@@ -80,6 +80,7 @@ Conversational analytics supports the following AI functions in response to chat
   - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
   - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
   - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
+  - [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg)
 
 You must have [the required permissions](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
 
@@ -104,6 +105,7 @@ The following table shows examples of one-shot prompts that activate the use of 
 | Semantic scoring        | "For the articles in the entertainment category, provide a rating indicating their degree of positive sentiment."  | [`bigquery-public-data.bbc_news.fulltext`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=bbc_news&t=fulltext&page=table)                                             |
 | Semantic categorization | "Tag each review with the reviewer's main focus: Acting, Plot, Cinematography, Directing, or Other"                | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
 | Semantic search         | "Find the top 5 reviews that most closely match 'tension-building psychological thriller'"                         | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
+| Semantic aggregation    | "Summarize the reviews for The English Patient"                                                                    | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
 
 ## Graph support
 

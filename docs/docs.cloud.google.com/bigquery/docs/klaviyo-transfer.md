@@ -14,7 +14,9 @@ data_source: docs.cloud.google.com
 
 > **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Klaviyo to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Klaviyo connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Klaviyo to BigQuery.
+To schedule recurring data transfers from Klaviyo to BigQuery, create a transfer configuration to specify what data objects to transfer, and how often to schedule the data transfer. You can create a transfer configuration using either the Google Cloud console or the `bq` command-line tool. Once you have set up the transfer configuration, the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) transfers the latest data into a BigQuery table on the specified schedule.
+
+To learn about how a Klaviyo transfer works, see [Introduction to Klaviyo transfers](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro) .
 
 ## Before you begin
 
@@ -137,23 +139,6 @@ When you save the transfer configuration, the Klaviyo connector automatically tr
 To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 For a list of data that's included in a Klaviyo data transfer, see [Klaviyo data model reference](https://docs.cloud.google.com/bigquery/docs/klaviyo-data-model) .
-
-## Data type mapping
-
-The following table maps Klaviyo data types to the corresponding BigQuery data types:
-
-| Klaviyo data type            | BigQuery data type |
-| ---------------------------- | ------------------ |
-| `String`                     | `STRING`           |
-| `Text`                       | `STRING`           |
-| `Integer`                    | `INTEGER`          |
-| `Boolean`                    | `BOOLEAN`          |
-| `Date (YYYY-MM-DD HH:MM:SS)` | `TIMESTAMP`        |
-| `List`                       | `ARRAY`            |
-
-## Pricing
-
-There is no cost to transfer Klaviyo data into BigQuery while this feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## Troubleshoot transfer setup
 

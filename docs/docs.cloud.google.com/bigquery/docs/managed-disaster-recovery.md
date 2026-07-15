@@ -66,9 +66,6 @@ The following regions are available when creating a failover reservation:
 
 | Location code | Region Name               | Region Description |
 | ------------- | ------------------------- | ------------------ |
-| `ASIA`        |                           |                    |
-|               | `ASIA-EAST1`              | Taiwan             |
-|               | `ASIA-SOUTHEAST1`         | Singapore          |
 | `AU`          |                           |                    |
 |               | `AUSTRALIA-SOUTHEAST1`    | Sydney             |
 |               | `AUSTRALIA-SOUTHEAST2`    | Melbourne          |
@@ -103,7 +100,7 @@ The following regions are available when creating a failover reservation:
 |               | `US-WEST3`                | Salt Lake City     |
 |               | `US-WEST4`                | Las Vegas          |
 
-Region pairs must be selected within `ASIA` , `AU` , `CA` , `DE` , `EU` , `IN` or the `US` . For example, a region within the `US` cannot be paired with a region within `EU` .
+Region pairs must be selected within `AU` , `CA` , `DE` , `EU` , `IN` or the `US` . For example, a region within the `US` cannot be paired with a region within `EU` .
 
 If your BigQuery dataset is in a multi-region location, you can't use the following region pairs. This limitation is required to make sure that your failover reservation and data are geographically separated after replication. For more information about regions that are contained within multi-regions, see [Multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) .
 

@@ -18,8 +18,6 @@ In this tutorial, you will perform the following tasks:
   - Evaluate the model.
   - Make predictions by using the model.
 
-> **Note:** This tutorial covers linear regression in pure SQL. For a linear regression tutorial using Python and BigQuery DataFrames on the same dataset, see [Create a regression model with BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-dataframes-regression-model) .
-
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including the following:

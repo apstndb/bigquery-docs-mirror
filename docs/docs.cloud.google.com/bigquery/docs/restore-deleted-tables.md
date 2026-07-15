@@ -393,7 +393,7 @@ There are several possible causes for this error:
 
 To resolve this error:
 
-1.  Ensure that the schema of the destination table is identical, and ensure that none of the columns in the original table are missing from the destination table.
+1.  Ensure that the schema of the destination table is identical, and ensure that none of the columns in the original table are missing from the destination table and that columns are in the same order in both tables.
 2.  Remove any column-level policy tags from the destination table that aren't in the original table's schema.
 
 ### Error: `BigQuery error in cp operation: Invalid time travel timestamp`

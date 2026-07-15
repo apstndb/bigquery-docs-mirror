@@ -2505,7 +2505,7 @@ When `indexUsageMode` is `UNUSED` or `PARTIALLY_USED` , this field explains why 
 
 ## IndexUsageMode
 
-Indicates the type of search index usage in the entire search query.
+Indicates the type of search index usage in the entire search query. In this context, "usage" means that an index lookup is attempted to prune base table data, with effectiveness depending on the selectivity of the search term.
 
 Enums
 

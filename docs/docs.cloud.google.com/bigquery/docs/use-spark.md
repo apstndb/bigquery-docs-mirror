@@ -210,7 +210,7 @@ Replace the following:
 
 **Output:**
 
-The cell output lists a sample of the wordcount output. To see session details in the Google Cloud console, click the **Interactive Session Detail View** link. To monitor your Spark session, click **View Spark UI** on the session details page.
+The cell output lists a sample of the wordcount output. To see session details in the Google Cloud console, click the **Interactive Session Detail View** link. A Spark details panel opens that provides tabs for **Logs** , **Executors** , **SQL** , and **Jobs** (including an event timeline). To monitor your Spark session, click **View Spark UI** on the session details page.
 
 ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/view-spark-ui.png)
 
@@ -298,7 +298,7 @@ Notes:
   - CATALOG and NAMESPACE : The Iceberg catalog name and namespace combine to identify the Iceberg table ( `catalog.namespace.table_name` ).
   - APP\_NAME : An optional name for your session.
 
-The cell output lists the `sample_iceberg_table` with the added column, and displays a link to the **Interactive Session Details** page in the Google Cloud console. You can click **View Spark UI** on the session details page to monitor your Spark session.
+The cell output lists the `sample_iceberg_table` with the added column, and displays a link to the **Interactive Session Details** page in the Google Cloud console. A Spark details panel opens that provides tabs for **Logs** , **Executors** , **SQL** , and **Jobs** (including an event timeline). You can click **View Spark UI** on the session details page to monitor your Spark session.
 
 ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/view-spark-ui.png)
 

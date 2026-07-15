@@ -31,19 +31,19 @@ For more information about IAM roles and permissions in BigQuery, see [Predefine
 
 ## Control access to clustered tables
 
-To configure access to tables and views, you can grant an IAM role to an entity at the following levels, listed in order of range of resources allowed (largest to smallest):
+To configure access to tables and views, you can grant an IAM role to an entity at the following levels, which are listed in order of the range of resources allowed (largest to smallest):
 
-  - a high level in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) such as the project, folder, or organization level
-  - the dataset level
-  - the table or view level
+  - A high level in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) such as the project, folder, or organization level
+  - The dataset level
+  - The table or view level
 
 You can also restrict data access within tables, by using the following methods:
 
-  - [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
-  - [column data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
-  - [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro)
+  - [Column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
+  - [Column data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
+  - [Row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro)
 
-Access with any resource protected by IAM is additive. For example, if an entity does not have access at the high level such as a project, you could grant the entity access at the dataset level, and then the entity will have access to the tables and views in the dataset. Similarly, if the entity does not have access at the high level or the dataset level, you could grant the entity access at the table or view level.
+Access to any resource protected by IAM is additive. For example, if an entity does not have access at a high level such as a project, you can grant the entity access at the dataset level, and the entity then has access to the tables and views in the dataset. Similarly, if the entity does not have access at the high level or the dataset level, you can grant the entity access at the table or view level.
 
 Granting IAM roles at a higher level in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) such as the project, folder, or organization level gives the entity access to a broad set of resources. For example, granting a role to an entity at the project level gives that entity permissions that apply to all datasets throughout the project.
 

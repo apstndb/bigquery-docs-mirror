@@ -20,9 +20,9 @@ For example, you can use queries similar to the following to create a table with
       description_embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
         GENERATED ALWAYS AS (
           AI.EMBED(description, connection_id => 'us.example_connection',
-            en>dpoint = 'text-embedding-005')
+            endpoint => 'text-embedding-005')
           # Alternatively, you can use the syntax for a built-in model.
-          # AI.EMBED(desc>ription, model = 'embeddinggemma-300m')
+          # AI.EMBED(description, model => 'embeddinggemma-300m')
         ) STORED OPTIONS( asynchronous = TRUE ));
     
     # Values in the description_embedding column are automatically generated.
@@ -288,10 +288,11 @@ Next, create a table with autonomous embedding generation enabled to hold your p
       description_embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
         GENERATED ALWAYS AS (
           AI.EMBED(description, connection_id => 'us.example_connection',
-            en>dpoint = 'text-embedding-005')
+            endpoint => 'text-embedding-005')
           # Alternatively, you can use the syntax for a built-in model.
-          # AI.EMBED(desc>ription, model = 'embeddinggemma-300m')
-        ) STORED OPTIONS( asynchronous = TRUE ));
+          # AI.EMBED(description, model => 'embeddinggemma-300m')
+        ) STORED OPTIONS( asynchronous = TRUE )
+    );
 
 The following query inserts some product names and descriptions into the table. You don't specify a value for `description_embedding` because it's generated automatically.
 
@@ -337,12 +338,12 @@ The following example shows how to create a table with an `ObjectRef` column and
     
     # Add a generated embedding column for the ObjectRef column.
     ALTER TABLE mydataset.images
-    ADD COLUMN image_embeddin<g STRUCTresu<lt ARRA>YFLOAT64, statu>s STRING
+    ADD COLUMN image_embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
     GENERATED ALWAYS AS (
       AI.EMBED(
         ref,
-        connect>ion_id = "us.my_connection&quo>t;,
-        endpoint = "multimodalembedding@001")
+        connection_id => "us.my_connection",
+        endpoint => "multimodalembedding@001")
     )
     STORED OPTIONS (asynchronous = true);
 
@@ -397,8 +398,13 @@ If the `image_embedding` column has a blocking error, the result is similar to t
       {
         "column_name": "image_embedding",
         "async_generation_status": {
-          "bloc<king_error">;: {
-            "message": "service_account does not have the permission to access resources used by AI.EMBED. Please follow https://cloud.google.com/bigquery/docs/permissions-for-ai-functions to set up permissions.",        ...      }    }  }]
+          "blocking_error": {
+            "message": "<service_account> does not have the permission to access resources used by AI.EMBED. Please follow https://cloud.google.com/bigquery/docs/permissions-for-ai-functions to set up permissions.",
+            ...
+          }
+        }
+      }
+    ]
 
 You can also query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) for the background job and look at the information in the `error_result` field. The job ID of a background embedding job is prefixed with `gc_` . For example, the following query extracts all background jobs whose error result isn't `NULL` :
 
@@ -407,12 +413,13 @@ You can also query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.googl
       SELECT 1
       FROM unnest(j.referenced_tables) t
       WHERE
-        j.project_id = &#39;PROJECT_ID'
-        AND t.dataset_id = 9;DATASET_ID'
+        j.project_id = 'PROJECT_ID'
+        AND t.dataset_id = 'DATASET_ID'
         AND t.table_id = 'TABLE'
     )
     AND starts_with(job_id, 'gc')
-    AND error_result IS NOT NULLORDER BY j.creation_time DESC;
+    AND error_result IS NOT NULL
+    ORDER BY j.creation_time DESC;
 
 ## Track costs
 

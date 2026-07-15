@@ -94,6 +94,10 @@ The following permissions are required to perform the tasks in this document:
       - `bigquery.datasets.update` on the datasets that the routine accesses
       - `analyticshub.listings.create` on the project
       - `analyticshub.queryTemplates.approve` on the project
+  - Update an existing query template: `analyticshub.queryTemplates.update` on the query template
+  - Retrieve details of a query template: `analyticshub.queryTemplates.get` on the query template
+  - List all query templates in a data exchange: `analyticshub.queryTemplates.list` on the data exchange
+  - Delete a query template: `analyticshub.queryTemplates.delete` on the query template
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 

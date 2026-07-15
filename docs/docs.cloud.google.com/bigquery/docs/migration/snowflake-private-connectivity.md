@@ -95,13 +95,45 @@ Once created, note the endpoint's IP address. You'll need to specify the IP addr
 
 ## Create a network load balancer
 
-Set up a regional internal proxy network load balancer (NLB) with hybrid connectivity. You can create the load balancer to route traffic to the Amazon S3 VPC endpoints or Azure Storage private endpoints that you created in the preceding section. For more information, see [Set up a regional internal proxy Network Load Balancer with hybrid connectivity](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#set-up-a-regional-internal-proxy-network-load-balancer-with-hybrid-connectivity) .
+In Google Cloud, set up a regional internal proxy Network Load Balancer with hybrid connectivity. This provides an internal IP address that's restricted to clients running in the same VPC network as the load balancer, and that routes traffic to the S3 VPC endpoints or Azure Storage private endpoints that you created in the previous section.
+
+You should create the load balancer in the same project and VPC network as the VLAN attachment which interfaces with the Cloud Interconnect. While the interconnect itself can be in a different project within the same organization, the attachment must be in the same VPC and region as the load balancer.
+
+  - [Set up a regional internal proxy Network Load Balancer with hybrid connectivity](https://docs.cloud.google.com/load-balancing/docs/tcp/set-up-int-tcp-proxy-hybrid#setup-google-environment)
+
+Specify the S3 VPC endpoint or Azure Storage private endpoint IP address when you reach the steps labeled **Add endpoints to the hybrid connectivity NEG** .
+
+Note the NLB's frontend IP address and port, as you'll need to specify them in the next section.
+
+### Validate the connection
+
+Before proceeding, we recommend that you validate that the load balancer can connect to the remote storage endpoint.
+
+To do so:
+
+1.  Create a Compute Engine VM in the same VPC network as your load balancer.
+
+2.  From the VM, use `curl` to test connectivity to the load balancer's IP address and port:
+    
+        curl -v --resolve HOSTNAME:PORT:LOAD_BALANCER_IP https://HOSTNAME
+    
+    Replace the following:
+    
+      - HOSTNAME is the hostname of your source storage provider.
+          - For AWS S3, use the S3 API endpoint for your bucket's region, for example `s3.us-west-1.amazonaws.com` .
+          - For Azure Storage, use your storage account's blob endpoint, for example `mystorageaccount.blob.core.windows.net` .
+      - PORT is the port you configured on the load balancer's forwarding rule, typically `443` .
+      - LOAD\_BALANCER\_IP is the frontend IP address of your load balancer.
+
+A response from the remote endpoint, even an error, indicates that connectivity is successful. A connection timeout indicates a misconfiguration in your network setup that you should resolve before continuing.
 
 ## Register your NLB
 
-After creating your network NLB, register it in the Service Directory in the Storage Transfer Service. For more information, see [Register your NLB with Service Directory](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agentless/customer-managed-private-network#register-your-nlb-with-service-directory) .
+Register the NLB in Service Directory. BigQuery uses Service Directory to resolve the address of the load balancer and connect to it directly.
 
-Note the link to the service directory. You'll need the self-link to the service when you create your Snowflake transfer configuration.
+Follow the instructions to [register an internal load balancer](https://docs.cloud.google.com/service-directory/docs/configuring-ilb-in-sd) . Use the IP address and port of the load balancer that you created when specifying the forwarding rule.
+
+Once created, note the self-link of the service. It uses the format `projects/{project_id}/locations/{location}/namespaces/{namespace}/services/{service}` . You'll need this value when creating the transfer job.
 
 ## Prepare staging bucket
 

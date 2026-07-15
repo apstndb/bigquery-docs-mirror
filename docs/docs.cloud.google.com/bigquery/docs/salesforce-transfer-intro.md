@@ -30,7 +30,7 @@ The append write mode only inserts new rows to your destination table. This opti
 
 When you select the append mode, you must select a watermark column. A watermark column is required for the Salesforce connector to track changes in the source table.
 
-Select a watermark column that is only updated when the record was created, and won't change with subsequent updates. For example, the `CreatedDate` column.
+Select a watermark column that is only updated when the record was created, and won't change with subsequent updates—for example, the `CreatedDate` column.
 
 #### Upsert write mode
 

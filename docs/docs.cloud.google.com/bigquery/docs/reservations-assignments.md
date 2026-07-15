@@ -628,15 +628,17 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example assigns a project to `none` :
 
-```terraform
-data "google_project" "project" {}
+    resource "google_bigquery_reservation_assignment" "default" {
+      assignee    = "projects/PROJECT_ID"
+      job_type    = "QUERY"
+      reservation = "projects/ADMIN_PROJECT_ID/locations/LOCATION/reservations/none"
+    }
 
-resource "google_bigquery_reservation_assignment" "default" {
-  assignee    = "projects/${data.google_project.project.project_id}"
-  job_type    = "QUERY"
-  reservation = "projects/${data.google_project.project.project_id}/locations/us/reservations/none"
-}
-```
+Replace the following:
+
+  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
+  - `  PROJECT_ID  ` : the ID of the project to assign to `none`
 
 To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
 
