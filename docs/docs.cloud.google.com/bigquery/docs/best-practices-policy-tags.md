@@ -12,6 +12,8 @@ This page describes best practices for using policy tags in BigQuery. Use policy
 
 To learn how to set policy tags on a column, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
 
+Policy tags are an alternative to [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) , which are a type of Resource Manager tag that you can use for column-level access control and data masking.
+
 ## Build a hierarchy of data classes
 
 Build a hierarchy of data classes that makes sense for your business.
@@ -22,7 +24,7 @@ First, consider what kinds of data the organization processes. Usually there are
   - Financial data
   - Customer order history
 
-A single data class can be applied to multiple data columns using a policy tag. You should leverage this level of abstraction to efficiently manage many columns with only a few policy tags.
+A single data class can be applied to multiple data columns using a policy tag. You should use this level of abstraction to efficiently manage many columns with only a few policy tags.
 
 Second, consider if there are groups of people who need different access to different data classes. For example, one group needs access to business- sensitive data such as revenues and customer history. Another group needs access to personally identifiable data (PII) like phone numbers and addresses.
 

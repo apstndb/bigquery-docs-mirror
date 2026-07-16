@@ -677,15 +677,12 @@ When you use `array_path` with implicit `UNNEST` , `array_path` must be prepende
     
     pivot_operator:
       PIVOT(
-        aggregate_function_call [as_alias][, ...]
+        aggregate_function_call [[AS] prefix][, ...]
         FOR input_column
-        IN ( pivot_column [as_alias][, ...] )
-      ) [AS alias]
-    
-    as_alias:
-      [AS] alias
+        IN ( value [[AS] pivot_column][, ...] )
+      ) [[AS] table_alias]
 
-The `PIVOT` operator rotates rows into columns, using aggregation. `PIVOT` is part of the `FROM` clause.
+The `PIVOT` operator rotates rows into columns using aggregation. `PIVOT` is part of the `FROM` clause.
 
   - `PIVOT` can be used to modify any table expression.
   - Combining `PIVOT` with `FOR SYSTEM_TIME AS OF` isn't allowed, although users may use `PIVOT` against a subquery input which itself uses `FOR SYSTEM_TIME AS OF` .
@@ -724,13 +721,25 @@ Top-level definitions:
 
   - `from_item` : The table, subquery, or table-valued function (TVF) on which to perform a pivot operation. The `from_item` must [follow these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#rules_for_pivot_from_item) .
   - `pivot_operator` : The pivot operation to perform on a `from_item` .
-  - `alias` : An alias to use for an item in the query.
+  - `table_alias` : An alias for the results of the `PIVOT` operation. This alias can be referenced elsewhere in the query.
 
 `pivot_operator` definitions:
 
-  - `aggregate_function_call` : An aggregate function call that aggregates all input rows such that `input_column` matches a particular value in `pivot_column` . Each aggregation corresponding to a different `pivot_column` value produces a different column in the output. [Follow these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#rules_for_pivot_agg_function) when creating an aggregate function call.
+  - `aggregate_function_call` : An aggregate function call that aggregates all input rows where `input_column` matches each `value` , [following these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#rules_for_pivot_agg_function) . Each aggregation corresponding to a different `value` produces a different column in the output.
+    
+      - `prefix` : An optional column prefix to assign to each column created by the pivot operation.
+
   - `input_column` : Takes a column and retrieves the row values for the column, [following these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#rules_input_column) .
-  - `pivot_column` : A pivot column to create for each aggregate function call. If an alias isn't provided, a default alias is created. A pivot column value type must match the value type in `input_column` so that the values can be compared. It's possible to have a value in `pivot_column` that doesn't match a value in `input_column` . Must be a constant and [follow these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#rules_pivot_column) .
+
+  - `value` : A value to match against `input_column` . A `value` data type must match the data type in `input_column` so that the values can be compared. It's possible to have a `value` that doesn't match a value in `input_column` . A `value` must be a constant, [following these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#rules_value) .
+    
+      - `pivot_column` : An optional column name or suffix for the column created for this `value` . Output columns are constructed by concatenating:
+    
+    <!-- end list -->
+    
+    1.  The `prefix` , if provided.
+    2.  An underscore, if `prefix` is present.
+    3.  The `pivot_column` name, if present, or a string representation of `value` .
 
 **Rules**
 
@@ -758,14 +767,14 @@ Top-level definitions:
   - The type must be groupable.
   - The input table may be accessed through its alias if one is provided.
 
-<span id="rules_pivot_column"></span> Rules for `pivot_column` :
+<span id="rules_value"></span> <span id="rules_pivot_column"></span> Rules for `value` :
 
-  - A `pivot_column` must be a constant.
+  - A `value` must be a constant.
   - Named constants, such as variables, aren't supported.
   - Query parameters aren't supported.
-  - If a name is desired for a named constant or query parameter, specify it explicitly with an alias.
-  - Corner cases exist where a distinct `pivot_column` s can end up with the same default column names. For example, an input column might contain both a `NULL` value and the string literal `"NULL"` . When this happens, multiple pivot columns are created with the same name. To avoid this situation, use aliases for pivot column names.
-  - If a `pivot_column` doesn't specify an alias, a column name is constructed as follows:
+  - If a name is desired for a named constant or query parameter, specify it explicitly with `pivot_column` .
+  - Corner cases exist where distinct `value` s can end up with the same default `pivot_column` names. For example, an input column might contain both a `NULL` value and the string literal `"NULL"` . When this happens, multiple pivot columns are created with the same name. To avoid this situation, use explicit `pivot_column` names.
+  - If a `pivot_column` name isn't specified, a column name is constructed from `value` as follows:
 
 <table>
 <colgroup>
@@ -898,7 +907,7 @@ The following examples reference a table called `Produce` that looks like this:
      | Apple   | 1     | Q1      | 2021 |
      +---------+-------+---------+------*/
 
-With the `PIVOT` operator, the rows in the `quarter` column are rotated into these new columns: `Q1` , `Q2` , `Q3` , `Q4` . The aggregate function `SUM` is implicitly grouped by all unaggregated columns other than the `pivot_column` : `product` and `year` .
+With the `PIVOT` operator, the rows in the `quarter` ( `input_column` ) column are rotated into these new columns ( `pivot_column` s): `Q1` , `Q2` , `Q3` , `Q4` . The aggregate function `SUM` is implicitly grouped by all unaggregated columns other than the `input_column` : `product` and `year` .
 
     SELECT * FROM
       Produce
@@ -926,7 +935,7 @@ If you don't include `year` , then `SUM` is grouped only by `product` .
      | Kale    | 121 | 108 | 45   | 3    |
      +---------+-----+-----+------+------*/
 
-You can select a subset of values in the `pivot_column` :
+You can select a subset of values from the `input_column` :
 
     SELECT * FROM
       (SELECT product, sales, quarter FROM Produce)
@@ -949,7 +958,7 @@ You can select a subset of values in the `pivot_column` :
      | 199 | 108 | 45 |
      +-----+-----+----*/
 
-You can include multiple aggregation functions in the `PIVOT` . In this case, you must specify an alias for each aggregation. These aliases are used to construct the column names in the resulting table.
+You can include multiple aggregation functions in the `PIVOT` . In this case, you must specify a prefix for each aggregation. These prefixes are used to construct the column names in the resulting table.
 
     SELECT * FROM
       (SELECT product, sales, quarter FROM Produce)
@@ -961,6 +970,23 @@ You can include multiple aggregation functions in the `PIVOT` . In this case, yo
      | Kale   | 121            | 2              | 108            | 2              |
      | Apple  | 78             | 2              | 0              | 1              |
      +--------+----------------+----------------+----------------+----------------*/
+
+The following example includes a `prefix` ( `sales` ) for the pivot columns, `pivot_column` aliases ( `first_quarter` and `second_quarter` ) for the rotated columns, and a `table_alias` ( `pivoted_sales` ) for the result table. The enclosing `SELECT` statement references the table alias to select the pivoted columns:
+
+    SELECT
+      pivoted_sales.product,
+      pivoted_sales.sales_first_quarter,
+      pivoted_sales.sales_second_quarter
+    FROM
+      (SELECT product, sales, quarter FROM Produce)
+      PIVOT(SUM(sales) AS sales FOR quarter IN ('Q1' AS first_quarter, 'Q2' AS second_quarter)) AS pivoted_sales;
+    
+    /*---------+---------------------+----------------------+
+     | product | sales_first_quarter | sales_second_quarter |
+     +---------+---------------------+----------------------+
+     | Apple   | 78                  | 0                    |
+     | Kale    | 121                 | 108                  |
+     +---------+---------------------+----------------------*/
 
 ## `UNPIVOT` operator
 

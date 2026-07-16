@@ -19,7 +19,7 @@ You pass query parameters for various data types, including the following:
 
 ## Pass a parameter in a query
 
-Query parameters are only supported in [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) . Parameters cannot be used as substitutes for identifiers, column names, table names, or other parts of the query.
+Query parameters are only supported in [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) . Parameters cannot be used as substitutes for identifiers, column names, table names, or other parts of the query. A query parameter value can't be `NULL` .
 
 To specify a named parameter, use the `@` character followed by an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) , such as `@param_name` . Alternatively, use the placeholder value `?` to specify a positional parameter. A query can use positional or named parameters, but not both.
 

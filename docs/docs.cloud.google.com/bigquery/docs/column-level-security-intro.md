@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-BigQuery provides fine-grained access to sensitive columns using *policy tags* , or type-based classification, of data. Using BigQuery column-level access control, you can create policies that check, at query time, whether a user has proper access. For example, a policy can enforce access checks such as:
+BigQuery provides fine-grained access to sensitive columns using either *policy tags* (based on Data Catalog) or *data governance tags* (based on Resource Manager tags). Using these classification methods, you can create policies that check, at query time, whether a user has proper access. For example, a policy can enforce access checks such as:
 
   - You must be in `group:high-access` to see the columns containing `TYPE_SSN` .
 
@@ -87,7 +87,7 @@ To set up column level security, a data steward, who has the [appropriate permis
 
 With this fine-grained access, you can manage access to many columns by controlling only a small number of data classification policy tags.
 
-For details about these steps, see [Restricting access with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
+For details about these steps, see [Restrict access with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
 
 ## Roles used with column-level access control
 
@@ -338,6 +338,6 @@ For more information about logging in Google Cloud, see [Cloud Logging](https://
 
 ## What's next
 
-  - For details about using column-level access control, see [Restricting access with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
+  - For details about using column-level access control, see [Restrict access with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
 
   - For information about best practices for policy tags, see [BigQuery best practices: Using policy tags](https://docs.cloud.google.com/bigquery/docs/best-practices-policy-tags) .

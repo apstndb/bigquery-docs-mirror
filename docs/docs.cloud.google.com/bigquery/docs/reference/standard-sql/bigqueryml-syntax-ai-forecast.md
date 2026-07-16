@@ -8,9 +8,16 @@ data_source: docs.cloud.google.com
 
 # The AI.FORECAST function
 
-This document describes the `AI.FORECAST` function, which lets you forecast a time series by using BigQuery ML's built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) .
+This document describes the `AI.FORECAST` function, which lets you forecast a time series by using BigQuery ML's built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) . This lets you to perform forecasting without having to create and train your own model, so you can avoid the need for model management.
 
-Using the `AI.FORECAST` function with the built-in TimesFM model lets you perform forecasting without having to create and train your own model, so you can avoid the need for model management.
+For example, imagine you have a table containing sales data for a product. You could run a query similar to the following to forecast sales for the next 30 data points:
+
+    SELECT *
+    FROM AI.FORECAST(
+      TABLE `mydataset.input_table`,
+      data_col => 'units_sold',
+      timestamp_col => 'sales_date',
+      horizon => 30);
 
 ## Syntax
 

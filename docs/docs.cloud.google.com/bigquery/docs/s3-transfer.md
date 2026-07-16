@@ -104,7 +104,7 @@ To create an Amazon S3 data transfer:
         
           - For **Dataset** , select the dataset that you created to store your data. ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
           - Select **Native table** if you want to transfer to a BigQuery table.
-          - Select **Apache Iceberg** if you want to transfer to an Iceberg managed table.
+          - Select **Iceberg Managed** if you want to transfer to an Iceberg managed table.
     
       - In the **Data source details** section:
         

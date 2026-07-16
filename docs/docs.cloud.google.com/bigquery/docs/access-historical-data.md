@@ -29,9 +29,11 @@ If the timestamp specifies a time from prior to the time travel window or from b
 
 After you replace an existing table by using the `CREATE OR REPLACE TABLE` statement, you can use `FOR SYSTEM_TIME AS OF` to query the previous version of the table.
 
-If the table was deleted, then the query fails and returns an error like the following:
+If the table was deleted, you cannot query its historical data directly using `FOR SYSTEM_TIME AS OF` . The query fails and returns an error like the following:
 
     Not found: Table myproject:mydataset.table was not found in location LOCATION
+
+To access historical data for a deleted table, you must instead restore the table from a [point in time](https://docs.cloud.google.com/bigquery/docs/access-historical-data#restore-a-table) .
 
 ## Restore a table from a point in time
 
@@ -310,6 +312,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 If you anticipate that you might want to restore a table later than what is allowed by the time travel window, then create a table snapshot of the table. For more information, see [Introduction to table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 You cannot restore a logical view directly. For more information, see [Restore a view](https://docs.cloud.google.com/bigquery/docs/managing-views#restore_a_view) .
+
+> **Note:** If you delete a table and then create a new table with the same name, you can restore data from the original deleted table using [point-in-time recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#bq) . The timestamp must specify a time when the original table existed.
 
 ## What's next
 

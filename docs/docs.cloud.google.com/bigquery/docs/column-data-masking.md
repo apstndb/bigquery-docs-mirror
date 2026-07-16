@@ -36,7 +36,7 @@ Use policy tags to selectively obscure sensitive data.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `roles/serviceusage.serviceUsageAdmin` ), which contains the `serviceusage.services.enable` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 2.  If you are creating a data policy that references a [custom masking routine](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask) , create the associated masking UDF so that it is available in the following steps.
 
@@ -945,6 +945,8 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 ## Mask data by applying data policies to a column
 
 As an alternative to creating policy tags, you can create data policies and apply them directly on a column.
+
+You can also implement data masking through data governance tags. For more information, see [Control access with data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) .
 
 ### Work with data policies
 

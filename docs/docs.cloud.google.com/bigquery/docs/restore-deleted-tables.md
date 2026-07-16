@@ -305,6 +305,8 @@ If you anticipate that you might want to restore a table later than what is allo
 
 You cannot restore a logical view directly. For more information, see [Restore a view](https://docs.cloud.google.com/bigquery/docs/managing-views#restore_a_view) .
 
+> **Note:** If you delete a table and then create a new table with the same name, you can restore data from the original deleted table using [point-in-time recovery](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#bq) . The timestamp must specify a time when the original table existed.
+
 ### Identify when a table was deleted
 
 Use the following filter in Logs Explorer in the Google Cloud console to identify the audit entry that shows the expiration or deletion for a specified table:

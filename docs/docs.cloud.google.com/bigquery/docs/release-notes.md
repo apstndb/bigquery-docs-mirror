@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 15, 2026
+
+Feature
+
+BigQuery supports [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) , which let you enforce column-level security and data masking. Data governance tags are a type of Resource Manager tag that you can attach to sensitive columns and use in BigQuery data policies to grant conditional access to your users. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## July 14, 2026
 
 Feature

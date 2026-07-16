@@ -14,6 +14,8 @@ BigQuery supports [data masking](https://docs.cloud.google.com/bigquery/docs/col
 
 When you use data masking in combination with column-level access control, you can configure a range of access to column data, from full access to no access, based on the needs of different user groups. For example, for tax ID data, you might want to grant your accounting group full access, your analyst group masked access, and your sales group no access.
 
+This document describes using policy tags for data masking. As an alternative, you can use [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) , which are Resource Manager tags used for data masking and column-level access control.
+
 ## Benefits
 
 Data masking provides the following benefits:
@@ -25,7 +27,10 @@ Data masking provides the following benefits:
 
 ## Data masking workflow
 
-There are two ways of masking data. You can create a taxonomy and policy tags, then configure data policies on the policy tags. Alternatively, you can set a data policy directly on a column. This lets you map a data masking rule on your data without handling policy tags or creating additional taxonomies.
+To mask data, you can create a taxonomy and policy tags, and then configure data policies on the policy tags. Alternatively, you can do one of the following:
+
+  - **Set a data policy directly on a column.** Map a data masking rule to your data without handling policy tags or creating additional taxonomies.
+  - **Use data governance tags.** Use [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) (Preview) for column-level access control and data masking.
 
 ### Set a data policy directly on a column
 

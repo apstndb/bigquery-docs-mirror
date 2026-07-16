@@ -1,18 +1,23 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/tags
 uri: https://docs.cloud.google.com/bigquery/docs/tags
-title: Tag tables, views, and datasets
+title: Control access with tags
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Tag tables, views, and datasets
+# Control access with tags
 
-This document describes how to use tags to conditionally apply [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/tags-access-control) policies to BigQuery tables, views, and datasets.
+This document describes how to use tags with BigQuery resources for access control.
 
-You can also use tags to conditionally [deny access](https://docs.cloud.google.com/iam/docs/deny-access) with IAM policies to BigQuery tables, views, and datasets. For more information, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
+A tag is a key-value pair you can attach to a Google Cloud resource. You can use tags with BigQuery in the following ways:
 
-A tag is a key-value pair that you can attach directly to a table, view, or dataset or a key-value pair that a table, view, or dataset can [inherit](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance) from other Google Cloud resources. You can conditionally apply policies based on whether a resource has a specific tag. For example, you might conditionally grant the BigQuery Data Viewer role to a principal on any dataset with the `environment:dev` tag.
+  - **Conditionally grant or deny policies** : You can attach tags to BigQuery tables, views, and datasets and use [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/tags-access-control) to conditionally grant roles or [deny access](https://docs.cloud.google.com/iam/docs/deny-access) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to those resources based on their tags. For more information about deny policies, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
+  - **Column-level access control** : You can attach [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) (Preview) to table columns and use them with data policies to restrict access to column data.
+
+You can attach tags directly to a resource, or tags can be [inherited](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance) from parent resources in the Google Cloud resource hierarchy.
+
+This document focuses on using tags with IAM to conditionally grant or deny access to BigQuery tables, views, and datasets.
 
 For more information about using tags across the Google Cloud resource hierarchy, see [Tags overview](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview) .
 
@@ -1178,6 +1183,10 @@ Call the [`tables.update` method](https://docs.cloud.google.com/bigquery/docs/re
 
 You can similarly tag BigQuery views, materialized views, clones, and snapshots.
 
+## Tag columns
+
+You can tag table columns with [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) for column-level access control and data masking.
+
 ## Delete tags
 
 You can't delete a tag if it's referenced by a table, view, or dataset. You should detach all existing tag binding resources before deleting the tag key or value itself. To delete tag keys and tag values, see [Deleting tags](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#deleting) .
@@ -1223,8 +1232,457 @@ Suppose you are an administrator of an organization. Your data analysts are all 
             --parent=//bigquery.googleapis.com/projects/userData/datasets/anonymousData \
             --location=US
 
+## Control access to columns with data governance tags
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security-feedback@google.com> .
+
+You can enforce column-level security and data masking in BigQuery using data governance tags. Data governance tags are a type of Resource Manager tag that you can attach to sensitive columns and use in BigQuery data policies to grant conditional access to your users.
+
+Configure column-level security by creating data governance tags and attaching them to BigQuery columns. Then, create BigQuery Data Policy data policies that reference these tags. These policies apply data masking rules or grant raw data access to specific users, ensuring only authorized principals view sensitive data.
+
+For more information, see [Introduction to column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [Introduction to data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .
+
+### Before you begin with governance tags
+
+1.  [Install](https://docs.cloud.google.com/sdk/docs/install) the Google Cloud CLI.
+    
+    > **Note:** If you installed the gcloud CLI previously, make sure you have the latest version by running `gcloud components update` .
+
+2.  If you're using an external identity provider (IdP), you must first [sign in to the gcloud CLI with your federated identity](https://docs.cloud.google.com/iam/docs/workforce-log-in-gcloud) .
+
+3.  To [initialize](https://docs.cloud.google.com/sdk/docs/initializing) the gcloud CLI, run the following command:
+    
+        gcloud init
+
+4.  To create and manage data governance tags, you must use the [BigQuery Enterprise edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+
+#### Required roles for data governance tags
+
+To get the permissions that you need to control column access with data governance tags, ask your administrator to grant you the following IAM roles:
+
+  - Create data governance tags:
+      - [Tag Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.tagAdmin) ( `roles/resourcemanager.tagAdmin` ) on the project or organization
+      - [Organization Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.organizationViewer) ( `roles/resourcemanager.organizationViewer` ) on the organization
+  - Attach or remove tags to columns:
+      - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) on the table
+      - [Tag User](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.tagUser) ( `roles/resourcemanager.tagUser` ) on the organization, project, or tag value
+  - Create and manage data policies: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.admin) ( `roles/bigquerydatapolicy.admin` ) on the project
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+### Create data governance tags
+
+Create the data governance tag key and its values.
+
+#### Create a tag key
+
+To create a key for a data governance tag, set the `purpose` field to `DATA_GOVERNANCE` when you create the tag key. Setting this purpose categorizes the tag for column-level security or data masking and distinguishes it from general resource tags in BigQuery.
+
+### gcloud
+
+1.  Run the [`gcloud resource-manager tags keys create`](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/keys/create) command:
+    
+        gcloud resource-manager tags keys create TAG_KEY \
+            --parent=projects/PROJECT_ID \
+            --purpose=DATA_GOVERNANCE
+    
+    Replace the following:
+    
+      - `  TAG_KEY  ` : the short name for the tag key.
+      - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use ` organizations/ ORGANIZATION_ID  ` instead of ` projects/ PROJECT_ID  ` .
+
+### API
+
+1.  Send a `POST` request to the `tagKeys` endpoint:
+    
+        curl --request POST \
+          "https://cloudresourcemanager.googleapis.com/v3/tagKeys" \
+          --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+          --header 'Accept: application/json' \
+          --header 'Content-Type: application/json' \
+          --data '{"shortName":"TAG_KEY","parent":"projects/PROJECT_ID","purpose":"DATA_GOVERNANCE"}' \
+          --compressed
+    
+    Replace the following:
+    
+      - `  TAG_KEY  ` : the short name for the tag key.
+      - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use ` organizations/ ORGANIZATION_ID  ` instead of ` projects/ PROJECT_ID  ` .
+
+#### Create a tag value
+
+To add one or more values to a tag key, follow these steps.
+
+### gcloud
+
+1.  Get the namespaced name for the tag key by running the [`gcloud resource-manager tags keys list`](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/keys/list) command:
+    
+        gcloud resource-manager tags keys list --parent=projects/PROJECT_ID
+
+2.  Create a new value by running the [`gcloud resource-manager tags values create`](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/values/create) command:
+    
+        gcloud resource-manager tags values create TAG_VALUE \
+            --parent=PROJECT_ID/TAG_KEY
+    
+    Replace the following:
+    
+      - `  TAG_VALUE  ` : a user-specified short name of the tag value.
+      - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use your `  ORGANIZATION_ID  ` instead.
+
+### API
+
+1.  Get the namespaced name for the tag key:
+    
+        curl --request GET \
+            "https://cloudresourcemanager.googleapis.com/v3/tagKeys/namespaced?name=PROJECT_ID/TAG_KEY" \
+            --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+            --header 'Accept: application/json'
+    
+    The response contains the `name` field, for example `tagKeys/4567890123` .
+
+2.  Send a `POST` request to the `tagValues` endpoint with the tag key name:
+    
+        curl --request POST \
+          "https://cloudresourcemanager.googleapis.com/v3/tagValues" \
+          --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+          --header 'Accept: application/json' \
+          --header 'Content-Type: application/json' \
+          --data '{"shortName":"TAG_VALUE","parent":"tagKeys/TAG_KEY_ID"}' \
+          --compressed
+    
+    Replace the following:
+    
+      - `  TAG_VALUE  ` : a user-specified short name of the tag value.
+      - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use your `  ORGANIZATION_ID  ` instead.
+      - `  TAG_KEY_ID  ` : the namespaced name for the tag key from step 1—for example, if tag key name is `tagKeys/4567890123` , then the tag key ID is `4567890123` .
+
+#### Create hierarchical tag values
+
+Optionally, you can create a child tag value that is parented by a tag value and build a hierarchical tree of data governance tag values. The hierarchy can be 5-levels deep, as shown in the following diagram:
+
+![Diagram of the workflow for column-level access control using Data Governance tags.](https://docs.cloud.google.com/static/bigquery/images/data-governance-tag-structure.svg)
+
+### gcloud
+
+To create a child tag value, run the [`gcloud resource-manager tags values create`](https://docs.cloud.google.com/sdk/gcloud/reference/resource-manager/tags/values/create) command and specify a parent tag value in the `--parent` flag:
+
+    gcloud resource-manager tags values create CHILD_TAG_VALUE \
+    --parent=PROJECT_ID/TAG_KEY/PARENT_TAG_VALUE
+
+Replace the following:
+
+  - `  CHILD_TAG_VALUE  ` : the short name for the child tag value you are creating.
+  - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use your `  ORGANIZATION_ID  ` instead.
+  - `  TAG_KEY  ` : the short name of the tag key that is the parent of the tag value.
+  - `  PARENT_TAG_VALUE  ` : the short name of the parent tag value.
+
+### API
+
+To create a child tag value, use the tag value resource name of the parent (for example, `tagValues/123456789012` ) in the `parent` field:
+
+    curl --request POST \
+      "https://cloudresourcemanager.googleapis.com/v3/tagValues" \
+      --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+      --header 'Accept: application/json' \
+      --header 'Content-Type: application/json' \
+      --data '{"shortName":"CHILD_TAG_VALUE","parent":"tagValues/PARENT_TAG_VALUE_ID"}' \
+      --compressed
+
+Replace the following:
+
+  - `  CHILD_TAG_VALUE  ` : the short name for the child tag value you are creating.
+  - `  PARENT_TAG_VALUE_ID  ` : the numeric ID of the parent tag value.
+
+### Attach data governance tags to BigQuery columns
+
+Attach the data governance tags that you created to the BigQuery columns that you want to protect.
+
+### SQL
+
+#### Create a new table with a tagged column
+
+To attach data governance tags when creating a new table, use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement. Specify the tag by setting the `data_governance_tags` option on the column.
+
+    CREATE TABLE PROJECT_ID.DATASET_ID.TABLE_ID (
+      COLUMN_NAME INT64 OPTIONS (data_governance_tags=[("PROJECT_ID/TAG_KEY", "TAG_VALUE")])
+    );
+
+Replace the following:
+
+  - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project as the parent of your tag, use your `  ORGANIZATION_ID  ` instead for the tag key format ( `ORGANIZATION_ID/TAG_KEY` ).
+  - `  DATASET_ID  ` : the ID of the dataset where the table resides.
+  - `  TABLE_ID  ` : the ID of the table you are creating.
+  - `  COLUMN_NAME  ` : the name of the column you want to tag.
+  - `  TAG_KEY  ` : the tag key that you want to apply.
+  - `  TAG_VALUE  ` : the tag value that you want to apply.
+
+#### Add a tag to an existing table
+
+To attach data governance tags to a column in an existing table, use the [`ALTER TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options) statement to set the `data_governance_tags` option on the column.
+
+    ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
+    ALTER COLUMN COLUMN_NAME SET OPTIONS (data_governance_tags=[("PROJECT_ID/TAG_KEY", "TAG_VALUE")]);
+
+### bq CLI
+
+#### Create a new table with a tagged column
+
+1.  To create a local JSON schema file that defines the tag, run the `bq mk` command:
+    
+        bq mk \
+            --table \
+            --project_id=PROJECT_ID \
+            --description="description of my table" \
+            --schema=SCHEMA_FILE.json \
+            DATASET_ID.TABLE_ID
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project as the parent of your tag, use your `  ORGANIZATION_ID  ` instead for the tag key format ( `ORGANIZATION_ID/TAG_KEY` ).
+      - `  DATASET_ID  ` : the ID of the dataset where the table resides.
+      - `  TABLE_ID  ` : the ID of the table you are creating.
+
+#### Add a tag to an existing table
+
+1.  To add a tag to an existing table, first export its schema to a local file:
+    
+        bq show \
+            --project_id=PROJECT_ID \
+            --schema \
+            --format=prettyjson \
+            DATASET_ID.TABLE_ID > SCHEMA_FILE.json
+
+2.  Edit the schema file to add the `dataGovernanceTagsInfo` object to the column. For example:
+    
+        [
+          {
+            "description": "my sensitive column",
+            "mode": "NULLABLE",
+            "name": "Column_X",
+            "type": "INT64",
+            "dataGovernanceTagsInfo": {
+              "dataGovernanceTags": {
+                "PROJECT_ID/TAG_KEY": "TAG_VALUE"
+              }
+            }
+          },
+          {
+            "mode": "REQUIRED",
+            "name": "column2",
+            "type": "FLOAT"
+          }
+        ]
+
+3.  Update the table to attach tags to the sensitive column with the `bq update` command:
+    
+        bq update \
+            --project_id=PROJECT_ID \
+            --schema=SCHEMA_FILE.json \
+            DATASET_ID.TABLE_ID
+    
+    You can also use the `bq update` command to remove existing tags and attach new tags.
+
+### API
+
+#### Create a new table with a tagged column
+
+Use the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method. Include the `dataGovernanceTagsInfo` field in the request body.
+
+    ```json
+    {
+      "schema": {
+        "fields": [
+          {
+            "name": "Column_X",
+            "type": "INT64",
+            "description": "sensitive column",
+            "dataGovernanceTagsInfo": {
+              "dataGovernanceTags": {
+                "PROJECT_ID/TAG_KEY": "TAG_VALUE"
+              }
+            }
+          }
+        ]
+      }
+    }
+    ```
+
+#### Add a tag to an existing table
+
+1.  Retrieve the current table resource with the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method.
+
+2.  Modify the table resource to include the `dataGovernanceTagsInfo` field for the target column.
+
+3.  Call the [`tables.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update) or [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with the updated table resource.
+
+### Create and manage data policies
+
+Create and manage BigQuery data policies that reference data governance tags to apply masking rules or raw data access policies.
+
+After a data policy is created for a tagged column, only users specified in that policy can access the column, provided they also have access to the table. All other users are denied access.
+
+#### Create data policies
+
+### API
+
+Create a data policy that uses a predefined `SHA256` masking rule, or create a raw data access policy.
+
+##### Create a data policy with a predefined `SHA256` masking rule
+
+To create a data policy with a predefined `SHA256` masking rule, send a `POST` request to the `dataPolicies` endpoint:
+
+    curl --request POST \
+        "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies" \
+        --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+        --header 'Accept: application/json' \
+        --header 'Content-Type: application/json' \
+        --data '{"dataPolicy":{"dataPolicyType":"DATA_MASKING_POLICY","dataMaskingPolicy":{"predefinedExpression":"SHA256"},"grantees": ["principal://goog/subject/EMAIL_ADDRESS"],"dataGovernanceTag":{"key":"PROJECT_ID/TAG_KEY","value":"TAG_VALUE"}},"dataPolicyId":"POLICY_ID"}' \
+        --compressed
+
+Replace the following:
+
+  - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project as the parent of your tag, use your `  ORGANIZATION_ID  ` instead for the `dataGovernanceTag.key` format ( `ORGANIZATION_ID/TAG_KEY` ).
+  - `  LOCATION  ` : the region where you are creating data policy. For more information, see [data policy locations](https://docs.cloud.google.com/bigquery/docs/locations#data-policy-locations) .
+  - `  EMAIL_ADDRESS  ` : the email address of user to grant access.
+  - `  TAG_KEY  ` : the short name for the tag key.
+  - `  TAG_VALUE  ` : a user-specified short name of the tag value.
+  - `  POLICY_ID  ` : the ID for data policy.
+
+##### Create a raw data access policy
+
+To create a raw data access policy, set the `dataPolicyType` to `RAW_DATA_ACCESS_POLICY` :
+
+    curl --request POST \
+        "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies" \
+        --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+        --header 'Accept: application/json' \
+        --header 'Content-Type: application/json' \
+        --data '{"dataPolicy":{"dataPolicyType":"RAW_DATA_ACCESS_POLICY","grantees": ["principal://goog/subject/EMAIL_ADDRESS"],"dataGovernanceTag":{"key":"PROJECT_ID/TAG_KEY","value":"TAG_VALUE"}},"dataPolicyId":"POLICY_ID"}' \
+        --compressed
+
+#### Update data policies
+
+Update an existing data policy to grant access to additional users.
+
+### API
+
+1.  To add users by directly updating a policy, first get the current policy and its `etag` :
+    
+        curl --request GET \
+            "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies/POLICY_ID" \
+            --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+            --header 'Accept: application/json' \
+            --header 'Content-Type: application/json' \
+            --compressed
+
+2.  Send a `PATCH` request with the updated list of grantees and the `etag` from the previous step:
+    
+        curl -X PATCH \
+          -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "grantees": ["principal://goog/subject/user1@example.com","principal://iam.googleapis.com/projects/-/serviceAccounts/SA_EMAIL_ADDRESS"],
+            "etag": "ETAG"
+          }'  \
+        "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies/POLICY_ID?updateMask=grantees"
+    
+    Replace `  ETAG  ` with the `etag` value returned by the `GET` request in the previous step.
+    
+    Alternatively, use the `addGrantees` method to add users to a policy:
+    
+        curl -X POST \
+          -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "grantees": ["principal://goog/subject/user1@example.com","principal://iam.googleapis.com/projects/-/serviceAccounts/SA_EMAIL_ADDRESS"]
+          }'  \
+        "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies/POLICY_ID:addGrantees"
+
+3.  To remove users from a policy, use the `removeGrantees` method:
+    
+        curl -X POST \
+          -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "grantees": ["principal://goog/subject/user1@example.com","principal://iam.googleapis.com/projects/-/serviceAccounts/SA_EMAIL_ADDRESS"]
+          }'  \
+        "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies/POLICY_ID:removeGrantees"
+
+#### Delete data policies
+
+### API
+
+To delete a data policy, send a `DELETE` request to the `dataPolicies` endpoint:
+
+    curl --request DELETE \
+    "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies/POLICY_ID" \
+    --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+    --header 'Accept: application/json' \
+    --header 'Content-Type: application/json' \
+    --compressed
+
+#### List data policies
+
+### API
+
+To list data policies that reference a tag key, send a `GET` request to the `dataPolicies` endpoint with a `filter` parameter:
+
+    curl --request GET \
+    "https://bigquerydatapolicy.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/dataPolicies?filter=dataGovernanceTag:PROJECT_ID/TAG_KEY" \
+    --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+    --header 'Accept: application/json' \
+    --header 'Content-Type: application/json' \
+    --compressed
+
+### Interactions with other features
+
+This section describes how data governance tags interact with other BigQuery features.
+
+| Feature            | Interaction                                                                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Information Schema | Data governance tags attached to columns are included in the `INFORMATION_SCHEMA.COLUMNS` and `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` views. |
+| Table copy         | Cross-region table copies are disabled for tables that have column-level security features, including tables with data governance tags.      |
+| Time travel        | Access to historical table data is governed by the access policies and tags that are attached to the table.                                  |
+
+### Configure a default data policy project
+
+When you access columns protected by data governance tags, BigQuery by default evaluates only the data policies in the project where the table is located. Data policies defined in other projects don't apply, unless an administrator configures a default data policy project at the organization level.
+
+If a default data policy project is configured for your organization, BigQuery evaluates both the data policies of the table's project and those of the default data policy project when determining column access.
+
+If a user is subject to conflicting data policies in both the table's project and the default data policy project, the data policies in the table's project take precedence.
+
+To set or view the `default_data_policy_projects` option at the organization level using DDL or `INFORMATION_SCHEMA` views, see [Data management settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#data-management-settings) in the default configuration documentation.
+
+### Limitations of data governance tags
+
+  - BigQuery Omni tables don't support data governance tags on columns.
+  - You can use the Google Cloud console to view data governance tags on columns, but not to bind or unbind them.
+  - You can bind one tag per column and up to 1000 unique tags per table.
+  - If you query a tagged column using the BigQuery Storage Read API, `tabledata.list` calls, or wildcard tables, you receive an access denied error unless a data policy grants you access.
+  - For `STRUCT` fields, you can apply data governance tags only to the leaf fields.
+  - You can delete tag values that are attached to columns. If you delete a tag value, the tag binding persists on the column, but because the tag value no longer exists, access to the column might be lost.
+
+### Troubleshoot data governance tags
+
+This section describes how to troubleshoot common issues when controlling access to columns with data governance tags.
+
+#### Incorrectly formatted tag names
+
+When you create tags, you define a short name (for example, `ssn` ). However, when you attach tags to columns in your schema or use them in conditions, the tag key must use the namespaced format ( `PROJECT_ID/TAG_KEY` or `ORGANIZATION_ID/TAG_KEY` ), while the tag value still uses the short name. Supplying only the short name for the tag key produces an `Invalid tagKey` or `Invalid tagValue` error.
+
+#### Cross-project policy application
+
+By default, only the data policies of the table's project are evaluated. Policies from other projects don't apply unless a default data policy project is configured at the organization level. For more information about configuring and evaluating cross-project policies, see [Configure a default data policy project](https://docs.cloud.google.com/bigquery/docs/tags#configure-default-data-policy-project) .
+
 ## What's next
 
   - For an overview of tags in Google Cloud, see [Tags overview](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview) .
   - For more information about how to use tags, see [Creating and managing tags](https://docs.cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing) .
+  - Learn more about [applying policies on columns](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
   - For information about how to control access to BigQuery resources with IAM Conditions, see [Control access with IAM Conditions](https://docs.cloud.google.com/bigquery/docs/conditions) .

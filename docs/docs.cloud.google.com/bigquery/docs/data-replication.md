@@ -486,11 +486,11 @@ Replicating datasets with CMEK applied are subject to the following limitations:
 
   - If the provided `replica_kms_key` is not valid in the destination region, the dataset won't be replicated.
 
-## Data policies assigned to a column
+## Data policies assigned to a column or a data governance tag
 
-The following sections describe how [data policies assigned directly to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) [(Preview)](https://cloud.google.com/products#product-launch-stages) interact with cross-region replication.
+The following sections describe how [data policies assigned directly to a column](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) and [data policies assigned to data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#manage-data-policies) [(Preview)](https://cloud.google.com/products#product-launch-stages) interact with cross-region replication.
 
-Data policies assigned to columns are regional resources. This means the data policy and its attached table must be in the same region. Data policies are automatically replicated when you create a secondary replica. If a data policy is attached to any table within a replicated dataset, BigQuery creates or updates the data policy and its corresponding IAM policies in the secondary region.
+Data policies assigned to columns or data governance tags are regional resources. This means the data policy and its attached table must be in the same region. Data policies are automatically replicated when you create a secondary replica. If a data policy is attached to any table within a replicated dataset, or if it is assigned to a data governance tag on that table, BigQuery creates or updates the data policy and its corresponding IAM policies in the secondary region.
 
 ### Mutability
 
