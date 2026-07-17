@@ -1,5 +1,5 @@
 https://cloud.google.com/bigquery	
-https://docs.cloud.google.com/bigquery/docs	2026-07-12T04:15:00Z
+https://docs.cloud.google.com/bigquery/docs	2026-07-16T12:56:26Z
 https://docs.cloud.google.com/bigquery/docs/access-control	2026-07-14T21:57:28Z
 https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles	2026-07-12T04:14:39Z
 https://docs.cloud.google.com/bigquery/docs/access-control-intro	2026-07-12T04:14:39Z
@@ -16,7 +16,7 @@ https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries	2026-07-12
 https://docs.cloud.google.com/bigquery/docs/analysis-rules	2026-07-12T04:14:39Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-audit-logging	2026-07-12T04:14:39Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace	2026-07-12T04:14:39Z
-https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints	2026-07-16T03:07:33Z
+https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints	2026-07-16T17:58:45Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles	2026-07-12T04:14:39Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction	2026-07-12T04:14:39Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges	2026-07-12T04:14:39Z
@@ -149,7 +149,7 @@ https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables	2026-07-
 https://docs.cloud.google.com/bigquery/docs/css-center-products-schema	2026-07-12T04:28:05Z
 https://docs.cloud.google.com/bigquery/docs/css-center-transfer	2026-07-12T04:28:05Z
 https://docs.cloud.google.com/bigquery/docs/css-center-transfer-schedule-transfers	2026-07-12T04:28:05Z
-https://docs.cloud.google.com/bigquery/docs/custom-constraints	2026-07-16T03:25:45Z
+https://docs.cloud.google.com/bigquery/docs/custom-constraints	2026-07-16T17:58:45Z
 https://docs.cloud.google.com/bigquery/docs/custom-quotas	2026-07-12T04:28:05Z
 https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption	2026-07-12T04:28:05Z
 https://docs.cloud.google.com/bigquery/docs/data-analysis-tools-intro	2026-07-12T04:28:05Z
@@ -219,7 +219,7 @@ https://docs.cloud.google.com/bigquery/docs/export-to-alloydb	2026-07-12T04:15:0
 https://docs.cloud.google.com/bigquery/docs/export-to-bigtable	2026-07-12T04:15:01Z
 https://docs.cloud.google.com/bigquery/docs/export-to-pubsub	2026-07-16T03:11:59Z
 https://docs.cloud.google.com/bigquery/docs/export-to-spanner	2026-07-12T04:28:34Z
-https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-07-16T03:11:59Z
+https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-07-16T14:00:36Z
 https://docs.cloud.google.com/bigquery/docs/exporting-models	2026-07-12T04:28:34Z
 https://docs.cloud.google.com/bigquery/docs/extend-differential-privacy	2026-07-12T04:28:34Z
 https://docs.cloud.google.com/bigquery/docs/external-data-bigtable	2026-07-12T04:28:34Z
@@ -460,7 +460,7 @@ https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables	202
 https://docs.cloud.google.com/bigquery/docs/metadata-indexing-managed-tables	2026-07-12T04:16:11Z
 https://docs.cloud.google.com/bigquery/docs/migrate-dataframes	2026-07-12T04:16:11Z
 https://docs.cloud.google.com/bigquery/docs/migration-assessment	2026-07-12T04:16:11Z
-https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies	2026-07-16T03:12:06Z
+https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies	2026-07-16T17:58:45Z
 https://docs.cloud.google.com/bigquery/docs/migration-intro	2026-07-12T04:16:11Z
 https://docs.cloud.google.com/bigquery/docs/migration/external-metastore-lakehouse-migration	2026-07-16T03:11:38Z
 https://docs.cloud.google.com/bigquery/docs/migration/hive	2026-07-15T08:10:19Z
@@ -483,7 +483,7 @@ https://docs.cloud.google.com/bigquery/docs/migration/snowflake-sql	2026-07-12T0
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer	2026-07-15T08:10:19Z
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema	2026-07-15T08:10:19Z
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials	2026-07-12T04:14:54Z
-https://docs.cloud.google.com/bigquery/docs/migration/teradata	2026-07-16T03:17:05Z
+https://docs.cloud.google.com/bigquery/docs/migration/teradata	2026-07-16T12:46:03Z
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-migration-intro	2026-07-12T04:14:54Z
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview	2026-07-12T04:14:54Z
 https://docs.cloud.google.com/bigquery/docs/migration/teradata-sql	2026-07-12T04:14:54Z
@@ -503,7 +503,7 @@ https://docs.cloud.google.com/bigquery/docs/object-table-introduction	2026-07-12
 https://docs.cloud.google.com/bigquery/docs/object-table-remote-function	2026-07-16T03:12:06Z
 https://docs.cloud.google.com/bigquery/docs/object-tables	2026-07-16T03:12:06Z
 https://docs.cloud.google.com/bigquery/docs/objectref-columns	2026-07-12T04:14:54Z
-https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery	2026-07-12T04:14:54Z
+https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery	2026-07-16T22:53:38Z
 https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection	2026-07-12T04:14:54Z
 https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table	2026-07-12T04:14:54Z
 https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3	2026-07-12T04:14:54Z
@@ -1220,7 +1220,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries	20
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in	2026-07-12T04:14:29Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis	2026-07-12T04:14:29Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions	2026-07-12T04:14:29Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions	2026-07-12T04:14:29Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions	2026-07-16T21:39:43Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions	2026-07-12T04:14:29Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions	2026-07-12T04:14:29Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/utility-functions	2026-07-12T04:14:29Z
@@ -1305,7 +1305,7 @@ https://docs.cloud.google.com/bigquery/docs/spark-procedures	2026-07-12T04:15:25
 https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer	2026-07-15T08:10:13Z
 https://docs.cloud.google.com/bigquery/docs/storage_overview	2026-07-12T04:15:25Z
 https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery	2026-07-15T08:10:13Z
-https://docs.cloud.google.com/bigquery/docs/stripe-transfer	2026-07-12T04:15:25Z
+https://docs.cloud.google.com/bigquery/docs/stripe-transfer	2026-07-16T12:36:14Z
 https://docs.cloud.google.com/bigquery/docs/supported-data-types	2026-07-12T04:15:25Z
 https://docs.cloud.google.com/bigquery/docs/table-clones-create	2026-07-12T04:15:25Z
 https://docs.cloud.google.com/bigquery/docs/table-clones-intro	2026-07-12T04:15:25Z
@@ -1336,7 +1336,7 @@ https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tuto
 https://docs.cloud.google.com/bigquery/docs/transactions	2026-07-12T04:15:38Z
 https://docs.cloud.google.com/bigquery/docs/transcribe	2026-07-16T03:06:46Z
 https://docs.cloud.google.com/bigquery/docs/transfer-changes	2026-07-12T04:15:38Z
-https://docs.cloud.google.com/bigquery/docs/transfer-custom-constraints	2026-07-16T03:06:46Z
+https://docs.cloud.google.com/bigquery/docs/transfer-custom-constraints	2026-07-16T17:58:45Z
 https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications	2026-07-12T04:15:38Z
 https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting	2026-07-12T04:15:38Z
 https://docs.cloud.google.com/bigquery/docs/transform-intro	2026-07-12T04:15:38Z

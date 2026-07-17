@@ -214,21 +214,12 @@ The following table maps Stripe data types to the corresponding BigQuery data ty
 The following Stripe objects support the `StartDate` filter, which lets you load time-based data:
 
   - Accounts
-  - ApplicationFees
-  - BalanceTransactions
-  - Cardholders
   - Charges
   - Coupons
   - Customers
   - Disputes
-  - EarlyFraudWarnings
-  - Events
-  - FileLinks
-  - Files
   - InvoiceItems
   - Invoices
-  - IssuingCards
-  - IssuingDisputes
   - PaymentIntent
   - Payouts
   - Plans
@@ -236,7 +227,6 @@ The following Stripe objects support the `StartDate` filter, which lets you load
   - Products
   - PromotionCodes
   - Refunds
-  - Reviews
   - ShippingRates
   - Subscriptions
   - TaxRates

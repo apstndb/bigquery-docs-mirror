@@ -1158,6 +1158,8 @@ The configuration file created in the initialization step looks similar to this 
           - `action` : **(Required)**
               - `type` supported values: `MAPPING` .
               - `value` supported values: `TIMESTAMP` , `DATETIME` .
+        
+        > **Note:** BigQuery stores [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) in UTC by default. Data transfers that include timestamps from other timezones might have discrepancies when transferred into BigQuery.
     
       - `compress-output` : **(Optional)** dictates whether data should be compressed before storing on Cloud Storage. This is only applied in **tpt-mode** . By default this value is `false` .
     

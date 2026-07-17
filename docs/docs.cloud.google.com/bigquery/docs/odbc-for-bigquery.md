@@ -287,7 +287,7 @@ ODBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">LogLevel</code></td>
-<td>Limits the detail that the driver logs during interactions. Choose one of the following:<br />
+<td>Limits the detail that the driver logs during interactions. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#logging">Logging</a> . Choose one of the following:<br />
 
 <ul>
 <li><code dir="ltr" translate="no">0</code> : <code dir="ltr" translate="no">OFF</code></li>
@@ -301,7 +301,7 @@ ODBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">LogPath</code></td>
-<td>Specifies the directory where the driver writes log files.</td>
+<td>Specifies the directory where the driver writes log files. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#logging">Logging</a> .</td>
 <td>N/A</td>
 <td>String</td>
 <td>No</td>
@@ -315,7 +315,7 @@ ODBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">LogFileSize</code></td>
-<td>Specifies the maximum size of each log file in bytes.</td>
+<td>Specifies the maximum size of each log file in KB.</td>
 <td><code dir="ltr" translate="no">0</code></td>
 <td>Long</td>
 <td>No</td>
@@ -449,6 +449,39 @@ When you run queries through the ODBC driver for BigQuery, the following data ty
 | `RANGE`            | `SQL_VARCHAR`        |
 | `NUMERIC`          | `SQL_NUMERIC`        |
 | `BIGNUMERIC`       | `SQL_NUMERIC`        |
+
+## Logging
+
+To enable logging with the driver, do the following:
+
+### Windows
+
+Configure logging using the DSN configuration dialog in the ODBC Data Source Administrator.
+
+### Non-Windows
+
+1.  Create or edit a configuration file, such as `google.bigqueryodbc.ini` , and add the logging options under the `[Driver]` section. The following is an example:
+    
+        [Driver]
+        LogLevel=3
+        LogPath=/path/to/log/directory
+        LogFileCount=200
+        LogFileSize=1000
+
+2.  Set the `GOOGLEBIGQUERYODBCINI` environment variable to the path of this file:
+    
+        export GOOGLEBIGQUERYODBCINI=/path/to/google.bigqueryodbc.ini
+
+> **Note:** You might need to restart your application for the changes to take effect.
+
+The driver supports logging levels 0 to 3. We recommend starting with `LogLevel=3` (INFO) for troubleshooting.
+
+| ODBC logging level | Description                                                            |
+| ------------------ | ---------------------------------------------------------------------- |
+| 0 (OFF)            | Disables all logging.                                                  |
+| 1 (ERROR)          | Logs error events.                                                     |
+| 2 (WARNING)        | Logs warning events.                                                   |
+| 3 (INFO)           | Logs general information that describes the progress of the connector. |
 
 ## Examples
 

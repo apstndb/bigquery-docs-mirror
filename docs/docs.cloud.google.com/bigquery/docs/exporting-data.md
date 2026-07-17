@@ -1062,6 +1062,90 @@ One method of resolving this quota error is to create a slot [reservation](https
 
 For alternative approaches that allow exporting more *than* 50 TiB, see the notes section in [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
 
+### Failed to export on nested schema error
+
+This error occurs when you try to export a table containing nested or repeated fields, such as `STRUCT` or `ARRAY` data types, to a flat-file format like CSV or newline-delimited JSON.
+
+**Error message**
+
+    Failed to export: Operation cannot be performed on a nested schema. Field: [COLUMN_NAME]
+
+This error occurs because flat-file formats like CSV can't represent hierarchical or multi-valued data. BigQuery exports require you to *flatten* or transform this complex data into a tabular structure before it can be written in a flat-file format. In this case, the COLUMN\_NAME refers to a column with [nested or repeated fields](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-nested) that need to be flattened or transformed before the data can be exported.
+
+**Resolution**
+
+Depending on your source schema, there are several methods that you can use to flatten your schema to prepare it for export.
+
+The following example shows a schema with nested `STRUCT` fields and a query that flattens them for export. In the example, the export query fails due to the nested fields in the `user_details` column. You can use the suggested fix to flatten the file structure into two columns, `user_details.name` and `user_details.email` .
+
+``` 
+  -- Schema example:
+  root
+    ├── id (INTEGER)
+    ├── user_details (RECORD / STRUCT, NULLABLE)
+    │   ├── name (STRING)
+    │   └── email (STRING)
+    └── created_at (TIMESTAMP)
+
+  -- Export query:
+  SELECT * FROM my_dataset.my_table;
+
+  -- Suggested fix:
+  SELECT
+      id,
+      user_details.name AS user_name,
+      user_details.email AS user_email,
+      created_at
+  FROM
+      my_dataset.my_table;
+```
+
+The following example shows a schema with repeated `ARRAY` fields and a query that flattens them for export. In the example, the export query fails due to the repeated fields in the `line_items` column. You can use the suggested fix which uses the `UNNEST()` operator to convert the array elements into individual rows.
+
+``` 
+  -- Schema example:
+  root
+    ├── order_id (STRING)
+    ├── customer_name (STRING)
+    └── line_items (REPEATED / ARRAY of RECORD/STRUCT, NULLABLE)
+        ├── product_id (STRING)
+        └── quantity (INTEGER)
+
+
+  -- Export query:
+  SELECT * FROM my_dataset.my_orders_table;
+
+  -- Suggested fix:
+  SELECT
+      t.order_id,
+      t.customer_name,
+      item.product_id,
+      item.quantity
+  FROM
+      my_dataset.my_orders_table AS t
+  LEFT JOIN
+      UNNEST(t.line_items) AS item
+  ;
+```
+
+Alternatively, you can use `ARRAY_TO_STRING()` if you only need to represent an array, such as an `ARRAY<STRING>` , as a single string column in your CSV file.
+
+`ARRAY_TO_STRING()` concatenates all elements of the interests array into a single string, using a comma as a separator. This transformation is useful when the exact structure of each array element isn't crucial for the export.
+
+``` 
+  -- Schema example:
+  root
+    ├── user_id (STRING)
+    └── interests (REPEATED / ARRAY of STRING, NULLABLE)
+
+  -- Suggested fix:
+  SELECT
+      user_id,
+      ARRAY_TO_STRING(interests, ', ') AS user_interests
+  FROM
+      my_dataset.my_users_table;
+```
+
 ## Pricing
 
 For information on data export pricing, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing) page.

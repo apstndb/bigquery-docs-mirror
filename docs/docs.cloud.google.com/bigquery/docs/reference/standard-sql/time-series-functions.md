@@ -213,6 +213,7 @@ The `CHANGES` function returns a table with the following columns:
   - All columns of the input table at the time that the query is run. If a column is added after the `end_timestamp` value, it appears with `NULL` values populated in of the any rows that were changed before the addition of the column.
   - `_CHANGE_TYPE` : a `STRING` value indicating the type of change that produced the row. For `CHANGES` , the supported values are `INSERT` , `UPDATE` , and `DELETE` .
   - `_CHANGE_TIMESTAMP` : a `TIMESTAMP` value indicating the commit time of the transaction that made the change.
+  - `_CHANGE_IS_FOR_UPDATE` : a `BOOL` value that is `TRUE` for a `DELETE` event produced by a row update. Otherwise, the value is `FALSE` .
 
 **Limitations**
 
@@ -261,22 +262,23 @@ View the full change history of the changes made to the table:
       product,
       inventory,
       _CHANGE_TYPE AS change_type,
-      _CHANGE_TIMESTAMP AS change_time
+      _CHANGE_TIMESTAMP AS change_time,
+      _CHANGE_IS_FOR_UPDATE as change_is_for_update
     FROM
       CHANGES(TABLE mydataset.Produce, NULL, NULL)
     ORDER BY change_time, product;
 
 The output is similar to the following:
 
-    +---------+-----------+-------------+---------------------+
-    | product | inventory | change_type |     change_time     |
-    +---------+-----------+-------------+---------------------+
-    | bananas |        20 | INSERT      | 2024-01-09 17:13:58 |
-    | carrots |        30 | INSERT      | 2024-01-09 17:13:58 |
-    | bananas |        20 | DELETE      | 2024-01-09 17:14:30 |
-    | carrots |        30 | DELETE      | 2024-01-09 17:15:24 |
-    | carrots |        20 | UPDATE      | 2024-01-09 17:15:24 |
-    +---------+-----------+-------------+---------------------+
+    +---------+-----------+-------------+---------------------+----------------------+
+    | product | inventory | change_type |     change_time     | change_is_for_update |
+    +---------+-----------+-------------+---------------------+----------------------+
+    | bananas |        20 | INSERT      | 2024-01-09 17:13:58 | false                |
+    | carrots |        30 | INSERT      | 2024-01-09 17:13:58 | false                |
+    | bananas |        20 | DELETE      | 2024-01-09 17:14:30 | false                |
+    | carrots |        30 | DELETE      | 2024-01-09 17:15:24 | true                 |
+    | carrots |        20 | UPDATE      | 2024-01-09 17:15:24 | false                |
+    +---------+-----------+-------------+---------------------+----------------------+
 
 **Enabling change history for an existing table**
 
