@@ -12,6 +12,8 @@ data_source: docs.cloud.google.com
 
 > **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
 
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+
 This tutorial shows you how to perform semantic search on your graph data by using [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) and the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
 
 ## Objectives

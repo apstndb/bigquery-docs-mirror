@@ -14,6 +14,8 @@ data_source: docs.cloud.google.com
 
 > **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
 
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+
 This document shows you how to define and query measures on your graphs. You can use measures to ensure that aggregations are performed correctly across joins.
 
 ## Overview
@@ -29,7 +31,7 @@ A *measure* is an aggregate property defined within the `PROPERTIES` clause of a
 
 Measures define their aggregation in reference to the `KEY` of the node or edge table on which they're defined. This means that when you query a measure, the aggregation is performed correctly even if the underlying table is joined in a way that causes rows to be duplicated.
 
-You can't reference a property defined by a measure in a GQL query. Instead, you access measures by calling the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) to create a flattened table representation of your graph. This function doesn't accept all types of graphs. For more information about which graphs form valid input, see the [input limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#input_limitations) .
+You can't reference a property defined by a measure in a GQL query. Instead, you access measures by calling the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) to create a flattened table representation of your graph. This function doesn't accept all types of graphs. For more information about which graphs form valid input, see the [input limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#input_limitations) . To run GQL queries, you must have a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) that uses the [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) . If you use on-demand pricing, you can call the `GRAPH_EXPAND` function to run SQL queries on your graph.
 
 You can call the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) on output from the `GRAPH_EXPAND` TVF to aggregate the properties according to the aggregation function you defined in the measure.
 

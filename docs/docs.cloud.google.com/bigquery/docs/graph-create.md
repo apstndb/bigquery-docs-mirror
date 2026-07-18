@@ -14,6 +14,8 @@ data_source: docs.cloud.google.com
 
 > **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
 
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+
 This document shows you how to use [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) to create a graph with financial information and run graph queries using the [Graph Query Language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) (GQL).
 
 ## Required roles

@@ -14,7 +14,13 @@ data_source: docs.cloud.google.com
 
 > **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
 
-You can use [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) to ask questions about a graph. Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. For example, to try asking an agent about the publicly available Look Ecommerce graph, do the following:
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+
+You can use [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) to ask questions about a graph. Agents can write SQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. If you have [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , then the agent can run GQL queries on your graph. If you use on-demand pricing, the agent can call the `GRAPH_EXPAND` function to run SQL queries on your graph.
+
+Graphs encode the relationships between your tables. Providing a graph to an agent removes ambiguity about how your tables relate. This clarity reduces hallucinations and can improve the efficiency of your conversations.
+
+For example, to try asking an agent about the publicly available Look Ecommerce graph, do the following:
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
 

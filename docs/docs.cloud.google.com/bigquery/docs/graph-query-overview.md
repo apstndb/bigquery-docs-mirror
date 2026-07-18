@@ -14,6 +14,8 @@ data_source: docs.cloud.google.com
 
 > **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
 
+> **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+
 This document provides an overview of the graph query language (GQL) and how to write graph queries for BigQuery Graph. You can run graph queries to find patterns, traverse relationships, and gain insights from your property graph. The examples in this document refer to a graph called `FinGraph` , which shows the relationships between people, accounts they own, and transfers between accounts. For information about the definition of the graph, see [`FinGraph` example](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#fin_graph) .
 
 ## Query structure

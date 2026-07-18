@@ -76,7 +76,7 @@ The following table outlines next steps that you can take to learn more about cu
 <td>Experienced cloud users</td>
 <td><ul>
 <li>Enable <a href="https://docs.cloud.google.com/dataplex/docs/about-data-lineage#auto-lineage-bq-support">data lineage</a> in your BigQuery project to automatically record lineage information for BigQuery operations like load, copy, and data modifications.<br />
-<strong>Note</strong> : You can <a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#control-ingestion">configure the ingestion of data lineage</a> to enable or deactivate automatic lineage ingestion for BigQuery. The lineage ingestion control feature is in <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> launch stage.</li>
+<strong>Note</strong> : You can <a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#control-ingestion">configure the ingestion of data lineage</a> to enable or deactivate automatic lineage ingestion for BigQuery.</li>
 <li>Set up a recurring <a href="https://docs.cloud.google.com/bigquery/docs/data-quality-scan">data quality scan</a> to alert you to possible data issues by using <a href="https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#predefined-rules">predefined scan rules</a> .</li>
 <li>Set up <a href="https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types">custom data quality rules</a> for your data quality scans so that your scans are tailored to your specific needs.</li>
 </ul></td>

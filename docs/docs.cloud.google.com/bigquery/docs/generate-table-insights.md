@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Generate table insights
 
-This document describes how to generate table insights for BigQuery tables, BigLake tables, and external tables. Table insights help you understand the data within a single table by generating natural language questions and SQL queries based on table metadata.
+This document describes how to generate table insights for [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [BigQuery external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) (including [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) ).
 
 Table insights can help you accelerate data exploration by letting you quickly understand the structure and content of a new or unfamiliar table without writing complex queries. You can also generate SQL queries based on natural language questions, which reduces the time and effort required to write queries manually. Table insights can also help non-SQL users understand and analyze data through these natural language queries.
 

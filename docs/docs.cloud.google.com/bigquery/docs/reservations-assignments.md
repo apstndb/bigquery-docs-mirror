@@ -188,6 +188,7 @@ When you create a project cap, the following limitations apply:
   - The *assignee* must be a Google Cloud project. Folders and organizations aren't supported.
   - The *job type* must be unset or explicitly set to `JOB_TYPE_UNSPECIFIED` .
   - Changes to the `max_slots` policy value require a new query to start before the update takes effect.
+  - Project-level slot consumption caps aren't enforced on the training phase of `ML_EXTERNAL` jobs. See [Assign slots to BigQuery ML workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) for more details.
 
 To create project caps through these scheduling policy assignments, select one of the following options:
 

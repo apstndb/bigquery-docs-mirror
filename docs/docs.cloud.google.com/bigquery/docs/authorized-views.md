@@ -344,7 +344,7 @@ For more information, see [Control access to resources using IAM](https://docs.c
 
 ### Remove authorization to a view
 
-> **Note:** If you remove a view, wait 24 hours before reusing the view name, or use a unique name. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/docs/authorized-views#quotas_and_limits) .
+> **Note:** If you remove authorization for a view across a VPC Service Controls perimeter, queries might start failing with VPC Service Controls errors. For more information, see [Revoked authorization and VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/authorized-views#revoked-authorization-vpcsc) . If you remove a view, wait 24 hours before reusing the view name, or use a unique name. For more information about removing views, see [Quotas and limits](https://docs.cloud.google.com/bigquery/docs/authorized-views#quotas_and_limits) .
 
 To remove authorization to a view, select one of the following options:
 
@@ -381,6 +381,14 @@ To remove authorization from a view, use the `bq rm` command. Enter the `table_i
 ### API
 
 Call the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) method and use the `projectID` , `datasetID` , and `tableID` properties to remove the authorized view for your dataset. For more information, see [Tables](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
+
+### Revoked authorization and VPC Service Controls
+
+When an authorized view accesses data in a source dataset across a VPC Service Controls perimeter, querying the view bypasses standard VPC Service Controls checks against the underlying base tables.
+
+If you revoke or remove authorization for the view from the source dataset, BigQuery falls back to standard authorization checks and queries the base tables in the source project directly. If those base tables cross a VPC Service Controls perimeter boundary without explicit egress rules that permit direct table access, VPC Service Controls blocks the query and returns ingress or egress violation errors.
+
+When you restore authorization for the view on the source dataset, BigQuery again bypasses the direct base table checks, and this resolves the VPC Service Controls errors.
 
 ## Quotas and limits
 

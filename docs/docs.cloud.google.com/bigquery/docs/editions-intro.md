@@ -346,7 +346,7 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
+<td>Create graphs, call <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand"><code dir="ltr" translate="no">GRAPH_EXPAND</code></a> , and <a href="https://docs.cloud.google.com/bigquery/docs/graph-measures">use measures</a> . No support for GQL queries.</td>
 </tr>
 </tbody>
 </table>
