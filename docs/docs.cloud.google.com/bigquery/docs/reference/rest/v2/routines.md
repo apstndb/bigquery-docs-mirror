@@ -328,7 +328,7 @@ Input/output argument of a function or a stored procedure.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;argumentKind&quot;: enum (ArgumentKind),&quot;mode&quot;: enum (Mode),&quot;dataType&quot;: {object (StandardSqlDataType)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;argumentKind&quot;: enum (ArgumentKind),&quot;mode&quot;: enum (Mode),&quot;dataType&quot;: {object (StandardSqlDataType)},&quot;tableType&quot;: {object (StandardSqlTableType)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -359,6 +359,12 @@ Optional. Specifies whether the argument is input or output. Can be set for proc
 
 Set if argumentKind == FIXED\_TYPE.
 
+`tableType`
+
+` object ( StandardSqlTableType  ` )
+
+Optional. Set if argumentKind == FIXED\_TABLE.
+
 ## ArgumentKind
 
 Represents the kind of a given argument.
@@ -376,6 +382,14 @@ The argument is a variable with fully specified type, which can be a struct or a
 `ANY_TYPE`
 
 The argument is any type, including struct or array, but not a table.
+
+`FIXED_TABLE`
+
+The argument is a table with fully specified column names and types.
+
+`ANY_TABLE`
+
+The argument is any table type.
 
 ## Mode
 
