@@ -1423,7 +1423,7 @@ Replace the following:
 
 #### Add a tag to an existing table
 
-To attach data governance tags to a column in an existing table, use the [`ALTER TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options) statement to set the `data_governance_tags` option on the column.
+To attach data governance tags to a column in an existing table, use the [`ALTER TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) statement to set the `data_governance_tags` option on the column.
 
     ALTER TABLE PROJECT_ID.DATASET_ID.TABLE_ID
     ALTER COLUMN COLUMN_NAME SET OPTIONS (data_governance_tags=[("PROJECT_ID/TAG_KEY", "TAG_VALUE")]);
@@ -1547,7 +1547,7 @@ To create a data policy with a predefined `SHA256` masking rule, send a `POST` r
 Replace the following:
 
   - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project as the parent of your tag, use your `  ORGANIZATION_ID  ` instead for the `dataGovernanceTag.key` format ( `ORGANIZATION_ID/TAG_KEY` ).
-  - `  LOCATION  ` : the region where you are creating data policy. For more information, see [data policy locations](https://docs.cloud.google.com/bigquery/docs/locations#data-policy-locations) .
+  - `  LOCATION  ` : the region where you are creating data policy. For more information, see [locations](https://docs.cloud.google.com/bigquery/docs/locations) .
   - `  EMAIL_ADDRESS  ` : the email address of user to grant access.
   - `  TAG_KEY  ` : the short name for the tag key.
   - `  TAG_VALUE  ` : a user-specified short name of the tag value.

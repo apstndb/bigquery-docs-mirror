@@ -17,6 +17,7 @@ This document describes how Gemini in BigQuery, which is part of the [Gemini for
 Gemini in BigQuery provides AI assistance to help you do the following:
 
   - **Explore and understand your data with data insights** . Data insights offers an automated, intuitive way to uncover patterns and perform statistical analysis by using insightful queries that are generated from the metadata of your tables. This feature is especially helpful in addressing the cold-start challenges of early data exploration. For more information, see [Generate data insights in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+  - **Chat with your data using conversational analytics** . Conversational analytics lets you have natural language conversations with your data. You can create data agents configured with custom metadata, instructions, glossary terms, and verified queries to establish business logic. You can also start direct conversations with data sources, including tables, views, property graphs, and Lakehouse tables. For more information, see [Conversational analytics overview](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
   - **Discover, transform, query, and visualize data with BigQuery data canvas** . You can use natural language with Gemini in BigQuery, to find, join, and query table assets, visualize results, and seamlessly collaborate with others throughout the entire process. For more information, see [Analyze with data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
   - **Get assisted SQL and Python data analysis** . You can use Gemini in BigQuery to generate or suggest code in either SQL or Python, and to explain an existing SQL query. You can also use natural language queries to begin data analysis. To learn how to generate, complete, and summarize code, see the following documentation:  
       - SQL code assist
@@ -51,6 +52,7 @@ See [Gemini for Google Cloud pricing](https://cloud.google.com/products/gemini/p
 After you [set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) , you can use Gemini in BigQuery to do the following in BigQuery Studio:
 
   - To [generate data insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-table) , go to the **Insights** tab for a table entry, where you can identify patterns, assess quality, and run statistical analysis across your BigQuery data.
+  - To use [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) , go to the BigQuery **Agents** page. To create, manage, and chat with [data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) , click the **Agent catalog** tab. To view your [conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) , click the **Conversations** tab.
   - To use data canvas, [create a data canvas or use data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas#work-with-data-canvas) from a table or query to explore data assets with natural language and share your canvases.
   - To use natural language to generate [SQL queries](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_a_sql_query) or [Python code](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#complete_python_code) , use [comments in code](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_sql_from_a_comment) or the [SQL generation tool](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#use_the_sql_generation_tool) . You can also receive [suggestions with autocomplete while typing](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#complete_a_sql_query) .
   - To prepare data for analysis, in the **Create new** list, select **Data preparation** . For more information, see [Open the data preparation editor in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#open-data-prep-editor) .
@@ -72,6 +74,7 @@ Enhanced features in Gemini in BigQuery are the following:
   - Explain a SQL query
   - Generate python code
   - Python code completion
+  - Conversational analytics
   - Data canvas
   - Data preparation
   - Data insights

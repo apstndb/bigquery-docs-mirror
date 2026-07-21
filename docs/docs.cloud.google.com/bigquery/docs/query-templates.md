@@ -110,8 +110,8 @@ Use the [`projects.locations.dataExchanges.listings.create` method](https://docs
 The following example shows how to call the `projects.locations.dataExchanges.listings.create` method using the `curl` command:
 
 ``` 
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H &#39;x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
-    '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources";:[{"routine&quot;:"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}],},"displayName":LISTING_NAME"}'
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
+    '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}],},"displayName":LISTING_NAME"}'
 ```
 
 Replace the following:

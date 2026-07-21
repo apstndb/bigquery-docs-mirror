@@ -2,23 +2,20 @@
 name: documents/docs.cloud.google.com/bigquery/docs/semantic-analysis
 uri: https://docs.cloud.google.com/bigquery/docs/semantic-analysis
 title: Perform semantic analysis with managed AI functions
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Use BigQuery ML to perform semantic analysis using managed AI functions.
 data_source: docs.cloud.google.com
 ---
 
-# Perform semantic analysis with managed AI functions
-
-This tutorial shows you how to use BigQuery ML managed AI functions to perform semantic analysis on customer feedback.
+This tutorial shows you how to use the [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) , [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) , and [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) functions to perform semantic analysis on customer feedback.
 
 ## Objectives
 
-In this tutorial, you:
-
-  - Create a dataset and load sentiment data into a table
-  - Use the following AI functions to perform semantic analysis:
-      - [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) : to filter your data with natural language conditions
-      - [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) : to rate input by sentiment
-      - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : to classify input into user-defined categories
+  - Create a table that contains sample customer reviews for a device.
+  - Categorize overall sentiment of each review.
+  - Rate user sentiment based on how favorable a review is towards price, customer service, or quality.
+  - Categorize and filter reviews by their main emotion or topic.
+  - Identify semantically similar reviews.
+  - Create reusable prompt user-defined functions (UDFs).
 
 ## Costs
 
@@ -328,6 +325,8 @@ The result looks similar to the following:
 +-----------+------------------------------------------+------------------+
 ```
 
+Even though the first review in the output is more positive, it specifically mentions difficulty with setup, so it scores higher. The second review expresses frustration with account access, but not with device setup, so its similarity score is lower.
+
 You can also use the `AI.IF` function to find reviews that relate to text:
 
     SELECT
@@ -379,7 +378,7 @@ To keep your queries readable, you can reuse your prompt logic by creating [user
 
 ## Clean up
 
-To avoid incurring charges, you can either delete the project that contains the resources that you created, or keep the project and delete the individual resources.
+To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
 ### Delete your project
 
@@ -403,3 +402,8 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 To delete the dataset and all resources that it contains, including all tables and functions, run the following query:
 
     DROP SCHEMA my_dataset CASCADE;
+
+## What's next
+
+  - Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - Learn more about the [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) , [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) , and [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) functions.

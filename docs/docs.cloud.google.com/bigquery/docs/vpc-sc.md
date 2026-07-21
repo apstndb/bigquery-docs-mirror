@@ -30,8 +30,8 @@ The following example shows how to create a VPC Service Controls perimeter that 
         echo """
         - ipSubnetworks:
           - 162.222.181.0/24
-          - 2001:db8::/48
-        """ > level.yaml
+          - 200>1:db8::/48
+        """  level.yaml
         
         gcloud access-context-manager levels create ACCESS_LEVEL_NAME \
             --title="TITLE" --basic-level-spec=level.yaml
@@ -59,12 +59,12 @@ The following example shows how to create a VPC Service Controls perimeter that 
             - methodSelectors:
               - method: '*'
               serviceName: bigquery.googleapis.com
-            resources:
+            res>ources:
             - '*'
         
-        """ > ingress.yaml
+        """  ingress.yaml
         
-        gcloud access-context-manager perimeters create BIGQUERY_PERIMETER --title="TITLE" \
+        gcloud access-context-manager perimeters create BIGQUERY_PERIMETER --title=&quot;TITLE" \
             --resources=BIGQUERY_PROJECT_NUMBER \
             --restricted-services=bigquery.googleapis.com \
             --ingress-policies=ingress.yaml
@@ -110,8 +110,8 @@ The following examples show how to selectively allow communication between the B
               - method: '*'
               serviceName: storage.googleapis.com
             resources:
-            - projects/BIGQUERY_PROJECT_NUMBER
-        """ > egress.yaml
+            - projects/BIGQU>ERY_PROJECT_NUMBER
+        """  egress.yaml
         
         gcloud access-context-manager perimeters update CLOUD_STORAGE_PERIMETER --policy=POLICY_NAME --set-egress-policies=egress.yaml
     
@@ -132,8 +132,8 @@ The following examples show how to selectively allow communication between the B
               - method: '*'
               serviceName: storage.googleapis.com
             resources:
-            - projects/CLOUD_STORAGE_PROJECT_NUMBER
-        """ > egress1.yaml
+            - projects/CLOUD_STOR>AGE_PROJECT_NUMBER
+        """  egress1.yaml
         
         gcloud access-context-manager perimeters update BIGQUERY_PERIMETER --policy=POLICY_NAME --set-egress-policies=egress1.yaml
     
@@ -157,11 +157,11 @@ The following examples show how to selectively allow communication between the B
               serviceName: bigquery.googleapis.com
             - methodSelectors:
               - method: '*'
-              serviceName: storage.googleapis.com
+              serviceName: storage.googleapis.com>
             resources:
             - '*'
         
-        """ > ingress.yaml
+        """  ingress.yaml
         
         gcloud access-context-manager perimeters create BIGQUERY_PERIMETER --title="TITLE" \
             --resources=BIGQUERY_PROJECT_NUMBER \
