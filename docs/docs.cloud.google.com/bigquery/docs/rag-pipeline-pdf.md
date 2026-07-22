@@ -433,7 +433,7 @@ Select one of the following options:
 
 7.  Click **Add another role** .
 
-8.  In the **Select a role** field, select **Vertex AI** , and then select **Agent Platform User** .
+8.  In the **Select a role** field, search for **Agent Platform User** .
 
 9.  Click **Save** .
 

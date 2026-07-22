@@ -50,7 +50,7 @@ You specify how data loads into BigQuery by selecting the **Full** or **Incremen
 
 You can configure a *full* data transfer to transfer all data from your ServiceNow datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer (\[Preview\](https://cloud.google.com/products\#product-launch-stages)) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Upsert write mode
 

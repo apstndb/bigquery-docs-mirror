@@ -125,7 +125,7 @@ For example, if you call the `AI.GENERATE` function on an `ObjectRef` value that
 
 The following example shows a query that uses direct access:
 
-    -- Requires that the end user can read the object "gs://cloud-samples-data/vision/demo-img.jpg" and use the Vertex AI model.
+    -- Requires that the end user can read the object "gs://cloud-samples-data/vision/demo-img.jpg" and use the Agent Platform model.
     SELECT AI.GENERATE(
       ("Describe this image:",
       OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg")),

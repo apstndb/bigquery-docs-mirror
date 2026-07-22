@@ -223,6 +223,9 @@ You can get help with the bq command-line tool by running the following commands
 
 You can use the following flags with any `bq` command, where applicable:
 
+  - **` --alpha= FEATURE_NAME  `**  
+    Specifies an alpha feature to enable.
+
   - **` --api= ENDPOINT  `**  
     Specifies the API endpoint to call. The default value is `https://bigquery.googleapis.com` .
 
@@ -237,8 +240,8 @@ You can use the following flags with any `bq` command, where applicable:
       - `stderr` - logs to standard error
       - `false` - API requests and responses are not logged (default)
 
-  - **`--use_google_auth={true|false}`**  
-    If set to `true` , enables authentication using Google Auth libraries. The default value is `true` .
+  - **` --bigquery_discovery_api_key= API_KEY  `**  
+    Specifies an API key to use for discovery document requests.
 
   - **` --bigqueryrc= PATH  `**  
     Specifies the path to the bq command-line tool configuration file. If you don't specify the `--bigqueryrc` flag, then the command uses the `BIGQUERYRC` environment variable. If the environment variable is not set, then `$HOME/.bigqueryrc` is used. If that file does not exist, then `~/.bigqueryrc` is used. For more information, see [Setting default values for command-line flags](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
@@ -253,13 +256,16 @@ You can use the following flags with any `bq` command, where applicable:
     If set to `true` , shows tracebacks on Python exceptions. The default value is `false` .
 
   - **`--disable_ssl_validation={true|false}`**  
-    If set to `true` , enables HTTPS certificate validation. The default value is `false` .
+    If set to `true` , disables HTTPS certificate validation. The default value is `false` .
 
   - **` --discovery_file= PATH  `**  
     Specifies the JSON file to read for discovery.
 
   - **`--enable_gdrive={true|false}`**  
     If set to `false` , requests a new OAuth token without Google Drive scope. The default value is `true` ; requests a new OAuth token with Drive scope. To set this flag to `false` when authenticated using a user account, the `--use_google_auth` flag must be set to `false` .
+
+  - **`--enable_resumable_uploads={true|false}`**  
+    Enables resumable uploads over HTTP for jobs that load data from local files. The default value is `true` .
 
   - **`--fingerprint_job_id={true|false}`**  
     To use a job ID that is derived from a fingerprint of the job configuration, set to `true` . This prevents the same job from running multiple times accidentally. The default value is `false` .
@@ -293,6 +299,12 @@ You can use the following flags with any `bq` command, where applicable:
   - **` --job_property= KEY : VALUE  `**  
     A key-value pair to include in the properties field of the job configuration. Repeat this flag to specify additional properties.
 
+  - **`--jobs_query_use_request_id={true|false}`**  
+    If set to `true` , sends a request ID in `jobs.query` requests. The default value is `false` .
+
+  - **`--jobs_query_use_results_from_response={true|false}`**  
+    If set to `true` , uses results from the `jobs.query` response. The default value is `true` .
+
   - **` --location= LOCATION  `**  
     A string corresponding to a region or multi-region [location](https://docs.cloud.google.com/bigquery/docs/locations) . The location flag is required for the [`bq cancel`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cancel) command and for the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command when you use the `--jobs` flag to show information about jobs. The location flag is optional for the following commands:
     
@@ -313,6 +325,9 @@ You can use the following flags with any `bq` command, where applicable:
   - **` --max_rows_per_request= MAX_ROWS  `**  
     An integer that specifies the maximum number of rows to return per read.
 
+  - **`--mtls={true|false}`**  
+    If set to `true` , uses an mTLS client certificate on connections to BigQuery. The default value is `false` .
+
   - **` --project_id= PROJECT  `**  
     Specifies the project to use for commands.
 
@@ -331,14 +346,38 @@ You can use the following flags with any `bq` command, where applicable:
   - **`--quiet={true|false}` or `-q={true|false}`**  
     To suppress status updates while jobs are running, set to `true` . The default value is `false` .
 
+  - **` --quota_project_id= PROJECT_ID  `**  
+    Specifies the ID of a Google Cloud project to use as the quota project to be used for billing and quota limits.
+
+  - **` --request_reason= REASON  `**  
+    Specifies a reason for making a request that is recorded in audit logs.
+
   - **`--synchronous_mode={true|false}` or `-sync={true|false}`**  
     To create the job and immediately return, with a successful completion status as the error code, set to `false` . If set to `true` , then the command waits for the job to complete before returning, and returns the job completion status as the error code. The default value is `true` .
 
   - **` --trace=token: TOKEN  `**  
     Specifies a tracing token to include in API requests.
 
+  - **` --universe_domain= DOMAIN  `**  
+    Specifies the universe domain to use in Trusted Partner Cloud (TPC) domains.
+
+  - **`--use_gcloud_config={true|false}`**  
+    If set to `true` , uses `gcloud` config to override default flag values. The default value is `true` .
+
+  - **`--use_gcloud_config_cache={true|false}`**  
+    If set to `true` , uses a persistent cache for `gcloud` config and credentials. The default value is `false` .
+
+  - **`--use_google_auth={true|false}`**  
+    If set to `true` , enables authentication using Google Auth libraries. The default value is `true` .
+
+  - **`--use_lep={true|false}`**  
+    If set to `true` , uses a LEP endpoint based on the operation's location. The default value is `false` .
+
   - **`--use_regional_endpoints={true|false}`**  
     In [preview](https://cloud.google.com/products/#product-launch-stages) . To connect to a regional endpoint, set the `--use_regional_endpoints` flag to `true` and the [`--location`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#location_flag) flag to the region you want to connect to. The default value is `false` .
+
+  - **`--use_rep={true|false}`**  
+    If set to `true` , uses a REP endpoint based on the operation's location. The default value is `false` .
 
 ## Deprecated global flags
 

@@ -8,6 +8,8 @@ data_source: docs.cloud.google.com
 
   - [Resource: DataPolicy](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#DataPolicy)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#DataPolicy.SCHEMA_REPRESENTATION)
+  - [DataGovernanceTag](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#DataGovernanceTag)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#DataGovernanceTag.SCHEMA_REPRESENTATION)
   - [DataMaskingPolicy](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#DataMaskingPolicy)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#DataMaskingPolicy.SCHEMA_REPRESENTATION)
   - [PredefinedExpression](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#PredefinedExpression)
@@ -30,7 +32,7 @@ Represents the label-policy binding.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyId&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;policyTag&quot;: string,&quot;grantees&quot;: [string],&quot;version&quot;: enum (Version),// Union field policy can be only one of the following:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of list of possible types for union field policy.&quot;etag&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyId&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;policyTag&quot;: string,&quot;grantees&quot;: [string],&quot;version&quot;: enum (Version),// Union field matching_label can be only one of the following:&quot;dataGovernanceTag&quot;: {object (DataGovernanceTag)}// End of list of possible types for union field matching_label.// Union field policy can be only one of the following:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of list of possible types for union field policy.&quot;etag&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -75,6 +77,14 @@ Uses the [IAM V2 principal syntax](https://cloud.google.com/iam/docs/principal-i
 
 Output only. The version of the Data Policy resource.
 
+Union field `matching_label` . Label that is bound to this data policy. `matching_label` can be only one of the following:
+
+`dataGovernanceTag`
+
+` object ( DataGovernanceTag  ` )
+
+Optional. Data Governance tag bound to the Data Policy.
+
 Union field `policy` . The policy that is bound to this data policy. `policy` can be only one of the following:
 
 `dataMaskingPolicy`
@@ -88,6 +98,43 @@ Optional. The data masking policy that specifies the data masking rule to use. I
 `string`
 
 The etag for this Data Policy. This field is used for dataPolicies.patch calls. If Data Policy exists, this field is required and must match the server's etag. It will also be populated in the response of dataPolicies.get, dataPolicies.create, and dataPolicies.patch calls.
+
+## DataGovernanceTag
+
+This is a namespaced name specifying the key and the value. For example: `project-id/pii/sensitive` .
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;key&quot;: string,
+  &quot;value&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`key`
+
+`string`
+
+Optional. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example `parent-id/pii` where `parent-id` is the ID of the parent organization or project resource for this tag key.
+
+`value`
+
+`string`
+
+Optional. Specifies the tag value as the short name, for example `sensitive` .
 
 ## DataMaskingPolicy
 

@@ -449,7 +449,7 @@ A field in TableSchema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {&quot;names&quot;: [string]},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {&quot;names&quot;: [string]},&quot;dataGovernanceTagsInfo&quot;: {&quot;dataGovernanceTags&quot;: {string: string,...}},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -515,6 +515,24 @@ Optional. The policy tags attached to this field, used for field-level access co
 `string`
 
 A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed.
+
+`dataGovernanceTagsInfo`
+
+`object`
+
+Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows:
+
+  - **Precedence** : If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag.
+  - **Patching behavior** : Describes how this field behaves during a `Table.patch` schema update:
+      - **Unset** : If the `dataGovernanceTagsInfo` field is omitted from the update request, the existing tags on the column are preserved.
+      - **Empty Field** : To clear data governance tags from a column, send the `dataGovernanceTagsInfo` field as an empty object. This removes all tags from the column.
+      - **Updating tags** : To replace an existing tag, send the field with the new tag.
+
+`dataGovernanceTagsInfo.dataGovernanceTags`
+
+`map (key: string, value: string)`
+
+Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "parent-id/pii" where parent-id is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "parent-id/pii": "sensitive", "myProject/cost\_center": "sales"
 
 `dataPolicies[]`
 

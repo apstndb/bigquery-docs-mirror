@@ -23,7 +23,7 @@ To run generative AI queries using end-user credentials, configure the necessary
 
 ### Required roles
 
-To get the permissions that you need to run a query job that calls a Vertex AI model, ask your administrator to grant you the following IAM roles on the project:
+To get the permissions that you need to run a query job that calls an Agent Platform model, ask your administrator to grant you the following IAM roles on the project:
 
   - Run query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
   - Access a foundation model in Gemini Enterprise Agent Platform: [Agent Platform User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )

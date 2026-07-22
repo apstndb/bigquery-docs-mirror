@@ -132,8 +132,6 @@ Publishers can enable data egress restriction on a listing, the results of a que
 
   - Copy, clone, export, and snapshot options are unavailable in the Google Cloud console.
 
-  - Connecting the restricted dataset to the table explorer is unavailable.
-
   - BigQuery Data Transfer Service is unavailable on the restricted dataset.
 
   - [`CREATE TABLE AS SELECT` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and [writing to a destination table](https://docs.cloud.google.com/bigquery/docs/writing-results) are unavailable.

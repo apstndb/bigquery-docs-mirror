@@ -75,7 +75,7 @@ When you analyze image data, the content must be in one of the supported image f
         
         You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    You need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you run the function.
+    You need to grant the [Agent Platform User role](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user) to the connection's service account in the project where you run the function.
 
 ### Multimodal embedding
 
@@ -126,7 +126,7 @@ When you analyze image data, the content must be in one of the supported image f
         
         You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    You need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you run the function.
+    You need to grant the [Agent Platform User role](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user) to the connection's service account in the project where you run the function.
 
   - `  ENDPOINT  ` : a `STRING` value that specifies the Agent Platform endpoint to use for the multimodal embedding model. If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 

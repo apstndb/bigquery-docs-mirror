@@ -410,7 +410,7 @@ To grant these roles, follow these steps:
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, select **Vertex AI** , and then select **Agent Platform User** .
+4.  In the **Select a role** field, search for **Agent Platform User** .
 
 5.  Click **Add another role** .
 
