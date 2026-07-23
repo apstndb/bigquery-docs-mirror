@@ -88,7 +88,9 @@ Optionally, if the `TARGET_TABLE` or `TARGET_QUERY_STATEMENT` argument is not pr
 
   - `  TARGET_START_TIMESTAMP  ` : a `TIMESTAMP` value or expression that specifies the cutoff point for the target data. Data points with a timestamp on or prior to the cutoff point are used as historical data. Data points with a timestamp strictly after the cutoff point are used as the target data. If you use this argument, then you can't specify the `TARGET_TABLE` , `TARGET_QUERY_STATEMENT` , or `TARGET_LAST_N_POINTS` arguments. You can use an expression for this argument to specify a rolling time window, for example `TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)` to detect anomalies for the last week.
 
-  - `  MODEL_NAME  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.0` .
+  - `  MODEL_NAME  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.5` .
+    
+    > **Note:** We recommend using `TimesFM 2.5` for all new anomaly detection tasks.
 
   - `  ID_COLS  ` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each ID identifies a unique time series to evaluate. Specify one or more values for this argument in order to evaluate multiple time series using a single query. The columns that you specify must use one of the following data types:
     

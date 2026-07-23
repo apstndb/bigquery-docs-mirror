@@ -197,6 +197,12 @@ Specify a column option list in the following format:
 <p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement"><code dir="ltr" translate="no">ALTER TABLE ALTER COLUMN</code></a> statement supports the <code dir="ltr" translate="no">=</code> and <code dir="ltr" translate="no">+=</code> operators to add data policies to a specific column.</p>
 <p>Example: <code dir="ltr" translate="no">data_policies +=["data_policy1", "data_policy2"]</code></p></td>
 </tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">data_governance_tags</code></td>
+<td><code dir="ltr" translate="no">ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;</code></td>
+<td><p>Applies <a href="https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags">data governance tags</a> to a column in a table.</p>
+<p>Example: <code dir="ltr" translate="no">data_governance_tags = [("myproject/tag_key", "tag_value")]</code></p></td>
+</tr>
 </tbody>
 </table>
 

@@ -19,6 +19,7 @@ Before you create an Amazon S3 data transfer:
   - [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. The destination table must follow the [table naming rules](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) . Destination table names also support [parameters](https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters) . You can create a BigQuery table or [create Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
   - Retrieve your Amazon S3 URI, your access key ID, and your secret access key. For information on managing your access keys, see the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) .
   - If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+  - If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer#CMEK) .
 
 ## Limitations
 
@@ -147,6 +148,8 @@ To create an Amazon S3 data transfer:
           - If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a data transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the data transfer is optional.
           - The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/s3-transfer#required_permissions) .
     
+      - If you use [CMEKs](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) , in the **Advanced options** section, select **Customer-managed key** . A list of your available CMEKs appears for you to choose from.
+    
       - (Optional) In the **Notification options** section:
         
           - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a data transfer run fails.
@@ -165,6 +168,7 @@ Enter the `bq mk` command and supply the transfer creation flag — `--transfer_
     --display_name=name \
     --target_dataset=dataset \
     --service_account_name=service_account \
+    --destination_kms_key=destination_key \
     --params='parameters'
 
 Where:
@@ -178,6 +182,8 @@ Where:
   - dataset : Required. The target dataset for the data transfer configuration.
 
   - service\_account : The service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the data transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/s3-transfer#required_permissions) .
+
+  - destination\_key : Optional. The [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) — for example, `projects/project_name/locations/us/keyRings/key_ring_name/cryptoKeys/key_name` .
 
   - parameters : Required. The parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for an Amazon S3 transfer:
     
@@ -329,6 +335,18 @@ Along with these files in the source location:
 This will result in all Amazon S3 files with the prefix `s3://bucket/folder/` being transferred to Google Cloud. In this example, both `file1.csv` and `file2.csv` will be transferred.
 
 However, only files matching `s3://bucket/folder/*/subfolder/*.csv` will actually load into BigQuery. In this example, only `file1.csv` will be loaded into BigQuery.
+
+## Specify encryption key with transfers
+
+You can specify [customer-managed encryption keys (CMEKs)](https://docs.cloud.google.com/kms/docs/cmek) to encrypt data for a transfer run. You can use a CMEK to support transfers from [Amazon Simple Storage Service (Amazon S3)](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
+
+When you specify a CMEK with a transfer, the BigQuery Data Transfer Service applies the CMEK to any intermediate on-disk cache of ingested data so that the entire data transfer workflow is CMEK compliant.
+
+You cannot update an existing transfer to add a CMEK if the transfer was not originally created with a CMEK. For example, you cannot change a destination table that was originally default encrypted to now be encrypted with CMEK. Conversely, you also cannot change a CMEK-encrypted destination table to have a different type of encryption.
+
+You can update a CMEK for a transfer if the transfer configuration was originally created with a CMEK encryption. When you update a CMEK for a transfer configuration, the BigQuery Data Transfer Service propagates the CMEK to the destination tables at the next run of the transfer, where the BigQuery Data Transfer Service replaces any outdated CMEKs with the new CMEK during the transfer run. For more information, see [Update a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_a_transfer) .
+
+You can also use [project default keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#project_default_key) . When you specify a project default key with a transfer, the BigQuery Data Transfer Service uses the project default key as the default key for any new transfer configurations.
 
 ## Troubleshoot transfer setup
 

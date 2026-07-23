@@ -114,22 +114,26 @@ There is no default limit on how many TiB in queries a user can run per day. You
 </td>
 </tr>
 <tr class="odd">
+<td>BigQuery Omni transferred bytes per job</td>
+<td>60 GB</td>
+<td>The maximum transfer size per job is 60 GB when you run <code dir="ltr" translate="no">CREATE TABLE AS SELECT</code> (CTAS) or <code dir="ltr" translate="no">INSERT INTO SELECT</code> statements in BigQuery Omni regions to <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data">filter data</a> during a cross-cloud transfer. This limit also applies to <a href="https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins">BigQuery Omni joins</a> , which runs an Omni CTAS query in the background to transfer data into a temporary table in your BigQuery region. To request an increase, <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">contact Support</a> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_join_costs">BigQuery Omni join costs</a> .</td>
+</tr>
+<tr class="even">
 <td>Bytes transferred by global queries per day per region pair</td>
 <td>180 TB</td>
-<td>You can transfer up to 180 TB of data per day between each pair of regions with <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> .</td>
-</tr>
-<tr class="even">
-<td>Global queries copy jobs per project</td>
-<td>10,000</td>
-<td>You can execute up to 10,000 copy jobs per project when you run <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> that copy data between regions. One global query might trigger multiple copy jobs.<br />
-</td>
+<td>You can transfer up to 180 TB of data per day between each pair of regions with <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> . To request a quota increase, <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">contact Support</a> .</td>
 </tr>
 <tr class="odd">
-<td>Bytes transferred by a single copy job in a global query</td>
-<td>100 GB</td>
-<td>A single copy job that is a part of a <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global query</a> can't transfer more than 100 GB.</td>
+<td>Global queries copy jobs per project</td>
+<td>10,000</td>
+<td>You can execute up to 10,000 copy jobs per project when you run <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> that copy data between regions. One global query might trigger multiple copy jobs. To request a quota increase, <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">contact Support</a> .</td>
 </tr>
 <tr class="even">
+<td>Bytes transferred by a single copy job in a global query</td>
+<td>100 GB</td>
+<td>By default, a single copy job that is a part of a <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global query</a> can transfer a maximum of 100 GB. To request a limit increase, <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">contact Support</a> .</td>
+</tr>
+<tr class="odd">
 <td>Global project-level options updates</td>
 <td>5</td>
 <td><p>When you run a DDL statement that changes <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings">global configuration options</a> , you can run up to five statements every 10 seconds. This limit applies to the following DDL statements:</p>

@@ -341,6 +341,10 @@ The following table describes the important fields from the insights API respons
 
 ### View recommendations with `INFORMATION_SCHEMA`
 
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
 You can also view your recommendations and insights using `INFORMATION_SCHEMA` views. For example, you can use the `INFORMATION_SCHEMA.RECOMMENDATIONS` view to view your top three recommendations based on slots savings, as seen in the following example:
 
     SELECT

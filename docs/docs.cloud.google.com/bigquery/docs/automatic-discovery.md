@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Discover and catalog Cloud Storage data
 
-This document explains how to use Knowledge Catalog automatic discovery, a feature in BigQuery that lets you scan data in Cloud Storage buckets to extract and then catalog metadata. As part of the discovery scan, automatic discovery creates BigLake or external tables for structured data and object tables for unstructured data. This centralized table data eases AI-powered data insights, data security, and governance.
+This document explains how to use Knowledge Catalog automatic discovery, a feature in BigQuery that lets you scan data in Cloud Storage buckets to extract and then catalog metadata. As part of the discovery scan, automatic discovery creates BigLake or external tables for structured data and object tables for unstructured data. BigLake tables and external tables let you query structured data in external data stores (see [Introduction to BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [Introduction to external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) ), while object tables provide a metadata index over unstructured data in Cloud Storage (see [Introduction to object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) ). This centralized table data eases AI-powered data insights, data security, and governance.
 
 To use automatic discovery of Cloud Storage data, you create and run a discovery scan.
 
@@ -23,13 +23,18 @@ A discovery scan does the following:
   - Collects metadata, such as the table name, schema, and partition definition.
   - Creates and updates [BigLake external](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , [non-BigLake external](https://docs.cloud.google.com/bigquery/docs/external-tables) , or [BigLake object](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) tables in BigQuery using the schema and partition definition.
 
-For unstructured data, such as images and videos, the discovery scan detects and registers groups of files that share the same data file format. Files must be located in folders that contain the same file format. For example, `gs://images/group1` must only contain GIF images, and `gs://images/group2` must only contain JPEG images for the discovery scan to detect and register two BigLake object tables.
+### Structured and semi-structured data
 
-For structured data, such as Avro, the discovery scan registers groups of files as BigLake external tables and detects files only if they're located in folders that contain the same data format and compatible schema.
+Structured and semi-structured data includes formats like Avro, Parquet, and CSV. The discovery scan registers groups of these files as BigLake external tables. The scan detects files only if they are located in folders that contain the same data format and a compatible schema.
 
-The discovery scan supports the following formats:
+  - **Use case** : Centralize strongly typed, structured files into BigQuery to run analytical SQL queries without manually defining schemas.
+  - **Workflow** :
+    1.  Organize your structured files into folders. Ensure that the files in each folder share the same data format and have a compatible schema.
+    2.  Create a discovery scan and provide your Google Cloud resource connection ID.
+    3.  The scan groups the data and registers it as BigLake external tables.
+    4.  Query the published tables directly in BigQuery using SQL.
 
-**Structured and semi-structured**
+#### Supported formats
 
   - Parquet
   - Avro
@@ -37,17 +42,9 @@ The discovery scan supports the following formats:
   - JSON (only the [newline-delimited format](https://github.com/ndjson/ndjson-spec) )
   - CSV (but not CSV files that have comment rows)
 
-[**Unstructured**](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#supported_object_files)
+#### Compression formats
 
-  - Image (such as JPEG, PNG, and BMP)
-  - Documents (such as PDF, slide presentations, and text reports)
-  - Audio or video (such as WAV, MP3, and MP4)
-
-> **Note:** Apache Iceberg and Delta Lake table formats aren't supported by the discovery scan.
-
-The discovery scan supports the following compression formats:
-
-**Structured and semi-structured data**
+For structured and semi-structured data, the discovery scan supports the following compression formats:
 
   - Internal compression for the following formats:
     
@@ -64,7 +61,28 @@ The discovery scan supports the following compression formats:
       - gzip
       - bzip2
 
-**Unstructured data**
+### Unstructured data
+
+For unstructured data, such as images and videos, the discovery scan detects and registers groups of files that share the same data file format. Files must be located in folders that contain the same file format. For example, `gs://images/group1` must only contain GIF images, and `gs://images/group2` must only contain JPEG images for the discovery scan to detect and register two BigLake object tables.
+
+  - **Use case** : Catalog unstructured files like images or documents to perform machine learning inference using BigQuery ML or remote functions.
+  - **Workflow** :
+    1.  Organize your unstructured files into folders. Ensure that the files in each folder share the same file format.
+    2.  Create a discovery scan.
+    3.  The scan groups the unstructured data and registers it as BigLake object tables.
+    4.  Perform inference on your unstructured files directly in BigQuery.
+
+#### Supported formats
+
+The discovery scan supports the following unstructured formats:
+
+  - Image (such as JPEG, PNG, and BMP)
+  - Documents (such as PDF, slide presentations, and text reports)
+  - Audio or video (such as WAV, MP3, and MP4)
+
+For more information, see [supported object files](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#supported_object_files) .
+
+#### Compression formats
 
 For object tables, compression is managed primarily through [Cloud Storage object metadata](https://docs.cloud.google.com/storage/docs/metadata) , rather than BigQuery internal settings.
 
@@ -72,9 +90,26 @@ For object tables, compression is managed primarily through [Cloud Storage objec
   - Content-Encoding: you can use the [Content-Encoding gzip](https://docs.cloud.google.com/storage/docs/metadata#content-encoding) metadata in Cloud Storage to serve compressed files while maintaining their original content-type.
   - Media-internal compression: formats that are inherently compressed (such as JPEG for images, MP3 for audio, MP4 for video) are natively supported.
 
-To see the limit of how many tables a discovery scan supports, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#dataplex-discovery) .
+### Table registration and availability
 
-The discovered tables are registered in BigQuery as BigLake external tables, BigLake object tables, or external tables. This makes their data available for analysis in BigQuery. Metadata caching for BigLake tables and object tables is also enabled. All the BigLake tables are automatically ingested into Knowledge Catalog for search and discovery.
+The discovered tables are registered in BigQuery as one of the following table types, depending on the data format and your scan configuration:
+
+  - **BigLake object tables** . Created for unstructured data, such as images and videos.
+  - **BigLake external tables** . Created for structured and semi-structured data when you provide a Google Cloud resource connection ID during the scan configuration.
+  - **External tables (non-BigLake)** : Created for structured and semi-structured data if you don't provide a resource connection ID.
+
+This registration makes their data available for analysis in BigQuery. Metadata caching for BigLake tables and object tables is also enabled. All the BigLake tables are automatically ingested into Knowledge Catalog for search and discovery.
+
+To start working with your newly registered tables, you can:
+
+  - [Run a query](https://docs.cloud.google.com/bigquery/docs/running-queries) in BigQuery.
+  - [Search for resources](https://docs.cloud.google.com/dataplex/docs/search-assets) in Knowledge Catalog.
+
+### Limitations and quotas
+
+A discovery scan doesn't support Apache Iceberg and Delta Lake table formats.
+
+To see the limit of how many tables a discovery scan supports, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#dataplex-discovery) .
 
 ## Before you begin
 
@@ -211,7 +246,7 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 9.  For **Unstructured data options** , select **Enable semantic inference** .
     
-    This option is required if you want to view data insights for unstructured data in Knowledge Catalog. For more information, see [About data insights for unstructured data](https://docs.cloud.google.com/dataplex/docs/data-insights-unstructured-data) .
+    This option is required if you want to view data insights for unstructured data in Knowledge Catalog. For more information, see [About unstructured data insights](https://docs.cloud.google.com/dataplex/docs/data-insights-unstructured-data) .
 
 10. Optional: In **Project** , select the BigQuery dataset project that contains the BigLake external or non-BigLake external tables created by the discovery scan. If not provided, the dataset is created in the project that contains the Cloud Storage bucket.
 
@@ -234,7 +269,7 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
     1.  To configure JSON options, select **Enable JSON parsing options** .
           - **Disable type inference** : whether the discovery scan should infer data types when scanning data. If you disable type inference for JSON data, all columns are registered as their primitive types, such as string, number, or boolean.
           - **Encoding format** : the character encoding of the data, such as UTF-8, US-ASCII, or ISO-8859-1. If you don't specify a value, UTF-8 is used as the default.
-    2.  To configure CSV options, check **Enable CSV parsing options** .
+    2.  To configure CSV options, select **Enable CSV parsing options** .
           - **Disable type inference** : whether the discovery scan should infer data types when scanning data. If you disable type inference for CSV data, all columns are registered as strings.
           - **Header rows** : the number of header rows, either `0` or `1` . If you specify the value `0` , the discovery scan infers headings and extracts the column names from the file. The default is `0` .
           - **Column delimiter character** : the character that is used to separate values. Provide a single character, `\r` (carriage return), or `\n` (newline). The default is a comma ( `,` ).
@@ -242,11 +277,9 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 15. Click **Create** (for a scheduled scan), **Run now** (for an on-demand scan), or **Create and run** (for a one-time scan).
     
-    A scheduled scan is run according to the schedule that you set.
-    
-    An on-demand scan is run once initially when you create it, and you can run the scan at any time. It can take several minutes for the discovery scan to run.
-    
-    A one-time scan executes automatically, a single time. It's automatically deleted when it reaches its defined time to live (TTL) threshold, a value that determines the duration a discovery scan remains active after execution. The TTL value can range from 0 seconds (immediate deletion) to 365 days. A discovery scan without a specified TTL is automatically deleted after 24 hours.
+      - **Scheduled scan** : is run according to the schedule that you set.
+      - **On-demand scan** : is run once initially when you create it, and you can run the scan at any time. It can take several minutes for the discovery scan to run.
+      - **One-time scan** : executes automatically. It's automatically deleted when it reaches its defined time to live (TTL) threshold, a value that determines the duration a discovery scan remains active after execution. The TTL value can range from 0 seconds (immediate deletion) to 365 days. A discovery scan without a specified TTL is automatically deleted after 24 hours.
 
 ### gcloud
 
@@ -454,7 +487,6 @@ Replace the following:
   - `  JOB  ` : the job ID of the discovery scan job.
   - `  LOCATION  ` : the Google Cloud region in which the discovery scan was created.
   - `  DATASCAN  ` : the name of the discovery scan the job belongs to.
-  - `--view=FULL` : see the discovery scan job result.
 
 ### REST
 
@@ -489,7 +521,7 @@ Replace the following:
 
 ### REST
 
-To view all the jobs of a discovery scan, use the [`dataScans.job/list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) in the Dataplex API.
+To view all the jobs of a discovery scan, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) in the Dataplex API.
 
 ## Update a discovery scan
 

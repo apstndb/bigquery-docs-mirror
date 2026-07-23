@@ -50,7 +50,7 @@ https://docs.cloud.google.com/bigquery/docs/authorized-datasets	2026-07-18T03:58
 https://docs.cloud.google.com/bigquery/docs/authorized-routines	2026-07-18T03:58:08Z
 https://docs.cloud.google.com/bigquery/docs/authorized-views	2026-07-17T17:55:48Z
 https://docs.cloud.google.com/bigquery/docs/auto-preprocessing	2026-07-18T03:58:08Z
-https://docs.cloud.google.com/bigquery/docs/automatic-discovery	2026-07-18T03:58:08Z
+https://docs.cloud.google.com/bigquery/docs/automatic-discovery	2026-07-23T06:22:39Z
 https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation	2026-07-18T03:58:08Z
 https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment	2026-07-18T03:58:08Z
 https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment	2026-07-18T03:58:08Z
@@ -72,7 +72,7 @@ https://docs.cloud.google.com/bigquery/docs/bi-engine-query	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/biglake-audit-logging	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery	2026-07-18T03:57:15Z
-https://docs.cloud.google.com/bigquery/docs/biglake-intro	2026-07-18T03:57:15Z
+https://docs.cloud.google.com/bigquery/docs/biglake-intro	2026-07-22T17:25:49Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-cud	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction	2026-07-18T03:57:15Z
@@ -84,7 +84,7 @@ https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial	2026
 https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-implicit-tutorial	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/bigqueryml-transform	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/billing-questions	2026-07-18T03:57:15Z
-https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer	2026-07-18T03:57:15Z
+https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer	2026-07-22T18:05:30Z
 https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/boosted-tree-classifier-tutorial	2026-07-18T03:57:15Z
@@ -98,7 +98,7 @@ https://docs.cloud.google.com/bigquery/docs/choose-text-generation-function	2026
 https://docs.cloud.google.com/bigquery/docs/classification-overview	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access	2026-07-18T03:57:15Z
-https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer	2026-07-18T03:57:15Z
+https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer	2026-07-22T18:05:30Z
 https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/clustered-tables	2026-07-18T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/clustering-overview	2026-07-18T03:57:15Z
@@ -157,7 +157,7 @@ https://docs.cloud.google.com/bigquery/docs/data-canvas	2026-07-18T04:27:35Z
 https://docs.cloud.google.com/bigquery/docs/data-clean-rooms	2026-07-18T04:27:35Z
 https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines	2026-07-18T04:27:35Z
 https://docs.cloud.google.com/bigquery/docs/data-governance	2026-07-17T16:14:59Z
-https://docs.cloud.google.com/bigquery/docs/data-insights	2026-07-18T04:27:35Z
+https://docs.cloud.google.com/bigquery/docs/data-insights	2026-07-23T08:40:52Z
 https://docs.cloud.google.com/bigquery/docs/data-manipulation-language	2026-07-18T04:27:35Z
 https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions	2026-07-18T04:27:35Z
 https://docs.cloud.google.com/bigquery/docs/data-prep-introduction	2026-07-18T04:27:35Z
@@ -273,7 +273,7 @@ https://docs.cloud.google.com/bigquery/docs/global-queries	2026-07-18T03:58:06Z
 https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets	2026-07-20T04:16:05Z
 https://docs.cloud.google.com/bigquery/docs/google-ads-transfer	2026-07-18T03:58:06Z
 https://docs.cloud.google.com/bigquery/docs/google-ads-transformation	2026-07-18T03:58:06Z
-https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer	2026-07-18T03:58:06Z
+https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer	2026-07-22T18:05:30Z
 https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transformation	2026-07-18T03:58:06Z
 https://docs.cloud.google.com/bigquery/docs/graph-chat	2026-07-17T21:04:03Z
 https://docs.cloud.google.com/bigquery/docs/graph-compare	2026-07-18T03:58:06Z
@@ -421,7 +421,7 @@ https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables	2026-07-18T0
 https://docs.cloud.google.com/bigquery/docs/manage-data-preparations	2026-07-18T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations	2026-07-18T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/manage-notebooks	2026-07-18T03:57:51Z
-https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations	2026-07-18T03:57:51Z
+https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations	2026-07-22T23:03:39Z
 https://docs.cloud.google.com/bigquery/docs/manage-pipelines	2026-07-18T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/manage-saved-queries	2026-07-18T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery	2026-07-18T03:57:51Z
@@ -480,7 +480,7 @@ https://docs.cloud.google.com/bigquery/docs/migration/snowflake-migration-intro	
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-network-policies	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-sql	2026-07-18T04:02:28Z
-https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer	2026-07-18T04:02:28Z
+https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer	2026-07-22T18:05:30Z
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/migration/teradata	2026-07-18T04:02:28Z
@@ -916,7 +916,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2	2026-04-29T22:55:45Z
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2alpha	2026-04-29T22:55:45Z
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.rpc	2025-10-17T21:03:38Z
-https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers	2026-07-18T04:02:28Z
+https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers	2026-07-22T14:23:52Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations	2026-07-20T04:21:23Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest	2025-12-19T17:36:29Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/Shared.Types/Status	2025-10-17T21:04:04Z
@@ -1055,10 +1055,10 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens	2026-07-18T04:02:28Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies	2026-07-18T04:02:28Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies	2026-07-23T02:03:24Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed	2026-07-21T22:02:50Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate	2026-07-18T04:02:28Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast	2026-07-18T04:02:28Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate	2026-07-23T02:03:24Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast	2026-07-23T02:03:24Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double	2026-07-18T04:02:28Z
@@ -1169,7 +1169,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_e
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language	2026-07-18T04:02:26Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language	2026-07-18T04:02:26Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language	2026-07-22T00:06:07Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions	2026-07-18T04:02:26Z
@@ -1199,7 +1199,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/interval_func
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical	2026-07-18T04:02:26Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements	2026-07-18T04:02:26Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements	2026-07-22T00:06:07Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions	2026-07-18T04:02:26Z
@@ -1207,7 +1207,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators	2026-07-18T04:02:26Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax	2026-07-18T04:02:26Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax	2026-07-22T16:01:38Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions	2026-07-18T04:02:26Z
@@ -1264,19 +1264,19 @@ https://docs.cloud.google.com/bigquery/docs/routines-intro	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/row-level-security-intro	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/running-jobs	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/running-queries	2026-07-21T08:23:03Z
-https://docs.cloud.google.com/bigquery/docs/s3-transfer	2026-07-18T04:02:26Z
+https://docs.cloud.google.com/bigquery/docs/s3-transfer	2026-07-22T18:05:30Z
 https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-transfer	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro	2026-07-21T15:46:27Z
-https://docs.cloud.google.com/bigquery/docs/samples	2026-07-21T15:04:09Z
+https://docs.cloud.google.com/bigquery/docs/samples	2026-07-22T01:44:14Z
 https://docs.cloud.google.com/bigquery/docs/sandbox	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/scan-with-dlp	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/schedule-pipelines	2026-07-18T04:02:26Z
-https://docs.cloud.google.com/bigquery/docs/scheduling-queries	2026-07-18T04:02:26Z
+https://docs.cloud.google.com/bigquery/docs/scheduling-queries	2026-07-22T18:05:30Z
 https://docs.cloud.google.com/bigquery/docs/schema-detect	2026-07-21T08:23:03Z
 https://docs.cloud.google.com/bigquery/docs/schemas	2026-07-18T04:02:26Z
 https://docs.cloud.google.com/bigquery/docs/search	2026-07-18T04:02:26Z
@@ -1394,7 +1394,7 @@ https://docs.cloud.google.com/bigquery/docs/youtube-channel-transformation	2026-
 https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer	2026-07-18T04:02:22Z
 https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transformation	2026-07-18T04:02:22Z
 https://docs.cloud.google.com/bigquery/public-data	2026-07-18T04:00:11Z
-https://docs.cloud.google.com/bigquery/quotas	2026-07-18T04:15:37Z
+https://docs.cloud.google.com/bigquery/quotas	2026-07-22T17:25:49Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq	2026-05-27T16:47:36Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets	2026-05-27T16:47:48Z
 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/config	2026-05-27T16:48:22Z

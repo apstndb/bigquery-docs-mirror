@@ -89,6 +89,21 @@ Pipe operators have the following semantic behavior:
   - A pipe operator consumes the input table passed to it through the pipe symbol, `|>` , and produces a new table as output.
   - A pipe operator can reference only columns from its immediate input table. Columns from earlier in the same query aren't visible. Inside subqueries, correlated references to outer columns are still allowed.
 
+### Order preservation
+
+The following operators preserve row order if the input table is ordered:
+
+  - [`SELECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#select_pipe_operator) (except when using `SELECT DISTINCT` or window functions)
+  - [`EXTEND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) (except when using window functions)
+  - [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#set_pipe_operator) (except when using window functions)
+  - [`DROP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#drop_pipe_operator)
+  - [`RENAME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator)
+  - [`AS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator)
+  - [`LIMIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#limit_pipe_operator)
+  - [`WITH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#with_pipe_operator)
+
+When you use these operators after an [`ORDER BY` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#order_by_pipe_operator) , the result remains ordered. Additionally, if a [`LIMIT` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#limit_pipe_operator) follows an order-preserving operator, the query computes the top rows based on that order.
+
 ## `FROM` queries
 
 In pipe syntax, a query can start with a standard [`FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) and use any standard `FROM` syntax, including tables, joins, subqueries, and table-valued functions (TVFs). Table aliases can be assigned to each input item using the [`AS alias` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#using_aliases) .

@@ -65,7 +65,9 @@ FROM
       - `DATE`
       - `DATETIME`
 
-  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.0` .
+  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.5` .
+    
+    > **Note:** We recommend using `TimesFM 2.5` for all new evaluation tasks.
 
   - `  ID_COLS  ` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to evaluate. Specify one or more values for this argument in order to evaluate multiple time series using a single query. The columns that you specify must use one of the following data types:
     

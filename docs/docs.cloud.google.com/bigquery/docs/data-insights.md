@@ -182,7 +182,7 @@ These workflows support data stewards and governance teams in maintaining data i
 
 ## Pricing
 
-For details about pricing for this feature, see [Gemini in BigQuery pricing overview](https://docs.cloud.google.com/gemini/pricing#gemini-in-bigquery-pricing) .
+For details about pricing for this feature, see [Data Cloud Agent pricing](https://cloud.google.com/products/data-agents/pricing) .
 
 ## Quotas and limits
 
