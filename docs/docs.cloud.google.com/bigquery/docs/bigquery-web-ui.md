@@ -54,7 +54,7 @@ You can also use the navigation menu to perform specific tasks in the following 
   - **Administration** : lets you perform administrative tasks such as [monitoring](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) , viewing information about [jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) , [managing capacity](https://docs.cloud.google.com/bigquery/docs/reservations-intro) , viewing information about [disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) , and displaying [recommendations](https://docs.cloud.google.com/bigquery/docs/recommendations-intro) .
   - **Migration** : lets you view and set up options for [migrating your data warehouse](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview) to BigQuery.
   - **Partner Center** : provides tools and services from [partners](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview#partner_center) to accelerate your workflow.
-  - **Settings** : lets you [customize BigQuery default settings or user interface settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings) .
+  - **Settings** : lets you customize your BigQuery user and administrator settings.
   - **Release notes** : contains the latest [product updates and announcements](https://docs.cloud.google.com/bigquery/docs/release-notes) for BigQuery.
 
 ## The BigQuery Studio page

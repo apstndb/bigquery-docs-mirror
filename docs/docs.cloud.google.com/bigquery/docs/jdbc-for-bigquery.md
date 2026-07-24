@@ -283,6 +283,16 @@ Boolean
 
 No
 
+`EnableProjectDiscovery`
+
+Determines if database metadata methods discover datasets across all accessible Google Cloud projects. When set to `FALSE` , discovery is restricted to the default `ProjectId` .
+
+`FALSE`
+
+Boolean
+
+No
+
 `EnableSession`
 
 Determines if the connection starts a session. If set to `TRUE` , the session ID is passed to all subsequent queries.
@@ -744,6 +754,16 @@ String
 
 No
 
+`SSLTrustStoreProvider`
+
+The Java Cryptography Extension (JCE) provider used for the `SSLTrustStore` property.
+
+N/A
+
+String
+
+No
+
 `SSLTrustStorePwd`
 
 The password to the Java TrustStore specified in the `SSLTrustStore` property.
@@ -753,6 +773,16 @@ N/A
 String
 
 Only if the Java TrustStore is password-protected
+
+`SSLTrustStoreType`
+
+The format of the truststore file specified in the `SSLTrustStore` property (such as `JKS` , `PKCS12` , or `ROTKS` ).
+
+N/A
+
+String
+
+No
 
 `SWA_ActivationRowCount`
 

@@ -80,7 +80,7 @@ Create a BigQuery dataset to contain your resources:
     Replace the following:
     
       - `  LOCATION  ` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) .
-      - `  DATASET_ID  ` is the ID of the dataset that you're creating.
+      - `  DATASET_ID  ` : the ID of the dataset that you're creating.
 
 2.  Confirm that the dataset was created:
     

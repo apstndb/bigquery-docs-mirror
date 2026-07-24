@@ -413,7 +413,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Set or change table partitioning
 
-The following configuration YAML changes the [partitioning scheme of a table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) :
+The following configuration YAML changes the [partitioning scheme of a table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) so that it partitions by a date column:
 
     type: object_rewriter
     relation:
@@ -456,6 +456,51 @@ A SQL translation with this configuration YAML file might look like the followin
       b INT64
     )
     ;
+    </code></pre></td>
+</tr>
+</tbody>
+</table>
+
+The following configuration YAML changes the [partitioning scheme of a table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) so that it partitions by range bucket:
+
+    type: object_rewriter
+    relation:
+    -
+      key: "testdb.testschema.mytable"
+      partition:
+        range_bucket:
+          column: "id"
+          start: 0
+          end: 100
+          step: 10
+          options:
+            require_partition_filter: "TRUE"
+
+A SQL translation with this configuration YAML file might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">snowflake-input.sql</code></td>
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>     create table testschema.mytable (date timestamp_ntz, id number, content variant);
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">bq-output.sql</code></td>
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>     create table testdb.testschema.mytable
+      (
+        date datetime,
+        id int64,
+        content json
+      )
+      partition by range_bucket(id, generate_array(0, 100, 10))
+      options(
+        require_partition_filter=true
+      );
     </code></pre></td>
 </tr>
 </tbody>

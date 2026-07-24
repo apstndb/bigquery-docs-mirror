@@ -45,7 +45,7 @@ Regardless of the method, all logging options use the low-latency, high-throughp
 To understand and optimize your agent's performance, analyze and evaluate interaction logs in the following ways:
 
   - **Direct SQL queries** : run custom queries in BigQuery to compute metrics like token consumption and execution latency. You can also use [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) for automated root-cause analysis of errors, or perform joins with business tables to measure business impact.
-  - **Interactive dashboards** : connect visualization tools like [Data Studio](https://docs.cloud.google.com/data-studio/welcome) to prebuilt or custom BigQuery views to track agent health, error rates, and usage trends over time.
+  - **Interactive dashboards** : connect visualization tools like [Data Studio](https://docs.cloud.google.com/data-studio/welcome) to prebuilt or custom BigQuery views to track agent health, error rates, and usage trends over time. Looker customers can also use a prebuilt [BigQuery Agent Analytics dashboard template](https://marketplace.looker.com/marketplace/detail/agent_analytics) (Looker Block) from the Looker Marketplace.
   - **Jupyter notebooks** : [explore and experiment](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics#use-a-notebook) with log data using Python libraries, pandas, or BigFrames in interactive environments.
   - **Python SDK** : [programmatically](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics#use-the-sdk) query, reconstruct, and audit agent execution traces directly in your application code or automated evaluation pipelines.
 
