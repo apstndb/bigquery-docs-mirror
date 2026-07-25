@@ -1384,6 +1384,34 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To view historical data quality scan jobs, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
 
+### Job statuses
+
+Data scan jobs can have the following statuses:
+
+  - **`PENDING`** : the job is created but hasn't started running. In this state, the scan actively sets up infrastructure or acquires slots. This phase can take 10 to 20 seconds or more, depending on schema complexity and resource contention.
+
+  - **`RUNNING`** : the job is running.
+
+  - **`CANCELING`** : the job is canceling.
+
+  - **`CANCELLED`** : the job is successfully canceled.
+
+  - **`SUCCEEDED`** : the job completes successfully. The completion status might lag the actual query completion by up to 60 seconds because of post-processing steps, such as aggregation and metadata synchronization.
+
+  - **`FAILED`** : the job fails because of an error. The completion status might lag the actual query completion by up to 60 seconds because of post-processing steps, such as aggregation and metadata synchronization.
+
+  - **`SUCCEEDED_WITH_ERRORS`** : the job completes successfully, but some errors occur during execution.
+
+#### Monitoring best practices
+
+When you monitor your data scan jobs, keep the following best practices in mind:
+
+  - **Avoid aggressive polling** : avoid aggressive polling (for example, calling `GetJob` or equivalent every 1 to 5 seconds). Aggressive polling wastes API quota and does not accelerate state transitions.
+
+  - **Use exponential backoff** : if repetitive polling is unavoidable, use exponential backoff starting at 10 to 15 seconds.
+
+  - **Use asynchronous event-driven decoupling (Recommended)** : instead of synchronous API polling, use Eventarc triggers that listen to Cloud Audit Logs ( `cloudaudit.googleapis.com` ). You can use these triggers to initiate downstream workflows immediately upon DataScan job completion events. This approach bypasses API polling limits, conserves quota, and reduces perceived latency.
+
 ## Grant access to data quality scan results
 
 To enable the users in your organization to view the scan results, do the following:

@@ -69,7 +69,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ### Knowledge Catalog service account roles and permissions
 
-> **Note:** If you are scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/bigquery/docs/cmek#datascan-cmek-permissions) .
+> **Note:** If you're scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/bigquery/docs/cmek#datascan-cmek-permissions) .
 
 To ensure that the Knowledge Catalog service account has the necessary permissions to run data profile scans and export results, ask your administrator to grant the following IAM roles to the Knowledge Catalog service account:
 
@@ -105,7 +105,7 @@ The following permissions are required to run data profile scans and export resu
 
 Your administrator might also be able to give the Knowledge Catalog service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Knowledge Catalog can only scan rows visible to the Knowledge Catalog service account. To allow Knowledge Catalog to scan all rows, add its service account to a row filter where the predicate is `TRUE` .
+If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Knowledge Catalog can only scan rows visible to the Knowledge Catalog service account. To let Knowledge Catalog scan all rows, add its service account to a row filter where the predicate is `TRUE` .
 
 If a table uses BigQuery [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) , then Knowledge Catalog requires access to scan protected columns. To grant access, give the Knowledge Catalog service account the **Data Catalog Fine-Grained Reader** ( `roles/datacatalog.fineGrainedReader` ) role on all policy tags used in the table. The user creating or updating a data scan also needs permissions on protected columns.
 
@@ -174,7 +174,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
     
     1.  In the **Scope** field, choose **Incremental** or **Entire data** .
         
-        If you choose **Incremental data** , in the **Timestamp column** field, select a column of type `DATE` or `TIMESTAMP` from your BigQuery table. Knowledge Catalog uses this column to identify new records as they are added. For tables partitioned on a column of type `DATE` or `TIMESTAMP` , we recommend using this column as the partition column.
+        If you choose **Incremental data** , in the **Timestamp column** field, select a column of type `DATE` or `TIMESTAMP` from your BigQuery table. Knowledge Catalog uses this column to identify new records as they're added. For tables partitioned on a column of type `DATE` or `TIMESTAMP` , it's recommended to use this column as the partition column.
     
     2.  Optional: To filter your data, do any of the following:
         
@@ -200,7 +200,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
 
 9.  Optional: Publish the data profile scan results in the BigQuery and Knowledge Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Knowledge Catalog** checkbox.
     
-    You can view the latest scan results in the **Data profile** tab in the BigQuery and Knowledge Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
+    You can view the latest scan results in the **Data profile** tab in the BigQuery and Knowledge Catalog pages for the source table. To let users access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
     
     The publishing option might not be available in the following cases:
     
@@ -213,7 +213,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
     
       - **On-demand** : Run the data profile scan on demand.
     
-      - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+      - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature's in [Preview](https://cloud.google.com/products/#product-launch-stages) .
         
           - **Set post-scan results auto-deletion** : The auto-deletion time defines the duration a data profile scan remains active after execution. A data profile scan without a specified auto-deletion time is automatically removed after 24 hours. The auto-deletion time can range from 0 seconds (immediate deletion) to 365 days.
 
@@ -223,7 +223,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data profile scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it's compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
         
         > **Note:** You can use the same results table for multiple data profile scans.
 
@@ -560,7 +560,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
 
 10. Optional: Publish the data profile scan results in the BigQuery and Knowledge Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Knowledge Catalog** checkbox.
     
-    You can view the latest scan results in the **Data profile** tab in the BigQuery and Knowledge Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
+    You can view the latest scan results in the **Data profile** tab in the BigQuery and Knowledge Catalog pages for the source table. To let users access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
     
     > **Note:** You must choose tables that don't have any existing scans publishing their results.
 
@@ -570,7 +570,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
     
       - **On-demand** : Run the data profile scans on demand.
         
-          - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+          - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature's in [Preview](https://cloud.google.com/products/#product-launch-stages) .
             
               - **Set post-scan results auto-deletion** : The auto-deletion time defines the duration a data profile scan remains active after execution. A data profile scan without a specified auto-deletion time is automatically removed after 24 hours. The auto-deletion time can range from 0 seconds (immediate deletion) to 365 days.
 
@@ -584,7 +584,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data profile scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it's compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
         
         Knowledge Catalog uses the same results table for all of the data profile scans.
 
@@ -1053,7 +1053,7 @@ If the data profile scan results are published to the BigQuery and Knowledge Cat
 
 3.  Click the **Latest job results** tab.
     
-    The **Latest job results** tab, when there is at least one successfully completed run, provides information about the most recent job. It lists the scanned table's columns and statistics about the columns that were found in the scan.
+    The **Latest job results** tab, when there's at least one successfully completed run, provides information about the most recent job. It lists the scanned table's columns and statistics about the columns that were found in the scan.
 
 ### gcloud
 
@@ -1346,6 +1346,34 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To view historical data profile scan jobs, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
 
+### Job statuses
+
+Data scan jobs can have the following statuses:
+
+  - **`PENDING`** : the job is created but has not started running. In this state, the scan actively sets up infrastructure or acquires slots. This phase can take 10 to 20 seconds or more, depending on schema complexity and resource contention.
+
+  - **`RUNNING`** : the job is running.
+
+  - **`CANCELING`** : the job is canceling.
+
+  - **`CANCELLED`** : the job is successfully canceled.
+
+  - **`SUCCEEDED`** : the job completes successfully. The completion status might lag the actual query completion by up to 60 seconds because of post-processing steps, such as aggregation and metadata synchronization.
+
+  - **`FAILED`** : the job fails because of an error. The completion status might lag the actual query completion by up to 60 seconds because of post-processing steps, such as aggregation and metadata synchronization.
+
+  - **`SUCCEEDED_WITH_ERRORS`** : the job completes successfully, but some errors occur during execution.
+
+#### Monitoring best practices
+
+When you monitor your data scan jobs, keep the following best practices in mind:
+
+  - **Avoid aggressive polling** : avoid aggressive polling (for example, calling `GetJob` or equivalent every 1 to 5 seconds). Aggressive polling wastes API quota and doesn't accelerate state transitions.
+
+  - **Use exponential backoff** : if repetitive polling is unavoidable, use exponential backoff starting at 10 to 15 seconds.
+
+  - **Use asynchronous event-driven decoupling (Recommended)** : instead of synchronous API polling, use Eventarc triggers that listen to Cloud Audit Logs ( `cloudaudit.googleapis.com` ). You can use these triggers to initiate downstream workflows immediately upon DataScan job completion events. This approach bypasses API polling limits, conserves quota, and reduces perceived latency.
+
 ### View the data profile scans for a table
 
 To view the data profile scans that apply to a specific table, do the following:
@@ -1356,7 +1384,7 @@ To view the data profile scans that apply to a specific table, do the following:
 
 ## Grant access to data profile scan results
 
-To enable the users in your organization to view the scan results, do the following:
+To let users in your organization view the scan results, do the following:
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
 
@@ -1377,7 +1405,7 @@ You can also create and manage data profile scans when working with a specific t
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
-    In the **Explorer** pane (in the left pane), click **Datasets** , and then click your dataset. Now click **Overview \> Tables** , and select the table whose data profile scan results you want to see.
+    In the **Explorer** pane, click **Datasets** , and then click your dataset. Click **Overview \> Tables** , and select the table whose data profile scan results you want to see.
 
 2.  Click the **Data profile** tab.
 
@@ -1401,7 +1429,7 @@ You can also create and manage data profile scans when working with a specific t
     
       - **Data profile scan results aren't published** : click the menu next to **Quick data profile** , and then select from the following options:
         
-          - **Customize data profiling** : create a new data profile scan. For more information, see the [Create a data profile scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#create-scan) section of this document. When you create a scan from a table's details page, the table is preselected.
+          - **Customize data profiling** : create a new data profile scan. For more information, see the [Create a data profile scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#create-scan) section of this document. When you create a scan from a table's details page, the table's preselected.
         
           - **View previous profiles** : view a list of data profile scans that apply to this table.
 
