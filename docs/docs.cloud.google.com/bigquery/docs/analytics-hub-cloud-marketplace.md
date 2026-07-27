@@ -148,7 +148,7 @@ To subscribe to a BigQuery sharing listing on Cloud Marketplace, do the followin
 
 2.  Click search **Search listings** .
 
-3.  Search for the listing that you want to subscribe to.
+3.  Search for the listing that you want to subscribe to. To quickly discover commercial listings on Cloud Marketplace, apply the **Listings \> Marketplace** filter.
 
 4.  Click the listing.
 

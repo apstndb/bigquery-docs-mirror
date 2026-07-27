@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 27, 2026
+
+Feature
+
+You can discover commercial BigQuery sharing listings on Google Cloud Marketplace with the **Marketplace** filter. For more information, see [Subscribe to a Cloud Marketplace-integrated listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace#subscribe) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## July 23, 2026
 
 Change

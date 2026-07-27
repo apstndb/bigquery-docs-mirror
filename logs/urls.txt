@@ -15,7 +15,7 @@ https://docs.cloud.google.com/bigquery/docs/ai-introduction	2026-07-18T04:15:37Z
 https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries	2026-07-18T04:15:37Z
 https://docs.cloud.google.com/bigquery/docs/analysis-rules	2026-07-18T03:58:08Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-audit-logging	2026-07-18T03:58:08Z
-https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace	2026-07-18T03:58:08Z
+https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace	2026-07-27T08:06:24Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints	2026-07-24T18:55:33Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles	2026-07-18T03:58:08Z
 https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction	2026-07-21T20:54:44Z
@@ -1237,8 +1237,8 @@ https://docs.cloud.google.com/bigquery/docs/reference/system-procedures	2026-07-
 https://docs.cloud.google.com/bigquery/docs/reference/system-variables	2026-07-18T04:02:28Z
 https://docs.cloud.google.com/bigquery/docs/regional-endpoints	2026-07-18T03:57:41Z
 https://docs.cloud.google.com/bigquery/docs/regression-overview	2026-07-18T03:57:41Z
-https://docs.cloud.google.com/bigquery/docs/release-notes	2026-07-23T17:44:46Z
-https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-07-18T04:00:11Z
+https://docs.cloud.google.com/bigquery/docs/release-notes	2026-07-27T08:08:34Z
+https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-07-27T03:39:36Z
 https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-07-18T03:57:41Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-07-18T03:57:41Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions-translation-tutorial	2026-07-18T03:57:41Z
