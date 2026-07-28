@@ -664,7 +664,7 @@ The `bq help` command uses the following flags and arguments:
 
 ### `bq insert`
 
-Use the `bq insert` command to insert rows of newline-delimited, JSON-formatted data into a table from a file using the streaming insert. Data types are converted to match the column types of the destination table. This command is intended for testing purposes only. To stream data into BigQuery, use the [`insertAll`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll) API method.
+Use the `bq insert` command to insert rows of newline-delimited, JSON-formatted data into a table from a file using the streaming insert. Data types are converted to match the column types of the destination table. This command is intended for testing purposes only. To stream data into BigQuery, use the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) .
 
 #### Synopsis
 

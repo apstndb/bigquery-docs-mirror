@@ -133,8 +133,8 @@ You can ingest JSON data into a BigQuery table in the following ways:
       - [CSV](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
       - [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#extract_json_data_from_avro_data)
       - [JSON](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#loading_semi-structured_json_data)
-  - Use the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
-  - Use the legacy [`tabledata.insertAll` streaming API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery)
+  - Use the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) .
+  - Use the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
 ### Load from CSV files
 
@@ -176,9 +176,9 @@ To load this file using the bq command-line tool, use the [`bq load`](https://do
      22 Dec 22:10:32   |- id: integer       3            63
                        |- json_data: json
 
-### Use the Storage Write API
+### Use the Storage Write API (gRPC)
 
-You can use the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) to ingest JSON data. The following example uses the Storage Write API [Python client](https://docs.cloud.google.com/bigquery/docs/write-api#python_client) to write data into a table with a JSON data type column.
+You can use the [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) to ingest JSON data. The following example uses the Storage Write API (gRPC) [Python client](https://docs.cloud.google.com/bigquery/docs/write-api#python_client) to write data into a table with a JSON data type column.
 
 Define a protocol buffer to hold the serialized streaming data. The JSON data is encoded as a string. In the following example, the `json_col` field holds JSON data.
 
@@ -208,9 +208,9 @@ If you aren't able to format the incoming JSON data, you need to use the `json.d
     
     ...
 
-### Use the legacy streaming API
+### Use the Storage Write API (REST)
 
-The following example loads JSON data from a local file and streams it to a BigQuery table with a JSON data-type column named `json_data` using the [legacy streaming API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
+The following example loads JSON data from a local file and streams it to a BigQuery table with a JSON data-type column named `json_data` using the [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
     from google.cloud import bigquery
     import json

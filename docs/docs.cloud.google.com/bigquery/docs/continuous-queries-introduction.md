@@ -12,8 +12,8 @@ This document describes BigQuery continuous queries.
 
 BigQuery continuous queries are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time. You can insert the output rows produced by a continuous query into a BigQuery table or export them to Pub/Sub, Bigtable, or Spanner. Continuous queries can process data that has been written to [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) by using one of the following methods:
 
-  - The [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api)
-  - The [`tabledata.insertAll` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll)
+  - The [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api)
+  - The [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery)
   - [Batch load](https://docs.cloud.google.com/bigquery/docs/batch-loading-data)
   - The [`INSERT` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
   - Mutating [data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) such as `DELETE` , `UPDATE` , and `MERGE` when [exporting data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .

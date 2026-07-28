@@ -24,7 +24,7 @@ You can generate data insights at the table or dataset level:
 
   - **For tables:** Gemini generates natural language questions and their SQL equivalents to help you understand data within a single table. Through table insights, you can detect data patterns, anomalies, outliers, or quality issues within a table. Gemini also generates table and column descriptions.
 
-  - **For datasets:** ( [Preview](https://cloud.google.com/products#product-launch-stages) ) Gemini generates an interactive relationship graph showing cross-table relationships and cross-table SQL queries to help you understand how tables are related in a dataset. Through relationship graphs, you can discover how data is derived, which can help with quality, consistency, or redundancy issues. Through cross-table queries, you can find broader relationships. For example, you can calculate revenue by customer segment by leveraging data in a sales table and a customer table.
+  - **For datasets:** Gemini generates an interactive relationship graph showing cross-table relationships and cross-table SQL queries to help you understand how tables are related in a dataset. Through relationship graphs, you can discover how data is derived, which can help with quality, consistency, or redundancy issues. Through cross-table queries, you can find broader relationships. For example, you can calculate revenue by customer segment by leveraging data in a sales table and a customer table.
 
 To investigate further, you can ask follow-up questions in [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
 

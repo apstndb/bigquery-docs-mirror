@@ -1,14 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery
 uri: https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery
-title: Use the legacy streaming API
+title: Use the Storage Write API (REST)
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-This document describes how to stream data into BigQuery by using the legacy [`tabledata.insertAll`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) method.
+This document describes how to stream data into BigQuery by using the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) , which was previously known as the *legacy `tabledata.insertAll` method* .
 
-For new projects, we recommend using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) instead of the `tabledata.insertAll` method. The Storage Write API has lower pricing and more robust features, including exactly-once delivery semantics. If you are migrating an existing project from the `tabledata.insertAll` method to the Storage Write API, we recommend selecting the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) . The `tabledata.insertAll` method is still fully supported.
+For new projects, we recommend using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) instead of the Storage Write API (REST). The Storage Write API (gRPC) has lower pricing and more robust features, including exactly-once delivery semantics and streaming into Apache Iceberg managed tables. If you are migrating an existing project from the Storage Write API (REST) to the Storage Write API (gRPC), we recommend selecting the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) . The Storage Write API (REST) is still fully supported.
 
 ## Before you begin
 
@@ -415,7 +415,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Send date and time data
 
-For date and time fields, format the data in the `tabledata.insertAll` method as follows:
+For date and time fields, format the data in the Storage Write API (REST) as follows:
 
 | Type        | Format                                                                                                     |
 | ----------- | ---------------------------------------------------------------------------------------------------------- |
@@ -426,9 +426,9 @@ For date and time fields, format the data in the `tabledata.insertAll` method as
 
 ### Send range data
 
-For fields with type `RANGE<T>` , format the data in the `tabledata.insertAll` method as a JSON object with two fields, `start` and `end` . Missing or NULL values for the `start` and `end` fields represent unbounded boundaries. These fields must have the same supported JSON format of type `T` , where `T` can be one of `DATE` , `DATETIME` , and `TIMESTAMP` .
+For fields with type `RANGE<T>` , format the data in the Storage Write API (REST) as a JSON object with two fields, `start` and `end` . Missing or NULL values for the `start` and `end` fields represent unbounded boundaries. These fields must have the same supported JSON format of type `T` , where `T` can be one of `DATE` , `DATETIME` , and `TIMESTAMP` .
 
-In the following example, the `f_range_date` field represents a `RANGE<DATE>` column in a table. A row is inserted into this column using the `tabledata.insertAll` API.
+In the following example, the `f_range_date` field represents a `RANGE<DATE>` column in a table. A row is inserted into this column using the Storage Write API (REST).
 
     {
         "f_range_date": {
@@ -439,7 +439,7 @@ In the following example, the `f_range_date` field represents a `RANGE<DATE>` co
 
 ## Stream data availability
 
-Data is available for real-time analysis using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) queries immediately after BigQuery successfully acknowledges a `tabledata.insertAll` request. When you query data in the streaming buffer, you aren't charged for bytes processed from streaming buffer if you use on-demand compute pricing. If you use capacity-based pricing, your [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) consume slots for processing data in streaming buffer.
+Data is available for real-time analysis using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) queries immediately after BigQuery successfully acknowledges a Storage Write API (REST) request. When you query data in the streaming buffer, you aren't charged for bytes processed from streaming buffer if you use on-demand compute pricing. If you use capacity-based pricing, your [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) consume slots for processing data in streaming buffer.
 
 Recently streamed rows to an ingestion time partitioned table temporarily have a NULL value for the [`_PARTITIONTIME`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) pseudocolumn. For such rows, BigQuery assigns the final non-NULL value of the `PARTITIONTIME` column in the background, typically within a few minutes. In rare cases, this can take up to 90 minutes.
 
@@ -517,7 +517,7 @@ When you stream to an ingestion-time partitioned table, BigQuery infers the dest
 
 Newly arriving data is temporarily placed in the `__UNPARTITIONED__` partition while in the streaming buffer. When there's enough unpartitioned data, BigQuery partitions the data into the correct partition. However, there is no SLA for how long it takes for data to move out of the `__UNPARTITIONED__` partition. A query can exclude data in the streaming buffer from a query by filtering out the `NULL` values from the `__UNPARTITIONED__` partition by using one of the pseudocolumns ( [`_PARTITIONTIME` or `_PARTITIONDATE`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) depending on your preferred data type).
 
-If you are streaming data into a daily partitioned table, then you can override the date inference by supplying a partition decorator as part of the `insertAll` request. Include the decorator in the `tableId` parameter. For example, you can stream to the partition corresponding to 2021-03-01 for table `table1` using the partition decorator:
+If you are streaming data into a daily partitioned table, then you can override the date inference by supplying a partition decorator as part of the Storage Write API (REST). Include the decorator in the `tableId` parameter. For example, you can stream to the partition corresponding to 2021-03-01 for table `table1` using the partition decorator:
 
     table1$20210301
 
@@ -543,7 +543,7 @@ When the data is streamed, it is initially placed in the `__UNPARTITIONED__` par
 
 *Template tables* provide a mechanism to split a logical table into many smaller tables to create smaller sets of data (for example, by user ID). Template tables have a number of limitations described below. Instead, [partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) are the recommended ways to achieve this behavior.
 
-To use a template table through the BigQuery API, add a `templateSuffix` parameter to your `insertAll` request. For the bq command-line tool, add the `template_suffix` flag to your `insert` command. If BigQuery detects a `templateSuffix` parameter or the `template_suffix` flag, it treats the targeted table as a base template. It creates a new table that shares the same schema as the targeted table and has a name that includes the specified suffix:
+To use a template table through the BigQuery API, add a `templateSuffix` parameter to your Storage Write API (REST) request. For the bq command-line tool, add the `template_suffix` flag to your `insert` command. If BigQuery detects a `templateSuffix` parameter or the `template_suffix` flag, it treats the targeted table as a base template. It creates a new table that shares the same schema as the targeted table and has a name that includes the specified suffix:
 
     <targeted_table_name> + <templateSuffix>
 
@@ -577,14 +577,14 @@ If you want to change a generated table's schema, do not change the schema until
     The generated table inherits its expiration time from the dataset. As with normal streaming data, generated tables cannot be copied immediately.
 
   - Deduplication  
-    Deduplication only happens between uniform references to a destination table. For example, if you simultaneously stream to a generated table using both template tables and a regular `insertAll` command, no deduplication occurs between rows inserted by template tables and a regular `insertAll` command.
+    Deduplication only happens between uniform references to a destination table. For example, if you simultaneously stream to a generated table using both template tables and a regular Storage Write API (REST) command, no deduplication occurs between rows inserted by template tables and a regular Storage Write API (REST) command.
 
   - Views  
     The template table and the generated tables shouldn't be views.
 
 ## Troubleshoot streaming inserts
 
-The following sections discuss how to troubleshoot errors that occur when you [stream data into BigQuery using the legacy streaming API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . For more information on how to resolve quota errors for streaming inserts, see [Streaming insert quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota) .
+The following sections discuss how to troubleshoot errors that occur when you [stream data into BigQuery using the Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . For more information on how to resolve quota errors for streaming inserts, see [Streaming insert quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota) .
 
 ### Failure HTTP response codes
 

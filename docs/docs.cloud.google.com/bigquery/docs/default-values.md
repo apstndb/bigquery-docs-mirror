@@ -285,9 +285,9 @@ Text formats, such as JSON and CSV, don't have encoded file schema. To specify t
       uris = ['gs://test-bucket/sample.csv'],
       format = 'CSV');
 
-## Write API
+## Use the Storage Write API (gRPC)
 
-The Storage Write API only populates default values when the [write stream](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream) schema is missing a field that is contained in the destination table schema. In this case, the missing field is populated with the default value on the column for every write. If the field exists in the write stream schema but is missing from the data itself, then the missing field is populated with `NULL` . For example, suppose you are writing data to a BigQuery table with the following schema:
+The Storage Write API (gRPC) only populates default values when the [write stream](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream) schema is missing a field that is contained in the destination table schema. In this case, the missing field is populated with the default value on the column for every write. If the field exists in the write stream schema but is missing from the data itself, then the missing field is populated with `NULL` . For example, suppose you are writing data to a BigQuery table with the following schema:
 
     [
       {
@@ -379,9 +379,9 @@ If a field is not in this map and has missing values, then the missing values ar
 
 Keys can only be top-level column names. Keys can't be struct subfields, such as `col1.subfield1` .
 
-## Use the `insertAll` API method
+## Use the BigQuery Storage Write API (REST)
 
-The [`tabledata.insertAll` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll) populates default values at the row level when data is written to a table. If a row is missing columns with default values, then the default values are applied to those columns.
+The [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) populates default values at the row level when data is written to a table. If a row is missing columns with default values, then the default values are applied to those columns.
 
 For example, suppose you have the following table schema:
 

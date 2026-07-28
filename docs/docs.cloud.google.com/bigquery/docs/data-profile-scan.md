@@ -69,7 +69,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ### Knowledge Catalog service account roles and permissions
 
-> **Note:** If you're scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/bigquery/docs/cmek#datascan-cmek-permissions) .
+> **Note:** If you're scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/dataplex/docs/cmek#datascans-cmek-permissions) .
 
 To ensure that the Knowledge Catalog service account has the necessary permissions to run data profile scans and export results, ask your administrator to grant the following IAM roles to the Knowledge Catalog service account:
 

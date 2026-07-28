@@ -8,10 +8,6 @@ data_source: docs.cloud.google.com
 
 # Generate dataset insights
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 This document describes how to generate dataset insights for BigQuery datasets. Dataset insights help you understand relationships between tables in a dataset by generating relationship graphs and cross-table queries.
 
 Dataset insights help you accelerate the exploration of datasets with multiple tables by automatically discovering and visualizing relationships between tables in a graph, identifying primary-key and foreign-key relationships, and generating sample cross-table queries. This is useful for understanding data structure without documentation, discovering schema-defined, usage-based, or AI-inferred relationships between tables, and generating complex queries that join multiple tables.
@@ -105,10 +101,10 @@ To see the exact permissions that are required to generate insights, expand the 
   - `bigquery.jobs.listAll` : list all jobs in the project
   - `bigquery.tables.get` : get table metadata
   - `bigquery.tables.getData` : get table data and metadata
-  - `dataplex.datascans.create` : create DataScan resource
-  - `dataplex.datascans.get` : read DataScan resource metadata
-  - `dataplex.datascans.getData` : read DataScan execution results
-  - `dataplex.datascans.run` : run on-demand DataScan
+  - `dataplex.datascans.create` : create data scan resource
+  - `dataplex.datascans.get` : read data scan resource metadata
+  - `dataplex.datascans.getData` : read data scan execution results
+  - `dataplex.datascans.run` : run on-demand data scan
   - `dataplex.entryGroups.useSchemaJoinEntryLink` : use `schema-join` entry links
   - `dataplex.entryGroups.useSchemaJoinAspect` : use schema join aspects
   - `dataplex.entryLinks.create` : create entry links
@@ -145,11 +141,11 @@ After insights are generated, BigQuery displays a dataset description, a relatio
 
 To generate insights programmatically, use the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . To do this, complete the following steps:
 
-1.  [Generate a data documentation datascan for the BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#create-doc-scan)
+1.  [Generate a data documentation data scan for the BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#create-doc-scan)
 2.  [Check the data documentation scan status](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#check-scan-status)
 3.  [Verify publishing to Knowledge Catalog](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#verify-publishing)
 
-### Generate a data documentation datascan for the BigQuery dataset
+### Generate a data documentation data scan for the BigQuery dataset
 
 1.  Create a data documentation data scan using the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) . Optionally, you can publish these insights to Knowledge Catalog by setting the `catalog_publishing_enabled` parameter to `true` .
     
@@ -203,9 +199,9 @@ A successful job response contains the generated insights in the `dataDocumentat
 
 ### Verify publishing to Knowledge Catalog
 
-If `catalog_publishing_enabled` is set to `true` , then the insights are published to Knowledge Catalog asynchronously after the datascan job completes. To verify that insights were persisted, use the Dataplex API to inspect the aspects of the dataset.
+If `catalog_publishing_enabled` is set to `true` , then the insights are published to Knowledge Catalog asynchronously after the data scan job completes. To verify that insights were persisted, use the Dataplex API to inspect the aspects of the dataset.
 
-While insights are generated from the dataset-level datascan, the resulting entry links are stored between the tables they connect. To verify these relationships, use the [`lookupEntryLinks` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations/lookupEntryLinks) to retrieve the entry links associated with a specific table entry.
+While insights are generated from the dataset-level data scan, the resulting entry links are stored between the tables they connect. To verify these relationships, use the [`lookupEntryLinks` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations/lookupEntryLinks) to retrieve the entry links associated with a specific table entry.
 
 To retrieve metadata for your BigQuery dataset, use the [`entries.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.entryGroups.entries/get) . To include all aspects, set the `view` parameter to `FULL` . For example:
 
@@ -213,7 +209,7 @@ To retrieve metadata for your BigQuery dataset, use the [`entries.get` method](h
 
 Replace the following:
 
-  - PROJECT\_ID : the ID of your Google Cloud project where the DataScan was configured
+  - PROJECT\_ID : the ID of your Google Cloud project where the data scan was configured
   - LOCATION : the region where the entry group resides
   - DATASET\_PROJECT\_ID : the ID of the Google Cloud project where the BigQuery dataset resides
   - DATASET : the ID of the BigQuery dataset
@@ -257,7 +253,7 @@ Based on the discovered relationships, Gemini generates sample queries. These ar
 
 2.  To open the query in the BigQuery query editor, click **Copy to query** . You can then run the query or modify it.
 
-3.  To ask a follow up question, click **Ask a follow-up** , which opens an untitled data canvas where you can chat with Gemini to explore your data.
+3.  To ask a follow-up question, click **Ask a follow-up** , which opens an untitled data canvas where you can chat with Gemini to explore your data.
 
 ## Manage generated insights
 

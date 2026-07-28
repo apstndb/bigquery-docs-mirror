@@ -615,7 +615,7 @@ For example, when a load job appends data to a table, the `data_access` stream a
 
   - If a job fails before or during execution, `TableDataChange` and `TableDataRead` events are not logged.
 
-  - Data appended to a table using the legacy streaming API or the Storage Write API does not generate `TableDataChange` log entries.
+  - Data appended to a table using the Storage Write API (gRPC) or the Storage Write API (REST) doesn't generate `TableDataChange` log entries.
 
   - Recursive dataset deletions, such as removing a dataset and its contents in a single API call, don't yield deletion entries for each resource contained in the dataset. The dataset removal is present in the activity log.
 

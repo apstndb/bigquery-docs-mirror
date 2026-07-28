@@ -10,6 +10,23 @@ data_source: docs.cloud.google.com
 
 The `KEY_COLUMN_USAGE` view contains columns of the tables from `TABLE_CONSTRAINTS` that are constrained as keys by [primary and foreign key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) constraints.
 
+## Required roles
+
+To get the permissions that you need to query the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` view, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+This predefined role contains the permissions required to query the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` view. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to query the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` view:
+
+  - Viewing primary and foreign key definitions: `bigquery.tables.get`
+  - Viewing table information schemas: `bigquery.tables.list`
+
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
+
 ## Schema
 
 The `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` view has the following schema:

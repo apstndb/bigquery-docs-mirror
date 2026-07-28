@@ -83,6 +83,14 @@ Resources accessed during a tool call might require additional scopes.
 
 AI applications and agents, such as Claude or Antigravity, can instantiate an MCP client that connects to a single MCP server. An AI application can have multiple clients that connect to different MCP servers. If your application isn't listed in the [client-specific guidance](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#client-specific-guidance) , then you can use the following information to connect from most applications.
 
+### Register the MCP server using `add-mcp`
+
+You can automatically register the BigQuery Migration Service MCP server into supported AI clients by using [`add-mcp`](https://github.com/neon-solutions/add-mcp) without manually locating configuration file paths. The tool detects your installed AI clients automatically. The following example shows how to use `add-mcp` to register the BigQuery Migration Service MCP server:
+
+    npx add-mcp https://bigquerymigration.googleapis.com/mcp --name bqms --header "x-goog-user-project: <var>PROJECT_ID</var>" --scopes "https://www.googleapis.com/auth/bigquerymigration,https://www.googleapis.com/auth/devstorage.read_only" --timeout 30000
+
+> > **Note:** When you use `google_credentials` for authentication, `add-mcp` hardens written configurations by emitting standard MCP fields and dropping vendor-specific properties like `authProviderType: "google_credentials"` . For clients that require Google Cloud OAuth credentials (such as Antigravity or Gemini CLI), ensure that `"authProviderType": "google_credentials"` and `"oauth": { "scopes": [...] }` are included in your JSON configuration.
+
 In your AI application, look for a way to add or connect to a remote MCP server. For the BigQuery Migration Service MCP server, enter the following information as required:
 
   - **Server name** : BigQuery Migration Service MCP server
@@ -298,15 +306,16 @@ Replace `  PROJECT_ID  ` with the Google Cloud project ID. Model Armor doesn't a
 
 Model Armor floor settings and general configuration can impact more than just MCP. Because Model Armor integrates with services like Vertex AI, any changes you make to floor settings can affect traffic scanning and safety behaviors across all integrated services, not just MCP.
 
-### Control MCP use with IAM deny policies
+### Control MCP use with IAM policies
 
-[Identity and Access Management (IAM) deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) help you secure Google Cloud remote MCP servers. Configure these policies to block unwanted MCP tool access.
+Identity and Access Management (IAM) [deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) and [allow policies](https://docs.cloud.google.com/iam/docs/allow-policies) help you secure Google Cloud and Google MCP servers.
 
-For example, you can deny or allow access based on:
+You can combine multiple criteria to build customized security and governance policies by allowing or denying access based on the following:
 
-  - The principal
-  - Tool properties like read-only
-  - The application's OAuth client ID
+  - The principal.
+  - Tool properties like the read-only attribute.
+  - The service name or tool name.
+  - The application's OAuth client ID.
 
 For more information, see [Control MCP use with Identity and Access Management](https://docs.cloud.google.com/mcp/control-mcp-use-iam) .
 

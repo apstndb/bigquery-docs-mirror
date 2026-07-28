@@ -21,12 +21,6 @@ GoogleSQL for BigQuery supports the following time series functions.
 
 ## `APPENDS`
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bq-change-history-feedback@google.com> .
-
     APPENDS(
       TABLE table,
       start_timestamp DEFAULT NULL,
@@ -48,7 +42,9 @@ The following operations add rows to the `APPENDS` change history:
 
   - `table` : the BigQuery table name. This must be a regular BigQuery table. This argument must be preceded by the word `TABLE` .
 
-  - `start_timestamp` : a [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) value indicating the earliest time at which a change is included in the output. If the value is `NULL` , all changes since the table creation are returned. If the table was created after the `start_timestamp` value, the actual table creation time is used instead. An error is returned if the time specified is earlier than allowed by [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) , or if the table was created earlier than allowed by time travel if the `start_timestamp` value is `NULL` . For standard tables, this window is seven days, but you can [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than that.
+  - `start_timestamp` : a [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) value indicating the earliest time at which a change is included in the output. If the value is `NULL` , all changes since the table creation are returned. If the table was created after the `start_timestamp` value, the actual table creation time is used instead. An error is returned if the time specified is earlier than allowed by [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
+    
+    **Note:** An error is returned if the `start_timestamp` is older than allowed by [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) . An error is also returned if the `start_timestamp` value is `NULL` and the table was created earlier than allowed by time travel. To get all available appended records, specify a `start_timestamp` within your time travel window instead of `NULL` . For standard tables, the time travel window is seven days, but you can [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than that.
 
   - `end_timestamp` : a `TIMESTAMP` value indicating the latest time at which a change is included in the output. `end_timestamp` is exclusive; for example, if you specify `2023-12-31 08:00:00` for `start_timestamp` and `2023-12-31 12:00:00` for `end_timestamp` , all changes made from 8 AM December 31, 2023 through 11:59 AM December 31, 2023 are returned.
     
@@ -76,6 +72,7 @@ The `APPENDS` function returns a table with the following columns:
   - `APPENDS` function may not capture all rows appended within a multi-statement transaction if some appended rows are updated or deleted within the same transaction.
   - You can only use the `APPENDS` function with regular BigQuery tables. Clones, snapshots, views, materialized views, external tables, and wildcard tables aren't supported.
   - Partition pseudo-columns for ingestion-time partitioned tables, such as `_PARTITIONTIME` and `_PARTITIONDATE` , aren't included in the function's output.
+  - Rows inserted through the [Storage Write API pending stream](https://docs.cloud.google.com/bigquery/docs/write-api#pending_type) could have inconsistent timestamps, so repeatable reads are not guaranteed. If you require repeatable reads for batch ingestion workloads, use [BigQuery load jobs](https://docs.cloud.google.com/bigquery/docs/loading-data) instead.
 
 **Example**
 
@@ -158,12 +155,6 @@ The `inventory` column displays the values that were set when the rows were orig
 
 ## `CHANGES`
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bq-change-history-feedback@google.com> .
-
     CHANGES(
       TABLE table,
       start_timestamp DEFAULT NULL,
@@ -190,7 +181,9 @@ The following operations add rows to the `CHANGES` change history:
 
   - `table` : the BigQuery table name. This must be a regular BigQuery table, and must have the [`enable_change_history` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) set to `TRUE` . Enabling this table option has an impact on costs; for more information see [Pricing and costs](https://docs.cloud.google.com/bigquery/docs/change-history#pricing_and_costs) . This argument must be preceded by the word `TABLE` .
 
-  - `start_timestamp` : a [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) value indicating the earliest time at which a change is included in the output. If the value is `NULL` , all changes since the table creation are returned. If you set the `enable_change_history` option after setting the `start_timestamp` option, the history before the enablement time might be incomplete. If the table was created after the `start_timestamp` value, the actual table creation time is used instead. An error is returned if the time specified is earlier than allowed by [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) , or if the table was created earlier than allowed by time travel if the `start_timestamp` value is `NULL` . For standard tables, this window is seven days, but you can [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than that.
+  - `start_timestamp` : a [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) value indicating the earliest time at which a change is included in the output. If the value is `NULL` , all changes since the table creation are returned. If you set the `enable_change_history` option after setting the `start_timestamp` option, the history before the enablement time might be incomplete. If the table was created after the `start_timestamp` value, the actual table creation time is used instead.
+    
+    **Note:** An error is returned if the `start_timestamp` is older than allowed by [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) . An error is also returned if the `start_timestamp` value is `NULL` and the table was created earlier than allowed by time travel. To get all available changes, specify a `start_timestamp` within your time travel window instead of `NULL` . For standard tables, the time travel window is seven days, but you can [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) to be less than that.
 
   - `end_timestamp` : a `TIMESTAMP` value indicating the latest time at which a change is included in the output. `end_timestamp` is exclusive; for example, if you specify `2023-12-31 08:00:00` for `start_timestamp` and `2023-12-31 12:00:00` for `end_timestamp` , all changes made from 8 AM December 31, 2023 through 11:59 AM December 31, 2023 are returned. The maximum time range allowed between `start_timestamp` and `end_timestamp` is one day.
     
@@ -225,7 +218,9 @@ The `CHANGES` function returns a table with the following columns:
   - You can only use the `CHANGES` function with regular BigQuery tables. Views, materialized views, external tables, and wildcard tables aren't supported.
   - For tables that have been cloned or snapshotted, and for tables that are restored from a clone or snapshot, change history from the source table isn't carried over to the new table, clone, or snapshot.
   - You can't use the `CHANGES` function with a table that has [change data capture](https://docs.cloud.google.com/bigquery/docs/change-data-capture) enabled.
+  - If a table is enabled with [fine-grained DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained_dml) , and data deletion occurs using either a [`TRUNCATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) , [`WRITE_TRUNCATE` write disposition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery) , or a [qualifying `DELETE` statement](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables#using_dml_delete_to_delete_partitions) that covers all rows in a partition, the `CHANGES` function might return additional deleted events.
   - Partition pseudo-columns for ingestion-time partitioned tables, such as `_PARTITIONTIME` and `_PARTITIONDATE` , aren't included in the function's output.
+  - Rows inserted through the [Storage Write API pending stream](https://docs.cloud.google.com/bigquery/docs/write-api#pending_type) could have inconsistent timestamps, so repeatable reads are not guaranteed. If you require repeatable reads for batch ingestion workloads, use [BigQuery load jobs](https://docs.cloud.google.com/bigquery/docs/loading-data) instead.
   - Change history isn't captured for table deletions made due to table partition expiration.
   - Performing [data manipulation language (DML) statements over recently streamed data](https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) fails on tables that have the `enable_change_history` option set to `TRUE` .
 

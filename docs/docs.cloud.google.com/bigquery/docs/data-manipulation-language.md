@@ -21,9 +21,9 @@ For more information about how to compute the number of bytes processed by a DML
 
   - Each DML statement initiates an implicit transaction, which means that changes made by the statement are automatically committed at the end of each successful DML statement.
 
-  - Rows that were recently written using the `tabledata.insertall` streaming method can't be modified with data manipulation language (DML), such as `UPDATE` , `DELETE` , `MERGE` , or `TRUNCATE` statements. The recent writes are those that occurred within the last 30 minutes. All other rows in the table remain modifiable by using `UPDATE` , `DELETE` , `MERGE` , or `TRUNCATE` statements. The streamed data can take up to 90 minutes to become available for copy operations.
+  - Rows that were recently written using the BigQuery Storage Write API (REST) can't be modified with data manipulation language (DML), such as `UPDATE` , `DELETE` , `MERGE` , or `TRUNCATE` statements. The recent writes are those that occurred within the last 30 minutes. All other rows in the table remain modifiable by using `UPDATE` , `DELETE` , `MERGE` , or `TRUNCATE` statements. The streamed data can take up to 90 minutes to become available for copy operations.
     
-    Alternatively, rows that were recently written using the Storage Write API can be modified using `UPDATE` , `DELETE` , or `MERGE` statements. For more information, see [Use data manipulation language (DML) with recently streamed data](https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) .
+    Alternatively, rows that were recently written using the Storage Write API (gRPC) can be modified using `UPDATE` , `DELETE` , or `MERGE` statements. For more information, see [Use data manipulation language (DML) with recently streamed data](https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) .
 
   - Correlated subqueries within a `when_clause` , `search_condition` , `merge_update_clause` or `merge_insert_clause` are not supported for `MERGE` statements.
 
@@ -123,7 +123,7 @@ BigQuery manages the concurrency of DML statements that add, modify, or delete r
 
 During any 24-hour period, the first 1500 `INSERT` statements run immediately after they are submitted. After this limit is reached, the concurrency of `INSERT` statements that write to a table is limited to 10. Additional `INSERT` statements are added to a `PENDING` queue. Up to 100 `INSERT` statements can be queued against a table at any given time. When an `INSERT` statement completes, the next `INSERT` statement is removed from the queue and run.
 
-If you must run DML `INSERT` statements more frequently, consider streaming data to your table using the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
+If you must run DML `INSERT` statements more frequently, consider streaming data to your table using the [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) .
 
 ### UPDATE, DELETE, MERGE DML concurrency
 

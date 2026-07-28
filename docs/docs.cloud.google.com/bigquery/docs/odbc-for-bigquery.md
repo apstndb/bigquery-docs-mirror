@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Use the ODBC driver for BigQuery
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request feedback or support for this feature, send an email to <bigquery-drivers-feedback@google.com> .
-
 The Open Database Connectivity (ODBC) driver for BigQuery connects your non-Java applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. To connect Java applications to BigQuery, use the [JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
 
 The ODBC driver for BigQuery is available under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0) .

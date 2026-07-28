@@ -137,7 +137,7 @@ Eligibility for optimization can vary with the type of partitioning, the underly
 
   - Partial partition coverage
   - References to non-partitioning columns
-  - [Recently ingested data](https://docs.cloud.google.com/bigquery/docs/write-api#stream_into_partitioned_tables) through the BigQuery [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) or the [legacy streaming API](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery)
+  - [Recently ingested data](https://docs.cloud.google.com/bigquery/docs/write-api#stream_into_partitioned_tables) through the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) or the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery)
   - Filters with subqueries or unsupported predicates
 
 This optimization might also not apply to partitioned tables that are clustered using columns other than the partitioned columns.

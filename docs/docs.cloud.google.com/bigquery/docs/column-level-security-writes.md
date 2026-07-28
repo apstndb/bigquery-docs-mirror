@@ -188,7 +188,7 @@ For a copy operation, BigQuery checks whether the user has the Fine-Grained Read
 
 ### Streaming
 
-No policy tags are checked when streaming with the legacy `insertAll` streaming API or the Storage Write API. For [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , the policy tags are checked on the primary key columns.
+No policy tags are checked when streaming with the BigQuery Storage Write API (REST) or the Storage Write API (gRPC). For [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , the policy tags are checked on the primary key columns.
 
 ## Copy examples
 
