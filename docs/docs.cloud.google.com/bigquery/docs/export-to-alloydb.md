@@ -12,7 +12,7 @@ data_source: docs.cloud.google.com
 > 
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-> **Note:** To request access to this preview feature, complete the [BigQuery to AlloyDB Batch Exports - Preview Sign-Up](https://forms.gle/nTbRPvmMQLDGRsYr8) interest form. To provide feedback or request support for this feature, send email to <bq-alloydb-export-feedback@google.com> .
+> **Note:** To provide feedback or request support for this feature, send email to <bq-alloydb-export-feedback@google.com> .
 
 This document describes how you can set up a reverse extract, transform, and load (reverse ETL) workflow from BigQuery to AlloyDB for PostgreSQL. You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) .
 

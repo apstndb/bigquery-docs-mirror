@@ -13,7 +13,7 @@ data_source: docs.cloud.google.com
 Iceberg managed tables support the following features:
 
   - *Table mutations* using GoogleSQL data manipulation language (DML).
-  - *Unified batch and high throughput streaming* using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) through connectors like Spark, Dataflow, and other engines.
+  - *Unified batch and high throughput streaming* using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) through connectors like Spark, Dataflow, and other engines.
   - *Export of Iceberg V2 snapshot and automatic refresh* on each table mutation for direct query access with open-source and third-party query engines, such as Spark.
   - *Schema evolution* , which lets you add, drop, and rename columns to suit your needs. This feature also lets you change an existing column's [data type](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_data_type) and [mode](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_mode) . For more information, see [Conversion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
   - *Automatic storage optimization* , including adaptive file sizing, automatic clustering, garbage collection, and metadata optimization.
@@ -111,7 +111,6 @@ The configuration of your Cloud Storage bucket and its connection with BigQuery 
 
   - Avoid the following Cloud Storage features, as they are unsupported for Iceberg managed tables:
     
-      - [Hierarchical namespaces](https://docs.cloud.google.com/storage/docs/hns-overview)
       - [Object access control lists (ACLs)](https://docs.cloud.google.com/storage/docs/access-control/lists)
       - [Customer-supplied encryption keys](https://docs.cloud.google.com/storage/docs/encryption/customer-supplied-keys)
       - [Object versioning](https://docs.cloud.google.com/storage/docs/object-versioning)

@@ -76,6 +76,7 @@ Predefined queries use [table-valued functions (TVFs)](https://docs.cloud.google
 BigQuery data clean rooms have the following limitations:
 
   - You can set [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) only on views, not on tables or materialized views. Because of this limitation, if a data contributor directly shares tables or materialized views, or views without analysis rules, into a data clean room, then data clean room subscribers have raw access to the data in those resources.
+  - While [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) provide privacy controls, they aren't guaranteed to block every unauthorized query designed to extract raw data. To secure your information, use [query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) in data clean rooms to review and approve queries, effectively blocking unauthorized attempts up front.
   - Because data clean rooms use the BigQuery sharing platform, all [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
   - Data clean rooms are only available in [BigQuery sharing regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
   - As a data clean room subscriber, you can't search for shared resources in Knowledge Catalog or Data Catalog.

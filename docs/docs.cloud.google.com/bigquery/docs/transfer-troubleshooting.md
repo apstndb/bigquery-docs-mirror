@@ -411,6 +411,13 @@ The following are common errors encountered when creating a [Google Ad Manager t
   - Error: `Incompatible table partitioning specification. Destination table exists with partitioning specification interval(type:Day,field:) clustering`  
     **Resolution:** The Google Ads Manager connector does not support transfer data to a dataset with clustering. Use a dataset without clustering instead.
 
+## Search Ads 360 transfer issues
+
+The following are common errors encountered when [creating a Search Ads 360 transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) .
+
+  - Error: `No jobs to start for run`  
+    **Resolution:** This error can occur when you use a table filter to filter only metric tables (tables that contain `stats` ), but your transfer is run with a manager or sub-manager account with no active client accounts associated with it. To resolve this error, remove the table filter or change the table filter to include match tables (tables that don't contain `stats` ).
+
 ## Google Merchant Center transfer issues
 
 The following are common errors encountered when [creating a Google Merchant Center transfer](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer) .

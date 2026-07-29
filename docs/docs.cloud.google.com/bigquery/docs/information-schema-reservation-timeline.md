@@ -121,31 +121,36 @@ The `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view has the following schema:
 <td>The name of the reservation.</td>
 </tr>
 <tr class="even">
+<td><code dir="ltr" translate="no">slot_capacity</code></td>
+<td><code dir="ltr" translate="no">INTEGER</code></td>
+<td>The baseline slot capacity of the reservation.</td>
+</tr>
+<tr class="odd">
 <td><code dir="ltr" translate="no">slots_assigned</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The number of slots assigned to this reservation.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">slots_max_assigned</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The maximum slot capacity for this reservation, including slot sharing. If <code dir="ltr" translate="no">ignore_idle_slots</code> is true, this is the same as <code dir="ltr" translate="no">slots_assigned</code> , otherwise this is the total number of slots in all capacity commitments in the administration project.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">max_slots</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The maximum number of slots that this reservation can use, which includes baseline slots ( <code dir="ltr" translate="no">slot_capacity</code> ), idle slots (if <code dir="ltr" translate="no">ignore_idle_slots</code> is false), and autoscale slots. This field is specified by users for using the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">scaling_mode</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>The scaling mode for the reservation, which determines how the reservation scales from baseline to <code dir="ltr" translate="no">max_slots</code> . This field is specified by users for using the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">period_autoscale_slot_seconds</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
 <td>The total slot seconds charged by autoscale for a specific minute (each data row corresponds to one minute).</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">is_creation_region</code></td>
 <td><code dir="ltr" translate="no">BOOLEAN</code></td>
 <td><p>Specifies if the current region is the location where the reservation was created. This location is used to determine the pricing of the baseline reservation slots. For a failover <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">disaster recovery (DR)</a> reservation, a <code dir="ltr" translate="no">TRUE</code> value indicates the original primary location, while for a non-DR reservation, a <code dir="ltr" translate="no">TRUE</code> value denotes the reservation's location.</p>

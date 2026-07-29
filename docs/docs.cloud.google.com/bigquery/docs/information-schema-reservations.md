@@ -70,7 +70,7 @@ The `INFORMATION_SCHEMA.RESERVATIONS` view has the following schema:
 <tr class="even">
 <td><code dir="ltr" translate="no">slot_capacity</code></td>
 <td><code dir="ltr" translate="no">INTEGER</code></td>
-<td>Baseline of the reservation.</td>
+<td>The baseline slot capacity of the reservation.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">target_job_concurrency</code></td>

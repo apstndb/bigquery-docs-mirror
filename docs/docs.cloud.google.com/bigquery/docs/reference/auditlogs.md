@@ -187,6 +187,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `bigquery.jobs.create - ADMIN_WRITE`
+      - `bigquery.jobs.update - ADMIN_WRITE`
   - **Method is a long-running or streaming operation** : No.  
   - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.v2.JobService.CancelJob"`  
 
@@ -432,7 +433,7 @@ The following audit logs are associated with methods belonging to `jobservice` .
   - **Method** : `jobservice.jobcompleted`  
   - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
-  - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
+  - **Method is a long-running or streaming operation** : No.  
   - **Filter for this method** : `protoPayload.methodName="jobservice.jobcompleted"`  
 
 #### `query`
