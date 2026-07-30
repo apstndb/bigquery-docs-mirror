@@ -42,6 +42,8 @@ data_source: docs.cloud.google.com
   - [Secret](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Secret)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Secret.SCHEMA_REPRESENTATION)
   - [SecretType](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SecretType)
+  - [ParameterValue](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#ParameterValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#ParameterValue.SCHEMA_REPRESENTATION)
   - [Network](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Network)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Network.SCHEMA_REPRESENTATION)
   - [PrivateServiceConnect](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#PrivateServiceConnect)
@@ -689,7 +691,7 @@ Represents concrete parameter values for Connector Configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;connectorId&quot;: string,&quot;endpoint&quot;: {object (Endpoint)},&quot;authentication&quot;: {object (Authentication)},&quot;network&quot;: {object (Network)},&quot;asset&quot;: {object (Asset)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;connectorId&quot;: string,&quot;endpoint&quot;: {object (Endpoint)},&quot;authentication&quot;: {object (Authentication)},&quot;network&quot;: {object (Network)},&quot;asset&quot;: {object (Asset)},&quot;parameters&quot;: {string: {object (ParameterValue)},...}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -725,6 +727,14 @@ Networking configuration.
 ` object ( Asset  ` )
 
 Data asset.
+
+`parameters`
+
+` map (key: string, value: object ( ParameterValue  ` ))
+
+Optional. A map of name-value pairs for connector-specific parameters. These extra configuration parameters aren't standardized in the configuration sections.
+
+To update a single parameter value, call `  ConnectionService.UpdateConnection  ` with `updateMask` set to `configuration.parameters.parameter_id` . If `parameterId` doesn't fit the `[a-zA-Z0-9_]+` pattern, `parameterId` should be escaped with backticks—for example, `` configuration.parameters.`parameter id` `` .
 
 ## Endpoint
 
@@ -773,7 +783,7 @@ Client authentication.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;usernamePassword&quot;: {object (UsernamePassword)},&quot;serviceAccount&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;usernamePassword&quot;: {object (UsernamePassword)},&quot;serviceAccount&quot;: string,&quot;parameters&quot;: {string: {object (ParameterValue)},...}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -791,6 +801,14 @@ Username/password authentication.
 `string`
 
 Output only. Google-managed service account associated with this connection, e.g., `service-{project_number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com` . BigQuery jobs using this connection will act as `serviceAccount` identity while connecting to the datasource.
+
+`parameters`
+
+` map (key: string, value: object ( ParameterValue  ` ))
+
+Optional. A map of name-value pairs for connector-specific parameters. These extra configuration parameters aren't standardized in the configuration sections.
+
+To update a single parameter value, call `  ConnectionService.UpdateConnection  ` with `updateMask` set to `configuration.parameters.parameter_id` . If `parameterId` doesn't fit the `[a-zA-Z0-9_]+` pattern, `parameterId` should be escaped with backticks—for example, `` configuration.parameters.`parameter id` `` .
 
 ## UsernamePassword
 
@@ -871,6 +889,62 @@ Enums
 `SECRET_TYPE_UNSPECIFIED`
 
 `PLAINTEXT`
+
+## ParameterValue
+
+Represents a value for a connector parameter.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field kind can be only one of the following:&quot;stringValue&quot;: string,&quot;boolValue&quot;: boolean,&quot;int32Value&quot;: integer,&quot;doubleValue&quot;: number,&quot;secretValue&quot;: {object (Secret)}// End of list of possible types for union field kind.}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+Union field `kind` .
+
+`kind` can be only one of the following:
+
+`stringValue`
+
+`string`
+
+A string parameter value.
+
+`boolValue`
+
+`boolean`
+
+A boolean parameter value.
+
+`int32Value`
+
+`integer`
+
+An int32 parameter value.
+
+`doubleValue`
+
+`number`
+
+A double parameter value.
+
+`secretValue`
+
+` object ( Secret  ` )
+
+A secret parameter value. Allowed only for Authentication parameters.
 
 ## Network
 

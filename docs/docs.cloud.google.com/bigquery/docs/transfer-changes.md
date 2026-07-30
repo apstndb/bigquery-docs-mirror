@@ -617,9 +617,108 @@ Starting September 16, 2026, all transfer configurations will use the updated da
 
 ## YouTube Reporting API
 
-The BigQuery Data Transfer Service for YouTube Content Owner connector and YouTube Channel connector periodically updates to support new reports introduced by [YouTube Reporting API](https://developers.google.com/youtube/reporting) and deprecate old reports.
+The BigQuery Data Transfer Service for YouTube Content Owner connector and YouTube Channel connector periodically updates to support new reports introduced by [YouTube Reporting API](https://developers.google.com/youtube/reporting) , deprecate old reports, and adapt to updates in YouTube APIs.
 
-The following sections outline the changes when new reports are introduced by YouTube Reporting API. Changes are organized by release date, and each entry provides information on the changes you need to make to continue receiving data from YouTube.
+The following sections outline the changes for YouTube connectors. Changes are organized by release date, and each entry provides information on the changes you need to make to continue receiving data from YouTube.
+
+### August 2026
+
+Starting **June 30, 2027** , YouTube Reporting API for YouTube Channel is deprecating Brand Account delegation and transitioning to the more secure and granular YouTube Permissions authorization model. To align with this change, the [YouTube Channel connector](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer) is updating its authorization model. To prevent data ingestion failures, you must migrate your YouTube Channel transfer configurations to the new authorization model before **June 30, 2027** . The following lists more details about this update:
+
+  - **Authorization Change:** Previously, transfers were authorized directly using the YouTube Brand Account. Under the new model, authorization must be granted using your Google Account.
+  - **Explicit Channel ID Required:** A `channel_id` is now required for each YouTube Channel transfer configuration. The `channel_id` will be automatically backfilled for existing legacy transfer configurations.
+  - **Service Disruption Risk:** Any YouTube Channel transfer configuration that is not updated to use YouTube Permissions and re-authorized with a Google Account will fail to ingest data after June 30, 2027.
+
+#### What you need to do
+
+The deprecation of the YouTube Brand Account delegation will complete on June 30, 2027. Legacy configurations still using Brand Account credentials will stop working.
+
+To ensure uninterrupted data ingestion, perform the following steps for each of your YouTube Channel transfer configurations between January 1, 2027 and June 30, 2027:
+
+1.  Verify that your Google Account has been granted appropriate permissions on your YouTube Channel. For more information, see [Add or remove access to your YouTube Channel](https://support.google.com/youtube/answer/9481328) .
+
+2.  Go to the Data transfers page.
+
+3.  Update your transfer configuration with the following steps:
+    
+      - Select your existing YouTube Channel transfer configuration.
+      - Set the parameter `use_youtube_permissions` to `true` .
+      - (Optional) Verify that the automatically backfilled `channel_id` is correct.
+
+4.  Re-authorize the transfer configuration using your Google Account. Don't select a Brand Account. For more information, see [Update credentials](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_credentials) .
+
+#### Bulk Migration
+
+You can also migrate your transfer configurations programmatically if you need to update multiple transfer configurations in bulk. You can use the following script to update the `use_youtube_permissions` parameter in your transfer configuration and re-authorize the transfer configuration. This bulk migration only works if all YouTube Channel transfer configurations in the project can use the same Google Account.
+
+> **Warning:** Rolling back transfer configurations updates cannot be done in bulk because legacy configurations rely on distinct Brand Account associations. Users should initially migrate only several transfer configurations and verify that transfers complete successfully, before attempting to bulk-migrate remaining transfer configurations.
+
+###### Prerequisites
+
+Before you can use the bulk migration script, do the following:
+
+1.  Install the BigQuery Data Transfer Service Python client library and set up authentication. For more information, see [BigQuery Data Transfer Service API Client Libraries](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/libraries)
+2.  Obtain the OAuth version information with the following steps:
+    1.  Open the following OAuth consent URL for YouTube Channel connector in your browser:
+        
+            https://bigquery.cloud.google.com/datatransfer/oauthz/auth?client_id=433065040935-shfnmm3slhkgijod8guqprmpnbsdbh21.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/bigquery%20https://www.googleapis.com/auth/youtubepartner%20https://www.googleapis.com/auth/yt-analytics.readonly%20https://www.googleapis.com/auth/yt-analytics-monetary.readonly&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=consent_user
+    
+    2.  Sign in and authorize access using your Google Account.
+    
+    3.  Copy the generated code. You will use it in the VERSION\_INFO field in the following migration script.
+
+###### Migration Script
+
+Run the following script by doing the following:
+
+1.  Copy the `bulk_migrate.py` code sample:
+    
+        from google.api_core import exceptions as api_exceptions
+        from google.cloud import bigquery_datatransfer_v1 as bigquery_datatransfer
+        from google.protobuf import field_mask_pb2
+        
+        PROJECT_ID = 'PROJECT_ID'
+        LOCATION = 'LOCATION'  # e.g. 'us' or 'eu'
+        VERSION_INFO = 'VERSION_INFO'
+        DRY_RUN = True  # Set to False to execute migration updates
+        
+        client = bigquery_datatransfer.DataTransferServiceClient()
+        parent = client.common_location_path(PROJECT_ID, LOCATION)
+        print(f"Scanning configs in {parent} (dry_run={DRY_RUN})...")
+        
+        # Iterate over all YouTube Channel transfer configs in the project and region
+        list_request = bigquery_datatransfer.ListTransferConfigsRequest(
+            parent=parent,
+            data_source_ids=["youtube_channel"],
+        )
+        for config in client.list_transfer_configs(request=list_request):
+          if DRY_RUN:
+            print(f"[DRY-RUN] Would migrate {config.name}, name: {config.display_name}")
+          else:
+            # Update each configs to use YouTube permissions and re-authorize
+            config.params["use_youtube_permissions"] = True
+            update_request = bigquery_datatransfer.UpdateTransferConfigRequest(
+                transfer_config=config,
+                update_mask=field_mask_pb2.FieldMask(paths=["params", "version_info"]),
+                version_info=VERSION_INFO,
+            )
+            try:
+              client.update_transfer_config(request=update_request)
+              print(f"Successfully migrated {config.name}.")
+            except api_exceptions.GoogleAPICallError as e:
+              print(f"Error migrating {config.name}: {e}")
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : the ID of the Google Cloud project.
+      - `  LOCATION  ` : the location of your YouTube Channel transfer configurations.
+      - `  VERSION_INFO  ` : the OAuth version information that you obtained from [the previous step](https://docs.cloud.google.com/bigquery/docs/transfer-changes#prerequisites) .
+
+2.  Run the script to run a dry run to preview changes without modifying transfers.
+
+3.  Once you have verified the results of the dry run, set `DRY_RUN = False` and run the following command to execute the migration.
+    
+        python3 bulk_migrate.py
 
 ### September 22, 2025
 

@@ -466,40 +466,17 @@ The following list contains links to more resources related to the client librar
   - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bruby%5D)
   - [Source code](https://github.com/googleapis/google-cloud-ruby)
 
-<span id="bigquery-dataframes"></span>
+<span id="python-open-source-libraries"></span>
 
-## BigQuery DataFrames (BigFrames)
+## Open source Python libraries
 
-[BigQuery DataFrames](https://dataframes.bigquery.dev/) is a pythonic DataFrame and machine learning (ML) API powered by the BigQuery engine. It implements the pandas and scikit-learn APIs by pushing the processing down to BigQuery through SQL conversion.
+For data analysis, machine learning, and DataFrame operations in Python, BigQuery API offers specific open source Python libraries. For a detailed comparison and usage examples across all three libraries, see [Use open source Python libraries](https://docs.cloud.google.com/bigquery/docs/python-libraries) .
 
-To get started with BigQuery DataFrames, install the library:
-
-    pip install --upgrade bigframes
-
-The following example shows how to initialize BigQuery DataFrames and perform a simple query.
-
-    import bigframes.pandas as bpd
-    
-    # Set BigQuery DataFrames options
-    # Note: The project option is not required in all environments.
-    # On BigQuery Studio, the project ID is automatically detected.
-    bpd.options.bigquery.project = your_gcp_project_id
-    
-    # Use "partial" ordering mode to generate more efficient queries, but the
-    # order of the rows in DataFrames may not be deterministic if you have not
-    # explictly sorted it. Some operations that depend on the order, such as
-    # head() will not function until you explictly order the DataFrame. Set the
-    # ordering mode to "strict" (default) for more pandas compatibility.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # Create a DataFrame from a BigQuery table
-    query_or_table = "bigquery-public-data.ml_datasets.penguins"
-    df = bpd.read_gbq(query_or_table)
-    
-    # Efficiently preview the results using the .peek() method.
-    df.peek()
-
-For more information, see the [BigQuery DataFrames reference documentation](https://dataframes.bigquery.dev/) and [Getting started with BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .
+| Library                                                                                                     | Package                                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/python-libraries#bigquery-dataframes)     | [`bigframes`](https://pypi.org/project/bigframes/)                         | Pythonic DataFrame and ML API ( `bigframes.pandas` and `bigframes.ml` ) powered by the BigQuery API engine. Implements pandas and scikit-learn APIs using server-side query pushdown. For documentation, see [Introduction to BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) and the [reference documentation](https://dataframes.bigquery.dev/) . |
+| [pandas-gbq](https://docs.cloud.google.com/bigquery/docs/python-libraries#pandas-gbq)                       | [`pandas-gbq`](https://pypi.org/project/pandas-gbq/)                       | Interface for querying and moving data between BigQuery API and in-memory client-side pandas DataFrames. For documentation, see [pandas-gbq documentation](https://googleapis.dev/python/pandas-gbq/latest/index.html) .                                                                                                                                                                               |
+| [google-cloud-bigquery](https://docs.cloud.google.com/bigquery/docs/python-libraries#google-cloud-bigquery) | [`google-cloud-bigquery`](https://pypi.org/project/google-cloud-bigquery/) | Core Python client library wrapping all BigQuery API APIs for deployment, administration, and general SQL querying. For documentation, see [client library reference](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .                                                                                                                                                           |
 
 <span id="third-party_client_libraries"></span>
 
@@ -507,11 +484,11 @@ For more information, see the [BigQuery DataFrames reference documentation](http
 
 In addition to the Google-supported client libraries listed in the tables above, a set of third-party libraries are available.
 
-| Language | Library                                                                                                                                                                                                                                               |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Python   | [pandas-gbq](https://github.com/googleapis/python-bigquery-pandas) ( [usage guide](https://docs.cloud.google.com/bigquery/docs/pandas-gbq-migration) ), [ibis](https://ibis-project.org/) ( [tutorial](https://ibis-project.org/backends/bigquery/) ) |
-| R        | [bigrquery](https://github.com/r-dbi/bigrquery) , [BigQueryR](https://github.com/cloudyr/bigQueryR)                                                                                                                                                   |
-| Scala    | [spark-bigquery-connector](https://github.com/GoogleCloudDataproc/spark-bigquery-connector)                                                                                                                                                           |
+| Language | Library                                                                                             |
+| -------- | --------------------------------------------------------------------------------------------------- |
+| Python   | [ibis](https://ibis-project.org/) ( [tutorial](https://ibis-project.org/backends/bigquery/) )       |
+| R        | [bigrquery](https://github.com/r-dbi/bigrquery) , [BigQueryR](https://github.com/cloudyr/bigQueryR) |
+| Scala    | [spark-bigquery-connector](https://github.com/GoogleCloudDataproc/spark-bigquery-connector)         |
 
 ### What's next?
 

@@ -189,6 +189,8 @@ To call a stored procedure after it's been created, use the `CALL` statement. Fo
 
 > **Note:** Calling a stored procedure rather than including the procedure's SQL statements directly in your query introduces a small performance overhead.
 
+> **Note:** BigQuery runs each statement in the procedure body as a separate [child job](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#enumerate_child_jobs_of_a_multi-statement_query) . Data access audit log entries are recorded against those child jobs, not against the job that runs the `CALL` statement. For more information, see [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs#data_access) .
+
 ## Call a system procedure
 
 To call a built-in system procedure, use the `CALL` statement. For example, the following statement calls the system procedure `BQ.REFRESH_MATERIALIZED_VIEW` :

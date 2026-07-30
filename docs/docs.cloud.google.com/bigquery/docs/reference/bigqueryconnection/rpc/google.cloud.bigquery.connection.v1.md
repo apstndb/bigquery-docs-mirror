@@ -23,6 +23,7 @@ data_source: docs.cloud.google.com
   - `  ConnectorConfiguration.Authentication  ` (message)
   - `  ConnectorConfiguration.Endpoint  ` (message)
   - `  ConnectorConfiguration.Network  ` (message)
+  - `  ConnectorConfiguration.ParameterValue  ` (message)
   - `  ConnectorConfiguration.PrivateServiceConnect  ` (message)
   - `  ConnectorConfiguration.Secret  ` (message)
   - `  ConnectorConfiguration.Secret.SecretType  ` (enum)
@@ -614,6 +615,14 @@ Networking configuration.
 
 Data asset.
 
+`parameters`
+
+` map<string, ParameterValue  ` \>
+
+Optional. A map of name-value pairs for connector-specific parameters. These extra configuration parameters aren't standardized in the configuration sections.
+
+To update a single parameter value, call `  ConnectionService.UpdateConnection  ` with `update_mask` set to `configuration.parameters.parameter_id` . If `parameter_id` doesn't fit the `[a-zA-Z0-9_]+` pattern, `parameter_id` should be escaped with backticks—for example, `` configuration.parameters.`parameter id` `` .
+
 ## Asset
 
 Data Asset - a resource within instance of the system, reachable under specified endpoint. For example a database name in a SQL DB.
@@ -650,6 +659,14 @@ Username/password authentication.
 
 Output only. Google-managed service account associated with this connection, e.g., `service-{project_number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com` . BigQuery jobs using this connection will act as `service_account` identity while connecting to the datasource.
 
+`parameters`
+
+` map<string, ParameterValue  ` \>
+
+Optional. A map of name-value pairs for connector-specific parameters. These extra configuration parameters aren't standardized in the configuration sections.
+
+To update a single parameter value, call `  ConnectionService.UpdateConnection  ` with `update_mask` set to `configuration.parameters.parameter_id` . If `parameter_id` doesn't fit the `[a-zA-Z0-9_]+` pattern, `parameter_id` should be escaped with backticks—for example, `` configuration.parameters.`parameter id` `` .
+
 ## Endpoint
 
 Remote endpoint specification.
@@ -681,6 +698,46 @@ Union field `network` .
 `  PrivateServiceConnect  `
 
 Private Service Connect networking configuration.
+
+## ParameterValue
+
+Represents a value for a connector parameter.
+
+Fields
+
+Union field `kind` .
+
+`kind` can be only one of the following:
+
+`string_value`
+
+`string`
+
+A string parameter value.
+
+`bool_value`
+
+`bool`
+
+A boolean parameter value.
+
+`int32_value`
+
+`int32`
+
+An int32 parameter value.
+
+`double_value`
+
+`double`
+
+A double parameter value.
+
+`secret_value`
+
+`  Secret  `
+
+A secret parameter value. Allowed only for Authentication parameters.
 
 ## PrivateServiceConnect
 

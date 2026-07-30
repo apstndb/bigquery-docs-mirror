@@ -702,7 +702,7 @@ To update the credentials for a transfer:
 
 3.  Click the transfer in the data transfers list.
 
-4.  Click **MORE** menu, and then select **Refresh credentials** .
+4.  Click **MORE** menu, and then select **Update credentials** .
 
 5.  Click **Allow** to give the BigQuery Data Transfer Service permission to view your reporting data and to access and manage the data in BigQuery.
 

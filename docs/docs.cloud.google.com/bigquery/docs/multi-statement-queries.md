@@ -192,7 +192,7 @@ When you create a temporary table, don't use a project or dataset qualifier in t
 
 ### Reference a temporary table
 
-You can refer to a temporary table by name for the duration of the current multi-statement query. This includes temporary tables created by a procedure within the multi-statement query. You cannot share temporary tables. Temporary tables reside in hidden `_script%` datasets with randomly generated names. [Listing datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets#bq) article describes how to list hidden datasets.
+You can refer to a temporary table by name for the duration of the current multi-statement query. This includes temporary tables created by a procedure within the multi-statement query. You cannot share temporary tables. Temporary tables reside in hidden `_script%` datasets with randomly generated names. [List datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets#bq) article describes how to list hidden datasets.
 
 ### Delete temporary tables
 
@@ -279,6 +279,8 @@ To get the results of all statements in a multi-statement query, [enumerate the 
 ### Enumerate child jobs
 
 Multi-statement queries are executed in BigQuery using [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) , similar to any other query, with the multi-statement queries specified as the query text. When a multi-statement query runs, additional jobs, known as child jobs, are created for each statement in the multi-statement query. You can enumerate the child jobs of a multi-statement query by calling [`jobs.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/list) , passing in the multi-statement query job ID as the `parentJobId` parameter.
+
+Child jobs also generate their own audit log entries. Data access events such as `TableDataRead` and `TableDataChange` are recorded against the child job that runs the statement, not against the parent job. For more information, see [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs#data_access) .
 
 ## Debug a multi-statement-query
 
