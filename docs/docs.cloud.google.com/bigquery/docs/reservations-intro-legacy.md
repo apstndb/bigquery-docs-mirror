@@ -60,7 +60,7 @@ A reservation is the lowest level at which you can specify slot allocation. [Slo
 
 ## Assignments
 
-To use the slots that you allocate, you must assign one or more projects, folders, or organizations to a reservation. Each level in the resource hierarchy inherits the assignment from the level above it. In other words, if a project or folder is not assigned, then that project or folder inherits the assignment of its parent folder or organization, if any. For more information about the resource hierarchy, see [Organizing BigQuery resources](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
+To use the slots that you allocate, you must assign one or more projects, folders, or organizations to a reservation. Each level in the resource hierarchy inherits the assignment from the level above it. In other words, if a project or folder is not assigned, then that project or folder inherits the assignment of its parent folder or organization, if any. For more information about organizing BigQuery resources, see [Introduction to the resource hierarchy](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
 
 When a job is started from a project that is assigned to a reservation, the job uses that reservation's slots. If a project is not assigned to a reservation (either directly or by inheriting from its parent folder or organization), the jobs in that project use on-demand pricing.
 

@@ -268,12 +268,6 @@ To add a task to a pipeline, follow these steps:
     
     ### Table
     
-    > **Preview**
-    > 
-    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-    
-    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
-    
     1.  Click **Add task** , and then select **Table** .
     
     2.  In the **Create new** pane, select **Table** or **Incremental table** .
@@ -284,7 +278,7 @@ To add a task to a pipeline, follow these steps:
     
     5.  Enter a name for the table.
     
-    6.  In the **Table task details** pane, click **Open** to open the task.
+    6.  In the table task details pane, click **Open** to open the task.
     
     7.  Configure the task using the settings in **Details \> Configuration** or in the `config` block of the code editor for the table.
         
@@ -306,12 +300,6 @@ To add a task to a pipeline, follow these steps:
     
     ### View
     
-    > **Preview**
-    > 
-    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-    
-    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
-    
     1.  Click **Add task** , and then select **View** .
     
     2.  In the **Create new** pane, select **View** or **Materialized view** .
@@ -322,7 +310,7 @@ To add a task to a pipeline, follow these steps:
     
     5.  Enter a name for the view.
     
-    6.  In the **View task details** pane, click **Open** to open the task.
+    6.  In the view task details pane, click **Open** to open the task.
     
     7.  Configure the task using the settings in **Details \> Configuration** or in the `config` block of the code editor for the view.
         
@@ -341,6 +329,50 @@ To add a task to a pipeline, follow these steps:
     9.  Click **Run** to run the SQL in your pipeline.
     
     10. In **Query results** , inspect the data preview.
+    
+    ### Declare source
+    
+    1.  Click **Add task** , and then select **Declare source** .
+    
+    2.  In the **Declare source** pane, verify the default project for the data source, or select a new project.
+    
+    3.  Verify the default dataset for the data source, or select a new dataset.
+    
+    4.  In the **Table / View** field, select the table or view that you want to use as a data source.
+    
+    5.  Click **Create** .
+    
+    6.  In the declare source task details pane, click **Open** to open the task.
+    
+    7.  Configure the data source using the settings in **Details \> Configuration** or in the `config` block of the code editor.
+        
+        For more information about configuring a data source, see [Declare a data source](https://docs.cloud.google.com/dataform/docs/declare-source) .
+        
+        The editor validates your code and displays the validation status.
+    
+    ### Data quality test
+    
+    1.  Click **Add task** , and then select **Data quality test** .
+    
+    2.  In the **Create new** pane, verify the default project for the data quality test, or select a new project.
+    
+    3.  Verify the default dataset for the data quality test, or select a new dataset.
+    
+    4.  In the **Table** field, enter a name for the data quality test.
+    
+    5.  Click **Create** .
+    
+    6.  In the data quality test task details pane, click **Open** to open the task.
+    
+    7.  Configure assertions for the test using the settings in **Details \> Configuration** or in the `config` block of the code editor.
+        
+        For more information about configuring assertions, see [Test data quality](https://docs.cloud.google.com/dataform/docs/assertions) .
+        
+        Optional: In the **Run after** menu, select a task to precede your data quality test in the pipeline sequence.
+        
+        The editor validates your code and displays the validation status.
+    
+    8.  Click **Run** to run the data quality test as part of your pipeline sequence.
 
 ## Edit a pipeline task
 

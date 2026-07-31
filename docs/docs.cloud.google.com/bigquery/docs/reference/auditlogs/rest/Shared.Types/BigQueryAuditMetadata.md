@@ -19,6 +19,8 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDefinition.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.EncryptionInfo](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.EncryptionInfo)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.EncryptionInfo.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.SecureContextValue](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SecureContextValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SecureContextValue.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.JobConfig.Load](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Load)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Load.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.JobConfig.Extract](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Extract)
@@ -43,6 +45,8 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobChange.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.JobDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobDeletion)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobCancel](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobCancel)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobCancel.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.DatasetCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetCreation)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetCreation.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.Dataset](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Dataset)
@@ -149,6 +153,26 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ConnectionChange.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.AnalyticsHubSubscribeListing](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AnalyticsHubSubscribeListing)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AnalyticsHubSubscribeListing.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.PropertyGraphCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraphCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraphCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.PropertyGraph](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraph)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraph.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.PropertyGraphChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraphChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraphChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.PropertyGraphDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraphDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.PropertyGraphDeletion.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.FirstPartyAppMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.FirstPartyAppMetadata)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.FirstPartyAppMetadata.SCHEMA_REPRESENTATION)
   - [BigQueryAuditMetadata.SheetsMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SheetsMetadata)
@@ -167,7 +191,7 @@ BigQueryAuditMetaData is exposed as part of the new AuditData.metadata messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;firstPartyAppMetadata&quot;: {object (BigQueryAuditMetadata.FirstPartyAppMetadata)},// Union field event can be only one of the following:&quot;jobInsertion&quot;: {object (BigQueryAuditMetadata.JobInsertion)},&quot;jobChange&quot;: {object (BigQueryAuditMetadata.JobChange)},&quot;jobDeletion&quot;: {object (BigQueryAuditMetadata.JobDeletion)},&quot;datasetCreation&quot;: {object (BigQueryAuditMetadata.DatasetCreation)},&quot;datasetChange&quot;: {object (BigQueryAuditMetadata.DatasetChange)},&quot;datasetDeletion&quot;: {object (BigQueryAuditMetadata.DatasetDeletion)},&quot;tableCreation&quot;: {object (BigQueryAuditMetadata.TableCreation)},&quot;tableChange&quot;: {object (BigQueryAuditMetadata.TableChange)},&quot;tableDeletion&quot;: {object (BigQueryAuditMetadata.TableDeletion)},&quot;tableDataRead&quot;: {object (BigQueryAuditMetadata.TableDataRead)},&quot;tableDataChange&quot;: {object (BigQueryAuditMetadata.TableDataChange)},&quot;modelDeletion&quot;: {object (BigQueryAuditMetadata.ModelDeletion)},&quot;modelCreation&quot;: {object (BigQueryAuditMetadata.ModelCreation)},&quot;modelMetadataChange&quot;: {object (BigQueryAuditMetadata.ModelMetadataChange)},&quot;modelDataChange&quot;: {object (BigQueryAuditMetadata.ModelDataChange)},&quot;modelDataRead&quot;: {object (BigQueryAuditMetadata.ModelDataRead)},&quot;routineCreation&quot;: {object (BigQueryAuditMetadata.RoutineCreation)},&quot;routineChange&quot;: {object (BigQueryAuditMetadata.RoutineChange)},&quot;routineDeletion&quot;: {object (BigQueryAuditMetadata.RoutineDeletion)},&quot;rowAccessPolicyCreation&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyCreation)},&quot;rowAccessPolicyChange&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyChange)},&quot;rowAccessPolicyDeletion&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyDeletion)},&quot;unlinkDataset&quot;: {object (BigQueryAuditMetadata.UnlinkDataset)},&quot;searchIndexCreation&quot;: {object (BigQueryAuditMetadata.SearchIndexCreation)},&quot;searchIndexChange&quot;: {object (BigQueryAuditMetadata.SearchIndexChange)},&quot;searchIndexDeletion&quot;: {object (BigQueryAuditMetadata.SearchIndexDeletion)},&quot;vectorIndexCreation&quot;: {object (BigQueryAuditMetadata.VectorIndexCreation)},&quot;vectorIndexChange&quot;: {object (BigQueryAuditMetadata.VectorIndexChange)},&quot;vectorIndexDeletion&quot;: {object (BigQueryAuditMetadata.VectorIndexDeletion)},&quot;connectionChange&quot;: {object (BigQueryAuditMetadata.ConnectionChange)},&quot;analyticsHubSubscribeListing&quot;: {object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)}// End of list of possible types for union field event.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;firstPartyAppMetadata&quot;: {object (BigQueryAuditMetadata.FirstPartyAppMetadata)},// Union field event can be only one of the following:&quot;jobInsertion&quot;: {object (BigQueryAuditMetadata.JobInsertion)},&quot;jobChange&quot;: {object (BigQueryAuditMetadata.JobChange)},&quot;jobDeletion&quot;: {object (BigQueryAuditMetadata.JobDeletion)},&quot;jobCancel&quot;: {object (BigQueryAuditMetadata.JobCancel)},&quot;datasetCreation&quot;: {object (BigQueryAuditMetadata.DatasetCreation)},&quot;datasetChange&quot;: {object (BigQueryAuditMetadata.DatasetChange)},&quot;datasetDeletion&quot;: {object (BigQueryAuditMetadata.DatasetDeletion)},&quot;tableCreation&quot;: {object (BigQueryAuditMetadata.TableCreation)},&quot;tableChange&quot;: {object (BigQueryAuditMetadata.TableChange)},&quot;tableDeletion&quot;: {object (BigQueryAuditMetadata.TableDeletion)},&quot;tableDataRead&quot;: {object (BigQueryAuditMetadata.TableDataRead)},&quot;tableDataChange&quot;: {object (BigQueryAuditMetadata.TableDataChange)},&quot;modelDeletion&quot;: {object (BigQueryAuditMetadata.ModelDeletion)},&quot;modelCreation&quot;: {object (BigQueryAuditMetadata.ModelCreation)},&quot;modelMetadataChange&quot;: {object (BigQueryAuditMetadata.ModelMetadataChange)},&quot;modelDataChange&quot;: {object (BigQueryAuditMetadata.ModelDataChange)},&quot;modelDataRead&quot;: {object (BigQueryAuditMetadata.ModelDataRead)},&quot;routineCreation&quot;: {object (BigQueryAuditMetadata.RoutineCreation)},&quot;routineChange&quot;: {object (BigQueryAuditMetadata.RoutineChange)},&quot;routineDeletion&quot;: {object (BigQueryAuditMetadata.RoutineDeletion)},&quot;rowAccessPolicyCreation&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyCreation)},&quot;rowAccessPolicyChange&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyChange)},&quot;rowAccessPolicyDeletion&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyDeletion)},&quot;unlinkDataset&quot;: {object (BigQueryAuditMetadata.UnlinkDataset)},&quot;searchIndexCreation&quot;: {object (BigQueryAuditMetadata.SearchIndexCreation)},&quot;searchIndexChange&quot;: {object (BigQueryAuditMetadata.SearchIndexChange)},&quot;searchIndexDeletion&quot;: {object (BigQueryAuditMetadata.SearchIndexDeletion)},&quot;vectorIndexCreation&quot;: {object (BigQueryAuditMetadata.VectorIndexCreation)},&quot;vectorIndexChange&quot;: {object (BigQueryAuditMetadata.VectorIndexChange)},&quot;vectorIndexDeletion&quot;: {object (BigQueryAuditMetadata.VectorIndexDeletion)},&quot;connectionChange&quot;: {object (BigQueryAuditMetadata.ConnectionChange)},&quot;analyticsHubSubscribeListing&quot;: {object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)},&quot;icebergTableSetIamPolicy&quot;: {object (BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata)},&quot;deltaSharingCatalogCreation&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata)},&quot;deltaSharingCatalogUpdate&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata)},&quot;deltaSharingCatalogDeletion&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata)},&quot;propertyGraphCreation&quot;: {object (BigQueryAuditMetadata.PropertyGraphCreation)},&quot;propertyGraphChange&quot;: {object (BigQueryAuditMetadata.PropertyGraphChange)},&quot;propertyGraphDeletion&quot;: {object (BigQueryAuditMetadata.PropertyGraphDeletion)}// End of list of possible types for union field event.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -199,6 +223,12 @@ Job state change event.
 ` object ( BigQueryAuditMetadata.JobDeletion  ` )
 
 Job deletion event.
+
+`jobCancel`
+
+` object ( BigQueryAuditMetadata.JobCancel  ` )
+
+Job cancel event.
 
 `datasetCreation`
 
@@ -368,6 +398,48 @@ Connection change event.
 
 Subscribe listing event.
 
+`icebergTableSetIamPolicy`
+
+` object ( BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata  ` )
+
+Iceberg table set IAM policy event.
+
+`deltaSharingCatalogCreation`
+
+` object ( BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata  ` )
+
+Delta Sharing catalog creation event.
+
+`deltaSharingCatalogUpdate`
+
+` object ( BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata  ` )
+
+Delta Sharing catalog update event.
+
+`deltaSharingCatalogDeletion`
+
+` object ( BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata  ` )
+
+Delta Sharing catalog deletion event.
+
+`propertyGraphCreation`
+
+` object ( BigQueryAuditMetadata.PropertyGraphCreation  ` )
+
+Property graph creation event.
+
+`propertyGraphChange`
+
+` object ( BigQueryAuditMetadata.PropertyGraphChange  ` )
+
+Property graph change event.
+
+`propertyGraphDeletion`
+
+` object ( BigQueryAuditMetadata.PropertyGraphDeletion  ` )
+
+Property graph deletion event.
+
 ## BigQueryAuditMetadata.JobInsertion
 
 Job insertion event.
@@ -533,7 +605,7 @@ Query job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;queryTruncated&quot;: boolean,&quot;destinationTable&quot;: string,&quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),&quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),&quot;defaultDataset&quot;: string,&quot;tableDefinitions&quot;: [{object (BigQueryAuditMetadata.TableDefinition)}],&quot;priority&quot;: enum (BigQueryAuditMetadata.JobConfig.Query.Priority),&quot;destinationTableEncryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)},&quot;statementType&quot;: enum (BigQueryAuditMetadata.QueryStatementType)}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;queryTruncated&quot;: boolean,&quot;destinationTable&quot;: string,&quot;createDisposition&quot;: enum (BigQueryAuditMetadata.CreateDisposition),&quot;writeDisposition&quot;: enum (BigQueryAuditMetadata.WriteDisposition),&quot;defaultDataset&quot;: string,&quot;tableDefinitions&quot;: [{object (BigQueryAuditMetadata.TableDefinition)}],&quot;priority&quot;: enum (BigQueryAuditMetadata.JobConfig.Query.Priority),&quot;destinationTableEncryption&quot;: {object (BigQueryAuditMetadata.EncryptionInfo)},&quot;statementType&quot;: enum (BigQueryAuditMetadata.QueryStatementType),&quot;secureContextValues&quot;: [{object (BigQueryAuditMetadata.SecureContextValue)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -599,6 +671,12 @@ Result table encryption information. Set when non-default encryption is used.
 ` enum ( BigQueryAuditMetadata.QueryStatementType  ` )
 
 Type of the query.
+
+`secureContextValues[]`
+
+` object ( BigQueryAuditMetadata.SecureContextValue  ` )
+
+The names and values of the secure context variables used in the query.
 
 ## BigQueryAuditMetadata.TableDefinition
 
@@ -670,6 +748,43 @@ Fields
 Cloud kms key identifier.
 
 Format: `projects/<projectId>/locations/<location>/keyRings/<key_ring_name>/cryptoKeys/<key_name>`
+
+## BigQueryAuditMetadata.SecureContextValue
+
+Describes a secure context key-value pair.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;key&quot;: string,
+  &quot;value&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`key`
+
+`string`
+
+The name of the secure context variable.
+
+`value`
+
+`string`
+
+The value of the secure context variable.
 
 ## BigQueryAuditMetadata.JobConfig.Load
 
@@ -918,7 +1033,7 @@ Job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (BigQueryAuditMetadata.JobStats.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;parentJobName&quot;: string,// Union field extended can be only one of the following:&quot;queryStats&quot;: {object (BigQueryAuditMetadata.JobStats.Query)},&quot;loadStats&quot;: {object (BigQueryAuditMetadata.JobStats.Load)},&quot;extractStats&quot;: {object (BigQueryAuditMetadata.JobStats.Extract)}// End of list of possible types for union field extended.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (BigQueryAuditMetadata.JobStats.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;parentJobName&quot;: string,&quot;globalQueryRemoteRegions&quot;: [string],&quot;parentGlobalQueryJobId&quot;: string,&quot;parentGlobalQueryJobLocation&quot;: string,// Union field extended can be only one of the following:&quot;queryStats&quot;: {object (BigQueryAuditMetadata.JobStats.Query)},&quot;loadStats&quot;: {object (BigQueryAuditMetadata.JobStats.Load)},&quot;extractStats&quot;: {object (BigQueryAuditMetadata.JobStats.Extract)}// End of list of possible types for union field extended.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -974,6 +1089,24 @@ Reservation name. The value is "unreserved" for on-demand resource usage or pare
 `string`
 
 Parent job name. Only present for child jobs.
+
+`globalQueryRemoteRegions[]`
+
+`string`
+
+Remote regions of a global query.
+
+`parentGlobalQueryJobId`
+
+`string`
+
+Global query that created this job.
+
+`parentGlobalQueryJobLocation`
+
+`string`
+
+Location of the global query that created this job.
 
 Union field `extended` . Statistics specific to the job type. `extended` can be only one of the following:
 
@@ -1287,6 +1420,38 @@ Format: `projects/<projectId>/jobs/<jobId>` .
 ` enum ( BigQueryAuditMetadata.JobDeletion.Reason  ` )
 
 Describes how the job was deleted.
+
+## BigQueryAuditMetadata.JobCancel
+
+Job cancel event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;jobName&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`jobName`
+
+`string`
+
+Job URI.
+
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.DatasetCreation
 
@@ -2681,7 +2846,7 @@ Table data read event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;fields&quot;: [string],&quot;fieldsTruncated&quot;: boolean,&quot;policyTags&quot;: [string],&quot;policyTagsTruncated&quot;: boolean,&quot;reason&quot;: enum (BigQueryAuditMetadata.TableDataRead.Reason),&quot;jobName&quot;: string,&quot;sessionName&quot;: string,&quot;readStream&quot;: string,&quot;offset&quot;: string,&quot;rowCount&quot;: string,&quot;serializedResponseBytes&quot;: string,&quot;scannedBytes&quot;: string,&quot;fraction&quot;: number,&quot;primaryStream&quot;: string,&quot;remainderStream&quot;: string,&quot;writeStream&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;fields&quot;: [string],&quot;fieldsTruncated&quot;: boolean,&quot;policyTags&quot;: [string],&quot;policyTagsTruncated&quot;: boolean,&quot;reason&quot;: enum (BigQueryAuditMetadata.TableDataRead.Reason),&quot;jobName&quot;: string,&quot;sessionName&quot;: string,&quot;readStream&quot;: string,&quot;offset&quot;: string,&quot;rowCount&quot;: string,&quot;serializedResponseBytes&quot;: string,&quot;scannedBytes&quot;: string,&quot;fraction&quot;: number,&quot;primaryStream&quot;: string,&quot;remainderStream&quot;: string,&quot;writeStream&quot;: string,&quot;uiDownloadRequest&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -2787,6 +2952,12 @@ Remainder stream name, which contains the tail of |readStream|. An empty value i
 `string`
 
 The name of the write stream that is being used for the table data read. This will be of the form `projects/{projectId}/datasets/{datasetId}/tables/{tableName}/streams/_default` if it's a default write stream or in the form of `projects/{projectId}/datasets/{datasetId}/tables/{tableName}/streams/{streamId}` if it's an exclusive write stream.
+
+`uiDownloadRequest`
+
+`boolean`
+
+True if the tabledata.list request is from a UI download. This field is only set when the reason is TABLEDATA\_LIST\_REQUEST.
 
 ## BigQueryAuditMetadata.TableDataChange
 
@@ -3867,6 +4038,398 @@ Format: `projects/<projectId>/locations/<locationId>/dataExchanges/<data_exchang
 ` enum ( BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason  ` )
 
 Describes how the subscription was created.
+
+## BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata
+
+Iceberg table set IAM policy event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;detail&quot;: {object (BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail)},&quot;reason&quot;: enum (BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Reason)}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`detail`
+
+` object ( BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail  ` )
+
+The iceberg table that was created.
+
+`reason`
+
+` enum ( BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Reason  ` )
+
+Describes how the iceberg table was created.
+
+## BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata.Detail
+
+The detail of the set IAM policy event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;table&quot;: string,
+  &quot;policy&quot;: string,
+  &quot;updateMask&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`table`
+
+`string`
+
+The name of the table. Format: projects/{projectId}/catalogs/{catalog\_id}/namespaces/{namespace\_id}/tables/{tableId}
+
+`policy`
+
+`string`
+
+The policy that was set.
+
+`updateMask`
+
+` string ( FieldMask  ` format)
+
+Field mask specifying which fields of the IAM policy to modify.
+
+This is a comma-separated list of fully qualified names of fields. Example: `"user.displayName,photo"` .
+
+## BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata
+
+Delta Sharing catalog creation event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;detail&quot;: {&quot;@type&quot;: string,field1: ...,...},&quot;reason&quot;: enum (BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata.Reason)}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`detail`
+
+`object`
+
+The Delta Sharing catalog that was created. We will use the DeltaSharingCatalog proto as the detail.
+
+An object containing fields of an arbitrary type. An additional field `"@type"` contains a URI identifying the type. Example: `{ "id": 1234, "@type": "types.example.com/standard/id" }` .
+
+`reason`
+
+` enum ( BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata.Reason  ` )
+
+Describes how the Delta Sharing catalog was created.
+
+## BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata
+
+Delta Sharing catalog update event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;detail&quot;: {&quot;@type&quot;: string,field1: ...,...},&quot;reason&quot;: enum (BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata.Reason)}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`detail`
+
+`object`
+
+The Delta Sharing catalog that was updated. We will use the DeltaSharingCatalog proto as the detail.
+
+An object containing fields of an arbitrary type. An additional field `"@type"` contains a URI identifying the type. Example: `{ "id": 1234, "@type": "types.example.com/standard/id" }` .
+
+`reason`
+
+` enum ( BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata.Reason  ` )
+
+Describes how the Delta Sharing catalog was updated.
+
+## BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata
+
+Delta Sharing catalog delete event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;detail&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail)},&quot;reason&quot;: enum (BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Reason)}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`detail`
+
+` object ( BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail  ` )
+
+The detail of the delete event.
+
+`reason`
+
+` enum ( BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Reason  ` )
+
+Describes how the Delta Sharing catalog was deleted.
+
+## BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata.Detail
+
+The detail of the delete event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;name&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`name`
+
+`string`
+
+The name of the catalog. Format: projects/{project}/catalogs/{catalog}
+
+## BigQueryAuditMetadata.PropertyGraphCreation
+
+Property graph creation event. Property graphs are created only via a `CREATE PROPERTY GRAPH` DDL query.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;propertyGraph&quot;: {object (BigQueryAuditMetadata.PropertyGraph)},&quot;reason&quot;: enum (BigQueryAuditMetadata.PropertyGraphCreation.Reason),&quot;jobName&quot;: string}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`propertyGraph`
+
+` object ( BigQueryAuditMetadata.PropertyGraph  ` )
+
+Created property graph.
+
+`reason`
+
+` enum ( BigQueryAuditMetadata.PropertyGraphCreation.Reason  ` )
+
+Describes how the property graph was created.
+
+`jobName`
+
+`string`
+
+The URI of the job that created the property graph.
+
+Format: `projects/<projectId>/jobs/<jobId>` .
+
+## BigQueryAuditMetadata.PropertyGraph
+
+Property graph resource. Property graphs have no resource-level IAM policy; access is controlled by the parent dataset's policy.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;propertyGraphName&quot;: string,
+  &quot;createTime&quot;: string,
+  &quot;updateTime&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`propertyGraphName`
+
+`string`
+
+Property graph URI.
+
+Format: `projects/<projectId>/datasets/<datasetId>/propertyGraphs/<property_graph_id>` .
+
+`createTime`
+
+` string ( Timestamp  ` format)
+
+Property graph creation time.
+
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
+
+`updateTime`
+
+` string ( Timestamp  ` format)
+
+Property graph last update time.
+
+Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
+
+## BigQueryAuditMetadata.PropertyGraphChange
+
+Property graph change event. Emitted for `CREATE OR REPLACE PROPERTY GRAPH` .
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;propertyGraph&quot;: {object (BigQueryAuditMetadata.PropertyGraph)},&quot;reason&quot;: enum (BigQueryAuditMetadata.PropertyGraphChange.Reason),&quot;jobName&quot;: string}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`propertyGraph`
+
+` object ( BigQueryAuditMetadata.PropertyGraph  ` )
+
+Updated property graph.
+
+`reason`
+
+` enum ( BigQueryAuditMetadata.PropertyGraphChange.Reason  ` )
+
+Describes how the property graph was updated.
+
+`jobName`
+
+`string`
+
+The URI of the job that updated the property graph.
+
+Format: `projects/<projectId>/jobs/<jobId>` .
+
+## BigQueryAuditMetadata.PropertyGraphDeletion
+
+Property graph deletion event.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;propertyGraph&quot;: {object (BigQueryAuditMetadata.PropertyGraph)},&quot;reason&quot;: enum (BigQueryAuditMetadata.PropertyGraphDeletion.Reason),&quot;jobName&quot;: string}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`propertyGraph`
+
+` object ( BigQueryAuditMetadata.PropertyGraph  ` )
+
+Deleted property graph.
+
+`reason`
+
+` enum ( BigQueryAuditMetadata.PropertyGraphDeletion.Reason  ` )
+
+Describes how the property graph was deleted.
+
+`jobName`
+
+`string`
+
+The URI of the job that deleted the property graph. Present if the reason is QUERY.
+
+Format: `projects/<projectId>/jobs/<jobId>` .
 
 ## BigQueryAuditMetadata.FirstPartyAppMetadata
 

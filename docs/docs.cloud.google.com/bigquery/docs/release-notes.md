@@ -14,6 +14,16 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## July 30, 2026
+
+Feature
+
+You can add tables, views, data sources, and data quality tests as tasks to BigQuery pipelines. For more information, see [Add a pipeline task](https://docs.cloud.google.com/bigquery/docs/create-pipelines#add_a_pipeline_task) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can audit when users download query results by using the BigQuery console. Data Access audit logs for the `tabledata.list` method now include a [`uiDownloadRequest`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDataRead.FIELDS.ui_download_request) field to indicate whether the request was triggered by a UI download. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## July 29, 2026
 
 Feature
@@ -37,6 +47,12 @@ You can use the Google-developed [Open Database Connectivity (ODBC) driver for B
 Change
 
 The feature formerly known as the *legacy `tabledata.insertAll` method* is now called the [*Storage Write API (REST)*](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . The feature formerly known as the *Storage Write API* is now called the [*Storage Write API (gRPC)*](https://docs.cloud.google.com/bigquery/docs/write-api) .
+
+Feature
+
+BigQuery dataset insights is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+[BigQuery dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) helps you discover and visualize relationships between tables and automatically generate cross-table queries. You can run and publish these insights to Knowledge Catalog for agentic grounding use cases, or generate them on demand without publishing for quick, ad hoc dataset exploration.
 
 ## July 23, 2026
 

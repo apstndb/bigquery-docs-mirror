@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes how to create and use [standard (built-in) tables in BigQuery](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . For information about creating other table types, see the following:
 
-  - [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
+  - [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
   - [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables)
 
 After creating a table, you can do the following:

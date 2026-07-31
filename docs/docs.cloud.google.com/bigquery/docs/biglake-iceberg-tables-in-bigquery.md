@@ -23,6 +23,7 @@ Iceberg managed tables support the following features:
   - [*Table partitioning*](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#use_partitioning) .
   - [*Table creation in Dataform workflows*](https://docs.cloud.google.com/dataform/docs/create-tables#create-iceberg-table) .
   - [*BigQuery advanced runtime*](https://docs.cloud.google.com/bigquery/docs/advanced-runtime) .
+  - Streaming with the [*BigQuery Storage Write API (gRPC)*](https://docs.cloud.google.com/bigquery/docs/write-api-grpc) .
 
 ## Architecture
 

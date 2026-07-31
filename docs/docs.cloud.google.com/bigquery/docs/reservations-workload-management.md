@@ -22,7 +22,7 @@ To use allocated slots in a reservation, you must *assign* it to one or more pro
 
 Projects use the single most specific reservation in the resource hierarchy to which they are assigned. A folder assignment overrides an organization assignment, and a project assignment overrides a folder assignment.
 
-If a project doesn't have an assigned or inherited reservation, then the job uses on-demand pricing. For more information about the resource hierarchy, see [organizing BigQuery resources](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
+If a project doesn't have an assigned or inherited reservation, then the job uses on-demand pricing. For more information about organizing BigQuery resources, see [Introduction to the resource hierarchy](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
 
 Resources can be assigned to `None` to represent an absence of an assignment. Projects that are assigned to `None` always use on-demand pricing. A common use case for `None` assignments is to assign an organization to a reservation and then use `None` to opt certain projects or folders out of that reservation. For more information, see [Assign a project to `None`](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-project-to-none) .
 

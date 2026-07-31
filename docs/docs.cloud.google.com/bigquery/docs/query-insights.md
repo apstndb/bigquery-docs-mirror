@@ -231,12 +231,6 @@ Check your join conditions to confirm that the increase in the size of the outpu
 
 ### Partition skew
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To provide feedback or request support with this feature, send email to [`bq-query-inspector-feedback@google.com`](mailto:%0Abq-query-inspector-feedback@google.com) .
-
 Skewed data distribution can cause queries to run slowly. When a query is executing, BigQuery splits data into small partitions for parallel processing. Skew occurs when data is unevenly distributed across these partitions, often due to frequently occurring values in join or grouping keys, making some partitions significantly larger than others. Since a single slot processes an entire partition and cannot share the work, an oversized partition can slow down processing, cause "resource exceeded" errors, and in extreme cases crash the slot.
 
 While you run a `JOIN` operation, BigQuery partitions the data on the left and right sides of the join based on the join keys. If a partition is too large, BigQuery attempts to rebalance the data. If the skew is too severe to be fully rebalanced, a partition skew insight is added to the `JOIN` stage in the execution graph.

@@ -20,7 +20,7 @@ The following are key differences between Lakehouse and standard BigQuery resour
   - You can't modify Lakehouse resources from BigQuery.
   - Lakehouse resources have additional metadata in their respective **Details** section.
 
-## Use cross-cloud Lakehouse
+## Use borderless Lakehouse
 
 > **Preview**
 > 
@@ -28,7 +28,7 @@ The following are key differences between Lakehouse and standard BigQuery resour
 
 > **Note:** For support during the preview, email <biglake-help@google.com> .
 
-You can use [cross-cloud Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-lakehouse) to query data that's stored in other cloud providers, directly from BigQuery, without migrating files or building complex ETL pipelines. For configuration information, see [Use cross-cloud Lakehouse](https://docs.cloud.google.com/lakehouse/docs/use-cross-cloud-lakehouse) .
+You can use [borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-borderless-lakehouse) to query data that's stored in other cloud providers, directly from BigQuery, without migrating files or building complex ETL pipelines. For configuration information, see [Use borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/use-borderless-lakehouse) .
 
 ## What's next
 

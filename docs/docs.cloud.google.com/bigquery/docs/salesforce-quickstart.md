@@ -1,20 +1,20 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/salesforce-quickstart
 uri: https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart
-title: Work with Salesforce Data Cloud data in BigQuery
+title: Work with Salesforce Data 360 data in BigQuery
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Work with Salesforce Data Cloud data in BigQuery
+# Work with Salesforce Data 360 data in BigQuery
 
-This document describes how to access and analyze Salesforce Data Cloud data in BigQuery using BigQuery Omni. The document shows how to link your Data Cloud datasets in BigQuery to run queries, join data with tables in Google Cloud, and replicate data using BigQuery Omni materialized views.
+This document describes how to access and analyze Salesforce Data 360 data in BigQuery using BigQuery Omni. The document shows how to link your Data 360 datasets in BigQuery to run queries, join data with tables in Google Cloud, and replicate data using BigQuery Omni materialized views.
 
-This document is intended for Data Cloud users who want to use BigQuery for deep analytics on their Data Cloud data, or combine it with data in Google Cloud for cross-cloud analytics—all without building and maintaining extract, transform, and load (ETL) pipelines.
+This document is intended for Data 360 users who want to use BigQuery for deep analytics on their Data 360 data, or combine it with data in Google Cloud for cross-cloud analytics—all without building and maintaining extract, transform, and load (ETL) pipelines.
 
 ## Before you begin
 
-Before working with Data Cloud data, you must be a Data Cloud user. If you have VPC Service Controls enabled on your project, you will need additional permissions.
+Before working with Data 360 data, you must be a Data 360 user. If you have VPC Service Controls enabled on your project, you will need additional permissions.
 
 ### Required roles
 
@@ -23,26 +23,26 @@ The following roles and permissions are required:
   - Analytics Hub Subscriber ( `roles/analyticshub.subscriber` )
   - BigQuery Admin ( `roles/bigquery.admin` )
 
-## Share Data From Data Cloud
+## Share Data From Data 360
 
-This documentation demonstrates how to share data from Data Cloud to BigQuery - [BYOL Data Shares - Zero-ETL Integration with BigQuery](https://help.salesforce.com/s/articleView?id=sf.c360_a_access_data_from_google_bigquery.htm&type=5) .
+This documentation demonstrates how to share data from Data 360 to BigQuery - [BYOL Data Shares - Zero-ETL Integration with BigQuery](https://help.salesforce.com/s/articleView?id=sf.c360_a_access_data_from_google_bigquery.htm&type=5) .
 
-## Link Data Cloud dataset to BigQuery
+## Link Data 360 dataset to BigQuery
 
-To access a Data Cloud dataset in BigQuery, you must first link the dataset to BigQuery with the following steps:
+To access a Data 360 dataset in BigQuery, you must first link the dataset to BigQuery with the following steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
 2.  Click **Salesforce Data Cloud**
     
-    Data Cloud datasets are displayed. You can find the dataset by name using the following naming pattern:
+    Data 360 datasets are displayed. You can find the dataset by name using the following naming pattern:
     
         listing_DATA_SHARE_NAME_TARGET_NAME
     
     Replace the following:
     
-      - `  DATA_SHARE_NAME  ` : the name of the data share in the Data Cloud.
-      - `  TARGET_NAME  ` : the name of the BigQuery target in the Data Cloud.
+      - `  DATA_SHARE_NAME  ` : the name of the data share in the Data 360.
+      - `  TARGET_NAME  ` : the name of the BigQuery target in the Data 360.
 
 3.  Click the dataset you want to add to BigQuery.
 
@@ -50,7 +50,7 @@ To access a Data Cloud dataset in BigQuery, you must first link the dataset to B
 
 5.  Specify the name of the linked dataset.
 
-Once the linked dataset is created, you can explore the dataset and the tables in it. All of the tables' metadata is retrieved from Data Cloud dynamically. All the objects inside the dataset are views that map to the Data Cloud objects. BigQuery supports three types of Data Cloud objects:
+Once the linked dataset is created, you can explore the dataset and the tables in it. All of the tables' metadata is retrieved from Data 360 dynamically. All the objects inside the dataset are views that map to the Data 360 objects. BigQuery supports three types of Data 360 objects:
 
   - Data Lake Objects (DLO)
   - Data Model Objects (DMO)
@@ -58,11 +58,11 @@ Once the linked dataset is created, you can explore the dataset and the tables i
 
 All of these objects are represented as views in BigQuery. These views point to hidden tables that are stored in Amazon S3.
 
-> **Note:** If you are using VPC Service Controls and Analytics Hub API is restricted, then you will need to create a [Egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) in the VPC Service Controls perimeter to include the Data Cloud Sharing producer project.
+> **Note:** If you are using VPC Service Controls and Analytics Hub API is restricted, then you will need to create a [Egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) in the VPC Service Controls perimeter to include the Data 360 Sharing producer project.
 
-## Work with Data Cloud data
+## Work with Data 360 data
 
-The following examples use a dataset called Northwest Trail Outfitters (NTO) that is hosted in Data Cloud. This dataset consists of three tables that represent the online sales data of the NTO organization:
+The following examples use a dataset called Northwest Trail Outfitters (NTO) that is hosted in Data 360. This dataset consists of three tables that represent the online sales data of the NTO organization:
 
   - `linked_nto_john.nto_customers__dll`
   - `linked_nto_john.nto_products__dll`
@@ -81,7 +81,7 @@ The following datasets store additional objects:
 
 ### Run ad-hoc queries
 
-Using BigQuery Omni, you can run ad-hoc queries to analyze the Data Cloud data through the subscribed dataset. The following example shows a simple query that queries the customers table from Data Cloud.
+Using BigQuery Omni, you can run ad-hoc queries to analyze the Data 360 data through the subscribed dataset. The following example shows a simple query that queries the customers table from Data 360.
 
     SELECT name__c, age__c
       FROM `listing_nto_john.nto_customers__dll`
@@ -103,7 +103,7 @@ BigQuery Omni queries let you join any of the tables in the BigQuery Omni region
 
 ### BigQuery Omni Data Transfer through CTAS
 
-You can use Create Table As Select (CTAS) to move data from Data Cloud tables in the BigQuery Omni region to the `US` region.
+You can use Create Table As Select (CTAS) to move data from Data 360 tables in the BigQuery Omni region to the `US` region.
 
     -- Move all the orders for March to the US region
     CREATE OR REPLACE TABLE us_data.online_orders_march
@@ -163,13 +163,13 @@ The following example runs a query on a replica materialized view:
       WHERE month = EXTRACT(MONTH FROM date)
       GROUP BY 1
 
-## Using Data Cloud data with `INFORMATION_SCHEMA`
+## Using Data 360 data with `INFORMATION_SCHEMA`
 
-Data Cloud datasets support BigQuery `INFORMATION_SCHEMA` views. The data in `INFORMATION_SCHEMA` views is synced regularly from Data Cloud and may be stale. The `SYNC_STATUS` column in the [`TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`SCHEMATA`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) views shows the last completed sync time, any errors that prevent BigQuery from providing fresh data, and any steps that are required to fix the error.
+Data 360 datasets support BigQuery `INFORMATION_SCHEMA` views. The data in `INFORMATION_SCHEMA` views is synced regularly from Data 360 and may be stale. The `SYNC_STATUS` column in the [`TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`SCHEMATA`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) views shows the last completed sync time, any errors that prevent BigQuery from providing fresh data, and any steps that are required to fix the error.
 
 `INFORMATION_SCHEMA` queries don't reflect datasets that have been recently created before the initial sync.
 
-Data Cloud datasets are subject to the same [limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) as other linked datasets, such as only being accessible in `INFORMATION_SCHEMA` in dataset-scoped queries.
+Data 360 datasets are subject to the same [limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) as other linked datasets, such as only being accessible in `INFORMATION_SCHEMA` in dataset-scoped queries.
 
 ## What's next
 

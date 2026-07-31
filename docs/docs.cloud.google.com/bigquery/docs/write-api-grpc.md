@@ -1,6 +1,6 @@
 ---
-name: documents/docs.cloud.google.com/bigquery/docs/write-api
-uri: https://docs.cloud.google.com/bigquery/docs/write-api
+name: documents/docs.cloud.google.com/bigquery/docs/write-api-grpc
+uri: https://docs.cloud.google.com/bigquery/docs/write-api-grpc
 title: Introduction to the Storage Write API (gRPC)
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
@@ -196,7 +196,7 @@ The Storage Write API (gRPC) supports streaming data into [partitioned tables](h
 
 When the data is streamed, it is initially placed in the `__UNPARTITIONED__` partition. After enough unpartitioned data is collected, BigQuery repartitions the data, placing it into the appropriate partition. However, there is no service level agreement (SLA) that defines how long it might take for that data to move out of the `__UNPARTITIONED__` partition.
 
-For [ingestion-time partitioned](https://docs.cloud.google.com/bigquery/docs/write-api#ingestion-time_partitioning) and [time-unit column partitioned](https://docs.cloud.google.com/bigquery/docs/write-api#time-unit_column_partitioning) tables, unpartitioned data can be excluded from a query by filtering out the `NULL` values from the `__UNPARTITIONED__` partition by using one of the pseudocolumns ( [`_PARTITIONTIME` or `_PARTITIONDATE`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) depending on your preferred data type).
+For [ingestion-time partitioned](https://docs.cloud.google.com/bigquery/docs/write-api-grpc#ingestion-time_partitioning) and [time-unit column partitioned](https://docs.cloud.google.com/bigquery/docs/write-api-grpc#time-unit_column_partitioning) tables, unpartitioned data can be excluded from a query by filtering out the `NULL` values from the `__UNPARTITIONED__` partition by using one of the pseudocolumns ( [`_PARTITIONTIME` or `_PARTITIONDATE`](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_an_ingestion-time_partitioned_table) depending on your preferred data type).
 
 ### Ingestion-time partitioning
 
@@ -228,7 +228,7 @@ This plugin supports the following:
 
 ## Apache Iceberg support
 
-You can use the Storage Write API (gRPC) with Lakehouse for Apache Iceberg to stream data into your Iceberg tables. For more information, see [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/lakehouse/docs/bigquery-storage-api) in the Lakehouse documentation.
+You can use the Storage Write API (gRPC) to stream data into your Iceberg tables. For more information, see [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
 
 ## Storage Write API (gRPC) project metrics
 

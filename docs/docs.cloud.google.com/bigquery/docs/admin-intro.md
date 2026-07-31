@@ -39,7 +39,7 @@ BigQuery provides several interfaces you can use for administration tasks. Often
 
 BigQuery resources include organizations, folders, projects, datasets, and tables. This section describes how to manage your organization's resources.
 
-For information about the BigQuery resource hierarchy, see [Organize BigQuery resources](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) . In particular, you can create an Organization resource, which lets you do some tasks, such as setting access controls, at the organization level.
+For information about organizing BigQuery resources, see [Introduction to the resource hierarchy](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) . In particular, you can create an Organization resource, which lets you do some tasks, such as setting access controls, at the organization level.
 
 ### Manage datasets
 

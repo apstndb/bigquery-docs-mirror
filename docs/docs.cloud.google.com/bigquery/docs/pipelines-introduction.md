@@ -19,6 +19,7 @@ A pipeline consists of one or more of the following code assets:
   - [Notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
   - [SQL queries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
   - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)
+  - SQLX tasks, including tables, views, sources, and data quality tests
 
 You can use pipelines to schedule the execution of code assets. For example, you can schedule a SQL query to run daily and update a table with the most recent source data, which can then power a dashboard.
 
@@ -28,7 +29,7 @@ In a pipeline with multiple code assets, you define the execution sequence. For 
 
 You can do the following in a pipeline:
 
-  - [Create new or import existing](https://docs.cloud.google.com/bigquery/docs/create-pipelines#add_a_pipeline_task) SQL queries or notebooks into a pipeline.
+  - [Create new or import existing](https://docs.cloud.google.com/bigquery/docs/create-pipelines#add_a_pipeline_task) SQL queries, notebooks, data preparations, or SQLX tasks into a pipeline.
   - [Schedule a pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) to automatically run at a specified time and frequency.
   - [Share a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_pipeline) with users or groups you specify.
   - [Share a link to a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_link_to_a_pipeline) .

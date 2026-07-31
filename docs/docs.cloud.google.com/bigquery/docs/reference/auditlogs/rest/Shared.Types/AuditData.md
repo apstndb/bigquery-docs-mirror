@@ -49,6 +49,8 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Query.SCHEMA_REPRESENTATION)
   - [TableDefinition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDefinition)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDefinition.SCHEMA_REPRESENTATION)
+  - [SecureContextValue](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#SecureContextValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#SecureContextValue.SCHEMA_REPRESENTATION)
   - [JobConfiguration.Load](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Load)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Load.SCHEMA_REPRESENTATION)
   - [JobConfiguration.Extract](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Extract)
@@ -1050,7 +1052,7 @@ Describes a query job, which executes a SQL-like query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;destinationTable&quot;: {object (TableName)},&quot;createDisposition&quot;: string,&quot;writeDisposition&quot;: string,&quot;defaultDataset&quot;: {object (DatasetName)},&quot;tableDefinitions&quot;: [{object (TableDefinition)}],&quot;queryPriority&quot;: string,&quot;destinationTableEncryption&quot;: {object (EncryptionInfo)},&quot;statementType&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;destinationTable&quot;: {object (TableName)},&quot;createDisposition&quot;: string,&quot;writeDisposition&quot;: string,&quot;defaultDataset&quot;: {object (DatasetName)},&quot;tableDefinitions&quot;: [{object (TableDefinition)}],&quot;queryPriority&quot;: string,&quot;destinationTableEncryption&quot;: {object (EncryptionInfo)},&quot;statementType&quot;: string,&quot;secureContextValues&quot;: [{object (SecureContextValue)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1111,6 +1113,12 @@ Result table encryption information. Set when non-default encryption is used.
 
 Type of the statement (e.g. SELECT, INSERT, CREATE\_TABLE, CREATE\_MODEL..)
 
+`secureContextValues[]`
+
+` object ( SecureContextValue  ` )
+
+The names and values of the secure context variables used in the query.
+
 ## TableDefinition
 
 Describes an external data source used in a query.
@@ -1149,6 +1157,43 @@ Name of the table, used in queries.
 `string`
 
 Google Cloud Storage URIs for the data to be imported.
+
+## SecureContextValue
+
+Describes a secure context key-value pair.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;key&quot;: string,
+  &quot;value&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`key`
+
+`string`
+
+The name of the secure context variable.
+
+`value`
+
+`string`
+
+The value of the secure context variable.
 
 ## JobConfiguration.Load
 
@@ -1349,7 +1394,7 @@ Job statistics that may change after a job starts.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalProcessedBytes&quot;: string,&quot;totalBilledBytes&quot;: string,&quot;billingTier&quot;: integer,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (JobStatistics.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;referencedTables&quot;: [{object (TableName)}],&quot;totalTablesProcessed&quot;: integer,&quot;referencedViews&quot;: [{object (TableName)}],&quot;totalViewsProcessed&quot;: integer,&quot;queryOutputRowCount&quot;: string,&quot;totalLoadOutputBytes&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalProcessedBytes&quot;: string,&quot;totalBilledBytes&quot;: string,&quot;billingTier&quot;: integer,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (JobStatistics.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;referencedTables&quot;: [{object (TableName)}],&quot;totalTablesProcessed&quot;: integer,&quot;referencedViews&quot;: [{object (TableName)}],&quot;totalViewsProcessed&quot;: integer,&quot;queryOutputRowCount&quot;: string,&quot;totalLoadOutputBytes&quot;: string,&quot;parentGlobalQueryJob&quot;: {object (JobName)},&quot;globalQueryRemoteRegions&quot;: [string]}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1454,6 +1499,18 @@ Number of output rows produced by the query job.
 
 Total bytes loaded for an import job.
 
+`parentGlobalQueryJob`
+
+` object ( JobName  ` )
+
+Global query that created this job.
+
+`globalQueryRemoteRegions[]`
+
+`string`
+
+The remote regions of a global query.
+
 ## JobStatistics.ReservationResourceUsage
 
 This field is deprecated. Job resource usage breakdown by reservation.
@@ -1506,7 +1563,7 @@ Job query request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;maxResults&quot;: integer,&quot;defaultDataset&quot;: {object (DatasetName)},&quot;projectId&quot;: string,&quot;dryRun&quot;: boolean}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;query&quot;: string,&quot;maxResults&quot;: integer,&quot;defaultDataset&quot;: {object (DatasetName)},&quot;projectId&quot;: string,&quot;dryRun&quot;: boolean,&quot;secureContextValues&quot;: [{object (SecureContextValue)}]}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1542,6 +1599,12 @@ Project that the query should be charged to.
 `boolean`
 
 If true, don't actually run the job. Just check that it would run.
+
+`secureContextValues[]`
+
+` object ( SecureContextValue  ` )
+
+The secure context key-value pairs evaluated during this request.
 
 ## JobGetQueryResultsRequest
 

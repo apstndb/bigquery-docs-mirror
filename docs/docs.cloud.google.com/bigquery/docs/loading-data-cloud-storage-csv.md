@@ -252,7 +252,7 @@ Other optional flags include:
     
     For more information on partitioned tables, see:
     
-      - [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
+      - [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
     
     For more information on clustered tables, see:
     

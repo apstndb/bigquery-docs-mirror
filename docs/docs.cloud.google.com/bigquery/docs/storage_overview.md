@@ -46,7 +46,7 @@ In addition, [cached query results](https://docs.cloud.google.com/bigquery/docs/
 
 [External tables](https://docs.cloud.google.com/bigquery/docs/external-tables) are a special type of table, where the data resides in a data store that is external to BigQuery, such as Cloud Storage. An external table has a table schema, just like a standard table, but the table definition points to the external data store. In this case, only the table metadata is kept in BigQuery storage. BigQuery does not charge for external table storage, although the external data store might charge for storage.
 
-BigQuery organizes tables and other resources into logical containers called *datasets* . How you group your BigQuery resources affects permissions, quotas, billing, and other aspects of your BigQuery workloads. For more information and best practices, see [Organizing BigQuery resources](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
+BigQuery organizes tables and other resources into logical containers called *datasets* . How you group your BigQuery resources affects permissions, quotas, billing, and other aspects of your BigQuery workloads. For more information and best practices, see [Introduction to the resource hierarchy](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
 
 The data retention policy that is used for a table is determined by the configuration of the dataset that contains the table. For more information, see [Data retention with time travel and fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel) .
 

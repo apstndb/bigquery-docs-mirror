@@ -1,6 +1,6 @@
 ---
-name: documents/docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery
-uri: https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery
+name: documents/docs.cloud.google.com/bigquery/docs/write-api-rest
+uri: https://docs.cloud.google.com/bigquery/docs/write-api-rest
 title: Use the Storage Write API (REST)
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
@@ -12,7 +12,7 @@ For new projects, we recommend using the [BigQuery Storage Write API (gRPC)](htt
 
 ## Before you begin
 
-1.  Ensure that you have write access to the dataset that contains your destination table. The table must exist before you begin writing data to it unless you are using template tables. For more information on template tables, see [Creating tables automatically using template tables](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#template-tables) .
+1.  Ensure that you have write access to the dataset that contains your destination table. The table must exist before you begin writing data to it unless you are using template tables. For more information on template tables, see [Creating tables automatically using template tables](https://docs.cloud.google.com/bigquery/docs/write-api-rest#template-tables) .
 
 2.  Check the [quota policy for streaming data](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) .
 
@@ -27,7 +27,7 @@ To stream data into BigQuery, you need the following IAM permissions:
   - `bigquery.tables.updateData` (lets you insert data into the table)
   - `bigquery.tables.get` (lets you obtain table metadata)
   - `bigquery.datasets.get` (lets you obtain dataset metadata)
-  - `bigquery.tables.create` (required if you use a [template table](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#template-tables) to create the table automatically)
+  - `bigquery.tables.create` (required if you use a [template table](https://docs.cloud.google.com/bigquery/docs/write-api-rest#template-tables) to create the table automatically)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to stream data into BigQuery:
 
@@ -451,7 +451,7 @@ When you supply `insertId` for an inserted row, BigQuery uses this ID to support
 
 The system expects that rows provided with identical `insertId` s are also identical. If two rows have identical `insertId` s, it is nondeterministic which row BigQuery preserves.
 
-De-duplication is generally meant for retry scenarios in a distributed system where there's no way to determine the state of a streaming insert under certain error conditions, such as network errors between your system and BigQuery or internal errors within BigQuery. If you retry an insert, use the same `insertId` for the same set of rows so that BigQuery can attempt to de-duplicate your data. For more information, see [troubleshooting streaming inserts](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#troubleshooting) .
+De-duplication is generally meant for retry scenarios in a distributed system where there's no way to determine the state of a streaming insert under certain error conditions, such as network errors between your system and BigQuery or internal errors within BigQuery. If you retry an insert, use the same `insertId` for the same set of rows so that BigQuery can attempt to de-duplicate your data. For more information, see [troubleshooting streaming inserts](https://docs.cloud.google.com/bigquery/docs/write-api-rest#troubleshooting) .
 
 De-duplication offered by BigQuery is best effort, and it should not be relied upon as a mechanism to guarantee the absence of duplicates in your data. Additionally, BigQuery might degrade the quality of best effort de-duplication at any time in order to guarantee higher reliability and availability for your data.
 
@@ -638,7 +638,7 @@ If the `insertId` field is populated, the following quota errors are possible:
 
 The purpose of the `insertId` field is to deduplicate inserted rows. If multiple inserts with the same `insertId` arrive within a few minutes' window, BigQuery writes a single version of the record. However, this automatic deduplication is not guaranteed. For maximum streaming throughput, we recommend that you don't include `insertId` and instead use [manual deduplication](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) . For more information, see [Ensuring data consistency](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataconsistency) .
 
-When you encounter this error, [diagnose the issue](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#ts-streaming-insert-quota-diagnose) the issue and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#ts-streaming-insert-quota-resolution) to resolve it.
+When you encounter this error, [diagnose the issue](https://docs.cloud.google.com/bigquery/docs/write-api-rest#ts-streaming-insert-quota-diagnose) the issue and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/write-api-rest#ts-streaming-insert-quota-resolution) to resolve it.
 
 #### Diagnosis
 

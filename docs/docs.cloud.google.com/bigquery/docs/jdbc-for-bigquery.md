@@ -158,691 +158,545 @@ JDBC driver connection properties are configuration parameters that you include 
 
 > **Note:** All connection property names are case-insensitive. Boolean connection properties accept both `TRUE` / `FALSE` and `1` / `0` .
 
-**Connection property**
-
-**Description**
-
-**Default value**
-
-**Data type**
-
-**Required**
-
-`AdditionalProjects`
-
-Projects that the driver can access for queries and metadata operations, in addition to the primary project set by the `ProjectId` property.
-
-N/A
-
-Comma-separated string
-
-No
-
-`AllowLargeResults`
-
-Determines if the driver processes query results that are larger than 128 MB when the `QueryDialect` property is set to `BIG_QUERY` . If the `QueryDialect` property is set to `SQL` , the driver always processes large query results.
-
-`TRUE`
-
-Boolean
-
-No
-
-`BYOID_AudienceUri`
-
-The audience property in an external account configuration file. The audience property can contain the resource name for the workload identity pool or workforce pool, as well as the provider identifier in that pool.
-
-N/A
-
-String
-
-Only when `OAuthType=4`
-
-`BYOID_CredentialSource`
-
-The token retrieval and environmental information.
-
-N/A
-
-String
-
-Only when `OAuthType=4`
-
-`BYOID_PoolUserProject`
-
-The user project when a workforce pool is being used for authentication.
-
-N/A
-
-String
-
-Only when `OAuthType=4` and using the workforce pool
-
-`BYOID_SA_Impersonation_Uri`
-
-The URI for the service account impersonation when a workforce pool is being used for authentication.
-
-N/A
-
-String
-
-Only when `OAuthType=4` and using the workforce pool
-
-`BYOID_SubjectTokenType`
-
-The Security Token Service token based on the token exchange specification. One of the following:  
-
-  - `urn:ietf:params:oauth:token-type:jwt`
-  - `urn:ietf:params:oauth:token-type:id_token`
-  - `urn:ietf:params:oauth:token-type:saml2`
-  - `urn:ietf:params:aws:token-type:aws4_request`
-
-`urn:ietf:params:oauth:tokentype:id_token`
-
-String
-
-Only when `OAuthType=4`
-
-`BYOID_TokenUri`
-
-The Security Token Service token exchange endpoint.
-
-`https://sts.googleapis.com/v1/token`
-
-String
-
-No
-
-`ConnectionPoolSize`
-
-The connection pool size, if connection pooling is enabled.
-
-`10`
-
-Long
-
-No
-
-`DefaultDataset`
-
-The dataset that's used when one isn't specified in a query.
-
-N/A
-
-String
-
-No
-
-`EnableHighThroughputAPI`
-
-Determines if the Storage Read API can be used. The `HighThroughputActivationRatio` and `HighThroughputMinTableSize` properties must also be set to `TRUE` to use the Storage Read API.
-
-`FALSE`
-
-Boolean
-
-No
-
-`EnableProjectDiscovery`
-
-Determines if database metadata methods discover datasets across all accessible Google Cloud projects. When set to `FALSE` , discovery is restricted to the default `ProjectId` .
-
-`FALSE`
-
-Boolean
-
-No
-
-`EnableSession`
-
-Determines if the connection starts a session. If set to `TRUE` , the session ID is passed to all subsequent queries.
-
-`FALSE`
-
-Boolean
-
-No
-
-`EnableWriteAPI`
-
-Determines if the Storage Write API can be used. It must be set to `TRUE` to enable bulk inserts.
-
-`FALSE`
-
-Boolean
-
-No
-
-`EndpointOverrides`
-
-Custom endpoints to overwrite the following:  
-
-  - `BIGQUERY=https://bigquery.googleapis.com`
-  - `READ_API=https://bigquerystorage.googleapis.com`
-  - `OAUTH2=https://oauth2.googleapis.com`
-  - `STS=https://sts.googleapis.com`
-
-N/A
-
-Comma-separated string
-
-No
-
-`FilterTablesOnDefaultDataset`
-
-Determines the scope of metadata returned by the `DatabaseMetaData.getTables()` and `DatabaseMetaData.getColumns()` methods. When set to `FALSE` , no filtering occurs. The `DefaultDataset` property must also be set to enable filtering.
-
-`FALSE`
-
-Boolean
-
-No
-
-`HighThroughputActivationRatio`
-
-The threshold for the number of pages in a query response. When this number is exceeded, and the `EnableHighThroughputAPI` and `HighThroughputMinTableSize` conditions are met, the driver starts using the Storage Read API.
-
-`2`
-
-Integer
-
-No
-
-`HighThroughputMinTableSize`
-
-The threshold for the number of rows in a query response. When this number is exceeded, and the `EnableHighThroughputAPI` and `HighThroughputActivationRatio` conditions are met, the driver starts using the Storage Read API.
-
-`10000`
-
-Integer
-
-No
-
-`JobCreationMode`
-
-Determines if queries are run with or without jobs. A `1` value means that jobs are created for every query, and a `2` value means that queries can be executed without jobs.
-
-`2`
-
-Integer
-
-No
-
-`JobTimeout`
-
-The job timeout (in seconds) after which the job is cancelled on the server.
-
-`0`
-
-Long
-
-No
-
-`KMSKeyName`
-
-The KMS key name for encrypting data.
-
-N/A
-
-String
-
-No
-
-`Labels`
-
-Labels that are associated with the query to organize and group query jobs.
-
-N/A
-
-Map\<String, String\>
-
-No
-
-`LargeResultDataset`
-
-The destination dataset for large query results, only when the `LargeResultTable` property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.
-
-`_google_jdbc`
-
-String
-
-No
-
-`LargeResultsDatasetExpirationTime`
-
-The lifetime of all tables in a large result dataset, in milliseconds. This property is ignored if the dataset already has a default expiration time set.
-
-`3600000`
-
-Long
-
-No
-
-`LargeResultTable`
-
-The destination table for large query results, only when the `LargeResultDataset` property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.
-
-`temp_table...`
-
-String
-
-No
-
-`ListenerPoolSize`
-
-The listener pool size, if connection pooling is enabled.
-
-`10`
-
-Long
-
-No
-
-`Location`
-
-The [location](https://docs.cloud.google.com/bigquery/docs/locations) where datasets are created or queried. BigQuery automatically determines the location if this property isn't set.
-
-N/A
-
-String
-
-No
-
-`LogLevel`
-
-The level of detail logged by the driver. For more information, see [Logging](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#logging) .
-
-`0`
-
-Integer
-
-No
-
-`LogPath`
-
-The directory where log files are written.
-
-N/A
-
-String
-
-No
-
-`MaximumBytesBilled`
-
-The limit of bytes billed. Queries with bytes billed greater than this number fail without incurring a charge.
-
-`0`
-
-Long
-
-No
-
-`MaxResults`
-
-The maximum number of results per page.
-
-`10000`
-
-Long
-
-No
-
-`MetaDataFetchThreadCount`
-
-The number of threads used for database metadata methods.
-
-`32`
-
-Integer
-
-No
-
-`OAuthAccessToken`
-
-The access token that's used for pre-generated access token authentication.
-
-N/A
-
-String
-
-Only when `OAUTH_TYPE=2`
-
-`OAuthClientId`
-
-The client ID for pre-generated refresh token authentication and user account authentication.
-
-N/A
-
-String
-
-Only when `OAUTH_TYPE=1` or `OAUTH_TYPE=2`
-
-`OAuthClientSecret`
-
-The client secret for pre-generated refresh token authentication and user account authentication.
-
-N/A
-
-String
-
-Only when `OAUTH_TYPE=1` or `OAUTH_TYPE=2`
-
-`OAuthP12Password`
-
-The password for the PKCS12 key file.
-
-`notasecret`
-
-String
-
-No
-
-`OAuthPvtKey`
-
-The service account key when using service account authentication. This value can be a raw JSON keyfile object or a path to the JSON keyfile.
-
-N/A
-
-String
-
-Only when `OAUTH_TYPE=0` and the `OAuthPvtKeyPath` value isn't set
-
-`OAuthPvtKeyPath`
-
-The path to the service account key when using service account authentication.
-
-N/A
-
-String
-
-Only when `OAUTH_TYPE=0` and the `OAuthPvtKey` and `OAuthServiceAcctEmail` values aren't set
-
-`OAuthRefreshToken`
-
-The refresh token for pre-generated refresh token authentication.
-
-N/A
-
-String
-
-Only when `OAUTH_TYPE=2`
-
-`OAuthServiceAcctEmail`
-
-The service account email when using service account authentication.
-
-N/A
-
-String
-
-Only when `OAUTH_TYPE=0` and the `OAuthPvtKeyPath` value isn't set
-
-`OAuthType`
-
-The authentication type. One of the following:  
-
-  - `0` : service account authentication
-  - `1` : user account authentication
-  - `2` : pre-generated refresh or access token authentication
-  - `3` : Application Default Credential authentication
-  - `4` : other authentication methods
-
-`-1`
-
-Integer
-
-Yes
-
-`PartnerToken`
-
-A token that's used by Google Cloud partners to track usage of the driver.
-
-N/A
-
-String
-
-No
-
-`ProjectId`
-
-The default project ID for the driver. This project is used to execute queries and is billed for resource usage. If not set, the driver infers a project ID.
-
-N/A
-
-String
-
-No, but highly recommended
-
-`ProxyHost`
-
-The hostname or IP address of a proxy server through which the JDBC connection is routed.
-
-N/A
-
-String
-
-No
-
-`ProxyPort`
-
-The port number on which the proxy server is listening for connections.
-
-N/A
-
-String
-
-No
-
-`ProxyPwd`
-
-The password for authentication when connecting through a proxy server that requires it.
-
-N/A
-
-String
-
-No
-
-`ProxyUid`
-
-The username for authentication when connecting through a proxy server that requires it.
-
-N/A
-
-String
-
-No
-
-`QueryDialect`
-
-The SQL dialect for query execution. Use `SQL` for GoogleSQL (highly recommended) and `BIG_QUERY` for legacy SQL.
-
-`SQL`
-
-String
-
-No
-
-`QueryProperties`
-
-[REST connection properties](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty) that customize query behavior.
-
-N/A
-
-Map\<String, String\>
-
-No
-
-`RequestGoogleDriveScope`
-
-Adds read-only Drive scope to the connection when set to `1` .
-
-`0`
-
-Integer
-
-No
-
-`RetryInitialDelay`
-
-Sets the delay (in seconds) before the first retry.
-
-`0`
-
-Long
-
-No
-
-`RetryMaxDelay`
-
-Sets the maximum limit (in seconds) for the retry delay.
-
-`0`
-
-Long
-
-No
-
-`ServiceAccountImpersonationChain`
-
-A comma-separated list of service account emails in the impersonation chain.
-
-N/A
-
-String
-
-No
-
-`ServiceAccountImpersonationEmail`
-
-The service account email to be impersonated.
-
-N/A
-
-String
-
-No
-
-`ServiceAccountImpersonationScopes`
-
-A comma-separated list of OAuth2 scopes to use with the impersonated account.
-
-`https://www.googleapis.com/auth/bigquery`
-
-String
-
-No
-
-`ServiceAccountImpersonationTokenLifetime`
-
-The impersonated account token lifetime (in seconds).
-
-`3600`
-
-Integer
-
-No
-
-`SSLTrustStore`
-
-The full path to the Java TrustStore that contains trusted Certificate Authority (CA) certificates. The driver utilizes this truststore to validate the identity of the server during the SSL/TLS handshake.
-
-N/A
-
-String
-
-No
-
-`SSLTrustStoreProvider`
-
-The Java Cryptography Extension (JCE) provider used for the `SSLTrustStore` property.
-
-N/A
-
-String
-
-No
-
-`SSLTrustStorePwd`
-
-The password to the Java TrustStore specified in the `SSLTrustStore` property.
-
-N/A
-
-String
-
-Only if the Java TrustStore is password-protected
-
-`SSLTrustStoreType`
-
-The format of the truststore file specified in the `SSLTrustStore` property (such as `JKS` , `PKCS12` , or `ROTKS` ).
-
-N/A
-
-String
-
-No
-
-`SWA_ActivationRowCount`
-
-The threshold of `executeBatch insert` rows which, when exceeded, causes the connector to switch to the Storage Write API.
-
-`3`
-
-Integer
-
-No
-
-`SWA_AppendRowCount`
-
-The size of the write stream.
-
-`1000`
-
-Integer
-
-No
-
-`Timeout`
-
-The length of time, in seconds, that the connector retries a failed API call before timing out.
-
-`0`
-
-Long
-
-No
-
-`UniverseDomain`
-
-The top-level domain that's associated with your organization's Google Cloud resources.
-
-`googleapis.com`
-
-String
-
-No
-
-`UnsupportedHTAPIFallback`
-
-Determines if the connector falls back to the REST API (when set to `TRUE` ) or returns an error (when set to `FALSE` ).
-
-`TRUE`
-
-Boolean
-
-No
-
-`UseQueryCache`
-
-Enables query caching.
-
-`TRUE`
-
-Boolean
-
-No
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 40%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Connection property</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Default value</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Required</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">AdditionalProjects</code></td>
+<td>Projects that the driver can access for queries and metadata operations, in addition to the primary project set by the <code dir="ltr" translate="no">ProjectId</code> property.</td>
+<td>N/A</td>
+<td>Comma-separated string</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">AllowLargeResults</code></td>
+<td>Determines if the driver processes query results that are larger than 128 MB when the <code dir="ltr" translate="no">QueryDialect</code> property is set to <code dir="ltr" translate="no">BIG_QUERY</code> . If the <code dir="ltr" translate="no">QueryDialect</code> property is set to <code dir="ltr" translate="no">SQL</code> , the driver always processes large query results.</td>
+<td><code dir="ltr" translate="no">TRUE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">BYOID_AudienceUri</code></td>
+<td>The audience property in an external account configuration file. The audience property can contain the resource name for the workload identity pool or workforce pool, as well as the provider identifier in that pool.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAuthType=4</code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">BYOID_CredentialSource</code></td>
+<td>The token retrieval and environmental information.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAuthType=4</code></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">BYOID_PoolUserProject</code></td>
+<td>The user project when a workforce pool is being used for authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAuthType=4</code> and using the workforce pool</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">BYOID_SA_Impersonation_Uri</code></td>
+<td>The URI for the service account impersonation when a workforce pool is being used for authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAuthType=4</code> and using the workforce pool</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">BYOID_SubjectTokenType</code></td>
+<td>The Security Token Service token based on the token exchange specification. One of the following:<br />
+
+<ul>
+<li><code dir="ltr" translate="no">urn:ietf:params:oauth:token-type:jwt</code></li>
+<li><code dir="ltr" translate="no">urn:ietf:params:oauth:token-type:id_token</code></li>
+<li><code dir="ltr" translate="no">urn:ietf:params:oauth:token-type:saml2</code></li>
+<li><code dir="ltr" translate="no">urn:ietf:params:aws:token-type:aws4_request</code></li>
+</ul></td>
+<td><code dir="ltr" translate="no">urn:ietf:params:oauth:tokentype:id_token</code></td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAuthType=4</code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">BYOID_TokenUri</code></td>
+<td>The Security Token Service token exchange endpoint.</td>
+<td><code dir="ltr" translate="no">https://sts.googleapis.com/v1/token</code></td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">ConnectionPoolSize</code></td>
+<td>The connection pool size, if connection pooling is enabled.</td>
+<td><code dir="ltr" translate="no">10</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">DefaultDataset</code></td>
+<td>The dataset that's used when one isn't specified in a query.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">EnableGcpLogExporter</code></td>
+<td>Determines if the driver automatically exports logs to Cloud Logging (if no custom or global OpenTelemetry instance is used). For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#opentelemetry">OpenTelemetry</a> .</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">EnableGcpTraceExporter</code></td>
+<td>Determines if the driver automatically exports traces to Cloud Trace (if no custom or global OpenTelemetry instance is used). For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#opentelemetry">OpenTelemetry</a> .</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">EnableHighThroughputAPI</code></td>
+<td>Determines if the Storage Read API can be used. The <code dir="ltr" translate="no">HighThroughputActivationRatio</code> and <code dir="ltr" translate="no">HighThroughputMinTableSize</code> properties must also be set to <code dir="ltr" translate="no">TRUE</code> to use the Storage Read API.</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">EnableProjectDiscovery</code></td>
+<td>Determines if database metadata methods discover datasets across all accessible Google Cloud projects. When set to <code dir="ltr" translate="no">FALSE</code> , discovery is restricted to the default <code dir="ltr" translate="no">ProjectId</code> .</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">EnableSession</code></td>
+<td>Determines if the connection starts a session. If set to <code dir="ltr" translate="no">TRUE</code> , the session ID is passed to all subsequent queries.</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">EnableWriteAPI</code></td>
+<td>Determines if the Storage Write API (gRPC) can be used. It must be set to <code dir="ltr" translate="no">TRUE</code> to enable bulk inserts.</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">EndpointOverrides</code></td>
+<td>Custom endpoints to overwrite the following:<br />
+
+<ul>
+<li><code dir="ltr" translate="no">BIGQUERY=https://bigquery.googleapis.com</code></li>
+<li><code dir="ltr" translate="no">READ_API=https://bigquerystorage.googleapis.com</code></li>
+<li><code dir="ltr" translate="no">OAUTH2=https://oauth2.googleapis.com</code></li>
+<li><code dir="ltr" translate="no">STS=https://sts.googleapis.com</code></li>
+</ul></td>
+<td>N/A</td>
+<td>Comma-separated string</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">FilterTablesOnDefaultDataset</code></td>
+<td>Determines the scope of metadata returned by the <code dir="ltr" translate="no">DatabaseMetaData.getTables()</code> and <code dir="ltr" translate="no">DatabaseMetaData.getColumns()</code> methods. When set to <code dir="ltr" translate="no">FALSE</code> , no filtering occurs. The <code dir="ltr" translate="no">DefaultDataset</code> property must also be set to enable filtering.</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">GcpTelemetryCredentials</code></td>
+<td>The credentials used to authenticate telemetry exporters. Accepts a path to a service account JSON key or the raw JSON string. Defaults to connection credentials if not set. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#opentelemetry">OpenTelemetry</a> .</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">GcpTelemetryProjectId</code></td>
+<td>The destination Google Cloud project ID for telemetry. Defaults to the primary <code dir="ltr" translate="no">ProjectId</code> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#opentelemetry">OpenTelemetry</a> .</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">HighThroughputActivationRatio</code></td>
+<td>The threshold for the number of pages in a query response. When this number is exceeded, and the <code dir="ltr" translate="no">EnableHighThroughputAPI</code> and <code dir="ltr" translate="no">HighThroughputMinTableSize</code> conditions are met, the driver starts using the Storage Read API.</td>
+<td><code dir="ltr" translate="no">2</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">HighThroughputMinTableSize</code></td>
+<td>The threshold for the number of rows in a query response. When this number is exceeded, and the <code dir="ltr" translate="no">EnableHighThroughputAPI</code> and <code dir="ltr" translate="no">HighThroughputActivationRatio</code> conditions are met, the driver starts using the Storage Read API.</td>
+<td><code dir="ltr" translate="no">10000</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">JobCreationMode</code></td>
+<td>Determines if queries are run with or without jobs. A <code dir="ltr" translate="no">1</code> value means that jobs are created for every query, and a <code dir="ltr" translate="no">2</code> value means that queries can be executed without jobs.</td>
+<td><code dir="ltr" translate="no">2</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">JobTimeout</code></td>
+<td>The job timeout (in seconds) after which the job is cancelled on the server.</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">KMSKeyName</code></td>
+<td>The KMS key name for encrypting data.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">Labels</code></td>
+<td>Labels that are associated with the query to organize and group query jobs.</td>
+<td>N/A</td>
+<td>Map&lt;String, String&gt;</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">LargeResultDataset</code></td>
+<td>The destination dataset for large query results, only when the <code dir="ltr" translate="no">LargeResultTable</code> property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.</td>
+<td><code dir="ltr" translate="no">_google_jdbc</code></td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">LargeResultsDatasetExpirationTime</code></td>
+<td>The lifetime of all tables in a large result dataset, in milliseconds. This property is ignored if the dataset already has a default expiration time set.</td>
+<td><code dir="ltr" translate="no">3600000</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">LargeResultTable</code></td>
+<td>The destination table for large query results, only when the <code dir="ltr" translate="no">LargeResultDataset</code> property is set. When you set this property, data writes bypass the result cache and trigger billing for each query, even if the results are small.</td>
+<td><code dir="ltr" translate="no">temp_table...</code></td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">ListenerPoolSize</code></td>
+<td>The listener pool size, if connection pooling is enabled.</td>
+<td><code dir="ltr" translate="no">10</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">Location</code></td>
+<td>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> where datasets are created or queried. BigQuery automatically determines the location if this property isn't set.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">LogLevel</code></td>
+<td>The level of detail logged by the driver. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#logging">Logging</a> .</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">LogPath</code></td>
+<td>The directory where log files are written.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">MaximumBytesBilled</code></td>
+<td>The limit of bytes billed. Queries with bytes billed greater than this number fail without incurring a charge.</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">MaxResults</code></td>
+<td>The maximum number of results per page.</td>
+<td><code dir="ltr" translate="no">10000</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">MetaDataFetchThreadCount</code></td>
+<td>The number of threads used for database metadata methods.</td>
+<td><code dir="ltr" translate="no">32</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">OAuthAccessToken</code></td>
+<td>The access token that's used for pre-generated access token authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAUTH_TYPE=2</code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">OAuthClientId</code></td>
+<td>The client ID for pre-generated refresh token authentication and user account authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAUTH_TYPE=1</code> or <code dir="ltr" translate="no">OAUTH_TYPE=2</code></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">OAuthClientSecret</code></td>
+<td>The client secret for pre-generated refresh token authentication and user account authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAUTH_TYPE=1</code> or <code dir="ltr" translate="no">OAUTH_TYPE=2</code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">OAuthP12Password</code></td>
+<td>The password for the PKCS12 key file.</td>
+<td><code dir="ltr" translate="no">notasecret</code></td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">OAuthPvtKey</code></td>
+<td>The service account key when using service account authentication. This value can be a raw JSON keyfile object or a path to the JSON keyfile.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAUTH_TYPE=0</code> and the <code dir="ltr" translate="no">OAuthPvtKeyPath</code> value isn't set</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">OAuthPvtKeyPath</code></td>
+<td>The path to the service account key when using service account authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAUTH_TYPE=0</code> and the <code dir="ltr" translate="no">OAuthPvtKey</code> and <code dir="ltr" translate="no">OAuthServiceAcctEmail</code> values aren't set</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">OAuthRefreshToken</code></td>
+<td>The refresh token for pre-generated refresh token authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAUTH_TYPE=2</code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">OAuthServiceAcctEmail</code></td>
+<td>The service account email when using service account authentication.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only when <code dir="ltr" translate="no">OAUTH_TYPE=0</code> and the <code dir="ltr" translate="no">OAuthPvtKeyPath</code> value isn't set</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">OAuthType</code></td>
+<td>The authentication type. One of the following:<br />
+
+<ul>
+<li><code dir="ltr" translate="no">0</code> : service account authentication</li>
+<li><code dir="ltr" translate="no">1</code> : user account authentication</li>
+<li><code dir="ltr" translate="no">2</code> : pre-generated refresh or access token authentication</li>
+<li><code dir="ltr" translate="no">3</code> : Application Default Credential authentication</li>
+<li><code dir="ltr" translate="no">4</code> : other authentication methods</li>
+</ul></td>
+<td><code dir="ltr" translate="no">-1</code></td>
+<td>Integer</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">PartnerToken</code></td>
+<td>A token that's used by Google Cloud partners to track usage of the driver.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">ProjectId</code></td>
+<td>The default project ID for the driver. This project is used to execute queries and is billed for resource usage. If not set, the driver infers a project ID.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No, but highly recommended</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">ProxyHost</code></td>
+<td>The hostname or IP address of a proxy server through which the JDBC connection is routed.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">ProxyPort</code></td>
+<td>The port number on which the proxy server is listening for connections.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">ProxyPwd</code></td>
+<td>The password for authentication when connecting through a proxy server that requires it.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">ProxyUid</code></td>
+<td>The username for authentication when connecting through a proxy server that requires it.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">QueryDialect</code></td>
+<td>The SQL dialect for query execution. Use <code dir="ltr" translate="no">SQL</code> for GoogleSQL (highly recommended) and <code dir="ltr" translate="no">BIG_QUERY</code> for legacy SQL.</td>
+<td><code dir="ltr" translate="no">SQL</code></td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">QueryProperties</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty">REST connection properties</a> that customize query behavior.</td>
+<td>N/A</td>
+<td>Map&lt;String, String&gt;</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">RequestGoogleDriveScope</code></td>
+<td>Adds read-only Drive scope to the connection when set to <code dir="ltr" translate="no">1</code> .</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">RetryInitialDelay</code></td>
+<td>Sets the delay (in seconds) before the first retry.</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">RetryMaxDelay</code></td>
+<td>Sets the maximum limit (in seconds) for the retry delay.</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">ServiceAccountImpersonationChain</code></td>
+<td>A comma-separated list of service account emails in the impersonation chain.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">ServiceAccountImpersonationEmail</code></td>
+<td>The service account email to be impersonated.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">ServiceAccountImpersonationScopes</code></td>
+<td>A comma-separated list of OAuth2 scopes to use with the impersonated account.</td>
+<td><code dir="ltr" translate="no">https://www.googleapis.com/auth/bigquery</code></td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">ServiceAccountImpersonationTokenLifetime</code></td>
+<td>The impersonated account token lifetime (in seconds).</td>
+<td><code dir="ltr" translate="no">3600</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">SSLTrustStore</code></td>
+<td>The full path to the Java TrustStore that contains trusted Certificate Authority (CA) certificates. The driver utilizes this truststore to validate the identity of the server during the SSL/TLS handshake.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">SSLTrustStoreProvider</code></td>
+<td>The Java Cryptography Extension (JCE) provider used for the <code dir="ltr" translate="no">SSLTrustStore</code> property.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">SSLTrustStorePwd</code></td>
+<td>The password to the Java TrustStore specified in the <code dir="ltr" translate="no">SSLTrustStore</code> property.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Only if the Java TrustStore is password-protected</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">SSLTrustStoreType</code></td>
+<td>The format of the truststore file specified in the <code dir="ltr" translate="no">SSLTrustStore</code> property (such as <code dir="ltr" translate="no">JKS</code> , <code dir="ltr" translate="no">PKCS12</code> , or <code dir="ltr" translate="no">ROTKS</code> ).</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">SWA_ActivationRowCount</code></td>
+<td>The threshold of <code dir="ltr" translate="no">executeBatch insert</code> rows which, when exceeded, causes the connector to switch to the Storage Write API (gRPC).</td>
+<td><code dir="ltr" translate="no">3</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">SWA_AppendRowCount</code></td>
+<td>The size of the write stream.</td>
+<td><code dir="ltr" translate="no">1000</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">Timeout</code></td>
+<td>The length of time, in seconds, that the connector retries a failed API call before timing out.</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">UniverseDomain</code></td>
+<td>The top-level domain that's associated with your organization's Google Cloud resources.</td>
+<td><code dir="ltr" translate="no">googleapis.com</code></td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">UnsupportedHTAPIFallback</code></td>
+<td>Determines if the connector falls back to the REST API (when set to <code dir="ltr" translate="no">TRUE</code> ) or returns an error (when set to <code dir="ltr" translate="no">FALSE</code> ).</td>
+<td><code dir="ltr" translate="no">TRUE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">UseGlobalOpenTelemetry</code></td>
+<td>Determines if the driver uses <code dir="ltr" translate="no">GlobalOpenTelemetry.get()</code> for instrumentation. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#opentelemetry">OpenTelemetry</a> .</td>
+<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">UseQueryCache</code></td>
+<td>Enables query caching.</td>
+<td><code dir="ltr" translate="no">TRUE</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
 
 ## Run queries with the driver
 
@@ -1005,6 +859,110 @@ For example, in a Linux or macOS environment, run the following:
 
     export BIGQUERY_JDBC_LOG_LEVEL=6
     export BIGQUERY_JDBC_LOG_PATH=/tmp/jdbc-logs
+
+## OpenTelemetry
+
+The JDBC driver for BigQuery supports OpenTelemetry (OTel) to provide distributed tracing and logging, which lets you monitor the performance of your database interactions and troubleshoot issues effectively.
+
+### Traced operations
+
+When OpenTelemetry is enabled, the driver generates spans for the following operations:
+
+  - Query execution: Spans are generated for `BigQueryStatement` ( `execute()` , `executeQuery()` , `executeLargeUpdate()` , `executeBatch()` ) and `BigQueryPreparedStatement` ( `execute()` , `executeQuery()` , `executeLargeUpdate()` ).
+  - Metadata operations: Spans are generated for specific `DatabaseMetaData` methods ( `getCatalogs()` , `getSchemas()` , `getTables()` , `getColumns()` ).
+  - Pagination: Asynchronous fetches for additional pages of results (when using the REST API path) are traced and causally linked to the original query execution span using OpenTelemetry Span Links. A span named `BigQueryStatement.pagination` is created for these operations.
+  - Context propagation: The JDBC driver propagates the active context to the underlying `google-cloud-bigquery` SDK. As a result, spans generated by the SDK (such as HTTP RPC calls) automatically appear as children of the JDBC spans, providing a complete end-to-end trace hierarchy.
+
+### Configuration modes
+
+You can configure OpenTelemetry in the JDBC driver using one of the following modes, depending on your application's architecture and requirements.
+
+#### Application-managed telemetry
+
+If your application already uses OpenTelemetry, you can inject your OpenTelemetry instance into the JDBC driver to ensure that the driver's telemetry is correlated with your application's telemetry.
+
+To do this, use the `BigQueryDataSource` API:
+
+    BigQueryDataSource dataSource = new BigQueryDataSource();
+    // ... set other properties ...
+    dataSource.setCustomOpenTelemetry(yourOpenTelemetryInstance);
+
+#### Global OpenTelemetry support
+
+If you have initialized OpenTelemetry globally in your application (for example, using the OpenTelemetry Java Agent or by calling the `GlobalOpenTelemetry.set()` function), you can configure the driver to use this global instance.
+
+To enable the global instance, set the `UseGlobalOpenTelemetry` connection property to `TRUE` .
+
+#### Zero-configuration Google Cloud telemetry
+
+If you're running on Google Cloud and want a quick setup, you can enable automatic export of traces and logs to Google Cloud observability (Trace and Logging).
+
+To enable this export, set the following connection properties in your JDBC URL:
+
+  - `EnableGcpTraceExporter=true`
+  - `EnableGcpLogExporter=true`
+
+The following is an example connection URL:
+
+    jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;ProjectId=your-project-id;EnableGcpTraceExporter=true;EnableGcpLogExporter=true;
+
+### OpenTelemetry connection properties
+
+The following connection properties are supported for OpenTelemetry. For detailed descriptions and default values, see [Connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) .
+
+  - `EnableGcpLogExporter`
+  - `EnableGcpTraceExporter`
+  - `GcpTelemetryCredentials`
+  - `GcpTelemetryProjectId`
+  - `UseGlobalOpenTelemetry`
+
+### Important considerations
+
+When deploying OpenTelemetry integration, keep the following considerations in mind regarding logging behavior, authentication, and pricing.
+
+#### Interaction with LogLevel
+
+The existing `LogLevel` connection property acts as a primary gatekeeper for logging.
+
+  - If `LogLevel=0` (OFF) is set, no log records are generated. Consequently, no logs are exported using OpenTelemetry or to Logging, even if `EnableGcpLogExporter=true` .
+  - To enable OTel logging, ensure `LogLevel` is set to a value greater than 0 (for example, `5` for detailed logs).
+
+#### Authentication for telemetry
+
+Telemetry export (both tracing and logging) with the automatic Google Cloud fallback supports both Application Default Credentials (ADC) and explicit Service Account credentials provided using `GcpTelemetryCredentials` .
+
+When `GcpTelemetryProjectId` or `GcpTelemetryCredentials` are provided, both logs and traces are sent to the same specified destination project using the same configured credentials.
+
+#### Required APIs and IAM permissions
+
+To successfully write telemetry data to Google Cloud observability, perform the following setup in your target Google Cloud project:
+
+1.  Enable APIs:
+      - Enable the Cloud Trace API ( `cloudtrace.googleapis.com` ).
+      - Enable the Cloud Logging API ( `logging.googleapis.com` ).
+2.  Grant IAM roles:
+      - For exporting traces: Grant the principal or service account the Trace Agent ( `roles/cloudtrace.agent` ) role.
+      - For exporting logs: Grant the principal or service account the Logs Writer ( `roles/logging.logWriter` ) role.
+
+#### Pricing and billing
+
+When using zero-configuration Google Cloud telemetry ( `EnableGcpTraceExporter=true` or `EnableGcpLogExporter=true` ), telemetry data is sent to Trace and Logging. These services may incur charges based on the volume of data ingested. For more information, see [Google Cloud Observability](https://cloud.google.com/stackdriver/pricing) .
+
+#### Metrics
+
+This integration doesn't support OpenTelemetry metrics.
+
+#### Dependency shading
+
+To prevent classpath conflicts with your application, the driver shades OpenTelemetry SDK and exporter dependencies. The OpenTelemetry API remains unshaded to allow interoperability with your application-provided SDK.
+
+#### Logging and trace correlation
+
+When OpenTelemetry is enabled, the driver automatically correlates logs with traces:
+
+  - `db.connection_id` : Attached as a span attribute to all JDBC spans.
+  - `jdbc.connection_id` : Used as a baggage key and attached as a label to all log entries emitted by the driver to Logging.
+  - Trace ID and Span ID: Logs generated within the scope of a query execution automatically include the active `trace_id` and `span_id` .
 
 ## Pricing
 
