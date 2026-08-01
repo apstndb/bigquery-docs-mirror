@@ -278,6 +278,66 @@ The data canvas toolbar provides the following controls for adding nodes and man
 
 The following examples demonstrate different ways to use BigQuery data canvas in analysis workflows.
 
+### Canvas settings
+
+The **Canvas settings** pane provides the following options:
+
+  - **Location** : the processing [location](https://docs.cloud.google.com/bigquery/docs/data-canvas#supported-locations) for your data canvas. For details, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
+  - **Query parameters** : add [parameters](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) to use in SQL queries for your data canvas.
+  - **Resource management** : manage [query job priority](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , [caching](https://docs.cloud.google.com/bigquery/docs/cached-results) , and [job settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#query_and_job_execution_settings) .
+  - **Canvas management** : control the display of query output on your data canvas.
+  - **Advanced options** : select a Google-owned and Google-managed encryption key or [Customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) , and set the [maximum bytes billed](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#restrict-bytes-billed) for your queries.
+
+To change the settings for your data canvas, follow these steps:
+
+1.  Go to the **BigQuery** page.
+
+2.  In the left pane, click explore **Explorer** .
+
+3.  Expand your project name, and then click **Data canvases** .
+
+4.  On the **Data canvases** page, click the link for the canvas you want to update.
+
+5.  Click settings **Canvas settings** .
+
+6.  In the **Location** section, choose from the following options:
+    
+    1.  Select **Automatic location selection** to allow BigQuery to automatically determine the processing location based on the resources you're querying.
+    
+    2.  Alternatively, to manually route your jobs, do the following:
+        
+        1.  Deselect **Automatic location selection** and then select a **Location type** , either **Region** or **Multi-region** .
+        
+        2.  In the region field, specify the region, or in the multi-region field, specify the multi-region.
+        
+        3.  Optionally, for **Reservation** , choose a reservation to use for the canvas jobs.
+
+7.  In the **Query parameters** section, choose from the following options:
+    
+    1.  Click add **Add parameter** to define standard parameters to use across the SQL queries in your canvas.
+    
+    2.  Enter a name, type, and value for the parameter.
+    
+    > **Note:** Query parameters in the Google Cloud console only support primitive types. For complex types such as `ARRAY` , `STRUCT` , and `JSON` , use the `bq` command-line tool or the BigQuery API.
+
+8.  In the **Resource management** section, choose from the following options:
+    
+    1.  For **Job priority** , choose whether to run your canvas queries using **Interactive** or **Batch** priority.
+    
+    2.  For **Cache preference** , select **Use cached results** to allow BigQuery to return previously cached query results. Using cached results can reduce costs and improve performance.
+    
+    3.  For **Job timeout** , enter a maximum job execution time in milliseconds. If this time limit is exceeded, BigQuery attempts to stop the job.
+
+9.  In the **Canvas management** section, deselect **Omit node output when saving this canvas** to cache the query results with the canvas state. This only saves the canvas structure and queries.
+
+10. Expand the **Advanced options** section, and choose from the following options:
+    
+    1.  For **Encryption** , choose **Google-managed keys** or choose **Cloud KMS key** , and enter your customer-managed key type and value.
+    
+    2.  For **Maximum bytes billed** , enter a limit on bytes billed for your queries. If a query goes beyond this limit, it fails without incurring charges. If this option isn't specified, the maximum bytes billed is set to the project default.
+
+11. After making your changes, click **Save** to apply the settings to your data canvas.
+
 ### Example workflow: Find, query, and visualize data
 
 In this example, you use natural language prompts in BigQuery data canvas to find data, generate a query, and edit the query. Then, you create a chart.

@@ -79,7 +79,7 @@ If you need to access columns protected by BigQuery column-level access policies
 
 ### Knowledge Catalog service account roles and permissions
 
-> **Note:** If you are scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/bigquery/docs/cmek#datascan-cmek-permissions) .
+> **Note:** If you are scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/dataplex/docs/cmek#datascans-cmek-permissions) .
 
 If you haven't created any data quality or data profile scans or you don't have a Knowledge Catalog lake in this project, create a service identifier by running: `gcloud beta services identity create --service=dataplex.googleapis.com` . This command returns a Knowledge Catalog service identifier if it exists.
 

@@ -36,7 +36,7 @@ To work with default connections, use the following Identity and Access Manageme
 
   - Use the default connection: BigQuery Connection User ( `roles/bigquery.connectionUser` ) on your project
 
-  - Set the default connection: BigQuery Admin ( `roles/bigquery.admin` ) on your project
+  - Set the default connection: BigQuery Connection Admin ( `roles/bigquery.connectionAdmin` ) on your project
 
   - If it is necessary to grant permissions to the service account of a default connection:
     

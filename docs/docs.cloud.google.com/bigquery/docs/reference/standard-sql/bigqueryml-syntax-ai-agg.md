@@ -317,10 +317,10 @@ The `AI.AGG` function has the following known issues:
 
   - If a single input row has 10 or more images, it might be skipped.
   - Input rows with arrays of `ObjectRefRuntime` objects that call the `OBJ.GET_ACCESS_URL` function might be skipped.
-  - If you're using [Workforce Identity Federation](https://cloud.google.com/workforce-identity-federation) without a specified Cloud resource connection and your query takes more than a few minutes to run, it might fail unexpectedly.
   - The function might fail to process some `ObjectRefRuntime` image objects that are created by the `OBJ.GET_ACCESS_URL` function.
   - Individual rows that are larger than 10 MiB might cause the function to fail with an internal error.
   - The function might return an internal error if the same query uses the `AI.AGG()` function without the `DISTINCT` modifier and another aggregate function with the `DISTINCT` modifier.
+  - The function might return an internal error if you use a Gemini 3 endpoint and instruct Gemini to return empty result.
 
 ## What's next
 

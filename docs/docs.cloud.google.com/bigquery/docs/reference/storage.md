@@ -371,7 +371,7 @@ Regardless of API version, to access API functions, we recommend that you use th
 
   - Because the Storage Read API operates on storage, you cannot use the Storage Read API to directly read from logical or materialized views. As a workaround, you can execute a BigQuery query over the view and use the Storage Read API to read from the resulting table. Some connectors, including the [Spark-BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example) , support this workflow natively.
 
-  - Reading [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) is not supported. To use the Storage Read API with external data sources, use [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+  - Reading [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) is not supported. To use the Storage Read API with external data sources, use [Apache Iceberg](https://docs.cloud.google.com/lakehouse/docs/manage-tables) tables, managed by the Lakehouse runtime catalog.
 
 ## Supported regions
 
