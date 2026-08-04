@@ -852,17 +852,17 @@ The `bq load` command uses the following flags and arguments:
 
 For more information about loading data from Cloud Storage using the `bq load` command, see the following:
 
-  - [Loading Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
-  - [Loading CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
-  - [Loading JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
-  - [Loading ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
-  - [Loading Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
-  - [Loading data from Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
-  - [Loading data from Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
+  - [Load Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
+  - [Load CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
+  - [Load JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
+  - [Load ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
+  - [Load Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
+  - [Load data from Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
+  - [Load data from Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
 
 For more information about loading data from a local source using the `bq load` command, see the following:
 
-  - [Loading data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_data_from_local_files) .
+  - [Load data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_data_from_local_files) .
 
 ### `bq ls`
 
@@ -1028,7 +1028,7 @@ For example:
 For more information about using the `bq ls` command, see the following:
 
   - [Managing jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs)
-  - [Listing datasets in a project](https://docs.cloud.google.com/bigquery/docs/listing-datasets)
+  - [List datasets in a project](https://docs.cloud.google.com/bigquery/docs/listing-datasets)
   - [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables)
   - [Listing views in a dataset](https://docs.cloud.google.com/bigquery/docs/view-metadata#list_views)
   - [Working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers)

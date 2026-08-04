@@ -14,6 +14,20 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## August 03, 2026
+
+Feature
+
+You can now use [cross-cloud connections](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections) to query data in AWS, Azure, and Salesforce Data 360 from all BigQuery regions. These connections let you use more BigQuery features and are more cost efficient than standard connections that use BigQuery Omni. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
+Feature
+
+The JDBC driver for BigQuery now supports [OpenTelemetry](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#opentelemetry) for tracing and logging, which helps you monitor the performance of your database interactions and troubleshoot issues. [Automatic exports to Google Cloud Observability](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#zero-config-gcp-telemetry) are also available. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Announcement
+
+Support for hybrid search (using the `VECTOR_SEARCH` function to combine a semantic search with a lexical (keyword) search) has been restored. Using `HYBRID` mode in the `AI.SEARCH` function has also been restored.
+
 ## July 30, 2026
 
 Feature
@@ -99,6 +113,12 @@ As part of [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemi
 Feature
 
 Table partitioning, multi-statement transactions, and advanced runtime are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
+
+Feature
+
+*Cross-cloud Lakehouse* now supports Snowflake as a remote catalog provider (Preview). You can configure federated catalogs to query data stored in Snowflake directly from Google Cloud using BigQuery or Apache Spark without migrating data or building complex ETL pipelines.
+
+For more information, see [Set up cross-cloud Lakehouse for Snowflake](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-lakehouse-snowflake) .
 
 Security
 
@@ -197,6 +217,20 @@ You can now grant data preparations and pipelines access to additional services 
 
 ## June 25, 2026
 
+Feature
+
+*Lakehouse* now supports BigQuery writes (DML, DDL) and automatic table management for Apache Iceberg tables in the Lakehouse runtime catalog (Preview).
+
+This update introduces the following features:
+
+**Read/write interoperability:** Full read and write (DML) support across Managed Service for Apache Spark, open source engines (such as Spark, Flink, and Trino).
+
+**BigQuery SQL DDL and DML:** Create, alter, and delete tables, or modify data using standard SQL DDL and DML statements ( `INSERT` , `UPDATE` , `DELETE` , and `MERGE` ) directly in BigQuery.
+
+**Automatic table management:** Opt in to automatic storage optimization, including compaction and garbage collection.
+
+For more information, see [Apache Iceberg tables](https://docs.cloud.google.com/lakehouse/docs/manage-tables) and [Configure table options](https://docs.cloud.google.com/lakehouse/docs/table-options) .
+
 Change
 
 An updated version of the [Simba ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver) is now available.
@@ -289,6 +323,10 @@ You can use Gemini Code Assist directly within the BigQuery **Jobs explorer** , 
 
 Feature
 
+*Lakehouse for Apache Iceberg* now supports custom catalog names and data distributed across multiple buckets. For more information, see [Create a catalog](https://docs.cloud.google.com/lakehouse/docs/create-catalog) .
+
+Feature
+
 [BigQuery AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) can use [`ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) directly as input, without calling the `OBJ.GET_ACCESS_URL` function. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## June 11, 2026
@@ -296,6 +334,12 @@ Feature
 Feature
 
 You can [monitor performance, analyze capacity, and optimize costs with Gemini Cloud Assist in BigQuery](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#administer_bigquery) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+*Lakehouse runtime catalog* now supports Apache Iceberg V3 tables with Binary Deletion Vectors (BDV) (Preview). This feature is useful for handling high-volume updates and deletes by deleting specific rows without the overhead of rewriting entire data files.
+
+For more information, see [Use Binary Deletion Vectors in Iceberg V3 tables](https://docs.cloud.google.com/lakehouse/docs/use-iceberg-v3-binary-deletion-vectors) .
 
 Feature
 
@@ -340,6 +384,14 @@ Feature
 
 You can manage and limit the costs associated with BigQuery generative AI functions by configuring [daily token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) . Token-based cost management for BigQuery generative AI functions is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
+## June 05, 2026
+
+Feature
+
+*Cross-cloud Lakehouse* now supports AWS Glue as a remote catalog provider (Preview). You can configure federated catalogs to query data stored in AWS Glue directly from Google Cloud using BigQuery or Apache Spark without migrating data or building complex ETL pipelines.
+
+For more information, see [Set up cross-cloud Lakehouse for AWS Glue](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-lakehouse-aws-glue) .
+
 ## June 03, 2026
 
 Feature
@@ -375,6 +427,12 @@ Change
 An updated version of the [Simba ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver) is now available.
 
 ## May 26, 2026
+
+Feature
+
+*Lakehouse* now supports using Apache Spark and Apache Hive with the Lakehouse runtime catalog and the Hive catalog. This integration lets you use the metastore as a serverless, central metadata layer, enabling seamless data sharing and unified querying across Spark, Hive, and BigQuery using supported environments (such as Managed Service for Apache Spark).
+
+For more information, see [About Hive Catalogs in Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore) and [Use Spark and Hive with the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/use-spark-hive-metastore) .
 
 Feature
 

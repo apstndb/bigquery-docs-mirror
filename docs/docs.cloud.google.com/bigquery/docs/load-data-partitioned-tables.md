@@ -36,12 +36,12 @@ For more information on loading data, see [Introduction to loading data into Big
 
 ## Stream data into partitioned tables
 
-For information about streaming data into a partitioned table with the BigQuery Storage Write API, see [Stream into partitioned tables](https://docs.cloud.google.com/bigquery/docs/write-api#stream_into_partitioned_tables) .
+For information about streaming data into a partitioned table with the BigQuery Storage Write API (gRPC), see [Stream into partitioned tables](https://docs.cloud.google.com/bigquery/docs/write-api#stream_into_partitioned_tables) .
 
 ## What's next
 
 To learn more about working with partitioned tables, see:
 
-  - [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
-  - [Managing partitioned tables](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables)
+  - [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
+  - [Manage partitioned tables](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables)
   - [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables)

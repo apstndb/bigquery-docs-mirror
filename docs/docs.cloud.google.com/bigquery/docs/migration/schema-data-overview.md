@@ -131,7 +131,7 @@ You can make the initial transfer using one of several approaches.
   - For Amazon Redshift and Teradata data warehouses, you can use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) to load schema and data directly from your existing system into BigQuery. Cloud Storage is still used to stage data as part of the migration process.
   - For any data warehouse, you can extract files that contain your schema and data, upload those files to Cloud Storage, and then use one of the following options to load the schema and data from those files into BigQuery:
       - [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
-      - [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api)
+      - [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api)
       - [Batch load](https://docs.cloud.google.com/bigquery/docs/batch-loading-data)
 
 For further considerations when choosing a data transfer method, see [Choosing a data ingestion method](https://docs.cloud.google.com/bigquery/docs/loading-data#methods) .

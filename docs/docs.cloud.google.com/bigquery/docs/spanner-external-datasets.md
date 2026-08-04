@@ -513,7 +513,7 @@ Spanner external datasets also support access delegation. Access delegation deco
 
 ## List tables in an external dataset
 
-To list the tables that are available for query in your external dataset, see [Listing datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
+To list the tables that are available for query in your external dataset, see [List datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
 
 ## Get table information
 

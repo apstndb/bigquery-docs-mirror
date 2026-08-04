@@ -188,7 +188,7 @@ BigQuery might be a critical component of a variety of architectures. Depending 
 
 ### Real-time analytics
 
-The first example is an event data processing pipeline. In this example, log events from endpoints are ingested using Pub/Sub. From there, a streaming Dataflow pipeline performs some operations on the data prior to writing it into BigQuery using the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . The data is then used both for ad hoc querying to, for example, recreate sequences of events that may have resulted in specific endpoint outcomes, and for feeding near-real time dashboards to allow the detection of trends and patterns in the data through visualization.
+The first example is an event data processing pipeline. In this example, log events from endpoints are ingested using Pub/Sub. From there, a streaming Dataflow pipeline performs some operations on the data prior to writing it into BigQuery using the [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . The data is then used both for ad hoc querying to, for example, recreate sequences of events that may have resulted in specific endpoint outcomes, and for feeding near-real time dashboards to allow the detection of trends and patterns in the data through visualization.
 
 This example requires you to consider multiple aspects of reliability. Because the end-to-end data freshness requirements are quite high, **latency** of the ingestion process is critical. Once data is written to BigQuery, **reliability** is perceived as the ability of users to issue ad hoc queries with **consistent** and predictable latency and ensuring that dashboards utilizing the data reflect the absolute latest available information.
 

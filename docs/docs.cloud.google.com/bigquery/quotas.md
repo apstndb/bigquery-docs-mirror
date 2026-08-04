@@ -1082,7 +1082,7 @@ DML statements have the following <a href="https://docs.cloud.google.com/bigquer
 <td>1,500 statements</td>
 <td>The first 1,500 <code dir="ltr" translate="no">INSERT</code> statements run immediately after they are submitted. After this limit is reached, the concurrency of <code dir="ltr" translate="no">INSERT</code> statements that write to a table is limited to 10. Additional <code dir="ltr" translate="no">INSERT</code> statements are added to a <code dir="ltr" translate="no">PENDING</code> queue. Up to 100 <code dir="ltr" translate="no">INSERT</code> statements can be queued against a table at any given time. When an <code dir="ltr" translate="no">INSERT</code> statement completes, the next <code dir="ltr" translate="no">INSERT</code> statement is removed from the queue and run.<br />
 <br />
-If you must run DML <code dir="ltr" translate="no">INSERT</code> statements more frequently, consider streaming data to your table using the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">Storage Write API</a> .</td>
+If you must run DML <code dir="ltr" translate="no">INSERT</code> statements more frequently, consider streaming data to your table using the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">Storage Write API (gRPC)</a> .</td>
 </tr>
 <tr class="odd">
 <td>Concurrent mutating DML statements per table</td>
@@ -1883,9 +1883,9 @@ The following limits apply to [BigQuery Storage Read API](https://docs.cloud.goo
 | Maximum serialized data size    | 128 MB  | When you use the Storage Read API `ReadRows` call, the serialized representation of the data in an individual `ReadRowsResponse` message cannot be larger than 128 MB.                                                                                                                                                                                      |
 | Maximum per-stream memory usage | 1.5 GB  | The maximum per-stream memory is approximate because the limit is based on the internal representation of the row data. Streams utilizing more than 1.5 GB memory for a single row might fail. For more information, see [Troubleshoot resources exceeded issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-resources-exceeded) . |
 
-### Storage Write API
+### Storage Write API (gRPC)
 
-The following quotas apply to [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) requests. The following quotas can be applied at the folder level. These quotas are then aggregated and shared across all child projects. To enable this configuration, contact [Cloud Customer Care](https://console.cloud.google.com/support/) .
+The following quotas apply to [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) requests. The following quotas can be applied at the folder level. These quotas are then aggregated and shared across all child projects. To enable this configuration, contact [Cloud Customer Care](https://console.cloud.google.com/support/) .
 
 > **Note:** Projects that have opted in folder level quota enforcement can only check folder level quota usage and limit in the folder's Google Cloud console quotas page. Project level quota usage and limit won't be displayed. In this case, the project level [monitoring metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerystorage) is still a good source for the project level usage.
 
@@ -1910,10 +1910,10 @@ If you plan to [request a quota adjustment](https://docs.cloud.google.com/docs/q
 <tr class="odd">
 <td>Concurrent write connections</td>
 <td>5,000 in a region; 20,000 in a multi-region</td>
-<td><p>The concurrent connections quota is based on the client project that initiates the Storage Write API request, not the project containing the BigQuery dataset resource. The initiating project is the project associated with the <a href="https://docs.cloud.google.com/docs/authentication/api-keys">API key</a> or the <a href="https://docs.cloud.google.com/iam/docs/understanding-service-accounts">service account</a> .</p>
+<td><p>The concurrent connections quota is based on the client project that initiates the Storage Write API (gRPC) request, not the project containing the BigQuery dataset resource. The initiating project is the project associated with the <a href="https://docs.cloud.google.com/docs/authentication/api-keys">API key</a> or the <a href="https://docs.cloud.google.com/iam/docs/understanding-service-accounts">service account</a> .</p>
 <p>Your project can operate on 5,000 concurrent connections in a region, or 20,000 concurrent connections in the <code dir="ltr" translate="no">US</code> and <code dir="ltr" translate="no">EU</code> multi-regions.</p>
 <p>A connection should be long lived and used to send as many requests as possible. Use of short-lived connections is discouraged and could cause inflated concurrent connection quota usage. For quota accounting purposes, we suggest a connection lifetime of at least several minutes.</p>
-<p>When you use the <a href="https://docs.cloud.google.com/bigquery/docs/write-api#default_stream">default stream</a> in Java or Go, we recommend using <a href="https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management">Storage Write API multiplexing</a> to write to multiple destination tables with shared connections in order to reduce the number of overall connections that are needed. If you are using the <a href="https://beam.apache.org/documentation/io/built-in/google-bigquery/#at-least-once-semantics">Beam connector with at-least-once semantics</a> , you can set <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/gcp/bigquery/BigQueryOptions.html#setUseStorageApiConnectionPool-java.lang.Boolean-">UseStorageApiConnectionPool</a> to <code dir="ltr" translate="no">TRUE</code> to enable multiplexing.</p>
+<p>When you use the <a href="https://docs.cloud.google.com/bigquery/docs/write-api#default_stream">default stream</a> in Java or Go, we recommend using <a href="https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management">Storage Write API (gRPC) multiplexing</a> to write to multiple destination tables with shared connections in order to reduce the number of overall connections that are needed. If you are using the <a href="https://beam.apache.org/documentation/io/built-in/google-bigquery/#at-least-once-semantics">Beam connector with at-least-once semantics</a> , you can set <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/gcp/bigquery/BigQueryOptions.html#setUseStorageApiConnectionPool-java.lang.Boolean-">UseStorageApiConnectionPool</a> to <code dir="ltr" translate="no">TRUE</code> to enable multiplexing.</p>
 <br />
 
 <p>You can view usage quota and limits metrics for your projects in <a href="https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view_quota_usage_and_limits">Cloud Monitoring</a> . Select the concurrent connections limit name based on your region. The options are <code dir="ltr" translate="no">ConcurrentWriteConnectionsPerProject</code> , <code dir="ltr" translate="no">ConcurrentWriteConnectionsPerProjectEU</code> , and <code dir="ltr" translate="no">ConcurrentWriteConnectionsPerProjectRegion</code> for <code dir="ltr" translate="no">us</code> , <code dir="ltr" translate="no">eu</code> , and other regions, respectively.<br />
@@ -1945,7 +1945,7 @@ It is strongly recommended that you set up <a href="https://docs.cloud.google.co
 </tbody>
 </table>
 
-The following limits apply to [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) requests:
+The following limits apply to [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) requests:
 
 | Limit                     | Default                  | Notes                                                                      |
 | ------------------------- | ------------------------ | -------------------------------------------------------------------------- |
@@ -1954,7 +1954,7 @@ The following limits apply to [Storage Write API](https://docs.cloud.google.com/
 
 ## Streaming inserts
 
-The following quotas and limits apply when you stream data into BigQuery by using the [legacy streaming API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . For information about strategies to stay within these limits, see [Troubleshooting quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota) . If you exceed these quotas, BigQuery returns a `quotaExceeded` error. BigQuery might reduce your provisioned quota if your quota is significantly under-utilized for more than one year.
+The following quotas and limits apply when you stream data into BigQuery by using the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . For information about strategies to stay within these limits, see [Troubleshooting quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota) . If you exceed these quotas, BigQuery returns a `quotaExceeded` error. BigQuery might reduce your provisioned quota if your quota is significantly under-utilized for more than one year.
 
 <table>
 <colgroup>

@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/creating-partitioned-tables
 uri: https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables
-title: Creating partitioned tables
+title: Create partitioned tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Creating partitioned tables
+# Create partitioned tables
 
 This page describes how to create partitioned tables in BigQuery. For an overview of partitioned tables, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 

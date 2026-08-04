@@ -455,7 +455,7 @@ It can take up to 24 hours for some charges to appear in Cloud Billing.
 
   - If you are using the [legacy streaming API](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) to ingest data, then there might be some delays before the embedding generation starts.
 
-  - When using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , background embedding generation jobs may fail if a streaming write job is running concurrently. When this occurs, the Agent Platform quota and background DML costs are wasted. Using the Storage Write API also causes concurrent embedding generation jobs on the table, but this is handled by BigQuery and no Agent Platform quota or background DML costs are wasted.
+  - When using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) , background embedding generation jobs may fail if a streaming write job is running concurrently. When this occurs, the Agent Platform quota and background DML costs are wasted. Using the Storage Write API (gRPC) also causes concurrent embedding generation jobs on the table, but this is handled by BigQuery and no Agent Platform quota or background DML costs are wasted.
 
   - For higher throughput on Agent Platform remote endpoints, we recommend using text embedding models over Gemini models. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation#quotas) .
 

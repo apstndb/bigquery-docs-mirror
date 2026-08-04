@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv
 uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv
-title: Loading CSV data from Cloud Storage
+title: Load CSV data from Cloud Storage
 description: Describes how to load CSV data from Cloud Storage to BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Loading CSV data from Cloud Storage
+# Load CSV data from Cloud Storage
 
 When you load CSV data from Cloud Storage, you can load the data into a new table or partition, or you can append to or overwrite an existing table or partition. When your data is loaded into BigQuery, it is converted into columnar format for [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (BigQuery's storage format).
 
@@ -1443,7 +1443,7 @@ To replace the rows in an existing table, set the [LoadJobConfig.write\_disposit
 
 ## Loading hive-partitioned CSV data
 
-BigQuery supports loading hive-partitioned CSV data stored on Cloud Storage and will populate the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading Externally Partitioned Data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+BigQuery supports loading hive-partitioned CSV data stored on Cloud Storage and will populate the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Load externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 ## Details of loading CSV data
 

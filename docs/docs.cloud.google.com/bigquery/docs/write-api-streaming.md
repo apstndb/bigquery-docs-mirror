@@ -1,16 +1,16 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/write-api-streaming
 uri: https://docs.cloud.google.com/bigquery/docs/write-api-streaming
-title: Stream data using the Storage Write API
+title: Stream data using the Storage Write API (gRPC)
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Stream data using the Storage Write API
+# Stream data using the Storage Write API (gRPC)
 
-This document describes how to use the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) to stream data into BigQuery.
+This document describes how to use the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) to stream data into BigQuery.
 
-In streaming scenarios, data arrives continuously and should be available for reads with minimal latency. When using the BigQuery Storage Write API for streaming workloads, consider what guarantees you need:
+In streaming scenarios, data arrives continuously and should be available for reads with minimal latency. When using the BigQuery Storage Write API (gRPC) for streaming workloads, consider what guarantees you need:
 
   - If your application only needs at-least-once semantics, then use the **default stream** .
   - If you need exactly-once semantics, then create one or more streams in **committed type** and use stream offsets to guarantee exactly-once writes.

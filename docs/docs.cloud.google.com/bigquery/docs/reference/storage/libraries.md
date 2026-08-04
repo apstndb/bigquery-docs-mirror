@@ -136,7 +136,7 @@ For a local development environment, you can set up ADC with the credentials tha
 
 The following example shows basic interactions with the [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) .
 
-For examples of how to use the BigQuery Storage Write API, see [Perform batch and streaming using the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
+For examples of how to use the BigQuery Storage Write API (gRPC), see [Perform batch and streaming using the Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) .
 
 ### C++
 

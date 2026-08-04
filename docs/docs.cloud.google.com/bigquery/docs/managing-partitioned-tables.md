@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/managing-partitioned-tables
 uri: https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables
-title: Managing partitioned tables
+title: Manage partitioned tables
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Managing partitioned tables
+# Manage partitioned tables
 
 This document describes how to manage partitioned tables in BigQuery.
 
@@ -145,7 +145,7 @@ Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/
 
 When you create a partitioned table, you can require that all queries on the table must include a predicate filter (a `WHERE` clause) that filters on the partitioning column. This setting can improve performance and reduce costs, because BigQuery can use the filter to prune partitions that don't match the predicate. This requirement also applies to queries on views and materialized views that reference the partitioned table.
 
-For information on adding the **Require partition filter** option when you create a partitioned table, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+For information on adding the **Require partition filter** option when you create a partitioned table, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
 
 If a partitioned table has the **Require partition filter** setting, then every query on that table must include at least one predicate that only references the partitioning column. Queries without such a predicate return the following error:
 

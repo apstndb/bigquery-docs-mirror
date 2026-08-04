@@ -24,7 +24,7 @@ This document describes how you can set up a reverse extract, transform, and loa
 
   - [Create a BigQuery connection](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb) to connect to your AlloyDB instance. The connection must be authenticated by username and password. The database user specified in the connection must have `INSERT` privileges on the target table and `USAGE` on the target schema.
 
-  - Create a [BigQuery Enterprise or Enterprise Plus tier reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) .
+  - To use this feature, you must create a [BigQuery Enterprise or Enterprise Plus tier reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) . Exports to AlloyDB are only supported for reservations with a [`QUERY` assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
 
   - Grant [Identity and Access Management (IAM) roles](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#required_roles) that give users the necessary permissions to perform each task in this document.
 

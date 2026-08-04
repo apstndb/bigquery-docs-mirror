@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 The `INFORMATION_SCHEMA.STREAMING_TIMELINE` view contains per minute aggregated streaming statistics for the current project.
 
-You can query the `INFORMATION_SCHEMA` streaming views to retrieve historical and real-time information about streaming data into BigQuery that uses the legacy [`tabledata.insertAll` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) and not the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . For more information about streaming data into BigQuery, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
+You can query the `INFORMATION_SCHEMA` streaming views to retrieve historical and real-time information about streaming data into BigQuery that uses the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . For more information about streaming data into BigQuery, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
 > **Note:** The view names `INFORMATION_SCHEMA.STREAMING_TIMELINE` and `INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
 

@@ -223,7 +223,7 @@ You can also convert a GeoJSON geometry object into a `GEOGRAPHY` value by using
 
 [GeoParquet](https://geoparquet.org) is a specification that adds geospatial types to the [Parquet](https://parquet.apache.org/) file format. GeoParquet includes metadata that provides definite semantics to the contained geospatial data, avoiding the [interpretation issues](https://docs.cloud.google.com/bigquery/docs/geospatial-data#coordinate_systems_and_edges) that occur with other geospatial data formats.
 
-When loading Parquet files, BigQuery checks for GeoParquet metadata. If GeoParquet metadata exists, BigQuery loads all of the columns it describes into a corresponding `GEOGRAPHY` column by default. For more information about loading Parquet files, see [Loading Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
+When loading Parquet files, BigQuery checks for GeoParquet metadata. If GeoParquet metadata exists, BigQuery loads all of the columns it describes into a corresponding `GEOGRAPHY` column by default. For more information about loading Parquet files, see [Load Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
 
 > **Note:** GeoParquet support is disabled for a few projects to avoid breaking existing workflows. If your GeoParquet files aren't loaded directly to `GEOGRAPHY` columns, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 

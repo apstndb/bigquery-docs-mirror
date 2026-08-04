@@ -36,7 +36,7 @@ The `INFORMATION_SCHEMA.PARAMETERS` view has the following schema:
 | `specific_catalog`  | `STRING`  | The name of the project that contains the dataset in which the routine containing the parameter is defined |
 | `specific_schema`   | `STRING`  | The name of the dataset that contains the routine in which the parameter is defined                        |
 | `specific_name`     | `STRING`  | The name of the routine in which the parameter is defined                                                  |
-| `ordinal_position`  | `STRING`  | The 1-based position of the parameter, or 0 for the return value                                           |
+| `ordinal_position`  | `INT64`   | The 1-based position of the parameter, or 0 for the return value                                           |
 | `parameter_mode`    | `STRING`  | The mode of the parameter, either `IN` , `OUT` , `INOUT` , or `NULL`                                       |
 | `is_result`         | `STRING`  | Whether the parameter is the result of the function, either `YES` or `NO`                                  |
 | `parameter_name`    | `STRING`  | The name of the parameter                                                                                  |

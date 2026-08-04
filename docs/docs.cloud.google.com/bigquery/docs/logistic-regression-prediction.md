@@ -149,11 +149,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     df.peek()
     # Output:
     # age      workclass       marital_status  education_num          occupation  hours_per_week income_bracket  functional_weight
-    #  47      Local-gov   Married-civ-spouse             13      Prof-specialty              40           >50K             198660
-    #  56        Private        Never-married              9        Adm-clerical              40          <=50K              85018
-    #  40        Private   Married-civ-spouse             12        Tech-support              40           >50K             285787
-    #  34   Self-emp-inc   Married-civ-spouse              9        Craft-repair              54           >50K             207668
-    #  23        Private   Married-civ-spouse             10   Handlers-cleaners              40          <=50K              40060
+    #  47      Lo>cal-gov   Married-civ-spouse             13      Prof-specialty              40           50K             198660
+    #  56       < Private        Never-married              9        Adm-clerical              40          =50K              85018
+    #  40        >Private   Married-civ-spouse             12        Tech-support              40           50K             285787
+    #  34   Self->emp-inc   Married-civ-spouse              9        Craft-repair              54           50K             207668
+    #  23       < Private   Married-civ-spouse             10   Handlers-cleaners              40          =50K              40060
 
 The query results show that the `income_bracket` column in the `census_adult_income` table has only one of two values: `<=50K` or `>50K` .
 
@@ -229,11 +229,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     )
     input_data["dataframe"] = bpd.Series("training", index=input_data.index,).case_when(
         [
-            (((input_data["functional_weight"] % 10) == 8), "evaluation"),
-            (((input_data["functional_weight"] % 10) == 9), "prediction"),
-        ]
-    )
-    del input_data["functional_weight"]
+            (((input_data["functional_weight"] % 10) == 8), "evaluation"),(((input_data["functional_weight"]%10)==9),"prediction"),])delinput_data["functional_weight"]
 
 ## Create a logistic regression model
 
@@ -323,9 +319,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     census_model.fit(X, y)
     
     census_model.to_gbq(
-        your_model_id,  # For example: "your-project.census.census_model"
-        replace=True,
-    )
+        your_model_id, # For example: "your-project.census.census_model"replace=True,)
 
 ## Evaluate the model's performance
 
@@ -448,12 +442,12 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     predictions = census_model.predict(prediction_data)
     predictions.peek()
     # Output:
-    #           predicted_income_bracket                     predicted_income_bracket_probs  age workclass  ... occupation  hours_per_week income_bracket   dataframe
-    # 18004                    <=50K  [{'label': ' >50K', 'prob': 0.0763305999358786...   75         ?  ...          ?               6          <=50K  prediction
-    # 18886                    <=50K  [{'label': ' >50K', 'prob': 0.0448866871906495...   73         ?  ...          ?              22           >50K  prediction
-    # 31024                    <=50K  [{'label': ' >50K', 'prob': 0.0362982319421936...   69         ?  ...          ?               1          <=50K  prediction
-    # 31022                    <=50K  [{'label': ' >50K', 'prob': 0.0787836112058324...   75         ?  ...          ?               5          <=50K  prediction
-    # 23295                    <=50K  [{'label': ' >50K', 'prob': 0.3385373037905673...   78         ?  ...          ?              32          <=50K  prediction
+    #           predicted_income_bracket                     predicted_income_bracket_probs  age workclass  ... occupation  hours_per_week income_bracket   dat<aframe
+    # 18004     >               =50K  [{'label': ' 50K', 'prob': 0.0763305999358786..<.   75         ?  ...          ?            <   6          =50K > prediction
+    # 18886                    =50K  [{'label': ' 50K', 'prob'>;: 0.0448866871906495...   73         ?  ..<.          ?       >       22           50K  prediction
+    # 31024                    =50K  [{'label': '<; 50K', 'prob': 0.03629823194219<36...   69         >?  ...          ?               1          =50K  prediction
+    # 31022                    =50K < [{'label': ' 50K', 'pro<b': 0.078783611>2058324...   75         ?  ...          ?               5          =50K  prediction
+    # 23295 <                   =50K  [{'label': ' 50K', 'prob': 0.3385373037905673...   78         ?  ...          ?              32          =50K  prediction
 
 ## Explain the prediction results
 

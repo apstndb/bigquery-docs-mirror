@@ -222,7 +222,7 @@ Call the [`datasets.insert` method](https://docs.cloud.google.com/bigquery/docs/
 
 ## List tables in a federated dataset
 
-To list the tables that are available for query in your federated dataset, see [Listing datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
+To list the tables that are available for query in your federated dataset, see [List datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
 
 ## Get table information
 

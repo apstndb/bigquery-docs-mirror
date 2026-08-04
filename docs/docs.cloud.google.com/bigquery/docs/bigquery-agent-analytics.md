@@ -12,12 +12,12 @@ BigQuery agent analytics is an open source solution that lets you capture, analy
 
 ## Architecture
 
-BigQuery agent analytics streams agent activity data to BigQuery using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which provides high-throughput, low-latency log streaming without blocking agent execution.
+BigQuery agent analytics streams agent activity data to BigQuery using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) , which provides high-throughput, low-latency log streaming without blocking agent execution.
 
 The data flow consists of these stages:
 
 1.  **Capture** . Use plugins in the Agent Development Kit (ADK) or callbacks in LangGraph intercept interaction events to capture agent events.
-2.  **Stream** . Interaction events are sent to BigQuery through the Storage Write API. If a standardized schema doesn't exist, the agent creates one automatically.
+2.  **Stream** . Interaction events are sent to BigQuery through the Storage Write API (gRPC). If a standardized schema doesn't exist, the agent creates one automatically.
 3.  **Consume** . Analyze and evaluate logged agent data. You can query raw data with SQL, track metrics on custom dashboards, or use the [BigQuery agent analytics SDK](https://github.com/GoogleCloudPlatform/BigQuery-Agent-Analytics-SDK) to reconstruct and evaluate complex multi-turn agent execution traces.
 
 ![Diagram showing agent activity data flowing from orchestration frameworks into BigQuery for analysis.](https://docs.cloud.google.com/static/bigquery/images/agent-analytics-architecture.png)
@@ -36,9 +36,9 @@ To capture your agent's interaction telemetry (requests, responses, tool calls, 
 
   - **Orchestration framework plugins** : use standard logging plugins provided by your agent orchestration toolkit. For example, the `BigQueryAgentAnalyticsPlugin` in the Agent Development Kit (ADK) hooks into the agent runner to automatically intercept, serialize, and stream events.
   - **Framework callback handlers** : integrate standard callbacks in popular agent environments. For example, you can use the built-in BigQuery handler in LangGraph and LangChain to intercept and forward traces.
-  - **Direct API ingestion** : for custom or proprietary frameworks, use the Google Cloud client libraries to stream structured events directly to your events table using the Storage Write API.
+  - **Direct API ingestion** : for custom or proprietary frameworks, use the Google Cloud client libraries to stream structured events directly to your events table using the Storage Write API (gRPC).
 
-Regardless of the method, all logging options use the low-latency, high-throughput **[BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api)** . This API provides a robust streaming endpoint that buffers and serializes rows (using the PyArrow engine) asynchronously in memory before committing them, ensuring that observability pipeline tasks don't block your user-facing agent execution turns.
+Regardless of the method, all logging options use the low-latency, high-throughput **[BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api)** . This API provides a robust streaming endpoint that buffers and serializes rows (using the PyArrow engine) asynchronously in memory before committing them, ensuring that observability pipeline tasks don't block your user-facing agent execution turns.
 
 ## Ways to analyze agent log data
 
@@ -91,7 +91,7 @@ You can perform the following tasks using the BigQuery agent analytics SDK. For 
 
 Integrating the SDK into your agent workflows typically involves the following steps:
 
-1.  **Log interactions** : Attach a logger plugin (such as the `BigQueryAgentAnalyticsPlugin` in ADK) or a callback handler in your agent orchestration framework. When users interact with your agent, the logs are streamed asynchronously to BigQuery using the high-throughput Storage Write API.
+1.  **Log interactions** : Attach a logger plugin (such as the `BigQueryAgentAnalyticsPlugin` in ADK) or a callback handler in your agent orchestration framework. When users interact with your agent, the logs are streamed asynchronously to BigQuery using the high-throughput Storage Write API (gRPC).
 
 2.  **Initialize the client** : Connect to your log dataset from the Python SDK:
     

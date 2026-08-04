@@ -31,7 +31,7 @@ To see the exact BigQuery permissions that are required to query external tables
 #### Required permissions
 
   - `bigquery.jobs.create`
-  - `bigquery.readsessions.create` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
+  - `bigquery.readsessions.create` (Only required if you are [streaming data with the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
   - `bigquery.tables.get`
   - `bigquery.tables.getData`
 
@@ -75,7 +75,7 @@ To see the exact BigQuery permissions that are required to query external tables
 #### Required permissions
 
   - `bigquery.jobs.create`
-  - `bigquery.readsessions.create` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
+  - `bigquery.readsessions.create` (Only required if you are [streaming data with the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
   - `bigquery.tables.get`
   - `bigquery.tables.getData`
 

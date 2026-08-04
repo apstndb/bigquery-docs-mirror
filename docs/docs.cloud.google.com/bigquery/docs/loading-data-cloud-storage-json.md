@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json
 uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json
-title: Loading JSON data from Cloud Storage
+title: Load JSON data from Cloud Storage
 description: Shows how to load JSON files from Cloud Storage into a new table, or append to, or overwrite a table. Shows how to load nested/repeated JSON data and hive-partitioned JSON data. Describes JSON data types and options, and limitations of loading JSON files from Cloud Storage.
 data_source: docs.cloud.google.com
 ---
 
-# Loading JSON data from Cloud Storage
+# Load JSON data from Cloud Storage
 
 You can load newline-delimited JSON (ndJSON) data from Cloud Storage into a new table or partition, or append to or overwrite an existing table or partition. When your data is loaded into BigQuery, it is converted into columnar format for [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (BigQuery's storage format).
 
@@ -199,7 +199,7 @@ Other optional flags include:
     
     For more information on partitioned tables, see:
     
-      - [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
+      - [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
     
     For more information on clustered tables, see:
     
@@ -1245,7 +1245,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Loading hive-partitioned JSON data
 
-BigQuery supports loading hive-partitioned JSON data stored on Cloud Storage and populates the hive-partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+BigQuery supports loading hive-partitioned JSON data stored on Cloud Storage and populates the hive-partitioning columns as columns in the destination BigQuery managed table. For more information, see [Load externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 ## Details of loading JSON data
 

@@ -317,9 +317,9 @@ However, the following is not sufficient, and will result in an error:
 
 For ingestion-time partitioned tables, use either the `_PARTITIONTIME` or `_PARTITIONDATE` pseudocolumn.
 
-For more information about adding the **Require partition filter** option when you create a partitioned table, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) . You can also [update](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) this setting on an existing table.
+For more information about adding the **Require partition filter** option when you create a partitioned table, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) . You can also [update](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) this setting on an existing table.
 
 ## What's next
 
   - For an overview of partitioned tables, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
-  - To learn more about creating partitioned tables, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+  - To learn more about creating partitioned tables, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .

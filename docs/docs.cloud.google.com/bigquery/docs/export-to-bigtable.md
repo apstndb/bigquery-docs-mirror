@@ -28,9 +28,11 @@ For information about preparing BigQuery results for export to Bigtable, see [Pr
 
 ## Before you begin
 
-You must create a [Bigtable instance](https://docs.cloud.google.com/bigtable/docs/creating-instance) and a [Bigtable table](https://docs.cloud.google.com/bigtable/docs/managing-tables#create-table) to receive the exported data.
+  - To receive the exported data, you must create a [Bigtable instance](https://docs.cloud.google.com/bigtable/docs/creating-instance) and a [Bigtable table](https://docs.cloud.google.com/bigtable/docs/managing-tables#create-table)
 
-Grant [Identity and Access Management (IAM) roles](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#required_roles) that give users the necessary permissions to perform each task in this document.
+  - To use this feature, you must create a [BigQuery Enterprise or Enterprise Plus tier reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) . Batch exports require a [`QUERY` assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) , and [continuous exports](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#export_continuously) require a [`CONTINUOUS` assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
+
+  - Grant [Identity and Access Management (IAM) roles](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#required_roles) that give users the necessary permissions to perform each task in this document.
 
 ### Required roles
 
@@ -51,7 +53,6 @@ You might also be able to get the required permissions through [custom roles](ht
   - The destination [Bigtable app profile](https://docs.cloud.google.com/bigtable/docs/app-profiles) must be configured with [single-cluster routing](https://docs.cloud.google.com/bigtable/docs/routing#single-cluster) and a [low request priority level](https://docs.cloud.google.com/bigtable/docs/request-priorities) .
   - The Bigtable app profile must be configured to route data to a Bigtable cluster colocated with the BigQuery dataset. For more information, see [location considerations](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#data-locations) .
   - Exports to Bigtable are only supported for [BigQuery Enterprise or Enterprise Plus editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) . BigQuery Standard edition and [on-demand compute](https://cloud.google.com/bigquery/pricing#on_demand_pricing) are not supported.
-  - Exports to Bigtable are only supported for reservations with a [`QUERY` assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
 
 ## Location considerations
 

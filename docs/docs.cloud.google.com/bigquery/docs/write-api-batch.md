@@ -1,20 +1,20 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/write-api-batch
 uri: https://docs.cloud.google.com/bigquery/docs/write-api-batch
-title: Batch load data using the Storage Write API
+title: Batch load data using the Storage Write API (gRPC)
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Batch load data using the Storage Write API
+# Batch load data using the Storage Write API (gRPC)
 
-This document describes how to use the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) to batch load data into BigQuery.
+This document describes how to use the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) to batch load data into BigQuery.
 
-In batch-load scenarios, an application writes data and commits it as a single atomic transaction. When using the Storage Write API to batch load data, create one or more streams in *pending type* . Pending type supports stream-level transactions. Records are buffered in a pending state until you commit the stream.
+In batch-load scenarios, an application writes data and commits it as a single atomic transaction. When using the Storage Write API (gRPC) to batch load data, create one or more streams in *pending type* . Pending type supports stream-level transactions. Records are buffered in a pending state until you commit the stream.
 
-For batch workloads, also consider using the Storage Write API through the [Apache Spark SQL connector for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery) using Managed Service for Apache Spark, rather than writing custom Storage Write API code.
+For batch workloads, also consider using the Storage Write API (gRPC) through the [Apache Spark SQL connector for BigQuery](https://github.com/GoogleCloudDataproc/spark-bigquery-connector#writing-data-to-bigquery) using Managed Service for Apache Spark, rather than writing custom Storage Write API (gRPC) code.
 
-The Storage Write API is well-suited to a *data pipeline* architecture. A main process creates a number of streams. For each stream, it assigns a worker thread or a separate process to write a portion of the batch data. Each worker creates a connection to its stream, writes data, and finalizes its stream when it's done. After all of the workers signal successful completion to the main process, the main process commits the data. If a worker fails, its assigned portion of the data will not show up in the final results, and the whole worker can be safely retried. In a more sophisticated pipeline, workers checkpoint their progress by reporting the last offset written to the main process. This approach can result in a robust pipeline that is resilient to failures.
+The Storage Write API (gRPC) is well-suited to a *data pipeline* architecture. A main process creates a number of streams. For each stream, it assigns a worker thread or a separate process to write a portion of the batch data. Each worker creates a connection to its stream, writes data, and finalizes its stream when it's done. After all of the workers signal successful completion to the main process, the main process commits the data. If a worker fails, its assigned portion of the data will not show up in the final results, and the whole worker can be safely retried. In a more sophisticated pipeline, workers checkpoint their progress by reporting the last offset written to the main process. This approach can result in a robust pipeline that is resilient to failures.
 
 ## Batch load data using pending type
 

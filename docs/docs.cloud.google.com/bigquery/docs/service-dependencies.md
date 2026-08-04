@@ -111,7 +111,7 @@ The following services are enabled by default for every new Google Cloud project
 <li><a href="https://docs.cloud.google.com/bigquery/docs/change-data-capture">Change data capture</a></li>
 </ul></td>
 <td><ul>
-<li>You can't use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage">Storage Read API</a> or the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">Storage Write API</a> to access your BigQuery data.</li>
+<li>You can't use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage">Storage Read API</a> or the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">Storage Write API (gRPC)</a> to access your BigQuery data.</li>
 </ul></td>
 </tr>
 <tr class="even">

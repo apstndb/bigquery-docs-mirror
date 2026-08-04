@@ -18,7 +18,9 @@ This reverse ETL workflow combines analytic capabilities in BigQuery with low la
 
   - Grant [Identity and Access Management (IAM) roles](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#required_roles) that give users the necessary permissions to perform each task in this document.
 
-  - Create an [Enterprise or a higher tier reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) . You might reduce BigQuery compute costs when you run one-time exports to Spanner by setting a baseline slot capacity of zero and enabling [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) .
+  - To use this feature, you must create a [BigQuery Enterprise or Enterprise Plus tier reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) . Batch exports require a [`QUERY` assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) , and [continuous exports](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#export_continuously) require a [`CONTINUOUS` assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
+
+You can reduce BigQuery compute costs when you run one-time exports to Spanner by setting a baseline slot capacity of zero and enabling [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) .
 
 ### Required roles
 

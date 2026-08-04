@@ -86,7 +86,7 @@ In Cloud Monitoring, you can view metrics for quota usage and limits:
     
     ![Metrics explorer.](https://docs.cloud.google.com/static/bigquery/images/stackdriver-metrics-explorer.png)
 
-> **Note:** You can view metrics for quota usage and limits only for the [BigQuery Storage Write API's](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) concurrent connections and throughput quotas.
+> **Note:** You can view metrics for quota usage and limits only for the [BigQuery Storage Write API (gRPC)'s](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) concurrent connections and throughput quotas.
 
 ### Create an alert
 

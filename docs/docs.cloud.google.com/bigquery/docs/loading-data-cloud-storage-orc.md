@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc
 uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc
-title: Loading ORC data from Cloud Storage
+title: Load ORC data from Cloud Storage
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Loading ORC data from Cloud Storage
+# Load ORC data from Cloud Storage
 
 This page provides an overview of loading ORC data from Cloud Storage into BigQuery.
 
@@ -195,7 +195,7 @@ Other optional flags include:
     
     For more information about partitioned tables, see:
     
-      - [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
+      - [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
     
     For more information about clustered tables, see:
     
@@ -1043,7 +1043,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Load hive-partitioned ORC data
 
-BigQuery supports loading hive partitioned ORC data stored on Cloud Storage and populates the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading Externally Partitioned Data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+BigQuery supports loading hive partitioned ORC data stored on Cloud Storage and populates the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Load externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 ## ORC conversions
 
@@ -1196,7 +1196,7 @@ BigQuery converts ORC data types to the following BigQuery data types:
 
 ### Column names
 
-A column name can contain letters (a-z, A-Z), numbers (0-9), or underscores (\_), and it must start with a letter or underscore. If you use flexible column names, BigQuery supports starting a column name with a number. Exercise caution when starting columns with a number, since using flexible column names with the BigQuery Storage Read API or BigQuery Storage Write API requires special handling. For more information about flexible column name support, see [flexible column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#flexible-column-names) .
+A column name can contain letters (a-z, A-Z), numbers (0-9), or underscores (\_), and it must start with a letter or underscore. If you use flexible column names, BigQuery supports starting a column name with a number. Exercise caution when starting columns with a number, since using flexible column names with the BigQuery Storage Read API or BigQuery Storage Write API (gRPC) requires special handling. For more information about flexible column name support, see [flexible column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#flexible-column-names) .
 
 Column names have a maximum length of 300 characters. Column names can't use any of the following prefixes:
 
@@ -1275,7 +1275,7 @@ Flexible column names don't support the following special characters:
 
 For additional guidelines, see [Column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) .
 
-The expanded column characters are supported by both the BigQuery Storage Read API and the BigQuery Storage Write API. To use the expanded list of Unicode characters with the BigQuery Storage Read API, you must set a flag. You can use the `displayName` attribute to retrieve the column name. The following example shows how to set a flag with the Python client:
+The expanded column characters are supported by both the BigQuery Storage Read API and the BigQuery Storage Write API (gRPC). To use the expanded list of Unicode characters with the BigQuery Storage Read API, you must set a flag. You can use the `displayName` attribute to retrieve the column name. The following example shows how to set a flag with the Python client:
 
     from google.cloud.bigquery_storage import types
     requested_session = types.ReadSession()
@@ -1285,7 +1285,7 @@ The expanded column characters are supported by both the BigQuery Storage Read A
     options.enable_display_name_attribute = True
     requested_session.read_options.avro_serialization_options = options
 
-To use the expanded list of Unicode characters with the BigQuery Storage Write API, you must provide the schema with `column_name` notation, unless you are using the `JsonStreamWriter` writer object. The following example shows how to provide the schema:
+To use the expanded list of Unicode characters with the BigQuery Storage Write API (gRPC), you must provide the schema with `column_name` notation, unless you are using the `JsonStreamWriter` writer object. The following example shows how to provide the schema:
 
     syntax = "proto2";
     package mypackage;

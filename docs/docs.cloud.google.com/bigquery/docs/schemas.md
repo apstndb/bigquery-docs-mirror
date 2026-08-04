@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/schemas
 uri: https://docs.cloud.google.com/bigquery/docs/schemas
-title: Specifying a schema
+title: Specify a schema
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Specifying a schema
+# Specify a schema
 
 BigQuery lets you specify a table's schema when you load data into a table, and when you create an empty table. Alternatively, you can use schema [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect#auto-detect) for supported data formats.
 
@@ -29,7 +29,7 @@ When you specify a table schema, you must supply each column's name and data typ
 
 ### Column names
 
-A column name can contain letters (a-z, A-Z), numbers (0-9), or underscores (\_), and it must start with a letter or underscore. If you use flexible column names, BigQuery supports starting a column name with a number. Exercise caution when starting columns with a number, since using flexible column names with the BigQuery Storage Read API or BigQuery Storage Write API requires special handling. For more information about flexible column name support, see [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) .
+A column name can contain letters (a-z, A-Z), numbers (0-9), or underscores (\_), and it must start with a letter or underscore. If you use flexible column names, BigQuery supports starting a column name with a number. Exercise caution when starting columns with a number, since using flexible column names with the BigQuery Storage Read API or BigQuery Storage Write API (gRPC) requires special handling. For more information about flexible column name support, see [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) .
 
 Column names have a maximum length of 300 characters. Column names can't use any of the following prefixes:
 
@@ -108,7 +108,7 @@ Flexible column names don't support the following special characters:
 
 For additional guidelines, see [Column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) .
 
-The expanded column characters are supported by both the BigQuery Storage Read API and the BigQuery Storage Write API. To use the expanded list of Unicode characters with the BigQuery Storage Read API, you must set a flag. You can use the `displayName` attribute to retrieve the column name. The following example shows how to set a flag with the Python client:
+The expanded column characters are supported by both the BigQuery Storage Read API and the BigQuery Storage Write API (gRPC). To use the expanded list of Unicode characters with the BigQuery Storage Read API, you must set a flag. You can use the `displayName` attribute to retrieve the column name. The following example shows how to set a flag with the Python client:
 
     from google.cloud.bigquery_storage import types
     requested_session = types.ReadSession()
@@ -118,7 +118,7 @@ The expanded column characters are supported by both the BigQuery Storage Read A
     options.enable_display_name_attribute = True
     requested_session.read_options.avro_serialization_options = options
 
-To use the expanded list of Unicode characters with the BigQuery Storage Write API, you must provide the schema with `column_name` notation, unless you are using the `JsonStreamWriter` writer object. The following example shows how to provide the schema:
+To use the expanded list of Unicode characters with the BigQuery Storage Write API (gRPC), you must provide the schema with `column_name` notation, unless you are using the `JsonStreamWriter` writer object. The following example shows how to provide the schema:
 
     syntax = "proto2";
     package mypackage;

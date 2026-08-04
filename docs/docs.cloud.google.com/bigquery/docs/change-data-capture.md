@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Stream table updates with change data capture ingestion
 
-BigQuery change data capture (CDC) ingestion updates your BigQuery tables by processing and applying streamed changes to existing data. This synchronization is accomplished through upsert and delete row operations that are streamed in real time by the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which you should be familiar with before proceeding.
+BigQuery change data capture (CDC) ingestion updates your BigQuery tables by processing and applying streamed changes to existing data. This synchronization is accomplished through upsert and delete row operations that are streamed in real time by the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) , which you should be familiar with before proceeding.
 
 ## Before you begin
 
@@ -16,9 +16,9 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required permissions
 
-To get the permission that you need to use the Storage Write API, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to use the Storage Write API (gRPC), ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-This predefined role contains the `bigquery.tables.updateData` permission, which is required to use the Storage Write API.
+This predefined role contains the `bigquery.tables.updateData` permission, which is required to use the Storage Write API (gRPC).
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -28,14 +28,14 @@ For more information about IAM roles and permissions in BigQuery, see [Introduct
 
 To use BigQuery CDC ingestion, your workflow must meet the following conditions:
 
-  - You must use the Storage Write API in the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api#default_stream) .
+  - You must use the Storage Write API (gRPC) in the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api#default_stream) .
   - You must use the protobuf format as the ingestion format. The Apache Arrow format isn't supported.
   - You must declare [primary keys](https://docs.cloud.google.com/bigquery/docs/information-schema-table-constraints) for the destination table in BigQuery. Composite primary keys containing up to 16 columns are supported.
   - Sufficient BigQuery compute resources must be available to perform the CDC row operations. Be aware that if CDC row modification operations fail, you might unintentionally retain data that you intended to delete. For more information, see [Deleted data considerations](https://docs.cloud.google.com/bigquery/docs/change-data-capture#deleted_data_considerations) .
 
 ## Specify changes to existing records
 
-In BigQuery CDC ingestion, the pseudocolumn `_CHANGE_TYPE` indicates the type of change to be processed for each row. To use CDC, set `_CHANGE_TYPE` when you stream row modifications using the Storage Write API. The pseudocolumn `_CHANGE_TYPE` only accepts the values `UPSERT` and `DELETE` . A table is considered *active with CDC* while the Storage Write API is streaming row modifications to the table in this manner.
+In BigQuery CDC ingestion, the pseudocolumn `_CHANGE_TYPE` indicates the type of change to be processed for each row. To use CDC, set `_CHANGE_TYPE` when you stream row modifications using the Storage Write API (gRPC). The pseudocolumn `_CHANGE_TYPE` only accepts the values `UPSERT` and `DELETE` . A table is considered *active with CDC* while the Storage Write API (gRPC) is streaming row modifications to the table in this manner.
 
 ### Example with `UPSERT` and `DELETE` values
 
@@ -47,7 +47,7 @@ Consider the following table in BigQuery:
 | 101 | Tal     | 3000   |
 | 102 | Lee     | 5000   |
 
-The following row modifications are streamed by the Storage Write API:
+The following row modifications are streamed by the Storage Write API (gRPC):
 
 | ID  | Name  | Salary | \_CHANGE\_TYPE |
 | --- | ----- | ------ | -------------- |
@@ -197,7 +197,7 @@ To configure user-supplied ordering keys, the pseudocolumn `_CHANGE_SEQUENCE_NUM
 
 The pseudocolumn `_CHANGE_SEQUENCE_NUMBER` only accepts `STRING` values, written in a fixed format. This fixed format uses `STRING` values written in hexadecimal, separated into sections by a forward slash `/` . Each section can be expressed in at most 16 hexadecimal characters, and up to four sections are allowed per `_CHANGE_SEQUENCE_NUMBER` . The allowable range of the `_CHANGE_SEQUENCE_NUMBER` supports values between `0/0/0/0` and `FFFFFFFFFFFFFFFF/FFFFFFFFFFFFFFFF/FFFFFFFFFFFFFFFF/FFFFFFFFFFFFFFFF` . `_CHANGE_SEQUENCE_NUMBER` values support both uppercase and lowercase characters.
 
-Expressing basic ordering keys can be done by using a single section. For example, to order keys solely based on a record's processing timestamp from an application server, you could use one section: `'2024-04-30 11:19:44 UTC'` , expressed as hexadecimal by converting the timestamp to the milliseconds from Epoch, `'18F2EBB6480'` in this case. The logic to convert data into hexadecimal is the responsibility of the client issuing the write to BigQuery using the Storage Write API.
+Expressing basic ordering keys can be done by using a single section. For example, to order keys solely based on a record's processing timestamp from an application server, you could use one section: `'2024-04-30 11:19:44 UTC'` , expressed as hexadecimal by converting the timestamp to the milliseconds from Epoch, `'18F2EBB6480'` in this case. The logic to convert data into hexadecimal is the responsibility of the client issuing the write to BigQuery using the Storage Write API (gRPC).
 
 Supporting multiple sections lets you combine several processing-logic values into one key for more complex use cases. For example, to order keys based on a record's processing timestamp from an application server, a log sequence number, and the record's status, you could use three sections: `'2024-04-30 11:19:44 UTC' / '123' / 'complete'` , each expressed as hexadecimal. The ordering of sections is an important consideration for ranking your processing-logic. BigQuery compares `_CHANGE_SEQUENCE_NUMBER` values by comparing the first section, then comparing the next section only if the previous sections were equal.
 
@@ -282,7 +282,7 @@ Replace `  REGION  ` with the [region name](https://docs.cloud.google.com/bigque
 ## Deleted data considerations
 
   - BigQuery CDC ingestion operations use BigQuery compute resources. If the CDC operations are configured to use [on-demand billing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , CDC operations are performed regularly using internal BigQuery resources. If the CDC operations are configured with a `BACKGROUND` or `BACKGROUND_CHANGE_DATA_CAPTURE` reservation, CDC operations are instead subject to the configured reservation's resource availability. If there are not enough resources available within the configured reservation, processing CDC operations, including deletion, might take longer than anticipated.
-  - A CDC `DELETE` operation is considered to be applied only when the `upsert_stream_apply_watermark` timestamp has passed the timestamp at which the Storage Write API streamed the operation. For more information on the `upsert_stream_apply_watermark` timestamp, see [Monitor table upsert operation progress](https://docs.cloud.google.com/bigquery/docs/change-data-capture#monitor_table_upsert_operation_progress) .
+  - A CDC `DELETE` operation is considered to be applied only when the `upsert_stream_apply_watermark` timestamp has passed the timestamp at which the Storage Write API (gRPC) streamed the operation. For more information on the `upsert_stream_apply_watermark` timestamp, see [Monitor table upsert operation progress](https://docs.cloud.google.com/bigquery/docs/change-data-capture#monitor_table_upsert_operation_progress) .
   - To apply CDC `DELETE` operations that arrive out of order, BigQuery maintains a delete retention window of two days. Table `DELETE` operations are stored for this period before the standard [Google Cloud data deletion process](https://docs.cloud.google.com/docs/security/deletion) begins. `DELETE` operations within the delete retention window use standard [BigQuery storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
 ## Limitations
@@ -308,7 +308,7 @@ Replace `  REGION  ` with the [region name](https://docs.cloud.google.com/bigque
 
 ## BigQuery CDC ingestion pricing
 
-BigQuery CDC ingestion uses the Storage Write API for data ingestion, BigQuery storage for data storage, and BigQuery compute for row modification operations, all of which incur costs. For pricing information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
+BigQuery CDC ingestion uses the Storage Write API (gRPC) for data ingestion, BigQuery storage for data storage, and BigQuery compute for row modification operations, all of which incur costs. For pricing information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
 ### Estimate BigQuery CDC ingestion costs
 
@@ -335,6 +335,6 @@ In addition to [general BigQuery cost best practices](https://docs.cloud.google.
 
 ## What's next
 
-  - Learn how to [implement the Storage Write API default stream](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) .
-  - Learn about [best practices for the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices) .
+  - Learn how to [implement the Storage Write API (gRPC) default stream](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) .
+  - Learn about [best practices for the Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices) .
   - Learn how to [use Datastream to replicate transactional databases to BigQuery](https://docs.cloud.google.com/datastream/docs/quickstart-replication-to-bigquery) with BigQuery CDC ingestion.

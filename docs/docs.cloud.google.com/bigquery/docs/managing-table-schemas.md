@@ -26,7 +26,7 @@ You can add columns to an existing table's schema definition by using one of the
   - Overwrite a table with a load or query job.
   - Append data to a table with a load or query job.
 
-Any column you add must adhere to BigQuery's rules for [column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) . For more information on creating schema components, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+Any column you add must adhere to BigQuery's rules for [column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) . For more information on creating schema components, see [Specify a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
 It isn't possible to add columns in the middle of a table schema. New columns and nested fields are always added at the end of the table or field. The only way to create a new column in the middle of a table schema is to create a new table with the chosen schema and copy the data from the original table.
 

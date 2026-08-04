@@ -52,7 +52,7 @@ Although the user that runs the query has full access to the dataset and the cac
 
 The names of anonymous datasets begin with an underscore. This hides them from the datasets list in the Google Cloud console. You can list anonymous datasets and audit anonymous dataset access controls by using the bq command-line tool or the API.
 
-For more information about listing and getting information about datasets, including anonymous datasets, see [Listing datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
+For more information about listing and getting information about datasets, including anonymous datasets, see [List datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
 
 ## Cross-user caching
 

@@ -81,7 +81,7 @@ Clustering columns must be top-level, non-repeated columns, and they must be one
 
 You can specify up to four clustering columns. When you specify multiple columns, the order of the columns determines how the data is sorted. For example, if the table is clustered by columns a, b and c, the data is sorted in the same order: first by column a, then by column b, and then by column c. As a best practice, place the most frequently filtered or aggregated column first.
 
-The order of your clustering columns also affects query performance and pricing. For more information about query best practices for clustered tables, see [Querying clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
+The order of your clustering columns also affects query performance and pricing. For more information about query best practices for clustered tables, see [Query clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
 
 ## Create an empty clustered table with a schema definition
 
@@ -752,7 +752,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 ## What's next
 
   - For information about working with clustered tables, see [Manage clustered tables](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables) .
-  - For information about querying clustered tables, see [Querying clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
+  - For information about querying clustered tables, see [Query clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
   - For an overview of partitioned table support in BigQuery, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
-  - To learn how to create partitioned tables, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+  - To learn how to create partitioned tables, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
   - To see an overview of `INFORMATION_SCHEMA` , see [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .

@@ -24,7 +24,7 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 
 ### Required roles
 
-To work with data agents, you must have Identity and Access Management (IAM) permissions that match your use case. The following sections list required roles based on whether you are creating and publishing agents, provisioning agents in Gemini Enterprise, or discovering and using agents. For more information, see [Conversational Analytics API IAM roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) .
+To work with data agents, you must have Identity and Access Management (IAM) permissions that match your use case. The following sections list required roles based on whether you are creating and publishing agents, provisioning agents in Gemini Enterprise, or discovering and using agents across various surfaces. For more information, see [Conversational Analytics API IAM roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) .
 
   - **Create, edit, publish, share, and delete agents:**
       - To create data agents in a project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
@@ -36,7 +36,9 @@ To work with data agents, you must have Identity and Access Management (IAM) per
   - **Discover and use agents:**
       - To chat with data agents: Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ).
       - To view all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ).
-  - **Add knowledge sources to an agent:** Data Catalog Viewer ( `roles/datacatalog.viewer` ) on the project.
+      - To interact with the Gemini-powered chat interface in Data Studio: BigQuery Studio User ( `roles/bigquery.studioUser` ) or Gemini for Google Cloud User ( `roles/cloudaicompanion.user` ), each of which provide the `cloudaicompanion.topics.create` permission. Grant these roles at the project level. Users also require the Data Studio Asset Viewer ( `roles/datastudio.viewer` ) role.
+  - **Add knowledge sources to an agent:**
+      - Data Catalog Viewer ( `roles/datacatalog.viewer` ) on the project.
 
 To have conversations, see the [required roles for conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
 
@@ -402,7 +404,7 @@ Continue to the next section to place the agent in draft mode or publish the age
     
     To publish your agent, remain on the agent creation page and proceed to the next step.
 
-4.  Click **Publish** to publish the data agent and make it available for use in the project. You can create conversations with the data agent by using BigQuery Studio or [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) . You can also build your own interface to chat with the data agent by using the Conversational Analytics API. For information on publishing to Gemini Enterprise, see [Publish a data agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) .
+4.  Click **Publish** to publish the data agent and make it available for use in the project. You can create conversations with the data agent by using BigQuery Studio or [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) . You can also build your own interface to chat with the data agent by using the Conversational Analytics API. For information on publishing to Data Studio, see [Publish a data agent in Data Studio](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-agent-data-studio) . For information on publishing to Gemini Enterprise, see [Publish a data agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) .
 
 5.  Optional: In the **Your agent has been published** dialog, click **Share** to share the data agent with other users.
     
@@ -486,60 +488,6 @@ Follow these steps to share a published data agent. You can't share draft agents
     
     ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
-#### Share a data agent in Data Studio
-
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-When you [publish](https://docs.cloud.google.com/bigquery/docs/create-data-agents#preview-publish) your agent and [share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) it with Data Studio users, the agent automatically appears for those users on the **Chat with your data** page in Data Studio.
-
-You can also copy a direct link to the agent, which opens [Data Studio directly into a session with that specific BigQuery data agent](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) . You can copy the agent's dedicated URL in these ways:
-
-  - From the agent catalog: Select more\_vert **Open actions** ; next, select **Copy link** , and then select **Data Studio** .
-  - From the agent details view: Select content\_copy **Copy agent link** , and then select **Data Studio** .
-  - From the **Share** overflow menu: Select **Copy link to agent in Data Studio** .
-
-To allow users to interact with a BigQuery data agent on the **Chat with your data** page in Data Studio, you must ensure that the correct BigQuery agent sharing settings are configured and that specific Google Cloud project permissions are granted and APIs are enabled for end-users.
-
-##### Share the agent in BigQuery
-
-Follow the steps to [share the data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) . Grant end-users at least the [Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role on the agent resource. This role lets them chat with the agent.
-
-##### Ensure prerequisites for Data Studio users
-
-End-users accessing the agent through Data Studio need the following configured in the Google Cloud project:
-
-**Required APIs enabled**
-
-  - [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
-  - [Cloud AI Companion API](https://console.cloud.google.com/apis/library/cloudaicompanion.googleapis.com)
-  - [Gemini Data Analytics API](https://console.cloud.google.com/apis/library/geminidataanalytics.googleapis.com)
-
-**Required IAM roles for end-users**
-
-Grant these roles at the project level:
-
-  - [BigQuery Data Viewer ( `roles/bigquery.dataViewer` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) : To view the underlying BigQuery datasets and tables.
-  - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) : To run queries against BigQuery data.
-  - [Gemini for Google Cloud User ( `roles/cloudaicompanion.user` )](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) or [BigQuery Studio User ( `roles/bigquery.studioUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) : Required for interacting with the Gemini-powered chat interface in Data Studio. These roles provide the `cloudaicompanion.topics.create` permission.
-
-##### Troubleshoot common issues
-
-The following are common issues when sharing data agents with Data Studio users:
-
-  - **Error: User does not have permission `cloudaicompanion.topics.create`**
-    
-    **Cause** : The user is missing the necessary IAM permissions to initiate chat sessions with the Cloud AI Companion API, or the API is not enabled.
-    
-    **Solution** : Ensure that the `cloudaicompanion.googleapis.com` API is enabled in the project, and grant the user either the `roles/cloudaicompanion.user` or `roles/bigquery.studioUser` IAM role.
-
-  - **Agent not visible on "Manage Agent" page in Data Studio**
-    
-    **Cause** : Users with only the *Gemini Data Analytics Data Agent User* role on the agent (and not edit or owner permissions) might not see the agent listed in the default "Manage Agent" view in Data Studio.
-    
-    **Workaround** : [Copy a direct link to the agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-agent-data-studio) and share it with users.
-
 ### Delete a data agent
 
 1.  Go to the BigQuery **Agents** page.
@@ -551,6 +499,34 @@ The following are common issues when sharing data agents with Data Studio users:
 4.  Click more\_vert **Open actions** \> **Delete** .
 
 5.  In the **Delete agent?** dialog, click **Delete** .
+
+## Publish a data agent in Data Studio
+
+When you [publish](https://docs.cloud.google.com/bigquery/docs/create-data-agents#preview-publish) your agent and [share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) it with Data Studio users, the agent automatically appears for those users to chat with on the **Chat with your data** page in Data Studio.
+
+### Create and publish your agent to Data Studio
+
+As a data analyst, you can create, edit, and publish an agent to Data Studio by completing the following steps:
+
+1.  [Create](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-a-data-agent) or [edit](https://docs.cloud.google.com/bigquery/docs/create-data-agents#edit-agent) your data agent in BigQuery.
+2.  [Publish](https://docs.cloud.google.com/bigquery/docs/create-data-agents#preview-publish) the agent. When you publish the agent, select **Data Studio** as the publishing option.
+3.  Follow the instructions to [share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent, granting the [appropriate Identity and Access Management roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required-roles) to your Data Studio users.
+
+### Share your agent with Data Studio users
+
+You can share agents with Data Studio users directly by copying a link that opens a [conversation with the agent in Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agent) or you can send an email to inform the user that they have access to an agent.
+
+To share a direct link to the agent, you can copy the agent's dedicated URL in these ways:
+
+    * From the agent catalog: Select <span class="material-icons" translate="no" aria-hidden="true">more_vert</span>
+    **Open actions** > select **Copy link** > select **Data Studio**.
+    * From the agent details view: Select <span class="material-icons" aria-hidden="true" translate="no">content_copy</span> **Copy agent link** > select **Data Studio**.
+    * From the **Share** overflow menu: Select **Copy link to agent in Data Studio**.
+    * After clicking **Save** from the **Share permissions** panel: Select **Copy link**.
+
+To send an email notification that informs recipients of their access to an agent, select **Send email** from the **Share permissions** panel. Email notifications are sent only to the users or groups with whom you have just shared the agent in that editing session. All members of a group receive the email notification, even if a given user already has agent-level permission for the agent. The email includes the name of the user who shared the agent, the name of the agent, and a link to open the agent in Data Studio.
+
+> **Note:** If you're emailing a Google Group that has **Who Can Post** settings set to **Group Members Only** , a Group Owner or Manager must update the group's settings to **Entire Organization** to enable deliveries.
 
 ## Publish a data agent in Gemini Enterprise
 

@@ -52,7 +52,7 @@ Labels can be used as queryable annotations for resources, but can't be used to 
 
 ## Limitations
 
-  - You can't apply BigQuery labels when using the BigQuery Storage Write API to ingest data.
+  - You can't apply BigQuery labels when using the BigQuery Storage Write API (gRPC) to ingest data.
 
 ## What's next
 

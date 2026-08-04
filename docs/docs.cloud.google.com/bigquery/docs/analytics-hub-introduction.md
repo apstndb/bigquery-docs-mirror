@@ -204,9 +204,9 @@ BigQuery sharing has the following limitations:
     
       - SQL stored procedures aren't available in the BigQuery sharing usage metrics dashboard. You can view details in the `INFORMATION_SCHEMA.ROUTINES` view, but not in the `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view. For more information, see [Use `INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-information-schema) .
 
-  - The following limitations apply when subscribing to Salesforce Data Cloud data:
+  - The following limitations apply when subscribing to Salesforce Data 360 data:
     
-      - Data Cloud data is shared as views. As a subscriber, you can't access the underlying tables that the views reference.
+      - Data 360 data is shared as views. As a subscriber, you can't access the underlying tables that the views reference.
 
 ## Supported regions
 

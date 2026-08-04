@@ -171,7 +171,7 @@ To load Avro data from Cloud Storage into a new BigQuery table, select one of th
 
 7.  In the **Schema** section, no action is necessary. The schema is self-described in Avro files.
 
-8.  (Optional) To partition the table, choose your options in the **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+8.  (Optional) To partition the table, choose your options in the **Partition and cluster settings** . For more information, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
 
 9.  (Optional) For **Partitioning filter** , click the **Require partition filter** box to require users to include a `WHERE` clause that specifies the partitions to query. Requiring a partition filter may reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#require_a_partition_filter_in_queries) . This option is unavailable if **No partitioning** is selected.
 
@@ -228,7 +228,7 @@ Other optional flags include:
     
     For more information on partitioned tables, see:
     
-      - [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
+      - [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
     
     For more information on clustered tables, see:
     
@@ -514,7 +514,7 @@ There are two ways to ensure that Avro data is loaded into BigQuery as [`JSON` d
             "name": "json_field"
         }
 
-2.  Specify the BigQuery destination table schema explicitly and set the column type to `JSON` . For more information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+2.  Specify the BigQuery destination table schema explicitly and set the column type to `JSON` . For more information, see [Specify a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
 If you do not specify JSON as the type in either the Avro schema or the BigQuery table schema, then the data will be read as a `STRING` .
 
@@ -876,7 +876,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Loading hive-partitioned Avro data
 
-BigQuery supports loading hive-partitioned Avro data stored on Cloud Storage and populates the hive-partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading Externally Partitioned Data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+BigQuery supports loading hive-partitioned Avro data stored on Cloud Storage and populates the hive-partitioning columns as columns in the destination BigQuery managed table. For more information, see [Load externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 ## Avro conversions
 

@@ -32,15 +32,15 @@ For more information on loading data, see the documentation for your source data
 
   - For more information on loading data from Cloud Storage, see:
     
-      - [Loading Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
-      - [Loading CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
-      - [Loading JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
-      - [Loading Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
-      - [Loading ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
-      - [Loading data from Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
-      - [Loading data from Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
+      - [Load Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
+      - [Load CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
+      - [Load JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
+      - [Load Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
+      - [Load ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
+      - [Load data from Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
+      - [Load data from Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
 
-  - For more information on loading data from a local source, see [Loading data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) .
+  - For more information on loading data from a local source, see [Load data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) .
 
 ## Appending to and overwriting table data
 

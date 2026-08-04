@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Supported protocol buffer and Arrow data types
 
-This document describes the supported protocol buffer and Arrow data types for each respective BigQuery data type. Before reading this document, read [Overview of the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .
+This document describes the supported protocol buffer and Arrow data types for each respective BigQuery data type. Before reading this document, read [Overview of the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .
 
 ## Supported protocol buffer data types
 

@@ -301,7 +301,7 @@ Replace the following:
 
 #### Standard load from Apache Hive-partitioned files
 
-You can load Hive-partitioned files into Iceberg managed tables using standard BigQuery load jobs. For more information, see [Loading externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
+You can load Hive-partitioned files into Iceberg managed tables using standard BigQuery load jobs. For more information, see [Load externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 #### Load streaming data from Pub/Sub
 

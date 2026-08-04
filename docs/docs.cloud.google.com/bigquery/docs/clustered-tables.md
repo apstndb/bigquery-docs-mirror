@@ -152,4 +152,4 @@ To control access to tables in BigQuery, see [Control access to resources with I
 ## What's next
 
   - To learn how to create and use clustered tables, see [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
-  - For information about querying clustered tables, see [Querying clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
+  - For information about querying clustered tables, see [Query clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .

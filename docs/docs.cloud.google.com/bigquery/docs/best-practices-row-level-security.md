@@ -57,7 +57,7 @@ To mitigate such opportunities, BigQuery hides sensitive statistics on all queri
 
 > **Best practice:** Don't grant table write permissions to users who should only see filtered data.
 
-Users with write permissions to a table can insert data into the table with the [`bq load` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) or with the BigQuery Storage Write API. This can allow the user with write permissions to alter the query results of other users.
+Users with write permissions to a table can insert data into the table with the [`bq load` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) or with the BigQuery Storage Write API (gRPC). This can allow the user with write permissions to alter the query results of other users.
 
 *We recommend that admins create separate Google groups for table write access and row-level access policies. Users that should only see filtered table results shouldn't have write access to the filtered table.*
 

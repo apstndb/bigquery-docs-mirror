@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # WRITE\_API\_TIMELINE view
 
-The `INFORMATION_SCHEMA.WRITE_API_TIMELINE` view contains per minute aggregated BigQuery Storage Write API ingestion statistics for the current project.
+The `INFORMATION_SCHEMA.WRITE_API_TIMELINE` view contains per minute aggregated BigQuery Storage Write API (gRPC) ingestion statistics for the current project.
 
-You can query the `INFORMATION_SCHEMA` Write API views to retrieve historical and real-time information about data ingestion into BigQuery that uses the BigQuery Storage Write API. See [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) for more information.
+You can query the `INFORMATION_SCHEMA` Write API views to retrieve historical and real-time information about data ingestion into BigQuery that uses the BigQuery Storage Write API (gRPC). See [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) for more information.
 
 > **Note:** The view names `INFORMATION_SCHEMA.WRITE_API_TIMELINE` and `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
 
@@ -34,28 +34,28 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 
 ## Schema
 
-When you query the `INFORMATION_SCHEMA` BigQuery Storage Write API views, the query results contain historical and real-time information about data ingestion into BigQuery using the BigQuery Storage Write API. Each row in the following views represents statistics for ingestion into a specific table, aggregated over a one minute interval starting at `start_timestamp` . Statistics are grouped by stream type and error code, so there will be one row for each stream type and each encountered error code during the one minute interval for each timestamp and table combination. Successful requests have the error code set to `OK` . If no data was ingested into a table during a certain time period, then no rows are present for the corresponding timestamps for that table.
+When you query the `INFORMATION_SCHEMA` BigQuery Storage Write API (gRPC) views, the query results contain historical and real-time information about data ingestion into BigQuery using the BigQuery Storage Write API (gRPC). Each row in the following views represents statistics for ingestion into a specific table, aggregated over a one minute interval starting at `start_timestamp` . Statistics are grouped by stream type and error code, so there will be one row for each stream type and each encountered error code during the one minute interval for each timestamp and table combination. Successful requests have the error code set to `OK` . If no data was ingested into a table during a certain time period, then no rows are present for the corresponding timestamps for that table.
 
 The `INFORMATION_SCHEMA.WRITE_API_TIMELINE` view has the following schema:
 
-| Column name         | Data type   | Value                                                                                                                                                                                                                        |
-| ------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `start_timestamp`   | `TIMESTAMP` | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics.                                                                                                                              |
-| `project_id`        | `STRING`    | *(Clustering column)* ID of the project.                                                                                                                                                                                     |
-| `project_number`    | `INTEGER`   | Number of the project.                                                                                                                                                                                                       |
-| `dataset_id`        | `STRING`    | *(Clustering column)* ID of the dataset.                                                                                                                                                                                     |
-| `table_id`          | `STRING`    | *(Clustering column)* ID of the table.                                                                                                                                                                                       |
-| `stream_type`       | `STRING`    | The [stream type](https://docs.cloud.google.com/bigquery/docs/write-api#overview) used for the data ingestion with BigQuery Storage Write API. It is supposed to be one of "DEFAULT", "COMMITTED", "BUFFERED", or "PENDING". |
-| `error_code`        | `STRING`    | Error code returned for the requests specified by this row. "OK" for successful requests.                                                                                                                                    |
-| `total_requests`    | `INTEGER`   | Total number of requests within the 1 minute interval.                                                                                                                                                                       |
-| `total_rows`        | `INTEGER`   | Total number of rows from all requests within the 1 minute interval.                                                                                                                                                         |
-| `total_input_bytes` | `INTEGER`   | Total number of bytes from all rows within the 1 minute interval.                                                                                                                                                            |
+| Column name         | Data type   | Value                                                                                                                                                                                                                               |
+| ------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `start_timestamp`   | `TIMESTAMP` | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics.                                                                                                                                     |
+| `project_id`        | `STRING`    | *(Clustering column)* ID of the project.                                                                                                                                                                                            |
+| `project_number`    | `INTEGER`   | Number of the project.                                                                                                                                                                                                              |
+| `dataset_id`        | `STRING`    | *(Clustering column)* ID of the dataset.                                                                                                                                                                                            |
+| `table_id`          | `STRING`    | *(Clustering column)* ID of the table.                                                                                                                                                                                              |
+| `stream_type`       | `STRING`    | The [stream type](https://docs.cloud.google.com/bigquery/docs/write-api#overview) used for the data ingestion with BigQuery Storage Write API (gRPC). It is supposed to be one of "DEFAULT", "COMMITTED", "BUFFERED", or "PENDING". |
+| `error_code`        | `STRING`    | Error code returned for the requests specified by this row. "OK" for successful requests.                                                                                                                                           |
+| `total_requests`    | `INTEGER`   | Total number of requests within the 1 minute interval.                                                                                                                                                                              |
+| `total_rows`        | `INTEGER`   | Total number of rows from all requests within the 1 minute interval.                                                                                                                                                                |
+| `total_input_bytes` | `INTEGER`   | Total number of bytes from all rows within the 1 minute interval.                                                                                                                                                                   |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Data retention
 
-This view contains the BigQuery Storage Write API ingestion history of the past 180 days.
+This view contains the BigQuery Storage Write API (gRPC) ingestion history of the past 180 days.
 
 ## Scope and syntax
 
@@ -83,7 +83,7 @@ For a list of available regions, see [Dataset locations](https://docs.cloud.goog
 
 ## Examples
 
-##### Example 1: Recent BigQuery Storage Write API ingestion failures
+##### Example 1: Recent BigQuery Storage Write API (gRPC) ingestion failures
 
 The following example calculates the per minute breakdown of total failed requests for all tables in the project in the last 30 minutes, split by stream type and error code:
 
@@ -166,7 +166,7 @@ The result is similar to the following:
 
 ##### Example 3: Tables with the most incoming traffic
 
-The following example returns the BigQuery Storage Write API ingestion statistics for the 10 tables with the most incoming traffic:
+The following example returns the BigQuery Storage Write API (gRPC) ingestion statistics for the 10 tables with the most incoming traffic:
 
     SELECT
       project_id,
@@ -204,7 +204,7 @@ The result is similar to the following:
     | my-project           | dataset1   | table6                        |    8771021 |  5119004622353 |      8771021 |
     +----------------------+------------+-------------------------------+------------+----------------+--------------+
 
-##### Example 4: BigQuery Storage Write API ingestion error ratio for a table
+##### Example 4: BigQuery Storage Write API (gRPC) ingestion error ratio for a table
 
 The following example calculates a per-day breakdown of errors for a specific table, split by error code:
 

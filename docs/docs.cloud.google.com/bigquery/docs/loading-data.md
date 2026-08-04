@@ -93,7 +93,7 @@ To optimize batch loading into tables to avoid reaching the daily load limit, se
 <br />
 For more information about loading from Dataflow to BigQuery, see <a href="https://docs.cloud.google.com/dataflow/docs/guides/write-to-bigquery">Write from Dataflow to BigQuery</a> .<br />
 <br />
-You can also directly use the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">BigQuery Storage Write API</a> .<br />
+You can also directly use the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">BigQuery Storage Write API (gRPC)</a> .<br />
 <br />
 To optimize streaming into tables to avoid reaching the daily load limit, see <a href="https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs">Optimize load jobs</a> .</td>
 </tr>

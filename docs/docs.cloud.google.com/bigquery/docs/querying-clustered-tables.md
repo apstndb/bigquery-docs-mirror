@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/querying-clustered-tables
 uri: https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables
-title: Querying clustered tables
+title: Query clustered tables
 description: Shows how to optimize querying clustered tables by using filters and following best practices.
 data_source: docs.cloud.google.com
 ---
 
-# Querying clustered tables
+# Query clustered tables
 
 When you create a clustered table in BigQuery, the table data is automatically organized based on the contents of one or more columns in the table's schema. The columns you specify are used to colocate related data. When you cluster a table using multiple columns, the order of columns you specify is important. The order of the specified columns determines the sort order of the data.
 
@@ -288,4 +288,4 @@ To control access to tables in BigQuery, see [Control access to resources with I
   - For more information on running queries, see [Running interactive and batch queries](https://docs.cloud.google.com/bigquery/docs/running-queries) .
   - To learn how to create and use clustered tables, see [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
   - For an overview of partitioned table support in BigQuery, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
-  - To learn how to create partitioned tables, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+  - To learn how to create partitioned tables, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .

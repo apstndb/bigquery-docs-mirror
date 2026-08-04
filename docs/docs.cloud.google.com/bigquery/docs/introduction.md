@@ -46,8 +46,8 @@ BigQuery stores data using a columnar storage format that is optimized for analy
   - [Learn about datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) , BigQuery's top-level container of tables and views.
   - [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) automates data ingestion.
   - [Load data into BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) using:
-      - [Stream data](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) with the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
-      - [Batch-load data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) from local files or Cloud Storage using formats that include: [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro) , [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) , [ORC](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc) , [CSV](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv) , [JSON](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json) , [Datastore](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore) , and [Firestore](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore) formats.
+      - [Stream data](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) with the [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) .
+      - [Batch load data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) from local files or Cloud Storage using formats that include: [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro) , [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) , [ORC](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc) , [CSV](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv) , [JSON](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json) , [Datastore](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore) , and [Firestore](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore) formats.
 
 For more information, see [Overview of BigQuery storage](https://docs.cloud.google.com/bigquery/docs/storage_overview) .
 
@@ -184,7 +184,7 @@ Task guidance to help if you need to do the following:
     
       - [batch-load data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) for [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro) , [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) , [ORC](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc) , [CSV](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv) , [JSON](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json) , [Datastore](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore) , and [Firestore](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore) formats
       - [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
-      - [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api)
+      - [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api)
 
   - [Use code sample library](https://docs.cloud.google.com/bigquery/docs/samples) including:
     

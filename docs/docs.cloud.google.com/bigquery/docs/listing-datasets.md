@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/listing-datasets
 uri: https://docs.cloud.google.com/bigquery/docs/listing-datasets
-title: Listing datasets
+title: List datasets
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Listing datasets
+# List datasets
 
 This document describes how to list and get information about datasets in BigQuery.
 
@@ -361,7 +361,7 @@ You can also query the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs
 
 Issue the `bq show` command. The `--format` flag can be used to control the output. If you are getting information about a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` . The output displays the dataset's information such as access control, labels, and location. This command doesn't display a dataset's inherited permissions, but you can see them in the Google Cloud console.
 
-To show information about a [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) , use the [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/listing-datasets) command to list all datasets and then use the name of the hidden dataset in the `bq show` command.
+To show information about a [hidden dataset](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) , use the [`bq ls --all`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to list all datasets and then use the name of the hidden dataset in the `bq show` command.
 
     bq show --format=prettyjson project_id:dataset
 

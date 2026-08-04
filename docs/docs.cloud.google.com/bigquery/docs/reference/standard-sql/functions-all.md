@@ -1666,7 +1666,7 @@ Formats ASCII characters in a <code dir="ltr" translate="no">BYTES</code> value 
 </tr>
 <tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">VECTOR_SEARCH</code></a></td>
-<td>Performs a vector search on embeddings to find semantically similar entities.</td>
+<td>Performs a semantic search or a hybrid search on embeddings to find similar entities.</td>
 </tr>
 <tr class="even">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics"><code dir="ltr" translate="no">VECTOR_INDEX.STATISTICS</code></a></td>

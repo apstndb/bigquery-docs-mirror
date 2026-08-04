@@ -905,7 +905,7 @@ Protect a load job destination table with a customer-managed encryption key by s
 
 You can stream data into your CMEK-protected BigQuery table without specifying any additional parameters. Note that this data is encrypted using your Cloud KMS key in the buffer as well as in the final location. Before using streaming with a CMEK table, review the requirements on [key availability and accessibility](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_access) .
 
-Learn more about streaming at [Streaming data using the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
+Learn more about streaming at [Streaming data using the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) .
 
 ## Change a table from default encryption to Cloud KMS protection
 

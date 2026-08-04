@@ -148,9 +148,9 @@ For more information about supported data types in BigQuery, see [GoogleSQL data
 
 Snowflake can export data in the following file formats. You can load the following formats directly into BigQuery:
 
-  - [Loading CSV data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv) .
-  - [Loading Parquet data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
-  - [Loading JSON data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json) .
+  - [Load CSV data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv) .
+  - [Load Parquet data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
+  - [Load JSON data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json) .
   - [Query data from Apache Iceberg](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) .
 
 ## Migration tools

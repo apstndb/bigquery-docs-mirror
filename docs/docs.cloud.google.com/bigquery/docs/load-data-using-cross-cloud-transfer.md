@@ -16,7 +16,7 @@ You can transfer data into BigQuery in the following ways:
 
   - Filter data from files in Amazon S3 or Blob Storage before transferring results into BigQuery tables, by using the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) . To append data to the destination table, use the [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) . Data manipulation is applied on the external tables that reference data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) or [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
 
-  - Create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) of external Amazon S3, Apache Iceberg, or Salesforce Data Cloud data in a BigQuery dataset so that the data is available locally in BigQuery.
+  - Create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) of external Amazon S3, Apache Iceberg, or Salesforce Data 360 data in a BigQuery dataset so that the data is available locally in BigQuery.
 
 > **Note:** If you want to transfer large files from Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into BigQuery tables on a scheduled basis, use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . If you want to read and process data before transferring data into BigQuery tables, use the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) .
 
@@ -248,9 +248,9 @@ After creating a partitioned table, you can insert data into the ingestion-time 
 
 ## Materialized view replicas
 
-A materialized view replica is a replication of external Amazon Simple Storage Service (Amazon S3), Apache Iceberg, or Salesforce Data Cloud data in a BigQuery dataset so that the data is available locally in BigQuery. This can help you avoid data egress costs and improve query performance. BigQuery lets you [create materialized views on BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction#cache-enabled_tables_with_materialized_views) over Amazon Simple Storage Service (Amazon S3), Apache Iceberg, or Salesforce Data Cloud data.
+A materialized view replica is a replication of external Amazon Simple Storage Service (Amazon S3), Apache Iceberg, or Salesforce Data 360 data in a BigQuery dataset so that the data is available locally in BigQuery. This can help you avoid data egress costs and improve query performance. BigQuery lets you [create materialized views on BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction#cache-enabled_tables_with_materialized_views) over Amazon Simple Storage Service (Amazon S3), Apache Iceberg, or Salesforce Data 360 data.
 
-A materialized view replica lets you use the Amazon S3, Iceberg, or Data Cloud materialized view data in queries while avoiding data egress costs and improving query performance. A materialized view replica does this by replicating the Amazon S3, Iceberg, or Data Cloud data to a dataset in a [supported BigQuery region](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#supported_regions) , so that the data is available locally in BigQuery.
+A materialized view replica lets you use the Amazon S3, Iceberg, or Data 360 materialized view data in queries while avoiding data egress costs and improving query performance. A materialized view replica does this by replicating the Amazon S3, Iceberg, or Data 360 data to a dataset in a [supported BigQuery region](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#supported_regions) , so that the data is available locally in BigQuery.
 
 ### Before you begin
 
@@ -284,7 +284,7 @@ Before creating a materialized view replica, you must complete the following tas
 2.  Create a source table in the dataset you created in the preceding step. The source table can be any of the following table types:
       - An [Amazon S3 BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) that has [metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) enabled and doesn't use an Iceberg file format.
       - An [Apache Iceberg external table](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) .
-      - A [Data Cloud table](https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart) .
+      - A [Data 360 table](https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart) .
 
 ### Create materialized view replicas
 
@@ -362,13 +362,13 @@ After you create the materialized view replica, the replication process polls th
 
 After you create the materialized view replica, the replication process polls the source materialized view for changes and replicates data to the materialized view replica. The data is replicated at the interval you specified in the `replication_interval_seconds` option of the [`CREATE MATERIALIZED VIEW AS REPLICA OF` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_as_replica_of_statement) .
 
-In addition to the replication interval, the freshness of the materialized view replica data is also affected by how often the source materialized view refreshes, and how often the metadata cache of the Amazon S3, Iceberg, or Data Cloud table used by the materialized view refreshes.
+In addition to the replication interval, the freshness of the materialized view replica data is also affected by how often the source materialized view refreshes, and how often the metadata cache of the Amazon S3, Iceberg, or Data 360 table used by the materialized view refreshes.
 
 You can check the data freshness for the materialized view replica and the resources it is based on by using the Google Cloud console:
 
   - For materialized view replica freshness, look at the **Last modified** field in the materialized view replica's **Details** pane.
   - For source materialized view freshness, look at the **Last modified** field in the materialized view's **Details** pane.
-  - For source Amazon S3, Iceberg, or Data Cloud table metadata cache freshness, look at the **Max staleness** field in the materialized view's **Details** pane.
+  - For source Amazon S3, Iceberg, or Data 360 table metadata cache freshness, look at the **Max staleness** field in the materialized view's **Details** pane.
 
 ### Supported materialized view replica regions
 

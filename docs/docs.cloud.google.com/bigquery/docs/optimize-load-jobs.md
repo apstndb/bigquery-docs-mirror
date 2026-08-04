@@ -96,17 +96,17 @@ Replace the following:
 
 For more information, see [Load statements in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) .
 
-### Batch load using the BigQuery Storage Write API
+### Batch load using the BigQuery Storage Write API (gRPC)
 
-To load batch data into BigQuery, one option is to use the Storage Write API directly from your application with the Google API Client Libraries.
+To load batch data into BigQuery, one option is to use the Storage Write API (gRPC) directly from your application with the Google API Client Libraries.
 
-The Storage Write API optimizes data loading to stay within table limits. For high-volume, real-time streaming, use a `PENDING` stream, rather than a `COMMITTED` stream. When you use a `PENDING` stream, the API temporarily stores records until you commit the stream.
+The Storage Write API (gRPC) optimizes data loading to stay within table limits. For high-volume, real-time streaming, use a `PENDING` stream, rather than a `COMMITTED` stream. When you use a `PENDING` stream, the API temporarily stores records until you commit the stream.
 
 For a complete example of batch loading data using the Storage Write API, see [Batch load data using the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-batch-load) .
 
 ### Batch load using Dataflow
 
-If you want to stream, transform, and write data into BigQuery using data pipelines, you can use Dataflow. The data pipelines that you create read from supported sources like Pub/Sub or Apache Kafka. You can also create a Dataflow pipeline using the `BigQueryIO` connector, which uses the Storage Write API for high-performance data streaming and exactly-once semantics.
+If you want to stream, transform, and write data into BigQuery using data pipelines, you can use Dataflow. The data pipelines that you create read from supported sources like Pub/Sub or Apache Kafka. You can also create a Dataflow pipeline using the `BigQueryIO` connector, which uses the Storage Write API (gRPC) for high-performance data streaming and exactly-once semantics.
 
 For information about using Dataflow to batch load data to BigQuery, see [Write from Dataflow to BigQuery](https://docs.cloud.google.com/dataflow/docs/guides/write-to-bigquery) .
 
@@ -114,15 +114,15 @@ For information about using Dataflow to batch load data to BigQuery, see [Write 
 
 To load high volumes of data with frequent updates, we recommend that you stream your data into BigQuery. With data streaming, new data continuously writes from your client application into BigQuery, a strategy that avoids reaching the limit for running too many load jobs. The following sections describe several methods to stream your data into BigQuery.
 
-### Stream data using the Storage Write API
+### Stream data using the Storage Write API (gRPC)
 
-Use the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) to stream records in real time into BigQuery with minimal latency. The [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) provides an efficient streaming protocol that provides advanced functionality like exactly-once delivery semantics, schema update detection, and streaming Change Data Capture (CDC) upserts. In addition, you can ingest up to 2 TiB per month at no cost.
+Use the [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) to stream records in real time into BigQuery with minimal latency. The [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) provides an efficient streaming protocol that provides advanced functionality like exactly-once delivery semantics, schema update detection, and streaming Change Data Capture (CDC) upserts. In addition, you can ingest up to 2 TiB per month at no cost.
 
-For information about using the Storage Write API, see [Streaming data using the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) .
+For information about using the Storage Write API (gRPC), see [Streaming data using the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) .
 
 ### Stream data using Dataflow
 
-Use Dataflow to create data pipelines that read from supported sources, for example, Pub/Sub or Apache Kafka. These pipelines then transform and write the data to BigQuery as a destination. You can create a Dataflow pipeline using the `BigQueryIO` connector, which uses the Storage Write API.
+Use Dataflow to create data pipelines that read from supported sources, for example, Pub/Sub or Apache Kafka. These pipelines then transform and write the data to BigQuery as a destination. You can create a Dataflow pipeline using the `BigQueryIO` connector, which uses the Storage Write API (gRPC).
 
 For information about using Dataflow to stream data to BigQuery, see [Write from Dataflow to BigQuery](https://docs.cloud.google.com/dataflow/docs/guides/write-to-bigquery) .
 

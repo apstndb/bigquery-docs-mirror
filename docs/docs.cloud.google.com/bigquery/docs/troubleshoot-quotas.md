@@ -370,7 +370,7 @@ To resolve this quota error, do the following:
 
   - If the limit is only exceeded occasionally, you can implement retries on this specific error with exponential backoff.
 
-  - If you frequently insert data, consider using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) . Streaming data with this API isn't affected by the BigQuery API quota.
+  - If you frequently insert data, consider using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) . Streaming data with this API isn't affected by the BigQuery API quota.
 
   - While loading data to BigQuery using Dataflow with the [BigQuery I/O connector](https://beam.apache.org/documentation/io/built-in/google-bigquery/) , you might encounter this error for the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) . To resolve this issue, do the following:
     
@@ -535,7 +535,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - If you use load, select or copy jobs to append single rows of data to a table, for example, then you should consider batching multiple jobs into one job. BigQuery doesn't perform well when used as a relational database. As a best practice, avoid running frequent, single-row append actions.
 
-  - To append data at a high rate, consider using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
+  - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
   - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
@@ -606,7 +606,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - If you use load, select or copy jobs to append single rows of data to a table, for example, then you should consider batching multiple jobs into one job. BigQuery doesn't perform well when used as a relational database. As a best practice, avoid running frequent, single-row append actions.
 
-  - To append data at a high rate, consider using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
+  - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
   - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
@@ -656,7 +656,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
   - If you use load, select or copy jobs to append single rows of data to a table, for example, then you should consider batching multiple jobs into one job. BigQuery doesn't perform well when used as a relational database. As a best practice, avoid running frequent, single-row append actions.
 
-  - To append data at a high rate, consider using [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
+  - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
   - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 

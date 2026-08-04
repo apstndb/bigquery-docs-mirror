@@ -906,7 +906,7 @@ The following table provides details about converting `CREATE VIEW` statements f
 <p><code dir="ltr" translate="no">: (partition_column = partition_col_value, partition_column = partition_col_value, ...)</code></p></td>
 <td>Not supported. Additional partitions are added as needed when data with new values in the partition columns are loaded.<br />
 
-<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables">Managing partitioned tables</a> .</p></td>
+<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables">Manage partitioned tables</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">Rename partition</code></td>
