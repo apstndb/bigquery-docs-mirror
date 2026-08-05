@@ -77,7 +77,7 @@ Approximates the feature contribution values. It is faster and simpler compared 
 
 [`ML.GLOBAL_EXPLAIN` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
 
-[Gini Index-based feature importance](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.XGBRegressor.feature_importances_)
+[Gini Index-based feature importance](https://xgboost.readthedocs.io/en/latest/python/python_api.html?#xgboost.XGBRegressor.feature_importances_)
 
 A global feature importance score that indicates how useful or valuable each feature was in the construction of the boosted tree or random forest model during training.
 

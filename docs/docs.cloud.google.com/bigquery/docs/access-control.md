@@ -1439,7 +1439,10 @@ Repository
 <li><code dir="ltr" translate="no">dataprocrm.workloads.list</code></li>
 </ul>
 <p><code dir="ltr" translate="no">geminicloudassist.  agents.  invoke</code></p>
+<p><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  create</code></p>
+<p><code dir="ltr" translate="no">geminidataanalytics.  locations.  chat</code></p>
 <p><code dir="ltr" translate="no">geminidataanalytics.  locations.  useDataEngineeringAgent</code></p>
+<p><code dir="ltr" translate="no">geminidataanalytics.  operations.  get</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.get</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.list</code></p></td>
 </tr>
@@ -1578,6 +1581,9 @@ Repository
 <li><code dir="ltr" translate="no">dataprocrm.workloads.list</code></li>
 </ul>
 <p><code dir="ltr" translate="no">geminicloudassist.  agents.  invoke</code></p>
+<p><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  get</code></p>
+<p><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  list</code></p>
+<p><code dir="ltr" translate="no">geminidataanalytics.  locations.  chat</code></p>
 <p><code dir="ltr" translate="no">geminidataanalytics.  locations.  useDataEngineeringAgent</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.get</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.list</code></p></td>

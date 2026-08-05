@@ -112,7 +112,7 @@ The following example overwrites the existing table `test_parquet` with data fro
 
 ## Filter data
 
-You can filter data before transferring them into BigQuery by using the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and the [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
+You can filter data before transferring them into BigQuery by using the [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language?#create_table_statement) and the [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
 
 ### Limitations
 

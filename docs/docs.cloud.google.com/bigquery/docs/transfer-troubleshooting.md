@@ -715,6 +715,27 @@ The following are common issues you might encounter when [creating a ServiceNow 
   - Error: `FAILED_PRECONDITION: There was an issue connecting to API.`  
     **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allow list. To resolve this error, [create a network attachment](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) by defining a static IP address.
 
+## Amazon Redshift transfer issues
+
+You might encounter the following errors when you set up or run an Amazon Redshift transfer.
+
+  - Error: `Cannot connect to Amazon Redshift cluster` or connection timeout  
+    **Resolution:** Check each of the following:
+    
+      - Verify that you configured your cluster's security group rules to allow inbound connections over TCP on the port that your cluster uses (by default, `5439` ). For more information, see [Grant access to your Amazon Redshift cluster](https://docs.cloud.google.com/bigquery/docs/migration/redshift#grant_access_redshift_cluster) .
+      - If you are connecting using public IP addresses, confirm that your cluster is publicly accessible and that your security group rules allow inbound connections from all required Google-owned migration IP addresses.
+      - If you are connecting using a VPC (VPC), verify that your VPC and reserved IP range don't overlap with any subnet, that custom routes are advertised, and that your VPC peering connection is active.
+      - Verify that your JDBC connection URL is formatted correctly ( ` jdbc:postgresql:// endpoint-host : port / database-name  ` ).
+
+  - Error: `Authentication failure: User Id not found` or `PERMISSION_DENIED` when connecting to Amazon Redshift  
+    **Resolution:** Verify that the **Username of your database** and **Password of your database** values belong to a database user that has `SELECT` permissions on the target Amazon Redshift schema and tables. Also verify that the AWS **Access key ID** and **Secret access key** values correspond to an IAM entity that has permissions to `UNLOAD` data from Amazon Redshift and write temporary files to your Amazon S3 staging bucket.
+
+  - Error: `AccessDenied` when accessing the Amazon S3 staging bucket  
+    **Resolution:** Confirm that the provided AWS access key pair corresponds to an IAM user or role with both Read and Write permission ( `PutObject` , `GetObject` , `ListBucket` , and `DeleteObject` ) on your Amazon S3 staging bucket ( ` s3:// bucket-name / prefix  ` ) so BigQuery Data Transfer Service can transfer files to BigQuery.
+
+  - Error: CSV import failed due to ASCII 0 ( `NUL` ) characters  
+    **Resolution:** If BigQuery Data Transfer Service exports your Amazon Redshift tables as CSV files containing ASCII 0 characters ( `\0` ), loading them into BigQuery fails. To work around this issue, export your data to Amazon S3 as Parquet files instead. For more information, see [Assess your data](https://docs.cloud.google.com/bigquery/docs/migration/redshift#assess_your_data) .
+
 ## Teradata transfer issues
 
 The following are common issues you might encounter when creating a Teradata transfer.

@@ -30,6 +30,14 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `https://bigquerymigration.googleapis.com`
 
+### Regional service endpoint
+
+A regional service endpoint is a base URL that specifies the network address of an API service in a single region. A service that is available in multiple regions might have multiple regional endpoints. Select a location to see its regional service endpoint for this service.
+
+  
+
+`https://bigquerymigration.googleapis.com`
+
 ## REST Resource: [v2alpha.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows)
 
 Methods

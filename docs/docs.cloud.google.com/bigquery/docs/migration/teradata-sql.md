@@ -1454,7 +1454,7 @@ The following flow-of-control statements are not used in BigQuery because BigQue
 <td><code dir="ltr" translate="no">SELECT  * EXCEPT(is_generated, generation_expression, is_stored, is_updatable)  FROM  mydataset.INFORMATION_SCHEMA.COLUMNS;  WHERE  table_name=         table_name       </code><br />
 <br />
 The same query is valid to get column information for views.<br />
-For more information, see the <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-tables#columns_view">Column view in the BigQuery <code dir="ltr" translate="no">INFORMATION_SCHEMA</code></a> .</td>
+For more information, see the <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-tables?#columns_view">Column view in the BigQuery <code dir="ltr" translate="no">INFORMATION_SCHEMA</code></a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">SELECT * FROM dbc.tables WHERE tablekind = 'T';</code><br />

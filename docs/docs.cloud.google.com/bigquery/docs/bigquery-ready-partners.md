@@ -2064,7 +2064,7 @@ Datadog offers services in infrastructure performance, availability, and monitor
 
   - [BigQuery Integration](https://docs.datadoghq.com/integrations/google_cloud_bigquery/)
   - [Query Results Save Detection](https://docs.datadoghq.com/security/default_rules/google-cloud-bq-exfil-via-cloud-storage/)
-  - [Google Cloud Monitoring](https://www.datadoghq.com/solutions/gcp/)
+  - [Google Cloud Monitoring](https://www.datadoghq.com/solutions/gcp/#)
 
 **Partner profile**
 

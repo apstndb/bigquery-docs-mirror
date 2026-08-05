@@ -16,6 +16,8 @@ data_source: docs.cloud.google.com
 
 You can load data from Google Merchant Center to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Google Merchant Center connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Merchant Center to BigQuery.
 
+> **Note:** The BigQuery Data Transfer Service for Google Merchant Center is **NOT** affected by the deprecation of Content API for Shopping. No action is needed to preserve service in the BigQuery Data Transfer Service.
+
 ## Supported reports
 
 The BigQuery Data Transfer Service for Google Merchant Center supports the following data:

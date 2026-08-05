@@ -148,7 +148,7 @@ Streamline end-to-end [data science](https://cloud.google.com/data-science) work
 
 [View end-to-end ML model flow](https://cloud.google.com/bigquery/docs/e2e-journey)
 
-[ML diagram](https://cloud.google.com/bigquery)
+[ML diagram](https://cloud.google.com/bigquery#)
 
   - [Perform time series forecasting with a multivariate model](https://cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
 
@@ -168,7 +168,7 @@ Streamline end-to-end [data science](https://cloud.google.com/data-science) work
 
 [View end-to-end ML model flow](https://cloud.google.com/bigquery/docs/e2e-journey)
 
-[ML diagram](https://cloud.google.com/bigquery)
+[ML diagram](https://cloud.google.com/bigquery#)
 
   - [Perform time series forecasting with a multivariate model](https://cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
 
@@ -186,7 +186,7 @@ Connect Google and partner AI models directly to your multimodal data in BigQuer
 
 [Learn about generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)
 
-[Unstructured data analysis with AI](https://cloud.google.com/bigquery)
+[Unstructured data analysis with AI](https://cloud.google.com/bigquery#)
 
   - [](https://docs.cloud.google.com/bigquery/docs/image-analysis)
     
@@ -210,7 +210,7 @@ Connect Google and partner AI models directly to your multimodal data in BigQuer
 
 [Learn about generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions)
 
-[Unstructured data analysis with AI](https://cloud.google.com/bigquery)
+[Unstructured data analysis with AI](https://cloud.google.com/bigquery#)
 
   - [](https://docs.cloud.google.com/bigquery/docs/image-analysis)
     
@@ -232,7 +232,7 @@ Solve for today’s analytics demands and tomorrow's AI use cases by migrating y
 
 [Learn about BigQuery Migration Services for a comprehensive data warehouse migration](https://cloud.google.com/solutions/data-migration)
 
-[BigQuery migration process](https://cloud.google.com/bigquery)
+[BigQuery migration process](https://cloud.google.com/bigquery#)
 
   - [](https://cloud.google.com/bigquery/docs/migration-assessment)
     
@@ -256,7 +256,7 @@ Solve for today’s analytics demands and tomorrow's AI use cases by migrating y
 
 [Learn about BigQuery Migration Services for a comprehensive data warehouse migration](https://cloud.google.com/solutions/data-migration)
 
-[BigQuery migration process](https://cloud.google.com/bigquery)
+[BigQuery migration process](https://cloud.google.com/bigquery#)
 
   - [](https://cloud.google.com/bigquery/docs/migration-assessment)
     
@@ -278,7 +278,7 @@ ELT is the recommended pattern for bringing data into BigQuery. There are many t
 
 [Learn more about data integration and ELT](https://cloud.google.com/use-cases/data-integration)
 
-[data integration big picture](https://cloud.google.com/bigquery)
+[data integration big picture](https://cloud.google.com/bigquery#)
 
   - [](https://cloud.google.com/blog/products/data-analytics/a-leader-in-gartner-magic-quadrant-for-data-integration-tools)
     
@@ -302,7 +302,7 @@ ELT is the recommended pattern for bringing data into BigQuery. There are many t
 
 [Learn more about data integration and ELT](https://cloud.google.com/use-cases/data-integration)
 
-[data integration big picture](https://cloud.google.com/bigquery)
+[data integration big picture](https://cloud.google.com/bigquery#)
 
   - [](https://cloud.google.com/blog/products/data-analytics/a-leader-in-gartner-magic-quadrant-for-data-integration-tools)
     
@@ -324,7 +324,7 @@ Respond to business events in real time with event-driven analysis. Built-in str
 
 [Learn more about streaming data into BigQuery](https://cloud.google.com/bigquery/docs/write-api-streaming)
 
-[streaming analytics architecture](https://cloud.google.com/bigquery)
+[streaming analytics architecture](https://cloud.google.com/bigquery#)
 
   - [](https://cloud.google.com/bigquery/docs/continuous-queries-introduction)
     
@@ -348,7 +348,7 @@ Respond to business events in real time with event-driven analysis. Built-in str
 
 [Learn more about streaming data into BigQuery](https://cloud.google.com/bigquery/docs/write-api-streaming)
 
-[streaming analytics architecture](https://cloud.google.com/bigquery)
+[streaming analytics architecture](https://cloud.google.com/bigquery#)
 
   - [](https://cloud.google.com/bigquery/docs/continuous-queries-introduction)
     

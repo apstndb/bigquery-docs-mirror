@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # The ML.FEATURE\_IMPORTANCE function
 
-This document describes the `ML.FEATURE_IMPORTANCE` function, which lets you see the feature importance score. This score indicates how useful or valuable each feature was in the construction of a boosted tree or a random forest model during training. For more information, see the [`feature_importances` property](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.XGBRegressor.feature_importances_) in the XGBoost library.
+This document describes the `ML.FEATURE_IMPORTANCE` function, which lets you see the feature importance score. This score indicates how useful or valuable each feature was in the construction of a boosted tree or a random forest model during training. For more information, see the [`feature_importances` property](https://xgboost.readthedocs.io/en/latest/python/python_api.html?#xgboost.XGBRegressor.feature_importances_) in the XGBoost library.
 
 ## Syntax
 

@@ -1541,6 +1541,8 @@ The following table lists the regions in Africa where BigQuery is available.
 
 ### Multi-regions
 
+> **Note:** Later this year, BigQuery will stop using the term *multi-region* . Instead, the `US` and `EU` region names will be included in the list of single regions and will colocate with the `us-central1` and `europe-west4` regions respectively. There is no change to existing data residency.
+
 The following table lists the multi-regions where BigQuery is available. When you select a multi-region, you let BigQuery select a single region within the multi-region where your data is stored and processed.
 
 | **Multi-region description**                                                                                                   | **Multi-region name** |

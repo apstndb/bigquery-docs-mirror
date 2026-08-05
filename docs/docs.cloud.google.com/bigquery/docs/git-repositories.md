@@ -28,7 +28,7 @@ By using BigQuery Studio Git repositories, you can interact with your code asset
 
   - File system operations within the [mount location](https://docs.cloud.google.com/bigquery/docs/git-repositories#notebook-mount) consume [Dataform quota](https://docs.cloud.google.com/dataform/docs/quotas) .
 
-  - Repositories with a large number of files, large file sizes, many branches, or a deep and complex commit history take longer to clone. The cloning operation might exceed the operation timeout, which prevents the repository from being successfully created.
+  - Repositories with a large number of files, large file sizes, many branches, or a deep and complex commit history take longer to clone. The cloning operation might exceed the operation timeout, which prevents the repository from being successfully created. To reduce the cloning time for repositories with deep commit histories, you can create a [shallow clone](https://docs.cloud.google.com/bigquery/docs/git-repositories#create-git-repository) . You can [fetch more commits](https://docs.cloud.google.com/bigquery/docs/git-repositories#view-commit-history) later as needed.
 
   - The size of notebook files stored in a BigQuery Studio Git repository mount can't exceed 30 MB. If your files are larger than 30 MB, save them to your Colab runtime's local storage outside of the mounted location.
 
@@ -111,7 +111,11 @@ To create a Git repository, do the following:
       - If no account connector exists, click **Create account connector** to create a new account connector.
       - If you prefer not to use a Developer Connect account connector, click **Use different connection type** to [connect using HTTPS or SSH](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) .
 
-6.  Click **Connect** .
+6.  Optional: To create a shallow clone repository with limited commit history, click **Advanced options** , and then select the **Shallow clone** checkbox.
+    
+    1.  In the **Depth** field, enter the number of commits to retrieve in the limited commit history.
+
+7.  Click **Connect** .
 
 ## Edit a file
 
@@ -195,6 +199,30 @@ To check out a new branch, do the following:
     > **Note:** If you selected a remote tracking branch as the source, the **Branch name** field is prefilled with the corresponding branch name.
 
 7.  Click **Check out** . BigQuery Studio checks out the source branch first. If the provided branch name indicates a new branch, it's then created based on that source. The new branch becomes the active branch, and the contents of your Git repository automatically update to reflect the state of the checked-out branch.
+
+## View commit history
+
+You can view commit history for your active branch. If your repository was created as a shallow clone, the **Branch commit history** pane displays an informational banner indicating that the repository has limited commit history. You can expand your local history by fetching more commits.
+
+To view the commit history, do the following:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click fork\_right **Repository** .
+
+3.  Next to the primary version control action button, click the expander\_arrow arrow drop-down, and then click **View commit history** .
+    
+    The **Branch commit history** pane opens, displaying the commit history for your active branch.
+
+4.  Optional: To fetch additional commits for a shallow clone repository, in the **Branch commit history** pane, click **Fetch** .
+    
+    1.  In the **Fetch (shallow clone)** dialog, in the **Additional commits to fetch** field, enter the number of additional commits to retrieve from the repository history.
+        
+        If you enter `0` , no additional historical commits are retrieved, but BigQuery Studio performs a standard fetch to synchronize remote references and metadata.
+    
+    2.  Click **Fetch** .
+        
+        You can repeat fetching as needed until all commits are retrieved.
 
 ## Access notebook files in a Git repository mount
 

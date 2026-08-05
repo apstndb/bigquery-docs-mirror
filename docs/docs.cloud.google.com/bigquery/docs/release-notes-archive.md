@@ -302,7 +302,7 @@ You can [store columns](https://docs.cloud.google.com/bigquery/docs/vector-index
 
 Feature
 
-You can now use the [partial ordering mode in BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/use-bigquery-dataframes#partial-ordering-mode) to generate more efficient queries. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+You can now use the [partial ordering mode in BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/use-bigquery-dataframes#partial-ordering-mode) to generate more efficient queries. This feature is in [Preview](https://cloud.google.com/products?#product-launch-stages) .
 
 ## September 11, 2024
 
@@ -627,7 +627,7 @@ You can also perform supervised tuning by using the [BigQuery DataFrames Python 
 
 Feature
 
-You can now [schedule notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks#schedule_notebooks) . This feature is available in [preview](https://cloud.google.com/products#product-launch-stages) .
+You can now [schedule notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks#schedule_notebooks) . This feature is available in [preview](https://cloud.google.com/products?#product-launch-stages) .
 
 ## June 05, 2024
 
@@ -1555,19 +1555,19 @@ Feature
 
 The following Google Cloud Blockchain Analytics datasets are now available in [Preview](https://cloud.google.com/products/#product-launch-stages) and available through the [Public Datasets Program](https://docs.cloud.google.com/bigquery/public-data) and [Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view_listings) :
 
-  - [Google Cloud's Tron Mainnet data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_tron_mainnet_18a66110122)
+  - [Google Cloud's Tron Mainnet data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_tron_mainnet_18a66110122?)
 
-  - [Google Cloud's Optimism Mainnet data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_optimism_mainnet_18a660ef3ca)
+  - [Google Cloud's Optimism Mainnet data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_optimism_mainnet_18a660ef3ca?)
 
-  - [Google Cloud's Avalanche Contract Chain data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_avalanche_contract_chain_18a660b19c8)
+  - [Google Cloud's Avalanche Contract Chain data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_avalanche_contract_chain_18a660b19c8?)
 
-  - [Google Cloud's Fantom Opera data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_fantom_opera_us_189e08de2bb)
+  - [Google Cloud's Fantom Opera data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_fantom_opera_us_189e08de2bb?)
 
-  - [Google Cloud's Ethereum Mainnet data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_ethereum_mainnet_us_189c135b141)
+  - [Google Cloud's Ethereum Mainnet data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_ethereum_mainnet_us_189c135b141?)
 
-  - [Google Cloud's Arbitrum One Chain data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_arbitrum_one_chain_18add05adee)
+  - [Google Cloud's Arbitrum One Chain data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_arbitrum_one_chain_18add05adee?)
 
-  - [Google Cloud's Cronos Mainnet Chain data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_cronos_mainnet_chain_18add08d212)
+  - [Google Cloud's Cronos Mainnet Chain data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_cronos_mainnet_chain_18add08d212?)
 
 ## October 02, 2023
 

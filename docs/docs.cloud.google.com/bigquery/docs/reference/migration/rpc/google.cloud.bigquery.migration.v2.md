@@ -334,6 +334,12 @@ Fields
 
 Optional. Whether to create a dataset containing non-PII data in addition to the output dataset.
 
+`generate_tco_report`
+
+`bool`
+
+Optional. Whether the TCO report Google Doc generation is allowlisted for the project.
+
 ## AssessmentTaskDetails
 
 Assessment task config.

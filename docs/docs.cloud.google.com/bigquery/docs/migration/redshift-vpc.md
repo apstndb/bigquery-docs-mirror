@@ -49,21 +49,23 @@ Before creating an Amazon Redshift transfer, follow these steps:
 
 ### Create a dataset
 
-[Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data. You do not need to create any tables.
+[Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data. You don't need to create any tables.
 
 ### Grant access to your Amazon Redshift cluster
 
-Add the following IP ranges of your private Amazon Redshift cluster to an allowlist by [configuring the security group rules](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html) . In a later step, you define the private IP range in this VPC network when you set up the transfer.
+To allow connections from your Amazon Redshift cluster, configure inbound security group rules that allow incoming connections over TCP on the port that your cluster uses. By default, Amazon Redshift uses port `5439` . You can check or verify your cluster's port by viewing the **Endpoint** field of your cluster properties in the Amazon Redshift console.
+
+Add the private IP range of the VPC network, in CIDR notation, where your transfer runs to the inbound rules of your cluster's security group by [configuring the security group rules](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-security-group-rules.html) . In a later step, you specify this private IP range when you set up the transfer.
 
 ### Grant access to your Amazon S3 bucket
 
 You must have an Amazon S3 bucket to use as a staging area to transfer the Amazon Redshift data to BigQuery. For detailed instructions, see the [Amazon documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/) .
 
-1.  We recommended that you create a dedicated Amazon IAM user, and grant that user only Read access to Amazon Redshift and Read and Write access to Amazon S3. To achieve this step, you can apply the following policies:
+1.  We recommended that you create a dedicated AWS IAM user, and grant that user only Read access to Amazon Redshift and Read and Write access to Amazon S3. To achieve this step, you can apply the following policies:
     
     ![Amazon Redshift migration Amazon permissions](https://docs.cloud.google.com/static/bigquery/images/redshift-migration-amazon-permissions.png)
 
-2.  Create an Amazon [IAM user access key pair](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html) .
+2.  Create an AWS [IAM user access key pair](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html) .
 
 ### Configure workload control with a separate migration queue
 
@@ -79,7 +81,7 @@ Gather the information that you need to set up the migration with the BigQuery D
 
   - Follow [these instructions](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#obtain-jdbc-url) to get the JDBC URL.
   - Get the username and password of a user with appropriate permissions to your Amazon Redshift database.
-  - Follow the instructions at [Grant access to your Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#grant_access_to_your_amazon_s3_bucket) to get an AWS access key pair.
+  - Follow the instructions at [Grant access to your Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#grant_access_to_your_S3_bucket) to get an AWS access key pair.
   - <span id="s3_uri">Get the URI of the Amazon S3 bucket you want to use for the transfer. We recommend that you set up a [Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html) policy for this bucket to avoid unnecessary charges. The recommended expiration time is 24 hours to allow sufficient time to transfer all data to BigQuery.</span>
 
 ### Assess your data
@@ -116,7 +118,7 @@ Use the following instructions to set up an Amazon Redshift transfer:
 
 4.  In the **Source type** section, select **Migration: Amazon Redshift** from the **Source** list.
 
-5.  In the **Transfer config name** section, enter a name for the transfer, such as `My migration` , in the **Display name** field. The display name can be any value that allows you to easily identify the transfer if you need to modify it later.
+5.  In the **Transfer config name** section, enter a name for the transfer, such as `My migration` , in the **Display name** field. The display name can be any value that lets you identify the transfer if you need to modify it later.
 
 6.  In the **Destination settings** section, choose [the dataset you created](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc#create_a_dataset) from the **Dataset** list.
 
@@ -166,6 +168,10 @@ Use the following instructions to set up an Amazon Redshift transfer:
 9.  Click **Save** .
 
 10. The Google Cloud console displays all the transfer setup details, including a **Resource name** for this transfer.
+
+## Troubleshoot transfer setup
+
+If you encounter issues when connecting to your cluster or setting up your transfer, see [Amazon Redshift transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#redshift-issues) .
 
 ## Quotas and limits
 

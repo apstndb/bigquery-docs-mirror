@@ -16,6 +16,8 @@ data_source: docs.cloud.google.com
 
 This document describes how you can set up a reverse extract, transform, and load (reverse ETL) workflow from BigQuery to AlloyDB for PostgreSQL. You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) .
 
+You can also export data to AlloyDB by [syncing your BigQuery table to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#sync_a_table_for_export) .
+
 ## Before you begin
 
   - Create an [AlloyDB cluster and instance](https://docs.cloud.google.com/alloydb/docs/cluster-create) , which includes a database, schema, and table, to receive the exported data. You must have the target schema and table before you run the export job.
@@ -115,6 +117,23 @@ The following example exports selected fields from a table that's named `mydatas
       col3 AS value
     FROM
       `mydataset.table1`;
+
+## Sync a table for export
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+> 
+> For information about access to this release, see the [access request page](https://forms.gle/qoq87WBbnTvmegTN9) .
+
+For full-table copies or automated mirroring without the need for SQL-based transformations, you can sync your BigQuery table directly to AlloyDB. While the `EXPORT DATA` statement lets you use a `SELECT` query to process, alias, or filter data before it is moved, you can use table syncs for a one-for-one migration of a BigQuery table.
+
+Table syncs are available in the following modes:
+
+  - One-time import: Creates a writable, independent copy of a BigQuery table within AlloyDB.
+  - Periodic sync (mirroring): Creates a read-only local table in AlloyDB that automatically refreshes from BigQuery on a defined schedule.
+
+For more information, see [Sync BigQuery data to AlloyDB](https://docs.cloud.google.com/alloydb/docs/sync-bigquery-data-to-alloydb) .
 
 ## Pricing
 

@@ -371,8 +371,6 @@ To modify an Iceberg managed table, follow the steps shown in [Modifying table s
 
 ### Use multi-statement transactions
 
-> **Note:** Multi-statement transactions are only supported for Iceberg managed tables that were created after July 2, 2026.
-
 You can use [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) with Iceberg managed tables in the same way that you do with standard BigQuery tables. Multi-statement transactions are commonly used for performing mutations on multiple tables at the same time or for performing mutations on a single table in multiple stages. Multi-statement transactions guarantee ACID properties and support snapshot isolation.
 
 Standard [multi-statement transaction limitations](https://docs.cloud.google.com/bigquery/docs/transactions#limitations) apply.

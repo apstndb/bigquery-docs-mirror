@@ -330,7 +330,8 @@ User-definable feature flags for assessment tasks.
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;addShareableDataset&quot;: boolean
+  &quot;addShareableDataset&quot;: boolean,
+  &quot;generateTcoReport&quot;: boolean
 }</code></pre></td>
 </tr>
 </tbody>
@@ -343,6 +344,12 @@ Fields
 `boolean`
 
 Optional. Whether to create a dataset containing non-PII data in addition to the output dataset.
+
+`generateTcoReport`
+
+`boolean`
+
+Optional. Whether the TCO report Google Doc generation is allowlisted for the project.
 
 ## TranslationConfigDetails
 

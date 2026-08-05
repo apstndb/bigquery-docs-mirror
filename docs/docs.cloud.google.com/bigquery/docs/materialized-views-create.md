@@ -356,7 +356,7 @@ The following SQL features are not supported in materialized views:
 
 To request feedback or support for this feature, send an email to <bq-mv-help@google.com> .
 
-Incremental materialized views support `LEFT OUTER JOIN` and `UNION ALL` . Materialized views with `LEFT OUTER JOIN` and `UNION ALL` statements share the limitations of other incremental materialized views. In addition, [smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#smart_tuning) is not supported for materialized views with union all or left outer join.
+Incremental materialized views support `LEFT OUTER JOIN` and `UNION ALL` . Materialized views with `LEFT OUTER JOIN` and `UNION ALL` statements share the limitations of other incremental materialized views. In addition, [smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#smart_tuning) is not supported for materialized views with union all or left outer join. For partitioned incremental materialized views that use `UNION ALL` , all base tables must have the same partition expiration date (TTL) settings to maintain [partition alignment](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#partition_alignment) . If the base tables have different partition expiration dates, incremental refreshes fail.
 
 ##### Examples
 

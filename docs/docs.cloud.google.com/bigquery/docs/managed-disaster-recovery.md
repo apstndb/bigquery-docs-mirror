@@ -14,7 +14,7 @@ To protect your data and maintain business continuity during regional outages, y
 
 BigQuery supports disaster recovery scenarios in the case of a total region outage. BigQuery disaster recovery relies on [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) to manage storage failover. After creating a dataset replica in a secondary region, you can control failover behavior for compute and storage to maintain business continuity during an outage. After a failover, you can access compute capacity (slots) and replicated datasets in the promoted region. Disaster recovery is only supported with the [Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-Managed disaster recovery offers two failover options: hard failover and soft failover. A hard failover immediately promotes the secondary region's reservation and dataset replicas to become the primary. This action proceeds even if the current primary region is offline and does not wait for the replication of any unreplicated data. Because of this, data loss can occur during hard failover. Any jobs that committed data in the source region after the replica's value of [`replication_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas#schema) may need to be rerun in the destination region after a hard failover. In contrast to a hard failover, a soft failover waits until all reservation and dataset changes committed in the primary region are replicated to the secondary region before completing the failover process. A soft failover requires both the primary and secondary region to be available. Initiating a soft failover sets the [`softFailoverStartTime`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) for the reservation. The [`softFailoverStartTime`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) is cleared on soft failover completion.
+Managed disaster recovery offers two failover options: hard failover and soft failover. A hard failover immediately promotes the secondary region's reservation and dataset replicas to become the primary. This action proceeds even if the current primary region is offline and does not wait for the replication of any unreplicated data. Because of this, data loss can occur during hard failover. Any jobs that committed data in the source region after the replica's value of [`replication_time`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas#schema) may need to be rerun in the destination region after a hard failover. During a hard failover, dataset access controls (ACLs)—including authorized views and user access grants—that have not yet replicated might also be lost. To prevent downstream disruption, include ACL recreation steps (for example, by using `terraform apply` ) in your failover playbooks. In contrast to a hard failover, a soft failover waits until all reservation and dataset changes committed in the primary region are replicated to the secondary region before completing the failover process. A soft failover requires both the primary and secondary region to be available. Initiating a soft failover sets the [`softFailoverStartTime`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) for the reservation. The [`softFailoverStartTime`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#replicationstatus) is cleared on soft failover completion.
 
 To enable disaster recovery, you are required to create an Enterprise Plus edition reservation in the primary region, which is the region the dataset is in before failover. Standby compute capacity in the paired region is included in the Enterprise Plus reservation. You then attach a dataset to this reservation to enable failover for that dataset. You can only attach a dataset to a reservation if the dataset is backfilled and has the same paired primary and secondary locations as the reservation. After a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to those datasets and you can't perform a [cross-region replication](https://docs.cloud.google.com/bigquery/docs/data-replication) promotion on the dataset. You can read from datasets attached to a failover reservation with any capacity model. For more information about reservations, see [Introduction to workload management](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
@@ -261,11 +261,8 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
     Replace the following:
     
       - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-    
       - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `europe-west9` .
-    
       - `  RESERVATION_NAME  ` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
-    
       - `  SECONDARY_LOCATION  ` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
 3.  Click play\_circle **Run** .
@@ -312,7 +309,6 @@ To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL st
     Replace the following:
     
       - `  DATASET_NAME  ` : the name of the dataset.
-    
       - `  ADMIN_PROJECT_ID . RESERVATION_NAME  ` : the name of the reservation you want to associate the dataset to.
 
 3.  Click play\_circle **Run** .
@@ -390,13 +386,9 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
     Replace the following:
     
       - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-    
       - `  LOCATION  ` : the new primary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, that is the current secondary location before the failover - for example, `europe-west9` .
-    
       - `  RESERVATION_NAME  ` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
-    
       - `  PRIMARY_STATUS  ` : a boolean status that declares whether the reservation is the primary replica.
-    
       - `  FAILOVER_MODE  ` : an optional parameter used to describe the failover mode. This can be set to either `HARD` or `SOFT` . If this parameter is not specified, `HARD` is used by default.
 
 3.  Click play\_circle **Run** .

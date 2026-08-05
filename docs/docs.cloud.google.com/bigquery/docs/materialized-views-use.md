@@ -60,6 +60,8 @@ When a materialized view is partitioned, the behavior described in [Incremental 
 
 Materialized views with inner joins can only be aligned with one of their base tables. If one of the non-aligned base tables changes, it affects the entire view.
 
+For partitioned incremental materialized views that use `UNION ALL` , all base tables must have the same partition expiration date (TTL) settings to maintain partition alignment.
+
 ## Smart tuning
 
 BigQuery automatically rewrites queries to use materialized views whenever possible. Automatic rewriting improves query performance and reduces costs without changing query results. Querying does not automatically trigger a materialized refresh. For a query to be rewritten using smart-tuning, the materialized view must meet the following conditions:

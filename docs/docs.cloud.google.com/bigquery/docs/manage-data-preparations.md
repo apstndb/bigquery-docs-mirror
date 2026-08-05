@@ -94,7 +94,7 @@ To configure the way your prepared data is written into a destination table, fol
 
 ## Help improve suggestions
 
-You can help improve Gemini suggestions by sharing with Google the prompt data that you submit to features in [Preview](https://cloud.google.com/products#product-launch-stages) . To share your prompt data, follow these steps:
+You can help improve Gemini suggestions by sharing with Google the prompt data that you submit to features in [Preview](https://cloud.google.com/products?#product-launch-stages) . To share your prompt data, follow these steps:
 
 1.  [Open the data preparation editor in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#open-data-prep-editor) .
 2.  In the data preparation toolbar, click settings **More** .

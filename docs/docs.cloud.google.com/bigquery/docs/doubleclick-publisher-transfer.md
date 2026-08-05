@@ -146,7 +146,7 @@ For more information, see [Grant `bigquery.admin` access](https://docs.cloud.goo
 
 ### Required Google Ad Manager roles
 
-Grant read access to the Google Ad Manager DT files stored in Cloud Storage. Permissions for Google Ad Manager DT files are managed by the Google Ad Manager team. In addition to the Google Ad Manager DT files, the person creating the data transfer must be added to the Google Ad Manager network, with read access to all the entities needed to create the various [match tables](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation) (line item, order, ad unit, etc.). This can be accomplished by adding the Ad Manager user who authenticated the data transfer to the [All Entities team](https://support.google.com/admanager/answer/2445815#:%7E:text=All%20entities%C2%A0team,with%20their%20account) in Ad Manager.
+Grant read access to the Google Ad Manager DT files stored in Cloud Storage. Permissions for Google Ad Manager DT files are managed by the Google Ad Manager team. In addition to the Google Ad Manager DT files, the person creating the data transfer must be added to the Google Ad Manager network, with read access to all the entities needed to create the various [match tables](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation) (line item, order, ad unit, etc.). This can be accomplished by adding the Ad Manager user who authenticated the data transfer to the [All Entities team](https://support.google.com/admanager/answer/2445815?#:%7E:text=All%20entities%C2%A0team,with%20their%20account) in Ad Manager.
 
 ## Set up a Google Ad Manager transfer
 

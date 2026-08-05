@@ -19,9 +19,12 @@ Gets a previously created migration workflow.
 
 ### HTTP request
 
+Choose a location:
+
+  
 `GET https://bigquerymigration.googleapis.com/v2alpha/{name=projects/*/locations/*/workflows/*}`
 
-The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
