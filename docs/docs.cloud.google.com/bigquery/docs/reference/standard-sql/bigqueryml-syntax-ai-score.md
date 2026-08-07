@@ -101,7 +101,17 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
     
-    Agent Platform doesn't support regional endpoints for Gemini 3 models. For these models, use `global` , `us` , or `eu` as the location.
+    BigQuery supports the `gemini-3.1-flash-lite` and `gemini-3.5-flash` models. Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
+    
+      - If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
+      - If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
+      - For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
+    
+    To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the following formats:
+    
+      - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
+      - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
+      - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
 
   - `  MAX_ERROR_RATIO  ` : a `FLOAT64` value between `0.0` and `1.0` that contains the maximum acceptable ratio of row-level inference failures to rows processed on this function. If this value is exceeded, then the query fails and BigQuery returns an error message that describes the most frequent types of errors. For example, if the value is `0.3` then the query fails if more than 30% of rows processed have failed to return results. If `max_error_ratio` is set for multiple functions, the query fails if the ratio is exceeded on any function. The default value is `1.0` . However, the query still fails if inference fails for every row.
 

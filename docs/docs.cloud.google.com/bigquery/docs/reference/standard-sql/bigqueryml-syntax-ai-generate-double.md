@@ -112,7 +112,17 @@ When you analyze unstructured data, that data must meet the following requiremen
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
     
-    Agent Platform doesn't support regional endpoints for Gemini 3 models. For these models, use `global` , `us` , or `eu` as the location.
+    BigQuery supports the `gemini-3.1-flash-lite` and `gemini-3.5-flash` models. Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
+    
+      - If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
+      - If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
+      - For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
+    
+    To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the following formats:
+    
+      - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
+      - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
+      - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
     
     Using Gemini 2.5 and later models incurs charges for the [thinking process](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking) . You can control the thinking process by using the `model_params` argument to set fields in the [`ThinkingConfig` object](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/GenerationConfig#ThinkingConfig) . Setting these fields lets you balance the model's reasoning depth with response latency and cost. For tasks where extensive internal reasoning isn't required, you can adjust the thinking configuration to receive faster responses and reduce token usage. For more information, see [Thinking budgets](https://ai.google.dev/gemini-api/docs/thinking#set-budget) and [Thinking levels](https://ai.google.dev/gemini-api/docs/thinking#thinking-levels) . For an example of this, see [Disable the thinking budget](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double#thinking-budget) .
 

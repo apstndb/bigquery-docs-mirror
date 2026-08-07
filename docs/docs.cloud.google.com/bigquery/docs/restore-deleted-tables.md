@@ -21,6 +21,8 @@ The time travel window can have a duration between two and seven days. After the
 
 Ensure that you have the necessary Identity and Access Management (IAM) permissions to restore a deleted table.
 
+If you are restoring a table from a deleted dataset, you must recreate the dataset in the same region where it was originally stored. Recreating the dataset in a different region causes time travel table restoration to fail.
+
 ### Required roles
 
 To get the permissions that you need to restore a deleted table, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -32,6 +34,8 @@ You might also be able to get the required permissions through [custom roles](ht
 You can restore a table from historical data by copying the historical data into a new table. Copying historical data works even if the table was deleted or has expired, as long as you restore the table within the duration of the time travel window.
 
 When you restore a table from historical data, [tags](https://docs.cloud.google.com/bigquery/docs/tags) from the source table aren't copied to the destination table. Table partitioning information also isn't copied to the destination table. To recreate the partitioning scheme of the original table, you can view the initial table creation request in [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface) and use that information to partition the restored table.
+
+You can only restore an entire table. You cannot restore individual partitions. For example, copying a partition by using a partition decorator such as `bq cp mydataset.mytable$20260712@1418864998000 mydataset.mytable_restored` isn't supported.
 
 You can restore a table that was deleted but is still within the time travel window by copying the table to a new table, using the `@<time>` time decorator. You can't query a deleted table, even if you use a time decorator. You must restore it first.
 
@@ -415,6 +419,10 @@ This error can also occur when you provide a negative timestamp value, for examp
     Cannot read before 1744843691075
 
 This error message indicates that the `bq cp` command contains a negative timestamp value as an offset, and that you attempted to read the table at `CURRENT_TIMESTAMP - PROVIDED TIMESTAMP` . This value is normally a timestamp in 1970. To work around this issue, verify the offset or timestamp values when you set the table decorator value and use the `-` sign appropriately.
+
+### Partitions
+
+You can only restore an entire table. You cannot restore individual partitions. For example, copying a partition by using a partition decorator such as `bq cp mydataset.mytable$20260712@1418864998000 mydataset.mytable_restored` isn't supported.
 
 ### Materialized views
 

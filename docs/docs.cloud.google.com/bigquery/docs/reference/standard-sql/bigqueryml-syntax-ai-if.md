@@ -109,7 +109,17 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
     
     > **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
     
-    Agent Platform doesn't support regional endpoints for Gemini 3 models. For these models, use `global` , `us` , or `eu` as the location.
+    BigQuery supports the `gemini-3.1-flash-lite` and `gemini-3.5-flash` models. Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
+    
+      - If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
+      - If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
+      - For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
+    
+    To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the following formats:
+    
+      - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
+      - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
+      - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
 
   - `  EMBEDDINGS  ` : the embeddings to use for [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview). This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
     

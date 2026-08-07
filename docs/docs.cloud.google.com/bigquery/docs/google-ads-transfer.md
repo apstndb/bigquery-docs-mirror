@@ -349,6 +349,7 @@ Custom reports with the Google Ads connector are subject to the following limita
   - The Google Ads connector automatically appends ` WHERE segments.date = run_date  ` when there is a core date segment (for example, `segments.date` , `segments.week` , `segments.month` , `segments.quarter` , `segments.year` ) in the query. This can cause the [Google Ads Query Validator](https://developers.google.com/google-ads/api/fields/v23/query_validator) to return an error, for example, `The filtering conditions in the WHERE clause must combine to form a valid, finite date range composed of the core date segments ...` . You can safely ignore these errors.
   - GAQL queries without a [`segments.date` field](https://developers.google.com/google-ads/api/fields/v23/segments#segments.date) acts as [match tables](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation#google_ads_match_tables) , which are only updated once per day and are not supported in backfill runs. If you want to backfill data, you must include a `segments.date` field in the GAQL query.
   - The Google Ads connector supports up to 100 custom reports in a single transfer.
+  - When you use segmented fields (for example, `segments.ad_network_type` or `segments.device` ) in a custom query, the Google Ads API excludes campaigns that have zero impressions.
 
 ## Performance Max (PMax) campaigns
 

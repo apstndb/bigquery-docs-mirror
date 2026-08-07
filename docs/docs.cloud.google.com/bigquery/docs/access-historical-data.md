@@ -41,6 +41,8 @@ You can restore a table from historical data by copying the historical data into
 
 When you restore a table from historical data, [tags](https://docs.cloud.google.com/bigquery/docs/tags) from the source table aren't copied to the destination table. Table partitioning information also isn't copied to the destination table. To recreate the partitioning scheme of the original table, you can view the initial table creation request in [Cloud Logging](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface) and use that information to partition the restored table.
 
+You can only restore an entire table. You cannot restore individual partitions. For example, copying a partition by using a partition decorator such as `bq cp mydataset.mytable$20260712@1418864998000 mydataset.mytable_restored` isn't supported.
+
 You can restore a table that was deleted but is still within the time travel window by copying the table to a new table, using the `@<time>` time decorator. You can't query a deleted table, even if you use a time decorator. You must restore it first.
 
 Use the following syntax with the `@<time>` time decorator:

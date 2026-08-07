@@ -800,6 +800,34 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To run a data profile scan, use the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
 
+### Airflow
+
+To run a data profile scan using a Directed Acyclic Graph (DAG) in [Managed Service for Apache Airflow (Cloud Composer)](https://docs.cloud.google.com/composer/docs) , use the [`DataplexRunDataProfileScanOperator`](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/_api/airflow/providers/google/cloud/operators/dataplex/index.html#airflow.providers.google.cloud.operators.dataplex.DataplexRunDataProfileScanOperator) :
+
+    from datetime import datetime
+    from airflow import DAG
+    from airflow.providers.google.cloud.operators.dataplex import DataplexRunDataProfileScanOperator
+    
+    with DAG(
+      "dataplex_data_profile_scan",
+      start_date=datetime(2026, 1, 1),
+      schedule_interval="@daily",
+      catchup=False,
+    ) as dag:
+    
+      run_profile_scan = DataplexRunDataProfileScanOperator(
+          task_id="run_dataplex_profile_scan",
+          project_id="PROJECT_ID",
+          region="REGION",
+          data_scan_id="DATASCAN_ID",
+      )
+
+Replace the following variables:
+
+  - `  PROJECT_ID  ` : Your Google Cloud project ID.
+  - `  REGION  ` : The Google Cloud region in which the data profile scan was created.
+  - `  DATASCAN_ID  ` : The ID of your data profile scan.
+
 > **Note:** Run isn't supported for data profile scans that are on a one-time schedule.
 
 ## View data profile scan results

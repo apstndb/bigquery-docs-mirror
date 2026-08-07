@@ -24,7 +24,9 @@ You can generate data insights at the table or dataset level:
 
   - **For tables:** Gemini generates natural language questions and their SQL equivalents to help you understand data within a single table. Through table insights, you can detect data patterns, anomalies, outliers, or quality issues within a table. Gemini also generates table and column descriptions.
 
-  - **For datasets:** Gemini generates an interactive relationship graph showing cross-table relationships and cross-table SQL queries to help you understand how tables are related in a dataset. Through relationship graphs, you can discover how data is derived, which can help with quality, consistency, or redundancy issues. Through cross-table queries, you can find broader relationships. For example, you can calculate revenue by customer segment by leveraging data in a sales table and a customer table.
+  - **For datasets and Apache Iceberg namespaces:** Gemini generates an interactive relationship graph showing cross-table relationships and cross-table SQL queries to help you understand how tables are related in a dataset. Through relationship graphs, you can discover how data is derived, which can help with quality, consistency, or redundancy issues. Through cross-table queries, you can find broader relationships. For example, you can calculate revenue by customer segment by leveraging data in a sales table and a customer table.
+    
+    Because Iceberg namespaces are natively represented as datasets in BigQuery, you can generate the same dataset-level insights directly on Iceberg namespaces.
 
 To investigate further, you can ask follow-up questions in [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
 
@@ -37,7 +39,7 @@ Table insights help you understand the content, quality, and patterns within a s
 
 ### Dataset insights
 
-Dataset insights help you understand the relationships and join paths across multiple tables within a BigQuery dataset, which provides a holistic view of the dataset's contents. When you generate insights for a dataset, Gemini provides the following:
+Dataset insights help you understand the relationships and join paths across multiple tables within a BigQuery dataset (or an Iceberg namespace represented as a dataset), which provides a holistic view of the contents. When you generate insights for a dataset or namespace, Gemini provides the following:
 
   - **Dataset description:** provides an AI-generated summary of the dataset.
   - **Relationships:** displays a visual, interactive map showing relationships between tables within the dataset. You can hover over connections to see relationship details, such as join keys.
@@ -134,7 +136,7 @@ These workflows focus on tasks for data analysts, business analysts, and other u
     
     For more information about generating and viewing table insights, see [Generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
 
-  - **Explore an entire dataset:** discover the relationships between tables within a dataset and understand its overall structure. You can perform the following tasks after selecting a dataset in BigQuery Studio:
+  - **Explore an entire dataset or namespace:** discover the relationships between tables within a dataset (or an Iceberg namespace represented as a dataset) and understand its overall structure. You can perform the following tasks after selecting a dataset in BigQuery Studio:
     
       - Generate and view dataset insights.
     
@@ -192,7 +194,7 @@ For information about quotas and limits for this feature, see [Quotas for Gemini
 
 Data insights have the following limitations:
 
-  - Data insights are available for BigQuery tables, BigLake tables, external tables, and views.
+  - Data insights are available for BigQuery tables, BigLake tables, external tables, views, and Iceberg namespaces.
 
   - For multi-cloud customers, data from other clouds is not available.
 

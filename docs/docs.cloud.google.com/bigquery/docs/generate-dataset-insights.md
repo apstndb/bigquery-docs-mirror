@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Generate dataset insights
 
-This document describes how to generate dataset insights for BigQuery datasets. Dataset insights help you understand relationships between tables in a dataset by generating relationship graphs and cross-table queries.
+This document describes how to generate dataset insights for BigQuery datasets and Apache Iceberg namespaces (which are represented as datasets in BigQuery). Dataset insights help you understand relationships between tables in a dataset or namespace by generating relationship graphs and cross-table queries.
 
-Dataset insights help you accelerate the exploration of datasets with multiple tables by automatically discovering and visualizing relationships between tables in a graph, identifying primary-key and foreign-key relationships, and generating sample cross-table queries. This is useful for understanding data structure without documentation, discovering schema-defined, usage-based, or AI-inferred relationships between tables, and generating complex queries that join multiple tables.
+Dataset insights help you accelerate the exploration of datasets and namespaces with multiple tables by automatically discovering and visualizing relationships between tables in a graph, identifying primary-key and foreign-key relationships, and generating sample cross-table queries. This is useful for understanding data structure without documentation, discovering schema-defined, usage-based, or AI-inferred relationships between tables, and generating complex queries that join multiple tables.
 
 For an overview of table and dataset insights, see [Data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
 
@@ -39,7 +39,7 @@ When generating dataset insights, BigQuery provides two modes:
 <li>Stores the dataset description in Knowledge Catalog.</li>
 <li>Captures suggested queries and questions as reusable aspects.</li>
 <li>Captures relationships as metadata in Knowledge Catalog.</li>
-<li>Makes published insights accessible to all users who have appropriate Knowledge Catalog access, ensuring shared organizational knowledge.</li>
+<li>Lets users with appropriate Knowledge Catalog access view published insights, ensuring shared organizational knowledge.</li>
 <li>Lets you edit and save descriptions directly in Knowledge Catalog using the API. You can edit the suggested queries using the Google Cloud console.</li>
 </ul></td>
 <td><p>Use this mode for enterprise-wide data documentation that persists and is reusable, or when building catalog-driven governance workflows.</p></td>
@@ -121,7 +121,7 @@ To see the exact permissions that are required to generate insights, expand the 
 
 1.  In the Google Cloud console, go to **BigQuery Studio** .
 
-2.  In the **Explorer** pane, select the project and then the dataset for which you want to generate insights.
+2.  In the **Explorer** pane, select the project and the dataset for which you want to generate insights. For Iceberg namespaces, select the dataset that represents your catalog namespace.
 
 3.  Click the **Insights** tab.
 

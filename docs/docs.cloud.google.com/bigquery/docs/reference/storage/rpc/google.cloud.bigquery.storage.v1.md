@@ -26,6 +26,9 @@ data_source: docs.cloud.google.com
   - `  AvroSerializationOptions.PicosTimestampPrecision  ` (enum)
   - `  BatchCommitWriteStreamsRequest  ` (message)
   - `  BatchCommitWriteStreamsResponse  ` (message)
+  - `  ClientStats  ` (message)
+  - `  ClientStats.RequestStats  ` (message)
+  - `  ClientStats.WindowStats  ` (message)
   - `  CreateReadSessionRequest  ` (message)
   - `  CreateWriteStreamRequest  ` (message)
   - `  DataFormat  ` (enum)
@@ -314,6 +317,12 @@ If a field is not in this map and has missing values, the missing values in this
 This field only applies to the current request, it won't affect other requests on the connection.
 
 Currently, field name can only be top-level column name, can't be a struct field path like 'foo.bar'.
+
+`client_stats`
+
+`  ClientStats  `
+
+Optional. Stats and telemetry data gathered on the client side.
 
 Union field `rows` . Input rows. The `writer_schema` field must be specified at the initial request and currently, it will be ignored if specified in following requests. Following requests must have data in the same format as the initial request. `rows` can be only one of the following:
 
@@ -636,6 +645,96 @@ The time at which streams were committed in microseconds granularity. This field
 `  StorageError  `
 
 Stream level error if commit failed. Only streams with error will be in the list. If empty, there is no error and all streams are committed successfully. If non empty, certain streams have errors and ZERO stream is committed due to atomicity guarantee.
+
+## ClientStats
+
+Stats and telemetry data gathered on the client side about requests being sent to the BigQuery Storage service, for internal use only.
+
+Fields
+
+`request_stats`
+
+`  RequestStats  `
+
+Optional. Per-request stats.
+
+`window_stats`
+
+`  WindowStats  `
+
+Optional. Windowed stats.
+
+## RequestStats
+
+Stats and telemetry data gathered on the client side about a single request.
+
+Fields
+
+`send_time_millis`
+
+`int64`
+
+Optional. Timestamp indicating when the request was sent over the network, expressed in epoch milliseconds.
+
+`queued_requests_count`
+
+`int64`
+
+Optional. Number of pending requests at the moment this request was sent. This includes requests waiting to be sent, and those that are inflight.
+
+## WindowStats
+
+Aggregate connection metrics over a window interval.
+
+Fields
+
+`max_response_latency_millis`
+
+`int64`
+
+Optional. The maximum response latency observed in the window, expressed in milliseconds.
+
+`avg_response_latency_millis`
+
+`int64`
+
+Optional. The average response latency observed in the window, expressed in milliseconds.
+
+`longest_wait_no_response_millis`
+
+`int64`
+
+Optional. The longest time spent waiting without receiving a response in the window. This could exceed max\_response\_latency\_millis because the latter is evaluated only when a response is received. Expressed in milliseconds.
+
+`requests_sent_count`
+
+`int64`
+
+Optional. How many requests were sent in the window.
+
+`responses_received_count`
+
+`int64`
+
+Optional. How many responses were received in the window.
+
+`bytes_sent_count`
+
+`int64`
+
+Optional. How many bytes were sent in the window.
+
+`window_start_time_epoch_millis`
+
+`int64`
+
+Optional. Start time of the window interval for which these stats are aggregated, expressed in epoch milliseconds.
+
+`window_millis`
+
+`int64`
+
+Optional. Duration of the window interval for which these stats are aggregated, expressed in milliseconds.
 
 ## CreateReadSessionRequest
 

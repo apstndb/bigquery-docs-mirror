@@ -54,7 +54,6 @@ To estimate the impact of the advanced runtime, you can use the following SQL qu
           ) AS has_advanced_runtime
         FROM region-LOCATION.INFORMATION_SCHEMA.JOBS_BY_PROJECT
         WHERE EXTRACT(DATE FROM creation_time) > DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
-          AND creation_time >= TIMESTAMP "2026-01-30"
       ),
       most_recent_jobs_without_advanced_runtime AS (
         SELECT *
@@ -78,7 +77,7 @@ To estimate the impact of the advanced runtime, you can use the following SQL qu
     ORDER BY percent_execution_time_saved DESC
     LIMIT 10;
 
-> **Note:** You can only compare queries created on or after January 30, 2026, which is when the advanced runtime optimization indicators ( `enhanced_vectorization` and `short_query_optimization` ) became consistently available in the `INFORMATION_SCHEMA.JOBS` view. The previous query ensures this by restricting the queried time range.
+> **Note:** You can only compare queries created on or after January 30, 2026, which is when the advanced runtime optimization indicators ( `enhanced_vectorization` and `short_query_optimization` ) became consistently available in the `INFORMATION_SCHEMA.JOBS` view.
 
 Replace the following:
 

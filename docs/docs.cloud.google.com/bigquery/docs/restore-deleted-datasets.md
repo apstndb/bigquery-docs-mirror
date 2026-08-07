@@ -25,6 +25,8 @@ The following is a list of limitations related to restoring a dataset:
 
   - References to a deleted dataset in linked datasets aren't restored when you perform this action. Subscribers must subscribe again to manually restore the links.
 
+  - To restore a deleted dataset and use time travel to recover its tables, you must recreate the dataset in the same region where it was originally stored. If you recreate the dataset in a different region, time travel recovery fails.
+
   - Business tags aren't restored when you perform this action.
 
   - You must [manually refresh materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#manual-refresh) and reauthorize [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views#manage_users_or_groups_for_authorized_views) , [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets#authorize_a_dataset) , and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines#authorize_routines) .

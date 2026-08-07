@@ -47,21 +47,27 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
 
 ## Create a dataset
 
-Create a BigQuery dataset to store your ML model.
+To create a BigQuery dataset, follow these steps.
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click your project name.
+2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  Click more\_vert **View actions \> Create dataset**
+3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Create dataset** page, do the following:
+4.  On the **Datasets** page, click add **Create dataset** .
+
+5.  On the **Create dataset** page, do the following:
     
       - For **Dataset ID** , enter `bqml_tutorial` .
     
-      - For **Location type** , select **Multi-region** , and then select **US** .
+      - For **Data location** , select **US** .
     
       - Leave the remaining default settings as they are, and click **Create dataset** .
 
