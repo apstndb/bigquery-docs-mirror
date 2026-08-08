@@ -102,6 +102,18 @@ data_source: docs.cloud.google.com
   - [TableMetadataCacheUsage](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TableMetadataCacheUsage)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TableMetadataCacheUsage.SCHEMA_REPRESENTATION)
   - [UnusedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#UnusedReason)
+  - [GenAiStats](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiStats.SCHEMA_REPRESENTATION)
+  - [GenAiErrorStats](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiErrorStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiErrorStats.SCHEMA_REPRESENTATION)
+  - [GenAiFunctionStats](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionStats.SCHEMA_REPRESENTATION)
+  - [GenAiFunctionErrorStats](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionErrorStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionErrorStats.SCHEMA_REPRESENTATION)
+  - [GenAiFunctionCostOptimizationStats](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionCostOptimizationStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionCostOptimizationStats.SCHEMA_REPRESENTATION)
+  - [GenAiFunctionCacheStats](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionCacheStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#GenAiFunctionCacheStats.SCHEMA_REPRESENTATION)
   - [JobStatistics3](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics3)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics3.SCHEMA_REPRESENTATION)
   - [JobStatistics4](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics4)
@@ -1379,7 +1391,7 @@ Statistics for a query job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;queryPlan&quot;: [{object (ExplainQueryStage)}],&quot;estimatedBytesProcessed&quot;: string,&quot;timeline&quot;: [{object (QueryTimelineSample)}],&quot;totalPartitionsProcessed&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;totalBytesProcessedAccuracy&quot;: string,&quot;totalBytesBilled&quot;: string,&quot;billingTier&quot;: integer,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{&quot;name&quot;: string,&quot;slotMs&quot;: string}],&quot;cacheHit&quot;: boolean,&quot;referencedTables&quot;: [{object (TableReference)}],&quot;referencedRoutines&quot;: [{object (RoutineReference)}],&quot;referencedPropertyGraphs&quot;: [{object (PropertyGraphReference)}],&quot;schema&quot;: {object (TableSchema)},&quot;numDmlAffectedRows&quot;: string,&quot;dmlStats&quot;: {object (DmlStats)},&quot;undeclaredQueryParameters&quot;: [{object (QueryParameter)}],&quot;statementType&quot;: string,&quot;ddlOperationPerformed&quot;: string,&quot;ddlTargetTable&quot;: {object (TableReference)},&quot;ddlDestinationTable&quot;: {object (TableReference)},&quot;ddlTargetRowAccessPolicy&quot;: {object (RowAccessPolicyReference)},&quot;ddlAffectedRowAccessPolicyCount&quot;: string,&quot;ddlTargetRoutine&quot;: {object (RoutineReference)},&quot;ddlTargetDataset&quot;: {object (DatasetReference)},&quot;mlStatistics&quot;: {object (MlStatistics)},&quot;exportDataStatistics&quot;: {object (ExportDataStatistics)},&quot;externalServiceCosts&quot;: [{object (ExternalServiceCost)}],&quot;biEngineStatistics&quot;: {object (BiEngineStatistics)},&quot;loadQueryStatistics&quot;: {object (LoadQueryStatistics)},&quot;dclTargetTable&quot;: {object (TableReference)},&quot;dclTargetView&quot;: {object (TableReference)},&quot;dclTargetDataset&quot;: {object (DatasetReference)},&quot;searchStatistics&quot;: {object (SearchStatistics)},&quot;vectorSearchStatistics&quot;: {object (VectorSearchStatistics)},&quot;performanceInsights&quot;: {object (PerformanceInsights)},&quot;queryInfo&quot;: {object (QueryInfo)},&quot;sparkStatistics&quot;: {object (SparkStatistics)},&quot;transferredBytes&quot;: string,&quot;materializedViewStatistics&quot;: {object (MaterializedViewStatistics)},&quot;metadataCacheStatistics&quot;: {object (MetadataCacheStatistics)},&quot;totalServicesSkuSlotMs&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;queryPlan&quot;: [{object (ExplainQueryStage)}],&quot;estimatedBytesProcessed&quot;: string,&quot;timeline&quot;: [{object (QueryTimelineSample)}],&quot;totalPartitionsProcessed&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;totalBytesProcessedAccuracy&quot;: string,&quot;totalBytesBilled&quot;: string,&quot;billingTier&quot;: integer,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{&quot;name&quot;: string,&quot;slotMs&quot;: string}],&quot;cacheHit&quot;: boolean,&quot;referencedTables&quot;: [{object (TableReference)}],&quot;referencedRoutines&quot;: [{object (RoutineReference)}],&quot;referencedPropertyGraphs&quot;: [{object (PropertyGraphReference)}],&quot;schema&quot;: {object (TableSchema)},&quot;numDmlAffectedRows&quot;: string,&quot;dmlStats&quot;: {object (DmlStats)},&quot;undeclaredQueryParameters&quot;: [{object (QueryParameter)}],&quot;statementType&quot;: string,&quot;ddlOperationPerformed&quot;: string,&quot;ddlTargetTable&quot;: {object (TableReference)},&quot;ddlDestinationTable&quot;: {object (TableReference)},&quot;ddlTargetRowAccessPolicy&quot;: {object (RowAccessPolicyReference)},&quot;ddlAffectedRowAccessPolicyCount&quot;: string,&quot;ddlTargetRoutine&quot;: {object (RoutineReference)},&quot;ddlTargetDataset&quot;: {object (DatasetReference)},&quot;mlStatistics&quot;: {object (MlStatistics)},&quot;exportDataStatistics&quot;: {object (ExportDataStatistics)},&quot;externalServiceCosts&quot;: [{object (ExternalServiceCost)}],&quot;biEngineStatistics&quot;: {object (BiEngineStatistics)},&quot;loadQueryStatistics&quot;: {object (LoadQueryStatistics)},&quot;dclTargetTable&quot;: {object (TableReference)},&quot;dclTargetView&quot;: {object (TableReference)},&quot;dclTargetDataset&quot;: {object (DatasetReference)},&quot;searchStatistics&quot;: {object (SearchStatistics)},&quot;vectorSearchStatistics&quot;: {object (VectorSearchStatistics)},&quot;performanceInsights&quot;: {object (PerformanceInsights)},&quot;queryInfo&quot;: {object (QueryInfo)},&quot;sparkStatistics&quot;: {object (SparkStatistics)},&quot;transferredBytes&quot;: string,&quot;materializedViewStatistics&quot;: {object (MaterializedViewStatistics)},&quot;metadataCacheStatistics&quot;: {object (MetadataCacheStatistics)},&quot;genAiStats&quot;: {object (GenAiStats)},&quot;totalServicesSkuSlotMs&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1693,6 +1705,12 @@ Output only. Statistics of materialized views of a query job.
 ` object ( MetadataCacheStatistics  ` )
 
 Output only. Statistics of metadata cache usage in a query for BigLake tables.
+
+`genAiStats`
+
+` object ( GenAiStats  ` )
+
+Output only. Statistics related to GenAI usage in the query.
 
 `totalServicesSkuSlotMs`
 
@@ -3480,6 +3498,236 @@ Metadata caching feature is not enabled. [Update BigLake tables](https://docs.cl
 `OTHER_REASON`
 
 Other unknown reason.
+
+## GenAiStats
+
+GenAi stats for the query job.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;functionStats&quot;: [{object (GenAiFunctionStats)}],&quot;errorStats&quot;: {object (GenAiErrorStats)}}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`functionStats[]`
+
+` object ( GenAiFunctionStats  ` )
+
+Function level stats for GenAI Functions. For more information, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+
+`errorStats`
+
+` object ( GenAiErrorStats  ` )
+
+Job level error stats across all GenAi functions
+
+## GenAiErrorStats
+
+Provides error statistics for the query job across all AI function calls.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;errors&quot;: [
+    string
+  ]
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`errors[]`
+
+`string`
+
+A list of unique errors at query level (up to 5, truncated to 100 chars)
+
+## GenAiFunctionStats
+
+Provides statistics for each Ai function call within a query.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;functionName&quot;: string,&quot;prompt&quot;: string,&quot;numProcessedRows&quot;: string,&quot;errorStats&quot;: {object (GenAiFunctionErrorStats)},&quot;costOptimizationStats&quot;: {object (GenAiFunctionCostOptimizationStats)},&quot;cacheStats&quot;: {object (GenAiFunctionCacheStats)}}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`functionName`
+
+`string`
+
+Name of the function.
+
+`prompt`
+
+`string`
+
+User input prompt of the function (truncated to 20 chars).
+
+`numProcessedRows`
+
+`string ( int64 format)`
+
+Number of rows processed by this GenAi function. This includes all cost\_optimized, llm\_inferred and failed\_rows.
+
+`errorStats`
+
+` object ( GenAiFunctionErrorStats  ` )
+
+Error stats for the function.
+
+`costOptimizationStats`
+
+` object ( GenAiFunctionCostOptimizationStats  ` )
+
+Cost optimization stats if applied on the rows processed by the function.
+
+`cacheStats`
+
+` object ( GenAiFunctionCacheStats  ` )
+
+Cache stats for the function.
+
+## GenAiFunctionErrorStats
+
+Provides error statistics for a GenAi function call.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;errors&quot;: [
+    string
+  ],
+  &quot;numFailedRows&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`errors[]`
+
+`string`
+
+A list of unique errors at function level (up to 5, truncated to 100 chars).
+
+`numFailedRows`
+
+`string ( int64 format)`
+
+Number of failed rows processed by the function
+
+## GenAiFunctionCostOptimizationStats
+
+Provides cost optimization statistics for a GenAi function call.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;numCostOptimizedRows&quot;: string,
+  &quot;message&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`numCostOptimizedRows`
+
+`string ( int64 format)`
+
+Number of rows inferred via cost optimized workflow.
+
+`message`
+
+`string`
+
+System generated message to provide insights into cost optimization state.
+
+## GenAiFunctionCacheStats
+
+Provides cache statistics for a GenAi function call.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;numCacheHitRows&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`numCacheHitRows`
+
+`string ( int64 format)`
+
+Number of rows served from cache.
 
 ## JobStatistics3
 

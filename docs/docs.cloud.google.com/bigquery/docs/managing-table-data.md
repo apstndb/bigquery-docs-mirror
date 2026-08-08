@@ -17,6 +17,7 @@ This document describes how to manage table data in BigQuery. You can work with 
   - Modify table data using data manipulation language (DML)
   - Copy table data
   - Export table data
+  - Audit table data
 
 For information on managing table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
@@ -489,6 +490,13 @@ You can export table data to a Cloud Storage bucket in CSV, JSON, Avro, or Parqu
 
 For more information, see [Exporting table data](https://docs.cloud.google.com/bigquery/docs/exporting-data) .
 
+## Auditing table data
+
+To audit activity and track data modifications on a table, do one of the following:
+
+  - To track the history of changes made to a table during a specific time range, use [BigQuery change history](https://docs.cloud.google.com/bigquery/docs/change-history) . You can use GoogleSQL table functions to see particular types of changes, such as appends or mutations.
+  - To determine whether table data has been modified within a specific timeframe, query the `storage_last_modified_time` field in the [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) view. This field returns the most recent time that data was written to the table.
+
 ## Table security
 
 To control access to tables in BigQuery, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
@@ -500,3 +508,4 @@ To control access to tables in BigQuery, see [Control access to resources with I
   - For more information on modifying table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
   - For more information on creating and using tables, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
   - For more information on managing tables, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+  - For more information on change history, see [Work with change history](https://docs.cloud.google.com/bigquery/docs/change-history) .

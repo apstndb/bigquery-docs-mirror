@@ -653,6 +653,7 @@ BigQuery converts GoogleSQL data types to the following Parquet data types:
 | Floating point       | `FLOAT`                | `NONE`                                               |
 | Boolean              | `BOOLEAN`              | `NONE`                                               |
 | String               | `BYTE_ARRAY`           | `STRING` `(UTF8)`                                    |
+| JSON                 | `BYTE_ARRAY`           | `STRING` `(UTF8)`                                    |
 | Bytes                | `BYTE_ARRAY`           | `NONE`                                               |
 | Date                 | `INT32`                | `DATE`                                               |
 | Datetime             | `INT64`                | `TIMESTAMP (isAdjustedToUTC = false, unit = MICROS)` |
@@ -661,6 +662,8 @@ BigQuery converts GoogleSQL data types to the following Parquet data types:
 | Geography            | `BYTE_ARRAY`           | `GEOGRAPHY (edges = spherical)`                      |
 
 The Parquet schema represents nested data as a group and repeated records as repeated groups. For more information about using nested and repeated data in BigQuery, see [Specifying nested and repeated columns](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
+
+When you export a `JSON` column to Parquet format, it is exported as a `STRING` field. To load this Parquet file back into a `JSON` column in BigQuery, you must specify the schema in the load job (for example, by using the `--schema` flag). Auto schema detection with Parquet infers the column as a `STRING` type.
 
 > **Caution:** If you export a `DATETIME` type to Parquet, you cannot load the Parquet file directly back into the same table schema, because the converted value won't match the schema.
 
