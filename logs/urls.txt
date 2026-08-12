@@ -1320,7 +1320,6 @@ https://docs.cloud.google.com/bigquery/docs/supported-data-types	2026-08-03T18:5
 https://docs.cloud.google.com/bigquery/docs/table-clones-create	2026-08-03T18:56:41Z
 https://docs.cloud.google.com/bigquery/docs/table-clones-intro	2026-08-03T18:56:41Z
 https://docs.cloud.google.com/bigquery/docs/table-decorators	2026-08-03T18:56:41Z
-https://docs.cloud.google.com/bigquery/docs/table-explorer	2026-08-03T18:56:41Z
 https://docs.cloud.google.com/bigquery/docs/table-functions	2026-08-03T18:56:41Z
 https://docs.cloud.google.com/bigquery/docs/table-sampling	2026-08-03T18:56:41Z
 https://docs.cloud.google.com/bigquery/docs/table-snapshots-create	2026-08-03T18:56:41Z
