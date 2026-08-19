@@ -69,7 +69,6 @@ https://docs.cloud.google.com/bigquery/docs/best-practices-spatial-analysis	2026
 https://docs.cloud.google.com/bigquery/docs/best-practices-storage	2026-08-03T18:51:36Z
 https://docs.cloud.google.com/bigquery/docs/bi-engine-intro	2026-08-03T18:51:36Z
 https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor	2026-08-08T08:31:12Z
-https://docs.cloud.google.com/bigquery/docs/bi-engine-query	2026-08-03T18:51:36Z
 https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity	2026-08-03T18:51:36Z
 https://docs.cloud.google.com/bigquery/docs/biglake-audit-logging	2026-08-05T00:51:40Z
 https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery	2026-08-04T21:17:00Z
