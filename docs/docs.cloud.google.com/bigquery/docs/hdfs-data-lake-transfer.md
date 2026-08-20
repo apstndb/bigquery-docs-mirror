@@ -30,10 +30,6 @@ With the Hive Metastore migration connector, you can use Cloud Storage as the fi
     
     The Lakehouse runtime catalog Hive Catalog lets you register your migrated Hive tables with [Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore) using a Hive Catalog. This offers a serverless metastore for Apache Hive tables. You can use BigQuery to query the data (subject to format limitations), in addition to Apache Spark and other OSS engines.
 
-  - [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview)
-    
-    Dataproc Metastore supports both Hive and Iceberg table formats. You can only use Apache Spark and other OSS engines to read and write data to Dataproc Metastore.
-
 This connector supports both full and metadata-only transfers. Full transfers will transfer both your data and metadata from your source tables to your target metastore. You can create a metadata-only transfer if you already have your data in Cloud Storage and if you only want to register your data to a destination metastore.
 
 The following diagram provides an overview of the migration process.
@@ -149,7 +145,6 @@ To configure permissions for a Hive Metastore transfer, do the steps in the foll
       - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
       - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
       - To migrate metadata to Lakehouse runtime catalog (Iceberg REST Catalog or Hive Catalog): [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
-      - To migrate metadata to Dataproc Metastore: [Dataproc Metastore Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/metastore#metastore.metadataOwner) ( `roles/metastore.metadataOwner` )
     
     For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
@@ -249,7 +244,6 @@ Select one of the following options:
     4.  Optional: For **Partition Filter gcs path** , enter a full Cloud Storage path to a custom filter JSON file to [filter partitions](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#filter-partitions) from source tables.
     5.  For **Destination gcs path** , enter a path to a Cloud Storage bucket to store your migrated data.
     6.  Choose the Destination Metastore type from the drop-down list:
-          - `DATAPROC_METASTORE` : Select this option to store your metadata in [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) . You must provide the URL for the Dataproc Metastore in **Dataproc metastore url** .
           - `BIGLAKE_REST_CATALOG` : Select this option to store your metadata in the Lakehouse runtime catalog Iceberg REST catalog. Catalog is created based on the destination Cloud Storage bucket.
           - `BIGLAKE_HIVE_CATALOG` ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Select this option to store your metadata in the Lakehouse runtime catalog Hive Catalog. You must provide a catalog name in **BigLake Metastore Hive Catalog ID** . If the catalog does not exist, it will be automatically created.
     7.  Optional: For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created.
@@ -269,7 +263,6 @@ To schedule Hive Metastore transfer, enter the `bq mk` command and supply the tr
     "table_metadata_path":"gs://DUMPER_BUCKET/hive-dumper-output.zip",
     "target_gcs_file_path":"gs://MIGRATION_BUCKET",
     "metastore":"METASTORE",
-    "destination_dataproc_metastore":"DATAPROC_METASTORE_URL",
     "destination_bigquery_dataset":"BIGLAKE_METASTORE_DATASET",
     "blms_hive_catalog_id":"HIVE_CATALOG_ID",
     "translation_output_gcs_path":"gs://TRANSLATION_OUTPUT_BUCKET/metadata/config/default_database/",
@@ -297,10 +290,8 @@ Replace the following:
   - `DUMPER_BUCKET` : the Cloud Storage bucket containing the `hive-dumper-output.zip` file. If you are using [dumper output automation with `cron`](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#automate-dumper) , then change `table_metadata_path` to be the Cloud Storage folder path configured with `--gcs-base-path` in cron setup—for example: `"table_metadata_path":"<var>GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT</var>"` .
   - `MIGRATION_BUCKET` : Destination GCS path to which all underlying files will be loaded. Available only if `transfer_strategy` is `FULL_TRANSFER` .
   - `METASTORE` : The type of metastore to migrate to. Set this to one of the following values:
-      - `DATAPROC_METASTORE` : To transfer metadata to Dataproc Metastore.
       - `BIGLAKE_REST_CATALOG` : To transfer metadata to Lakehouse runtime catalog Iceberg REST Catalog (recommended for Iceberg tables).
       - `BIGLAKE_HIVE_CATALOG` : To transfer metadata to Lakehouse runtime catalog Hive Catalog (recommended for Apache Hive tables) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
-  - `DATAPROC_METASTORE_URL` : The URL of your Dataproc Metastore. Required if `metastore` is `DATAPROC_METASTORE` .
   - `HIVE_CATALOG_ID` : The ID of the Lakehouse runtime catalog Hive Catalog. Required if `metastore` is `BIGLAKE_HIVE_CATALOG` . If the catalog does not exist, it will be automatically created.
   - `STORAGE_TYPE` : Specify the underlying file storage for your tables. Supported types are `HDFS` , `S3` , and `AZURE` . Required if `transfer_strategy` is `FULL_TRANSFER` .
   - `AGENT_POOL_NAME` : the name of the agent pool used for creating agents. Required if `storage_type` is `HDFS` .
@@ -732,5 +723,4 @@ Once the quota is reached, the transfer waits until more quota is available. Sto
 There is no cost to use the Apache Hive Metastore connector to transfer your data. After the data is transferred, you're charged with storing the data in your destination. For more information, see the following:
 
   - [Lakehouse](https://cloud.google.com/products/lakehouse/pricing)
-  - [Dataproc Metastore pricing](https://cloud.google.com/dataproc-metastore/pricing)
   - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)

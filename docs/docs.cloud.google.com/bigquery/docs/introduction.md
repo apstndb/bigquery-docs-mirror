@@ -40,7 +40,7 @@ BigQuery's serverless infrastructure lets you focus on your data instead of reso
 
 ### BigQuery storage
 
-BigQuery stores data using a columnar storage format that is optimized for analytical queries. BigQuery presents data in tables, rows, and columns and provides full support for database transaction semantics ( [ACID](https://en.wikipedia.org/wiki/ACID) ). BigQuery storage is automatically replicated across multiple locations to provide high availability.
+BigQuery stores data using a columnar storage format that is optimized for analytical queries. BigQuery presents data in tables, rows, and columns and provides full support for database transaction semantics ( [ACID](https://en.wikipedia.org/wiki/ACID) . BigQuery storage is automatically replicated across multiple locations to provide high availability.
 
   - [Learn about common patterns to organize BigQuery resources](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy#patterns) in the data warehouse and data marts.
   - [Learn about datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) , BigQuery's top-level container of tables and views.
@@ -121,6 +121,7 @@ Gemini in BigQuery provides AI assistance to help you do the following:
           - [Python code completion](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#complete_python_code)
           - [Generate BigQuery DataFrames Python code](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#dataframe) ( [Preview](https://cloud.google.com/products#product-launch-stages) )
   - **Prepare data for analysis** . Data preparation in BigQuery gives you context aware, AI-generated transformation recommendations to cleanse data for analysis. For more information, see [Prepare data with Gemini](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
+  - **Build and modify data pipelines with the Data Engineering Agent** . The Data Engineering Agent helps you build, modify, and troubleshoot data pipelines using natural language prompts. In addition to SQL logic, the agent proactively generates semantic metadata ( [Preview](https://cloud.google.com/products#product-launch-stages) )—such as field descriptions, table overviews, and generic aspects like system and type information—ensuring your data assets are discoverable from the moment of creation. For more information, see [Use the Data Engineering Agent to build and modify data pipelines.](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines)
   - **Customize your SQL translations with translation rules** . ( [Preview](https://cloud.google.com/products#product-launch-stages) ) Create Gemini-enhanced translation rules to customize your SQL translations when using the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) . You can describe changes to the SQL translation output using natural language prompts or specify SQL patterns to find and replace. For more information, see [Create a translation rule](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#create-apply-rules) .
 
 To learn how to set up Gemini in BigQuery, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
@@ -147,7 +148,7 @@ Task guidance to help if you need to do the following:
     
       - [Partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) : Prune large tables based on time or integer ranges.
       - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) : Define cached views to optimize queries or provide persistent results.
-      - [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-query) : BigQuery's fast, in-memory analysis service.
+      - [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) : BigQuery's fast, in-memory analysis service.
 
 ### Data Administrator
 

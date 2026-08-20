@@ -319,5 +319,5 @@ For best practices to optimize query performance, see [Introduction to optimizin
 ## What's next
 
   - For DML syntax information and samples, see [DML syntax](https://docs.cloud.google.com/bigquery/sql-reference/dml-syntax) .
-  - Learn more about [Updating partitioned table data using DML](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables) .
+  - Learn more about [updating partitioned table data using DML](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables) .
   - For information about using DML statements in scheduled queries, see [Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .

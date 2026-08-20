@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/connected-sheets
 uri: https://docs.cloud.google.com/bigquery/docs/connected-sheets
-title: Using Connected Sheets
+title: Use Connected Sheets
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Using Connected Sheets
+# Use Connected Sheets
 
 Connected Sheets brings the scale of BigQuery to the familiar Google Sheets interface. With Connected Sheets, you can preview your BigQuery data and use it in pivot tables, formulas, and charts built from the entire set of data.
 

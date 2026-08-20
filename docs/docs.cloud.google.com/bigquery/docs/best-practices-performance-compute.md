@@ -165,7 +165,7 @@ Operations on `BOOL` , `INT64` , `FLOAT64` , and `DATE` columns are typically fa
 
 **Best practice:** Use BigQuery BI Engine to accelerate queries by caching the data that you use most frequently.
 
-Consider adding a [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-query) reservation to the project where the queries are being computed. BigQuery BI Engine uses a vectorized query engine to accelerate the `SELECT` query performance.
+Consider adding a [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) reservation to the project where the queries are being computed. BigQuery BI Engine uses a vectorized query engine to accelerate the `SELECT` query performance.
 
 ### Use search indexes
 
@@ -298,7 +298,7 @@ For information about how to denormalize data storage using nested and repeated 
 
 **Best practice:** Use `INT64` data types in joins instead of `STRING` data types to reduce cost and improve comparison performance.
 
-BigQuery doesn't index primary keys like traditional databases, so the wider the join column is, the longer the comparison takes. Therefore, using `INT64` data types in joins is cheaper and more efficient than using `STRING` data types.
+BigQuery doesn't index primary keys, so the wider the join column is, the longer the comparison takes. Therefore, using `INT64` data types in joins is cheaper and more efficient than using `STRING` data types.
 
 ## Reduce query outputs
 

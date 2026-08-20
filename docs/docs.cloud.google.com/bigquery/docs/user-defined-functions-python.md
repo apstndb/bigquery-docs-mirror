@@ -1271,7 +1271,7 @@ To view Python UDF metrics in the Metrics Explorer, follow these steps:
 
 2.  Click **Select a metric** , and in the **Filter** field, type `BigQuery Managed Routine Invocation` or `bigquery.googleapis.com/ManagedRoutineInvocation` .
 
-3.  Choose **Bigquery Managed Routine \> Managed\_routine** .
+3.  Choose **BigQuery Managed Routine \> Managed\_routine** .
 
 4.  Click any of the available metrics such as the following:
     

@@ -54,11 +54,13 @@ Required. Human-readable display name of the QueryTemplate. The display name mus
 
 Optional. Short description of the QueryTemplate. The description must not contain Unicode non-characters and C0 and C1 control codes except tabs (HT), new lines (LF), carriage returns (CR), and page breaks (FF). Default value is an empty string. Max length: 2000 bytes.
 
-`proposer`
+` proposer (deprecated)  `
 
 `string`
 
-Optional. Will be deprecated. Email or URL of the primary point of contact of the QueryTemplate. Max Length: 1000 bytes.
+> This item is deprecated\!
+
+Optional. Deprecated: Use `primaryContact` instead. Email or URL of the primary point of contact of the QueryTemplate. Max Length: 1000 bytes.
 
 `primaryContact`
 

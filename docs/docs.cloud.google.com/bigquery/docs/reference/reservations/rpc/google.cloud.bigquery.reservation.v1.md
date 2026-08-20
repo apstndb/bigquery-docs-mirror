@@ -1969,6 +1969,18 @@ Fields
 
 Identifier. The resource name of the reservation group, e.g., `projects/*/locations/*/reservationGroups/team1-prod` . The reservation\_group\_id must only contain lower case alphanumeric characters or dashes. It must start with a letter and must not end with a dash. Its maximum length is 64 characters.
 
+`creation_time`
+
+`  Timestamp  `
+
+Output only. Creation time of the reservation group.
+
+`update_time`
+
+`  Timestamp  `
+
+Output only. Last update time of the reservation group via a user operation. This timestamp is updated only when an update operation explicitly targets this reservation group directly. It is not updated when parent or child groups are created, updated, or deleted.
+
 ## SearchAllAssignmentsRequest
 
 The request for `  ReservationService.SearchAllAssignments  ` . Note: "bigquery.reservationAssignments.search" permission is required on the related assignee.

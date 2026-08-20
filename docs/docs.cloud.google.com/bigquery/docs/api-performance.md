@@ -318,7 +318,7 @@ The server responds with a 200 OK HTTP status code, and the partial representati
       "characteristics": {
         "length": "short",
         "level": "10",             /* Value is updated.*/
-        "followers": ["Jo" "Liz"], /* New follower Liz is present; deleted Will is missing. */
+        "followers": ["Jo" g>"Liz"], /* New follower Liz is present; deleted Will is missing. */
         "accuracy": "high"         /* New characteristic is present. */
       }
     }

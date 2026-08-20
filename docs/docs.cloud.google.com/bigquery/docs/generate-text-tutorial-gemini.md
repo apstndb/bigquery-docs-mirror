@@ -67,7 +67,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 ## Create a dataset
 
-To create a BigQuery dataset, follow these steps.
+To create a BigQuery dataset, select one of the following options:
 
 ### Console
 
@@ -83,19 +83,21 @@ To create a BigQuery dataset, follow these steps.
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
-5.  On the **Create dataset** page, do the following:
+5.  In the **Create dataset** pane, do the following:
     
       - For **Dataset ID** , enter `bqml_tutorial` .
     
       - For **Data location** , select **US** .
     
-      - Leave the remaining default settings as they are, and click **Create dataset** .
+    Leave the remaining default settings as they are.
+
+6.  Click **Create dataset** .
 
 ### bq
 
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `bqml_tutorial` with the data location set to `US` .
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
     
         bq mk --dataset \
           --location=US \
@@ -108,7 +110,7 @@ To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.
 
 ### API
 
-Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
     {
       "datasetReference": {

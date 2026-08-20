@@ -36,13 +36,14 @@ You can install and configure the JDBC driver for BigQuery by either direcly dow
 
 To configure the JDBC driver through direct download, do the following:
 
-1.  Download the [1.1.0 version of the driver](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.1.0-all.jar) .
+1.  Download the [1.2.0 version of the driver](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.2.0-all.jar) .
 2.  Copy the downloaded file to the location specified by your software.
 
 For information on feature changes and workflow updates, see [the changelog](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/CHANGELOG.md) .
 
 ### Previous JDBC driver for BigQuery versions
 
+  - [1.1.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.1.0-all.jar)
   - [1.0.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.0.0-all.jar)
 
 ### Maven configuration
@@ -918,7 +919,7 @@ The following connection properties are supported for OpenTelemetry. For detaile
 
 ### Important considerations
 
-When deploying OpenTelemetry integration, keep the following considerations in mind regarding logging behavior, authentication, and pricing.
+When deploying OpenTelemetry integration, keep the following considerations in mind regarding logging behavior, authentication, proxy configuration, and pricing.
 
 #### Interaction with LogLevel
 
@@ -932,6 +933,16 @@ The existing `LogLevel` connection property acts as a primary gatekeeper for log
 Telemetry export (both tracing and logging) with the automatic Google Cloud fallback supports both Application Default Credentials (ADC) and explicit Service Account credentials provided using `GcpTelemetryCredentials` .
 
 When `GcpTelemetryProjectId` or `GcpTelemetryCredentials` are provided, both logs and traces are sent to the same specified destination project using the same configured credentials.
+
+#### Proxy configuration with OpenTelemetry and logging
+
+If your application connects to BigQuery through a proxy server, the driver handles proxy routing as follows:
+
+  - **Trace export (HTTP).** When you use the default HTTP protocol for OpenTelemetry trace export ( `otel.exporter.otlp.protocol=http/protobuf` ), the driver automatically routes trace export traffic through the proxy configured in the connection properties using `ProxyHost` and `ProxyPort` .
+
+  - **Log export and gRPC telemetry.** The automatic Google Cloud log exporter ( `EnableGcpLogExporter=true` ) and gRPC-based OpenTelemetry exporters ( `otel.exporter.otlp.protocol=grpc` ) use gRPC, which doesn't support per-connection proxy configuration. To route log export and gRPC telemetry traffic through a proxy server, configure proxy settings at the JVM level using the following system properties:
+    
+        -Dhttps.proxyHost=PROXY_HOST -Dhttps.proxyPort=PROXY_PORT
 
 #### Required APIs and IAM permissions
 
@@ -970,5 +981,9 @@ You can download the JDBC driver for BigQuery at no cost. However, when you use 
 
 ## What's next
 
+  - For additional setup instructions, connection URL property reference manuals, code samples, and local build instructions, visit the open-source repository on GitHub:
+      - [User Guide ( `docs/USER_GUIDE.md` )](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/docs/USER_GUIDE.md)
+      - [Development Guide ( `DEVELOPMENT.md` )](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/DEVELOPMENT.md)
+      - [BigQuery Storage APIs Deep Dive ( `docs/STORAGE_APIS.md` )](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/docs/STORAGE_APIS.md)
   - Learn more about the [ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) .
   - Explore other [BigQuery developer tools](https://docs.cloud.google.com/bigquery/docs/developer-overview) .

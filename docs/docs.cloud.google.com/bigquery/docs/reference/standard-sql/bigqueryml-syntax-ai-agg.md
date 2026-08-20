@@ -65,6 +65,8 @@ The `AI.AGG` function takes the following arguments:
       - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
+    
+    If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
 
 ### Output
 

@@ -514,15 +514,14 @@ As a data analyst, you can create, edit, and publish an agent to Data Studio by 
 
 ### Share your agent with Data Studio users
 
-You can share agents with Data Studio users directly by copying a link that opens a [conversation with the agent in Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agent) or you can send an email to inform the user that they have access to an agent.
+You can share agents with Data Studio users directly by copying a link that opens a [conversation with the agent in Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-data-agents) or you can send an email to inform the user that they have access to an agent.
 
 To share a direct link to the agent, you can copy the agent's dedicated URL in these ways:
 
-    * From the agent catalog: Select <span class="material-icons" translate="no" aria-hidden="true">more_vert</span>
-    **Open actions** > select **Copy link** > select **Data Studio**.
-    * From the agent details view: Select <span class="material-icons" aria-hidden="true" translate="no">content_copy</span> **Copy agent link** > select **Data Studio**.
-    * From the **Share** overflow menu: Select **Copy link to agent in Data Studio**.
-    * After clicking **Save** from the **Share permissions** panel: Select **Copy link**.
+  - From the agent catalog: Select more\_vert **Open actions** \> select **Copy link** \> select **Data Studio** .
+  - From the agent details view: Select content\_copy **Copy agent link** \> select **Data Studio** .
+  - From the **Share** overflow menu: Select **Copy link to agent in Data Studio** .
+  - After clicking **Save** from the **Share permissions** panel: Select **Copy link** .
 
 To send an email notification that informs recipients of their access to an agent, select **Send email** from the **Share permissions** panel. Email notifications are sent only to the users or groups with whom you have just shared the agent in that editing session. All members of a group receive the email notification, even if a given user already has agent-level permission for the agent. The email includes the name of the user who shared the agent, the name of the agent, and a link to open the agent in Data Studio.
 

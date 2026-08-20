@@ -12,7 +12,7 @@ Knowledge Catalog, (formerly known as Dataplex Universal Catalog), interacts wit
 
 ## How do I use Knowledge Catalog with BigQuery?
 
-Knowledge Catalog interacts with BigQuery in the following ways:
+Knowledge Catalog interacts with BigQuery in the following ways.
 
 ### Automated metadata ingestion
 
@@ -26,9 +26,23 @@ Knowledge Catalog automatically discovers and indexes technical metadata from Bi
 ### Metadata representation and enrichment
 
   - **Entries** : each BigQuery table or asset is represented as [an *entry*](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources) in the catalog, rather than the entire table; for example, `project.dataset.table` .
+
+  - **Data quality scorecard integration** : Knowledge Catalog provides a [data quality scorecard](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#data-quality-scorecard) for each entry in the catalog. In addition to built-in Knowledge Catalog data scans, assertion results from Dataform are a source for this scorecard ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+
+  - **Automated metadata enrichment** : for tables and views created with Dataform, you can define semantic metadata directly in your code. This metadata is automatically synchronized to Knowledge Catalog upon successful completion of a pipeline action ( [Preview](https://cloud.google.com/products#product-launch-stages) ). The following aspect types are supported:
+    
+      - Overview: documentation and summary text for the entry.
+      - Generic aspects: semantic metadata tags for technical details, such as table system and type information.
+    
+    To check the status of a metadata update, follow the instructions in [View past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
+    
+    After the metadata has been synchronized, you can search for and view the entry in Knowledge Catalog. For more information, see [Search for resources](https://docs.cloud.google.com/dataplex/docs/search-assets#search-data-assets) .
+
   - **Column-level metadata** : individual columns or fields are represented as *[paths](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata)* , allowing you to attach specific metadata, like PII markers or data quality scores, to individual fields within a BigQuery table rather than just the table itself.
+
   - **Aspects** : technical metadata is enriched with [*aspects*](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , which add business context to data, such as ownership, data quality, and documentation.
-  - **Data products** : You can package related BigQuery assets into [data products](https://docs.cloud.google.com/dataplex/docs/data-products-overview) —for example, ecommerce business data—which have shared access and governance constraints.
+
+  - **Data products** : you can package related BigQuery assets into [data products](https://docs.cloud.google.com/dataplex/docs/data-products-overview) —for example, ecommerce business data—which have shared access and governance constraints.
 
 ### Data discovery and search
 
@@ -49,7 +63,7 @@ Knowledge Catalog automatically discovers and indexes technical metadata from Bi
 
 Migrating to Knowledge Catalog from the deprecated Data Catalog involves several steps. Standard metadata from BigQuery (like datasets, tables, views) is automatically available in Knowledge Catalog, so the migration process primarily focuses on custom metadata, API usage, and user interface defaults.
 
-The following are the main points to consider when migrating:
+The following are the main points to consider when migrating.
 
 ### Understand the change
 

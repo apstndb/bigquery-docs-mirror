@@ -120,6 +120,8 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
       - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
+    
+    If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
 
   - `  EMBEDDINGS  ` : the embeddings to use for [optimized mode](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) (Preview). This argument is optional. If you don't specify this argument, then the query uses standard LLM inference for all rows unless the table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) enabled.
     

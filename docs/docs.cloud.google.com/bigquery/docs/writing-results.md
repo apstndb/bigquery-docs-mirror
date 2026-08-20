@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/writing-results
 uri: https://docs.cloud.google.com/bigquery/docs/writing-results
-title: Writing query results
+title: Write query results
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Writing query results
+# Write query results
 
 This document describes how to write query results to temporary or permanent tables.
 

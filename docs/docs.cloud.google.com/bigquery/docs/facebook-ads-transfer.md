@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 To schedule recurring data transfers from Facebook Ads to BigQuery, create a transfer configuration to specify what data objects to transfer, and how often to schedule the data transfer. You can create a transfer configuration using either the Google Cloud console, the `bq` command-line tool, or the BigQuery Data Transfer Service API. Once you have set up the transfer configuration, [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) transfers the latest data into a BigQuery table on the specified schedule.
 
-To learn about how a Facebook Ads transfer works, see [Introduction to Facebook Ads transfers](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro) .
+To learn about how a Facebook Ads transfer works, see [Introduction to Facebook Ads data transfers](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro) .
 
 ## Limitations
 

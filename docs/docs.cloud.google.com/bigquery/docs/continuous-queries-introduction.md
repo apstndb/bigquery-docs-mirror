@@ -47,7 +47,9 @@ The following operations are supported in continuous queries:
 
   - Running [`INSERT` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) to write data from a continuous query into a BigQuery table.
 
-  - Running [`EXPORT DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to [publish](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) continuous query output to Pub/Sub topics. For more information, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
+  - Running [`EXPORT DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to [publish](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) continuous query output to Pub/Sub topics.
+    
+    Continuous queries that export data to Pub/Sub must be run by using a [service account](https://docs.cloud.google.com/bigquery/docs/continuous-queries#run_a_continuous_query_by_using_a_service_account) . For more information, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
     
     From a Pub/Sub topic, you can use the data with other services, such as performing streaming analytics by using Dataflow, or using the data in an application integration workflow.
 
@@ -173,10 +175,16 @@ Continuous queries are subject to the following limitations:
 
 ### Reservation limitations
 
-  - You must create Enterprise edition or Enterprise Plus edition [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) in order to run continuous queries. Continuous queries don't support the on-demand compute billing model.
+  - You must create an Enterprise edition or Enterprise Plus edition [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) with a [`CONTINUOUS` assignment type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to run continuous queries. Continuous queries don't support the on-demand compute billing model.
+
   - When you create a `CONTINUOUS` [reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) , the associated reservation is limited to at most 500 slots. You can request an increase to this limit by contacting <bq-continuous-queries-feedback@google.com> .
+
   - You can't create a reservation assignment that uses a different [job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) in the same reservation as a continuous query reservation assignment.
-  - You can't configure continuous query concurrency. BigQuery automatically determines the number of continuous queries that can run concurrently, based on available reservation assignments that use the `CONTINUOUS` job type.
+
+  - BigQuery determines the number of continuous queries that can run concurrently per project based on the configured size of the reservation assignment that uses the `CONTINUOUS` job type. To admit new jobs, BigQuery requires a threshold of 10 slots per continuous query job. The query does not necessarily consume all 10 slots during normal execution. This threshold ensures every running continuous query maintains enough baseline compute capacity to handle sudden spikes in incoming data volume without falling behind or compromising on low-latency processing.
+    
+    To ensure your queries are admitted successfully without reaching concurrency limits, we recommend using [slot autoscaling](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#slots_autoscaling) . With autoscaling, your overall slot usage will scale dynamically based on actual resource demand. You can configure a smaller baseline reservation and set a maximum autoscaling limit that comfortably covers the 10 slots per query threshold for your expected concurrent queries.
+
   - When running multiple continuous queries using the same reservation, individual jobs might not split available resources fairly, as defined by [BigQuery fairness](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) .
 
 ## Slots autoscaling
@@ -206,6 +214,22 @@ Usage of other services that receive continuous query results or that are called
   - [Pub/Sub pricing](https://cloud.google.com/pubsub/pricing)
   - [Spanner pricing](https://cloud.google.com/spanner/pricing)
   - [Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing)
+
+### Estimating slot capacity requirements
+
+Because every workload is different, an exact slot estimation for continuous queries is often not possible upfront. The amount of slots required by your continuous queries depends on a combination of several factors:
+
+  - The number of continuous queries running concurrently.
+  - The complexity of the SQL statement.
+  - The use of stateful processing functions including window durations, `JOIN` s, and aggregations.
+  - The rate or velocity of incoming data.
+  - The structure and size of the data being ingested.
+
+Conceptually, you can estimate your total slot requirement as a function of your continuous query workload:
+
+*Estimated Slots ≈ Number of continuous queries x ∑ (Data rate x Query complexity)*
+
+Because actual slot consumption heavily depends on your unique workload and data patterns, the most accurate method for estimating cost is to monitor a running job. You can measure the peak slot usage of an isolated continuous query run using `INFORMATION_SCHEMA` views. For detailed instructions and example queries to track slot usage over time, see [View slot consumption information](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor#view_slot_consumption_information) .
 
 ## What's next
 

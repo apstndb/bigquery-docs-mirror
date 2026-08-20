@@ -3565,6 +3565,8 @@ When aggregation functions are present in both the `SELECT` list and `HAVING` cl
 
 The `ORDER BY` clause specifies a column or expression as the sort criterion for the result set. If an `ORDER BY` clause isn't present, the order of the results of a query isn't defined. Column aliases from a `FROM` clause or `SELECT` list are allowed. If a query contains aliases in the `SELECT` clause, those aliases override names in the corresponding `FROM` clause. The data type of `expression` must be [orderable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#orderable_data_types) .
 
+When using the `ORDER BY` clause with either [recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#recursive_cte) or [non-recursive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#simple_cte) common table expressions (CTEs), specify the `ORDER BY` clause within the main query definition, and not in the CTE definition itself. This evenly distributes the execution of your queries as tables grow over time and prevents a single processing unit from having to process all query data.
+
 **Optional Clauses**
 
   - `NULLS FIRST | NULLS LAST` :

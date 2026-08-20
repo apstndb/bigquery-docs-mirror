@@ -245,14 +245,17 @@ To get a list of your three most recent sessions including the active and termin
 
 2.  In the query editor, enter the following statement:
     
-        SELECT  session_id,  MAX(creation_time) AS last_modified_timeFROM region-us.INFORMATION_SCHEMA.VIEWWHERE  session_id IS NOT NULL  AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)GROUP BY session_idORDER BY last_modified_time DESC;
+        SELECT
+          session_id,
+          MAX(creation_time) AS last_modified_time
+        FROM `region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER>
+        WHERE
+          session_id IS NOT NULL
+          AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)
+        GROUP BY session_id
+        ORDER BY last_modified_time DESC;
     
-    Replace the following:
-    
-      - `  VIEW  ` : the `INFORMATION_SCHEMA` view:
-          - [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user#schema) : returns only the jobs created by the current user in the current project
-          - [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user#schema) : returns only the sessions created by the current user in the current project
-          - [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project#schema) : returns all sessions in the current project
+    Replace REGION\_NAME with the name of the region in which to list sessions.
 
 3.  Click play\_circle **Run** .
 
@@ -306,20 +309,13 @@ To view historical data for a specific session, first [get your session ID](http
         SELECT
           *
         FROM
-          region-us.INFORMATION_SCHEMA.VIEW
+          `region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER
         WHERE
           session_info.session_id = 'SESSION_ID';
     
     Replace the following:
     
-      - VIEW : the `INFORMATION_SCHEMA` view to work with
-        
-        Select one of the following views:
-        
-          - [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) : returns only the jobs created by the current user in the current project
-          - [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user#schema) : returns only the sessions created by the current user in the current project
-          - [`SESSIONS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project#schema) : returns all sessions in the current project
-    
+      - REGION\_NAME : the name of the region in which to view session data
       - SESSION\_ID : the ID of the session for which to retrieve historical data
 
 3.  Click play\_circle **Run** .
@@ -333,7 +329,7 @@ The following returns the history for a session that has the session ID `CgwKCmZ
     SELECT
       creation_time, query
     FROM
-      region-us.INFORMATION_SCHEMA.JOBS_BY_USER
+      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_USER
     WHERE
       session_info.session_id = 'CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0'
       AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY);

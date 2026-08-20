@@ -73,7 +73,21 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TranslationTaskResult.SCHEMA_REPRESENTATION)
   - [GcsReportLogMessage](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#GcsReportLogMessage)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#GcsReportLogMessage.SCHEMA_REPRESENTATION)
+  - [TaskOutput](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TaskOutput)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TaskOutput.SCHEMA_REPRESENTATION)
+  - [LineageOutput](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#LineageOutput)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#LineageOutput.SCHEMA_REPRESENTATION)
+  - [RecognizedInput](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#RecognizedInput)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#RecognizedInput.SCHEMA_REPRESENTATION)
+  - [Type](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#Type_1)
+  - [ProgressReport](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#ProgressReport)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#ProgressReport.SCHEMA_REPRESENTATION)
+  - [ProcessingStage](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#ProcessingStage)
+  - [WorkSummary](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#WorkSummary)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#WorkSummary.SCHEMA_REPRESENTATION)
   - [State](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#State_1)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#State_2)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#State_3)
   - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#METHODS_SUMMARY)
 
 ## Resource: MigrationWorkflow
@@ -1349,12 +1363,18 @@ The migration task result.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field details can be only one of the following:&quot;translationTaskResult&quot;: {object (TranslationTaskResult)}// End of list of possible types for union field details.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;taskOutputs&quot;: {string: {object (TaskOutput)},...},// Union field details can be only one of the following:&quot;translationTaskResult&quot;: {object (TranslationTaskResult)}// End of list of possible types for union field details.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
+
+`taskOutputs`
+
+` map (key: string, value: object ( TaskOutput  ` ))
+
+The map of task output types to the task outputs, e.g. "LINEAGE".
 
 Union field `details` . Details specific to the task type. `details` can be only one of the following:
 
@@ -1503,6 +1523,296 @@ Effect of the error/warning. Example: COMPATIBILITY
 `string`
 
 Name of the affected object in the log message.
+
+## TaskOutput
+
+The task output for a task type including the status and any errors.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;state&quot;: enum (State),&quot;processingError&quot;: {object (ErrorInfo)},// Union field output can be only one of the following:&quot;lineageOutput&quot;: {object (LineageOutput)}// End of list of possible types for union field output.}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`state`
+
+` enum ( State  ` )
+
+Output only. The current state of the task output.
+
+`processingError`
+
+` object ( ErrorInfo  ` )
+
+An explanation that may be populated when the task output is in FAILED state.
+
+Union field `output` . The detailed output of the task. `output` can be only one of the following:
+
+`lineageOutput`
+
+` object ( LineageOutput  ` )
+
+The output of the task with output type "LINEAGE".
+
+## LineageOutput
+
+The output of a task with output type "LINEAGE".
+
+Actual generated lineage can be queried separately (see `  webappUri  ` ), this message contains only metadata: processing status, errors, etc.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;webappUri&quot;: string,&quot;recognizedInputs&quot;: [{object (RecognizedInput)}],&quot;processingProgressReports&quot;: [{object (ProgressReport)}]}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`webappUri`
+
+`string`
+
+The URI of the webapp that visualizes the lineage. The user needs the `bigquerymigration.googleapis.com/lineageDbs.query` IAM permission to use the webapp.
+
+`recognizedInputs[]`
+
+` object ( RecognizedInput  ` )
+
+Output only. Recognized lineage inputs.
+
+All inputs are processed only if the task succeeds and all work is in state [SUCCEEDED](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/ProgressReport.WorkSummary.State.SUCCEEDED) (in particular, nothing is [SKIPPED](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/ProgressReport.WorkSummary.State.SKIPPED) ).
+
+Even with all inputs processed successfully, there may be transpiler errors present leading to inaccurate lineage.
+
+`processingProgressReports[]`
+
+` object ( ProgressReport  ` )
+
+Output only. Work processing progress reports broken up by processing stage.
+
+## RecognizedInput
+
+Information about lineage input of the given type that lineage generation recognized.
+
+If you expected to process more of the given input, verify your input was uploaded and is in the correct format and the request to generate lineage correctly specified the input location.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;type&quot;: enum (Type),&quot;uncompressedSizeBytes&quot;: string}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`type`
+
+` enum ( Type  ` )
+
+Output only. The type of the input.
+
+`uncompressedSizeBytes`
+
+`string ( int64 format)`
+
+Output only. The uncompressed size of the recognized input of the given type.
+
+## Type
+
+Input type recognized by the lineage processing.
+
+Enums
+
+`TYPE_UNSPECIFIED`
+
+The type is not specified.
+
+`METADATA`
+
+The input is metadata.
+
+`QUERY_LOG`
+
+The input is a query log.
+
+`SCRIPT`
+
+The input is a SQL script.
+
+## ProgressReport
+
+Breaks down processing progress of work.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;processingStage&quot;: enum (ProcessingStage),&quot;workSummaries&quot;: [{object (WorkSummary)}]}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`processingStage`
+
+` enum ( ProcessingStage  ` )
+
+Output only. The processing stage this progress report describes.
+
+`workSummaries[]`
+
+` object ( WorkSummary  ` )
+
+Output only. Summaries of work broken up by the state of the work. Each work summary describes how much work is in the given state.
+
+To get numbers for the total work covered, aggregate the numbers from all summaries.
+
+## ProcessingStage
+
+The processing stage the progress report describes.
+
+Enums
+
+`PROCESSING_STAGE_UNSPECIFIED`
+
+The stage is not specified.
+
+`INPUT_INGESTION`
+
+The input ingestion stage.
+
+`POSTPROCESSING`
+
+The lineage DB postprocessing stage.
+
+## WorkSummary
+
+Summary of work in the given state.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;state&quot;: enum (State),&quot;size&quot;: string,&quot;comment&quot;: string}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`state`
+
+` enum ( State  ` )
+
+Output only. The state of the work this summary describes.
+
+`size`
+
+`string ( int64 format)`
+
+Output only. Size of the work in the given State.
+
+Size counts "units of work". Units represent arbitrary division of work; there's no expectation each unit takes similar time to process.
+
+`comment`
+
+`string`
+
+Output only. Human-readable comment.
+
+## State
+
+States of work. Each piece of work is in exactly one state. \[SUCCEEDED\], \[FAILED\] and \[SKIPPED\] are terminal states; work in the \[IN\_PROGRESS\] will eventually transition to one of the terminal states.
+
+Enums
+
+`STATE_UNSPECIFIED`
+
+The state is not specified.
+
+`SUCCEEDED`
+
+Work that was processed successfully.
+
+`FAILED`
+
+Work that failed processing.
+
+`IN_PROGRESS`
+
+Work that is currently being processed or queued for processing.
+
+`SKIPPED`
+
+Work that was recognised as necessary to fully process inputs but was skipped due to system limitations.
+
+## State
+
+Possible task output states.
+
+Enums
+
+`STATE_UNSPECIFIED`
+
+Task output state is unspecified.
+
+`PENDING`
+
+Task output is pending.
+
+`SUCCEEDED`
+
+Task output is succeeded.
+
+`FAILED`
+
+Task output is failed. This does not mean that there is no useful information in the output; partial outputs or failure details may be available.
 
 ## State
 

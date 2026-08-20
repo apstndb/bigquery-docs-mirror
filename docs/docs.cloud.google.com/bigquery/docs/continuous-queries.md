@@ -227,6 +227,8 @@ The following example shows how to backfill older data from a BigQuery table rec
 
 This section describes how to run a continuous query by using a user account. After the continuous query is running, you can close the Google Cloud console, terminal window, or application without interrupting query execution. A continuous query run by a user account runs for a maximum of two days and then automatically stops. To continue processing new incoming data, start a new continuous query and [specify a starting point](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) . To automate this process, see [retry failed queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor#retry) .
 
+> **Note:** You must use a [service account](https://docs.cloud.google.com/bigquery/docs/continuous-queries#run_a_continuous_query_by_using_a_service_account) to run a continuous query that exports results to a Pub/Sub topic. You cannot use a user account.
+
 Follow these steps to run a continuous query:
 
 ### Console

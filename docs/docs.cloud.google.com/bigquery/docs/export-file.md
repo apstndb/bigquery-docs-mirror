@@ -104,7 +104,7 @@ To save query results to Google Sheets, use the Google Cloud console:
     
     When you save query results to Google Sheets, the filename begins with `results-[DATE]` where `[DATE]` is today's date in the format `YYYYMMDD` .
     
-    > **Note:** Saving results to Google Sheets is not supported by the bq command-line tool or the API. For more information, see [Using Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
+    > **Note:** Saving results to Google Sheets is not supported by the bq command-line tool or the API. For more information, see [Use Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
 
 ### Troubleshoot saving results to Google Sheets
 

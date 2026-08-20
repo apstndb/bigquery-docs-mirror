@@ -106,7 +106,7 @@ To explore the **Studio** page, follow these steps:
     
     The **Studio** page opens in your most recently accessed project.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click the **Explorer** tab.
     
     The **Explorer** pane lists different code assets and data resources, and it lets you search for BigQuery resources.
     
@@ -292,6 +292,63 @@ For information on creating agents and using conversational analytics, see [Conv
 ## Limitations
 
 The BigQuery Google Cloud console doesn't support [Virtual Private Cloud](https://docs.cloud.google.com/vpc-service-controls/docs/supported-products#console) or [Private Service Connect](https://docs.cloud.google.com/vpc/docs/private-service-connect) .
+
+## Troubleshoot BigQuery Google Cloud console issues
+
+If you experience issues in the Google Cloud console when using BigQuery, such as pages not loading, slow responsiveness, or missing features, try the following troubleshooting steps.
+
+### Common browser fixes
+
+Many Google Cloud console issues are caused by local browser configurations or cached data.
+
+  - **Browser troubleshooting:** for general browser troubleshooting steps such as using Incognito mode, clearing cache and cookies, or turning off browser extensions, see [Troubleshoot Google Cloud console page loading issues](https://docs.cloud.google.com/support/docs/troubleshoot-console-page-loading) .
+  - **Verify service health:** check the [Google Cloud **Service Health** dashboard](https://status.cloud.google.com/) for ongoing BigQuery service outages.
+
+### Connectivity and firewall requirements
+
+If you are working behind a corporate VPN or proxy, it might block API calls required by the console. Ensure your network administrator allowlists the following domains:
+
+  - `https://cloudconsole-pa.clients6.google.com`
+  - `https://clients6.google.com`
+  - `https://cloudusersettings-pa.clients6.google.com`
+
+Common symptoms of blocked API endpoints include a spinning progress indicator for autocomplete suggestions or permission errors despite having the correct IAM roles.
+
+### Improve performance for large projects
+
+If your project contains a large number of datasets or tables, the **Explorer** tab can load slowly.
+
+  - **Use the minimal loading parameter:** you can prevent the resource tree from pre-loading by appending `?minimal=true` to your URL. For example:
+    
+    ` https://console.cloud.google.com/bigquery?minimal=true&project= PROJECT_ID  `
+
+  - **Unpin unused projects:** remove pinned projects that you are not actively using to reduce the load on the **Explorer** tab.
+
+  - **Force metadata refresh:** if you modified tables through the API/CLI and changes don't show in the console, perform a hard refresh (Ctrl+Shift+R or Cmd+Shift+R). Use `INFORMATION_SCHEMA` queries as a definitive source of truth.
+
+### Troubleshoot maps and charts
+
+  - **Geospatial (TinyMap):** the geospatial visualization tab is available only if your query results contain a `GEOGRAPHY` column. Map visualization is limited to a maximum of 20,000 features or 1 million vertices.
+  - **Charts:** results must contain at least one numeric column to generate charts. If a "No data to display" warning appears, check for null values in the selected X-axis dimension.
+
+### Troubleshoot data lineage and profiling
+
+  - **Lineage delay:** data lineage information isn't real-time. Allow up to 30 minutes for lineage data to synchronize.
+  - **Required APIs:** ensure the Dataplex API ( `dataplex.googleapis.com` ) and Data Catalog API ( `datacatalog.googleapis.com` ) are enabled in your project.
+
+### Troubleshoot BigQuery Studio and saved queries
+
+  - **Saved query migration limit:** if you have more than 2,500 saved queries, the automated migration tool cannot process them. Contact [Cloud Customer Care](https://cloud.google.com/support) to request a manual migration.
+  - **Required APIs:** saving scripts and notebooks in BigQuery Studio requires the Dataform API ( `dataform.googleapis.com` ) to be enabled in your project.
+
+### Contact support
+
+If the issue persists, collect the following information before creating a support ticket:
+
+1.  **A HAR file:** record the network request log while reproducing the issue (using the browser's developer tools Network tab with **Preserve Log** checked).
+2.  **Console logs:** capture JavaScript errors shown in the browser's developer console (Ctrl+Shift+I \> Console).
+3.  **Project ID:** the ID of the project you are working in.
+4.  **Tracking number:** the tracking ID shown in any error banners.
 
 ## What's next
 

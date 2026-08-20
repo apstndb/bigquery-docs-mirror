@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro
 uri: https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro
-title: Introduction to Salesforce transfers
+title: Introduction to Salesforce data transfers
 description: Learn how to use the BigQuery Data Transfer Service Salesforce connector to ingest data from Salesforce into BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Introduction to Salesforce transfers
+# Introduction to Salesforce data transfers
 
 You can load data from your Salesforce Sales Cloud to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Salesforce connector. With BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Salesforce Sales Cloud to BigQuery.
 

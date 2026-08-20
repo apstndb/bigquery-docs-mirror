@@ -63,8 +63,6 @@ You can use the Google Cloud console or SQL to grant the required roles for a pr
     8.  Search for or browse to the **BigQuery Job User** role and select it.
     
     9.  Click **Save** .
-        
-        ![Click Save to grant the roles to the principal](https://docs.cloud.google.com/bigquery/images/apply-roles.png)
 
 ### SQL
 

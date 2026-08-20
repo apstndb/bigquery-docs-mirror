@@ -24,7 +24,9 @@ You might use the BigQuery [local MCP server](https://docs.cloud.google.com/bigq
   - You need to build a custom tool over a parameterized SQL query.
   - You don't have permissions to enable or use the MCP server in your project.
 
-For more information about how to use our local MCP server, see [Connect LLMs to BigQuery with MCP](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) . The following sections apply only to the BigQuery MCP server.
+To allow agents access to advanced BigQuery capabilities like scheduling, permission management, and reservation management, use the `run_bq_command` tool available under the Cloud CLI MCP server. For more information, see [Use the Cloud CLI remote MCP server](https://docs.cloud.google.com/sdk/use-gcloud-mcp) .
+
+For more information about how to use our local MCP server, see [Connect LLMs to BigQuery with MCP](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) . The following sections apply only to the BigQuery remote MCP server.
 
 ## Google and Google Cloud remote MCP servers
 
@@ -80,7 +82,7 @@ Additional BigQuery permissions might be required depending on the task. For inf
 
 BigQuery MCP servers use the [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2) protocol with [IAM](https://docs.cloud.google.com/iam/docs/overview) for authentication and authorization. All [Google Cloud identities](https://docs.cloud.google.com/docs/authentication/identity-products) are supported for authentication to MCP servers.
 
-The BigQuery MCP server doesn't accept API keys.
+We recommend that you create a separate identity for agents that are using MCP tools so that access to resources can be controlled and monitored. For more information about authentication, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
 
 ## BigQuery MCP OAuth scopes
 
@@ -109,8 +111,8 @@ In your AI application, look for a way to add or connect to a remote MCP server.
   - **Authentication details** : your Google Cloud credentials, your OAuth Client ID and secret, or an agent identity and credentials
     
     Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
-    
-    ### Redirect URIs
+
+### Redirect URIs
 
 For web-based applications, and some desktop applications, you must allowlist a redirect URI when you create a client ID and secret for authentication. Redirect URIs are used by the authorization server to send tokens to your application. Your application's documentation should specify the redirect URI that you must use. [Custom redirect URIs](https://developers.google.com/identity/protocols/oauth2/native-app#redirect-uri_custom-scheme) aren't supported.
 
@@ -147,7 +149,7 @@ Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to
       "method": "tools/list",
     }
 
-### Deny access to tools
+### Deny access to read-write tools
 
 The only MCP tool that isn't read-only is `execute_sql` . You can restrict access to the `execute_sql` tool by creating a [deny policy that restricts read-write MCP tool use](https://docs.cloud.google.com/mcp/control-mcp-use-iam#deny_read-write_mcp_tool_use) .
 

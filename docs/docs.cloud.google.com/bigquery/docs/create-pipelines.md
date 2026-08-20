@@ -268,6 +268,12 @@ To add a task to a pipeline, follow these steps:
     
     ### Table
     
+    > **Preview**
+    > 
+    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+    
+    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
+    
     1.  Click **Add task** , and then select **Table** .
     
     2.  In the **Create new** pane, select **Table** or **Incremental table** .
@@ -292,13 +298,41 @@ To add a task to a pipeline, follow these steps:
         
         > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
     
-    8.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
+    8.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
+        
+          - Overview: documentation and summary text for the entry.
+          - Generic aspects: semantic details such as table system and type information.
+        
+        The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
+        
+        ``` 
+           config {
+           type: "table",
+           metadata: {
+              overview: "This table provides standardized trip data.",
+              extraProperties: {
+                 generic: {
+                       system: "BigQuery",
+                       type: "fact table"
+                 }
+                 }
+           }
+           }
+        ```
     
-    9.  Click **Run** to run the SQL in your pipeline.
+    9.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
     
-    10. In **Query results** , inspect the data preview.
+    10. Click **Run** to run the SQL in your pipeline.
+    
+    11. In **Query results** , inspect the data preview.
     
     ### View
+    
+    > **Preview**
+    > 
+    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+    
+    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
     
     1.  Click **Add task** , and then select **View** .
     
@@ -324,55 +358,33 @@ To add a task to a pipeline, follow these steps:
         
         > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
     
-    8.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
-    
-    9.  Click **Run** to run the SQL in your pipeline.
-    
-    10. In **Query results** , inspect the data preview.
-    
-    ### Declare source
-    
-    1.  Click **Add task** , and then select **Declare source** .
-    
-    2.  In the **Declare source** pane, verify the default project for the data source, or select a new project.
-    
-    3.  Verify the default dataset for the data source, or select a new dataset.
-    
-    4.  In the **Table / View** field, select the table or view that you want to use as a data source.
-    
-    5.  Click **Create** .
-    
-    6.  In the declare source task details pane, click **Open** to open the task.
-    
-    7.  Configure the data source using the settings in **Details \> Configuration** or in the `config` block of the code editor.
+    8.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
         
-        For more information about configuring a data source, see [Declare a data source](https://docs.cloud.google.com/dataform/docs/declare-source) .
+          - Overview: documentation and summary text for the entry.
+          - Generic aspects: semantic details such as table system and type information.
         
-        The editor validates your code and displays the validation status.
-    
-    ### Data quality test
-    
-    1.  Click **Add task** , and then select **Data quality test** .
-    
-    2.  In the **Create new** pane, verify the default project for the data quality test, or select a new project.
-    
-    3.  Verify the default dataset for the data quality test, or select a new dataset.
-    
-    4.  In the **Table** field, enter a name for the data quality test.
-    
-    5.  Click **Create** .
-    
-    6.  In the data quality test task details pane, click **Open** to open the task.
-    
-    7.  Configure assertions for the test using the settings in **Details \> Configuration** or in the `config` block of the code editor.
+        The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
         
-        For more information about configuring assertions, see [Test data quality](https://docs.cloud.google.com/dataform/docs/assertions) .
-        
-        Optional: In the **Run after** menu, select a task to precede your data quality test in the pipeline sequence.
-        
-        The editor validates your code and displays the validation status.
+        ``` 
+           config {
+           type: "view",
+           metadata: {
+              overview: "This view provides standardized trip data.",
+              extraProperties: {
+                 generic: {
+                       system: "BigQuery",
+                       type: "view"
+                 }
+                 }
+           }
+           }
+        ```
     
-    8.  Click **Run** to run the data quality test as part of your pipeline sequence.
+    9.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
+    
+    10. Click **Run** to run the SQL in your pipeline.
+    
+    11. In **Query results** , inspect the data preview.
 
 ## Edit a pipeline task
 

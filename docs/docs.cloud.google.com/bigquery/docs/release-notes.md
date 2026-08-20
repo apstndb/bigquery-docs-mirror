@@ -14,6 +14,38 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## August 18, 2026
+
+Feature
+
+The default per-project limit of user-specific [reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assignment-logic-and-criteria) has been increased from 10 to 100.
+
+## August 13, 2026
+
+Feature
+
+BigQuery pipelines now support automated metadata enrichment, allowing you to define semantic metadata directly in SQLX configurations for synchronization with Knowledge Catalog. In addition, the Data Engineering Agent proactively generates this metadata based on your intent or context. For more information, see [Metadata enrichment and data quality scorecard integration](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#metadata-scorecard) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+## August 12, 2026
+
+Announcement
+
+Table Explorer behavior has moved to the **Reference** panel. Table Explorer has been deprecated. For more information, see "Use the Reference panel" in [Run a query](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) .
+
+## August 11, 2026
+
+Feature
+
+[Query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) for data clean rooms are [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Query templates allow data clean room owners and publishers to share predefined queries without exposing the underlying tables and views.
+
+Additionally, [table parameters](https://docs.cloud.google.com/bigquery/docs/table-functions#table_parameters) in table-valued functions (TVFs) are [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use the `ANY TABLE` type as a table parameter to create generic functions that accept tables of any structure.
+
+## August 10, 2026
+
+Feature
+
+BigQuery now supports the `gemini-3.1-flash-lite` and `gemini-3.5-flash` GA models, which are available for the `us` , `eu` , and `global` multi-regional endpoints. You can use these models in all generative AI functions. For information about how to specify a multi-regional endpoint and how endpoints are selected, read about [locations](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#locations) in the generative AI overview.
+
 ## August 03, 2026
 
 Feature

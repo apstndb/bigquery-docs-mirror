@@ -31,6 +31,8 @@ data_source: docs.cloud.google.com
   - [TextConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#TextConfig)
   - [AvroConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#AvroConfig)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#AvroConfig.SCHEMA_REPRESENTATION)
+  - [BigtableConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#BigtableConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#BigtableConfig.SCHEMA_REPRESENTATION)
   - [ExpirationPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ExpirationPolicy)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ExpirationPolicy.SCHEMA_REPRESENTATION)
   - [DeadLetterPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DeadLetterPolicy)
@@ -41,6 +43,14 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#MessageTransform.SCHEMA_REPRESENTATION)
   - [JavaScriptUDF](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#JavaScriptUDF)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#JavaScriptUDF.SCHEMA_REPRESENTATION)
+  - [AIInference](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#AIInference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#AIInference.SCHEMA_REPRESENTATION)
+  - [UnstructuredInference](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#UnstructuredInference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#UnstructuredInference.SCHEMA_REPRESENTATION)
+  - [Compression](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#Compression)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#Compression.SCHEMA_REPRESENTATION)
+  - [CompressionAlgorithm](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#CompressionAlgorithm)
+  - [CompressionMode](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#CompressionMode)
   - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#try-it)
 
 Subscribes to a listing.
@@ -168,7 +178,7 @@ Required. Destination Pub/Sub subscription resource.
 
 ## PubSubSubscription
 
-Defines the destination Pub/Sub subscription. If none of `pushConfig` , `bigqueryConfig` , `cloudStorageConfig` , `pubsubExportConfig` , or `pubsubliteExportConfig` is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
+Defines the destination Pub/Sub subscription. If none of `pushConfig` , `bigqueryConfig` , `cloudStorageConfig` , `bigtableConfig` , `pubsubExportConfig` , or `pubsubliteExportConfig` is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
 
 <table>
 <colgroup>
@@ -181,7 +191,7 @@ Defines the destination Pub/Sub subscription. If none of `pushConfig` , `bigquer
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;pushConfig&quot;: {object (PushConfig)},&quot;bigqueryConfig&quot;: {object (BigQueryConfig)},&quot;cloudStorageConfig&quot;: {object (CloudStorageConfig)},&quot;ackDeadlineSeconds&quot;: integer,&quot;retainAckedMessages&quot;: boolean,&quot;messageRetentionDuration&quot;: string,&quot;labels&quot;: {string: string,...},&quot;enableMessageOrdering&quot;: boolean,&quot;expirationPolicy&quot;: {object (ExpirationPolicy)},&quot;filter&quot;: string,&quot;deadLetterPolicy&quot;: {object (DeadLetterPolicy)},&quot;retryPolicy&quot;: {object (RetryPolicy)},&quot;detached&quot;: boolean,&quot;enableExactlyOnceDelivery&quot;: boolean,&quot;messageTransforms&quot;: [{object (MessageTransform)}],&quot;tags&quot;: {string: string,...}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;pushConfig&quot;: {object (PushConfig)},&quot;bigqueryConfig&quot;: {object (BigQueryConfig)},&quot;cloudStorageConfig&quot;: {object (CloudStorageConfig)},&quot;bigtableConfig&quot;: {object (BigtableConfig)},&quot;ackDeadlineSeconds&quot;: integer,&quot;retainAckedMessages&quot;: boolean,&quot;messageRetentionDuration&quot;: string,&quot;labels&quot;: {string: string,...},&quot;enableMessageOrdering&quot;: boolean,&quot;expirationPolicy&quot;: {object (ExpirationPolicy)},&quot;filter&quot;: string,&quot;deadLetterPolicy&quot;: {object (DeadLetterPolicy)},&quot;retryPolicy&quot;: {object (RetryPolicy)},&quot;detached&quot;: boolean,&quot;enableExactlyOnceDelivery&quot;: boolean,&quot;messageTransforms&quot;: [{object (MessageTransform)}],&quot;tags&quot;: {string: string,...}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -192,7 +202,7 @@ Fields
 
 `string`
 
-Required. Name of the subscription. Format is `projects/{project}/subscriptions/{sub}` .
+Required. Identifier. Name of the subscription. Format is `projects/{project}/subscriptions/{sub}` .
 
 `pushConfig`
 
@@ -211,6 +221,12 @@ Optional. If delivery to BigQuery is used with this subscription, this field is 
 ` object ( CloudStorageConfig  ` )
 
 Optional. If delivery to Google Cloud Storage is used with this subscription, this field is used to configure it.
+
+`bigtableConfig`
+
+` object ( BigtableConfig  ` )
+
+Optional. If delivery to Bigtable is used with this subscription, this field is used to configure it.
 
 `ackDeadlineSeconds`
 
@@ -307,7 +323,7 @@ Optional. Transforms to be applied to messages before they are delivered to subs
 
 `map (key: string, value: string)`
 
-Optional. Input only. Immutable. Tag keys/values directly bound to this resource. For example: "123/environment": "production", "123/costCenter": "marketing"
+Optional. Input only. Immutable. Tag keys/values directly bound to this resource. For example: "123/environment": "production", "123/costCenter": "marketing" See [https://{$universe.dns\_names.final\_documentation\_domain}/pubsub/docs/tags](https://%7B$universe.dns_names.final_documentation_domain%7D/pubsub/docs/tags) for more information on using tags with Pub/Sub resources.
 
 An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
@@ -649,6 +665,59 @@ Optional. When true, write the subscription name, message\_id, publish\_time, at
 
 Optional. When true, the output Cloud Storage file will be serialized using the topic schema, if it exists.
 
+## BigtableConfig
+
+Configuration for a Bigtable subscription. The Pub/Sub message will be written to a Bigtable row as follows: - row key: subscription name, message ID hash, and message ID delimited by `#` . - columns: message bytes written to a single column family `data` with an empty-string column qualifier. - cell timestamp: the message publish timestamp.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;table&quot;: string,
+  &quot;appProfileId&quot;: string,
+  &quot;serviceAccountEmail&quot;: string,
+  &quot;writeMetadata&quot;: boolean
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`table`
+
+`string`
+
+Optional. The unique name of the table to write messages to.
+
+Values are of the form `projects/<project>/instances/<instance>/tables/<table>` .
+
+`appProfileId`
+
+`string`
+
+Optional. The app profile to use for the Bigtable writes. If not specified, the "default" application profile will be used. The app profile must use single-cluster routing.
+
+`serviceAccountEmail`
+
+`string`
+
+Optional. The service account to use to write to Bigtable. The subscription creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/%7B$universe.dns_names.final_documentation_domain%7D/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
+
+`writeMetadata`
+
+`boolean`
+
+Optional. When true, write the subscription name, message\_id, publish\_time, attributes, and ordering\_key to additional columns in the table under the pubsub\_metadata column family. The subscription name, message\_id, and publish\_time fields are put in their own columns while all other message properties (other than data) are written to a JSON object in the attributes column.
+
 ## ExpirationPolicy
 
 A policy that specifies the conditions for resource expiration (i.e., automatic resource deletion).
@@ -792,7 +861,7 @@ All supported message transforms types.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;enabled&quot;: boolean,&quot;disabled&quot;: boolean,// Union field transform can be only one of the following:&quot;javascriptUdf&quot;: {object (JavaScriptUDF)}// End of list of possible types for union field transform.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;enabled&quot;: boolean,&quot;disabled&quot;: boolean,// Union field transform can be only one of the following:&quot;javascriptUdf&quot;: {object (JavaScriptUDF)},&quot;aiInference&quot;: {object (AIInference)},&quot;compression&quot;: {object (Compression)}// End of list of possible types for union field transform.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -820,6 +889,18 @@ Union field `transform` . The type of transform to apply to messages. `transform
 ` object ( JavaScriptUDF  ` )
 
 Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's are specified on a resource, each must have a unique `functionName` .
+
+`aiInference`
+
+` object ( AIInference  ` )
+
+Optional. AI Inference. Specifies the Vertex AI endpoint that inference requests built from the Pub/Sub message data and provided parameters will be sent to.
+
+`compression`
+
+` object ( Compression  ` )
+
+Optional. Compression/Decompression.
 
 ## JavaScriptUDF
 
@@ -885,3 +966,143 @@ Required. JavaScript code that contains a function `functionName` with the below
   function <functionName>(message, metadata) {
   }
 ```
+
+## AIInference
+
+Configuration for making inference requests against Vertex AI models.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;endpoint&quot;: string,&quot;serviceAccountEmail&quot;: string,// Union field inference_mode can be only one of the following:&quot;unstructuredInference&quot;: {object (UnstructuredInference)}// End of list of possible types for union field inference_mode.}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`endpoint`
+
+`string`
+
+Required. An endpoint to a Vertex AI model of the form `projects/{project}/locations/{location}/endpoints/{endpoint}` or `projects/{project}/locations/{location}/publishers/{publisher}/models/{model}` . Vertex AI API requests will be sent to this endpoint.
+
+`serviceAccountEmail`
+
+`string`
+
+Optional. The service account to use to make prediction requests against endpoints. The resource creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/%7B$universe.dns_names.final_documentation_domain%7D/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
+
+Union field `inference_mode` . The format of inference requests made to the endpoint. `inference_mode` can be only one of the following:
+
+`unstructuredInference`
+
+` object ( UnstructuredInference  ` )
+
+Optional. Requests and responses can be any arbitrary JSON object.
+
+## UnstructuredInference
+
+Configuration for making inferences using arbitrary JSON payloads.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;parameters&quot;: {
+    object
+  }
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`parameters`
+
+` object ( Struct  ` format)
+
+Optional. A parameters object to be included in each inference request. The parameters object is combined with the data field of the Pub/Sub message to form the inference request.
+
+## Compression
+
+Configuration for compressing/decompressing message data using a user-specified compression algorithm.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;compressionAlgorithm&quot;: enum (CompressionAlgorithm),&quot;compressionMode&quot;: enum (CompressionMode)}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`compressionAlgorithm`
+
+` enum ( CompressionAlgorithm  ` )
+
+Required. Specifies the compression algorithm to use.
+
+`compressionMode`
+
+` enum ( CompressionMode  ` )
+
+Required. Specifies whether to compress or decompress the message.
+
+## CompressionAlgorithm
+
+The compression algorithm to use.
+
+Enums
+
+`COMPRESSION_ALGORITHM_UNSPECIFIED`
+
+Unspecified algorithm.
+
+`ZLIB`
+
+ZLIB compression.
+
+## CompressionMode
+
+The mode of the compression SMT.
+
+Enums
+
+`COMPRESSION_MODE_UNSPECIFIED`
+
+Unspecified mode.
+
+`COMPRESS`
+
+Compress.
+
+`DECOMPRESS`
+
+Decompress.

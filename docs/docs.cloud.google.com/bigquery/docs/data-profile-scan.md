@@ -1751,4 +1751,4 @@ To delete a data profile scan, use the [`dataScans.delete` method](https://docs.
   - Learn how to [explore your data by generating data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
   - Learn more about [data governance in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-governance) .
   - Learn how to [scan your data for data quality issues](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) .
-  - Learn how to examine table data and create queries with [table explorer](https://docs.cloud.google.com/bigquery/docs/table-explorer) .
+  - Learn how to preview schema details and construct queries with the [Reference panel](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) .

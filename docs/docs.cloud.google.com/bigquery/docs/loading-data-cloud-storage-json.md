@@ -1376,4 +1376,4 @@ To change how BigQuery parses JSON data, specify additional options in the Googl
 ## What's next
 
   - For information about loading JSON data from a local file, see [Loading data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_data_from_local_files) .
-  - For more information about creating, ingesting, and querying JSON data, see [Working with JSON data in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/json-data) .
+  - For more information about creating, ingesting, and querying JSON data, see [Work with JSON data in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/json-data) .

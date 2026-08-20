@@ -65,7 +65,7 @@ As a data contributor, you configure analysis rules on the resources that you sh
 
 #### Query templates
 
-[Query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) [(Preview)](https://cloud.google.com/products#product-launch-stages) let data clean room owners and BigQuery sharing publishers share predefined queries without sharing the underlying resources of tables and views.
+[Query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) let data clean room owners and BigQuery sharing publishers share predefined queries without sharing the underlying resources of tables and views.
 
 Predefined queries use [table-valued functions (TVFs)](https://docs.cloud.google.com/bigquery/docs/table-functions) in BigQuery that allow an entire table or specific fields to pass as input parameters and return a table as the output.
 

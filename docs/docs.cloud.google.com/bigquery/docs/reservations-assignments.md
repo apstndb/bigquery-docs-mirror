@@ -24,7 +24,7 @@ Projects use the single most specific reservation in the resource hierarchy to w
 
 2.  **User-specific assignments using the `principal` property ( [Preview](https://cloud.google.com/products#product-launch-stages) ):** BigQuery reservation assignments support an optional `principal` property, which lets administrators route queries to specific reservations based on the identity of the user or service account executing the job. Within a specific assignee resource, an assignment with a matching principal takes priority over a generic assignment where the principal is unset.
     
-    The default per-project limit of user-specific assignments is 10. For help changing the default limit, contact <bigquery-wlm-feedback@google.com> .
+    The default per-project limit of user-specific assignments is 100. For help changing the default limit, contact <bigquery-wlm-feedback@google.com> .
     
     > **Tip:** To ensure that a specific user is routed correctly despite a project-level generic assignment, create another user-specific assignment at that same project level.
 

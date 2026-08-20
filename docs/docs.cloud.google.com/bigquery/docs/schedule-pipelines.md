@@ -22,26 +22,26 @@ Before you begin, [create a pipeline](https://docs.cloud.google.com/bigquery/doc
 
 ### Enable pipeline scheduling
 
-To schedule pipelines, you must grant the following role to the custom service account that you plan to use for pipeline schedules:
+To schedule pipelines, you must grant the following role to the custom service accounts that you plan to use for pipeline schedules:
 
   - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
     Follow [Grant a single role on a service account](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#grant-single-role) to add your service account as a principal to itself. In other words, add the service account as a principal to the same service account. Then, grant the Service Account User role to this principal.
 
-If your pipeline contains SQL queries, you must grant the following roles to the service account that you plan to use for pipeline schedules:
+If your pipeline contains SQL queries, you must grant the following roles to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
 
   - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Job User role to your service account on projects from which your pipelines read data.
+    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Job User role to the custom service accounts or Google Accounts on projects from which your pipelines read data.
   - [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Viewer role to your service account on projects from which your pipelines read data.
+    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Viewer role to the custom service accounts or Google Accounts on projects from which your pipelines read data.
   - [BigQuery Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Editor role to your service account on projects to which your pipelines write data.
+    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Editor role to the custom service accounts or Google Accounts on projects to which your pipelines write data.
 
-If your pipeline contains notebooks, you must grant the following roles to the service account that you plan to use for pipeline schedules:
+If your pipeline contains notebooks, you must grant the following roles to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
 
   - [Notebook Executor User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookExecutorUser) ( `roles/aiplatform.notebookExecutorUser` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Notebook Executor User role to your service account on the selected project.
+    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Notebook Executor User role to the custom service accounts or Google Accounts on the selected project.
   - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )  
-    Follow [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add your service account as a principal to the Cloud Storage bucket that you plan to use for storing output of notebooks executed in scheduled pipeline runs, and grant the Storage Admin role to this principal.
+    Follow [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add the custom service accounts or Google Accounts as principals to the Cloud Storage bucket that you plan to use for storing the output of notebooks executed in scheduled pipeline runs, and then grant the Storage Admin role to these principals.
 
 Additionally, you must grant the following roles to the default Dataform service agent:
 
@@ -49,6 +49,11 @@ Additionally, you must grant the following roles to the default Dataform service
     Follow [Grant token creation access to a service account](https://docs.cloud.google.com/dataform/docs/access-control#grant-token-creation-access) to add the default Dataform service agent as a principal to your service account, and grant the Service Account Token Creator role to this principal.
   - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
     Follow [Grant or revoke multiple IAM roles using Google Cloud console](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#multiple-roles-console) to grant the Service Account User role to the default Dataform service agent on the custom service account.
+
+To enable metadata enrichment in Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ), you must enable the [Dataplex API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com) . Additionally, you must grant the following role on the project or on the `@bigquery` entry group to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
+
+  - [Dataplex Catalog Editor role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )  
+    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Dataplex Catalog Editor role to the custom service accounts or Google Accounts on the project or `@bigquery` entry group.
 
 To learn more about service accounts in Dataform, see [About service accounts in Dataform](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) .
 
@@ -66,12 +71,15 @@ For detailed configuration steps and security considerations, see [Configure VPC
 
 To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles:
 
-  - Delete pipelines: [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Admin) ( `roles/dataform.Admin` ) on the pipeline
-  - Create, edit, run, and delete pipeline schedules:
-      - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Admin) ( `roles/dataform.Admin` ) on the pipeline
-      - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
-  - View and run pipelines: [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Viewer) ( `roles/dataform.Viewer` ) on the project
-  - View pipeline schedules: [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Editor) ( `roles/dataform.Editor` ) on the project
+  - View and manage schedules:
+      - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `roles/dataform.admin` ) on the pipeline
+      - [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.editor) ( `roles/dataform.editor` ) on the project
+  - View and run pipelines:
+      - [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.viewer) ( `roles/dataform.viewer` ) on the project
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+  - Run a pipeline schedule with user credentials for a Google Account: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+  - Run a pipeline schedule with a custom service account: [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
+  - Enable metadata enrichment: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 

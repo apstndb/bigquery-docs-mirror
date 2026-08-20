@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 To schedule recurring data transfers from your Oracle database to BigQuery, you create a transfer configuration to specify what data objects to transfer, and how often to schedule the data transfer. After you set up the transfer configuration, the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) transfers the latest data into a BigQuery table on the specified schedule.
 
-For general information about Oracle transfers, including configuration options, see [Introduction to Oracle data transfers](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro) .
+To learn about how an Oracle transfer works, see [Introduction to Oracle data transfers](https://docs.cloud.google.com/bigquery/docs/oracle-transfer-intro) .
 
 ## Limitations
 

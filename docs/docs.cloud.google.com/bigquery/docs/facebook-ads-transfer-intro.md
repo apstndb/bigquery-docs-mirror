@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro
 uri: https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro
-title: Introduction to Facebook Ads transfers
+title: Introduction to Facebook Ads data transfers
 description: Learn how to use the BigQuery Data Transfer Service Facebook Ads connector to ingest data from Facebook Ads into BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Introduction to Facebook Ads transfers
+# Introduction to Facebook Ads data transfers
 
 You can load data from Facebook Ads to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Facebook Ads connector. With BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Facebook Ads to BigQuery.
 

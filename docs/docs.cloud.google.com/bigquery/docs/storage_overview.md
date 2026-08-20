@@ -8,8 +8,6 @@ data_source: docs.cloud.google.com
 
 # Overview of BigQuery storage
 
-This page describes the storage component of BigQuery.
-
 BigQuery storage is optimized for running analytic queries over large datasets. It also supports high-throughput streaming ingestion and high-throughput reads. Understanding BigQuery storage can help you to optimize your workloads.
 
 ## Overview
@@ -74,7 +72,16 @@ Another advantage of column-oriented databases is that data within a column typi
 
 ## Storage billing models
 
-You can be billed for BigQuery data storage in either logical or physical (compressed) bytes, or a combination of both. The storage billing model you choose determines your [storage pricing](https://cloud.google.com/bigquery/pricing#storage) . The storage billing model you choose doesn't impact BigQuery performance. Whichever billing model you choose, your data is stored as physical bytes.
+BigQuery offers two storage billing models: **logical** (uncompressed) and **physical** (compressed).
+
+Changing your storage billing model only changes the metering configuration. It does not involve data migration, file format conversion, or any infrastructure changes. Your data is always stored in the same compressed physical format. Changing this setting has no impact on query performance, latency, or integration with other applications, such as Looker.
+
+The model you select determines only how your stored bytes are measured and priced according to [storage pricing](https://cloud.google.com/bigquery/pricing#storage) :
+
+  - **Logical billing:** You are billed based on the uncompressed size of the data. This is the default model.
+  - **Physical billing:** You are billed based on the compressed size of the data on disk.
+
+Whichever billing model you choose, your data is stored as physical bytes.
 
 You set the storage billing model at the dataset level. If you don't specify a storage billing model when you create a dataset, it defaults to using logical storage billing. However, you can [change a dataset's storage billing model](https://docs.cloud.google.com/bigquery/docs/updating-datasets#update_storage_billing_models) after you create it. If you change a dataset's storage billing model, you must wait 14 days before you can change the storage billing model again.
 

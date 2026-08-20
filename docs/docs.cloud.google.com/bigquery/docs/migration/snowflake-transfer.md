@@ -26,7 +26,7 @@ Data transfers made using the Snowflake connector are subject to the following l
 
   - The Snowflake connector only supports transfers from tables within a single Snowflake database and schema. To transfer from tables with multiple Snowflake databases or schemas, you can set up each transfer job separately.
   - The speed of loading data from Snowflake to your Amazon S3 bucket or Azure Blob Storage container or Cloud Storage bucket is limited by the Snowflake warehouse you have chosen for this transfer.
-  - BigQuery writes data from Snowflake to Cloud Storage as Parquet files. Parquet files don't support the [`TIMESTAMP_TZ` and `TIMESTAMP_LTZ`](https://community.snowflake.com/s/article/How-To-Unload-Timestamp-data-in-a-Parquet-file) data types. If your data contains these types, you can export it to Amazon S3 as CSV files and then import the CSV files into BigQuery. For more information, see [Overview of Amazon S3 transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
+  - BigQuery writes data from Snowflake to Cloud Storage as Parquet files. Parquet files don't support the [`TIMESTAMP_TZ` and `TIMESTAMP_LTZ`](https://community.snowflake.com/s/article/How-To-Unload-Timestamp-data-in-a-Parquet-file) data types. If your data contains these types, you can export it to Amazon S3 as CSV files and then import the CSV files into BigQuery. For more information, see [Introduction to Amazon S3 data transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
 
 ## Before you begin
 

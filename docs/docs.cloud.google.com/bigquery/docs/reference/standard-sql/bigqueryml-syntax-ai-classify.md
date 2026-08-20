@@ -138,6 +138,8 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
       - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
+    
+    If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
 
   - `  OUTPUT_MODE  ` : a `STRING` value that indicates whether a single input can be classified into multiple categories. Specifying an output mode changes the return type of the function to `ARRAY<STRING>` . The supported values are the following:
     

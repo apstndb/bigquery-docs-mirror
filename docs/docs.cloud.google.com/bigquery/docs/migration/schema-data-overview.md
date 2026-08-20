@@ -170,7 +170,7 @@ For detailed information on best practices when moving data into Cloud Storage, 
 
 Load the schema and data into BigQuery, using one of the options discussed in [Choose a transfer method](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview#choose_a_transfer_method) .
 
-For more information on one-time loads, see [Introduction to loading data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage) in the BigQuery documentation. For more information on loads scheduled at regular intervals, see [Overview of Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) in the BigQuery Data Transfer Service documentation.
+For more information on one-time loads, see [Introduction to loading data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage) in the BigQuery documentation. For more information on loads scheduled at regular intervals, see [Introduction to Cloud Storage data transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) in the BigQuery Data Transfer Service documentation.
 
 #### Load data using an ETL tool
 

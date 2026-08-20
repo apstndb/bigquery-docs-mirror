@@ -45,7 +45,7 @@ Complete the tasks in this section to prepare your local environment for the tra
 #### Local machine requirements
 
   - The migration agent uses a JDBC connection with the Teradata instance and Google Cloud APIs. Ensure that network access is not blocked by a firewall.
-  - Ensure that Java Runtime Environment 8 or later is installed.
+  - To use the migration agent version 1.18.0 or later, you must install Java Runtime Environment (JRE) 21 or later. Earlier versions of the migration agent require JRE 8 or later.
   - Ensure that you have enough storage space for the extraction method you have chosen, as described in [Extraction method](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
   - If you have decided to use Teradata Parallel Transporter (TPT) extraction, ensure that the [`tbuild`](https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/July-2017/Teradata-PT-Utility-Commands/Command-Syntax/tbuild) utility is installed. For more information on choosing an extraction method, see [Extraction method](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
 
@@ -705,6 +705,8 @@ If you create a schema file manually and you intend to use the Google Cloud cons
 ### Download the migration agent
 
 [Download the migration agent](https://storage.googleapis.com/data_transfer_agent/latest/mirroring-agent.jar) to a machine which can connect to the data warehouse. Move the migration agent JAR file to the same directory as the Teradata JDBC driver JAR file.
+
+> **Note:** For migration agent versions 1.18.0 and later, you must upgrade your Java Runtime Environment (JRE) to version 21 or later.
 
 ### Setup credential file for access module
 

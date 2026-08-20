@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Use query templates
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, contact <bq-data-sharing-feedback@google.com> .
-
 BigQuery data clean room query templates accelerate time to insight and provide additional layers of security and control to minimize data exfiltration concerns. By predefining and limiting the queries that can be executed in data clean rooms, you can do the following:
 
   - **Help prevent the leakage of sensitive data** . When data clean room subscribers run queries in a clean room, greater flexibility to explore can increase the risk of accidental or intentional exposure of sensitive information for data owners.

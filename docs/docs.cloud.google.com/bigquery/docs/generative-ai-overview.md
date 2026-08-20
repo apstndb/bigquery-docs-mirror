@@ -154,6 +154,8 @@ To specify a specific endpoint, use a fully qualified multi-regional endpoint na
   - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
   - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
 
+If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
+
 ## Pricing
 
 You are charged for the compute resources that you use to run queries against models. Remote models make calls to Agent Platform models, so queries against remote models also incur charges from Agent Platform.

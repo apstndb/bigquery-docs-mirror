@@ -112,6 +112,8 @@ This function passes your input to a Gemini model and incurs charges in Gemini E
       - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
       - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
+    
+    If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
 
   - `  MAX_ERROR_RATIO  ` : a `FLOAT64` value between `0.0` and `1.0` that contains the maximum acceptable ratio of row-level inference failures to rows processed on this function. If this value is exceeded, then the query fails and BigQuery returns an error message that describes the most frequent types of errors. For example, if the value is `0.3` then the query fails if more than 30% of rows processed have failed to return results. If `max_error_ratio` is set for multiple functions, the query fails if the ratio is exceeded on any function. The default value is `1.0` . However, the query still fails if inference fails for every row.
 

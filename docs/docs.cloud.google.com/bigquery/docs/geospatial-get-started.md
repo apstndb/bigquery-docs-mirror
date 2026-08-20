@@ -274,6 +274,6 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 ## What's next
 
   - To learn more about visualization options for geospatial analytics, see [Visualizing geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize) .
-  - To learn more about working with geospatial analytics data, see [Working with geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data) .
+  - To learn more about working with geospatial analytics data, see [Work with geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data) .
   - For a tutorial on using geospatial analytics, see [Using geospatial analytics to plot a hurricane's path](https://docs.cloud.google.com/bigquery/docs/geospatial-tutorial-hurricane) .
   - For documentation on GoogleSQL functions in geospatial analytics, see [Geography functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .

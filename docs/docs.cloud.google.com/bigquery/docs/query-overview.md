@@ -38,7 +38,7 @@ BigQuery can help you understand your data before you start writing SQL queries.
 
   - [**Knowledge Catalog.**](https://docs.cloud.google.com/bigquery/docs/search-resources) Find Google Cloud resources from within BigQuery, such as datasets and tables.
 
-  - [**Table explorer.**](https://docs.cloud.google.com/bigquery/docs/table-explorer) Visually explore the range and frequency of values in your table and interactively build queries.
+  - [**Reference panel.**](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) Preview the schema details of tables, snapshots, views, and materialized views, and construct new queries or edit existing queries.
 
   - [**Data insights.**](https://docs.cloud.google.com/bigquery/docs/data-insights) Generate natural language questions about your data, along with the SQL queries to answer those questions.
 
@@ -194,7 +194,7 @@ In addition to running queries in BigQuery, you can analyze your data with vario
 
   - **Data Studio.** After you run a query, you can launch Data Studio directly from BigQuery in the Google Cloud console. Then, in Data Studio you can create visualizations and explore the data that's returned from the query. For information about Data Studio, see [Data Studio overview](https://lookerstudio.google.com/overview) .
 
-  - **Connected Sheets.** You can also launch Connected Sheets directly from BigQuery in the console. Connected Sheets runs BigQuery queries on your behalf either upon your request or on a defined schedule. Results of those queries are saved in your spreadsheet for analysis and sharing. For information about Connected Sheets, see [Using connected sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
+  - **Connected Sheets.** You can also launch Connected Sheets directly from BigQuery in the console. Connected Sheets runs BigQuery queries on your behalf either upon your request or on a defined schedule. Results of those queries are saved in your spreadsheet for analysis and sharing. For information about Connected Sheets, see [Use Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
 
   - **Tableau.** You can [connect to a dataset from Tableau](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau) . Use BigQuery to power your charts, dashboards, and other data visualizations.
 

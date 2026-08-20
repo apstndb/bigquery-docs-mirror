@@ -702,7 +702,7 @@ Gather the information that you need to set up the migration with the BigQuery D
 
 ### Assess your data
 
-As part of the data transfer, BigQuery Data Transfer Service writes data from Amazon Redshift to Cloud Storage as CSV files. If these files contain the ASCII 0 character, they can't be loaded into BigQuery. We suggest you assess your data to determine if this could be an issue for you. If it is, you can work around this by exporting your data to Amazon S3 as Parquet files, and then importing those files by using BigQuery Data Transfer Service. For more information, see [Overview of Amazon S3 transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
+As part of the data transfer, BigQuery Data Transfer Service writes data from Amazon Redshift to Cloud Storage as CSV files. If these files contain the ASCII 0 character, they can't be loaded into BigQuery. We suggest you assess your data to determine if this could be an issue for you. If it is, you can work around this by exporting your data to Amazon S3 as Parquet files, and then importing those files by using BigQuery Data Transfer Service. For more information, see [Introduction to Amazon S3 data transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
 
 ## Set up an Amazon Redshift transfer
 

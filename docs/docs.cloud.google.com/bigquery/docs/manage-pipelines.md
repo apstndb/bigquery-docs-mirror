@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/manage-pipelines
 uri: https://docs.cloud.google.com/bigquery/docs/manage-pipelines
 title: Manage pipelines
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to manage BigQuery pipelines, including scheduling, deletion, and monitoring.
 data_source: docs.cloud.google.com
 ---
 
@@ -23,18 +23,26 @@ Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/
 
 To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles:
 
+  - To view and run pipelines:
+      - [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Viewer) ( `roles/dataform.Viewer` ) on the project
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+  - To run pipelines with user credentials for a Google Account: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project or specific BigQuery datasets
   - To delete pipelines: [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Admin) ( `roles/dataform.Admin` ) on the pipeline
-  - To view and run pipelines: [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Viewer) ( `roles/dataform.Viewer` ) on the project
+  - To view and manage metadata in Knowledge Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-To manage pipeline metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles)
-
 For more information about Dataform IAM, see [Control access with IAM](https://docs.cloud.google.com/dataform/docs/access-control) .
 
 > **Note:** When you create a pipeline, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that pipeline. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all pipelines created in the project.
+
+If you use a custom service account to run pipelines, you must grant the following roles to that service account:
+
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project or specific BigQuery datasets
+  - [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
 
 ## View all pipelines
 
@@ -130,6 +138,28 @@ Knowledge Catalog logs pipelines as [entries](https://docs.cloud.google.com/data
     The type for data canvases is `WORKFLOW` . This type lets you filter pipelines in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=WORKFLOW` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
 For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Knowledge Catalog documentation.
+
+### Metadata enrichment and data quality scorecard integration
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To provide feedback or request support for this feature, send an email to <bq-pipelines-preview-support@google.com> .
+
+Dataform can publish the following metadata to Knowledge Catalog:
+
+  - Overview aspect type
+  - Generic aspect type
+  - Data quality scorecard aspect type
+
+Dataform assertions are automatically integrated with the [Knowledge Catalog data quality scorecard](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#data-quality-scorecard) . During pipeline execution, the results of any Dataform assertions are automatically published to Knowledge Catalog. These results populate the Knowledge Catalog data quality scorecard with a pass or fail status.
+
+> **Note:** Each execution overwrites existing data quality scorecards published by prior Dataform runs, but doesn't affect scorecards created by Knowledge Catalog data scans.
+
+To check the status of a metadata update, follow the instructions in [View past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
+
+After the metadata has been synchronized, you can search for and view the entry in Knowledge Catalog. For more information, see [Search for resources](https://docs.cloud.google.com/dataplex/docs/search-assets#search-data-assets) .
 
 ## What's next
 

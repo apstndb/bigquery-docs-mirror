@@ -12,7 +12,7 @@ You can use BigQuery pipelines to automate and streamline your BigQuery data pro
 
 ## Overview
 
-Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
+Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . In addition to executing code assets, Dataform automatically updates metadata in Knowledge Catalog for tables created within a pipeline.
 
 A pipeline consists of one or more of the following code assets:
 
@@ -24,6 +24,12 @@ A pipeline consists of one or more of the following code assets:
 You can use pipelines to schedule the execution of code assets. For example, you can schedule a SQL query to run daily and update a table with the most recent source data, which can then power a dashboard.
 
 In a pipeline with multiple code assets, you define the execution sequence. For example, to train a machine learning model, you can create a workflow in which a SQL query prepares data, and then a subsequent notebook trains the model using that data.
+
+When you trigger a pipeline run, BigQuery executes the actions in the order defined by their dependencies. For each action, BigQuery performs the following steps:
+
+1.  Executes the compiled SQL in BigQuery.
+2.  Updates the action status in the execution log.
+3.  Upon successful completion of an action, Dataform automatically initiates a metadata sync to Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process updates Knowledge Catalog with the semantic metadata defined in your SQLX configuration. The sync happens asynchronously and utilizes a retry mechanism, ensuring that metadata updates don't impact your pipeline latency or lead to workflow failures if the Dataplex API is temporarily unavailable.
 
 ## Capabilities
 

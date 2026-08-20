@@ -5557,7 +5557,7 @@ The `ALTER TABLE RENAME TO` statement recreates the table in the destination dat
 ### Details
 
   - If you want to rename a table that has data streaming into it, you must stop the streaming, commit any pending streams, and wait for BigQuery to indicate that streaming is not in use.
-  - While a table can usually be renamed 5 hours after the last streaming operation, it might take longer.
+  - While a table can usually be renamed 5 hours after the last streaming operation, it might take longer. In some cases, the wait time can be up to 8 days.
   - Existing table ACLs and row access policies are preserved, but table ACL and row access policy updates made during the table rename are not preserved.
   - You can't concurrently rename a table and run a DML statement on that table.
   - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) on the table.

@@ -16,7 +16,7 @@ data_source: docs.cloud.google.com
 
 To schedule recurring data transfers from Klaviyo to BigQuery, create a transfer configuration to specify what data objects to transfer, and how often to schedule the data transfer. You can create a transfer configuration using either the Google Cloud console or the `bq` command-line tool. Once you have set up the transfer configuration, the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) transfers the latest data into a BigQuery table on the specified schedule.
 
-To learn about how a Klaviyo transfer works, see [Introduction to Klaviyo transfers](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro) .
+To learn about how a Klaviyo transfer works, see [Introduction to Klaviyo data transfers](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro) .
 
 ## Before you begin
 

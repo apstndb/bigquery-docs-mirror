@@ -538,11 +538,11 @@ This option accepts the following values:
     
     The data is sorted smallest to largest based on the specified column.
     
-    When you aren't running hyperparameter tuning, the first n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
+    When you aren't running hyperparameter tuning, the last n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
     
-    When you are running hyperparameter tuning, the first n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The next m rows are used as test data, where m is the value specified for `DATA_SPLIT_TEST_FRACTION` . The remaining rows are used as training data.
+    When you are running hyperparameter tuning, the last m rows are used as test data, where m is the value specified for `DATA_SPLIT_TEST_FRACTION` . The second last n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
     
-    All rows with split values smaller than the threshold are used as training data. The remaining rows, including `NULLs` , are used as evaluation data.
+    All rows with split values smaller than the threshold, including `NULL` s, are used as training data. The remaining rows are used as evaluation data.
     
     Use the `DATA_SPLIT_COL` option to identify the column that contains the data split information.
 
@@ -592,7 +592,7 @@ The name of the column to use to sort input data into the training, evaluation, 
 
   - If you aren't running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_eval_fraction) . The remaining rows are used as training data.
   - If you aren't running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
-  - If you are running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_eval_fraction) . The next m rows are used as test data, where m is the value specified for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_test_fraction) . The remaining rows are used as training data.
+  - If you are running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last m rows are used as test data, where m is the value specified for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_test_fraction) . The second last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#data_split_eval_fraction) . The remaining rows are used as training data.
   - If you are running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
 
 The column you specify for `DATA_SPLIT_COL` can't be used as a feature or label, and is excluded from features automatically.

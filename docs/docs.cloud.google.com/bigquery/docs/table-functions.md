@@ -37,12 +37,6 @@ To filter in other ways, you can pass multiple parameters to a table function. T
 
 ### Table parameters
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-Note: To request support or provide feedback for this feature, email <bq-dcr-eng@google.com> .
-
 You can set TVF parameters to be tables. Following the table parameter name, you must specify the required table schema explicitly, the same way that you specify the fields of a struct. The table argument that you pass to the TVF can contain additional columns besides those specified in the parameter schema, and the columns can appear in any order.
 
 The following table function returns a table that contains total sales for `item_name` from the `orders` table:
@@ -55,6 +49,19 @@ The following table function returns a table that contains total sales for `item
       WHERE item = item_name
       GROUP BY item
     );
+
+Using the `ANY TABLE` type in a TVF lets you create generic functions that accept tables of any structure. Unlike fixed tables—where you must define every column and data type—the `ANY TABLE` type acts as a placeholder, making the function reusable with different datasets. However, the table you pass in must still contain the specific columns used inside the function. For example, if your function filters by `created_date` , your input table must have that column, or the query will fail.
+
+    -- Simple pass-through (accepts any table, as used in your devstack)
+    CREATE OR REPLACE TABLE FUNCTION dataset_test.MyTVF(input_table ANY TABLE)
+    AS
+    SELECT * FROM input_table;
+    
+    -- Generic filter (accepts any table, but implicitly requires a 'status' column)
+    CREATE TEMP TABLE FUNCTION FilterByStatus(input_table ANY TABLE, status_val STRING)
+    AS
+    SELECT * FROM input_table
+    WHERE status = status_val;
 
 ### Parameter names
 

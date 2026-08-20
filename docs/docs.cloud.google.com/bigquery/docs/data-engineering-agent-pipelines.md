@@ -84,7 +84,7 @@ This predefined role contains the `geminidataanalytics.locations.useDataEngineer
 
 You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-You must also enable the [Knowledge Catalog API](https://console.cloud.google.com/apis/enableflow?apiid=dataplex.googleapis.com) .
+If you use a custom service account to run pipelines, you must grant the [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) role on the project or `@bigquery` entry group. Additionally, you must enable the [Dataplex API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com) .
 
 ### Encrypt data with Cloud Key Management Service keys
 

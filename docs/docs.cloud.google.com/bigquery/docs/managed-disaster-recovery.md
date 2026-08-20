@@ -30,35 +30,35 @@ The following diagram shows the architecture of managed disaster recovery:
 
 The following limitations apply to BigQuery disaster recovery:
 
-  - Once a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. However, you can read from datasets attached to a failover reservation using any capacity model.
-
   - BigQuery disaster recovery is subject to the same limitations as [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#limitations) .
 
-  - Autoscaling after a failover depends on compute capacity availability in the secondary region. Only the reservation baseline is available in the secondary region.
+  - A failover reservation can have a maximum of 1,000 attached datasets.
 
-  - The [`INFORMATION_SCHEMA.RESERVATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't have failover details.
+  - You can't convert an existing reservation to a failover reservation if the reservation has more than 1,000 [reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) .
 
-  - The primary region's data in the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) isn't replicated to the secondary region. This view only contains the job history for the specific region where the jobs were executed. In the event of a failover, job history from the primary region isn't visible in the secondary region using the `INFORMATION_SCHEMA.JOBS` view.
+  - If queries reference datasets attached to multiple failover reservations within the same administration project, all of those reservations must use the same secondary location.
 
-  - If you have multiple failover reservations with the same administration project but whose attached datasets use different secondary locations, don't use one failover reservation with the datasets attached to a different failover reservation.
+  - Once a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from attached datasets using any capacity model.
 
-  - If you want to convert an existing reservation to a failover reservation, the existing reservation can't have more than 1,000 [reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) .
+  - For datasets using disaster recovery, load and extract jobs can't use the free shared slot pool. You must create a `PIPELINE` type reservation assignment because only the Enterprise Plus edition supports writing to disaster recovery-configured datasets.
 
-  - A failover reservation can't have more than 1,000 datasets attached to it.
+  - After a failover, autoscaling depends on compute capacity availability in the secondary region. Only the reservation baseline is available in the secondary region.
 
-  - Soft failover can only be triggered if both the source and destination regions are available.
+  - If replication fails during the initial creation of resources, the reservation isn't created in the secondary region, and neither hard nor soft failover is available.
 
-  - If replication fails during the initial creation of the resources, the reservation won't be created in the secondary location, meaning neither hard nor soft failover will be available.
+  - Soft failover requires both the primary and secondary regions to be available.
 
-  - Soft failover cannot be triggered if reservation configuration changes have not been successfully replicated to the secondary region. Any errors during reservation replication, such as insufficient slot quota in the secondary region or other transient issues will prevent the soft failover from being initiated.
+  - You can't initiate a soft failover if reservation configuration changes have not replicated to the secondary region. Any replication errors, such as insufficient slot quota in the secondary region or transient issues, prevent soft failover from starting.
 
-  - The reservation and attached datasets cannot be updated during an active soft failover but they can still be read from.
+  - During an active soft failover, you can't update the reservation or attached datasets, but you can still read from them.
 
-  - Jobs running on a failover reservation during an active soft failover may not run on the reservation due to transient changes in the dataset and reservation routing during the failover operation. However these jobs will use the reservation slots before any soft failover is initiated and after it completes.
+  - Jobs running on a failover reservation during an active soft failover might not use reservation slots due to transient routing changes during the failover operation. These jobs use reservation slots before the soft failover starts and once it completes.
 
-  - For datasets using BigQuery disaster recovery, load and extract jobs cannot use the free shared slot pool. You must create a `PIPELINE` type reservation assignment, as only the Enterprise Plus edition supports writing to MDR configured datasets. This requirement ensures that all data ingestion is handled by the dedicated infrastructure necessary to support MDR's cross-region replication and the recovery point objective (RPO).
+  - After a failover, [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to the new primary location because they are bound to the location specified during creation. To resume scheduled queries, you must recreate them in the new primary location.
 
-  - [Scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to the new primary location after a failover because they are bound to the location specified during their creation. To resume scheduled queries in the new primary location, you must manually recreate them in that location.
+  - The [`INFORMATION_SCHEMA.RESERVATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't include failover details.
+
+  - The [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) contains job history only for the region where jobs executed. Primary region job history isn't replicated to the secondary region. After a failover, job history from the primary region isn't visible in the secondary region.
 
 ## Locations
 

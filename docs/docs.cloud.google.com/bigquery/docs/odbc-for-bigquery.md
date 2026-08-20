@@ -91,9 +91,9 @@ You can install and configure the ODBC driver for BigQuery using either a Window
 
 2.  Extract the contents of the downloaded ZIP or TAR file.
 
-3.  Move the contents of the ZIP or TAR file to the directory where you want to install the connector. The ODBC driver for BigQuery shared object path is `  INSTALL_DIR /lib/libgoogle_cloud_odbc_bq_driver.so ` , where `  INSTALL_DIR  ` is your installation directory.
+3.  Move the contents of the ZIP or TAR file to the directory where you want to install the driver. The ODBC driver for BigQuery shared object path is `  INSTALL_DIR /lib/libgoogle_cloud_odbc_bq_driver.so ` , where `  INSTALL_DIR  ` is your installation directory.
 
-4.  Update your `.ini` files to reflect the new path of the connector.
+4.  Update your `.ini` files to reflect the new path of the driver.
     
     The following example updates the `.ini` files in a Linux system:
     
@@ -106,13 +106,22 @@ You can install and configure the ODBC driver for BigQuery using either a Window
     
     Replace `  VERSION  ` with the driver version.
 
+### Previous ODBC driver for BigQuery versions
+
+**1.3.1**
+
+  - [Windows 32-bit (x86)](https://storage.googleapis.com/bq-driver-releases/odbc/ODBCDriverforBigQuery_windows_x86_1.3.1.msi)
+  - [Windows 64-bit (x64)](https://storage.googleapis.com/bq-driver-releases/odbc/ODBCDriverforBigQuery_windows_x64_1.3.1.msi)
+  - [Linux](https://storage.googleapis.com/bq-driver-releases/odbc/ODBCDriverforBigQuery_linux_1.3.1.zip)
+  - [macOS](https://storage.googleapis.com/bq-driver-releases/odbc/ODBCDriverforBigQuery_macos_1.3.1.tar.gz)
+
 ## Establish a connection
 
 To establish a connection between your application and BigQuery with the ODBC driver for BigQuery, identify your connection string. You can skip this step if you already configured connection properties through your DSN.
 
 The connection string has the following format:
 
-    Driver=ODBC Driver for BigQuery;ProjectId=PROJECT_ID;OAuthType=AUTH_TYPE;AUTH_PROPS;OTHER_PROPS
+    Driver=ODBC Driver for BigQuery;Catalog=PROJECT_ID;OAuthMechanism=AUTH_TYPE;AUTH_PROPS;OTHER_PROPS
 
 Replace the following:
 
@@ -121,7 +130,7 @@ Replace the following:
       - `0` : for service account authentication
       - `3` : for Application Default Credential authentication
       - `4` : for Workload Identity Federation or Workforce Identity Federation authentication
-  - `AUTH_PROPS` : the authentication information that you noted when you [authenticated to BigQuery](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#before_you_begin) , listed in the `property_1=value_1; property_2=value_2;...` format—for example, `KeyFilePath=my-sa-key` , if you authenticated with a service account.
+  - `AUTH_PROPS` : the authentication information that you noted when you [authenticated to BigQuery](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#before_you_begin) , listed in the `property_1=value_1; property_2=value_2;...` format—for example, `KeyFilePath=my-sa-key.json` , if you authenticated with a service account.
   - `OTHER_PROPS` (optional): additional connection properties for the ODBC driver, listed in the `property_1=value_1; property_2=value_2;...` format. For a full list of connection properties, see [Connection properties](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#connection_properties) .
 
 ### Connection properties
@@ -150,7 +159,7 @@ ODBC driver connection properties are configuration parameters that you include 
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">AdditionalProjects</code></td>
-<td>Projects that the driver can access for queries and metadata operations, in addition to the primary project set by the <code dir="ltr" translate="no">ProjectId</code> property.</td>
+<td>Projects that the driver can access for queries and metadata operations, in addition to the primary project set by the <code dir="ltr" translate="no">Catalog</code> property.</td>
 <td>N/A</td>
 <td>Comma-separated string</td>
 <td>No</td>
@@ -164,7 +173,7 @@ ODBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">AllowLargeResults</code></td>
-<td>Determines if the driver processes query results that are larger than 128 MB when the <code dir="ltr" translate="no">QueryDialect</code> property is set to <code dir="ltr" translate="no">BIG_QUERY</code> . If the <code dir="ltr" translate="no">QueryDialect</code> property is set to <code dir="ltr" translate="no">SQL</code> , the driver always processes large query results.</td>
+<td>Determines if the driver processes query results that are larger than 128 MB when the <code dir="ltr" translate="no">SQLDialect</code> property is set to <code dir="ltr" translate="no">0</code> (legacy SQL). If the <code dir="ltr" translate="no">SQLDialect</code> property is set to <code dir="ltr" translate="no">1</code> (GoogleSQL), the driver always processes large query results.</td>
 <td><code dir="ltr" translate="no">0</code></td>
 <td>Boolean</td>
 <td>No</td>
@@ -192,7 +201,7 @@ ODBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">BYOID_SubjectTokenType</code></td>
-<td>Sets the STS token type based on the Oauth2.0 token exchange specification. Expected values include:<br />
+<td>Sets the STS token type based on the OAuth 2.0 token exchange specification. Expected values include:<br />
 
 <ul>
 <li><code dir="ltr" translate="no">urn:ietf:params:oauth:token-type:jwt</code></li>
@@ -212,22 +221,36 @@ ODBC driver connection properties are configuration parameters that you include 
 <td>No</td>
 </tr>
 <tr class="odd">
+<td><code dir="ltr" translate="no">Catalog</code></td>
+<td>The default BigQuery project ID for the driver. The driver uses this project to execute queries and bills it for resource usage.</td>
+<td>N/A</td>
+<td>String</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
 <td><code dir="ltr" translate="no">DefaultDataset</code></td>
 <td>Serves as a designated dataset within a project that the driver automatically references when you execute queries without explicitly specifying a dataset.</td>
 <td>N/A</td>
 <td>String</td>
 <td>No</td>
 </tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">EnableSession</code></td>
+<td>Determines whether a connection starts a session. When enabled, the first query run by that particular connection starts a session and the driver passes the session ID to all subsequent queries.</td>
+<td><code dir="ltr" translate="no">0</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">FilterTablesOnDefaultDataset</code></td>
-<td>Determines the scope of metadata that table or column metadata methods return. When false, no filtering occurs. You must also set the <code dir="ltr" translate="no">DefaultDataset</code> property to enable filtering.</td>
-<td><code dir="ltr" translate="no">FALSE</code></td>
+<td>Determines the scope of metadata that table or column metadata methods return. When false ( <code dir="ltr" translate="no">0</code> ), no filtering occurs. You must also set the <code dir="ltr" translate="no">DefaultDataset</code> property to enable filtering.</td>
+<td><code dir="ltr" translate="no">0</code></td>
 <td>Boolean</td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">EnableSession</code></td>
-<td>Determines whether a connection starts a session. When enabled, the first query run by that particular connection starts a session and the driver passes the session ID to all subsequent queries.</td>
+<td><code dir="ltr" translate="no">IgnoreTransactions</code></td>
+<td>When enabled ( <code dir="ltr" translate="no">1</code> or <code dir="ltr" translate="no">TRUE</code> ), the driver bypasses manual transaction handling ( <code dir="ltr" translate="no">BEGIN TRANSACTION</code> , <code dir="ltr" translate="no">COMMIT</code> , <code dir="ltr" translate="no">ROLLBACK</code> ) when <code dir="ltr" translate="no">SQL_ATTR_AUTOCOMMIT</code> is set to <code dir="ltr" translate="no">SQL_AUTOCOMMIT_OFF</code> . This is recommended for third-party BI and SQL client tools (such as Tableau, Power BI, and DBeaver) that disable autocommit by default.</td>
 <td><code dir="ltr" translate="no">0</code></td>
 <td>Boolean</td>
 <td>No</td>
@@ -246,14 +269,14 @@ ODBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">KeyFilePath</code></td>
-<td>The path to the service account key when using service account authentication.</td>
+<td>The path to the service account key JSON file when using service account authentication.</td>
 <td>N/A</td>
 <td>String</td>
 <td>Only when <code dir="ltr" translate="no">OAuthMechanism=0</code></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">KMSKeyName</code></td>
-<td>Specifies the name of the KMS key to use when encrypting and decrypting data.</td>
+<td>Specifies the Cloud KMS key resource name to use when encrypting and decrypting data.</td>
 <td>N/A</td>
 <td>String</td>
 <td>No</td>
@@ -266,22 +289,15 @@ ODBC driver connection properties are configuration parameters that you include 
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">LargeResultsDatasetExpirationTime</code></td>
-<td>Specifies the lifetime of all tables in the large results dataset, in milliseconds.</td>
+<td><code dir="ltr" translate="no">LargeResultsTempTableExpirationTime</code></td>
+<td>Specifies the lifetime of temporary tables in the <code dir="ltr" translate="no">LargeResultsDataSetId</code> , in milliseconds.</td>
 <td><code dir="ltr" translate="no">3600000</code></td>
 <td>Long</td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">Location</code></td>
-<td>Specifies the location where the driver creates or queries datasets.</td>
-<td>N/A</td>
-<td>String</td>
-<td>No</td>
-</tr>
-<tr class="even">
 <td><code dir="ltr" translate="no">LogLevel</code></td>
-<td>Limits the detail that the driver logs during interactions. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#logging">Logging</a> . Choose one of the following:<br />
+<td>Limits the detail that the driver logs during interactions. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#logging_and_driver_configuration">Logging and driver configuration</a> . Choose one of the following:<br />
 
 <ul>
 <li><code dir="ltr" translate="no">0</code> : <code dir="ltr" translate="no">OFF</code></li>
@@ -293,42 +309,42 @@ ODBC driver connection properties are configuration parameters that you include 
 <td>Integer</td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">LogPath</code></td>
-<td>Specifies the directory where the driver writes log files. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#logging">Logging</a> .</td>
+<td>Specifies the directory where the driver writes log files. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery#logging_and_driver_configuration">Logging and driver configuration</a> .</td>
 <td>N/A</td>
 <td>String</td>
 <td>No</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">LogFileCount</code></td>
 <td>Specifies the maximum number of log files to keep.</td>
 <td><code dir="ltr" translate="no">0</code></td>
 <td>Integer</td>
 <td>No</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">LogFileSize</code></td>
 <td>Specifies the maximum size of each log file in KB.</td>
 <td><code dir="ltr" translate="no">0</code></td>
 <td>Long</td>
 <td>No</td>
 </tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">MaxResults</code></td>
-<td>Specifies the number of results per page in the BigQuery API result.</td>
-<td><code dir="ltr" translate="no">10000</code></td>
-<td>Long</td>
-<td>No</td>
-</tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">MaxThreads</code></td>
-<td>Defines the maximum number of threads that the connector can use for concurrent processing in a thread pool. To configure this property as a connector-wide setting for non-Windows connectors, specify it in the <code dir="ltr" translate="no">googlebigqueryodbc.ini</code> file.</td>
-<td><code dir="ltr" translate="no">8</code></td>
+<td><code dir="ltr" translate="no">MaxRetries</code></td>
+<td>Configures the maximum number of retry attempts executed by the driver with exponential backoff upon encountering transient BigQuery REST and gRPC API errors (such as rate limits or HTTP 5xx) before returning an error.</td>
+<td><code dir="ltr" translate="no">6</code></td>
 <td>Integer</td>
 <td>No</td>
 </tr>
 <tr class="even">
+<td><code dir="ltr" translate="no">MaxThreads</code></td>
+<td>Defines the maximum number of threads that the driver can use for concurrent processing in a thread pool. To configure this property as a driver-wide setting for non-Windows environments, specify it in the <code dir="ltr" translate="no">googlebigqueryodbc.ini</code> file.</td>
+<td><code dir="ltr" translate="no">8</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
 <td><code dir="ltr" translate="no">OAuthMechanism</code></td>
 <td>The authentication type. Choose one of the following:<br />
 
@@ -340,41 +356,6 @@ ODBC driver connection properties are configuration parameters that you include 
 <td>N/A</td>
 <td>Integer</td>
 <td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ProjectId</code></td>
-<td>The default project ID for the driver. The driver uses this project to execute queries and bills it for resource usage.</td>
-<td>N/A</td>
-<td>String</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ProxyHost</code></td>
-<td>Hostname or IP address of a proxy server.</td>
-<td>N/A</td>
-<td>String</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ProxyPort</code></td>
-<td>Port number on which the proxy server is listening.</td>
-<td>N/A</td>
-<td>String</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ProxyPwd</code></td>
-<td>Password for authentication when connecting through a proxy server.</td>
-<td>N/A</td>
-<td>String</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ProxyUid</code></td>
-<td>Username for authentication when connecting through a proxy server.</td>
-<td>N/A</td>
-<td>String</td>
-<td>No</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">PrivateServiceConnectUris</code></td>
@@ -390,30 +371,107 @@ ODBC driver connection properties are configuration parameters that you include 
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">QueryDialect</code></td>
-<td>Specifies which query dialect to use. Use <code dir="ltr" translate="no">SQL</code> for GoogleSQL (highly recommended) and <code dir="ltr" translate="no">BIG_QUERY</code> for legacy SQL.</td>
-<td><code dir="ltr" translate="no">SQL</code></td>
+<td><code dir="ltr" translate="no">ProxyHost</code></td>
+<td>Hostname or IP address of a proxy server.</td>
+<td>N/A</td>
 <td>String</td>
 <td>No</td>
 </tr>
 <tr class="even">
+<td><code dir="ltr" translate="no">ProxyPort</code></td>
+<td>Port number on which the proxy server is listening.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">ProxyPwd</code></td>
+<td>Password for authentication when connecting through a proxy server.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">ProxyUid</code></td>
+<td>Username for authentication when connecting through a proxy server.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
 <td><code dir="ltr" translate="no">QueryProperties</code></td>
 <td>Configures properties which can modify the query behavior.</td>
 <td>N/A</td>
 <td>Map&lt;String, String&gt;</td>
 <td>No</td>
 </tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">RefreshToken</code></td>
+<td>OAuth refresh token stored for user authentication flows.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
 <tr class="odd">
+<td><code dir="ltr" translate="no">RowsFetchedPerBlock</code></td>
+<td>Specifies the maximum number of rows fetched per block or result page from BigQuery.</td>
+<td><code dir="ltr" translate="no">100000</code></td>
+<td>Long</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">ServiceAccountImpersonationEmail</code></td>
+<td>Specifies a target service account email address to impersonate using caller base credentials. Enables multi-tenant and least-privilege delegation workflows without distributing additional service account private keys.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">SessionLocation</code></td>
+<td>Specifies the geographic location (region or multi-region) where the driver creates or queries datasets and runs query sessions (for example, <code dir="ltr" translate="no">US</code> , <code dir="ltr" translate="no">EU</code> , or <code dir="ltr" translate="no">us-central1</code> ).</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">SQLDialect</code></td>
+<td>Specifies which query dialect to use. Use <code dir="ltr" translate="no">1</code> for GoogleSQL (standard SQL, highly recommended) and <code dir="ltr" translate="no">0</code> for legacy SQL.</td>
+<td><code dir="ltr" translate="no">1</code></td>
+<td>Integer</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">TrustedCerts</code></td>
+<td>Specifies the full path to a custom PEM-formatted SSL/TLS root CA certificates file (for example, <code dir="ltr" translate="no">roots.pem</code> or <code dir="ltr" translate="no">cacerts.pem</code> ). Overrides the default bundled certificate file.</td>
+<td>N/A</td>
+<td>String</td>
+<td>No</td>
+</tr>
+<tr class="even">
 <td><code dir="ltr" translate="no">UniverseDomain</code></td>
 <td>Specifies the universe domain for your organization.</td>
 <td><code dir="ltr" translate="no">googleapis.com</code></td>
 <td>String</td>
 <td>No</td>
 </tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">UseDefaultLargeResultsDataset</code></td>
+<td>When <code dir="ltr" translate="no">AllowLargeResults=1</code> , determines whether the driver automatically routes large query results into the default temporary dataset ( <code dir="ltr" translate="no">_bqodbc_temp_tables</code> ). When set to <code dir="ltr" translate="no">0</code> , <code dir="ltr" translate="no">LargeResultsDataSetId</code> must be explicitly specified.</td>
+<td><code dir="ltr" translate="no">1</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">UseQueryCache</code></td>
 <td>Enables the query caching feature in BigQuery.</td>
 <td><code dir="ltr" translate="no">true</code></td>
+<td>Boolean</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">UseSystemTrustStore</code></td>
+<td>Windows only. Instructs the driver to load and validate TLS certificates against the Windows Certificate Trust Store rather than looking for a local PEM file.</td>
+<td><code dir="ltr" translate="no">0</code></td>
 <td>Boolean</td>
 <td>No</td>
 </tr>
@@ -444,38 +502,51 @@ When you run queries through the ODBC driver for BigQuery, the following data ty
 | `NUMERIC`          | `SQL_NUMERIC`        |
 | `BIGNUMERIC`       | `SQL_NUMERIC`        |
 
-## Logging
+## Logging and driver configuration
 
-To enable logging with the driver, do the following:
+To configure driver-wide options (such as logging and character encoding), do the following:
 
 ### Windows
 
-Configure logging using the DSN configuration dialog in the ODBC Data Source Administrator.
+Configure logging and DSN options using the DSN configuration dialog in the ODBC Data Source Administrator.
 
 ### Non-Windows
 
-1.  Create or edit a configuration file, such as `google.bigqueryodbc.ini` , and add the logging options under the `[Driver]` section. The following is an example:
+1.  Create or edit a configuration file, such as `googlebigqueryodbc.ini` , and add driver options under the `[Driver]` section. The following is an example:
     
         [Driver]
         LogLevel=3
         LogPath=/path/to/log/directory
         LogFileCount=200
         LogFileSize=1000
+        MaxThreads=8
+        WcharEncoding=UTF-16LE
 
 2.  Set the `GOOGLEBIGQUERYODBCINI` environment variable to the path of this file:
     
-        export GOOGLEBIGQUERYODBCINI=/path/to/google.bigqueryodbc.ini
+        export GOOGLEBIGQUERYODBCINI=/path/to/googlebigqueryodbc.ini
 
 > **Note:** You might need to restart your application for the changes to take effect.
 
+### Driver logging levels
+
 The driver supports logging levels 0 to 3. We recommend starting with `LogLevel=3` (INFO) for troubleshooting.
 
-| ODBC logging level | Description                                                            |
-| ------------------ | ---------------------------------------------------------------------- |
-| 0 (OFF)            | Disables all logging.                                                  |
-| 1 (ERROR)          | Logs error events.                                                     |
-| 2 (WARNING)        | Logs warning events.                                                   |
-| 3 (INFO)           | Logs general information that describes the progress of the connector. |
+| ODBC logging level | Description                                                         |
+| ------------------ | ------------------------------------------------------------------- |
+| 0 (OFF)            | Disables all logging.                                               |
+| 1 (ERROR)          | Logs error events.                                                  |
+| 2 (WARNING)        | Logs warning events.                                                |
+| 3 (INFO)           | Logs general information that describes the progress of the driver. |
+
+### Driver-wide configuration properties (Non-Windows)
+
+The following properties can be configured under the `[Driver]` section in `googlebigqueryodbc.ini` :
+
+| **Property**    | **Description**                                                                                                                                                                                                                                                                                                                                 | **Allowed values**                | **Default value**                                 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------- |
+| `WcharEncoding` | Explicitly controls the wire encoding of `SQLWCHAR` character buffers when passing wide-character strings between the driver and the ODBC driver manager (for example, `WcharEncoding=UTF-16LE` ). This resolves character corruption and truncation issues across unixODBC (typically 2-byte UTF-16LE) and iODBC (typically 4-byte UTF-32LE ). | `UTF-8` , `UTF-16LE` , `UTF-32LE` | Empty (auto-detects based on `sizeof(SQLWCHAR)` ) |
+| `MaxThreads`    | Defines the maximum number of threads that the driver can use for concurrent processing in a thread pool.                                                                                                                                                                                                                                       | Positive integer                  | `8`                                               |
 
 ## Examples
 

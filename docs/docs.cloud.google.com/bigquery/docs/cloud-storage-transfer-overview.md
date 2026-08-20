@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview
 uri: https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview
-title: Introduction to Cloud Storage transfers
+title: Introduction to Cloud Storage data transfers
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Introduction to Cloud Storage transfers
+# Introduction to Cloud Storage data transfers
 
 The [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Cloud Storage lets you schedule recurring data loads from [Cloud Storage buckets](https://docs.cloud.google.com/storage/docs/buckets) to BigQuery. The path to the data stored in Cloud Storage and the destination table can both be [parameterized](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) , allowing you to load data from Cloud Storage buckets organized by date.
 

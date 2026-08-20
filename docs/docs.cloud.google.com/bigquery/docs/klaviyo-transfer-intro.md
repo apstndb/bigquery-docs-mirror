@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro
 uri: https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro
-title: Introduction to Klaviyo transfers
+title: Introduction to Klaviyo data transfers
 description: Learn how to use the BigQuery Data Transfer Service Klaviyo connector to ingest data from Klaviyo into BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Introduction to Klaviyo transfers
+# Introduction to Klaviyo data transfers
 
 > **Preview**
 > 

@@ -69,7 +69,7 @@ You can use the following query to append records from one table to another:
     <column3>) (SELECT * FROM <projectID>.<datasetID>.<table2>)
 ```
 
-For more information on using query results to append to or overwrite data, see [Writing query results](https://docs.cloud.google.com/bigquery/docs/writing-results#writing_query_results) .
+For more information on using query results to append to or overwrite data, see [Write query results](https://docs.cloud.google.com/bigquery/docs/writing-results#writing_query_results) .
 
 ## Browsing table data
 

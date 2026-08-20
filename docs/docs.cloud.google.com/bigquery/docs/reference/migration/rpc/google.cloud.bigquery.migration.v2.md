@@ -24,6 +24,13 @@ data_source: docs.cloud.google.com
   - `  GetMigrationWorkflowRequest  ` (message)
   - `  GreenplumDialect  ` (message)
   - `  HiveQLDialect  ` (message)
+  - `  LineageOutput  ` (message)
+  - `  LineageOutput.ProgressReport  ` (message)
+  - `  LineageOutput.ProgressReport.ProcessingStage  ` (enum)
+  - `  LineageOutput.ProgressReport.WorkSummary  ` (message)
+  - `  LineageOutput.ProgressReport.WorkSummary.State  ` (enum)
+  - `  LineageOutput.RecognizedInput  ` (message)
+  - `  LineageOutput.RecognizedInput.Type  ` (enum)
   - `  ListMigrationSubtasksRequest  ` (message)
   - `  ListMigrationSubtasksResponse  ` (message)
   - `  ListMigrationWorkflowsRequest  ` (message)
@@ -63,6 +70,8 @@ data_source: docs.cloud.google.com
   - `  SuggestionStep.RewriteTarget  ` (enum)
   - `  SuggestionStep.SuggestionType  ` (enum)
   - `  TargetSpec  ` (message)
+  - `  TaskOutput  ` (message)
+  - `  TaskOutput.State  ` (enum)
   - `  TeradataDialect  ` (message)
   - `  TeradataDialect.Mode  ` (enum)
   - `  TimeInterval  ` (message)
@@ -690,6 +699,168 @@ This type has no fields.
 
 The dialect definition for HiveQL.
 
+## LineageOutput
+
+The output of a task with output type "LINEAGE".
+
+Actual generated lineage can be queried separately (see `  webapp_uri  ` ), this message contains only metadata: processing status, errors, etc.
+
+Fields
+
+`webapp_uri`
+
+`string`
+
+The URI of the webapp that visualizes the lineage. The user needs the `bigquerymigration.googleapis.com/lineageDbs.query` IAM permission to use the webapp.
+
+`recognized_inputs[]`
+
+`  RecognizedInput  `
+
+Output only. Recognized lineage inputs.
+
+All inputs are processed only if the task succeeds and all work is in state [SUCCEEDED](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/ProgressReport.WorkSummary.State.SUCCEEDED) (in particular, nothing is [SKIPPED](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/ProgressReport.WorkSummary.State.SKIPPED) ).
+
+Even with all inputs processed successfully, there may be transpiler errors present leading to inaccurate lineage.
+
+`processing_progress_reports[]`
+
+`  ProgressReport  `
+
+Output only. Work processing progress reports broken up by processing stage.
+
+## ProgressReport
+
+Breaks down processing progress of work.
+
+Fields
+
+`processing_stage`
+
+`  ProcessingStage  `
+
+Output only. The processing stage this progress report describes.
+
+`work_summaries[]`
+
+`  WorkSummary  `
+
+Output only. Summaries of work broken up by the state of the work. Each work summary describes how much work is in the given state.
+
+To get numbers for the total work covered, aggregate the numbers from all summaries.
+
+## ProcessingStage
+
+The processing stage the progress report describes.
+
+Enums
+
+`PROCESSING_STAGE_UNSPECIFIED`
+
+The stage is not specified.
+
+`INPUT_INGESTION`
+
+The input ingestion stage.
+
+`POSTPROCESSING`
+
+The lineage DB postprocessing stage.
+
+## WorkSummary
+
+Summary of work in the given state.
+
+Fields
+
+`state`
+
+`  State  `
+
+Output only. The state of the work this summary describes.
+
+`size`
+
+`int64`
+
+Output only. Size of the work in the given State.
+
+Size counts "units of work". Units represent arbitrary division of work; there's no expectation each unit takes similar time to process.
+
+`comment`
+
+`string`
+
+Output only. Human-readable comment.
+
+## State
+
+States of work. Each piece of work is in exactly one state. \[SUCCEEDED\], \[FAILED\] and \[SKIPPED\] are terminal states; work in the \[IN\_PROGRESS\] will eventually transition to one of the terminal states.
+
+Enums
+
+`STATE_UNSPECIFIED`
+
+The state is not specified.
+
+`SUCCEEDED`
+
+Work that was processed successfully.
+
+`FAILED`
+
+Work that failed processing.
+
+`IN_PROGRESS`
+
+Work that is currently being processed or queued for processing.
+
+`SKIPPED`
+
+Work that was recognised as necessary to fully process inputs but was skipped due to system limitations.
+
+## RecognizedInput
+
+Information about lineage input of the given type that lineage generation recognized.
+
+If you expected to process more of the given input, verify your input was uploaded and is in the correct format and the request to generate lineage correctly specified the input location.
+
+Fields
+
+`type`
+
+`  Type  `
+
+Output only. The type of the input.
+
+`uncompressed_size_bytes`
+
+`int64`
+
+Output only. The uncompressed size of the recognized input of the given type.
+
+## Type
+
+Input type recognized by the lineage processing.
+
+Enums
+
+`TYPE_UNSPECIFIED`
+
+The type is not specified.
+
+`METADATA`
+
+The input is metadata.
+
+`QUERY_LOG`
+
+The input is a query log.
+
+`SCRIPT`
+
+The input is a SQL script.
+
 ## ListMigrationSubtasksRequest
 
 A request to list previously created migration subtasks.
@@ -1073,6 +1244,12 @@ The task finished unsuccessfully.
 The migration task result.
 
 Fields
+
+`task_outputs`
+
+` map<string, TaskOutput  ` \>
+
+The map of task output types to the task outputs, e.g. "LINEAGE".
 
 Union field `details` . Details specific to the task type. `details` can be only one of the following:
 
@@ -1575,6 +1752,54 @@ Fields
 `string`
 
 The relative path for the target data. Given source file `base_uri/input/sql` , the output would be `target_base_uri/sql/relative_path/input.sql` .
+
+## TaskOutput
+
+The task output for a task type including the status and any errors.
+
+Fields
+
+`state`
+
+`  State  `
+
+Output only. The current state of the task output.
+
+`processing_error`
+
+`  ErrorInfo  `
+
+An explanation that may be populated when the task output is in FAILED state.
+
+Union field `output` . The detailed output of the task. `output` can be only one of the following:
+
+`lineage_output`
+
+`  LineageOutput  `
+
+The output of the task with output type "LINEAGE".
+
+## State
+
+Possible task output states.
+
+Enums
+
+`STATE_UNSPECIFIED`
+
+Task output state is unspecified.
+
+`PENDING`
+
+Task output is pending.
+
+`SUCCEEDED`
+
+Task output is succeeded.
+
+`FAILED`
+
+Task output is failed. This does not mean that there is no useful information in the output; partial outputs or failure details may be available.
 
 ## TeradataDialect
 

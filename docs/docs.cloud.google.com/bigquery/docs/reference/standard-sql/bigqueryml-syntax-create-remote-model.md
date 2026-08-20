@@ -125,18 +125,20 @@ To specify a specific endpoint, use a fully qualified multi-regional endpoint na
   - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
   - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
 
+If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
+
 ### Claude models
 
 The following [Anthropic Claude models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) are supported:
 
+  - `claude-opus-4-6`
+  - `claude-sonnet-4-6`
+  - `claude-opus-4-5`
   - `claude-haiku-4-5`
   - `claude-sonnet-4-5`
   - `claude-opus-4-1`
   - `claude-opus-4`
   - `claude-sonnet-4`
-  - `claude-3-7-sonnet`
-  - `claude-3-5-haiku`
-  - `claude-3-haiku`
 
 You must enable Claude models in Gemini Enterprise Agent Platform before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
