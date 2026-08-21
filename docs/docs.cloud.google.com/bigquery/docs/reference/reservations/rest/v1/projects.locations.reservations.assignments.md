@@ -27,7 +27,7 @@ An assignment allows a project to submit jobs of a certain type using slots from
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;assignee&quot;: string,&quot;jobType&quot;: enum (JobType),&quot;state&quot;: enum (State)}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;assignee&quot;: string,&quot;jobType&quot;: enum (JobType),&quot;state&quot;: enum (State),&quot;principal&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -57,6 +57,19 @@ Optional. Which type of jobs will use the reservation.
 ` enum ( State  ` )
 
 Output only. State of the assignment.
+
+`principal`
+
+`string`
+
+Optional. Represents the principal for this assignment. If not empty, jobs run by this principal utilize the associated reservation. Otherwise, jobs fall back to using the reservation assigned to the project, folder, or organization, in that order. If no reservation is assigned at any of these levels, on-demand capacity is used.
+
+The supported formats are:
+
+  - `principal://goog/subject/USER_EMAIL_ADDRESS` for users,
+  - `principal://iam.googleapis.com/projects/-/serviceAccounts/SA_EMAIL_ADDRESS` for service accounts,
+  - `principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/subject/SUBJECT_ID` for workload identity pool identities.
+  - The special value `unknown_or_deleted_user` represents principals which cannot be read from the user info service, for example, deleted users.
 
 ## JobType
 

@@ -48,7 +48,7 @@ Dataset insights help you understand the relationships and join paths across mul
 
 ## Example of table data insights
 
-Consider a table called `telco_churn` with columns such as `CustomerID` , `Tenure` , `InternetService` , `Contract` , `MonthlyCharges` , and `Churn` . The following table describes the table's metadata.
+Consider a table called `telco_churn` with columns such as `CustomerID` , `Tenure` , `InternetService` , `Contract` , `MonthlyCharges` , and `Churn` . The following table describes the table's schema.
 
 | Field name        | Type      |
 | ----------------- | --------- |

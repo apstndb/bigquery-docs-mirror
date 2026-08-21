@@ -268,14 +268,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         "cymbal_pets.gemini",
         replace=True,
         connection_name="us.cymbal_conn",
-        options={"endpoint": "gemini-2.5-flash"},
+        options={"endpoint": "gemini-3.5-flash"},
     )
 
     embedding_model = bbq.ml.create_model(
         "cymbal_pets.embedding_model",
         replace=True,
         connection_name="us.cymbal_conn",
-        options={"endpoint": "multimodalembedding@001"},
+        options={"endpoint": "gemini-embedding-2"},
     )
 
 ## Create a `products_mm` table with multimodal data

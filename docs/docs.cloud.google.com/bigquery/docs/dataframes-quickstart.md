@@ -8,16 +8,15 @@ data_source: docs.cloud.google.com
 
 # Try BigQuery DataFrames
 
-Use this quickstart to perform the following analysis and machine learning (ML) tasks by using the [BigQuery DataFrames API](https://dataframes.bigquery.dev/reference/index.html) in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) :
+BigQuery DataFrames brings scalable Python analytics and machine learning (ML) to BigQuery. Computations execute in BigQuery with server-side processing, which lets you analyze and model large datasets without being constrained by local or notebook memory. You can use syntax similar to pandas ( `bigframes.pandas` ) and BigQuery ML ( `bigframes.bigquery` ) without writing SQL.
+
+Use this quickstart to perform the following analysis and ML tasks by using the [BigQuery DataFrames API](https://dataframes.bigquery.dev/reference/index.html) in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) :
 
   - Create a DataFrame over the `bigquery-public-data.ml_datasets.penguins` public dataset.
   - Calculate the average body mass of a penguin.
-  - Create a [linear regression model](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.html) .
-  - Create a DataFrame over a subset of the penguin data to use as training data.
-  - Clean up the training data.
-  - Set the model parameters.
-  - [Fit](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.fit.html) the model.
-  - [Score](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LinearRegression.score.html) the model.
+  - Clean and prepare a subset of the penguin data for training.
+  - Train a [linear regression model](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html) by using `bigframes.bigquery.ml.create_model` .
+  - [Evaluate](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html) the model by using `bigframes.bigquery.ml.evaluate` .
 
 ## Before you begin
 
@@ -87,37 +86,38 @@ Try BigQuery DataFrames by following these steps:
 
 7.  Create a new code cell in the notebook and add the following code:
     
-        # Create the Linear Regression model
-        from bigframes.ml.linear_model import LinearRegression
+        import bigframes.bigquery as bbq
+        from google.cloud import bigquery
         
-        # Filter down to the data we want to analyze
+        # Ensure a dataset exists to store the model
+        client = bigquery.Client(project=bpd.options.bigquery.project)
+        client.create_dataset("bq_quickstart", exists_ok=True)
+        
+        # Filter down to the Adelie Penguin species
         adelie_data = df[df.species == "Adelie Penguin (Pygoscelis adeliae)"]
         
-        # Drop the columns we don't care about
+        # Drop the columns that are not needed
         adelie_data = adelie_data.drop(columns=["species"])
         
-        # Drop rows with nulls to get our training data
+        # Drop rows with nulls to get the training data
         training_data = adelie_data.dropna()
         
-        # Pick feature columns and label column
-        X = training_data[
-            [
-                "island",
-                "culmen_length_mm",
-                "culmen_depth_mm",
-                "flipper_length_mm",
-                "sex",
-            ]
-        ]
-        y = training_data[["body_mass_g"]]
+        # Train a linear regression model
+        model_name = f"{bpd.options.bigquery.project}.bq_quickstart.penguin_weight"
+        model_metadata = bbq.ml.create_model(
+            model_name,
+            replace=True,
+            options={"model_type": "LINEAR_REG"},
+            training_data=training_data.rename(columns={"body_mass_g": "label"}),
+        )
         
-        model = LinearRegression(fit_intercept=False)
-        model.fit(X, y)
-        model.score(X, y)
+        # Evaluate the model
+        evaluation = bbq.ml.evaluate(model_name)
+        print(evaluation)
 
 8.  Run the code cell.
     
-    The code returns the model's evaluation metrics.
+    The code trains the linear regression model directly in BigQuery and returns the model's evaluation metrics.
 
 ## Clean up
 

@@ -14,6 +14,28 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## August 20, 2026
+
+Feature
+
+BigQuery supports the following table-valued functions in the query editor and as part of [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) to help you analyze your time series data:
+
+  - [`ML.TREND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend) : identify the directional trajectory of your data.
+  - [`ML.SEASONALITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality) : identify repeating patterns in your data.
+  - [`ML.DETECT_CHANGE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points) : identify intervals where structural shifts occur in your data.
+
+These functions are in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Deprecated
+
+Starting April 26, 2027, core graph processing for [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) will be restricted to the [BigQuery Enterprise and Enterprise Plus editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) . Consequently, we are deprecating support for Standard edition and on-demand billing for core graph processing.
+
+[Graph measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) will remain available in the Enterprise and Enterprise Plus editions and for queries run using on-demand pricing. Measures are not available in Standard edition.
+
+Feature
+
+The [`run_bq_command` tool](https://docs.cloud.google.com/sdk/use-gcloud-mcp#available-tools) exposes the `bq` command-line tool within the Cloud CLI remote MCP server. AI agents can now execute advanced BigQuery operations, such as job scheduling, job management, and reservation management, through a managed MCP endpoint. For more information, see [Use the Cloud CLI remote MCP server](https://docs.cloud.google.com/sdk/use-gcloud-mcp) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## August 18, 2026
 
 Feature

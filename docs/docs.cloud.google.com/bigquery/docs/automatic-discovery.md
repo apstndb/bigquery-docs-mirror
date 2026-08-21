@@ -235,7 +235,16 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 7.  To specify the Cloud Storage bucket that contains the files to scan, in the **Bucket** field, browse to and select the bucket.
 
-8.  Optional: Define the data to include or exclude from the discovery scan by providing a list of [glob patterns for file filtering](https://en.wikipedia.org/wiki/Glob_\(programming\)) .
+8.  Optional: Define the data to include or exclude from the discovery scan by providing a list of glob patterns for file filtering. Knowledge Catalog supports the following glob patterns:
+    
+      - `*` : Matches zero or more characters, without crossing directory boundaries. For example, `*.csv` matches `file.csv` , but not `folder/file.csv` .
+      - `**` : Matches zero or more characters, crossing directory boundaries. For example, `**/*.csv` matches `file.csv` and `folder/subfolder/file.csv` .
+      - `?` : Matches exactly one character. For example, `file_?.csv` matches `file_1.csv` and `file_a.csv` , but not `file_10.csv` .
+      - `[...]` : Matches one character from a set of characters. For example, `[abc]` matches `a` , `b` , or `c` , and `[a-z]` matches any lowercase letter.
+      - `{...}` : Matches a comma-separated list of subpatterns. For example, `{sun,moon,stars}` matches `sun` , `moon` , or `stars` .
+      - `\` : Escapes a character ( `*` , `?` , or `\` ). For example, `file\*.csv` matches the literal filename `file*.csv` .
+    
+    You can specify the following types of patterns:
     
       - **Include** : if only a subset of the data should be scanned, provide a list of glob patterns that match the objects to include.
       - **Exclude** : provide a list of glob patterns that match the objects to exclude.

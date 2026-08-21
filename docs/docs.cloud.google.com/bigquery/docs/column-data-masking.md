@@ -67,7 +67,7 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 To use existing taxonomies, call [`taxonomies.import`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/import) in place of the first two steps of the following procedure.
 
 1.  Call [`taxonomies.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies/create) to create a taxonomy.
-2.  Call [`taxonomies.policytag.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create) to create a policy tag.
+2.  Call [`taxonomies.policyTags.create`](https://docs.cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.taxonomies.policyTags/create) to create a policy tag.
 
 ### Work with policy tags
 

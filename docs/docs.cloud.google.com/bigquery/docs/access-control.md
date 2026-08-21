@@ -1439,10 +1439,25 @@ Repository
 <li><code dir="ltr" translate="no">dataprocrm.workloads.list</code></li>
 </ul>
 <p><code dir="ltr" translate="no">geminicloudassist.  agents.  invoke</code></p>
-<p><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  create</code></p>
-<p><code dir="ltr" translate="no">geminidataanalytics.  locations.  chat</code></p>
-<p><code dir="ltr" translate="no">geminidataanalytics.  locations.  useDataEngineeringAgent</code></p>
-<p><code dir="ltr" translate="no">geminidataanalytics.  operations.  get</code></p>
+<p><code dir="ltr" translate="no">geminidataanalytics.*</code></p>
+<ul>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  chat</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  create</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  delete</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  get</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  getIamPolicy</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  list</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  setIamPolicy</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  dataAgents.  update</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  locations.  chat</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  locations.  get</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  locations.  list</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  locations.  useDataEngineeringAgent</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  operations.  cancel</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  operations.  delete</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  operations.  get</code></li>
+<li><code dir="ltr" translate="no">geminidataanalytics.  operations.  list</code></li>
+</ul>
 <p><code dir="ltr" translate="no">resourcemanager.projects.get</code></p>
 <p><code dir="ltr" translate="no">resourcemanager.projects.list</code></p></td>
 </tr>

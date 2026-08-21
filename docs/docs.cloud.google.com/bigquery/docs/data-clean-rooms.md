@@ -12,6 +12,8 @@ Data clean rooms provide a security-enhanced environment in which multiple parti
 
 BigQuery data clean rooms use the BigQuery sharing (formerly Analytics Hub) platform. While standard [BigQuery sharing data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) let you share data across organizational boundaries at scale, data clean rooms address use cases for sharing sensitive and protected data. Data clean rooms provide additional security controls to protect the underlying data and enforce [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) defined by the data owner.
 
+> **Caution:** Analysis rules in data clean rooms provide privacy controls, but they might not fully prevent sophisticated queries from extracting unauthorized data. To maintain control and restrict execution to approved queries, use [query templates](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#query_templates) .
+
 Primary use cases include the following:
 
   - **Campaign planning and audience insights.** Let two parties (for example, sellers and buyers) mix first-party data and improve data enrichment in a privacy-centric way.
@@ -68,8 +70,6 @@ As a data contributor, you configure analysis rules on the resources that you sh
 [Query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) let data clean room owners and BigQuery sharing publishers share predefined queries without sharing the underlying resources of tables and views.
 
 Predefined queries use [table-valued functions (TVFs)](https://docs.cloud.google.com/bigquery/docs/table-functions) in BigQuery that allow an entire table or specific fields to pass as input parameters and return a table as the output.
-
-> **Warning:** Allowing data clean room subscribers to run arbitrary queries in your data clean rooms can create security vulnerabilities. To mitigate these risks and enhance data security, use query templates.
 
 ## Limitations
 
