@@ -1,16 +1,16 @@
 ---
-name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/explain_translation
-uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/explain_translation
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_batch_queries
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_batch_queries
 title: 'MCP Tools Reference: bigquerymigration.googleapis.com'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-## Tool: `explain_translation`
+## Tool: `translate_batch_queries`
 
-Explains the SQL translation for a given translation ID.
+Translates a batch of SQL queries stored in Google Cloud Storage. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
 
-The following code sample shows how to use `curl` to call the `explain_translation` MCP tool.
+The following code sample shows how to use `curl` to call the `translate_batch_queries` MCP tool.
 
 <table>
 <colgroup>
@@ -29,7 +29,7 @@ The following code sample shows how to use `curl` to call the `explain_translati
 --data &#39;{
   &quot;method&quot;: &quot;tools/call&quot;,
   &quot;params&quot;: {
-    &quot;name&quot;: &quot;explain_translation&quot;,
+    &quot;name&quot;: &quot;translate_batch_queries&quot;,
     &quot;arguments&quot;: {
       // provide these details according to the tool&#39;s MCP specification
     }
@@ -43,9 +43,9 @@ The following code sample shows how to use `curl` to call the `explain_translati
 
 ## Input Schema
 
-Request message for `ExplainTranslation` .
+Request message for TranslateBatchQueries.
 
-### ExplainTranslationRequest
+### TranslateBatchQueriesRequest
 
 <table>
 <colgroup>
@@ -61,7 +61,18 @@ Request message for `ExplainTranslation` .
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectNumber&quot;: string,
   &quot;location&quot;: string,
-  &quot;translation&quot;: string
+  &quot;sourceDialect&quot;: string,
+  &quot;targetDialect&quot;: string,
+  &quot;sourceBaseUri&quot;: [
+    string
+  ],
+  &quot;targetBaseUri&quot;: string,
+  &quot;configurationFilePaths&quot;: [
+    string
+  ],
+  &quot;metadataFilePaths&quot;: [
+    string
+  ]
 }</code></pre></td>
 </tr>
 </tbody>
@@ -81,17 +92,47 @@ Required. The Google Cloud project number.
 
 Required. The location.
 
-`translation`
+`sourceDialect`
 
 `string`
 
-Required. The translation ID.
+Required. The dialect of the source queries.
+
+`targetDialect`
+
+`string`
+
+Required. The dialect of the target queries.
+
+`sourceBaseUri[]`
+
+`string`
+
+Required. The Cloud Storage path containing the inputs. All files with this path will be included in the translation, including input queries, configuration files, and metadata files.
+
+`targetBaseUri`
+
+`string`
+
+Required. The base URI for all writes to persistent storage in Cloud Storage.
+
+`configurationFilePaths[]`
+
+`string`
+
+Optional. The Cloud Storage path of the configuration files for this batch translation. See [YAML configuration guidelines](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines) .
+
+`metadataFilePaths[]`
+
+`string`
+
+Optional. The Cloud Storage path of the metadata files for this batch translation. See [Generate metadata](https://cloud.google.com/bigquery/docs/generate-metadata) .
 
 ## Output Schema
 
-Response message for `ExplainTranslation` .
+Response message for TranslateBatchQueries.
 
-### ExplainTranslationResponse
+### TranslateBatchQueriesResponse
 
 <table>
 <colgroup>
@@ -105,7 +146,8 @@ Response message for `ExplainTranslation` .
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;explanation&quot;: string
+  &quot;translation&quot;: string,
+  &quot;translationState&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -113,11 +155,17 @@ Response message for `ExplainTranslation` .
 
 Fields
 
-`explanation`
+`translation`
 
 `string`
 
-The string that explains the translation.
+The ID of the migration workflow created for this batch translation.
+
+`translationState`
+
+`string`
+
+The current state of the translation workflow, typically `RUNNING` .
 
 ### Tool Annotations
 
@@ -130,4 +178,4 @@ Along with the title string, the following boolean hints are defined as follows:
   - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
   - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌
+Destructive Hint: ❌ | Idempotent Hint: ❌ | Read Only Hint: ❌ | Open World Hint: ❌

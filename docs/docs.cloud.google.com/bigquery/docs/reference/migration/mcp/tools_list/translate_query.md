@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 Translates a single query into BigQuery SQL syntax.
 
-The following sample demonstrate how to use `curl` to invoke the `translate_query` MCP tool.
+The following code sample shows how to use `curl` to call the `translate_query` MCP tool.
 
 <table>
 <colgroup>
@@ -23,8 +23,7 @@ The following sample demonstrate how to use `curl` to invoke the `translate_quer
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
-curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{
@@ -37,8 +36,7 @@ curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
   },
   &quot;jsonrpc&quot;: &quot;2.0&quot;,
   &quot;id&quot;: 1
-}&#39;
-                </code></pre></td>
+}&#39;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -292,7 +290,7 @@ Fields
 
 `string`
 
-The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match a regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]` , which represents UPPER\_SNAKE\_CASE.
+The reason for the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match a regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]` , which represents UPPER\_SNAKE\_CASE.
 
 `domain`
 
@@ -342,5 +340,14 @@ Fields
 `string`
 
 ### Tool Annotations
+
+[Tool annotations](https://modelcontextprotocol.io/specification/latest/schema#toolannotations) are sent to MCP clients to describe the basic risk of a given tool. Most clients treat these hints as untrusted, but they can be used to decide when a confirmation prompt might be sent to a user.
+
+Along with the title string, the following boolean hints are defined as follows:
+
+  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
 Destructive Hint: ❌ | Idempotent Hint: ❌ | Read Only Hint: ❌ | Open World Hint: ❌

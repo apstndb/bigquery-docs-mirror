@@ -52,6 +52,26 @@ Suggests Data Definition Language (DDL) statements for an input query. For examp
 
 Fetches DDL suggestion for a given suggestion ID.
 
+`  translate_batch_queries  `
+
+Translates a batch of SQL queries stored in Google Cloud Storage. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+
+`  fetch_batch_translation  `
+
+Retrieves the status and logs of a batch translation workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+
+`  generate_batch_ddl_suggestion  `
+
+Generates Data Definition Language (DDL) suggestions for a batch translation. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+
+`  fetch_batch_ddl_suggestion  `
+
+Retrieves the status and logs of a batch DDL suggestion workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+
+`  translate_metadata  `
+
+Translates a metadata zip file into Data Definition Language (DDL) statements and table mappings. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+
 ### Get MCP tool specifications
 
 To get the MCP tool specifications for all tools in an MCP server, use the `tools/list` method. The following example demonstrates how to use `curl` to list all tools and their specifications currently available within the MCP server.
@@ -67,16 +87,14 @@ To get the MCP tool specifications for all tools in an MCP server, use the `tool
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                      
-curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{
     &quot;method&quot;: &quot;tools/list&quot;,
     &quot;jsonrpc&quot;: &quot;2.0&quot;,
     &quot;id&quot;: 1
-}&#39;
-                    </code></pre></td>
+}&#39;</code></pre></td>
 </tr>
 </tbody>
 </table>

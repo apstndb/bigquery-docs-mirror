@@ -1,16 +1,16 @@
 ---
-name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_ddl_suggestion
-uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_ddl_suggestion
+name: documents/docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_batch_translation
+uri: https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_batch_translation
 title: 'MCP Tools Reference: bigquerymigration.googleapis.com'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-## Tool: `fetch_ddl_suggestion`
+## Tool: `fetch_batch_translation`
 
-Fetches DDL suggestion for a given suggestion ID.
+Retrieves the status and logs of a batch translation workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
 
-The following code sample shows how to use `curl` to call the `fetch_ddl_suggestion` MCP tool.
+The following code sample shows how to use `curl` to call the `fetch_batch_translation` MCP tool.
 
 <table>
 <colgroup>
@@ -29,7 +29,7 @@ The following code sample shows how to use `curl` to call the `fetch_ddl_suggest
 --data &#39;{
   &quot;method&quot;: &quot;tools/call&quot;,
   &quot;params&quot;: {
-    &quot;name&quot;: &quot;fetch_ddl_suggestion&quot;,
+    &quot;name&quot;: &quot;fetch_batch_translation&quot;,
     &quot;arguments&quot;: {
       // provide these details according to the tool&#39;s MCP specification
     }
@@ -43,9 +43,9 @@ The following code sample shows how to use `curl` to call the `fetch_ddl_suggest
 
 ## Input Schema
 
-Request message for `FetchDdlSuggestion` .
+Request message for FetchBatchTranslation.
 
-### FetchDdlSuggestionRequest
+### FetchBatchTranslationRequest
 
 <table>
 <colgroup>
@@ -61,7 +61,7 @@ Request message for `FetchDdlSuggestion` .
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectNumber&quot;: string,
   &quot;location&quot;: string,
-  &quot;suggestion&quot;: string
+  &quot;translation&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -81,17 +81,17 @@ Required. The Google Cloud project number.
 
 Required. The location.
 
-`suggestion`
+`translation`
 
 `string`
 
-Required. The suggestion ID.
+Required. The translation ID of the batch workflow.
 
 ## Output Schema
 
-Response message for `FetchDdlSuggestion` .
+Response message for FetchBatchTranslation.
 
-### FetchDdlSuggestionResponse
+### FetchBatchTranslationResponse
 
 <table>
 <colgroup>
@@ -104,32 +104,32 @@ Response message for `FetchDdlSuggestion` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;suggestion&quot;: {object (Suggestion)},&quot;logs&quot;: [{object (Log)}],&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;translation&quot;: {object (BatchTranslation)},&quot;translationLogs&quot;: [{object (Log)}],&quot;errorInfo&quot;: {object (ErrorInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-`suggestion`
+`translation`
 
-` object ( Suggestion  ` )
+` object ( BatchTranslation  ` )
 
-The DDL suggestion. Note: Prepending the DDL suggestion to the original input query and retranslating can improve translation quality, especially in cases where metadata is missing and produces `RelationNotFound` or `AttributesNotFound` errors. If no DDL suggestion is generated, the suggestion field will be empty, and the logs will contain an informational message.
+The batch translation resource.
 
-`logs[]`
+`translationLogs[]`
 
 ` object ( Log  ` )
 
-A list of logs generated during the DDL suggestion process.
+A summary list of logs generated during the batch translation process. AI INSTRUCTION: Review all returned logs to identify warnings and errors. Use these log details to improve the overall quality of your SQL translations.
 
 `errorInfo`
 
 ` object ( ErrorInfo  ` )
 
-The error information.
+The error information if the workflow itself failed to orchestrate.
 
-### Suggestion
+### BatchTranslation
 
 <table>
 <colgroup>
@@ -143,9 +143,9 @@ The error information.
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;suggestion&quot;: string,
-  &quot;suggestionContent&quot;: string,
-  &quot;state&quot;: string
+  &quot;translation&quot;: string,
+  &quot;state&quot;: string,
+  &quot;targetBaseUri&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -153,23 +153,23 @@ The error information.
 
 Fields
 
-`suggestion`
+`translation`
 
 `string`
 
-The ID of the suggestion.
-
-`suggestionContent`
-
-`string`
-
-The suggestion.
+The ID of the batch translation.
 
 `state`
 
 `string`
 
-The current state of the suggestion, for example, `SUCCEEDED` or `FAILED` .
+The current state of the batch translation workflow, for example, `RUNNING` , `SUCCEEDED` , or `FAILED` .
+
+`targetBaseUri`
+
+`string`
+
+The base URI for all writes to persistent storage in Cloud Storage. This contains all of the generated translation outputs and artifacts.
 
 ### Log
 

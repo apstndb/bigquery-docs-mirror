@@ -16,7 +16,7 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 `list_transfer_runs(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig")`
 
-The following sample demonstrate how to use `curl` to invoke the `list_transfer_runs` MCP tool.
+The following code sample shows how to use `curl` to call the `list_transfer_runs` MCP tool.
 
 <table>
 <colgroup>
@@ -29,8 +29,7 @@ The following sample demonstrate how to use `curl` to invoke the `list_transfer_
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
-curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{
@@ -43,8 +42,7 @@ curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
   },
   &quot;jsonrpc&quot;: &quot;2.0&quot;,
   &quot;id&quot;: 1
-}&#39;
-                </code></pre></td>
+}&#39;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -670,5 +668,14 @@ Data transfer failed (5).
 Data transfer is cancelled (6).
 
 ### Tool Annotations
+
+[Tool annotations](https://modelcontextprotocol.io/specification/latest/schema#toolannotations) are sent to MCP clients to describe the basic risk of a given tool. Most clients treat these hints as untrusted, but they can be used to decide when a confirmation prompt might be sent to a user.
+
+Along with the title string, the following boolean hints are defined as follows:
+
+  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
 Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌

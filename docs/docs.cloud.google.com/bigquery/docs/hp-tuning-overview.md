@@ -818,9 +818,9 @@ Hyperparameter tuning handles errors in the following ways:
 
   - Invalid hyperparameters: If the hyperparameters are invalid for a trial, then the trial is skipped and marked as `INFEASIBLE` in the output from the `ML.TRIAL_INFO` function.
 
-  - Trial internal error: If more than 10% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , then the training job stops and returns a user error.
+  - Trial internal error: If more than 50% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , then the training job stops and returns a user error.
 
-  - If less than 10% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , the training continues with the failed trials marked as `FAILED` in the output from the `ML.TRIAL_INFO` function.
+  - If less than 50% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , the training continues with the failed trials marked as `FAILED` in the output from the `ML.TRIAL_INFO` function.
 
 ## Model serving functions
 

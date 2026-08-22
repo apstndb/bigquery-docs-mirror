@@ -182,16 +182,14 @@ To get the MCP tool specifications for all tools in an MCP server, use the `tool
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                      
-curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{
     &quot;method&quot;: &quot;tools/list&quot;,
     &quot;jsonrpc&quot;: &quot;2.0&quot;,
     &quot;id&quot;: 1
-}&#39;
-                    </code></pre></td>
+}&#39;</code></pre></td>
 </tr>
 </tbody>
 </table>

@@ -141,8 +141,7 @@ Next, query the table.
       ORDER BY
         count DESC
       LIMIT
-        5;
-      
+     5;  
     ```
 
 3.  Click **Run** . The results are displayed in the **Query results** section.  

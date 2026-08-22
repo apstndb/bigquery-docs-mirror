@@ -12,9 +12,34 @@ Run a read-only SQL query in the project and return the result. Prefer this tool
 
 This tool is restricted to only `SELECT` statements. `INSERT` , `UPDATE` , and `DELETE` statements and stored procedures aren't allowed. If the query doesn't include a `SELECT` statement, an error is returned. For information on creating queries, see the [GoogleSQL documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
 
-Queries executed using the `execute_sql_readonly` tool will have the job label `goog-mcp-server: true` automatically set. Queries are charged to the project specified in the `project_id` field.
+Example Queries:
 
-The following sample demonstrate how to use `curl` to invoke the `execute_sql_readonly` MCP tool.
+```sql
+-- Count the number of penguins in each island.
+        SELECT island, COUNT(*) AS population
+        FROM bigquery-public-data.ml_datasets.penguins GROUP BY island
+
+        -- Evaluate a bigquery ML Model.
+        SELECT * FROM ML.EVALUATE(MODEL `my_dataset.my_model`)
+
+        -- Evaluate BigQuery ML model on custom data
+        SELECT *
+        FROM ML.EVALUATE(MODEL `my_dataset.my_model`, (SELECT * FROM `my_dataset.my_table`))
+
+        -- Predict using BigQuery ML model:
+        SELECT *
+        FROM ML.PREDICT(MODEL `my_dataset.my_model`, (SELECT * FROM `my_dataset.my_table`))
+
+        -- Forecast data using AI.FORECAST
+        SELECT *
+        FROM AI.FORECAST(TABLE `project.dataset.my_table`, data_col => 'num_trips',
+          timestamp_col => 'date', id_cols => ['usertype'], horizon => 30)
+        
+```
+
+Queries executed using the `execute_sql_readonly` tool will always have the job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
+
+The following code sample shows how to use `curl` to call the `execute_sql_readonly` MCP tool.
 
 <table>
 <colgroup>
@@ -27,8 +52,7 @@ The following sample demonstrate how to use `curl` to invoke the `execute_sql_re
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
-curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{
@@ -41,8 +65,7 @@ curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
   },
   &quot;jsonrpc&quot;: &quot;2.0&quot;,
   &quot;id&quot;: 1
-}&#39;
-                </code></pre></td>
+}&#39;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -67,7 +90,11 @@ Runs a BigQuery SQL query synchronously and returns query results if the query c
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;query&quot;: string,
-  &quot;dryRun&quot;: boolean
+  &quot;dryRun&quot;: boolean,
+  &quot;labels&quot;: {
+    string: string,
+    ...
+  }
 }</code></pre></td>
 </tr>
 </tbody>
@@ -92,6 +119,45 @@ Required. The query to execute in the form of a GoogleSQL query.
 `boolean`
 
 Optional. If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.
+
+`labels`
+
+`map (key: string, value: string)`
+
+Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the map must have a different key.
+
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
+
+### LabelsEntry
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;key&quot;: string,
+  &quot;value&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`key`
+
+`string`
+
+`value`
+
+`string`
 
 ## Output Schema
 
@@ -216,7 +282,7 @@ Optional. Specifies metadata of the foreign data type definition in field schema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {object (PolicyTagList)},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;timestampPrecision&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;foreignTypeDefinition&quot;: string,&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {object (PolicyTagList)},&quot;dataGovernanceTagsInfo&quot;: {object (DataGovernanceTagsInfo)},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;timestampPrecision&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;foreignTypeDefinition&quot;: string,&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -277,11 +343,29 @@ Optional. The field description. The maximum length is 1,024 characters.
 
 Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policy\_tags.
 
+`dataGovernanceTagsInfo`
+
+` object ( DataGovernanceTagsInfo  ` )
+
+Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows:
+
+  - **Precedence** : If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag.
+  - **Patching behavior** : Describes how this field behaves during a `Table.patch` schema update:
+      - **Unset** : If the `data_governance_tags_info` field is omitted from the update request, the existing tags on the column are preserved.
+      - **Empty Field** : To clear data governance tags from a column, send the `data_governance_tags_info` field as an empty object. This removes all tags from the column.
+      - **Updating tags** : To replace an existing tag, send the field with the new tag.
+
 `dataPolicies[]`
 
 ` object ( DataPolicyOption  ` )
 
 Optional. Data policies attached to this field, used for field-level access control.
+
+`dataPolicyList`
+
+` object ( DataPolicyList  ` )
+
+Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information.
 
 `maxLength`
 
@@ -340,7 +424,7 @@ Possible values include: \* 6 (Default, for TIMESTAMP type with microsecond prec
 
 `roundingMode`
 
-`enum ( RoundingMode` )
+` enum ( RoundingMode  ` )
 
 Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type.
 
@@ -439,6 +523,70 @@ Fields
 
 A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed.
 
+### DataGovernanceTagsInfo
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;dataGovernanceTags&quot;: {
+    string: string,
+    ...
+  }
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`dataGovernanceTags`
+
+`map (key: string, value: string)`
+
+Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "parent-id/pii" where parent-id is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "parent-id/pii": "sensitive", "myProject/cost\_center": "sales"
+
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
+
+### DataGovernanceTagsEntry
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;key&quot;: string,
+  &quot;value&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`key`
+
+`string`
+
+`value`
+
+`string`
+
 ### DataPolicyOption
 
 <table>
@@ -468,6 +616,32 @@ Union field `_name` .
 `string`
 
 Data policy resource name in the form of projects/project\_id/locations/location\_id/dataPolicies/data\_policy\_id.
+
+### DataPolicyList
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataPolicies&quot;: [{object (DataPolicyOption)}]}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`dataPolicies[]`
+
+` object ( DataPolicyOption  ` )
+
+Contains a list of data policy options. At most 9 data policies are allowed per field.
 
 ### Int64Value
 
@@ -551,7 +725,7 @@ Union field `_generated_mode` .
 
 `generatedMode`
 
-`enum ( GeneratedMode` )
+` enum ( GeneratedMode  ` )
 
 Optional. Dictates when system generated values are used to populate the field.
 
@@ -593,7 +767,7 @@ Union field `_generation_expression` .
 
 `string`
 
-Optional. The generation expression (e.g. AI.EMBED(...)) used to generated the field.
+Optional. The generation expression (e.g. AI.EMBED(...)) used to generate the field.
 
 Union field `_asynchronous` .
 
@@ -637,7 +811,7 @@ Fields
 
 `typeSystem`
 
-`enum ( TypeSystem` )
+` enum ( TypeSystem  ` )
 
 Required. Specifies the system which defines the foreign data type.
 
@@ -870,6 +1044,79 @@ Debugging information. This property is internal to Google and should not be use
 
 A human-readable description of the error.
 
+### RoundingMode
+
+Rounding mode options that can be used when storing NUMERIC or BIGNUMERIC values.
+
+Enums
+
+`ROUNDING_MODE_UNSPECIFIED`
+
+Unspecified will default to using ROUND\_HALF\_AWAY\_FROM\_ZERO.
+
+`ROUND_HALF_AWAY_FROM_ZERO`
+
+ROUND\_HALF\_AWAY\_FROM\_ZERO rounds half values away from zero when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5, 1.6, 1.7, 1.8, 1.9 =\> 2
+
+`ROUND_HALF_EVEN`
+
+ROUND\_HALF\_EVEN rounds half values to the nearest even value when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5 =\> 2 1.6, 1.7, 1.8, 1.9 =\> 2 2.5 =\> 2
+
+### GeneratedMode
+
+Dictates when system generated values are used to populate the field.
+
+Enums
+
+`GENERATED_MODE_UNSPECIFIED`
+
+Unspecified GeneratedMode will default to GENERATED\_ALWAYS.
+
+`GENERATED_ALWAYS`
+
+Field can only have system generated values. Users cannot manually insert values into the field.
+
+`GENERATED_BY_DEFAULT`
+
+Use system generated values only if the user does not explicitly provide a value.
+
+### TypeSystem
+
+External systems, such as query engines or table formats, that have their own data types.
+
+Enums
+
+`TYPE_SYSTEM_UNSPECIFIED`
+
+TypeSystem not specified.
+
+`HIVE`
+
+Represents Hive data types.
+
+### NullValue
+
+Represents a JSON `null` .
+
+`NullValue` is a sentinel, using an enum with only one value to represent the null value for the `Value` type union.
+
+A field of type `NullValue` with any value other than `0` is considered invalid. Most ProtoJSON serializers will emit a `Value` with a `null_value` set as a JSON `null` regardless of the integer value, and so will round trip to a `0` value.
+
+Enums
+
+`NULL_VALUE`
+
+Null value.
+
 ### Tool Annotations
+
+[Tool annotations](https://modelcontextprotocol.io/specification/latest/schema#toolannotations) are sent to MCP clients to describe the basic risk of a given tool. Most clients treat these hints as untrusted, but they can be used to decide when a confirmation prompt might be sent to a user.
+
+Along with the title string, the following boolean hints are defined as follows:
+
+  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
 Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌

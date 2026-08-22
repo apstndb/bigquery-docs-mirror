@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 Get metadata information about a BigQuery table.
 
-The following sample demonstrate how to use `curl` to invoke the `get_table_info` MCP tool.
+The following code sample shows how to use `curl` to call the `get_table_info` MCP tool.
 
 <table>
 <colgroup>
@@ -23,8 +23,7 @@ The following sample demonstrate how to use `curl` to invoke the `get_table_info
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
-curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{
@@ -37,8 +36,7 @@ curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
   },
   &quot;jsonrpc&quot;: &quot;2.0&quot;,
   &quot;id&quot;: 1
-}&#39;
-                </code></pre></td>
+}&#39;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -279,7 +277,7 @@ Optional. Specifies the configuration of a BigQuery table for Apache Iceberg.
 
 `managedTableType`
 
-`enum ( ManagedTableType` )
+` enum ( ManagedTableType  ` )
 
 Optional. If set, overrides the default managed table type configured in the dataset.
 
@@ -318,7 +316,7 @@ Optional. Defines the default collation specification of new STRING fields in th
 
 `defaultRoundingMode`
 
-`enum ( RoundingMode` )
+` enum ( RoundingMode  ` )
 
 Optional. Defines the default rounding mode specification of new decimal fields (NUMERIC OR BIGNUMERIC) in the table. During table creation or update, if a decimal field is added to this table without an explicit rounding mode specified, then the field inherits the table default rounding mode. Changing this field doesn't affect existing fields.
 
@@ -582,7 +580,7 @@ Optional. Specifies metadata of the foreign data type definition in field schema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {object (PolicyTagList)},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;timestampPrecision&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;foreignTypeDefinition&quot;: string,&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {object (PolicyTagList)},&quot;dataGovernanceTagsInfo&quot;: {object (DataGovernanceTagsInfo)},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;timestampPrecision&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;foreignTypeDefinition&quot;: string,&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -643,11 +641,29 @@ Optional. The field description. The maximum length is 1,024 characters.
 
 Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policy\_tags.
 
+`dataGovernanceTagsInfo`
+
+` object ( DataGovernanceTagsInfo  ` )
+
+Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows:
+
+  - **Precedence** : If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag.
+  - **Patching behavior** : Describes how this field behaves during a `Table.patch` schema update:
+      - **Unset** : If the `data_governance_tags_info` field is omitted from the update request, the existing tags on the column are preserved.
+      - **Empty Field** : To clear data governance tags from a column, send the `data_governance_tags_info` field as an empty object. This removes all tags from the column.
+      - **Updating tags** : To replace an existing tag, send the field with the new tag.
+
 `dataPolicies[]`
 
 ` object ( DataPolicyOption  ` )
 
 Optional. Data policies attached to this field, used for field-level access control.
+
+`dataPolicyList`
+
+` object ( DataPolicyList  ` )
+
+Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information.
 
 `maxLength`
 
@@ -706,7 +722,7 @@ Possible values include: \* 6 (Default, for TIMESTAMP type with microsecond prec
 
 `roundingMode`
 
-`enum ( RoundingMode` )
+` enum ( RoundingMode  ` )
 
 Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type.
 
@@ -777,6 +793,70 @@ Fields
 
 A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed.
 
+### DataGovernanceTagsInfo
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;dataGovernanceTags&quot;: {
+    string: string,
+    ...
+  }
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`dataGovernanceTags`
+
+`map (key: string, value: string)`
+
+Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "parent-id/pii" where parent-id is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "parent-id/pii": "sensitive", "myProject/cost\_center": "sales"
+
+An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
+
+### DataGovernanceTagsEntry
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;key&quot;: string,
+  &quot;value&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`key`
+
+`string`
+
+`value`
+
+`string`
+
 ### DataPolicyOption
 
 <table>
@@ -806,6 +886,32 @@ Union field `_name` .
 `string`
 
 Data policy resource name in the form of projects/project\_id/locations/location\_id/dataPolicies/data\_policy\_id.
+
+### DataPolicyList
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataPolicies&quot;: [{object (DataPolicyOption)}]}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`dataPolicies[]`
+
+` object ( DataPolicyOption  ` )
+
+Contains a list of data policy options. At most 9 data policies are allowed per field.
 
 ### Int64Value
 
@@ -889,7 +995,7 @@ Union field `_generated_mode` .
 
 `generatedMode`
 
-`enum ( GeneratedMode` )
+` enum ( GeneratedMode  ` )
 
 Optional. Dictates when system generated values are used to populate the field.
 
@@ -931,7 +1037,7 @@ Union field `_generation_expression` .
 
 `string`
 
-Optional. The generation expression (e.g. AI.EMBED(...)) used to generated the field.
+Optional. The generation expression (e.g. AI.EMBED(...)) used to generate the field.
 
 Union field `_asynchronous` .
 
@@ -975,7 +1081,7 @@ Fields
 
 `typeSystem`
 
-`enum ( TypeSystem` )
+` enum ( TypeSystem  ` )
 
 Required. Specifies the system which defines the foreign data type.
 
@@ -1557,7 +1663,7 @@ Union field `_join_condition` .
 
 `joinCondition`
 
-`enum ( JoinCondition` )
+` enum ( JoinCondition  ` )
 
 Optional. Specifies if a join is required or not on queries for the view. Default is JOIN\_CONDITION\_UNSPECIFIED.
 
@@ -1798,7 +1904,7 @@ Fields
 
 `fileSetSpecType`
 
-`enum ( FileSetSpecType` )
+` enum ( FileSetSpecType  ` )
 
 Optional. Specifies how source URIs are interpreted for constructing the file set to load. By default source URIs are expanded against the underlying storage. Other options include specifying manifest files. Only applicable to object storage systems.
 
@@ -1876,7 +1982,7 @@ Optional. The connection specifying the credentials to be used to read external 
 
 `decimalTargetTypes[]`
 
-`enum ( DecimalTargetType` )
+` enum ( DecimalTargetType  ` )
 
 Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown.
 
@@ -1900,7 +2006,7 @@ Optional. Additional properties to set if sourceFormat is set to AVRO.
 
 `jsonExtension`
 
-`enum ( JsonExtension` )
+` enum ( JsonExtension  ` )
 
 Optional. Load option to be used together with source\_format newline-delimited JSON to indicate that a variant of JSON is being loaded. To load newline-delimited GeoJSON, specify GEOJSON (and source\_format must be set to NEWLINE\_DELIMITED\_JSON).
 
@@ -1918,7 +2024,7 @@ Optional. When creating an external table, the user can provide a reference file
 
 `metadataCacheMode`
 
-`enum ( MetadataCacheMode` )
+` enum ( MetadataCacheMode  ` )
 
 Optional. Metadata Cache Mode for the table. Set this to enable caching of metadata from external data source.
 
@@ -1928,7 +2034,7 @@ Optional. Metadata Cache Mode for the table. Set this to enable caching of metad
 
 Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode.
 
-Available for the formats: CSV, PARQUET, and AVRO.
+Available for the formats: CSV, PARQUET, AVRO, and Iceberg External Table.
 
 Possible values include: Not Specified, \[\], or \[6\]: timestamp(6) for all auto detected TIMESTAMP columns \[6, 12\]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. \[12\]: timestamp(12) for all auto detected TIMESTAMP columns.
 
@@ -1940,7 +2046,7 @@ Union field `_object_metadata` .
 
 `objectMetadata`
 
-`enum ( ObjectMetadata` )
+` enum ( ObjectMetadata  ` )
 
 Optional. ObjectMetadata is used to create Object Tables. Object Tables contain a listing of objects (with their metadata) found at the source\_uris. If ObjectMetadata is set, source\_format should be omitted.
 
@@ -2572,7 +2678,7 @@ Optional. Indicates whether to use schema inference specifically for Parquet LIS
 
 `mapTargetType`
 
-`enum ( MapTargetType` )
+` enum ( MapTargetType  ` )
 
 Optional. Indicates how to represent a Parquet map if present.
 
@@ -2610,13 +2716,13 @@ Optional. The fully qualified location prefix of the external folder where table
 
 `fileFormat`
 
-`enum ( FileFormat` )
+` enum ( FileFormat  ` )
 
 Optional. The file format the table data is stored in.
 
 `tableFormat`
 
-`enum ( TableFormat` )
+` enum ( TableFormat  ` )
 
 Optional. The table format the metadata only snapshots are stored in.
 
@@ -2780,7 +2886,7 @@ Fields
 
 `type`
 
-`enum ( RestrictionType` )
+` enum ( RestrictionType  ` )
 
 Output only. Specifies the type of dataset/table restriction.
 
@@ -2990,7 +3096,7 @@ Optional. Output only. If source is a materialized view, this field signifies th
 
 `replicationStatus`
 
-`enum ( ReplicationStatus` )
+` enum ( ReplicationStatus  ` )
 
 Optional. Output only. Replication status of configured replication.
 
@@ -3193,6 +3299,277 @@ Fields
 
 `string`
 
+### RoundingMode
+
+Rounding mode options that can be used when storing NUMERIC or BIGNUMERIC values.
+
+Enums
+
+`ROUNDING_MODE_UNSPECIFIED`
+
+Unspecified will default to using ROUND\_HALF\_AWAY\_FROM\_ZERO.
+
+`ROUND_HALF_AWAY_FROM_ZERO`
+
+ROUND\_HALF\_AWAY\_FROM\_ZERO rounds half values away from zero when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5, 1.6, 1.7, 1.8, 1.9 =\> 2
+
+`ROUND_HALF_EVEN`
+
+ROUND\_HALF\_EVEN rounds half values to the nearest even value when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5 =\> 2 1.6, 1.7, 1.8, 1.9 =\> 2 2.5 =\> 2
+
+### GeneratedMode
+
+Dictates when system generated values are used to populate the field.
+
+Enums
+
+`GENERATED_MODE_UNSPECIFIED`
+
+Unspecified GeneratedMode will default to GENERATED\_ALWAYS.
+
+`GENERATED_ALWAYS`
+
+Field can only have system generated values. Users cannot manually insert values into the field.
+
+`GENERATED_BY_DEFAULT`
+
+Use system generated values only if the user does not explicitly provide a value.
+
+### TypeSystem
+
+External systems, such as query engines or table formats, that have their own data types.
+
+Enums
+
+`TYPE_SYSTEM_UNSPECIFIED`
+
+TypeSystem not specified.
+
+`HIVE`
+
+Represents Hive data types.
+
+### JoinCondition
+
+Enum for Join Restrictions policy.
+
+Enums
+
+`JOIN_CONDITION_UNSPECIFIED`
+
+A join is neither required nor restricted on any column. Default value.
+
+`JOIN_ANY`
+
+A join is required on at least one of the specified columns.
+
+`JOIN_ALL`
+
+A join is required on all specified columns.
+
+`JOIN_NOT_REQUIRED`
+
+A join is not required, but if present it is only permitted on 'join\_allowed\_columns'
+
+`JOIN_BLOCKED`
+
+Joins are blocked for all queries.
+
+### FileSetSpecType
+
+This enum defines how to interpret source URIs for load jobs and external tables.
+
+Enums
+
+`FILE_SET_SPEC_TYPE_FILE_SYSTEM_MATCH`
+
+This option expands source URIs by listing files from the object store. It is the default behavior if FileSetSpecType is not set.
+
+`FILE_SET_SPEC_TYPE_NEW_LINE_DELIMITED_MANIFEST`
+
+This option indicates that the provided URIs are newline-delimited manifest files, with one URI per line. Wildcard URIs are not supported.
+
+### DecimalTargetType
+
+The data types that could be used as a target type when converting decimal values.
+
+Enums
+
+`DECIMAL_TARGET_TYPE_UNSPECIFIED`
+
+Invalid type.
+
+`NUMERIC`
+
+Decimal values could be converted to NUMERIC type.
+
+`BIGNUMERIC`
+
+Decimal values could be converted to BIGNUMERIC type.
+
+`STRING`
+
+Decimal values could be converted to STRING type.
+
+### JsonExtension
+
+Used to indicate that a JSON variant, rather than normal JSON, is being used as the source\_format. This should only be used in combination with the JSON source format.
+
+Enums
+
+`JSON_EXTENSION_UNSPECIFIED`
+
+The default if provided value is not one included in the enum, or the value is not specified. The source format is parsed without any modification.
+
+`GEOJSON`
+
+Use GeoJSON variant of JSON. See <https://tools.ietf.org/html/rfc7946> .
+
+### MapTargetType
+
+Indicates the map target type. Only applies to parquet maps.
+
+Enums
+
+`MAP_TARGET_TYPE_UNSPECIFIED`
+
+In this mode, the map will have the following schema: struct map\_field\_name { repeated struct key\_value { key value } }.
+
+`ARRAY_OF_STRUCT`
+
+In this mode, the map will have the following schema: repeated struct map\_field\_name { key value }.
+
+### ObjectMetadata
+
+Supported Object Metadata Types.
+
+Enums
+
+`OBJECT_METADATA_UNSPECIFIED`
+
+Unspecified by default.
+
+`DIRECTORY`
+
+A synonym for `SIMPLE` .
+
+`SIMPLE`
+
+Directory listing of objects.
+
+### MetadataCacheMode
+
+MetadataCacheMode identifies if the table should use metadata caching for files from external source (eg Google Cloud Storage).
+
+Enums
+
+`METADATA_CACHE_MODE_UNSPECIFIED`
+
+Unspecified metadata cache mode.
+
+`AUTOMATIC`
+
+Set this mode to trigger automatic background refresh of metadata cache from the external source. Queries will use the latest available cache version within the table's maxStaleness interval.
+
+`MANUAL`
+
+Set this mode to enable triggering manual refresh of the metadata cache from external source. Queries will use the latest manually triggered cache version within the table's maxStaleness interval.
+
+### FileFormat
+
+Supported file formats for BigQuery tables for Apache Iceberg.
+
+Enums
+
+`FILE_FORMAT_UNSPECIFIED`
+
+Default Value.
+
+`PARQUET`
+
+Apache Parquet format.
+
+### TableFormat
+
+Supported table formats for BigQuery tables for Apache Iceberg.
+
+Enums
+
+`TABLE_FORMAT_UNSPECIFIED`
+
+Default Value.
+
+`ICEBERG`
+
+Apache Iceberg format.
+
+### ManagedTableType
+
+The classification of managed table types that can be created.
+
+Enums
+
+`MANAGED_TABLE_TYPE_UNSPECIFIED`
+
+No managed table type specified.
+
+`NATIVE`
+
+The managed table is a native BigQuery table.
+
+`BIGLAKE`
+
+The managed table is a BigLake table for Apache Iceberg in BigQuery.
+
+### RestrictionType
+
+RestrictionType specifies the type of dataset/table restriction.
+
+Enums
+
+`RESTRICTION_TYPE_UNSPECIFIED`
+
+Should never be used.
+
+`RESTRICTED_DATA_EGRESS`
+
+Restrict data egress. See [Data egress](https://cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress) for more details.
+
+### ReplicationStatus
+
+Replication status of the table created using `AS REPLICA` like: `CREATE MATERIALIZED VIEW mv1 AS REPLICA OF src_mv`
+
+Enums
+
+`REPLICATION_STATUS_UNSPECIFIED`
+
+Default value.
+
+`ACTIVE`
+
+Replication is Active with no errors.
+
+`SOURCE_DELETED`
+
+Source object is deleted.
+
+`PERMISSION_DENIED`
+
+Source revoked replication permissions.
+
+`UNSUPPORTED_CONFIGURATION`
+
+Source configuration doesn't allow replication.
+
 ### Tool Annotations
+
+[Tool annotations](https://modelcontextprotocol.io/specification/latest/schema#toolannotations) are sent to MCP clients to describe the basic risk of a given tool. Most clients treat these hints as untrusted, but they can be used to decide when a confirmation prompt might be sent to a user.
+
+Along with the title string, the following boolean hints are defined as follows:
+
+  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
 Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌

@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 Get metadata information about a BigQuery dataset.
 
-The following sample demonstrate how to use `curl` to invoke the `get_dataset_info` MCP tool.
+The following code sample shows how to use `curl` to call the `get_dataset_info` MCP tool.
 
 <table>
 <colgroup>
@@ -23,8 +23,7 @@ The following sample demonstrate how to use `curl` to invoke the `get_dataset_in
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
-curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{
@@ -37,8 +36,7 @@ curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
   },
   &quot;jsonrpc&quot;: &quot;2.0&quot;,
   &quot;id&quot;: 1
-}&#39;
-                </code></pre></td>
+}&#39;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -268,7 +266,7 @@ Optional. Defines the default collation specification of future tables created i
 
 `defaultRoundingMode`
 
-`enum ( RoundingMode` )
+` enum ( RoundingMode  ` )
 
 Optional. Defines the default rounding mode specification of new tables created within this dataset. During table creation, if this field is specified, the table within this dataset will inherit the default rounding mode of the dataset. Setting the default rounding mode on a table overrides this option. Existing tables in the dataset are unaffected. If columns are defined during that table creation, they will immediately inherit the table's default rounding mode, unless otherwise specified.
 
@@ -288,7 +286,7 @@ Output only. Tags for the dataset. To provide tags as inputs, use the `resourceT
 
 `storageBillingModel`
 
-`enum ( StorageBillingModel` )
+` enum ( StorageBillingModel  ` )
 
 Optional. Updates storage\_billing\_model for the dataset.
 
@@ -646,7 +644,7 @@ The dataset this entry applies to
 
 `targetTypes[]`
 
-`enum ( TargetType` )
+` enum ( TargetType  ` )
 
 Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future.
 
@@ -803,7 +801,7 @@ Fields
 
 `linkState`
 
-`enum ( LinkState` )
+` enum ( LinkState  ` )
 
 Output only. Specifies whether Linked Dataset is currently in a linked state or not.
 
@@ -972,7 +970,7 @@ Fields
 
 `type`
 
-`enum ( RestrictionType` )
+` enum ( RestrictionType  ` )
 
 Output only. Specifies the type of dataset/table restriction.
 
@@ -1007,6 +1005,101 @@ Fields
 
 `string`
 
+### TargetType
+
+Indicates the type of resources in a dataset that the entry applies to.
+
+Enums
+
+`TARGET_TYPE_UNSPECIFIED`
+
+Do not use. You must set a target type explicitly.
+
+`VIEWS`
+
+This entry applies to views in the dataset.
+
+`ROUTINES`
+
+This entry applies to routines in the dataset.
+
+### LinkState
+
+Specifies whether Linked Dataset is currently in a linked state or not.
+
+Enums
+
+`LINK_STATE_UNSPECIFIED`
+
+The default value. Default to the LINKED state.
+
+`LINKED`
+
+Normal Linked Dataset state. Data is queryable via the Linked Dataset.
+
+`UNLINKED`
+
+Data publisher or owner has unlinked this Linked Dataset. It means you can no longer query or see the data in the Linked Dataset.
+
+### RoundingMode
+
+Rounding mode options that can be used when storing NUMERIC or BIGNUMERIC values.
+
+Enums
+
+`ROUNDING_MODE_UNSPECIFIED`
+
+Unspecified will default to using ROUND\_HALF\_AWAY\_FROM\_ZERO.
+
+`ROUND_HALF_AWAY_FROM_ZERO`
+
+ROUND\_HALF\_AWAY\_FROM\_ZERO rounds half values away from zero when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5, 1.6, 1.7, 1.8, 1.9 =\> 2
+
+`ROUND_HALF_EVEN`
+
+ROUND\_HALF\_EVEN rounds half values to the nearest even value when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5 =\> 2 1.6, 1.7, 1.8, 1.9 =\> 2 2.5 =\> 2
+
+### StorageBillingModel
+
+Indicates the billing model that will be applied to the dataset.
+
+Enums
+
+`STORAGE_BILLING_MODEL_UNSPECIFIED`
+
+Value not set.
+
+`LOGICAL`
+
+Billing for logical bytes.
+
+`PHYSICAL`
+
+Billing for physical bytes.
+
+### RestrictionType
+
+RestrictionType specifies the type of dataset/table restriction.
+
+Enums
+
+`RESTRICTION_TYPE_UNSPECIFIED`
+
+Should never be used.
+
+`RESTRICTED_DATA_EGRESS`
+
+Restrict data egress. See [Data egress](https://cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress) for more details.
+
 ### Tool Annotations
+
+[Tool annotations](https://modelcontextprotocol.io/specification/latest/schema#toolannotations) are sent to MCP clients to describe the basic risk of a given tool. Most clients treat these hints as untrusted, but they can be used to decide when a confirmation prompt might be sent to a user.
+
+Along with the title string, the following boolean hints are defined as follows:
+
+  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
 Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌
