@@ -1363,8 +1363,8 @@ https://docs.cloud.google.com/bigquery/docs/understand-text	2026-08-13T20:25:23Z
 https://docs.cloud.google.com/bigquery/docs/updating-datasets	2026-08-16T04:10:45Z
 https://docs.cloud.google.com/bigquery/docs/updating-labels	2026-08-16T04:10:45Z
 https://docs.cloud.google.com/bigquery/docs/updating-model-metadata	2026-08-16T04:10:45Z
-https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp	2026-08-13T20:25:23Z
-https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp	2026-08-13T20:25:23Z
+https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp	2026-08-22T17:07:40Z
+https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp	2026-08-22T17:07:40Z
 https://docs.cloud.google.com/bigquery/docs/use-cloud-assist	2026-08-13T20:25:23Z
 https://docs.cloud.google.com/bigquery/docs/use-knowledge-catalog	2026-08-13T22:37:30Z
 https://docs.cloud.google.com/bigquery/docs/use-service-accounts	2026-08-16T04:10:45Z
