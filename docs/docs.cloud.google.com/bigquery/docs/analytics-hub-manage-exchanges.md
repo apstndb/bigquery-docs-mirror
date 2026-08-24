@@ -220,17 +220,17 @@ To give users access to a data exchange, you must set the IAM policy for that da
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  Click the data exchange name for which you want to set permissions.
+2.  Click the name of the data exchange that you want to set permissions for.
 
-3.  Go to the **Details** tab.
+3.  Click the **Details** tab.
 
 4.  Click person **Set permissions** .
 
 5.  To add principals, click person\_add **Add principal** .
 
-6.  In the **New principals** field, add the email IDs to which you want to grant access. You can also use `allUsers` to make a resource public and accessible to everyone on the internet, or `allAuthenticatedUsers` to make it accessible only to signed-in Google users.
+6.  In the **New principals** field, enter the email address of the principal that you want to grant access to. You can also use `allUsers` to make a resource public and accessible to everyone on the internet, or `allAuthenticatedUsers` to make it accessible only to signed-in Google users.
 
-7.  In the **Select a role** menu, select **Analytics Hub** , and then select one of the following Identity and Access Management (IAM) roles:
+7.  In the **Select a role** list, hold the pointer over **Analytics Hub** , and then select one of the following IAM roles:
     
       - **Analytics Hub Admin**
       - **Analytics Hub Listing Admin**
@@ -243,7 +243,7 @@ To give users access to a data exchange, you must set the IAM policy for that da
 
 ### API
 
-1.  Read the existing policy with the listing `getIamPolicy` method by using the [`projects.locations.dataExchanges.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/getIamPolicy) :
+1.  To read the existing policy, use the [`projects.locations.dataExchanges.getIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/getIamPolicy) :
     
         POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID:getIamPolicy
     
@@ -253,29 +253,27 @@ To give users access to a data exchange, you must set the IAM policy for that da
       - `  LOCATION  ` : the location for your data exchange. Use lowercase letters.
       - `  DATAEXCHANGE_ID  ` : the data exchange ID.
     
-    BigQuery sharing (formerly Analytics Hub) returns the current policy.
+    BigQuery sharing returns the current policy.
 
-2.  To add or remove members and their associated Identity and Access Management (IAM) roles, edit the policy with a text editor. Use the following format to add members:
+2.  To add or remove members and their associated IAM roles, edit the policy with a text editor. Use the following format to add members:
     
       - `user:test-user@gmail.com`
-      - `group:admins@example.com`
-      - `serviceAccount:test123@example.domain.com`
-      - `domain:example.domain.com`
+      - `group:admins@googlegroups.com`
+      - `serviceAccount:server@example.gserviceaccount.com`
+      - `domain:example.com`
     
-    For example, to grant the `roles/analyticshub.subscriber` role to `group:subscribers@example.com` , add the following binding to the policy:
+    For example, to grant the `roles/analyticshub.subscriber` role to `group:subscribers@googlegroups.com` , add the following binding to the policy:
     
         {
          "members": [
-           "group:subscribers@example.com"
+           "group:subscribers@googlegroups.com"
          ],
          "role":"roles/analyticshub.subscriber"
         }
 
-3.  Write the updated policy by using the [`projects.locations.dataExchanges.setIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/setIamPolicy) . In the body of the request, provide the updated IAM policy from the previous step.
+3.  To set the policy for the data exchange, use the [`projects.locations.dataExchanges.setIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/setIamPolicy) . In the request body, provide the updated IAM policy from the previous step:
     
         POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID:setIamPolicy
-    
-    In the body of the request, provide the listing details. If the request is successful, then the response body contains details of the listing.
 
 ### Create BigQuery sharing administrators
 
