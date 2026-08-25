@@ -38,7 +38,7 @@ The following sections describe several BigQuery interfaces and automated tools 
 The following tools help you troubleshoot BigQuery from Google Cloud console.
 
   - **Jobs Explorer.** Search, filter, and inspect past and running jobs across projects or organizations without writing SQL queries. You can view error messages, slot usage, execution timelines, and job metadata. For more information, see [Monitor jobs in Jobs Explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
-  - **Query execution graph.** Inspect the visual stage-by-stage execution plan for a query. The execution graph helps you identify bottlenecks such as shuffle spills to disk, compute-bound stages, data skew, or input/output delays. For more information, see [Troubleshoot query performance with the query execution graph](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#query_execution_graph) .
+  - **Query execution graph.** Inspect the visual stage-by-stage execution plan for a query. The execution graph helps you identify bottlenecks such as shuffle spills to disk, compute-bound stages, data skew, or input/output delays. For more information, see [Get query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) .
   - **Query Insights and resource charts.** View real-time and historical graphs of slot utilization, job concurrency, and reservation allocations to diagnose capacity constraints. For more information, see [Use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
   - **Gemini Cloud Assist in BigQuery.** Get contextual, AI-assisted analysis of failed queries and performance bottlenecks. Gemini Cloud Assist explains error codes, highlights problematic SQL syntax, and suggests remediation steps directly in the Google Cloud console. For more information, see [Troubleshoot queries using Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#cloud-assist) .
 
@@ -55,7 +55,7 @@ Information schema views let you query real-time and historical metadata about j
 
   - **Job execution telemetry.** Query [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) to analyze slot-millisecond consumption, spilled bytes, queue times, and error codes across jobs.
   - **Reservations and capacity.** Query [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) and [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments) to diagnose slot allocation, reservation limits, and autoscaling behaviors.
-  - **Streaming and ingestion.** Query [`INFORMATION_SCHEMA.STREAMING_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming-timeline) to identify ingestion latency and streaming rate limits.
+  - **Streaming and ingestion.** Query [`INFORMATION_SCHEMA.STREAMING_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) to identify ingestion latency and streaming rate limits.
   - **Storage and partition health.** Query [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to inspect physical table sizes, active versus long-term storage, and partition distribution.
 
 For more information, see [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
@@ -112,7 +112,6 @@ Diagnose failures when loading data, streaming records, or syncing external sour
 Diagnose connectivity, authentication, and execution errors when querying data outside BigQuery.
 
   - **[Troubleshoot Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries#troubleshooting) .** Resolve connection timeouts, instance configuration issues, and credential failures.
-  - **[Troubleshoot BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#troubleshooting) .** Diagnose Cloud Storage access permissions, external delegation errors, and metadata sync issues with open table formats.
 
 ### Billing and cost discrepancies
 

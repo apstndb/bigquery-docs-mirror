@@ -616,6 +616,181 @@ After you've discovered the agent, you can interact with it by performing the fo
   - **Chat** : Ask natural language questions to the agent. The requests are processed by the agent, and the response is streamed back to Gemini Enterprise as text, Markdown, charts, or tables.
   - **View conversation history** : Conversations are automatically saved in the history pane.
 
+## Monitor agents and conversations
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
+
+You can monitor the performance, adoption, latency, and costs of your data agents and their conversations by using Google Cloud Observability in BigQuery. When you enable agent observability, you can view metrics such as the following:
+
+  - The number of agents used in conversations
+  - The number of users who have asked questions
+  - The number of conversations created
+  - The agents that have answered the most questions
+  - The most commonly used knowledge sources
+  - User engagement
+  - Projected token usage
+  - Hourly answer latency
+
+### Before you begin
+
+Enable the Cloud Trace, Cloud Monitoring, Cloud Logging APIs.
+
+**Roles required to enable APIs**
+
+To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+#### Required roles and permissions
+
+To enable agent observability, you must have the following permissions on your project:
+
+  - `cloudaicompanion.gibqObservabilitySettings.create`
+  - `cloudaicompanion.gibqObservabilitySettings.list`
+  - `cloudaicompanion.gibqObservabilitySettings.update`
+  - `geminidataanalytics.dataAgents.create`
+  - `geminidataanalytics.operations.get`
+  - `observability.traceScopes.create`
+  - `resourcemanager.projects.update`
+  - `serviceusage.services.enable`
+  - `serviceusage.values.test`
+
+To get the permissions that you need to monitor your agents by using metrics, traces, and logs, ask your administrator to grant you the following IAM roles on your project:
+
+  - View monitoring data and configurations: [Monitoring Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/monitoring#monitoring.viewer) ( `roles/monitoring.viewer` )
+  - View traces: [Cloud Trace User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudtrace#cloudtrace.user) ( `roles/cloudtrace.user` )
+  - View logs: [Logs Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/logging#logging.viewer) ( `roles/logging.viewer` )
+  - View datasets and their contents: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
+  - View administrator settings: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` )
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+### Enable observability
+
+Agent observability is disabled by default. An administrator can enable it for your project or organization. To enable observability for your agents, select one of the following options:
+
+### Console
+
+1.  In the Google Cloud console, go to the BigQuery **Agents** page.
+
+2.  Select the **Monitoring** tab.
+
+3.  If observability is disabled, follow the prompts to enable it.
+
+### Google Cloud CLI
+
+1.  Create an observability setting:
+    
+        gcloud gemini gibq-observability-settings create SETTING_NAME \
+          --conversational-analytics-setting-metrics-enabled \
+          --conversational-analytics-setting-traces-enabled \
+          --project=PROJECT_ID \
+          --location=global
+    
+    Replace the following:
+    
+      - `  SETTING_NAME  ` : A name for the observability setting.
+      - `  PROJECT_ID  ` : Your project ID.
+
+2.  Bind the observability setting to your project:
+    
+        gcloud gemini gibq-observability-settings setting-bindings create BINDING_NAME \
+          --gibq-observability-setting=SETTING_NAME \
+          --target=projects/PROJECT_ID \
+          --location=global \
+          --project=PROJECT_ID
+    
+    Replace `  BINDING_NAME  ` with a name for the setting binding. We recommend that you use ` binding- PROJECT_ID  ` for your binding name.
+
+### API
+
+1.  Create an observability setting:
+    
+        curl -X POST \
+            -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+                  "conversational_analytics_setting": {
+                    "metrics_enabled": true
+                  }
+                }' \
+            "https://cloudaicompanion.googleapis.com/v1/projects/PROJECT_ID/locations/global/gibqObservabilitySettings?gibq_observability_setting_id=SETTING_NAME"
+    
+    Replace the following:
+    
+      - `  SETTING_NAME  ` : A name for the observability setting.
+      - `  PROJECT_ID  ` : Your project ID.
+
+2.  Bind the observability setting to your project:
+    
+        curl -X POST \
+            -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+                  "target": "projects/PROJECT_ID",
+                  "product": "GEMINI_IN_BIGQUERY"
+                }' \
+            "https://cloudaicompanion.googleapis.com/v1/projects/PROJECT_ID/locations/global/gibqObservabilitySettings/SETTING_NAME/settingBindings?setting_binding_id=BINDING_NAME"
+    
+    Replace `  BINDING_NAME  ` with a name for the setting binding. We recommend that you use ` binding- PROJECT_ID  ` for your binding name.
+
+### View metrics
+
+Metrics are collected after you enable observability. Data isn't backfilled. To view agent metrics, select one of the following options:
+
+### BigQuery
+
+1.  In the Google Cloud console, go to the BigQuery **Agents** page.
+
+2.  Select the **Monitoring** tab.
+
+### Cloud Monitoring
+
+1.  In the Google Cloud console, go to the Cloud Monitoring **Dashboards** page.
+
+2.  In the **My Dashboards** pane, search for the dashboard named `BigQuery Conversational Analytics` .
+
+3.  To open the dashboard, click its name.
+
+4.  Optional: Create a [custom dashboard](https://docs.cloud.google.com/monitoring/charts/dashboards) .
+
+5.  Optional: To view metrics individually, go to the **Metrics explorer** page.
+    
+    Agent metrics include agent usage, model calls, tool usage, health, latency, and token usage.
+
+### Debug model calls
+
+You can visualize the sequence of operations within a conversation turn, such as model calls and tool calls, to help you troubleshoot errors and latency.
+
+1.  In the Google Cloud console, go to the Cloud Monitoring **Trace explorer** page.
+
+2.  Click a span to examine.
+
+3.  Review the information in the **Details** pane.
+
+4.  Optional: Create a [custom trace dashboard](https://docs.cloud.google.com/trace/docs/display-traces-on-dashboards) .
+
+For more information, read about how to [find and explore traces](https://docs.cloud.google.com/trace/docs/finding-traces) .
+
+### Turn off observability
+
+To turn off observability for your data agents, update your observability setting:
+
+    gcloud gemini gibq-observability-settings update SETTING_NAME \
+        --no-conversational-analytics-setting-metrics-enabled \
+        --no-conversational-analytics-setting-traces-enabled \
+        --project=PROJECT_ID \
+        --location=global
+
+Replace the following:
+
+  - `  SETTING_NAME  ` : The name of the observability setting that you created to enable observability. If you enabled observability by using the Google Cloud console, then the setting name is `default` .
+  - `  PROJECT_ID  ` : Your project ID.
+
 ## What's next
 
   - Learn more about [conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .

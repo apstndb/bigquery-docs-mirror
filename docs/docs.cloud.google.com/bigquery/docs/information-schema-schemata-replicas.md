@@ -10,11 +10,13 @@ data_source: docs.cloud.google.com
 
 The `INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view contains information about schemata replicas.
 
-## Required role
+## Required roles
 
-To get the permissions that you need to query the `INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view, ask your administrator to grant you the [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to query the `INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view, ask your administrator to grant you the [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+This predefined role contains the `bigquery.datasets.get` permission, which is required to query the `INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view.
+
+You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Schema
 

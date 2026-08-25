@@ -135,6 +135,7 @@ The BigQuery MCP tools are subject to the following limitations:
   - By default, the `execute_sql` and `execute_sql_readonly` tools limit query processing time to three minutes. Queries that run longer than three minutes are automatically canceled.
   - Query results are limited to a maximum of 3,000 rows.
   - The `execute_sql_readonly` tool allows only read-only operations on the data. Mutations such as DML statements, DDL statements, and Python UDFs aren't supported.
+  - The `execute_sql_readonly` tool doesn't support queries that use Graph Query Language (GQL).
 
 ### List tools
 
@@ -162,6 +163,8 @@ The following are sample use cases for the BigQuery MCP server:
   - Use BigQuery's advanced capabilities like forecasting for higher-order insights.
 
   - Build a conversational experience for your users with custom agent instructions.
+
+  - Chat with your [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) data using GQL.
 
 ### Sample prompts
 

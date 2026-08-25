@@ -130,8 +130,8 @@ If you are migrating to a Apache Iceberg REST catalog, you must create a secret 
 
     {
       "client_id": "CLIENT_ID",
-      "client_secret": "CLIENT_SECRET<",
-      "polaris_realm": "POLARIS_REALM"
+      "client_secret": "CLIENT_SECRET",
+      "polaris_realm": "POLARIS_REALM",
       "scope": "SCOPE"
     }
 

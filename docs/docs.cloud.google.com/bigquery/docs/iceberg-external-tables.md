@@ -243,9 +243,10 @@ In addition to [external table limitations](https://docs.cloud.google.com/bigque
 
   - Tables using merge-on-read have the following limitations:
     
+      - A query can process up to 100,000 total deletion vector entries across the table. For Iceberg version 3 tables that use binary deletion vectors, each data file associated with a deletion vector counts as one deletion entry toward this limit.
       - Each data file can be associated with up to 10,000 delete files.
       - No more than 100,000 equality deletes can be applied to a data file.
-      - You can work around these limitations by compacting delete files frequently, creating a view on top of the Iceberg table that avoids frequently mutated partitions, or using position deletes rather than equality deletes.
+      - You can work around these limitations by compacting delete files and deletion vectors frequently, creating a view on top of the Iceberg table that avoids frequently mutated partitions, or filtering queries on partitioned columns to reduce the number of scanned data files and deletion vectors.
 
   - BigQuery supports manifest pruning using all [Iceberg partition transformation functions](https://iceberg.apache.org/spec/#partition-transforms) . For information about how to prune partitions, see [Query partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) . Queries referencing Iceberg external tables must contain literals in predicates compared to columns that are partitioned.
 
