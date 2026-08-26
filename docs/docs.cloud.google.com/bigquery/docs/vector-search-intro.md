@@ -55,12 +55,6 @@ Use the following topics to try embedding generation in BigQuery ML:
 
 ### Autonomous embedding generation
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
-
 You can use [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) to simplify the process of creating, maintaining, and querying embeddings. BigQuery maintains a column of embeddings on your table based on a source column. When you add or modify data in the source column, BigQuery automatically generates or updates the embedding column for that data by using an Agent Platform embedding model. This is helpful if you want to let BigQuery maintain your embeddings when your source data is updated regularly.
 
 ## Search
@@ -69,7 +63,7 @@ You can use the following search functions to perform a semantic vector search, 
 
   - [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a semantic vector search or hybrid search by using SQL.
 
-  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Perform a semantic or a hybrid search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
+  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) : Perform a semantic or a hybrid search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
 
   - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `VECTOR_SEARCH` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
 

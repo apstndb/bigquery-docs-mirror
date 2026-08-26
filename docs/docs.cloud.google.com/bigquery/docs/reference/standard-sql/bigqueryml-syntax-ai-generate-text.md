@@ -822,7 +822,7 @@ To iterate through inference calls until all rows are successfully processed, yo
 
   - Try [a tutorial on generating text using a public dataset](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial) .
   - Get step-by-step instructions on how to [generate text](https://docs.cloud.google.com/bigquery/docs/generate-text) using your own data.
-  - Get step-by-step instructions on how to tune an LLM and use it to [generate text](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
+  - Get step-by-step instructions on how to tune an LLM and use it to [generate text](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .
   - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
   - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
   - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

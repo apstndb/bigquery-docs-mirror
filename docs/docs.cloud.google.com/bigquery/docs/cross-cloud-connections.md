@@ -21,7 +21,7 @@ Workloads can benefit from cross-cloud connections versus standard connections f
   - **Feature consistency.** By bringing your data from other clouds into BigQuery, you gain direct access to BigQuery AI capabilities, Gemini Enterprise Agent Platform, materialized views, user-defined functions, and other features that aren't available through standard connections.
   - **Cost efficiency.** Workloads that use cross-cloud connections consume standard slot reservations and commitments, eliminating the need to manage separate compute capacities.
 
-If your workload involves Apache Iceberg catalogs or you need query support across engines other than BigQuery, consider using [cross-cloud Lakehouse for Apache Iceberg](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-lakehouse) instead.
+If your workload involves Apache Iceberg catalogs or you need query support across engines other than BigQuery, consider using the [cross-cloud data access capability of borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-borderless-lakehouse) instead.
 
 ## Before you begin
 

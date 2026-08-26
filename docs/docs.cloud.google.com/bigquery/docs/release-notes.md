@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## August 25, 2026
+
+Feature
+
+BigQuery [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) are supported in Terraform. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## August 24, 2026
 
 Feature
@@ -138,11 +144,11 @@ An updated version of the [Simba ODBC driver for BigQuery](https://docs.cloud.go
 
 Issue
 
-[*Lakehouse for Apache Iceberg*](https://docs.cloud.google.com/lakehouse/docs/introduction) : Data Products with special characters, such as "/" or "-", are not supported and will not be available in BigQuery even if shared from SAP BDC to BigQuery. If you share a Data Product with special characters, this could cause the refresh to stop and require re-enrollment. Known SAP systems producing these Data Products include SAP Business Warehouse (BW) sources and SAP SuccessFactors.
+[*Lakehouse*](https://docs.cloud.google.com/lakehouse/docs/introduction) : Data Products with special characters, such as "/" or "-", are not supported and will not be available in BigQuery even if shared from SAP BDC to BigQuery. If you share a Data Product with special characters, this could cause the refresh to stop and require re-enrollment. Known SAP systems producing these Data Products include SAP Business Warehouse (BW) sources and SAP SuccessFactors.
 
 Feature
 
-[*Lakehouse for Apache Iceberg*](https://docs.cloud.google.com/lakehouse/docs/introduction) : Cross-cloud Lakehouse now supports integration with SAP Business Data Cloud (BDC) in Preview.
+[*Lakehouse*](https://docs.cloud.google.com/lakehouse/docs/introduction) : Cross-cloud Lakehouse now supports integration with SAP Business Data Cloud (BDC) in Preview.
 
 This update includes the following features:
 
@@ -383,7 +389,7 @@ You can use Gemini Code Assist directly within the BigQuery **Jobs explorer** , 
 
 Feature
 
-*Lakehouse for Apache Iceberg* now supports custom catalog names and data distributed across multiple buckets. For more information, see [Create a catalog](https://docs.cloud.google.com/lakehouse/docs/create-catalog) .
+*Lakehouse* now supports custom catalog names and data distributed across multiple buckets. For more information, see [Create a catalog](https://docs.cloud.google.com/lakehouse/docs/create-catalog) .
 
 Feature
 

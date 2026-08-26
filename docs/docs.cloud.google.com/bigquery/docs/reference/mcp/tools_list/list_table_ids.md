@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `list_table_ids`
 
-List table ids in a BigQuery dataset. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
+List table ids in a BigQuery dataset or BigLake namespace. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
 
 The following code sample shows how to use `curl` to call the `list_table_ids` MCP tool.
 
@@ -144,7 +144,8 @@ A token that can be used to request the next results page.
 <tbody>
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;id&quot;: string
+  &quot;id&quot;: string,
+  &quot;type&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -157,6 +158,12 @@ Fields
 `string`
 
 The ID of the table.
+
+`type`
+
+`string`
+
+Output only. The type of table (e.g. TABLE, VIEW, EXTERNAL, MATERIALIZED\_VIEW, SNAPSHOT).
 
 ### Tool Annotations
 

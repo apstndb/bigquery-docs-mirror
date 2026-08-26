@@ -108,7 +108,7 @@ When you use these operators after an [`ORDER BY` operator](https://docs.cloud.g
 
 In pipe syntax, a query can start with a standard [`FROM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) and use any standard `FROM` syntax, including tables, joins, subqueries, and table-valued functions (TVFs). Table aliases can be assigned to each input item using the [`AS alias` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#using_aliases) .
 
-A query with only a `FROM` clause, like `FROM table_name` , is allowed in pipe syntax and returns all rows from the table. For tables with columns, `FROM table_name` in pipe syntax is similar to [`SELECT * FROM table_name`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax.
+A query with only a `FROM` clause, like `FROM table_name` , is allowed in pipe syntax and returns all rows from the table. For tables with columns, `FROM table_name` in pipe syntax is similar to [`SELECT * FROM table_name`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_star) in standard syntax.
 
 **Examples**
 
@@ -178,7 +178,7 @@ GoogleSQL supports the following pipe operators. For operators that correspond o
 
 Produces a new table with the listed columns, similar to the outermost [`SELECT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list) in a table subquery in standard syntax. The `SELECT` operator supports standard output modifiers like `SELECT AS STRUCT` and `SELECT DISTINCT` . The `SELECT` operator also supports [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , including [named windows](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window) . Named windows are defined using the `WINDOW` keyword and are only visible to the current pipe `SELECT` operator. The `SELECT` operator doesn't support aggregations or anonymization.
 
-In pipe syntax, the `SELECT` operator in a query is optional. The `SELECT` operator can be used near the end of a query to specify the list of output columns. The final query result contains the columns returned from the last pipe operator. If the `SELECT` operator isn't used to select specific columns, the output includes the full row, similar to what the [`SELECT *` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax produces.
+In pipe syntax, the `SELECT` operator in a query is optional. The `SELECT` operator can be used near the end of a query to specify the list of output columns. The final query result contains the columns returned from the last pipe operator. If the `SELECT` operator isn't used to select specific columns, the output includes the full row, similar to what the [`SELECT *` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_star) in standard syntax produces.
 
 In pipe syntax, the `SELECT` clause doesn't perform aggregation. Use the [`AGGREGATE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#aggregate_pipe_operator) instead.
 
@@ -221,7 +221,7 @@ For cases where `SELECT` would be used in standard syntax to rearrange columns, 
 
 **Description**
 
-Propagates the existing table and adds computed columns, similar to [`SELECT *, new_column`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_) in standard syntax. The `EXTEND` operator supports [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , including [named windows](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window) . Named windows are defined using the `WINDOW` keyword and are only visible to the current `EXTEND` operator.
+Propagates the existing table and adds computed columns, similar to [`SELECT *, new_column`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_star) in standard syntax. The `EXTEND` operator supports [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , including [named windows](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window) . Named windows are defined using the `WINDOW` keyword and are only visible to the current `EXTEND` operator.
 
 **Examples**
 
@@ -725,25 +725,28 @@ Calls a [table-valued function](https://docs.cloud.google.com/bigquery/docs/refe
 
 TVFs in standard syntax can be called in the `FROM` clause or in a `JOIN` operation. These are both allowed in pipe syntax as well.
 
-In pipe syntax, TVFs that take a table argument can also be called with the `CALL` operator. The first table argument comes from the input table and must be omitted in the arguments. An optional table alias can be added for the output table.
+In pipe syntax, TVFs that take a table argument can also be called with the `CALL` operator. **By default, the pipe input table is passed as the first table argument** and omitted from the argument list.
 
-Multiple TVFs can be called sequentially without using nested subqueries.
+If `[AS] alias` is present, this adds a table alias for the TVF output table.
+
+Multiple TVFs can be called by writing consecutive `|> CALL` operators.
 
 **Examples**
 
-Suppose you have TVFs with the following parameters:
+Suppose you have TVFs defined as follows:
 
-  - `tvf1(inputTable1, arg1 ANY TYPE)` and
-  - `tvf2(arg2 ANY TYPE, arg3 ANY TYPE, inputTable2)` .
+  - `tvf1(inputTable1, arg1 STRING)`
+  - `tvf2(arg2 STRING, arg3 STRING, inputTable2)`
 
-The following examples compare calling both TVFs on an input table by using standard syntax and by using the `CALL` pipe operator:
+The following examples compare calling TVFs on an input table by using standard syntax and by using the `CALL` pipe operator:
 
-    -- Call the TVFs without using the CALL operator.
+    -- Standard syntax: Chained TVF calls are nested in the FROM clause.
     SELECT *
     FROM
       tvf2(arg2, arg3, TABLE tvf1(TABLE input_table, arg1));
 
-    -- Call the same TVFs with the CALL operator.
+    -- Pipe syntax: Chained TVF calls are written sequentially with `|> CALL`.
+    -- The pipe input table is implicitly passed as the first table argument.
     FROM input_table
     |> CALL tvf1(arg1)
     |> CALL tvf2(arg2, arg3);

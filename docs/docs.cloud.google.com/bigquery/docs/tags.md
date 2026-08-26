@@ -1297,6 +1297,80 @@ To create a key for a data governance tag, set the `purpose` field to `DATA_GOVE
       - `  TAG_KEY  ` : the short name for the tag key.
       - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use ` organizations/ ORGANIZATION_ID  ` instead of ` projects/ PROJECT_ID  ` .
 
+### Terraform
+
+To create a tag key for data governance, use the [`google_tags_tag_key`](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/tags_tag_key) resource in the `google-beta` provider and set the `purpose` argument to `DATA_GOVERNANCE` :
+
+    resource "google_tags_tag_key" "dg_key" {
+      provider   = google-beta
+      parent     = "projects/PROJECT_ID"
+      short_name = "TAG_KEY"
+      purpose    = "DATA_GOVERNANCE"
+    }
+
+Replace the following:
+
+  - `  TAG_KEY  ` : the short name for the tag key.
+  - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use ` organizations/ ORGANIZATION_ID  ` instead of ` projects/ PROJECT_ID  ` .
+
+To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
+
+## Prepare Cloud Shell
+
+1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
+
+2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
+    
+    You only need to run this command once per project, and you can run it in any directory.
+    
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    
+    Environment variables are overridden if you set explicit values in the Terraform configuration file.
+
+## Prepare the directory
+
+Each Terraform configuration file must have its own directory (also called a *root module* ).
+
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
+    
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+2.  If you are following a tutorial, you can copy the sample code in each section or step.
+    
+    Copy the sample code into the newly created `main.tf` .
+    
+    Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
+
+3.  Review and modify the sample parameters to apply to your environment.
+
+4.  Save your changes.
+
+5.  Initialize Terraform. You only need to do this once per directory.
+    
+        terraform init
+    
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
+    
+        terraform init -upgrade
+
+## Apply the changes
+
+1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
+    
+        terraform plan
+    
+    Make corrections to the configuration as necessary.
+
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
+    
+        terraform apply
+    
+    Wait until Terraform displays the "Apply complete\!" message.
+
+3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
+
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+
 ### API
 
 1.  Send a `POST` request to the `tagKeys` endpoint:
@@ -1333,6 +1407,78 @@ To add one or more values to a tag key, follow these steps.
     
       - `  TAG_VALUE  ` : a user-specified short name of the tag value.
       - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project, use your `  ORGANIZATION_ID  ` instead.
+
+### Terraform
+
+To create a tag value, use the [`google_tags_tag_value`](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/tags_tag_value) resource in the `google-beta` provider:
+
+    resource "google_tags_tag_value" "dg_value" {
+      provider   = google-beta
+      parent     = "tagKeys/${google_tags_tag_key.dg_key.name}"
+      short_name = "TAG_VALUE"
+    }
+
+Replace the following:
+
+  - `  TAG_VALUE  ` : a user-specified short name of the tag value.
+
+To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
+
+## Prepare Cloud Shell
+
+1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
+
+2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
+    
+    You only need to run this command once per project, and you can run it in any directory.
+    
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    
+    Environment variables are overridden if you set explicit values in the Terraform configuration file.
+
+## Prepare the directory
+
+Each Terraform configuration file must have its own directory (also called a *root module* ).
+
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
+    
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+2.  If you are following a tutorial, you can copy the sample code in each section or step.
+    
+    Copy the sample code into the newly created `main.tf` .
+    
+    Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
+
+3.  Review and modify the sample parameters to apply to your environment.
+
+4.  Save your changes.
+
+5.  Initialize Terraform. You only need to do this once per directory.
+    
+        terraform init
+    
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
+    
+        terraform init -upgrade
+
+## Apply the changes
+
+1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
+    
+        terraform plan
+    
+    Make corrections to the configuration as necessary.
+
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
+    
+        terraform apply
+    
+    Wait until Terraform displays the "Apply complete\!" message.
+
+3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
+
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 
@@ -1487,6 +1633,108 @@ To attach data governance tags to a column in an existing table, use the [`ALTER
     
     You can also use the `bq update` command to remove existing tags and attach new tags.
 
+### Terraform
+
+#### Create a new table with a tagged column
+
+To attach data governance tags to a column when creating a table, use the [`google_bigquery_table`](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/bigquery_table) resource in the `google-beta` provider. Set the `dataGovernanceTagsInfo` object inside the column's schema definition.
+
+The following example creates a table and attaches a data governance tag to a column:
+
+    resource "google_bigquery_table" "table" {
+      provider   = google-beta
+      dataset_id = "DATASET_ID"
+      table_id   = "TABLE_ID"
+      schema     = <<EOF
+    [
+    {
+    "name": "COLUMN_NAME",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "dataGovernanceTagsInfo": {
+      "dataGovernanceTags": {
+        "PROJECT_ID/TAG_KEY": "TAG_VALUE"
+      }
+    }
+    }
+    ]
+    EOF
+      deletion_protection = false
+    }
+
+Replace the following:
+
+  - `  DATASET_ID  ` : the ID of the dataset where the table resides.
+  - `  TABLE_ID  ` : the ID of the table you're creating.
+  - `  COLUMN_NAME  ` : the name of the column you want to tag.
+  - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project as the parent of your tag, use your `  ORGANIZATION_ID  ` instead for the tag key format ( `ORGANIZATION_ID/TAG_KEY` ).
+  - `  TAG_KEY  ` : the short name for the tag key.
+  - `  TAG_VALUE  ` : the short name of the tag value you want to attach.
+
+#### Add a tag to an existing table
+
+To attach or update data governance tags on a column in an existing table, update the column's schema in the `google_bigquery_table` resource to include or modify the `dataGovernanceTagsInfo` object, and then apply the updated configuration.
+
+> **Note:** Adding, modifying, or clearing `dataGovernanceTagsInfo` on a table column schema is performed in-place and doesn't recreate the table.
+
+To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
+
+## Prepare Cloud Shell
+
+1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
+
+2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
+    
+    You only need to run this command once per project, and you can run it in any directory.
+    
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    
+    Environment variables are overridden if you set explicit values in the Terraform configuration file.
+
+## Prepare the directory
+
+Each Terraform configuration file must have its own directory (also called a *root module* ).
+
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
+    
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+2.  If you are following a tutorial, you can copy the sample code in each section or step.
+    
+    Copy the sample code into the newly created `main.tf` .
+    
+    Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
+
+3.  Review and modify the sample parameters to apply to your environment.
+
+4.  Save your changes.
+
+5.  Initialize Terraform. You only need to do this once per directory.
+    
+        terraform init
+    
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
+    
+        terraform init -upgrade
+
+## Apply the changes
+
+1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
+    
+        terraform plan
+    
+    Make corrections to the configuration as necessary.
+
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
+    
+        terraform apply
+    
+    Wait until Terraform displays the "Apply complete\!" message.
+
+3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
+
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+
 ### API
 
 #### Create a new table with a tagged column
@@ -1527,6 +1775,118 @@ Create and manage BigQuery data policies that reference data governance tags to 
 After a data policy is created for a tagged column, only users specified in that policy can access the column, provided they also have access to the table. All other users are denied access.
 
 #### Create data policies
+
+### Terraform
+
+To create a data policy that references a data governance tag, use the [`google_bigquery_datapolicyv2_data_policy`](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/bigquery_datapolicyv2_data_policy) resource in the `google-beta` provider. Specify the `data_governance_tag` block to bind the policy to a data governance tag key and value.
+
+> **Caution:** The `data_governance_tag` block and its nested fields are immutable. Updating or removing this block causes Terraform to recreate the data policy resource.
+
+##### Create a data policy with a predefined `SHA256` masking rule
+
+The following example creates a data masking policy that uses a predefined `SHA256` masking routine:
+
+    resource "google_bigquery_datapolicyv2_data_policy" "mask_policy" {
+      provider         = google-beta
+      location         = "LOCATION"
+      data_policy_type = "DATA_MASKING_POLICY"
+      data_policy_id   = "POLICY_ID"
+      data_masking_policy {
+        predefined_expression = "SHA256"
+      }
+      data_governance_tag {
+        key   = "PROJECT_ID/TAG_KEY"
+        value = "TAG_VALUE"
+      }
+      grantees = [
+        "principal://goog/subject/EMAIL_ADDRESS"
+      ]
+    }
+
+Replace the following:
+
+  - `  LOCATION  ` : the region where you are creating the data policy. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/locations) .
+  - `  POLICY_ID  ` : the ID for the data policy.
+  - `  PROJECT_ID  ` : the ID of your Google Cloud project. To supply an organization instead of a project as the parent of your tag, use your `  ORGANIZATION_ID  ` instead for the `key` format ( `ORGANIZATION_ID/TAG_KEY` ).
+  - `  TAG_KEY  ` : the short name for the tag key.
+  - `  TAG_VALUE  ` : the short name of the tag value.
+  - `  EMAIL_ADDRESS  ` : the email address of the user or service account to grant access to.
+
+##### Create a raw data access policy
+
+To create a raw data access policy, set `data_policy_type` to `RAW_DATA_ACCESS_POLICY` :
+
+    resource "google_bigquery_datapolicyv2_data_policy" "raw_policy" {
+      provider         = google-beta
+      location         = "LOCATION"
+      data_policy_type = "RAW_DATA_ACCESS_POLICY"
+      data_policy_id   = "POLICY_ID"
+      data_governance_tag {
+        key   = "PROJECT_ID/TAG_KEY"
+        value = "TAG_VALUE"
+      }
+      grantees = [
+        "principal://goog/subject/EMAIL_ADDRESS"
+      ]
+    }
+
+To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
+
+## Prepare Cloud Shell
+
+1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
+
+2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
+    
+    You only need to run this command once per project, and you can run it in any directory.
+    
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    
+    Environment variables are overridden if you set explicit values in the Terraform configuration file.
+
+## Prepare the directory
+
+Each Terraform configuration file must have its own directory (also called a *root module* ).
+
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
+    
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+2.  If you are following a tutorial, you can copy the sample code in each section or step.
+    
+    Copy the sample code into the newly created `main.tf` .
+    
+    Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
+
+3.  Review and modify the sample parameters to apply to your environment.
+
+4.  Save your changes.
+
+5.  Initialize Terraform. You only need to do this once per directory.
+    
+        terraform init
+    
+    Optionally, to use the latest Google provider version, include the `-upgrade` option:
+    
+        terraform init -upgrade
+
+## Apply the changes
+
+1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
+    
+        terraform plan
+    
+    Make corrections to the configuration as necessary.
+
+2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
+    
+        terraform apply
+    
+    Wait until Terraform displays the "Apply complete\!" message.
+
+3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
+
+> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
 ### API
 

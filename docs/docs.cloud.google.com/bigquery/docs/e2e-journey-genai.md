@@ -56,7 +56,6 @@ Remote model over a Gemini text generation model <sup>1</sup>
   - [Handle quota errors by calling `ML.GENERATE_TEXT` iteratively](https://docs.cloud.google.com/bigquery/docs/iterate-generate-text-calls)
   - [Analyze images with a Gemini model](https://docs.cloud.google.com/bigquery/docs/image-analysis)
   - [Try model tuning using public data](https://docs.cloud.google.com/bigquery/docs/tune-evaluate)
-  - [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning)
 
 Remote model over a partner text generation model
 

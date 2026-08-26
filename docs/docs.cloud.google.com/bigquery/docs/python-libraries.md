@@ -283,42 +283,12 @@ The following sample shows how to run a query with named parameters.
 
 ### Loading a pandas DataFrame to a BigQuery table
 
-All three libraries support uploading data from a pandas DataFrame to a new table in BigQuery. Key differences include:
+Both `pandas-gbq` and `google-cloud-bigquery` support uploading data from a pandas DataFrame to a new table in BigQuery. Key differences include the following:
 
-|                     | bigquery-dataframes                                                                                                                                                                                              | pandas-gbq                                                                                                                      | google-cloud-bigquery                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Type support        | Converts the local pandas DataFrame to a `bigframes.pandas.DataFrame` using `read_pandas` (using Parquet or CSV under the hood), supporting nested and array values. You then save it to a table with `to_gbq` . | Converts the DataFrame to CSV format before sending to the API, which does not support nested or array values.                  | Converts the DataFrame to Parquet or CSV format before sending to the API, which supports nested and array values. Choose Parquet for struct and array values and CSV for date and time serialization flexibility. Parquet is the default choice. Note that `pyarrow` , which is the parquet engine used to send the DataFrame data to the BigQuery API, must be installed to load the DataFrame to a table. |
-| Load configurations | Use the `if_exists` parameter ( `'fail'` , `'replace'` , or `'append'` ) when saving with `to_gbq` .                                                                                                             | You can optionally specify a [table schema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema) . | Use the [`LoadJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig) class, which contains properties for the various API configuration options.                                                                                                                                                                                           |
-
-### bigquery-dataframes
-
-    import bigframes.pandas as bpd
-    
-    import pandas as pd
-    
-    # Set partial ordering mode as the default configuration for BigQuery
-    # DataFrames.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    
-    def upload_from_dataframe(
-        table_id: str = "your-project.your_dataset.your_table_name",
-    ) -> bpd.DataFrame:
-        # Create a local pandas DataFrame.
-        df = pd.DataFrame(
-            {
-                "my_string": ["a", "b", "c"],
-                "my_int64": [1, 2, 3],
-                "my_float64": [4.0, 5.0, 6.0],
-            }
-        )
-    
-        # Convert the local pandas DataFrame to a BigQuery DataFrame.
-        bq_df = bpd.read_pandas(df)
-    
-        # Write the DataFrame to a BigQuery table.
-        bq_df.to_gbq(table_id, if_exists="replace")
-        return bq_df
+|                     | pandas-gbq                                                                                                                      | google-cloud-bigquery                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Type support        | Converts the DataFrame to CSV format before sending to the API, which doesn't support nested or array values.                   | Converts the DataFrame to Parquet or CSV format before sending to the API, which supports nested and array values. Choose Parquet for struct and array values and CSV for date and time serialization flexibility. Parquet is the default choice. Note that `pyarrow` , which is the parquet engine used to send the DataFrame data to the BigQuery API, must be installed to load the DataFrame to a table. |
+| Load configurations | You can optionally specify a [table schema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema) . | Use the [`LoadJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig) class, which contains properties for the various API configuration options.                                                                                                                                                                                           |
 
 ### pandas-gbq
 

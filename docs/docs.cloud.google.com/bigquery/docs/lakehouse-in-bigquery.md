@@ -1,14 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/lakehouse-in-bigquery
 uri: https://docs.cloud.google.com/bigquery/docs/lakehouse-in-bigquery
-title: Interact with Lakehouse data in BigQuery
+title: Interact with borderless Lakehouse data in BigQuery
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-# Interact with Lakehouse data in BigQuery
+# Interact with borderless Lakehouse data in BigQuery
 
-[*Lakehouse for Apache Iceberg*](https://docs.cloud.google.com/lakehouse/docs/introduction) is a storage engine that unites Google Cloud and open source services to create a unified interface for advanced analytics and AI. It provides the foundation to build an open, managed, and high-performance lakehouse with automated data management and built-in governance using Apache Iceberg.
+[Borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/introduction) is a storage engine that unites Google Cloud and open source services to create a unified interface for advanced analytics and AI. It provides the foundation to build an open, managed, and high-performance lakehouse with automated data management and built-in governance using Apache Iceberg.
 
 When you [create a table in Lakehouse](https://docs.cloud.google.com/lakehouse/docs/lakehouse-tables) , it is automatically queryable from BigQuery and is visible on the BigQuery page of the Google Cloud console. Your Lakehouse namespaces and schemas are also automatically mapped to BigQuery datasets.
 
@@ -214,7 +214,7 @@ Supported
 
 Supported
 
-## Use borderless Lakehouse
+## Access cross-cloud data
 
 > **Preview**
 > 
@@ -222,8 +222,8 @@ Supported
 
 > **Note:** For support during the preview, email <biglake-help@google.com> .
 
-You can use [borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-borderless-lakehouse) to query data that's stored in other cloud providers, directly from BigQuery, without migrating files or building complex ETL pipelines. For configuration information, see [Use borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/use-borderless-lakehouse) .
+The [cross-cloud data access capability of Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-borderless-lakehouse) lets you query data stored with other cloud providers directly from BigQuery, without migrating files or building complex ETL pipelines. For configuration information, see [Query remote data](https://docs.cloud.google.com/lakehouse/docs/use-borderless-lakehouse) .
 
 ## What's next
 
-  - Learn more about [Lakehouse](https://docs.cloud.google.com/lakehouse/docs/lakehouse-basics) .
+  - Learn more about [borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/lakehouse-basics) .

@@ -34,19 +34,19 @@ MCP Tools
 
 `  list_dataset_ids  `
 
-List BigQuery dataset IDs in a Google Cloud project. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
+List BigQuery dataset IDs and BigLake namespaces in a Google Cloud project. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
 
 `  get_dataset_info  `
 
-Get metadata information about a BigQuery dataset.
+Get metadata information about a BigQuery dataset or BigLake namespace.
 
 `  list_table_ids  `
 
-List table ids in a BigQuery dataset. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
+List table ids in a BigQuery dataset or BigLake namespace. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
 
 `  get_table_info  `
 
-Get metadata information about a BigQuery table.
+Get metadata information about a BigQuery table or BigLake table.
 
 `  execute_sql_readonly  `
 

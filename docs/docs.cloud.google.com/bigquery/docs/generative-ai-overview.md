@@ -74,7 +74,7 @@ Use the following topics to try text generation in BigQuery ML:
   - [Generate text by using a Gemma model and the `AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma) .
   - [Analyze images with a Gemini model](https://docs.cloud.google.com/bigquery/docs/image-analysis) .
   - [Generate text by using the `AI.GENERATE_TEXT` function with your data](https://docs.cloud.google.com/bigquery/docs/generate-text) .
-  - [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
+  - [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .
 
 For some models, you can optionally choose to configure [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , which lets you train the model on your own data to make it better suited for your use case. All inference occurs in Agent Platform. The results are stored in BigQuery.
 

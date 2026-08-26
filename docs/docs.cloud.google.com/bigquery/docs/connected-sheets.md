@@ -340,3 +340,9 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
   - Get more information from the Google Workspace [Get started with BigQuery data in Google Sheets](https://support.google.com/docs/answer/9702507) topic.
 
   - View videos from the [Using Connected Sheets playlist](https://www.youtube.com/playlist?list=PLU8ezI8GYqs74i8hy_qln3FvkAuSpE-r1) on YouTube.
+
+  - Ready to get hands-on? Try a lab:
+    
+      - [Connected Sheets: Qwik Start](https://www.skills.google/focuses/18108?&parent=catalog)
+      - [Examining BigQuery Billing Data in Google Sheets](https://www.skills.google/focuses/6916?&parent=catalog)
+      - Show your mastery: complete the [Analyze BigQuery Data in Connected Sheets skill badge](https://www.skills.google/course_templates/632+doc)

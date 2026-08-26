@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `get_table_info`
 
-Get metadata information about a BigQuery table.
+Get metadata information about a BigQuery table or BigLake table.
 
 The following code sample shows how to use `curl` to call the `get_table_info` MCP tool.
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `list_dataset_ids`
 
-List BigQuery dataset IDs in a Google Cloud project. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
+List BigQuery dataset IDs and BigLake namespaces in a Google Cloud project. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
 
 The following code sample shows how to use `curl` to call the `list_dataset_ids` MCP tool.
 
@@ -139,7 +139,8 @@ A token that can be used to request the next results page.
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;id&quot;: string,
   &quot;friendlyName&quot;: string,
-  &quot;location&quot;: string
+  &quot;location&quot;: string,
+  &quot;type&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -164,6 +165,19 @@ An alternate name for the dataset. The friendly name is purely decorative in nat
 `string`
 
 The geographic location where the dataset resides.
+
+`type`
+
+`string`
+
+Output only. Same as `type` . The type of the dataset, one of:
+
+  - `DEFAULT` - only accessible by owner and authorized accounts,
+  - `PUBLIC` - accessible by everyone,
+  - `LINKED` - linked dataset,
+  - `EXTERNAL` - dataset with definition in external metadata catalog,
+  - `BIGLAKE_ICEBERG` - a Biglake dataset accessible through the Iceberg API,
+  - `BIGLAKE_HIVE` - a Biglake dataset accessible through the Hive API.
 
 ### StringValue
 

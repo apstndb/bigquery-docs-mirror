@@ -359,5 +359,5 @@ Replace CONNECTION\_ID with the actual ID of your connection.
 ## What's next
 
   - Learn more about [generative AI functions in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Learn how to [tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
+  - Learn how to [tune and evaluate a model](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .
   - Explore reference architectures, diagrams, and best practices about Google Cloud. Take a look at our [Cloud Architecture Center](https://docs.cloud.google.com/architecture) .

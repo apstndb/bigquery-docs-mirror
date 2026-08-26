@@ -358,4 +358,4 @@ The following example creates a BigQuery ML remote model over a tuned version of
 ## What's next
 
   - For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Try [customizing a model by using supervised fine tuning](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
+  - Try [customizing a model by using supervised fine tuning](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .

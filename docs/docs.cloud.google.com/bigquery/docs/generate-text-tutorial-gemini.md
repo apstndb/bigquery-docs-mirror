@@ -589,4 +589,4 @@ If you want to reuse the project, then delete the resources that you created for
 ## What's next
 
   - [Choose a text generation function](https://docs.cloud.google.com/bigquery/docs/choose-text-generation-function)
-  - [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning)
+  - [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/tune-evaluate)

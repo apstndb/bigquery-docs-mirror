@@ -36,7 +36,7 @@ MODEL_TYPE = { 'RANDOM_FOREST_CLASSIFIER' | 'RANDOM_FOREST_REGRESSOR' } ]
     [, MIN_SPLIT_LOSS = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, SUBSAMPLE = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, INSTANCE_WEIGHT_COL = string_value ]
-    [, XGBOOST_VERSION = { '0.9' | '1.1' } ]
+    [, XGBOOST_VERSION = { '0.9' | '1.1' | '2.1'} ]
     [, AUTO_CLASS_WEIGHTS = { TRUE | FALSE } ]
     [, CLASS_WEIGHTS = struct_array ]
     [, ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE } ]
@@ -365,7 +365,7 @@ A `STRING` value.
 
 **Syntax**
 
-    XGBOOST_VERSION = { '0.9' | '1.1' }
+    XGBOOST_VERSION = { '0.9' | '1.1' | '2.1'}
 
 **Description**
 
@@ -377,6 +377,7 @@ This option accepts the following values:
 
   - `0.9` . This is the default.
   - `1.1`
+  - `2.1`
 
 ### `AUTO_CLASS_WEIGHTS`
 

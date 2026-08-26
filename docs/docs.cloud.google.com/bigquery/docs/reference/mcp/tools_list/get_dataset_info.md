@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `get_dataset_info`
 
-Get metadata information about a BigQuery dataset.
+Get metadata information about a BigQuery dataset or BigLake namespace.
 
 The following code sample shows how to use `curl` to call the `get_dataset_info` MCP tool.
 

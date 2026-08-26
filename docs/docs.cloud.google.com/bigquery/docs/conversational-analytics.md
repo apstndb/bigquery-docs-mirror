@@ -32,7 +32,7 @@ Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.g
 
 Data agents consist of one or more knowledge sources, and a set of instructions specific to a use case for processing that data. When you create a data agent, you can configure it using the following options:
 
-  - Use *knowledge sources* such as tables, views, and UDFs with a data agent. You can also connect to Lakehouse tables as sources. For more information, see [Query Lakehouse data with natural language](https://docs.cloud.google.com/biglake/docs/conversational-analytics) .
+  - Use *knowledge sources* such as tables, views, and UDFs with a data agent. You can also connect to borderless Lakehouse tables as sources. For more information, see [Query Lakehouse tables with natural language](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
   - Provide custom table and field metadata to describe the data in the most appropriate way for the given use case.
   - Provide instructions for interpreting and querying the data, such as defining the following:
       - Synonyms and business terms for field names
@@ -251,5 +251,5 @@ Replace the following:
   - Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
   - [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
   - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
-  - [Use conversational Analytics with Lakehouse](https://docs.cloud.google.com/biglake/docs/conversational-analytics)
+  - [Use conversational analytics with Lakehouse](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
   - Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .

@@ -26,7 +26,7 @@ This document shows you how to migrate metadata from external data catalogs to [
   - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg are a one-time sync. This feature doesn't support continuous or periodic syncs, so any writes made after migration aren't visible until you migrate again.
   - Nested namespaces aren't supported.
   - The Iceberg REST catalog only supports Parquet data files.
-  - Lakehouse doesn't support Apache Iceberg V3 tables.
+  - Borderless Lakehouse doesn't support Apache Iceberg V3 tables.
   - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg only supports migrations of up to 10,000 tables. If your workload requires processing more than 10,000 tables, then we recommend splitting your workload across multiple migrations.
   - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg don't support the use of organization policies to enforce [domain-restricted sharing](https://docs.cloud.google.com/organization-policy/domain-restricted-sharing) .
 
