@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/materialized-views-monitor
 uri: https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor
 title: Monitor materialized views
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes how to monitor materialized views in BigQuery, including automatic refresh status, refresh jobs, and query usage.
 data_source: docs.cloud.google.com
 ---
 
@@ -265,3 +265,5 @@ If your query uses materialized views and is running slower than expected, do th
 1.  Verify that the intended materialized views are actually being used by the query. For detailed instructions, see [Monitor materialized view usage](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor#monitor_materialized_view_usage) .
 2.  [Check the freshness of your materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor#view_last_refresh_status) .
 3.  Review the materialized view definition and the data it references and consider [techniques to optimize your materialized view usage](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#best_practices_when_creating_materialized_views) .
+
+For comprehensive troubleshooting of creation errors, refresh failures, and query performance issues, see [Troubleshoot materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-troubleshoot) .

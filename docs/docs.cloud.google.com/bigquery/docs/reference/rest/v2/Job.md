@@ -1107,7 +1107,7 @@ JobConfigurationExtract configures a job that exports data from a BigQuery table
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destinationUri&quot;: string,&quot;destinationUris&quot;: [string],&quot;printHeader&quot;: boolean,&quot;fieldDelimiter&quot;: string,&quot;destinationFormat&quot;: string,&quot;compression&quot;: string,&quot;useAvroLogicalTypes&quot;: boolean,&quot;modelExtractOptions&quot;: {object (ModelExtractOptions)},// Union field source can be only one of the following:&quot;sourceTable&quot;: {object (TableReference)},&quot;sourceModel&quot;: {object (ModelReference)}// End of list of possible types for union field source.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destinationUri&quot;: string,&quot;destinationUris&quot;: [string],&quot;printHeader&quot;: boolean,&quot;fieldDelimiter&quot;: string,&quot;destinationFormat&quot;: string,&quot;compression&quot;: string,&quot;useAvroLogicalTypes&quot;: boolean,&quot;modelExtractOptions&quot;: {object (ModelExtractOptions)},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;sourceTable&quot;: {object (TableReference)},&quot;sourceModel&quot;: {object (ModelReference)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1162,7 +1162,7 @@ Whether to use logical types when extracting to AVRO format. Not applicable when
 
 Optional. Model extract options only applicable when extracting models.
 
-Union field `source` . Required. Source reference for the export. `source` can be only one of the following:
+Required. Source reference for the export. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `sourceTable`
 
@@ -1175,6 +1175,8 @@ A reference to the table being exported.
 ` object ( ModelReference  ` )
 
 A reference to the model being exported.
+
+End of mutually exclusive fields.
 
 ## ModelExtractOptions
 

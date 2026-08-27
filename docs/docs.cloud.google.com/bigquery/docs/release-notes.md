@@ -14,6 +14,16 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## August 26, 2026
+
+Security
+
+An Improper Input Validation vulnerability was discovered in the JDBC driver in BigQuery Data Transfer Service versions prior to May 1, 2026. An authenticated attacker could use crafted JDBC connection string parameters to achieve remote code execution in the connector container and escalate privileges in the tenant project. For more information, see the [GCP-2026-056](https://docs.cloud.google.com/bigquery/docs/security-bulletins#gcp-2026-056) security bulletin.
+
+Feature
+
+You can now [view real-time logs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#use_logging) for your Python UDFs in Cloud Logging. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
 ## August 25, 2026
 
 Feature

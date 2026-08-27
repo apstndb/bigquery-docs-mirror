@@ -199,8 +199,7 @@ The following example shows the result of `DATETIME_DIFF` for two dates in diffe
     /*-----------+--------------+
      | year_diff | isoyear_diff |
      +-----------+--------------+
-     | 3         | 2            |
-     +-----------+--------------*/
+     | 3         | 2            | +-----------+--------------*/
 
 The following example shows the result of `DATETIME_DIFF` for two days in succession. The first date falls on a Monday and the second date falls on a Sunday. `DATETIME_DIFF` with the date part `WEEK` returns 0 because this time part uses weeks that begin on Sunday. `DATETIME_DIFF` with the date part `WEEK(MONDAY)` returns 1. `DATETIME_DIFF` with the date part `ISOWEEK` also returns 1 because ISO weeks begin on Monday.
 

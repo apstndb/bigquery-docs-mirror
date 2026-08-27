@@ -70,7 +70,7 @@ The data type of a variable such as a function argument. Examples include:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;typeKind&quot;: enum (TypeKind),// Union field sub_type can be only one of the following:&quot;arrayElementType&quot;: {object (StandardSqlDataType)},&quot;structType&quot;: {object (StandardSqlStructType)},&quot;rangeElementType&quot;: {object (StandardSqlDataType)}// End of list of possible types for union field sub_type.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;typeKind&quot;: enum (TypeKind),// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;arrayElementType&quot;: {object (StandardSqlDataType)},&quot;structType&quot;: {object (StandardSqlStructType)},&quot;rangeElementType&quot;: {object (StandardSqlDataType)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -83,7 +83,7 @@ Fields
 
 Required. The top level type of this field. Can be any GoogleSQL data type (e.g., "INT64", "DATE", "ARRAY").
 
-Union field `sub_type` . For complex types, the sub type information. `sub_type` can be only one of the following:
+For complex types, the sub type information. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `arrayElementType`
 
@@ -102,6 +102,8 @@ The fields of this struct, in order, if typeKind = "STRUCT".
 ` object ( StandardSqlDataType  ` )
 
 The type of the range's elements, if typeKind = "RANGE".
+
+End of mutually exclusive fields.
 
 ## TypeKind
 

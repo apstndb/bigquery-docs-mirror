@@ -2200,14 +2200,14 @@ Evaluation metrics of a model. These are either computed on all training data or
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field metrics can be only one of the following:&quot;regressionMetrics&quot;: {object (RegressionMetrics)},&quot;binaryClassificationMetrics&quot;: {object (BinaryClassificationMetrics)},&quot;multiClassClassificationMetrics&quot;: {object (MultiClassClassificationMetrics)},&quot;clusteringMetrics&quot;: {object (ClusteringMetrics)},&quot;rankingMetrics&quot;: {object (RankingMetrics)},&quot;arimaForecastingMetrics&quot;: {object (ArimaForecastingMetrics)},&quot;dimensionalityReductionMetrics&quot;: {object (DimensionalityReductionMetrics)}// End of list of possible types for union field metrics.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;regressionMetrics&quot;: {object (RegressionMetrics)},&quot;binaryClassificationMetrics&quot;: {object (BinaryClassificationMetrics)},&quot;multiClassClassificationMetrics&quot;: {object (MultiClassClassificationMetrics)},&quot;clusteringMetrics&quot;: {object (ClusteringMetrics)},&quot;rankingMetrics&quot;: {object (RankingMetrics)},&quot;arimaForecastingMetrics&quot;: {object (ArimaForecastingMetrics)},&quot;dimensionalityReductionMetrics&quot;: {object (DimensionalityReductionMetrics)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `metrics` . Metrics. `metrics` can be only one of the following:
+Metrics. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `regressionMetrics`
 
@@ -2250,6 +2250,8 @@ Populated for ARIMA models.
 ` object ( DimensionalityReductionMetrics  ` )
 
 Evaluation metrics when the model is a dimensionality reduction model, which currently includes PCA.
+
+End of mutually exclusive fields.
 
 ## RegressionMetrics
 
@@ -2747,7 +2749,7 @@ Representative value of a single feature within the cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;featureColumn&quot;: string,// Union field value can be only one of the following:&quot;numericalValue&quot;: number,&quot;categoricalValue&quot;: {object (CategoricalValue)}// End of list of possible types for union field value.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;featureColumn&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;numericalValue&quot;: number,&quot;categoricalValue&quot;: {object (CategoricalValue)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -2760,7 +2762,7 @@ Fields
 
 The feature column name.
 
-Union field `value` . Value. `value` can be only one of the following:
+Value. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `numericalValue`
 
@@ -2773,6 +2775,8 @@ The numerical feature value. This is the centroid value for this feature.
 ` object ( CategoricalValue  ` )
 
 The categorical feature value.
+
+End of mutually exclusive fields.
 
 ## CategoricalValue
 
@@ -3384,14 +3388,14 @@ Search space for a double hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field search_space can be only one of the following:&quot;range&quot;: {object (DoubleRange)},&quot;candidates&quot;: {object (DoubleCandidates)}// End of list of possible types for union field search_space.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;range&quot;: {object (DoubleRange)},&quot;candidates&quot;: {object (DoubleCandidates)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `search_space` . Search space. `search_space` can be only one of the following:
+Search space. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `range`
 
@@ -3404,6 +3408,8 @@ Range of the double hyperparameter.
 ` object ( DoubleCandidates  ` )
 
 Candidates of the double hyperparameter.
+
+End of mutually exclusive fields.
 
 ## DoubleRange
 
@@ -3489,14 +3495,14 @@ Search space for an int hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field search_space can be only one of the following:&quot;range&quot;: {object (IntRange)},&quot;candidates&quot;: {object (IntCandidates)}// End of list of possible types for union field search_space.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;range&quot;: {object (IntRange)},&quot;candidates&quot;: {object (IntCandidates)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `search_space` . Search space. `search_space` can be only one of the following:
+Search space. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `range`
 
@@ -3509,6 +3515,8 @@ Range of the int hyperparameter.
 ` object ( IntCandidates  ` )
 
 Candidates of the int hyperparameter.
+
+End of mutually exclusive fields.
 
 ## IntRange
 
@@ -3802,7 +3810,7 @@ Remote Model Info
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;connection&quot;: string,&quot;maxBatchingRows&quot;: string,&quot;remoteModelVersion&quot;: string,// Union field remote_service can be only one of the following:&quot;endpoint&quot;: string,&quot;remoteServiceType&quot;: enum (RemoteServiceType)// End of list of possible types for union field remote_service.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;connection&quot;: string,&quot;maxBatchingRows&quot;: string,&quot;remoteModelVersion&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;endpoint&quot;: string,&quot;remoteServiceType&quot;: enum (RemoteServiceType)// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -3827,7 +3835,7 @@ Output only. Max number of rows in each batch sent to the remote service. If uns
 
 Output only. The model version for LLM.
 
-Union field `remote_service` . Remote services are services outside of BigQuery used by remote models for predictions. A remote service is backed by either an arbitrary endpoint or a selected remote service type, but not both. `remote_service` can be only one of the following:
+Remote services are services outside of BigQuery used by remote models for predictions. A remote service is backed by either an arbitrary endpoint or a selected remote service type, but not both. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `endpoint`
 
@@ -3840,6 +3848,8 @@ Output only. The endpoint for remote model.
 ` enum ( RemoteServiceType  ` )
 
 Output only. The remote service type for remote model.
+
+End of mutually exclusive fields.
 
 ## RemoteServiceType
 

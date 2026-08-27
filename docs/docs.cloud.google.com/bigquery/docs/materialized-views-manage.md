@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/materialized-views-manage
 uri: https://docs.cloud.google.com/bigquery/docs/materialized-views-manage
 title: Manage materialized views
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes how to alter, list, or delete materialized views in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
@@ -24,6 +24,7 @@ For more information about materialized views, see the following:
   - [Create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create)
   - [Use materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-use)
   - [Monitor materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor)
+  - [Troubleshoot materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-troubleshoot)
 
 ## Before you begin
 

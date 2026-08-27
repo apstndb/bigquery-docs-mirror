@@ -115,7 +115,7 @@ Materialized views with active change data capture base tables have the followin
 
 Materialized views over BigLake tables have the following limitations:
 
-  - You can't partition the materialized view. The base tables can use Hive partitioning but you can't partition materialized view storage in BigLake tables. This means that any deletion in a base table causes a full refresh of the materialized view. For more details, see [Incremental updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) .
+  - You can't partition the materialized view. The base tables can use Apache Hive partitioning but you can't partition materialized view storage in BigLake tables. This means that any deletion in a base table causes a full refresh of the materialized view. For more details, see [Incremental updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) .
   - The [`--max_staleness` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) value of the materialized view must be greater than that of the BigLake base table.
   - You can't perform a join between BigQuery managed tables and BigLake tables in a single materialized view definition.
   - BigQuery BI Engine doesn't support acceleration of materialized views over BigLake tables.
@@ -157,3 +157,4 @@ While the `avg_paid` column appears as `NUMERIC` or `FLOAT64` , internally it is
   - [Create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create)
   - [Use materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-use)
   - [Manage materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage)
+  - [Troubleshoot materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-troubleshoot)

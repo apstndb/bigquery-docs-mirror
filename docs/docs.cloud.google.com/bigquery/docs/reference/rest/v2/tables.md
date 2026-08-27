@@ -733,7 +733,7 @@ Optional. Definition of how values are generated for the field. Only valid for t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;generatedMode&quot;: enum (GeneratedMode),// Union field definition can be only one of the following:&quot;generatedExpressionInfo&quot;: {object (GeneratedExpressionInfo)}// End of list of possible types for union field definition.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;generatedMode&quot;: enum (GeneratedMode),// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;generatedExpressionInfo&quot;: {object (GeneratedExpressionInfo)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -746,13 +746,15 @@ Fields
 
 Optional. Dictates when system generated values are used to populate the field.
 
-Union field `definition` . Captures the metadata for the generated column. `definition` can be only one of the following:
+Captures the metadata for the generated column. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `generatedExpressionInfo`
 
 ` object ( GeneratedExpressionInfo  ` )
 
 Definition of the expression used to generate the field.
+
+End of mutually exclusive fields.
 
 ## GeneratedMode
 
@@ -1122,20 +1124,22 @@ Represents privacy policy that contains the privacy requirements specified by th
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field privacy_policy can be only one of the following:&quot;aggregationThresholdPolicy&quot;: {object (AggregationThresholdPolicy)}// End of list of possible types for union field privacy_policy.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;aggregationThresholdPolicy&quot;: {object (AggregationThresholdPolicy)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `privacy_policy` . Privacy policy associated with this requirement specification. Only one of the privacy methods is allowed per data source object. `privacy_policy` can be only one of the following:
+Privacy policy associated with this requirement specification. Only one of the privacy methods is allowed per data source object. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `aggregationThresholdPolicy`
 
 ` object ( AggregationThresholdPolicy  ` )
 
 Optional. Policy used for aggregation thresholds.
+
+End of mutually exclusive fields.
 
 ## AggregationThresholdPolicy
 

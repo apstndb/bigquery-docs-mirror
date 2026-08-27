@@ -8,13 +8,15 @@ data_source: docs.cloud.google.com
 
 # Manage data exchanges
 
-This document describes how to manage data exchanges in BigQuery sharing (formerly Analytics Hub). As a BigQuery sharing administrator, you can do the following:
+You can use data exchanges in BigQuery sharing to share datasets securely across projects, organizations, or with the public. As a BigQuery sharing administrator, you can perform the following tasks:
 
   - Create, update, view, share, and delete [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) .
-  - Create, update, delete, and share listings.
-  - Manage BigQuery sharing administrators, listing administrators, publishers, subscribers, and viewers.
+  - Manage access permissions and roles for data exchanges.
+  - Make data exchanges publicly discoverable.
 
-By default, a data exchange is private. Only users or groups with access to an exchange can view or subscribe to its data. You can request to [make your data exchange public](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#make-data-exchange-public) . Making your data exchange public allows [Google Cloud users ( `allAuthenticatedUsers` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) to [discover](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) and [subscribe to](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) listings.
+To manage listings within a data exchange, see [Manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
+
+By default, a data exchange is private. Only users or groups that have access to an exchange can view or subscribe to its listings. You can [make your data exchange public](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#make-data-exchange-public) . Making your data exchange public lets [Google Cloud users ( `allAuthenticatedUsers` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) [discover](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) and [subscribe to](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) listings.
 
 ## Before you begin
 
@@ -50,46 +52,47 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## Create a data exchange
 
-> **Caution:** Avoid creating the data exchange in a Google Cloud project with a VPC Service Controls perimeter. If you do so, you must add the appropriate [ingress and egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules#create_a_data_exchange) .
+You can create a data exchange to share datasets with specific individuals, groups, or the public. When you create a data exchange, you specify its project, region, display name, and optional settings such as subscriber email logging and public discoverability.
+
+> **Caution:** Avoid creating a data exchange in a Google Cloud project that is protected by a VPC Service Controls perimeter. If you create a data exchange in a perimeter, you must add the appropriate [ingress and egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules#create_a_data_exchange) .
 
 To create a data exchange, follow these steps:
 
 ### Console
 
-1.  Go to the **Sharing (Analytics Hub)** page.
+1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
 2.  Click add\_box **Create exchange** .
 
-3.  In the **Create exchange** dialog, select a **Project** and a **Region** for your data exchange. You can't update the project and region after you create the data exchange.
+3.  In the **Create exchange** dialog, select a **Project** and a **Region** for your data exchange. You can't change the project and region after you create the data exchange.
 
 4.  In the **Display name** field, enter a name for your data exchange.
 
 5.  Optional: Enter values in the following fields:
     
-      - **Primary contact** : enter the URL or the email address of the primary contact for the data exchange.
+      - **Primary contact** : enter the URL or email address of the primary contact for the data exchange.
       - **Description** : enter a description for the data exchange.
 
-6.  To log the [principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) of all users running jobs and queries on linked datasets, click the **Subscriber Email Logging** toggle. When you enable this option, all future listings under the data exchange have subscriber email logging turned on. The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
+6.  To log the [principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) of all users who run jobs and queries on linked datasets, click the **Subscriber Email Logging** toggle to the on position. When you turn on this setting, all future listings under the data exchange have subscriber email logging turned on. The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
     
-    > **Note:** Once you enable and save email logging, this setting can't be edited. To disable email logging, delete the data exchange and recreate it without clicking the **Subscriber Email Logging** toggle.
+    > **Note:** After you enable and save email logging, you can't edit this setting. To disable email logging, delete the data exchange and create a new data exchange without clicking the **Subscriber Email Logging** to the on position.
 
-7.  To enable public discoverability, click the **Public Discoverability** toggle. When an exchange is publicly discoverable, all listings in the exchange appear and are searchable in the catalog. If you enable public discoverability, configure the exchange permissions. All listings inherit the data exchange's public discoverability setting by default. This setting inheritance means public exchanges can't have private listings, but private exchanges can have public listings. You can set the public discoverability type at the individual listing level. The project where you create the data exchange must have an associated organization and billing account.
+7.  To make the exchange publicly discoverable, click the **Public Discoverability** toggle to the on position. When an exchange is publicly discoverable, all listings in the exchange appear and are searchable in the catalog. Consider the following factors when you enable public discoverability:
+    
+      - **Listing inheritance** : all listings inherit the public discoverability setting of the data exchange by default. Public exchanges can't have private listings, but private exchanges can have public listings. You can configure the public discoverability type at the individual listing level.
+      - **Permissions** : if you enable public discoverability, configure the exchange permissions to grant the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.viewer` ) to `allUsers` or `allAuthenticatedUsers` .
+      - **Project requirements** : the project where you create the data exchange must have an associated organization and billing account.
 
-8.  Click **Create Exchange** .
+8.  To create the data exchange, click **Create exchange** .
 
 9.  Optional: In the **Exchange Permissions** section, complete the following steps:
     
-    1.  Enter email addresses in the following fields to grant the Identity and Access Management (IAM) roles:
+    1.  In the following fields, enter email addresses to grant Identity and Access Management (IAM) roles:
         
           - **Administrators** : assign the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ) to these users.
-        
-          - **Publishers** : assign the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) to these users. For information about the tasks that BigQuery sharing publishers can perform, see [Manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
-        
-          - **Subscribers** : assign the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) to these users. For information about the tasks that BigQuery sharing subscribers can perform, see [View and subscribe to listings and data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
-        
-          - **Viewers** : assign the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.viewer` ) to these users. BigQuery sharing viewers can [view listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) .
-            
-            If public discoverability is enabled, grant the Analytics Hub Viewer role to `allUsers` or `allAuthenticatedUsers` .
+          - **Publishers** : assign the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) to these users. For more information about the tasks that BigQuery sharing publishers can perform, see [Manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
+          - **Subscribers** : assign the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) to these users. For more information about the tasks that BigQuery sharing subscribers can perform, see [View and subscribe to listings and data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
+          - **Viewers** : assign the Analytics Hub Viewer role ( `roles/analyticshub.viewer` ) to these users. BigQuery sharing viewers can [view listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) . If public discoverability is enabled, grant the Analytics Hub Viewer role to `allUsers` or `allAuthenticatedUsers` .
     
     2.  To save permissions, click **Set permissions** .
 
@@ -97,15 +100,15 @@ To create a data exchange, follow these steps:
 
 ### API
 
-Use the [`projects.locations.dataExchanges.create` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/create) .
+To create a data exchange, use the [`projects.locations.dataExchanges.create` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/create) :
 
-    POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges?dataExchangeId=DATAEXCHANGE_ID
+    POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges?dataExchangeId=DATAEXCHANGE_ID
 
 Replace the following:
 
   - `  PROJECT_ID  ` : the ID of the project where you want to create the data exchange.
-  - `  LOCATION  ` : the location for your data exchange. For more information about locations that support BigQuery sharing, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
-  - `  DATAEXCHANGE_ID  ` : the ID for your data exchange.
+  - `  LOCATION  ` : the location for your data exchange. For more information about regions that support BigQuery sharing, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
+  - `  DATAEXCHANGE_ID  ` : the ID of your data exchange.
 
 In the body of the request, provide the [data exchange details](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#resource:-dataexchange) .
 
@@ -117,46 +120,53 @@ For more information about the tasks that you can perform on data exchanges usin
 
 ## Update a data exchange
 
+You can update the configuration of an existing data exchange, such as its display name, description, primary contact, and public discoverability settings. You can't change the project or region of an existing data exchange.
+
 To update a data exchange, follow these steps:
 
 ### Console
 
-1.  Go to the **Sharing (Analytics Hub)** page.
+1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  From the list of data exchanges, select the data exchange to update.
+2.  In the list of data exchanges, select the data exchange that you want to update.
 
-3.  Go to the **Details** tab.
+3.  Click the **Details** tab.
 
 4.  Click mode\_edit **Edit exchange** .
 
 5.  In the **Edit exchange** dialog, update the following fields:
     
-      - **Display name**
+      - **Display name** : enter a new display name.
     
-      - **Primary contact**
+      - **Primary contact** : enter an updated URL or email address.
     
-      - **Description**
+      - **Description** : enter an updated description.
     
-      - **Public discoverability**
+      - **Public discoverability** : turn public discoverability on or off.
         
-          - If you enable public discoverability, grant the Analytics Hub Viewer role ( `roles/analyticshub.viewer` ) to `allUsers` or `allAuthenticatedUsers` .
-          - If you disable public discoverability, remove the Analytics Hub Viewer role ( `roles/analyticshub.viewer` ) from `allUsers` or `allAuthenticatedUsers` . Public exchanges can't have private listings, but private exchanges can have public listings.
+          - If you turn public discoverability on, grant the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.viewer` ) to `allUsers` or `allAuthenticatedUsers` .
+          - If you turn public discoverability off, remove the Analytics Hub Viewer role ( `roles/analyticshub.viewer` ) from `allUsers` or `allAuthenticatedUsers` . Public exchanges can't have private listings, but private exchanges can have public listings.
     
-      - **Subscriber Email Logging**
+      - **Subscriber Email Logging** : turn subscriber email logging on or off.
         
-        > **Note:** Once you enable and save email logging, this setting can't be edited. To disable email logging, delete the data exchange and recreate it without clicking the **Subscriber Email Logging** toggle.
+        > **Note:** After you enable and save email logging, you can't edit this setting. To disable email logging, delete the data exchange and create a new data exchange without clicking the **Subscriber Email Logging** to the on position.
 
-6.  Click **Save** .
+6.  To apply your changes, click **Save** .
 
 ### API
 
-Use the [`projects.locations.dataExchanges.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/patch) .
+To update a data exchange, use the [`projects.locations.dataExchanges.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/patch) :
 
-    PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID?updateMask=UPDATEMASK
+    PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID?updateMask=UPDATEMASK
 
-Replace `  UPDATEMASK  ` with the list of fields that you want to update. To update multiple values, use a comma-separated list. For example, to update the display name and primary contact for a data exchange, enter `displayName,primaryContact` .
+Replace the following:
 
-In the body of the request, specify updated values for the following fields:
+  - `  PROJECT_ID  ` : the ID of the project that contains the data exchange.
+  - `  LOCATION  ` : the location of your data exchange.
+  - `  DATAEXCHANGE_ID  ` : the ID of your data exchange.
+  - `  UPDATEMASK  ` : a comma-separated list of fields that you want to update (for example, `displayName,primaryContact` ).
+
+In the body of the request, specify updated values for any of the following fields:
 
   - `displayName`
   - `description`
@@ -166,53 +176,57 @@ In the body of the request, specify updated values for the following fields:
   - `discoveryType`
   - `logLinkedDatasetQueryUserEmail`
 
-For details on these fields, see [Resource: DataExchange](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#resource:-dataexchange) .
+For more information about these fields, see [Resource: DataExchange](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#resource:-dataexchange) .
 
 For more information about the tasks that you can perform on data exchanges using APIs, see [`projects.locations.dataExchanges` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#methods) .
 
 ## View data exchanges
 
-To view the data exchanges in your project or organization that you have access to, follow these steps:
+You can view the list of data exchanges in your Google Cloud project or organization that you have permission to access.
+
+To view data exchanges, follow these steps:
 
 ### Console
 
-1.  Go to the **Sharing (Analytics Hub)** page.
+1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  The page displays the data exchanges in your Google Cloud project. If you have the `resourcemanager.organizations.get` permission, you can also see the data exchanges in your Google Cloud organization.
+2.  In the list of data exchanges, view the data exchanges displayed for your Google Cloud project. If you have the `resourcemanager.organizations.get` permission, you can also view data exchanges across your Google Cloud organization.
 
 ### API
 
 To view data exchanges in your project, use the [`projects.locations.dataExchanges.list` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/list) :
 
-    GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges
+    GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges
 
 Replace the following:
 
-  - PROJECT\_ID : the project ID.
-  - LOCATION : the location for which you want to list the existing data exchanges.
+  - `  PROJECT_ID  ` : the ID of the project where you want to list data exchanges.
+  - `  LOCATION  ` : the location where you want to list existing data exchanges.
 
 To view data exchanges in your organization, use the [`organizations.locations.dataExchanges.list` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/organizations.locations.dataExchanges/list) :
 
-    GET https://analyticshub.googleapis.com/v1/organizations/ORGANIZATION_ID/location/LOCATION/dataExchanges
+    GET https://analyticshub.googleapis.com/v1/organizations/ORGANIZATION_ID/locations/LOCATION/dataExchanges
 
 Replace the following:
 
-  - `  ORGANIZATION_ID  ` : the organization ID. For more information, see [Getting your organization ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id) .
-  - `  LOCATION  ` : the location where you want to list the existing data exchanges.
+  - `  ORGANIZATION_ID  ` : the organization ID. For more information, see [Get your organization ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id) .
+  - `  LOCATION  ` : the location where you want to list existing data exchanges.
 
 ## Share a data exchange
 
-If the BigQuery sharing publisher belongs to a different organization than the organization that contains the data exchange, the publisher can't [view your data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#view_data_exchanges) in BigQuery sharing. Share a link to the data exchange with the publisher.
+If a BigQuery sharing publisher belongs to a different organization from the organization that contains the data exchange, they can't browse or [view your data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#view_data_exchanges) in BigQuery sharing. To let the publisher access the data exchange, you can copy and share a direct link.
 
-1.  Go to the **Sharing (Analytics Hub)** page.
+To share a link to a data exchange, follow these steps:
 
-2.  From the list of data exchanges, click more\_vert **More options** .
+1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-3.  Click content\_copy **Copy share link** .
+2.  In the list of data exchanges, find the data exchange that you want to share, and then click more\_vert **More options** .
+
+3.  To copy the link to your clipboard, click content\_copy **Copy share link** .
 
 ## Give users access to a data exchange
 
-To give users access to a data exchange, you must set the IAM policy for that data exchange. For information about predefined IAM user roles, see [BigQuery sharing IAM roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#user_roles) .
+To give users access to a data exchange, set the IAM policy for that data exchange. For more information about predefined IAM user roles, see [BigQuery sharing IAM roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#user_roles) .
 
 > **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
@@ -277,68 +291,67 @@ To give users access to a data exchange, you must set the IAM policy for that da
 
 ### Create BigQuery sharing administrators
 
-To manage data exchanges, create data exchange administrators by granting users the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ) at the project or data exchange level.
+To delegate data exchange management, you can create data exchange administrators by granting users the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ) at the project or data exchange level.
 
-To allow administrators to manage all data exchanges in a project, [grant them the Analytics Hub Admin role for that project](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#grant-role-project) .
-
-To allow administrators to manage a specific data exchange, [grant them the Analytics Hub Admin role for that data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#grant-role-data-exchange) .
+  - To let administrators manage all data exchanges in a project, [grant them the Analytics Hub Admin role for that project](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#grant-role-project) .
+  - To let administrators manage a specific data exchange only, [grant them the Analytics Hub Admin role for that data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#grant-role-data-exchange) .
 
 ## Make a data exchange public
 
-By default, a data exchange is private. Only users or groups with access to an exchange can view or subscribe to its listings. You can make a data exchange public, which lets [Google Cloud users ( `allAuthenticatedUsers` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) discover and subscribe to its listings.
+By default, a data exchange is private. Only users or groups that have access to an exchange can view or subscribe to its listings. You can make a data exchange public, which lets [Google Cloud users ( `allAuthenticatedUsers` )](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) discover and subscribe to its listings.
 
 To make a data exchange public, follow these steps:
 
-1.  To allow `allAuthenticatedUsers` to [view listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) , grant them the Analytics Hub Viewer role ( `roles/analyticshub.viewer` ) at the data exchange level.
+1.  To let `allAuthenticatedUsers` [view listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) , grant them the [Analytics Hub Viewer role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.viewer` ) at the data exchange level.
 
-2.  To allow `allAuthenticatedUsers` to [subscribe to listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) , grant them the Analytics Hub Subscriber role ( `roles/analyticshub.subscriber` ) at the data exchange level.
+2.  To let `allAuthenticatedUsers` [subscribe to listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) , grant them the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) at the data exchange level.
 
-3.  Enable public discoverability when you [create](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) or [update](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#update-exchange) a data exchange. Specify the appropriate permissions when you make a data exchange public.
+3.  When you [create](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) or [update](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#update-exchange) a data exchange, click the **Public Discoverability** toggle to the on position.
 
-> **Note:** You can also convert a public data exchange to private. To do so, remove `allAuthenticatedUsers` from the permissions list for your data exchange.
+> **Note:** You can also convert a public data exchange to private. To do so, remove `allAuthenticatedUsers` and the associated BigQuery sharing roles from the permissions list for your data exchange, and disable public discoverability in the exchange settings.
 
 ## Delete a data exchange
 
-Deleting a data exchange also deletes all its listings. However, shared and linked datasets aren't deleted. When you delete a project, its data exchanges aren't deleted. Delete these data exchanges before [deleting the project](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#shutting_down_projects) . You can't undo a data exchange deletion.
+When you delete a data exchange, all listings within the exchange are also deleted. Shared and linked datasets aren't deleted. Deleting a project doesn't automatically delete its data exchanges, so you must delete all data exchanges before [shutting down the project](https://docs.cloud.google.com/resource-manager/docs/delete-restore-projects#shutting_down_projects) . You can't undo a data exchange deletion.
 
-Before deleting a data exchange, complete the following steps based on the data exchange's configuration:
+Before you delete a data exchange, complete the following prerequisites based on the data exchange configuration:
 
   - For data exchanges with Google Cloud Marketplace-integrated commercial listings, [offboard the Cloud Marketplace-integrated listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace#offboard-listing) .
-  - For data exchanges with listings for multiple regions, [remove all active subscriptions using the `projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions#revoke-subscription) .
+  - For data exchanges with listings for multiple regions, [revoke all active subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions#revoke-subscription) .
 
 To delete a data exchange, follow these steps:
 
 ### Console
 
-1.  Go to the **Sharing (Analytics Hub)** page.
+1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  From the list of data exchanges, select the data exchange to delete.
+2.  In the list of data exchanges, select the data exchange that you want to delete.
 
-3.  Go to the **Details** tab.
+3.  Click the **Details** tab.
 
 4.  Click delete **Delete exchange** .
 
-5.  In the **Delete exchange?** dialog, confirm deletion by typing **delete** .
+5.  In the **Delete exchange?** dialog, confirm deletion by entering `delete` .
 
-6.  Click **Delete** .
+6.  To permanently delete the data exchange, click **Delete** .
 
 ### API
 
-Use the [`projects.locations.dataExchanges.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/delete) .
+To delete a data exchange, use the [`projects.locations.dataExchanges.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/delete) :
 
     DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the ID of the project in which you want to create the data exchange.
-  - `  LOCATION  ` : the location for your data exchange. For more information about locations that support BigQuery sharing, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
-  - `  DATAEXCHANGE_ID  ` : the ID for your data exchange.
+  - `  PROJECT_ID  ` : the ID of the project that contains the data exchange.
+  - `  LOCATION  ` : the location for your data exchange. For more information about regions that support BigQuery sharing, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
+  - `  DATAEXCHANGE_ID  ` : the ID of your data exchange.
 
 For more information about the tasks that you can perform on data exchanges using APIs, see [`projects.locations.dataExchanges` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#methods) .
 
 ## What's next
 
-  - Learn about [managing listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
-  - Learn how to [grant Analytics Hub user roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles) .
+  - Learn how to [manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
+  - Learn how to [grant BigQuery sharing user roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles) .
   - Learn how to [view and subscribe to listings and data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
-  - Learn about [Sharing audit logging](https://docs.cloud.google.com/bigquery/docs/analytics-hub-audit-logging) .
+  - Learn how to [view BigQuery sharing audit logs](https://docs.cloud.google.com/bigquery/docs/analytics-hub-audit-logging) .

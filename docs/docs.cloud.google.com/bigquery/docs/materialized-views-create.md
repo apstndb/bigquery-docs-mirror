@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/materialized-views-create
 uri: https://docs.cloud.google.com/bigquery/docs/materialized-views-create
 title: Create materialized views
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes how to create materialized views in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
@@ -770,7 +770,7 @@ For example, if one hour is required to refresh your materialized view and you w
 
 ## Non-incremental materialized views
 
-Non-incremental materialized views support most SQL queries, including `OUTER JOIN` , `UNION` , and `HAVING` clauses, and analytic functions. To determine whether a materialized view was used in your query, check the cost estimates by using a [dry run](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#interaction) . In scenarios where data staleness is acceptable, for example for batch data processing or reporting, non-incremental materialized views can improve query performance and reduce cost. By using the `max_staleness` option, you can build arbitrary, complex materialized views that are automatically maintained and have built-in staleness guarantees.
+Non-incremental materialized views support most SQL queries, including `OUTER JOIN` , `UNION` , and `HAVING` clauses, and analytic functions. To determine whether a materialized view was used in your query, check the cost estimates by using a [dry run](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#interaction) . In scenarios where data staleness is acceptable, for example for batch data processing or reporting, non-incremental materialized views can improve query performance and reduce cost. By using the `max_staleness` option, you can build arbitrary, complex materialized views that are automatically maintained and have built-in staleness limits.
 
 ### Use non-incremental materialized views
 
@@ -876,3 +876,4 @@ The following limitations only apply to materialized views with the `allow_non_i
 
   - [Manage materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage) .
   - [Use materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-use) .
+  - [Troubleshoot materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-troubleshoot) .

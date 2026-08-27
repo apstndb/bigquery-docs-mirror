@@ -8,20 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage subscriptions
 
-This document describes how to manage subscriptions in BigQuery sharing (formerly Analytics Hub), covering tasks for both subscribers and publishers.
-
-BigQuery sharing subscribers can do the following:
-
-  - Subscribe to a listing.
-  - List your current subscriptions in a given Google Cloud project.
-  - Delete a subscription.
-
-BigQuery sharing publishers can do the following:
-
-  - View all subscriptions to your listing.
-  - Revoke access to a specific subscription.
-
-A BigQuery sharing subscription is a regionalized resource that resides in the subscriber's project. Subscriptions store relevant information about the subscriber and represent the contract between publisher and subscriber.
+You can manage your subscriptions in BigQuery sharing (formerly Analytics Hub) to control data access and sharing. As a subscriber, you can subscribe to listings, view your subscriptions, and delete them. As a publisher, you can monitor who has access to your listings and revoke subscriptions as needed. A BigQuery sharing subscription is a regionalized resource that resides in the subscriber's project. Subscriptions store information about the subscriber and represent the contract between the publisher and the subscriber.
 
 ## Before you begin
 
@@ -55,9 +42,15 @@ To get the permissions that you need to manage subscriptions, ask your administr
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-## Subscriber workflows for managing subscriptions
+## Limitations
 
-This section describes how BigQuery sharing subscribers manage subscriptions.
+Subscriptions have the following limitations:
+
+  - You can only use the Analytics Hub API to manage subscriptions that were created after July 25, 2023. Linked datasets created before this date aren't supported because they lack the required subscription resource.
+
+## Manage subscriptions as a subscriber
+
+The following sections describe how BigQuery sharing subscribers manage subscriptions.
 
 ### Subscribe to listings
 
@@ -65,70 +58,70 @@ To subscribe to listings, follow the steps in [View and subscribe to listings an
 
 ### List subscriptions
 
-To list your current subscriptions in a given project, use the [`projects.locations.subscriptions.list` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) :
+To list your subscriptions in a project, call the [`projects.locations.subscriptions.list` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) :
 
-    GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions
+    GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/subscriptions
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the Google Cloud project ID for the subscriptions that you want to list.
-  - `  LOCATION  ` : the location for the subscriptions that you want to list.
+  - `  PROJECT_ID  ` : the Google Cloud project ID of the project that contains the subscriptions that you want to list.
+  - `  LOCATION  ` : the location of the subscriptions that you want to list. For more information about locations that support sharing, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
 
 ### Delete a subscription
 
-To delete a subscription, use the [`projects.locations.subscriptions.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/delete) :
+To delete a subscription, call the [`projects.locations.subscriptions.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/delete) :
 
-    DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions/SUBSCRIPTION_ID
+    DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/subscriptions/SUBSCRIPTION_ID
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID for the subscription to delete.
-  - `  LOCATION  ` : the location of the subscription to delete. For more information about locations that support sharing, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
-  - `  SUBSCRIPTION_ID  ` : the ID of the subscription to delete.
+  - `  PROJECT_ID  ` : the Google Cloud project ID of the project that contains the subscription that you want to delete.
+  - `  LOCATION  ` : the location of the subscription that you want to delete.
+  - `  SUBSCRIPTION_ID  ` : the ID of the subscription that you want to delete.
 
 The request body must be empty. If successful, the response body contains an operation instance.
 
-When a BigQuery sharing subscriber deletes a subscription, it also deletes the linked dataset from the subscriber's project.
+When you delete a subscription, the linked dataset is also deleted from your project.
 
-When you delete a subscription from a multi-region listing, all the primary and secondary linked dataset replicas are also deleted from the subscriber's project.
+When you delete a subscription from a multi-region listing, all primary and secondary linked dataset replicas are also deleted from your project.
 
-For more information about managing subscriptions using the API, see the [`projects.locations.subscriptions` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#methods) .
+For more information about managing subscriptions using the Analytics Hub API, see the [`projects.locations.subscriptions` methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#methods) .
 
-## Publisher workflows for managing subscriptions
+## Manage subscriptions as a publisher
 
-This section describes how BigQuery sharing publishers manage subscriptions. For more information about managing subscriptions to listings, see [Manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
+The following sections describe how BigQuery sharing publishers manage subscriptions. For more information about managing subscriptions to listings, see [Manage listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
 
 ### List subscriptions
 
-To list all subscriptions, select one of the following options.
+To list all subscriptions, select one of the following options:
 
 ### Console
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
     
-    The page lists all the [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) you can access.
+    The page lists all the [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) that you can access.
 
-2.  Select the data exchange name where you want to list subscriptions.
+2.  In the list of data exchanges, click the name of the data exchange that contains the subscriptions that you want to list.
 
-3.  Select the **Subscriptions** tab to view all subscriptions for listings within the data exchange.
+3.  Click the **Subscriptions** tab.
 
 ### API
 
-To list subscriptions for listings in a particular data exchange, use the [`projects.locations.dataExchanges.listSubscriptions` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/listSubscriptions) .
+To list subscriptions for listings in a particular data exchange, call the [`projects.locations.dataExchanges.listSubscriptions` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges/listSubscriptions) :
 
-    GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID:listSubscriptions
+    GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID:listSubscriptions
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID of the data exchange for which to list subscriptions.
-  - `  LOCATION  ` : the location of the data exchange for which to list subscriptions.
+  - `  PROJECT_ID  ` : the Google Cloud project ID of the project that contains the data exchange.
+  - `  LOCATION  ` : the location of the data exchange that contains the subscriptions that you want to list.
   - `  DATAEXCHANGE_ID  ` : the ID of the data exchange for which to list subscriptions.
 
 ### Revoke a subscription
 
-When a BigQuery sharing publisher revokes a subscription, the subscriber can no longer query the linked dataset. Because this action is initiated by the publisher on a subscriber-owned resource, the linked dataset remains in the subscriber's project. The subscriber can remove the dataset by deleting it.
+When you revoke a subscription as a BigQuery sharing publisher, the subscriber can no longer query the linked dataset. Because you initiate this action on a subscriber-owned resource, the linked dataset remains in the subscriber's project. The subscriber can remove the dataset by deleting it.
 
-If a publisher revokes a subscription from a multi-region listing, subscribers can no longer query any primary or secondary linked dataset replicas.
+When you revoke a subscription from a multi-region listing, subscribers can no longer query any primary or secondary linked dataset replicas.
 
 > **Caution:** Revoking [Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 
@@ -138,37 +131,31 @@ To revoke a subscription, select one of the following options:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
     
-    The page lists all the data exchanges you can access.
+    The page lists all the [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) that you can access.
 
-2.  Select the data exchange name where you want to revoke the listing.
+2.  In the list of data exchanges, click the name of the data exchange that contains the subscription that you want to revoke.
 
-3.  Select the **Subscriptions** tab to view all subscriptions for the data exchange.
+3.  Click the **Subscriptions** tab.
 
-4.  Select the subscriptions to revoke.
+4.  Select the checkbox next to each subscription that you want to revoke.
 
 5.  Click **Revoke subscriptions** .
 
 ### API
 
-To revoke a subscription, use the [`projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) .
+To revoke a subscription, call the [`projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) :
 
-    POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions/SUBSCRIPTION_ID:revoke
+    POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/subscriptions/SUBSCRIPTION_ID:revoke
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID of the subscription to revoke.
-  - `  LOCATION  ` : the location of the subscription.
-  - `  SUBSCRIPTION_ID  ` : the ID of the subscription to revoke.
-
-## Limitations
-
-Subscriptions have the following limitations:
-
-  - You can only use the API to manage subscriptions created after July 25, 2023. Linked datasets created before this date are unsupported because they lack the required subscription resource.
+  - `  PROJECT_ID  ` : the Google Cloud project ID of the project that contains the subscription that you want to revoke.
+  - `  LOCATION  ` : the location of the subscription that you want to revoke.
+  - `  SUBSCRIPTION_ID  ` : the ID of the subscription that you want to revoke.
 
 ## What's next
 
-  - Read about [BigQuery sharing architecture](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#architecture) .
+  - Learn about [BigQuery sharing architecture](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#architecture) .
   - Learn how to [view and subscribe to listings and data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
   - Learn about [BigQuery sharing user roles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#user_roles) .
   - Learn how to [create datasets](https://docs.cloud.google.com/bigquery/docs/datasets) .
