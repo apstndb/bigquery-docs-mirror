@@ -1503,6 +1503,10 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
     # A dry run query completes immediately.
     print("This query will process {} bytes.".format(query_job.total_bytes_processed))
 
+## Troubleshoot query issues
+
+For information about resolving issues when you run queries, see [Troubleshoot queries](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .
+
 ## What's next
 
   - Learn how to [manage query jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) .

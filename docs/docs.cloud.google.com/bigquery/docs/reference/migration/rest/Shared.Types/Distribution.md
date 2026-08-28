@@ -150,14 +150,14 @@ A bucket has an inclusive lower bound and exclusive upper bound for the values t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field options can be only one of the following:&quot;linearBuckets&quot;: {object (Linear)},&quot;exponentialBuckets&quot;: {object (Exponential)},&quot;explicitBuckets&quot;: {object (Explicit)}// End of list of possible types for union field options.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;linearBuckets&quot;: {object (Linear)},&quot;exponentialBuckets&quot;: {object (Exponential)},&quot;explicitBuckets&quot;: {object (Explicit)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `options` . Exactly one of these three fields must be set. `options` can be only one of the following:
+Exactly one of these three fields must be set. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `linearBuckets`
 
@@ -176,6 +176,8 @@ The exponential buckets.
 ` object ( Explicit  ` )
 
 The explicit buckets.
+
+End of mutually exclusive fields.
 
 ## Linear
 

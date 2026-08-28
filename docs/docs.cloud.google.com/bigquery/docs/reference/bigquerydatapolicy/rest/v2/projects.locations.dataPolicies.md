@@ -32,7 +32,7 @@ Represents the label-policy binding.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyId&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;policyTag&quot;: string,&quot;grantees&quot;: [string],&quot;version&quot;: enum (Version),// Union field matching_label can be only one of the following:&quot;dataGovernanceTag&quot;: {object (DataGovernanceTag)}// End of list of possible types for union field matching_label.// Union field policy can be only one of the following:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of list of possible types for union field policy.&quot;etag&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyId&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;policyTag&quot;: string,&quot;grantees&quot;: [string],&quot;version&quot;: enum (Version),// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;dataGovernanceTag&quot;: {object (DataGovernanceTag)}// End of mutually exclusive fields.// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of mutually exclusive fields.&quot;etag&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -77,7 +77,7 @@ Uses the [IAM V2 principal syntax](https://cloud.google.com/iam/docs/principal-i
 
 Output only. The version of the Data Policy resource.
 
-Union field `matching_label` . Label that is bound to this data policy. `matching_label` can be only one of the following:
+Label that is bound to this data policy. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `dataGovernanceTag`
 
@@ -85,13 +85,17 @@ Union field `matching_label` . Label that is bound to this data policy. `matchin
 
 Optional. Data Governance tag bound to the Data Policy.
 
-Union field `policy` . The policy that is bound to this data policy. `policy` can be only one of the following:
+End of mutually exclusive fields.
+
+The policy that is bound to this data policy. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `dataMaskingPolicy`
 
 ` object ( DataMaskingPolicy  ` )
 
 Optional. The data masking policy that specifies the data masking rule to use. It must be set if the data policy type is DATA\_MASKING\_POLICY.
+
+End of mutually exclusive fields.
 
 `etag`
 
@@ -151,14 +155,14 @@ The policy used to specify data masking rule.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field masking_expression can be only one of the following:&quot;predefinedExpression&quot;: enum (PredefinedExpression),&quot;routine&quot;: string// End of list of possible types for union field masking_expression.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;predefinedExpression&quot;: enum (PredefinedExpression),&quot;routine&quot;: string// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `masking_expression` . A masking expression to bind to the data masking rule. `masking_expression` can be only one of the following:
+A masking expression to bind to the data masking rule. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `predefinedExpression`
 
@@ -171,6 +175,8 @@ Optional. A predefined masking expression.
 `string`
 
 Optional. The name of the BigQuery routine that contains the custom masking routine, in the format of `projects/{projectNumber}/datasets/{dataset_id}/routines/{routine_id}` .
+
+End of mutually exclusive fields.
 
 ## PredefinedExpression
 

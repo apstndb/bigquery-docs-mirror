@@ -29,7 +29,7 @@ Represents the label-policy binding.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;dataPolicyId&quot;: string,// Union field matching_label can be only one of the following:&quot;policyTag&quot;: string// End of list of possible types for union field matching_label.// Union field policy can be only one of the following:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of list of possible types for union field policy.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;dataPolicyType&quot;: enum (DataPolicyType),&quot;dataPolicyId&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;policyTag&quot;: string// End of mutually exclusive fields.// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;dataMaskingPolicy&quot;: {object (DataMaskingPolicy)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -54,7 +54,7 @@ Required. Data policy type. Type of data policy.
 
 User-assigned (human readable) ID of the data policy that needs to be unique within a project. Used as {dataPolicyId} in part of the resource name.
 
-Union field `matching_label` . Label that is bound to this data policy. `matching_label` can be only one of the following:
+Label that is bound to this data policy. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `policyTag`
 
@@ -62,13 +62,17 @@ Union field `matching_label` . Label that is bound to this data policy. `matchin
 
 Policy tag resource name, in the format of `projects/{projectNumber}/locations/{locationId}/taxonomies/{taxonomyId}/policyTags/{policyTag_id}` .
 
-Union field `policy` . The policy that is bound to this data policy. `policy` can be only one of the following:
+End of mutually exclusive fields.
+
+The policy that is bound to this data policy. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `dataMaskingPolicy`
 
 ` object ( DataMaskingPolicy  ` )
 
 The data masking policy that specifies the data masking rule to use.
+
+End of mutually exclusive fields.
 
 ## DataMaskingPolicy
 
@@ -85,20 +89,22 @@ The data masking policy that is used to specify data masking rule.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field masking_expression can be only one of the following:&quot;predefinedExpression&quot;: enum (PredefinedExpression)// End of list of possible types for union field masking_expression.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;predefinedExpression&quot;: enum (PredefinedExpression)// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `masking_expression` . A masking expression to bind to the data masking rule. `masking_expression` can be only one of the following:
+A masking expression to bind to the data masking rule. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `predefinedExpression`
 
 ` enum ( PredefinedExpression  ` )
 
 A predefined masking expression.
+
+End of mutually exclusive fields.
 
 ## PredefinedExpression
 

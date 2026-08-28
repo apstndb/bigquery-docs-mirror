@@ -30,7 +30,7 @@ Configuration parameters to establish connection with an external data source, e
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;friendlyName&quot;: string,&quot;description&quot;: string,&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;hasCredential&quot;: boolean,// Union field properties can be only one of the following:&quot;cloudSql&quot;: {object (CloudSqlProperties)}// End of list of possible types for union field properties.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;friendlyName&quot;: string,&quot;description&quot;: string,&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;hasCredential&quot;: boolean,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;cloudSql&quot;: {object (CloudSqlProperties)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -73,13 +73,15 @@ Output only. The last update timestamp of the connection.
 
 Output only. True, if credential is configured for this connection.
 
-Union field `properties` . Properties specific to the underlying data source. `properties` can be only one of the following:
+Properties specific to the underlying data source. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `cloudSql`
 
 ` object ( CloudSqlProperties  ` )
 
 Cloud SQL properties.
+
+End of mutually exclusive fields.
 
 ## CloudSqlProperties
 

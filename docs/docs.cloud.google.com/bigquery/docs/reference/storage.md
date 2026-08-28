@@ -416,6 +416,10 @@ The relevant API method for these logs is `google.cloud.bigquery.storage.v1.BigQ
 | `serialized_response_bytes` | INT64     | The total number of bytes sent to the client over the network, after serialization. This field helps you track data egress.                              |
 | `scanned_bytes`             | INT64     | The total number of bytes scanned from BigQuery storage to fulfill the request. This value is used to calculate the analysis cost of the read operation. |
 
+### Monitoring `ReadRows` latency
+
+To monitor the latency of `ReadRows` requests, use the [**Metrics Explorer**](https://docs.cloud.google.com/monitoring/charts/metrics-explorer) in Cloud Monitoring. Select `Consumed API - Request latencies` in the **Metric** field and filter by the `method` in the **Filter** field by selecting the corresponding `ReadRows` method.
+
 ## Pricing
 
 For information on Storage Read API pricing, see the [Pricing](https://cloud.google.com/bigquery/pricing#data-extraction-pricing-details) page.

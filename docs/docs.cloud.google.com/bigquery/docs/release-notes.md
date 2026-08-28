@@ -14,6 +14,22 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## August 27, 2026
+
+Feature
+
+The [Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) is now [HIPAA compliant](https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance) . For more information, see [HIPAA compliance on Google Cloud](https://cloud.google.com/security/compliance/hipaa) .
+
+Announcement
+
+Core graph processing for [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) requires an Enterprise or Enterprise Plus edition reservation. Existing allowlisted users can continue to use Standard edition or on-demand billing until April 26, 2027, after which these billing models will no longer be supported for core graph processing.
+
+[Graph measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) will remain available in the Enterprise and Enterprise Plus editions and for queries run using on-demand pricing. Measures are not available in Standard edition.
+
+Feature
+
+You can now train models using XGBoost version 2.1 by using the `XGBOOST_VERSION` option. BigQuery uses the XGBoost 3.1.0 library to load and make predictions on XGBoost models. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
 ## August 26, 2026
 
 Security
@@ -53,6 +69,8 @@ Deprecated
 Starting April 26, 2027, core graph processing for [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) will be restricted to the [BigQuery Enterprise and Enterprise Plus editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) . Consequently, we are deprecating support for Standard edition and on-demand billing for core graph processing.
 
 [Graph measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) will remain available in the Enterprise and Enterprise Plus editions and for queries run using on-demand pricing. Measures are not available in Standard edition.
+
+For additional details and enforcement dates regarding Standard edition and on-demand billing support, see the [August 27, 2026](https://docs.cloud.google.com/bigquery/docs/release-notes#August_27_2026) release note.
 
 Feature
 

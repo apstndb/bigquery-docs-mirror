@@ -67,7 +67,7 @@ Configuration parameters to establish connection with an external data source, e
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;friendlyName&quot;: string,&quot;description&quot;: string,&quot;configuration&quot;: {object (ConnectorConfiguration)},&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;hasCredential&quot;: boolean,&quot;kmsKeyName&quot;: string,// Union field properties can be only one of the following:&quot;cloudSql&quot;: {object (CloudSqlProperties)},&quot;aws&quot;: {object (AwsProperties)},&quot;azure&quot;: {object (AzureProperties)},&quot;cloudSpanner&quot;: {object (CloudSpannerProperties)},&quot;cloudResource&quot;: {object (CloudResourceProperties)},&quot;spark&quot;: {object (SparkProperties)},&quot;salesforceDataCloud&quot;: {object (SalesforceDataCloudProperties)}// End of list of possible types for union field properties.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;friendlyName&quot;: string,&quot;description&quot;: string,&quot;configuration&quot;: {object (ConnectorConfiguration)},&quot;creationTime&quot;: string,&quot;lastModifiedTime&quot;: string,&quot;hasCredential&quot;: boolean,&quot;kmsKeyName&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;cloudSql&quot;: {object (CloudSqlProperties)},&quot;aws&quot;: {object (AwsProperties)},&quot;azure&quot;: {object (AzureProperties)},&quot;cloudSpanner&quot;: {object (CloudSpannerProperties)},&quot;cloudResource&quot;: {object (CloudResourceProperties)},&quot;spark&quot;: {object (SparkProperties)},&quot;salesforceDataCloud&quot;: {object (SalesforceDataCloudProperties)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -126,7 +126,7 @@ If omitted, internal Google owned encryption keys are used.
 
 Example: `projects/[kms_project_id]/locations/[region]/keyRings/[key_region]/cryptoKeys/[key]`
 
-Union field `properties` . Properties specific to the underlying data source. `properties` can be only one of the following:
+Properties specific to the underlying data source. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `cloudSql`
 
@@ -169,6 +169,8 @@ Spark properties.
 ` object ( SalesforceDataCloudProperties  ` )
 
 Optional. Salesforce DataCloud properties. This field is intended for use only by Salesforce partner projects. This field contains properties for your Salesforce DataCloud connection.
+
+End of mutually exclusive fields.
 
 ## CloudSqlProperties
 
@@ -294,20 +296,22 @@ Connection properties specific to Amazon Web Services (AWS).
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field authentication_method can be only one of the following:&quot;accessRole&quot;: {object (AwsAccessRole)}// End of list of possible types for union field authentication_method.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;accessRole&quot;: {object (AwsAccessRole)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `authentication_method` . Authentication method chosen at connection creation. `authentication_method` can be only one of the following:
+Authentication method chosen at connection creation. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `accessRole`
 
 ` object ( AwsAccessRole  ` )
 
 Authentication using Google owned service account to assume into customer's AWS IAM Role.
+
+End of mutually exclusive fields.
 
 ## AwsAccessRole
 
@@ -751,22 +755,28 @@ Remote endpoint specification.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field endpoint can be only one of the following:&quot;hostPort&quot;: string// End of list of possible types for union field endpoint.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+
+  // The following is a list of mutually exclusive fields. At most one of the
+  // fields will be set in a response:
+  &quot;hostPort&quot;: string
+  // End of mutually exclusive fields.
+}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `endpoint` .
-
-`endpoint` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `hostPort`
 
 `string`
 
 Host and port in a format of `hostname:port` as defined in <https://www.ietf.org/rfc/rfc3986.html#section-3.2.2> and <https://www.ietf.org/rfc/rfc3986.html#section-3.2.3> .
+
+End of mutually exclusive fields.
 
 ## Authentication
 
@@ -859,7 +869,7 @@ Secret value parameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;secretType&quot;: enum (SecretType),// Union field secret can be only one of the following:&quot;plaintext&quot;: string// End of list of possible types for union field secret.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;secretType&quot;: enum (SecretType),// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;plaintext&quot;: string// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -872,13 +882,15 @@ Fields
 
 Output only. Indicates type of secret. Can be used to check type of stored secret value even if it's `INPUT_ONLY` .
 
-Union field `secret` . Required. Secret value. `secret` can be only one of the following:
+Required. Secret value. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `plaintext`
 
 `string`
 
 Input only. Secret as plaintext.
+
+End of mutually exclusive fields.
 
 ## SecretType
 
@@ -905,16 +917,14 @@ Represents a value for a connector parameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field kind can be only one of the following:&quot;stringValue&quot;: string,&quot;boolValue&quot;: boolean,&quot;int32Value&quot;: integer,&quot;doubleValue&quot;: number,&quot;secretValue&quot;: {object (Secret)}// End of list of possible types for union field kind.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;stringValue&quot;: string,&quot;boolValue&quot;: boolean,&quot;int32Value&quot;: integer,&quot;doubleValue&quot;: number,&quot;secretValue&quot;: {object (Secret)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `kind` .
-
-`kind` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `stringValue`
 
@@ -946,6 +956,8 @@ A double parameter value.
 
 A secret parameter value. Allowed only for Authentication parameters.
 
+End of mutually exclusive fields.
+
 ## Network
 
 Network related configuration.
@@ -961,22 +973,22 @@ Network related configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field network can be only one of the following:&quot;privateServiceConnect&quot;: {object (PrivateServiceConnect)}// End of list of possible types for union field network.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;privateServiceConnect&quot;: {object (PrivateServiceConnect)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `network` .
-
-`network` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `privateServiceConnect`
 
 ` object ( PrivateServiceConnect  ` )
 
 Private Service Connect networking configuration.
+
+End of mutually exclusive fields.
 
 ## PrivateServiceConnect
 

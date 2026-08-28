@@ -201,6 +201,10 @@ The command outputs the updated policy:
 
 For more information on IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
+## Troubleshoot transfer configurations
+
+For information about resolving issues with BigQuery Data Transfer Service, see [Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .
+
 ## What's next
 
 After enabling the BigQuery Data Transfer Service, create a transfer for your data source.

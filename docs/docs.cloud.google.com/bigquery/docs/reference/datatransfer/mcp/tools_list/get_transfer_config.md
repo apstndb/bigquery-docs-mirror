@@ -37,7 +37,7 @@ The following code sample shows how to use `curl` to call the `get_transfer_conf
   &quot;params&quot;: {
     &quot;name&quot;: &quot;get_transfer_config&quot;,
     &quot;arguments&quot;: {
-      // provide these details according to the tool&#39;s MCP specification
+      // Provide these details according to the MCP tool specification.
     }
   },
   &quot;jsonrpc&quot;: &quot;2.0&quot;,

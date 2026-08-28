@@ -1256,3 +1256,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 The BigQuery Data Transfer Service exports logs and metrics to Cloud Monitoring and Cloud Logging that provide observability into your transfers. You can [use Monitoring](https://docs.cloud.google.com/bigquery/docs/dts-monitor) to set up dashboards to monitor transfers, evaluate transfer run performance, and view error messages to troubleshoot transfer failures. You can [use Logging](https://docs.cloud.google.com/bigquery/docs/dts-monitor#logs) to view logs related to a transfer run or a transfer configuration.
 
 You can also [view audit logs](https://docs.cloud.google.com/bigquery/docs/audit-logging) that are available to the BigQuery Data Transfer Service for transfer activity and data access logs.
+
+## Troubleshoot transfer configurations
+
+For information about resolving issues with BigQuery Data Transfer Service, see [Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .

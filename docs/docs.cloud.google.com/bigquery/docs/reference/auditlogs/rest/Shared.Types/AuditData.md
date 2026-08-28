@@ -105,7 +105,7 @@ BigQuery AuditData represents the older AuditData.serviceData log messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;jobCompletedEvent&quot;: {object (JobCompletedEvent)},&quot;tableDataReadEvents&quot;: [{object (TableDataReadEvent)}],// Union field request can be only one of the following:&quot;tableInsertRequest&quot;: {object (TableInsertRequest)},&quot;tableUpdateRequest&quot;: {object (TableUpdateRequest)},&quot;datasetListRequest&quot;: {object (DatasetListRequest)},&quot;datasetInsertRequest&quot;: {object (DatasetInsertRequest)},&quot;datasetUpdateRequest&quot;: {object (DatasetUpdateRequest)},&quot;jobInsertRequest&quot;: {object (JobInsertRequest)},&quot;jobQueryRequest&quot;: {object (JobQueryRequest)},&quot;jobGetQueryResultsRequest&quot;: {object (JobGetQueryResultsRequest)},&quot;tableDataListRequest&quot;: {object (TableDataListRequest)},&quot;setIamPolicyRequest&quot;: {object (SetIamPolicyRequest)}// End of list of possible types for union field request.// Union field response can be only one of the following:&quot;tableInsertResponse&quot;: {object (TableInsertResponse)},&quot;tableUpdateResponse&quot;: {object (TableUpdateResponse)},&quot;datasetInsertResponse&quot;: {object (DatasetInsertResponse)},&quot;datasetUpdateResponse&quot;: {object (DatasetUpdateResponse)},&quot;jobInsertResponse&quot;: {object (JobInsertResponse)},&quot;jobQueryResponse&quot;: {object (JobQueryResponse)},&quot;jobGetQueryResultsResponse&quot;: {object (JobGetQueryResultsResponse)},&quot;jobQueryDoneResponse&quot;: {object (JobQueryDoneResponse)},&quot;policyResponse&quot;: {object (Policy)}// End of list of possible types for union field response.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;jobCompletedEvent&quot;: {object (JobCompletedEvent)},&quot;tableDataReadEvents&quot;: [{object (TableDataReadEvent)}],// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;tableInsertRequest&quot;: {object (TableInsertRequest)},&quot;tableUpdateRequest&quot;: {object (TableUpdateRequest)},&quot;datasetListRequest&quot;: {object (DatasetListRequest)},&quot;datasetInsertRequest&quot;: {object (DatasetInsertRequest)},&quot;datasetUpdateRequest&quot;: {object (DatasetUpdateRequest)},&quot;jobInsertRequest&quot;: {object (JobInsertRequest)},&quot;jobQueryRequest&quot;: {object (JobQueryRequest)},&quot;jobGetQueryResultsRequest&quot;: {object (JobGetQueryResultsRequest)},&quot;tableDataListRequest&quot;: {object (TableDataListRequest)},&quot;setIamPolicyRequest&quot;: {object (SetIamPolicyRequest)}// End of mutually exclusive fields.// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;tableInsertResponse&quot;: {object (TableInsertResponse)},&quot;tableUpdateResponse&quot;: {object (TableUpdateResponse)},&quot;datasetInsertResponse&quot;: {object (DatasetInsertResponse)},&quot;datasetUpdateResponse&quot;: {object (DatasetUpdateResponse)},&quot;jobInsertResponse&quot;: {object (JobInsertResponse)},&quot;jobQueryResponse&quot;: {object (JobQueryResponse)},&quot;jobGetQueryResultsResponse&quot;: {object (JobGetQueryResultsResponse)},&quot;jobQueryDoneResponse&quot;: {object (JobQueryDoneResponse)},&quot;policyResponse&quot;: {object (Policy)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -124,7 +124,7 @@ A job completion event.
 
 Information about the table access events.
 
-Union field `request` . Request data for each BigQuery method. `request` can be only one of the following:
+Request data for each BigQuery method. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `tableInsertRequest`
 
@@ -186,7 +186,9 @@ Table data-list request.
 
 Iam policy request.
 
-Union field `response` . Response data for each BigQuery method. `response` can be only one of the following:
+End of mutually exclusive fields.
+
+Response data for each BigQuery method. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `tableInsertResponse`
 
@@ -241,6 +243,8 @@ Deprecated: Job query-done response. Use this information for usage analysis.
 ` object ( Policy  ` )
 
 Iam Policy.
+
+End of mutually exclusive fields.
 
 ## TableInsertRequest
 
@@ -990,7 +994,7 @@ Job configuration information. See the [Jobs](https://docs.cloud.google.com/bigq
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dryRun&quot;: boolean,&quot;labels&quot;: {string: string,...},// Union field configuration can be only one of the following:&quot;query&quot;: {object (JobConfiguration.Query)},&quot;load&quot;: {object (JobConfiguration.Load)},&quot;extract&quot;: {object (JobConfiguration.Extract)},&quot;tableCopy&quot;: {object (JobConfiguration.TableCopy)}// End of list of possible types for union field configuration.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dryRun&quot;: boolean,&quot;labels&quot;: {string: string,...},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;query&quot;: {object (JobConfiguration.Query)},&quot;load&quot;: {object (JobConfiguration.Load)},&quot;extract&quot;: {object (JobConfiguration.Extract)},&quot;tableCopy&quot;: {object (JobConfiguration.TableCopy)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1011,7 +1015,7 @@ Labels provided for the job.
 
 An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-Union field `configuration` . Job configuration information. `configuration` can be only one of the following:
+Job configuration information. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `query`
 
@@ -1036,6 +1040,8 @@ Extract job information.
 ` object ( JobConfiguration.TableCopy  ` )
 
 TableCopy job information.
+
+End of mutually exclusive fields.
 
 ## JobConfiguration.Query
 

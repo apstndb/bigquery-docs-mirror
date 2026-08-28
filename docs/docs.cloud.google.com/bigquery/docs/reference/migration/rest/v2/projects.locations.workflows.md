@@ -165,7 +165,7 @@ A single task for a migration which has details about the configuration of the t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;id&quot;: string,&quot;type&quot;: string,&quot;state&quot;: enum (State),&quot;processingError&quot;: {object (ErrorInfo)},&quot;createTime&quot;: string,&quot;lastUpdateTime&quot;: string,&quot;resourceErrorDetails&quot;: [{object (ResourceErrorDetail)}],&quot;resourceErrorCount&quot;: integer,&quot;metrics&quot;: [{object (TimeSeries)}],&quot;taskResult&quot;: {object (MigrationTaskResult)},&quot;totalProcessingErrorCount&quot;: integer,&quot;totalResourceErrorCount&quot;: integer,// Union field task_details can be only one of the following:&quot;assessmentTaskDetails&quot;: {object (AssessmentTaskDetails)},&quot;translationConfigDetails&quot;: {object (TranslationConfigDetails)},&quot;translationDetails&quot;: {object (TranslationDetails)}// End of list of possible types for union field task_details.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;id&quot;: string,&quot;type&quot;: string,&quot;state&quot;: enum (State),&quot;processingError&quot;: {object (ErrorInfo)},&quot;createTime&quot;: string,&quot;lastUpdateTime&quot;: string,&quot;resourceErrorDetails&quot;: [{object (ResourceErrorDetail)}],&quot;resourceErrorCount&quot;: integer,&quot;metrics&quot;: [{object (TimeSeries)}],&quot;taskResult&quot;: {object (MigrationTaskResult)},&quot;totalProcessingErrorCount&quot;: integer,&quot;totalResourceErrorCount&quot;: integer,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;assessmentTaskDetails&quot;: {object (AssessmentTaskDetails)},&quot;translationConfigDetails&quot;: {object (TranslationConfigDetails)},&quot;translationDetails&quot;: {object (TranslationDetails)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -256,7 +256,7 @@ Output only. Count of all the processing errors in this task and its subtasks.
 
 Output only. Count of all the resource errors in this task and its subtasks.
 
-Union field `task_details` . The details of the task. `task_details` can be only one of the following:
+The details of the task. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `assessmentTaskDetails`
 
@@ -275,6 +275,8 @@ Task configuration for CW Batch/Offline SQL Translation.
 ` object ( TranslationDetails  ` )
 
 Task details for unified SQL Translation.
+
+End of mutually exclusive fields.
 
 ## AssessmentTaskDetails
 
@@ -380,7 +382,7 @@ The translation config to capture necessary settings for a translation task and 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceDialect&quot;: {object (Dialect)},&quot;targetDialect&quot;: {object (Dialect)},&quot;sourceEnv&quot;: {object (SourceEnv)},&quot;requestSource&quot;: string,&quot;targetTypes&quot;: [string],// Union field source_location can be only one of the following:&quot;gcsSourcePath&quot;: string// End of list of possible types for union field source_location.// Union field target_location can be only one of the following:&quot;gcsTargetPath&quot;: string// End of list of possible types for union field target_location.// Union field output_name_mapping can be only one of the following:&quot;nameMappingList&quot;: {object (ObjectNameMappingList)}// End of list of possible types for union field output_name_mapping.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;sourceDialect&quot;: {object (Dialect)},&quot;targetDialect&quot;: {object (Dialect)},&quot;sourceEnv&quot;: {object (SourceEnv)},&quot;requestSource&quot;: string,&quot;targetTypes&quot;: [string],// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;gcsSourcePath&quot;: string// End of mutually exclusive fields.// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;gcsTargetPath&quot;: string// End of mutually exclusive fields.// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;nameMappingList&quot;: {object (ObjectNameMappingList)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -417,7 +419,7 @@ The indicator to show translation request initiator.
 
 The types of output to generate, e.g. sql, metadata etc. If not specified, a default set of targets will be generated. Some additional target types may be slower to generate. See the documentation for the set of available target types.
 
-Union field `source_location` . The chosen path where the source for input files will be found. `source_location` can be only one of the following:
+The chosen path where the source for input files will be found. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `gcsSourcePath`
 
@@ -425,7 +427,9 @@ Union field `source_location` . The chosen path where the source for input files
 
 The Cloud Storage path for a directory of files to translate in a task.
 
-Union field `target_location` . The chosen path where the destination for output files will be found. `target_location` can be only one of the following:
+End of mutually exclusive fields.
+
+The chosen path where the destination for output files will be found. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `gcsTargetPath`
 
@@ -433,13 +437,17 @@ Union field `target_location` . The chosen path where the destination for output
 
 The Cloud Storage path to write back the corresponding input files to.
 
-Union field `output_name_mapping` . The mapping of full SQL object names from their current state to the desired output. `output_name_mapping` can be only one of the following:
+End of mutually exclusive fields.
+
+The mapping of full SQL object names from their current state to the desired output. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `nameMappingList`
 
 ` object ( ObjectNameMappingList  ` )
 
 The mapping of objects to their desired output names in list form.
+
+End of mutually exclusive fields.
 
 ## ObjectNameMappingList
 
@@ -659,14 +667,14 @@ The possible dialect options for translation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field dialect_value can be only one of the following:&quot;bigqueryDialect&quot;: {object (BigQueryDialect)},&quot;hiveqlDialect&quot;: {object (HiveQLDialect)},&quot;redshiftDialect&quot;: {object (RedshiftDialect)},&quot;teradataDialect&quot;: {object (TeradataDialect)},&quot;oracleDialect&quot;: {object (OracleDialect)},&quot;sparksqlDialect&quot;: {object (SparkSQLDialect)},&quot;snowflakeDialect&quot;: {object (SnowflakeDialect)},&quot;netezzaDialect&quot;: {object (NetezzaDialect)},&quot;azureSynapseDialect&quot;: {object (AzureSynapseDialect)},&quot;verticaDialect&quot;: {object (VerticaDialect)},&quot;sqlServerDialect&quot;: {object (SQLServerDialect)},&quot;postgresqlDialect&quot;: {object (PostgresqlDialect)},&quot;prestoDialect&quot;: {object (PrestoDialect)},&quot;mysqlDialect&quot;: {object (MySQLDialect)},&quot;db2Dialect&quot;: {object (DB2Dialect)},&quot;sqliteDialect&quot;: {object (SQLiteDialect)},&quot;greenplumDialect&quot;: {object (GreenplumDialect)}// End of list of possible types for union field dialect_value.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;bigqueryDialect&quot;: {object (BigQueryDialect)},&quot;hiveqlDialect&quot;: {object (HiveQLDialect)},&quot;redshiftDialect&quot;: {object (RedshiftDialect)},&quot;teradataDialect&quot;: {object (TeradataDialect)},&quot;oracleDialect&quot;: {object (OracleDialect)},&quot;sparksqlDialect&quot;: {object (SparkSQLDialect)},&quot;snowflakeDialect&quot;: {object (SnowflakeDialect)},&quot;netezzaDialect&quot;: {object (NetezzaDialect)},&quot;azureSynapseDialect&quot;: {object (AzureSynapseDialect)},&quot;verticaDialect&quot;: {object (VerticaDialect)},&quot;sqlServerDialect&quot;: {object (SQLServerDialect)},&quot;postgresqlDialect&quot;: {object (PostgresqlDialect)},&quot;prestoDialect&quot;: {object (PrestoDialect)},&quot;mysqlDialect&quot;: {object (MySQLDialect)},&quot;db2Dialect&quot;: {object (DB2Dialect)},&quot;sqliteDialect&quot;: {object (SQLiteDialect)},&quot;greenplumDialect&quot;: {object (GreenplumDialect)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `dialect_value` . The possible dialect options that this message represents. `dialect_value` can be only one of the following:
+The possible dialect options that this message represents. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `bigqueryDialect`
 
@@ -769,6 +777,8 @@ SQLite dialect
 ` object ( GreenplumDialect  ` )
 
 Greenplum dialect
+
+End of mutually exclusive fields.
 
 ## BigQueryDialect
 
@@ -1065,7 +1075,7 @@ Represents one path to the location that holds source data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;encoding&quot;: string,// Union field source can be only one of the following:&quot;baseUri&quot;: string,&quot;literal&quot;: {object (Literal)},&quot;gcsFilePath&quot;: string// End of list of possible types for union field source.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;encoding&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;baseUri&quot;: string,&quot;literal&quot;: {object (Literal)},&quot;gcsFilePath&quot;: string// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1078,7 +1088,7 @@ Fields
 
 Optional. The optional field to specify the encoding of the sql bytes.
 
-Union field `source` . The specific source SQL. `source` can be only one of the following:
+The specific source SQL. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `baseUri`
 
@@ -1098,6 +1108,8 @@ Source literal.
 
 The path to a single source file in Cloud Storage.
 
+End of mutually exclusive fields.
+
 ## Literal
 
 Literal data.
@@ -1113,7 +1125,15 @@ Literal data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;relativePath&quot;: string,// Union field literal_data can be only one of the following:&quot;literalString&quot;: string,&quot;literalBytes&quot;: string// End of list of possible types for union field literal_data.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;relativePath&quot;: string,
+
+  // The following is a list of mutually exclusive fields. At most one of the
+  // fields will be set in a response:
+  &quot;literalString&quot;: string,
+  &quot;literalBytes&quot;: string
+  // End of mutually exclusive fields.
+}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1126,7 +1146,7 @@ Fields
 
 Required. The identifier of the literal entry.
 
-Union field `literal_data` . The literal SQL contents. `literal_data` can be only one of the following:
+The literal SQL contents. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `literalString`
 
@@ -1139,6 +1159,8 @@ Literal string data.
 `string ( bytes format)`
 
 Literal byte data.
+
+End of mutually exclusive fields.
 
 ## TargetSpec
 
@@ -1363,7 +1385,7 @@ The migration task result.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;taskOutputs&quot;: {string: {object (TaskOutput)},...},// Union field details can be only one of the following:&quot;translationTaskResult&quot;: {object (TranslationTaskResult)}// End of list of possible types for union field details.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;taskOutputs&quot;: {string: {object (TaskOutput)},...},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;translationTaskResult&quot;: {object (TranslationTaskResult)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1376,13 +1398,15 @@ Fields
 
 The map of task output types to the task outputs, e.g. "LINEAGE".
 
-Union field `details` . Details specific to the task type. `details` can be only one of the following:
+Details specific to the task type. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `translationTaskResult`
 
 ` object ( TranslationTaskResult  ` )
 
 Details specific to translation task types.
+
+End of mutually exclusive fields.
 
 ## TranslationTaskResult
 
@@ -1539,7 +1563,7 @@ The task output for a task type including the status and any errors.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;state&quot;: enum (State),&quot;processingError&quot;: {object (ErrorInfo)},// Union field output can be only one of the following:&quot;lineageOutput&quot;: {object (LineageOutput)}// End of list of possible types for union field output.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;state&quot;: enum (State),&quot;processingError&quot;: {object (ErrorInfo)},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;lineageOutput&quot;: {object (LineageOutput)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1558,13 +1582,15 @@ Output only. The current state of the task output.
 
 An explanation that may be populated when the task output is in FAILED state.
 
-Union field `output` . The detailed output of the task. `output` can be only one of the following:
+The detailed output of the task. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `lineageOutput`
 
 ` object ( LineageOutput  ` )
 
 The output of the task with output type "LINEAGE".
+
+End of mutually exclusive fields.
 
 ## LineageOutput
 

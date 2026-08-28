@@ -405,6 +405,10 @@ To use legacy SQL syntax in a query job, pass the option `legacy_sql: true` with
       end
     end
 
+## Troubleshoot query issues
+
+For information about resolving issues when you run queries, see [Troubleshoot queries](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .
+
 ## What's next
 
   - For information about how to run a SQL query in BigQuery, see [Running interactive and batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries) .

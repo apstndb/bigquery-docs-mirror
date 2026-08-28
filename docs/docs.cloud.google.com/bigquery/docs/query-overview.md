@@ -210,6 +210,10 @@ You can also use BigQuery with other notebooks and analysis tools. For more info
 
 For a full list of BigQuery analytics and broader technology partners, see the [Partners](https://docs.cloud.google.com/bigquery#section-12) list on the BigQuery product page.
 
+## Troubleshoot query issues
+
+For information about resolving issues when you run queries, see [Troubleshoot queries](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .
+
 ## What's next
 
   - For an introduction and overview of supported SQL statements, see [Introduction to SQL in BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-sql) .

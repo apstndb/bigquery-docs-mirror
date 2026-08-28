@@ -191,7 +191,7 @@ BigQueryAuditMetaData is exposed as part of the new AuditData.metadata messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;firstPartyAppMetadata&quot;: {object (BigQueryAuditMetadata.FirstPartyAppMetadata)},// Union field event can be only one of the following:&quot;jobInsertion&quot;: {object (BigQueryAuditMetadata.JobInsertion)},&quot;jobChange&quot;: {object (BigQueryAuditMetadata.JobChange)},&quot;jobDeletion&quot;: {object (BigQueryAuditMetadata.JobDeletion)},&quot;jobCancel&quot;: {object (BigQueryAuditMetadata.JobCancel)},&quot;datasetCreation&quot;: {object (BigQueryAuditMetadata.DatasetCreation)},&quot;datasetChange&quot;: {object (BigQueryAuditMetadata.DatasetChange)},&quot;datasetDeletion&quot;: {object (BigQueryAuditMetadata.DatasetDeletion)},&quot;tableCreation&quot;: {object (BigQueryAuditMetadata.TableCreation)},&quot;tableChange&quot;: {object (BigQueryAuditMetadata.TableChange)},&quot;tableDeletion&quot;: {object (BigQueryAuditMetadata.TableDeletion)},&quot;tableDataRead&quot;: {object (BigQueryAuditMetadata.TableDataRead)},&quot;tableDataChange&quot;: {object (BigQueryAuditMetadata.TableDataChange)},&quot;modelDeletion&quot;: {object (BigQueryAuditMetadata.ModelDeletion)},&quot;modelCreation&quot;: {object (BigQueryAuditMetadata.ModelCreation)},&quot;modelMetadataChange&quot;: {object (BigQueryAuditMetadata.ModelMetadataChange)},&quot;modelDataChange&quot;: {object (BigQueryAuditMetadata.ModelDataChange)},&quot;modelDataRead&quot;: {object (BigQueryAuditMetadata.ModelDataRead)},&quot;routineCreation&quot;: {object (BigQueryAuditMetadata.RoutineCreation)},&quot;routineChange&quot;: {object (BigQueryAuditMetadata.RoutineChange)},&quot;routineDeletion&quot;: {object (BigQueryAuditMetadata.RoutineDeletion)},&quot;rowAccessPolicyCreation&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyCreation)},&quot;rowAccessPolicyChange&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyChange)},&quot;rowAccessPolicyDeletion&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyDeletion)},&quot;unlinkDataset&quot;: {object (BigQueryAuditMetadata.UnlinkDataset)},&quot;searchIndexCreation&quot;: {object (BigQueryAuditMetadata.SearchIndexCreation)},&quot;searchIndexChange&quot;: {object (BigQueryAuditMetadata.SearchIndexChange)},&quot;searchIndexDeletion&quot;: {object (BigQueryAuditMetadata.SearchIndexDeletion)},&quot;vectorIndexCreation&quot;: {object (BigQueryAuditMetadata.VectorIndexCreation)},&quot;vectorIndexChange&quot;: {object (BigQueryAuditMetadata.VectorIndexChange)},&quot;vectorIndexDeletion&quot;: {object (BigQueryAuditMetadata.VectorIndexDeletion)},&quot;connectionChange&quot;: {object (BigQueryAuditMetadata.ConnectionChange)},&quot;analyticsHubSubscribeListing&quot;: {object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)},&quot;icebergTableSetIamPolicy&quot;: {object (BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata)},&quot;deltaSharingCatalogCreation&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata)},&quot;deltaSharingCatalogUpdate&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata)},&quot;deltaSharingCatalogDeletion&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata)},&quot;propertyGraphCreation&quot;: {object (BigQueryAuditMetadata.PropertyGraphCreation)},&quot;propertyGraphChange&quot;: {object (BigQueryAuditMetadata.PropertyGraphChange)},&quot;propertyGraphDeletion&quot;: {object (BigQueryAuditMetadata.PropertyGraphDeletion)}// End of list of possible types for union field event.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;firstPartyAppMetadata&quot;: {object (BigQueryAuditMetadata.FirstPartyAppMetadata)},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;jobInsertion&quot;: {object (BigQueryAuditMetadata.JobInsertion)},&quot;jobChange&quot;: {object (BigQueryAuditMetadata.JobChange)},&quot;jobDeletion&quot;: {object (BigQueryAuditMetadata.JobDeletion)},&quot;jobCancel&quot;: {object (BigQueryAuditMetadata.JobCancel)},&quot;datasetCreation&quot;: {object (BigQueryAuditMetadata.DatasetCreation)},&quot;datasetChange&quot;: {object (BigQueryAuditMetadata.DatasetChange)},&quot;datasetDeletion&quot;: {object (BigQueryAuditMetadata.DatasetDeletion)},&quot;tableCreation&quot;: {object (BigQueryAuditMetadata.TableCreation)},&quot;tableChange&quot;: {object (BigQueryAuditMetadata.TableChange)},&quot;tableDeletion&quot;: {object (BigQueryAuditMetadata.TableDeletion)},&quot;tableDataRead&quot;: {object (BigQueryAuditMetadata.TableDataRead)},&quot;tableDataChange&quot;: {object (BigQueryAuditMetadata.TableDataChange)},&quot;modelDeletion&quot;: {object (BigQueryAuditMetadata.ModelDeletion)},&quot;modelCreation&quot;: {object (BigQueryAuditMetadata.ModelCreation)},&quot;modelMetadataChange&quot;: {object (BigQueryAuditMetadata.ModelMetadataChange)},&quot;modelDataChange&quot;: {object (BigQueryAuditMetadata.ModelDataChange)},&quot;modelDataRead&quot;: {object (BigQueryAuditMetadata.ModelDataRead)},&quot;routineCreation&quot;: {object (BigQueryAuditMetadata.RoutineCreation)},&quot;routineChange&quot;: {object (BigQueryAuditMetadata.RoutineChange)},&quot;routineDeletion&quot;: {object (BigQueryAuditMetadata.RoutineDeletion)},&quot;rowAccessPolicyCreation&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyCreation)},&quot;rowAccessPolicyChange&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyChange)},&quot;rowAccessPolicyDeletion&quot;: {object (BigQueryAuditMetadata.RowAccessPolicyDeletion)},&quot;unlinkDataset&quot;: {object (BigQueryAuditMetadata.UnlinkDataset)},&quot;searchIndexCreation&quot;: {object (BigQueryAuditMetadata.SearchIndexCreation)},&quot;searchIndexChange&quot;: {object (BigQueryAuditMetadata.SearchIndexChange)},&quot;searchIndexDeletion&quot;: {object (BigQueryAuditMetadata.SearchIndexDeletion)},&quot;vectorIndexCreation&quot;: {object (BigQueryAuditMetadata.VectorIndexCreation)},&quot;vectorIndexChange&quot;: {object (BigQueryAuditMetadata.VectorIndexChange)},&quot;vectorIndexDeletion&quot;: {object (BigQueryAuditMetadata.VectorIndexDeletion)},&quot;connectionChange&quot;: {object (BigQueryAuditMetadata.ConnectionChange)},&quot;analyticsHubSubscribeListing&quot;: {object (BigQueryAuditMetadata.AnalyticsHubSubscribeListing)},&quot;icebergTableSetIamPolicy&quot;: {object (BigQueryAuditMetadata.IcebergTableSetIamPolicyAuditMetadata)},&quot;deltaSharingCatalogCreation&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogCreationAuditMetadata)},&quot;deltaSharingCatalogUpdate&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogUpdateAuditMetadata)},&quot;deltaSharingCatalogDeletion&quot;: {object (BigQueryAuditMetadata.DeltaSharingCatalogDeletionAuditMetadata)},&quot;propertyGraphCreation&quot;: {object (BigQueryAuditMetadata.PropertyGraphCreation)},&quot;propertyGraphChange&quot;: {object (BigQueryAuditMetadata.PropertyGraphChange)},&quot;propertyGraphDeletion&quot;: {object (BigQueryAuditMetadata.PropertyGraphDeletion)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -204,7 +204,7 @@ Fields
 
 First party (Google) application specific metadata.
 
-Union field `event` . BigQuery event information. `event` can be only one of the following:
+BigQuery event information. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `jobInsertion`
 
@@ -440,6 +440,8 @@ Property graph change event.
 
 Property graph deletion event.
 
+End of mutually exclusive fields.
+
 ## BigQueryAuditMetadata.JobInsertion
 
 Job insertion event.
@@ -537,7 +539,7 @@ Job configuration. See the [Jobs](https://cloud.google.com/bigquery/docs/referen
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;type&quot;: enum (BigQueryAuditMetadata.JobConfig.Type),&quot;labels&quot;: {string: string,...},&quot;reservation&quot;: string,// Union field config can be only one of the following:&quot;queryConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Query)},&quot;loadConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Load)},&quot;extractConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Extract)},&quot;tableCopyConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.TableCopy)}// End of list of possible types for union field config.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;type&quot;: enum (BigQueryAuditMetadata.JobConfig.Type),&quot;labels&quot;: {string: string,...},&quot;reservation&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;queryConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Query)},&quot;loadConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Load)},&quot;extractConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.Extract)},&quot;tableCopyConfig&quot;: {object (BigQueryAuditMetadata.JobConfig.TableCopy)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -564,7 +566,7 @@ An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench
 
 User specified reservation for the job.
 
-Union field `config` . Job configuration information. `config` can be only one of the following:
+Job configuration information. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `queryConfig`
 
@@ -589,6 +591,8 @@ Extract job information.
 ` object ( BigQueryAuditMetadata.JobConfig.TableCopy  ` )
 
 TableCopy job information.
+
+End of mutually exclusive fields.
 
 ## BigQueryAuditMetadata.JobConfig.Query
 
@@ -871,7 +875,18 @@ Extract job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destinationUris&quot;: [string],&quot;destinationUrisTruncated&quot;: boolean,// Union field source can be only one of the following:&quot;sourceTable&quot;: string,&quot;sourceModel&quot;: string// End of list of possible types for union field source.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;destinationUris&quot;: [
+    string
+  ],
+  &quot;destinationUrisTruncated&quot;: boolean,
+
+  // The following is a list of mutually exclusive fields. At most one of the
+  // fields will be set in a response:
+  &quot;sourceTable&quot;: string,
+  &quot;sourceModel&quot;: string
+  // End of mutually exclusive fields.
+}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -890,9 +905,7 @@ URIs where extracted data should be written. Entire list is truncated if exceeds
 
 True if the destination\_URIs field was truncated.
 
-Union field `source` .
-
-`source` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `sourceTable`
 
@@ -905,6 +918,8 @@ The source table.
 `string`
 
 The source model.
+
+End of mutually exclusive fields.
 
 ## BigQueryAuditMetadata.JobConfig.TableCopy
 
@@ -1033,7 +1048,7 @@ Job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (BigQueryAuditMetadata.JobStats.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;parentJobName&quot;: string,&quot;globalQueryRemoteRegions&quot;: [string],&quot;parentGlobalQueryJobId&quot;: string,&quot;parentGlobalQueryJobLocation&quot;: string,// Union field extended can be only one of the following:&quot;queryStats&quot;: {object (BigQueryAuditMetadata.JobStats.Query)},&quot;loadStats&quot;: {object (BigQueryAuditMetadata.JobStats.Load)},&quot;extractStats&quot;: {object (BigQueryAuditMetadata.JobStats.Extract)}// End of list of possible types for union field extended.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;createTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{object (BigQueryAuditMetadata.JobStats.ReservationResourceUsage)}],&quot;reservation&quot;: string,&quot;parentJobName&quot;: string,&quot;globalQueryRemoteRegions&quot;: [string],&quot;parentGlobalQueryJobId&quot;: string,&quot;parentGlobalQueryJobLocation&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;queryStats&quot;: {object (BigQueryAuditMetadata.JobStats.Query)},&quot;loadStats&quot;: {object (BigQueryAuditMetadata.JobStats.Load)},&quot;extractStats&quot;: {object (BigQueryAuditMetadata.JobStats.Extract)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1108,7 +1123,7 @@ Global query that created this job.
 
 Location of the global query that created this job.
 
-Union field `extended` . Statistics specific to the job type. `extended` can be only one of the following:
+Statistics specific to the job type. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `queryStats`
 
@@ -1127,6 +1142,8 @@ Load job statistics.
 ` object ( BigQueryAuditMetadata.JobStats.Extract  ` )
 
 Extract job statistics.
+
+End of mutually exclusive fields.
 
 ## BigQueryAuditMetadata.JobStats.Query
 
@@ -2154,14 +2171,14 @@ Represents privacy policy that contains the privacy requirements specified by th
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field privacy_policy can be only one of the following:&quot;aggregationThresholdPolicy&quot;: {object (AggregationThresholdPolicy)},&quot;differentialPrivacyPolicy&quot;: {object (DifferentialPrivacyPolicy)}// End of list of possible types for union field privacy_policy.&quot;joinRestrictionPolicy&quot;: {object (JoinRestrictionPolicy)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;aggregationThresholdPolicy&quot;: {object (AggregationThresholdPolicy)},&quot;differentialPrivacyPolicy&quot;: {object (DifferentialPrivacyPolicy)}// End of mutually exclusive fields.&quot;joinRestrictionPolicy&quot;: {object (JoinRestrictionPolicy)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `privacy_policy` . Privacy policy associated with this requirement specification. Only one of the privacy methods is allowed per data source object. `privacy_policy` can be only one of the following:
+Privacy policy associated with this requirement specification. Only one of the privacy methods is allowed per data source object. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `aggregationThresholdPolicy`
 
@@ -2174,6 +2191,8 @@ Optional. Policy used for aggregation thresholds.
 ` object ( DifferentialPrivacyPolicy  ` )
 
 Optional. Policy used for differential privacy.
+
+End of mutually exclusive fields.
 
 `joinRestrictionPolicy`
 
@@ -4446,22 +4465,22 @@ First party (Google) application specific request metadata.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field metadata can be only one of the following:&quot;sheetsMetadata&quot;: {object (BigQueryAuditMetadata.SheetsMetadata)}// End of list of possible types for union field metadata.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;sheetsMetadata&quot;: {object (BigQueryAuditMetadata.SheetsMetadata)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `metadata` .
-
-`metadata` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `sheetsMetadata`
 
 ` object ( BigQueryAuditMetadata.SheetsMetadata  ` )
 
 Google Sheets metadata.
+
+End of mutually exclusive fields.
 
 ## BigQueryAuditMetadata.SheetsMetadata
 

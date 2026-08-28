@@ -62,7 +62,11 @@ Google Services:
   - [YouTube Channel](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer)
   - [YouTube Content Owner](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer)
 
+## Troubleshoot transfer configurations
+
+For information about resolving issues with BigQuery Data Transfer Service, see [Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .
+
 ## What's next
 
-  - To learn more about the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service?](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - To learn more about the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service?](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
   - To learn about other ways you can ingest data into BigQuery, such as using extract, load, and transform (ELT) workflows, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .

@@ -69,17 +69,19 @@ Credential to use with a connection.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field credential can be only one of the following:&quot;cloudSql&quot;: {object (CloudSqlCredential)}// End of list of possible types for union field credential.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;cloudSql&quot;: {object (CloudSqlCredential)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `credential` . Credential specific to the underlying data source. `credential` can be only one of the following:
+Credential specific to the underlying data source. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `cloudSql`
 
 ` object ( CloudSqlCredential  ` )
 
 Credential for Cloud SQL database.
+
+End of mutually exclusive fields.

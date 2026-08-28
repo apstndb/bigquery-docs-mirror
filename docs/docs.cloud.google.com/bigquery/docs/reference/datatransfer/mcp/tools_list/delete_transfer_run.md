@@ -35,7 +35,7 @@ The following code sample shows how to use `curl` to call the `delete_transfer_r
   &quot;params&quot;: {
     &quot;name&quot;: &quot;delete_transfer_run&quot;,
     &quot;arguments&quot;: {
-      // provide these details according to the tool&#39;s MCP specification
+      // Provide these details according to the MCP tool specification.
     }
   },
   &quot;jsonrpc&quot;: &quot;2.0&quot;,

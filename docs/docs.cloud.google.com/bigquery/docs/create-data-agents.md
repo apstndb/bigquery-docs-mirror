@@ -774,6 +774,79 @@ You can visualize the sequence of operations within a conversation turn, such as
 
 4.  Optional: Create a [custom trace dashboard](https://docs.cloud.google.com/trace/docs/display-traces-on-dashboards) .
 
+### Retain traces
+
+Your Cloud Trace data is stored in an observability dataset for 30 days. To store your trace data for longer, move your trace data to a BigQuery dataset.
+
+#### Required roles
+
+To get the permissions that you need to expose live traces to BigQuery by creating a linked dataset, ask your administrator to grant you the following IAM roles on your project:
+
+  - [Cloud Trace Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudtrace#cloudtrace.admin) ( `roles/cloudtrace.admin` )
+  - [Observability Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/observability#observability.editor) ( `roles/observability.editor` )
+  - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+#### Move trace data to BigQuery
+
+To retain your trace data, do the following:
+
+1.  Open [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) .
+
+2.  Find the location of your `_Trace` bucket:
+    
+        gcloud beta observability buckets list --location=-
+    
+    Note the location of your `_Trace` bucket for the next step.
+
+3.  Create a [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) in your BigQuery project that points to your `_Trace` bucket:
+    
+        gcloud beta observability buckets datasets links create \
+            projects/PROJECT_ID/locations/LOCATION/buckets/_Trace/datasets/Spans/links/LINK_NAME \
+            --dataset=Spans \
+            --bucket=_Trace \
+            --location=LOCATION \
+            --project=PROJECT_ID
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : your project ID
+      - `  LOCATION  ` : the location of your `_Trace` bucket from the previous step
+      - `  LINK_NAME  ` : a name for the linked dataset
+
+4.  Create a [standard dataset](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) in which to store your historical traces. The following command sets the [default partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) to 90 days (7,776,000 seconds):
+    
+        bq --location=LOCATION mk \
+            --dataset \
+            --default_partition_expiration=7776000 \
+            --description="Archive storage for historical traces" \
+            PROJECT_ID:STORAGE_DATASET
+    
+    Replace `  STORAGE_DATASET  ` with a name for the dataset.
+
+5.  Create an empty partitioned table in your storage dataset with the same schema as the linked dataset. Partitioning by date helps you manage data retention and query costs. To create the table, run the following query in the SQL editor:
+    
+        CREATE TABLE `PROJECT_ID.STORAGE_DATASET.TABLE_NAME`
+        PARTITION BY DATE(start_time)
+        AS
+        SELECT *
+        FROM `PROJECT_ID.LINK_NAME._AllSpans`
+        WHERE FALSE;
+    
+    Replace `  TABLE_NAME  ` with a name for the table.
+
+6.  Create a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) to copy daily trace data from the linked dataset to your archive table. The following query copies data from the previous day:
+    
+        INSERT INTO `PROJECT_ID.STORAGE_DATASET.TABLE_NAME`
+        SELECT *
+        FROM `PROJECT_ID.LINK_NAME._AllSpans`
+        WHERE start_time >=
+          TIMESTAMP_SUB(TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY), INTERVAL 1 DAY)
+          AND start_time < TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY);
+
 For more information, read about how to [find and explore traces](https://docs.cloud.google.com/trace/docs/finding-traces) .
 
 ### Turn off observability

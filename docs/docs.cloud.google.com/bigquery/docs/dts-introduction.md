@@ -113,6 +113,10 @@ Once data is transferred to BigQuery, standard BigQuery [storage](https://cloud.
 
 For information on BigQuery Data Transfer Service quotas, see the [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) page.
 
+## Troubleshoot transfer configurations
+
+For information about resolving issues with BigQuery Data Transfer Service, see [Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .
+
 ## What's next
 
-To learn how to create a transfer, see the documentation for your [data source](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) .
+  - To learn how to create a transfer, see the documentation for your [data source](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) .

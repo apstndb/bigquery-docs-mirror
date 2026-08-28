@@ -150,14 +150,14 @@ A single strongly-typed value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field value can be only one of the following:&quot;boolValue&quot;: boolean,&quot;int64Value&quot;: string,&quot;doubleValue&quot;: number,&quot;stringValue&quot;: string,&quot;distributionValue&quot;: {object (Distribution)}// End of list of possible types for union field value.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;boolValue&quot;: boolean,&quot;int64Value&quot;: string,&quot;doubleValue&quot;: number,&quot;stringValue&quot;: string,&quot;distributionValue&quot;: {object (Distribution)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `value` . The typed value field. `value` can be only one of the following:
+The typed value field. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `boolValue`
 
@@ -188,3 +188,5 @@ A variable-length string value.
 ` object ( Distribution  ` )
 
 A distribution value.
+
+End of mutually exclusive fields.
