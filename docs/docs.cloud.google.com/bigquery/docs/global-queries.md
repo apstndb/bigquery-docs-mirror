@@ -120,7 +120,18 @@ BigQuery doesn't need to replicate all of table `t2` from the US to the EU. It i
 
 ## Observability
 
+To monitor global queries and inspect their execution across regions, you can use the following methods:
+
+### Job history
+
 To see the query text sent to the remote region, check the [job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) . The remote job has the same job ID as the original query with an additional `_xregion` suffix.
+
+### Jobs REST API
+
+When you call the [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) method, the returned [`Job`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) resource contains the following fields in the [`JobStatistics`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics) object:
+
+  - `statistics.global_query_remote_regions` : An array of strings representing the remote regions from which a global query accesses data. This field is populated only for parent global query jobs in the primary execution region. It is empty for child global query jobs and single-region queries.
+  - `statistics.parent_global_query_job` : A [`JobReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference) object ( `projectId` , `jobId` , `location` ) identifying the parent global query job. This field is populated only for child global query jobs (remote subqueries and cross-region copy jobs) executed in remote regions on behalf of a global query. It is unset for parent global query jobs and single-region queries.
 
 ## Turn off global queries
 

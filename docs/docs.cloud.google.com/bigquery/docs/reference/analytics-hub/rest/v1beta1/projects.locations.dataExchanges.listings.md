@@ -35,7 +35,7 @@ A listing is what gets published into a data exchange that a subscriber can subs
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;state&quot;: enum (State),&quot;icon&quot;: string,&quot;dataProvider&quot;: {object (DataProvider)},&quot;categories&quot;: [enum (Category)],&quot;publisher&quot;: {object (Publisher)},&quot;requestAccess&quot;: string,&quot;restrictedExportConfig&quot;: {object (RestrictedExportConfig)},&quot;allowOnlyMetadataSharing&quot;: boolean,// Union field source can be only one of the following:&quot;bigqueryDataset&quot;: {object (BigQueryDatasetSource)}// End of list of possible types for union field source.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;state&quot;: enum (State),&quot;icon&quot;: string,&quot;dataProvider&quot;: {object (DataProvider)},&quot;categories&quot;: [enum (Category)],&quot;publisher&quot;: {object (Publisher)},&quot;requestAccess&quot;: string,&quot;restrictedExportConfig&quot;: {object (RestrictedExportConfig)},&quot;allowOnlyMetadataSharing&quot;: boolean,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;bigqueryDataset&quot;: {object (BigQueryDatasetSource)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -122,13 +122,15 @@ Optional. If set, restricted export configuration will be propagated and enforce
 
 Optional. If true, the listing is only available to get the resource metadata. Listing is non subscribable.
 
-Union field `source` . Listing source. `source` can be only one of the following:
+Listing source. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `bigqueryDataset`
 
 ` object ( BigQueryDatasetSource  ` )
 
 Required. Shared dataset i.e. BigQuery dataset source.
+
+End of mutually exclusive fields.
 
 ## BigQueryDatasetSource
 

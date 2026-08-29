@@ -59,9 +59,9 @@ Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers 
 > 
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-[Google Cloud Data Agent Kit](https://docs.cloud.google.com/data-cloud-extension) provides an extension for agent coding tools, such as VS Code, Antigravity, and Cursor, that lets you interact with BigQuery resources directly in your agent environment. You can use this extension to browse datasets, manage pipelines, run queries, and prompt your agent to perform other BigQuery tasks directly in your preferred IDE.
+[Google Cloud Data Agent Kit](https://docs.cloud.google.com/data-agent-kit) provides an extension for agent coding tools, such as VS Code, Antigravity, and Cursor, that let you interact with BigQuery resources directly in your agent environment. You can use Data Agent Kit to browse datasets, manage pipelines, run queries, and prompt your agent to perform other BigQuery tasks directly in your preferred IDE.
 
-Data Agent Kit also provides a set of open source plugins that you can use with various command-line tools, including Antigravity CLI, Gemini CLI, Claude Code, and Codex CLI.
+Data Agent Kit also provides a set of plugins that you can use with various command-line tools, including Antigravity CLI, Gemini CLI, Claude Code, and Codex CLI.
 
 ## Tools for developing end-to-end solutions
 

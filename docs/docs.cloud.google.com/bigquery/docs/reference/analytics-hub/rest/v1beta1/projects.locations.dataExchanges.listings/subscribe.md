@@ -54,20 +54,22 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field destination can be only one of the following:&quot;destinationDataset&quot;: {object (DestinationDataset)}// End of list of possible types for union field destination.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;destinationDataset&quot;: {object (DestinationDataset)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `destination` . Resulting destination of the listing that you subscribed to. `destination` can be only one of the following:
+Resulting destination of the listing that you subscribed to. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `destinationDataset`
 
 ` object ( DestinationDataset  ` )
 
 BigQuery destination dataset to create for the subscriber.
+
+End of mutually exclusive fields.
 
 ### Response body
 

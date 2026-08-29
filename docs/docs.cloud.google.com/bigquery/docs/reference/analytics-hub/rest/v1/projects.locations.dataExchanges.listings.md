@@ -53,7 +53,7 @@ A listing is what gets published into a data exchange that a subscriber can subs
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;state&quot;: enum (State),&quot;icon&quot;: string,&quot;dataProvider&quot;: {object (DataProvider)},&quot;categories&quot;: [enum (Category)],&quot;publisher&quot;: {object (Publisher)},&quot;requestAccess&quot;: string,&quot;restrictedExportConfig&quot;: {object (RestrictedExportConfig)},&quot;storedProcedureConfig&quot;: {object (StoredProcedureConfig)},&quot;resourceType&quot;: enum (SharedResourceType),// Union field source can be only one of the following:&quot;bigqueryDataset&quot;: {object (BigQueryDatasetSource)},&quot;pubsubTopic&quot;: {object (PubSubTopicSource)}// End of list of possible types for union field source.&quot;discoveryType&quot;: enum (DiscoveryType),&quot;commercialInfo&quot;: {object (CommercialInfo)},&quot;logLinkedDatasetQueryUserEmail&quot;: boolean,&quot;allowOnlyMetadataSharing&quot;: boolean}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;state&quot;: enum (State),&quot;icon&quot;: string,&quot;dataProvider&quot;: {object (DataProvider)},&quot;categories&quot;: [enum (Category)],&quot;publisher&quot;: {object (Publisher)},&quot;requestAccess&quot;: string,&quot;restrictedExportConfig&quot;: {object (RestrictedExportConfig)},&quot;storedProcedureConfig&quot;: {object (StoredProcedureConfig)},&quot;resourceType&quot;: enum (SharedResourceType),// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;bigqueryDataset&quot;: {object (BigQueryDatasetSource)},&quot;pubsubTopic&quot;: {object (PubSubTopicSource)}// End of mutually exclusive fields.&quot;discoveryType&quot;: enum (DiscoveryType),&quot;commercialInfo&quot;: {object (CommercialInfo)},&quot;logLinkedDatasetQueryUserEmail&quot;: boolean,&quot;allowOnlyMetadataSharing&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -146,7 +146,7 @@ Optional. If set, stored procedure configuration will be propagated and enforced
 
 Output only. Listing shared asset type.
 
-Union field `source` . Listing source. `source` can be only one of the following:
+Listing source. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `bigqueryDataset`
 
@@ -159,6 +159,8 @@ Shared dataset i.e. BigQuery dataset source.
 ` object ( PubSubTopicSource  ` )
 
 Pub/Sub topic source.
+
+End of mutually exclusive fields.
 
 `discoveryType`
 
@@ -251,16 +253,21 @@ Resource in this dataset that is selectively shared.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field resource can be only one of the following:&quot;table&quot;: string,&quot;routine&quot;: string// End of list of possible types for union field resource.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+
+  // The following is a list of mutually exclusive fields. At most one of the
+  // fields will be set in a response:
+  &quot;table&quot;: string,
+  &quot;routine&quot;: string
+  // End of mutually exclusive fields.
+}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `resource` .
-
-`resource` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `table`
 
@@ -273,6 +280,8 @@ Optional. Format: For table: `projects/{projectId}/datasets/{datasetId}/tables/{
 `string`
 
 Optional. Format: For routine: `projects/{projectId}/datasets/{datasetId}/routines/{routineId}` Example:"projects/test\_project/datasets/test\_dataset/routines/test\_routine"
+
+End of mutually exclusive fields.
 
 ## RestrictedExportPolicy
 

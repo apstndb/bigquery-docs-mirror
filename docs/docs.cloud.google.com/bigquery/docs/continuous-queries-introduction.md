@@ -84,6 +84,8 @@ The following operations are supported in continuous queries:
 
   - Using the [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) change history function to process changed data, including both appends and mutations, from a specific point in time when [exporting data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) . However, `CHANGES` is not supported when using a [stateful operation](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) .
 
+  - Querying [views](https://docs.cloud.google.com/bigquery/docs/views) , as long as the view's underlying SQL query is a valid continuous query.
+
 ## Supported stateful operations
 
 > **Preview**
@@ -155,7 +157,7 @@ Continuous queries are subject to the following limitations:
       - [Wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
       - [Change Data Capture (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture) data.
       - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
-      - [Views](https://docs.cloud.google.com/bigquery/docs/views) that are defined by other continuous query limitations, such as `JOIN` operations, aggregate functions, user-defined functions or change data capture-enabled tables.
+      - [Views](https://docs.cloud.google.com/bigquery/docs/views) where the underlying SQL query uses unsupported features, such as user-defined functions, external tables, or CDC-enabled tables.
 
   - Continuous queries don't support the [column-](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) security features.
 

@@ -69,14 +69,14 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field time can be only one of the following:&quot;requestedTimeRange&quot;: {object (TimeRange)},&quot;requestedRunTime&quot;: string// End of list of possible types for union field time.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;requestedTimeRange&quot;: {object (TimeRange)},&quot;requestedRunTime&quot;: string// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `time` . The requested time specification - this can be a time range or a specific run\_time. `time` can be only one of the following:
+The requested time specification - this can be a time range or a specific run\_time. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `requestedTimeRange`
 
@@ -89,6 +89,8 @@ A time\_range start and end timestamp for historical data files or reports that 
 ` string ( Timestamp  ` format)
 
 A runTime timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedRunTime must be a past time and cannot include future time values.
+
+End of mutually exclusive fields.
 
 ### Response body
 

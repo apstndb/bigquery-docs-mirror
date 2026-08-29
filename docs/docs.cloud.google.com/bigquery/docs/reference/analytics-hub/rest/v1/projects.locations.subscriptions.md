@@ -25,7 +25,7 @@ A subscription represents a subscribers' access to a particular set of published
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;creationTime&quot;: string,&quot;lastModifyTime&quot;: string,&quot;organizationId&quot;: string,&quot;organizationDisplayName&quot;: string,&quot;state&quot;: enum (State),&quot;linkedDatasetMap&quot;: {string: {object (LinkedResource)},...},&quot;subscriberContact&quot;: string,&quot;linkedResources&quot;: [{object (LinkedResource)}],&quot;resourceType&quot;: enum (SharedResourceType),&quot;commercialInfo&quot;: {object (CommercialInfo)},&quot;destinationDataset&quot;: {object (DestinationDataset)},// Union field resource_name can be only one of the following:&quot;listing&quot;: string,&quot;dataExchange&quot;: string// End of list of possible types for union field resource_name.&quot;logLinkedDatasetQueryUserEmail&quot;: boolean}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;creationTime&quot;: string,&quot;lastModifyTime&quot;: string,&quot;organizationId&quot;: string,&quot;organizationDisplayName&quot;: string,&quot;state&quot;: enum (State),&quot;linkedDatasetMap&quot;: {string: {object (LinkedResource)},...},&quot;subscriberContact&quot;: string,&quot;linkedResources&quot;: [{object (LinkedResource)}],&quot;resourceType&quot;: enum (SharedResourceType),&quot;commercialInfo&quot;: {object (CommercialInfo)},&quot;destinationDataset&quot;: {object (DestinationDataset)},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;listing&quot;: string,&quot;dataExchange&quot;: string// End of mutually exclusive fields.&quot;logLinkedDatasetQueryUserEmail&quot;: boolean}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -112,9 +112,7 @@ Output only. This is set if this is a commercial subscription i.e. if this subsc
 
 Optional. BigQuery destination dataset to create for the subscriber.
 
-Union field `resource_name` .
-
-`resource_name` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `listing`
 
@@ -127,6 +125,8 @@ Output only. Resource name of the source Listing. e.g. projects/123/locations/us
 `string`
 
 Output only. Resource name of the source Data Exchange. e.g. projects/123/locations/us/dataExchanges/456
+
+End of mutually exclusive fields.
 
 `logLinkedDatasetQueryUserEmail`
 

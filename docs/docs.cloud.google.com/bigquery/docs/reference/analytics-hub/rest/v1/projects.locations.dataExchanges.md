@@ -114,16 +114,14 @@ Sharing environment is a behavior model for sharing data within a data exchange.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field environment can be only one of the following:&quot;defaultExchangeConfig&quot;: {object (DefaultExchangeConfig)},&quot;dcrExchangeConfig&quot;: {object (DcrExchangeConfig)}// End of list of possible types for union field environment.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;defaultExchangeConfig&quot;: {object (DefaultExchangeConfig)},&quot;dcrExchangeConfig&quot;: {object (DcrExchangeConfig)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `environment` .
-
-`environment` can be only one of the following:
+The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `defaultExchangeConfig`
 
@@ -136,6 +134,8 @@ Default Analytics Hub data exchange, used for secured data sharing.
 ` object ( DcrExchangeConfig  ` )
 
 Data Clean Room (DCR), used for privacy-safe and secured data sharing.
+
+End of mutually exclusive fields.
 
 ## DefaultExchangeConfig
 

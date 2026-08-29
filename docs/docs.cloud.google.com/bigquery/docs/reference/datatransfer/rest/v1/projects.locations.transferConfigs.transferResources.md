@@ -378,14 +378,14 @@ Details about the hierarchy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field detail can be only one of the following:&quot;tableDetail&quot;: {object (TableDetail)},&quot;partitionDetail&quot;: {object (PartitionDetail)}// End of list of possible types for union field detail.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;tableDetail&quot;: {object (TableDetail)},&quot;partitionDetail&quot;: {object (PartitionDetail)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `detail` . Details about the hierarchy can be one of table/partition. `detail` can be only one of the following:
+Details about the hierarchy can be one of table/partition. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `tableDetail`
 
@@ -398,6 +398,8 @@ Optional. Table details related to hierarchy.
 ` object ( PartitionDetail  ` )
 
 Optional. Partition details related to hierarchy.
+
+End of mutually exclusive fields.
 
 ### TableDetail
 

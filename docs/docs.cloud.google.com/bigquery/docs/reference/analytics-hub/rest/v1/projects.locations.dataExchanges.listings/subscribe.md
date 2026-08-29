@@ -88,14 +88,14 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field destination can be only one of the following:&quot;destinationDataset&quot;: {object (DestinationDataset)},&quot;destinationPubsubSubscription&quot;: {object (DestinationPubSubSubscription)}// End of list of possible types for union field destination.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;destinationDataset&quot;: {object (DestinationDataset)},&quot;destinationPubsubSubscription&quot;: {object (DestinationPubSubSubscription)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 Fields
 
-Union field `destination` . Resulting destination of the listing that you subscribed to. `destination` can be only one of the following:
+Resulting destination of the listing that you subscribed to. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `destinationDataset`
 
@@ -108,6 +108,8 @@ Input only. BigQuery destination dataset to create for the subscriber.
 ` object ( DestinationPubSubSubscription  ` )
 
 Input only. Destination Pub/Sub subscription to create for the subscriber.
+
+End of mutually exclusive fields.
 
 ### Response body
 
@@ -342,7 +344,7 @@ Configuration for a push delivery endpoint.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;pushEndpoint&quot;: string,&quot;attributes&quot;: {string: string,...},// Union field authentication_method can be only one of the following:&quot;oidcToken&quot;: {object (OidcToken)}// End of list of possible types for union field authentication_method.// Union field wrapper can be only one of the following:&quot;pubsubWrapper&quot;: {object (PubsubWrapper)},&quot;noWrapper&quot;: {object (NoWrapper)}// End of list of possible types for union field wrapper.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;pushEndpoint&quot;: string,&quot;attributes&quot;: {string: string,...},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;oidcToken&quot;: {object (OidcToken)}// End of mutually exclusive fields.// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;pubsubWrapper&quot;: {object (PubsubWrapper)},&quot;noWrapper&quot;: {object (NoWrapper)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -374,7 +376,7 @@ For example: `attributes { "x-goog-version": "v1" }`
 
 An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
-Union field `authentication_method` . An authentication method used by push endpoints to verify the source of push requests. This can be used with push endpoints that are private by default to allow requests only from the Pub/Sub system, for example. This field is optional and should be set only by users interested in authenticated push. `authentication_method` can be only one of the following:
+An authentication method used by push endpoints to verify the source of push requests. This can be used with push endpoints that are private by default to allow requests only from the Pub/Sub system, for example. This field is optional and should be set only by users interested in authenticated push. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `oidcToken`
 
@@ -382,7 +384,9 @@ Union field `authentication_method` . An authentication method used by push endp
 
 Optional. If specified, Pub/Sub will generate and attach an OIDC JWT token as an `Authorization` header in the HTTP request for every pushed message.
 
-Union field `wrapper` . The format of the delivered message to the push endpoint is defined by the chosen wrapper. When unset, `PubsubWrapper` is used. `wrapper` can be only one of the following:
+End of mutually exclusive fields.
+
+The format of the delivered message to the push endpoint is defined by the chosen wrapper. When unset, `PubsubWrapper` is used. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `pubsubWrapper`
 
@@ -395,6 +399,8 @@ Optional. When set, the payload to the push endpoint is in the form of the JSON 
 ` object ( NoWrapper  ` )
 
 Optional. When set, the payload to the push endpoint is not wrapped.
+
+End of mutually exclusive fields.
 
 ## OidcToken
 
@@ -549,7 +555,7 @@ Configuration for a Cloud Storage subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;bucket&quot;: string,&quot;filenamePrefix&quot;: string,&quot;filenameSuffix&quot;: string,&quot;filenameDatetimeFormat&quot;: string,&quot;maxDuration&quot;: string,&quot;maxBytes&quot;: string,&quot;maxMessages&quot;: string,&quot;serviceAccountEmail&quot;: string,// Union field output_format can be only one of the following:&quot;textConfig&quot;: {object (TextConfig)},&quot;avroConfig&quot;: {object (AvroConfig)}// End of list of possible types for union field output_format.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;bucket&quot;: string,&quot;filenamePrefix&quot;: string,&quot;filenameSuffix&quot;: string,&quot;filenameDatetimeFormat&quot;: string,&quot;maxDuration&quot;: string,&quot;maxBytes&quot;: string,&quot;maxMessages&quot;: string,&quot;serviceAccountEmail&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;textConfig&quot;: {object (TextConfig)},&quot;avroConfig&quot;: {object (AvroConfig)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -608,7 +614,7 @@ Optional. The maximum number of messages that can be written to a Cloud Storage 
 
 Optional. The service account to use to write to Cloud Storage. The subscription creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
 
-Union field `output_format` . Defaults to text format. `output_format` can be only one of the following:
+Defaults to text format. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `textConfig`
 
@@ -621,6 +627,8 @@ Optional. If set, message data will be written to Cloud Storage in text format.
 ` object ( AvroConfig  ` )
 
 Optional. If set, message data will be written to Cloud Storage in Avro format.
+
+End of mutually exclusive fields.
 
 ## TextConfig
 
@@ -861,7 +869,7 @@ All supported message transforms types.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;enabled&quot;: boolean,&quot;disabled&quot;: boolean,// Union field transform can be only one of the following:&quot;javascriptUdf&quot;: {object (JavaScriptUDF)},&quot;aiInference&quot;: {object (AIInference)},&quot;compression&quot;: {object (Compression)}// End of list of possible types for union field transform.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;enabled&quot;: boolean,&quot;disabled&quot;: boolean,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;javascriptUdf&quot;: {object (JavaScriptUDF)},&quot;aiInference&quot;: {object (AIInference)},&quot;compression&quot;: {object (Compression)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -882,7 +890,7 @@ Optional. This field is deprecated, use the `disabled` field to disable transfor
 
 Optional. If true, the transform is disabled and will not be applied to messages. Defaults to `false` .
 
-Union field `transform` . The type of transform to apply to messages. `transform` can be only one of the following:
+The type of transform to apply to messages. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `javascriptUdf`
 
@@ -901,6 +909,8 @@ Optional. AI Inference. Specifies the Vertex AI endpoint that inference requests
 ` object ( Compression  ` )
 
 Optional. Compression/Decompression.
+
+End of mutually exclusive fields.
 
 ## JavaScriptUDF
 
@@ -982,7 +992,7 @@ Configuration for making inference requests against Vertex AI models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;endpoint&quot;: string,&quot;serviceAccountEmail&quot;: string,// Union field inference_mode can be only one of the following:&quot;unstructuredInference&quot;: {object (UnstructuredInference)}// End of list of possible types for union field inference_mode.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;endpoint&quot;: string,&quot;serviceAccountEmail&quot;: string,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;unstructuredInference&quot;: {object (UnstructuredInference)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1001,13 +1011,15 @@ Required. An endpoint to a Vertex AI model of the form `projects/{project}/locat
 
 Optional. The service account to use to make prediction requests against endpoints. The resource creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/%7B$universe.dns_names.final_documentation_domain%7D/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
 
-Union field `inference_mode` . The format of inference requests made to the endpoint. `inference_mode` can be only one of the following:
+The format of inference requests made to the endpoint. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `unstructuredInference`
 
 ` object ( UnstructuredInference  ` )
 
 Optional. Requests and responses can be any arbitrary JSON object.
+
+End of mutually exclusive fields.
 
 ## UnstructuredInference
 

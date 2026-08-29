@@ -25,7 +25,7 @@ Represents a data transfer configuration. A transfer configuration contains all 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;dataSourceId&quot;: string,&quot;params&quot;: {object},&quot;schedule&quot;: string,&quot;scheduleOptions&quot;: {object (ScheduleOptions)},&quot;scheduleOptionsV2&quot;: {object (ScheduleOptionsV2)},&quot;dataRefreshWindowDays&quot;: integer,&quot;disabled&quot;: boolean,&quot;updateTime&quot;: string,&quot;nextRunTime&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;datasetRegion&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;encryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;error&quot;: {object (Status)},&quot;managedTableType&quot;: enum (ManagedTableType),&quot;metadataDestination&quot;: {object (MetadataDestination)},// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.&quot;ownerInfo&quot;: {object (UserInfo)}}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;dataSourceId&quot;: string,&quot;params&quot;: {object},&quot;schedule&quot;: string,&quot;scheduleOptions&quot;: {object (ScheduleOptions)},&quot;scheduleOptionsV2&quot;: {object (ScheduleOptionsV2)},&quot;dataRefreshWindowDays&quot;: integer,&quot;disabled&quot;: boolean,&quot;updateTime&quot;: string,&quot;nextRunTime&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;datasetRegion&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;encryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;error&quot;: {object (Status)},&quot;managedTableType&quot;: enum (ManagedTableType),&quot;metadataDestination&quot;: {object (MetadataDestination)},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;destinationDatasetId&quot;: string// End of mutually exclusive fields.&quot;ownerInfo&quot;: {object (UserInfo)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -156,13 +156,15 @@ The classification of the destination table.
 
 The metadata destination of the transfer config.
 
-Union field `destination` . The destination of the transfer config. `destination` can be only one of the following:
+The destination of the transfer config. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 
 `destinationDatasetId`
 
 `string`
 
 The BigQuery target dataset id.
+
+End of mutually exclusive fields.
 
 `ownerInfo`
 
