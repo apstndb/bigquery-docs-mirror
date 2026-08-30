@@ -46,7 +46,7 @@ https://docs.cloud.google.com/bigquery/docs/audit-logging	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/auditing-policy-tags	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/authentication	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed	2026-08-27T03:57:26Z
-https://docs.cloud.google.com/bigquery/docs/authentication/getting-started	2026-08-27T04:01:50Z
+https://docs.cloud.google.com/bigquery/docs/authentication/getting-started	2026-08-29T04:29:23Z
 https://docs.cloud.google.com/bigquery/docs/authorized-datasets	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/authorized-routines	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/authorized-views	2026-08-27T03:57:35Z
@@ -55,8 +55,8 @@ https://docs.cloud.google.com/bigquery/docs/automatic-discovery	2026-08-27T03:57
 https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment	2026-08-27T03:57:35Z
-https://docs.cloud.google.com/bigquery/docs/batch-loading-data	2026-08-27T03:57:35Z
-https://docs.cloud.google.com/bigquery/docs/batch-sql-translator	2026-08-13T20:10:14Z
+https://docs.cloud.google.com/bigquery/docs/batch-loading-data	2026-08-29T04:28:55Z
+https://docs.cloud.google.com/bigquery/docs/batch-sql-translator	2026-08-29T04:28:55Z
 https://docs.cloud.google.com/bigquery/docs/best-practices-costs	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/best-practices-for-multi-tenant-workloads-on-bigquery	2026-08-27T03:57:35Z
 https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute	2026-08-27T03:57:35Z
@@ -177,7 +177,7 @@ https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart	2026-08-27T04:
 https://docs.cloud.google.com/bigquery/docs/dataframes-sessions-io	2026-08-27T04:08:27Z
 https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations	2026-08-27T04:08:27Z
 https://docs.cloud.google.com/bigquery/docs/dataset-access-control	2026-08-27T04:08:27Z
-https://docs.cloud.google.com/bigquery/docs/datasets	2026-08-27T04:28:25Z
+https://docs.cloud.google.com/bigquery/docs/datasets	2026-08-29T04:39:59Z
 https://docs.cloud.google.com/bigquery/docs/datasets-intro	2026-08-27T04:28:25Z
 https://docs.cloud.google.com/bigquery/docs/default-configuration	2026-08-27T04:28:25Z
 https://docs.cloud.google.com/bigquery/docs/default-connections	2026-08-27T04:28:25Z
@@ -221,7 +221,7 @@ https://docs.cloud.google.com/bigquery/docs/export-to-alloydb	2026-08-27T04:28:2
 https://docs.cloud.google.com/bigquery/docs/export-to-bigtable	2026-08-27T04:28:25Z
 https://docs.cloud.google.com/bigquery/docs/export-to-pubsub	2026-08-27T04:28:25Z
 https://docs.cloud.google.com/bigquery/docs/export-to-spanner	2026-08-27T04:28:25Z
-https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-08-27T04:28:25Z
+https://docs.cloud.google.com/bigquery/docs/exporting-data	2026-08-29T04:39:59Z
 https://docs.cloud.google.com/bigquery/docs/exporting-models	2026-08-27T04:28:25Z
 https://docs.cloud.google.com/bigquery/docs/extend-differential-privacy	2026-08-27T04:28:25Z
 https://docs.cloud.google.com/bigquery/docs/external-data-bigtable	2026-08-27T04:28:25Z
@@ -397,7 +397,7 @@ https://docs.cloud.google.com/bigquery/docs/lakehouse-in-bigquery	2026-08-27T03:
 https://docs.cloud.google.com/bigquery/docs/legacy-nested-repeated	2026-08-27T03:57:26Z
 https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/linear-regression-tutorial	2026-08-27T03:58:04Z
-https://docs.cloud.google.com/bigquery/docs/listing-datasets	2026-08-27T03:58:04Z
+https://docs.cloud.google.com/bigquery/docs/listing-datasets	2026-08-29T04:28:46Z
 https://docs.cloud.google.com/bigquery/docs/listing-models	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/load-data-google-services	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables	2026-08-27T03:58:04Z
@@ -408,9 +408,9 @@ https://docs.cloud.google.com/bigquery/docs/loading-data	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro	2026-08-27T03:58:04Z
-https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv	2026-08-27T03:58:04Z
+https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv	2026-08-29T04:28:46Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json	2026-08-29T04:28:46Z
-https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc	2026-08-27T03:58:04Z
+https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc	2026-08-29T04:28:46Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/locations	2026-08-27T03:58:04Z
 https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview	2026-08-27T03:58:04Z
@@ -522,7 +522,7 @@ https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations	2026-0
 https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks	2026-08-27T04:01:38Z
 https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads	2026-08-27T04:01:38Z
 https://docs.cloud.google.com/bigquery/docs/output-name-mapping	2026-08-27T04:01:38Z
-https://docs.cloud.google.com/bigquery/docs/paging-results	2026-08-27T04:01:38Z
+https://docs.cloud.google.com/bigquery/docs/paging-results	2026-08-29T04:37:18Z
 https://docs.cloud.google.com/bigquery/docs/parameterized-queries	2026-08-27T04:01:38Z
 https://docs.cloud.google.com/bigquery/docs/partitioned-tables	2026-08-27T04:01:38Z
 https://docs.cloud.google.com/bigquery/docs/paypal-transfer	2026-08-27T04:01:38Z
@@ -560,7 +560,7 @@ https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables	2026-08-27T
 https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq	2026-08-27T03:58:11Z
 https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-console	2026-08-27T03:58:11Z
 https://docs.cloud.google.com/bigquery/docs/quickstarts/notebook-gallery-quickstart	2026-08-27T03:58:11Z
-https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries	2026-08-27T03:58:11Z
+https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries	2026-08-29T04:33:47Z
 https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf	2026-08-27T03:57:58Z
 https://docs.cloud.google.com/bigquery/docs/raster-data	2026-08-27T03:57:58Z
 https://docs.cloud.google.com/bigquery/docs/raster-tutorial-weather	2026-08-27T03:57:58Z
@@ -1178,7 +1178,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights	2026-08-27T03:57:51Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bit_functions	2026-08-27T03:57:51Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bit_functions	2026-08-29T04:33:05Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions	2026-08-27T03:57:51Z
