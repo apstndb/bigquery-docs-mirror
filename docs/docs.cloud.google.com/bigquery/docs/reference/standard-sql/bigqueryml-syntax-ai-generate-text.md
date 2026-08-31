@@ -10,6 +10,9 @@ data_source: docs.cloud.google.com
 
 This document describes the `AI.GENERATE_TEXT` function, a table-valued function that lets you perform generative natural language tasks by using any combination of text and unstructured data from BigQuery [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) , or unstructured data from BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
+    SELECT *
+    FROM AI.GENERATE_TEXT(MODEL `mydataset.gemini_model`, TABLE mydataset.table_of_prompts);
+
 The function works by sending requests to a BigQuery ML remote model that represents a Gemini Enterprise Agent Platform model, and then returning that model's response. The following types of remote models are supported:
 
   - [Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.

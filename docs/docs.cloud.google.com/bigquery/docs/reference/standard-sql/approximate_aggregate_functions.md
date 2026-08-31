@@ -10,10 +10,12 @@ GoogleSQL for BigQuery supports approximate aggregate functions. To learn about 
 
 Approximate aggregate functions are scalable in terms of memory usage and time, but produce approximate results instead of exact results. These functions typically require less memory than [exact aggregation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) like `COUNT(DISTINCT ...)` , but also introduce statistical uncertainty. This makes approximate aggregation appropriate for large data streams for which linear memory usage is impractical, as well as for data that is already approximate.
 
-The approximate aggregate functions in this section work directly on the input data, rather than an intermediate estimation of the data. These functions *don't allow* users to specify the precision for the estimation with sketches. If you would like to specify precision with sketches, see:
+The approximate aggregate functions in this section work directly on the input data, rather than an intermediate estimation of the data. These functions *don't allow* users to specify the precision for the estimation with sketches.
 
-  - [HyperLogLog++ functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions) to estimate cardinality.
-  - [KLL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions) to estimate quantile values.
+To specify precision with sketches, use the following functions:
+
+  - [HyperLogLog++ functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions) to estimate cardinality
+  - [KLL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions) to estimate quantile values
 
 ## Function list
 
@@ -34,7 +36,7 @@ The approximate aggregate functions in this section work directly on the input d
 
 Returns the approximate result for `COUNT(DISTINCT expression)` . The value returned is a statistical estimate, not necessarily the actual value.
 
-This function is less accurate than `COUNT(DISTINCT expression)` , but performs better on huge input.
+This function is less accurate than `COUNT(DISTINCT expression)` , but performs better on very large input.
 
 **Supported Argument Types**
 

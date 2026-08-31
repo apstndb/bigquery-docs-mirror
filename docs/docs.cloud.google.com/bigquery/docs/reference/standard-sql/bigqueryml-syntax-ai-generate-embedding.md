@@ -10,6 +10,9 @@ data_source: docs.cloud.google.com
 
 This document describes the `AI.GENERATE_EMBEDDING` function, a table-valued function that lets you create embeddings that describe an entity—for example, a piece of text or an image.
 
+    SELECT *
+    FROM AI.GENERATE_EMBEDDING(MODEL mydataset.embedding_model, (SELECT 'Text to embed' AS content));
+
 Embeddings are high-dimensional numerical vectors that represent a given entity. Machine learning models use embeddings to encode semantics about entities to make it easier to reason about and compare them. If two entities are semantically similar, then their respective embeddings are located near each other in the embedding vector space. For more information, see the [Introduction to embeddings](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
 
 You can create embeddings for the following types of data:

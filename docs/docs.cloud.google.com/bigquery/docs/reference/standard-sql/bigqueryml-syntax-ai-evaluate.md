@@ -10,6 +10,16 @@ data_source: docs.cloud.google.com
 
 This document describes the `AI.EVALUATE` function, which lets you evaluate [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) forecasted data against a reference time series based on historical data.
 
+For example, suppose you have tables that contain data about car rentals each day. The following query returns statistics about how well the model predicts car rentals in the current year based on the previous year:
+
+    SELECT *
+    FROM
+      AI.EVALUATE(
+        TABLE rentals.last_year,
+        TABLE rentals.this_year,
+        data_col => 'num_rentals',
+        timestamp_col => 'date');
+
 ## Syntax
 
 ```sql

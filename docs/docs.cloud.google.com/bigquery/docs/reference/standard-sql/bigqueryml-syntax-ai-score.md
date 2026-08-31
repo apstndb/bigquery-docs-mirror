@@ -16,6 +16,14 @@ The `AI.SCORE` function is commonly used with the `ORDER BY` clause and works we
   - **Hiring** : Find the top 10 resumes that appear most qualified for a job post.
   - **Customer success** : Find the top 20 best customer support interactions.
 
+For example, you can use the `AI.SCORE` function to triage customer feedback:
+
+    SELECT
+      feedback,
+      AI.SCORE(('On a scale from 1 to 10, rate how urgent this feedback is: ', feedback)) AS score
+    FROM mydataset.customer_feedback
+    ORDER BY score DESC LIMIT 5;
+
 ## Input
 
 `AI.SCORE` accepts the following types of input:
@@ -236,7 +244,7 @@ If the query exceeds the 0.05 error ratio, it fails and returns an error message
 The `AI.SCORE` and [`AI.GENERATE_DOUBLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double) functions both use models to generate a number in response to a prompt. The following differences can help you choose which function to use:
 
   - **Prompt optimization** : `AI.SCORE` automatically rewrites your prompt to generate a scoring rubric, which is especially helpful if you don't provide clear instructions for how to score input in your prompt.
-  - **Input** : `AI.GENERATE_DOUBLE` lets you specify a specific model parameters to use.
+  - **Input** : `AI.GENERATE_DOUBLE` lets you specify specific model parameters to use.
   - **Output** : `AI.SCORE` returns a `FLOAT64` value, which makes it easier to work with in queries. `AI.GENERATE_DOUBLE` returns a `STRUCT` that contains a `FLOAT64` , as well as additional information about the model call, which is useful if you need to view details such as the [safety rating](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters) or API response status.
   - **Error handling** : If `AI.SCORE` produces an error for any input, then the function returns `NULL` . `AI.GENERATE_DOUBLE` records details about the errors in its output.
 

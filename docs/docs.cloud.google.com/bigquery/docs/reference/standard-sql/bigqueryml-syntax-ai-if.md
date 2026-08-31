@@ -19,6 +19,12 @@ You can use the `AI.IF` function to filter and join data based on conditions des
   - **Image analysis** : Select images that contain a specific item.
   - **Security** : Identify suspicious emails.
 
+For example, you can use the `AI.IF` function to identify extremely negative product reviews:
+
+    SELECT *
+    FROM mydataset.product_reviews
+    WHERE AI.IF(('This review is extremely negative', review));
+
 ## Input
 
 `AI.IF` accepts the following types of input:

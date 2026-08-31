@@ -87,7 +87,7 @@ For more information, see [HyperLogLog in Practice: Algorithmic Engineering of a
 
 **Definitions**
 
-  - `precision` : Defines the accuracy of the estimate at the cost of additional memory required to process the sketches or store them on disk. The range for this value is `10` to `24` . The default value is `15` . For more information about precision, see [Precision for sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_hll) .
+  - `precision` : Defines the accuracy of the estimate at the cost of additional memory required to process the sketches or store them on disk. The range for this value is `10` to `24` , where larger values indicate higher accuracy, with `24` being the most accurate. The default value is `15` . For more information about precision, see [Precision for sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_hll) .
 
 **Supported input types**
 
@@ -151,7 +151,7 @@ This function ignores `NULL` values when merging sketches. If the merge happens 
 
 **Example**
 
-The following query counts the number of distinct users across all countries who have at least one invoice.
+The following query counts the number of distinct users across all countries who have at least one invoice. The inner query produces one sketch per country by grouping on `country` , and the outer query merges those sketches into a single distinct count.
 
     SELECT HLL_COUNT.MERGE(hll_sketch) AS distinct_customers_with_open_invoice
     FROM
@@ -201,7 +201,7 @@ This function returns `NULL` if there is no input or all inputs are `NULL` .
 
 **Example**
 
-The following query returns an HLL++ sketch that counts the number of distinct users who have at least one invoice across all countries.
+The following query returns an HLL++ sketch that counts the number of distinct users who have at least one invoice across all countries. The inner query produces one sketch per country by grouping on `country` , and the outer query merges those sketches into a new sketch.
 
     SELECT HLL_COUNT.MERGE_PARTIAL(HLL_sketch) AS distinct_customers_with_open_invoice
     FROM

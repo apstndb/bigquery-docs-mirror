@@ -16,6 +16,12 @@ The following are common use cases:
   - **Text analysis** : Classify support tickets or emails by topic.
   - **Image analysis** : Classify an image by its style or contents.
 
+For example, you can use the `AI.CLASSIFY` function to classify product reviews into categories:
+
+    SELECT
+      AI.CLASSIFY(review, ['Billing', 'Shipping', 'Product Quality', 'Customer Service']) AS category,
+    FROM  mydataset.product_reviews;
+
 ## Input
 
 `AI.CLASSIFY` accepts the following types of input:
