@@ -104,7 +104,7 @@ BigQuery Change Data Capture (CDC)
 
 Not supported
 
-Supported (Private Preview)
+Supported
 
 BigQuery multi-statement transactions
 

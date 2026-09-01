@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # The AI.EVALUATE function
 
-This document describes the `AI.EVALUATE` function, which lets you evaluate [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) forecasted data against a reference time series based on historical data.
+This document describes the `AI.EVALUATE` function, which lets you evaluate [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) forecasted data against a reference time series based on historical data, or TabFM predicted data against ground truth data.
 
 For example, suppose you have tables that contain data about car rentals each day. The following query returns statistics about how well the model predicts car rentals in the current year based on the previous year:
 
@@ -22,7 +22,11 @@ For example, suppose you have tables that contain data about car rentals each da
 
 ## Syntax
 
-```sql
+Choose one of the following syntaxes based on whether you're evaluating TimesFM or TabFM predictions:
+
+### TimesFM
+
+```googlesql
 SELECT
   *
 FROM
@@ -42,7 +46,7 @@ FROM
 
 `AI.EVALUATE` takes the following arguments:
 
-  - `  HISTORY_TIME_SERIES_TABLE  ` : the name of the table that contains historical time series data which is used to generate a forecast. For example, `` `mydataset.mytable` `` . The forecasted values are then evaluated against the data in the `ACTUAL_TIME_SERIES_TABLE` or `ACTUAL_TIME_SERIES_QUERY_STATEMENT` argument.
+  - `  HISTORY_TIME_SERIES_TABLE  ` : the name of the table that contains historical time series data, which is used to generate a forecast. For example, `` `mydataset.mytable` `` . The forecasted values are then evaluated against the data in the `ACTUAL_TIME_SERIES_TABLE` or `ACTUAL_TIME_SERIES_QUERY_STATEMENT` argument.
     
     If the table is in a different project, then you must prepend the project ID to the table name in the following format, including backticks:
     
@@ -75,9 +79,7 @@ FROM
       - `DATE`
       - `DATETIME`
 
-  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.5` .
-    
-    > **Note:** We recommend using `TimesFM 2.5` for all new evaluation tasks.
+  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.5` , which we recommend for all new evaluation tasks.
 
   - `  ID_COLS  ` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to evaluate. Specify one or more values for this argument in order to evaluate multiple time series using a single query. The columns that you specify must use one of the following data types:
     
@@ -112,9 +114,36 @@ FROM
 
     For the `TimesFM 2.0` model, 2,048 is the maximum number of time series data points that are passed to the model. For the `TimesFM 2.5` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
 
+### TabFM
+
+```googlesql
+SELECT
+  *
+FROM
+  AI.EVALUATE(
+  { TABLE TRAINING_TABLE | (TRAINING_QUERY)  },
+  { TABLE PREDICTION_TABLE | (PREDICTION_QUERY)  },
+  label_col => 'LABEL_COL'
+  )
+```
+
+### Arguments
+
+`AI.EVALUATE` takes the following arguments:
+
+  - `  TRAINING_TABLE | TRAINING_QUERY  ` : the table or query that contains the training data. The table or query result must contain a column named `label` or the column that you specify in the `LABEL_COL` argument. Every other column is considered a feature column. The feature and label columns must be one of the following types: `STRING` , `BOOL` , `INT64` , `FLOAT64` , `NUMERIC` or `BIGNUMERIC` .
+
+  - `  PREDICTION_TABLE | PREDICTION_QUERY  ` : the table or query that contains the data to evaluate. The table or query result must contain all of the feature columns in the training data and can optionally contain additional columns.
+
+  - `  LABEL_COL  ` : a `STRING` value that specifies the name of the label column in the training data. You must provide this argument for TabFM evaluation. If the column is of type `STRING` or `BOOL` , then classification is evaluated. If the column is of type `INT64` , `FLOAT64` , `NUMERIC` or `BIGNUMERIC` , then regression is evaluated.
+
 ## Output
 
-`AI.EVALUATE` returns the following columns:
+`AI.EVALUATE` returns the following columns based on whether you're evaluating TimesFM or TabFM predictions:
+
+### TimesFM
+
+The following columns are returned for TimesFM forecasted data:
 
   - `id_cols` : one or more values that contain the identifiers of a time series. `id_cols` can be an `INT64` , `STRING` , `ARRAY<INT64>` or `ARRAY<STRING>` value. The column names and types are inherited from the `ID_COLS` argument value specified in the function input.
   - `mean_absolute_error` : a `FLOAT64` value that contains the [mean absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error) for the time series.
@@ -124,6 +153,24 @@ FROM
   - `symmetric_mean_absolute_percentage_error` : a `FLOAT64` value that contains the [symmetric mean absolute percentage error](https://en.wikipedia.org/wiki/Symmetric_mean_absolute_percentage_error) for the time series.
   - `mean_absolute_scaled_error` : a `FLOAT64` value that contains the [mean absolute scaled error](https://en.wikipedia.org/wiki/Mean_absolute_scaled_error) for the time series.
   - `ai_evaluate_status` : a `STRING` value that contains the evaluation status. The value is empty if the operation was successful. If the operation wasn't successful, the value is the error string. A common error is `The time series data is too short.` This error indicates that there wasn't enough historical data in the time series to generate forecasted data to evaluate. A minimum of 3 data points is required.
+
+### TabFM
+
+The following columns are returned for TabFM regression predictions:
+
+  - `mean_absolute_error` : a `FLOAT64` value that contains the [mean absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error) for the data.
+  - `mean_squared_error` : a `FLOAT64` value that contains the [mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error) for the data.
+  - `mean_squared_log_error` : a `FLOAT64` value that contains the mean squared logarithmic error for the data.
+  - `median_absolute_error` : a `FLOAT64` value that contains the median absolute error for the data.
+  - `r2_score` : a `FLOAT64` value that contains the [coefficient of determination](https://en.wikipedia.org/wiki/Coefficient_of_determination) for the data.
+  - `explained_variance` : a `FLOAT64` value that contains the [explained variance](https://en.wikipedia.org/wiki/Explained_variation) for the data.
+
+The following columns are returned for TabFM classification predictions:
+
+  - `precision` : a `FLOAT64` value that contains the [macro-average precision](https://www.evidentlyai.com/classification-metrics/multi-class-metrics#macro-averaging) across all classes.
+  - `recall` : a `FLOAT64` value that contains the [macro-average recall](https://www.evidentlyai.com/classification-metrics/multi-class-metrics#macro-averaging) across all classes.
+  - `accuracy` : a `FLOAT64` value that contains the accuracy of the prediction.
+  - `f1_score` : a `FLOAT64` value that contains the macro-average [` F 1  ` score](https://en.wikipedia.org/wiki/F-score) across all classes.
 
 ## Examples
 
@@ -176,9 +223,64 @@ FROM
     id_cols => ['usertype']);
 ```
 
+### Evaluate regression prediction
+
+The following query evaluates the performance of TabFM regression to predict a penguin's mass:
+
+    WITH prepared_data AS (
+      SELECT *, RAND() <= 0.8 AS training
+      FROM `bigquery-public-data.ml_datasets.penguins`
+      WHERE body_mass_g > 0
+    )
+    SELECT
+     *
+    FROM
+     AI.EVALUATE(
+      # Training data
+      (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
+      # Prediction data
+      (SELECT * EXCEPT(training) FROM prepared_data WHERE NOT training),
+      label_col => 'body_mass_g');
+
+The result is similar to the following:
+
+    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+    | mean_absolute_error | mean_squared_error | mean_squared_log_error | median_absolute_error | r2_score            | explained_variance  |
+    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+    | 187.47826086956516  | 57233.014492753638 | 0.0036635839277726163  | 160.0                 | 0.91107011835200613 | 0.91265547176600315 |
+    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+
+### Evaluate classification prediction
+
+The following query evaluates the performance of TabFM classification to predict a penguin's sex:
+
+    WITH prepared_data AS (
+      SELECT *, RAND() <= 0.8 AS training
+      FROM `bigquery-public-data.ml_datasets.penguins`
+      WHERE sex IS NOT NULL and sex != "."
+    
+    )
+    SELECT
+     *
+    FROM
+     AI.EVALUATE(
+      # Training data
+      (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
+      # Prediction data
+      (SELECT * EXCEPT(training) FROM prepared_data WHERE NOT training),
+      label_col => 'sex');
+
+The result is similar to the following:
+
+    +---------------------+---------------------+----------+-------------------+
+    | precision           | recall              | accuracy | f1_score          |
+    +---------------------+---------------------+----------+-------------------+
+    | 0.96511627906976738 | 0.95714285714285707 | 0.96     | 0.959539651141881 |
+    +---------------------+---------------------+----------+-------------------+
+
 ## Locations
 
-`AI.EVALUATE` and the TimesFM model are available in all [supported BigQuery ML locations](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
+`AI.EVALUATE` and the TimesFM and TabFM models are available in all [supported BigQuery ML locations](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Pricing
 
@@ -187,5 +289,6 @@ FROM
 ## What's next
 
   - Try [using a TimesFM model with the `AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tutorial) .
+  - Try performing regression or classification with the [`AI.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict) .
   - For information about forecasting in BigQuery ML, see [Forecasting overview](https://docs.cloud.google.com/bigquery/docs/forecasting-overview) .
   - For more information about supported SQL statements and functions for time series forecasting models, see [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast) .

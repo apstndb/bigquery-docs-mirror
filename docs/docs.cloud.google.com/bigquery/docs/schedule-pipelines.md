@@ -79,6 +79,13 @@ To get the permissions that you need to manage pipelines, ask your administrator
       - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
   - Run a pipeline schedule with user credentials for a Google Account: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
   - Run a pipeline schedule with a custom service account: [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
+  - Manage pipeline schedules in user folders:
+      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
+      - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
+  - Manage pipeline schedules in team folders:
+      - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
+      - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
+  - Manage pipelines in Git repositories: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
   - Enable metadata enrichment: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -89,13 +96,73 @@ To enhance security for scheduling, see [Implement enhanced scheduling permissio
 
 For more information about Dataform IAM, see [Control access with IAM](https://docs.cloud.google.com/dataform/docs/access-control) .
 
+For more information about roles for folders, see [Create and manage folders](https://docs.cloud.google.com/bigquery/docs/create-manage-folders#required_roles) .
+
+For more information about roles for Git repositories, see [Manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories#required_roles) .
+
 To use Colab notebook runtime templates when scheduling pipelines, you need the [Notebook Runtime User role](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` ).
 
 ## Create a pipeline schedule
 
-> **Tip:** You can also use the **Pipelines & Connections** page to schedule a Dataform pipeline using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can also use the **Pipelines & Connections** page to schedule a Dataform pipeline using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** For pipelines stored in BigQuery Studio Git folders, scheduling is managed through [Dataform eployments](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy-git-pipelines) .
 
 To create a pipeline schedule, follow these steps:
+
+### **Files** pane
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** to open the file browser.
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
+
+4.  In the **Pipeline Viewer** toolbar, click **Schedule** or **Trigger** .
+
+5.  In the **Schedule pipeline** pane, in the **Schedule name** field, enter a name for the schedule.
+
+6.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
+    
+      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+        
+        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+        
+          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+          - **Google Drive** : Allows read-only access to Google Drive files.
+          - **Bigtable** : Allows read-only access to Google Bigtable data.
+    
+      - To use a service account, select **Execute with selected service account** , and then select a service account.
+
+7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
+    
+    > **Note:** A notebook runtime template must be in the same region as the pipeline.
+    
+    > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
+
+8.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
+    
+    Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
+
+9.  Under **Configuration Type** , select **Schedule (time-based recurrence)** .
+
+10. Under **Schedule frequency** , do the following:
+    
+    1.  In the **Repeats** menu, select the frequency of scheduled pipeline runs.
+    2.  In the **At time** field, enter the time for scheduled pipeline runs.
+    3.  In the **Timezone** menu, select the timezone for the schedule.
+
+11. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
+
+12. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+
+When you create the schedule, the current version of the pipeline is automatically deployed. To update the schedule with a new version of the pipeline, [deploy the pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy) .
+
+The latest deployed version of the pipeline runs at the selected time and frequency.
+
+> **Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
 ### **Explorer** pane
 
@@ -252,47 +319,44 @@ To create a trigger, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  Open your pipeline in the Pipeline Viewer by doing one of the following:
     
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+      - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
+      - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
 
-3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
+3.  In the Pipeline Viewer toolbar, click **Trigger** .
 
-4.  Click **Trigger** .
+4.  In the **Trigger** field, enter a name for the trigger.
 
-5.  In the **Trigger** field, enter a name for the trigger.
-
-6.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
+5.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
       - To use a service account, select **Execute with selected service account** , and then select a service account.
 
-7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
+6.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
     
     > **Note:** A notebook runtime template must be in the same region as the pipeline.
     
     > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
 
-8.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
+7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
     
     Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
 
-9.  Under **Configuration Type** , select **Trigger (event-based execution)** .
+8.  Under **Configuration Type** , select **Trigger (event-based execution)** .
 
-10. In the **Search tables** field, add a table or tables to be monitored for the trigger.
+9.  In the **Search tables** field, add a table or tables to be monitored for the trigger.
 
-11. Under **Trigger Condition** , select one of the following options:
+10. Under **Trigger Condition** , select one of the following options:
     
       - **Wait for ALL tables to update** : trigger the workflow only when all listed tables have been updated since the last check.
       - **Trigger if ANY table updates** : trigger this workflow if any of the listed tables are updated since the last check.
 
-12. (Optional) For **Max Wait Duration** , enter a duration to force the activation of a trigger if no table updates are detected within this duration. Supports values between 1 second to 7 days. If not specified, then the workflow will only run if the monitored table is updated, and the minimum execution duration is satisfied.
+11. (Optional) For **Max Wait Duration** , enter a duration to force the activation of a trigger if no table updates are detected within this duration. Supports values between 1 second to 7 days. If not specified, then the workflow will only run if the monitored table is updated, and the minimum execution duration is satisfied.
 
-13. (Optional) For **Min Execution Duration** , select a duration to prevent triggers from activating more frequently than this minimum duration. Supports values between 3 minutes to 24 hours. If not specified, the default value is 3 minutes.
+12. (Optional) For **Min Execution Duration** , select a duration to prevent triggers from activating more frequently than this minimum duration. Supports values between 3 minutes to 24 hours. If not specified, the default value is 3 minutes.
 
-14. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+13. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 ### Troubleshooting trigger-based schedules
 
@@ -311,27 +375,64 @@ This section describes common issues with trigger-based schedules and how to res
 
 ## Deploy a pipeline
 
-Deploying a pipeline updates its schedule with the current version of the pipeline. Schedules run the latest deployed version of the pipeline.
+Deploying a pipeline updates its schedule or orchestration configuration with the current version of the pipeline. Scheduled runs always execute the latest deployed version of the pipeline.
 
-To deploy a pipeline, follow these steps:
+### Deploy pipelines stored in folders
+
+To deploy standalone pipelines and pipelines stored in folders, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  Open your pipeline in the **Pipeline Viewer** by doing one of the following:
     
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+      - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
+      - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
 
-3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
-
-4.  Click **Deploy** .
+3.  In the **Pipeline Viewer** toolbar, click **Deploy** .
 
 The corresponding schedule is updated with the current version of the pipeline. The latest deployed version of the pipeline runs at the scheduled time.
+
+### Deploy pipelines stored in Git repositories
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Pipelines stored in Git Folders use Dataform [deployments](https://docs.cloud.google.com/dataform/docs/deployments) for orchestration and scheduling. Deployments let you configure release configurations, workflow configurations, compilation overrides, and multi-environment orchestration.
+
+To deploy a pipeline stored in a Git repository:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** .
+
+3.  In the file tree, expand your connected Git repository folder, and select a pipeline or click the Git repository folder if it is a root-level pipeline.
+
+4.  In the **Pipeline Viewer** toolbar, click **Deploy** .
+
+5.  In the deployment dialog, configure the release configurations, workflow configurations, and execution settings.
+
+6.  Click **Deploy** .
+
+For more information about configuring deployments, release configurations, and workflow configurations, see [Dataform Deployments](https://docs.cloud.google.com/dataform/docs/deployments) .
 
 ## Disable a schedule
 
 To pause the scheduled runs of a selected pipeline without deleting the schedule, you can disable the schedule.
 
 To disable a schedule for a selected pipeline, follow these steps:
+
+### **Files** pane
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** .
+
+3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
+
+4.  In the Pipeline Viewer toolbar, click **View trigger** .
+
+5.  In the **Schedule details** table, in the **Schedule state** row, click the **Schedule is enabled** toggle.
 
 ### **Explorer** pane
 
@@ -343,7 +444,7 @@ To disable a schedule for a selected pipeline, follow these steps:
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click **View schedule** .
+4.  Click **View trigger** .
 
 5.  In the **Schedule details** table, in the **Schedule state** row, click the **Schedule is enabled** toggle.
 
@@ -359,6 +460,18 @@ To disable a schedule for a selected pipeline, follow these steps:
 
 To resume scheduled runs of a disabled pipeline schedule, follow these steps:
 
+### **Files** pane
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** .
+
+3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
+
+4.  In the **Pipeline Viewer** toolbar, click **View trigger** .
+
+5.  In the **Schedule details** table, in the **Schedule state** row, click the **Schedule is disabled** toggle.
+
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
@@ -369,7 +482,7 @@ To resume scheduled runs of a disabled pipeline schedule, follow these steps:
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click **View schedule** .
+4.  Click **View trigger** .
 
 5.  In the **Schedule details** table, in the **Schedule state** row, click the **Schedule is disabled** toggle.
 
@@ -405,6 +518,16 @@ To view all pipeline schedules in your Google Cloud project, follow these steps:
 
 To view details for a selected pipeline schedule, follow these steps:
 
+### **Files** pane
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** .
+
+3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
+
+4.  In the **Pipeline Viewer** toolbar, click **View trigger** (or **View trigger** ).
+
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
@@ -415,7 +538,7 @@ To view details for a selected pipeline schedule, follow these steps:
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click **View schedule** .
+4.  Click **View trigger** .
 
 ### **Scheduling** page
 
@@ -426,6 +549,18 @@ To view details for a selected pipeline schedule, follow these steps:
 ## View past scheduled runs
 
 To view past runs of a selected pipeline schedule, follow these steps:
+
+### **Files** pane
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** .
+
+3.  In the **Files** pane, expand your **User** folder, a **Team folder** , or a Git repository, and then select a pipeline.
+
+4.  In the **Pipeline Viewer** toolbar, click **Executions** .
+
+5.  Optional: To refresh the list of past runs, click **Refresh** .
 
 ### **Explorer** pane
 
@@ -455,6 +590,18 @@ To view past runs of a selected pipeline schedule, follow these steps:
 
 To edit a pipeline schedule, follow these steps:
 
+### **Files** pane
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** .
+
+3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
+
+4.  In the **Pipeline Viewer** toolbar, click **View trigger** , and then click **Edit** .
+
+5.  In the **Schedule pipeline** dialog, edit the schedule, and then click **Update schedule** .
+
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
@@ -465,7 +612,7 @@ To edit a pipeline schedule, follow these steps:
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click **View schedule** , and then click **Edit** .
+4.  Click **View trigger** , and then click **Edit** .
 
 5.  In the **Schedule pipeline** dialog, edit the schedule, and then click **Update schedule** .
 
@@ -477,7 +624,7 @@ To edit a pipeline schedule, follow these steps:
 
 3.  On the **Schedule details** page, click **Edit** .
 
-4.  Click **View schedule** , and then click **Edit** .
+4.  Click **View trigger** , and then click **Edit** .
 
 5.  In the **Schedule pipeline** dialog, edit the schedule, and then click **Update schedule** .
 
@@ -499,3 +646,7 @@ To permanently delete a pipeline schedule, follow these steps:
 
   - Learn more about [pipelines in BigQuery](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
   - Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
+  - Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
+  - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
+  - Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
+  - Learn more about [Dataform Deployments](https://docs.cloud.google.com/dataform/docs/deployments) .

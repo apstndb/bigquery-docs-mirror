@@ -1223,7 +1223,7 @@ Statistics for a single job execution.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;creationTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;completionRatio&quot;: number,&quot;quotaDeferments&quot;: [string],&quot;query&quot;: {object (JobStatistics2)},&quot;load&quot;: {object (JobStatistics3)},&quot;extract&quot;: {object (JobStatistics4)},&quot;copy&quot;: {object (CopyJobStatistics)},&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{&quot;name&quot;: string,&quot;slotMs&quot;: string}],&quot;reservation_id&quot;: string,&quot;numChildJobs&quot;: string,&quot;parentJobId&quot;: string,&quot;scriptStatistics&quot;: {object (ScriptStatistics)},&quot;rowLevelSecurityStatistics&quot;: {object (RowLevelSecurityStatistics)},&quot;dataMaskingStatistics&quot;: {object (DataMaskingStatistics)},&quot;transactionInfo&quot;: {object (TransactionInfo)},&quot;sessionInfo&quot;: {object (SessionInfo)},&quot;finalExecutionDurationMs&quot;: string,&quot;edition&quot;: enum (ReservationEdition)}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;creationTime&quot;: string,&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;completionRatio&quot;: number,&quot;quotaDeferments&quot;: [string],&quot;query&quot;: {object (JobStatistics2)},&quot;load&quot;: {object (JobStatistics3)},&quot;extract&quot;: {object (JobStatistics4)},&quot;copy&quot;: {object (CopyJobStatistics)},&quot;totalSlotMs&quot;: string,&quot;reservationUsage&quot;: [{&quot;name&quot;: string,&quot;slotMs&quot;: string}],&quot;reservation_id&quot;: string,&quot;numChildJobs&quot;: string,&quot;parentJobId&quot;: string,&quot;scriptStatistics&quot;: {object (ScriptStatistics)},&quot;rowLevelSecurityStatistics&quot;: {object (RowLevelSecurityStatistics)},&quot;dataMaskingStatistics&quot;: {object (DataMaskingStatistics)},&quot;transactionInfo&quot;: {object (TransactionInfo)},&quot;sessionInfo&quot;: {object (SessionInfo)},&quot;finalExecutionDurationMs&quot;: string,&quot;edition&quot;: enum (ReservationEdition),&quot;globalQueryRemoteRegions&quot;: [string],&quot;parentGlobalQueryJob&quot;: {object (JobReference)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1377,6 +1377,22 @@ Output only. The duration in milliseconds of the execution of the final attempt 
 ` enum ( ReservationEdition  ` )
 
 Output only. Name of edition corresponding to the reservation for this job at the time of this update.
+
+`globalQueryRemoteRegions[]`
+
+`string`
+
+Output only. The list of remote regions from which a global query accesses data.
+
+This field is populated only for parent global query jobs in the primary execution region. It is empty for child global query jobs and single-region queries. For more information, see [Global queries](https://cloud.google.com/bigquery/docs/global-queries) .
+
+`parentGlobalQueryJob`
+
+` object ( JobReference  ` )
+
+Output only. Reference to the parent global query job, if this is a child global query job.
+
+This field is populated only for child global query jobs (remote subqueries or cross-region table copy jobs) executed in remote regions on behalf of a global query. It contains the project ID, job ID, and location of the parent global query job. It is unset for parent global query jobs and single-region queries. For more information, see [Global queries](https://cloud.google.com/bigquery/docs/global-queries) .
 
 ## JobStatistics2
 

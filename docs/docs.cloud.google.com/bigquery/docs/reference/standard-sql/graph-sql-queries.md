@@ -6,12 +6,6 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bq-graph-preview-support@google.com> .
-
 GoogleSQL for BigQuery supports the following syntax to use graphs within SQL queries.
 
 ## Language list

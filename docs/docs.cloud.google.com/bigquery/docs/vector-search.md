@@ -164,7 +164,7 @@ To create the vector index, follow these steps:
 
 After the vector index is created and populated, use the `VECTOR_SEARCH` function to find the nearest neighbor for the embedding in the `embedding_v1` column in the `patents2` table. This query uses the vector index in the search, so `VECTOR_SEARCH` uses an [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) method to find the embedding's nearest neighbor.
 
-> **Note:** Vector indexes are more effective on large datasets. If you want to see this in action, [recreate the `vector_search.patents` table](https://docs.cloud.google.com/bigquery/docs/vector-search#create_test_tables) without the `LIMIT 1000000` clause, [recreate the vector index](https://docs.cloud.google.com/bigquery/docs/vector-search#create_a_vector_index) , and then run the following query.
+> **Note:** Vector indexes are more effective on large datasets. If you want to see this in action, [recreate the `vector_search.patents` table](https://docs.cloud.google.com/bigquery/docs/vector-search#create_test_tables_to_store_data_and_embeddings) without the `LIMIT 1000000` clause, [recreate the vector index](https://docs.cloud.google.com/bigquery/docs/vector-search#create_a_vector_index) , and then run the following query.
 
 To use the `VECTOR_SEARCH` function with an index, paste the following in the query editor, and then click play\_circle **Run** :
 

@@ -14,6 +14,38 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## August 31, 2026
+
+Feature
+
+You can now [create, store](https://docs.cloud.google.com/bigquery/docs/create-pipelines) , and [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) in Git folders. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+BigQuery now supports [TabFM](https://research.google/blog/introducing-tabfm-a-zero-shot-foundation-model-for-tabular-data/) , Google's pre-trained foundation model for tabular data. TabFM enables zero-shot regression and classification through in-context learning. It delivers high-accuracy predictions on structured data without requiring model training or hyperparameter tuning. You can use TabFM directly through the [`AI.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict) and evaluate model performance by using the [`AI.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Fixed
+
+Support for [configuring daily token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) for BigQuery generative AI functions has been restored.
+
+Feature
+
+Using [folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) to [create, store, and manage pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can now create an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) , sometimes referred to as an auto-incrementing column, on a table. You can use identity columns to create and maintain primary keys on your tables. When you insert a row into a table that has an identity column, BigQuery generates a unique integer value for that column. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+[BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+BigQuery Graph now includes support for the `CALL` [graph query statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-query-statements) , and the following path inspection [GQL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-gql-functions) :
+
+  - `IS_ACYCLIC`
+  - `IS_SIMPLE`
+  - `IS_TRAIL` .
+
 ## August 27, 2026
 
 Feature

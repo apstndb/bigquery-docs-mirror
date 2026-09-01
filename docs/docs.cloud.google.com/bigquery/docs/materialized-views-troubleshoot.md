@@ -169,7 +169,7 @@ To create a partitioned incremental materialized view, the underlying base table
 
 **Resolution:**
 
-  - If you want the materialized view to be partitioned, ensure the base table is partitioned and configure the materialized view to use the same partitioning column. For more information, see [Partition alignment](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#partition-alignment) .
+  - If you want the materialized view to be partitioned, ensure the base table is partitioned and configure the materialized view to use the same partitioning column. For more information, see [Partition alignment](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#partition_alignment) .
   - If the base table is not partitioned, create the materialized view without a `PARTITION BY` clause.
   - If you need a partitioned view over a non-partitioned table, create a [non-incremental materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) with `allow_non_incremental_definition = true` and `max_staleness` . Non-incremental materialized views don't require partition alignment with base tables.
 

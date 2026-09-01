@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/libraries
 uri: https://docs.cloud.google.com/bigquery/docs/reference/libraries
 title: BigQuery API Client Libraries
-description: Information about interacting with BigQuery API in C++, C#, Go, Java, Node.js, PHP, Python, and Ruby.
+description: Information about interacting with BigQuery API in C#, Go, Java, Node.js, PHP, Python, Ruby, Rust.
 data_source: docs.cloud.google.com
 ---
 
@@ -95,6 +95,18 @@ For more information, see [Setting Up a Python Development Environment](https://
     gem install google-cloud-bigquery
 
 For more information, see [Setting Up a Ruby Development Environment](https://docs.cloud.google.com/ruby/docs/setup) .
+
+### Rust
+
+> **Preview**
+> 
+> This library is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA libraries are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Note: To request support or provide feedback for this library, send email to <cloud-sdk-rust@google.com> .
+
+    cargo add google-cloud-bigquery
+
+For more information, see [Get started with Rust](https://docs.cloud.google.com/rust/docs/quickstart) .
 
 <span id="setting_up_authentication"></span>
 
@@ -392,6 +404,39 @@ The following example shows how to initialize a client and perform a query on a 
       end
     end
 
+### Rust
+
+> **Preview**
+> 
+> This library is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA libraries are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Note: To request support or provide feedback for this library, send email to <cloud-sdk-rust@google.com> .
+
+    use google_cloud_bigquery::client::BigQuery;
+    
+    pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+        let client = BigQuery::builder().build().await?;
+    
+        let mut rows = client
+            .query(
+                "SELECT \
+            name FROM `bigquery-public-data.usa_names.usa_1910_2013` \
+            WHERE state = 'TX' \
+            LIMIT 100",
+            )
+            .with_project_id(project_id)
+            .set_location("US")
+            .until_done()
+            .await?
+            .read();
+    
+        while let Some(row) = rows.next().await.transpose()? {
+            let name: String = row.get("name")?;
+            println!("Name: {name}");
+        }
+        Ok(())
+    }
+
 <span id="additional_resources"></span>
 
 ## Additional resources
@@ -465,6 +510,16 @@ The following list contains links to more resources related to the client librar
   - [Issue tracker](https://github.com/googleapis/google-cloud-ruby/issues)
   - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bruby%5D)
   - [Source code](https://github.com/googleapis/google-cloud-ruby)
+
+### Rust
+
+The following list contains links to more resources related to the client library for Rust:
+
+  - [API reference](https://docs.rs/google-cloud-bigquery)
+  - [Client libraries best practices](https://docs.cloud.google.com/apis/docs/client-libraries-best-practices)
+  - [Issue tracker](https://github.com/googleapis/google-cloud-rust/issues)
+  - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Brust%5D)
+  - [Source code](https://github.com/googleapis/google-cloud-rust)
 
 <span id="python-open-source-libraries"></span>
 

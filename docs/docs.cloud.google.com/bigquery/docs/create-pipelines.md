@@ -24,16 +24,28 @@ For detailed configuration steps and security considerations, see [Configure VPC
 
 ### Required roles for pipelines
 
-To get the permissions that you need to create pipelines, ask your administrator to grant you the following IAM roles on the project:
+To get the permissions that you need to create pipelines, ask your administrator to grant you the following IAM roles:
 
-  - To create pipelines: [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` )
-  - To edit and run pipelines: [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.editor) ( `roles/dataform.editor` )
+  - To create pipelines: [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` ) on the project
+  - To edit and run pipelines: [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.editor) ( `roles/dataform.editor` ) on the project
+  - To create pipelines in user folders:
+      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` ) on the project
+      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
+      - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
+  - To create pipelines in team folders:
+      - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
+      - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
+  - To connect a Git repository for Git folders: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 For more information about Dataform IAM, see [Control access with IAM](https://docs.cloud.google.com/dataform/docs/access-control) .
+
+For more information about roles for folders, see [Create and manage folders](https://docs.cloud.google.com/bigquery/docs/create-manage-folders#required_roles) .
+
+For more information about roles for Git repositories, see [Manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories#required_roles) .
 
 > **Note:** When you create a pipeline, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that pipeline. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the pipelines created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
@@ -78,19 +90,93 @@ For a list of supported regions, see [BigQuery Studio locations](https://docs.cl
 
 ## Create a pipeline
 
-You can also use the BigQuery **Pipelines & Connections** page in the Google Cloud console to create a Dataform pipeline that uses a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can create and store pipelines in the following ways:
 
-To create a pipeline, follow these steps:
+  - **In folders** : organize pipelines inside personal or team folders in the **Files** pane of BigQuery Studio.
+  - **In BigQuery Studio Git folders** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): host, version control, and manage multiple independent pipelines or root-level pipelines within a folder with a Git repository connected using Developer Connect.
+  - **From the editor tab bar** : create a pipeline from the **+** menu in the query editor.
+  - **From the Pipelines & Connections page** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): create a pipeline using a streamlined, BigQuery-specific workflow.
 
-1.  Go to the **BigQuery** page.
+### Create a pipeline in a folder
+
+You can create and organize pipelines directly inside your personal user folders or shared team folders in BigQuery Studio. For more information about folders, see [Organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
+
+To create a pipeline in a folder, follow these steps:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click folder **Files** to open the file browser.
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+3.  Do one of the following to create a pipeline:
+    
+      - Select the user folder or team folder where you want to place the pipeline, click the **+** (Create) button on the toolbar, and select **Pipeline** .
+      - In the file tree, click more\_vert **View actions** next to a folder name, select **Create** \> **Pipeline** .
+      - Open a folder to view its contents in the main panel, and click **Create Pipeline** .
+
+4.  In the creation dialog, enter a name for the pipeline.
+
+5.  Click **Create** . A new pipeline folder appears in the file tree with the **Pipeline** icon.
+
+6.  Click the pipeline folder to open the **Pipeline Viewer** , and then configure [pipeline settings](https://docs.cloud.google.com/bigquery/docs/create-pipelines#configure-pipeline-settings) .
+
+### Create a pipeline in a Git repository
+
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To provide feedback or request support for this feature, send an email to <cloud-pipelines-ui@google.com> .
+
+You can create and manage pipelines directly within Git-integrated folders in BigQuery Studio. A Git folder represents a remote GitHub or GitLab repository connected to BigQuery Studio using Developer Connect. You can host and organize multiple independent pipelines within a single Git repository. Git repository pipelines support Dataform [deployments](https://docs.cloud.google.com/dataform/docs/deployments) for scheduling, release configurations, and multi-environment orchestration.
+
+To create a pipeline in a Git folder, follow these steps:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  If you have not already connected your Git repository, [create and connect a BigQuery Studio Git repository](https://docs.cloud.google.com/bigquery/docs/git-repositories#create-git-repository) .
+
+3.  In the left pane, click folder **Files** to open the file browser.
+
+4.  In the file tree, locate your connected Git repository folder or a nested directory within it.
+
+5.  Click more\_vert **View actions** next to the folder name, and select **Create** \> **Pipeline** .
+
+6.  In the dialog, enter the pipeline name and click **Save** .
+    
+    A new pipeline directory is created, initialized with the default files:
+    
+      - `workflow_settings.yaml` : Pipeline configuration.
+      - `definitions/actions.yaml` : Empty task definitions.
+
+7.  Click the pipeline directory in the file browser to open the **Pipeline Viewer** .
+
+> **Note:** If your remote Git repository contains the pipeline configuration ( `workflow_settings.yaml` ) in the root directory of the repository, BigQuery Studio automatically recognizes the repository as a **Root-Level Pipeline** .The Git repository folder itself displays the **Pipeline** icon. When you click the Git repository folder, the **Pipeline Viewer** opens, displaying the compiled DAG for the entire repository. You don't need to create a nested pipeline directory.
+
+### Create a pipeline from the editor tab bar
+
+To create a pipeline from the editor tab bar, follow these steps:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the tab bar of the editor pane, click the arrow\_drop\_down arrow next to the **+** sign, and then click **Pipeline** .
 
 3.  Optional: To rename the pipeline, click the pipeline name, and then type a new name.
 
-4.  Click **Get started** , and then go to the **Settings** tab.
+4.  Click **Get started** , and then configure [pipeline settings](https://docs.cloud.google.com/bigquery/docs/create-pipelines#configure-pipeline-settings) .
 
-5.  In the **Authentication** section, choose to authorize the pipeline with the user credentials for your Google Account or a service account.
+### Create a pipeline from the Pipelines & Connections page
+
+You can use the BigQuery **Pipelines & Connections** page in the Google Cloud console to create a Dataform pipeline that uses a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
+For instructions on how to create a pipeline from the BigQuery **Pipelines & Connections** page, see [Create a data integration asset](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page#create_a_data_integration_asset) .
+
+## Configure pipeline settings
+
+To configure settings for your pipeline, open the pipeline in the **Pipeline Viewer** , click the **Settings** tab, and configure the following sections:
+
+1.  In the **Authentication** section, choose to authorize the pipeline with the user credentials for your Google Account or a service account.
     
       - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with my user credentials** .
         
@@ -106,7 +192,7 @@ To create a pipeline, follow these steps:
     
       - To use a service account, select **Run with selected service account** , and then select a service account. If you need to create a service account, click **New service account** .
 
-6.  In the **Processing location** section, select a processing location for the pipeline.
+2.  In the **Processing location** section, select a processing location for the pipeline.
     
       - To enable the automatic selection of a location, select **Automatic location selection** . This option selects a location based on the datasets referenced in the request. The selection process is as follows:
         
@@ -155,6 +241,13 @@ To add a notebook to your pipeline, do the following in the **Notebook options**
 
 You can add multiple tasks to a pipeline that executes code assets in a specific sequence.
 
+Supported code assets inside pipelines include:
+
+  - SQL queries
+  - Notebooks
+  - Data preparations
+  - Tables and Views (SQLX tasks)
+
 ### Task naming conventions
 
 When you name a pipeline task, follow these naming conventions:
@@ -181,210 +274,260 @@ To add a task to a pipeline, follow these steps:
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
 4.  To add a code asset, select one of the following options:
+
+### SQL query
+
+You can either create a new query or import an existing one.
+
+1.  Do one of the following:
     
-    ### SQL query
+      - Click **Add task** , and then select **Query** . You can either create a new query or import an existing one.
     
-    1.  Click **Add task** , and then select **Query** . You can either create a new query or import an existing one.
+      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Query** .
     
-    2.  Optional: In the **Query task details** pane, in the **Run after** menu, select a task to precede your query.
+      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
+2.  Optional: In the **Query task details** pane, in the **Run after** menu, select a task to precede your query.
+
+**Create a new query**
+
+1.  Click the arrow\_drop\_down arrow menu next to **Edit Query** and select either **In context** or **In new tab** .
+
+2.  Search for an existing query.
+
+3.  Select a query name and then press **Enter** .
+
+4.  Click **Save** .
+
+5.  Optional: To rename the query, click the query name on the pipeline pane, click **Edit Query** , click the existing query name at the top of the screen, and then type a new name.
+
+**Import an existing query**
+
+1.  Click the arrow\_drop\_down arrow menu next to **Edit Query** and click **Import a copy** .
+
+2.  Search for an existing query to import or select an existing query from the search pane. When you import a query, the original remains unchanged because the query's source file is copied into the pipeline.
+
+3.  Click **Edit** to open the imported query.
+
+4.  Click **Save** .
+
+### Notebook
+
+You can either create a new notebook or import an existing one. To change settings for notebook runtime templates, see [Notebook options](https://docs.cloud.google.com/bigquery/docs/create-pipelines#notebook_options) .
+
+1.  Do one of the following:
     
-    **Create a new query**
+      - Click **Add task** , and then select **Notebook** .
     
-    1.  Click the arrow\_drop\_down arrow menu next to **Edit Query** and select either **In context** or **In new tab** .
+      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Notebook** .
     
-    2.  Search for an existing query.
+      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
     
-    3.  Select a query name and then press **Enter** .
+    <!-- end list -->
     
-    4.  Click **Save** .
-    
-    5.  Optional: To rename the query, click the query name on the pipeline pane, click **Edit Query** , click the existing query name at the top of the screen, and then type a new name.
-    
-    **Import an existing query**
-    
-    1.  Click the arrow\_drop\_down arrow menu next to **Edit Query** and click **Import a copy** .
-    
-    2.  Search for an existing query to import or select an existing query from the search pane. When you import a query, the original remains unchanged because the query's source file is copied into the pipeline.
-    
-    3.  Click **Edit** to open the imported query.
-    
-    4.  Click **Save** .
-    
-    ### Notebook
-    
-    1.  Click **Add task** , and then select **Notebook** . You can either create a new notebook or import an existing one. To change settings for notebook runtime templates, see [Notebook options](https://docs.cloud.google.com/bigquery/docs/create-pipelines#notebook_options) .
-    
-    2.  Optional: In the **Notebook task details** pane, in the **Run after** menu, select a task to precede your notebook.
+    1.  Optional: In the **Notebook task details** pane, in the **Run after** menu, select a task to precede your notebook.
     
     **Create a new notebook**
+
+2.  Click the arrow\_drop\_down arrow menu next to **Edit Notebook** and select either **In context** or **In new tab** .
+
+3.  Search for an existing notebook.
+
+4.  Select a notebook name and then press **Enter** .
+
+5.  Click **Save** .
+
+6.  Optional: To rename the notebook, click the notebook name on the pipeline pane, click **Edit Notebook** , click the existing notebook name at the top of the screen, and then type a new name.
+
+**Import an existing notebook**
+
+1.  Click the arrow\_drop\_down arrow menu next to **Edit Notebook** and click **Import a copy** .
+
+2.  Search for an existing notebook to import or select an existing notebook from the search pane. When you import a notebook, the original remains unchanged because the notebook's source file is copied into the pipeline.
+
+3.  To open the imported notebook, click **Edit** .
+
+4.  Click **Save** .
+
+### Data preparation
+
+You can either create a new data preparation or import an existing one.
+
+1.  Do one of the following:
     
-    1.  Click the arrow\_drop\_down arrow menu next to **Edit Notebook** and select either **In context** or **In new tab** .
+      - Click **Add task** , and then select **Data preparation** .
     
-    2.  Search for an existing notebook.
+      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Data preparation** .
     
-    3.  Select a notebook name and then press **Enter** .
+      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
+2.  Optional: In the **Data preparation task details** pane, in the **Run after** menu, select a task to precede your data preparation.
+
+**Create a new data preparation**
+
+1.  Click the arrow\_drop\_down arrow menu adjacent to **Edit Data preparation** and select either **In context** or **In new tab** .
+
+2.  Search for an existing data preparation.
+
+3.  Select a data preparation name and press **Enter** .
+
+4.  Click **Save** .
+
+5.  Optional: To rename the data preparation, click the data preparation name on the pipeline pane, click **Edit Data preparation** , click the name at the top of the screen, and enter a new name.
+
+**Import an existing data preparation**
+
+1.  Click the arrow\_drop\_down arrow drop-down menu next to **Edit Data preparation** and click **Import a copy** .
+
+2.  Search for an existing data preparation to import or select an existing data preparation from the search pane. When you import a data preparation, the original remains unchanged because the data preparation's source file is copied into the pipeline.
+
+3.  To open the imported data preparation, click **Edit** .
+
+4.  Click **Save** .
+
+### Table
+
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
+
+1.  Do one of the following:
+
+<!-- end list -->
+
+  - Click **Add task** , and then select **Table** .
+
+  - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Table** .
+
+  - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
+<!-- end list -->
+
+1.  In the **Create new** pane, select **Table** or **Incremental table** .
+
+2.  Verify the default project for the table, or select a new project.
+
+3.  Verify the default dataset for the table, or select a new dataset.
+
+4.  Enter a name for the table.
+
+5.  In the table task details pane, click **Open** to open the task.
+
+6.  Configure the task using the settings in **Details \> Configuration** or in the `config` block of the code editor for the table.
+
+For metadata changes, use the **Configuration** tab. This tab lets you edit a specific value in the `config` block from the code editor, such as a string or an array, that is formatted like a JavaScript object. Using this tab helps you avoid syntax errors and verify that your settings are correct.
+
+Optional: In the **Run after** menu, select a task to precede your table.
+
+You can also define the metadata for your pipeline task in the `config` block in the editor. For more information, see [Creating tables](https://docs.cloud.google.com/dataform/docs/reference/sample-scripts#creating_tables) .
+
+The editor validates your code and displays the validation status.
+
+> **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
+
+1.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
+
+<!-- end list -->
+
+  - Overview: documentation and summary text for the entry.
+  - Generic aspects: semantic details such as table system and type information.
+
+The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
+
+```` 
+       ```javascript
+       config {
+       type: "table",
+       metadata: {
+          overview: "This table provides standardized trip data.",
+          extraProperties: {
+             generic: {
+                   system: "BigQuery",
+                   type: "fact table"
+             }
+             }
+       }
+       }
+       ```
+````
+
+1.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
+
+2.  Click **Run** to run the SQL in your pipeline.
+
+3.  In **Query results** , inspect the data preview.
+
+### View
+
+> **Preview**
+> 
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
+
+1.  Do one of the following:
     
-    4.  Click **Save** .
+      - Click **Add task** , and then select **View** .
     
-    5.  Optional: To rename the notebook, click the notebook name on the pipeline pane, click **Edit Notebook** , click the existing notebook name at the top of the screen, and then type a new name.
+      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create View** .
     
-    **Import an existing notebook**
-    
-    1.  Click the arrow\_drop\_down arrow menu next to **Edit Notebook** and click **Import a copy** .
-    
-    2.  Search for an existing notebook to import or select an existing notebook from the search pane. When you import a notebook, the original remains unchanged because the notebook's source file is copied into the pipeline.
-    
-    3.  To open the imported notebook, click **Edit** .
-    
-    4.  Click **Save** .
-    
-    ### Data preparation
-    
-    1.  Click **Add task** , and then select **Data preparation** . You can either create a new data preparation or import an existing one.
-    
-    2.  Optional: In the **Data preparation task details** pane, in the **Run after** menu, select a task to precede your data preparation.
-    
-    **Create a new data preparation**
-    
-    1.  Click the arrow\_drop\_down arrow menu adjacent to **Edit Data preparation** and select either **In context** or **In new tab** .
-    
-    2.  Search for an existing data preparation.
-    
-    3.  Select a data preparation name and press **Enter** .
-    
-    4.  Click **Save** .
-    
-    5.  Optional: To rename the data preparation, click the data preparation name on the pipeline pane, click **Edit Data preparation** , click the name at the top of the screen, and enter a new name.
-    
-    **Import an existing data preparation**
-    
-    1.  Click the arrow\_drop\_down arrow drop-down menu next to **Edit Data preparation** and click **Import a copy** .
-    
-    2.  Search for an existing data preparation to import or select an existing data preparation from the search pane. When you import a data preparation, the original remains unchanged because the data preparation's source file is copied into the pipeline.
-    
-    3.  To open the imported data preparation, click **Edit** .
-    
-    4.  Click **Save** .
-    
-    ### Table
-    
-    > **Preview**
-    > 
-    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-    
-    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
-    
-    1.  Click **Add task** , and then select **Table** .
-    
-    2.  In the **Create new** pane, select **Table** or **Incremental table** .
-    
-    3.  Verify the default project for the table, or select a new project.
-    
-    4.  Verify the default dataset for the table, or select a new dataset.
-    
-    5.  Enter a name for the table.
-    
-    6.  In the table task details pane, click **Open** to open the task.
-    
-    7.  Configure the task using the settings in **Details \> Configuration** or in the `config` block of the code editor for the table.
-        
-        For metadata changes, use the **Configuration** tab. This tab lets you edit a specific value in the `config` block from the code editor, such as a string or an array, that is formatted like a JavaScript object. Using this tab helps you avoid syntax errors and verify that your settings are correct.
-        
-        Optional: In the **Run after** menu, select a task to precede your table.
-        
-        You can also define the metadata for your pipeline task in the `config` block in the editor. For more information, see [Creating tables](https://docs.cloud.google.com/dataform/docs/reference/sample-scripts#creating_tables) .
-        
-        The editor validates your code and displays the validation status.
-        
-        > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
-    
-    8.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
-        
-          - Overview: documentation and summary text for the entry.
-          - Generic aspects: semantic details such as table system and type information.
-        
-        The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
-        
-        ``` 
-           config {
-           type: "table",
-           metadata: {
-              overview: "This table provides standardized trip data.",
-              extraProperties: {
-                 generic: {
-                       system: "BigQuery",
-                       type: "fact table"
-                 }
-                 }
-           }
-           }
-        ```
-    
-    9.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
-    
-    10. Click **Run** to run the SQL in your pipeline.
-    
-    11. In **Query results** , inspect the data preview.
-    
-    ### View
-    
-    > **Preview**
-    > 
-    > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-    
-    > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
-    
-    1.  Click **Add task** , and then select **View** .
-    
-    2.  In the **Create new** pane, select **View** or **Materialized view** .
-    
-    3.  Verify the default project for the view, or select a new project.
-    
-    4.  Verify the default dataset for the view, or select a new dataset.
-    
-    5.  Enter a name for the view.
-    
-    6.  In the view task details pane, click **Open** to open the task.
-    
-    7.  Configure the task using the settings in **Details \> Configuration** or in the `config` block of the code editor for the view.
-        
-        For metadata changes, use the **Configuration** tab. This tab lets you edit a specific value in the `config` block from the code editor, such as a string or an array, that is formatted like a JavaScript object. Using this tab helps you avoid syntax errors and verify that your settings are correct.
-        
-        Optional: In the **Run after** menu, select a task to precede your view.
-        
-        You can also define the metadata for your pipeline task in the `config` block in the editor. For more information, see [Creating a view with Dataform core](https://docs.cloud.google.com/dataform/docs/reference/sample-scripts#create-view) .
-        
-        The editor validates your code and displays the validation status.
-        
-        > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
-    
-    8.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
-        
-          - Overview: documentation and summary text for the entry.
-          - Generic aspects: semantic details such as table system and type information.
-        
-        The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
-        
-        ``` 
-           config {
-           type: "view",
-           metadata: {
-              overview: "This view provides standardized trip data.",
-              extraProperties: {
-                 generic: {
-                       system: "BigQuery",
-                       type: "view"
-                 }
-                 }
-           }
-           }
-        ```
-    
-    9.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
-    
-    10. Click **Run** to run the SQL in your pipeline.
-    
-    11. In **Query results** , inspect the data preview.
+      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
+2.  In the **Create new** pane, select **View** or **Materialized view** .
+
+3.  Verify the default project for the view, or select a new project.
+
+4.  Verify the default dataset for the view, or select a new dataset.
+
+5.  Enter a name for the view.
+
+6.  In the view task details pane, click **Open** to open the task.
+
+7.  Configure the task using the settings in **Details \> Configuration** or in the `config` block of the code editor for the view.
+
+For metadata changes, use the **Configuration** tab. This tab lets you edit a specific value in the `config` block from the code editor, such as a string or an array, that is formatted like a JavaScript object. Using this tab helps you avoid syntax errors and verify that your settings are correct.
+
+Optional: In the **Run after** menu, select a task to precede your view.
+
+You can also define the metadata for your pipeline task in the `config` block in the editor. For more information, see [Creating a view with Dataform core](https://docs.cloud.google.com/dataform/docs/reference/sample-scripts#create-view) .
+
+The editor validates your code and displays the validation status.
+
+> **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
+
+1.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
+
+<!-- end list -->
+
+  - Overview: documentation and summary text for the entry.
+  - Generic aspects: semantic details such as table system and type information.
+
+The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
+
+```` 
+       ```javascript
+       config {
+       type: "view",
+       metadata: {
+          overview: "This view provides standardized trip data.",
+          extraProperties: {
+             generic: {
+                   system: "BigQuery",
+                   type: "view"
+             }
+             }
+       }
+       }
+       ```
+````
+
+1.  In **Details \> Compiled queries** , view the SQL compiled from the SQLX code.
+
+2.  Click **Run** to run the SQL in your pipeline.
+
+3.  In **Query results** , inspect the data preview.
 
 ## Edit a pipeline task
 
@@ -673,3 +816,5 @@ If your pipeline contains a notebook, you must also manually grant permission fo
   - Learn more about [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
   - Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
   - Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
+  - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
+  - Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .

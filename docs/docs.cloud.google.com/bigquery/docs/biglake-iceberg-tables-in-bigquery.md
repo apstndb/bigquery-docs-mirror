@@ -458,7 +458,6 @@ Iceberg managed tables have the following limitations:
   - Iceberg managed tables display a 0-byte storage size when queried by the console or APIs.
   - Iceberg managed tables don't support [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
   - Iceberg managed tables don't support [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , but [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) is supported.
-  - Iceberg managed tables don't support [change data capture (CDC)](https://docs.cloud.google.com/bigquery/docs/change-data-capture) updates.
   - Iceberg managed tables don't support [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)
   - Iceberg managed tables don't support [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .
   - Iceberg managed tables don't support [fail-safe windows](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) .

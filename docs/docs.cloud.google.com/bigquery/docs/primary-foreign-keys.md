@@ -15,7 +15,7 @@ BigQuery supports the following key constraints:
   - **Primary key** : A primary key for a table is a combination of one or more columns that is unique for each row and not `NULL` .
   - **Foreign key** : A foreign key for a table is a combination of one or more columns that is present in the primary key column of a referenced table, or is `NULL` .
 
-Primary and foreign keys are typically used to ensure data integrity and enable query optimization. BigQuery doesn't enforce primary and foreign key constraints. When you declare constraints on your tables, you must ensure that your data conforms to them. BigQuery can use table constraints to optimize your queries.
+Primary and foreign keys are typically used to ensure data integrity and enable query optimization. BigQuery doesn't enforce primary and foreign key constraints. When you declare constraints on your tables, you must ensure that your data conforms to them. To ensure uniqueness of values within a column, consider using an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) . BigQuery can use table constraints to optimize your queries.
 
 ## Manage constraints
 

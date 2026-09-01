@@ -122,11 +122,11 @@ Use the `INSERT` statement when you want to add new rows to a table.
   - Values must be added in the same order as the specified columns.
   - The number of values added must match the number of specified columns.
   - Values must have a type that is compatible with the target column.
-  - When the value expression is `DEFAULT` , the [default value](https://docs.cloud.google.com/bigquery/docs/default-values) for the column is used. If the column has no default value, the value defaults to `NULL` .
+  - When the value expression is `DEFAULT` , either the [default value](https://docs.cloud.google.com/bigquery/docs/default-values) or a system-generated value for an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) is used. Otherwise, the value defaults to `NULL` .
 
 ### Omitting column names
 
-When the column names are omitted, all columns in the target table are included in ascending order based on their ordinal positions. If an omitted column has a default value, then that value is used. Otherwise, the column value is `NULL` . If the target table is an [ingestion-time partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time) , column names must be specified.
+When the column names are omitted, all columns in the target table are included in ascending order based on their ordinal positions. If an omitted column has a default value, then that value is used. If the omitted column is an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) , then a new ID is generated. Otherwise, the column value is `NULL` . If the target table is an [ingestion-time partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time) , column names must be specified.
 
 ### Value type compatibility
 
@@ -176,6 +176,23 @@ If you set a default value for a column, then you can use the `DEFAULT` keyword 
     | oven            |      300 | warehouse #3 |
     | top load washer |      100 | warehouse #1 |
     +-----------------+----------+--------------+
+
+If your table has an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) , then you can use the `DEFAULT` keyword to insert a generated ID value:
+
+    CREATE TABLE dataset.Products (
+      id INT64 GENERATED ALWAYS AS IDENTITY(INCREMENT BY 2),
+      product STRING);
+    
+    INSERT dataset.Products (id, product)
+    VALUES (DEFAULT, 'dryer'),
+           (DEFAULT, 'top load washer');
+
+    +----+-----------------+
+    | id | product         |
+    +----+-----------------+
+    | 1  | dryer           |
+    | 3  | top load washer |
+    +----+-----------------+
 
 #### `INSERT SELECT` statement
 
@@ -464,7 +481,7 @@ Use the `UPDATE` statement when you want to update existing rows within a table.
 Where:
 
   - `target_name` is the name of a table to update.
-  - `update_item` is the name of column to update and an expression to evaluate for the updated value. The expression may contain the `DEFAULT` keyword, which is replaced by the default value for that column.
+  - `update_item` is the name of column to update and an expression to evaluate for the updated value. The expression may contain the `DEFAULT` keyword, which is replaced by the default value or a system-generated value for an identity column.
 
 If the column is a `STRUCT` type, `column_name` can reference a field in the `STRUCT` using dot notation. For example, `struct1.field1` .
 

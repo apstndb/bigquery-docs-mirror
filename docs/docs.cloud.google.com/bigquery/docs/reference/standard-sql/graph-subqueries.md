@@ -6,12 +6,6 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bq-graph-preview-support@google.com> .
-
 The following subqueries are supported in GQL query statements:
 
 ## Subquery list
@@ -75,7 +69,7 @@ In the following query, an array of transfer amounts is produced for each `Accou
 
 #### Description
 
-Checks if the subquery produces at least one row. Returns `TRUE` if at least one row is produced, otherwise returns `FALSE` . Never produces `NULL` . You can't use an `EXISTS` subquery in the `WHERE` clause of a path pattern. Instead, use a `FILTER` statement.
+Checks if the subquery produces at least one row. Returns `TRUE` if at least one row is produced, otherwise returns `FALSE` . Never produces `NULL` .
 
 #### Definitions
 

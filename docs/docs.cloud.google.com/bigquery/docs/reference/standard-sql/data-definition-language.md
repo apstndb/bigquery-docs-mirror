@@ -542,7 +542,8 @@ This statement supports the following variants, which have the same limitations:
        }
        [PRIMARY KEY NOT ENFORCED | REFERENCES table_name(column_name) NOT ENFORCED]
        [ DEFAULT default_expression |
-         GENERATED ALWAYS AS (generation_expression) STORED OPTIONS(generation_option_list) ]
+         embedding_generation |
+         identity_column ]
        [NOT NULL]
        [OPTIONS(column_option_list)]
     
@@ -555,6 +556,14 @@ This statement supports the following variants, which have the same limitations:
     array_element_schema :=
       { simple_type | STRUCT<field_list> }
       [NOT NULL]
+    
+    embedding_generation :=
+      GENERATED ALWAYS AS (generation_expression) STORED OPTIONS(generation_option_list)
+    
+    identity_column :=
+      [ GENERATED { ALWAYS | BY DEFAULT } ] AS IDENTITY (
+        [ START WITH start_value ]
+        [ INCREMENT BY increment_value ])
 
   - [`column_name`](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) is the name of the column. A column name:
     
@@ -576,14 +585,6 @@ This statement supports the following variants, which have the same limitations:
 
   - `default_expression` : The [default value](https://docs.cloud.google.com/bigquery/docs/default-values) assigned to the column. You cannot specify `DEFAULT` if `GENERATED ALWAYS AS` is specified.
 
-  - `generation_expression` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) An expression for an automatically generated embedding column. Setting this field enables [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) on the table. The only supported `generation_expression` syntax is a call to the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
-    
-      - You can't specify `GENERATED ALWAYS AS` if `DEFAULT` is specified.
-      - If you specify an `endpoint` argument to `AI.EMBED` , then the `connection_id` argument is also required when used in a generation expression.
-      - The type of the column must be `STRUCT<result ARRAY<FLOAT64>, status STRING>` .
-
-  - `generation_option_list` : The options for a generated column. The only supported option is `asynchronous = TRUE` .
-
   - `field_list` : Represents the fields in a struct.
 
   - `field_name` : The name of the struct field. Struct field names have the same restrictions as column names.
@@ -593,6 +594,22 @@ This statement supports the following variants, which have the same limitations:
     Columns and fields of `ARRAY` type do not support the `NOT NULL` modifier. For example, a `column_schema` of `ARRAY<INT64> NOT NULL` is invalid, since `ARRAY` columns have `REPEATED` mode and can be empty but cannot be `NULL` . An array element in a table can never be `NULL` , regardless of whether the `NOT NULL` constraint is specified. For example, `ARRAY<INT64>` is equivalent to `ARRAY<INT64 NOT NULL>` .
     
     The `NOT NULL` attribute of a table's `column_schema` does not propagate through queries over the table. If table `T` contains a column declared as `x INT64 NOT NULL` , for example, `CREATE TABLE dataset.newtable AS SELECT x FROM T` creates a table named `dataset.newtable` in which `x` is `NULLABLE` .
+
+  - `generation_expression` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) An expression for an automatically generated embedding column. Setting this field enables [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) on the table. The only supported `generation_expression` syntax is a call to the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
+    
+      - You can't specify `GENERATED ALWAYS AS` if `DEFAULT` is specified.
+      - The `connection_id` argument to `AI.EMBED` is required when used in a generation expression.
+      - The type of the column must be `STRUCT<result ARRAY<FLOAT64>, status STRING>` .
+
+  - `generation_option_list` : The options for a generated column. The only supported option is `asynchronous = TRUE` .
+
+  - `ALWAYS` : The [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) can only have generated values. You can't manually insert values into the column. This mode is the default mode.
+
+  - `BY DEFAULT` : You can manually insert values into the [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) . If you add a row to the table and don't specify a value for the column, or specify a `NULL` value, then a generated value is used.
+
+  - `start_value` : An `INT64` literal that contains the first generated value to use for the identity column. The default value is 1.
+
+  - `increment_value` : An `INT64` value other than 0 that contains the minimum difference between successive values generated for the identity column. Some values might be skipped. The difference between successive generated values is always a multiple of the `increment_value` . For example, if your starting value is 1 and your increment is 2, then the generated values can only include odd numbers. The default value is 1.
 
 ### `partition_expression`
 
@@ -1236,11 +1253,7 @@ The table option list specifies the:
 
 #### Creating a table with autonomous embedding generation
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-The following example creates a table named `embedded_table` in `mydataset` with an [automatically generated embedding](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `embedding` that generates embeddings from the `content` column:
+The following example creates a table named `embedded_table` in `mydataset` with an [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `embedding` that generates embeddings from `content` column:
 
     CREATE TABLE mydataset.embedded_table (
       id INT64,
@@ -1315,6 +1328,36 @@ The table schema contains 2 columns:
 The table option list specifies the:
 
   - **Description:** `A table clustered by customer_id`
+
+#### Creating a table with autonomous embedding generation
+
+The following example creates a table named `embedded_table` in `mydataset` with an [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `embedding` that generates embeddings from `content` column:
+
+    CREATE TABLE mydataset.embedded_table (
+      id INT64,
+      content STRING,
+      embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
+        GENERATED ALWAYS AS (
+          AI.EMBED(
+            content,
+            connection_id => "US.embed_connection",
+            endpoint => "text-embedding-005")
+        )
+        STORED OPTIONS (asynchronous = true)
+    );
+
+#### Creating a table with an identity column
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+The following example creates a table that contains an identity column called `id` . The ID values start at 0 and increment by at least 2. Because `ALWAYS` is specified, you can't insert your own values into the `id` column. It can only contain system-generated values.
+
+    CREATE TABLE mydataset.identity_table (
+      name STRING,
+      id INT64 GENERATED ALWAYS AS IDENTITY(START WITH 0 INCREMENT BY 2)
+    );
 
 #### Creating a temporary table
 
@@ -6200,6 +6243,60 @@ The following example sets the default value of the column `mycolumn` to the cur
     ALTER COLUMN mycolumn
     SET DEFAULT CURRENT_TIME();
 
+## `ALTER COLUMN SET GENERATED` statement
+
+Changes a regular column into an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) .
+
+### Syntax
+
+    ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
+    SET GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY (
+      [ START WITH start_value ]
+      [ INCREMENT BY increment_value ]
+    );
+
+### Arguments
+
+  - `(ALTER TABLE) IF EXISTS` : If the specified table does not exist, the statement has no effect.
+
+  - `table_name` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
+
+  - `(ALTER COLUMN) IF EXISTS` : If the specified column does not exist, the statement has no effect.
+
+  - `column_name` : The name of the top-level `INT64` column to become an identity column. If the column is already an identity column, then this statement returns an error.
+
+  - `ALWAYS` : The [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) can only have generated values. You can't manually insert values into the column. This is the default mode.
+
+  - `BY DEFAULT` : You can manually insert values into the [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) . If you add a row to the table and don't specify a value for the column, or specify a `NULL` value, then a generated value is used.
+
+  - `start_value` : An `INT64` literal that contains the first generated value to use for the identity column. The default value is 1.
+
+  - `increment_value` : An `INT64` value other than 0 that contains the minimum difference between successive values generated for the identity column. Some values might be skipped. The difference between successive generated values is always a multiple of the `increment_value` . For example, if your starting value is 1 and your increment is 2, then the generated values can only include odd numbers. The default value is 1.
+
+### Details
+
+Designating a column as an identity column only affects future inserts to the table. It doesn't change any existing table data.
+
+### Required permissions
+
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
+
+| Permission               | Resource            |
+| ------------------------ | ------------------- |
+| `bigquery.tables.get`    | The table to alter. |
+| `bigquery.tables.update` | The table to alter. |
+
+### Examples
+
+The following example changes the column `id` into an identity column. Generated values for this column are greater than or equal to 100 and differ by multiples of 10.
+
+    ALTER TABLE mydataset.mytable
+    ALTER COLUMN id
+    SET GENERATED AS IDENTITY (
+      START WITH 100
+      INCREMENT BY 10
+    );
+
 ## `ALTER COLUMN DROP DEFAULT` statement
 
 Removes the [default value](https://docs.cloud.google.com/bigquery/docs/default-values) assigned to a column. This is the same as setting the default value to `NULL` .
@@ -6235,6 +6332,42 @@ The following example removes the default value from the column `mycolumn` :
     ALTER TABLE mydataset.mytable
     ALTER COLUMN mycolumn
     DROP DEFAULT;
+
+## `ALTER COLUMN DROP GENERATED` statement
+
+Removes identity generation from an [identity column](https://docs.cloud.google.com/bigquery/docs/identity-columns) .
+
+### Syntax
+
+    ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
+    DROP GENERATED;
+
+### Arguments
+
+  - `(ALTER TABLE) IF EXISTS` : If the specified table does not exist, the statement has no effect.
+
+  - `table_name` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
+
+  - `(ALTER COLUMN) IF EXISTS` : If the specified column does not exist, the statement has no effect.
+
+  - `column_name` : The name of the identity column to remove identity generation from. If you run this statement for a column that isn't an identity column, then an error is returned.
+
+### Required permissions
+
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
+
+| Permission               | Resource            |
+| ------------------------ | ------------------- |
+| `bigquery.tables.get`    | The table to alter. |
+| `bigquery.tables.update` | The table to alter. |
+
+### Examples
+
+The following example removes the property of being an identity column from the column `id_col` :
+
+    ALTER TABLE mydataset.mytable
+    ALTER COLUMN id_col
+    DROP GENERATED;
 
 ## `ALTER VIEW SET OPTIONS` statement
 

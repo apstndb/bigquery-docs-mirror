@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # Graph query best practices
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
-
 This document describes best practices for optimizing your BigQuery Graph queries.
 
 ## Start path traversal from low-cardinality nodes

@@ -897,6 +897,104 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 You have successfully queried a public dataset with the BigQuery Ruby client library.
 
+### Rust
+
+> **Preview**
+> 
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To request support or provide feedback for this feature, send email to <cloud-sdk-rust@google.com> .
+
+1.  In Cloud Shell, create a new Rust project:
+    
+        cargo new bigquery-rust-quickstart --bin
+    
+    This command creates a Rust project that's named `bigquery-rust-quickstart` and a directory structure with `src/main.rs` .
+
+2.  Open the Cloud Shell Editor:
+    
+        cloudshell workspace bigquery-rust-quickstart
+
+3.  To open a terminal in the Cloud Shell Editor, click **Open Terminal** .
+
+4.  Open your project directory:
+    
+        cd bigquery-rust-quickstart
+
+5.  Install the BigQuery client library and Tokio runtime for Rust:
+    
+        cargo add google-cloud-bigquery
+        cargo add tokio --features macros
+
+6.  Click **Open Editor** .
+
+7.  In the **Explorer** pane, locate your `BIGQUERY-RUST-QUICKSTART` project.
+
+8.  Click the `src/main.rs` file to open it.
+
+9.  To create a query against the `bigquery-public-data.stackoverflow` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, replace the contents of the `src/main.rs` file with the following code:
+    
+        use google_cloud_bigquery::client::BigQuery;
+        use google_cloud_bigquery::query::FromRow;
+        
+        pub async fn sample(project_id: &str) -> anyhow::Result<()> {
+            let client = BigQuery::builder().build().await?;
+        
+            let query = r#"
+        SELECT
+            CONCAT('https://stackoverflow.com/questions/', CAST(id as STRING)) as url,
+            view_count
+        FROM `bigquery-public-data.stackoverflow.posts_questions`
+        WHERE tags like '%google-bigquery%'
+        ORDER BY view_count DESC
+        LIMIT 10;
+        "#;
+            let mut rows = client
+                .query(query)
+                .with_project_id(project_id)
+                .until_done()
+                .await?
+                .read();
+        
+            #[derive(FromRow, Debug)]
+            struct StackOverflowRow {
+                url: String,
+                view_count: i64,
+            }
+        
+            while let Some(row) = rows.next().await.transpose()? {
+                let row: StackOverflowRow = row.try_into()?;
+                println!("url: {} views: {}", row.url, row.view_count);
+            }
+        
+            Ok(())
+        }
+
+10. Click **Open Terminal** .
+
+11. In the terminal, run the program. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
+    
+        cargo run
+    
+    The result is similar to the following:
+    
+    ```console
+    Query Results:
+    ------------
+    https://stackoverflow.com/questions/35159967: 170023 views
+    https://stackoverflow.com/questions/22879669: 142581 views
+    https://stackoverflow.com/questions/10604135: 132406 views
+    https://stackoverflow.com/questions/44564887: 128781 views
+    https://stackoverflow.com/questions/27060396: 127008 views
+    https://stackoverflow.com/questions/12482637: 120766 views
+    https://stackoverflow.com/questions/20673986: 115720 views
+    https://stackoverflow.com/questions/39109817: 108368 views
+    https://stackoverflow.com/questions/11057219: 105175 views
+    https://stackoverflow.com/questions/43195143: 101878 views
+    ```
+
+You have successfully queried a public dataset with the BigQuery Rust client library.
+
 ## Clean up
 
 To avoid incurring charges to your Google Cloud account, either delete your Google Cloud project, or delete the resources that you created in this walkthrough.
@@ -1005,6 +1103,18 @@ If you used an existing project, delete the resources that you created:
 2.  Delete the `bigquery-ruby-quickstart` folder that you created:
     
         rm -R bigquery-ruby-quickstart
+    
+    The `-R` flag deletes all assets in a folder.
+
+### Rust
+
+1.  In Cloud Shell, move up a directory:
+    
+        cd ..
+
+2.  Delete the `bigquery-rust-quickstart` folder that you created:
+    
+        rm -R bigquery-rust-quickstart
     
     The `-R` flag deletes all assets in a folder.
 

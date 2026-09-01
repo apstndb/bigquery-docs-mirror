@@ -24,7 +24,7 @@ BigQuery Studio notebooks let you visualize your BigQuery Graph query results by
 
 ## Kineviz
 
-[Kineviz GraphXR](https://www.kineviz.com/graphxr) , integrated with BigQuery Graph, lets you analyze complex, large-scale data with graph data exploration and AI-powered data insights.
+[Kineviz GraphXR](https://kineviz.com/bigquerygraph) , integrated with BigQuery Graph, lets you analyze complex, large-scale data with graph data exploration and AI-powered data insights.
 
 ## Linkurious
 
