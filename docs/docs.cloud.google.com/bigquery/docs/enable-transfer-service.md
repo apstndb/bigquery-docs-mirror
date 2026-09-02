@@ -236,7 +236,7 @@ Databases and data warehouses:
   - [MySQL](https://docs.cloud.google.com/bigquery/docs/mysql-transfer)
   - [Oracle](https://docs.cloud.google.com/bigquery/docs/oracle-transfer)
   - [PostgreSQL](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer)
-  - [Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer)
   - [Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
 
 Cloud storage:

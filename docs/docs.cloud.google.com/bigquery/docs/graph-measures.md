@@ -206,13 +206,19 @@ The following query simultaneously calculates the total budget and total number 
 
 ## Best practices
 
-When you design a graph with measures, follows these best practices:
+When you design a graph with measures, follow these best practices:
 
 ### Define nodes and edges within a single table
 
 We recommend that you use the same table for a node table definition and its connecting edge table definitions. Reusing the table ensures an exact one-to-one (1:1) relationship between the node table and the edge table, which prevents fan-out and ensures that the `GRAPH_EXPAND` function doesn't ignore the edge as ambiguous.
 
 For example, if you have an input table `Enrollment` that contains foreign keys pointing to `Student` and `Course` tables, define the `Enrollment` node and its outgoing edges using the `Enrollment` input table.
+
+### Avoid defining unnecessary properties on edge tables
+
+When you define a node table and an edge table using the same physical table, don't use the `PROPERTIES` clause on the edge table unless there's new information to capture on the edge. Because the node table and edge table use the same physical table, all of these properties are already part of the node table.
+
+Defining redundant properties on the edge table can cause the `GRAPH_EXPAND` function to treat the edge table as a separate entity from the shared node table. To optimize performance, specify `NO PROPERTIES` on the edge table definition when there are no new properties to capture on the edge.
 
 ### Model many-to-many relationships as node tables
 

@@ -271,6 +271,35 @@ Materialized views with the [`max_staleness`](https://docs.cloud.google.com/bigq
 
   - If the schema at time *t* differs from the current schema for the columns in the query, the query fails.
 
+## Implicit deletion of column-level access policies
+
+Policy tags can be implicitly (automatically) removed from a table under several conditions.
+
+The general principle for automatically deleting policy tags is:
+
+  - Operations using a [`WRITE_TRUNCATE` write disposition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) always overwrite any existing policy tags on the destination table, unless a new schema with policy tags is provided.
+  - For operations with a `WRITE_APPEND` write disposition, the destination table's current policy tags are preserved.
+
+Specifically, policy tags are implicitly removed in the following situations:
+
+  - Replacing a table: when a table is replaced using the [`CREATE OR REPLACE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) DDL statement, all existing policy tags on the original table are dropped.
+
+  - Loading or querying with `WRITE_TRUNCATE` : operations that use the `WRITE_TRUNCATE` write disposition remove all existing policy tags. This includes loading data using the [`bq load --replace`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command and running a query with the status of `writeDisposition` set to `WRITE_TRUNCATE` . Such operations completely overwrite the table, and existing policy tags aren't carried over unless you explicitly provide them in the destination schema.
+    
+    For example, if you write query results to a table by specifying the `--destination_table` flag, any existing policy tags are removed from the table, unless you use the `--destination_schema` flag to specify a schema with policy tags. The following example shows how to use `--destination_schema` .
+    
+        bq query --destination_table mydataset.mytable2 \
+          --use_legacy_sql=false --destination_schema=schema.json \
+          'SELECT * FROM mydataset.mytable1'
+    
+    Schema changes happen in a separate operation from query execution. If the query subsequently raises an exception, it is possible that any schema changes will be skipped. If this occurs, check the destination table schema and [manually update it](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) if necessary.
+
+  - Table deletion or expiration: if a table is explicitly deleted or if it reaches its expiration time and is automatically removed, all associated policy tags are also removed from that table's schema.
+
+  - Table copy operations: when copying a table without policy tags to a destination table that has policy tags, the tags on the destination table are removed, unless the [`--append_table`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) flag or `"writeDisposition": "WRITE_APPEND"` is used.
+
+Using the [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) DML statement, which removes all rows from a table while maintaining its schema, doesn't remove policy tags.
+
 ## Location considerations
 
 When you choose a location for your taxonomy, consider the following limitations.
@@ -296,14 +325,6 @@ You can't use references across organizations. A table and any policy tags that 
   - This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
   - BigQuery only supports column-level access control for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , [BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) , and [BigQuery Omni tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
-
-  - If you overwrite to a destination table, any existing policy tags are removed from the table, unless you use the `--destination_schema` flag to specify a schema with policy tags. The following example shows how to use `--destination_schema` .
-    
-        bq query --destination_table mydataset.mytable2 \
-          --use_legacy_sql=false --destination_schema=schema.json \
-          'SELECT * FROM mydataset.mytable1'
-    
-    Schema changes happen in a separate operation from query execution. If you write query results to a table by specifying the `--destination_table` flag, and the query subsequently raises an exception, it is possible that any schema changes will be skipped. If this occurs, check the destination table schema and [manually update it](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) if necessary.
 
   - A column can have only one policy tag.
 

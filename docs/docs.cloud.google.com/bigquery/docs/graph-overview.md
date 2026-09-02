@@ -66,6 +66,7 @@ The following tutorials show how to use BigQuery Graph in different scenarios:
   - [Spanner & BigQuery:Real-Time Fraud Defense Shield](https://codelabs.developers.google.com/next26/spanner-bigquery-graph#0)
   - [Perform semantic search on a graph](https://docs.cloud.google.com/bigquery/docs/graph-search)
   - [Analyze drug interactions with BigQuery Graph](https://codelabs.developers.google.com/codelabs/drug-interaction-bigquery-graph)
+  - [Anti-money laundering & fraud prevention with BigQuery GraphRAG](https://codelabs.developers.google.com/codelabs/graphrag-with-bigquery)
   - [Customer identity resolution with BigQuery Graph](https://codelabs.developers.google.com/codelabs/identity-resolution-bigquery-graph)
 
 ## Pricing
