@@ -296,12 +296,16 @@ Repository
 <li><code dir="ltr" translate="no">dataform.repositories.commit</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  computeAccessTokenStatus</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.create</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  createTagBinding</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.delete</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  deleteTagBinding</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  fetchHistory</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  fetchRemoteBranches</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.get</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  getIamPolicy</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.list</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  listEffectiveTags</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  listTagBindings</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.move</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  queryDirectoryContents</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.readFile</code></li>
@@ -1314,12 +1318,16 @@ Repository
 <li><code dir="ltr" translate="no">dataform.repositories.commit</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  computeAccessTokenStatus</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.create</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  createTagBinding</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.delete</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  deleteTagBinding</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  fetchHistory</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  fetchRemoteBranches</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.get</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  getIamPolicy</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.list</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  listEffectiveTags</code></li>
+<li><code dir="ltr" translate="no">dataform.  repositories.  listTagBindings</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.move</code></li>
 <li><code dir="ltr" translate="no">dataform.  repositories.  queryDirectoryContents</code></li>
 <li><code dir="ltr" translate="no">dataform.repositories.readFile</code></li>
@@ -6174,6 +6182,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <li><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.serviceAgent">Cloud Dataplex Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">roles/  dataplex.serviceAgent</code> )</li>
 <li><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dataprep#dataprep.serviceAgent">Dataprep Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">roles/  dataprep.serviceAgent</code> )</li>
 <li><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/datastream#datastream.serviceAgent">Datastream Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">roles/  datastream.serviceAgent</code> )</li>
+<li><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/datastudio#datastudio.managedStorageServiceAgent">Data Studio Managed Storage Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">roles/  datastudio.managedStorageServiceAgent</code> )</li>
 <li><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/discoveryengine#discoveryengine.serviceAgent">Discovery Engine Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">roles/  discoveryengine.serviceAgent</code> )</li>
 <li><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.serviceAgent">DLP API Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">roles/  dlp.serviceAgent</code> )</li>
 <li><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/enterpriseknowledgegraph#enterpriseknowledgegraph.serviceAgent">Enterprise Knowledge Graph Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">roles/  enterpriseknowledgegraph.serviceAgent</code> )</li>

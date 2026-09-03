@@ -122,11 +122,15 @@ Required. The base URI for all writes to persistent storage in Cloud Storage.
 
 Optional. The Cloud Storage path of the configuration files for this batch translation. See [YAML configuration guidelines](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines) .
 
+Do not set this field if the configuration files are already located within a path specified in `source_base_uri` .
+
 `metadataFilePaths[]`
 
 `string`
 
 Optional. The Cloud Storage path of the metadata files for this batch translation. See [Generate metadata](https://cloud.google.com/bigquery/docs/generate-metadata) .
+
+Do not set this field if the metadata files are already located within a path specified in `source_base_uri` .
 
 ## Output Schema
 

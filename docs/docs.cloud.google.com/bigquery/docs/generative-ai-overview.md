@@ -156,6 +156,14 @@ To specify a specific endpoint, use a fully qualified multi-regional endpoint na
 
 If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
 
+## Limitations
+
+Inside a [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc) perimeter, AI functions can't process [`ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) that use [delegated access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#delegated-access) . Delegated access generates a signed HTTPS URL for the object, and Agent Platform blocks HTTP and HTTPS fetches for projects inside a perimeter. The function writes the following error to the `status` field of its output:
+
+`INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.`
+
+Because the `ref` column of an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) always uses the object table's connection as the authorizer, passing `ref` to an AI function inside a perimeter always returns this error. To analyze the object, pass a single-argument `OBJ.MAKE_REF(uri)` value instead, which uses [direct access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#direct-access) and sends the Cloud Storage URI to the model without generating a signed URL.
+
 ## Pricing
 
 You are charged for the compute resources that you use to run queries against models. Remote models make calls to Agent Platform models, so queries against remote models also incur charges from Agent Platform.

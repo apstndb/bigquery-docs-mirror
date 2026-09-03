@@ -14,8 +14,6 @@ This page provides an overview of loading Parquet data from Cloud Storage into B
 
 When you load Parquet data from Cloud Storage, you can load the data into a new table or partition, or you can append to or overwrite an existing table or partition. When your data is loaded into BigQuery, it is converted into columnar format for [Capacitor](https://cloud.google.com/blog/products/gcp/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (BigQuery's storage format).
 
-When you load data from Cloud Storage into a BigQuery table, the dataset that contains the table must be in the same regional or multi- regional location as the Cloud Storage bucket.
-
 For information about loading Parquet data from a local file, see [Loading data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) .
 
 ## Limitations

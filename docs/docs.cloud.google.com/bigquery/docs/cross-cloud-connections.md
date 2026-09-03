@@ -65,6 +65,8 @@ To create an AWS cross-cloud connection, do the following:
       - `  AWS_ACCOUNT_ID  ` : the ID of the AWS IAM user from the previous step.
       - `  ROLE_NAME  ` : the AWS role policy name that you chose.
       - `  CONNECTION_ID  ` : an ID to give to this connection resource.
+    
+    For more information about AWS connection properties, see [AwsProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rpc/google.cloud.bigquery.connection.v1#awsproperties) .
 
 4.  To note the service account information, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
     
@@ -126,6 +128,8 @@ To create an Azure cross-cloud connection, do the following:
       - `  APP_ID  ` : the Azure Application (client) ID.
       - `  PROJECT_ID  ` : the ID of your Google Cloud project.
       - `  CONNECTION_ID  ` : an ID to give to this connection resource.
+    
+    For more information about Azure connection properties, see [AzureProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rpc/google.cloud.bigquery.connection.v1#azureproperties) .
 
 4.  To note the service account information, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
     

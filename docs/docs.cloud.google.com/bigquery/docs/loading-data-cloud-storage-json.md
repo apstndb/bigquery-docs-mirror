@@ -10,8 +10,6 @@ data_source: docs.cloud.google.com
 
 You can load newline-delimited JSON (ndJSON) data from Cloud Storage into a new table or partition, or append to or overwrite an existing table or partition. When your data is loaded into BigQuery, it is converted into columnar format for [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (BigQuery's storage format).
 
-When you load data from Cloud Storage into a BigQuery table, the dataset that contains the table must be in the same regional or multi- regional location as the Cloud Storage bucket.
-
 The ndJSON format is the same format as the [JSON Lines](http://jsonlines.org/) format.
 
 ## Limitations

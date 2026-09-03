@@ -18,8 +18,6 @@ You can control which properties BigQuery should load by setting the [`projectio
 
 If you prefer to skip the loading process, you can query the export directly by setting it up as an external data source. For more information, see [External data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
-When you load data from Cloud Storage into a BigQuery table, the dataset that contains the table must be in the same region or multi-region as the Cloud Storage bucket.
-
 ## Limitations
 
 When you load data into BigQuery from a Datastore export, note the following restrictions:

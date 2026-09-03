@@ -378,6 +378,8 @@ For more information on setting metadata caching options, see [Create object tab
 
   - `UNION ALL` operations that combine both empty and non-empty object tables are not supported and might return an error.
 
+  - Inside a [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc) perimeter, AI functions can't process the `ref` column of an object table. The `ref` column always uses the object table's connection as its authorizer, which means that BigQuery generates a signed HTTPS URL for the object, and Gemini Enterprise Agent Platform blocks HTTP and HTTPS fetches for projects inside a perimeter. The function writes the error `INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.` to the `status` field of its output. To analyze the object, pass a single-argument [`OBJ.MAKE_REF(uri)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) value instead, which sends the Cloud Storage URI to the model without generating a signed URL. `OBJ.MAKE_REF` retrieves object metadata from Cloud Storage each time it runs, which might be less scalable for large workloads. For more information, see [Maintaining `ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/objectref-columns#maintaining_objectref_values) .
+
 ## Costs
 
 Costs are associated with the following aspects of object tables:

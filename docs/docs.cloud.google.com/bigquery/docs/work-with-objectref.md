@@ -159,6 +159,12 @@ The following example shows a query that uses delegated access. It requires the 
       endpoint => 'gemini-2.5-pro',
       connection_id => "us.connection2");
 
+Inside a [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc) perimeter, AI functions can't process `ObjectRef` values that use delegated access. Delegated access generates a signed HTTPS URL for the object, and Gemini Enterprise Agent Platform blocks HTTP and HTTPS fetches for projects inside a perimeter. The function writes the following error to the `status` column in the result:
+
+`INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.`
+
+Because the `ref` column of an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) always uses the object table's connection as the authorizer, passing `ref` to an AI function inside a perimeter always returns this error. To analyze the object, pass a single-argument `OBJ.MAKE_REF(uri)` value instead, which uses [direct access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#direct-access) and sends the Cloud Storage URI to the model without generating a signed URL.
+
 ### Best practices
 
 Consider the following best practices when you decide whether to use direct or delegated access:

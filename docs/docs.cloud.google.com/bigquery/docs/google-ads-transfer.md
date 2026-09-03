@@ -213,10 +213,10 @@ Where:
   - DATASET is the target dataset for the data transfer configuration.
   - NAME is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
   - PARAMETERS contains the following JSON parameters for the transfer configuration: `--params='{"param":"param_value"}'` .
-      - `customer_id` : enter your Google Ads customer ID. This field is required.
-      - `custom_report_table_names` : a list of table names for the [custom reports](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) included in this transfer. This list corresponds to the queries in `custom_report_queries` . The length of this list must match the length of the list in `custom_report_queries` .
-      - `custom_report_queries` : a list of [Google Ads Query Language (GAQL) queries](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) for the custom reports included in this transfer. This list corresponds to the names in `custom_report_table_names` . The length of this list must match the length of the list in `custom_report_table_names` .
-      - Optional: set the `exclude_removed_items` parameter to `true` to prevent removed or disabled entities and metrics from being transferred.
+      - `customer_id` : enter your Google Ads customer ID in the format `1231231234` or `123-123-1234` . This field is required.
+      - `custom_report_table_names` (optional): a list of table names for the [custom reports](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) included in this transfer. This list corresponds to the queries in `custom_report_queries` . The length of this list must match the length of the list in `custom_report_queries` .
+      - `custom_report_queries` (optional): a list of [Google Ads Query Language (GAQL) queries](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) for the custom reports included in this transfer. This list corresponds to the names in `custom_report_table_names` . The length of this list must match the length of the list in `custom_report_table_names` .
+      - `exclude_removed_items` (optional): set this parameter to `true` to prevent removed or disabled entities and metrics from being transferred.
   - DATA\_SOURCE is the data source — `google_ads` .
   - TABLES is the comma-separated list of tables to include or exclude from the data transfer.
   - SCHEDULE is how often you want the query to run. If `--schedule` isn't specified, the default is every 24 hours, starting from the time the transfer is created.

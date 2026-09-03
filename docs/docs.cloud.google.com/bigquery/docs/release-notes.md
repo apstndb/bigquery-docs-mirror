@@ -14,6 +14,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## September 02, 2026
+
+Change
+
+An updated version of the [Simba JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_jdbc_driver) is now available.
+
+## September 01, 2026
+
+Feature
+
+The [Rust SDK for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/libraries) is now in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## August 31, 2026
 
 Feature
