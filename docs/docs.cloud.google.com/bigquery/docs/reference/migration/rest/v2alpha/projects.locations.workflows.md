@@ -2286,7 +2286,7 @@ The URI of the webapp that visualizes the lineage. The user needs the `bigquerym
 
 Output only. Recognized lineage inputs.
 
-All inputs are processed only if the task succeeds and all work is in state [SUCCEEDED](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/ProgressReport.WorkSummary.State.SUCCEEDED) (in particular, nothing is [SKIPPED](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/ProgressReport.WorkSummary.State.SKIPPED) ).
+All inputs are processed only if the task succeeds and all work is in state `SUCCEEDED` (in particular, nothing is `SKIPPED` ).
 
 Even with all inputs processed successfully, there may be transpiler errors present leading to inaccurate lineage.
 

@@ -102,7 +102,7 @@ Represents a data transfer run.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;scheduleTime&quot;: string,&quot;runTime&quot;: string,&quot;errorStatus&quot;: {object (Status)},&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;updateTime&quot;: string,&quot;params&quot;: {object},&quot;dataSourceId&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;schedule&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;scheduleTime&quot;: string,&quot;runTime&quot;: string,&quot;errorStatus&quot;: {object (Status)},&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;updateTime&quot;: string,&quot;params&quot;: {object},&quot;dataSourceId&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;schedule&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;parameterConfig&quot;: {object (ParameterConfig)},// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -204,6 +204,12 @@ The format for specifying a pubsub topic is: `projects/{project_id}/topics/{topi
 ` object ( EmailPreferences  ` )
 
 Output only. Email notifications will be sent according to these preferences to the email address of the user who owns the transfer config this run was derived from.
+
+`parameterConfig`
+
+` object ( ParameterConfig  ` )
+
+Output only. The parameter config of the transfer run.
 
 Union field `destination` . Data transfer destination. `destination` can be only one of the following:
 
@@ -524,6 +530,36 @@ Fields
 `boolean`
 
 If true, email notifications will be sent on transfer run failures.
+
+### ParameterConfig
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;secretManagerManagedParams&quot;: [
+    string
+  ]
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`secretManagerManagedParams[]`
+
+`string`
+
+Optional. The list of parameters that are stored in Secret Manager. The value of a parameter included in this list will be interpreted as a Secret Manager key version resource name instead of a raw value. The raw value will be retrieved from Secret Manager upon execution.
 
 ### NullValue
 

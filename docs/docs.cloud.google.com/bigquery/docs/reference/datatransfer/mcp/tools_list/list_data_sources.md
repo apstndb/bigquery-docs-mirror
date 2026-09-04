@@ -256,7 +256,7 @@ A duration in seconds with up to nine fractional digits, ending with ' `s` '. Ex
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;paramId&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;type&quot;: enum (Type),&quot;required&quot;: boolean,&quot;repeated&quot;: boolean,&quot;validationRegex&quot;: string,&quot;allowedValues&quot;: [string],&quot;minValue&quot;: number,&quot;maxValue&quot;: number,&quot;fields&quot;: [{object (DataSourceParameter)}],&quot;validationDescription&quot;: string,&quot;validationHelpUrl&quot;: string,&quot;immutable&quot;: boolean,&quot;recurse&quot;: boolean,&quot;deprecated&quot;: boolean,// Union field _max_list_size can be only one of the following:&quot;maxListSize&quot;: string// End of list of possible types for union field _max_list_size.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;paramId&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;type&quot;: enum (Type),&quot;required&quot;: boolean,&quot;repeated&quot;: boolean,&quot;validationRegex&quot;: string,&quot;allowedValues&quot;: [string],&quot;minValue&quot;: number,&quot;maxValue&quot;: number,&quot;fields&quot;: [{object (DataSourceParameter)}],&quot;validationDescription&quot;: string,&quot;validationHelpUrl&quot;: string,&quot;immutable&quot;: boolean,&quot;recurse&quot;: boolean,&quot;deprecated&quot;: boolean,&quot;secretManagerAllowed&quot;: boolean,// Union field _max_list_size can be only one of the following:&quot;maxListSize&quot;: string// End of list of possible types for union field _max_list_size.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -358,6 +358,12 @@ Deprecated. This field has no effect.
 `boolean`
 
 If true, it should not be used in new transfers, and it should not be visible to users.
+
+`secretManagerAllowed`
+
+`boolean`
+
+Output only. If true, the parameter value can be provided through Secret Manager.
 
 Union field `_max_list_size` .
 

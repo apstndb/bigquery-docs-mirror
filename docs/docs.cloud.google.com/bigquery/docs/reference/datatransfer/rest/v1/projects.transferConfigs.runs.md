@@ -25,7 +25,7 @@ Represents a data transfer run.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;scheduleTime&quot;: string,&quot;runTime&quot;: string,&quot;errorStatus&quot;: {object (Status)},&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;updateTime&quot;: string,&quot;params&quot;: {object},&quot;dataSourceId&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;schedule&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;destinationDatasetId&quot;: string// End of mutually exclusive fields.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;scheduleTime&quot;: string,&quot;runTime&quot;: string,&quot;errorStatus&quot;: {object (Status)},&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;updateTime&quot;: string,&quot;params&quot;: {object},&quot;dataSourceId&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;schedule&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;parameterConfig&quot;: {object (ParameterConfig)},// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;destinationDatasetId&quot;: string// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -117,6 +117,12 @@ The format for specifying a pubsub topic is: `projects/{projectId}/topics/{topic
 ` object ( EmailPreferences  ` )
 
 Output only. Email notifications will be sent according to these preferences to the email address of the user who owns the transfer config this run was derived from.
+
+`parameterConfig`
+
+` object ( ParameterConfig  ` )
+
+Output only. The parameter config of the transfer run.
 
 Data transfer destination. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 

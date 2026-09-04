@@ -204,8 +204,15 @@ The following limits apply to query jobs created automatically by running intera
 <tr class="odd">
 <td>Query/multi-statement query execution-time limit</td>
 <td>6 hours</td>
-<td><p>A query or multi-statement query can execute for up to 6 hours, and then it fails. However, sometimes queries are retried. A query can be tried up to three times, and each attempt can run for up to 6 hours. As a result, it's possible for a query to have a total runtime of more than 6 hours.</p>
-<p><code dir="ltr" translate="no">         CREATE MODEL        </code> job timeout defaults to 24 hours, with the exception of time series, AutoML, and hyperparameter tuning jobs which timeout at 48 hours.</p></td>
+<td><p>A query or multi-statement query can execute for up to 6 hours, and then it fails. However, BigQuery might internally retry a query job due to transient issues, such as server restarts. BigQuery can try a query up to three times, and each attempt can run for up to 6 hours. As a result, it's possible for a query to have a total runtime of more than 6 hours (up to 18 hours).</p>
+<p>To check whether a job was retried, you can look for these signals:</p>
+<ul>
+<li><strong>Google Cloud console</strong> : In the <strong>Jobs explorer</strong> , <a href="https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-two-jobs">compare two jobs</a> . In the <strong>Query level analysis</strong> section, check the <strong>Retry</strong> field on the <strong>Metrics</strong> tab.</li>
+<li><strong><code dir="ltr" translate="no">INFORMATION_SCHEMA</code></strong> : In the <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs"><code dir="ltr" translate="no">INFORMATION_SCHEMA.JOBS</code></a> views, check the <code dir="ltr" translate="no">final_execution_duration_ms</code> column. If the difference between <code dir="ltr" translate="no">start_time</code> and <code dir="ltr" translate="no">end_time</code> is significantly larger than <code dir="ltr" translate="no">final_execution_duration_ms</code> , then the query was retried.</li>
+<li><strong>BigQuery API</strong> : In the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics"><code dir="ltr" translate="no">JobStatistics</code></a> object, check the <code dir="ltr" translate="no">finalExecutionDurationMs</code> field. If the difference between <code dir="ltr" translate="no">startTime</code> and <code dir="ltr" translate="no">endTime</code> is significantly larger than <code dir="ltr" translate="no">finalExecutionDurationMs</code> , then the query was retried.</li>
+</ul>
+<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#execution-duration">Execution duration</a> in the query troubleshooting documentation.</p>
+<p>The <code dir="ltr" translate="no">         CREATE MODEL        </code> job timeout defaults to 24 hours, with the exception of time series, AutoML, and hyperparameter tuning jobs, which time out at 48 hours.</p></td>
 </tr>
 <tr class="even">
 <td>Maximum number of resources referenced per query</td>

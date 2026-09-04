@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## September 03, 2026
+
+Feature
+
+Conversational analytics now supports questions about [market basket analysis](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#analytic_task_support) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## September 02, 2026
 
 Change

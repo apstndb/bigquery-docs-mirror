@@ -10,12 +10,6 @@ data_source: docs.cloud.google.com
 
 BigQuery advanced runtime is a set of performance enhancements designed to automatically accelerate analytical workloads without requiring user action or code changes. This document describes these performance enhancements, including enhanced vectorization and short query optimizations.
 
-## Roles and permissions
-
-To get the permissions that you need to specify a configuration setting, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project or organization. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
-
 ## Enhanced vectorization
 
 Vectorized execution is a query processing model that operates on columns of data in blocks that align with CPU cache size and uses single instruction, multiple data (SIMD) instructions. Enhanced vectorization extends the vectorized query execution in BigQuery to the following aspects of query processing:

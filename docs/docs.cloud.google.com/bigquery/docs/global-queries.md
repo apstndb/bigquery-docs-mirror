@@ -133,6 +133,26 @@ When you call the [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/refer
   - `statistics.global_query_remote_regions` : An array of strings representing the remote regions from which a global query accesses data. This field is populated only for parent global query jobs in the primary execution region. It is empty for child global query jobs and single-region queries.
   - `statistics.parent_global_query_job` : A [`JobReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference) object ( `projectId` , `jobId` , `location` ) identifying the parent global query job. This field is populated only for child global query jobs (remote subqueries and cross-region copy jobs) executed in remote regions on behalf of a global query. It is unset for parent global query jobs and single-region queries.
 
+### Audit logs
+
+In [Cloud Audit Logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) , the [`BigQueryAuditMetadata`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) object contains the following fields in the [`JobStats`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats) object:
+
+  - `jobStats.globalQueryRemoteRegions` : An array of strings representing the remote regions accessed by the query. This field is only populated for parent global query jobs in the primary execution region.
+  - `jobStats.parentGlobalQueryJobId` : The job ID of the parent global query job. This field is populated for child jobs executed in remote regions.
+  - `jobStats.parentGlobalQueryJobLocation` : The location of the parent global query job. This field is populated for child jobs executed in remote regions.
+
+#### Find remote child jobs for a global query
+
+To find all remote child jobs associated with a parent global query, you can query audit logs using [Log Analytics](https://docs.cloud.google.com/logging/docs/log-analytics) or an exported log sink dataset:
+
+    SELECT  timestamp,  proto_payload.audit_log.resource_name AS resource_name,  JSON_VALUE(proto_payload.audit_log.metadata.jobChange.job.jobConfig.queryConfig.query) AS queryFROM  `PROJECT_ID.LOG_DATASET._AllLogs`WHERE  JSON_VALUE(proto_payload.audit_log.metadata.jobChange.job.jobStats.parentGlobalQueryJobId) = 'PARENT_JOB_ID';
+
+Replace the following:
+
+  - `  PROJECT_ID  ` : your Google Cloud project ID.
+  - `  LOG_DATASET  ` : the BigQuery linked dataset for Log Analytics or the log sink destination dataset.
+  - `  PARENT_JOB_ID  ` : the job ID of the parent global query job.
+
 ## Turn off global queries
 
 To disable global queries for your project or organization, use the [`ALTER PROJECT SET OPTIONS statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION SET OPTIONS statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) to change the [default configuration](https://docs.cloud.google.com/bigquery/docs/default-configuration) .

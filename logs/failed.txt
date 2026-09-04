@@ -1,3 +1,4 @@
-200 https://docs.cloud.google.com/bigquery/docs/enable-sql-translations
+200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/cancel_job
+200 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_query_results
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo

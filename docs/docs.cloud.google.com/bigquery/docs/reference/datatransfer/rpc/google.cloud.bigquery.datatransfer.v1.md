@@ -57,6 +57,7 @@ data_source: docs.cloud.google.com
   - `  TableDetail  ` (message)
   - `  TimeBasedSchedule  ` (message)
   - `  TransferConfig  ` (message)
+  - `  TransferConfig.ParameterConfig  ` (message)
   - `  TransferMessage  ` (message)
   - `  TransferMessage.MessageSeverity  ` (enum)
   - `  TransferResource  ` (message)
@@ -907,6 +908,12 @@ Deprecated. This field has no effect.
 `bool`
 
 If true, it should not be used in new transfers, and it should not be visible to users.
+
+`secret_manager_allowed`
+
+`bool`
+
+Output only. If true, the parameter value can be provided through Secret Manager.
 
 `max_list_size`
 
@@ -1941,6 +1948,12 @@ The classification of the destination table.
 
 The metadata destination of the transfer config.
 
+`param_config`
+
+`  ParameterConfig  `
+
+Optional. The config for values in `params` .
+
 Union field `destination` . The destination of the transfer config. `destination` can be only one of the following:
 
 `destination_dataset_id`
@@ -1954,6 +1967,18 @@ The BigQuery target dataset id.
 `  UserInfo  `
 
 Output only. Information about the user whose credentials are used to transfer data. Populated only for `transferConfigs.get` requests. In case the user information is not available, this field will not be populated.
+
+## ParameterConfig
+
+Configuration for data source parameters.
+
+Fields
+
+`secret_manager_managed_params[]`
+
+`string`
+
+Optional. The list of parameters that are stored in Secret Manager. The value of a parameter included in this list will be interpreted as a Secret Manager key version resource name instead of a raw value. The raw value will be retrieved from Secret Manager upon execution.
 
 ## TransferMessage
 
@@ -2176,6 +2201,12 @@ The format for specifying a pubsub topic is: `projects/{project_id}/topics/{topi
 `  EmailPreferences  `
 
 Output only. Email notifications will be sent according to these preferences to the email address of the user who owns the transfer config this run was derived from.
+
+`parameter_config`
+
+`  ParameterConfig  `
+
+Output only. The parameter config of the transfer run.
 
 Union field `destination` . Data transfer destination. `destination` can be only one of the following:
 

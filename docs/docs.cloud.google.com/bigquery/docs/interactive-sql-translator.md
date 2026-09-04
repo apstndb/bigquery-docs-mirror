@@ -12,84 +12,53 @@ This document describes how to translate a query from a different SQL dialect in
 
 You can use the [translation rule feature](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#customize) to customize the way the interactive SQL translator translates SQL.
 
+For a list of SQL dialects supported by this SQL translator, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+
+For a list of supported processing locations, see [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
+
 ## Before you begin
 
-If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
+Before you submit a translation job, do the following steps.
 
-1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
+### Enable SQL translations
 
-2.  Click **Enable** .
+Enable the required API, and get the permissions needed to use a BigQuery SQL translator. For more information, see [Enable SQL translations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#enable_sql_translations) .
 
-> **Note:** Projects created after February 15, 2022 have this API enabled automatically.
+### Required permissions
 
-### Permissions and roles
+To get the permissions that you need to create translation jobs with the interactor translator, the translation API, or the batch SQL translator, ask your administrator to grant you the following IAM roles on the `parent` resource:
 
-This section describes the [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need in order to use the interactive SQL translator, including the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions. The section also describes the permissions needed to configure additional translation configurations.
+  - Viewing and monitoring migration jobs: [MigrationWorkflow Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.viewer) ( `roles/bigquerymigration.viewer` )
+  - Submitting migration jobs: [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` )
+  - Access the Cloud Storage buckets for input and files: Storage Object Admin ( `roles/storage.objectAdmin` ) - on the source and destination Cloud Storage bucket.
 
-#### Permissions to use the interactive SQL translator
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-To get the permissions that you need to use the interactive translator, ask your administrator to grant you the [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` ) IAM role on the `parent` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-This predefined role contains the permissions required to use the interactive translator. To see the exact permissions that are required, expand the **Required permissions** section:
+These predefined roles contain the permissions required to create translation jobs with the interactor translator, the translation API, or the batch SQL translator. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-The following permissions are required to use the interactive translator:
+The following permissions are required to create translation jobs with the interactor translator, the translation API, or the batch SQL translator:
 
   - `bigquerymigration.workflows.create`
   - `bigquerymigration.workflows.get`
+  - `bigquerymigration.workflows.list`
+  - `bigquerymigration.workflows.delete`
+  - `bigquerymigration.subtasks.get`
+  - `bigquerymigration.subtasks.list`
+  - `storage.objects.get`
+  - `storage.objects.list`
+  - `storage.objects.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-#### Permissions to configure additional translation configurations
-
-You can configure additional translation configurations using the **Translation Config ID** and **Translation Configuration Source Location** fields in the translation settings. To configure these translation configurations, you need the following permissions:
-
-  - `bigquerymigration.workflows.get`
-  - `bigquerymigration.workflows.list`
-
-The following predefined IAM role provide the permissions that you need to configure additional translation configurations:
-
-  - `roles/bigquerymigration.viewer`
-
-For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
-
-## Supported SQL dialects
-
-The BigQuery interactive SQL translator can translate the following SQL dialects into GoogleSQL:
-
-  - Amazon Redshift SQL
-  - Apache HiveQL and Beeline CLI
-  - IBM Netezza SQL and NZPLSQL
-  - Teradata and Teradata Vantage:
-      - SQL
-      - Basic Teradata Query (BTEQ)
-      - Teradata Parallel Transport (TPT)
-
-Additionally, translation of the following SQL dialects is supported in [preview](https://cloud.google.com/products/#product-launch-stages) :
-
-  - Apache Impala SQL
-  - Apache Spark SQL
-  - Azure Synapse T-SQL
-  - GoogleSQL (BigQuery)
-  - Greenplum SQL
-  - IBM DB2 SQL
-  - MySQL SQL
-  - Oracle SQL, PL/SQL, Exadata
-  - PostgreSQL SQL
-  - Trino or PrestoSQL
-  - Snowflake SQL
-  - SQL Server T-SQL
-  - SQLite
-  - Vertica SQL
-
-### Handling unsupported SQL functions with helper UDFs
+## Handling unsupported SQL functions with helper UDFs
 
 When translating SQL from a source dialect to BigQuery, some functions might not have a direct equivalent. To address this, the BigQuery Migration Service (and the broader BigQuery community) provide helper user-defined functions (UDFs) that replicate the behavior of these unsupported source dialect functions.
 
 These UDFs are often found in the `bqutil` public dataset, allowing translated queries to initially reference them using the format `bqutil.<dataset>.<function>()` . For example, `bqutil.fn.cw_count()` .
 
-#### Important considerations for production environments:
+### Important considerations for production environments:
 
 While `bqutil` offers convenient access to these helper UDFs for initial translation and testing, direct reliance on `bqutil` for production workloads is not recommended for several reasons:
 
@@ -98,239 +67,13 @@ While `bqutil` offers convenient access to these helper UDFs for initial transla
 3.  Customization: You might need to modify or optimize these UDFs to better suit your specific business logic or performance requirements. This is only possible if they are within your own project.
 4.  Security and governance: Your organization's security policies might restrict direct access to public datasets like `bqutil` for production data processing. Copying UDFs to your controlled environment aligns with such policies.
 
-#### Deploying helper UDFs to your project:
+### Deploying helper UDFs to your project:
 
 For reliable and stable production use, you should deploy these helper UDFs into your own project and dataset. This gives you full control over their version, customization, and access. For detailed instructions on how to deploy these UDFs, refer to the [UDFs deployment guide on GitHub](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs#deploying-the-udfs) . This guide provides the necessary scripts and steps to copy the UDFs into your environment.
 
 ## Locations
 
-The interactive SQL translator is available in the following processing locations:
-
-**Region description**
-
-**Region name**
-
-**Details**
-
-**Asia Pacific**
-
-Bangkok
-
-`asia-southeast3`
-
-Delhi
-
-`asia-south2`
-
-Hong Kong
-
-`asia-east2`
-
-Jakarta
-
-`asia-southeast2`
-
-Melbourne
-
-`australia-southeast2`
-
-Mumbai
-
-`asia-south1`
-
-Osaka
-
-`asia-northeast2`
-
-Seoul
-
-`asia-northeast3`
-
-Singapore
-
-`asia-southeast1`
-
-Sydney
-
-`australia-southeast1`
-
-Taiwan
-
-`asia-east1`
-
-Tokyo
-
-`asia-northeast1`
-
-**Europe**
-
-Belgium
-
-`europe-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Berlin
-
-`europe-west10`
-
-EU multi-region
-
-`eu`
-
-Finland
-
-`europe-north1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Frankfurt
-
-`europe-west3`
-
-London
-
-`europe-west2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Madrid
-
-`europe-southwest1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Milan
-
-`europe-west8`
-
-Netherlands
-
-`europe-west4`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Paris
-
-`europe-west9`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Stockholm
-
-`europe-north2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Turin
-
-`europe-west12`
-
-Warsaw
-
-`europe-central2`
-
-Zürich
-
-`europe-west6`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-**Americas**
-
-Columbus, Ohio
-
-`us-east5`
-
-Dallas
-
-`us-south1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Iowa
-
-`us-central1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Las Vegas
-
-`us-west4`
-
-Los Angeles
-
-`us-west2`
-
-Mexico
-
-`northamerica-south1`
-
-Northern Virginia
-
-`us-east4`
-
-Oregon
-
-`us-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Québec
-
-`northamerica-northeast1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-São Paulo
-
-`southamerica-east1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Salt Lake City
-
-`us-west3`
-
-Santiago
-
-`southamerica-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-South Carolina
-
-`us-east1`
-
-Toronto
-
-`northamerica-northeast2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-US multi-region
-
-`us`
-
-**Africa**
-
-Johannesburg
-
-`africa-south1`
-
-**MiddleEast**
-
-Dammam
-
-`me-central2`
-
-Doha
-
-`me-central1`
-
-Israel
-
-`me-west1`
+The interactive SQL translator is only available in select processing locations. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
 
 [Gemini-based translation configurations](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) are only available in specific processing locations. For more information, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
 

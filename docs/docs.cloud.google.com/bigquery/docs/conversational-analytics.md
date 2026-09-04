@@ -110,6 +110,16 @@ The following table shows examples of one-shot prompts that activate the use of 
 | Semantic search         | "Find the top 5 reviews that most closely match 'tension-building psychological thriller'"                         | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
 | Semantic aggregation    | "Summarize the reviews for The English Patient"                                                                    | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
 
+## Analytic task support
+
+Conversational analytics supports [*market basket analysis*](https://en.wikipedia.org/wiki/Association_rule_learning) , also referred to as *association rule learning* , which is a technique used to uncover purchase patterns. This analysis identifies relationships between items frequently purchased together in a single transaction.
+
+For example, you can ask the following question in a conversation that has the `bigquery-public-data.iowa_liquor_sales.sales` table as a data source:
+
+`What are the best product bundling opportunities based on data from 2025?`
+
+Conversational analytics uses built-in SQL templates to help it return an accurate response that includes leverage, support, confidence, and lift metrics.
+
 ## Graph support
 
 Conversational analytics supports using a [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a data source. When you ask questions about your graph, the agent constructs SQL queries to answer them. Agents can use [descriptions and synonyms](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) that you define on your graph labels and properties to improve the quality of the results. Agents can also take advantage of [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to perform multi-level aggregation. If you have [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , then the agent can run GQL queries on your graph. If the response includes graph paths, then graph visualizations are provided.

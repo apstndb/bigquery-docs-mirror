@@ -52,30 +52,22 @@ Create a transfer configuration.
 
 To create a transfer configuration, do the following:
 
-  - Provide the `required_fields` .
-
+  - Provide the `required_fields` . Parameters allowed for Secret Manager must be set with Secret Manager. Plaintext is strictly disallowed in requests.
   - Specify how often you want your transfer to run by specifying `schedule_options`
-
   - Provide the `optional_fields` .
-
   - If you want to use a service account to create this transfer, provide a `service_account_name` .
 
-  - Check that you have valid credentials by calling `check_valid_creds` :
-    
-      - If you do not have valid credentials, do the following:
-      - Find your `client_id` and `data_source_scopes` from your data source definition.
-      - Authorize your data source by navigating to the following link:
-    
-    <!-- end list -->
-    
-        https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=CLIENT_ID&scope=DATA_SOURCE_1%20DATA_SOURCE_2
-    
-      - Provide the `version_info` .
-      - If you have valid credentials, then `version_info` is not required.
+If the request fails due to missing valid credentials, do the following: \* Find your `client_id` and `data_source_scopes` from your data source definition. \* Authorize your data source by navigating to the following link:
+
+    https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=CLIENT_ID&scope=DATA_SOURCE_1%20DATA_SOURCE_2
+
+  - Provide the `version_info` .
 
 `  update_transfer_config  `
 
 Update a transfer configuration.
+
+  - When updating params, parameters allowed for Secret Manager must be set with Secret Manager. Plaintext is strictly disallowed in requests.
 
 The following example shows a MCP call to update a transfer configuration named `transfer_config_id` in the project `myproject` in the location `myregion` .
 

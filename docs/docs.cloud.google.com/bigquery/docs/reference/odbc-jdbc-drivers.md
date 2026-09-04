@@ -57,6 +57,8 @@ You might also be able to get these permissions with [custom roles](https://docs
       - [Windows 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.3.1.3003.msi) ( `.msi` file)
       - [Linux 32-bit and 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.3.1.3003-Linux.tar.gz) ( `.tar.gz` file)
       - [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.3.1.3003.dmg) ( `.dmg` file)
+    
+    By downloading the Simba ODBC driver for BigQuery, you agree to the applicable [Google Terms of Service](https://cloud.google.com/terms) . Sublicensing or OEM redistribution may require separate licensing.
 
 2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-3.3.1.3003.pdf) .
 
@@ -246,6 +248,8 @@ To see a list of previous driver versions, expand the following section:
 > **Note:** As an alternative to the Simba JDBC driver, consider using the [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
 
 1.  Download the [1.8.0.1001 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.0.1001.zip) .
+    
+    By downloading the Simba JDBC driver for BigQuery, you agree to the applicable [Google Terms of Service](https://cloud.google.com/terms) . Sublicensing or OEM redistribution may require separate licensing.
 
 2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.8.0.1001.pdf) .
 
@@ -283,7 +287,11 @@ Support for the Simba ODBC and JDBC drivers for BigQuery is available through st
 
 ## Pricing
 
-You can download the Simba ODBC and JDBC drivers for BigQuery at no cost, and you don't need any additional licenses to use the drivers. However, when you use the driver, the following BigQuery pricing applies:
+You can download the Simba ODBC and JDBC drivers for BigQuery at no cost. However, sublicensing or OEM distribution may require a separate license.
+
+For additional licensing inquiries regarding redistribution or OEM licensing, you may contact insightsoftware (FKA Simba) directly at [insightsoftware.com](https://insightsoftware.com) .
+
+When you use the driver, the following BigQuery pricing applies:
 
   - [Compute pricing](https://cloud.google.com/bigquery/pricing#compute-pricing-models) for the queries that you run.
   - [Storage pricing](https://cloud.google.com/bigquery/pricing#storage-pricing) , if your driver is configured to write large result sets to a destination table.

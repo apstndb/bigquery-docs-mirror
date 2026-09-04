@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints
 title: Manage Sharing data exchanges and listings using custom constraints
-description: Learn how to create and enforce custom organization policies for Sharing data exchanges and listings.
+description: Learn how to create and enforce custom organization policies for BigQuery sharing data exchanges and listings.
 data_source: docs.cloud.google.com
 ---
 
@@ -14,6 +14,8 @@ This page shows you how to use Organization Policy Service custom constraints to
   - `analyticshub.googleapis.com/Listing`
 
 To learn more about Organization Policy, see [Custom organization policies](https://docs.cloud.google.com/organization-policy/overview#custom-organization-policies) .
+
+You can use Organization Policy Service custom constraints to gain fine-grained control over your BigQuery sharing data exchanges and listings. By enforcing custom policies, you help ensure data governance, prevent unauthorized data dissemination, and meet regulatory requirements for your BigQuery sharing resources.
 
 ## About organization policies and constraints
 
@@ -250,9 +252,9 @@ Replace `  POLICY_PATH  ` with the full path to your organization policy YAML fi
 
 ## Test the custom organization policy
 
-The following example shows how you can create a custom constraint and policy that requires all `analyticshub.googleapis.com/DataExchange` resources to be private.
+The following example shows how you can create a custom constraint and an organization policy that requires all `analyticshub.googleapis.com/DataExchange` resources to be private.
 
-Before you begin, you must have the following:
+Before you begin, ensure that you have the following:
 
   - Your organization ID
   - A project ID
@@ -261,7 +263,7 @@ Before you begin, you must have the following:
 
 To create a custom constraint, follow these steps:
 
-1.  Save the following file as `constraint-enforce-dataExchangeDiscovery.yaml` :
+1.  To define the constraint, save the following configuration as `constraint-enforce-dataExchangeDiscovery.yaml` :
     
         name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceDataExchangeDiscovery
         resourceTypes:
@@ -275,13 +277,13 @@ To create a custom constraint, follow these steps:
     
     Replace `  ORGANIZATION_ID  ` with your organization ID.
     
-    This constraint denies operations to create or configure new `analyticshub.googleapis.com/DataExchange` resources if their discovery type is public.
+    If the discovery type is public, this constraint denies operations that create or update `analyticshub.googleapis.com/DataExchange` resources.
 
-2.  Apply the constraint:
+2.  To apply the constraint, run the `gcloud org-policies set-custom-constraint` command in your local terminal or Cloud Shell:
     
         gcloud org-policies set-custom-constraint ~/constraint-enforce-dataExchangeDiscovery.yaml
 
-3.  Verify that the constraint exists:
+3.  To verify that the constraint exists, list the custom constraints for your organization:
     
         gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
     
@@ -293,9 +295,9 @@ To create a custom constraint, follow these steps:
 
 ### Create the policy
 
-Create a policy and apply that policy to the custom constraint that you created.
+To enforce the custom constraint on your project, do the following:
 
-1.  Save the following file as `policy-enforce-dataExchangeDiscovery.yaml` :
+1.  To define the policy, save the following configuration as `policy-enforce-dataExchangeDiscovery.yaml` :
     
         name: projects/PROJECT_ID/policies/custom.enforceDataExchangeDiscovery
         spec:
@@ -304,11 +306,11 @@ Create a policy and apply that policy to the custom constraint that you created.
     
     Replace `  PROJECT_ID  ` with your project ID.
 
-2.  Apply the policy:
+2.  To apply the policy, run the `gcloud org-policies set-policy` command in your local terminal or Cloud Shell:
     
         gcloud org-policies set-policy ~/policy-enforce-dataExchangeDiscovery.yaml
 
-3.  Verify that the policy exists:
+3.  To verify that the policy exists, list the policies for your project:
     
         gcloud org-policies list --project=PROJECT_ID
     
@@ -317,13 +319,13 @@ Create a policy and apply that policy to the custom constraint that you created.
         CONSTRAINT                           LIST_POLICY    BOOLEAN_POLICY    ETAG
         custom.enforceDataExchangeDiscovery  -              SET               ETAG
 
-After you apply the policy, wait about two minutes for Google Cloud to start enforcing the policy.
+After you apply the policy, wait about two minutes for Google Cloud to start enforcing it.
 
 ### Test the policy
 
-Follow the steps in [Create a data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) to create a `analyticshub.googleapis.com/DataExchange` resource in your project. Make it publicly discoverable.
+To test that the policy is enforced, follow the steps in [Create a data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) to create a `analyticshub.googleapis.com/DataExchange` resource in your project, and then set its discovery type to public.
 
-The output is the following:
+Because the policy denies public data exchanges, the operation fails with an error message similar to the following:
 
     Operation failed, please try again. Error Message: Operation denied by org policy on resource 'projects/PROJECT_ID/locations/us':
     ["customConstraints/custom.enforceDataExchangeDiscovery": "All DataExchange resources must be private."]
@@ -345,7 +347,7 @@ This table provides syntax examples for some common custom constraints.
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">DataExchange</code> resources can't be publicly discoverable.</td>
+<td>Deny publicly discoverable data exchanges.</td>
 <td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceDataExchangeDiscovery
     resource_types: analyticshub.googleapis.com/DataExchange
     method_types:
@@ -358,7 +360,7 @@ This table provides syntax examples for some common custom constraints.
     </code></pre></td>
 </tr>
 <tr class="even">
-<td>Only allow creating a <code dir="ltr" translate="no">DataExchange</code> resource in a data clean room (DCR).</td>
+<td>Allow data exchanges only in a data clean room (DCR).</td>
 <td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name:
       organizations/ORGANIZATION_ID/customConstraints/custom.analyticsHubAllowDCRDataExchange
     resource_types: analyticshub.googleapis.com/DataExchange
@@ -371,7 +373,7 @@ This table provides syntax examples for some common custom constraints.
     </code></pre></td>
 </tr>
 <tr class="odd">
-<td>Only allow a <code dir="ltr" translate="no">DataExchange</code> resource with subscriber email logging enabled.</td>
+<td>Allow data exchanges only with subscriber email logging enabled.</td>
 <td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.subscriberEmailLoggingAllowed
     resource_types: analyticshub.googleapis.com/DataExchange
     method_types:
@@ -384,7 +386,7 @@ This table provides syntax examples for some common custom constraints.
     </code></pre></td>
 </tr>
 <tr class="even">
-<td>The <code dir="ltr" translate="no">Listing</code> resource can't be publicly discoverable.</td>
+<td>Deny publicly discoverable listings.</td>
 <td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.noPublicListing
     resource_types: analyticshub.googleapis.com/Listing
     method_types:
@@ -397,7 +399,7 @@ This table provides syntax examples for some common custom constraints.
     </code></pre></td>
 </tr>
 <tr class="odd">
-<td>The <code dir="ltr" translate="no">Listing</code> resource must refer to a BigQuery dataset.</td>
+<td>Allow listings only if they reference a BigQuery dataset.</td>
 <td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.listingWithBQDataset
     resource_types: analyticshub.googleapis.com/Listing
     method_types:
@@ -410,7 +412,7 @@ This table provides syntax examples for some common custom constraints.
     </code></pre></td>
 </tr>
 <tr class="even">
-<td>The <code dir="ltr" translate="no">Listing</code> resource must have the <code dir="ltr" translate="no">restrictedExportPolicy</code> object enabled.</td>
+<td>Allow listings only with restricted export policies enabled.</td>
 <td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.listingWithRestrictedExportPolicy
     resource_types: analyticshub.googleapis.com/Listing
     method_types:
@@ -427,7 +429,7 @@ This table provides syntax examples for some common custom constraints.
 
 ## What's next
 
-  - Learn more about [custom constraints](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints) .
+  - Learn more about [custom constraints](https://docs.cloud.google.com/organization-policy/create-custom-constraints) .
   - Learn more about [Organization Policy Service](https://docs.cloud.google.com/organization-policy/overview) .
   - Learn more about how to [create and manage organization policies](https://docs.cloud.google.com/organization-policy/create-organization-policies) .
   - See the full list of managed [organization policy constraints](https://docs.cloud.google.com/organization-policy/reference/org-policy-constraints) .

@@ -155,7 +155,7 @@ Output only. The next-pagination token. For multiple-page list results, this tok
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;dataSourceId&quot;: string,&quot;params&quot;: {object},&quot;schedule&quot;: string,&quot;scheduleOptions&quot;: {object (ScheduleOptions)},&quot;scheduleOptionsV2&quot;: {object (ScheduleOptionsV2)},&quot;dataRefreshWindowDays&quot;: integer,&quot;disabled&quot;: boolean,&quot;updateTime&quot;: string,&quot;nextRunTime&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;datasetRegion&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;encryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;error&quot;: {object (Status)},&quot;managedTableType&quot;: enum (ManagedTableType),&quot;metadataDestination&quot;: {object (MetadataDestination)},// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.// Union field _owner_info can be only one of the following:&quot;ownerInfo&quot;: {object (UserInfo)}// End of list of possible types for union field _owner_info.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;dataSourceId&quot;: string,&quot;params&quot;: {object},&quot;schedule&quot;: string,&quot;scheduleOptions&quot;: {object (ScheduleOptions)},&quot;scheduleOptionsV2&quot;: {object (ScheduleOptionsV2)},&quot;dataRefreshWindowDays&quot;: integer,&quot;disabled&quot;: boolean,&quot;updateTime&quot;: string,&quot;nextRunTime&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;datasetRegion&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;encryptionConfiguration&quot;: {object (EncryptionConfiguration)},&quot;error&quot;: {object (Status)},&quot;managedTableType&quot;: enum (ManagedTableType),&quot;metadataDestination&quot;: {object (MetadataDestination)},&quot;paramConfig&quot;: {object (ParameterConfig)},// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.// Union field _owner_info can be only one of the following:&quot;ownerInfo&quot;: {object (UserInfo)}// End of list of possible types for union field _owner_info.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -289,6 +289,12 @@ The classification of the destination table.
 ` object ( MetadataDestination  ` )
 
 The metadata destination of the transfer config.
+
+`paramConfig`
+
+` object ( ParameterConfig  ` )
+
+Optional. The config for values in `params` .
 
 Union field `destination` . The destination of the transfer config. `destination` can be only one of the following:
 
@@ -923,6 +929,36 @@ Fields
 `string`
 
 Required. The Dataplex Universal Catalog entry group for importing the metadata. entry\_group has the format of `projects/{project_id}/locations/{region}/entryGroups/{entry_group_id}` .
+
+### ParameterConfig
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;secretManagerManagedParams&quot;: [
+    string
+  ]
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`secretManagerManagedParams[]`
+
+`string`
+
+Optional. The list of parameters that are stored in Secret Manager. The value of a parameter included in this list will be interpreted as a Secret Manager key version resource name instead of a raw value. The raw value will be retrieved from Secret Manager upon execution.
 
 ### NullValue
 

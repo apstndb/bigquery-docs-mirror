@@ -10,74 +10,55 @@ data_source: docs.cloud.google.com
 
 This document describes how to use the translation API in BigQuery to translate scripts written in other SQL dialects into GoogleSQL queries. The translation API can simplify the process of [migrating workloads to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration-intro) .
 
+For a list of SQL dialects supported by this SQL translator, and a list of supported processing locations, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) and [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
+
 ## Before you begin
 
-Before you submit a translation job, complete the following steps:
+Before you submit a translation job, do the following steps.
 
-1.  Ensure that you have all the required permissions.
-2.  Enable the BigQuery Migration API.
-3.  Collect the source files containing the SQL scripts and queries to be translated.
-4.  Upload the source files to Cloud Storage.
+### Enable translations
+
+Enable the required BigQuery Migration API. For more information, see [Enable SQL translations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#enable-api) .
 
 ### Required permissions
 
-To get the permissions that you need to create translation jobs using the translation API, ask your administrator to grant you the [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` ) IAM role on the `parent` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create translation jobs with the interactor translator, the translation API, or the batch SQL translator, ask your administrator to grant you the following IAM roles on the `parent` resource:
 
-This predefined role contains the permissions required to create translation jobs using the translation API. To see the exact permissions that are required, expand the **Required permissions** section:
+  - Viewing and monitoring migration jobs: [MigrationWorkflow Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.viewer) ( `roles/bigquerymigration.viewer` )
+  - Submitting migration jobs: [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` )
+  - Access the Cloud Storage buckets for input and files: Storage Object Admin ( `roles/storage.objectAdmin` ) - on the source and destination Cloud Storage bucket.
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+These predefined roles contain the permissions required to create translation jobs with the interactor translator, the translation API, or the batch SQL translator. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-The following permissions are required to create translation jobs using the translation API:
+The following permissions are required to create translation jobs with the interactor translator, the translation API, or the batch SQL translator:
 
   - `bigquerymigration.workflows.create`
   - `bigquerymigration.workflows.get`
+  - `bigquerymigration.workflows.list`
+  - `bigquerymigration.workflows.delete`
+  - `bigquerymigration.subtasks.get`
+  - `bigquerymigration.subtasks.list`
+  - `storage.objects.get`
+  - `storage.objects.list`
+  - `storage.objects.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
-
-### Enable the BigQuery Migration API
-
-If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
-
-1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
-
-2.  Click **Enable** .
-
-> **Note:** Projects created after February 15, 2022 have this API enabled automatically.
 
 ### Upload input files to Cloud Storage
 
 If you want to use the Google Cloud console or the BigQuery Migration API to perform a translation job, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) or [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket containing the source files. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
-## Supported task types
-
-The translation API can translate the following SQL dialects into GoogleSQL:
-
-  - Amazon Redshift SQL - `Redshift2BigQuery_Translation`
-  - Apache HiveQL and Beeline CLI - `HiveQL2BigQuery_Translation`
-  - Apache Impala - `Impala2BigQuery_Translation`
-  - Apache Spark SQL - `SparkSQL2BigQuery_Translation`
-  - Azure Synapse T-SQL - `AzureSynapse2BigQuery_Translation`
-  - GoogleSQL (BigQuery) - `Bigquery2Bigquery_Translation`
-  - Greenplum SQL - `Greenplum2BigQuery_Translation`
-  - IBM Db2 SQL - `Db22BigQuery_Translation`
-  - IBM Netezza SQL and NZPLSQL - `Netezza2BigQuery_Translation`
-  - MySQL SQL - `MySQL2BigQuery_Translation`
-  - Oracle SQL, PL/SQL, Exadata - `Oracle2BigQuery_Translation`
-  - PostgreSQL SQL - `Postgresql2BigQuery_Translation`
-  - Presto or Trino SQL - `Presto2BigQuery_Translation`
-  - Snowflake SQL - `Snowflake2BigQuery_Translation`
-  - SQLite - `SQLite2BigQuery_Translation`
-  - SQL Server T-SQL - `SQLServer2BigQuery_Translation`
-  - Teradata and Teradata Vantage - `Teradata2BigQuery_Translation`
-  - Vertica SQL - `Vertica2BigQuery_Translation`
-
-### Handling unsupported SQL functions with helper UDFs
+### Handle unsupported SQL functions with helper UDFs
 
 When translating SQL from a source dialect to BigQuery, some functions might not have a direct equivalent. To address this, the BigQuery Migration Service (and the broader BigQuery community) provide helper user-defined functions (UDFs) that replicate the behavior of these unsupported source dialect functions.
 
 These UDFs are often found in the `bqutil` public dataset, allowing translated queries to initially reference them using the format `bqutil.<dataset>.<function>()` . For example, `bqutil.fn.cw_count()` .
 
-#### Important considerations for production environments:
+### Important considerations for production environments
 
 While `bqutil` offers convenient access to these helper UDFs for initial translation and testing, direct reliance on `bqutil` for production workloads is not recommended for several reasons:
 
@@ -86,243 +67,13 @@ While `bqutil` offers convenient access to these helper UDFs for initial transla
 3.  Customization: You might need to modify or optimize these UDFs to better suit your specific business logic or performance requirements. This is only possible if they are within your own project.
 4.  Security and governance: Your organization's security policies might restrict direct access to public datasets like `bqutil` for production data processing. Copying UDFs to your controlled environment aligns with such policies.
 
-#### Deploying helper UDFs to your project:
+### Deploying helper UDFs to your project
 
 For reliable and stable production use, you should deploy these helper UDFs into your own project and dataset. This gives you full control over their version, customization, and access. For detailed instructions on how to deploy these UDFs, refer to the [UDFs deployment guide on GitHub](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs#deploying-the-udfs) . This guide provides the necessary scripts and steps to copy the UDFs into your environment.
 
-## Locations
-
-The translation API is available in the following processing locations:
-
-**Region description**
-
-**Region name**
-
-**Details**
-
-**Asia Pacific**
-
-Bangkok
-
-`asia-southeast3`
-
-Delhi
-
-`asia-south2`
-
-Hong Kong
-
-`asia-east2`
-
-Jakarta
-
-`asia-southeast2`
-
-Melbourne
-
-`australia-southeast2`
-
-Mumbai
-
-`asia-south1`
-
-Osaka
-
-`asia-northeast2`
-
-Seoul
-
-`asia-northeast3`
-
-Singapore
-
-`asia-southeast1`
-
-Sydney
-
-`australia-southeast1`
-
-Taiwan
-
-`asia-east1`
-
-Tokyo
-
-`asia-northeast1`
-
-**Europe**
-
-Belgium
-
-`europe-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Berlin
-
-`europe-west10`
-
-EU multi-region
-
-`eu`
-
-Finland
-
-`europe-north1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Frankfurt
-
-`europe-west3`
-
-London
-
-`europe-west2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Madrid
-
-`europe-southwest1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Milan
-
-`europe-west8`
-
-Netherlands
-
-`europe-west4`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Paris
-
-`europe-west9`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Stockholm
-
-`europe-north2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Turin
-
-`europe-west12`
-
-Warsaw
-
-`europe-central2`
-
-Zürich
-
-`europe-west6`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-**Americas**
-
-Columbus, Ohio
-
-`us-east5`
-
-Dallas
-
-`us-south1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Iowa
-
-`us-central1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Las Vegas
-
-`us-west4`
-
-Los Angeles
-
-`us-west2`
-
-Mexico
-
-`northamerica-south1`
-
-Northern Virginia
-
-`us-east4`
-
-Oregon
-
-`us-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Québec
-
-`northamerica-northeast1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-São Paulo
-
-`southamerica-east1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Salt Lake City
-
-`us-west3`
-
-Santiago
-
-`southamerica-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-South Carolina
-
-`us-east1`
-
-Toronto
-
-`northamerica-northeast2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-US multi-region
-
-`us`
-
-**Africa**
-
-Johannesburg
-
-`africa-south1`
-
-**MiddleEast**
-
-Dammam
-
-`me-central2`
-
-Doha
-
-`me-central1`
-
-Israel
-
-`me-west1`
-
 ## Submit a translation job
 
-To submit a translation job using the translation API, use the [`projects.locations.workflows.create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create) method and supply an instance of the [`MigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#resource:-migrationworkflow) resource with a [supported task type](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) .
+To submit a translation job using the translation API, use the [`projects.locations.workflows.create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create) method and supply an instance of the [`MigrationWorkflow`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#resource:-migrationworkflow) resource with a [supported task type](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
 
 Once the job is submitted, you can [issue a query to get results](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#explore_the_translation_output) .
 
@@ -351,7 +102,7 @@ The following `curl` command creates a batch translation job where the input and
 
 Replace the following:
 
-  - `  TYPE  ` : the [task type](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) of the translation, which determines the source and target dialect.
+  - `  TYPE  ` : the [task type](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) of the translation, which determines the source and target dialect.
 
   - `  TARGET_BASE  ` : the base URI for all translation outputs.
 
@@ -368,7 +119,7 @@ Replace the following:
 
   - `  PROJECT_ID  ` : the project to process the translation.
 
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#locations) where the job is processed.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) where the job is processed.
 
 The preceding command returns a response that includes a workflow ID written in the format ` projects/ PROJECT_ID /locations/ LOCATION /workflows/ WORKFLOW_ID  ` .
 
@@ -464,13 +215,13 @@ The following `curl` command creates a translation job with string literal input
 
 Replace the following:
 
-  - `  TYPE  ` : the [task type](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) of the translation, which determines the source and target dialect.
+  - `  TYPE  ` : the [task type](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) of the translation, which determines the source and target dialect.
   - `  PATH  ` : the identifier of the literal entry, similar to a filename or path.
   - `  STRING  ` : string of literal input data (for example, SQL) to be translated.
   - `  TARGETS  ` : the expected targets that the user wants to be directly returned in the response in the `literal` format. These should be in the target URI format (for example, GENERATED\_DIR + `target_spec.relative_path` + `source_spec.literal.relative_path` ). Anything not in this list is not returned in the response. The generated directory, GENERATED\_DIR for general SQL translations is `sql/` .
   - `  TOKEN  ` : the token for authentication. To generate a token, use the `gcloud auth print-access-token` command or the [OAuth 2.0 playground](https://developers.google.com/oauthplayground/) (use the scope `https://www.googleapis.com/auth/cloud-platform` ).
   - `  PROJECT_ID  ` : the project to process the translation.
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#locations) where the job is processed.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) where the job is processed.
 
 The preceding command returns a response that includes a workflow ID written in the format ` projects/ PROJECT_ID /locations/ LOCATION /workflows/ WORKFLOW_ID  ` .
 
@@ -553,7 +304,7 @@ Replace the following:
 
   - `  TOKEN  ` : the token for authentication. To generate a token, use the `gcloud auth print-access-token` command or the [OAuth 2.0 playground](https://developers.google.com/oauthplayground/) (use the scope `https://www.googleapis.com/auth/cloud-platform` ).
   - `  PROJECT_ID  ` : the project to process the translation.
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#locations) where the job is processed.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) where the job is processed.
   - `  WORKFLOW_ID  ` : the ID generated when you create a translation workflow.
 
 The response contains the status of your migration workflow, and any completed files in `target_return_literals` .
