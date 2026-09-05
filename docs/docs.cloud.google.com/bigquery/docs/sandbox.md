@@ -70,7 +70,9 @@ The BigQuery sandbox is subject to the following limits:
 
   - All BigQuery [quotas and limits](https://docs.cloud.google.com/bigquery/quotas) apply.
 
-  - You are granted the same free usage limits as the BigQuery [free tier](https://cloud.google.com/bigquery/pricing#free-tier) , including 10 GB of active storage and 1 TB of processed query data each month.
+  - You are granted a lifetime limit of 10 GiB of storage. This quota is not refunded upon data deletion.
+
+  - You are granted the same free compute limit as the BigQuery [free tier](https://cloud.google.com/bigquery/pricing#free-usage-tier) of 1 TiB of processed query data each month.
 
   - All BigQuery [datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) have a [default table expiration time](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , and all [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) , [views](https://docs.cloud.google.com/bigquery/docs/views-intro) , and [partitions](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) automatically expire after 60 days.
 

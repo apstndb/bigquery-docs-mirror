@@ -414,6 +414,25 @@ To resolve this error, you can request a quota increase by contacting [support](
 
 You can't increase the following quotas or limits, but you can apply the suggested workarounds or best practices to mitigate them.
 
+### Table snapshot limit exceeded
+
+This error occurs when a BigQuery table exceeds the maximum number of table snapshots allowed within a 24-hour period. This is a table-level limit, which means that it applies to each individual table in your project.
+
+For more information about the limits on table operations per day, see [Standard tables](https://docs.cloud.google.com/bigquery/quotas#standard_tables) .
+
+This limit [cannot be increased](https://docs.cloud.google.com/bigquery/quotas#table_snapshots) .
+
+**Error message**
+
+    Your table exceeded quota for SNAPSHOT operations per table
+
+#### Resolution
+
+To resolve this error, consider the following actions:
+
+  - Reduce the number of snapshot operations performed on the affected table within a 24-hour window.
+  - If reducing the snapshot frequency isn't an option, contact [Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) or your technical account manager.
+
 ### Maximum number of pending jobs errors
 
 This limit [can't be increased](https://docs.cloud.google.com/bigquery/quotas#pending_jobs) .

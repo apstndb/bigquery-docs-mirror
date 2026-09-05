@@ -1,47 +1,22 @@
 ---
-name: documents/docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly
-uri: https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly
+name: documents/docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_query_results
+uri: https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_query_results
 title: 'MCP Tools Reference: bigquery.googleapis.com'
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-## Tool: `execute_sql_readonly`
+## Tool: `get_query_results`
 
-Run a read-only SQL query in the project and return the result. Prefer this tool over `execute_sql` if possible.
+Get the results of a BigQuery SQL query job.
 
-This tool is restricted to only `SELECT` statements. `INSERT` , `UPDATE` , and `DELETE` statements and stored procedures aren't allowed. If the query doesn't include a `SELECT` statement, an error is returned. For information on creating queries, see the [GoogleSQL documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
+Use this tool ONLY when: 1. A previous `execute_sql` or `execute_sql_readonly` call returned `job_complete: false` with a `job_id` (poll with this tool until `job_complete: true` ), OR 2. You need to paginate through additional rows using `page_token` or `start_index` for a previously completed job.
 
-Example Queries:
+Do NOT call this tool if the query already returned `job_complete: true` with all rows.
 
-```sql
--- Count the number of penguins in each island.
-        SELECT island, COUNT(*) AS population
-        FROM bigquery-public-data.ml_datasets.penguins GROUP BY island
+Supports pagination. Use `max_results` to limit results and `page_token` to retrieve the next page of results.
 
-        -- Evaluate a bigquery ML Model.
-        SELECT * FROM ML.EVALUATE(MODEL `my_dataset.my_model`)
-
-        -- Evaluate BigQuery ML model on custom data
-        SELECT *
-        FROM ML.EVALUATE(MODEL `my_dataset.my_model`, (SELECT * FROM `my_dataset.my_table`))
-
-        -- Predict using BigQuery ML model:
-        SELECT *
-        FROM ML.PREDICT(MODEL `my_dataset.my_model`, (SELECT * FROM `my_dataset.my_table`))
-
-        -- Forecast data using AI.FORECAST
-        SELECT *
-        FROM AI.FORECAST(TABLE `project.dataset.my_table`, data_col => 'num_trips',
-          timestamp_col => 'date', id_cols => ['usertype'], horizon => 30)
-        
-```
-
-Queries executed using the `execute_sql_readonly` tool will always have the job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
-
-Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` . In this case, use the `get_query_results` tool with `job_id` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
-
-The following code sample shows how to use `curl` to call the `execute_sql_readonly` MCP tool.
+The following code sample shows how to use `curl` to call the `get_query_results` MCP tool.
 
 <table>
 <colgroup>
@@ -60,7 +35,7 @@ The following code sample shows how to use `curl` to call the `execute_sql_reado
 --data &#39;{
   &quot;method&quot;: &quot;tools/call&quot;,
   &quot;params&quot;: {
-    &quot;name&quot;: &quot;execute_sql_readonly&quot;,
+    &quot;name&quot;: &quot;get_query_results&quot;,
     &quot;arguments&quot;: {
       // Provide these details according to the MCP tool specification.
     }
@@ -74,9 +49,9 @@ The following code sample shows how to use `curl` to call the `execute_sql_reado
 
 ## Input Schema
 
-Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
+Request for getting query results of a job.
 
-### QueryRequest
+### GetQueryResultsRequest
 
 <table>
 <colgroup>
@@ -91,14 +66,12 @@ Runs a BigQuery SQL query synchronously and returns query results if the query c
 <tr class="odd">
 <td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
-  &quot;query&quot;: string,
-  &quot;dryRun&quot;: boolean,
-  &quot;labels&quot;: {
-    string: string,
-    ...
-  },
-  &quot;jobTimeoutMs&quot;: string,
-  &quot;timeoutMs&quot;: integer
+  &quot;jobId&quot;: string,
+  &quot;startIndex&quot;: string,
+  &quot;pageToken&quot;: string,
+  &quot;maxResults&quot;: integer,
+  &quot;timeoutMs&quot;: integer,
+  &quot;location&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -110,72 +83,45 @@ Fields
 
 `string`
 
-Required. Project that will be used for query execution and billing.
+Required. Project ID of the query job.
 
-`query`
+`jobId`
 
 `string`
 
-Required. The query to execute in the form of a GoogleSQL query.
+Required. Job ID of the query job.
 
-`dryRun`
+`startIndex`
 
-`boolean`
+`string ( UInt64Value format)`
 
-Optional. If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.
+Optional. Zero-based index of the starting row.
 
-`labels`
+`pageToken`
 
-`map (key: string, value: string)`
+`string`
 
-Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the map must have a different key.
+Optional. Page token, returned by a previous call, to request the next page of results.
 
-An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
+`maxResults`
 
-`jobTimeoutMs`
+`integer`
 
-`string ( Int64Value format)`
-
-Optional. Optional: Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop the query job.
+Optional. Maximum number of results to read.
 
 `timeoutMs`
 
 `integer`
 
-Optional. Optional: Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete. By default, this limit is 20 seconds (20,000 milliseconds).
+Optional. Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete.
 
-### LabelsEntry
-
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;key&quot;: string,
-  &quot;value&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-Fields
-
-`key`
+`location`
 
 `string`
 
-`value`
+Optional. The geographic location of the job.
 
-`string`
-
-### Int64Value
+### UInt64Value
 
 <table>
 <colgroup>
@@ -199,9 +145,9 @@ Fields
 
 `value`
 
-`string ( int64 format)`
+`string`
 
-The int64 value.
+The uint64 value.
 
 ### UInt32Value
 

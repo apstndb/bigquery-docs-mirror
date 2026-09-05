@@ -80,6 +80,8 @@ FROM AI.FORECAST(TABLE `project.dataset.my_table`, data_col => 'num_trips',
 
 Queries executed using the `execute_sql_readonly` tool will always have the job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
 
+Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` . In this case, use the `get_query_results` tool with `job_id` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
+
 `  execute_sql  `
 
 Run a SQL query in the project and return the result. Prefer the `execute_sql_readonly` tool if possible.
@@ -128,6 +130,24 @@ SELECT col1, col2, timestamp, label FROM `my_project.my_dataset.my_table`;
 ```
 
 Queries executed using the `execute_sql` tool will always have the default job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
+
+Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the initial result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` . In this case, use the `get_query_results` tool with `job_id` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
+
+`  get_query_results  `
+
+Get the results of a BigQuery SQL query job.
+
+Use this tool ONLY when: 1. A previous `execute_sql` or `execute_sql_readonly` call returned `job_complete: false` with a `job_id` (poll with this tool until `job_complete: true` ), OR 2. You need to paginate through additional rows using `page_token` or `start_index` for a previously completed job.
+
+Do NOT call this tool if the query already returned `job_complete: true` with all rows.
+
+Supports pagination. Use `max_results` to limit results and `page_token` to retrieve the next page of results.
+
+`  cancel_job  `
+
+Cancel a running BigQuery job.
+
+Use this tool to cancel a query job that is currently executing (i.e. returned `job_complete: false` with a `job_id` from `execute_sql` or `execute_sql_readonly` ). Specify the `job_id` to abort.
 
 ### Get MCP tool specifications
 

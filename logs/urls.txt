@@ -728,7 +728,6 @@ https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Sh
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/TestIamPermissionsResponse	2025-10-17T21:03:48Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections	2026-08-27T18:39:34Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/create	2025-10-17T21:04:12Z
-https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/delete	2025-10-17T21:03:42Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/get	2025-10-17T21:04:12Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/getIamPolicy	2025-10-17T21:03:48Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/list	2025-10-17T21:04:42Z
@@ -880,10 +879,12 @@ https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.rp
 https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql	2026-08-27T03:57:26Z
 https://docs.cloud.google.com/bigquery/docs/reference/libraries	2026-09-01T04:15:32Z
 https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview	2026-08-27T03:58:11Z
-https://docs.cloud.google.com/bigquery/docs/reference/mcp	2026-08-25T20:49:32Z
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql	2026-08-28T16:33:12Z
-https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly	2026-08-28T16:33:12Z
+https://docs.cloud.google.com/bigquery/docs/reference/mcp	2026-09-04T17:22:07Z
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/cancel_job	2026-09-04T17:22:07Z
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql	2026-09-04T17:22:07Z
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly	2026-09-04T17:22:07Z
 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info	2026-08-28T16:33:12Z
+https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_query_results	2026-09-04T17:22:07Z
 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info	2026-08-28T16:33:12Z
 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_dataset_ids	2026-08-28T02:57:40Z
 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_table_ids	2026-08-28T02:57:40Z
@@ -1292,7 +1293,7 @@ https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart	2026-08-27T03:
 https://docs.cloud.google.com/bigquery/docs/salesforce-transfer	2026-08-27T03:57:58Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro	2026-08-27T03:57:58Z
 https://docs.cloud.google.com/bigquery/docs/samples	2026-09-01T21:46:46Z
-https://docs.cloud.google.com/bigquery/docs/sandbox	2026-08-27T03:57:58Z
+https://docs.cloud.google.com/bigquery/docs/sandbox	2026-09-04T17:03:38Z
 https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries	2026-08-27T04:01:48Z
 https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction	2026-08-27T04:01:48Z
 https://docs.cloud.google.com/bigquery/docs/scan-with-dlp	2026-08-27T04:01:48Z
@@ -1363,7 +1364,7 @@ https://docs.cloud.google.com/bigquery/docs/translate-text	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-intro	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries	2026-08-27T03:57:51Z
-https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas	2026-08-27T03:57:51Z
+https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas	2026-09-04T17:22:31Z
 https://docs.cloud.google.com/bigquery/docs/tune-evaluate	2026-08-31T16:22:59Z
 https://docs.cloud.google.com/bigquery/docs/understand-text	2026-08-27T03:57:51Z
 https://docs.cloud.google.com/bigquery/docs/updating-datasets	2026-08-27T03:57:51Z

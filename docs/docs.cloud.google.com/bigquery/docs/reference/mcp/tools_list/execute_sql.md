@@ -56,6 +56,8 @@ Example Queries:
 
 Queries executed using the `execute_sql` tool will always have the default job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
 
+Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the initial result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` . In this case, use the `get_query_results` tool with `job_id` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
+
 The following code sample shows how to use `curl` to call the `execute_sql` MCP tool.
 
 <table>
@@ -111,7 +113,9 @@ Runs a BigQuery SQL query synchronously and returns query results if the query c
   &quot;labels&quot;: {
     string: string,
     ...
-  }
+  },
+  &quot;jobTimeoutMs&quot;: string,
+  &quot;timeoutMs&quot;: integer
 }</code></pre></td>
 </tr>
 </tbody>
@@ -145,6 +149,18 @@ Optional. The labels associated with this query. Labels can be used to organize 
 
 An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
+`jobTimeoutMs`
+
+`string ( Int64Value format)`
+
+Optional. Optional: Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop the query job.
+
+`timeoutMs`
+
+`integer`
+
+Optional. Optional: Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete. By default, this limit is 20 seconds (20,000 milliseconds).
+
 ### LabelsEntry
 
 <table>
@@ -176,6 +192,62 @@ Fields
 
 `string`
 
+### Int64Value
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;value&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`value`
+
+`string ( int64 format)`
+
+The int64 value.
+
+### UInt32Value
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;value&quot;: integer
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`value`
+
+`integer ( uint32 format)`
+
+The uint32 value.
+
 ## Output Schema
 
 Response for a BigQuery SQL query.
@@ -193,7 +265,7 @@ Response for a BigQuery SQL query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;schema&quot;: {object (TableSchema)},&quot;rows&quot;: [{object}],&quot;jobComplete&quot;: boolean,&quot;errors&quot;: [{object (ErrorProto)}],&quot;queryId&quot;: string,&quot;totalBytesBilled&quot;: string,&quot;totalSlotMs&quot;: string,&quot;numDmlAffectedRows&quot;: string,&quot;totalBytesProcessed&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;schema&quot;: {object (TableSchema)},&quot;rows&quot;: [{object}],&quot;jobComplete&quot;: boolean,&quot;errors&quot;: [{object (ErrorProto)}],&quot;queryId&quot;: string,&quot;totalBytesBilled&quot;: string,&quot;totalSlotMs&quot;: string,&quot;numDmlAffectedRows&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;jobId&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -253,6 +325,12 @@ Output only. The number of rows affected by a DML statement.
 `string ( Int64Value format)`
 
 Output only. The total number of bytes processed for this query.
+
+`jobId`
+
+`string`
+
+Output only. The ID of the BigQuery job created for this query, if any. Present when a query job is created (e.g. for long-running operations, DML, scripts). Use this ID with `get_query_results` , `cancel_job` , or `get_job` .
 
 ### TableSchema
 
