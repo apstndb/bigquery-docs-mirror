@@ -728,6 +728,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Sh
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/TestIamPermissionsResponse	2025-10-17T21:03:48Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections	2026-08-27T18:39:34Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/create	2025-10-17T21:04:12Z
+https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/delete	2025-10-17T21:03:42Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/get	2025-10-17T21:04:12Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/getIamPolicy	2025-10-17T21:03:48Z
 https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections/list	2025-10-17T21:04:42Z
