@@ -718,7 +718,7 @@ Optional. The app profile to use for the Bigtable writes. If not specified, the 
 
 `string`
 
-Optional. The service account to use to write to Bigtable. The subscription creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/%7B$universe.dns_names.final_documentation_domain%7D/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
+Optional. The service account to use to write to Bigtable. The subscription creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
 
 `writeMetadata`
 
@@ -1009,7 +1009,7 @@ Required. An endpoint to a Vertex AI model of the form `projects/{project}/locat
 
 `string`
 
-Optional. The service account to use to make prediction requests against endpoints. The resource creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/%7B$universe.dns_names.final_documentation_domain%7D/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
+Optional. The service account to use to make prediction requests against endpoints. The resource creator or updater that specifies this field must have `iam.serviceAccounts.actAs` permission on the service account. If not specified, the Pub/Sub [service agent](https://cloud.google.com/iam/docs/service-agents) , service-{projectNumber}@gcp-sa-pubsub.iam.gserviceaccount.com, is used.
 
 The format of inference requests made to the endpoint. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
 

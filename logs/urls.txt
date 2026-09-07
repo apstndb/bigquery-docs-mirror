@@ -606,7 +606,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/proj
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/listSubscriptions	2025-10-17T21:03:59Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/patch	2025-10-17T21:03:12Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/setIamPolicy	2025-10-17T21:03:54Z
-https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe	2026-08-28T16:33:12Z
+https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe	2026-09-07T08:25:07Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/testIamPermissions	2025-10-17T21:05:05Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates	2026-08-18T19:33:38Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/approve	2025-11-12T09:57:02Z
