@@ -22,7 +22,7 @@ For more information, see [Create metadata files](https://docs.cloud.google.com/
 
 You can use the `dwh-migration-dumper` tool to extract metadata from the following database platforms:
 
-  - Teradata
+  - Teradata version 15 or later, and on-premises Teradata VantageCore
   - Amazon Redshift
   - Apache Hive
   - Apache Impala
@@ -107,6 +107,8 @@ Running the `dwh-migration-dumper` tool creates an output file named `dwh-migrat
 Use the following instructions to learn how to run the `dwh-migration-dumper` tool for your source platform.
 
 ### Teradata
+
+> **Note:** The migration assessment supports Teradata version 15 or later, and supports only on-premises versions of Teradata VantageCore. Teradata VantageCloud is not supported.
 
 To allow the `dwh-migration-dumper` tool to connect to Teradata, download their JDBC driver from Teradata's [download page](https://downloads.teradata.com/download/connectivity/jdbc-driver) .
 

@@ -332,6 +332,9 @@ The following are common errors encountered when [creating a Campaign Manager tr
   - Error: `A permission denied error was encountered: PERMISSION_DENIED. Please ensure that the user account setting up the transfer config has the necessary permissions, and that the configuration settings are correct.`  
     **Resolution:** The user creating the Campaign Manager transfer must have read access to the [Cloud Storage bucket](https://console.cloud.google.com/storage) containing the Data Transfer V2.0 files. You can obtain information about the Cloud Storage bucket and request access from your Campaign Manager administrator.
 
+  - Error: ` Unexpected fields found: [ FIELD_NAMES ]; Table: ' TABLE_NAME ', file: FILE_NAME  `  
+    **Resolution:** The Campaign Manager transfer supports a subset of the fields supported in Campaign Manager. If you encounter this error, [request support](https://docs.cloud.google.com/bigquery/docs/getting-support) to raise a feature request.
+
 ## Google Ads transfer issues
 
 The following are common errors encountered when [creating a Google Ads transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) .

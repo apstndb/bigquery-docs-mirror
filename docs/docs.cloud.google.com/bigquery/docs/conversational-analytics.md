@@ -69,7 +69,7 @@ You can create and manage conversations in BigQuery using the Google Cloud conso
 
 ## BigQuery AI and ML support
 
-Conversational analytics supports the following AI functions in response to chats with data agents and data sources, and in verified SQL queries that you create.
+Conversational analytics supports the following AI and ML functions in response to chats with data agents and data sources, and in verified SQL queries that you create.
 
   - [`AI.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
   - [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
@@ -81,9 +81,12 @@ Conversational analytics supports the following AI functions in response to chat
   - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
   - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
   - [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg)
+  - [`AI.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict)
   - [`ML.DETECT_CHANGE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points)
   - [`ML.SEASONALITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality)
   - [`ML.TREND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend)
+  - [`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)
+  - [`ML.CORRELATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-correlation)
 
 You must have [the required permissions](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
 
@@ -109,6 +112,12 @@ The following table shows examples of one-shot prompts that activate the use of 
 | Semantic categorization | "Tag each review with the reviewer's main focus: Acting, Plot, Cinematography, Directing, or Other"                | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
 | Semantic search         | "Find the top 5 reviews that most closely match 'tension-building psychological thriller'"                         | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
 | Semantic aggregation    | "Summarize the reviews for The English Patient"                                                                    | [`bigquery-public-data.imdb.reviews`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=imdb&t=reviews&page=table)                                                       |
+| Predictive modeling     | "Predict the body mass of penguins"                                                                                | [`bigquery-public-data.ml_datasets.penguins`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=penguins&page=table)                                       |
+| Change point detection  | "Detect change points in daily trips."                                                                             | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
+| Seasonality analysis    | "Analyze the seasonality pattern of daily trips for 2017."                                                         | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
+| Trend analysis          | "Analyze the long-term trend of daily trips for 2017."                                                             | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
+| Data profiling          | "Profile the table to check for any data inconsistencies"                                                          | [`bigquery-public-data.ml_datasets.census_adult_income`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=census_adult_income&page=table)                 |
+| Correlation analysis    | "How does body mass correlate with flipper length, culmen length, and culmen depth?"                               | [`bigquery-public-data.ml_datasets.penguins`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=penguins&page=table)                                       |
 
 ## Analytic task support
 

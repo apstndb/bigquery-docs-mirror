@@ -321,6 +321,35 @@ The following query creates an external table from images of pet products stored
       `cymbal_pets.product_images` AS images
     LIMIT 10;
 
+### Calculate classification metrics
+
+The following example uses the [`ML.METRICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-metrics) to calculate classification metrics for news categories predicted by the `AI.CLASSIFY` function against actual labeled categories:
+
+    SELECT *
+    FROM ML.METRICS(
+      (
+        SELECT
+          category,
+          AI.CLASSIFY(
+            body,
+            categories => ['business', 'entertainment', 'politics', 'sport', 'tech']
+          ) AS predicted_category
+        FROM
+          `bigquery-public-data.bbc_news.fulltext`
+        LIMIT 100
+      ),
+      predicted_col => 'predicted_category',
+      actual_col => 'category',
+      task_type => 'classification');
+
+The result is similar to the following:
+
+    +-----------+--------+----------+----------+
+    | precision | recall | accuracy | f1_score |
+    +-----------+--------+----------+----------+
+    | 0.33      | 0.28   | 0.84     | 0.30     |
+    +-----------+--------+----------+----------+
+
 ### Handle inference errors
 
 The following query classifies news articles but sets `max_error_ratio` to `0.05` , meaning the query fails if more than 5% of rows return an error during inference:

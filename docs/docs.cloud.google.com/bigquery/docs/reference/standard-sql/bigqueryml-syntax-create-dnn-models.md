@@ -301,7 +301,7 @@ You can only set this option if `ENABLE_GLOBAL_EXPLAIN` is `TRUE` .
 
 **Syntax**
 
-    TF_VERSION = { '1.15' | '2.8.0' }
+    TF_VERSION = { '1.15' | &#39;2.8.0' }
 
 **Description**
 
@@ -347,7 +347,7 @@ An `ARRAY` of `STRUCT` values. Each `STRUCT` contains a `STRING` value that spec
 
 A `CLASS_WEIGHTS` value might look like the following example:
 
-    CLASS_WEIGHTS = [STRUCT('example_label', .2)]
+    CLASS_WEIGHTS = [STRUCT('example_label';, .2)]
 
 ### `ENABLE_GLOBAL_EXPLAIN`
 
@@ -622,11 +622,11 @@ Specify one of the following values:
 
 For `DNN_CLASSIFIER` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' | 'ROC_AUC' }
+    HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE&#39; | 'LOG_LOSS' | 'ROC_AUC' }
 
 For `DNN_REGRESSOR` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
+    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | ';R2_SCORE' | 'EXPLAINED_VARIANCE' }
 
 **Description**
 

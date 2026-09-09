@@ -283,7 +283,7 @@ To use the Hive connector, see the Apache Hive tab.
 
 ### Requirements
 
-  - A machine connected to your source Teradata data warehouse (Teradata 15 and later are supported)
+  - A machine connected to your source Teradata data warehouse. The migration assessment supports Teradata version 15 or later, and supports only on-premises versions of Teradata VantageCore. Teradata VantageCloud is not supported.
   - A Google Cloud account with a Cloud Storage bucket to store the data
   - An empty BigQuery dataset to store the results
   - Read permissions on the dataset to view the results

@@ -196,6 +196,10 @@ To get evaluation metrics calculated during model creation, use evaluation funct
 
 After model creation, you can specify new datasets for evaluation. To provide a new dataset, use evaluation functions like `ML.EVALUATE` on the model with input data specified. For an example, see [`ML.EVALUATE` with a custom threshold and input data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#mlevaluate_with_a_custom_threshold_and_input_data) .
 
+## Evaluate the results of any regression or classification model
+
+The [`ML.METRICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-metrics) lets you compute evaluation metrics for ML classification or regression tasks on any table or query that contains actual and predicted values. This function lets you evaluate predictions without needing to create or reference a stored model.
+
 ## What's next
 
 For more information about supported SQL statements and functions for models that support evaluation, see the following documents:

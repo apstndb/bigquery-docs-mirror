@@ -61,9 +61,8 @@ The following query uses `AI.PREDICT` to perform regression to predict the body 
       WHERE body_mass_g > 0
     )
     SELECT
-     *
-    FROM
-     AI.PREDICT(
+      *
+    FROM AI.PREDICT(
       # Training data
       (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
       # Prediction data
@@ -80,6 +79,40 @@ The result is similar to the following:
     | ...               | ...    | ...              | ...             | ...               | ...         | ...    | ...                   |
     +-------------------+--------+------------------+-----------------+-------------------+-------------+--------+-----------------------+
 
+### Calculate prediction accuracy
+
+You can compute regression metrics for the predictions using the [`ML.METRICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-metrics) :
+
+    WITH prepared_data AS (
+      SELECT *, RAND() <= 0.8 AS training
+      FROM `bigquery-public-data.ml_datasets.penguins`
+      WHERE body_mass_g > 0
+    )
+    SELECT *
+    FROM ML.METRICS(
+      (
+        SELECT
+        *
+        FROM
+        AI.PREDICT(
+          # Training data
+          (SELECT * EXCEPT(training) FROM prepared_data WHERE training),
+          # Prediction data
+          (SELECT * EXCEPT(training) FROM prepared_data WHERE NOT training),
+          label_col => 'body_mass_g')
+      ),
+      predicted_col => 'predicted_body_mass_g',
+      actual_col => 'body_mass_g',
+      task_type => 'regression');
+
+The result is similar to the following:
+
+    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+    | mean_absolute_error | mean_squared_error | mean_squared_log_error | median_absolute_error | r2_score            | explained_variance  |
+    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+    | 158.33734939759032  | 46334.843373493975 | 0.0027285838904596953  | 104.0                 | 0.91609072642998024 | 0.91803270745448851 |
+    +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
+
 ### Perform classification
 
 The following query uses `AI.PREDICT` to perform classification to predict the sex of a penguin:
@@ -88,7 +121,6 @@ The following query uses `AI.PREDICT` to perform classification to predict the s
       SELECT *, RAND() <= 0.8 AS training
       FROM `bigquery-public-data.ml_datasets.penguins`
       WHERE sex IS NOT NULL and sex != "."
-    
     )
     SELECT
      *

@@ -36,13 +36,15 @@ You can install and configure the JDBC driver for BigQuery by either direcly dow
 
 To configure the JDBC driver through direct download, do the following:
 
-1.  Download the [1.2.0 version of the driver](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.2.0-all.jar) .
+1.  Download the [1.4.0 version of the driver](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.4.0-all.jar) .
 2.  Copy the downloaded file to the location specified by your software.
 
 For information on feature changes and workflow updates, see [the changelog](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/CHANGELOG.md) .
 
 ### Previous JDBC driver for BigQuery versions
 
+  - [1.3.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.3.0-all.jar)
+  - [1.2.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.2.0-all.jar)
   - [1.1.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.1.0-all.jar)
   - [1.0.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.0.0-all.jar)
 
@@ -59,7 +61,7 @@ Add the following dependency to your `pom.xml` file:
     <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-bigquery-jdbc</artifactId>
-        <version>1.1.0</version>
+        <version>1.4.0</version>
     </dependency>
 
 ### Maven using uber-JAR
@@ -69,7 +71,7 @@ Add the following dependency to your `pom.xml` file:
     <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>google-cloud-bigquery-jdbc</artifactId>
-        <version>1.1.0</version>
+        <version>1.4.0</version>
         <classifier>all</classifier>
         <exclusions>
           <exclusion>
@@ -85,7 +87,7 @@ Add the following to your `build.gradle` file:
 
     dependencies {
     // ... other dependencies
-    implementation("com.google.cloud:google-cloud-bigquery-jdbc:1.1.0")
+    implementation("com.google.cloud:google-cloud-bigquery-jdbc:1.4.0")
     }
 
 ## Establish a connection

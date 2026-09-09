@@ -1199,11 +1199,13 @@ For models other than remote models, BigQuery ML processes and stages data in th
 
 BigQuery ML stores your data in the selected location in accordance with the [Service Specific Terms](https://cloud.google.com/terms/service-terms#13-google-bigquery-service) .
 
-## BigQuery SQL translator locations
+## BigQuery SQL translator and migration lineage locations
 
 When migrating data from your legacy data warehouse into BigQuery, you can use several SQL translators to translate your SQL queries into GoogleSQL or other supported SQL dialects. These include the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) , the [SQL translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) , and the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
 
-The BigQuery SQL translators are available in the following processing locations:
+You can also use the [migration lineage service](https://docs.cloud.google.com/bigquery/docs/migration/migration-lineage) to visualize the data flow in your source database to help you plan a data warehouse migration.
+
+The BigQuery SQL translators and the lineage service are available in the following processing locations:
 
 **Region description**
 
