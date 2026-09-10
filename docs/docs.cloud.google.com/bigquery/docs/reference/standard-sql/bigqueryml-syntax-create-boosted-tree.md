@@ -613,22 +613,20 @@ You can see the model's data split information in the following ways:
 
 This option accepts the following values:
 
-\* `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
-
-  - If there are fewer than 500 rows in the input data, then all rows are used as training data.
-
-  - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
+  - `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
     
-      - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
-      - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
-
-  - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+      - If there are fewer than 500 rows in the input data, then all rows are used as training data.
     
-      - 10% of the data is used as evaluation data
+      - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
+        
+          - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
+          - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
     
-      - 10% is used as test data
-    
-      - 80% is used as training data
+      - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+        
+          - 10% of the data is used as evaluation data
+          - 10% is used as test data
+          - 80% is used as training data
         
         For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
 

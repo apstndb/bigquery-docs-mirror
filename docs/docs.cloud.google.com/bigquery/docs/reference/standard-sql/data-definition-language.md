@@ -728,8 +728,7 @@ Specify a table option list in the following format:
 <tr class="odd">
 <td><code dir="ltr" translate="no">enable_change_history</code></td>
 <td><p><code dir="ltr" translate="no">BOOL</code></p></td>
-<td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
-<p>Example: <code dir="ltr" translate="no">enable_change_history=TRUE</code></p>
+<td><p>Example: <code dir="ltr" translate="no">enable_change_history=TRUE</code></p>
 <p>Set this property to <code dir="ltr" translate="no">TRUE</code> in order to capture <a href="https://docs.cloud.google.com/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">CHANGES</code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="https://docs.cloud.google.com/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">FALSE</code> .</p></td>
 </tr>
 <tr class="even">
@@ -5246,8 +5245,7 @@ Specify a table option list in the following format:
 <tr class="odd">
 <td><code dir="ltr" translate="no">enable_change_history</code></td>
 <td><p><code dir="ltr" translate="no">BOOL</code></p></td>
-<td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
-<p>Example: <code dir="ltr" translate="no">enable_change_history=TRUE</code></p>
+<td><p>Example: <code dir="ltr" translate="no">enable_change_history=TRUE</code></p>
 <p>Set this property to <code dir="ltr" translate="no">TRUE</code> in order to capture <a href="https://docs.cloud.google.com/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">CHANGES</code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="https://docs.cloud.google.com/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">FALSE</code> .</p></td>
 </tr>
 <tr class="even">

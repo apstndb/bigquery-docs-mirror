@@ -142,7 +142,15 @@ For more information, see [Task-specific solutions overview](https://docs.cloud.
 
 Supported locations for text generation and embedding models vary based on the model type and version that you use. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/locations#bqml-loc) .
 
-BigQuery supports the `gemini-3.1-flash-lite` and `gemini-3.5-flash` models. Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
+BigQuery supports the following models:
+
+  - `gemini-3.1-flash-lite`
+  - `gemini-3.5-flash`
+  - `gemini-3.5-flash-lite`
+  - `gemini-3.6-flash`
+  - `gemini-3.7-flash`
+
+Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
 
   - If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
   - If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.

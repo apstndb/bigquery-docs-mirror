@@ -301,7 +301,7 @@ You can only set this option if `ENABLE_GLOBAL_EXPLAIN` is `TRUE` .
 
 **Syntax**
 
-    TF_VERSION = { '1.15' | &#39;2.8.0' }
+    TF_VERSION = { '1.15' | '2.8.0' }
 
 **Description**
 
@@ -347,7 +347,7 @@ An `ARRAY` of `STRUCT` values. Each `STRUCT` contains a `STRING` value that spec
 
 A `CLASS_WEIGHTS` value might look like the following example:
 
-    CLASS_WEIGHTS = [STRUCT('example_label';, .2)]
+    CLASS_WEIGHTS = [STRUCT('example_label', .2)]
 
 ### `ENABLE_GLOBAL_EXPLAIN`
 
@@ -460,22 +460,20 @@ You can see the model's data split information in the following ways:
 
 This option accepts the following values:
 
-\* `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
-
-  - If there are fewer than 500 rows in the input data, then all rows are used as training data.
-
-  - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
+  - `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
     
-      - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
-      - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
-
-  - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+      - If there are fewer than 500 rows in the input data, then all rows are used as training data.
     
-      - 10% of the data is used as evaluation data
+      - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
+        
+          - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
+          - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
     
-      - 10% is used as test data
-    
-      - 80% is used as training data
+      - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+        
+          - 10% of the data is used as evaluation data
+          - 10% is used as test data
+          - 80% is used as training data
         
         For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
 
@@ -622,11 +620,11 @@ Specify one of the following values:
 
 For `DNN_CLASSIFIER` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE&#39; | 'LOG_LOSS' | 'ROC_AUC' }
+    HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' | 'ROC_AUC' }
 
 For `DNN_REGRESSOR` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | ';R2_SCORE' | 'EXPLAINED_VARIANCE' }
+    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
 
 **Description**
 

@@ -278,22 +278,20 @@ You can see the model's data split information in the following ways:
 
 This option accepts the following values:
 
-\* `AUTO_SPLIT` : This option splits the data as follows:
-
-  - If there are fewer than 500 rows in the input data, then all rows are used as training data.
-
-  - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
+  - `AUTO_SPLIT` : This option splits the data as follows:
     
-      - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
-      - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
-
-  - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+      - If there are fewer than 500 rows in the input data, then all rows are used as training data.
     
-      - 10% of the data is used as evaluation data
+      - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
+        
+          - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
+          - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
     
-      - 10% is used as test data
-    
-      - 80% is used as training data
+      - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+        
+          - 10% of the data is used as evaluation data
+          - 10% is used as test data
+          - 80% is used as training data
         
         For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
 
@@ -394,7 +392,7 @@ A `STRING` value.
 
 **Description**
 
-The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` submodels are trained, or when the hyperparameter search space is exhausted. You must specify this option in order to use hyperparameter tuning.
+The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` submodels are trained, or when the hyperparameter search space is exhausted. You must specify this option in order to use hyperparameter tuning. For matrix factorization models, increasing `NUM_TRIALS` is the recommended way to reduce model output variance.
 
 **Arguments**
 
@@ -559,9 +557,13 @@ Where, in addition to the variables defined previously, the function also introd
 
 For explicit matrix factorization, the input is typically integers within a known fixed range. For implicit matrix factorization, the input ratings can be doubles or integers that span a wider range. We recommend that you make sure there aren't any outliers in the input ratings, and that you scale the input ratings if the model is performing poorly.
 
+## Training data handling
+
+When you train a matrix factorization model, BigQuery ML uses all provided input data for training. No automatic sampling or bootstrapping occurs unless you explicitly split the data by using the [`DATA_SPLIT_METHOD` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_method) .
+
 ## Hyperparameter tuning
 
-Matrix factorization models support [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`NUM_TRIALs` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
+Matrix factorization models support [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`NUM_TRIALS` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
 
 Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`HPARAM_TUNING_OBJECTIVES` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#hparam_tuning_objectives) to tune for a different metric if you need to.
 
@@ -573,11 +575,15 @@ For information about supported locations, see [Locations for non-remote models]
 
 ## Limitations
 
-If you get the "Model is too large (\>100 MB)" error, check the input data. This error is caused by having too many ratings for a single user or a single item. Hashing the user or item columns into an `INT64` value or reducing the data size can help. You can use the following formula to determine whether this error might occur:
+Matrix factorization models have the following limitations:
 
-    max(num_rated_user, num_rated_item) < 100 million
+  - User-defined random seeds for weight initialization aren't supported.
 
-Where `num_rated_user` is the maximum item ratings that a single user has entered and `num_rated_items` is the maximum user ratings for a given item.
+  - If you get the "Model is too large (\>100 MB)" error, check the input data. This error is caused by having too many ratings for a single user or a single item. Hashing the user or item columns into an `INT64` value or reducing the data size can help. You can use the following formula to determine whether this error might occur:
+    
+        max(num_rated_user, num_rated_item) < 100 million
+    
+    Where `num_rated_user` is the maximum item ratings that a single user has entered and `num_rated_items` is the maximum user ratings for a given item.
 
 ## Pricing
 
