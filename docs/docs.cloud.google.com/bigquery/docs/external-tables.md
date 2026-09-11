@@ -77,7 +77,7 @@ When you query data in Cloud Storage by using a [BigLake](https://docs.cloud.goo
     
     If your Cloud Storage bucket is in the `us-central1` (Iowa) region, your BigQuery dataset must be in the `us-central1` (Iowa) region or the `US` multi-region.
     
-    If your Cloud Storage bucket is in the `europe-west4` (Netherlands) region, your BigQuery dataset must in the `europe-west4` (Netherlands) or the `EU` multi-region.
+    If your Cloud Storage bucket is in the `europe-west4` (Netherlands) region, your BigQuery dataset must be in the `europe-west4` (Netherlands) region or the `EU` multi-region.
     
     If your Cloud Storage bucket is in the `europe-west1` (Belgium) region, the corresponding BigQuery dataset must also be in the `europe-west1` (Belgium) or the `EU` multi-region.
 

@@ -121,19 +121,15 @@ You can visualize graph query results and graph schemas in notebook environments
 
 To visualize query results in a notebook, follow these steps:
 
-1.  In a notebook cell, run the following command to install the latest BigQuery magics library:
-    
-        !pip install bigquery_magics==0.12.1
+1.  In your notebook environment, ensure you have the BigQuery Graph client library installed.
 
-2.  In your notebook environment, ensure you have the BigQuery Graph client library installed.
-
-3.  In a notebook cell, use the `%%bigquery --graph` magic command followed by your GQL query. The query must return graph elements in JSON format using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function. We recommend returning graph paths instead of individual nodes and edges. Returning paths provides the following benefits:
+2.  In a notebook cell, use the `%%bigquery --graph` magic command followed by your GQL query. The query must return graph elements in JSON format using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function. We recommend returning graph paths instead of individual nodes and edges. Returning paths provides the following benefits:
     
       - Paths contain complete data of nodes and edges. If you return individual nodes and edges, some intermediate nodes and edges in a complex query's visualization might not be available.
     
       - If you return paths, your `RETURN` statement is less complex than if you return individual nodes and edges.
 
-4.  Run the cell. The visualization is displayed in the output area of the cell.
+3.  Run the cell. The visualization is displayed in the output area of the cell.
 
 The following sample query finds a person, their accounts, and transfers between accounts, and then returns the results in a notebook:
 
@@ -159,17 +155,10 @@ You can visualize graphs that you create with a schema. Visualizing the schema h
 
 To see a visualization of a BigQuery Graph schema in a notebook, follow these steps:
 
-1.  In a notebook cell, run the following command to install the BigQuery magics library:
-    
-        !pip install bigquery_magics==0.12.1
-
-2.  In your notebook environment, ensure that you have the BigQuery Graph client library installed.
-
-3.  In a notebook cell, use the `%%bigquery --graph` magic command followed by your GQL query. The query must return graph elements in JSON format using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function.
-
-4.  Run the cell. The visualization is displayed in the output area of the cell.
-
-5.  In the visualization output, click schema **Schema view** .
+1.  In your notebook environment, ensure that you have the BigQuery Graph client library installed.
+2.  In a notebook cell, use the `%%bigquery --graph` magic command followed by your GQL query. The query must return graph elements in JSON format using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function.
+3.  Run the cell. The visualization is displayed in the output area of the cell.
+4.  In the visualization output, click schema **Schema view** .
 
 ## Troubleshoot BigQuery Graph visualizations
 

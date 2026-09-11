@@ -231,7 +231,7 @@ https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage	2026-09-
 https://docs.cloud.google.com/bigquery/docs/external-data-drive	2026-09-08T04:12:48Z
 https://docs.cloud.google.com/bigquery/docs/external-data-sources	2026-09-08T04:12:48Z
 https://docs.cloud.google.com/bigquery/docs/external-table-definition	2026-09-08T04:12:48Z
-https://docs.cloud.google.com/bigquery/docs/external-tables	2026-09-08T04:12:48Z
+https://docs.cloud.google.com/bigquery/docs/external-tables	2026-09-10T16:09:26Z
 https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer	2026-09-08T04:12:48Z
 https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro	2026-09-08T04:12:48Z
 https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation	2026-09-08T04:12:48Z
@@ -281,6 +281,7 @@ https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transformation	20
 https://docs.cloud.google.com/bigquery/docs/graph-chat	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/graph-compare	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/graph-create	2026-09-08T03:58:29Z
+https://docs.cloud.google.com/bigquery/docs/graph-iceberg	2026-09-10T20:58:07Z
 https://docs.cloud.google.com/bigquery/docs/graph-iso-standards	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/graph-measures	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/graph-modeler	2026-09-08T03:58:29Z
@@ -289,7 +290,7 @@ https://docs.cloud.google.com/bigquery/docs/graph-query-best-practices	2026-09-0
 https://docs.cloud.google.com/bigquery/docs/graph-query-overview	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/graph-schema-overview	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/graph-search	2026-09-08T03:58:29Z
-https://docs.cloud.google.com/bigquery/docs/graph-visualization	2026-09-08T03:58:29Z
+https://docs.cloud.google.com/bigquery/docs/graph-visualization	2026-09-10T21:25:24Z
 https://docs.cloud.google.com/bigquery/docs/graph-visualization-integrations	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/grid-systems-spatial-analysis	2026-09-08T03:58:29Z
 https://docs.cloud.google.com/bigquery/docs/hadoop-metadata	2026-09-08T03:58:29Z
@@ -1262,7 +1263,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/system-procedures	2026-09-
 https://docs.cloud.google.com/bigquery/docs/reference/system-variables	2026-09-08T03:59:43Z
 https://docs.cloud.google.com/bigquery/docs/regional-endpoints	2026-09-08T04:53:51Z
 https://docs.cloud.google.com/bigquery/docs/regression-overview	2026-09-08T04:53:51Z
-https://docs.cloud.google.com/bigquery/docs/release-notes	2026-09-09T23:19:31Z
+https://docs.cloud.google.com/bigquery/docs/release-notes	2026-09-10T22:22:13Z
 https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-09-08T04:28:18Z
 https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-09-08T04:53:51Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-09-08T04:53:51Z
