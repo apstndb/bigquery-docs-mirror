@@ -192,17 +192,32 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Import the model by using the `TensorFlowModel` object.
+Create the model by using the [`bigframes.bigquery.ml.create_model`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model) function.
 
     import bigframes
-    from bigframes.ml.imported import TensorFlowModel
+    import bigframes.pandas as bpd
+    from bigframes.bigquery import ml
     
     bigframes.options.bigquery.project = PROJECT_ID
     # You can change the location to one of the valid locations: https://cloud.google.com/bigquery/docs/locations#supported_locations
     bigframes.options.bigquery.location = "US"
     
-    imported_tensorflow_model = TensorFlowModel(
-        model_path="gs://cloud-training-demos/txtclass/export/exporter/1549825580/*"
+    # Set partial ordering mode for BigQuery DataFrames.
+    # For more information, see the BigQuery DataFrames performance documentation:
+    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+    bpd.options.bigquery.ordering_mode = "partial"
+    
+    # Use ml.create_model to create and import the model in BigQuery.
+    # The options parameter specifies the model type and the Cloud Storage path.
+    # For more information, see the BigQuery DataFrames API reference documentation:
+    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+    ml.create_model(
+        your_model_id,  # For example: "bqml_tutorial.imported_tf_model"
+        options={
+            "model_type": "TENSORFLOW",
+            "model_path": "gs://cloud-training-demos/txtclass/export/exporter/1549825580/*",
+        },
+        replace=True,
     )
 
 For more information about importing TensorFlow models into BigQuery ML, including format and storage requirements, see the [`CREATE MODEL` statement for importing TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
@@ -273,14 +288,27 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Use the [`predict`](https://docs.cloud.google.com/python/docs/reference/bigframes/latest/bigframes.ml.llm.PaLM2TextGenerator#bigframes_ml_llm_PaLM2TextGenerator_predict) function to run the TensorFlow model:
+Use the [`bigframes.bigquery.ml.predict`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict) function to run the TensorFlow model:
 
     import bigframes.pandas as bpd
+    from bigframes.bigquery import ml
+    
+    # Set partial ordering mode for BigQuery DataFrames.
+    # For more information, see the BigQuery DataFrames performance documentation:
+    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+    bpd.options.bigquery.ordering_mode = "partial"
     
     df = bpd.read_gbq("bigquery-public-data.hacker_news.full")
     df_pred = df.rename(columns={"title": "input"})
-    predictions = imported_tensorflow_model.predict(df_pred)
-    predictions.head(5)
+    
+    # Use the ml.predict method to predict results using your model.
+    # For more information, see the BigQuery DataFrames API reference documentation:
+    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+    predictions = ml.predict(
+        your_model_id,  # For example: "bqml_tutorial.imported_tf_model"
+        input_=df_pred,
+    )
+    predictions.peek(5)
 
 The results should look like this:
 

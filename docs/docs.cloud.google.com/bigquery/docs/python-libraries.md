@@ -45,12 +45,12 @@ The following sample shows how to run a GoogleSQL query with and without explici
 
     import bigframes.pandas as bpd
     
-    # Set partial ordering mode as the default configuration for BigQuery
-    # DataFrames.
+    # Set partial ordering mode for BigQuery DataFrames.
     bpd.options.bigquery.ordering_mode = "partial"
     
     
     def query_standard_sql(project_id: str = "your-project-id") -> bpd.DataFrame:
+        """Runs a standard SQL query using BigQuery DataFrames."""
         sql = """
         SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
         WHERE state = 'TX'
@@ -66,6 +66,11 @@ The following sample shows how to run a GoogleSQL query with and without explici
         bpd.options.bigquery.project = project_id
         df = bpd.read_gbq(sql)
         return df
+    
+    
+    # Run the sample:
+    # df = query_standard_sql("your-project-id")
+    # print(df.head())
 
 ### pandas-gbq
 
@@ -147,15 +152,14 @@ Use the [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/refer
 ### bigquery-dataframes
 
     import bigframes.pandas as bpd
-    
     import pandas as pd
     
-    # Set partial ordering mode as the default configuration for BigQuery
-    # DataFrames.
+    # Set partial ordering mode for BigQuery DataFrames.
     bpd.options.bigquery.ordering_mode = "partial"
     
     
     def query_bqstorage() -> pd.DataFrame:
+        """Queries BigQuery and downloads results using the BigQuery Storage API."""
         sql = """
         SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
         WHERE state = 'TX'
@@ -170,6 +174,11 @@ Use the [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/refer
         # installed.
         pandas_df = df.to_pandas()
         return pandas_df
+    
+    
+    # Run the sample:
+    # pandas_df = query_bqstorage()
+    # print(pandas_df.head())
 
 ### pandas-gbq
 
@@ -203,12 +212,12 @@ The following sample shows how to run a query with named parameters.
 
     import bigframes.pandas as bpd
     
-    # Set partial ordering mode as the default configuration for BigQuery
-    # DataFrames.
+    # Set partial ordering mode for BigQuery DataFrames.
     bpd.options.bigquery.ordering_mode = "partial"
     
     
     def query_parameters() -> bpd.DataFrame:
+        """Queries BigQuery using BigQuery DataFrames with query parameters."""
         sql = """
         SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
         WHERE state = @state
@@ -230,6 +239,11 @@ The following sample shows how to run a query with named parameters.
     
         df = bpd.read_gbq(sql, configuration=query_config)
         return df
+    
+    
+    # Run the sample:
+    # df = query_parameters()
+    # print(df.head())
 
 ### pandas-gbq
 
@@ -283,12 +297,46 @@ The following sample shows how to run a query with named parameters.
 
 ### Loading a pandas DataFrame to a BigQuery table
 
-Both `pandas-gbq` and `google-cloud-bigquery` support uploading data from a pandas DataFrame to a new table in BigQuery. Key differences include the following:
+All three libraries support uploading data from a pandas DataFrame to a new table in BigQuery. Key differences include the following:
 
-|                     | pandas-gbq                                                                                                                      | google-cloud-bigquery                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Type support        | Converts the DataFrame to CSV format before sending to the API, which doesn't support nested or array values.                   | Converts the DataFrame to Parquet or CSV format before sending to the API, which supports nested and array values. Choose Parquet for struct and array values and CSV for date and time serialization flexibility. Parquet is the default choice. Note that `pyarrow` , which is the parquet engine used to send the DataFrame data to the BigQuery API, must be installed to load the DataFrame to a table. |
-| Load configurations | You can optionally specify a [table schema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema) . | Use the [`LoadJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig) class, which contains properties for the various API configuration options.                                                                                                                                                                                           |
+|                     | bigquery-dataframes                                                                  | pandas-gbq                                                                                                                      | google-cloud-bigquery                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Type support        | Converts the DataFrame using `read_pandas` and writes it to a table using `to_gbq` . | Converts the DataFrame to CSV format before sending to the API, which doesn't support nested or array values.                   | Converts the DataFrame to Parquet or CSV format before sending to the API, which supports nested and array values. Choose Parquet for struct and array values and CSV for date and time serialization flexibility. Parquet is the default choice. Note that `pyarrow` , which is the parquet engine used to send the DataFrame data to the BigQuery API, must be installed to load the DataFrame to a table. |
+| Load configurations | Configure behavior with `to_gbq` parameters, such as `if_exists` .                   | You can optionally specify a [table schema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema) . | Use the [`LoadJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig) class, which contains properties for the various API configuration options.                                                                                                                                                                                           |
+
+### bigquery-dataframes
+
+    import bigframes.pandas as bpd
+    import pandas as pd
+    
+    # Set partial ordering mode for BigQuery DataFrames.
+    bpd.options.bigquery.ordering_mode = "partial"
+    
+    
+    def upload_from_dataframe(
+        table_id: str = "your-project.your_dataset.your_table_name",
+    ) -> bpd.DataFrame:
+        """Uploads an in-memory pandas DataFrame to a BigQuery table using BigQuery DataFrames."""
+        # Create a local pandas DataFrame.
+        df = pd.DataFrame(
+            {
+                "my_string": ["a", "b", "c"],
+                "my_int64": [1, 2, 3],
+                "my_float64": [4.0, 5.0, 6.0],
+            }
+        )
+    
+        # Convert the local pandas DataFrame to a BigQuery DataFrame.
+        bq_df = bpd.read_pandas(df)
+    
+        # Write the DataFrame to a BigQuery table.
+        bq_df.to_gbq(table_id, if_exists="replace")
+        return bq_df
+    
+    
+    # Run the sample:
+    # bq_df = upload_from_dataframe("your-project.your_dataset.your_table_name")
+    # print(bq_df.head())
 
 ### pandas-gbq
 

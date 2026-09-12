@@ -8,7 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to INFORMATION\_SCHEMA
 
-The BigQuery `INFORMATION_SCHEMA` views are read-only, system-defined views that provide metadata information about your BigQuery objects. The following table lists all `INFORMATION_SCHEMA` views that you can query to retrieve metadata information:
+BigQuery `INFORMATION_SCHEMA` views let you retrieve metadata about your BigQuery objects. You can query these read-only, system-defined views to analyze resources like datasets, jobs, and access control.
+
+In BigQuery, you query `INFORMATION_SCHEMA` views using GoogleSQL by specifying a scope and a view. For example, to get metadata for tables in a dataset, you specify `myDataset.INFORMATION_SCHEMA.TABLES` .
+
+The following table lists the available views:
 
 <table>
 <colgroup>
@@ -230,3 +234,11 @@ Specifying a project qualifier for organization-level views (for example, `STREA
   - `INFORMATION_SCHEMA` views don't contain information about [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) .
   - `INFORMATION_SCHEMA` queries with region qualifiers might include metadata from resources in that region from [deleted datasets that are within your time travel window](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) .
   - When you list resources from an `INFORMATION_SCHEMA` view, the permissions are checked only at the parent level, not at an individual row level. Therefore, any [deny policy](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource) ( [preview](https://cloud.google.com/products#product-launch-stages) ) that conditionally targets an individual row using tags is ignored.
+
+## What's next
+
+  - [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information_using_information_schema) .
+  - [View Iceberg-managed table metadata](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#view-iceberg-table-metadata-snapshot) .
+  - [View graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview#view_graph_schemas) .
+  - [Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
+  - [Troubleshoot with information schema](https://docs.cloud.google.com/bigquery/docs/info-schema-troubleshoot) .

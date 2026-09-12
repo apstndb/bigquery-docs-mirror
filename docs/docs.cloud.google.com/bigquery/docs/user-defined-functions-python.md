@@ -425,20 +425,21 @@ The following example uses the [BigQuery DataFrames](https://dataframes.bigquery
     import pandas as pd
     import pyarrow as pa
     
-    
-    # Using partial ordering mode enables more efficient query optimizations.
+    # Set partial ordering mode for BigQuery DataFrames.
     bpd.options.bigquery.ordering_mode = "partial"
     
     
     def call_python_udf(
-        project_id: str, location: str,
+        project_id: str = "your-project-id",
+        location: str = "US",
     ) -> Tuple[pd.Series, bpd.Series]:
+        """Demonstrates calling a Python UDF using pandas and BigQuery DataFrames."""
         # Set the billing project to use for queries. This step is optional, as the
         # project can be inferred from your environment in many cases.
-        bpd.options.bigquery.project = project_id  # "your-project-id"
+        bpd.options.bigquery.project = project_id
     
         # Since this example works with local data, set a processing location.
-        bpd.options.bigquery.location = location  # "US"
+        bpd.options.bigquery.location = location
     
         # Create a sample series.
         xml_series = pd.Series(
@@ -473,7 +474,7 @@ The following example uses the [BigQuery DataFrames](https://dataframes.bigquery
         df = pd.DataFrame({"xml": xml_series})
     
         # Use the BigQuery Accessor, which is automatically registered on pandas
-        # DataFrames when you import bigframes.  This example uses a function that
+        # DataFrames when you import bigframes. This example uses a function that
         # has been deployed to bigquery-utils for demonstration purposes. To use in
         # production, deploy the function at
         # https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/udfs/community/cw_xml_extract.sqlx
@@ -490,6 +491,10 @@ The following example uses the [BigQuery DataFrames](https://dataframes.bigquery
         xpath_query = "//title/text()"
         titles_bigframes = xml_bigframes.apply(cw_xml_extract, args=(xpath_query,))
         return titles_pandas, titles_bigframes
+    
+    
+    # Run the sample:
+    # titles_pandas, titles_bigframes = call_python_udf("your-project-id", "US")
 
 ## Supported Python UDF data types
 

@@ -18,7 +18,15 @@ To get the latest product updates delivered to you, add the URL of this page to 
 
 Feature
 
+Conversational analytics in BigQuery now supports the [`ML.CORRELATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-correlation) function to calculate statistical correlations between a target column and one or more metric columns in a table. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
 You can now use the [`ML.METRICS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-metrics) to compute evaluation metrics for machine learning classification or regression tasks on any table or query that contains actual and predicted values. This function lets you evaluate predictions without needing to create or reference a stored model. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can use the [`AI.CAUSAL_EFFECT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-causal-effect) function to quantify the impact of specific interventions on time series data. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 09, 2026
 

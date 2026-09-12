@@ -186,6 +186,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
     import bigframes.pandas as bpd
     
+    # Set partial ordering mode for BigQuery DataFrames.
+    # For more information, see the BigQuery DataFrames performance documentation:
+    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+    bpd.options.bigquery.ordering_mode = "partial"
+    
     input_data = bpd.read_gbq(
         "bigquery-public-data.ml_datasets.census_adult_income",
         columns=(
@@ -199,10 +204,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
             "functional_weight",
         ),
     )
-    input_data["dataframe"] = bpd.Series("training", index=input_data.index,).case_when(
+    input_data["dataframe"] = input_data["functional_weight"].case_when(
         [
             (((input_data["functional_weight"] % 10) == 8), "evaluation"),
             (((input_data["functional_weight"] % 10) == 9), "prediction"),
+            (True, "training"),
         ]
     )
     del input_data["functional_weight"]
@@ -240,25 +246,34 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    from bigframes.ml import ensemble
+    import bigframes.pandas as bpd
+    from bigframes.bigquery import ml
+    
+    # Set partial ordering mode for BigQuery DataFrames.
+    # For more information, see the BigQuery DataFrames performance documentation:
+    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+    bpd.options.bigquery.ordering_mode = "partial"
     
     # input_data is defined in an earlier step.
-    training_data = input_data[input_data["dataframe"] == "training"]
-    X = training_data.drop(columns=["income_bracket", "dataframe"])
-    y = training_data["income_bracket"]
-    
-    # create and train the model
-    tree_model = ensemble.XGBClassifier(
-        n_estimators=1,
-        booster="gbtree",
-        tree_method="hist",
-        max_iterations=1,  # For a more accurate model, try 50 iterations.
-        subsample=0.85,
+    training_data = input_data[input_data["dataframe"] == "training"].drop(
+        columns=["dataframe"]
     )
-    tree_model.fit(X, y)
     
-    tree_model.to_gbq(
+    # For more information, see the BigQuery DataFrames API reference documentation:
+    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+    ml.create_model(
         your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+        options={
+            "model_type": "BOOSTED_TREE_CLASSIFIER",
+            "booster_type": "GBTREE",
+            "num_parallel_tree": 1,
+            "max_iterations": 1,  # For a more accurate model, try 50 iterations.
+            "tree_method": "HIST",
+            "early_stop": False,
+            "subsample": 0.85,
+            "input_label_cols": ["income_bracket"],
+        },
+        training_data=training_data,
         replace=True,
     )
 
@@ -304,22 +319,23 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    # Select model you'll use for predictions. `read_gbq_model` loads model
-    # data from BigQuery, but you could also use the `tree_model` object
-    # from the previous step.
-    tree_model = bpd.read_gbq_model(
-        your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
-    )
+    import bigframes.pandas as bpd
+    from bigframes.bigquery import ml
+    
+    # Set partial ordering mode for BigQuery DataFrames.
+    # For more information, see the BigQuery DataFrames performance documentation:
+    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+    bpd.options.bigquery.ordering_mode = "partial"
     
     # input_data is defined in an earlier step.
     evaluation_data = input_data[input_data["dataframe"] == "evaluation"]
-    X = evaluation_data.drop(columns=["income_bracket", "dataframe"])
-    y = evaluation_data["income_bracket"]
     
-    # The score() method evaluates how the model performs compared to the
-    # actual data. Output DataFrame matches that of ML.EVALUATE().
-    score = tree_model.score(X, y)
-    score.peek()
+    # For more information, see the BigQuery DataFrames API reference documentation:
+    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate
+    ml.evaluate(
+        your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+        input_=evaluation_data,
+    )
     # Output:
     #    precision    recall  accuracy  f1_score  log_loss   roc_auc
     # 0   0.671924  0.578804  0.839429  0.621897  0.344054  0.887335
@@ -381,18 +397,23 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    # Select model you'll use for predictions. `read_gbq_model` loads model
-    # data from BigQuery, but you could also use the `tree_model` object
-    # from previous steps.
-    tree_model = bpd.read_gbq_model(
-        your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
-    )
+    import bigframes.pandas as bpd
+    from bigframes.bigquery import ml
+    
+    # Set partial ordering mode for BigQuery DataFrames.
+    # For more information, see the BigQuery DataFrames performance documentation:
+    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+    bpd.options.bigquery.ordering_mode = "partial"
     
     # input_data is defined in an earlier step.
     prediction_data = input_data[input_data["dataframe"] == "prediction"]
     
-    predictions = tree_model.predict(prediction_data)
-    predictions.peek()
+    # For more information, see the BigQuery DataFrames API reference documentation:
+    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+    ml.predict(
+        your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+        input_=prediction_data,
+    )
     # Output:
     # predicted_income_bracket   predicted_income_bracket_probs.label  predicted_income_bracket_probs.prob
     #                   <=50K                                   >50K                   0.05183430016040802
