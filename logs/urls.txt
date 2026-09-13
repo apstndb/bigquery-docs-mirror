@@ -1296,7 +1296,7 @@ https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters	2026-09-08T04
 https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart	2026-09-08T04:28:33Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-transfer	2026-09-08T04:28:33Z
 https://docs.cloud.google.com/bigquery/docs/salesforce-transfer-intro	2026-09-08T04:28:32Z
-https://docs.cloud.google.com/bigquery/docs/samples	2026-09-08T04:28:18Z
+https://docs.cloud.google.com/bigquery/docs/samples	2026-09-12T16:34:32Z
 https://docs.cloud.google.com/bigquery/docs/sandbox	2026-09-04T17:03:38Z
 https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries	2026-09-08T04:28:32Z
 https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction	2026-09-08T04:28:32Z
