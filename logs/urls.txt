@@ -57,7 +57,7 @@ https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment	2026-09-0
 https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment	2026-09-08T04:03:36Z
 https://docs.cloud.google.com/bigquery/docs/batch-loading-data	2026-09-08T04:03:36Z
 https://docs.cloud.google.com/bigquery/docs/batch-sql-translator	2026-09-08T04:03:36Z
-https://docs.cloud.google.com/bigquery/docs/best-practices-costs	2026-09-08T04:03:36Z
+https://docs.cloud.google.com/bigquery/docs/best-practices-costs	2026-09-14T06:06:01Z
 https://docs.cloud.google.com/bigquery/docs/best-practices-for-multi-tenant-workloads-on-bigquery	2026-09-08T04:03:36Z
 https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute	2026-09-08T04:03:36Z
 https://docs.cloud.google.com/bigquery/docs/best-practices-performance-functions	2026-09-08T04:03:36Z
@@ -610,7 +610,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/proj
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/setIamPolicy	2025-10-17T21:03:54Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe	2026-09-07T08:25:07Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/testIamPermissions	2025-10-17T21:05:05Z
-https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates	2026-08-18T19:33:38Z
+https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates	2026-09-14T01:36:51Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/approve	2025-11-12T09:57:02Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/create	2025-11-12T09:57:02Z
 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates/delete	2025-11-12T09:57:02Z
@@ -1367,7 +1367,7 @@ https://docs.cloud.google.com/bigquery/docs/transform-intro	2026-09-08T03:58:58Z
 https://docs.cloud.google.com/bigquery/docs/translate-text	2026-09-08T03:58:58Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control	2026-09-08T03:58:58Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-intro	2026-09-08T03:58:58Z
-https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries	2026-09-08T03:58:58Z
+https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries	2026-09-14T06:55:12Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas	2026-09-04T17:22:31Z
 https://docs.cloud.google.com/bigquery/docs/tune-evaluate	2026-09-08T03:58:58Z
 https://docs.cloud.google.com/bigquery/docs/understand-text	2026-09-08T03:58:58Z
@@ -1377,7 +1377,7 @@ https://docs.cloud.google.com/bigquery/docs/updating-model-metadata	2026-09-08T0
 https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp	2026-09-10T19:27:20Z
 https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp	2026-09-10T19:27:43Z
 https://docs.cloud.google.com/bigquery/docs/use-cloud-assist	2026-09-08T03:58:58Z
-https://docs.cloud.google.com/bigquery/docs/use-knowledge-catalog	2026-09-08T03:58:58Z
+https://docs.cloud.google.com/bigquery/docs/use-knowledge-catalog	2026-09-14T06:58:10Z
 https://docs.cloud.google.com/bigquery/docs/use-service-accounts	2026-09-08T03:58:58Z
 https://docs.cloud.google.com/bigquery/docs/use-spark	2026-09-08T03:58:58Z
 https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates	2026-09-08T03:58:58Z

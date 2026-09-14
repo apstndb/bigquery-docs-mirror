@@ -313,7 +313,31 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### Estimate query costs
 
+Depending on your compute pricing model, the method for estimating query costs differs.
+
+#### On-demand query cost estimation
+
 When using the [on-demand pricing model](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , you can estimate the cost of running a query by calculating the number of bytes processed.
+
+#### Capacity-based query cost estimation
+
+When using [capacity-based pricing](https://docs.cloud.google.com/bigquery/docs/reservations-intro#capacity-based-pricing) , it's not possible to estimate the exact cost of an individual query before execution with precise accuracy. Capacity-based costs are calculated based on overall reservation slot capacity provisioned or autoscaled over time, rather than the amount of data scanned by a specific query.
+
+Estimating individual query costs before execution is difficult due to dynamic runtime factors, including the following:
+
+  - **Dynamic slot allocation** : the number of slots allocated to a query depends on query complexity, runtime optimization, and resource availability.
+  - **Concurrency** : multiple queries dynamically share the slots available in the reservation.
+  - **Autoscaling behavior** : if [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) is enabled, the reservation scales up and down based on aggregate workload demand rather than single query execution.
+
+After query execution, you can view the actual compute resources consumed by the query in slot-milliseconds ( `total_slot_ms` ) by inspecting the query execution details or querying the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
+
+#### Capacity-based cost attribution
+
+Cost attribution is the process of splitting and attributing reservation compute costs across projects, teams, or queries after workloads have run.
+
+To understand and allocate your overall costs, you can attribute reservation fees back to specific queries and projects using [reservation cost attribution](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#reservation_cost_attribution) in Cloud Billing data. In your Cloud Billing data and reports, look for the **Analysis Slots Attribution** line item, which tracks slot hours used per project without incurring additional cost or affecting your invoice totals.
+
+For more information, see [Reservation cost attribution](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#reservation_cost_attribution) .
 
 #### On-demand query size calculation
 

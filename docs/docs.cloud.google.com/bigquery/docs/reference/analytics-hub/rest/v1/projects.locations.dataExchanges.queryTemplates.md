@@ -12,6 +12,8 @@ data_source: docs.cloud.google.com
   - [Routine](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#Routine)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#Routine.SCHEMA_REPRESENTATION)
   - [RoutineType](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#RoutineType)
+  - [EncryptionConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#EncryptionConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#EncryptionConfig.SCHEMA_REPRESENTATION)
   - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#METHODS_SUMMARY)
 
 ## Resource: QueryTemplate
@@ -29,7 +31,7 @@ A query template is a container for sharing table-valued functions defined by co
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;proposer&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;state&quot;: enum (State),&quot;routine&quot;: {object (Routine)},&quot;createTime&quot;: string,&quot;updateTime&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;displayName&quot;: string,&quot;description&quot;: string,&quot;proposer&quot;: string,&quot;primaryContact&quot;: string,&quot;documentation&quot;: string,&quot;state&quot;: enum (State),&quot;routine&quot;: {object (Routine)},&quot;createTime&quot;: string,&quot;updateTime&quot;: string,&quot;encryptionConfiguration&quot;: {object (EncryptionConfig)}}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -101,6 +103,12 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 Output only. Timestamp when the QueryTemplate was last modified.
 
 Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
+
+`encryptionConfiguration`
+
+` object ( EncryptionConfig  ` )
+
+Optional. Encryption configuration for the query template. If set, the customer-managed KMS key is used to encrypt the query template definition body.
 
 ## State
 
@@ -175,6 +183,36 @@ Default value.
 `TABLE_VALUED_FUNCTION`
 
 Non-built-in persistent TVF.
+
+## EncryptionConfig
+
+Encryption configuration for the query template.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;kmsKeyName&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`kmsKeyName`
+
+`string`
+
+Optional. The KMS key used to encrypt the query template. Format: `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}`
 
 ## Methods
 

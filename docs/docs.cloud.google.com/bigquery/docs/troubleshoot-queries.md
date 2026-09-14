@@ -260,9 +260,57 @@ This error can occur when multiple queries are running concurrently in a session
 
 Error string: `Could not serialize access to table due to concurrent update`
 
-This error can occur when mutating data manipulation language (DML) statements that are running concurrently on the same table conflict with each other, or when the table is truncated during a mutating DML statement. For more information, see [DML statement conflicts](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml_statement_conflicts) .
+This error occurs when concurrent mutating data manipulation language (DML) statements ( `UPDATE` , `DELETE` , or `MERGE` ) attempt to modify data in the same table partition simultaneously, or when the table is truncated while a DML statement is running.
 
-To address this error, run DML operations that affect a single table such that they don't overlap.
+BigQuery lets concurrent mutating DML statements run on the same table as long as they modify different partitions. However, if two jobs attempt to modify the same partition, the first job to commit succeeds, and subsequent jobs fail with this error.
+
+To address this error, try the following:
+
+  - **Retry the failed job** : if the conflict was caused by a temporary overlap with another job, retry the query after the conflicting job completes.
+  - **Identify and coordinate conflicting jobs** : run the diagnostic query in the following section to identify the competing job, and then coordinate schedules so mutating DML operations on the same partition don't run at the same time.
+  - **Partition your tables** : if concurrent DML jobs update different segments of data, partition your table by date or integer range. Concurrent mutating DML statements succeed without conflict if they modify different partitions.
+  - **Batch DML operations** : combine multiple individual `UPDATE` or `DELETE` operations into a single `MERGE` statement or batch job to reduce concurrency and commit overhead. For more information, see [Best practices](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#best_practices) .
+
+### Identify the conflicting job
+
+To identify which job was concurrently updating the table when the error occurred, run a query against the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) :
+
+    SELECT
+      job_id,
+      query,
+      start_time,
+      end_time
+    FROM
+      `region-REGION`.INFORMATION_SCHEMA.JOBS
+    WHERE
+      creation_time BETWEEN
+        TIMESTAMP_SUB(TIMESTAMP 'FAILED_JOB_START_TIME', INTERVAL 1 DAY)
+        AND TIMESTAMP 'FAILED_JOB_END_TIME'
+      AND destination_table.table_id = 'TABLE_NAME'
+      AND destination_table.dataset_id = 'DATASET_NAME'
+      AND statement_type IN ('UPDATE', 'DELETE', 'MERGE')
+      AND start_time <= 'FAILED_JOB_END_TIME'
+      AND (end_time >= 'FAILED_JOB_START_TIME' OR end_time IS NULL)
+    ORDER BY
+      start_time;
+
+Replace the following:
+
+  - `  REGION  ` : the [region name](https://docs.cloud.google.com/bigquery/docs/locations) where your dataset is located—for example, `us` .
+  - `  FAILED_JOB_START_TIME  ` : the timestamp when the failed job started—for example, `2026-09-01 09:55:00 UTC` .
+  - `  FAILED_JOB_END_TIME  ` : the timestamp when the failed job ended—for example, `2026-09-01 10:00:00 UTC` .
+  - `  TABLE_NAME  ` : the name of the table that the failed DML statement attempted to update.
+  - `  DATASET_NAME  ` : the name of the dataset that contains the table.
+
+If the query returns no conflicting user-initiated jobs, the conflict might have been caused by another background operation, such as partition expiration.
+
+### Other causes of concurrent update conflicts
+
+  - **Partition expiration** : background system tasks that expire partitions can conflict with a DML statement, if they modify the same partition during job execution. If you use [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) , schedule DML jobs outside of the times when partitions expire.
+  - **Multi-statement transactions** : when a [multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) mutates a table, it blocks all other concurrent DML statements on that table until the transaction completes.
+  - **DML statements affecting zero rows** : an `UPDATE` , `DELETE` , or `MERGE` statement acquires locks on targeted partitions and can cause serialization conflicts even if no rows match the filter conditions.
+
+For more information, see [DML statement conflicts](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml_statement_conflicts) .
 
 ## Correlated subqueries
 

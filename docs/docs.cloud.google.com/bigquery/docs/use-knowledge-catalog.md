@@ -18,7 +18,7 @@ Knowledge Catalog interacts with BigQuery in the following ways.
 
 Knowledge Catalog automatically discovers and indexes technical metadata from BigQuery assets. This includes the following:
 
-  - **Asset types** : [datasets, tables, views, models, routines, connections, and linked datasets](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
+  - **Asset types** : [datasets, tables, views, models, routines, connections, linked datasets](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) , and [graphs](https://docs.cloud.google.com/bigquery/docs/graph-overview) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
   - **BigQuery sharing** : [exchanges and listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) from BigQuery sharing (formerly Analytics Hub).
   - **Real-time updates** : the system supports near real-time ingestion and provides [*metadata change feeds*](https://docs.cloud.google.com/dataplex/docs/metadata-change-feeds-overview) using Pub/Sub to notify downstream systems of schema changes or deletions in BigQuery.
   - **Dark data discovery** : Knowledge Catalog can [scan unstructured files](https://docs.cloud.google.com/dataplex/docs/data-insights-unstructured-data) (like PDFs in Cloud Storage), extract entities, and convert them into queryable assets in BigQuery. This capability makes previously inaccessible "dark data" available for BigQuery-based analytics and AI grounding.
@@ -76,7 +76,7 @@ Knowledge Catalog offers enhanced features for metadata management, governance, 
 
 ### Specific BigQuery considerations
 
-  - **Automatic Ingestion** : technical metadata from BigQuery assets (datasets, tables, views, models, and routines) continue to be automatically ingested into Knowledge Catalog, as they were with Dataplex Universal Catalog.
+  - **Automatic Ingestion** : technical metadata from BigQuery assets (datasets, tables, views, models, routines, and graphs) continue to be automatically ingested into Knowledge Catalog, as they were with Dataplex Universal Catalog.
   - **Policy Tags** : policy tags used for BigQuery column-level access control are *not* deprecated and their management remains within BigQuery.
   - **Lineage** : data lineage for BigQuery operations is surfaced within Knowledge Catalog. For more information about data lineage, see [Track data lineage for a BigQuery table](https://docs.cloud.google.com/dataplex/docs/track-lineage-quickstart) .
 
