@@ -97,7 +97,7 @@ In your AI application, look for a way to add or connect to a remote MCP server.
 
   - **Server URL** or **Endpoint** : bigquerymigration.googleapis.com/mcp
 
-  - **Transport** : HTTP
+  - **Transport** : [Streamable HTTP](https://modelcontextprotocol.io/specification/latest/basic/transports/streamable-http)
 
   - **Authentication details** : your Google Cloud credentials, your OAuth Client ID, and secret, or an agent identity and credentials
     

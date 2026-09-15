@@ -247,6 +247,15 @@ For more information about using DML to modify your streamed data, see [Using da
   - Support for running mutating DML statements against recently streamed data does not extend to data streamed using the [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
   - Running mutating DML statements within a [multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) against recently streamed data is unsupported.
 
+## Query streamed data with `max_staleness`
+
+By default, every time you run a query against a table with streamed data, BigQuery returns the freshest, most up-to-date results by including rows streamed up to the query execution time.
+
+If your use case doesn't require real-time data freshness — for example, in dashboards or reporting queries — you can reduce query latency and cost by configuring data staleness. To configure data staleness, use one of the following methods:
+
+  - **Configure staleness at the table level (CDC or materialized views)** : set the `max_staleness` option on your destination table to allow queries to return results based on recent data snapshots within the staleness interval. For more information, see [Change data capture `max_staleness`](https://docs.cloud.google.com/bigquery/docs/change-data-capture#query-max-staleness) and [Materialized views with `max_staleness`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) .
+  - **Override staleness for a query or session** : set the [`@@max_staleness_override`](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) system variable in your multi-statement query or session to override the staleness dynamically without altering table-level configurations—for example `SET @@max_staleness_override = INTERVAL 10 MINUTE;` .
+
 ## Storage Write API (gRPC) quotas
 
 For information about Storage Write API (gRPC) quotas and limits, see [BigQuery Storage Write API (gRPC) quotas and limits](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) .

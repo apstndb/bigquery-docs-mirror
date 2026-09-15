@@ -313,6 +313,7 @@ The following query shows the difference between aggregating a measure and a reg
 
     ANY_VALUE(
       expression
+      [ WHERE where_expression ]
       [ HAVING { MAX | MIN } having_expression ]
     )
     [ OVER over_clause ]
@@ -412,6 +413,7 @@ Matches the input data type.
       [ DISTINCT ]
       expression
       [ { IGNORE | RESPECT } NULLS ]
+      [ WHERE where_expression ]
       [ ORDER BY key [ { ASC | DESC } ] [, ... ] ]
       [ LIMIT n ]
     )
@@ -429,6 +431,8 @@ Matches the input data type.
 **Description**
 
 Returns an ARRAY of `expression` values. The order of elements in the returned array is arbitrary. To order the array elements, use an `ORDER BY` clause within the function call.
+
+If you specify a `WHERE` clause expression, then the `IGNORE NULLS` clause is required.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
@@ -473,6 +477,17 @@ If there are zero input rows, this function returns `NULL` .
      +-------------------+
      | [1, -2, 3, -2, 1] |
      +-------------------*/
+
+    SELECT
+      ARRAY_AGG(x IGNORE NULLS WHERE x < 0) AS negative_array_agg,
+      ARRAY_AGG(x IGNORE NULLS WHERE x > 0) AS positive_array_agg
+    FROM UNNEST([NULL, 1, -2, 3, -2, 1, NULL]) AS x;
+    
+    /*--------------------+--------------------+
+     | negative_array_agg | positive_array_agg |
+     +--------------------+--------------------+
+     | [-2, -2]           | [1, 3, 1]          |
+     +--------------------+--------------------*/
 
     SELECT ARRAY_AGG(x ORDER BY ABS(x)) AS array_agg
     FROM UNNEST([2, 1, -2, 3, -2, 1, 2]) AS x;
@@ -548,6 +563,7 @@ If there are zero input rows, this function returns `NULL` .
 
     ARRAY_CONCAT_AGG(
       expression
+      [ WHERE where_expression ]
       [ ORDER BY key [ { ASC | DESC } ] [, ... ] ]
       [ LIMIT n ]
     )
@@ -624,6 +640,7 @@ To learn more about the optional aggregate clauses that you can pass into this f
     AVG(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -707,6 +724,7 @@ Caveats:
 
     BIT_AND(
       expression
+      [ WHERE where_expression ]
     )
 
 **Description**
@@ -737,6 +755,7 @@ INT64
 
     BIT_OR(
       expression
+      [ WHERE where_expression ]
     )
 
 **Description**
@@ -768,6 +787,7 @@ INT64
     BIT_XOR(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
 
 **Description**
@@ -818,6 +838,7 @@ INT64
     COUNT(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -847,14 +868,6 @@ Gets the number of rows in the input or the number of rows with an expression ev
   - `OVER` : To learn more about the `OVER` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Details**
-
-To count the number of distinct values of an expression for which a certain condition is satisfied, you can use the following recipe:
-
-    COUNT(DISTINCT IF(condition, expression, NULL))
-
-`IF` returns the value of `expression` if `condition` is `TRUE` , or `NULL` otherwise. The surrounding `COUNT(DISTINCT ...)` ignores the `NULL` values, so it counts only the distinct values of `expression` for which `condition` is `TRUE` .
-
-To count the number of non-distinct values of an expression for which a certain condition is satisfied, consider using the [`COUNTIF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif) function.
 
 This function with `DISTINCT` supports specifying [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) .
 
@@ -912,7 +925,7 @@ You can use the `COUNT` function to return the number of rows in a table or the 
 
 The following query counts the number of distinct positive values of `x` :
 
-    SELECT COUNT(DISTINCT IF(x > 0, x, NULL)) AS distinct_positive
+    SELECT COUNT(DISTINCT x WHERE x > 0) AS distinct_positive
     FROM UNNEST([1, -2, 4, 1, -5, 4, 1, 3, -6, 1]) AS x;
     
     /*-------------------+
@@ -937,7 +950,7 @@ The following query counts the number of distinct dates on which a certain kind 
       SELECT DATE '2021-01-04' AS event_date, 'FAILURE' AS event_type
     )
     SELECT
-      COUNT(DISTINCT IF(event_type = 'FAILURE', event_date, NULL))
+      COUNT(DISTINCT event_date WHERE event_type = 'FAILURE')
         AS distinct_dates_with_failures
     FROM Events;
     
@@ -959,7 +972,7 @@ The following query counts the number of distinct `id` s that exist in both the 
         SELECT 2991, 'e' UNION ALL
         SELECT 4366, 'f')
     SELECT
-      COUNT(DISTINCT IF(id IN (SELECT id FROM customers), id, NULL)) AS result
+      COUNT(DISTINCT id WHERE id IN (SELECT id FROM customers)) AS result
     FROM vendors;
     
     /*--------+
@@ -973,6 +986,7 @@ The following query counts the number of distinct `id` s that exist in both the 
     COUNTIF(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -1001,6 +1015,8 @@ Gets the number of `TRUE` values for an expression.
 **Details**
 
 The function signature `COUNTIF(DISTINCT ...)` is generally not useful. If you would like to use `DISTINCT` , use `COUNT` with `DISTINCT IF` . For more information, see the [`COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count) function.
+
+> **Note:** `COUNTIF(expression)` is equivalent to `COUNT(expression WHERE expression)` .
 
 **Return type**
 
@@ -1136,6 +1152,7 @@ In the following example, it's difficult to determine if `NULL` represents a `NU
 
     LOGICAL_AND(
       expression
+      [ WHERE where_expression ]
     )
 
 **Description**
@@ -1170,6 +1187,7 @@ This function can be used with the [`AGGREGATION_THRESHOLD` clause](https://docs
 
     LOGICAL_OR(
       expression
+      [ WHERE where_expression ]
     )
 
 **Description**
@@ -1204,6 +1222,7 @@ This function can be used with the [`AGGREGATION_THRESHOLD` clause](https://docs
 
     MAX(
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -1298,6 +1317,7 @@ Matches the input `x` data type.
 
     MIN(
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -1393,6 +1413,7 @@ Matches the input `x` data type.
     STRING_AGG(
       [ DISTINCT ]
       expression [, delimiter]
+      [ WHERE where_expression ]
       [ ORDER BY key [ { ASC | DESC } ] [, ... ] ]
       [ LIMIT n ]
     )
@@ -1501,6 +1522,7 @@ Either `STRING` or `BYTES` .
     SUM(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     

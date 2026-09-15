@@ -655,7 +655,7 @@ Point `GEOGRAPHY`
 
 ## `ST_CENTROID_AGG`
 
-    ST_CENTROID_AGG(geography)
+    ST_CENTROID_AGG(geography [ WHERE where_expression ])
 
 **Description**
 
@@ -663,7 +663,7 @@ Computes the centroid of the set of input `GEOGRAPHY` s as a single point `GEOGR
 
 The *centroid* over the set of input `GEOGRAPHY` s is the weighted average of the centroid of each individual `GEOGRAPHY` . Only the `GEOGRAPHY` s with the highest dimension present in the input contribute to the centroid of the entire set. For example, if the input contains both `GEOGRAPHY` s with lines and `GEOGRAPHY` s with only points, `ST_CENTROID_AGG` returns the weighted average of the `GEOGRAPHY` s with lines, since a line has more dimensions than a point. In this example, `ST_CENTROID_AGG` ignores `GEOGRAPHY` s with only points when calculating the aggregate centroid.
 
-`ST_CENTROID_AGG` ignores `NULL` input `GEOGRAPHY` values.
+`ST_CENTROID_AGG` ignores `NULL` input `GEOGRAPHY` values. You can specify a boolean expression for `where_expression` to filter the aggregate function input.
 
 See [`ST_CENTROID`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_centroid) for the non-aggregate version of `ST_CENTROID_AGG` and the definition of centroid for an individual `GEOGRAPHY` value.
 
@@ -1102,11 +1102,11 @@ As long as they still represent the same geometric structure, two `GEOGRAPHY` va
 
 ## `ST_EXTENT`
 
-    ST_EXTENT(geography_expression)
+    ST_EXTENT(geography_expression [ WHERE where_expression ])
 
 **Description**
 
-Returns a `STRUCT` that represents the bounding box for the set of input `GEOGRAPHY` values. The bounding box is the minimal rectangle that encloses the geography. The edges of the rectangle follow constant lines of longitude and latitude.
+Returns a `STRUCT` that represents the bounding box for the set of input `GEOGRAPHY` values. The bounding box is the minimal rectangle that encloses the geography. The edges of the rectangle follow constant lines of longitude and latitude. You can specify a boolean expression for `where_expression` to filter the aggregate function input.
 
 Caveats:
 
@@ -2515,13 +2515,13 @@ See [`ST_UNION_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/stand
 
 ## `ST_UNION_AGG`
 
-    ST_UNION_AGG(geography)
+    ST_UNION_AGG(geography [ WHERE where_expression ])
 
 **Description**
 
 Returns a `GEOGRAPHY` that represents the point set union of all input `GEOGRAPHY` s.
 
-`ST_UNION_AGG` ignores `NULL` input `GEOGRAPHY` values.
+`ST_UNION_AGG` ignores `NULL` input `GEOGRAPHY` values. You can specify a boolean expression for `where_expression` to filter the aggregate function input.
 
 See [`ST_UNION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_union) for the non-aggregate version of `ST_UNION_AGG` .
 

@@ -8,21 +8,18 @@ data_source: docs.cloud.google.com
 
 # Create Apache Iceberg external tables
 
-Apache Iceberg external tables let you access [Apache Iceberg](https://iceberg.apache.org/docs/latest/) tables with finer-grained access control in a read-only format.
+Apache Iceberg external tables let you access [Apache Iceberg](https://iceberg.apache.org/docs/latest/) tables with finer-grained access control in a read-only format. These tables are no longer recommended for most use cases. Instead, see [Recommended alternatives](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#recommended-alternatives) .
 
 Iceberg is an open source table format that supports petabyte scale data tables. The Iceberg open specification lets you run multiple query engines on a single copy of data stored in an object store. Apache Iceberg external tables (hereafter called *Iceberg external tables* ) support [Iceberg version 2](https://iceberg.apache.org/spec/#version-2-row-level-deletes) , including merge-on-read. Support for [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) , including binary deletion vectors, is in [Preview](https://cloud.google.com/products/#product-launch-stages) . To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
 
 As a BigQuery administrator, you can enforce row- and column-level access control including data masking on tables. For information about how to set up access control at the table level, see [Set up access control policies](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#set-access-control) . Table access policies are also enforced when you use the BigQuery Storage API as a data source for the table in Managed Service for Apache Spark and Serverless Spark.
 
-You can create Iceberg external tables in the following ways:
+## Recommended alternatives
 
-  - **[With Lakehouse runtime catalog (recommended for Google Cloud)](https://docs.cloud.google.com/biglake/docs/about-blms) .** Lakehouse runtime catalog is a unified, managed, serverless, and scalable metastore that connects lakehouse data stored in Google Cloud to multiple runtimes, including open source engines (like Apache Spark) and BigQuery.
+Depending on where your data is stored, we recommend the following alternatives for accessing Iceberg tables whose metadata aren't managed by Google Cloud:
 
-  - **[With AWS Glue Data Catalog (recommended for AWS)](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) .** AWS Glue is the recommended method for AWS because it's a centralized metadata repository where you define the structure and location of your data stored in various AWS services and provides capabilities like automatic schema discovery and integration with AWS analytics tools.
-
-  - **[With Iceberg JSON metadata files](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#create-using-metadata-file) (recommended for Azure).** If you use an Iceberg JSON metadata file, then you must manually update the latest metadata file whenever there are any table updates. You can use a BigQuery stored procedure for Apache Spark to create Iceberg external tables that reference an Iceberg metadata file.
-
-For a full list of limitations, see [Limitations](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#limitations) .
+  - **Cloud Storage or Amazon Simple Storage Service (Amazon S3) data managed by remote catalogs such as AWS Glue, Databricks Unity Catalog, and Snowflake Horizon Catalog** . Use [Lakehouse runtime catalog with cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) . The cross-cloud data access feature of Lakehouse runtime catalog lets you query data in other cloud providers directly from Google Cloud without migrating files or building complex ETL pipelines.
+  - **Azure Blob Storage or Apache Iceberg tables not managed by a supported remote catalog for Lakehouse runtime catalog with cross-cloud data access** . Continue with [Apache Iceberg external tables using Iceberg JSON metadata files](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#create-using-metadata-file) .
 
 ## Before you begin
 
@@ -63,13 +60,9 @@ The following permissions are required to create an Iceberg external table:
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-## Create tables with Lakehouse runtime catalog
-
-We recommend creating Iceberg external tables with [Lakehouse runtime catalog](https://docs.cloud.google.com/biglake/docs/about-blms) .
-
 ## Create tables with a metadata file
 
-You can create Iceberg external tables with a [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) . However, this is not the recommended method because you have to manually [update the URI of the JSON metadata file](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#update-table-metadata) to keep the Iceberg external table up to date. If the URI is not kept up to date, queries in BigQuery can either fail or provide different results from other query engines that directly use an Iceberg catalog.
+You can create Iceberg external tables with a [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) . However, you must manually [update the URI of the JSON metadata file](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#update-table-metadata) to keep the Iceberg external table up to date. If the URI is not kept up to date, queries in BigQuery can either fail or provide different results from other query engines that directly use an Iceberg catalog.
 
 Iceberg table metadata files are created in the Cloud Storage bucket that you specify when you create an [Iceberg table using Spark](https://docs.cloud.google.com/dataproc-metastore/docs/apache-iceberg#iceberg-table-with-spark) .
 

@@ -89,6 +89,8 @@ For additional rules on how values are evaluated, see the three-valued logic tab
 
 `condition` must be a boolean expression. There may be multiple `result` types. `result` and `else_result` expressions must be implicitly coercible to a common [supertype](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#supertypes) .
 
+To improve performance when you filter within an aggregate function, use the `WHERE` clause in the [aggregate function call](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) instead.
+
 This expression supports specifying [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) .
 
 **Return Data Type**

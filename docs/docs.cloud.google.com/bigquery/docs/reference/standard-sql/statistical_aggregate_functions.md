@@ -26,6 +26,7 @@ GoogleSQL for BigQuery supports statistical aggregate functions. To learn about 
 
     CORR(
       X1, X2
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -143,6 +144,7 @@ To learn more about the `OVER` clause and how to use it, see [Window function ca
 
     COVAR_POP(
       X1, X2
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -250,6 +252,7 @@ To learn more about the `OVER` clause and how to use it, see [Window function ca
 
     COVAR_SAMP(
       X1, X2
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -358,6 +361,7 @@ To learn more about the `OVER` clause and how to use it, see [Window function ca
     STDDEV(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -379,6 +383,7 @@ An alias of [STDDEV\_SAMP](https://docs.cloud.google.com/bigquery/docs/reference
     STDDEV_POP(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -461,6 +466,7 @@ If this function is used with the `OVER` clause, it's part of a window function 
     STDDEV_SAMP(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -543,6 +549,7 @@ If this function is used with the `OVER` clause, it's part of a window function 
     VAR_POP(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -621,6 +628,7 @@ If this function is used with the `OVER` clause, it's part of a window function 
     VAR_SAMP(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     
@@ -703,6 +711,7 @@ If this function is used with the `OVER` clause, it's part of a window function 
     VARIANCE(
       [ DISTINCT ]
       expression
+      [ WHERE where_expression ]
     )
     [ OVER over_clause ]
     

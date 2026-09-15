@@ -79,7 +79,7 @@ If you need to access columns protected by BigQuery column-level access policies
 
 ### Knowledge Catalog service account roles and permissions
 
-> **Note:** If you are scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/dataplex/docs/cmek#datascans-cmek-permissions) .
+> **Note:** If you are scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK permissions](https://docs.cloud.google.com/dataplex/docs/cmek#datascans-cmek-permissions) .
 
 If you haven't created any data quality or data profile scans or you don't have a Knowledge Catalog lake in this project, create a service identifier by running: `gcloud beta services identity create --service=dataplex.googleapis.com` . This command returns a Knowledge Catalog service identifier if it exists.
 
@@ -87,8 +87,8 @@ To ensure that the Knowledge Catalog service account of the project containing t
 
 > **Important:** You must grant these roles to the Knowledge Catalog service account of the project containing the data quality scan, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
-  - Read BigQuery table data: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on BigQuery tables to be scanned and any other tables referenced in rules
-  - Read Iceberg REST Catalog table data: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on Iceberg REST Catalog tables to be scanned and any other tables referenced in rules
+  - Read BigQuery table data: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on tables to be scanned and any other tables referenced in rules
+  - Read Iceberg REST Catalog, SAP Business Data Cloud Delta Lake, and Apache Hive on Google Cloud Lakehouse table data: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on respective tables to be scanned and any other tables referenced in rules
   - Export scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the results dataset and table
   - Scan BigQuery data organized in a Knowledge Catalog lake:
       - [Dataplex Metadata Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.metadataReader) ( `roles/dataplex.metadataReader` ) on Dataplex resources
@@ -147,7 +147,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
     
     3.  Optional: Enter a **Description** .
     
-    4.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** . Only standard BigQuery and Iceberg REST Catalog tables are supported.
+    4.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** . Only standard BigQuery, Iceberg REST Catalog, SAP BDC Delta, and Hive on Google Cloud Lakehouse tables are supported.
         
         For tables in multi-region datasets, choose a region where to create the data scan.
         

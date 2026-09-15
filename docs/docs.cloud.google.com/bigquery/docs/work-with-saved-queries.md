@@ -238,6 +238,27 @@ To upload a saved query, follow these steps:
 
 Your saved query can be accessed through the **Files** or the **Explorer** pane.
 
+## Troubleshoot saved queries
+
+This section describes how to resolve common issues with saved queries.
+
+### Unable to save queries
+
+If you are unable to save a query, the Dataform API might not be enabled for the project. The Dataform API is automatically enabled for most projects, but it's not enabled for projects that use the [Restrict Resource Service Usage](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-resources) organization policy constraint, such as [assured projects](https://docs.cloud.google.com/assured-workloads/docs/concepts) .
+
+To resolve this issue, ensure that the Dataform API is enabled:
+
+1.  In the Google Cloud console, go to the **APIs & Services** page.
+2.  Search for **Dataform API** and ensure it is enabled.
+3.  If the API is not enabled, click **Enable** .
+4.  Retry using saved queries.
+
+### Region mismatch for saved queries
+
+Changing the [default region for code assets](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#set-the-default-region-for-code-assets) only affects assets created after the change. Existing assets remain in their [original region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) .
+
+To resolve this issue, ensure that the region selected for the saved query matches one of the supported regions. If necessary, create a new saved query in a supported region or adjust the default region for your code assets.
+
 ## Classic saved queries
 
 > **Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic-saved-queries-deprecation) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
@@ -333,6 +354,27 @@ To share a classic saved query, follow these steps:
 5.  Modify the query.
 
 6.  To save the modified query, click ![](https://docs.cloud.google.com/static/bigquery/images/save-bigquery-console.png) **Save Query (Classic) \> Save query (Classic)** .
+
+### Troubleshoot classic saved queries
+
+This section describes how to resolve common issues with classic saved queries.
+
+#### Can't access saved queries of a deactivated user
+
+Unlike BigQuery Studio saved queries, which can be accessed by project administrators, private classic saved queries become inaccessible if the user who created them has left an organization and their Google Account has been deactivated or suspended. The queries disappear from the Google Cloud console for all users except the original owner.
+
+To recover these queries, a Google Workspace or Cloud Identity administrator must perform the following steps:
+
+1.  Temporarily reactivate the deactivated user's account.
+2.  Reset the user's password.
+3.  Sign in to the Google Cloud console as the reactivated user.
+4.  In the query editor, open each saved query.
+5.  Click **Save** or **Save query as** .
+6.  Change the **Visibility** from **Personal** to **Project** .
+7.  Click **Save** . This makes the query visible to other users in the same project who have the necessary permissions.
+8.  Once all queries have been migrated, re-suspend the user's account.
+
+To prevent this issue, save business-critical or team-shared queries with **Project** visibility.
 
 ## What's next
 

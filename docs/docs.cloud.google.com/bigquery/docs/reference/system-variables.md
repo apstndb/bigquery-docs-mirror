@@ -57,18 +57,30 @@ BigQuery supports the following system variables for [multi-statement queries](h
 <td>The location in which to run the query. <code dir="ltr" translate="no">@@location</code> can only be set to a string literal with a <a href="https://docs.cloud.google.com/bigquery/docs/locations#supported_locations">valid location</a> . A <code dir="ltr" translate="no">SET @@location</code> statement must be the first statement in a query. An error occurs if there is a mismatch between <code dir="ltr" translate="no">@@location</code> and another <a href="https://docs.cloud.google.com/bigquery/docs/locations#specify_locations">location setting</a> for the query. You can improve the latency of queries that set <code dir="ltr" translate="no">@@location</code> by using <a href="https://docs.cloud.google.com/bigquery/docs/running-queries#optional-job-creation">optional job creation mode</a> . You can use the <code dir="ltr" translate="no">@@location</code> system variable inside of <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure">SQL UDFs</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-functions">table functions</a> .</td>
 </tr>
 <tr class="even">
+<td><code dir="ltr" translate="no">@@max_staleness_override</code></td>
+<td><code dir="ltr" translate="no">INTERVAL</code></td>
+<td>Read and write</td>
+<td>Overrides the maximum staleness interval for all applicable entities queried within the current multi-statement query or session. Applicable entities include <a href="https://docs.cloud.google.com/bigquery/docs/write-api-grpc#query-streamed-data-max-staleness">streamed tables</a> , <a href="https://docs.cloud.google.com/bigquery/docs/change-data-capture#query-max-staleness">Change Data Capture (CDC) tables</a> , and <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness">materialized views</a> ) queried within the current multi-statement query or session.
+<p>By default, every time you run a query, BigQuery returns the most up-to-date results or respects the entity's configured <code dir="ltr" translate="no">max_staleness</code> option. You can use <code dir="ltr" translate="no">@@max_staleness_override</code> to dynamically customize the staleness behavior without altering table or view configurations:</p>
+<ul>
+<li><strong>Reduce query latency and costs:</strong> to tolerate stale data, set <code dir="ltr" translate="no">@@max_staleness_override</code> to a non-negative interval — for example, <code dir="ltr" translate="no">INTERVAL 10 MINUTE</code> .</li>
+<li><strong>Ensure completely up-to-date results:</strong> to force pending modifications or refreshes to be applied at query run time, set <code dir="ltr" translate="no">@@max_staleness_override</code> to <code dir="ltr" translate="no">INTERVAL 0 SECOND</code> .</li>
+<li><strong>Clear the override:</strong> to revert back to the entity-level <code dir="ltr" translate="no">max_staleness</code> settings, set <code dir="ltr" translate="no">@@max_staleness_override</code> to <code dir="ltr" translate="no">NULL</code> .</li>
+</ul></td>
+</tr>
+<tr class="odd">
 <td><code dir="ltr" translate="no">@@project_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Read-only</td>
 <td>ID of the project used to execute the current query. In the context of a procedure, <code dir="ltr" translate="no">@@project_id</code> refers to the project that is running the multi-statement query, not the project which owns the procedure.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">@@query_label</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Read and write</td>
 <td>Query label to associate with query jobs in the current multi-statement query or session. If set in a query, all subsequent query jobs in the script or session will have this label. If not set in a query, the value for this system variable is <code dir="ltr" translate="no">NULL</code> . For an example of how to set this system variable, see <a href="https://docs.cloud.google.com/bigquery/docs/adding-labels#adding-label-to-session">Associate jobs in a session with a label</a> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">@@reservation</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Read and write</td>
@@ -76,55 +88,55 @@ BigQuery supports the following system variables for [multi-statement queries](h
 <p>Forces the query to use on-demand billing when set to <code dir="ltr" translate="no">'none'</code> . This requires the project or organization to have <code dir="ltr" translate="no">reservation_override_mode</code> set to <code dir="ltr" translate="no">ALLOW_ANY_OVERRIDE</code> .</p>
 <p>The location of the reservation must match the location where the query is running. If <code dir="ltr" translate="no">@@reservation</code> is <code dir="ltr" translate="no">NULL</code> , the reservation is automatically detected based on <a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">assignment settings</a> matching the query properties.</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">@@row_count</code></td>
 <td><code dir="ltr" translate="no">INT64</code></td>
 <td>Read-only</td>
 <td>If used in a multi-statement query and the previous statement is DML, specifies the number of rows inserted, modified, or deleted, as a result of that DML statement. If the previous statement is a `MERGE` statement, <code dir="ltr" translate="no">@@row_count</code> represents the combined total number of rows inserted, modified, and deleted. This value is <code dir="ltr" translate="no">NULL</code> if not in a multi-statement query.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">@@script.bytes_billed</code></td>
 <td><code dir="ltr" translate="no">INT64</code></td>
 <td>Read-only</td>
 <td>Total bytes billed so far in the currently executing multi-statement query job. This value is <code dir="ltr" translate="no">NULL</code> if not in the job.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">@@script.bytes_processed</code></td>
 <td><code dir="ltr" translate="no">INT64</code></td>
 <td>Read-only</td>
 <td>Total bytes processed so far in the currently executing multi-statement query job. This value is <code dir="ltr" translate="no">NULL</code> if not in the job.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">@@script.creation_time</code></td>
 <td><code dir="ltr" translate="no">TIMESTAMP</code></td>
 <td>Read-only</td>
 <td>Creation time of the currently executing multi-statement query job. This value is <code dir="ltr" translate="no">NULL</code> if not in the job.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">@@script.job_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Read-only</td>
 <td>Job ID of the currently executing multi-statement query job. This value is <code dir="ltr" translate="no">NULL</code> if not in the job.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">@@script.num_child_jobs</code></td>
 <td><code dir="ltr" translate="no">INT64</code></td>
 <td>Read-only</td>
 <td>Number of currently completed child jobs. This value is <code dir="ltr" translate="no">NULL</code> if not in the job.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">@@script.slot_ms</code></td>
 <td><code dir="ltr" translate="no">INT64</code></td>
 <td>Read-only</td>
 <td>Number of slot milliseconds used so far by the script. This value is <code dir="ltr" translate="no">NULL</code> if not in the job.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">@@session_id</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Read-only</td>
 <td>ID of the session that the current query is associated with. You can use the <code dir="ltr" translate="no">@@session_id</code> system variable within <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure">SQL user-defined functions</a> , <a href="https://docs.cloud.google.com/bigquery/docs/table-functions">table functions</a> , and <a href="https://docs.cloud.google.com/bigquery/docs/views">logical views</a> . The use of this system variable in materialized views isn't supported.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">@@time_zone</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
 <td>Read and write</td>
@@ -142,6 +154,18 @@ In addition to the system variables shown previously, you can use `EXCEPTION` sy
 You don't create system variables, but you can override the default value for some of them:
 
     SET @@dataset_project_id = 'MyProject';
+
+The following example overrides the maximum staleness interval for subsequent queries in the session to 10 minutes:
+
+    SET @@max_staleness_override = INTERVAL 10 MINUTE;
+
+To force queries to return the freshest, fully up-to-date results and apply pending modifications at query run time:
+
+    SET @@max_staleness_override = INTERVAL 0 SECOND;
+
+To reset the staleness override back to the table-level settings, set `@@max_staleness_override` to `NULL` :
+
+    SET @@max_staleness_override = NULL;
 
 The following query returns the default time zone:
 

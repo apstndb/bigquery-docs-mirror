@@ -14,7 +14,8 @@ An aggregate function summarizes the rows of a group into a single value. When a
       [ DISTINCT ]
       function_arguments
       [ { IGNORE | RESPECT } NULLS ]
-      [ { HAVING { MAX | MIN } having_expression | GROUP BY grouping_expression [, ... ] } ]
+      [ WHERE where_expression ]
+      [ { HAVING { MAX | MIN } having_expression | GROUP BY grouping_expression [, ... ] [ HAVING having_expression ] } ]
       [ ORDER BY key [ { ASC | DESC } ] [, ... ] ]
       [ LIMIT n ]
     )
@@ -32,9 +33,11 @@ Each aggregate function supports all or a subset of the aggregate function call 
     
     If neither `IGNORE NULLS` nor `RESPECT NULLS` is specified, most functions default to `IGNORE NULLS` behavior but in a few cases `NULL` values are respected.
 
+  - `WHERE` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) Filters the aggregate function input using a boolean expression.
+
   - `HAVING MAX` or `HAVING MIN` : Restricts the set of rows that the function aggregates by a maximum or minimum value. For details, see [HAVING MAX and HAVING MIN clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#max_min_clause) .
 
-  - `GROUP BY` : Performs an additional grouping on input rows to the aggregate function. Used to define [multi-level aggregates](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) .
+  - `GROUP BY` : Performs an additional grouping on input rows to the aggregate function. Used to define [multi-level aggregates](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) . The `HAVING` clause in the `GROUP BY` clause filters the grouped output. The `HAVING` clause must be a scalar expression or an aggregate expression that doesn't use window functions.
 
   - `ORDER BY` : Specifies the order of the values.
     
@@ -65,7 +68,8 @@ Each aggregate function supports all or a subset of the aggregate function call 
 The clauses in an aggregate function call are applied in the following order:
 
   - `OVER`
-  - `HAVING MAX` / `HAVING MIN` or `GROUP BY`
+  - `WHERE`
+  - `HAVING MAX` / `HAVING MIN` or `GROUP BY` with `HAVING`
   - `IGNORE NULLS` or `RESPECT NULLS`
   - `DISTINCT`
   - `ORDER BY`
@@ -75,7 +79,7 @@ When used in conjunction with a `GROUP BY` clause, the groups summarized typical
 
 ## Restrict aggregation by a maximum or minimum value
 
-Some aggregate functions support two optional clauses that are called `HAVING MAX` and `HAVING MIN` . These clauses restrict the set of rows that a function aggregates to rows that have a maximum or minimum value in a particular column.
+Some aggregate functions support two optional clauses that are called `HAVING MAX` and `HAVING MIN` . These clauses restrict the set of rows that a function aggregates to rows that have a maximum or minimum value in a particular column. These clauses are also different from the `GROUP BY ... HAVING ...` clauses, which aggregate specifically grouped output.
 
 ### HAVING MAX clause
 
@@ -183,6 +187,88 @@ In the following example, the average of `x` over a specified window is returned
      | 4    | 4    |
      | 5    | 4.5  |
      +------+------*/
+
+The following example uses a `WHERE` clause to filter the `AVG` aggregate input for average inches of precipitation in wet seasons compared to dry seasons.
+
+    WITH
+      Precipitation AS (
+        SELECT 2001 AS year, 'spring' AS season, 9 AS inches
+        UNION ALL
+        SELECT 2001, 'winter', 1
+        UNION ALL
+        SELECT 2000, 'fall', 3
+        UNION ALL
+        SELECT 2000, 'summer', 5
+        UNION ALL
+        SELECT 2000, 'spring', 7
+        UNION ALL
+        SELECT 2000, 'winter', 2
+      )
+    SELECT
+      AVG(inches WHERE season IN ('spring', 'summer')) AS wet_seasons_avg,
+      AVG(inches WHERE season IN ('fall', 'winter')) AS dry_seasons_avg
+    FROM Precipitation;
+    
+    /*-----------------+------------------+
+     | wet_seasons_avg | dry_seasons_avg  |
+     +-----------------+------------------+
+     | 7               | 2                |
+     +-----------------+------------------*/
+
+The following example uses the `GROUP BY` clause to group input rows to the aggregate function ( [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation) ) and filters the grouped output using the additional `HAVING` clause. The query averages inches of precipitation in wet seasons compared to dry seasons, and totals the averages for expected precipitation
+
+    WITH
+      Precipitation AS (
+        SELECT 2001 AS year, 'spring' AS season, 9 AS inches
+        UNION ALL
+        SELECT 2001, 'winter', 1
+        UNION ALL
+        SELECT 2000, 'fall', 3
+        UNION ALL
+        SELECT 2000, 'summer', 5
+        UNION ALL
+        SELECT 2000, 'spring', 7
+        UNION ALL
+        SELECT 2000, 'winter', 2
+      )
+    SELECT
+      SUM(AVG(inches) GROUP BY season HAVING season IN ('spring', 'summer')) AS expected_rainy_season_inches,
+      SUM(AVG(inches) GROUP BY season HAVING season IN ('fall', 'winter')) AS expected_dry_season_inches
+    FROM Precipitation;
+    
+    /*------------------------------+-----------------------------+
+     | expected_rainy_season_inches | expected_dry_season_inches  |
+     +------------------------------+-----------------------------+
+     | 13                           | 4.5                         |
+     +------------------------------+-----------------------------*/
+
+The following example extends the previous example by further defining wet seasons as having averages of more than three inches of precipitation and dry seasons as three inches or less.
+
+    WITH
+      Precipitation AS (
+        SELECT 2001 AS year, 'spring' AS season, 9 AS inches
+        UNION ALL
+        SELECT 2001, 'winter', 1
+        UNION ALL
+        SELECT 2000, 'fall', 3
+        UNION ALL
+        SELECT 2000, 'summer', 5
+        UNION ALL
+        SELECT 2000, 'spring', 7
+        UNION ALL
+        SELECT 2000, 'winter', 2
+      )
+    SELECT
+      SUM(AVG(inches) GROUP BY season HAVING AVG(inches) > 3) AS expected_rainy_season_inches,
+      SUM(AVG(inches) GROUP BY season HAVING AVG(inches) <= 3) AS expected_dry_season_inches
+    FROM Precipitation;
+    
+    -- Results remain the same in this case.
+    /*------------------------------+-----------------------------+
+     | expected_rainy_season_inches | expected_dry_season_inches  |
+     +------------------------------+-----------------------------+
+     | 13                           | 4.5                         |
+     +------------------------------+-----------------------------*/
 
 ## Multi-level aggregation
 

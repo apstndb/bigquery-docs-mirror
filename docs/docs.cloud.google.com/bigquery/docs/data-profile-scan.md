@@ -34,6 +34,14 @@ To get the permissions that you need to create and manage data profile scans, as
   - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `roles/dataplex.dataScanViewer` ) on the project containing the data scan
   - Publish data profile scan results to Knowledge Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the `@bigquery` entry group
   - View published data profile scan results in BigQuery on the **Data profile** tab: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the table
+  - Run data profile scans:
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project running the scan (all table types)
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the BigQuery tables being scanned
+  - Run data profile scans against BigQuery external tables that use Cloud Storage data:
+      - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on the Cloud Storage bucket (Cloud Storage, Apache Hive, and Iceberg REST catalog)
+      - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `roles/storage.legacyBucketReader` ) on the Cloud Storage bucket
+  - Run data profile scans for Iceberg REST Catalog, SAP BDC Delta Lake, and Apache Hive tables on Google Cloud Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on the tables being scanned
+  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -69,20 +77,22 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ### Knowledge Catalog service account roles and permissions
 
-> **Note:** If you're scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK Permissions](https://docs.cloud.google.com/dataplex/docs/cmek#datascans-cmek-permissions) .
+Whichever [execution identity](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview#execution_identity) you select (the default Knowledge Catalog Service Agent, a custom service account, or End-User Credentials), that identity requires the following roles and permissions to run the data profile scan jobs in the backend and export results.
 
-To ensure that the Knowledge Catalog service account has the necessary permissions to run data profile scans and export results, ask your administrator to grant the following IAM roles to the Knowledge Catalog service account:
+> **Note:** If you're scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK permissions](https://docs.cloud.google.com/dataplex/docs/cmek#datascans-cmek-permissions) .
 
-> **Important:** You must grant these roles to the Knowledge Catalog service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+To ensure that the execution identity has the necessary permissions to run data profile scans and export results, ask your administrator to grant the following IAM roles to the execution identity:
 
-  - Run data profile scans against BigQuery data:
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on project running the scan
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on tables being scanned
+> **Important:** You must grant these roles to the execution identity, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+
+  - Run data profile scans:
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project running the scan (all table types)
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the BigQuery tables being scanned
   - Run data profile scans for BigQuery external tables that use Cloud Storage data:
       - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on Cloud Storage bucket
-      - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `roles/storage.legacyBucketReader` ) on Cloud Storage bucket
-  - Run data profile scans for Iceberg REST Catalog tables on borderless Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on Iceberg Rest Catalog tables being scanned
-  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on table
+      - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `roles/storage.legacyBucketReader` ) on the Cloud Storage bucket
+  - Run data profile scans for Iceberg REST Catalog, SAP BDC Delta Lake, and Apache Hive tables on Google Cloud Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on the tables being scanned
+  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -103,7 +113,7 @@ The following permissions are required to run data profile scans and export resu
       - `bigquery.tables.create` on dataset
       - `bigquery.tables.updateData` on table
 
-Your administrator might also be able to give the Knowledge Catalog service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the execution identity these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Knowledge Catalog can only scan rows visible to the Knowledge Catalog service account. To let Knowledge Catalog scan all rows, add its service account to a row filter where the predicate is `TRUE` .
 
@@ -158,7 +168,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
 
 5.  Optional: Enter a **Description** .
 
-6.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** . Only standard BigQuery and Iceberg REST Catalog tables are supported.
+6.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** . Only standard BigQuery, Iceberg REST Catalog, SAP BDC Delta Lake, and Apache Hive on Google Cloud Lakehousetables are supported.
     
     For tables in multi-region datasets, choose a region where to create the data scan.
     

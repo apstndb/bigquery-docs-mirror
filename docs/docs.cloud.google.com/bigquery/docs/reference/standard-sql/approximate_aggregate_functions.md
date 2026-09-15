@@ -30,6 +30,7 @@ To specify precision with sketches, use the following functions:
 
     APPROX_COUNT_DISTINCT(
       expression
+      [ WHERE where_expression ]
     )
 
 **Description**
@@ -67,13 +68,14 @@ Any data type **except** :
       [ DISTINCT ]
       expression, number
       [ { IGNORE | RESPECT } NULLS ]
+      [ WHERE where_expression ]
     )
 
 **Description**
 
 Returns the approximate boundaries for a group of `expression` values, where `number` represents the number of quantiles to create. This function returns an array of `number` + 1 elements, sorted in ascending order, where the first element is the approximate minimum and the last element is the approximate maximum.
 
-Returns `NULL` if there are zero input rows or `expression` evaluates to `NULL` for all rows.
+Returns `NULL` if there are zero input rows or `expression` evaluates to `NULL` for all rows. If you specify a `WHERE` clause expression, then the `IGNORE NULLS` clause is required.
 
 To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
@@ -140,9 +142,7 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 ## `APPROX_TOP_COUNT`
 
-    APPROX_TOP_COUNT(
-      expression, number
-    )
+    APPROX_TOP_COUNT(expression, number)
 
 **Description**
 
@@ -189,9 +189,7 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 ## `APPROX_TOP_SUM`
 
-    APPROX_TOP_SUM(
-      expression, weight, number
-    )
+    APPROX_TOP_SUM(expression, weight, number)
 
 **Description**
 

@@ -113,6 +113,10 @@ Finer granularity background jobs for refreshing cached metadata for BigQuery ta
 
 Finer granularity background jobs for refreshing search indexes upon BigQuery table columns. Reservations with this job type take priority over a default BACKGROUND reservation assignment (if it exists).
 
+`AUTOMATIC_MATERIALIZED_VIEW_REFRESH`
+
+Automated materialized view refresh jobs will use the reservation. Reservations with this job type will take priority over a default QUERY reservation assignment (if it exists).
+
 ## State
 
 Assignment will remain in PENDING state if no active capacity commitment is present. It will become ACTIVE when some capacity commitment becomes active.

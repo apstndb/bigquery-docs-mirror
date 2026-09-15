@@ -67,8 +67,12 @@ The `AI.KEY_DRIVERS` function takes the following arguments:
   - `  METRIC_COL  ` : a `STRING` expression to use to calculate a summable metric. The expression must be in the form `SUM(metric_column_name)` or `metric_column_name` , where `metric_column_name` is the name of a column of a numeric data type. Both expressions are treated as equivalent. The expression is case insensitive.
     
     You can't use any additional numerical computations in the contribution metric expression. For example, neither `SUM(AVG(metric_col))` nor `AVG(SUM(round(metric_col_numerator))/(SUM(metric_col_denominator))` is valid. You can perform additional computations in your query\_statement if necessary.
+    
+    The values in the metric column that you use in the `METRIC_COL` option must be non-negative, unless you specify `0` for the `MIN_APRIORI_SUPPORT` value.
 
   - `  DIMENSION_COLS  ` : an `ARRAY<STRING>` that lists the names of the columns to use as dimensions when summarizing the metric specified in the `METRIC_COL` option. The dimension columns that you specify must have an `INT64` , `BOOL` , or `STRING` data type. You must provide between 1 and 12 columns. You can't use the columns from the `METRIC_COL` or `INTEREST_LABEL_COL` arguments as dimensions.
+    
+    Any rows in the dimension columns that contain `NULL` values are removed. If you have `NULL` values in your data, you can preprocess the data to fill in the `NULL` values by using the [`ML.IMPUTER` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-imputer) , or by using the [`IFNULL` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull) to replace `NULL` values with a custom value.
 
   - `  INTEREST_LABEL_COL  ` : a `STRING` value that contains the name of the column to use to determine whether a given row is interest group or reference group. The column that you specify must have a `BOOL` data type. For more information, see [choose interest and reference data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers#choose-interest-reference) .
 

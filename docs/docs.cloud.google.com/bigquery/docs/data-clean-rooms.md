@@ -8,16 +8,18 @@ data_source: docs.cloud.google.com
 
 # Share sensitive data with data clean rooms
 
-Data clean rooms provide a security-enhanced environment in which multiple parties can share, join, and analyze their data assets without moving or revealing the underlying data.
+You can use data clean rooms to establish a security-enhanced environment. In this environment, multiple parties share, join, and analyze their data assets. This collaboration occurs without moving or revealing the underlying data.
 
-BigQuery data clean rooms use the BigQuery sharing (formerly Analytics Hub) platform. While standard [BigQuery sharing data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) let you share data across organizational boundaries at scale, data clean rooms address use cases for sharing sensitive and protected data. Data clean rooms provide additional security controls to protect the underlying data and enforce [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) defined by the data owner.
+BigQuery data clean rooms integrate with the BigQuery sharing (formerly Analytics Hub) platform. Standard [BigQuery sharing data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) support data sharing across organizational boundaries at scale. However, you use data clean rooms specifically for sensitive and protected data. Data clean rooms provide additional security controls that protect underlying data and enforce [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) defined by data owners.
 
 > **Caution:** Analysis rules in data clean rooms provide privacy controls, but they might not fully prevent sophisticated queries from extracting unauthorized data. To maintain control and restrict execution to approved queries, use [query templates](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#query_templates) .
+
+## Use cases
 
 Primary use cases include the following:
 
   - **Campaign planning and audience insights.** Let two parties (for example, sellers and buyers) mix first-party data and improve data enrichment in a privacy-centric way.
-  - **Measurement and attribution.** Match customer and media performance data to better understand the effectiveness of marketing efforts and make more informed business decisions.
+  - **Measurement and attribution.** Match customer and media performance data to better understand marketing effectiveness and decide on future campaigns.
   - **Activation.** Combine customer data with data from other parties to enrich customer understanding, which lets you improve segmentation capabilities and media activation.
 
 Data clean rooms also support several use cases beyond the marketing industry:
@@ -41,31 +43,31 @@ BigQuery data clean rooms use a publish and subscribe model of BigQuery data. Bi
 
 ![Data contributors publish data to the data clean room, which subscribers can query with privacy filters.](https://docs.cloud.google.com/static/bigquery/images/clean-room-architecture.png)
 
-#### Data clean room
+### Data clean room
 
 A data clean room is an environment for sharing sensitive data that helps prevent raw access and enforces query restrictions. Only users or groups added as data clean room subscribers can subscribe to the shared data. Data clean room owners can create any number of data clean rooms in BigQuery sharing.
 
-#### Shared resources
+### Shared resources
 
 A shared resource is the unit of data sharing in a data clean room. The resource must be a BigQuery table, view, or routine (table-valued function). As a data contributor, you create or use an existing BigQuery resource in your project to share with your data clean room subscribers.
 
-#### Listings
+### Listings
 
-A data contributor creates a listing when they add data to a data clean room. It contains a reference to the data contributor's shared resource along with descriptive information that helps subscribers use the data. As a data contributor, you can create a listing and include information such as a description, sample queries, and links to documentation for your subscribers.
+When you add data to a data clean room as a data contributor, you create a listing. The listing contains a reference to your shared resource along with descriptive information that helps subscribers use the data. You can include information such as a description, sample queries, and links to documentation for your subscribers.
 
-#### Linked datasets
+### Linked datasets
 
-A linked dataset is a read-only BigQuery dataset that serves as a symbolic link to all data in a data clean room. When data clean room subscribers query resources in a linked dataset, data from the shared resources is returned, satisfying analysis rules set by the data contributor. As a subscriber, a linked dataset is created inside your project when you subscribe to a data clean room. No copy of the data is created, and subscribers can't see certain metadata, such as view definitions.
+A linked dataset is a read-only BigQuery dataset that serves as a symbolic link to all data in a data clean room. When data clean room subscribers query resources in a linked dataset, data from the shared resources is returned, satisfying analysis rules set by the data contributor. When you subscribe to a data clean room, BigQuery creates a linked dataset in your project. No copy of the data is created, and subscribers can't see certain metadata, such as view definitions.
 
-#### Analysis rules
+### Analysis rules
 
-As a data contributor, you configure analysis rules on the resources that you share in the data clean room. [Analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) prevent raw access to underlying data and enforce query restrictions. For example, data clean rooms support the [aggregation threshold analysis rule](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) , which lets data clean room subscribers analyze data only through aggregation queries.
+As a data contributor, you configure analysis rules on the resources that you share in the data clean room. [Analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) help prevent raw access to underlying data and enforce query restrictions. For example, data clean rooms support the [aggregation threshold analysis rule](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) , which lets data clean room subscribers analyze data only through aggregation queries.
 
-#### Data egress controls
+### Data egress controls
 
 [Data egress](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress) controls automatically prevent data clean room subscribers from copying and exporting raw data from a data clean room. Data contributors can configure additional controls to prevent copying and exporting query results that subscribers obtain.
 
-#### Query templates
+### Query templates
 
 [Query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) let data clean room owners and BigQuery sharing publishers share predefined queries without sharing the underlying resources of tables and views.
 
@@ -75,10 +77,10 @@ Predefined queries use [table-valued functions (TVFs)](https://docs.cloud.google
 
 BigQuery data clean rooms have the following limitations:
 
-  - You can set [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) only on views, not on tables or materialized views. Because of this limitation, if a data contributor directly shares tables or materialized views, or views without analysis rules, into a data clean room, then data clean room subscribers have raw access to the data in those resources.
-  - While [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) provide privacy controls, they aren't guaranteed to block every unauthorized query designed to extract raw data. To secure your information, use [query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) in data clean rooms to review and approve queries, effectively blocking unauthorized attempts up front.
+  - You can set [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) only on views, not on tables or materialized views. Because of this limitation, subscribers have raw data access if a data contributor shares tables, materialized views, or views without analysis rules directly to a data clean room.
+  - While [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) provide privacy controls, they aren't guaranteed to block every unauthorized query designed to extract raw data. To help secure your information, use [query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) in data clean rooms to review and approve queries, which helps block unauthorized attempts.
   - Because data clean rooms use the BigQuery sharing platform, all [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
-  - Data clean rooms are only available in [BigQuery sharing regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
+  - Data clean rooms are available only in [BigQuery sharing regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
   - As a data clean room subscriber, you can't search for shared resources in Knowledge Catalog or Data Catalog.
   - As a data clean room subscriber, you can't query [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) on linked datasets.
   - As a data contributor, you can't publish an entire dataset directly to a data clean room.
@@ -88,7 +90,7 @@ BigQuery data clean rooms have the following limitations:
 
 ## Before you begin
 
-Grant Identity and Access Management (IAM) roles to give users the necessary permissions to perform each task in this document, enable the Analytics Hub API, and assign the Analytics Hub Admin role to your data clean room owner.
+Grant Identity and Access Management (IAM) roles to ensure that you have the required permissions to complete the tasks in this document, enable the Analytics Hub API, and assign the Analytics Hub Admin role to your data clean room owner.
 
 ### Required permissions
 
@@ -124,9 +126,9 @@ Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcl
 
 After you enable the Analytics Hub API, you can access the [Sharing (Analytics Hub) page](https://console.cloud.google.com/bigquery/analytics-hub) .
 
-### Assign the Analytics Hub Admin role
+### Grant the Analytics Hub Admin role
 
-Your data clean room owner, the user who creates the data clean room, must have the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ). To learn how to grant this role to other users, see [Create BigQuery sharing administrators](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange-administrator) .
+To create a data clean room as an owner, you must have the [Analytics Hub Admin role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-admin-role) ( `roles/analyticshub.admin` ). For more information about granting this role to other users, see [Create BigQuery sharing administrators](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange-administrator) .
 
 ## Data clean room owner workflows
 
@@ -141,9 +143,11 @@ As a data clean room owner, you can do the following:
 
 ### Additional data clean room owner permissions
 
-You must have the Analytics Hub Admin role ( `roles/analyticshub.admin` ) on your project to perform data clean room owner tasks. You can also assign this role at the folder or organization level, if applicable.
+To complete data clean room owner tasks, you must have the Analytics Hub Admin role ( `roles/analyticshub.admin` ) on your project. You can also assign this role at the folder or organization level, if applicable.
 
 ### Create a data clean room
+
+To create a data clean room, select one of the following options:
 
 ### Console
 
@@ -163,7 +167,7 @@ You must have the Analytics Hub Admin role ( `roles/analyticshub.admin` ) on you
 
 7.  Optional: In the **Clean Room Permissions** section, add other data clean room owners, data contributors, or data clean room subscribers.
     
-    ![Create data clean room pane.](https://docs.cloud.google.com/static/bigquery/images/clean-room-create.png)
+    ![Create a data clean room pane in BigQuery sharing.](https://docs.cloud.google.com/static/bigquery/images/clean-room-create.png)
 
 ### API
 
@@ -193,6 +197,8 @@ If the request is successful, the response body contains the details of the data
 If you enable subscriber email logging with the `logLinkedDatasetQueryUserEmail` field, the data exchange response contains `log_linked_dataset_query_user_email: true` . The logged data appears in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
 
 ### Update a data clean room
+
+To update data clean room properties, select one of the following options:
 
 ### Console
 
@@ -239,9 +245,11 @@ In the body of the request, specify updated values for the following fields:
   - `discoveryType`
   - `logLinkedDatasetQueryUserEmail`
 
-For details on these fields, see [Resource: DataExchange](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#resource:-dataexchange) .
+For more information about these fields, see [Resource: DataExchange](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#resource:-dataexchange) .
 
 ### Delete a data clean room
+
+To delete a data clean room, select one of the following options:
 
 ### Console
 
@@ -264,13 +272,12 @@ Replace the following:
   - `  PROJECT_ID  ` : your project ID
   - `  LOCATION  ` : the location of the data clean room
   - `  CLEAN_ROOM_ID  ` : your data clean room ID
-  - `  CLEAN_ROOM_NAME  ` : the display name of your data clean room
 
-When you delete a data clean room, all the listings within it are deleted. However, the shared resources and linked datasets are not deleted. The linked datasets are unlinked from the source datasets, so querying resources in the data clean room starts to fail for data clean room subscribers.
+When you delete a data clean room, all the listings within it are deleted. The shared resources and linked datasets aren't deleted. The linked datasets are unlinked from the source datasets, so querying resources in the data clean room starts to fail for data clean room subscribers.
 
 ### Manage data contributors
 
-As a data clean room owner, you manage which users can add data to your data clean rooms (your data contributors). To let a user add data to a data clean room, grant them the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) on a specific data clean room:
+As a data clean room owner, you manage who can add data to your data clean rooms (your data contributors). To let a data contributor add data to a data clean room, grant them the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) on that data clean room:
 
 ### Console
 
@@ -288,7 +295,7 @@ As a data clean room owner, you manage which users can add data to your data cle
 
 7.  Click **Save** .
 
-You can delete and update data contributors at any time by clicking **Set Permissions** .
+You can delete and update data contributors at any time by clicking **Set permissions** .
 
 ### API
 
@@ -310,13 +317,13 @@ The following example shows how to call the `projects.locations.dataExchanges.se
       }
     }'
 
-The policy in the request body should conform to the structure of a [Policy](https://docs.cloud.google.com/iam/reference/rest/v1/Policy) .
+The policy in the request body must conform to the structure of a [Policy](https://docs.cloud.google.com/iam/reference/rest/v1/Policy) .
 
-You can grant the Analytics Hub Publisher role ( `roles/analyticshub.publisher` ) for an entire project from the [IAM page](https://console.cloud.google.com/iam-admin) , which gives a user permission to add data to any data clean room in a project. However, we don't recommend this action, as it might result in users having overly permissive access.
+You can grant the Analytics Hub Publisher role ( `roles/analyticshub.publisher` ) for an entire project on the [IAM page](https://console.cloud.google.com/iam-admin) . This grants permission to add data to any data clean room in that project. Granting this role at the project level isn't recommended because it can result in overly permissive access.
 
 ### Manage data clean room subscribers
 
-As a data clean room owner, you manage which users can subscribe to your data clean rooms (your subscribers). To allow a user to subscribe to a data clean room, grant them the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) and [Analytics Hub Subscription Owner role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) ( `roles/analyticshub.subscriptionOwner` ) on a specific data clean room:
+As a data clean room owner, you manage who can subscribe to your data clean rooms (your subscribers). To let a subscriber subscribe to a data clean room, grant them the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) and [Analytics Hub Subscription Owner role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) ( `roles/analyticshub.subscriptionOwner` ) on that data clean room:
 
 ### Console
 
@@ -338,7 +345,7 @@ As a data clean room owner, you manage which users can subscribe to your data cl
 
 9.  Click **Save** .
 
-You can delete and update subscribers at any time by clicking **Set Permissions** .
+You can delete and update data clean room subscribers at any time by clicking **Set permissions** .
 
 ### API
 
@@ -366,19 +373,19 @@ The following example shows how to call the `projects.locations.dataExchanges.se
       }
     }'
 
-The policy in the request body should conform to the structure of a [Policy](https://docs.cloud.google.com/iam/reference/rest/v1/Policy) .
+The policy in the request body must conform to the structure of a [Policy](https://docs.cloud.google.com/iam/reference/rest/v1/Policy) .
 
-You can grant the Analytics Hub Subscriber role ( `roles/analyticshub.subscriber` ) and Analytics Hub Subscription Owner role ( `roles/analyticshub.subscriptionOwner` ) for an entire project from the [IAM page](https://console.cloud.google.com/iam-admin) , which gives a user permission to subscribe to any data clean room in a project. However, we don't recommend this action, as it might result in users having overly permissive access.
+You can grant the Analytics Hub Subscriber role ( `roles/analyticshub.subscriber` ) and Analytics Hub Subscription Owner role ( `roles/analyticshub.subscriptionOwner` ) for an entire project on the [IAM page](https://console.cloud.google.com/iam-admin) . These roles give permission to subscribe to any data clean room in that project. Avoid granting these roles at the project level because it can result in overly permissive access.
 
 ### Share a data clean room
 
-You can directly share a data clean room with subscribers:
+You can directly share a data clean room with data clean room subscribers:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
 2.  In the row of the data clean room that you want to share, click more\_vert **More actions \> Copy share link** .
 
-3.  Share the copied link with data clean room subscribers to let them view and subscribe to the data clean room.
+3.  To let subscribers view and subscribe to the data clean room, share the copied link with them.
 
 ## Data contributor workflows
 
@@ -392,9 +399,9 @@ As a data contributor, you can do the following:
 
 ### Additional data contributor permissions
 
-To perform data contributor tasks, you must have the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) on a data clean room.
+To complete data contributor tasks, you must have the [Analytics Hub Publisher role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-publisher-role) ( `roles/analyticshub.publisher` ) on a data clean room.
 
-To perform data contributor tasks, you also need the `bigquery.datasets.get` , `bigquery.datasets.update` , and `bigquery.tables.get` permissions on the source dataset and table. These permissions are available in the [BigQuery Data Owner role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ).
+In addition, you need the `bigquery.datasets.get` , `bigquery.datasets.update` , and `bigquery.tables.get` permissions on the source dataset and table. These permissions are available in the [BigQuery Data Owner role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ).
 
 To view data clean rooms in your organization that aren't in your current project, you need the `resourcemanager.organization.get` permission.
 
@@ -412,7 +419,7 @@ To prepare data with [analysis rules](https://docs.cloud.google.com/bigquery/doc
 
 2.  Click the display name of the data clean room that you want to create a listing in.
     
-    If you're in a different organization than your data clean room owner and the data clean room is not visible to you, ask the data clean room owner for a direct link.
+    If you're in a different organization than your data clean room owner and the data clean room isn't visible to you, ask the data clean room owner for a direct link.
 
 3.  Click **Add data** .
 
@@ -458,11 +465,13 @@ Replace the following:
 
 By listing a resource in a data clean room, you grant all current and future data clean room subscribers access to the data in your shared resource.
 
-If you try to create a listing with a shared resource that doesn't have an analysis rule, you're shown a warning that subscribers will be able to access the raw data for that resource. If you confirm that you're willingly publishing such resources without analysis rules, you can still create the listing.
+If you create a listing with a shared resource that lacks an analysis rule, a warning indicates that subscribers can access raw data for that resource. If you confirm the warning, you can still create the listing.
 
-If you get the `Failed to save listing` error, ensure that you have the [necessary permissions to perform data contributor tasks](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#additional_data_contributor_permissions) .
+If you get the `Failed to save listing` error, verify that you have the [required permissions to complete data contributor tasks](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#additional_data_contributor_permissions) .
 
 ### Update a listing
+
+To update a listing, select one of the following options:
 
 ### Console
 
@@ -476,11 +485,11 @@ If you get the `Failed to save listing` error, ensure that you have the [necessa
 
 5.  Click **Next** .
 
-6.  Update the analysis rule as needed. You can only update the parameters of the chosen rule. You can't switch to a different rule.
+6.  Update the analysis rule as needed. You can update only the parameters of the chosen rule. You can't switch to a different rule.
 
 7.  Click **Next** .
 
-8.  Review the listing and click **Add data** .
+8.  Review the listing and click **Save** .
 
 ### API
 
@@ -493,15 +502,17 @@ The following example shows how to call the `projects.locations.dataExchanges.li
 
 Replace the following:
 
-  - `  DCR_PROJECT_ID  ` : the project ID of the project where the clean room was created.
+  - `  DCR_PROJECT_ID  ` : the project ID of the project where the data clean room was created.
   - `  LOCATION  ` : the location of the data clean room.
   - `  CLEAN_ROOM_ID  ` : your data clean room ID.
   - `  LISTING_ID  ` : your listing ID.
   - `  LISTING_NAME  ` : your listing name.
 
-You can't change the source resource or data egress controls for a listing after it's created.
+After a listing is created, you can't change its source resource or data egress controls.
 
 ### Delete a listing
+
+To delete a listing, select one of the following options:
 
 ### Console
 
@@ -523,12 +534,12 @@ The following example shows how to call the `projects.locations.dataExchanges.li
 
 Replace the following:
 
-  - `  DCR_PROJECT_ID  ` : the project ID of the project where the clean room was created.
+  - `  DCR_PROJECT_ID  ` : the project ID of the project where the data clean room was created.
   - `  LOCATION  ` : the location of the data clean room.
   - `  CLEAN_ROOM_ID  ` : your data clean room ID.
   - `  LISTING_ID  ` : your listing ID.
 
-When you delete a listing, the shared resources and linked datasets are not deleted. The linked datasets are unlinked from the source datasets, so querying data in that listing starts to fail for data clean room subscribers.
+When you delete a listing, the shared resources and linked datasets aren't deleted. The linked datasets are unlinked from the source datasets, so querying resources in that listing starts to fail for data clean room subscribers.
 
 ### Share a data clean room
 
@@ -538,7 +549,7 @@ You can directly share a data clean room with data clean room subscribers:
 
 2.  In the row of the data clean room that you want to share, click more\_vert **More actions \> Copy share link** .
 
-3.  Share the copied link with subscribers to let them view and subscribe to the data clean room.
+3.  To let subscribers view and subscribe to the data clean room, share the copied link with them.
 
 ### Monitor listings
 
@@ -554,15 +565,20 @@ To view your listing data clean room subscribers, do the following:
 
 ## Data clean room subscriber workflows
 
-A subscriber can view and subscribe to a data clean room. Subscribing to a data clean room creates one linked dataset in the subscriber's project. Each linked dataset has the same name as the data clean room.
+As a data clean room subscriber, you can do the following:
 
-You can't subscribe to a specific listing within a data clean room. You can only subscribe to the data clean room itself.
+  - Subscribe to a data clean room.
+  - Query data in a linked dataset.
 
-### Additional subscriber permissions
+Subscribing to a data clean room creates one linked dataset in your project. Each linked dataset has the same name as the data clean room.
 
-You must have the [Analytics Hub Subscriber](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) on a data clean room and [Analytics Hub Subscription Owner](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) ( `roles/analyticshub.subscriptionOwner` ) roles on the subscription project to perform subscriber tasks.
+You can't subscribe to a specific listing within a data clean room. You can subscribe only to the data clean room itself.
 
-In addition, you need the `bigquery.datasets.create` permission in a project to create a linked dataset when you subscribe to a clean room.
+### Additional data clean room subscriber permissions
+
+To complete data clean room subscriber tasks, you must have the [Analytics Hub Subscriber role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscriber-role) ( `roles/analyticshub.subscriber` ) on the data clean room and the [Analytics Hub Subscription Owner role](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles#ah-subscription-owner-role) ( `roles/analyticshub.subscriptionOwner` ) on the subscription project.
+
+When you subscribe to a data clean room, you also need the `bigquery.datasets.create` permission in your project to create the linked dataset.
 
 ### Subscribe to a data clean room
 
@@ -596,12 +612,12 @@ The following example shows how to call the `projects.locations.dataExchanges.su
 
 Replace the following:
 
-  - `  DCR_PROJECT_ID  ` : the project ID of the project where the clean room was created.
+  - `  DCR_PROJECT_ID  ` : the project ID of the project where the data clean room was created.
   - `  LOCATION  ` : the location of the data clean room.
   - `  CLEAN_ROOM_ID  ` : your data clean room ID.
   - `  SUBSCRIBER_PROJECT_ID  ` : the project ID of the subscriber project.
   - `  SUBSCRIPTION  ` : the name of your subscription.
-  - `  LINKED_DATASET_ID  ` : the ID you want to give to the linked dataset.
+  - `  LINKED_DATASET_ID  ` : the ID that you want to give to the linked dataset.
   - `  PRIMARY_REGION  ` : the primary geographic region where you want to create the linked dataset.
 
 In the body of the request, specify the destination location, subscription name, and the dataset where you want to create the [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) :
@@ -620,17 +636,17 @@ In the body of the request, specify the destination location, subscription name,
 
 If the request is successful, the response body contains the [subscription object](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#response-body) .
 
-If you enable subscriber email logging for the data clean room with the `logLinkedDatasetQueryUserEmail` field, the subscription response contains `log_linked_dataset_query_user_email: true` . The logged data is available in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
+If you enable subscriber email logging for the data clean room with the `logLinkedDatasetQueryUserEmail` field, the subscription response contains `log_linked_dataset_query_user_email: true` . The logged data appears in the `job_principal_subject` field of the [`INFORMATION_SCHEMA.SHARED_DATASET_USAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) .
 
 A linked dataset is now added to the project that you specified and is available for query.
 
-As a data clean room subscriber, you can edit some metadata of your linked datasets, such as description and labels. You can also set permissions on your linked datasets. However, changes to linked datasets don't affect the source datasets. You also can't see view definitions.
+As a data clean room subscriber, your access to linked datasets is subject to the following conditions:
 
-Resources that are contained in linked datasets are read-only. As a subscriber, you can't edit data or metadata for resources in linked datasets. You also can't specify permissions for individual resources within the linked dataset.
+  - **Metadata and permissions** : you can edit some metadata of your linked datasets, such as descriptions and labels, and you can set permissions on your linked datasets. Changes to linked datasets don't affect source datasets. You can't see view definitions.
+  - **Read-only resources** : resources contained in linked datasets are read-only. As a subscriber, you can't edit data or metadata for resources in linked datasets, or specify permissions for individual resources within the linked dataset.
+  - **Unsubscribe** : to unsubscribe from the data clean room, delete your linked dataset.
 
-To unsubscribe to the data clean room, delete your linked dataset.
-
-#### Query data in a linked dataset
+### Query data in a linked dataset
 
 To query data in a linked dataset, use the [`SELECT WITH AGGREGATION_THRESHOLD` syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) , which lets you run queries on analysis rule-enforced views. For an example of this syntax, see [Query an aggregation threshold analysis rule–enforced view](https://docs.cloud.google.com/bigquery/docs/analysis-rules#view_in_privacy_query) .
 
@@ -638,7 +654,7 @@ To query data in a linked dataset, use the [`SELECT WITH AGGREGATION_THRESHOLD` 
 
 An advertiser wants to track the effectiveness of its marketing campaigns. The advertiser has first-party data on its customers, including their purchase history, demographics, and interests. The publisher has data from its website, including which ads were shown to visitors and their conversions.
 
-The advertiser and publisher agree to use a data clean room to combine data and measure the results of their campaigns. In this case, the publisher creates the data clean room and makes their data available for the advertiser to perform the analysis. The result is an attribution report that shows the advertiser which ads were most effective in driving sales. The advertiser can then use this information to improve its future marketing campaigns.
+The advertiser and publisher agree to use a data clean room to combine data and measure the results of their campaigns. In this case, the publisher creates the data clean room and makes data available for the advertiser to analyze. The resulting attribution report shows the advertiser which ads were most effective in driving sales. The advertiser uses this information to optimize future marketing campaigns.
 
 The advertiser and publisher orchestrate the BigQuery data clean room through the process described in the following sections.
 
@@ -651,7 +667,7 @@ The advertiser and publisher orchestrate the BigQuery data clean room through th
 
 ### Add data to the data clean room (publisher)
 
-1.  User B creates a new listing in the data clean room called `Publisher Conversion Data` . As part of listing creation, a new view with analysis rules is created.
+User B creates a new listing in the data clean room called `Publisher Conversion Data` . As part of listing creation, a new view with analysis rules is created.
 
 ### Subscribe to the data clean room (advertiser)
 
@@ -667,7 +683,7 @@ As a part of [data preparation](https://docs.cloud.google.com/bigquery/docs/data
   - For data contributors, it deduplicates and resolves records in their shared resources by using identifiers from a common provider of their choice. This process enables cross-contributor joins.
   - For data clean room subscribers, it deduplicates and resolves records in their first-party datasets and links to entities in data contributor datasets. This process enables joins between subscriber and data contributor data.
 
-To set up entity resolution with the identity provider of your choice, see [Configure and use entity resolution in BigQuery](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup) .
+For more information about configuring entity resolution, see [Configure and use entity resolution in BigQuery](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup) .
 
 ## Discover data clean room assets
 
@@ -700,7 +716,12 @@ Replace `  PROJECT_ID  ` with the project that contains your linked datasets.
 
 ## Pricing
 
-Data contributors are only charged for [data storage](https://cloud.google.com/bigquery/pricing#storage) . Data clean room subscribers are only charged for [compute (analysis)](https://cloud.google.com/bigquery/pricing#overview_of_pricing) when they run queries.
+The following table summarizes pricing for BigQuery data clean rooms:
+
+| Role                       | Pricing details                                                                                                            |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Data contributor           | Charged only for [data storage](https://cloud.google.com/bigquery/pricing#storage) .                                       |
+| Data clean room subscriber | Charged only for [compute (analysis)](https://cloud.google.com/bigquery/pricing#overview_of_pricing) when running queries. |
 
 ## What's next
 
