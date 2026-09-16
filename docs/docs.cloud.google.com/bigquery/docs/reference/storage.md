@@ -423,3 +423,14 @@ To monitor the latency of `ReadRows` requests, use the [**Metrics Explorer**](ht
 ## Pricing
 
 For information on Storage Read API pricing, see the [Pricing](https://cloud.google.com/bigquery/pricing#data-extraction-pricing-details) page.
+
+### Serverless Apache Spark workloads
+
+Storage Read API streaming reads usage incurs no additional charges when requests originate from the following serverless environments:
+
+  - [Managed Service for Apache Spark serverless](https://docs.cloud.google.com/managed-spark/docs/serverless-overview)
+  - [BigQuery stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures)
+
+In these serverless environments, data read costs are delegated to the streaming engine at no additional charge. Standard network egress charges still apply if data is read across regions.
+
+For cluster-based Apache Spark workloads (such as [Managed Service for Apache Spark on clusters](https://docs.cloud.google.com/managed-spark/docs/concepts/clusters-overview) or Apache Spark running on Google Kubernetes Engine (GKE)), standard Storage Read API rates apply.

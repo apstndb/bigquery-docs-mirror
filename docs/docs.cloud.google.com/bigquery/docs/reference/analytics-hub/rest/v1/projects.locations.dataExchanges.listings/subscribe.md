@@ -33,6 +33,11 @@ data_source: docs.cloud.google.com
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#AvroConfig.SCHEMA_REPRESENTATION)
   - [BigtableConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#BigtableConfig)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#BigtableConfig.SCHEMA_REPRESENTATION)
+  - [ColumnFamilyMapping](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ColumnFamilyMapping)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ColumnFamilyMapping.SCHEMA_REPRESENTATION)
+  - [RowKeySchema](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#RowKeySchema)
+  - [DelimitedKey](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DelimitedKey)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DelimitedKey.SCHEMA_REPRESENTATION)
   - [ExpirationPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ExpirationPolicy)
       - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ExpirationPolicy.SCHEMA_REPRESENTATION)
   - [DeadLetterPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DeadLetterPolicy)
@@ -675,7 +680,7 @@ Optional. When true, the output Cloud Storage file will be serialized using the 
 
 ## BigtableConfig
 
-Configuration for a Bigtable subscription. The Pub/Sub message will be written to a Bigtable row as follows: - row key: subscription name, message ID hash, and message ID delimited by `#` . - columns: message bytes written to a single column family `data` with an empty-string column qualifier. - cell timestamp: the message publish timestamp.
+Configuration for a Bigtable subscription, which will write a Pub/Sub message to a Bigtable row. See the ColumnFamilyMapping documentation below for details on how the row keys and columns will be written.
 
 <table>
 <colgroup>
@@ -688,12 +693,7 @@ Configuration for a Bigtable subscription. The Pub/Sub message will be written t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;table&quot;: string,
-  &quot;appProfileId&quot;: string,
-  &quot;serviceAccountEmail&quot;: string,
-  &quot;writeMetadata&quot;: boolean
-}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;table&quot;: string,&quot;appProfileId&quot;: string,&quot;serviceAccountEmail&quot;: string,&quot;writeMetadata&quot;: boolean,// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;columnFamilyMapping&quot;: {object (ColumnFamilyMapping)}// End of mutually exclusive fields.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -725,6 +725,124 @@ Optional. The service account to use to write to Bigtable. The subscription crea
 `boolean`
 
 Optional. When true, write the subscription name, message\_id, publish\_time, attributes, and ordering\_key to additional columns in the table under the pubsub\_metadata column family. The subscription name, message\_id, and publish\_time fields are put in their own columns while all other message properties (other than data) are written to a JSON object in the attributes column.
+
+How to write a Pub/Sub message to a Bigtable row, notably for defining keys and columns.
+
+If not specified, the default is the following:
+
+  - row key: subscription name, message ID hash, and message ID delimited by `#` .
+  - columns: message bytes written to a single column family `data` with an empty-string column qualifier.
+  - cell timestamp: the message publish timestamp. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
+
+`columnFamilyMapping`
+
+` object ( ColumnFamilyMapping  ` )
+
+Optional. Configuration that allows writing row keys and/or columns based on fields in the input message. The input message format must be JSON if this field is set.
+
+End of mutually exclusive fields.
+
+## ColumnFamilyMapping
+
+Configuration for writing a Pub/Sub message to a Bigtable row with a user-defined key and writing to column families.
+
+If this field is set:
+
+  - The subscription messages must be formatted as JSON.
+  - The row key mapping is configured in the `key_definition` section.
+  - The top-level fields will be written either:
+  - By default, they will be written to the `data` column family with the field name as the column qualifier.
+  - But if the field name matches an existing column family (except for the default `data` column), then that field will be written to that column family, either as a scalar or its next level nested fields if it's a JSON object.
+  - The cell timestamp will be the message publish timestamp.
+
+If the field is not set, the default behavior is to write:
+
+  - row key: subscription name, message ID hash, and message ID delimited by `#` .
+  - columns: message bytes written to a single column family `data` with an empty-string column qualifier.
+  - cell timestamp: the message publish timestamp.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;rowKeySchema&quot;: {object (RowKeySchema)},&quot;delimitedKey&quot;: {object (DelimitedKey)}// End of mutually exclusive fields.}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+How to construct the row key from the Pub/Sub message.
+
+If not specified, the default behavior is to construct the row key from the subscription name, message ID hash, and message ID delimited by `#` . The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
+
+`rowKeySchema`
+
+` object ( RowKeySchema  ` )
+
+Optional. If set, the row key is constructed from the field names of the table's structured row key ( <https://docs.cloud.google.com/bigtable/docs/manage-row-key-schemas)> . Note that if the field is nullable in the structured row key, then it need not be present in the message; null will be used instead.
+
+`delimitedKey`
+
+` object ( DelimitedKey  ` )
+
+Optional. If set, the row key is constructed from the given key fields and delimiter. All key fields must be present in the message; otherwise, the message remains in the subscription backlog.
+
+End of mutually exclusive fields.
+
+## RowKeySchema
+
+This type has no fields.
+
+Row key definition that reads the input message fields based on the field names of the table's structured row key ( <https://docs.cloud.google.com/bigtable/docs/manage-row-key-schemas)> . Note that if the field is nullable in the structured row key, then it need not be present in the message; null will be used instead.
+
+## DelimitedKey
+
+Row key definition based on fields from the message.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;keyFields&quot;: [
+    string
+  ],
+  &quot;delimiter&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`keyFields[]`
+
+`string`
+
+Optional. The key fields to construct from the row key. The fields must be present in the message as a top-level field, i.e. JSON path expressions will not traverse into nested objects.
+
+`delimiter`
+
+`string ( bytes format)`
+
+Optional. Byte sequence used to delimit concatenated fields. Must be specified if multiple key fields are used. The delimiter must contain at least 1 character and at most 50 characters.
+
+A base64-encoded string.
 
 ## ExpirationPolicy
 

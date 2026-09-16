@@ -218,7 +218,7 @@ In a graph, labels and properties are uniquely identified by their names. Labels
     
     options_clause:
       OPTIONS (
-        [ descriptions = description_string ]
+        [ description = description_string ]
         [, synonyms = synonym_array ]
       )
 
@@ -267,11 +267,11 @@ Adds a list of labels and properties to an element.
       PROPERTIES (derived_property[, ...])
     
     derived_property:
-      { value_expression | measure_expression } [ AS property_name ] [ options_clause ] 
+      { value_expression | measure_expression } [ AS property_name ] [ options_clause ]
     
     options_clause:
       OPTIONS (
-        [ descriptions = description_string ]
+        [ description = description_string ]
         [, synonyms = synonym_array ]
       )
 

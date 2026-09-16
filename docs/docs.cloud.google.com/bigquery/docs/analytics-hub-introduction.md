@@ -261,6 +261,8 @@ Los Angeles
 
 `us-west2`
 
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+
 Mexico
 
 `northamerica-south1`
@@ -335,11 +337,11 @@ The following table lists the regions in Europe where sharing is available.
 | Frankfurt          | `europe-west3`      |                                                                                                                                                                          |
 | London             | `europe-west2`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Madrid             | `europe-southwest1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Milan              | `europe-west8`      |                                                                                                                                                                          |
+| Milan              | `europe-west8`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Netherlands        | `europe-west4`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Paris              | `europe-west9`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Turin              | `europe-west12`     |                                                                                                                                                                          |
-| Warsaw             | `europe-central2`   |                                                                                                                                                                          |
+| Turin              | `europe-west12`     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Warsaw             | `europe-central2`   | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Zürich             | `europe-west6`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 
 The following table lists the regions in the Middle East where sharing is available.

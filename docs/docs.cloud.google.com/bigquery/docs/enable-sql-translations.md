@@ -193,6 +193,8 @@ Milan
 
 `europe-west8`
 
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+
 Netherlands
 
 `europe-west4`
@@ -215,9 +217,13 @@ Turin
 
 `europe-west12`
 
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+
 Warsaw
 
 `europe-central2`
+
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Zürich
 
@@ -250,6 +256,8 @@ Las Vegas
 Los Angeles
 
 `us-west2`
+
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Mexico
 

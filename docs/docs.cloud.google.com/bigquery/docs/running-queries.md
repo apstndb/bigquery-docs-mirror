@@ -1273,6 +1273,8 @@ Dry runs don't use query slots, and you are not charged for performing a dry run
 
 > **Note:** A dry run of a federated query that uses an external data source might report a lower bound of 0 bytes of data, even if rows are returned. This is because the amount of data processed from the external table can't be determined until the actual query completes. Running the federated query still incurs a cost for processing this data.
 
+> **Caution:** Dry runs on tables that are masked by row-level security always return 0 bytes to prevent side channel attacks. For these tables, you can't rely on dry runs to estimate query costs.
+
 ### Perform a dry run
 
 To perform a dry run, do the following:

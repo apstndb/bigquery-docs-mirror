@@ -65,7 +65,7 @@ For more information, see [Restrict costs for each pricing model](https://docs.c
 When using the on-demand pricing model, queries are billed according to the number of bytes read. To estimate costs before running a query:
 
   - [Use the query validator](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#use-query-validator) in the Google Cloud console.
-  - [Perform a dry run](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#perform-dry-run) for queries.
+  - [Perform a dry run](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#perform-dry-run) for queries, unless the target table is masked with row-level security, in which case dry runs always return 0 bytes to prevent side-channel attacks.
 
 > **Note:** The estimate of the number of bytes that is billed for a query is an upper bound, and can be higher than the actual number of bytes billed after running the query.
 

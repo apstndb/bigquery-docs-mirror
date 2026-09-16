@@ -66,7 +66,7 @@ To run a global query, you must have the `bigquery.jobs.createGlobalQuery` permi
 
 ## Query data
 
-To run a global query, you write a SQL query as you would if your data was in a single location. If the data referenced by the query is stored in more than one location, BigQuery tries to execute a global query. In some cases, BigQuery [automatically selects the location](https://docs.cloud.google.com/bigquery/docs/global-queries#automatic-location-selection) of the query. Otherwise, you must [specify the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) in which to run the query. Data referenced by the query that doesn't reside in the selected location is copied to that location.
+To run a global query, you write a SQL query as you would if your data was in a single location. If the data referenced by the query is stored in more than one location, BigQuery tries to execute a global query. If you don't [specify the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) in which to run the query, BigQuery automatically selects the location based on the locations of the referenced tables. For more information, see [Choose a location](https://docs.cloud.google.com/bigquery/docs/global-queries#choose-a-location) . Data referenced by the query that doesn't reside in the selected location is copied to that location.
 
 The following example runs as a global query that unions tables from two different datasets stored in two different locations:
 
@@ -74,23 +74,24 @@ The following example runs as a global query that unions tables from two differe
     UNION ALL
     SELECT id, tr_date, product_id, price FROM europe_dataset.transactions
 
-### Automatic location selection
-
-In the following cases, the location in which a query must be executed is determined automatically and can't be changed:
-
-  - Data modification language queries ( `INSERT` , `UPDATE` , `DELETE` statements) are always executed in a location of the target table.
-  - Data definition language queries, such as `CREATE TABLE AS SELECT` statement, are always executed in the location in which a resource is created or modified.
-  - Queries with a [specified destination table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) are always executed in the location where the destination table is.
-
 ## Choose a location
 
-In general, you decide where your global queries are executed. To make that decision, consider the following:
+To configure where the global query will be run, [specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . As you decide on an execution location for the global query, consider the following:
 
-  - Global queries temporarily copy data from one location to another. If your organization has any requirements for data residency, and you don't want your data from location A to leave location A, set the query location to A.
+  - **Data residency:** global queries temporarily copy data from one location to another. If your organization has requirements for data residency, and you don't want your data to leave a certain location, then set the query location to that location.
 
-  - To minimize the amount of data transferred between locations and reduce the cost of the query, run your query in the region where most of the queried data is stored.
+  - **Transfer costs and performance:** to minimize the amount of data transferred between locations and reduce the cost of the query, run your query in the region where most of the queried data is stored.
+    
+    For example, you have an online store and you keep a list of your products in location `us-central1` , but you keep your transactions in the `us-south1` region. If there are more transactions than products in your catalog, then you should run the query in the `us-south1` region.
 
-Imagine you have an online store and you keep a list of your products in location `us-central1` , but transactions in `us-south1` region. If there are more transactions than products in your catalog then you should run the query in the `us-south1` region.
+  - **Reservations and compute capacity:** specify the query location to control which regional reservations or slots process the query.
+
+If you don't manually specify a location, then BigQuery automatically determines the execution location based on the following criteria:
+
+  - For data modification language (DML) queries ( `INSERT` , `UPDATE` , and `DELETE` statements), the location of the target table is selected as the execution location.
+  - For data definition language (DDL) queries (such as `CREATE TABLE AS SELECT` statements), the location in which the resource is created or modified is selected as the execution location.
+  - For queries with a [specified destination table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) , the location of the destination table is selected as the execution location.
+  - For all other queries, the execution location is selected arbitrarily as one of the locations of the referenced datasets.
 
 ## Understand global queries
 
@@ -98,7 +99,7 @@ In order to run global queries in an efficient and cost-effective way, it's impo
 
 To use data that resides in different locations, it must be replicated to one location. The following is an abstraction of the global query workflow carried out by BigQuery:
 
-1.  Determine where the query must be executed, either from [user's declaration](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) or [automatically](https://docs.cloud.google.com/bigquery/docs/global-queries#automatic-location-selection) . This location is called the *primary* location, and all other locations referenced by the query are *remote* .
+1.  Determine where the query must be executed, either from [user's declaration](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) or automatically. This location is called the *primary* location, and all other locations referenced by the query are *remote* .
 2.  Run a sub-query in each remote region to collect the data that is needed to finish the query in the primary region.
 3.  Copy this data from remote locations to the primary location.
 4.  Save the data in temporary tables in the primary location for 24 hours.

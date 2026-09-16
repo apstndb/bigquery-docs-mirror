@@ -65,6 +65,8 @@ You must [create a stored procedure for Spark](https://docs.cloud.google.com/big
 
   - While Spark stored procedures use a Spark execution engine, you won't see separate charges for Spark execution. As noted, corresponding charges are reported as [BigQuery Enterprise edition pay-as-you-go SKU](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
+  - Reading data from BigQuery tables using stored procedures for Spark does not incur [Storage Read API charges](https://docs.cloud.google.com/bigquery/pricing#data-extraction-pricing-details) . Streaming reads are included with the stored procedure execution at no additional charge. Standard network egress rates apply if you read data across regions.
+
   - Spark stored procedures don't offer a free tier.
 
 ## Create a stored procedure for Spark

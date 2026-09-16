@@ -1477,7 +1477,7 @@ The following table lists the regions in the Americas where BigQuery is availabl
 | Columbus, Ohio         | `us-east5`                |                                                                                                                                                                          |
 | Dallas                 | `us-south1`               | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Iowa                   | `us-central1`             | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Los Angeles            | `us-west2`                |                                                                                                                                                                          |
+| Los Angeles            | `us-west2`                | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Las Vegas              | `us-west4`                |                                                                                                                                                                          |
 | Mexico                 | `northamerica-south1`     |                                                                                                                                                                          |
 | Montréal               | `northamerica-northeast1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
@@ -1521,8 +1521,8 @@ The following table lists the regions in Europe where BigQuery is available.
 | Netherlands            | `europe-west4`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Paris                  | `europe-west9`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Stockholm              | `europe-north2`     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Turin                  | `europe-west12`     |                                                                                                                                                                          |
-| Warsaw                 | `europe-central2`   |                                                                                                                                                                          |
+| Turin                  | `europe-west12`     | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Warsaw                 | `europe-central2`   | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Zürich                 | `europe-west6`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 
 The following table lists the regions in the Middle East where BigQuery is available.
