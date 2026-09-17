@@ -1,38 +1,40 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial
 uri: https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial
-title: Analyze multimodal data with SQL and BigQuery DataFrames
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+title: Analyze multimodal data with SQL, object tables, and BigQuery DataFrames
+description: Use ObjectRef values, SQL functions, and Generative AI functions to process multimodal data.
 data_source: docs.cloud.google.com
 ---
 
-# Analyze multimodal data with SQL and BigQuery DataFrames
+This tutorial shows you how to use SQL queries, the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) , the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) and [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to [analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) from the Cymbal pet store public dataset.
 
-This tutorial shows you how to [analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) by using SQL queries and [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .
+The `AI.GENERATE` function lets you analyze any combination of structured and unstructured data, and the `AI.EMBED` function lets you create [embeddings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#embeddings) from text or image data in BigQuery.
 
-This tutorial uses the product catalog from the public Cymbal pet store dataset.
+You find similar images by using the [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) function. The `VECTOR_SEARCH` function lets you perform a semantic search or a hybrid search on embeddings to find similar entities.
+
+This tutorial uses a persistent [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that stores `ObjectRef` values.
 
 ## Objectives
 
-  - Use [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values to store image data alongside structured data in a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
-  - Enrich your data with image descriptions, keywords, and animal types, and subcategories by using the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) .
-  - Generate embeddings based on image data by using the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
-  - Find similar images by using the [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) function.
-  - Summarize user manuals by processing ordered multimodal data using arrays of `ObjectRef` values.
+  - Use `ObjectRef` values to store image data alongside structured data in a BigQuery table.
+  - Use the `AI.GENERATE` function to enrich your data.
+  - Use the `AI.EMBED` function to generate embeddings based on image data.
+  - Use the `VECTOR_SEARCH` function to find similar images.
+  - Use arrays of `ObjectRef` values to summarize user manuals.
 
 ## Costs
 
 In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery** : you incur costs for the data that you process in BigQuery.
-  - **Cloud Storage** : you incur costs for the objects stored in Cloud Storage.
+  - **Cloud Storage** : you incur costs for reading the objects stored in Cloud Storage.
   - **Gemini Enterprise Agent Platform** : you incur costs for calls to Agent Platform models.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
 New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-For more information about, see the following pricing pages:
+For more information about costs, see the following pricing pages:
 
   - [BigQuery pricing](https://cloud.google.com/bigquery/pricing)
   - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
@@ -61,23 +63,25 @@ For more information about, see the following pricing pages:
 
 To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles:
 
-  - Create a connection: [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
-  - Grant permissions to the connection's service account: [Project IAM Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `roles/resourcemanager.projectIamAdmin` )
-  - Create a Cloud Storage bucket: [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
-  - Create datasets, models, UDFs, and tables, and run BigQuery jobs: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
+  - Create datasets and tables: [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` )
+  - Run BigQuery jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - Create connections: [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
+  - Grant permissions to a connection's service account: [Project IAM Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `roles/resourcemanager.projectIamAdmin` )
   - Create URLs that let you read and modify Cloud Storage objects: [BigQuery ObjectRef Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.objectRefAdmin) ( `roles/bigquery.objectRefAdmin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-## Set up
+## Create the dataset, tables, models, and connection
 
 In this section, you create the dataset, connection, tables, and models used in this tutorial.
 
 ### Create a dataset
 
-Create a BigQuery dataset to contain the objects you create in this tutorial:
+Create a BigQuery dataset to contain the objects you create in this tutorial by choosing one of the following:
+
+### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -87,107 +91,89 @@ Create a BigQuery dataset to contain the objects you create in this tutorial:
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, select your project.
+3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  Click more\_vert **View actions** , and then click **Create dataset** . The **Create dataset** pane opens.
+4.  On the **Datasets** page, click add **Create dataset** .
 
-5.  For **Dataset ID** , type `cymbal_pets` .
-
-6.  Click **Create dataset** .
-
-### Create a connection
-
-Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. BigQuery uses the connection to access objects in Cloud Storage:
-
-1.  Go to the **BigQuery** page.
-
-2.  In the left pane, click explore **Explorer** :
+5.  On the **Create dataset** page, do the following:
     
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-
-3.  In the **Explorer** pane, click add **Add data** .
+    1.  For **Dataset ID** , enter `cymbal_pets` .
     
-    The **Add data** dialog opens.
-
-4.  In the **Filter By** pane, in the **Data Source Type** section, select **Business Applications** .
+    2.  For **Data location** , select **US** .
     
-    Alternatively, in the **Search for data sources** field, you can enter `Vertex AI` .
+    3.  Leave the remaining default settings as they are, and click **Create dataset** .
 
-5.  In the **Featured data sources** section, click **Vertex AI** .
+### SQL
 
-6.  Click the **Vertex AI Models: BigQuery Federation** solution card.
-
-7.  In the **Connection type** list, select **Vertex AI remote models, remote functions, BigLake and Spanner (Cloud Resource)** .
-
-8.  In the **Connection ID** field, type `cymbal_conn` .
-
-9.  Click **Create connection** .
-
-10. Click **Go to connection** .
-
-11. In the **Connection info** pane, copy the service account ID for use in a following step.
-
-#### Grant permissions to the connection's service account
-
-Grant the connection's service account the appropriate roles to access other services. You must grant these roles in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial#before_you_begin) section. Granting the roles in a different project results in the error `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
-
-### Create a bucket
-
-Create a Cloud Storage bucket for storing transformed objects:
-
-1.  Go to the **Buckets** page.
-
-2.  Click add\_box **Create** .
-
-3.  On the **Create a bucket** page, in the **Get started** section, enter a globally unique name that meets the [bucket name requirements](https://docs.cloud.google.com/storage/docs/buckets#naming) .
-
-4.  Click **Create** .
-
-#### Grant permissions on the Cloud Storage bucket
-
-Give the service account access to use objects in the bucket you created:
-
-1.  Go to the **Buckets** page.
-
-2.  Click the name of the bucket you created.
-
-3.  Click **Permissions** .
-
-4.  Click person\_add **Grant access** . The **Grant access** dialog opens.
-
-5.  In the **New principals** field, enter the service account ID that you copied earlier.
-
-6.  In the **Select a role** field, choose **Cloud Storage** , and then select **Storage Object User** .
-
-7.  Click **Save** .
-
-#### Grant permissions on to use Agent Platform models
-
-Give the service account access to use Agent Platform models:
-
-1.  Go to the **IAM & Admin** page.
-
-2.  Click person\_add **Grant access** . The **Grant access** dialog opens.
-
-3.  In the **New principals** field, enter the service account ID that you copied earlier.
-
-4.  In the **Select a role** field, enter **Agent Platform User** .
-
-5.  Click **Save** .
-
-### Create the tables of example data
-
-Create tables to store the Cymbal pets product information.
-
-#### Create the `products` table
-
-Create a standard table that contains the Cymbal pets product information:
+Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Run the following to create the `products` table:
+2.  In the query editor, enter the following statement:
+    
+        CREATE SCHEMA PROJECT_ID.cymbal_pets  OPTIONS (    description = 'Dataset for BigQuery ML tutorial',    location = 'US');
+    
+    Replace `  PROJECT_ID  ` with your project ID.
+
+3.  Click play\_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
+You receive a confirmation message similar to the following: `The dataset named cymbal_pets was created.`
+
+### Create a connection
+
+Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. BigQuery uses the connection to access objects in Cloud Storage.
+
+1.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+
+2.  In the **Explorer** pane, click **Connections** .
+
+3.  On the **Connections** page, click **Create connection** .
+
+4.  On the **External data source** page, do the following:
+    
+    1.  For **Connection type** , choose **Vertex AI remote models, remote functions, Lakehouse and Spanner (Cloud Resource)** .
+    
+    2.  In the **Connection ID** field, type `cymbal_conn` .
+    
+    3.  Leave the remaining settings as they are, and then click **Create connection** .
+
+5.  On the **Connections** page, click `cymbal_conn` .
+
+6.  In the **Connection info** pane, copy the **Service account ID** value. It is required for the following steps.
+
+### Grant permissions on to use Agent Platform models
+
+Grant the connection's service account the Agent Platform User role to access remote models in Agent Platform. You must grant this role in the same project you created or selected previously. Granting the roles in a different project results in the error `bqcx-1234567890-abcd@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
+
+To grant the service account access to use Agent Platform models, follow these steps:
+
+1.  Go to the **IAM & Admin** page.
+
+2.  Click person\_add **Grant access** .
+
+3.  In the **Grant access** dialog, do the following:
+    
+    1.  In the **New principals** field, enter the service account ID that you copied earlier.
+    
+    2.  In the **Select a role** field, choose or search for **Agent Platform User** .
+    
+    3.  Click **Save** .
+
+### Create the `products` table
+
+To create a standard table that contains the Cymbal pets product information, follow these steps to load the data from Cloud Storage:
+
+1.  In the Google Cloud console, go to the **Studio** page.
+
+2.  To create the `products` table, choose one of the following options:
     
     ### SQL
+    
+    Paste this command into the query editor, and then click play\_circle **Run** :
     
         LOAD DATA OVERWRITE cymbal_pets.products
         FROM
@@ -195,6 +181,8 @@ Create a standard table that contains the Cymbal pets product information:
             format = 'avro',
             uris = [
               'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/tables/products/products_*.avro']);
+    
+    You receive a confirmation message similar to the following: `Data was successfully loaded into managed table.`
     
     ### BigQuery DataFrames
     
@@ -215,40 +203,200 @@ Create a standard table that contains the Cymbal pets product information:
                 ],
             },
         )
-
-#### Create the `product_images` table
-
-Create an object table that contains the Cymbal pets product images:
-
-  - Run the following to create the `product_images` table:
     
-    ### SQL
-    
-        CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
-          WITH CONNECTION `us.cymbal_conn`
-          OPTIONS (
-            object_metadata = 'SIMPLE',
-            uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png'],
-            max_staleness = INTERVAL 30 MINUTE,
-            metadata_cache_mode = AUTOMATIC);
-    
-    ### BigQuery DataFrames
-    
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
-    
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
-    
-        bbq.create_external_table(
-            "cymbal_pets.product_images",
-            replace=True,
-            connection_name="us.cymbal_conn",
-            options={
-                "object_metadata": "SIMPLE",
+        import bigframes.bigquery as bbq
+        import bigframes.pandas as bpd
+        
+        bbq.load_data(
+            "cymbal_pets.products",
+            write_disposition="OVERWRITE",
+            from_files_options={
+                "format": "avro",
                 "uris": [
-                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png"
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/tables/products/products_*.avro"
                 ],
             },
         )
+
+### Create the `product_images` table
+
+To create an object table ( `product_images` ) that contains the Cymbal pets product images, select one of the following options:
+
+``` 
+
+* { SQL }
+
+  Paste this command into the query editor, and then click
+  <span class="material-icons" aria-hidden="true">play_circle</span>
+  **Run**:
+
+  <pre class="lang-googlesql notranslate prettyprint devsite-click-to-copy">
+  CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
+    WITH CONNECTION `us.cymbal_conn`
+    OPTIONS (
+      object_metadata = 'SIMPLE',
+      uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png'],
+      max_staleness = INTERVAL 30 MINUTE,
+      metadata_cache_mode = AUTOMATIC);
+  </pre>
+
+  You receive a confirmation message similar to the following: `This
+  statement created a new table named product_images.`
+
+* { BigQuery DataFrames }
+
+       Before trying this sample, follow the BigQuery DataFrames
+    setup instructions in the BigQuery quickstart
+    using BigQuery DataFrames.
+    For more information, see the
+    BigQuery DataFrames reference documentation.
+  To authenticate to BigQuery, set up Application Default Credentials.
+    For more information, see Set
+    up ADC for a local development environment.
+   
+
+    
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+  
+  
+  
+    
+  
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+  
+
+  bbq.create_external_table(
+    "cymbal_pets.product_images",
+    replace=True,
+    connection_name="us.cymbal_conn",
+    options={
+        "object_metadata": "SIMPLE",
+        "uris": [
+            "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png"
+        ],
+    },
+)
+```
+
+    bbq.create_external_table(
+        "cymbal_pets.product_images",
+        replace=True,
+        connection_name="us.cymbal_conn",
+        options={
+            "object_metadata": "SIMPLE",
+            "uris": [
+                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png"
+            ],
+        },
+    )
 
 ### Create models
 
@@ -271,6 +419,20 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         options={"endpoint": "gemini-3.5-flash"},
     )
 
+    gemini_model = bbq.ml.create_model(
+        "cymbal_pets.gemini",
+        replace=True,
+        connection_name="us.cymbal_conn",
+        options={"endpoint": "gemini-3.5-flash"},
+    )
+
+    embedding_model = bbq.ml.create_model(
+        "cymbal_pets.embedding_model",
+        replace=True,
+        connection_name="us.cymbal_conn",
+        options={"endpoint": "gemini-embedding-2"},
+    )
+
     embedding_model = bbq.ml.create_model(
         "cymbal_pets.embedding_model",
         replace=True,
@@ -280,17 +442,25 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ## Create a `products_mm` table with multimodal data
 
-Create a `products_mm` table that contains an `image` column populated with product images from the `product_images` object table. The `image` column that is created is a `STRUCT` column that uses the `ObjectRef` format.
+Create a `products_mm` table that contains an `image` column populated with product images from the `product_images` object table. The `image` column that is created is a [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) column that uses [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values to store image data alongside structured data in a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
-1.  Run the following to create the `products_mm` table and populate the `image` column:
+An `ObjectRef` value is a `STRUCT` type with a predefined schema that references Cloud Storage objects for [multimodal analysis](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) . `ObjectRef` values can be processed by [`OBJ` functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions) , [AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) , or [Python user-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python) .
+
+To create and populate the `products_mm` table, follow these steps:
+
+1.  To create a `products_mm` table, choose one of the following options:
     
     ### SQL
+    
+    Paste this command into the query editor, and then click play\_circle **Run** :
     
         CREATE OR REPLACE TABLE cymbal_pets.products_mm
         AS
         SELECT products.* EXCEPT (uri), ot.ref AS image FROM cymbal_pets.products
         INNER JOIN cymbal_pets.product_images ot
         ON ot.uri = products.uri;
+    
+    You receive a confirmation message similar to the following: `This statement created a new table named products_mm.`
     
     ### BigQuery DataFrames
     
@@ -303,10 +473,18 @@ Create a `products_mm` table that contains an `image` column populated with prod
         
         df_products_mm = df_images.merge(df_products, on="uri").drop(columns="uri")
         df_products_mm = df_products_mm.rename(columns={"ref": "image"})
+    
+        df_images = bpd.read_gbq("SELECT * FROM cymbal_pets.product_images")
+        df_products = bpd.read_gbq("cymbal_pets.products")
+        
+        df_products_mm = df_images.merge(df_products, on="uri").drop(columns="uri")
+        df_products_mm = df_products_mm.rename(columns={"ref": "image"})
 
-2.  Run the following to view the `image` column data:
+2.  To view the `image` column data, choose one of the following options:
     
     ### SQL
+    
+    Paste this command into the query editor, and then click play\_circle **Run** :
     
         SELECT product_name, image
         FROM cymbal_pets.products_mm
@@ -319,44 +497,57 @@ Create a `products_mm` table that contains an `image` column populated with prod
     
         df_products_mm[["product_name", "image"]]
     
+        df_products_mm[["product_name", "image"]]
+    
     The results look similar to the following:
     
     ```console
-    +--------------------------------+--------------------------------------+-----------------------------------------------+------------------------------------------------+
+    +--------------------------------+--------------------------------------+---------------+-------------------------------+------------------------------------------------+
     | product_name                   | image.uri                            | image.version | image.authorizer              | image.details                                  |
-    +--------------------------------+--------------------------------------+-----------------------------------------------+------------------------------------------------+
+    +--------------------------------+--------------------------------------+---------------+-------------------------------+------------------------------------------------+
     |  AquaClear Aquarium Background | gs://cloud-samples-data/bigquery/    | 1234567891011 | myproject.region.myconnection | {"gcs_metadata":{"content_type":"image/png",   |
     |                                | tutorials/cymbal-pets/images/        |               |                               | "md5_hash":"494f63b9b137975ff3e7a11b060edb1d", |
     |                                | aquaclear-aquarium-background.png    |               |                               | "size":1282805,"updated":1742492680017000}}    |
-    +--------------------------------+--------------------------------------+-----------------------------------------------+------------------------------------------------+
+    +--------------------------------+--------------------------------------+---------------+-------------------------------+------------------------------------------------+
     |  AquaClear Aquarium            | gs://cloud-samples-data/bigquery/    | 2345678910112 | myproject.region.myconnection | {"gcs_metadata":{"content_type":"image/png",   |
     |  Gravel Vacuum                 | tutorials/cymbal-pets/images/        |               |                               | "md5_hash":"b7bfc2e2641a77a402a1937bcf0003fd", |
     |                                | aquaclear-aquarium-gravel-vacuum.png |               |                               | "size":820254,"updated":1742492682411000}}     |
-    +--------------------------------+--------------------------------------+-----------------------------------------------+------------------------------------------------+
+    +--------------------------------+--------------------------------------+---------------+-------------------------------+------------------------------------------------+
     | ...                            | ...                                  | ...           |                               | ...                                            |
-    +--------------------------------+--------------------------------------+-----------------------------------------------+------------------------------------------------+
+    +--------------------------------+--------------------------------------+---------------+-------------------------------+------------------------------------------------+
     ```
 
 ## Generate product information
 
-Use the `AI.GENERATE` function to generate the following data for the pet store products:
+Use the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) to generate the following data for the pet store products:
 
   - Add an `image_description` column to the `products_mm` table.
   - Populate the `animal_type` , `search_keywords` , and `subcategory` columns of the `products_mm` table.
   - Run a query that returns a description of each product brand and also a count of the number of products from that brand. The brand description is generated by analyzing product information for all of the products from that brand, including product images.
 
-<!-- end list -->
+With the `AI.GENERATE` function, you can choose to generate text or [structured output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#use_structured_output) according to a custom schema that you specify. The function works by sending requests to a Gemini model and returns a struct that contains your generated data, the full model response, and a status.
 
-1.  Run the following to create and populate the `image_description` column:
+To generate the product data, follow these steps:
+
+1.  To generate the product information using `AI.GENERATE` , choose one of the following options:
     
     ### SQL
     
-        CREATE OR REPLACE TABLE cymbal_pets.products_mm AS (
-          SELECT
-            *, AI.GENERATE(('Describe the following image: ', image), endpoint => 'gemini-2.5-pro').result AS image_description
-          FROM
-            cymbal_pets.products_mm
-        );
+    To create and populate the `image_description` column, paste the following into the query editor, and then click play\_circle **Run** :
+    
+        -- Add the column to the existing table
+        ALTER TABLE bqml_tutorial.products_mm
+        ADD COLUMN IF NOT EXISTS image_description STRING;
+        
+        -- Populate the new column using the AI.GENERATE function
+        UPDATE bqml_tutorial.products_mm
+        SET image_description = AI.GENERATE(
+        ('Describe the following image: ', image),
+        endpoint => 'gemini-3.5-flash'
+        ).result
+        WHERE image_description IS NULL;
+    
+    You receive a confirmation message similar to the following: `This statement altered the table named products_mm.`
     
     ### BigQuery DataFrames
     
@@ -392,21 +583,88 @@ Use the `AI.GENERATE` function to generate the following data for the pet store 
                 "image_description",
             ]
         ]
+    
+        df_products_mm["url"] = bbq.obj.get_access_url(
+            df_products_mm["image"], "R"
+        ).to_frame()
+        df_products_mm["prompt0"] = "Can you describe the following image?"
+        
+        df_products_mm["prompt"] = bbq.struct(df_products_mm[["prompt0", "url"]])
+        df_products_mm = bbq.ai.generate_table(
+            gemini_model, df_products_mm, output_schema={"image_description": "STRING"}
+        )
+        
+        df_products_mm = df_products_mm[
+            [
+                "product_id",
+                "product_name",
+                "brand",
+                "category",
+                "subcategory",
+                "animal_type",
+                "search_keywords",
+                "price",
+                "description",
+                "inventory_level",
+                "supplier_id",
+                "average_rating",
+                "image",
+                "image_description",
+            ]
+        ]
 
-2.  Run the following to update the `animal_type` , `search_keywords` , and `subcategory` columns with generated data:
+2.  To view the contents of the `image_description` column, paste the following into the query editor, and then click play\_circle **Run** :
+    
+        SELECT product_name, image_description
+        FROM cymbal_pets.products_mm;
+    
+    The results look similar to the following:
+    
+    ```console
+    +--------------------------------+-------------------------------------+
+    | product_name                   | image_description                   |
+    +--------------------------------+-------------------------------------+
+    |  AquaClear Aquarium Background | The image shows a colorful coral    |
+    |                                | reef backdrop. The background is a  |
+    |                                | blue ocean with a bright light...   |
+    |                                |                                     |
+    |                                |                                     |
+    +--------------------------------+-------------------------------------+
+    |  AquaClear Aquarium            | The image shows a long, clear       |
+    |  Gravel Vacuum                 | plastic tube with a green hose      |
+    |                                | attached to one end. The tube...    |
+    |                                |                                     |
+    |                                |                                     |
+    +--------------------------------+-------------------------------------+
+    | ...                            | ...                                 |
+    +--------------------------------+-------------------------------------+
+    ```
+
+3.  To update the `animal_type` , `search_keywords` , and `subcategory` columns with generated data, choose one of the following options:
     
     ### SQL
     
-        CREATE OR REPLACE TABLE cymbal_pets.products_mm AS (
-        SELECT * EXCEPT(animal_type, search_keywords, subcategory),
-          AI.GENERATE(
-            ('For the image and description of a pet product, concisely generate the following metadata: '
-            '1) animal_type and 2) 5 SEO search keywords, and 3) product subcategory. ',
-            image,
-            description),
-            endpoint => 'gemini-2.5-pro',
-            output_schema => 'animal_type STRING, search_keywords ARRAY, subcategory STRING').*
-        FROM cymbal_pets.products_mm);
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
+        UPDATE cymbal_pets.products_mm t
+        SET
+        animal_type = r.animal_type,
+        search_keywords = SPLIT(r.search_keywords, ','),
+        subcategory = r.subcategory
+        FROM (
+        SELECT
+          product_id,
+          g.* EXCEPT(full_response, status)
+        FROM bqml_tutorial.products_mm,
+        UNNEST([AI.GENERATE(
+          ('For the image and description of a pet product, concisely generate the following metadata: 1) animal_type and 2) 5 SEO search keywords (comma separated), and 3) product subcategory. ', image, description),
+          endpoint => 'gemini-3.5-flash',
+          output_schema => 'animal_type STRING, search_keywords STRING, subcategory STRING'
+        )]) AS g
+        ) r
+        WHERE t.product_id = r.product_id;
+    
+    You receive a confirmation message similar to the following: `This statement modified 205 rows in products_mm.`
     
     ### BigQuery DataFrames
     
@@ -429,17 +687,35 @@ Use the `AI.GENERATE` function to generate the following data for the pet store 
             df_products_mm,
             output_schema="animal_type STRING, search_keywords ARRAY<STRING>, subcategory STRING",
         )
+    
+        df_prompt = bbq.obj.get_access_url(df_products_mm["image"], "R").to_frame()
+        df_prompt[
+            "prompt0"
+        ] = "For the image of a pet product, concisely generate the following metadata: 1) animal_type and 2) 5 SEO search keywords, and 3) product subcategory."
+        
+        df_products_mm["prompt"] = bbq.struct(df_prompt[["prompt0", "image"]])
+        
+        df_products_mm = df_products_mm.drop(
+            columns=["animal_type", "search_keywords", "subcategory"]
+        )
+        df_products_mm = bbq.ai.generate_table(
+            gemini_model,
+            df_products_mm,
+            output_schema="animal_type STRING, search_keywords ARRAY<STRING>, subcategory STRING",
+        )
 
-3.  Run the following to view the generated data:
+4.  To view the generated data, choose one of the following options:
     
     ### SQL
     
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
         SELECT
-          product_name,
-          image_description,
-          animal_type,
-          search_keywords,
-          subcategory,
+        product_name,
+        image_description,
+        animal_type,
+        search_keywords,
+        subcategory,
         FROM cymbal_pets.products_mm;
     
     ### BigQuery DataFrames
@@ -458,11 +734,21 @@ Use the `AI.GENERATE` function to generate the following data for the pet store 
             ]
         ]
     
+        df_products_mm[
+            [
+                "product_name",
+                "image_description",
+                "animal_type",
+                "search_keywords",
+                "subcategory",
+            ]
+        ]
+    
     The results look similar to the following:
     
     ```console
     +--------------------------------+-------------------------------------+-------------+------------------------+------------------+
-    | product_name                   | image.description                   | animal_type | search_keywords        | subcategory      |
+    | product_name                   | image_description                   | animal_type | search_keywords        | subcategory      |
     +--------------------------------+-------------------------------------+-------------+------------------------+------------------+
     |  AquaClear Aquarium Background | The image shows a colorful coral    | fish        | aquarium background    | aquarium decor   |
     |                                | reef backdrop. The background is a  |             | fish tank backdrop     |                  |
@@ -480,20 +766,22 @@ Use the `AI.GENERATE` function to generate the following data for the pet store 
     +--------------------------------+-------------------------------------+-------------+------------------------+------------------+
     ```
 
-4.  Run the following to generate a description of each product brand and also a count of the number of products from that brand:
+5.  To generate a description of each product brand and a count of the number of products from that brand, choose one of the following options:
     
     ### SQL
     
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
         SELECT
-          brand,
-          COUNT(*) AS cnt,
-          AI.GENERATE(('Use the images and text to give one concise brand description ',
-                      'for a website brand page. Return the description only.',
-                        ARRAY_AGG(image LIMIT 10), ARRAY_AGG(description), ARRAY_AGG(category),
-                        ARRAY_AGG(subcategory)),
-                      endpoint => 'gemini-2.5-pro').result AS brand_description
+        brand,
+        COUNT(*) AS cnt,
+        AI.GENERATE(('Use the images and text to give one concise brand description ',
+                    'for a website brand page. Return the description only.',
+                      ARRAY_AGG(image LIMIT 10), ARRAY_AGG(description), ARRAY_AGG(category),
+                      ARRAY_AGG(subcategory)),
+                    endpoint => 'gemini-2.5-pro').result AS brand_description
         FROM
-          cymbal_pets.products_mm
+        cymbal_pets.products_mm
         GROUP BY brand
         ORDER BY cnt DESC;
     
@@ -527,11 +815,35 @@ Use the `AI.GENERATE` function to generate the following data for the pet store 
         )
         df_agg[["brand", "brand_description", "cnt"]]
     
+        df_agg = df_products_mm[
+            ["image", "description", "category", "subcategory", "brand"]
+        ]
+        df_agg["image"] = bbq.obj.get_access_url(df_products_mm["image"], "R")
+        df_agg = bbq.array_agg(df_agg.groupby(by=["brand"]))
+        
+        df_agg["cnt"] = bbq.array_length(df_agg["image"])
+        
+        df_prompt = df_agg[["image", "description", "category", "subcategory"]]
+        df_prompt[
+            "prompt0"
+        ] = "Use the images and text to give one concise brand description for a website brand page. Return the description only. "
+        
+        df_agg["prompt"] = bbq.struct(
+            df_prompt[["prompt0", "image", "description", "category", "subcategory"]]
+        )
+        
+        df_agg = df_agg.reset_index()
+        
+        df_agg = bbq.ai.generate_table(
+            gemini_model, df_agg, output_schema={"brand_description": "STRING"}
+        )
+        df_agg[["brand", "brand_description", "cnt"]]
+    
     The results look similar to the following:
     
     ```console
     +--------------+-------------------------------------+-----+
-    | brand        | brand.description                   | cnt |
+    | brand        | brand_description                   | cnt |
     +--------------+-------------------------------------+-----+
     |  AquaClear   | AquaClear is a brand of aquarium    | 33  |
     |              | and pond care products that offer   |     |
@@ -549,20 +861,26 @@ Use the `AI.GENERATE` function to generate the following data for the pet store 
 
 Generate embeddings from image data, and then use the embeddings to return similar images by using [vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
 
-In a production scenario, we recommend creating a [vector index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) before running a vector search. A vector index lets you perform the vector search more quickly, with the trade-off of reducing recall and so returning more approximate results.
+In a production scenario, we recommend creating a [vector index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) before running a vector search. A vector index lets you perform the vector search more quickly, and it returns more approximate results, but recall is reduced.
 
-1.  Run the following to create the `products_embeddings` table:
+To create the embeddings and perform a vector search, follow these steps:
+
+1.  To create the `products_embeddings` table, choose one of the following options:
     
     ### SQL
     
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
         CREATE OR REPLACE TABLE cymbal_pets.products_embedding
         AS (
-          SELECT
-            product_id,
-            AI.EMBED(image, endpoint => 'multimodalembedding@001').result AS embedding,
-            image
-          FROM cymbal_pets.products_mm
+        SELECT
+          product_id,
+          AI.EMBED(image, endpoint => 'gemini-embedding-2').result AS embedding,
+          image
+        FROM cymbal_pets.products_mm
         );
+    
+    You receive a confirmation message similar to the following: `This statement created a new table named products_embedding.`
     
     ### BigQuery DataFrames
     
@@ -576,25 +894,52 @@ In a production scenario, we recommend creating a [vector index](https://docs.cl
         )
         
         df_embed.to_gbq("cymbal_pets.products_embedding", if_exists="replace")
+    
+        df_products_mm["content"] = bbq.obj.get_access_url(df_products_mm["image"], "R")
+        df_embed = bbq.ai.generate_embedding(
+            embedding_model, df_products_mm[["content", "product_id"]]
+        )
+        
+        df_embed.to_gbq("cymbal_pets.products_embedding", if_exists="replace")
 
-2.  Run the following to run a vector search to return product images that are similar to the given input image:
+2.  To perform a vector search that returns product images that are similar to the given input image, choose one of the following options:
     
     ### SQL
     
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
         SELECT *
         FROM
-          VECTOR_SEARCH(
-            TABLE cymbal_pets.products_embedding,
-            'embedding',
-            query_value => AI.EMBED(
-                            OBJ.MAKE_REF('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png'),
-                            endpoint => 'multimodalembedding@001').result);
+        VECTOR_SEARCH(
+          TABLE cymbal_pets.products_embedding,
+          'embedding',
+          query_value => AI.EMBED(
+                          OBJ.MAKE_REF('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png'),
+                          endpoint => 'gemini-embedding-2').result);
     
     ### BigQuery DataFrames
     
     Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
     To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+    
+        df_image = bpd.DataFrame(
+            {
+                "uri": [
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png"
+                ]
+            }
+        ).cache()
+        df_image["image"] = bbq.obj.make_ref(df_image["uri"], "us.cymbal_conn")
+        df_search = bbq.ai.generate_embedding(
+            embedding_model,
+            bbq.obj.get_access_url(bbq.obj.fetch_metadata(df_image["image"]), "R"),
+        )
+        
+        search_result = bbq.vector_search(
+            "cymbal_pets.products_embedding", "embedding", df_search["embedding"]
+        )
+        search_result
     
         df_image = bpd.DataFrame(
             {
@@ -642,28 +987,35 @@ In a production scenario, we recommend creating a [vector index](https://docs.cl
 
 ## Process ordered multimodal data using arrays of `ObjectRef` values
 
-This section shows you how to complete the following tasks:
+This section shows you how to summarize user manuals by processing ordered multimodal data using arrays of `ObjectRef` values. BigQuery can analyze multiple unstructured files simultaneously using arrays.
+
+You complete the following tasks:
 
 1.  Create the `product_manuals` table so that it contains both a PDF file for the `Crittercuisine Pro 5000` product manual, and PDF files for each page of that manual.
+
 2.  Create a table that maps the manual to its chunks. The complete manual and the manual pages are each stored in an `ObjectRef` column.
+
 3.  Analyze an array of `ObjectRef` values together to return a single generated value.
-4.  Analyze an array of `ObjectRef` values separately and returning a generated value for each array value.
 
-Follow these steps to process ordered multimodal data using `ObjectRef` values:
+4.  Analyze an array of `ObjectRef` values separately and return a generated value for each array value.
 
-1.  Go to the **BigQuery** page.
+To process ordered multimodal data using `ObjectRef` values, follow these steps:
 
-2.  Run the following to create the `product_manuals` table:
+1.  To create the `product_manuals` table, choose one of the following options:
     
     ### SQL
     
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
         CREATE OR REPLACE EXTERNAL TABLE `cymbal_pets.product_manuals`
-          WITH CONNECTION `us.cymbal_conn`
-          OPTIONS (
-            object_metadata = 'SIMPLE',
-            uris = [
-                'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf',
-                'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf']);
+        WITH CONNECTION `us.cymbal_conn`
+        OPTIONS (
+          object_metadata = 'SIMPLE',
+          uris = [
+              'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf',
+              'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf']);
+    
+    You receive a confirmation message similar to the following: `This statement created a new table named product_manuals.`
     
     ### BigQuery DataFrames
     
@@ -683,10 +1035,25 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
                 ],
             },
         )
+    
+        bbq.create_external_table(
+            "cymbal_pets.product_manuals_all",
+            replace=True,
+            connection_name="us.cymbal_conn",
+            options={
+                "object_metadata": "SIMPLE",
+                "uris": [
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf",
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf",
+                ],
+            },
+        )
 
-3.  Run the following to write PDF data to the `map_manual_to_chunks` table:
+2.  To write PDF data to the `map_manual_to_chunks` table, choose one of the following options:
     
     ### SQL
+    
+    Paste the following into the query editor, and then click play\_circle **Run** :
     
         -- Extract the file and chunks into a single table.
         -- Store the chunks in the chunks column as array of ObjectRefs (ordered by page number)
@@ -695,10 +1062,12 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
         SELECT ARRAY_AGG(m1.ref)[0] manual, ARRAY_AGG(m2.ref ORDER BY m2.ref.uri) chunks
         FROM cymbal_pets.product_manuals m1
         JOIN cymbal_pets.product_manuals m2
-          ON
-            REGEXP_EXTRACT(m1.uri, r'.*/([^.]*).[^/]+')
-            = REGEXP_EXTRACT(m2.uri, r'.*/([^.]*)_page[0-9]+.[^/]+')
+        ON
+          REGEXP_EXTRACT(m1.uri, r'.*/([^.]*).[^/]+')
+          = REGEXP_EXTRACT(m2.uri, r'.*/([^.]*)_page[0-9]+.[^/]+')
         GROUP BY m1.uri;
+    
+    You receive a confirmation message similar to the following: `This statement created a new table named map_manual_to_chunks.`
     
     ### BigQuery DataFrames
     
@@ -721,10 +1090,28 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
         df_manuals_agg["chunks"] = bbq.array_agg(
             df_manuals_all[["ref_y", "uri_x"]].groupby("uri_x")
         )["ref_y"]
+    
+        df1 = bpd.read_gbq("SELECT * FROM cymbal_pets.product_manuals_all").sort_values(
+            "uri"
+        )
+        df2 = df1.copy()
+        df1["name"] = df1["uri"].str.extract(r".*/([^.]*).[^/]+")
+        df2["name"] = df2["uri"].str.extract(r".*/([^.]*)_page[0-9]+.[^/]+")
+        df_manuals_all = df1.merge(df2, on="name")
+        df_manuals_agg = (
+            bbq.array_agg(df_manuals_all[["ref_x", "uri_x"]].groupby("uri_x"))["ref_x"]
+            .str[0]
+            .to_frame()
+        )
+        df_manuals_agg["chunks"] = bbq.array_agg(
+            df_manuals_all[["ref_y", "uri_x"]].groupby("uri_x")
+        )["ref_y"]
 
-4.  Run the following to view the PDF data in the `map_manual_to_chunks` table:
+3.  To view the PDF data in the `map_manual_to_chunks` table, choose one of the following options:
     
     ### SQL
+    
+    Paste the following into the query editor, and then click play\_circle **Run** :
     
         SELECT *
         FROM cymbal_pets.map_manual_to_chunks;
@@ -734,6 +1121,8 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
     Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
     To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+    
+        df_manuals_agg
     
         df_manuals_agg
     
@@ -755,23 +1144,38 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
     +-------------------------------------+--------------------------------+-----------------------------------+------------------------------------------------------+-------------------------------------------+---------------------------------+------------------------------------+-------------------------------------------------------+
     ```
 
-5.  Run the following to generate a single response from a Gemini model based on the analysis of an array of `ObjectRef` values:
+4.  To generate a single response from a Gemini model based on the analysis of an array of `ObjectRef` values, choose one of the following options:
     
     ### SQL
     
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
         SELECT
-          AI.GENERATE((
-            '''Can you provide a page by page summary for the first 3 pages of the attached manual?
-            Only write one line for each page. The pages are provided in serial order''',
-            chunks),
-            endpoint => 'gemini-2.5-pro').result AS Response,
-        FROM cymbal_pets.map_manual_to_chunks
+        AI.GENERATE((
+          '''Can you provide a page by page summary for the first 3 pages of the attached manual?
+          Only write one line for each page. The pages are provided in serial order''',
+          chunks),
+          endpoint => 'gemini-3.5-flash').result AS Response,
+        FROM cymbal_pets.map_manual_to_chunks;
     
     ### BigQuery DataFrames
     
     Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
     To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+    
+        df_manuals_agg["chunks_url"] = bbq.array_agg(
+            bbq.obj.get_access_url(df_manuals_agg.explode("chunks")["chunks"], "R").groupby(
+                "uri_x"
+            )
+        )
+        df_manuals_agg[
+            "prompt0"
+        ] = "Can you provide a page by page summary for the first 3 pages of the attached manual? Only write one line for each page. The pages are provided in serial order"
+        df_manuals_agg["prompt"] = bbq.struct(df_manuals_agg[["prompt0", "chunks_url"]])
+        
+        result = bbq.ai.generate_text(gemini_model, df_manuals_agg["prompt"])["result"]
+        result
     
         df_manuals_agg["chunks_url"] = bbq.array_agg(
             bbq.obj.get_access_url(df_manuals_agg.explode("chunks")["chunks"], "R").groupby(
@@ -803,19 +1207,21 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
     +---------------------------------------------------------------------------+
     ```
 
-6.  Run the following to generate multiple responses from a Gemini model based on the analysis of an array of `ObjectRef` values:
+5.  To generate multiple responses from a Gemini model based on the analysis of an array of `ObjectRef` values, choose one of the following options:
     
     ### SQL
     
+    Paste the following into the query editor, and then click play\_circle **Run** :
+    
         WITH results AS (
-          SELECT
-            AI.GENERATE((
-              '''Can you provide a page by page summary for the first 3 pages of the attached manual?
-              Only write one line for each page. The pages are provided in serial order''',
-              chunks),
-              endpoint => 'gemini-2.5-pro'
-              output_schema =>  'page1_summary STRING, page2_summary STRING, page3_summary STRING').*
-          FROM cymbal_pets.map_manual_to_chunks)
+        SELECT
+          AI.GENERATE((
+            '''Can you provide a page by page summary for the first 3 pages of the attached manual?
+            Only write one line for each page. The pages are provided in serial order''',
+            chunks),
+            endpoint => 'gemini-3.5-flash',
+            output_schema =>  'page1_summary STRING, page2_summary STRING, page3_summary STRING').*
+        FROM cymbal_pets.map_manual_to_chunks)
         SELECT page1_summary, page2_summary, page3_summary
         FROM results;
     
@@ -824,6 +1230,17 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
     Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
     To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+    
+        result = bbq.ai.generate_table(
+            gemini_model,
+            df_manuals_agg["prompt"],
+            output_schema={
+                "page1_summary": "STRING",
+                "page2_summary": "STRING",
+                "page3_summary": "STRING",
+            },
+        )[["page1_summary", "page2_summary", "page3_summary"]]
+        result
     
         result = bbq.ai.generate_table(
             gemini_model,
@@ -854,6 +1271,8 @@ Follow these steps to process ordered multimodal data using `ObjectRef` values:
 
 ## Clean up
 
+To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
+
 > **Caution** : Deleting a project has the following effects:
 > 
 >   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
@@ -866,3 +1285,25 @@ In the Google Cloud console, go to the **Manage resources** page.
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
+
+Alternatively, to keep the project and delete the resources used in this tutorial, follow these steps:
+
+1.  Go to the **BigQuery** page.
+
+2.  In the left pane, expand your project, and then click **Datasets** .
+
+3.  For the `bqml_tutorial` dataset, click more\_vert **Open actions \> Delete** .
+
+4.  In the **Delete dataset** dialog, click **Delete** to confirm.
+
+5.  In the left pane, click **Connections** .
+
+6.  For the `cymbal_conn` connection, click more\_vert **Open actions \> Delete** .
+
+7.  In the **Delete connection** dialog, enter `delete` , and then click **Delete** to confirm.
+
+## What's next
+
+  - For more information on working with multimodal data, see [Analyze multimodal data in BigQuery](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) .
+  - For more information on `ObjectRef` values, see [Work with ObjectRef values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) .
+  - To learn how to analyze multimodal data with SQL and the `OBJ.LIST` function, see [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-sql-object-list-tutorial) .

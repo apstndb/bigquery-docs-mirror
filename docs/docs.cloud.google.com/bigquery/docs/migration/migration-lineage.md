@@ -53,9 +53,9 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 For more information on IAM roles and permissions in BigQuery, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-## Create a migration lineage
+## Trace a migration lineage
 
-To create a migration lineage, you first run the `dwh-migration-dumper` tool to generate source input SQL log files that you upload to Cloud Storage. After you upload the input files to Cloud Storage, you can generate the migration lineage with the Google Cloud console or the BigQuery Migration API.
+To trace a migration lineage, you first run the `dwh-migration-dumper` tool to generate source input SQL log files that you upload to Cloud Storage. After you upload the input files to Cloud Storage, you can trace the migration lineage with the Google Cloud console or the BigQuery Migration API.
 
 ### Run the `dwh-migration-dumper` tool
 
@@ -63,28 +63,28 @@ Select one of the following options:
 
 ### Amazon Redshift
 
-To build and view a migration lineage on an Amazon Redshift database, do the following:
+To trace and view a migration lineage on an Amazon Redshift database, do the following:
 
 1.  [Run the `dwh-migration-dumper` tool](https://docs.cloud.google.com/bigquery/docs/migration-assessment#redshift) to generate a dump of your source system files.
 2.  [Upload the query logs to Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration-assessment#redshift_1) .
 
 ### Snowflake
 
-To build and view a migration lineage on an Snowflake database, do the following:
+To trace and view a migration lineage on an Snowflake database, do the following:
 
 1.  [Run the `dwh-migration-dumper` tool](https://docs.cloud.google.com/bigquery/docs/migration-assessment#snowflake) to generate a dump of your source system files.
 2.  [Upload the query logs to Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration-assessment#snowflake_1) .
 
 ### Teradata
 
-To build and view a migration lineage on an Teradata database, do the following:
+To trace and view a migration lineage on an Teradata database, do the following:
 
 1.  [Run the `dwh-migration-dumper` tool](https://docs.cloud.google.com/bigquery/docs/migration-assessment#teradata) to generate a dump of your source system files.
 2.  [Upload the query logs to Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration-assessment#teradata_1) .
 
 ### BigQuery
 
-To build and view a migration lineage on a BigQuery database, do the following:
+To trace and view a migration lineage on a BigQuery database, do the following:
 
 1.  Grant the account or service account the following roles:
     
@@ -101,42 +101,32 @@ To build and view a migration lineage on a BigQuery database, do the following:
 
 4.  Upload the ZIP files to a Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create a bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a file system](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
-### Generate the migration lineage
+### Trace lineage
 
-After you upload the ZIP files that contain the metadata and query logs to Cloud Storage, you can generate the migration lineage. Select one of the following options:
+After you upload the ZIP files that contain the metadata and query logs to Cloud Storage, you can trace the lineage. Select one of the following options:
 
 ### Console
 
 1.  Go to the **Your migration services** page.
 
-2.  Under **Translate SQL** , click **Translate** \> **Batch translation** .
+2.  Under **Trace Lineage** , click **Trace translation** .
 
-3.  Under **Translation configuration** , enter the following:
+3.  Under **Lineage configuration** , enter the following:
     
     1.  For **Display name** , specify a name for the lineage job. The name can contain letters, numbers or underscores.
     2.  For **Processing Location** , select the location where you want the lineage job to run.
-    3.  For **Source dialect** , select your source SQL dialect.
-    4.  For **Target dialect** , select **GoogleSQL** .
 
-4.  Click **Next** .
-
-5.  Under **File location details** , do the following:
+4.  For **Edit input directory location** , specify the path to the Cloud Storage folder containing the log ZIP files that you uploaded earlier. You can type the path in the format `  bucket_name / folder_name / ` or click **Browse** . You can also name the subdirectory of your output files in the **Output subdirectory name** field.
     
-    1.  For **Output directory location** , specify the path to a Cloud Storage bucket to save your translation output files. You can type the path in the format `  bucket_name / folder_name / ` or click **Browse** .
-    2.  For **Input directory location** , specify the path to the Cloud Storage folder containing the log ZIP files that you uploaded earlier. You can type the path in the format `  bucket_name / folder_name / ` or click **Browse** . You can also name the subdirectory of your output files in the **Output subdirectory name** field.
-    3.  You can add additional input files by clicking **Add an input directory location** .
+    You can add additional input files by clicking **Add an input directory location** .
 
-6.  Click **Next** .
+5.  Click **Trace** .
 
-7.  Select the **Lineage from query logs** checkbox.
-
-8.  Click **Create** .
-
-The lineage job is now running. The job can take several hours to complete depending on your input size. After the job is complete, the tool provides a link to the generated migration lineage.
+The lineage job is now running. The job can take several hours to complete depending on your input size. After the job is complete, the tool provides a link to the traced migration lineage.
 
 ### API
 
-To create a lineage job, run the following `curl` command:
+To trace a lineage job, run the following `curl` command:
 
 ``` 
   curl -d "{
@@ -187,19 +177,19 @@ The lineage job is now running. The job can take several hours to complete depen
   -H "Authorization:Bearer " -X GET https://bigquerymigration.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
 ```
 
-After the job is complete, the tool provides a link to the generated lineage view.
+After the job is complete, the tool provides a link to the traced lineage view.
 
 ## Open the migration lineage
 
-After you have generated a migration lineage, you can open the migration lineage by using one of the following options:
+After you have traced a migration lineage, you can open the migration lineage by using one of the following options:
 
 ### Console
 
 1.  Go to the **Your migration services** page.
 
-2.  Under **Translate SQL** , click **View recent** .
+2.  Under **Trace Lineage** , click **View recent** .
 
-3.  On the **SQL translations** page, click the job name to select the complete lineage job. Lineage jobs have the output value `Lineage` .
+3.  On the **Migration Lineage** page, click the job name to select the complete lineage job.
 
 4.  On the **Translation details** page, click **Data lineage** .
 
@@ -217,7 +207,7 @@ Replace the following:
 
   - `  PROJECT_ID  ` : the project ID to your Google Cloud project.
   - `  LOCATION  ` : a processing location. This value must either be `eu` or `us` .
-  - `  WORKFLOW_ID  ` : the workflow ID of the generated lineage.
+  - `  WORKFLOW_ID  ` : the workflow ID of the traced lineage.
 
 Navigate to the link included in the `taskResult.translationTaskResult.consoleUri` field of the output message.
 

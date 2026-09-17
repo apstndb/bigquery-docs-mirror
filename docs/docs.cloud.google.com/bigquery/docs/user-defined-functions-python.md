@@ -1277,11 +1277,30 @@ The Python UDF `extract_user_email` extracts email addresses from JSON strings. 
 
 The logs that contain the `corrupted_payload_string` input are accessible in Logging.
 
-To view the logs, follow these steps:
+### View logs
+
+To view the logs for your Python UDFs, choose one of the options in the following sections.
+
+#### Job information
+
+To view Python UDF logs for a query job from the **Job information** tab, follow these steps:
 
 1.  In the **Query results** pane, click the **Job information** tab.
 
 2.  In the **Log** field, click **Log** . Logs Explorer opens and is prepopulated with a query that shows the logs for your Python UDF call.
+
+#### Logs Explorer
+
+You can also go directly to Logs Explorer and build a query yourself to view Python UDF logs:
+
+1.  Go to the Cloud Logging **Logs Explorer** page.
+
+2.  In the query editor, [build a query](https://docs.cloud.google.com/logging/docs/view/building-queries) using the `bigquery.googleapis.com/ManagedRoutineInvocation` resource type and any relevant resource labels. For example, you can use the following query to view Python UDF logs that came from a query job:
+    
+        resource.type="bigquery.googleapis.com/ManagedRoutineInvocation"
+        resource.labels.query_job_id="QUERY_JOB_ID"
+    
+    Replace `  QUERY_JOB_ID  ` with the ID of the query job that invoked the Python UDF.
 
 ## View Python UDF metrics
 

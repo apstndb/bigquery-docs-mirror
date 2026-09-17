@@ -15,6 +15,16 @@ This document provides detailed steps for setting up Virtual Private Cloud peeri
 
 This document also covers the creation of a network attachment in the BigQuery Data Transfer Service connector project.
 
+## Architecture overview
+
+To transfer data from a private Cloud SQL instance in one project to BigQuery in another project, BigQuery Data Transfer Service requires a connector network to bridge private network connectivity.
+
+VPC Network Peering supports communication only between directly peered networks and doesn't forward traffic from other connections. Therefore, traffic that enters a VPC network through a Private Service Connect network attachment can't cross a peering connection to reach a peered Cloud SQL network. To establish this connection, a Compute Engine VM in the connector network runs the Cloud SQL Auth Proxy. The proxy terminates the incoming connection from the network attachment and establishes an authenticated connection to the Cloud SQL instance over the peered network.
+
+The following diagram illustrates the network components and data path between BigQuery Data Transfer Service and a private Cloud SQL instance:
+
+![BigQuery Data Transfer Service to Cloud SQL network architecture.](https://docs.cloud.google.com/static/bigquery/images/cloud-sql-dts-architecture.png)
+
 ## Before you begin
 
 Ensure you have the following:

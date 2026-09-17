@@ -320,7 +320,7 @@ The output keysets each contain two things: the primary cryptographic key create
 
 **Description**
 
-Can be used in place of the `keyset` argument to the AEAD and deterministic encryption functions to pass a [Tink](https://github.com/google/tink/blob/master/docs/KEY-MANAGEMENT.md) keyset that's encrypted with a [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) . This function lets you use other AEAD functions without including plaintext keys in a query.
+Can be used in place of the `keyset` argument to the AEAD and deterministic encryption functions to pass a [Tink](https://github.com/google/tink/blob/master/docs/KEY-MANAGEMENT.md) keyset that's encrypted with a [Cloud KMS key](https://cloud.google.com/kms/docs/resource-hierarchy) . This function lets you use other AEAD functions without including plaintext keys in a query.
 
 This function takes the following arguments:
 
@@ -591,7 +591,7 @@ The following query creates a keyset for each row in `CustomerIds` , which can s
 
 **Description**
 
-Creates a new keyset and encrypts it with a [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) . Returns the [wrapped keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) as a `BYTES` representation of [google.crypto.tink.Keyset](https://github.com/google/tink/blob/master/proto/tink.proto) that contains a primary cryptographic key and no additional keys.
+Creates a new keyset and encrypts it with a [Cloud KMS key](https://cloud.google.com/kms/docs/resource-hierarchy) . Returns the [wrapped keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) as a `BYTES` representation of [google.crypto.tink.Keyset](https://github.com/google/tink/blob/master/proto/tink.proto) that contains a primary cryptographic key and no additional keys.
 
 This function takes the following arguments:
 
@@ -633,7 +633,7 @@ Multiple calls to this function with the same arguments in one query returns the
 
 **Description**
 
-Re-encrypts a [wrapped keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) with a new [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) . Returns the wrapped keyset as a `BYTES` representation of [google.crypto.tink.Keyset](https://github.com/google/tink/blob/master/proto/tink.proto) that contains a primary cryptographic key and no additional keys.
+Re-encrypts a [wrapped keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) with a new [Cloud KMS key](https://cloud.google.com/kms/docs/resource-hierarchy) . Returns the wrapped keyset as a `BYTES` representation of [google.crypto.tink.Keyset](https://github.com/google/tink/blob/master/proto/tink.proto) that contains a primary cryptographic key and no additional keys.
 
 When this function is used, a wrapped keyset is decrypted by `source_kms_resource_name` and then re-encrypted by `target_kms_resource_name` . During this process, the decrypted keyset is never visible to customers.
 
@@ -714,7 +714,7 @@ When this function is used, the wrapped keyset is decrypted, the new key is adde
 
 This function takes the following arguments:
 
-  - `kms_resource_name` : A `STRING` literal representation of the [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) that was used to wrap the wrapped keyset. The Cloud KMS key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
+  - `kms_resource_name` : A `STRING` literal representation of the [Cloud KMS key](https://cloud.google.com/kms/docs/resource-hierarchy) that was used to wrap the wrapped keyset. The Cloud KMS key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
     
         gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
 
