@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/listing-datasets
 uri: https://docs.cloud.google.com/bigquery/docs/listing-datasets
 title: List datasets
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to list datasets in BigQuery, view dataset metadata such as location and access controls, and verify whether a dataset exists.
 data_source: docs.cloud.google.com
 ---
 
 # List datasets
 
-This document describes how to list and get information about datasets in BigQuery.
+Listing datasets in BigQuery lets you discover and browse the datasets in your Google Cloud project. To verify resources and manage permissions, you can inspect dataset details, such as location, labels, and access controls.
 
 ## Before you begin
 

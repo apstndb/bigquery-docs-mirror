@@ -529,6 +529,70 @@ The following example configuration shows you how to add an overview and generic
 
 3.  In **Query results** , inspect the data preview.
 
+### Declare source
+
+1.  Click **Add task** , and then select **Declare source** .
+
+2.  In the **Declare source** pane, verify the default project for the data source, or select a new project.
+
+3.  Verify the default dataset for the data source, or select a new dataset.
+
+4.  In the **Table / View** field, select the table or view that you want to use as a data source.
+
+5.  Click **Create** .
+
+6.  In the declare source task details pane, click **Open** to open the task.
+
+7.  Configure the data source using the settings in **Details \> Configuration** or in the `config` block of the code editor.
+    
+    For more information about configuring a data source, see [Declare a data source](https://docs.cloud.google.com/dataform/docs/declare-source) .
+    
+    The editor validates your code and displays the validation status.
+
+### Assertion data test
+
+1.  Click **Add task** , and then select **Data quality test** .
+
+2.  In the **Create new** pane, verify the default project for the data quality test, or select a new project.
+
+3.  Verify the default dataset for the data quality test, or select a new dataset.
+
+4.  In the **Table** field, enter a name for the data quality test.
+
+5.  Click **Create** .
+
+6.  In the data quality test task details pane, click **Open** to open the task.
+
+7.  Configure assertions for the test using the settings in **Details \> Configuration** or in the `config` block of the code editor.
+    
+    For more information about configuring assertions, see [Test data quality](https://docs.cloud.google.com/dataform/docs/test-data#assertions) .
+    
+    Optional: In the **Run after** menu, select a task to precede your data quality test in the pipeline sequence.
+    
+    The editor validates your code and displays the validation status.
+
+8.  Click **Run** to run the data quality test as part of your pipeline sequence.
+
+### Unit test
+
+1.  Click **Add task** , and then select **Unit test** .
+
+2.  In the **Action to test** field, select the table or view that you want to test.
+
+3.  In the **BigQuery Unit test** field, enter a name for the unit test.
+
+4.  Click **Create** .
+
+5.  In the task details pane, click **Open** to open the unit test.
+
+6.  Configure inputs and the expected output rows for the unit test.
+    
+    For more information about configuring unit tests, see [Test data quality](https://docs.cloud.google.com/dataform/docs/test-data#unit-tests) .
+
+7.  Optional: To ensure that the inputs and outputs are what you expect, click **Run task** and select expected or actual statements.
+
+8.  Click **Run** to run the data quality test as part of your pipeline sequence.
+
 ## Edit a pipeline task
 
 To edit a pipeline task, follow these steps:
@@ -613,7 +677,7 @@ To share a pipeline, follow these steps:
 
 ## Run a pipeline
 
-When running a pipeline, you can choose to run all the tasks in the pipeline, manually select specific tasks to run, or run tasks with selected tags.
+When running a pipeline, you can choose to run all the tasks in the pipeline, manually select specific tasks to run, run tasks with selected tags, or run unit tests.
 
 ### Run all the tasks in a pipeline
 
@@ -787,6 +851,58 @@ To run tasks with selected tags in a pipeline, do the following:
 
 10. Optional: To inspect the run, [view past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
 
+### Run unit tests in a pipeline
+
+You [define unit tests in Dataform](https://docs.cloud.google.com/dataform/docs/test-data#unit-tests) by creating `.sqlx` test files in the `definitions/` directory of your repository. After you create unit tests in Dataform, you can run them directly in your BigQuery pipeline to validate your SQL transformation logic against mock datasets.
+
+To run unit tests in a pipeline, do the following:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
+
+4.  Click play\_circle\_filled **Run** .
+
+5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account:
+    
+      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+        
+            Optional: In the **Extended access options** section, select the
+            additional services that your pipeline requires:
+            
+            - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
+            - **Google Drive**: Allows read-only access to Google Drive files.
+            - **Bigtable**: Allows read-only access to Google
+              Bigtable data.
+    
+      - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
+        
+        To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
+        
+        If you need to create a service account, click **New service account** .
+
+6.  In the **Execution mode** section, select **Unit tests** .
+
+7.  Select one of the following execution scope options:
+    
+      - **Select unit tests** : search for and select specific unit tests from your pipeline.
+      - **Select unit test tags** : filter and execute unit tests assigned specific tags.
+      - **All Unit Tests** : execute all unit tests defined in the pipeline.
+
+8.  Optional: In the **Execution options** sections, select the **Execute as interactive job with high priority** checkbox to run unit tests immediately, prioritizing execution speed.
+    
+    If you don't select the **Execute as interactive job with high priority** checkbox, Dataform runs unit tests using batch resources by default, prioritizing compute costs savings.
+
+9.  Click **Run** . If you selected **Run with user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+
+10. Optional: To inspect the run, [view past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
+
 ### Authorize your Google Account
 
 > **Preview**
@@ -818,3 +934,4 @@ If your pipeline contains a notebook, you must also manually grant permission fo
   - Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
   - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
   - Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
+  - Learn how to [test data quality with unit tests](https://docs.cloud.google.com/dataform/docs/test-data#unit-tests) .

@@ -149,6 +149,12 @@ Cancel a running BigQuery job.
 
 Use this tool to cancel a query job that is currently executing (i.e. returned `job_complete: false` with a `job_id` from `execute_sql` or `execute_sql_readonly` ). Specify the `job_id` to abort.
 
+`  get_job  `
+
+Get information and status about a BigQuery job.
+
+Use this tool to check the status, statistics, or configuration of a job using its `job_id` .
+
 ### Get MCP tool specifications
 
 To get the MCP tool specifications for all tools in an MCP server, use the `tools/list` method. The following example demonstrates how to use `curl` to list all tools and their specifications currently available within the MCP server.

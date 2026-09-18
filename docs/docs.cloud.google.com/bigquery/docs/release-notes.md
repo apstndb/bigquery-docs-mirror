@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## September 17, 2026
+
+Feature
+
+You can [add unit tests](https://docs.cloud.google.com/dataform/docs/test-data#unit-tests) to pipelines to validate your SQL transformation logic against mock datasets. Unit tests for pipelines are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## September 16, 2026
 
 Feature

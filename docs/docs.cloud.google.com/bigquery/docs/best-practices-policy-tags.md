@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # Best practices for using policy tags in BigQuery
 
-This page describes best practices for using policy tags in BigQuery. Use policy tags to define access to your data when you use [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) or [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .
-
-To learn how to set policy tags on a column, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
-
-Policy tags are an alternative to [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) , which are a type of Resource Manager tag that you can use for column-level access control and data masking.
+Policy tags in BigQuery let you enforce [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) on sensitive table data. Structuring policy tags into a hierarchical taxonomy helps you manage permissions across numerous columns with a minimal set of classifications. Policy tags are an alternative to [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) . To apply policy tags directly to columns, see [Set a policy tag on a column](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_policy) .
 
 ## Build a hierarchy of data classes
 

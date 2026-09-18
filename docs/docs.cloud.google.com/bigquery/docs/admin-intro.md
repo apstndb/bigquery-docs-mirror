@@ -8,18 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to BigQuery administration
 
-This document provides an introduction to BigQuery administration tasks, and the BigQuery features that help you accomplish them.
-
-BigQuery administrators typically do the following types of tasks:
-
-  - Manage resources, such as projects, datasets, and tables.
-  - Secure resources, so that access is limited to the principals who need it.
-  - Manage workloads, such as jobs, queries, and compute capacity (reservations).
-  - Monitor resources, including quotas, jobs, and compute usage.
-  - Optimize workloads for best performance while controlling costs.
-  - Troubleshoot error messages, billing issues, and quotas.
-
-This document gives an overview of the features that BigQuery provides to help you do these tasks.
+BigQuery administration lets you configure, secure, and monitor data resources and compute workloads across your organization. You can use these capabilities to allocate compute capacity, optimize query performance, control costs, and enforce access policies.
 
 To take a tour of BigQuery data administration features directly in the Google Cloud console, click **Take the tour** .
 
@@ -216,4 +205,4 @@ If you need additional assistance, see [Get support](https://docs.cloud.google.c
 
 ## What's next
 
-  - For a video series on various topics related to BigQuery administration, see [BigQuery admin reference guide: recap](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap) .
+  - [BigQuery Admin reference guide: recap](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap)

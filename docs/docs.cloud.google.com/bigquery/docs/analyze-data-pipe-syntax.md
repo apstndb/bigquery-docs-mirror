@@ -8,14 +8,7 @@ data_source: docs.cloud.google.com
 
 # Analyze data using pipe syntax
 
-This tutorial shows you how to write queries using pipe syntax to analyze data.
-
-Pipe syntax is an extension to GoogleSQL that supports a linear query structure designed to make your queries easier to read, write, and maintain. Pipe syntax consists of the pipe symbol `|>` , a [pipe operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#pipe_operators) name, and any arguments. For more information, see the following resources:
-
-  - For an introduction to pipe syntax, see [Work with pipe query syntax](https://docs.cloud.google.com/bigquery/docs/pipe-syntax-guide) .
-  - For full syntax details, see the [Pipe query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax) reference documentation.
-
-In this tutorial, you build a complex query in pipe syntax using the publicly available [`bigquery-public-data.austin_bikeshare.bikeshare_trips` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=austin_bikeshare&t=bikeshare_trips&page=table) , which contains data about bicycle trips.
+Pipe syntax in GoogleSQL lets you structure queries linearly, making complex data analysis easier to read, write, and maintain. In this tutorial, you build a query using the publicly available [`bigquery-public-data.austin_bikeshare.bikeshare_trips` table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=austin_bikeshare&t=bikeshare_trips&page=table) to filter, aggregate, and analyze bicycle trip data. For conceptual background and operator specifications, see [Work with pipe query syntax](https://docs.cloud.google.com/bigquery/docs/pipe-syntax-guide) and [Pipe query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax) .
 
 ## Objectives
 

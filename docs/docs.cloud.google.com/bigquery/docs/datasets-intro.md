@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/datasets-intro
 uri: https://docs.cloud.google.com/bigquery/docs/datasets-intro
 title: Introduction to datasets
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about BigQuery datasets, including how to organize tables and views, specify storage locations, and manage data retention.
 data_source: docs.cloud.google.com
 ---
 
 # Introduction to datasets
 
-This page provides an overview of datasets in BigQuery.
+BigQuery datasets let you organize and control access to your tables and views. You can also use datasets to specify storage locations, manage retention policies, and connect to external data sources.
 
 ## Datasets
 

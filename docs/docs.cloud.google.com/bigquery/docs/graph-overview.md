@@ -68,6 +68,7 @@ The following tutorials show how to use BigQuery Graph in different scenarios:
   - [Analyze drug interactions with BigQuery Graph](https://codelabs.developers.google.com/codelabs/drug-interaction-bigquery-graph)
   - [Anti-money laundering & fraud prevention with BigQuery GraphRAG](https://codelabs.developers.google.com/codelabs/graphrag-with-bigquery)
   - [Customer identity resolution with BigQuery Graph](https://codelabs.developers.google.com/codelabs/identity-resolution-bigquery-graph)
+  - [Trace AI agent decisions with BigQuery Graph](https://codelabs.developers.google.com/bqaa-context-graph)
 
 ## Pricing
 

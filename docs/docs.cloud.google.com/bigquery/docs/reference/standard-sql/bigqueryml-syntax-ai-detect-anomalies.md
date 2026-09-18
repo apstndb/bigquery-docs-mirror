@@ -134,7 +134,7 @@ Optionally, if the `TARGET_TABLE` or `TARGET_QUERY_STATEMENT` argument is not pr
 `AI.DETECT_ANOMALIES` returns the following columns:
 
   - All time series ID columns, as specified in the `ID_COLS` argument.
-  - `time_series_timestamp` : a `STRING` value that contains the timestamp column for a time series. This value is inherited from the `TIMESTAMP_COL` argument.
+  - `time_series_timestamp` : a `TIMESTAMP` value that contains the timestamp column for a time series. This value is inherited from the `TIMESTAMP_COL` argument.
   - `time_series_data` : a `FLOAT64` value that contains the data column for a time series. This value is inherited from the `DATA_COL` argument.
   - `is_anomaly` : a `BOOL` value that indicates whether the value associated with a given time point is an anomaly.
   - `lower_bound` : a `FLOAT64` value that contains the lower bound of the prediction result.

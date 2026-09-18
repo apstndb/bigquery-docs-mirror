@@ -520,7 +520,7 @@ To delete a listing, select one of the following options:
 
 2.  Click the display name of the data clean room that contains the listing.
 
-3.  In the row of the listing that you want to delete, click more\_vert **More actions \> Delete listings** .
+3.  In the row of the listing that you want to delete, click more\_vert **More actions \> Delete listing** .
 
 4.  To confirm, enter `delete` , and then click **Delete** . You can't undo this action.
 
