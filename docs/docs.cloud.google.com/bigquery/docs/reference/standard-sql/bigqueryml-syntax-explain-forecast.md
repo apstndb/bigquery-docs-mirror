@@ -75,7 +75,7 @@ The `ML.EXPLAIN_FORECAST` function returns the following columns:
 
   - `standard_error` : a `FLOAT64` value that contains the standard error of the residuals during the ARIMA fitting. The values are the same for all rows that have a value of `history` in the `time_series_type` column. For rows that have a value of `forecast` in the `time_series_type` column, this value increases with time, as the forecast values become less reliable.
 
-  - `confidence_level` : a `FLOAT64` value that contains the user-specified confidence level or, if unspecified, the default value. This value is the same for all rows that have a value of `history` in the `time_series_type` column. This value is `NULL` for all rows that have a value of `forecast` in the `time_series_type` column.
+  - `confidence_level` : a `FLOAT64` value that contains the user-specified confidence level or, if unspecified, the default value. Only rows that have a value of `forecast` in the `time_series_type` column have values other than `NULL` . This value is the same for all such rows.
 
   - `prediction_interval_lower_bound` : a `FLOAT64` value that contains the lower bound of the prediction result. Only rows that have a value of `forecast` in the `time_series_type` column have values other than `NULL` in this column.
 

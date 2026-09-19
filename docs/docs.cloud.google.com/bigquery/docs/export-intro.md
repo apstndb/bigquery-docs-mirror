@@ -61,6 +61,25 @@ You can export your BigQuery tables in the following data formats:
 
 You can also [export your BigQuery tables as Protobuf columns](https://docs.cloud.google.com/bigquery/docs/protobuf-export) when working with nested data structures that require object type safety, or if you need a wider language support.
 
+### Large table export considerations
+
+When exporting substantial data from BigQuery, consider the following:
+
+  - **Data volume and format** :
+      - Calculate the volume of data to be exported. Exports can incur substantial costs based on data size, format, method and geographic location. Some resources are charged per GiB, while others are charged per TiB.
+      - Choose a format compatible with analysis tools and structure of your data. For example, CSV doesn't handle nested or repeated fields. Check data type compatibility.
+      - Consider compression formats to reduce size and costs.
+  - **Export cost** :
+      - Some export methods are free up to a limit, while others always incur costs. For more information, see [Data extraction pricing](https://docs.cloud.google.com/bigquery/pricing#data-extraction-pricing) .
+      - Costs can apply if your BigQuery table and destination, such as a Cloud Storage bucket, are in different locations.
+  - **Quotas** : some export methods have daily limits. For more information, see [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
+  - **Multiple files** : large exports split into multiple files. Consider how you will manage these files downstream.
+  - **Automation** : for recurring exports, use [BigQuery scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) or [Dataflow](https://docs.cloud.google.com/dataflow/docs/overview) .
+  - **Retention policies** : determine retention periods in your destination dataset and implement lifecycle rules to optimize storage costs.
+  - **Security and access control** : implement appropriate IAM permissions and encryption.
+
+As you take these factors into consideration, we recommend performing a test export on a data subset to assess costs, file sizes, counts, and time. You can use a `WHERE` clause in your `EXPORT DATA` SQL statement to limit the test export.
+
 ## Export BigQuery code assets
 
 You can download [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets, such as [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) or [notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) to maintain a local copy of your assets. For more information on downloading your BigQuery code assets, see the following:

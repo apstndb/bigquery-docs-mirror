@@ -321,7 +321,7 @@ When using the [on-demand pricing model](https://cloud.google.com/bigquery/prici
 
 #### Capacity-based query cost estimation
 
-When using [capacity-based pricing](https://docs.cloud.google.com/bigquery/docs/reservations-intro#capacity-based-pricing) , it's not possible to estimate the exact cost of an individual query before execution with precise accuracy. Capacity-based costs are calculated based on overall reservation slot capacity provisioned or autoscaled over time, rather than the amount of data scanned by a specific query.
+When using [capacity-based pricing](https://docs.cloud.google.com/bigquery/docs/reservations-intro) , it's not possible to estimate the exact cost of an individual query before execution with precise accuracy. Capacity-based costs are calculated based on overall reservation slot capacity provisioned or autoscaled over time, rather than the amount of data scanned by a specific query.
 
 Estimating individual query costs before execution is difficult due to dynamic runtime factors, including the following:
 
