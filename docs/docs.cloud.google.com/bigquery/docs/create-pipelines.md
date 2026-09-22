@@ -164,7 +164,7 @@ To create a pipeline from the editor tab bar, follow these steps:
 
 3.  Optional: To rename the pipeline, click the pipeline name, and then type a new name.
 
-4.  Click **Get started** , and then configure [pipeline settings](https://docs.cloud.google.com/bigquery/docs/create-pipelines#configure-pipeline-settings) .
+4.  Configure [pipeline settings](https://docs.cloud.google.com/bigquery/docs/create-pipelines#configure-pipeline-settings) .
 
 ### Create a pipeline from the Pipelines & Connections page
 
@@ -178,7 +178,7 @@ To configure settings for your pipeline, open the pipeline in the **Pipeline Vie
 
 1.  In the **Authentication** section, choose to authorize the pipeline with the user credentials for your Google Account or a service account.
     
-      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with my user credentials** .
+      - To use the user credentials for your Google Account, select **Run with my user credentials** .
         
         Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
         
@@ -697,7 +697,7 @@ To run all the tasks in a pipeline, do the following:
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play\_circle\_filled **Run** \> **Run all tasks** . If you selected **Run with my user credentials** for your [authentication](https://docs.cloud.google.com/bigquery/docs/create-pipelines#create_a_pipeline) , you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+4.  Click play\_circle\_filled **Run** \> **Run all tasks** . If you selected **Run with my user credentials** for your [authentication](https://docs.cloud.google.com/bigquery/docs/create-pipelines#create_a_pipeline) , you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) .
 
 5.  Optional: To inspect the run, [view past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
 
@@ -764,7 +764,7 @@ To run selected tasks in a pipeline, do the following:
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
     
-      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+      - To use the user credentials for your Google Account, select **Run with user credentials** .
         
             Optional: In the **Extended access options** section, select the
             additional services that your pipeline requires:
@@ -818,7 +818,7 @@ To run tasks with selected tags in a pipeline, do the following:
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
     
-      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+      - To use the user credentials for your Google Account, select **Run with user credentials** .
         
             Optional: In the **Extended access options** section, select the
             additional services that your pipeline requires:
@@ -904,12 +904,6 @@ To run unit tests in a pipeline, do the following:
 10. Optional: To inspect the run, [view past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
 
 ### Authorize your Google Account
-
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
 To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface. If you select any **Extended access options** , you must grant access to those services—for example, Google Drive or Knowledge Catalog.
 

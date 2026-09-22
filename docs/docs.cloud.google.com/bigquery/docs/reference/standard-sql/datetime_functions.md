@@ -83,13 +83,13 @@ The current date and time value is set at the start of the query statement that 
 
 ## `DATETIME_ADD`
 
-    DATETIME_ADD(datetime_expression, INTERVAL int64_expression part)
+    DATETIME_ADD(datetime_expression, INTERVAL step_size step_unit)
 
 **Description**
 
-Adds `int64_expression` units of `part` to the `DATETIME` object.
+Adds `step_size` units of `step_unit` to the `DATETIME` object.
 
-`DATETIME_ADD` supports the following values for `part` :
+`DATETIME_ADD` supports the following values for `step_unit` :
 
   - `MICROSECOND`
   - `MILLISECOND`
@@ -102,7 +102,7 @@ Adds `int64_expression` units of `part` to the `DATETIME` object.
   - `QUARTER`
   - `YEAR`
 
-Special handling is required for MONTH, QUARTER, and YEAR parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original DATETIME's day, then the result day is the last day of the new month.
+Special handling is required for MONTH, QUARTER, and YEAR parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original `DATETIME` object's day, then the result day is the last day of the new month.
 
 **Return Data Type**
 
@@ -217,13 +217,13 @@ The following example shows the result of `DATETIME_DIFF` for two days in succes
 
 ## `DATETIME_SUB`
 
-    DATETIME_SUB(datetime_expression, INTERVAL int64_expression part)
+    DATETIME_SUB(datetime_expression, INTERVAL step_size step_unit)
 
 **Description**
 
-Subtracts `int64_expression` units of `part` from the `DATETIME` .
+Subtracts `step_size` units of `step_unit` from the `DATETIME` object.
 
-`DATETIME_SUB` supports the following values for `part` :
+`DATETIME_SUB` supports the following values for `step_unit` :
 
   - `MICROSECOND`
   - `MILLISECOND`
@@ -236,7 +236,7 @@ Subtracts `int64_expression` units of `part` from the `DATETIME` .
   - `QUARTER`
   - `YEAR`
 
-Special handling is required for `MONTH` , `QUARTER` , and `YEAR` parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original `DATETIME` 's day, then the result day is the last day of the new month.
+Special handling is required for `MONTH` , `QUARTER` , and `YEAR` parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original `DATETIME` object's day, then the result day is the last day of the new month.
 
 **Return Data Type**
 

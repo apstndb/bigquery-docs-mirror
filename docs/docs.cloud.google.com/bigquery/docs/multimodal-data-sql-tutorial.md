@@ -1306,4 +1306,3 @@ Alternatively, to keep the project and delete the resources used in this tutoria
 
   - For more information on working with multimodal data, see [Analyze multimodal data in BigQuery](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) .
   - For more information on `ObjectRef` values, see [Work with ObjectRef values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) .
-  - To learn how to analyze multimodal data with SQL and the `OBJ.LIST` function, see [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-sql-object-list-tutorial) .

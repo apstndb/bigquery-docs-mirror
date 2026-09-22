@@ -101,7 +101,7 @@ To create a notebook schedule, follow these steps:
 
 7.  In the **Authentication** section, authorize the notebook with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use your Google Account user credentials, select **Execute with my user credentials** .
       - To use a service account, select **Execute with selected service account** , then select a service account.
 
 8.  In the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
@@ -120,7 +120,7 @@ To create a notebook schedule, follow these steps:
     2.  In the **At time** field, enter the time for scheduled notebook runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
 
-11. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+11. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#authorize-google-account) .
 
 When you create the schedule, the current version of the notebook is automatically deployed. To update the schedule with a new version of the notebook, [deploy the notebook](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#deploy) .
 
@@ -138,7 +138,7 @@ The latest deployed version of the notebook runs at the selected time and freque
 
 5.  In the **Authentication** section, authorize the notebook with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use your Google Account user credentials, select **Execute with my user credentials** .
       - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 6.  In the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
@@ -157,19 +157,13 @@ The latest deployed version of the notebook runs at the selected time and freque
     2.  In the **At time** field, enter the time for scheduled notebook runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
 
-9.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+9.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#authorize-google-account) .
 
 When you create the schedule, the current version of the notebook is automatically deployed. To update the schedule with a new version of the notebook, [deploy the notebook](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#deploy) .
 
 The latest deployed version of the notebook runs at the selected time and frequency.
 
 ### Authorize your Google Account
-
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
 To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface. If you select any **Extended access options** , you must grant access to those services—for example, Google Drive or Knowledge Catalog.
 

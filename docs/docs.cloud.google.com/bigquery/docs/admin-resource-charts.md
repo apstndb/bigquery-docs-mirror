@@ -629,6 +629,8 @@ The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-
 
   - **Best practice** : Optimize the identified queries or adjust your reservation's slot allocation.
 
+> **Note:** For more information about why the actual utilization shown in these charts might differ from your quota usage, see [Understand slot metrics](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#understand_slot_metrics) .
+
 ## What's next
 
   - Learn about [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .

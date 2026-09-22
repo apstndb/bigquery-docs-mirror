@@ -182,13 +182,13 @@ This function supports the following arguments:
 
 ## `DATE_ADD`
 
-    DATE_ADD(date_expression, INTERVAL int64_expression date_part)
+    DATE_ADD(date_expression, INTERVAL step_size step_unit)
 
 **Description**
 
-Adds a specified time interval to a DATE.
+Adds a specified time interval to a `DATE` object.
 
-`DATE_ADD` supports the following `date_part` values:
+`DATE_ADD` supports the following `step_unit` values:
 
   - `DAY`
   - `WEEK` . Equivalent to 7 `DAY` s.
@@ -196,7 +196,7 @@ Adds a specified time interval to a DATE.
   - `QUARTER`
   - `YEAR`
 
-Special handling is required for MONTH, QUARTER, and YEAR parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original date's day, then the resulting date is the last date of that month.
+Special handling is required for MONTH, QUARTER, and YEAR parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original `DATE` object's day, then the resulting date is the last date of that month.
 
 **Return Data Type**
 
@@ -318,13 +318,13 @@ DATE
 
 ## `DATE_SUB`
 
-    DATE_SUB(date_expression, INTERVAL int64_expression date_part)
+    DATE_SUB(date_expression, INTERVAL step_size step_unit)
 
 **Description**
 
-Subtracts a specified time interval from a DATE.
+Subtracts a specified time interval from a `DATE` object.
 
-`DATE_SUB` supports the following `date_part` values:
+`DATE_SUB` supports the following `step_unit` values:
 
   - `DAY`
   - `WEEK` . Equivalent to 7 `DAY` s.
@@ -332,7 +332,7 @@ Subtracts a specified time interval from a DATE.
   - `QUARTER`
   - `YEAR`
 
-Special handling is required for MONTH, QUARTER, and YEAR parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original date's day, then the resulting date is the last date of that month.
+Special handling is required for MONTH, QUARTER, and YEAR parts when the date is at (or near) the last day of the month. If the resulting month has fewer days than the original `DATE` object's day, then the resulting date is the last date of that month.
 
 **Return Data Type**
 

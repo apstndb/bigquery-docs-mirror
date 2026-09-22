@@ -132,6 +132,10 @@ A recovery point objective (RPO) is the most recent point in time from which dat
 
 You must have your chosen compute capacity in the secondary region before configuring a failover reservation. If there is not available quota in the secondary region, you can't configure or update the reservation. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#reservations) .
 
+### Quota considerations for failover reservations
+
+When you configure managed disaster recovery, the baseline slots for a failover reservation are allocated slots in the secondary region. These allocated slots appear as "used" in the **Quotas & System Limits** page of the secondary region, even if the reservation is idle and no failover has been initiated. Ensure that your administration project has sufficient slot quota in the secondary region to accommodate the failover reservation's baseline capacity. For more information about allocated slots and quota usage, see [Understand slot metrics](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#understand_slot_metrics) .
+
 Turbo replication bandwidth has quota. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#bandwidth_limits) .
 
 ## Pricing

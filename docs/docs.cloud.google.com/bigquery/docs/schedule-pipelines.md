@@ -182,7 +182,7 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 6.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use your Google Account user credentials, select **Execute with my user credentials** .
         
         Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
         
@@ -212,7 +212,7 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 11. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
-12. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+12. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
 
 When you create the schedule, the current version of the pipeline is automatically deployed. To update the schedule with a new version of the pipeline, [deploy the pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy) .
 
@@ -232,7 +232,7 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 5.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use your Google Account user credentials, select **Execute with my user credentials** .
         
         Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
         
@@ -262,17 +262,11 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 10. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
-11. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+11. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
 
 > **Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
 ### Authorize your Google Account
-
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
 To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface. If you select any **Extended access options** , you must grant access to those services—for example, Google Drive or Knowledge Catalog.
 
@@ -330,7 +324,14 @@ To create a trigger, follow these steps:
 
 5.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use your Google Account user credentials, select **Execute with my user credentials** .
+        
+        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+        
+          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+          - **Google Drive** : Allows read-only access to Google Drive files.
+          - **Bigtable** : Allows read-only access to Google Bigtable data.
+    
       - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 6.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
@@ -356,7 +357,7 @@ To create a trigger, follow these steps:
 
 12. (Optional) For **Min Execution Duration** , select a duration to prevent triggers from activating more frequently than this minimum duration. Supports values between 3 minutes to 24 hours. If not specified, the default value is 3 minutes.
 
-13. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+13. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
 
 ### Troubleshooting trigger-based schedules
 

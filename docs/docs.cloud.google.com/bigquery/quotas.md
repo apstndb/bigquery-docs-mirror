@@ -31,6 +31,10 @@ There are also *system limits* on BigQuery resources. System limits can't be cha
 
 Some error messages specify quotas or limits that you can increase, while other error messages specify quotas or limits that you can't increase. Reaching a hard limit means that you need to implement temporary or permanent workarounds or best practices for your workload. Doing so is a best practice, even for quotas or limits that can be increased. For details about both types of errors, see [Troubleshoot quota and limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas) .
 
+### Slot quota usage calculation
+
+For projects using the capacity-based pricing model, including [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) , the **Used** column for the **Total number of slots** quota reflects your total *allocated capacity* in a specific region. This value includes all of the baseline slots defined in your reservations plus any active capacity commitments. Because baseline slots are dedicated available resources, they appear as "used" by the quota system even when idle. For more information on how this differs from resource monitoring, see [Understand slot metrics](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#understand_slot_metrics) .
+
 By default, BigQuery quotas and limits apply on a [per-project](https://docs.cloud.google.com/bigquery/docs/projects) basis. Quotas and limits that apply on a different basis are indicated as such; for example, the maximum number of columns *per table* , or the maximum number of concurrent API requests *per user* . Specific policies vary depending on resource availability, user profile, Service Usage history, and other factors, and are subject to change without notice.
 
 ### Quota replenishment

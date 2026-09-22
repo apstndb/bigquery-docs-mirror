@@ -114,6 +114,8 @@ Slot quotas and limits provide a safeguard for BigQuery. Different pricing model
 
   - Capacity-based pricing model: [Reservations quotas and limits](https://docs.cloud.google.com/bigquery/quotas#reservation-api-limits) define the maximum number of slots you can allocate across all reservations in a location. If you use autoscaling, the sum of your maximum reservation sizes cannot exceed this limit. You are only billed for your reservations and commitments, not for the quotas. For information about increasing your slot quota, see [Requesting a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
 
+Note the distinction between allocated slots (which impact your quota and billing) and utilized slots (which represent active compute). For a detailed comparison between the two, see [Understand slot metrics](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#understand_slot_metrics) .
+
 To check how many slots you are using, see [BigQuery monitoring](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
 ## Idle slots

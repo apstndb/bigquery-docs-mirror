@@ -61,7 +61,7 @@ To test your data preparation steps and validate the results in your destination
 
 6.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** . This is the default option.
+      - To use your Google Account user credentials, select **Execute with my user credentials** . This is the default option.
         
         Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
         
@@ -79,7 +79,7 @@ To test your data preparation steps and validate the results in your destination
 
 10. In the **Run now** dialog, click **Confirm** to acknowledge that this manual run writes data to a destination table, which you might also be using for scheduled runs.
     
-    If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+    If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) .
     
     The run then executes your steps and loads the output to the destination.
 
@@ -131,7 +131,7 @@ To create a data preparation schedule, follow these steps:
 
 7.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use your Google Account user credentials, select **Execute with my user credentials** .
         
         Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
         
@@ -143,7 +143,7 @@ To create a data preparation schedule, follow these steps:
 
 8.  Schedule a frequency.
 
-9.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+9.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) .
 
 ### **Scheduling** page
 
@@ -157,7 +157,7 @@ To create a data preparation schedule, follow these steps:
 
 5.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
     
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+      - To use your Google Account user credentials, select **Execute with my user credentials** .
         
         Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
         
@@ -173,15 +173,9 @@ To create a data preparation schedule, follow these steps:
     2.  In the **At time** field, enter the time for scheduled data preparation runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
 
-7.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+7.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) .
 
 ## Authorize your Google Account
-
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
 To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface. If you select any **Extended access options** , you must grant access to those services—for example, Google Drive or Knowledge Catalog.
 

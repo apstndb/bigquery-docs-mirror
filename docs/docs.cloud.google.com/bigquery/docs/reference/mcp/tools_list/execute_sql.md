@@ -13,7 +13,7 @@ Run a SQL query in the project and return the result. Prefer the `execute_sql_re
 This tool can execute any query that bigquery supports including:
 
   - SQL Queries ( `SELECT` , `INSERT` , `UPDATE` , `DELETE` , `CREATE` , etc.)
-  - AI/ML functions like `AI.FORECAST` , `ML.EVALUATE` , `ML.PREDICT`
+  - AI/ML functions like `AI.FORECAST` , `AI.KEY_DRIVERS` , `ML.EVALUATE` , `ML.PREDICT`
   - Any other query that bigquery supports.
 
 Example Queries:

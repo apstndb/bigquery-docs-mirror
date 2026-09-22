@@ -12,6 +12,8 @@ Run a read-only SQL query in the project and return the result. Prefer this tool
 
 This tool is restricted to only `SELECT` statements. `INSERT` , `UPDATE` , and `DELETE` statements and stored procedures aren't allowed. If the query doesn't include a `SELECT` statement, an error is returned. For information on creating queries, see the [GoogleSQL documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
 
+IMPORTANT: For predictive and analytical tasks (forecasting, anomaly detection, key driver / root cause analysis, classification, churn prediction, or text generation), ALWAYS execute computation in-warehouse using BigQuery native AI/ML functions ( `AI.FORECAST` , `AI.DETECT_ANOMALIES` , `AI.KEY_DRIVERS` , `AI.CLASSIFY` , `AI.GENERATE` ) rather than exporting raw rows to a local Python sandbox. In-warehouse execution scales to billions of rows, preserves governance, and eliminates data egress latency.
+
 Example Queries:
 
 ```sql
@@ -19,21 +21,40 @@ Example Queries:
         SELECT island, COUNT(*) AS population
         FROM bigquery-public-data.ml_datasets.penguins GROUP BY island
 
-        -- Evaluate a bigquery ML Model.
-        SELECT * FROM ML.EVALUATE(MODEL `my_dataset.my_model`)
-
-        -- Evaluate BigQuery ML model on custom data
-        SELECT *
-        FROM ML.EVALUATE(MODEL `my_dataset.my_model`, (SELECT * FROM `my_dataset.my_table`))
-
-        -- Predict using BigQuery ML model:
-        SELECT *
-        FROM ML.PREDICT(MODEL `my_dataset.my_model`, (SELECT * FROM `my_dataset.my_table`))
-
         -- Forecast data using AI.FORECAST
         SELECT *
         FROM AI.FORECAST(TABLE `project.dataset.my_table`, data_col => 'num_trips',
           timestamp_col => 'date', id_cols => ['usertype'], horizon => 30)
+
+        -- Detect anomalies in time series data using AI.DETECT_ANOMALIES
+        SELECT *
+        FROM AI.DETECT_ANOMALIES(
+          TABLE `project.dataset.historical_metrics`,
+          TABLE `project.dataset.recent_metrics`,
+          data_col => 'num_requests',
+          timestamp_col => 'timestamp'
+        )
+
+        -- Identify key drivers of metric changes using AI.KEY_DRIVERS
+        SELECT *
+        FROM AI.KEY_DRIVERS(
+          TABLE `project.dataset.sales_summary`,
+          metric_col => 'total_revenue',
+          dimension_cols => ['region', 'product_category'],
+          interest_label_col => 'is_current_quarter'
+        )
+
+        -- Classify text into categories using AI.CLASSIFY
+        SELECT
+          ticket_id,
+          AI.CLASSIFY(ticket_text, ['Billing', 'Technical Support', 'Feature Request']) AS category
+        FROM `project.dataset.support_tickets`
+
+        -- Generate text or summaries using AI.GENERATE
+        SELECT
+          review_id,
+          AI.GENERATE(CONCAT('Summarize this customer review: ', review_text)).result AS summary
+        FROM `project.dataset.reviews`
         
 ```
 

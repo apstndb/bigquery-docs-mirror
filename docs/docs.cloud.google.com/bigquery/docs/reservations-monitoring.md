@@ -30,6 +30,34 @@ You can view the project and reservation slot usage in the following ways:
 
 > **Note:** The number of slots in use might appear higher than your reservation slot count because of how BigQuery provisions resources to reservations. You are not charged for slots beyond your reservation slot count.
 
+## Understand slot metrics
+
+To monitor and manage BigQuery compute capacity effectively, you must distinguish between *allocated slots* and *utilized slots* :
+
+  - Allocated slots  
+    The capacity dedicated to your project through baseline slots and active capacity commitments. *Allocated slots impact your quota and billing* .
+  - Utilized slots  
+    The capacity actively consumed by running jobs during query execution. Utilized slots appear in the [Resource utilization charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-resource-utilization) .
+
+Because baseline slots are dedicated resources, they are reported as "used" by the quota system even when no queries are actively executing. Consequently, the quota usage reported on the **Quotas & System Limits** page can be higher than the actual slot usage shown on the **Monitoring** page.
+
+### Slot metrics comparison
+
+The following table compares how slot metrics are calculated and displayed across the Google Cloud console:
+
+| Google Cloud console page                                                                                              | Metric shown                                                                                                                      | What it counts                                                      | Discrepancy source                                                                                                     |
+| ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [Quotas & System Limits](https://console.cloud.google.com/iam-admin/quotas?service=bigqueryreservation.googleapis.com) | Used quota ( **Total number of slots** ; see [quota usage charts](https://docs.cloud.google.com/docs/quotas/view-manage#charts) ) | Allocated slots: reservation baseline slots and active commitments. | Includes idle baseline slots and inactive failover reservations in secondary regions. Doesn't count autoscaling slots. |
+| [Monitoring](https://console.cloud.google.com/bigquery/admin/monitoring)                                               | Slot usage ( [Resource utilization charts](https://console.cloud.google.com/bigquery/admin/monitoring/resource-utilization) )     | Utilized slots: compute units actively consumed by running jobs.    | Includes autoscaling bursts actively processing jobs. Excludes idle baseline slots and inactive failover reservations. |
+
+### Common causes for slot usage discrepancies
+
+When reconciling slot metrics between the **Quotas & System Limits** page and the **Monitoring** page, consider the following common causes for discrepancies:
+
+  - **Idle baseline slots** : You have reserved baseline slots that are not actively running any queries. Because baseline slots are dedicated capacity, the quota system treats them as used, but utilization charts show only the slots actively executing workloads.
+  - **Failover reservations** : If you configure managed disaster recovery, the baseline slots for a failover reservation are allocated in the secondary region. These slots appear as used quota in the secondary region even when the reservation is idle and no failover has occurred. For more information, see [Quota considerations for failover reservations](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#quota_considerations_for_failover_reservations) .
+  - **Autoscaling bursts** : The resource utilization charts include autoscaling slots that are actively processing jobs. In contrast, the **Quotas & System Limits** page reflects only static allocated capacity (baseline and commitments) and doesn't count autoscaling slots.
+
 ## View your capacity-based bill
 
 To view your capacity-based bill in real time, follow these steps:

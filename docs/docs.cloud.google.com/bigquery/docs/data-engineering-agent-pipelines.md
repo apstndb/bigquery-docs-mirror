@@ -108,11 +108,9 @@ You can use the Data Engineering Agent in the BigQuery pipelines interface by do
 
 2.  In the query editor, click arrow\_drop\_down **Create new** \> **Pipeline** .
 
-3.  Select an option for execution credentials, and then click **Get started** . These credentials aren't used by the agent, but are required to execute the generated data pipeline.
+3.  In the pipeline interface, click **Ask agent** .
 
-4.  Click **Try out the agent experience for data pipeline** .
-
-5.  In the **Ask agent** field, enter a natural language prompt to generate a data pipeline—for example:
+4.  In the **Ask agent** field, enter a natural language prompt to generate a data pipeline—for example:
     
     ``` 
       Create dimension tables for a taxi trips star schema from
@@ -122,7 +120,7 @@ You can use the Data Engineering Agent in the BigQuery pipelines interface by do
     
     After you enter a prompt, click **Send** .
 
-6.  The Data Engineering Agent generates a data pipeline based on your prompt.
+5.  The Data Engineering Agent generates a data pipeline based on your prompt.
 
 The Data Engineering Agent generates a proposed draft of a data pipeline. You can click a pipeline node to review the generated SQLX query. To apply the agent-suggested data pipeline, click **Apply** .
 
