@@ -103,7 +103,7 @@ This registration makes their data available for analysis in BigQuery. Metadata 
 To start working with your newly registered tables, you can:
 
   - [Run a query](https://docs.cloud.google.com/bigquery/docs/running-queries) in BigQuery.
-  - [Search for resources](https://docs.cloud.google.com/dataplex/docs/search-assets) in Knowledge Catalog.
+  - [Search for resources](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in Knowledge Catalog.
 
 ### Limitations and quotas
 
@@ -119,7 +119,7 @@ Enable the Dataplex API.
 
 To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-> **Note:** The roles listed in the next section are for a standard discovery scan. If you want to use unstructured data semantic inference to extract AI-powered insights from your files, you must also apply the additional roles listed in [Use data insights for unstructured data](https://docs.cloud.google.com/dataplex/docs/use-data-insights-unstructured-data#roles-permissions) .
+> **Note:** The roles listed in the next section are for a standard discovery scan. If you want to use unstructured data semantic inference to extract AI-powered insights from your files, you must also apply the additional roles listed in [Use data insights for unstructured data](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-insights-unstructured-data#roles-permissions) .
 
 ### Required roles for the Knowledge Catalog service account
 
@@ -255,7 +255,7 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 9.  For **Unstructured data options** , select **Enable semantic inference** .
     
-    This option is required if you want to view data insights for unstructured data in Knowledge Catalog. For more information, see [About unstructured data insights](https://docs.cloud.google.com/dataplex/docs/data-insights-unstructured-data) .
+    This option is required if you want to view data insights for unstructured data in Knowledge Catalog. For more information, see [About unstructured data insights](https://docs.cloud.google.com/knowledge-catalog/docs/data-insights-unstructured-data) .
 
 10. Optional: In **Project** , select the BigQuery dataset project that contains the BigLake external or non-BigLake external tables created by the discovery scan. If not provided, the dataset is created in the project that contains the Cloud Storage bucket.
 
@@ -304,7 +304,7 @@ Replace the following:
 
 ### REST
 
-To create a discovery scan, use the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+To create a discovery scan, use the [`dataScans.create` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
 ## Query published BigLake tables
 
@@ -442,7 +442,7 @@ Replace the following variables:
 
 ### REST
 
-To run a discovery scan on demand, use the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) in the Dataplex API.
+To run a discovery scan on demand, use the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) in the Dataplex API.
 
 ## List discovery scans
 
@@ -467,7 +467,7 @@ Replace the following:
 
 ### REST
 
-To retrieve the list of discovery scans in your project, use the [`dataScans.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/list) in the Dataplex API.
+To retrieve the list of discovery scans in your project, use the [`dataScans.list` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/list) in the Dataplex API.
 
 ## View a discovery scan
 
@@ -499,7 +499,7 @@ Replace the following:
 
 ### REST
 
-To view the results of a data discovery scan, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) in the Dataplex API.
+To view the results of a data discovery scan, use the [`dataScans.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/get) in the Dataplex API.
 
 ### View historical discovery scan results
 
@@ -530,7 +530,7 @@ Replace the following:
 
 ### REST
 
-To view all the jobs of a discovery scan, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) in the Dataplex API.
+To view all the jobs of a discovery scan, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) in the Dataplex API.
 
 ## Update a discovery scan
 
@@ -564,7 +564,7 @@ Replace the following:
 
 ### REST
 
-To update a discovery scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) in the Dataplex API.
+To update a discovery scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/patch) in the Dataplex API.
 
 ## Delete a discovery scan
 
@@ -591,4 +591,4 @@ Replace the following:
 
 ### REST
 
-To delete a discovery scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) in the Dataplex API.
+To delete a discovery scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/delete) in the Dataplex API.

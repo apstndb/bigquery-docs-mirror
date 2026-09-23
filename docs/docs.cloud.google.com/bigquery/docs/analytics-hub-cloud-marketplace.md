@@ -58,7 +58,7 @@ Cloud Marketplace-integrated listings have the following limitations:
 
   - All [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
   - BigQuery sharing publishers and subscribers must be located in a supported [Cloud Marketplace Agency Jurisdiction](https://cloud.google.com/terms/marketplace-agency-jurisdictions) .
-  - Cloud Marketplace-integrated listings are indexed in [Data Catalog](https://docs.cloud.google.com/bigquery/docs/data-catalog) (deprecated) and [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , but you can't specifically filter for its resource type.
+  - Cloud Marketplace-integrated listings are indexed in [Data Catalog](https://docs.cloud.google.com/bigquery/docs/data-catalog) (deprecated) and [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , but you can't specifically filter for its resource type.
   - Billing usage metrics for Cloud Marketplace-integrated listings aren't captured in provider usage metrics or in [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
   - Data clean rooms and Pub/Sub topics aren't supported for Cloud Marketplace integration.
 

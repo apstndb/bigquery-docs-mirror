@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to BigQuery DataFrames
 
-BigQuery DataFrames is a set of open source Python libraries that let you take advantage of BigQuery data processing by using familiar Python APIs. BigQuery DataFrames provides a Pythonic DataFrame powered by the BigQuery engine, and it implements the pandas and scikit-learn APIs by pushing the processing down to BigQuery through SQL conversion. This lets you use BigQuery to explore and process terabytes of data, and also train machine learning (ML) models, all with Python APIs.
+BigQuery DataFrames is an open source Python library that lets you take advantage of BigQuery data processing by using familiar Python APIs. BigQuery DataFrames provides a Pythonic DataFrame powered by the BigQuery engine, and it implements the pandas and scikit-learn APIs by pushing data processing down to BigQuery through SQL conversion. This lets you use BigQuery to explore and process terabytes of data, build data pipelines, and train machine learning (ML) models, all with Python APIs, and without moving data to your client machine.
 
 If you are familiar with pandas, you can use BigQuery DataFrames to work with BigQuery data with minimal changes to your code. For example, you can use familiar pandas methods to analyze data from a BigQuery table:
 
@@ -41,7 +41,7 @@ If you are familiar with pandas, you can use BigQuery DataFrames to work with Bi
 
 BigQuery DataFrames does the following:
 
-  - Offers more than 750 pandas and scikit-learn APIs implemented through transparent SQL conversion to BigQuery and BigQuery ML APIs.
+  - Offers more than 750 pandas and scikit-learn APIs implemented through SQL conversion to BigQuery and BigQuery ML APIs.
   - Defers the execution of queries for enhanced performance.
   - Extends data transformations with user-defined Python functions to let you process data in Google Cloud. These functions are automatically deployed as BigQuery [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
   - Integrates with Gemini Enterprise Agent Platform to let you use Gemini models for text generation.
@@ -72,9 +72,30 @@ For details, see the [`third_party/bigframes_vendored`](https://github.com/googl
   - BigQuery DataFrames uses BigQuery, Cloud Run functions, Agent Platform, and other Google Cloud services, which incur their own costs.
   - During regular usage, BigQuery DataFrames stores temporary data, such as intermediate results, in BigQuery tables. These tables persist for seven days by default, and you are charged for the data stored in them. The tables are created in the `_anonymous_` dataset in the Google Cloud project you specify in the [`bf.options.bigquery.project` option](https://dataframes.bigquery.dev/reference/api/bigframes._config.BigQueryOptions.html) .
 
+## Use cases
+
+You can use BigQuery DataFrames for the following analytics and machine learning use cases:
+
+  - [Machine learning and AI](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai)
+  - [Customize Python functions](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions)
+  - [Visualize graphs using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations)
+  - [Use BigQuery DataFrames in dbt](https://docs.cloud.google.com/bigquery/docs/dataframes-dbt)
+  - [Use the BigQuery JupyterLab plugin](https://docs.cloud.google.com/bigquery/docs/jupyterlab-plugin)
+
+## Code samples and reference documentation
+
+Explore code samples, notebooks, and reference documentation for BigQuery DataFrames:
+
+  - [BigQuery DataFrames sample notebooks on GitHub](https://github.com/google/bigframes/tree/main/notebooks)
+  - [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) (including [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) and [`bigframes.bigquery.ai`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ai.html) )
+  - [BigQuery DataFrames Cloud client library reference](https://docs.cloud.google.com/python/docs/reference/bigframes/latest)
+  - [BigQuery Python libraries overview](https://docs.cloud.google.com/bigquery/docs/python-libraries)
+  - [BigQuery DataFrames source code repository on GitHub](https://github.com/google/bigframes) and [package on PyPI](https://pypi.org/project/bigframes/)
+
 ## What's next
 
   - Try the [BigQuery DataFrames quickstart](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .
-  - [Install BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/install-dataframes) .
-  - Learn how to [visualize graphs using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations) .
-  - Learn how to [use the `dbt-bigquery` adapter](https://docs.cloud.google.com/bigquery/docs/dataframes-dbt) .
+  - [Install and configure BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/install-dataframes) .
+  - Learn how to [manipulate data](https://docs.cloud.google.com/bigquery/docs/dataframes-data-manipulation) and [work with the data type system](https://docs.cloud.google.com/bigquery/docs/dataframes-data-types) .
+  - Learn how to [manage sessions and I/O](https://docs.cloud.google.com/bigquery/docs/dataframes-sessions-io) .
+  - Learn how to [optimize performance](https://docs.cloud.google.com/bigquery/docs/dataframes-performance) .

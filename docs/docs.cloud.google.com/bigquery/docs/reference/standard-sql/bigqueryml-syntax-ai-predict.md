@@ -155,7 +155,7 @@ BigQuery TabFM will use a token based pricing from 10/30/2026 onwards. At that t
 
 ## Limitations
 
-  - Your data can include up to 20 feature columns. If you need to use more than 20 feature columns, contact <bqml-feedback@google.com> .
+  - Your data can include up to 50 feature columns. If you need to use more than 50 feature columns, contact <bqml-feedback@google.com> .
   - You can classify data into at most 10 different categories.
 
 ## What's next

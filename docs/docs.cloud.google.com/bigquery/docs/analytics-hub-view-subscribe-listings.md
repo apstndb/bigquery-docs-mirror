@@ -228,7 +228,7 @@ To view linked datasets in your project, follow these steps:
 
 3.  In the **Classic Explorer** pane, click the project name that contains the ![Analytics Hub linked dataset icon.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-linked-dataset.png) linked dataset.
 
-Alternatively, you can search for and view linked datasets with [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) . To match all the BigQuery sharing linked datasets in your search query, use the `type=dataset.linked` predicate. For more information, see [Knowledge Catalog search syntax](https://docs.cloud.google.com/dataplex/docs/search-syntax) .
+Alternatively, you can search for and view linked datasets with [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) . To match all the BigQuery sharing linked datasets in your search query, use the `type=dataset.linked` predicate. For more information, see [Knowledge Catalog search syntax](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax) .
 
 ### Cloud Shell
 

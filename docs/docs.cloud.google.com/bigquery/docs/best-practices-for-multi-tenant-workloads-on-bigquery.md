@@ -211,7 +211,7 @@ We recommend that your decentralized data marts use [the same two-tier design](h
 
 ### Use a data catalog
 
-A data catalog provides organization-wide discovery, metadata tagging, and column policy configuration. Knowledge Catalog discovery automatically creates [metadata entries](https://docs.cloud.google.com/dataplex/docs/catalog-overview) for all new BigQuery tables across your organization. Capabilities in Knowledge Catalog also help data governance admins quickly identify new data assets and apply appropriate controls.
+A data catalog provides organization-wide discovery, metadata tagging, and column policy configuration. Knowledge Catalog discovery automatically creates [metadata entries](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) for all new BigQuery tables across your organization. Capabilities in Knowledge Catalog also help data governance admins quickly identify new data assets and apply appropriate controls.
 
 ### Configure VPC Service Controls perimeters
 

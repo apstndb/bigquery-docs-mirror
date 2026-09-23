@@ -84,8 +84,8 @@ To get read-only access to the generated insights, ask your administrator to gra
 
 To publish data insights to Knowledge Catalog, ask your administrator to grant you the following IAM roles on the resource:
 
-  - Publish descriptions as aspects: [Dataplex Catalog Editor](https://docs.cloud.google.com/dataplex/docs/iam-roles#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )
-  - Publish queries as aspects: [Dataplex Entry and EntryLink Owner](https://docs.cloud.google.com/dataplex/docs/iam-roles#dataplex.entryOwner) ( `roles/dataplex.entryOwner` )
+  - Publish descriptions as aspects: [Dataplex Catalog Editor](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )
+  - Publish queries as aspects: [Dataplex Entry and EntryLink Owner](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles#dataplex.entryOwner) ( `roles/dataplex.entryOwner` )
 
 To enable APIs, ask your administrator to grant you the following IAM role:
 
@@ -107,7 +107,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## Generate insights for a BigQuery table
 
-To generate insights for BigQuery tables, you can use the Google Cloud console or the `DATA_DOCUMENTATION` scan type supported by the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . These scans generate metadata, SQL queries for data exploration, schema descriptions, and table-level summaries.
+To generate insights for BigQuery tables, you can use the Google Cloud console or the `DATA_DOCUMENTATION` scan type supported by the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans) . These scans generate metadata, SQL queries for data exploration, schema descriptions, and table-level summaries.
 
 ### Console
 
@@ -151,7 +151,7 @@ After you have generated insights for a table, anyone with the `dataplex.datasca
 
 ### REST
 
-To generate insights programmatically, use the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . To do this, complete the following steps:
+To generate insights programmatically, use the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans) . To do this, complete the following steps:
 
 1.  [Optional: Create a data profile scan for the table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#create-profile-scan)
 2.  [Generate a data documentation datascan for the BigQuery table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#create-doc-scan)
@@ -164,9 +164,9 @@ The presence of data profile scans reduces hallucinations and approximations by 
 
 To create and run a data profile scan, follow these steps:
 
-1.  Create a data profile scan using the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+1.  Create a data profile scan using the [`dataScans.create` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
-2.  Run the data profile scan using the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) . Wait for the run to complete.
+2.  Run the data profile scan using the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) . Wait for the run to complete.
 
 3.  Publish the scan results to the BigQuery table by attaching the following data profiling labels to the table:
     
@@ -184,7 +184,7 @@ You can choose to run a standard managed scan or a streamlined one-time scan.
 
 Use this method if you want to manage the scan resource over time.
 
-1.  Create a data documentation data scan using the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+1.  Create a data documentation data scan using the [`dataScans.create` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
 You can customize the scope of the generation to include schema, descriptions, queries, or a combination using the `generation_scopes` parameter. Optionally, you can publish these insights to Knowledge Catalog by setting the `catalogPublishingEnabled` parameter to `true` .
 
@@ -264,7 +264,7 @@ You can customize the scope of the generation to include schema, descriptions, q
 
 <!-- end list -->
 
-1.  Start the data documentation scan job using the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
+1.  Start the data documentation scan job using the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) .
     
     For example:
     
@@ -315,7 +315,7 @@ Replace the following:
 
 ### Check the data documentation scan status
 
-Check completion of the scan job run using the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
+Check completion of the scan job run using the [`dataScans.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/get) .
 
 Use the job ID to fetch the status of the job. For example:
 
@@ -417,7 +417,7 @@ To enhance the precision of your generated insights, adhere to the following rec
 
 ### Ground insights to data profiling results
 
-In generative AI, grounding is the ability to connect model output to verifiable sources of information. You can ground generated table insights to data profiling results. [Data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) analyzes the columns in your BigQuery tables and identifies common statistical characteristics, such as typical data values and data distribution.
+In generative AI, grounding is the ability to connect model output to verifiable sources of information. You can ground generated table insights to data profiling results. [Data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) analyzes the columns in your BigQuery tables and identifies common statistical characteristics, such as typical data values and data distribution.
 
 When you [create a data profiling scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#create_a_data_profile_scan) for a table, you can choose to publish the scan results to the BigQuery and Knowledge Catalog pages in the Google Cloud console. Insights uses data profiling results to create more accurate, relevant queries by doing the following:
 
@@ -469,10 +469,10 @@ If you save the [column descriptions that Gemini generates](https://docs.cloud.g
 
 ## Manage generated insights
 
-After you generate insights for a table, you can manage, update, or delete them in Knowledge Catalog. For more information, see [manage table insights](https://docs.cloud.google.com/dataplex/docs/use-data-insights-structured-data#manage-table-insights) .
+After you generate insights for a table, you can manage, update, or delete them in Knowledge Catalog. For more information, see [manage table insights](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-insights-structured-data#manage-table-insights) .
 
 ## What's next
 
   - Learn about [data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
   - Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
-  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
+  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .

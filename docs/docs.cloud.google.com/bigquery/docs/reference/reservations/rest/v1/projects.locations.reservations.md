@@ -30,7 +30,7 @@ A reservation is a mechanism used to guarantee slots to users.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;slotCapacity&quot;: string,&quot;ignoreIdleSlots&quot;: boolean,&quot;autoscale&quot;: {object (Autoscale)},&quot;concurrency&quot;: string,&quot;creationTime&quot;: string,&quot;updateTime&quot;: string,&quot;edition&quot;: enum (Edition),&quot;primaryLocation&quot;: string,&quot;secondaryLocation&quot;: string,&quot;originalPrimaryLocation&quot;: string,&quot;scalingMode&quot;: enum (ScalingMode),&quot;reservationGroup&quot;: string,&quot;replicationStatus&quot;: {object (ReplicationStatus)},&quot;maxSlots&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;slotCapacity&quot;: string,&quot;ignoreIdleSlots&quot;: boolean,&quot;autoscale&quot;: {object (Autoscale)},&quot;concurrency&quot;: string,&quot;creationTime&quot;: string,&quot;updateTime&quot;: string,&quot;edition&quot;: enum (Edition),&quot;primaryLocation&quot;: string,&quot;secondaryLocation&quot;: string,&quot;originalPrimaryLocation&quot;: string,&quot;scalingMode&quot;: enum (ScalingMode),&quot;reservationGroup&quot;: string,&quot;replicationStatus&quot;: {object (ReplicationStatus)},&quot;schedulingPolicy&quot;: {object (SchedulingPolicy)},&quot;maxSlots&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -128,6 +128,14 @@ Optional. The reservation group that this reservation belongs to. You can set th
 ` object ( ReplicationStatus  ` )
 
 Output only. The Disaster Recovery(DR) replication status of the reservation. This is only available for the primary replicas of DR/failover reservations and provides information about the both the staleness of the secondary and the last error encountered while trying to replicate changes from the primary to the secondary. If this field is blank, it means that the reservation is either not a DR reservation or the reservation is a DR secondary or that any replication operations on the reservation have succeeded.
+
+`schedulingPolicy`
+
+` object ( SchedulingPolicy  ` )
+
+Optional. The scheduling policy to use for jobs and queries running under this reservation. The scheduling policy controls how the reservation's resources are distributed.
+
+This feature is not yet generally available.
 
 `maxSlots`
 

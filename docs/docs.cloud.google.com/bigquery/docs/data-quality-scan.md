@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document explains how to use BigQuery and Knowledge Catalog together to ensure that data meets your quality expectations. Knowledge Catalog automatic data quality lets you define and measure the quality of the data in your BigQuery tables. You can automate the scanning of data, validate data against defined rules, and log alerts if your data doesn't meet quality requirements.
 
-For more information about automatic data quality, see the [Auto data quality overview](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview) .
+For more information about automatic data quality, see the [Auto data quality overview](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview) .
 
 > **Tip:** The steps in this document show how to manage data quality scans across your project. You can also create and manage data quality scans when working with a specific table. For more information, see the [Manage data quality scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#start-from-table) section of this document.
 
@@ -79,7 +79,7 @@ If you need to access columns protected by BigQuery column-level access policies
 
 ### Knowledge Catalog service account roles and permissions
 
-> **Note:** If you are scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK permissions](https://docs.cloud.google.com/dataplex/docs/cmek#datascans-cmek-permissions) .
+> **Note:** If you are scanning CMEK-encrypted BigQuery resources, you must also grant the `roles/cloudkms.cryptoKeyEncrypterDecrypter` role to the relevant service agents. For more information, see [DataScans CMEK permissions](https://docs.cloud.google.com/knowledge-catalog/docs/cmek#datascans-cmek-permissions) .
 
 If you haven't created any data quality or data profile scans or you don't have a Knowledge Catalog lake in this project, create a service identifier by running: `gcloud beta services identity create --service=dataplex.googleapis.com` . This command returns a Knowledge Catalog service identifier if it exists.
 
@@ -165,9 +165,9 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
         
         You can view the latest scan results on the **Data quality** tab in the BigQuery and Knowledge Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data quality scan results](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#share-results) section of this document.
     
-    9.  For **Credential type** , see [Configure execution identity](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#configure-execution-identity) .
+    9.  For **Credential type** , see [Configure execution identity](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#configure-execution-identity) .
     
-    10. To [create a data quality scan using rules](https://docs.cloud.google.com/dataplex/docs/reuse-data-quality-rules#create-scan-catalog) , select **Rule type \> Create with entry based rule** .
+    10. To [create a data quality scan using rules](https://docs.cloud.google.com/knowledge-catalog/docs/reuse-data-quality-rules#create-scan-catalog) , select **Rule type \> Create with entry based rule** .
     
     11. In the **Schedule** section, choose one of the following options:
         
@@ -195,7 +195,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
             
             4.  Select the checkbox for the rules that you want to add, and then click **Select** . Once selected, the rules are added to your current rule list. Then, you can edit the rules.
         
-          - **Built-in rule types** : Build rules from predefined rules. See the list of [predefined rules](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#predefined-rules) .
+          - **Built-in rule types** : Build rules from predefined rules. See the list of [predefined rules](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview#predefined-rules) .
             
             1.  **Choose columns** : Select the columns to select rules for.
             
@@ -211,7 +211,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
             
             3.  In **Column name** , choose a column.
             
-            4.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `true` (pass) or `false` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#sample-rules) .
+            4.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `true` (pass) or `false` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#sample-rules) .
             
             5.  Click **Add** .
         
@@ -221,7 +221,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
             
             2.  In **Column name** , choose a column.
             
-            3.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `true` (pass) or `false` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#sample-rules) .
+            3.  In the **Provide a SQL expression** field, enter a SQL expression that evaluates to a boolean `true` (pass) or `false` (fail). For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#sample-rules) .
             
             4.  Click **Add** .
         
@@ -231,7 +231,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
             
             2.  Optional: In **Column name** , choose a column.
             
-            3.  In the **Provide a SQL statement** field, enter a SQL statement that returns rows that match the invalid state. If any rows are returned, this rule fails. Omit the trailing semicolon from the SQL statement. For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#sample-rules) .
+            3.  In the **Provide a SQL statement** field, enter a SQL statement that returns rows that match the invalid state. If any rows are returned, this rule fails. Omit the trailing semicolon from the SQL statement. For more information, see [Supported custom SQL rule types](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview#supported-custom-sql-rule-types) and the examples in [Define data quality rules](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#sample-rules) .
             
             4.  Click **Add** .
     
@@ -246,7 +246,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data quality scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data quality scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data quality scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#table-schema) . If the specified table doesn't exist, Knowledge Catalog creates it for you.
         
         > **Note:** You can use the same results table for multiple data quality scans.
 
@@ -284,7 +284,7 @@ Replace the following variables:
 
   - `  DATASCAN  ` : The name of the data quality scan.
   - `  LOCATION  ` : The Google Cloud region in which to create the data quality scan.
-  - `  DATA_QUALITY_SPEC_FILE  ` : The path to the JSON or YAML file containing the specifications for the data quality scan. The file can be a local file or a Cloud Storage path with the prefix `gs://` . Use this file to specify the data quality rules for the scan. You can also specify additional details in this file, such as filters, sampling percent, and post-scan actions like exporting to BigQuery or sending email notification reports. See the [documentation for JSON representation](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and the [example YAML representation](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) .
+  - `  DATA_QUALITY_SPEC_FILE  ` : The path to the JSON or YAML file containing the specifications for the data quality scan. The file can be a local file or a Cloud Storage path with the prefix `gs://` . Use this file to specify the data quality rules for the scan. You can also specify additional details in this file, such as filters, sampling percent, and post-scan actions like exporting to BigQuery or sending email notification reports. See the [documentation for JSON representation](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/DataQualitySpec) and the [example YAML representation](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#create-scan-using-gcloud) .
   - `  DATA_SOURCE_ENTITY  ` : The Knowledge Catalog entity that contains the data for the data quality scan. For example, `projects/test-project/locations/test-location/lakes/test-lake/zones/test-zone/entities/test-entity` .
   - `  DATA_SOURCE_RESOURCE  ` : The name of the resource that contains the data for the data quality scan. For example, `//bigquery.googleapis.com/projects/test-project/datasets/test-dataset/tables/test-table` .
 
@@ -644,7 +644,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To create a data quality scan, use the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+To create a data quality scan, use the [`dataScans.create` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
 The following request creates a one-time data quality scan:
 
@@ -684,9 +684,9 @@ Replace the following:
   - `  TABLE_ID  ` : The ID of BigQuery table.
   - `  COLUMN_NAME  ` : The column name for the rule.
   - `  DIMENSION  ` : The dimension for the rule, for example `VALIDITY` .
-  - `  FILTER_CONDITION  ` : An optional [AIP-160 filter string](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#rule-filtering) to selectively run rules (for example, `name = \"RULE_NAME\"` ).
+  - `  FILTER_CONDITION  ` : An optional [AIP-160 filter string](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview#rule-filtering) to selectively run rules (for example, `name = \"RULE_NAME\"` ).
 
-If you want to build rules for the data quality scan by using rule recommendations that are based on the results of a data profiling scan, get the recommendations by calling the [`dataScans.jobs.generateDataQualityRules` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/generateDataQualityRules) on the data profiling scan.
+If you want to build rules for the data quality scan by using rule recommendations that are based on the results of a data profiling scan, get the recommendations by calling the [`dataScans.jobs.generateDataQualityRules` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans.jobs/generateDataQualityRules) on the data profiling scan.
 
 > **Note:** If your BigQuery table is configured with the **Require partition filter** set to `true` , use the BigQuery partition column as the data quality scan row filter or timestamp column.
 
@@ -886,7 +886,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To run a data quality scan, use the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
+To run a data quality scan, use the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) .
 
 ### Airflow
 
@@ -1125,7 +1125,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To view the results of a data quality scan, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
+To view the results of a data quality scan, use the [`dataScans.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/get) .
 
 ### View published results
 
@@ -1410,7 +1410,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To view historical data quality scan jobs, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
+To view historical data quality scan jobs, use the [`dataScans.jobs.list` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
 
 ### Job statuses
 
@@ -1457,7 +1457,7 @@ To enable the users in your organization to view the scan results, do the follow
 
 ## Troubleshoot a data quality failure
 
-You can set alerts for data quality failures using the logs in Cloud Logging. For more information, including sample queries, see [Set alerts in Cloud Logging](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#set-alerts) .
+You can set alerts for data quality failures using the logs in Cloud Logging. For more information, including sample queries, see [Set alerts in Cloud Logging](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#set-alerts) .
 
 For each job with row-level rules that fail, Knowledge Catalog provides a query to get the failed records. Run this query to see the records that did not match your rule.
 
@@ -1483,7 +1483,7 @@ Not supported.
 
 ### REST
 
-1.  To get the job that identified the data quality failures, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityResult) .
+1.  To get the job that identified the data quality failures, use the [`dataScans.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/DataQualityResult) .
     
     In the response object, the `failingRowsQuery` field shows the query.
 
@@ -1501,7 +1501,7 @@ Not supported.
 
 ### REST
 
-To get the job that identified the data quality failures, use the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualityResult) . In the response object, the `debugQueriesResultSets` field shows the results of the debug queries.
+To get the job that identified the data quality failures, use the [`dataScans.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/DataQualityResult) . In the response object, the `debugQueriesResultSets` field shows the results of the debug queries.
 
 ## Manage data quality scans for a specific table
 
@@ -1579,7 +1579,7 @@ Replace the following:
   - `  LOCATION  ` : The Google Cloud region in which the data quality scan was created.
   - `  DESCRIPTION  ` : The new description for the data quality scan.
 
-> **Note:** You can update specification fields, such as `rules` , `rowFilter` , or `samplingPercent` , in the data quality specification file. Refer to [JSON](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataQualitySpec) and [YAML](https://docs.cloud.google.com/dataplex/docs/use-auto-data-quality#create-scan-using-gcloud) representations.
+> **Note:** You can update specification fields, such as `rules` , `rowFilter` , or `samplingPercent` , in the data quality specification file. Refer to [JSON](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/DataQualitySpec) and [YAML](https://docs.cloud.google.com/knowledge-catalog/docs/use-auto-data-quality#create-scan-using-gcloud) representations.
 
 ### C\#
 
@@ -1796,7 +1796,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To edit a data quality scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
+To edit a data quality scan, use the [`dataScans.patch` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/patch) .
 
 > **Note:** Update isn't supported for data quality scans that are on a one-time schedule.
 
@@ -2037,7 +2037,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ### REST
 
-To delete a data quality scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
+To delete a data quality scan, use the [`dataScans.delete` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/delete) .
 
 > **Note:** Delete isn't supported for data quality scans that are on a one-time schedule.
 

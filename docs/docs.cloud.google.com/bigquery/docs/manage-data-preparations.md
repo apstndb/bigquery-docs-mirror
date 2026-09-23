@@ -15,7 +15,7 @@ Data preparations are [BigQuery](https://docs.cloud.google.com/bigquery/docs/que
 ## Before you begin
 
 1.  Ensure that you have enabled the [Gemini for Google Cloud API](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#enable-api) .
-2.  To manage data preparation metadata in Knowledge Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
+2.  To manage data preparation metadata in Knowledge Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/knowledge-catalog/docs/enable-api) is enabled in your Google Cloud project.
 
 ### Required roles
 
@@ -38,7 +38,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 #### Get access to manage metadata
 
-To get the permissions you need to manage data preparation metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
+To get the permissions you need to manage data preparation metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
 
 #### Give access to the Dataform service account
 
@@ -173,7 +173,7 @@ To upload a data preparation from a SQLX file, follow these steps:
 
 Knowledge Catalog lets you store and manage metadata for data preparations. Data preparations are available in Knowledge Catalog by default, without additional configuration.
 
-You can use Knowledge Catalog to manage data preparations in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing data preparations in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Knowledge Catalog to manage data preparations in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing data preparations in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/knowledge-catalog/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
 Knowledge Catalog automatically retrieves the following metadata from data preparations:
 
@@ -183,18 +183,18 @@ Knowledge Catalog automatically retrieves the following metadata from data prepa
   - Data asset type
   - Corresponding Google Cloud project
 
-Knowledge Catalog logs data preparations as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Knowledge Catalog logs data preparations as [entries](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for data preparations is `@dataform` . To view details of data preparation entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for data preparations is `@dataform` . To view details of data preparation entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for data preparations is `dataform-code-asset` . To view details of data preparations,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected data preparation. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for data preparations is `dataform-code-asset` . To view details of data preparations,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected data preparation. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for data preparations is `dataform-code-asset` . To provide additional context to data preparations in Knowledge Catalog by annotating data preparation entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for data preparations is `dataform-code-asset` . To provide additional context to data preparations in Knowledge Catalog by annotating data preparation entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_PREPARATION`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
   - Type  
-    The type for data canvases is `DATA_PREPARATION` . This type lets you filter data preparations in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=DATA_PREPARATION` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
+    The type for data canvases is `DATA_PREPARATION` . This type lets you filter data preparations in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=DATA_PREPARATION` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Knowledge Catalog documentation.
+For instructions about how to search for assets, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in the Knowledge Catalog documentation.
 
 ## What's next
 

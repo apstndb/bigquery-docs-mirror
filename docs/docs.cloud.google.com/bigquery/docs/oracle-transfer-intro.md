@@ -163,7 +163,7 @@ The following table maps Oracle data types to the corresponding BigQuery data ty
 > 
 > This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-You can also use the Oracle connector to [transfer metadata to Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/connectors) . For more information, see [Load Oracle metadata into Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/oracle-transfer) .
+You can also use the Oracle connector to [transfer metadata to Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors) . For more information, see [Load Oracle metadata into Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/oracle-transfer) .
 
 ## Pricing
 

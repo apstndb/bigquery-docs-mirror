@@ -8,13 +8,13 @@ data_source: docs.cloud.google.com
 
 # Analyze with BigQuery data canvas
 
-This document describes how to use data canvas for data analysis. You can also manage data canvas metadata by using [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
+This document describes how to use data canvas for data analysis. You can also manage data canvas metadata by using [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) .
 
 BigQuery data canvas, which is a [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) feature, lets you find, transform, query, and visualize data by using natural language prompts and a graphic interface for analysis workflows.
 
 For analysis workflows, BigQuery data canvas uses a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG), which provides a graphical view of your workflow. In BigQuery data canvas, you can iterate on query results and work with multiple branches of inquiry in a single place.
 
-BigQuery data canvas is designed to accelerate analytics tasks and help data professionals such as data analysts, data engineers, and others with their data-to-insights journey. It doesn't require that you have technical knowledge of specific tools, only basic familiarity with reading and writing SQL. BigQuery data canvas works with [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) metadata to identify appropriate tables based on natural language.
+BigQuery data canvas is designed to accelerate analytics tasks and help data professionals such as data analysts, data engineers, and others with their data-to-insights journey. It doesn't require that you have technical knowledge of specific tools, only basic familiarity with reading and writing SQL. BigQuery data canvas works with [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) metadata to identify appropriate tables based on natural language.
 
 BigQuery data canvas isn't intended for direct use by business users.
 
@@ -72,7 +72,7 @@ For more information, see [Prompting best practices for BigQuery data canvas](ht
 
 1.  [Ensure that Gemini in BigQuery is enabled for your Google Cloud project.](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) An administrator typically performs this step.
 2.  Ensure that you have the [necessary Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/data-canvas#required-roles) to use BigQuery data canvas.
-3.  To manage data canvas metadata in Knowledge Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
+3.  To manage data canvas metadata in Knowledge Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/knowledge-catalog/docs/enable-api) is enabled in your Google Cloud project.
 
 ### Required roles
 
@@ -87,7 +87,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To manage data canvas metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
+To manage data canvas metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
 
 > **Note:** When you create a data canvas, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) on that data canvas. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the data canvases created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
@@ -811,9 +811,9 @@ Restoring from the comparison pane lets you compare the previous version of the 
 
 ## Manage metadata in Knowledge Catalog
 
-[Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) lets you view and manage metadata for data canvases. Data canvases are available in Knowledge Catalog by default, without additional configuration.
+[Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) lets you view and manage metadata for data canvases. Data canvases are available in Knowledge Catalog by default, without additional configuration.
 
-You can use Knowledge Catalog to manage data canvases in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing data canvases in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Knowledge Catalog to manage data canvases in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing data canvases in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/knowledge-catalog/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
 Knowledge Catalog automatically retrieves the following metadata from data canvases:
 
@@ -823,18 +823,18 @@ Knowledge Catalog automatically retrieves the following metadata from data canva
   - Data asset type
   - Corresponding Google Cloud project
 
-Knowledge Catalog logs data canvases as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Knowledge Catalog logs data canvases as [entries](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for data canvases is `@dataform` . To view details of data canvas entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for data canvases is `@dataform` . To view details of data canvas entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for data canvases is `dataform-code-asset` . To view details of data canvases, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_CANVAS`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected data canvas. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for data canvases is `dataform-code-asset` . To view details of data canvases, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_CANVAS`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected data canvas. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for data canvases is `dataform-code-asset` . To provide additional context to data canvases in Knowledge Catalog by annotating data canvas entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_CANVAS`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for data canvases is `dataform-code-asset` . To provide additional context to data canvases in Knowledge Catalog by annotating data canvas entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `DATA_CANVAS`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
   - Type  
-    The type for data canvases is `DATA_CANVAS` . This type lets you filter data canvases in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=DATA_CANVAS` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
+    The type for data canvases is `DATA_CANVAS` . This type lets you filter data canvases in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=DATA_CANVAS` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Knowledge Catalog documentation.
+For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in the Knowledge Catalog documentation.
 
 ## Pricing
 

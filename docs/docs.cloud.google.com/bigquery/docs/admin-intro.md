@@ -90,7 +90,7 @@ You might want to create copies of your data for various reasons, such as protec
 
 ### Track data lineage
 
-Data lineage is a [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. For more information about how data lineage can help you track data movement in your project, see [About data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) in Knowledge Catalog.
+Data lineage is a [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. For more information about how data lineage can help you track data movement in your project, see [About data lineage](https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage) in Knowledge Catalog.
 
 ### Secure resources
 

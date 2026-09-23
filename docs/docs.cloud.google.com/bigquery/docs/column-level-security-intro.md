@@ -16,6 +16,8 @@ BigQuery provides fine-grained access to sensitive columns using either *policy 
 
 To enhance column-level access control, you can optionally use [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . Data masking lets you mask sensitive data by substituting null, default, or hashed content in place of the column's actual value.
 
+This document describes using policy tags for column-level access control. As an alternative, you can use [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) , which are Resource Manager tags used for column-level access control and data masking.
+
 ## Column-level access control workflow
 
 ![Workflow](https://docs.cloud.google.com/static/bigquery/images/column-level-security-workflow.png)

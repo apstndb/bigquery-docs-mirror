@@ -14,6 +14,24 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## September 22, 2026
+
+Feature
+
+You can now [publish a BigQuery data agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) by registering the agent with Agent Registry and importing it using default Google-managed credentials. When BigQuery and Gemini Enterprise are in the same Google Cloud project and configured with a matching [Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-overview) region, you don't need to manually copy the Agent-to-Agent (A2A) JSON card or configure OAuth client credentials.
+
+These features are in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+## September 21, 2026
+
+Feature
+
+The **Query results** pane in the BigQuery Studio query editor lets you [view a short history of recent runs for a query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#view_multi_statement_query_results) , including multi-statement queries, without having to navigate to the **Job history** tab. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+Feature
+
+BigQuery [generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#locations) now support the `gemini-3.8-flash` Gemini model.
+
 ## September 17, 2026
 
 Feature

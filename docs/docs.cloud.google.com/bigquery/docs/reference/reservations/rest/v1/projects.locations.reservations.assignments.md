@@ -27,7 +27,7 @@ An assignment allows a project to submit jobs of a certain type using slots from
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;assignee&quot;: string,&quot;jobType&quot;: enum (JobType),&quot;state&quot;: enum (State),&quot;principal&quot;: string}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;assignee&quot;: string,&quot;jobType&quot;: enum (JobType),&quot;state&quot;: enum (State),&quot;schedulingPolicy&quot;: {object (SchedulingPolicy)},&quot;principal&quot;: string}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -57,6 +57,14 @@ Optional. Which type of jobs will use the reservation.
 ` enum ( State  ` )
 
 Output only. State of the assignment.
+
+`schedulingPolicy`
+
+` object ( SchedulingPolicy  ` )
+
+Optional. The scheduling policy to use for jobs and queries of this assignee when running under the associated reservation. The scheduling policy controls how the reservation's resources are distributed. This overrides the default scheduling policy specified on the reservation.
+
+This feature is not yet generally available.
 
 `principal`
 

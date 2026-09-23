@@ -12,8 +12,6 @@ This document describes how BigQuery ML supports Explainable artificial intellig
 
 Explainable AI helps you understand the results that your predictive machine learning model generates for classification and regression tasks by defining how each feature in a row of data contributed to the predicted result. This information is often referred to as feature attribution. You can use this information to verify that the model is behaving as expected, to recognize biases in your models, and to inform ways to improve your model and your training data.
 
-BigQuery ML and Gemini Enterprise Agent Platform both have Explainable AI offerings which offer feature-based explanations. You can perform explainability in BigQuery ML, or you can [register your model](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) in Agent Platform and perform explainability there.
-
 ## Local versus global explainability
 
 There are two types of explainability: local explainability and global explainability. These are also known respectively as *local feature importance* and *global feature importance* .
@@ -85,18 +83,6 @@ N/A
 
 [`ML.FEATURE_IMPORTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance)
 
-[Deep Neural Network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)  
-  
-[Wide-and-Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
-
-[Integrated gradients](https://docs.cloud.google.com/ai-platform/prediction/docs/ai-explanations/overview#ig)
-
-A gradients-based method that efficiently computes feature attributions with the same axiomatic properties as the Shapley value. It provides a sampling approximation of exact feature attributions. Its accuracy is controlled by the [`integrated_gradients_num_steps`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict#arguments) parameter.
-
-[`ML.EXPLAIN_PREDICT` <sup>1</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
-
-[`ML.GLOBAL_EXPLAIN` <sup>2</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain)
-
 [AutoML Tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
 
 [Sampled Shapley](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/overview#compare-methods)
@@ -139,42 +125,6 @@ N/A
 
 <sup>4</sup> `ML.ADVANCED_WEIGHTS` is an extended version of `ML.WEIGHTS` .
 
-## Explainable AI in Agent Platform
-
-Explainable AI is available in Agent Platform for the following subset of exportable supervised learning models:
-
-| Model type                        | Explainable AI method |
-| --------------------------------- | --------------------- |
-| dnn\_classifier                   | Integrated gradients  |
-| dnn\_regressor                    | Integrated gradients  |
-| dnn\_linear\_combined\_classifier | Integrated gradients  |
-| dnn\_linear\_combined\_regressor  | Integrated gradients  |
-| boosted\_tree\_regressor          | Sampled shapley       |
-| boosted\_tree\_classifier         | Sampled shapley       |
-| random\_forest\_regressor         | Sampled shapley       |
-| random\_forest\_classifier        | Sampled shapley       |
-
-See [Feature Attribution Methods](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/overview#feature-attribution-methods) to learn more about these methods.
-
-### Enable Explainable AI in Model Registry
-
-When your BigQuery ML model is registered in Model Registry, and if it is a type of model that supports Explainable AI, you can enable Explainable AI on the model when deploying to an endpoint. When you register your BigQuery ML model, all of the associated metadata is populated for you.
-
-> **Note:** Explainable AI incurs a minor additional cost. See [Gemini Enterprise Agent Platform pricing](https://cloud.google.com/vertex-ai/pricing) to learn more.
-
-1.  [Register your BigQuery ML model to the Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) .
-2.  Go to the **Model Registry** page from the BigQuery section in the Google Cloud console.
-3.  From the Model Registry, select the BigQuery ML model and click the model version to redirect to the model detail page.
-4.  Select **More actions** from the model version. more\_vert
-5.  Click **Deploy to endpoint** .
-6.  Define your endpoint - create an endpoint name and click continue.
-7.  Select a machine type, for example, `n1-standard-2` .
-8.  Under **Model settings** , in the logging section, select the checkbox to enable Explainability options.
-9.  Click **Done** , and then **Continue** to deploy to the endpoint.
-
-To learn how to use XAI on your models from the Model Registry, see [Get an online explanation using your deployed model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/get-online-predictions#online-explanation) .
-
 ## What's next
 
-  - Learn how to [manage BigQuery ML models in Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) .
   - For more information about supported SQL statements and functions for models that support explainability, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

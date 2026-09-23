@@ -139,7 +139,7 @@ After insights are generated, BigQuery displays a dataset description, a relatio
 
 ### REST
 
-To generate insights programmatically, use the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans) . To do this, complete the following steps:
+To generate insights programmatically, use the Knowledge Catalog [DataScans API](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans) . To do this, complete the following steps:
 
 1.  [Generate a data documentation data scan for the BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#create-doc-scan)
 2.  [Check the data documentation scan status](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#check-scan-status)
@@ -147,7 +147,7 @@ To generate insights programmatically, use the Knowledge Catalog [DataScans API]
 
 ### Generate a data documentation data scan for the BigQuery dataset
 
-1.  Create a data documentation data scan using the [`dataScans.create` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) . Optionally, you can publish these insights to Knowledge Catalog by setting the `catalog_publishing_enabled` parameter to `true` .
+1.  Create a data documentation data scan using the [`dataScans.create` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/create) . Optionally, you can publish these insights to Knowledge Catalog by setting the `catalog_publishing_enabled` parameter to `true` .
     
     For example:
     
@@ -175,7 +175,7 @@ To generate insights programmatically, use the Knowledge Catalog [DataScans API]
       - DATASCAN\_ID : a unique name you provide for this scan
       - DATASET\_ID : the ID of the BigQuery dataset being scanned
 
-2.  Start the data documentation scan job using the [`dataScans.run` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
+2.  Start the data documentation scan job using the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) .
     
     For example:
     
@@ -187,7 +187,7 @@ To generate insights programmatically, use the Knowledge Catalog [DataScans API]
 
 ### Check the data documentation scan status
 
-Check completion of the scan job run using the [`dataScans.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) . To retrieve the full results, including the insights and the publishing status, set the `view` parameter to `FULL` .
+Check completion of the scan job run using the [`dataScans.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/get) . To retrieve the full results, including the insights and the publishing status, set the `view` parameter to `FULL` .
 
 Use the job ID to fetch the status of the job. For example:
 
@@ -201,9 +201,9 @@ A successful job response contains the generated insights in the `dataDocumentat
 
 If `catalog_publishing_enabled` is set to `true` , then the insights are published to Knowledge Catalog asynchronously after the data scan job completes. To verify that insights were persisted, use the Dataplex API to inspect the aspects of the dataset.
 
-While insights are generated from the dataset-level data scan, the resulting entry links are stored between the tables they connect. To verify these relationships, use the [`lookupEntryLinks` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations/lookupEntryLinks) to retrieve the entry links associated with a specific table entry.
+While insights are generated from the dataset-level data scan, the resulting entry links are stored between the tables they connect. To verify these relationships, use the [`lookupEntryLinks` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations/lookupEntryLinks) to retrieve the entry links associated with a specific table entry.
 
-To retrieve metadata for your BigQuery dataset, use the [`entries.get` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.entryGroups.entries/get) . To include all aspects, set the `view` parameter to `FULL` . For example:
+To retrieve metadata for your BigQuery dataset, use the [`entries.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries/get) . To include all aspects, set the `view` parameter to `FULL` . For example:
 
     gcurl -X GET https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/entryGroups/@bigquery/entries/bigquery.googleapis.com/projects/DATASET_PROJECT_ID/datasets/DATASET_ID?view=FULL
 
@@ -257,10 +257,10 @@ Based on the discovered relationships, Gemini generates sample queries. These ar
 
 ## Manage generated insights
 
-After you generate insights for a dataset, you can manage, update, or delete them in Knowledge Catalog. For more information, see [manage dataset insights](https://docs.cloud.google.com/dataplex/docs/use-data-insights-structured-data#manage-dataset-insights) .
+After you generate insights for a dataset, you can manage, update, or delete them in Knowledge Catalog. For more information, see [manage dataset insights](https://docs.cloud.google.com/knowledge-catalog/docs/use-data-insights-structured-data#manage-dataset-insights) .
 
 ## What's next
 
   - Learn about [data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
   - Learn how to [generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
-  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
+  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .

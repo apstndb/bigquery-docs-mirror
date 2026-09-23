@@ -256,7 +256,7 @@ If you are having issues setting up your data transfer, see [PostgreSQL transfer
 > 
 > This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-You can also use the PostgreSQL connector to [transfer metadata to Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/connectors) . For more information, see [Load PostgreSQL metadata into Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/postgresql-transfer) .
+You can also use the PostgreSQL connector to [transfer metadata to Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors) . For more information, see [Load PostgreSQL metadata into Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/postgresql-transfer) .
 
 ## What's next
 

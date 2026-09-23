@@ -165,7 +165,7 @@ BigQuery Studio helps you discover, analyze, and run inference on data in BigQue
   - A [PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) that lets you create stored Python procedures for Apache Spark.
   - Asset management and version history for code assets such as notebooks and [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) , built on top of [Dataform](https://docs.cloud.google.com/dataform) .
   - Assistive code development in the SQL editor and in notebooks, built on top of [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
-  - [Knowledge Catalog](https://docs.cloud.google.com/dataplex) features for [data discovery](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#search-page) , and [data profiling](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) and [data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) scans.
+  - [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog) features for [data discovery](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#search-page) , and [data profiling](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) and [data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) scans.
   - The ability to view [job history](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#studio-overview) on a per-user or per-project basis.
   - The ability to analyze saved query results by connecting to other tools such as Looker and Google Sheets, and to export saved query results for use in other applications.
 
@@ -178,7 +178,7 @@ BigQuery Studio helps you discover, analyze, and run inference on data in BigQue
 >   - [BigQuery Connection API](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest)
 >   - [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest)
 >   - [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest)
->   - [Dataplex API](https://docs.cloud.google.com/dataplex/docs/reference/rest)
+>   - [Dataplex API](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest)
 
 ### BigQuery ML
 

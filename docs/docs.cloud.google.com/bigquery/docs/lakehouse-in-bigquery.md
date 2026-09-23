@@ -10,14 +10,13 @@ data_source: docs.cloud.google.com
 
 [Borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/introduction) is a storage engine that unites Google Cloud and open source services to create a unified interface for advanced analytics and AI. It provides the foundation to build an open, managed, and high-performance lakehouse with automated data management and built-in governance using Apache Iceberg.
 
-When you [create a table in Lakehouse](https://docs.cloud.google.com/lakehouse/docs/lakehouse-tables) , it is automatically queryable from BigQuery and is visible on the BigQuery page of the Google Cloud console. Your Lakehouse namespaces and schemas are also automatically mapped to BigQuery datasets.
+When you [create a table in Lakehouse](https://docs.cloud.google.com/lakehouse/docs/lakehouse-tables) , it is automatically queryable from BigQuery and is visible on the BigQuery page of the Google Cloud console. Your Lakehouse namespaces and schemas are also automatically mapped to BigQuery datasets. Additionally, you can create and update Lakehouse catalogs, namespaces, and tables directly in BigQuery Studio.
 
 ## Differences between Lakehouse resources and other BigQuery resources
 
 The following are key differences between Lakehouse and standard BigQuery resources:
 
   - Lakehouse datasets appear in the BigQuery page of the Google Cloud console next to the water icon.
-  - You can't modify Lakehouse resources from BigQuery.
   - Lakehouse resources have additional metadata in their respective **Details** section.
 
 ### Iceberg table capabilities comparison
@@ -213,6 +212,61 @@ AI-based column and table descriptions generation
 Supported
 
 Supported
+
+## Create a Lakehouse table in BigQuery Studio
+
+1.  Go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, click add **Add data** .
+
+3.  Click the **Google Cloud Storage** data source card.
+
+4.  Under **Access external data in place** , click the **GCS data files** card.
+
+5.  For **GCS bucket source or file path** , select your Cloud Storage bucket.
+
+6.  For **File format** , select **Parquet** .
+
+7.  For **Table name** , enter a name for your table.
+
+8.  For **Project** , select your project.
+
+9.  For **Catalog ID** , select your existing Lakehouse catalog for the bucket, or create one if it doesn't exist yet.
+
+10. For **Namespace ID** , select an existing Lakehouse namespace, or create a new one. Namespace IDs can only contain letters, numbers, and underscores.
+
+11. (Optional) For **Schema** , define field names and data types for your new table.
+
+12. Click **Create table** .
+
+Your Lakehouse table is now visible in BigQuery and can be queried and modified like a standard BigQuery table.
+
+Instead of creating a table containing data, you can create an empty Lakehouse table in the same way that you can with [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables) . The only difference is selecting a Lakehouse namespace as the target dataset.
+
+## Migrate or federate other catalogs to Lakehouse
+
+1.  Go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, click add **Add data** .
+
+3.  Click the **Google Cloud Storage** data source card.
+
+4.  Under **Access external data in place** , click the **External or legacy catalogs** card.
+
+5.  For **Select catalog source** , select the catalog source.
+    
+      - If you selected **Hive Metastore** , do the following:
+        1.  For **Region** , select a region for your new Lakehouse catalog.
+        2.  For **Migration display name** , enter a new name for the migration.
+        3.  Click **Continue** .
+        4.  For **Source system configuration** , enter the URL, service account, and a network attachment.
+      - If you selected a different catalog source, do the following:
+        1.  For **Catalog name (in Lakehouse)** , enter a name for the catalog.
+        2.  For **Data location** , select a region for your new Lakehouse catalog.
+        3.  Click **Continue** .
+        4.  For **Catalog configuration** , enter the remote catalog details, authentication method, and refresh interval.
+
+6.  Click **Create** .
 
 ## Access cross-cloud data
 

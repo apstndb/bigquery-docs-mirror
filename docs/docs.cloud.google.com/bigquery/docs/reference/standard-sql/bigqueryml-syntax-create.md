@@ -149,7 +149,6 @@ model_option_list:
     [, HIERARCHICAL_TIME_SERIES_COLS = { string_array } ]
     [, ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE } ]
     [, APPROX_GLOBAL_FEATURE_CONTRIB = { TRUE | FALSE }]
-    [, INTEGRATED_GRADIENTS_NUM_STEPS = int64_value ]
     [, CALCULATE_P_VALUES = { TRUE | FALSE } ]
     [, FIT_INTERCEPT = { TRUE | FALSE } ]
     [, CATEGORY_ENCODING_METHOD = { 'ONE_HOT_ENCODING' | 'DUMMY_ENCODING' |
@@ -980,9 +979,7 @@ A weight must be present for every class label. The weights are not required to 
 <td>Specifies whether to compute global explanations using explainable AI to evaluate global feature importance to the model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#enable_global_explain">Linear &amp; logistic regression</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#enable_global_explain">Boosted trees</a> ,<br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#enable_global_explain">Random forest</a> ,<br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#enable_global_explain">DNN</a> ,<br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#enable_global_explain">Wide &amp; Deep</a></td>
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#enable_global_explain">Random forest</a></td>
 </tr>
 <tr class="even">
 <td>APPROX_GLOBAL_FEATURE_CONTRIB</td>
@@ -991,103 +988,97 @@ A weight must be present for every class label. The weights are not required to 
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#approx_global_feature_contrib">Random forest</a></td>
 </tr>
 <tr class="odd">
-<td>INTEGRATED_GRADIENTS_NUM_STEPS</td>
-<td>Specifies the number of steps to sample between the example being explained and its baseline for approximating the integral in integrated gradients attribution methods.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#integrated_gradients_num_steps">DNN</a> ,<br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#integrated_gradients_num_steps">Wide &amp; Deep</a></td>
-</tr>
-<tr class="even">
 <td>CALCULATE_P_VALUES</td>
 <td>Specifies whether to compute p-values for the model during training.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#calculate_p_values">Linear &amp; logistic regression</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>FIT_INTERCEPT</td>
 <td>Specifies whether to fit an intercept for the model during training.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#fit_intercept">Linear &amp; logistic regression</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>CATEGORY_ENCODING_METHOD</td>
 <td>Specifies the default encoding method for categorical features.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#category_encoding_method">Linear &amp; logistic regression</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#category_encoding_method">Boosted trees</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>ENDPOINT</td>
 <td>Specifies the Gemini Enterprise Agent Platform endpoint to use for a remote model. This can be the name of a Google model in Agent Platform or the HTTPS endpoint of a model deployed to Agent Platform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint">Remote models over Google models in Agent Platform</a><br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint">Remote models over hosted models in Agent Platform</a><br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#manually-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>HUGGING_FACE_MODEL_ID</td>
 <td>Specifies the model ID for a supported Hugging Face model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>MODEL_GARDEN_MODEL_NAME</td>
 <td>Specifies the model ID and model version of a supported Agent Platform Model Garden model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>HUGGING_FACE_TOKEN</td>
 <td>Specifies the Hugging Face User Access Token to use.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>MACHINE_TYPE</td>
 <td>Specifies the machine type to use when deploying the model to Agent Platform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>MIN_REPLICA_COUNT</td>
 <td>Specifies the minimum number of machine replicas used when deploying the model to Agent Platform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>MAX_REPLICA_COUNT</td>
 <td>Specifies the maximum number of machine replicas used when deploying the model to Agent Platform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>RESERVATION_AFFINITY_TYPE</td>
 <td>Determines whether the deployed model uses Compute Engine reservations to provide assured virtual machine (VM) availability when serving predictions, and specifies whether the model uses VMs from all available reservations or just one specific reservation.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>RESERVATION_AFFINITY_KEY</td>
 <td>The key for a Compute Engine reservation.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>RESERVATION_AFFINITY_VALUES</td>
 <td>Specifies the full resource name of the Compute Engine reservation.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>ENDPOINT_IDLE_TTL</td>
 <td>Specifies the duration of inactivity after which a BigQuery-managed Agent Platform model is automatically undeployed from an Agent Platform endpoint.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically-deployed">Remote models over open models</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>REMOTE_SERVICE_TYPE</td>
 <td>Specifies the Cloud AI service to use for a remote model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type">Remote models over Cloud AI services</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>XGBOOST_VERSION</td>
 <td>Specifies the Xgboost version for model training.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#xgboost_version">Boosted trees</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest#xgboost_version">Random forest</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>TF_VERSION</td>
 <td>Specifies the TensorFlow (TF) version for model training.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#tf_version">DNN</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models#tf_version">Wide &amp; Deep</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#tf_version">Autoencoder</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>NUM_TRIALS</td>
 <td>Specifies the maximum number of submodels to train when you are running hyperparameter tuning.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#num_trials">Linear &amp; logistic regression</a> ,<br />
@@ -1099,7 +1090,7 @@ A weight must be present for every class label. The weights are not required to 
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_trials">Matrix factorization</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#num_trials">Autoencoder</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>MAX_PARALLEL_TRIALS</td>
 <td>Specifies the maximum number of trials to run at the same time when you are running hyperparameter tuning.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#max_parallel_trials">Linear &amp; logistic regression</a> ,<br />
@@ -1111,7 +1102,7 @@ A weight must be present for every class label. The weights are not required to 
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#max_parallel_trials">Matrix factorization</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#max_parallel_trials">Autoencoder</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>HPARAM_TUNING_ALGORITHM</td>
 <td>Specifies the algorithm used to tune the hyperparameters when you are running hyperparameter tuning.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#hparam_tuning_algorithm">Linear &amp; logistic regression</a> ,<br />
@@ -1123,7 +1114,7 @@ A weight must be present for every class label. The weights are not required to 
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#hparam_tuning_algorithm">Matrix factorization</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hparam_tuning_algorithm">Autoencoder</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>HPARAM_TUNING_OBJECTIVES</td>
 <td>Specifies the hyperparameter tuning objective for the model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#hparam_tuning_objectives">Linear &amp; logistic regression</a> ,<br />
@@ -1135,81 +1126,81 @@ A weight must be present for every class label. The weights are not required to 
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#hparam_tuning_objectives">Matrix factorization</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hparam_tuning_objectives">Autoencoder</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>NUM_PRINCIPAL_COMPONENTS</td>
 <td>The number of principal components to keep.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#num_principal_components">PCA</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>PCA_EXPLAINED_VARIANCE_RATIO</td>
 <td>The ratio for the explained variance.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_explained_variance_ratio">PCA</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>SCALE_FEATURES</td>
 <td>Determines whether or not to scale the numerical features to unit variance.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#scale_features">PCA</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>PCA_SOLVER</td>
 <td>The solver to use to calculate the principal components.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_solver">PCA</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>TIME_SERIES_LENGTH_FRACTION</td>
 <td>The fraction of the interpolated length of the time series that's used to model the time series trend component.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_length_fraction">ARIMA_PLUS</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#time_series_length_fraction">ARIMA_PLUS_XREG</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>MIN_TIME_SERIES_LENGTH</td>
 <td>The minimum number of time points that are used in modeling the trend component of the time series.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#min_time_series_length">ARIMA_PLUS</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#min_time_series_length">ARIMA_PLUS_XREG</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>MAX_TIME_SERIES_LENGTH</td>
 <td>The maximum number of time points that are used in modeling the trend component of the time series.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#max_time_series_length">ARIMA_PLUS</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#max_time_series_length">ARIMA_PLUS_XREG</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>TREND_SMOOTHING_WINDOW_SIZE</td>
 <td>The smoothing window size for the trend component.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#trend_smoothing_window_size">ARIMA_PLUS</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#trend_smoothing_window_size">ARIMA_PLUS_XREG</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>SEASONALITIES</td>
 <td>The seasonality of the time series data refers to the presence of variations that occur at certain regular intervals such as weekly, monthly or quarterly.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#seasonalities">ARIMA_PLUS</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>PROMPT_COL</td>
 <td>The name of the prompt column in the training data table to use when performing supervised tuning.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#prompt_col">Remote models over Google models in Agent Platform</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>LEARNING_RATE_MULTIPLIER</td>
 <td>A multiplier to apply to the recommended learning rate when performing supervised tuning.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#learning_rate_multiplier">Remote models over Google models in Agent Platform</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>EVALUATION_TASK</td>
 <td>When performing supervised tuning, the type of task that you want to tune the model to perform.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#evaluation_task">Remote models over Google models in Agent Platform</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>DOCUMENT_PROCESSOR</td>
 <td>Identifies the document processor to use when the REMOTE_SERVICE_TYPE option value is <code dir="ltr" translate="no">CLOUD_AI_DOCUMENT_V1</code> .</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#document_processor">Remote models over Cloud AI services</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>SPEECH_RECOGNIZER</td>
 <td>Identifies the speech recognizer to use when the REMOTE_SERVICE_TYPE option value is <code dir="ltr" translate="no">CLOUD_AI_SPEECH_TO_TEXT_V2</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer">Remote models over Cloud AI services</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>KMS_KEY_NAME</td>
 <td>Specifies the Cloud Key Management Service <a href="https://docs.cloud.google.com/kms/docs/cmek">customer-managed encryption key (CMEK)</a> to use to encrypt the model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#kms_key_name">Linear &amp; logistic regression</a> ,<br />
@@ -1229,32 +1220,32 @@ A weight must be present for every class label. The weights are not required to 
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite#kms_key_name">TensorFlow Lite</a> ,<br />
 <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost#kms_key_name">XGBoost</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>CONTRIBUTION_METRIC</td>
 <td>The expression to use when performing contribution analysis.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric">Contribution analysis</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>DIMENSION_ID_COLS</td>
 <td>The names of the columns to use as dimensions when summarizing the contribution analysis metric.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#dimension_id_cols">Contribution analysis</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>IS_TEST_COL</td>
 <td>The name of the column to use to determine whether a given row is test data or control data.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#is_test_col">Contribution analysis</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>MIN_APRIORI_SUPPORT</td>
 <td>The minimum apriori support threshold for including segments in the model output.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#min_apriori_support">Contribution analysis</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>TOP_K_INSIGHTS_BY_APRIORI_SUPPORT</td>
 <td>The number of top insights by apriori support to include in the model output.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#top_k_insights_by_apriori_support">Contribution analysis</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>PRUNING_METHOD</td>
 <td>The pruning method to use for the contribution analysis model.</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#pruning_method">Contribution analysis</a></td>

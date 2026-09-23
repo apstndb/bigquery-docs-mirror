@@ -31,11 +31,9 @@ MODEL_TYPE = { 'DNN_LINEAR_COMBINED_CLASSIFIER' | 'DNN_LINEAR_COMBINED_REGRESSOR
     [, BATCH_SIZE = { int64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, DROPOUT = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, HIDDEN_UNITS = { int_array | HPARAM_CANDIDATES([candidates]) } ]
-    [, INTEGRATED_GRADIENTS_NUM_STEPS = int64_value ]
     [, TF_VERSION = { '1.15' | '2.8.0' } ]
     [, AUTO_CLASS_WEIGHTS = { TRUE | FALSE } ]
     [, CLASS_WEIGHTS = struct_array ]
-    [, ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE } ]
     [, EARLY_STOP = { TRUE | FALSE } ]
     [, MIN_REL_PROGRESS = float64_value ]
     [, INPUT_LABEL_COLS = string_array ]
@@ -285,22 +283,6 @@ The following example represents a neural architecture search with three candida
 
 The valid range for the `INT64` arrays is `[1, ∞)` .
 
-### `INTEGRATED_GRADIENTS_NUM_STEPS`
-
-**Syntax**
-
-` INTEGRATED_GRADIENTS_NUM_STEPS = int64_value  `
-
-**Description**
-
-Specifies the number of steps to sample between the example being explained and its baseline for approximating the integral when using [integrated gradients](https://docs.cloud.google.com/ai-platform/prediction/docs/ai-explanations/overview#ig) attribution methods.
-
-**Arguments**
-
-An `INT64` value. The default value is `50` .
-
-You can only set this option if `ENABLE_GLOBAL_EXPLAIN` is `TRUE` .
-
 ### `TF_VERSION`
 
 **Syntax**
@@ -352,22 +334,6 @@ An `ARRAY` of `STRUCT` values. Each `STRUCT` contains a `STRING` value that spec
 A `CLASS_WEIGHTS` value might look like the following example:
 
     CLASS_WEIGHTS = [STRUCT('example_label', .2)]
-
-### `ENABLE_GLOBAL_EXPLAIN`
-
-**Syntax**
-
-    ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE }
-
-**Description**
-
-Determines whether to compute global explanations by using [explainable AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) to evaluate the importance of global features to the model.
-
-Global explanations are computed when you create the model. This option must be `TRUE` if you want to use the [`ML.GLOBAL_EXPLAIN` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain) to retrieve the global explanations after the model is created.
-
-**Arguments**
-
-A `BOOL` value. The default value is `FALSE` .
 
 ### `EARLY_STOP`
 

@@ -19,7 +19,7 @@ Administrators, data stewards, data governance managers, and data custodians can
   - Ensure that data is used consistently and in compliance with organizational policies.
   - Share data at scale and in a secure fashion.
 
-BigQuery governance capabilities are powered by [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , a centralized inventory of all data assets in your organization. Knowledge Catalog holds business, technical, and operational metadata for all of your data. It helps you discover relationships and semantics in the metadata by applying artificial intelligence and machine learning.
+BigQuery governance capabilities are powered by [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , a centralized inventory of all data assets in your organization. Knowledge Catalog holds business, technical, and operational metadata for all of your data. It helps you discover relationships and semantics in the metadata by applying artificial intelligence and machine learning.
 
 Lakehouse runtime catalog lets you use multiple data processing engines to query a single copy of data with a single schema, without data duplication. The data processing engines that you can use include BigQuery, Apache Spark, Apache Flink, and Apache Hive. Your data can be stored in locations like BigQuery storage tables, Apache Iceberg managed tables, or BigLake external tables.
 
@@ -33,10 +33,10 @@ You can also extract and catalog metadata from third-party data sources using cu
 
 BigQuery offers the following data discovery capabilities:
 
-  - **Search.** Search for data and AI resources across projects and the organization. Within BigQuery in the Google Cloud console, use [semantic search](https://docs.cloud.google.com/bigquery/docs/search-resources) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to search for resources by using everyday language. Or, find resources by using [keyword search](https://docs.cloud.google.com/dataplex/docs/search-assets) in Knowledge Catalog.
+  - **Search.** Search for data and AI resources across projects and the organization. Within BigQuery in the Google Cloud console, use [semantic search](https://docs.cloud.google.com/bigquery/docs/search-resources) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to search for resources by using everyday language. Or, find resources by using [keyword search](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in Knowledge Catalog.
   - **[Automatic discovery of Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/automatic-discovery) .** Scan for data in Cloud Storage buckets to extract and then catalog metadata. Automatic discovery creates tables for both structured and unstructured data.
-  - **[Metadata import](https://docs.cloud.google.com/dataplex/docs/managed-connectivity-overview) .** Import metadata at scale from third-party systems into Knowledge Catalog. You can build custom connectors to extract data from your data sources, and then run managed connectivity pipelines that orchestrate the metadata import workflow.
-  - **[Metadata export](https://docs.cloud.google.com/dataplex/docs/export-metadata) .** Export metadata at scale out of Knowledge Catalog. You can analyze the exported metadata with BigQuery, or integrate the metadata into custom applications or programmatic processing workflows.
+  - **[Metadata import](https://docs.cloud.google.com/knowledge-catalog/docs/managed-connectivity-overview) .** Import metadata at scale from third-party systems into Knowledge Catalog. You can build custom connectors to extract data from your data sources, and then run managed connectivity pipelines that orchestrate the metadata import workflow.
+  - **[Metadata export](https://docs.cloud.google.com/knowledge-catalog/docs/export-metadata) .** Export metadata at scale out of Knowledge Catalog. You can analyze the exported metadata with BigQuery, or integrate the metadata into custom applications or programmatic processing workflows.
 
 ## Curation and data stewardship
 
@@ -44,11 +44,11 @@ To improve the discoverability and usability of data, data stewards and administ
 
 BigQuery offers the following data curation and stewardship capabilities:
 
-  - **[Business glossary](https://docs.cloud.google.com/dataplex/docs/create-glossary) .** Improve context, collaboration, and search by defining your organization's terminology in a glossary. Identify data stewards for the terms, and attach terms to data asset fields.
+  - **[Business glossary](https://docs.cloud.google.com/knowledge-catalog/docs/create-glossary) .** Improve context, collaboration, and search by defining your organization's terminology in a glossary. Identify data stewards for the terms, and attach terms to data asset fields.
   - **[Data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .** Gemini uses metadata to generate natural language questions about your table and the SQL queries to answer them. These data insights help you uncover patterns, assess data quality, and perform statistical analysis.
   - **[Data profiling](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .** Identify common statistical characteristics of the columns in BigQuery tables to understand and analyze your data more effectively.
   - **[Data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) .** Define and run data quality checks across tables in BigQuery and Cloud Storage, and apply regular and ongoing data controls in BigQuery environments.
-  - **[Data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) .** Track how data moves through your systems: where it comes from, where it's passed to, and what transformations are applied to it. BigQuery supports data lineage at the table- and column-levels.
+  - **[Data lineage](https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage) .** Track how data moves through your systems: where it comes from, where it's passed to, and what transformations are applied to it. BigQuery supports data lineage at the table- and column-levels.
 
 ### Next steps for curation and data stewardship
 
@@ -75,10 +75,10 @@ The following table outlines next steps that you can take to learn more about cu
 <tr class="even">
 <td>Experienced cloud users</td>
 <td><ul>
-<li>Enable <a href="https://docs.cloud.google.com/dataplex/docs/about-data-lineage#auto-lineage-bq-support">data lineage</a> in your BigQuery project to automatically record lineage information for BigQuery operations like load, copy, and data modifications.<br />
-<strong>Note</strong> : You can <a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#control-ingestion">configure the ingestion of data lineage</a> to enable or deactivate automatic lineage ingestion for BigQuery.</li>
-<li>Set up a recurring <a href="https://docs.cloud.google.com/bigquery/docs/data-quality-scan">data quality scan</a> to alert you to possible data issues by using <a href="https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#predefined-rules">predefined scan rules</a> .</li>
-<li>Set up <a href="https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#supported-custom-sql-rule-types">custom data quality rules</a> for your data quality scans so that your scans are tailored to your specific needs.</li>
+<li>Enable <a href="https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage#auto-lineage-bq-support">data lineage</a> in your BigQuery project to automatically record lineage information for BigQuery operations like load, copy, and data modifications.<br />
+<strong>Note</strong> : You can <a href="https://docs.cloud.google.com/knowledge-catalog/docs/use-lineage#control-ingestion">configure the ingestion of data lineage</a> to enable or deactivate automatic lineage ingestion for BigQuery.</li>
+<li>Set up a recurring <a href="https://docs.cloud.google.com/bigquery/docs/data-quality-scan">data quality scan</a> to alert you to possible data issues by using <a href="https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview#predefined-rules">predefined scan rules</a> .</li>
+<li>Set up <a href="https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview#supported-custom-sql-rule-types">custom data quality rules</a> for your data quality scans so that your scans are tailored to your specific needs.</li>
 </ul></td>
 </tr>
 </tbody>

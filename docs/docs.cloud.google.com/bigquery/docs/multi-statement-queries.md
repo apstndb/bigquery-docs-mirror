@@ -39,6 +39,10 @@ BigQuery interprets any request with multiple statements as a multi-statement qu
 
 You can run a multi-statement query in the same way as any other query, for example, in the Google Cloud console or using the bq command-line tool.
 
+### View multi-statement query results
+
+When you run a multi-statement query in BigQuery Studio, the **Query results** pane displays the results of each statement in a hierarchical execution history tree. The multi-statement query execution is shown as a parent node in the history tree, with sub-nodes for each individual statement (child job) within the multi-statement query. You can click individual sub-nodes to view the specific data returned by that part of the multi-statement query without navigating away from the editor.
+
 ### Dry-run a multi-statement query
 
 To estimate the number of bytes read by a multi-statement query, consider a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) . A dry run of a multi-statement query is most accurate for queries that only contain `SELECT` statements.

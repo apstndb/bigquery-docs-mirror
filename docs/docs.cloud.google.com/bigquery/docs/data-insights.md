@@ -32,7 +32,7 @@ To investigate further, you can ask follow-up questions in [data canvas](https:/
 
 ### Table insights
 
-Table insights help you understand the content, quality, and patterns within a single BigQuery table. For example, by generating queries that perform statistical analysis, you can use table insights to detect data patterns, anomalies, and outliers. Table insights can also help you detect quality issues, especially when [data profile scans](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) are available for a table. When you generate insights for a table, Gemini provides table description, column descriptions, and profile scan output based on the table's metadata. The following options are available:
+Table insights help you understand the content, quality, and patterns within a single BigQuery table. For example, by generating queries that perform statistical analysis, you can use table insights to detect data patterns, anomalies, and outliers. Table insights can also help you detect quality issues, especially when [data profile scans](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) are available for a table. When you generate insights for a table, Gemini provides table description, column descriptions, and profile scan output based on the table's metadata. The following options are available:
 
   - **Generate queries:** suggests natural language questions and provides the corresponding SQL queries to answer them. This helps you uncover patterns, assess data quality, and perform statistical analysis without writing SQL from scratch.
   - **Generate descriptions:** generates descriptions for the table and its columns. Gemini uses profile scan output (if available) to ground the generated descriptions. You can review, edit, and publish these descriptions to Knowledge Catalog to improve data discoverability and documentation.
@@ -154,7 +154,7 @@ These workflows are for data engineers, analytics engineers, and others who buil
 
   - **Generate baseline data documentation:** automatically create and maintain essential metadata descriptions. You can perform the following tasks:
     
-      - After table creation or modification, trigger data insights to generate table and column descriptions. You can also generate these descriptions at scale by using the [Knowledge Catalog automated metadata generation API](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#add-aspects) .
+      - After table creation or modification, trigger data insights to generate table and column descriptions. You can also generate these descriptions at scale by using the [Knowledge Catalog automated metadata generation API](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#add-aspects) .
     
       - Review and refine the AI-generated text to ensure technical accuracy and business relevance.
     
@@ -166,7 +166,7 @@ These workflows are for data engineers, analytics engineers, and others who buil
     
       - Ensure data profile scans run on tables to provide rich context for more accurate and useful insights.
     
-    For more information, see [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) and [Ground insights to data profiling results](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
+    For more information, see [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) and [Ground insights to data profiling results](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
 
 ### Workflows for data stewards
 
@@ -222,7 +222,7 @@ You can use data insights in all [BigQuery locations](https://docs.cloud.google.
 
   - Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
 
-  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
+  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
 
   - Learn how to [write queries with Gemini assistance in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
 

@@ -34,7 +34,7 @@ Before you use natural language search in BigQuery to search for Google Cloud re
 
 ### Required roles
 
-To search for resources, you need at least one of the following [Knowledge Catalog IAM roles](https://docs.cloud.google.com/dataplex/docs/iam-roles#predefined-roles) on the project that is used for search: Dataplex Catalog Admin, Dataplex Catalog Editor, or Dataplex Catalog Viewer. Permissions on search results are checked independently of the selected project.
+To search for resources, you need at least one of the following [Knowledge Catalog IAM roles](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles#predefined-roles) on the project that is used for search: Dataplex Catalog Admin, Dataplex Catalog Editor, or Dataplex Catalog Viewer. Permissions on search results are checked independently of the selected project.
 
 The search results in BigQuery are scoped according to your IAM permissions over the underlying resources. To search for a resource in BigQuery, you must have permissions to access the corresponding resource. For more information, see the [Search scope](https://docs.cloud.google.com/bigquery/docs/search-resources#search-scope) section of this document.
 
@@ -51,7 +51,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ### Enable the API
 
-To use search, ensure that you have enabled the Dataplex API. The Dataplex API is [enabled by default](https://docs.cloud.google.com/bigquery/docs/service-dependencies) for all new Google Cloud projects with BigQuery. If the Dataplex API isn't enabled in your project, see [Enable Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/enable-api) .
+To use search, ensure that you have enabled the Dataplex API. The Dataplex API is [enabled by default](https://docs.cloud.google.com/bigquery/docs/service-dependencies) for all new Google Cloud projects with BigQuery. If the Dataplex API isn't enabled in your project, see [Enable Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/enable-api) .
 
 ## Search for resources
 
@@ -68,12 +68,12 @@ To use search, ensure that you have enabled the Dataplex API. The Dataplex API i
 3.  To filter your search, click **Filters** . The following filters are available:
     
       - **Scope** : search across the organization (default), the current project, or only for starred resources. For more information, see the [Search scope](https://docs.cloud.google.com/bigquery/docs/search-resources#search-scope) section of this document.
-      - **Systems** : the Google Cloud service that the resource belongs to, such as BigQuery. The Knowledge Catalog system contains [entry groups](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) .
+      - **Systems** : the Google Cloud service that the resource belongs to, such as BigQuery. The Knowledge Catalog system contains [entry groups](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) .
       - **Projects** : the projects to search in.
       - **Type** : the resource type, such as BigQuery connection, Cloud Storage bucket, or database. Depending on the resource type, you can also filter by subtype, such as the connection type or SQL dialect.
       - **Select locations** : the locations to search in.
       - **Select datasets** : this limits search results to BigQuery resources that belong to the selected BigQuery datasets. In the **Type to filter** field, enter the name of the dataset.
-      - **Annotations** : the Knowledge Catalog [aspect types](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) that are associated with the resource that you're searching for. To filter by aspect values, click **Filter on annotation values** , and then select the values.
+      - **Annotations** : the Knowledge Catalog [aspect types](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) that are associated with the resource that you're searching for. To filter by aspect values, click **Filter on annotation values** , and then select the values.
     
     To remove a filter, click clear **Clear** next to the specific filter that you want to remove. Or, to remove all filters, click **Clear Filters** .
     
@@ -111,4 +111,4 @@ The search results include only those resources that belong to the same VPC Serv
 ## What's next
 
   - Learn how to [analyze data in BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) .
-  - Learn how to [use keyword search in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) .
+  - Learn how to [use keyword search in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) .

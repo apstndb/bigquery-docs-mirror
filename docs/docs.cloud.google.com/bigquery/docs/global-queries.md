@@ -131,8 +131,8 @@ To see the query text sent to the remote region, check the [job history](https:/
 
 When you call the [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) method, the returned [`Job`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) resource contains the following fields in the [`JobStatistics`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics) object:
 
-  - `statistics.global_query_remote_regions` : An array of strings representing the remote regions from which a global query accesses data. This field is populated only for parent global query jobs in the primary execution region. It is empty for child global query jobs and single-region queries.
-  - `statistics.parent_global_query_job` : A [`JobReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference) object ( `projectId` , `jobId` , `location` ) identifying the parent global query job. This field is populated only for child global query jobs (remote subqueries and cross-region copy jobs) executed in remote regions on behalf of a global query. It is unset for parent global query jobs and single-region queries.
+  - `statistics.globalQueryRemoteRegions` : An array of strings representing the remote regions from which a global query accesses data. This field is populated only for parent global query jobs in the primary execution region. It is empty for child global query jobs and single-region queries.
+  - `statistics.parentGlobalQueryJob` : A [`JobReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference) object ( `projectId` , `jobId` , `location` ) identifying the parent global query job. This field is populated only for child global query jobs (remote subqueries and cross-region copy jobs) executed in remote regions on behalf of a global query. It is unset for parent global query jobs and single-region queries.
 
 ### Audit logs
 

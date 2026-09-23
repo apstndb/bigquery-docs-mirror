@@ -46,6 +46,7 @@ data_source: docs.cloud.google.com
   - `  Reservation.ReplicationStatus  ` (message)
   - `  Reservation.ScalingMode  ` (enum)
   - `  ReservationGroup  ` (message)
+  - `  SchedulingPolicy  ` (message)
   - `  SearchAllAssignmentsRequest  ` (message)
   - `  SearchAllAssignmentsResponse  ` (message)
   - `  SearchAssignmentsRequest  ` (message)
@@ -963,6 +964,14 @@ Optional. Which type of jobs will use the reservation.
 
 Output only. State of the assignment.
 
+`scheduling_policy`
+
+`  SchedulingPolicy  `
+
+Optional. The scheduling policy to use for jobs and queries of this assignee when running under the associated reservation. The scheduling policy controls how the reservation's resources are distributed. This overrides the default scheduling policy specified on the reservation.
+
+This feature is not yet generally available.
+
 `principal`
 
 `string`
@@ -1878,6 +1887,14 @@ Optional. The reservation group that this reservation belongs to. You can set th
 
 Output only. The Disaster Recovery(DR) replication status of the reservation. This is only available for the primary replicas of DR/failover reservations and provides information about the both the staleness of the secondary and the last error encountered while trying to replicate changes from the primary to the secondary. If this field is blank, it means that the reservation is either not a DR reservation or the reservation is a DR secondary or that any replication operations on the reservation have succeeded.
 
+`scheduling_policy`
+
+`  SchedulingPolicy  `
+
+Optional. The scheduling policy to use for jobs and queries running under this reservation. The scheduling policy controls how the reservation's resources are distributed.
+
+This feature is not yet generally available.
+
 `max_slots`
 
 `int64`
@@ -1997,6 +2014,28 @@ Output only. Creation time of the reservation group.
 `  Timestamp  `
 
 Output only. Last update time of the reservation group via a user operation. This timestamp is updated only when an update operation explicitly targets this reservation group directly. It is not updated when parent or child groups are created, updated, or deleted.
+
+## SchedulingPolicy
+
+The scheduling policy controls how a reservation's resources are distributed.
+
+Fields
+
+`concurrency`
+
+`int64`
+
+Optional. If present and \> 0, the reservation will attempt to limit the concurrency of jobs running for any particular project within it to the given value.
+
+This feature is not yet generally available.
+
+`max_slots`
+
+`int64`
+
+Optional. If present and \> 0, the reservation will attempt to limit the slot consumption of queries running for any particular project within it to the given value.
+
+This feature is not yet generally available.
 
 ## SearchAllAssignmentsRequest
 

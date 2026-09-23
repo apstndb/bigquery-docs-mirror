@@ -88,11 +88,11 @@ The BigQuery [**Studio**](https://docs.cloud.google.com/bigquery/docs/query-over
       - The **Try with templates** section that lets you use templates to get started querying data and working with notebooks.
       - The **Add your own data** section that helps you get started loading data into BigQuery.
 
-6.  *Query editor* : use the query editor to create and [run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) . You can also view the results in the **Query results** pane that opens after you run the query.
+6.  ***Query editor*** : use the query editor to create and [run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) . You can also view the results in the **Query results** pane that opens after you run the query. Within the query results, the session-specific **Recent** pane lets you view recent results.
 
 ### Explore the Studio page
 
-The **Studio** page BigQuery is the central point for viewing your BigQuery resources and for performing common tasks such as creating datasets and creating and running notebooks.
+The **Studio** page in BigQuery is the central point for viewing your BigQuery resources and for performing common tasks such as creating datasets and creating and running notebooks.
 
 > **Note:** To see how to use keyboard shortcuts in Studio, click keyboard **BigQuery Studio shortcuts** in the BigQuery Studio toolbar:
 

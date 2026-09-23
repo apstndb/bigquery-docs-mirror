@@ -94,7 +94,7 @@ info
 
   - [Billing questions](https://docs.cloud.google.com/bigquery/docs/billing-questions)
 
-Training
+Solution
 
 Training and tutorials
 
@@ -110,7 +110,7 @@ Training and tutorials
 
 Learn best practices for extracting, transforming, and loading your data into Google Cloud with BigQuery.
 
-Training
+Codelab
 
 Training and tutorials
 

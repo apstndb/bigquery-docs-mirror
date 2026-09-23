@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage saved queries
 
-This document describes how to manage [saved queries and classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) and how to manage saved query metadata in [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
+This document describes how to manage [saved queries and classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) and how to manage saved query metadata in [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) .
 
 Saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
@@ -47,7 +47,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To manage saved query metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
+To manage saved query metadata in Knowledge Catalog, ensure that you have the required [Knowledge Catalog roles](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles) and the [`dataform.repositories.get`](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
 
 ## Share saved queries
 
@@ -472,7 +472,7 @@ Migration can take over 15 minutes, depending on the number of migrating queries
 
 Knowledge Catalog lets you store and manage metadata for saved queries. Saved queries are available in Knowledge Catalog by default, without additional configuration.
 
-You can use Knowledge Catalog to manage saved queries in all [saved query locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing saved queries in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Knowledge Catalog to manage saved queries in all [saved query locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing saved queries in Knowledge Catalog is subject to [Knowledge Catalog quotas and limits](https://docs.cloud.google.com/knowledge-catalog/docs/quotas) and [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
 Knowledge Catalog automatically retrieves the following metadata from saved queries:
 
@@ -482,18 +482,18 @@ Knowledge Catalog automatically retrieves the following metadata from saved quer
   - Data asset type
   - Corresponding Google Cloud project
 
-Knowledge Catalog logs saved queries as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Knowledge Catalog logs saved queries as [entries](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for saved queries is `@dataform` . To view details of saved query entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for saved queries is `@dataform` . To view details of saved query entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
   - System entry type  
-    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
   - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Knowledge Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Knowledge Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
   - Type  
-    The type for saved queries is `SQL_QUERY` . This type lets you filter saved queries in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
+    The type for saved queries is `SQL_QUERY` . This type lets you filter saved queries in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Knowledge Catalog documentation.
+For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in the Knowledge Catalog documentation.
 
 ## What's next
 

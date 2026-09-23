@@ -5580,7 +5580,7 @@ Renames a clone, snapshot, or table.
 
 The `ALTER TABLE RENAME TO` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
 
-> **Caution:** Renaming a table deletes all [tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) or [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that may be attached to it or its columns in [Data Catalog](https://docs.cloud.google.com/data-catalog) or [Knowledge Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , respectively.
+> **Caution:** Renaming a table deletes all [tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) or [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) that may be attached to it or its columns in [Data Catalog](https://docs.cloud.google.com/data-catalog) or [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , respectively.
 
 ### Syntax
 
@@ -5601,7 +5601,7 @@ The `ALTER TABLE RENAME TO` statement recreates the table in the destination dat
   - While a table can usually be renamed 5 hours after the last streaming operation, it might take longer. In some cases, the wait time can be up to 8 days.
   - Existing table ACLs and row access policies are preserved, but table ACL and row access policy updates made during the table rename are not preserved.
   - You can't concurrently rename a table and run a DML statement on that table.
-  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) on the table.
+  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) on the table.
   - Any search index or vector index created on the table is dropped when the table is renamed.
   - You can't rename external tables.
 
@@ -5624,7 +5624,7 @@ The following example renames the table `mydataset.mytable` to `mydataset.mynewt
 
 ## `ALTER TABLE RENAME COLUMN` statement
 
-> **Caution:** Renaming a column deletes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
+> **Caution:** Renaming a column deletes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
 
 Renames one or more columns in an existing table schema.
 

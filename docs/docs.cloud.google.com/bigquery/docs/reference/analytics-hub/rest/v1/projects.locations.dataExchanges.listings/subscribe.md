@@ -330,7 +330,7 @@ Optional. Transforms to be applied to messages before they are delivered to subs
 
 `map (key: string, value: string)`
 
-Optional. Input only. Immutable. Tag keys/values directly bound to this resource. For example: "123/environment": "production", "123/costCenter": "marketing" See [https://{$universe.dns\_names.final\_documentation\_domain}/pubsub/docs/tags](https://%7B$universe.dns_names.final_documentation_domain%7D/pubsub/docs/tags) for more information on using tags with Pub/Sub resources.
+Optional. Input only. Immutable. Tag keys/values directly bound to this resource. For example: "123/environment": "production", "123/costCenter": "marketing" See [Create and manage tags](https://cloud.google.com/pubsub/docs/tags) for more information on using tags with Pub/Sub resources.
 
 An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
 
@@ -787,7 +787,7 @@ If not specified, the default behavior is to construct the row key from the subs
 
 ` object ( RowKeySchema  ` )
 
-Optional. If set, the row key is constructed from the field names of the table's structured row key ( <https://docs.cloud.google.com/bigtable/docs/manage-row-key-schemas)> . Note that if the field is nullable in the structured row key, then it need not be present in the message; null will be used instead.
+Optional. If set, the row key is constructed from the field names of the table's [structured row key](https://cloud.google.com/bigtable/docs/manage-row-key-schemas) . Note that if the field is nullable in the structured row key, then it need not be present in the message; `null` will be used instead.
 
 `delimitedKey`
 
@@ -801,7 +801,7 @@ End of mutually exclusive fields.
 
 This type has no fields.
 
-Row key definition that reads the input message fields based on the field names of the table's structured row key ( <https://docs.cloud.google.com/bigtable/docs/manage-row-key-schemas)> . Note that if the field is nullable in the structured row key, then it need not be present in the message; null will be used instead.
+Row key definition that reads the input message fields based on the field names of the table's [structured row key](https://cloud.google.com/bigtable/docs/manage-row-key-schemas) . Note that if the field is nullable in the structured row key, then it need not be present in the message; `null` will be used instead.
 
 ## DelimitedKey
 

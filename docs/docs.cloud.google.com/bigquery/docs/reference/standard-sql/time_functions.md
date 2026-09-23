@@ -209,13 +209,13 @@ The following additional considerations apply when using the `PARSE_TIME` functi
 
 ## `TIME_ADD`
 
-    TIME_ADD(time_expression, INTERVAL int64_expression part)
+    TIME_ADD(time_expression, INTERVAL step_size step_unit)
 
 **Description**
 
-Adds `int64_expression` units of `part` to the `TIME` object.
+Adds `step_size` units of `step_unit` to the `TIME` object.
 
-`TIME_ADD` supports the following values for `part` :
+`TIME_ADD` supports the following values for `step_unit` :
 
   - `MICROSECOND`
   - `MILLISECOND`
@@ -265,7 +265,9 @@ Gets the number of unit boundaries between two `TIME` values ( `end_time` - `sta
 
 **Details**
 
-If `end_time` is earlier than `start_time` , the output is negative. Produces an error if the computation overflows, such as if the difference in microseconds between the two `TIME` values overflows.
+If `end_time` is earlier than `start_time` , the output is 0 or negative. Decimals are always truncated rather than rounded. For example, both 3.9 and 3.1 become 3, while -3.9 and -3.1 become -3 (instead of -4).
+
+Produces an error if the computation overflows, such as if the difference in microseconds between the two `TIME` values overflows.
 
 > **Note:** The behavior of the this function follows the type of arguments passed in. For example, `TIME_DIFF(TIMESTAMP, TIMESTAMP, PART)` behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)` .
 
@@ -273,7 +275,7 @@ If `end_time` is earlier than `start_time` , the output is negative. Produces an
 
 `INT64`
 
-**Example**
+**Examples**
 
     SELECT
       TIME "15:30:00" as first_time,
@@ -286,15 +288,29 @@ If `end_time` is earlier than `start_time` , the output is negative. Produces an
      | 15:30:00                   | 14:35:00               | 55                     |
      +----------------------------+------------------------+------------------------*/
 
+In the following example, `TIME_DIFF` truncates the output rather than rounding it. Both 3 hours 54 minutes (3.9 hours) and 3 hours 6 minutes (3.1 hours) truncate to 3 hours, and their negative counterparts truncate to -3 hours:
+
+    SELECT
+      TIME_DIFF(TIME '04:54:00', TIME '01:00:00', HOUR) AS diff_3_9,
+      TIME_DIFF(TIME '04:06:00', TIME '01:00:00', HOUR) AS diff_3_1,
+      TIME_DIFF(TIME '01:00:00', TIME '04:54:00', HOUR) AS diff_negative_3_9,
+      TIME_DIFF(TIME '01:00:00', TIME '04:06:00', HOUR) AS diff_negative_3_1;
+    
+    /*----------+----------+-------------------+-------------------+
+     | diff_3_9 | diff_3_1 | diff_negative_3_9 | diff_negative_3_1 |
+     +----------+----------+-------------------+-------------------+
+     | 3        | 3        | -3                | -3                |
+     +----------+----------+-------------------+-------------------*/
+
 ## `TIME_SUB`
 
-    TIME_SUB(time_expression, INTERVAL int64_expression part)
+    TIME_SUB(time_expression, INTERVAL step_size step_unit)
 
 **Description**
 
-Subtracts `int64_expression` units of `part` from the `TIME` object.
+Subtracts `step_size` units of `step_unit` from the `TIME` object.
 
-`TIME_SUB` supports the following values for `part` :
+`TIME_SUB` supports the following values for `step_unit` :
 
   - `MICROSECOND`
   - `MILLISECOND`

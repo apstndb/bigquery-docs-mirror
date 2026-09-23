@@ -702,7 +702,7 @@ An interval literal can be used directly inside of the `SELECT` statement and as
 
 Syntax:
 
-    INTERVAL int64_expression datetime_part
+    INTERVAL step_size step_unit
 
 The single datetime part syntax includes an `INT64` expression and a single [interval-supported datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) . For example:
 

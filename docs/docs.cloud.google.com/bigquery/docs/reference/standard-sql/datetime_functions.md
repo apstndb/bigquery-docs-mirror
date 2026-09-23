@@ -152,7 +152,9 @@ Gets the number of unit boundaries between two `DATETIME` values ( `end_datetime
 
 **Details**
 
-If `end_datetime` is earlier than `start_datetime` , the output is negative. Produces an error if the computation overflows, such as if the difference in microseconds between the two `DATETIME` values overflows.
+If `end_datetime` is earlier than `start_datetime` , the output is 0 or negative. Decimals are always truncated rather than rounded. For example, both 3.9 and 3.1 become 3, while -3.9 and -3.1 become -3 (instead of -4).
+
+Produces an error if the computation overflows, such as if the difference in microseconds between the two `DATETIME` values overflows.
 
 > **Note:** The behavior of the this function follows the type of arguments passed in. For example, `DATETIME_DIFF(TIMESTAMP, TIMESTAMP, PART)` behaves like `TIMESTAMP_DIFF(TIMESTAMP, TIMESTAMP, PART)` .
 
@@ -160,7 +162,7 @@ If `end_datetime` is earlier than `start_datetime` , the output is negative. Pro
 
 `INT64`
 
-**Example**
+**Examples**
 
     SELECT
       DATETIME "2010-07-07 10:20:00" as first_datetime,
@@ -173,6 +175,24 @@ If `end_datetime` is earlier than `start_datetime` , the output is negative. Pro
      +----------------------------+------------------------+------------------------+
      | 2010-07-07T10:20:00        | 2008-12-25T15:30:00    | 559                    |
      +----------------------------+------------------------+------------------------*/
+
+In the following example, `DATETIME_DIFF` truncates the output rather than rounding it. Both 3 hours 54 minutes (3.9 hours) and 3 hours 6 minutes (3.1 hours) truncate to 3 hours, and their negative counterparts truncate to -3 hours:
+
+    SELECT
+      DATETIME_DIFF(DATETIME '2021-05-01 04:54:00',
+        DATETIME '2021-05-01 01:00:00', HOUR) AS diff_3_9,
+      DATETIME_DIFF(DATETIME '2021-05-01 04:06:00',
+        DATETIME '2021-05-01 01:00:00', HOUR) AS diff_3_1,
+      DATETIME_DIFF(DATETIME '2021-05-01 01:00:00',
+        DATETIME '2021-05-01 04:54:00', HOUR) AS diff_negative_3_9,
+      DATETIME_DIFF(DATETIME '2021-05-01 01:00:00',
+        DATETIME '2021-05-01 04:06:00', HOUR) AS diff_negative_3_1;
+    
+    /*----------+----------+-------------------+-------------------+
+     | diff_3_9 | diff_3_1 | diff_negative_3_9 | diff_negative_3_1 |
+     +----------+----------+-------------------+-------------------+
+     | 3        | 3        | -3                | -3                |
+     +----------+----------+-------------------+-------------------*/
 
     SELECT
       DATETIME_DIFF(DATETIME '2017-10-15 00:00:00',

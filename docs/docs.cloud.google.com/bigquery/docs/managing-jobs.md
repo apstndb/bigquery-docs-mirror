@@ -77,6 +77,8 @@ For more information about IAM roles and permissions in BigQuery, see [Predefine
 
 You can view job details by using the Google Cloud console, the bq command-line tool, the API, or the client libraries. The details include data and metadata, such as the job type, the job state, and the user who created the job.
 
+> **Note:** The job details described in this section provide a persistent, project-wide log of all job activity. Alternatively, you can view a recent, session-specific history in the BigQuery Studio query editor's **Query results** pane.
+
 To view job details, follow these steps:
 
 ### Console
