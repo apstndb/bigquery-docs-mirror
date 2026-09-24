@@ -16,7 +16,7 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-2.  Enable the BigQuery, Gemini Data Analytics, Gemini for Google Cloud, and Knowledge Catalog APIs.
+2.  Enable the BigQuery, Gemini Data Analytics, Gemini for Google Cloud, and Knowledge Catalog APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     
@@ -659,7 +659,7 @@ You can monitor the performance, adoption, latency, and costs of your data agent
 
 ### Before you begin
 
-Enable the Cloud Trace, Cloud Monitoring, Cloud Logging APIs.
+Enable the Cloud Trace, Cloud Monitoring, Cloud Logging APIs, if any are not already enabled.
 
 **Roles required to enable APIs**
 

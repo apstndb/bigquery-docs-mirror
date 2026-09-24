@@ -39,7 +39,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-2.  Enable the BigQuery and Cloud Storage APIs.
+2.  Enable the BigQuery and Cloud Storage APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

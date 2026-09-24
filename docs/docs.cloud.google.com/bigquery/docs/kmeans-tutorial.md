@@ -38,7 +38,7 @@ For information on BigQuery ML costs, see [BigQuery ML pricing](https://cloud.go
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
     
-    Enable the BigQuery API.
+    Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

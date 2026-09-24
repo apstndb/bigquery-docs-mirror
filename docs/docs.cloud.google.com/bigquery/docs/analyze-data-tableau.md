@@ -38,7 +38,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 Before you begin, ensure that you have a project to use, that you have enabled billing for that project, and that you have enabled the BigQuery API.
 
-1.  Enable the BigQuery API.
+1.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

@@ -101,7 +101,7 @@ Supported (GA)
 
 BigQuery Change Data Capture (CDC)
 
-Not supported
+Supported (Preview)
 
 Supported
 

@@ -12,7 +12,7 @@ The Data Science Agent (DSA) for Colab Enterprise and BigQuery lets you automate
 
 ## Before you begin
 
-1.  Enable the BigQuery, Gemini for Google Cloud, Dataform, and Compute Engine APIs.
+1.  Enable the BigQuery, Gemini for Google Cloud, Dataform, and Compute Engine APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

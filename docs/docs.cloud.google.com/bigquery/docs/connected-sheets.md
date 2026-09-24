@@ -74,7 +74,7 @@ If you don't have a Google Cloud project that is set up for billing, follow thes
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a preexisting project, go to
     
-    Enable the BigQuery API.
+    Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

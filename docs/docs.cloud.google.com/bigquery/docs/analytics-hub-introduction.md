@@ -261,8 +261,6 @@ Los Angeles
 
 `us-west2`
 
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
 Mexico
 
 `northamerica-south1`

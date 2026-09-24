@@ -53,13 +53,25 @@ The simplest form of workload scheduling is [scheduling recurring queries](https
 
 ### Managed Service for Apache Airflow
 
-[Managed Airflow](https://docs.cloud.google.com/composer/docs/concepts/overview) is a fully managed tool built on Apache Airflow. It is best for extract, transform, load (ETL) or extract, load, transform (ELT) workloads as it supports several [operator](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) types and patterns, as well as task execution across other Google Cloud products and external targets. To learn more about using Managed Airflow with BigQuery, see [Run a data analytics DAG in Google Cloud](https://docs.cloud.google.com/composer/docs/data-analytics-googlecloud) .
+Managed Airflow is a fully managed tool built on Apache Airflow. It is the recommended unified enterprise platform for all durable, production-grade data and [MLOps workflows](https://airflow.apache.org/use-cases/mlops/) .
 
-**Scheduling method** : time-driven
+Managed Airflow is best suited for managing complex, end-to-end business processes that span heterogeneous systems, such as extracting data from BigQuery, triggering Gemini Enterprise Agent Platform Managed Training, and updating external dashboards like Looker.
 
-### Vertex AI Pipelines
+Managed Airflow features a library of over 1,000 prebuilt operators for seamless integrations, eliminating the need to build custom containers for non-ML tasks. Additionally, with the [declarative YAML framework](https://docs.cloud.google.com/composer/docs/composer-3/run-orchestration-pipelines) , data scientists can self-serve production-grade pipelines without needing deep Airflow expertise.
 
-[Vertex AI Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction) is a serverless tool based on Kubeflow Pipelines specially designed for scheduling machine learning workloads. It automates and connects all tasks of your model development and deployment, from training data to code, giving you a complete view of how your models work. To learn more about using Vertex AI Pipelines with BigQuery, see [Export and deploy a BigQuery machine learning model for prediction](https://codelabs.developers.google.com/codelabs/bqml-vertex-prediction#0) .
+To learn more about using Managed Airflow with BigQuery, see [Run a data analytics DAG in Google Cloud](https://docs.cloud.google.com/composer/docs/data-analytics-googlecloud) .
+
+**Scheduling method** : time-driven and event-driven
+
+### Gemini Enterprise Agent Platform Pipelines
+
+[Agent Platform Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction) is a serverless tool based on Kubeflow Pipelines designed as a solution for ML-specific, container-based tasks.
+
+Agent Platform Pipelines is ideal for self-contained workflows that remain strictly within the Agent Platform ecosystem.
+
+You can use Agent Platform Pipelines as a low-friction, pay-per-run option for tasks like scheduling specialized Gemini Enterprise Agent Platform Managed Training jobs or running pure experimentation centered on Agent Platform.
+
+To learn more about using Vertex AI Pipelines with BigQuery, see [Export and deploy a BigQuery machine learning model for prediction](https://codelabs.developers.google.com/codelabs/bqml-vertex-prediction#0) .
 
 **Scheduling method** : event-driven
 

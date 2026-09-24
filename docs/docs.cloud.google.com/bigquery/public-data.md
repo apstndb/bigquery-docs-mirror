@@ -26,7 +26,7 @@ To get started using a BigQuery public dataset, you must create or select a proj
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a preexisting project,
     
-    Enable the BigQuery API.
+    Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

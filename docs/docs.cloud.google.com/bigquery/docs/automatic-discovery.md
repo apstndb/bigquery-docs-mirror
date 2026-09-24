@@ -113,7 +113,7 @@ To see the limit of how many tables a discovery scan supports, see [Quotas and l
 
 ## Before you begin
 
-Enable the Dataplex API.
+Enable the Dataplex API, if it is not already enabled.
 
 **Roles required to enable APIs**
 

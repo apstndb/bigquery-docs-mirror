@@ -12,7 +12,7 @@ Get started analyzing data by using the notebook gallery in BigQuery Studio.
 
 ## Before you begin
 
-1.  Enable the BigQuery API.
+1.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

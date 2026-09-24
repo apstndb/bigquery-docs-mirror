@@ -38,7 +38,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 ## Before you begin
 
-1.  Enable the BigQuery, Gemini for Google Cloud, Dataform, and Compute Engine APIs.
+1.  Enable the BigQuery, Gemini for Google Cloud, Dataform, and Compute Engine APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

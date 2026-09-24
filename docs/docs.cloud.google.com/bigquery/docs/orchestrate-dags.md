@@ -26,7 +26,7 @@ To learn more about Managed Airflow environments, see the [Managed Airflow 3 ove
 
 ## Before you begin
 
-Enable the Cloud Composer API.
+Enable the Cloud Composer API, if it is not already enabled.
 
 **Roles required to enable APIs**
 

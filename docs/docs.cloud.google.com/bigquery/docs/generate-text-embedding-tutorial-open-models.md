@@ -66,7 +66,7 @@ Open models that you deploy to Agent Platform are charged per machine-hour. This
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs.
+3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

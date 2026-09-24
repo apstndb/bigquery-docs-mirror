@@ -30,7 +30,7 @@ This document shows you how to use the Google Cloud console to create a BigQuery
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery and BigQuery Connection APIs.
+3.  Enable the BigQuery and BigQuery Connection APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

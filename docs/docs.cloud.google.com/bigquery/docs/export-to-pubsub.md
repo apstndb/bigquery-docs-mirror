@@ -54,7 +54,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## Before you begin
 
-Enable the BigQuery and Pub/Sub APIs.
+Enable the BigQuery and Pub/Sub APIs, if any are not already enabled.
 
 **Roles required to enable APIs**
 

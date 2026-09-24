@@ -31,7 +31,7 @@ You incur charges for:
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in an existing project, go to
     
-    Enable the BigQuery API.
+    Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

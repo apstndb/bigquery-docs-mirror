@@ -42,17 +42,17 @@ Make sure that Gemini in BigQuery is enabled for your Google Cloud project. For 
 
 ### Enable the required APIs
 
-> **Note:** If you don't have permission to enable the APIs, ask your project administrator to enable the APIs for you from the [APIs & Services dashboard](https://console.cloud.google.com/apis/dashboard) . Alternatively, your project administrator can grant you the [Service Usage Admin ( `roles/serviceusage.serviceUsageAdmin` )](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageAdmin) role in the Google Cloud console, which lets you enable and disable APIs for the current project.
+> **Note:** If you don't have permission to enable the APIs, ask your project administrator to enable the APIs for you from the [APIs & Services dashboard](https://console.cloud.google.com/apis/dashboard) . Alternatively, your project administrator can grant you the [Service Usage Admin ( `roles/serviceusage.serviceUsageAdmin` )](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageAdmin) role, which lets you manage APIs for the current project.
 
 ### console
 
-Enable the following APIs in the Google Cloud console for the Google Cloud project you use with the Conversational Analytics API.
+Enable the following APIs in the Google Cloud console for the Google Cloud project you use with the Conversational Analytics API, if they aren't already enabled.
 
 > **Tip:** After you enable an API, refresh the Google Cloud console page to confirm that it's enabled.
 
 ### gcloud
 
-To enable the Gemini Data Analytics API, the Gemini for Google Cloud API, and the BigQuery API, use the [Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install-sdk) and run the following [`gcloud services enable`](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) commands:
+To enable the Gemini Data Analytics API, the Gemini for Google Cloud API, and the BigQuery API, if they aren't already enabled, use the [Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install-sdk) and run the following [`gcloud services enable`](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) commands:
 
     gcloud services enable geminidataanalytics.googleapis.com --project=PROJECT_ID
     gcloud services enable cloudaicompanion.googleapis.com --project=PROJECT_ID

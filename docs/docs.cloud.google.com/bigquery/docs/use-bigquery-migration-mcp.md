@@ -26,7 +26,7 @@ For information about other MCP servers and information about security and gover
 
 ## Before you begin
 
-1.  Enable the BigQuery Migration Service API.
+1.  Enable the BigQuery Migration Service API, if it is not already enabled.
     
     **Roles required to enable APIs**
     
@@ -245,7 +245,7 @@ You must enable Model Armor APIs before you can use Model Armor.
 
 ### Console
 
-1.  Enable the Model Armor API.
+1.  Enable the Model Armor API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

@@ -67,7 +67,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
       - `  USER_IDENTIFIER  ` : The identifier for your user account. For example, `myemail@example.com` .
       - `  ROLE  ` : The IAM role that you grant to your user account.
 
-4.  Enable the BigQuery API:
+4.  Enable the BigQuery API, if it is not already enabled:
     
     **Roles required to enable APIs**
     

@@ -30,7 +30,7 @@ For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/p
 
 ## Before you begin
 
-1.  Enable the BigQuery API.
+1.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

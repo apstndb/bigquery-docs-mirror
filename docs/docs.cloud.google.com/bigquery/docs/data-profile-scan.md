@@ -16,7 +16,7 @@ For more information about data profiling, see [About data profiling](https://do
 
 ## Before you begin
 
-Enable the Dataplex API.
+Enable the Dataplex API, if it is not already enabled.
 
 **Roles required to enable APIs**
 

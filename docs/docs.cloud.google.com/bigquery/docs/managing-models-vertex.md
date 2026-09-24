@@ -18,7 +18,7 @@ To learn how to manage your BigQuery ML models from Vertex AI Model Registry, se
 
 ## Before you begin
 
-Enable the Agent Platform API.
+Enable the Agent Platform API, if it is not already enabled.
 
 **Roles required to enable APIs**
 

@@ -25,7 +25,7 @@ Data Apps provide the following:
 
 ## Before you begin
 
-1.  Enable the BigQuery and Dataform APIs.
+1.  Enable the BigQuery and Dataform APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

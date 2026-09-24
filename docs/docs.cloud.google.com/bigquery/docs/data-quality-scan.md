@@ -16,7 +16,7 @@ For more information about automatic data quality, see the [Auto data quality ov
 
 ## Before you begin
 
-1.  Enable the Dataplex API.
+1.  Enable the Dataplex API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

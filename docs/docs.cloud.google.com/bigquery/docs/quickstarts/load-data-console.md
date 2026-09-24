@@ -18,7 +18,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 
 ## Before you begin
 
-1.  Enable the BigQuery API.
+1.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

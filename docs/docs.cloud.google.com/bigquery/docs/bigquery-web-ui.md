@@ -12,7 +12,7 @@ The BigQuery Google Cloud console is a graphical interface where you can create 
 
 ## Before you begin
 
-1.  Enable the BigQuery API.
+1.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

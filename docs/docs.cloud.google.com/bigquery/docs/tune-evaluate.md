@@ -79,7 +79,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery, BigQuery Connection, Agent Platform API, and Compute Engine APIs.
+3.  Enable the BigQuery, BigQuery Connection, Agent Platform API, and Compute Engine APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

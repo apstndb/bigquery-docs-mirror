@@ -181,7 +181,7 @@ Enter the `bq mk` command and supply the transfer creation flag — `--transfer_
   --project_id=PROJECT_ID \
   --target_dataset=DATASET \
   --display_name=NAME \
-  --params=&#39;PARAMETERS' \
+  --params='PARAMETERS' \
   --data_source=DATA_SOURCE
 ```
 

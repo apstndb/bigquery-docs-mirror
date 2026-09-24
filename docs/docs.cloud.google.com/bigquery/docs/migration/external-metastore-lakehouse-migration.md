@@ -36,7 +36,7 @@ Before you can migrate metadata from your external data catalogs, you must do th
 
 ### Enable APIs
 
-Enable the BigLake, BigQuery Data Transfer, BigQuery Migration, Secret Manager, Storage Transfer APIs.
+Enable the BigLake, BigQuery Data Transfer, BigQuery Migration, Secret Manager, Storage Transfer APIs, if any are not already enabled.
 
 **Roles required to enable APIs**
 

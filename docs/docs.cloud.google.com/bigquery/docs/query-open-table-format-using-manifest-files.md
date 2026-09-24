@@ -14,7 +14,7 @@ Some open table formats such as Hudi and Delta Lake export their current state a
 
 ## Before you begin
 
-  - Enable the BigQuery Connection, BigQuery Reservation, and BigLake APIs.
+  - Enable the BigQuery Connection, BigQuery Reservation, and BigLake APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

@@ -32,13 +32,13 @@ For more information about Agent Platform costs, see [Custom-trained models](htt
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
     
-    Enable the BigQuery API.
+    Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-2.  Enable the AI Platform Training and Prediction API and Compute Engine APIs.
+2.  Enable the AI Platform Training and Prediction API and Compute Engine APIs, if any are not already enabled.
     
     **Roles required to enable APIs**
     

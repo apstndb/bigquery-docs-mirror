@@ -24,7 +24,7 @@ To use the default connection, specify the `DEFAULT` keyword in the following SQ
 
 ## Before you begin
 
-Enable the BigQuery Connection API.
+Enable the BigQuery Connection API, if it is not already enabled.
 
 **Roles required to enable APIs**
 

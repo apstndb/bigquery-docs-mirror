@@ -23,7 +23,7 @@ Depending on where your data is stored, we recommend the following alternatives 
 
 ## Before you begin
 
-Enable the BigQuery Connection and BigQuery Reservation APIs.
+Enable the BigQuery Connection and BigQuery Reservation APIs, if any are not already enabled.
 
 **Roles required to enable APIs**
 

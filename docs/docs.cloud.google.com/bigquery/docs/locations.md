@@ -35,7 +35,7 @@ The following table lists the regions in the Americas where BigQuery is availabl
 | Columbus, Ohio         | `us-east5`                |                                                                                                                                                                          |
 | Dallas                 | `us-south1`               | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
 | Iowa                   | `us-central1`             | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
-| Los Angeles            | `us-west2`                | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| Los Angeles            | `us-west2`                |                                                                                                                                                                          |
 | Las Vegas              | `us-west4`                |                                                                                                                                                                          |
 | Mexico                 | `northamerica-south1`     |                                                                                                                                                                          |
 | Montréal               | `northamerica-northeast1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
@@ -153,8 +153,6 @@ Iowa
 Los Angeles
 
 `us-west2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
@@ -1377,8 +1375,6 @@ Los Angeles
 
 `us-west2`
 
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
 Mexico
 
 `northamerica-south1`
@@ -1488,8 +1484,6 @@ Las Vegas
 Los Angeles
 
 `us-west2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Mexico
 
@@ -1797,8 +1791,6 @@ Los Angeles
 
 `us-west2`
 
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
 Montréal
 
 `northamerica-northeast1`
@@ -1872,8 +1864,6 @@ Las Vegas
 Los Angeles
 
 `us-west2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Mexico
 

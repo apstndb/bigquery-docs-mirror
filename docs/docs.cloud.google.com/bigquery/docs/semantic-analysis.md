@@ -30,7 +30,7 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
 
 ## Before you begin
 
-1.  Enable the BigQuery API.
+1.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

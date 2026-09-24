@@ -26,7 +26,7 @@ To enhance column-level access control, you can optionally use [dynamic data mas
 
 1.  BigQuery is automatically enabled in new projects, but you might need to activate it in a preexisting project.
     
-    Enable the BigQuery API.
+    Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     

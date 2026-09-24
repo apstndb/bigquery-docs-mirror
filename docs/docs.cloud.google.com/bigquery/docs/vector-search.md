@@ -44,7 +44,7 @@ For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/p
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-3.  Enable the BigQuery API.
+3.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     
