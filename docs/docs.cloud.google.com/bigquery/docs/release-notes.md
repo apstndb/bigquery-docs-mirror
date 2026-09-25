@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## September 24, 2026
+
+Feature
+
+In the BigQuery Studio query editor, the **Query results** table now keeps the row numbers visible on the left as you scroll horizontally. This helps you maintain context and track data across wide tables. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## September 22, 2026
 
 Feature
@@ -23,6 +29,12 @@ You can now [publish a BigQuery data agent in Gemini Enterprise](https://docs.cl
 These features are in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 21, 2026
+
+Feature
+
+*Lakehouse* now supports Workday Data Lake as a remote catalog provider for cross-cloud data access ( [Preview](https://cloud.google.com/products#product-launch-stages) ). You can configure federated catalogs to query data stored in Workday Data Lake directly from Google Cloud using BigQuery or Apache Spark without migrating data or building complex ETL pipelines.
+
+For more information, see [Set up cross-cloud connection for Workday Data Lake](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-workday) .
 
 Feature
 
@@ -113,6 +125,14 @@ Feature
 The [Rust SDK for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/libraries) is now in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 31, 2026
+
+Feature
+
+*Lakehouse caching* is now available in Preview for borderless Lakehouse.
+
+Lakehouse caching automatically caches data blocks locally within Google Cloud when running cross-cloud queries against remote data (such as AWS S3 or SAP BDC). Caching helps reduce cross-cloud egress fees for repeated query patterns.
+
+For more information, see [Intelligent caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) and [Monitor cache usage and egress cost savings](https://docs.cloud.google.com/lakehouse/docs/query-remote-data#caching-stats) .
 
 Feature
 

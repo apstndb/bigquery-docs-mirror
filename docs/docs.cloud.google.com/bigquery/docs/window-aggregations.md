@@ -32,7 +32,7 @@ The following aggregation functions are supported:
   - [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)
   - [`APPROX_TOP_SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)
   - [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg) with the following requirements:
-      - A `LIMIT` clause is required, with a maximum value of 100.
+      - A `LIMIT` clause is required, with a maximum value of 10,000.
       - An `ORDER BY` clause is optional.
   - [`ARRAY_CONCAT_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg)
   - [`AVG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg)

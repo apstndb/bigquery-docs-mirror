@@ -79,7 +79,7 @@ FROM
       - `DATE`
       - `DATETIME`
 
-  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` and `TimesFM 2.5` . The default value is `TimesFM 2.5` , which we recommend for all new evaluation tasks.
+  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` , `TimesFM 2.5` , and `TimesFM 3.0` ( [Preview](https://cloud.google.com/products#product-launch-stages) ). The default value is `TimesFM 2.5` .
 
   - `  ID_COLS  ` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to evaluate. Specify one or more values for this argument in order to evaluate multiple time series using a single query. The columns that you specify must use one of the following data types:
     
@@ -90,29 +90,30 @@ FROM
 
   - `  CONTEXT_WINDOW  ` : an `INT64` value that specifies the context window length used by BigQuery ML's built-in TimesFM model. The context window length determines how many of the most recent data points from the input time series are used by the model. For example, if your time series date range is March 1 to April 15, data points are selected starting at April 15 and working backwards. Valid values for models are as follows:
     
-    | **Model Name** | **Supported Context Window Length**              |
-    | -------------- | ------------------------------------------------ |
-    | TimesFM 2.0    | 64, 128, 256, 512, 1024, 2048                    |
-    | TimesFM 2.5    | 64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360 |
+    | **Model name** | **Supported context window length**                     |
+    | -------------- | ------------------------------------------------------- |
+    | `TimesFM 2.0`  | 64, 128, 256, 512, 1024, 2048                           |
+    | `TimesFM 2.5`  | 64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360        |
+    | `TimesFM 3.0`  | `n * 32` where `n` is an integer in the range `[2, 64]` |
     
 
-    If you don't specify a `CONTEXT_WINDOW` value, the `AI.EVALUATE` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. The following table shows the relationships between the number of time series data points in the input data, the selected context window length, and the corresponding supported TimesFM model name:
+    If you don't specify a `CONTEXT_WINDOW` value with the `TimesFM 2.0` or `TimesFM 2.5` models, the `AI.FORECAST` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. If you don't specify a `CONTEXT_WINDOW` value when you use the `TimesFM 3.0` model, the `AI.FORECAST` function defaults to the maximum supported size, `2048` . The following table shows the relationships between the number of time series data points in the input data, the selected context window length, and the corresponding supported TimesFM model name:
     
-    | **Number of time series data points** | **Context window length** | **Supported Model Names** |
-    | ------------------------------------- | ------------------------- | ------------------------- |
-    | (1, 64\]                              | 64                        | TimesFM 2.0, TimesFM 2.5  |
-    | (65, 128\]                            | 128                       | TimesFM 2.0, TimesFM 2.5  |
-    | (129, 256\]                           | 256                       | TimesFM 2.0, TimesFM 2.5  |
-    | (257, 512\]                           | 512                       | TimesFM 2.0, TimesFM 2.5  |
-    | (513, 1024\]                          | 1,024                     | TimesFM 2.0, TimesFM 2.5  |
-    | (1025, 2048\]                         | 2,048                     | TimesFM 2.0, TimesFM 2.5  |
-    | (2049, 4096\]                         | 4,096                     | TimesFM 2.5               |
-    | (4097, 8192\]                         | 8,192                     | TimesFM 2.5               |
-    | (8193, 15360\]                        | 15,360                    | TimesFM 2.5               |
-    | 15360                                 | 15,360                    | TimesFM 2.5               |
+    | **Number of time series data points** | **Context window length** | **Supported model names**                     |
+    | ------------------------------------- | ------------------------- | --------------------------------------------- |
+    | ( `1` , `64` \]                       | 64                        | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
+    | ( `65` , `128` \]                     | 128                       | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
+    | ( `129` , `256` \]                    | 256                       | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
+    | ( `257` , `512` \]                    | 512                       | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
+    | ( `513` , `1024` \]                   | 1,024                     | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
+    | ( `1025` , `2048` \]                  | 2,048                     | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
+    | ( `2049` , `4096` \]                  | 4,096                     | `TimesFM 2.5`                                 |
+    | ( `4097` , `8192` \]                  | 8,192                     | `TimesFM 2.5`                                 |
+    | ( `8193` , `15360` \]                 | 15,360                    | `TimesFM 2.5`                                 |
+    | `15360`                               | 15,360                    | `TimesFM 2.5`                                 |
     
 
-    For the `TimesFM 2.0` model, 2,048 is the maximum number of time series data points that are passed to the model. For the `TimesFM 2.5` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
+    For the `TimesFM 2.0` and `TimesFM 3.0` models, 2,048 is the maximum number of time series data points that are passed to the model. For the `TimesFM 2.5` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
 
 ### TabFM
 
@@ -206,22 +207,20 @@ The result is similar to the following:
 
 The following example evaluates historical bike trips against actual bike trips for multiple time series:
 
-```googlesql
-WITH
-  citibike_trips AS (
-    SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips
-    FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date, usertype
-  )
-SELECT *
-FROM
-  AI.EVALUATE(
-    (SELECT * FROM citibike_trips WHERE date < '2016-07-01'),
-    (SELECT * FROM citibike_trips WHERE date >= '2016-07-01'),
-    data_col => 'num_trips',
-    timestamp_col => 'date',
-    id_cols => ['usertype']);
-```
+    WITH
+      citibike_trips AS (
+        SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips
+        FROM `bigquery-public-data.new_york.citibike_trips`
+        GROUP BY date, usertype
+      )
+    SELECT *
+    FROM
+      AI.EVALUATE(
+        (SELECT * FROM citibike_trips WHERE date < '2016-07-01'),
+        (SELECT * FROM citibike_trips WHERE date >= '2016-07-01'),
+        data_col => 'num_trips',
+        timestamp_col => 'date',
+        id_cols => ['usertype']);
 
 ### Evaluate regression prediction
 
@@ -285,6 +284,13 @@ The result is similar to the following:
 ## Pricing
 
 `AI.EVALUATE` usage is billed at the evaluation, inspection, and prediction rate documented in the **BigQuery ML on-demand pricing** section of the [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) page.
+
+During Preview, usage of `TimesFM 3.0` in BigQuery is billed in the following ways:
+
+  - If you use Enterprise or Enterprise Plus edition, then your usage is billed in slots.
+  - If you use on-demand pricing, then your usage is billed based on the number of bytes processed.
+
+`TimesFM 3.0` will use a token based pricing from 12/01/2026 onwards. At that time, you will be charged for tokens consumed by the model in your query and BigQuery slots used or bytes processed for the rest of the query.
 
 ## What's next
 

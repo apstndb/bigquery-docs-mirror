@@ -12,11 +12,11 @@ Forecasting is a technique where you analyze historical data in order to make an
 
 You can perform forecasting in the following ways:
 
-  - By using the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with the built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) . Use this approach when you need to forecast future values for a single variable. This approach doesn't require you to create and manage a model.
+  - By using the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with the built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) . Use this approach when you need to forecast future values for a single variable or multiple variables. This approach doesn't require you to create and manage a model.
   - By using the [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) with the [`ARIMA_PLUS` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) . Use this approach when you need to run an ARIMA-based modeling pipeline and decompose the time series into multiple components in order to explain the results. This approach requires you to create and manage a model.
   - By using the [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) with the [`ARIMA_PLUS_XREG` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) . Use this approach when you need to forecast future values for multiple variables. This approach requires you to create and manage a model.
 
-In addition to forecasting, you can use `ARIMA_PLUS` and `ARIMA_PLUS_XREG` models for anomaly detection. For more information, see the following documents:
+In addition to forecasting, you can use the `ARIMA_PLUS` , `ARIMA_PLUS_XREG` , and TimesFM models for anomaly detection. For more information, see the following documents:
 
   - [Anomaly detection overview](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview)
   - [Perform anomaly detection with a multivariate time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-anomaly-detection-tutorial)
@@ -41,13 +41,16 @@ Use the following table to determine whether to use TimesFM, `ARIMA_PLUS` , or `
 <tbody>
 <tr class="odd">
 <td>Model details</td>
-<td>Statistical model that uses the <code dir="ltr" translate="no">ARIMA</code> algorithm for the trend component, and a variety of other algorithms for non-trend components. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline">Time series modeling pipeline</a> and publication below.</td>
+<td>Statistical model that uses the <code dir="ltr" translate="no">ARIMA</code> algorithm for the trend component, and a variety of other algorithms for non-trend components. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline">Time series modeling pipeline</a> and the publication in the next row.</td>
 <td>Transformer-based foundation model. For more information, see the publications in the next row.</td>
 </tr>
 <tr class="even">
 <td>Publication</td>
-<td><a href="https://arxiv.org/abs/2510.24452">ARIMA_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in Google BigQuery</a></td>
-<td><a href="https://arxiv.org/pdf/2310.10688">A Decoder-only Foundation Model for Time-series Forecasting</a></td>
+<td><a href="https://arxiv.org/abs/2510.24452">ARIMA_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in BigQuery</a></td>
+<td><ul>
+<li><a href="https://arxiv.org/pdf/2310.10688">A Decoder-only Foundation Model for Time-series Forecasting</a></li>
+<li><a href="https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/">TimesFM-3: A zero-shot foundation model for multivariate time-series forecasting</a></li>
+</ul></td>
 </tr>
 <tr class="odd">
 <td>Training required</td>
@@ -85,7 +88,7 @@ Use the following table to determine whether to use TimesFM, `ARIMA_PLUS` , or `
 <tr class="even">
 <td>Supports covariates</td>
 <td>Yes, when using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series"><code dir="ltr" translate="no">ARIMA_PLUS_XREG</code> model</a> .</td>
-<td>No.</td>
+<td>Yes, when using the <code dir="ltr" translate="no">TimesFM 3.0</code> model ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> ).</td>
 </tr>
 <tr class="odd">
 <td>Explainability</td>
@@ -104,7 +107,8 @@ Use the following table to determine whether to use TimesFM, `ARIMA_PLUS` , or `
 <li>You need explainability for model output.</li>
 </ul></td>
 <td><ul>
-<li>You want minimal setup -- doing forecast without creating a model first.</li>
+<li>You want to perform forecasting without creating a model first.</li>
+<li>You want a high-performance, pre-trained foundational model.</li>
 </ul></td>
 </tr>
 </tbody>

@@ -114,7 +114,7 @@ If the `insertId` field is populated, the following quota errors are possible:
 
 The purpose of the `insertId` field is to deduplicate inserted rows. If multiple inserts with the same `insertId` arrive within a few minutes' window, BigQuery writes a single version of the record. However, this automatic deduplication is not guaranteed. For maximum streaming throughput, we recommend that you don't include `insertId` and instead use [manual deduplication](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) . For more information, see [Ensuring data consistency](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataconsistency) .
 
-When you encounter this error, [diagnose the issue](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota-diagnose) the issue and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota-resolution) to resolve it.
+When you encounter this error, [diagnose the issue](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota-diagnose) , and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota-resolution) to resolve it.
 
 #### Diagnosis
 

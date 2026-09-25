@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment
 uri: https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment
-title: Set up the AWS-Google Cloud VPN and network attachment
+title: Set up AWS VPN and network attachments
 description: Learn how to set up a VPN connection between Amazon Web Services (AWS) and {{dynamic_data.site_values.cloud_name}}.
 data_source: docs.cloud.google.com
 ---
 
-# Set up the AWS-Google Cloud VPN and network attachment
+# Set up AWS VPN and network attachments
 
 This document provides detailed steps for setting up a VPN connection between Amazon Web Services (AWS) and Google Cloud. The goal is to establish a reliable and security-enhanced connection between the two cloud environments.
 
@@ -84,9 +84,9 @@ For more information, see [Create network attachments](https://docs.cloud.google
 
 ## Troubleshoot
 
-If you are having issues setting up your network attachment, do the following:
+If you're having issues setting up your network attachment, do the following:
 
-  - Ensure the VPN connections are up and running in both the AWS and Google Cloud consoles.
+  - Ensure that the VPN connections are up and running in both the AWS console and the Google Cloud console.
   - Check the VPN logs for errors or dropped packets.
   - Verify that the routing tables in both AWS and Google Cloud are correctly configured.
   - Ensure that the necessary ports are open in both the AWS security groups and the Google Cloud firewall rules.

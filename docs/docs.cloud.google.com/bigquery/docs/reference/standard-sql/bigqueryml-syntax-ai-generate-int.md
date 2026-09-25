@@ -25,8 +25,7 @@ For example, the following query rates the sentiment of BBC news article titles:
     SELECT
       title,
       AI.GENERATE_INT(
-        ("Rate the sentiment of this article title from 1 (very negative) to 5 (very positive): ", title),
-        endpoint => 'gemini-2.5-pro'
+        ("Rate the sentiment of this article title from 1 (very negative) to 5 (very positive): ", title)
       ).result AS sentiment_score
     FROM `bigquery-public-data.bbc_news.fulltext`
     LIMIT 3;
@@ -176,7 +175,7 @@ To determine the population of each city, you can call the `AI.GENERATE_INT` fun
 
     SELECT
       city,
-      AI.GENERATE_INT(('What is the population of ', city), endpoint => 'gemini-2.5-pro').result
+      AI.GENERATE_INT(('What is the population of ', city)).result
     FROM UNNEST(["Seattle", "Beijing", "Paris", "London"]) city;
 
 The result is similar to the following:
@@ -201,7 +200,6 @@ The following query shows how to set the `model_params` argument to set the mode
     SELECT
       city,
       AI.GENERATE_INT(('What is the population of ', city),
-        endpoint => 'gemini-2.5-pro',
         model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}')
     FROM mydataset.cities;
 

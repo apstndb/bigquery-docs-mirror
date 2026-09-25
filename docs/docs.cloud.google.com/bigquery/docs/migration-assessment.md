@@ -1703,7 +1703,7 @@ After inspecting the dataset, if you would like to share it with a user that is 
 
 ## Troubleshooting
 
-This section explains some common issues and troubleshooting techniques for migrating your data warehouse to BigQuery.
+The following sections explain common issues and troubleshooting techniques for migrating your data warehouse to BigQuery.
 
 ### `dwh-migration-dumper` tool errors
 
@@ -1711,17 +1711,17 @@ To troubleshoot errors and warnings in the `dwh-migration-dumper` tool terminal 
 
 ### Hive migration errors
 
-This section describes common issues that you might run into when you plan to migrate your data warehouse from Hive to BigQuery.
+The following sections describe common issues that you might encounter when you plan to migrate your data warehouse from Hive to BigQuery.
 
-The logging hook writes debug log messages in your `hive-server2` logs. If you run into any issues, review the logging hook debug logs, which contains the `MigrationAssessmentLoggingHook` string.
+The `hadoop-migration-assessment` query logs extraction logging hook writes debug log messages in your `hive-server2` logs. If you encounter any issues, review the logging hook debug logs, which contain the `MigrationAssessmentLoggingHook` string.
 
 #### Handle the `ClassNotFoundException` error
 
-The error might be caused by the logging hook JAR file misplacement. Ensure that you added the JAR file to the auxlib folder on the Hive cluster. Alternatively, you can specify full path to the JAR file in the `hive.aux.jars.path` property, for example, ` file:// /HiveMigrationAssessmentQueryLogsHooks_deploy.jar  ` .
+This error might be caused by misplacement of the logging hook JAR file. Ensure that you added the JAR file to the `auxlib` folder on the Hive cluster. Alternatively, you can specify the full path to the JAR file in the `hive.aux.jars.path` property—for example, `file:// AUXLIB_PATH /HiveMigrationAssessmentQueryLogsHooks_deploy.jar` .
 
 #### Subfolders don't appear in the configured folder
 
-This issue might be caused by the misconfiguration or problems during logging hook initialization.
+This issue might be caused by a misconfiguration or problems during logging hook initialization.
 
 Search your `hive-server2` debug logs for the following logging hook messages:
 
@@ -1736,9 +1736,9 @@ Review the issue details and see if there is anything that you need to correct t
 
 #### Files don't appear in the folder
 
-This issue might be caused by the problems encountered during an event processing or while writing to a file.
+This issue might be caused by problems encountered during event processing or while writing to a file.
 
-Search in your `hive-server2` debug logs for the following logging hook messages:
+Search your `hive-server2` debug logs for the following logging hook messages:
 
     Failed to close writer for file
 
@@ -1750,13 +1750,13 @@ Review the issue details and see if there is anything that you need to correct t
 
 #### Some query events are missed
 
-This issue might be caused by the logging hook thread queue overflow.
+This issue might be caused by a logging hook thread queue overflow.
 
-Search in your `hive-server2` debug logs for the following logging hook message:
+Search your `hive-server2` debug logs for the following logging hook message:
 
     Writer queue is full. Ignoring event
 
-If there are such messages, consider increasing the `dwhassessment.hook.queue.capacity` parameter.
+If you find this message, consider increasing the `dwhassessment.hook.queue.capacity` parameter.
 
 ## What's next
 

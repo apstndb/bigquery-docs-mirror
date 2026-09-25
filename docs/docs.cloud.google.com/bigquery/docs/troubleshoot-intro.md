@@ -103,9 +103,15 @@ Resolve issues when workloads exceed BigQuery service limits or capacity allocat
 
 Diagnose failures when loading data, streaming records, or syncing external sources.
 
-  - **[Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .** Resolve BigQuery Data Transfer Service errors across sources like Amazon S3, Salesforce, Google Ads, and Cloud Storage.
-  - **[Troubleshoot streaming inserts](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#troubleshooting) .** Debug Storage Write API and legacy streaming ingestion failures, row-level insertion errors, and throughput quotas.
-  - **[Troubleshoot data loading](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#troubleshoot_parsing_errors) .** Resolve CSV, JSON, Parquet, or Avro schema parsing and delimiter errors.
+  - **[Troubleshoot data transfers](https://docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers) .** Diagnose BigQuery Data Transfer Service issues, network connectivity for private transfers, and CSV data loading errors.
+  - **[Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .** Resolve BigQuery Data Transfer Service configuration errors across sources like Amazon Simple Storage Service (Amazon S3), Salesforce, Google Ads, and Cloud Storage.
+  - **[Troubleshoot BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api) .** Debug BigQuery Storage Read API, BigQuery Storage Write API (gRPC), and BigQuery Storage Write API (REST) streaming ingestion failures, row-level insertion errors, and throughput quotas.
+
+### Data warehouse migration
+
+Diagnose issues when assessing, translating, or migrating external data warehouses to BigQuery.
+
+  - **[Troubleshoot migration issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-migrations) .** Resolve migration assessment errors, interactive and batch SQL translation issues, and metadata extraction failures.
 
 ### External data sources and federated queries
 

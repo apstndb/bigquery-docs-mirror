@@ -64,7 +64,7 @@ Request for updating a transfer configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataSource&quot;: string,&quot;projectId&quot;: string,&quot;location&quot;: string,&quot;transferConfigId&quot;: string,&quot;params&quot;: {object},&quot;scheduleOptions&quot;: {object (ScheduleOptionsV2)},&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},// Union field _display_name can be only one of the following:&quot;displayName&quot;: string// End of list of possible types for union field _display_name.// Union field _destination_dataset_id can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field _destination_dataset_id.// Union field authorization can be only one of the following:&quot;versionInfo&quot;: string,&quot;serviceAccountName&quot;: string// End of list of possible types for union field authorization.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataSource&quot;: string,&quot;projectId&quot;: string,&quot;location&quot;: string,&quot;transferConfigId&quot;: string,&quot;params&quot;: {object},&quot;scheduleOptions&quot;: {object (ScheduleOptionsV2)},&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;paramConfig&quot;: {object (ParameterConfig)},// Union field _display_name can be only one of the following:&quot;displayName&quot;: string// End of list of possible types for union field _display_name.// Union field _destination_dataset_id can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field _destination_dataset_id.// Union field authorization can be only one of the following:&quot;versionInfo&quot;: string,&quot;serviceAccountName&quot;: string// End of list of possible types for union field authorization.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -120,6 +120,14 @@ The format for specifying a pubsub topic is: `projects/{project_id}/topics/{topi
 ` object ( EmailPreferences  ` )
 
 Email notifications will be sent according to these preferences to the email address of the user who owns this transfer config.
+
+`paramConfig`
+
+` object ( ParameterConfig  ` )
+
+Optional. Config to specify properties of `params` .
+
+A parameter with `secret_manager_allowed` must be included in `param_config.secret_manager_managed_params` . Using plaintext secret values is insecure and is not allowed.
 
 Union field `_display_name` .
 
@@ -481,6 +489,36 @@ Fields
 `boolean`
 
 If true, email notifications will be sent on transfer run failures.
+
+### ParameterConfig
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;secretManagerManagedParams&quot;: [
+    string
+  ]
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`secretManagerManagedParams[]`
+
+`string`
+
+Optional. The list of parameters that are stored in Secret Manager. The value of a parameter included in this list will be interpreted as a Secret Manager key version resource name instead of a raw value. The raw value will be retrieved from Secret Manager upon execution.
 
 ### NullValue
 

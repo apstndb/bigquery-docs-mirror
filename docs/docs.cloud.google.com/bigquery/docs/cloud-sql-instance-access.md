@@ -148,9 +148,9 @@ To create the network attachment in the BigQuery Data Transfer Service connector
 
 ## Troubleshoot
 
-If you are having issues setting up your network configuration, do the following:
+If you're having issues setting up your network configuration, do the following:
 
   - Ensure that VPC peering is established and that routes are correctly configured.
   - Verify that the firewall rules allow for traffic on the required ports.
-  - Check the Cloud SQL proxy logs for errors and ensure it is running correctly.
+  - Check the Cloud SQL proxy logs for errors and ensure that it's running correctly.
   - Ensure that the network attachment is correctly configured and connected.

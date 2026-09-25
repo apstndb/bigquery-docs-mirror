@@ -431,9 +431,42 @@ Generated embeddings are written to your table using background DML jobs. By def
 
 Alternatively, to ensure predictable and consistent performance, you can [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) and set the `job_type` to `BACKGROUND` . When a background reservation is present, BigQuery uses it to run the background DML jobs. And the background reservation will be billed for slot time usage from the background DML jobs.
 
+To track the `total_slot_ms` and `total_bytes_billed` values for background DML jobs on a table, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) for jobs with a `job_id` prefix of `gc_` :
+
+    SELECT
+      job_id,
+      creation_time,
+      reservation_id,
+      total_slot_ms,
+      total_bytes_processed,
+      total_bytes_billed
+    FROM
+      `region-REGION.INFORMATION_SCHEMA.JOBS` j
+    WHERE
+      EXISTS (
+        SELECT 1
+        FROM UNNEST(j.referenced_tables) t
+        WHERE
+          j.project_id = 'PROJECT_ID'
+          AND t.dataset_id = 'DATASET_ID'
+          AND t.table_id = 'TABLE'
+      )
+      AND STARTS_WITH(job_id, 'gc_')
+    ORDER BY
+      j.creation_time DESC;
+
+Replace the following:
+
+  - `REGION` : the [dataset region](https://docs.cloud.google.com/bigquery/docs/locations) that contains your table, for example, `us` .
+  - `PROJECT_ID` : the ID of the project that contains your table.
+  - `DATASET_ID` : the name of the dataset that contains your table.
+  - `TABLE` : the name of the table with autonomous embedding generation enabled.
+
+If you specify the built-in `embeddinggemma-300m` model using the `model` parameter in the `AI.EMBED` function, BigQuery also generates the embeddings directly within these background DML jobs using BigQuery slots. No requests are sent to Agent Platform and no Agent Platform charges are incurred. For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) .
+
 ### Gemini Enterprise Agent Platform costs
 
-Autonomous embedding generation sends requests to Gemini Enterprise Agent Platform, which can incur costs. To track the Agent Platform costs incurred by background embedding jobs, follow these steps:
+When you specify a Gemini Enterprise Agent Platform model using the `endpoint` parameter in the `AI.EMBED` function, autonomous embedding generation sends requests to Gemini Enterprise Agent Platform, which can incur costs. To track the Agent Platform costs incurred by background embedding jobs, follow these steps:
 
 1.  [View your billing reports](https://docs.cloud.google.com/billing/docs/how-to/reports) in Cloud Billing.
 

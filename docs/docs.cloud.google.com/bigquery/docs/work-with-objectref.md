@@ -128,8 +128,7 @@ The following example shows a query that uses direct access:
     -- Requires that the end user can read the object "gs://cloud-samples-data/vision/demo-img.jpg" and use the Agent Platform model.
     SELECT AI.GENERATE(
       ("Describe this image:",
-      OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg")),
-      endpoint => 'gemini-2.5-pro');
+      OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg")));
 
 ### Delegated access
 
@@ -156,7 +155,6 @@ The following example shows a query that uses delegated access. It requires the 
     SELECT AI.GENERATE(
       ("Describe this image:",
         OBJ.MAKE_REF("gs://cloud-samples-data/vision/demo-img.jpg", "us.connection1")),
-      endpoint => 'gemini-2.5-pro',
       connection_id => "us.connection2");
 
 Inside a [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc) perimeter, AI functions can't process `ObjectRef` values that use delegated access. Delegated access generates a signed HTTPS URL for the object, and Gemini Enterprise Agent Platform blocks HTTP and HTTPS fetches for projects inside a perimeter. The function writes the following error to the `status` column in the result:

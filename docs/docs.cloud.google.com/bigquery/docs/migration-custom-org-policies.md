@@ -267,10 +267,9 @@ Before you begin, have the following information:
         methodTypes:
         - CREATE
         condition: resource.tasks.all(k, resource.tasks[k].type.startsWith('Assessment'))
-        condition: resource.tasks.all(k, resource.tasks[k].type.startsWith('Assessment'))
         actionType: ALLOW
         displayName: Only assessment tasks are allowed
-        description: Workflows must not contain a task of type 'Assessment'.
+        description: Workflows must only contain tasks of type 'Assessment'.
 
 2.  Apply the constraint:
     
@@ -283,7 +282,7 @@ Before you begin, have the following information:
     The output is similar to the following:
     
         CUSTOM_CONSTRAINT                       ACTION_TYPE  METHOD_TYPES   RESOURCE_TYPES                                       DISPLAY_NAME
-        custom.requireAssessmentTask            DENY         CREATE         bigquerymigration.googleapis.com/MigrationWorkflow   Only assessment tasks are allowed
+        custom.requireAssessmentTask            ALLOW        CREATE         bigquerymigration.googleapis.com/MigrationWorkflow   Only assessment tasks are allowed
         ...
 
 ### Create the policy
@@ -299,7 +298,7 @@ Before you begin, have the following information:
 
 2.  Apply the policy:
     
-        gcloud org-policies set-policy ~/policy-enable-autopilot.yaml
+        gcloud org-policies set-policy ~/policy-assessment-tasks.yaml
 
 3.  Verify that the policy exists:
     
@@ -318,26 +317,29 @@ To test the custom organization policy, you can try to create a non-assessment w
 
     {
       "tasks": {
-          "my_task": {
-            "type": "Teradata2BigQuery_Translation",
-            "translation_details": {
-              "target_base_uri": "gs://some_bucket/target",
-              "source_target_mapping": {
+        "my_task": {
+          "type": "Teradata2BigQuery_Translation",
+          "translation_details": {
+            "target_base_uri": "gs://some_bucket/target",
+            "source_target_mapping": [
+              {
                 "source_spec": {
                   "base_uri": "gs://some_bucket/dataset/"
                 }
               },
-              "source_target_mapping": {
+              {
                 "source_spec": {
                   "literal": {
                     "relative_path": ".",
                     "literal_string": "SELECT * FROM my_table;"
                   }
                 }
-              },
-              "target_return_literals": "sql/."
-            }
-          }  },
+              }
+            ],
+            "target_return_literals": "sql/."
+          }
+        }
+      },
       "display_name": "Translation request"
     }
 

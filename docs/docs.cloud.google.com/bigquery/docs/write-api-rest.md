@@ -2,9 +2,11 @@
 name: documents/docs.cloud.google.com/bigquery/docs/write-api-rest
 uri: https://docs.cloud.google.com/bigquery/docs/write-api-rest
 title: Use the Storage Write API (REST)
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Shows how to stream data into non-partitioned and time-partitioned BigQuery tables using the tabledata.insertAll method, de-duplicate data, and create tables using templates. Includes examples in C#, Go, Java, Node.js, PHP, Python, and Ruby.
 data_source: docs.cloud.google.com
 ---
+
+# Use the Storage Write API (REST)
 
 This document describes how to stream data into BigQuery by using the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) , which was previously known as the *legacy `tabledata.insertAll` method* .
 
@@ -453,7 +455,7 @@ The system expects that rows provided with identical `insertId` s are also ident
 
 De-duplication is generally meant for retry scenarios in a distributed system where there's no way to determine the state of a streaming insert under certain error conditions, such as network errors between your system and BigQuery or internal errors within BigQuery. If you retry an insert, use the same `insertId` for the same set of rows so that BigQuery can attempt to de-duplicate your data. For more information, see [troubleshooting streaming inserts](https://docs.cloud.google.com/bigquery/docs/write-api-rest#troubleshooting) .
 
-De-duplication offered by BigQuery is best effort, and it should not be relied upon as a mechanism to guarantee the absence of duplicates in your data. Additionally, BigQuery might degrade the quality of best effort de-duplication at any time in order to guarantee higher reliability and availability for your data.
+De-duplication offered by BigQuery is best effort, and it shouldn't be relied upon as a mechanism to ensure the absence of duplicates in your data. Additionally, BigQuery might degrade the quality of best effort de-duplication at any time in order to ensure higher reliability and availability for your data.
 
 If you have strict de-duplication requirements for your data, [Google Cloud Datastore](https://docs.cloud.google.com/datastore) is an alternative service that supports [transactions](https://docs.cloud.google.com/datastore/docs/concepts/transactions) .
 
@@ -541,7 +543,7 @@ When the data is streamed, it is initially placed in the `__UNPARTITIONED__` par
 
 ## Create tables automatically using template tables
 
-*Template tables* provide a mechanism to split a logical table into many smaller tables to create smaller sets of data (for example, by user ID). Template tables have a number of limitations described below. Instead, [partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) are the recommended ways to achieve this behavior.
+*Template tables* provide a mechanism to split a logical table into many smaller tables to create smaller sets of data (for example, by user ID). Template tables have a number of limitations described later in this section. Instead, [partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) are the recommended ways to achieve this behavior.
 
 To use a template table through the BigQuery API, add a `templateSuffix` parameter to your Storage Write API (REST) request. For the bq command-line tool, add the `template_suffix` flag to your `insert` command. If BigQuery detects a `templateSuffix` parameter or the `template_suffix` flag, it treats the targeted table as a base template. It creates a new table that shares the same schema as the targeted table and has a name that includes the specified suffix:
 
@@ -559,9 +561,9 @@ For existing tables that still have a streaming buffer, if you modify the templa
 
 After you change a template table schema, wait until the changes have propagated before you try to insert new data or query the generated tables. Requests to insert new fields should succeed within a few minutes. Attempts to query the new fields might require a longer wait of up to 90 minutes.
 
-If you want to change a generated table's schema, do not change the schema until streaming through the template table has ceased and the generated table's streaming statistics section is absent from the `tables.get()` response, which indicates that no data is buffered on the table.
+If you want to change a generated table's schema, don't change the schema until streaming through the template table has ceased and the generated table's streaming statistics section is absent from the `tables.get()` response, which indicates that no data is buffered on the table.
 
-[Partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) do not suffer from the preceding limitations and are the recommended mechanism.
+[Partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) don't suffer from the preceding limitations and are the recommended mechanism.
 
 ### Template table details
 
@@ -584,35 +586,37 @@ If you want to change a generated table's schema, do not change the schema until
 
 ## Troubleshoot streaming inserts
 
-The following sections discuss how to troubleshoot errors that occur when you [stream data into BigQuery using the Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . For more information on how to resolve quota errors for streaming inserts, see [Streaming insert quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota) .
+The following sections discuss how to troubleshoot errors that occur when you [stream data into BigQuery using the Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/write-api-rest) . For more information about how to resolve quota errors for streaming inserts, see [Streaming insert quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota) .
 
 ### Failure HTTP response codes
 
-If you receive a failure HTTP response code such as a network error, there's no way to tell whether the streaming insert succeeded. If you try to re-send the request, you might end up with duplicated rows in your table. To help protect your table against duplication, set the `insertId` property when sending your request. BigQuery uses the `insertId` property for de-duplication.
+If you receive a failure HTTP response code, such as a network error, there's no way to tell whether the streaming insert succeeded. If you try to resend the request, you might get duplicated rows in your table. To help protect your table against duplication, set the `insertId` property when you send your request. BigQuery uses the `insertId` property for deduplication.
 
 If you receive a permission error, an invalid table name error, or an exceeded quota error, no rows are inserted and the entire request fails.
 
 ### Success HTTP response codes
 
-Even if you receive a [success HTTP response code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#response-body) , you'll need to check the `insertErrors` property of the response to determine whether the row insertions were successful because it's possible that BigQuery was only partially successful at inserting the rows. You might encounter one of the following scenarios:
+Even if you receive a [success HTTP response code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#response-body) , you must check the `insertErrors` property of the response to determine whether the row insertions were successful, because BigQuery might be only partially successful at inserting the rows. You might encounter one of the following scenarios:
 
-  - **All rows inserted successfully.** If the `insertErrors` property is an empty list, all of the rows were inserted successfully.
-  - **Some rows inserted successfully.** Except in cases where there is a schema mismatch in any of the rows, rows indicated in the `insertErrors` property are not inserted, and all other rows are inserted successfully. The `errors` property contains detailed information about why each unsuccessful row failed. The `index` property indicates the 0-based row index of the request that the error applies to.
-  - **None of the rows inserted successfully.** If BigQuery encounters a schema mismatch on individual rows in the request, none of the rows are inserted and an `insertErrors` entry is returned for each row, even the rows that did not have a schema mismatch. Rows that did not have a schema mismatch have an error with the `reason` property set to `stopped` , and can be re-sent as-is. Rows that failed include detailed information about the schema mismatch. To learn about the supported protocol buffer types for each BigQuery data type, see [Supported protocol buffer and Arrow data types](https://docs.cloud.google.com/bigquery/docs/supported-data-types) .
+  - **All rows inserted successfully:** If the `insertErrors` property is an empty list, all of the rows were inserted successfully.
+  - **Some rows inserted successfully:** Except in cases where there's a schema mismatch in any of the rows, rows indicated in the `insertErrors` property aren't inserted, and all other rows are inserted successfully. The `errors` property contains detailed information about why each unsuccessful row failed. The `index` property indicates the 0-based row index of the request that the error applies to.
+  - **No rows inserted successfully:** If BigQuery encounters a schema mismatch on individual rows in the request, none of the rows are inserted and an `insertErrors` entry is returned for each row, even for rows that didn't have a schema mismatch. Rows that didn't have a schema mismatch have an error with the `reason` property set to `stopped` , and you can resend them as-is. Rows that failed include detailed information about the schema mismatch. To learn about the supported protocol buffer types for each BigQuery data type, see [Supported protocol buffer and Arrow data types](https://docs.cloud.google.com/bigquery/docs/supported-data-types) .
 
 ### Metadata errors for streaming inserts
 
-Because BigQuery's streaming API is designed for high insertion rates, modifications to the underlying table metadata exhibit are eventually consistent when interacting with the streaming system. Most of the time, metadata changes are propagated within minutes, but during this period API responses might reflect the inconsistent state of the table.
+Because the BigQuery streaming API is designed for high insertion rates, modifications to the underlying table metadata are eventually consistent when interacting with the streaming system. Most of the time, metadata changes propagate within minutes, but during this period API responses might reflect the inconsistent state of the table.
 
-Some scenarios include:
+Some scenarios include the following:
 
-  - **Schema Changes** . Modifying the schema of a table that has recently received streaming inserts can cause responses with schema mismatch errors because the streaming system might not immediately pick up the schema change.
-  - **Table Creation/Deletion** . Streaming to a nonexistent table returns a variation of a `notFound` response. A table created in response might not immediately be recognized by subsequent streaming inserts. Similarly, deleting or recreating a table can create a period of time where streaming inserts are effectively delivered to the old table. The streaming inserts might not be present in the new table.
-  - **Table Truncation** . Truncating a table's data (by using a query job that uses writeDisposition of WRITE\_TRUNCATE) can similarly cause subsequent inserts during the consistency period to be dropped.
+  - **Schema changes:** Modifying the schema of a table that recently received streaming inserts can cause responses with schema mismatch errors because the streaming system might not immediately detect the schema change.
+  - **Table creation or deletion:** Streaming to a nonexistent table returns a variation of a `notFound` response. A table created in response might not immediately be recognized by subsequent streaming inserts. Similarly, deleting or recreating a table can create a period of time where streaming inserts are delivered to the old table. The streaming inserts might not be present in the new table.
+  - **Table truncation:** Truncating a table's data (by using a query job that uses a `writeDisposition` value of `WRITE_TRUNCATE` ) can similarly cause subsequent inserts during the consistency period to be dropped.
 
-### Missing/Unavailable data
+### Missing or unavailable data
 
-Streaming inserts reside temporarily in the write-optimized storage, which has different availability characteristics than managed storage. Certain operations in BigQuery don't interact with the write-optimized storage, such as table copy jobs and API methods like `tabledata.list` . Recent streaming data won't be present in the destination table or output.
+Streaming inserts reside temporarily in write-optimized storage, which has different availability characteristics than managed storage. Certain operations in BigQuery don't interact with write-optimized storage, such as table copy jobs and API methods like `tabledata.list` . Recent streaming data isn't present in the destination table or output.
+
+<span id="ts-streaming-insert-quota"></span>
 
 ### Streaming insert quota errors
 
@@ -638,7 +642,7 @@ If the `insertId` field is populated, the following quota errors are possible:
 
 The purpose of the `insertId` field is to deduplicate inserted rows. If multiple inserts with the same `insertId` arrive within a few minutes' window, BigQuery writes a single version of the record. However, this automatic deduplication is not guaranteed. For maximum streaming throughput, we recommend that you don't include `insertId` and instead use [manual deduplication](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) . For more information, see [Ensuring data consistency](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataconsistency) .
 
-When you encounter this error, [diagnose the issue](https://docs.cloud.google.com/bigquery/docs/write-api-rest#ts-streaming-insert-quota-diagnose) the issue and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/write-api-rest#ts-streaming-insert-quota-resolution) to resolve it.
+When you encounter this error, [diagnose the issue](https://docs.cloud.google.com/bigquery/docs/write-api-rest#ts-streaming-insert-quota-diagnose) , and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/write-api-rest#ts-streaming-insert-quota-resolution) to resolve it.
 
 #### Diagnosis
 

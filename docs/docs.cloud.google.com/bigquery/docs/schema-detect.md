@@ -506,15 +506,15 @@ BigQuery detects the following delimiters:
 
 #### CSV header
 
-BigQuery infers headers by comparing the first row of the file with other rows in the file. If the first line contains only strings, and the other lines contain other data types, BigQuery assumes that the first row is a header row. BigQuery assigns column names based on the field names in the header row. The names might be modified to meet the [naming rules](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) for columns in BigQuery. For example, spaces will be replaced with underscores.
+BigQuery infers headers by comparing the first row of the file with other rows in the file. If the first line contains only strings, and the other lines contain other data types, BigQuery assumes that the first row is a header row. BigQuery assigns column names based on the field names in the header row. The names might be modified to meet the [naming rules](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) for columns in BigQuery. For example, spaces are replaced with underscores.
 
-Otherwise, BigQuery assumes the first row is a data row, and assigns generic column names such as `string_field_1` . Note that after a table is created, the column names cannot be updated in the schema, although you can [change the names manually](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas#changing_a_columns_name) after the table is created. Another option is to provide an explicit schema instead of using autodetect.
+Otherwise, BigQuery assumes the first row is a data row, and assigns generic column names such as `string_field_1` . Note that after a table is created, the column names can't be updated in the schema, although you can [change the names manually](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas#changing_a_columns_name) after the table is created. Another option is to provide an explicit schema instead of using autodetect.
 
-You might have a CSV file with a header row, where all of the data fields are strings. In that case, BigQuery won't automatically detect that the first row is a header. Use the `--skip_leading_rows` option to skip the header row. Otherwise, the header will be imported as data. Also consider providing an explicit schema in this case, so that you can assign column names.
+You might have a CSV file with a header row, where all of the data fields are strings. In that case, BigQuery won't automatically detect that the first row is a header. Use the `--skip_leading_rows` option to skip the header row. Otherwise, the header is imported as data. Also consider providing an explicit schema in this case, so that you can assign column names.
 
 #### CSV quoted new lines
 
-BigQuery detects quoted new line characters within a CSV field and does not interpret the quoted new line character as a row boundary.
+BigQuery detects quoted new line characters within a CSV field and doesn't interpret the quoted new line character as a row boundary.
 
 #### Troubleshooting
 

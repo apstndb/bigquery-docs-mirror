@@ -448,13 +448,15 @@ Save this placeholder UDF in a text file, and include that file as one of the so
 
 ## Troubleshoot translation errors
 
+The following sections describe commonly encountered errors when using the batch SQL translator.
+
 ### `RelationNotFound` or `AttributeNotFound` translation issues
 
-After translating a querying using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) , you might encounter a failed translation with the `RelationNotFound` or `AttributeNotFound` error.
+After translating a query using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) , you might encounter a failed translation with the `RelationNotFound` or `AttributeNotFound` error.
 
-You can find failed translations by navigating to the **Translation details** page and opening the **Log Messages** tab.
+You can find failed translations by going to the **Translation details** page in BigQuery in the Google Cloud console and opening the **Log Messages** tab.
 
-Translation works best with metadata DDLs. When SQL object definitions cannot be found, the translation engine raises `RelationNotFound` or `AttributeNotFound` issues. We recommend using the metadata extractor to generate metadata packages to make sure all object definitions are present. Adding metadata is the recommended first step to resolve most translation errors, as it often can fix many other errors that are indirectly caused from a lack of metadata.
+Translation works best with metadata DDLs. When SQL object definitions can't be found, the translation engine raises `RelationNotFound` or `AttributeNotFound` issues. We recommend using the metadata extractor to generate metadata packages to make sure all object definitions are present. Adding metadata is the recommended first step to resolve most translation errors, because this step often fixes many other errors that are indirectly caused by a lack of metadata.
 
 For more information, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
@@ -466,20 +468,22 @@ For more information, see [Generate metadata for translation and assessment](htt
 
 > **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
-To fixed failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to try to resolve these issues with the following steps.
+To fix failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to resolve these issues:
 
-1.  Navigate to the **Translation details** page and open the **Log Messages** tab.
+1.  Go to the **Translation details** page and open the **Log Messages** tab.
 
 2.  Click the query that has the message `RelationNotFound` or `AttributeNotFound` in the **Category** column.
 
-3.  Click the error message to navigate to the file and line containing the error in the code tab.
+3.  To go to the file and line containing the error in the code tab, click the
+    
+    error message.
 
 4.  In the **Action** column, click **Suggested fix** .
 
-5.  Select one of the following options: **Apply** or **Apply and rerun** :
+5.  Select one of the following options, **Apply** or **Apply and rerun** :
     
-      - Click **Apply** to copy the generated schema file from the output directory to the input directory.
-      - Click **Apply and rerun** to copy the generated schema file from the output directory to the input directory and opens a rerun window.
+      - To copy the generated schema file from the output directory to the input directory, click **Apply** .
+      - To copy the generated schema file from the output directory to the input directory and open a rerun window, click **Apply and rerun** .
 
 ## Pricing
 

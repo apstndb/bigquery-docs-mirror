@@ -1246,7 +1246,7 @@ The following table describes the flags that can be used with any of the support
 
 ## Troubleshooting
 
-This section explains some common issues and troubleshooting techniques for the `dwh-migration-dumper` tool.
+The following sections explain some common issues and troubleshooting techniques for the `dwh-migration-dumper` tool.
 
 ### Out of memory error
 
@@ -1262,42 +1262,42 @@ You can increase maximum memory by exporting the `JAVA_OPTS` environment variabl
 
     set JAVA_OPTS="-Xmx4G"
 
-You can reduce the number of processing threads (default is 32) by including the `--thread-pool-size` flag. This option is supported for `hiveql` and `redshift*` connectors only.
+You can reduce the number of processing threads (the default is 32) by including the `--thread-pool-size` flag value. This option is supported for `hiveql` and `redshift*` connectors only:
 
     dwh-migration-dumper --thread-pool-size=1
 
 ### Handling a `WARN...Task failed` error
 
-You might sometimes see a `WARN [main] o.c.a.d.MetadataDumper [MetadataDumper.java:107] Task failed: …` error in the `dwh-migration-dumper` tool terminal output. The extraction tool submits multiple queries to the source system, and the output of each query is written to its own file. Seeing this issue indicates that one of these queries failed. However, failure of one query doesn't prevent the execution of the other queries. If you see more than a couple of `WARN` errors, review the issue details and see if there is anything that you need to correct in order for the query to run appropriately. For example, if the database user you specified when running the extraction tool lacks permissions to read all metadata, try again with a user with the correct permissions.
+You might sometimes see a `WARN [main] o.c.a.d.MetadataDumper [MetadataDumper.java:107] Task failed: …` error in the `dwh-migration-dumper` tool terminal output. The extraction tool submits multiple queries to the source system, and the output of each query is written to its own file. Seeing this issue indicates that one of these queries failed. However, the failure of one query doesn't prevent the execution of the other queries. If you see more than a couple of `WARN` errors, review the issue details and see if there is anything that you need to correct for the query to run appropriately. For example, if the database user you specified when running the extraction tool lacks permissions to read all metadata, try again with a user with the correct permissions.
 
 ### Corrupted ZIP file
 
-To validate the `dwh-migration-dumper` tool zip file, download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command:
+To validate the `dwh-migration-dumper` tool ZIP file, download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command:
 
 ### Bash
 
     sha256sum --check SHA256SUMS.txt
 
-The `OK` result confirms successful checksum verification. Any other message indicates verification error:
+The `OK` result confirms successful checksum verification. Any other message indicates a verification error:
 
-  - `FAILED: computed checksum did NOT match` : the zip file is corrupted and has to be downloaded again.
-  - `FAILED: listed file could not be read` : the zip file version can't be located. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
+  - `FAILED: computed checksum did NOT match` : the ZIP file is corrupted and must be downloaded again.
+  - `FAILED: listed file could not be read` : the ZIP file version can't be located. Download the checksum and ZIP files from the same release version and place them in the same directory.
 
 ### Windows PowerShell
 
     (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 
-Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
+Replace `  RELEASE_ZIP_FILENAME  ` with the downloaded ZIP filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip` .
 
 The `True` result confirms successful checksum verification.
 
-The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
+The `False` result indicates a verification error. Download the checksum and ZIP files from the same release version and place them in the same directory.
 
 ### Teradata query logs extraction is slow
 
-To improve performance of joining tables that are specified by the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags, you can include an additional column of type `DATE` in the `JOIN` condition. This column must be defined in both tables and it must be part of the Partitioned Primary Index. To include this column, use the `-Dteradata-logs.log-date-column` flag.
+To improve the performance of joining tables that are specified by the `-Dteradata-logs.query-logs-table` and `-Dteradata-logs.sql-logs-table` flags, you can include an additional column of type `DATE` in the `JOIN` condition. This column must be defined in both tables and must be part of the Partitioned Primary Index. To include this column, use the `-Dteradata-logs.log-date-column` flag.
 
-Example:
+The following example shows how to use the `-Dteradata-logs.log-date-column` flag:
 
 ### Bash
 
@@ -1315,14 +1315,16 @@ Example:
 
 ### Teradata row size limit exceeded
 
-Teradata 15 has a 64kB row size limit. If the limit is exceeded, the dumper fails with the following message: `none [Error 9804] [SQLState HY000] Response Row size or Constant Row size overflow`
+Teradata version 15 has a 64 KB row size limit. If the limit is exceeded, the extraction tool fails with the following message:
 
-To resolve this error, either extend the row limit to 1MB or split the rows into multiple rows:
+    [Error 9804] [SQLState HY000] Response Row size or Constant Row size overflow
 
-  - Install and enable the 1MB Perm and Response Rows feature and current TTU software. For more information, see [Teradata Database Message 9804](https://docs.teradata.com/r/Teradata-VantageCloud-Lake-Analytics-Database-Messages/Database-Messages/9804)
+To resolve this error, either extend the row limit to 1 MB or split the rows into multiple rows:
+
+  - Install and enable the 1 MB Perm and Response Rows feature and current TTU software. For more information, see [Teradata Database Message 9804](https://docs.teradata.com/r/Teradata-VantageCloud-Lake-Analytics-Database-Messages/Database-Messages/9804) .
   - Split the long query text into multiple rows by using the `-Dteradata.metadata.max-text-length` and `-Dteradata-logs.max-sql-length` flags.
 
-The following command shows the usage of the `-Dteradata.metadata.max-text-length` flag to split the long query text into multiple rows of at most 10000 characters each:
+The following command shows how to use the `-Dteradata.metadata.max-text-length` flag to split long query text into multiple rows of at most 10,000 characters each:
 
 ### Bash
 
@@ -1336,7 +1338,7 @@ The following command shows the usage of the `-Dteradata.metadata.max-text-lengt
       --connector teradata `
       "-Dteradata.metadata.max-text-length=10000"
 
-The following command shows the usage of the `-Dteradata-logs.max-sql-length` flag to split the long query text into multiple rows of at most 10000 characters each:
+The following command shows how to use the `-Dteradata-logs.max-sql-length` flag to split long query text into multiple rows of at most 10,000 characters each:
 
 ### Bash
 
@@ -1352,31 +1354,27 @@ The following command shows the usage of the `-Dteradata-logs.max-sql-length` fl
 
 ### Oracle connection issue
 
-In common cases like invalid password or hostname, `dwh-migration-dumper` tool prints a meaningful error message describing the root issue. However, in some cases, the error message returned by the Oracle server may be generic and difficult to investigate.
+In common cases such as an invalid password or hostname, `dwh-migration-dumper` tool prints a meaningful error message describing the root issue. However, in some cases, the error message returned by the Oracle server might be generic and difficult to investigate.
 
-One of these issues is `IO Error: Got minus one from a read call` . This error indicates that the connection to Oracle server has been established but the server did not accept the client and closed the connection. This issue typically occurs when the server accepts `TCPS` connections only. By default, `dwh-migration-dumper` tool uses the `TCP` protocol. To solve this issue you must override the Oracle JDBC connection URL.
+One of these issues is `IO Error: Got minus one from a read call` . This error indicates that the connection to the Oracle server was established, but the server didn't accept the client and closed the connection. This issue typically occurs when the server accepts `TCPS` connections only. By default, `dwh-migration-dumper` tool uses the `TCP` protocol. To solve this issue, you must override the Oracle JDBC connection URL.
 
-Instead of providing the `oracle-service` , `host` and `port` flags, you can resolve this issue by providing the `url` flag in the following format: `jdbc:oracle:thin:@tcps://{HOST_NAME}:{PORT}/{ORACLE_SERVICE}` . Typically, the `TCPS` port number used by the Oracle server is `2484` .
+Instead of providing the `oracle-service` , `host` , and `port` flags, you can resolve this issue by providing the `url` flag in the following format: ` jdbc:oracle:thin:@tcps:// HOST_NAME : PORT / ORACLE_SERVICE  ` . Typically, the `TCPS` port number used by the Oracle server is `2484` .
 
-Example dumper command:
+The following example shows how to specify the connection URL in the command:
 
-``` 
-  dwh-migration-dumper \
-    --connector oracle-stats \
-    --url "jdbc:oracle:thin:@tcps://host:port/oracle_service" \
-    --assessment \
-    --driver "jdbc_driver_path" \
-    --user "user" \
-    --password
-```
+    dwh-migration-dumper \
+      --connector oracle-stats \
+      --url "jdbc:oracle:thin:@tcps://HOST_NAME:PORT/ORACLE_SERVICE" \
+      --assessment \
+      --driver "JDBC_DRIVER_PATH" \
+      --user "USER" \
+      --password
 
-In addition to changing connection protocol to TCPS you might need to provide the trustStore SSL configuration that is required to verify Oracle server certificate. A missing SSL configuration will result in an `Unable to find valid certification path` error message. To resolve this, set the JAVA\_OPTS environment variable:
+In addition to changing the connection protocol to `TCPS` , you might need to provide the trustStore SSL configuration that is required to verify the Oracle server certificate. A missing SSL configuration results in an `Unable to find valid certification path` error message. To resolve this issue, set the `JAVA_OPTS` environment variable:
 
-``` 
-  set JAVA_OPTS=-Djavax.net.ssl.trustStore="jks_file_location" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="password"
-```
+    set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
 
-Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. See [SSL With Oracle JDBC Driver](https://www.oracle.com/docs/tech/wp-oracle-jdbc-thin-ssl.pdf) for more information about configuration options.
+Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. For more information about configuration options, see [SSL With Oracle JDBC Driver](https://www.oracle.com/docs/tech/wp-oracle-jdbc-thin-ssl.pdf) .
 
 ## What's next
 

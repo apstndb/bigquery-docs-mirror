@@ -249,15 +249,15 @@ One method to reduce metadata file size is to use the `--database` or `--schema`
 
 ## Troubleshoot translation errors
 
-The following are commonly encountered errors when using the interactive SQL translator.
+The following sections describe commonly encountered errors when using the interactive SQL translator.
 
 ### `RelationNotFound` or `AttributeNotFound` translation issues
 
 After translating a query using the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate_a_query_into_standard_sql) , you might encounter a failed translation with the `RelationNotFound` or `AttributeNotFound` error.
 
-You can find failed translations by navigating to the **Translation details** page and opening the **Log Messages** tab.
+You can find failed translations by going to the **Translation details** page in BigQuery in the Google Cloud console and opening the **Log Messages** tab.
 
-To ensure the most accurate translation, you can input the data definition language (DDL) statements for any tables used in a query prior to the query itself. For example, if you want to translate the Amazon Redshift query `select table1.field1, table2.field1 from table1, table2 where table1.id = table2.id;` , you would input the following SQL statements into the interactive SQL translator:
+To ensure the most accurate translation, you can enter the data definition language (DDL) statements for any tables used in a query prior to the query itself. For example, if you want to translate the Amazon Redshift query `select table1.field1, table2.field1 from table1, table2 where table1.id = table2.id;` , enter the following SQL statements into the interactive SQL translator:
 
     create table schema1.table1 (id int, field1 int, field2 varchar(16));
     create table schema1.table2 (id int, field1 varchar(30), field2 date);
@@ -274,17 +274,13 @@ To ensure the most accurate translation, you can input the data definition langu
 
 > **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
-To fixed failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to try to resolve these issues with the following steps.
+To fix failed translation jobs with the `RelationNotFound` or `AttributeNotFound` errors, you can also use Gemini to resolve these issues:
 
-1.  Navigate to the **Translation details** page and open the **Log Messages** tab.
-
+1.  In BigQuery in the Google Cloud console, go to the **Translation details** page and open the **Log Messages** tab.
 2.  Click the query that has the message `RelationNotFound` or `AttributeNotFound` in the **Category** column.
-
 3.  Click **Suggested fix** .
-
 4.  Click **Apply** .
-
-5.  Click **Translate** to retranslate the query.
+5.  To retranslate the query, click **Translate** .
 
 ## Pricing
 

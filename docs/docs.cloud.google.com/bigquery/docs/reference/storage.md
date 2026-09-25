@@ -383,22 +383,24 @@ Data locality is the process of moving the computation closer to the location wh
 
 BigQuery determines the location to run your load, query, or extract jobs based on the datasets referenced in the request. For information about location considerations, see [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
+<span id="troubleshoot"></span>
+
 ## Troubleshoot errors
 
-The following are common errors encountered when using the Storage Read API:
+The following are common errors encountered when you use the Storage Read API:
 
   - Error: `Stream removed`  
-    **Resolution:** Retry the Storage Read API request. This is likely a transient error that can be resolved by retrying the request. If the problem persists, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+    **Resolution:** Retry the Storage Read API request. This is likely a transient error that you can resolve by retrying the request. If the problem persists, [contact Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
   - Error: `Stream expired`  
-    **Cause:** This error occurs when the Storage Read API session reaches the [6 hour timeout](https://docs.cloud.google.com/bigquery/docs/reference/storage#create_a_session) .
+    **Cause:** This error occurs when the Storage Read API session reaches the [6-hour timeout](https://docs.cloud.google.com/bigquery/docs/reference/storage#create_a_session) .
     
     **Resolution:**
 
 <!-- end list -->
 
 1.  Increase the parallelism of the job.
-2.  If the CPU utilization of the worker nodes is relatively consistent and doesn't spike above 85%, consider running the job on a larger machine type.
+2.  If the CPU utilization of the worker nodes is relatively consistent and doesn't exceed 85%, consider running the job on a larger machine type.
 3.  Split the job into multiple jobs or smaller queries.
 
 ## Quotas and limits

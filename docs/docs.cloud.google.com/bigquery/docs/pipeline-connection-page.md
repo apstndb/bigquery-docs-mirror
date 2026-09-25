@@ -43,9 +43,11 @@ To opt into using the **Pipelines & Connections** page, follow these steps:
     
     The BigQuery **Studio** page opens.
 
-5.  To expand the navigation menu, click last\_page **Toggle BigQuery navigation menu** .
+5.  To control the BigQuery navigation menu, do one of the following:
     
-    ![The BigQuery navigation menu.](https://docs.cloud.google.com/bigquery/images/bq-nav-menu.png)
+      - To expand the navigation menu, hold the pointer over the ![BigQuery navigation menu icon.](https://docs.cloud.google.com/static/bigquery/images/bigquery-nav-menu-icon.png) icon, and then click left\_panel\_open **Toggle BigQuery navigation menu** .
+    
+      - To collapse the navigation menu, click left\_panel\_close **Toggle BigQuery navigation menu** .
 
 6.  In the navigation menu, click one of the following options:
     

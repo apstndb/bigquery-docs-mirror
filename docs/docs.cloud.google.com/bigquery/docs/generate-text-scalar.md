@@ -420,7 +420,7 @@ To summarize news articles, call the `AI.GENERATE` function with the article tex
         bbc_news AS (
           SELECT body FROM `bigquery-public-data.bbc_news.fulltext` LIMIT 5
         )
-        SELECT AI.GENERATE(body, endpoint => 'gemini-2.5-pro') AS news FROM bbc_news;
+        SELECT AI.GENERATE(body) AS news FROM bbc_news;
     
     The output is similar to the following:
     
@@ -458,7 +458,7 @@ Follow these steps to generate text using the `AI.GENERATE` function, and use th
           news.summary
         FROM
           bbc_news,
-          UNNEST(ARRAY[AI.GENERATE(body, endpoint => 'gemini-2.5-pro', output_schema  => 'summary STRING, good_sentiment BOOL')]) AS news;
+          UNNEST(ARRAY[AI.GENERATE(body, output_schema  => 'summary STRING, good_sentiment BOOL')]) AS news;
     
     The output is similar to the following:
     
@@ -496,7 +496,6 @@ You can process multimedia files stored in Cloud Storage by using external objec
         SELECT
           AI.GENERATE(
             (OBJ.GET_ACCESS_URL(ref, 'r'), 'Transcribe the video in Japanese and then translate to English.'),
-            endpoint => 'gemini-2.5-pro',
             output_schema => 'japanese_transcript STRING, english_translation STRING'
           ).* EXCEPT (full_response, status)
         FROM
@@ -534,7 +533,6 @@ Follow these steps to create an object table over public audio content, and then
         SELECT
           AI.GENERATE(
             (OBJ.GET_ACCESS_URL(ref, 'r'), 'Summarize the content of this audio file.'),
-            endpoint => 'gemini-2.5-pro',
             output_schema => 'topic ARRAY<STRING>, summary STRING'
           ).* EXCEPT (full_response, status), uri
         FROM

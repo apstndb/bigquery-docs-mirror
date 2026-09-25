@@ -32,6 +32,8 @@ To enhance column-level access control, you can optionally use [dynamic data mas
     
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
+> **Note:** The `datacatalog.googleapis.com` API must remain enabled to create and manage the Data Catalog policy tags and taxonomies used for data masking and column-level security. Although Data Catalog metadata search and cataloging features are deprecated and transitioning to Knowledge Catalog, the specific Data Catalog API functionality for policy tags isn't deprecated.
+
 ## Roles and permissions
 
 There are several roles related to policy tags for users and service accounts.

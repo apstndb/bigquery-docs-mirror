@@ -171,7 +171,7 @@ To determine whether each city is located in the US, call the `AI.GENERATE_BOOL`
 
     SELECT
       city,
-      AI.GENERATE_BOOL(('Is ', city, ' a US city?'), endpoint => 'gemini-2.5-pro').result
+      AI.GENERATE_BOOL(('Is ', city, ' a US city?')).result
     FROM UNNEST(["Seattle", "Beijing", "Paris", "London"]) city;
 
 The result is similar to the following:
@@ -193,11 +193,11 @@ You can use the `AI.GENERATE_BOOL` function in a `WHERE` clause to filter rows b
 
     SELECT
       title,
-      AI.GENERATE((body, "Summarize the article in a single sentence."), endpoint => 'gemini-2.5-pro').result
+      AI.GENERATE((body, "Summarize the article in a single sentence.")).result
     FROM `bigquery-public-data.bbc_news.fulltext`
     WHERE
       AI.GENERATE_BOOL(
-        (body, "Is this news article focused on US technology? "), endpoint => 'gemini-2.5-pro').result
+        (body, "Is this news article focused on US technology? ")).result
       AND category = "tech"
     LIMIT 3;
 
@@ -229,7 +229,7 @@ To determine which items show cat food, call the `AI.GENERATE_BOOL` function and
     SELECT
       uri,
       OBJ.GET_READ_URL(ref).url AS signed_url,
-      AI.GENERATE_BOOL(("Is this cat food?", ref), endpoint => 'gemini-2.5-pro').result
+      AI.GENERATE_BOOL(("Is this cat food?", ref)).result
     FROM bqml_tutorial.product_images
     WHERE uri LIKE '%cat%';
 
@@ -246,7 +246,6 @@ The following query shows how to set the `model_params` argument to set the mode
     SELECT
       city,
       AI.GENERATE_BOOL(('Is ', city, ' a US city?'),
-        endpoint => 'gemini-2.5-pro',
         model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}')
     FROM mydataset.cities;
 

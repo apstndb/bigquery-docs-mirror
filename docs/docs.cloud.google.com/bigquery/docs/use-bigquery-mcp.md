@@ -35,7 +35,7 @@ You might use the BigQuery [local MCP server](https://docs.cloud.google.com/bigq
   - You need to build a custom tool over a parameterized SQL query.
   - You don't have permissions to enable or use the MCP server in your project.
 
-To allow agents access to advanced BigQuery capabilities like scheduling, permission management, and reservation management, use the `run_bq_command` tool available under the Cloud CLI MCP server. For more information, see [Use the Cloud CLI remote MCP server](https://docs.cloud.google.com/sdk/use-gcloud-mcp) .
+To allow agents access to advanced BigQuery capabilities like scheduling, permission management, and reservation management, use the `run_bq_command` tool available under the Google Cloud CLI MCP server. For more information, see [Use the Google Cloud CLI remote MCP server](https://docs.cloud.google.com/sdk/use-gcloud-mcp) .
 
 For more information about how to use our local MCP server, see [Connect LLMs to BigQuery with MCP](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) . The following sections apply only to the BigQuery remote MCP server.
 

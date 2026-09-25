@@ -1,18 +1,19 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tutorial
 uri: https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tutorial
-title: Forecast multiple time series with a TimesFM univariate model
+title: Forecast single or multiple time series with a TimesFM univariate model
 description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
 data_source: docs.cloud.google.com
 ---
 
-This tutorial teaches you how to use the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to forecast the future value for a given column, based on the historical value of that column.
+This tutorial teaches you how to perform univariate forecasting across single or multiple time series by using the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with the [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) that's built into BigQuery.
 
 This tutorial uses data from the public [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) table.
 
 ## Objectives
 
-This tutorial guides you through using the AI.FORECAST function with the built-in TimesFM model to forecast bike share trips. The first two sections cover how to forecast and visualize results for a single time series. The third section covers how to forecast for multiple time series.
+  - Perform univariate forecasting and visualize results for a single time series.
+  - Perform univariate forecasting and visualize results for multiple time series.
 
 ## Costs
 
@@ -21,19 +22,51 @@ This tutorial uses billable components of Google Cloud, including the following:
   - BigQuery
   - BigQuery ML
 
-For more information about BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
-
-For more information about BigQuery ML costs, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml) .
+For more information, see [BigQuery pricing](https://docs.cloud.google.com/bigquery/pricing) and [BigQuery ML pricing](https://docs.cloud.google.com/bigquery/pricing#bqml) .
 
 ## Before you begin
 
-1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project,
-    
-    Enable the BigQuery API, if it is not already enabled.
+1.  Enable the BigQuery API, if it is not already enabled.
     
     **Roles required to enable APIs**
     
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    For new projects, the BigQuery API is automatically enabled.
+
+### Required roles
+
+To get the permissions that you need to complete the tasks in this tutorial, ask your administrator to grant you the following IAM roles:
+
+  - Create the dataset: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+  - Create the model:
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - Run inference:
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+These predefined roles contain the permissions required to complete the tasks in this tutorial. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to complete the tasks in this tutorial:
+
+  - Create the dataset: `bigquery.datasets.create`
+  - Create the model:
+      - `bigquery.jobs.create`
+      - `bigquery.models.create`
+      - `bigquery.models.getData`
+      - `bigquery.models.updateData`
+  - Run inference:
+      - `bigquery.models.getData`
+      - `bigquery.jobs.create`
+
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Forecast a single bike share trips time series
 
@@ -155,8 +188,6 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ### Delete your project
 
-To delete the project:
-
 > **Caution** : Deleting a project has the following effects:
 > 
 >   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
@@ -173,3 +204,5 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 ## What's next
 
   - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+  - Learn how to [forecast single time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-single-time-series-forecasting-tutorial) .
+  - Learn how to [forecast multiple time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-multi-time-series-forecasting-tutorial) .

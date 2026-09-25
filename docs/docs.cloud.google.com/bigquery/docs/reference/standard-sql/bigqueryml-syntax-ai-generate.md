@@ -14,7 +14,7 @@ For example, the following query generates summaries of BBC news articles:
 
     SELECT
       title,
-      AI.GENERATE(CONCAT("Summarize in one sentence: ", body), endpoint => 'gemini-2.5-pro').result AS article_summary
+      AI.GENERATE(CONCAT("Summarize in one sentence: ", body)).result AS article_summary
     FROM `bigquery-public-data.bbc_news.fulltext`
     LIMIT 3;
 
@@ -22,7 +22,6 @@ You can also use the `AI.GENERATE` function to extract structured output. For ex
 
     SELECT
       AI.GENERATE(patient_description,
-        endpoint => 'gemini-2.5-pro',
         output_schema => 'name STRING, age INT64, phone_number STRING')
     FROM mydataset.patient_data;
 
@@ -189,8 +188,7 @@ The following query translates publicly available BBC news technology articles i
     SELECT
       body,
       AI.GENERATE(
-        CONCAT("Translate into French ", body),
-        endpoint => 'gemini-2.5-pro').result AS translation
+        CONCAT("Translate into French ", body)).result AS translation
     FROM
       `bigquery-public-data.bbc_news.fulltext`
     WHERE
@@ -208,7 +206,6 @@ The following query extracts information about a person from an unstructured des
     SELECT
       AI.GENERATE(
         input,
-        endpoint => 'gemini-2.5-pro',
         output_schema => '''name STRING,
                             age INT64,
                             address STRUCT<street_address STRING, city STRING, state STRING, zip_code STRING>,
@@ -239,7 +236,6 @@ The following query extracts information about customer complaints. The query us
       complaint_id,
       AI.GENERATE(
         CONCAT('Analyze the following complaint: ', consumer_complaint_narrative),
-        endpoint => 'gemini-2.5-pro',
         output_schema => """
         grievance_subject ARRAY<STRING> OPTIONS(description = 'a list of grievance subjects'),
         complaint_type STRING OPTIONS(description = 'classify the complaint type as Billing Dispute, Service Issue, or Reporting Error')
@@ -282,7 +278,6 @@ You can use `AI.GENERATE` to describe images and what's in them. To do that, con
       OBJ.GET_READ_URL(ref).url AS signed_url,
       AI.GENERATE(
         ("What is this: ", ref),
-        endpoint => 'gemini-2.5-pro',
         output_schema =>
           "image_description STRING, entities_in_the_image ARRAY<STRING>").*
     FROM bqml_tutorial.product_images
@@ -302,7 +297,6 @@ Set Google Search grounding:
       name,
       AI.GENERATE(
         ('Please check the weather of ', name, ' for today.'),
-        endpoint => 'gemini-2.5-pro',
         model_params => JSON '{"tools": [{"googleSearch": {}}]}'
       )
     FROM UNNEST(['Seattle', 'NYC', 'Austin']) AS name;
@@ -313,7 +307,6 @@ Set Google Maps grounding:
       name,
       AI.GENERATE(
         ('Please find some tourist attractions in ', name),
-        endpoint => 'gemini-2.5-pro',
         model_params => JSON '{"tools": [{"googleMaps": {}}]}'
       )
     FROM UNNEST(['Seattle', 'NYC', 'Austin']) AS name;
@@ -327,7 +320,6 @@ The following query shows how to use the `model_params` argument to set the mode
     SELECT
       AI.GENERATE(
         ('What is the capital of Monaco?'),
-        endpoint => 'gemini-2.5-flash',
         model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}');
 
 ### Use a context cache and low thinking level

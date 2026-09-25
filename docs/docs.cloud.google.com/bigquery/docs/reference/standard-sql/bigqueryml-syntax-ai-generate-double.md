@@ -25,8 +25,7 @@ For example, the following query rates the sentiment of BBC news article titles:
     SELECT
       title,
       AI.GENERATE_DOUBLE(
-        ("Rate the sentiment of this article title on a scale of 0 to 1, where 1 is very positive: ", title),
-        endpoint => 'gemini-2.5-pro'
+        ("Rate the sentiment of this article title on a scale of 0 to 1, where 1 is very positive: ", title)
       ).result AS sentiment_score
     FROM `bigquery-public-data.bbc_news.fulltext`
     LIMIT 3;
@@ -176,7 +175,7 @@ To determine the population of each city in millions, you can call the `AI.GENER
 
     SELECT
       city,
-      AI.GENERATE_DOUBLE(('What is the population of ', city, ' in millions?'), endpoint => 'gemini-2.5-pro').result
+      AI.GENERATE_DOUBLE(('What is the population of ', city, ' in millions?')).result
     FROM UNNEST(["Seattle", "Beijing", "Paris", "London"]) city;
 
 The result is similar to the following:
@@ -201,7 +200,6 @@ The following query shows how to set the `model_params` argument to set the mode
     SELECT
       city,
       AI.GENERATE_DOUBLE(('What is the population of ', city, ' in millions?'),
-        endpoint => 'gemini-2.5-pro',
         model_params => JSON '{"generation_config":{"thinking_config": {"thinking_budget": 0}}}')
     FROM mydataset.cities;
 
