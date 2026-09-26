@@ -28,7 +28,7 @@ As a BigQuery administrator, you can create a [connection](https://docs.cloud.go
     
       - Open the SAP Datasphere tenant to connections from all IP addresses by adding `0.0.0.0/0` to the allowlist.
     
-      - [Configure your connection with network attachments](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) so that BigQuery opens the connection from a static IP address.
+      - [Configure your connection with network attachments](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#configure-network-attachment) so that BigQuery opens the connection from a static IP address.
         
         > **Note:** If your configured network attachment and VM are located in different regions, there might be cross-region data movement when you use this connection to query SAP Datasphere data.
     
@@ -36,11 +36,56 @@ As a BigQuery administrator, you can create a [connection](https://docs.cloud.go
 
 ### Required roles
 
-To get the permissions that you need to connect to SAP Datasphere, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to connect to SAP Datasphere, ask your administrator to grant you the following IAM roles:
+
+  - To create a connection: [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` ) on the project
+  - To configure network attachments: [Compute Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.admin) ( `roles/compute.admin` ) on the project
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-### Connect BigQuery to SAP Datasphere
+## Configure a network attachment
+
+> **Note:** This section is optional. You only need to complete these steps if you route your traffic through a static IP address or VPN.
+
+Because federated queries establish a direct connection to your database using the BigQuery Connection API, you must allow traffic from Google Cloud to your database engine. To increase security, you should only allow traffic that comes from your BigQuery queries. This traffic restriction can be accomplished in one of two ways:
+
+  - By defining a static IP address that is used by a BigQuery connection and adding it to the firewall rules of the external data source.
+  - By creating a VPN between BigQuery and your internal infrastructure, and using it for your queries.
+
+Both of these techniques are supported through the use of network attachments.
+
+### Limitations
+
+Connections with network attachments are subject to the following limitations:
+
+  - For standard regions, network attachments must be located in the same region as the connection. For connections in the `US` multi-region, the network attachment must be located in the `us-central1` region. For connections in the `EU` multi-region, the network attachment must be located in the `europe-west4` region.
+  - You can't edit your network attachment after you create it. To change your configuration, you need to recreate the network attachment.
+  - Network attachments can't be deleted unless BigQuery deletes the allocated resources. To initiate the deletion process, contact BigQuery support.
+
+### Create a network attachment
+
+When you create a connection for query federation, you can specify an optional network attachment that provides connectivity to your database's network. You can create a network attachment by either defining a static IP address or creating a VPN. For either option, do the following:
+
+1.  If you don't already have one, [create a VPC network and subnet](https://docs.cloud.google.com/vpc/docs/create-modify-vpc-networks#create-custom-network) .
+
+2.  Depending on your chosen routing method, do one of the following:
+    
+      - For a static IP address: [Create a Cloud NAT gateway with a static IP address](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation#create-nat-gateway) , using the network, region, and subnet that you created.
+      - For a VPN: [Create a VPN that is connected to your private network](https://docs.cloud.google.com/network-connectivity/docs/vpn) .
+
+3.  [Create a network attachment](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments#create-manual-accept) using the network, region, and subnet that you created.
+
+4.  Optional: Depending on your organization's security policies, you might need to configure your Google Cloud firewall to allow egress by [creating a firewall rule](https://docs.cloud.google.com/firewall/docs/using-firewalls#creating_firewall_rules) with the following settings:
+    
+      - Set **Targets** to **All instances in the network** .
+      - Set **Destination IPv4 ranges** to the entire IP address range.
+      - Set **Specified protocols and ports** to the port that is used by your database.
+
+5.  Configure your internal firewall to allow ingress from the static IP address that you created. This process varies by data source.
+
+## Connect BigQuery to SAP Datasphere
 
 You can connect BigQuery to SAP Datasphere in the Google Cloud console or the bq command-line tool.
 
@@ -69,7 +114,7 @@ You can connect BigQuery to SAP Datasphere in the Google Cloud console or the bq
       - Optional: For **Description** , enter a description for this connection resource.
       - For **Encryption** , select either **Google-managed encryption key** or **Customer-managed encryption key (CMEK)** . The use of a CMEK is optional.
       - For **Host:port** : enter the host and port of the SAP database instance, as shown in the **Database User Details** in the SAP Datasphere web console, in the format `HOST:PORT` .
-      - Optional: For **Network attachment** , enter a path to the [network attachment](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) that defines the network configuration that is used for establishing a connection to SAP Datasphere.
+      - Optional: For **Network attachment** , enter a path to the [network attachment](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#configure-network-attachment) that defines the network configuration that is used for establishing a connection to SAP Datasphere.
       - For **Username** : enter the database username from **Database User Details** in the SAP Datasphere web console. For example, `MY_SPACE#BIGQUERY` .
       - For **Password** : enter the database user's password.
 
@@ -111,7 +156,7 @@ Replace the following:
   - `  LOCATION  ` : specify a region of the BigQuery dataset to be combined with the data from SAP Datasphere. Queries that use this connection must be run from this region.
   - `  PROJECT_ID  ` : enter your Google Cloud project ID.
   - `  HOST_PORT  ` : enter the host and port of the SAP database instance, as shown in the **Database User Details** in the SAP Datasphere web console, in the format `HOST:PORT` .
-  - `  NETWORK_ATTACHMENT  ` (optional): enter the [network attachment](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) in the format `projects/{project}/regions/{region}/networkAttachments/{networkattachment}` . With this field, you can configure the SAP Datasphere connection so that BigQuery opens the connection from a static IP address.
+  - `  NETWORK_ATTACHMENT  ` (optional): enter the [network attachment](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#configure-network-attachment) in the format `projects/{project}/regions/{region}/networkAttachments/{networkattachment}` . With this field, you can configure the SAP Datasphere connection so that BigQuery opens the connection from a static IP address.
   - `  USERNAME  ` : enter the database username from **Database User Details** in the SAP Datasphere web console. For example, `MY_SPACE#BIGQUERY` .
   - `  PASSWORD  ` : enter the database user's password.
   - `  CONNECTION_ID  ` : enter a connection ID to identify this connection.
@@ -119,6 +164,8 @@ Replace the following:
 Optional flag:
 
   - `--kms_key_name` : A customer-managed encryption key. If omitted, credentials are protected by the default Google-owned and Google-managed encryption key.
+
+**Note:** If you configured your connection to use a network attachment, you must run an initial [federated query](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) to synchronize your project with the network attachment before it becomes fully active.
 
 ## Share connections with users
 
@@ -205,6 +252,13 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
         }
       }
     }
+
+## Pricing
+
+  - Standard [federated query pricing](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#pricing) applies.
+  - Using VPC is subject to [Virtual Private Cloud pricing](https://docs.cloud.google.com/vpc/pricing) .
+  - Using Cloud VPN is subject to [Cloud VPN pricing](https://docs.cloud.google.com/network-connectivity/docs/vpn/pricing) .
+  - Using Cloud NAT is subject to [Cloud NAT pricing](https://docs.cloud.google.com/nat/pricing) .
 
 ## What's next
 

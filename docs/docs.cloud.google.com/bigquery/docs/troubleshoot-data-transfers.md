@@ -8,13 +8,13 @@ data_source: docs.cloud.google.com
 
 # Troubleshoot data transfers
 
-This page explains how to troubleshoot issues when you transfer or load data into BigQuery. You can resolve common errors related to BigQuery Data Transfer Service, network connections across Google Cloud, Amazon Web Services (AWS), Cloud SQL, and Virtual Private Cloud (VPC) networks, as well as CSV data load jobs from Cloud Storage.
+This document explains how to troubleshoot issues when you transfer or load data into BigQuery. You can resolve common errors related to BigQuery Data Transfer Service, network connections across Google Cloud, Amazon Web Services (AWS), Cloud SQL, and Virtual Private Cloud (VPC) networks, as well as CSV data load jobs from Cloud Storage.
 
 ## Troubleshoot transfer configurations
 
 For information about resolving issues with BigQuery Data Transfer Service, see [Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .
 
-If you set up or run transfers transfers from external or partner data sources, see [Troubleshoot third-party transfer setup](https://docs.cloud.google.com/bigquery/docs/third-party-transfer#troubleshoot_third_party_transfer_setup) .
+If you set up or run transfers from external or partner data sources, see [Troubleshoot third-party transfer setup](https://docs.cloud.google.com/bigquery/docs/third-party-transfer#troubleshoot_third_party_transfer_setup) .
 
 ## Diagnose jobs with `INFORMATION_SCHEMA` views
 

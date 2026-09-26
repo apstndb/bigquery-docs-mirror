@@ -38,7 +38,7 @@ For more information, see [Set up cross-cloud connection for Workday Data Lake](
 
 Feature
 
-The **Query results** pane in the BigQuery Studio query editor lets you [view a short history of recent runs for a query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#view_multi_statement_query_results) , including multi-statement queries, without having to navigate to the **Job history** tab. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The **Query results** pane in the BigQuery Studio query editor lets you [view a short history of recent runs for a query](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) , including [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#view_multi_statement_query_results) , without having to navigate to the **Job history** tab. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
 Feature
 

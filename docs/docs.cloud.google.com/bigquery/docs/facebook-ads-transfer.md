@@ -32,7 +32,7 @@ Facebook Ads data transfers are subject to the following limitations:
     
     If your long-lived user access token is expired, you can obtain the new one by navigating to your data transfer details and clicking **Edit** . In the edit transfer page, follow the same steps in [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) to generate a new long-lived user access token.
 
-  - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
+  - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
 
   - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Facebook Ads.
 
@@ -128,7 +128,7 @@ Select one of the following options:
 
 4.  In the **Data source details** section, do the following:
     
-      - For **Network attachment** , select a network attachment from the menu. Before you can use a network attachment with this data transfer, you must [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
+      - For **Network attachment** , select a network attachment from the menu. Before you can use a network attachment with this data transfer, you must [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
       - For **Client ID** , enter the app ID.
       - For **Client secret** , enter the app secret.
       - For **Refresh token** , enter the long-lived user access token ID by clicking **Authorize** . Alternatively, if you [already have a refresh token or a system user token](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh_token_alternatives) , you can enter the refresh token directly in this field. For information about retrieving a long-lived user access token, see [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) .

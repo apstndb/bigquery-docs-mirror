@@ -21,7 +21,7 @@ ServiceNow data transfers are subject to the following limitations:
   - The minimum interval time between recurring data transfers is 15 minutes. The default interval for a recurring transfer is 24 hours.
   - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
       - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
-  - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
+  - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
 
 ### Incremental transfer limitations
 
@@ -171,7 +171,7 @@ Add ServiceNow data into BigQuery by setting up a transfer configuration using o
     
       - (Optional) For **Network attachment** , select a network attachment from the drop-down menu, or click **Create Network Attachment** .
           - Select a network attachment to configure this data transfer to use a single, consistent IP address. You can use this option if your ServiceNow instance is configured to only accept traffic from specific IP addresses.
-          - For more information about creating a network attachment, see [Configure connections with network attachments](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment)
+          - For more information about creating a network attachment, see [Configure connections with network attachments](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment)
           - For more information about defining IP addresses in ServiceNow, see [Define allowed ServiceNow internal IP addresses](https://www.servicenow.com/docs/csh?topicname=sc-ip-addresses-access-allowlist.html&version=latest)
       - For **Instance ID** , enter the ServiceNow instance ID. You can get this from your ServiceNow URL—for example, `https:// INSTANCE_ID .service-now.com` .
       - (Optional) For **ServiceNow Cloud Type** , select the cloud type for your ServiceNow account:

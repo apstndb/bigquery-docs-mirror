@@ -29,3 +29,5 @@ To learn more about the Google Research TimesFM model, use the following resourc
   - [Google Research blog](https://research.google/blog/a-decoder-only-foundation-model-for-time-series-forecasting/)
   - [GitHub repository](https://github.com/google-research/timesfm)
   - [Hugging Face page](https://huggingface.co/collections/google/timesfm-release-66e4be5fdb56e960c1e482a6)
+
+When you use TimesFM through BigQuery, your usage is governed by the [Google Cloud Terms of Service](https://cloud.google.com/terms) and allows for commercial uses. The non-commercial license associated with the publicly downloadable `TimesFM 3.0` weights on GitHub and Hugging Face applies only to self-hosted downloads and does not restrict usage within BigQuery.

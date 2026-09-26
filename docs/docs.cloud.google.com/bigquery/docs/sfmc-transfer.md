@@ -131,7 +131,7 @@ Add Salesforce Marketing Cloud data into BigQuery by setting up a transfer confi
 
 4.  In the **Data source details** section, do the following:
     
-      - For **Network attachment** , select a network attachment from the menu. Before you can use a network attachment with this data transfer, you must [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
+      - For **Network attachment** , select a network attachment from the menu. Before you can use a network attachment with this data transfer, you must [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
       - For **API Subdomain** , enter the [subdomain of your authentication base URI](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-prereqs) .
       - For **API instance** , enter the [API instance from the URL](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-prereqs) after you sign in to the Marketing Cloud application.
       - For **Client ID** , enter the [client ID from your API integration package](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#sfmc-prereqs) .
@@ -264,7 +264,7 @@ If you are having issues setting up or running a Salesforce Marketing Cloud data
     **Resolution:** You must have both `Read` and `Write` permissions for **File Locations** in order to read the contents of a data extension. Verify that your Salesforce Marketing Cloud scopes include `File Locations: Read, Write` .
 
   - Error: `FAILED_PRECONDITION: There was an issue connecting to API.`  
-    **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allowlist. To resolve this error, follow the steps in [Create a network attachment](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) and follow the steps to create your network attachment by defining a static IP address.
+    **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allowlist. To resolve this error, follow the steps in [Create a network attachment](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) and follow the steps to create your network attachment by defining a static IP address.
 
 ## Pricing
 

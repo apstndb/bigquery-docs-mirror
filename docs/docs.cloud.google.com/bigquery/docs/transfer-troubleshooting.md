@@ -716,7 +716,7 @@ The following are common issues you might encounter when [creating a ServiceNow 
   - Error: `RESOURCE EXHAUSTED. ServiceNow API rate limit or quota has been exceeded, or operations are too large.`  
     **Resolution:** You have exceeded the ServiceNow API quota or rate limit. Consider reducing the volume or frequency of requests and try again.
   - Error: `FAILED_PRECONDITION: There was an issue connecting to API.`  
-    **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allow list. To resolve this error, [create a network attachment](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) by defining a static IP address.
+    **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allow list. To resolve this error, [create a network attachment](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) by defining a static IP address.
 
 ## Amazon Redshift transfer issues
 
