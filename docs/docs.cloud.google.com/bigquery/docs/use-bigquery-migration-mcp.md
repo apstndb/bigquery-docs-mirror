@@ -94,16 +94,12 @@ You can automatically register the BigQuery Migration Service MCP server into su
 In your AI application, look for a way to add or connect to a remote MCP server. For the BigQuery Migration Service MCP server, enter the following information as required:
 
   - **Server name** : BigQuery Migration Service MCP server
-
   - **Server URL** or **Endpoint** : bigquerymigration.googleapis.com/mcp
-
   - **Transport** : [Streamable HTTP](https://modelcontextprotocol.io/specification/latest/basic/transports/streamable-http)
+  - **Authentication details** : depending on how you want to authenticate, you can enter your Google Cloud credentials, your OAuth Client ID and secret, or an agent identity and credentials. For more information about authentication, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
+  - **OAuth scope** : the [OAuth 2.0 scope](https://developers.google.com/identity/protocols/oauth2/scopes) that you want to use when connecting to the BigQuery Migration Service MCP server.
 
-  - **Authentication details** : your Google Cloud credentials, your OAuth Client ID, and secret, or an agent identity and credentials
-    
-    Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
-
-The following is an example configuration for the [Gemini CLI](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#gemini-cli) :
+<!-- end list -->
 
     {
       "name": "BQMS-MCP",
@@ -143,16 +139,35 @@ To view details of available MCP tools and their descriptions for the BigQuery M
 
 ### List tools
 
-Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to list tools, or send a `tools/list` HTTP request directly to the BigQuery Migration Service MCP server. The `tools/list` method doesn't require authentication.
+Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to list tools, or send a `tools/list` HTTP request directly to the BigQuery Migration Service remote MCP server. The `tools/list` method doesn't require authentication.
 
-    POST /mcp HTTP/1.1
-    Host: bigquerymigration.googleapis.com
-    Content-Type: application/json
-    
-    {
-      "jsonrpc": "2.0",
-      "method": "tools/list",
-    }
+    curl -X POST https://bigquerymigration.googleapis.com/TOOLSET_ENDPOINT \
+        -H 'Content-Type: application/json' \
+        -H 'Accept: application/json' \
+        -H 'MCP-Protocol-Version: MCP_PROTOCOL_VERSION' \
+        -H 'Mcp-Method: tools/list' \
+        -d '{
+          "jsonrpc": "2.0",
+          "id": 1,
+          "method": "tools/list",
+          "params": {
+            "_meta": {
+              "io.modelcontextprotocol/protocolVersion": "MCP_PROTOCOL_VERSION",
+              "io.modelcontextprotocol/clientCapabilities": {
+                "extensions": {
+                  "io.modelcontextprotocol/ui": {
+                    "mimeTypes": ["text/html;profile=mcp-app"]
+                  }
+                }
+              }
+            }
+          }
+        }'
+
+Replace the following:
+
+  - `TOOLSET_ENDPOINT` : the remainder of the MCP endpoint after the service name. For example, for BigQuery Migration Service, this might be `mcp/toolset-name` .
+  - `MCP_PROTOCOL_VERSION` : the MCP protocol version. For example, `2026-07-28` .
 
 ## Sample use cases
 
@@ -217,11 +232,11 @@ You can use the following sample prompts to create and manage BigQuery Migration
 
 In the prompts, replace the following:
 
-  - `DIALECT` : The dialect of the SQL query you're translating.
-  - `QUERY` : The query you're translating.
-  - `FILENAME` : The file that contains the query you're translating.
-  - `PROJECT_NUMBER` : Your Google Cloud [project number](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin) .
-  - `LOCATION` : The location of the [SQL translator](https://docs.cloud.google.com/bigquery/docs/locations#sql-translator-loc) .
+  - `DIALECT` : the dialect of the SQL query you're translating.
+  - `QUERY` : the query you're translating.
+  - `FILENAME` : the file that contains the query you're translating.
+  - `PROJECT_NUMBER` : your Google Cloud [project number](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin) .
+  - `LOCATION` : the location of the [SQL translator](https://docs.cloud.google.com/bigquery/docs/locations#sql-translator-loc) .
 
 ## Optional security and safety configurations
 

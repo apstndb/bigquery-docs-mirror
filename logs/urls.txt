@@ -938,7 +938,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.cloud.bigquery.migration.v2alpha	2026-09-03T07:36:46Z
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.rpc	2026-08-04T16:05:01Z
 https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers	2026-09-25T05:22:38Z
-https://docs.cloud.google.com/bigquery/docs/reference/reservations	2026-09-22T16:01:06Z
+https://docs.cloud.google.com/bigquery/docs/reference/reservations	2026-09-27T05:16:54Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest	2025-12-19T17:36:29Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/Shared.Types/Status	2025-10-17T21:04:04Z
 https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/BiReservation	2025-10-17T21:04:25Z
@@ -1378,8 +1378,8 @@ https://docs.cloud.google.com/bigquery/docs/understand-text	2026-09-25T05:24:25Z
 https://docs.cloud.google.com/bigquery/docs/updating-datasets	2026-09-25T05:24:25Z
 https://docs.cloud.google.com/bigquery/docs/updating-labels	2026-09-25T05:24:25Z
 https://docs.cloud.google.com/bigquery/docs/updating-model-metadata	2026-09-25T05:24:25Z
-https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp	2026-09-25T05:24:25Z
-https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp	2026-09-25T05:24:25Z
+https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp	2026-09-27T05:10:17Z
+https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp	2026-09-27T05:10:17Z
 https://docs.cloud.google.com/bigquery/docs/use-cloud-assist	2026-09-25T05:24:25Z
 https://docs.cloud.google.com/bigquery/docs/use-knowledge-catalog	2026-09-25T05:24:25Z
 https://docs.cloud.google.com/bigquery/docs/use-service-accounts	2026-09-25T05:24:25Z
