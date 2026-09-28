@@ -26,9 +26,9 @@ These token quotas govern the number of input and output tokens processed by the
 | **Quota name**                   | **Metric**                                | **Scope**           | **Default value** |
 | -------------------------------- | ----------------------------------------- | ------------------- | ----------------- |
 | `GenAiInputTokensPerDay`         | Input tokens used by the LLM              | Per day per project | 200,000,000,000   |
-| `GenAiInputTokensPerUserPerDay`  | Input tokens used by the LLM              | Per day per user    | 40,000,000,000    |
+| `GenAiInputTokensPerUserPerDay`  | Input tokens used by the LLM              | Per day per user    | 150,000,000,000   |
 | `GenAiOutputTokensPerDay`        | Output and thought tokens used by the LLM | Per day per project | 20,000,000,000    |
-| `GenAiOutputTokensPerUserPerDay` | Output and thought tokens used by the LLM | Per day per user    | 4,000,000,000     |
+| `GenAiOutputTokensPerUserPerDay` | Output and thought tokens used by the LLM | Per day per user    | 15,000,000,000    |
 
 These quotas are tracked in increments of millions of tokens. While you can set precise limits, values smaller than a few million tokens might not be reflected with perfect accuracy because of the nature of token reporting and aggregation.
 

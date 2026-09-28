@@ -1376,9 +1376,9 @@ The following daily limits apply to token usage for large language models access
 | **Quota name**                   | **Metric**                                | **Scope**           | **Default value** |
 | -------------------------------- | ----------------------------------------- | ------------------- | ----------------- |
 | `GenAiInputTokensPerDay`         | Input tokens used by the LLM              | Per day per project | 200,000,000,000   |
-| `GenAiInputTokensPerUserPerDay`  | Input tokens used by the LLM              | Per day per user    | 40,000,000,000    |
+| `GenAiInputTokensPerUserPerDay`  | Input tokens used by the LLM              | Per day per user    | 150,000,000,000   |
 | `GenAiOutputTokensPerDay`        | Output and thought tokens used by the LLM | Per day per project | 20,000,000,000    |
-| `GenAiOutputTokensPerUserPerDay` | Output and thought tokens used by the LLM | Per day per user    | 4,000,000,000     |
+| `GenAiOutputTokensPerUserPerDay` | Output and thought tokens used by the LLM | Per day per user    | 15,000,000,000    |
 
 ### Cloud AI service functions
 
