@@ -31,7 +31,7 @@ MODEL_TYPE = { 'DNN_CLASSIFIER' | 'DNN_REGRESSOR' }
     [, BATCH_SIZE = { int64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, DROPOUT = { float64_value | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
     [, HIDDEN_UNITS = { int_array | HPARAM_RANGE(range) | HPARAM_CANDIDATES([candidates]) } ]
-    [, TF_VERSION = { '1.15' | '2.8.0' } ]
+    [, TF_VERSION = { '1.15' | '2.17.0' } ]
     [, AUTO_CLASS_WEIGHTS = { TRUE | FALSE } ]
     [, CLASS_WEIGHTS = struct_array ]
     [, EARLY_STOP = { TRUE | FALSE } ]
@@ -283,13 +283,13 @@ The valid range for the `INT64` arrays is `[1, ∞)` .
 
 **Syntax**
 
-    TF_VERSION = { '1.15' | '2.8.0' }
+    TF_VERSION = { '1.15' | '2.17.0' }
 
 **Description**
 
 Specifies the TensorFlow version for model training. The default value is `1.15` .
 
-Set `TF_VERSION` to `2.8.0` to use TensorFlow2 with the Keras API.
+Set `TF_VERSION` to `2.17.0` to use TensorFlow2 with the Keras API.
 
 ### `AUTO_CLASS_WEIGHTS`
 

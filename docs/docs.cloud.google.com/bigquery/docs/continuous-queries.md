@@ -10,7 +10,13 @@ data_source: docs.cloud.google.com
 
 This document describes how to run a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) in BigQuery.
 
-BigQuery continuous queries are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time, and then either export the results to Bigtable, Pub/Sub, or Spanner, or write the results to a BigQuery table.
+BigQuery continuous queries are SQL statements that run continuously and process data in near real-time. You can write or export the output rows produced by a continuous query to the following destinations:
+
+  - BigQuery tables
+  - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery)
+  - Pub/Sub topics
+  - Bigtable tables
+  - Spanner tables
 
 ## Choose an account type
 
@@ -39,13 +45,15 @@ To export data from a BigQuery table, the user account must have the `bigquery.t
   - [BigQuery Data Owner ( `roles/bigquery.dataOwner` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
   - [BigQuery Admin ( `roles/bigquery.admin` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
-To update data in a BigQuery table, the user account must have the `bigquery.tables.updateData` IAM permission. Each of the following IAM roles grants the `bigquery.tables.updateData` permission:
+To write data to a BigQuery table, the user account must have the `bigquery.tables.updateData` IAM permission. Each of the following IAM roles grants the `bigquery.tables.updateData` permission:
 
   - [BigQuery Data Editor ( `roles/bigquery.dataEditor` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
   - [BigQuery Data Owner ( `roles/bigquery.dataOwner` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
   - [BigQuery Admin ( `roles/bigquery.admin` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
 If the user account must enable the APIs required for your continuous query use case, the user account must have the [Service Usage Admin ( `roles/serviceusage.serviceUsageAdmin` )](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) role.
+
+To write data to [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) , in addition to the BigQuery permissions, the user account must also have the [BigQuery Connection User ( `roles/bigquery.connectionUser` )](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) role to use the Google Cloud resource connection associated with the Iceberg managed table. Furthermore, the service account associated with that connection must have the appropriate permissions (for example, [`roles/storage.objectUser`](https://docs.cloud.google.com/storage/docs/access-control/iam-roles#storage.objectUser) and `roles/storage.legacyBucketReader` ) on the underlying Cloud Storage bucket. For more information, see [Create and use Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
 
 ### Permissions when using a service account
 
@@ -72,11 +80,13 @@ To export data from a BigQuery table, the service account must have the `bigquer
   - [BigQuery Data Owner ( `roles/bigquery.dataOwner` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
   - [BigQuery Admin ( `roles/bigquery.admin` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
-To update data in a BigQuery table, the service account must have the `bigquery.tables.updateData` IAM permission. Each of the following IAM roles grants the `bigquery.tables.updateData` permission:
+To write data to a BigQuery table, the service account must have the `bigquery.tables.updateData` IAM permission. Each of the following IAM roles grants the `bigquery.tables.updateData` permission:
 
   - [BigQuery Data Editor ( `roles/bigquery.dataEditor` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
   - [BigQuery Data Owner ( `roles/bigquery.dataOwner` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
   - [BigQuery Admin ( `roles/bigquery.admin` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
+
+To write data to [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) , in addition to the BigQuery permissions, the service account must also have the [BigQuery Connection User ( `roles/bigquery.connectionUser` )](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) role to use the Google Cloud resource connection associated with the Iceberg managed table. Furthermore, the service account associated with that connection must have the appropriate permissions (for example, [`roles/storage.objectUser`](https://docs.cloud.google.com/storage/docs/access-control/iam-roles#storage.objectUser) and `roles/storage.legacyBucketReader` ) on the underlying Cloud Storage bucket. For more information, see [Create and use Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
 
 ## Before you begin
 
@@ -131,9 +141,17 @@ Additional APIs, IAM permissions, and Google Cloud resources are required to exp
 
 Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Spanner. For more information, see [Export to Spanner (reverse ETL)](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) .
 
-## Write data to a BigQuery table
+## Write data to a BigQuery table or Apache Iceberg managed tables
 
-You can write data to a BigQuery table by using an [`INSERT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
+You can write data to a BigQuery table or an [Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) by using an [`INSERT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
+
+When writing continuous query output to an Iceberg managed table:
+
+  - The destination Iceberg managed table must already exist before you create the continuous query. For instructions on creating an Iceberg managed table, see [Create and use Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
+  - The query syntax is identical to writing to a standard BigQuery table. You can specify the destination table in the `INSERT INTO` clause and don't need to specify connection or bucket options in the SQL statement.
+  - The user account or service account running the continuous query must have the required permissions on the destination table, the Google Cloud resource connection, and the underlying Cloud Storage bucket. For more information, see [Required permissions](https://docs.cloud.google.com/bigquery/docs/continuous-queries#required_permissions) .
+
+For an example, see [Write data to a BigQuery table or Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/continuous-queries#bigquery-insert-example) .
 
 ## Use AI functions
 
@@ -477,9 +495,9 @@ The following example shows a continuous query that filters data from a BigQuery
       WHERE ride_status = 'enroute'
       );
 
-### Write data to a BigQuery table
+### Write data to a BigQuery table or Apache Iceberg managed tables
 
-The following example shows a continuous query that filters and transforms data from a BigQuery table that is receiving streaming taxi ride information, and then writes the data to another BigQuery table in real time. This makes the data available for further downstream analysis.
+The following example shows a continuous query that filters and transforms data from a BigQuery table that is receiving streaming taxi ride information, and then writes the data to another BigQuery table or Iceberg managed table in real time. This makes the data available for further downstream analysis in BigQuery or your open-format lakehouse.
 
     INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
     SELECT
@@ -499,6 +517,8 @@ The following example shows a continuous query that filters and transforms data 
         CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
     WHERE
       ride_status = 'dropoff';
+
+To write continuous query output into an Iceberg managed table, replace `myproject.real_time_taxi_streaming.transformed_taxirides` with the name of your target Iceberg managed table. The syntax is identical because connection details and lakehouse storage settings are defined on the destination table itself.
 
 ### Process data by using an Gemini Enterprise Agent Platform model
 

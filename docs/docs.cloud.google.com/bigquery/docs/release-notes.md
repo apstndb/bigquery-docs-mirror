@@ -14,6 +14,16 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## September 28, 2026
+
+Feature
+
+The [BigQuery Data Transfer Service MCP server](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp) is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now write the output rows produced by [BigQuery continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) directly into [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) . This lets you continuously process streaming data from BigQuery and write it into your open-format lakehouse by using an [`INSERT` DML statement](https://docs.cloud.google.com/bigquery/docs/continuous-queries#write-bigquery) .
+
 ## September 24, 2026
 
 Feature

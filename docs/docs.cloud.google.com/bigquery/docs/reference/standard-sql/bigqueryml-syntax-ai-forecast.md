@@ -75,7 +75,7 @@ FROM
       - `DATE`
       - `DATETIME`
 
-  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.0` , `TimesFM 2.5` , and `TimesFM 3.0` ( [Preview](https://cloud.google.com/products#product-launch-stages) ). The default value is `TimesFM 2.5` .
+  - `  MODEL  ` : a `STRING` value that specifies the name of the model to use. Supported models include `TimesFM 2.5` and `TimesFM 3.0` ( [Preview](https://cloud.google.com/products#product-launch-stages) ). The default value is `TimesFM 2.5` .
 
   - `  ID_COLS  ` : an `ARRAY<STRING>` value that specifies the names of one or more ID columns. Each unique combination of IDs identifies a unique time series to forecast. Specify one or more values for this argument in order to forecast multiple time series using a single query. The columns that you specify must use one of the following data types:
     
@@ -84,7 +84,7 @@ FROM
       - `ARRAY<STRING>`
       - `ARRAY<INT64>`
 
-  - `  HORIZON  ` : an `INT64` value that specifies the number of time series data points to forecast. The default value is `10` . The valid input range for the `TimesFM 2.0` and `TimesFM 2.5` models is `[1, 10,000]` . The valid input range for the `TimesFM 3.0` model is `[1, 1024]` . This argument can't be used with the `forecast_end_timestamp` argument.
+  - `  HORIZON  ` : an `INT64` value that specifies the number of time series data points to forecast. The default value is `10` . The valid input range for the `TimesFM 2.5` model is `[1, 10,000]` . The valid input range for the `TimesFM 3.0` model is `[1, 1024]` . This argument can't be used with the `forecast_end_timestamp` argument.
 
   - `  FORECAST_END_TIMESTAMP  ` : a timestamp literal value that specifies the end timestamp for the forecasted values. The horizon is calculated based on the end timestamp and the frequency provided from the input table for each time series. If the calculated horizon is out of the valid range `[1, 10,000]` , the query returns an error. You can then adjust the `forecast_end_timestamp` value so that the calculated horizon is within the valid range. This argument can't be used with the `horizon` argument.
 
@@ -98,28 +98,27 @@ FROM
     
     | **Model name** | **Supported context window length**                     |
     | -------------- | ------------------------------------------------------- |
-    | `TimesFM 2.0`  | 64, 128, 256, 512, 1024, 2048                           |
     | `TimesFM 2.5`  | 64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360        |
     | `TimesFM 3.0`  | `n * 32` where `n` is an integer in the range `[2, 64]` |
     
 
-    If you don't specify a `CONTEXT_WINDOW` value with the `TimesFM 2.0` or `TimesFM 2.5` models, the `AI.FORECAST` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. If you don't specify a `CONTEXT_WINDOW` value when you use the `TimesFM 3.0` model, the `AI.FORECAST` function defaults to the maximum supported size, `2048` . The following table shows the relationships between the number of time series data points in the input data, the selected context window length and the corresponding supported TimesFM model name:
+    If you don't specify a `CONTEXT_WINDOW` value when you use the `TimesFM 2.5` model, the `AI.FORECAST` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. If you don't specify a `CONTEXT_WINDOW` value when you use the `TimesFM 3.0` model, the `AI.FORECAST` function defaults to the maximum supported size, `2048` . The following table shows the relationships between the number of time series data points in the input data, the selected context window length and the corresponding supported TimesFM model name:
     
-    | **Number of time series data points** | **Context window length** | **Supported model names**                     |
-    | ------------------------------------- | ------------------------- | --------------------------------------------- |
-    | `(1, 64]`                             | 64                        | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
-    | `(65, 128]`                           | 128                       | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
-    | `(129, 256]`                          | 256                       | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
-    | `(257, 512]`                          | 512                       | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
-    | `(513, 1024]`                         | 1,024                     | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
-    | `(1025, 2048]`                        | 2,048                     | `TimesFM 2.0` , `TimesFM 2.5` , `TimesFM 3.0` |
-    | `(2049, 4096]`                        | 4,096                     | `TimesFM 2.5`                                 |
-    | `(4097, 8192]`                        | 8,192                     | `TimesFM 2.5`                                 |
-    | `(8193, 15360]`                       | 15,360                    | `TimesFM 2.5`                                 |
-    | `15360`                               | 15,360                    | `TimesFM 2.5`                                 |
+    | **Number of time series data points** | **Context window length** | **Supported model names**     |
+    | ------------------------------------- | ------------------------- | ----------------------------- |
+    | `(1, 64]`                             | 64                        | `TimesFM 2.5` , `TimesFM 3.0` |
+    | `(65, 128]`                           | 128                       | `TimesFM 2.5` , `TimesFM 3.0` |
+    | `(129, 256]`                          | 256                       | `TimesFM 2.5` , `TimesFM 3.0` |
+    | `(257, 512]`                          | 512                       | `TimesFM 2.5` , `TimesFM 3.0` |
+    | `(513, 1024]`                         | 1,024                     | `TimesFM 2.5` , `TimesFM 3.0` |
+    | `(1025, 2048]`                        | 2,048                     | `TimesFM 2.5` , `TimesFM 3.0` |
+    | `(2049, 4096]`                        | 4,096                     | `TimesFM 2.5`                 |
+    | `(4097, 8192]`                        | 8,192                     | `TimesFM 2.5`                 |
+    | `(8193, 15360]`                       | 15,360                    | `TimesFM 2.5`                 |
+    | `15360`                               | 15,360                    | `TimesFM 2.5`                 |
     
 
-    For the `TimesFM 2.0` and `TimesFM 3.0` models, 2,048 is the maximum number of time series data points that are passed to the model. For the `TimesFM 2.5` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
+    For the `TimesFM 3.0` model, 2,048 is the maximum number of time series data points that are passed to the model. For the `TimesFM 2.5` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
 
 ### Multivariate
 

@@ -10,7 +10,15 @@ data_source: docs.cloud.google.com
 
 This document describes BigQuery continuous queries.
 
-BigQuery continuous queries are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time. You can insert the output rows produced by a continuous query into a BigQuery table or export them to Pub/Sub, Bigtable, or Spanner. Continuous queries can process data that has been written to [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) by using one of the following methods:
+BigQuery continuous queries are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time. You can write or export the output rows produced by a continuous query to the following destinations:
+
+  - BigQuery tables
+  - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery)
+  - Pub/Sub topics
+  - Bigtable tables
+  - Spanner tables
+
+Continuous queries can process data that has been written to [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) by using one of the following methods:
 
   - The [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api)
   - The [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery)
@@ -37,7 +45,7 @@ Common use cases where you might want to use continuous queries are as follows:
   - **Anomaly detection** : build solutions that let you perform anomaly and threat detection on complex data in real time, so that you can react to issues more quickly.
   - **Customizable event-driven pipelines** : use continuous query integration with Pub/Sub to trigger downstream applications based on incoming data.
   - **Data enrichment and entity extraction** : use continuous queries to perform real-time data enrichment and transformation by using SQL functions and ML models.
-  - **Reverse extract-transform-load (ETL)** : perform real-time reverse ETL into other storage systems more suited for low latency application serving. For example, analyzing or enhancing event data that is written to BigQuery, and then streaming it to Bigtable or Spanner for application serving.
+  - **Reverse extract-transform-load (ETL)** : perform real-time reverse ETL into other storage systems more suited for low latency application serving. For example, analyzing or enhancing event data that is written to BigQuery, and then streaming it to Bigtable, Spanner, or Apache Iceberg managed tables for application serving.
   - **Autonomous agent triggering** : trigger agentic data pipelines in real-time based on complex events detected in live data streams. For an example, refer to the [Build an Event-Driven Data Agent with BigQuery and Agent Development Kit (ADK) codelab](https://codelabs.developers.google.com/bigquery-adk-event-driven-agents) .
   - **Autonomous agent monitoring** : develop real-time automated monitoring and alerting for real-time agentic interactions using the [BigQuery agent analytics plugin](https://adk.dev/integrations/bigquery-agent-analytics/) , which streams all agent trace data, tool usage, and operational logs directly into BigQuery for deep observability into your AI workforce.
 
@@ -45,7 +53,7 @@ Common use cases where you might want to use continuous queries are as follows:
 
 The following operations are supported in continuous queries:
 
-  - Running [`INSERT` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) to write data from a continuous query into a BigQuery table.
+  - Running [`INSERT` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) to write data from a continuous query into a BigQuery table or an [Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
 
   - Running [`EXPORT DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to [publish](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) continuous query output to Pub/Sub topics.
     
@@ -153,7 +161,7 @@ Continuous queries are subject to the following limitations:
     
       - [External tables](https://docs.cloud.google.com/bigquery/docs/external-data-sources) .
       - [Information schema views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
-      - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) .
+      - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) . Note that while Iceberg managed tables are not supported as data sources, they are supported as destinations for continuous query output.
       - [Wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
       - [Change Data Capture (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture) data.
       - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .

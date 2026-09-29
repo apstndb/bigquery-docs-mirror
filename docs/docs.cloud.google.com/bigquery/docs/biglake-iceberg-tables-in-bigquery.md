@@ -307,6 +307,14 @@ You can load Hive-partitioned files into Iceberg managed tables using standard B
 
 You can load streaming data into Iceberg managed tables by using a [Pub/Sub BigQuery subscription](https://docs.cloud.google.com/pubsub/docs/subscription-properties#bigquery) .
 
+#### Load streaming data using continuous queries
+
+You can continuously process and write streaming data from BigQuery into Iceberg managed tables using a [BigQuery continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) with the `INSERT` DML statement. This lets you perform real-time reverse ETL, data enrichment, and filtering in your open-format lakehouse.
+
+Before running the continuous query, make sure that the target Iceberg managed table exists and that the user or service account has the required permissions on the table, its Google Cloud resource connection, and the underlying Cloud Storage bucket.
+
+For setup instructions and SQL examples, see [Write data to a BigQuery or Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/continuous-queries#write-bigquery) .
+
 ### Export data from Iceberg managed tables
 
 The following sections describe how to export data from Iceberg managed tables into various table formats.
