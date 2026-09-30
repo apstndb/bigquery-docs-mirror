@@ -258,7 +258,7 @@ Install the [XGBoost library](https://xgboost.readthedocs.io/en/latest/build.htm
 
 This section uses the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud) to deploy and run predictions against the exported model. For more information, see [Get online inferences from a custom trained model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-online-predictions) .
 
-> **Note:** For serving on [Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview) Prediction, follow [Request Predictions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-predictions) and use the following containers for your region respectively: 1) us-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 2) europe-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest 3) asia-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-0:latest
+> **Note:** For serving on [Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview) Prediction, follow [Request Predictions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/predictions/get-predictions) and use the following containers for your region respectively: 1) us-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-2:latest 2) europe-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-2:latest 3) asia-docker.pkg.dev/vertex-ai/bigquery-ml/xgboost-cpu.1-2:latest
 
 For more information about deploying a model to Agent Platform for online or batch predictions using custom routines, see [Deploy a model to an endpoint](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/deployment) .
 

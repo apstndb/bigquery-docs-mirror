@@ -36,6 +36,14 @@ The following diagram shows the replication that occurs when a dataset is replic
 
 If the primary region is online, you can manually switch to the secondary replica. For more information, see [Promote the secondary replica](https://docs.cloud.google.com/bigquery/docs/data-replication#promote_the_secondary_replica) .
 
+#### Replication and DML
+
+BigQuery stores data in immutable blocks. Data manipulation language (DML) operations (such as the `UPDATE` , `DELETE` , or `MERGE` statements) rewrite both the modified and unmodified data from the affected files into new underlying storage blocks. Because cross-region replication occurs at the file level, after running a DML operation, BigQuery must replicate the entire new file to the secondary region.
+
+For example, updating 100 MB of data within a 1 GB storage file requires BigQuery to replicate the entire newly reconstructed 1 GB file, not just the updated 100 MB. Frequent DML operations on large or unpartitioned tables can significantly increase the total volume of data transferred.
+
+Because of this behavior, frequent DML operations on replicated data can lead to a surge in data transfer costs. Instead, move your DML-heavy tables to a separate dataset that isn't replicated.
+
 ### Pricing
 
 You are billed for the following for replicated datasets:

@@ -24,20 +24,20 @@ EXAMPLES
 
 To translate a Snowflake query from stdin, run:
 
-    echo 'SELECT * FROM test.my_table;' | gcloud alpha bq translation translate --source-dialect=SNOWFLAKE --location=us
+    echo 'SELECT * FROM test.my_table;' | gcloud alpha bq translation translate --source-dialect=SNOWFLAKE --target-dialect=BIGQUERY --location=us
 
 To translate a Snowflake query from a file and save the output and logs to files, run:
 
-    gcloud alpha bq translation translate --source-dialect=SNOWFLAKE --location=us --project=my-project --input-file=input.sql --output-file=output.sql --translation-log-file=translation_logs.yaml
+    gcloud alpha bq translation translate --source-dialect=SNOWFLAKE --target-dialect=BIGQUERY --location=us --project=my-project --input-file=input.sql --output-file=output.sql --translation-log-file=translation_logs.yaml
 
 REQUIRED FLAGS
 
   - `--location` = `  LOCATION  `  
     Google Cloud Storage location to use for the translation.
   - `--source-dialect` = `  SOURCE_DIALECT  `  
-    Source dialect of the query. See supported dialects in <https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#supported_sql_dialects>
+    Source dialect of the query. See supported dialects in <https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects>
   - `--target-dialect` = `  TARGET_DIALECT  `  
-    Target dialect of the query. See supported dialects in <https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#supported_sql_dialects>
+    Target dialect of the query. See supported dialects in <https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects>
 
 OPTIONAL FLAGS
 

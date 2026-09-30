@@ -14,6 +14,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## September 29, 2026
+
+Feature
+
+The [`AI.KEY_DRIVERS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use the `AI.KEY_DRIVERS` function to identify segments of data that cause statistically significant changes to a summable metric.
+
+Feature
+
+You can query the [`INFORMATION_SCHEMA.FAILOVER_HISTORY` view](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history) to retrieve a near real-time list of failover events for reservations within an administration project that use [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) .
+
+This feature is now in ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+
 ## September 28, 2026
 
 Feature

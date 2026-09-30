@@ -8,12 +8,6 @@ data_source: docs.cloud.google.com
 
 # The AI.KEY\_DRIVERS function
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqml-feedback@google.com> .
-
 This document describes the `AI.KEY_DRIVERS` function, which you can use to identify segments of data that cause statistically significant changes to a summable metric. For example, if you launch a new product, then the following query identifies the locations where new product sales were most unexpected:
 
     SELECT *

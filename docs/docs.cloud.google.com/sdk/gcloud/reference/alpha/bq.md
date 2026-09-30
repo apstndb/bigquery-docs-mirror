@@ -12,7 +12,7 @@ gcloud alpha bq - interact with and manage resources in Google BigQuery
 
 SYNOPSIS
 
-`gcloud alpha bq` `  GROUP  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq` `  GROUP  ` | `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
 
 DESCRIPTION
 
@@ -38,6 +38,13 @@ GROUPS
     `(ALPHA)` Interact with and manage Google BigQuery tables.
   - `  translation  `  
     `(ALPHA)` Manage BigQuery Migration Service translations.
+
+COMMANDS
+
+`  COMMAND  ` is one of the following:
+
+  - `  query  `  
+    `(ALPHA)` Execute a BigQuery SQL query.
 
 NOTES
 

@@ -164,9 +164,7 @@ This is an example of a project-level configuration for the `dbt_project.yml` fi
         notebook_template_id: 7018811640745295872
         packages: ["scikit-learn", "mlflow"]
         timeout: 3000
-        # Config indicated by + and applies to all files under models/example/
-        example:
-          +materialized: view
+        # Config indicated by + and applies to all files under models/example/example:+materialized:view
 
 Some parameters can also be configured using the `dbt.config` method within your Python code. If these settings conflict with your `dbt_project.yml` file, the configurations with `dbt.config` will take precedence.
 
@@ -210,9 +208,7 @@ Then, you build your Python model, which can use the data sources configured in 
         source_data = dbt.source('my_project_source', 'dev_sql1')
     
         # Example transformation: Create a new column 'id_new'
-        source_data['id_new'] = source_data['id'] * 10
-    
-        return source_data
+        source_data['id_new']=source_data['id']*10returnsource_data
 
 ### Referencing another model
 
@@ -227,9 +223,7 @@ You can build models that depend on the output of other dbt models, as shown in 
         df_from_sql = dbt.ref("dev_sql1")
     
         # Example transformation on the data from the referenced model
-        df_from_sql['id'] = df_from_sql['id'] * 100
-    
-        return df_from_sql
+        df_from_sql['id']=df_from_sql['id']*100returndf_from_sql
 
 ### Specifying a package dependency
 
@@ -250,11 +244,7 @@ If your Python model requires specific third-party libraries like [MLflow](https
         data = {
             "mlflow_version": [mlflow.__version__],
             "boto3_version": [boto3.__version__],
-            "note": ["This demonstrates accessing package versions after import."]
-        }
-        bdf = bpd.DataFrame(data)
-    
-        return bdf
+            "note": ["This demonstrates accessing package versions after import."]}bdf=bpd.DataFrame(data)returnbdf
 
 ### Specifying a non-default template
 
@@ -267,8 +257,7 @@ For more control over the execution environment or to use pre-configured setting
             notebook_template_id="857350349023451yyyy",
         )
     
-        data = {"int": [1, 2, 3], "str": ['a', 'b', 'c']}
-        return bpd.DataFrame(data=data)
+        data = {"int": [1, 2, 3], "str": ['a','b','c']}returnbpd.DataFrame(data=data)
 
 ### Materializing the tables
 
@@ -283,8 +272,7 @@ For standard table materialization, dbt creates or fully replaces a table in you
             materialized='table',
         )
     
-        data = {"int_column": [1, 2], "str_column": ['a', 'b']}
-        return bpd.DataFrame(data=data)
+        data = {"int_column": [1, 2], "str_column": ['a9;,'b']}returnbpd.DataFrame(data=data)
 
 Incremental materialization with a merge strategy allows dbt to update your table with only new or modified rows. This is useful for large datasets because completely rebuilding a table every time can be inefficient. The merge strategy is a common way to handle these updates.
 
@@ -310,8 +298,7 @@ To use the merge strategy, you need to specify a `unique_key` property that dbt 
         # - Row with 'int' value 4 is a new addition.
         # The 'merge' strategy will ensure that only the updated row ('int 2')
         # and the new row ('int 4') are processed and integrated into the table.
-        data = {"int": [1, 2, 4], "str": ['a', 'bbbb', 'd']}
-        return bpd.DataFrame(data=data)
+        data = {"int":[1,2,4],"str":['a','bbbb','d']}returnbpd.DataFrame(data=data)
 
 ## Troubleshooting
 

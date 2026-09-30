@@ -46,11 +46,11 @@ To allow this global query to execute successfully, the following configuration 
 
 1.  You need to enable execution of global queries in the project ( `query_project` ) in the region running a global query ( `us-central1` ):
     
-        ALTER PROJECT `query_project`SET OPTIONS (`region-us-central1.enable_global_queries_execution` = TRUE);
+        ALTER PROJECT `query_project`SET OPTIONS (`region-us-central1.enable_global_queries_execution` = TRUE)
 
 2.  You need to enable copying data by global queries from the project containing the data ( `data_project` ) for its region ( `europe-west1` ):
     
-        ALTER PROJECT `data_project`SET OPTIONS (`region-europe-west1.enable_global_queries_data_access` = TRUE);
+        ALTER PROJECT `data_project`SET OPTIONS (`region-europe-west1.enable_global_queries_data_access` = TRUE)
 
 To create and use [views](https://docs.cloud.google.com/bigquery/docs/views-intro) that contain remote tables, the same principles apply: the project running the queries must have `enable_global_queries_execution` enabled.
 
@@ -187,19 +187,19 @@ For information about quotas regarding global queries, see [Query jobs](https://
 
 ## Limitations
 
-  - A query's [execution details](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) and [execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) don't show the number of bytes processed and transferred from remote locations. This information appears in copy jobs that you can find in your job history. The job ID of a copy job created by a global query has the job ID of the query job as a prefix.
-  - Global queries are not supported in sandbox mode.
+  - Global queries are not supported in [Assured Workloads](https://docs.cloud.google.com/assured-workloads/docs/overview) .
   - Global queries are not supported when using [regional endpoints](https://docs.cloud.google.com/bigquery/docs/regional-endpoints) .
+  - Global queries are not supported in sandbox mode.
   - Global queries incur higher latency than single-region queries due to the time required to transfer data between regions.
   - Global queries don't use any cache to avoid transferring data between regions.
-  - You can't query pseudocolumns, such `_PARTITIONTIME` , with global queries.
-  - You can't query `RANGE` type columns with global queries.
-  - You can't query columns using [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with global queries.
+  - Global queries are not executed atomically. In cases where data replication succeeds, but the overall query fails, you are still billed for the data replication.
+  - A single global query can access up to 10 remote tables per region.
+  - Temporary tables created in remote regions as part of global queries execution are only encrypted using [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) if a CMEK key that was configured to encrypt the global query results (either on a table, dataset, or project level) is global. To ensure that remote temporary tables are always protected using CMEK, set a default KMS key for the project running global queries in the remote region.
   - Global [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location). Instead, create authorized views in the region where your data is located and query the authorized views through global queries.
   - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) over global queries are not supported.
+  - You can't query `RANGE` type columns with global queries.
+  - You can't query pseudocolumns, such `_PARTITIONTIME` , with global queries.
+  - You can't query columns using [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with global queries.
   - If your global query references `STRUCT` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the remote region that filters `STRUCT` columns and returns only the necessary fields as individual columns.
-  - Global queries are not executed atomically. In cases where data replication succeeds, but the overall query fails, you are still billed for the data replication.
-  - Temporary tables created in remote regions as part of global queries execution are only encrypted using [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) if a CMEK key that was configured to encrypt the global query results (either on a table, dataset, or project level) is global. To ensure that remote temporary tables are always protected using CMEK, set a default KMS key for the project running global queries in the remote region.
-  - Global queries are not supported in [Assured Workloads](https://docs.cloud.google.com/assured-workloads/docs/overview) .
-  - A single global query can access up to 10 remote tables per region.
+  - A query's [execution details](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) and [execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) don't show the number of bytes processed and transferred from remote locations. This information appears in copy jobs that you can find in your job history. The job ID of a copy job created by a global query has the job ID of the query job as a prefix.
   - Global queries are only supported in [Data Studio](https://docs.cloud.google.com/data-studio/welcome) when they are wrapped in a view and configured to use [Viewer's Credentials](https://docs.cloud.google.com/data-studio/data-credentials-article#viewers-credentials) .

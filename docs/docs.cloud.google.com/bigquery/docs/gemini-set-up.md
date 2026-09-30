@@ -54,8 +54,6 @@ If you're a data analyst, data scientist, or developer who wants to use specific
 
 BigQuery data insights and automated metadata generation features are available to customers using BigQuery on-demand compute, Enterprise edition, or Enterprise Plus edition. The quota for data insights scans and metadata generation is based on the use of these compute models at the organization level. For information about quotas for these features, see [Quotas for Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/quotas#bigquery) .
 
-If your organization is using BigQuery Standard edition for compute only, then you can use Gemini Code Assist Standard, which includes data insights and automated metadata generation capabilities in addition to features listed in [Gemini Code Assist Standard and Enterprise pricing overview](https://cloud.google.com/products/gemini/pricing#gemini_code_assist_standard_and_enterprise_pricing_overview) . To learn how to purchase Gemini Code Assist Standard, see [Purchase a Gemini Code Assist Standard subscription](https://docs.cloud.google.com/gemini/docs/discover/set-up-gemini#purchase-subscription) and follow the instructions to purchase Standard edition.
-
 ### Enable Gemini in BigQuery preview features
 
 Certain Gemini in BigQuery features in [Preview](https://cloud.google.com/products#product-launch-stages) are part of the trusted tester program. To request access to these features, an administrator must complete the [Gemini in BigQuery Pre-GA Sign-up form](https://goo.gle/gemini-in-bq-preview) . Gemini in BigQuery pre-GA feature access is enabled periodically in batches.

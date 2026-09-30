@@ -56,7 +56,7 @@ The following limitations apply to BigQuery disaster recovery:
 
   - After a failover, [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to the new primary location because they are bound to the location specified during creation. To resume scheduled queries, you must recreate them in the new primary location.
 
-  - The [`INFORMATION_SCHEMA.RESERVATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't include failover details.
+  - The [`INFORMATION_SCHEMA.RESERVATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't include failover details. To list failover events for reservations, query the [`INFORMATION_SCHEMA.FAILOVER_HISTORY` view](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history) .
 
   - The [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) contains job history only for the region where jobs executed. Primary region job history isn't replicated to the secondary region. After a failover, job history from the primary region isn't visible in the secondary region.
 
@@ -503,6 +503,8 @@ Replace the following:
   - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ## What's next
+
+  - Query [`INFORMATION_SCHEMA.FAILOVER_HISTORY`](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history) to view failover events for your reservations.
 
   - Learn more about [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) .
 

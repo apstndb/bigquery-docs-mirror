@@ -708,7 +708,7 @@ Estimate your monthly BigQuery costs, including region-specific pricing and fees
 
 Connect with our sales team to get a custom quote for your organization.
 
-[Request a quote](https://cloud.google.com/contact?direct=true)
+[Request a quote](https://cloud.google.com/contact)
 
 ### Start your proof of concept
 

@@ -3555,7 +3555,7 @@ Non-negative fractions of a second at nanosecond resolution. This field is the n
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destinationUri&quot;: string,&quot;destinationUris&quot;: [string],&quot;printHeader&quot;: boolean,&quot;fieldDelimiter&quot;: string,&quot;destinationFormat&quot;: string,&quot;compression&quot;: string,&quot;useAvroLogicalTypes&quot;: boolean,&quot;modelExtractOptions&quot;: {object (ModelExtractOptions)},&quot;nativeGeographyExportEnabled&quot;: boolean,// Union field source can be only one of the following:&quot;sourceTable&quot;: {object (TableReference)},&quot;sourceModel&quot;: {object (ModelReference)}// End of list of possible types for union field source.}</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;destinationUri&quot;: string,&quot;destinationUris&quot;: [string],&quot;printHeader&quot;: boolean,&quot;fieldDelimiter&quot;: string,&quot;destinationFormat&quot;: string,&quot;compression&quot;: string,&quot;useAvroLogicalTypes&quot;: boolean,&quot;modelExtractOptions&quot;: {object (ModelExtractOptions)},&quot;nativeGeographyExportEnabled&quot;: boolean,&quot;secureContext&quot;: {object (SecureContext)},// Union field source can be only one of the following:&quot;sourceTable&quot;: {object (TableReference)},&quot;sourceModel&quot;: {object (ModelReference)}// End of list of possible types for union field source.}</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -3615,6 +3615,12 @@ Optional. Model extract options only applicable when extracting models.
 `boolean`
 
 Optional. Applicable to formats: PARQUET. If enabled, BigQuery to Parquet export will write the native Parquet Geography type instead of the default GeoParquet type.
+
+`secureContext`
+
+` object ( SecureContext  ` )
+
+Optional. A set of key-value pairs representing the secure context. This can be used to pass sensitive or context-specific information. They can be retrieved via the SECURE\_CONTEXT() function and used to modify the run-time behavior of an extract job on tables with row access policies.
 
 Union field `source` . Required. Source reference for the export. `source` can be only one of the following:
 

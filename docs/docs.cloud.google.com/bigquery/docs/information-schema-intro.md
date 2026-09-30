@@ -79,6 +79,7 @@ The following table lists the available views:
 <code dir="ltr" translate="no">        ASSIGNMENT_CHANGES_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        CAPACITY_COMMITMENTS_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        CAPACITY_COMMITMENT_CHANGES_BY_PROJECT                 †        </code><br />
+<code dir="ltr" translate="no">        FAILOVER_HISTORY_BY_PROJECT                 †                  science       </code><br />
 <code dir="ltr" translate="no">        RESERVATIONS_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        RESERVATION_CHANGES_BY_PROJECT                 †        </code><br />
 <code dir="ltr" translate="no">        RESERVATIONS_TIMELINE_BY_PROJECT                 †        </code></td>

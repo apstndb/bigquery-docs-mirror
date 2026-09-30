@@ -28,8 +28,16 @@ COMMANDS
 
 `  COMMAND  ` is one of the following:
 
+  - `  describe  `  
+    `(ALPHA)` Get the details or status of a submitted batch translation.
+  - `  generate-source-ddl  `  
+    `(ALPHA)` Generates source DDL schemas from a batch of SQL queries using AI.
   - `  translate  `  
     `(ALPHA)` Translate a SQL query from a source dialect to BigQuery.
+  - `  translate-batch  `  
+    `(ALPHA)` Translates a batch of SQL queries.
+  - `  translate-metadata  `  
+    `(ALPHA)` Translates metadata from zip files into DDL statements and table mappings.
 
 NOTES
 
