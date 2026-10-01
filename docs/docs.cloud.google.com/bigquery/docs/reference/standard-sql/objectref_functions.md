@@ -35,6 +35,7 @@ The fields in the `gcs_metadata` JSON refer to the [object metadata](https://doc
 | [`OBJ.FETCH_METADATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objfetch_metadata) | Fetches Cloud Storage metadata for a partially populated `ObjectRef` value.                  |
 | [`OBJ.GET_ACCESS_URL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) | Returns access URLs for a Cloud Storage object.                                              |
 | [`OBJ.GET_READ_URL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_read_url)     | Returns a read URL and status for a Cloud Storage object.                                    |
+| [`OBJ.LIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objlist)                     | Returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage.        |
 | [`OBJ.MAKE_REF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref)             | Creates an `ObjectRef` value that contains reference information for a Cloud Storage object. |
 
 ## `OBJ.FETCH_METADATA`
@@ -249,6 +250,157 @@ When you run this query in Studio, the `read_url.url` column displays the images
 **Limitations**
 
 You can't have more than 20 connections in the project and region in which your query accesses object data as `ObjectRef` values.
+
+## `OBJ.LIST`
+
+    OBJ.LIST(
+      uri
+      [, authorizer ]
+    )
+
+**Description**
+
+The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage. `OBJ.LIST` lets you perform spontaneous discovery and analysis of unstructured data. The Cloud Storage data can include documents, images, and audio. The `OBJ.LIST` function can discover objects across all [Cloud Storage classes](https://docs.cloud.google.com/storage/docs/storage-classes) .
+
+Using `OBJ.LIST` replaces the need to manually construct `ObjectRef` values. You can quickly add Cloud Storage objects into AI functions to build ETL pipelines that handle converting unstructured data to structured data. If you require a persistent, self-updating table that continuously tracks new objects that arrive in a bucket over time, you should create a standard [BigQuery object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) instead.
+
+For more information, see [Work with `ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) .
+
+**Definitions**
+
+  - `uri` : a `STRING` value that contains the URI for the Cloud Storage object, for example, `gs://mybucket/flowers/12345.jpg` . Scalar subqueries and string manipulation functions such as `CONCAT` aren't supported.
+    
+    You can use one asterisk ( `*` ) wildcard character in each path to limit the objects included in the results. For example, if the bucket contains several types of unstructured data, you could list only PDF objects by specifying `gs://bucket_name/*.pdf` . For more information, see [Wildcard support for URIs](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#wildcard-support) .
+    
+    > **Note:** The `OBJ.LIST` function doesn't support uris that end in a slash or uris that contain consecutive slashes. For example, uris such as `gs://mybucket/flowers/` and `gs://mybucket/flowers//12345.jpg` return an error.
+
+  - `authorizer` : a `STRING` value that contains the [Cloud Resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) used for [delegated access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#delegated-access) to the Cloud Storage object. Your data administrator needs to set up the permissions to use this connection. If omitted, the returned ObjectRef uses [direct access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#direct-access) .
+
+**Output**
+
+A table with metadata that represents the objects found in Cloud Storage. The table includes the following columns:
+
+  - `uri` : a `STRING` value that contains the Cloud Storage URI of the object.
+  - `content_type` : a `STRING` value that contains the MIME type of the object, for example, `image/jpeg` or `application/pdf` .
+  - `size` : an `INT64` value that contains the object size in bytes.
+  - `md5_hash` : a `STRING` value that contains the MD5 hash of the object.
+  - `updated` : a `TIMESTAMP` value that contains the time the object was last updated.
+  - `metadata` : an `ARRAY<STRUCT<name STRING, value STRING>>` value that contains additional Cloud Storage metadata.
+  - `generation` : an `INT64` value that identifies the [version of an object](https://docs.cloud.google.com/storage/docs/metadata#generation-number) , and exists for every object, regardless of whether a bucket uses Object Versioning.
+  - `ref` : an `ObjectRef` value that represents the object. This value can be passed to other `OBJ` and `AI` functions.
+
+**Examples**
+
+The examples demonstrate how to use `OBJ.LIST` to perform spontaneous analysis of unstructured data. These examples omit the `authorizer` argument, which means that the queries use [direct access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#direct-access) . If your environment requires [delegated access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#delegated-access) , add the `authorizer` argument to the query.
+
+The following query uses the wildcard character (\*) to discover specific file types, and it uses the `AI.IF` function to filter unstructured data. This query lists only the PNG files that contain an image of a dog.
+
+    SELECT
+      uri,
+      content_type,
+      size
+    FROM
+      OBJ.LIST('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png')
+    WHERE
+      AI.IF(('Does this image contain a dog?', ref))
+    ORDER BY
+      uri;
+    
+    /*----------------------------------------------------------------+--------------+--------+
+     | uri                                                            | content_type | size   |
+     +----------------------------------------------------------------+--------------+--------+
+     | gs://.../k9-guard-dog-ear-cleaner.png                          | image/png    | 584558 |
+     | gs://.../k9-guard-dog-paw-wipes.png                            | image/png    | 785219 |
+     | gs://.../k9-guard-dog-toothpaste.png                           | image/png    | 732191 |
+     | gs://.../k9-guard-flea-&-tick-shampoo.png                      | image/png    | 1144191|
+     | gs://.../playful-pup-dog-training-book.png                     | image/png    | 1106425|
+     | gs://.../playful-pup-dog-training-clicker-with-training-dvd.png| image/png    | 1203398|
+     +----------------------------------------------------------------+--------------+--------*/
+
+The following example combines the `OBJ.LIST` and `AI.GENERATE` functions with the `output_schema` parameter to build an unstructured-to-structured data pipeline using a single query. This example reads raw images and extracts strictly typed properties into standard BigQuery columns without creating a persistent object table.
+
+    SELECT
+      uri,
+      result.animal_type,
+      result.item_color
+    FROM (
+      SELECT
+        uri,
+        AI.GENERATE(
+          ("What type of animal is this pet product for, and what is its primary color?", ref),
+          output_schema => 'animal_type STRING, item_color STRING'
+        ) AS result
+      FROM
+        OBJ.LIST('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png')
+    );
+    
+    /*--------------------------------------------------------------------------+-------------+------------+
+     | uri                                                                      | animal_type | item_color |
+     +-----------------------------------=--------------------------------------+-------------+------------+
+     | gs://cloud-samples-data/.../aquaclear-aquarium-filter-media-bag.png      | fish        | white      |
+     | gs://cloud-samples-data/.../cozy-naps-cat-scratching-pad-with-catnip.png | cat         | brown      |
+     | gs://cloud-samples-data/.../cozy-naps-cat-teaser-wand.png                | cat         | white      |
+     | gs://cloud-samples-data/.../fluffy-buns-chinchilla-play-tunnel.png       | cat         | blue       |
+     | gs://cloud-samples-data/.../fluffy-buns-rabbit-hay.png                   | rabbit      | green      |
+     | gs://cloud-samples-data/.../k9-guard-dog-muzzle.png                      | dog         | black      |
+     | ...                                                                      |             |            |
+     +--------------------------------------------------------------------------+-------------+------------*/
+
+The following example uses the `AI.IF` function to review a directory of unstructured files for policy violations based on their semantic, visual, or audio content. This query reviews a folder of product manuals and returns only the files that are missing crucial safety warnings.
+
+    SELECT
+      uri
+    FROM
+      OBJ.LIST('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*')
+    WHERE
+      AI.IF(('Determine if this product manual is missing standard choking hazard safety warnings.', ref))
+    ORDER BY
+      uri;
+    
+    /*-----------------------------------------------------------------------------+
+     | uri                                                                         |
+     +-----------------------------------------------------------------------------+
+     | gs://cloud-samples-data/.../documents/crittercuisine_5000_user_manual.pdf   |
+     +-----------------------------------------------------------------------------*/
+
+The following example uses the `OBJ.LIST` function to aggregate references into arrays to pass multiple files to simultaneously. This query retrieves three product images, and asks to synthesize the visual theme of the files.
+
+    WITH product_images AS (
+      SELECT ref
+      FROM OBJ.LIST('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png')
+      LIMIT 3
+    )
+    SELECT
+      AI.GENERATE(
+        ('What are the common visual themes or branding elements across these pet products?', ARRAY_AGG(ref))
+      ).result AS comparison_summary
+    FROM
+      product_images;
+    
+    /*-----------------------------------------------------------------------------+
+     | comparison_summary                                                          |
+     +-----------------------------------------------------------------------------+
+     | Based on the provided images, the common visual themes or branding elements |
+     | across these pet products, which appear to be related to aquariums and      |
+     | aquarium accessories, are:                                                  |
+     | 1.  **Clean and Minimalist Aesthetics**                                     |
+     |     ...                                                                     |
+     | 2.  **Focus on Clarity and Transparency (for aquariums)**                   |
+     |     ...                                                                     |
+     | 3.  **Modern and Neutral Color Palette**                                    |
+     |     ...                                                                     |
+     | 4.  **Subtle Branding (where visible)**                                     |
+     |     ...                                                                     |
+     | 5.  **Quality and Durability (implied)**                                    |
+     |     ...                                                                     |
+     +-----------------------------------------------------------------------------*/
+
+**Limitations**
+
+The following object table limitations apply to the `OBJ.LIST` function. Because `OBJ.LIST` dynamically generates object metadata, it shares many of the same underlying behaviors and limitations as [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+
+  - **Locations** : If you use a BigQuery connection, the connection's location and the query location must be compatible with the Cloud Storage bucket's region.
+  - **VPC Service Controls** : Access to Cloud Storage data is governed by your organization's [VPC Service Controls perimeters](https://docs.cloud.google.com/vpc-service-controls/docs/service-perimeters) .
 
 ## `OBJ.MAKE_REF`
 

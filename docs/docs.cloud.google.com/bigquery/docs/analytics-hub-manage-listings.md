@@ -485,6 +485,8 @@ Replace the following:
 
 As your data exchange requirements evolve, you can update a listing's metadata, categories, discoverability settings, and region availability without modifying the underlying shared dataset.
 
+If your Google Cloud project uses a VPC Service Controls service perimeter, you might need to configure additional [ingress and egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules#update-listing) to allow background synchronization to update the associated linked datasets.
+
 To update a listing, follow these steps:
 
 ### Console

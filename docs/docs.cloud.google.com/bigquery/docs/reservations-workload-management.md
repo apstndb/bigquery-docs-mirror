@@ -30,6 +30,8 @@ When you create an assignment, you specify the job type for that assignment:
 
   - `QUERY` : Use this reservation for non-continuous query jobs, including SQL, DDL, DML, and BigQuery ML (built-in models) queries.
 
+  - `AUTOMATIC_MATERIALIZED_VIEW_REFRESH` : Use this reservation for [automatic materialized view refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) jobs.
+
   - `BACKGROUND_CHANGE_DATA_CAPTURE` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigQuery CDC ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) background jobs. `BACKGROUND_CHANGE_DATA_CAPTURE` reservations are not available in the Standard edition.
 
   - `BACKGROUND_COLUMN_METADATA_INDEX` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigLake metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) background jobs. Also use this reservation when you replicate source databases to BigQuery with Datastream's background apply operations. `BACKGROUND_COLUMN_METADATA_INDEX` reservations are not available in the Standard edition.

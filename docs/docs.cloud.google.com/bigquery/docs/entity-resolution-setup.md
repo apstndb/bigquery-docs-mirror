@@ -8,13 +8,11 @@ data_source: docs.cloud.google.com
 
 # Configure and use entity resolution in BigQuery
 
-This document describes how to implement [entity resolution](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro) for end users and identity providers.
+[Entity resolution](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro) in BigQuery lets you match, deduplicate, and augment records across datasets without moving your underlying data. As an end user, you can connect your BigQuery datasets to an identity provider such as LiveRamp or TransUnion and call a remote function to resolve identities in place. As an identity provider, you can configure remote function endpoints and publish your entity resolution services on Google Cloud Marketplace.
 
-You can use this document to connect with an identity provider and use their service to match records. Identity providers can use this document to set up services to share with you on the Google Cloud Marketplace.
+## Configure entity resolution for end users
 
-## Workflow for end users
-
-The following sections show you how to configure entity resolution in BigQuery. For a visual representation of the complete setup, see [entity resolution architecture](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro#architecture) .
+To resolve entities as an end user, you prepare input and output datasets in BigQuery, grant dataset access to your identity provider, and invoke their matching service. For more information about the architecture, see [Entity resolution architecture](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro#architecture) .
 
 ### Before you begin
 
@@ -22,108 +20,150 @@ The following sections show you how to configure entity resolution in BigQuery. 
 2.  Get the following items from the identity provider:
       - Service account credentials
       - Remote function signature
-3.  Create two datasets in your Google Cloud project:
+3.  Create the following datasets in your Google Cloud project:
       - Input dataset
       - Output dataset
 
 ### Required roles
 
-To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles:
+To ensure that the identity provider's service account has the necessary permissions to read the input dataset and write to the output dataset, ask your administrator to grant the following IAM roles to the identity provider's service account:
 
-  - For the identity provider's service account to read the input dataset and write to the output dataset:
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the input dataset
-      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the output dataset
+> **Important:** You must grant these roles to the identity provider's service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+
+  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the input dataset
+  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the output dataset
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the identity provider's service account the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-### Translate or resolve entities
+### Resolve entities with an identity provider
 
-For identity provider-specific instructions, see the following sections.
+After you create your datasets and grant the required roles, you can configure your tables and run matching jobs with your chosen identity provider. The following table summarizes the integration method and required tables for each supported identity provider:
+
+| Identity provider | Integration method                                            | Required tables in your dataset                                                             | Job invocation                         |
+| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------- |
+| **LiveRamp**      | LiveRamp Embedded Identity                                    | Input table with RampIDs, metadata table                                                    | Email request to LiveRamp support      |
+| **TransUnion**    | TruAudience remote function over BigQuery external connection | Input table with entity attributes, metadata table, job status table, matching output table | SQL stored procedure call using `CALL` |
+
+Select an identity provider to view specific setup and job execution instructions:
 
 ### LiveRamp
 
-#### Prerequisites
+#### LiveRamp prerequisites
+
+Before you configure LiveRamp entity resolution in BigQuery, complete the following prerequisites:
 
   - Configure LiveRamp Embedded Identity in BigQuery. For more information, see [Enabling LiveRamp Embedded Identity in BigQuery](https://docs.liveramp.com/identity/en/liveramp-embedded-identity-in-bigquery.html#enabling-liveramp-embedded-identity-in-bigquery) .
-  - Coordinate with LiveRamp to enable API credentials for use with Embedded Identity. For more information, see [Authentication](https://docs.liveramp.com/identity/en/liveramp-embedded-identity-in-bigquery.html#id74765) .
+  - Coordinate with LiveRamp to enable API credentials that work with Embedded Identity. For more information, see [Authentication](https://docs.liveramp.com/identity/en/liveramp-embedded-identity-in-bigquery.html#id74765) .
 
-#### Setup
+#### Set up LiveRamp entity resolution
 
-The following steps are required when you use LiveRamp Embedded Identity for the first time. After setup, you only need to modify the input table and metadata table between runs.
+When you use LiveRamp Embedded Identity for the first time, complete the following setup steps. For subsequent runs, you only need to update your input table and metadata table.
 
-##### Create an input table
+##### Create a LiveRamp input table
 
-Create a table in the input dataset. Populate the table with RampIDs, target domains, and target types. For details and examples, see [Input Table Columns and Descriptions](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#input-table-columns-and-descriptions) .
+Create a table in your input dataset and populate it with the following columns:
 
-##### Create a metadata table
+  - RampIDs
+  - Target domains
+  - Target types
 
-The metadata table controls the execution of LiveRamp Embedded Identity on BigQuery. Create a metadata table in the input dataset. Populate the metadata table with client IDs, execution modes, target domains, and target types. For details and examples, see [Metadata Table Columns and Descriptions](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#metadata-table-columns-and-descriptions) .
+For more information about the input table schema, see [Input Table Columns and Descriptions](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#input-table-columns-and-descriptions) .
 
-##### Share tables with LiveRamp
+##### Create a LiveRamp metadata table
 
-Grant the LiveRamp Google Cloud service account access to view and process data in your input dataset. For details and examples, see [Share Tables and Datasets with LiveRamp](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#share-tables-and-datasets-with-liveramp-71) .
+To control the execution of LiveRamp Embedded Identity in BigQuery, create a metadata table in your input dataset. Populate the metadata table with the following configuration columns:
 
-#### Run an embedded identity job
+  - Client IDs
+  - Execution modes
+  - Target domains
+  - Target types
 
-To run an embedded identity job with LiveRamp in BigQuery, complete the following steps:
+For more information about the metadata table schema, see [Metadata Table Columns and Descriptions](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#metadata-table-columns-and-descriptions) .
 
-1.  Confirm that all RampIDs that were encoded in your domain are in your input table.
-2.  Confirm that your metadata table is still accurate before you run the job.
-3.  Contact <LiveRampIdentitySupport@liveramp.com> with a job process request. Include the project ID, dataset ID, and table ID (if applicable) for your input table, metadata table, and output dataset.
+#### Grant dataset access to LiveRamp
 
-Results are generally delivered to your output dataset within three business days.
+After you create the required tables, grant LiveRamp access to view and process data in your input dataset. Grant dataset access to the LiveRamp Google Cloud service account. For more information about sharing datasets, see [Share Tables and Datasets with LiveRamp](https://docs.liveramp.com/identity/en/perform-rampid-transcoding-in-bigquery.html#share-tables-and-datasets-with-liveramp-71) .
 
-#### LiveRamp support
+#### Run a LiveRamp entity resolution job
 
-For support issues, contact [LiveRamp Identity Support](mailto:LiveRampIdentitySupport@liveramp.com) .
+After you configure your tables and grant dataset access, run an entity resolution job with LiveRamp in BigQuery:
 
-#### LiveRamp billing
+1.  In your input table, confirm that all RampIDs for your domain are present.
+2.  Before you run the job, confirm that your metadata table configuration is accurate.
+3.  To submit a job processing request, send an email to <LiveRampIdentitySupport@liveramp.com> . In your request, include the project ID, dataset ID, and any applicable table IDs for your input table, metadata table, and output dataset.
 
-[LiveRamp](https://cloud.google.com/find-a-partner/partner/liveramp) handles billing for entity resolution.
+LiveRamp typically delivers the matching results to your output dataset within three business days.
+
+#### Get LiveRamp support and billing information
+
+LiveRamp manages technical support and billing for Embedded Identity in BigQuery:
+
+  - **Technical support** : contact [LiveRamp Identity Support](mailto:LiveRampIdentitySupport@liveramp.com) for assistance with setup or job execution.
+  - **Billing** : [LiveRamp](https://cloud.google.com/find-a-partner/partner/liveramp) bills you directly for entity resolution usage.
 
 ### TransUnion
 
-#### Prerequisites
+#### TransUnion prerequisites
 
-  - Contact [TransUnion Cloud Support](mailto:PDLtucloudappsupport@transunion.com) to sign an agreement to access the service. Provide your Google Cloud project ID, input data types, use case, and data volume.
-  - TransUnion Cloud Support enables the service for your Google Cloud project and shares a detailed implementation guide that includes available output data.
+Before you configure TransUnion entity resolution in BigQuery, send an email to [TransUnion Cloud Support](mailto:PDLtucloudappsupport@transunion.com) to sign a service access agreement. In your request, provide the following information:
 
-#### Setup
+  - Your Google Cloud project ID
+  - Input data types
+  - Intended use case
+  - Estimated data volume
 
-The following steps are required when you use TransUnion's TruAudience Identity Resolution and Enrichment service in your BigQuery environment.
+After TransUnion Cloud Support approves your request, they enable the service for your Google Cloud project and share an implementation guide that includes available output schemas.
+
+#### Set up TransUnion entity resolution
+
+When you use the TransUnion TruAudience Identity Resolution and Enrichment service in BigQuery for the first time, complete the following setup steps.
 
 ##### Create an external connection
 
-[Create a connection to an external data source](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) of the **Vertex AI remote models, remote functions and BigLake (Cloud Resource)** type. You use this connection to trigger the identity resolution service hosted in the TransUnion Google Cloud account from your Google Cloud account.
+To connect your Google Cloud account to the identity resolution service hosted in the TransUnion Google Cloud account, [create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) . When you configure the connection, select **Vertex AI remote models, remote functions and BigLake (Cloud Resource)** as the connection type.
 
-Copy the connection ID and service account ID and share these identifiers with the TransUnion customer delivery team.
+After you create the connection, copy the connection ID and service account ID, and then share these identifiers with the TransUnion customer delivery team.
 
 ##### Create a remote function
 
-[Create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function) to interact with the service orchestrator endpoint hosted on the TransUnion Google Cloud project to pass the necessary metadata (including schema mappings) to the TransUnion service. Use the connection ID from the external connection that you created and the TransUnion-hosted cloud function endpoint shared by the TransUnion customer delivery team.
+To pass schema mappings and configuration metadata to the TransUnion service orchestrator endpoint, [create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create-a-remote-function) . When you create the remote function, specify the connection ID from your external connection and the Cloud Run function endpoint URL that the TransUnion customer delivery team shared with you.
 
-##### Create an input table
+##### Create a TransUnion input table
 
-Create a table in the input dataset. TransUnion supports name, postal address, email, phone, date of birth, IPv4 address, and device IDs as inputs. Follow the formatting guidelines in the implementation guide that TransUnion shared with you.
+Create an input table in your input dataset. TransUnion supports the following entity attributes as input columns:
 
-##### Create a metadata table
+  - Name
+  - Postal address
+  - Email address
+  - Phone number
+  - Date of birth
+  - IPv4 address
+  - Device ID
 
-Create a metadata table to store the configuration required by the identity resolution service to process data, including schema mappings. For details and examples, see the implementation guide that TransUnion shared with you.
+Follow the schema and formatting guidelines in the implementation guide that TransUnion shared with you. If you map each input table to a distinct `config_id` parameter in your metadata table, you can use multiple input tables.
+
+##### Create a TransUnion metadata table
+
+To store the schema mappings and configuration that the identity resolution service requires, create a metadata table in your input dataset. For more information about the metadata schema, see the implementation guide that TransUnion shared with you.
 
 ##### Create a job status table
 
-Create a table to receive updates about the processing of an input batch. You can query this table to trigger other downstream processes in your pipeline. Possible job statuses include `RUNNING` , `COMPLETED` , or `ERROR` .
+To receive batch processing updates, create a job status table in your dataset. To monitor jobs and trigger downstream processes in your pipeline, query this job status table. The table records the following statuses:
 
-##### Create the service invocation
+  - `RUNNING` : the identity resolution service is processing the batch.
+  - `COMPLETED` : the service finished processing the batch and wrote the results to the output table.
+  - `ERROR` : the service encountered an error while processing the batch.
 
-Use the following procedure to call the TransUnion identity resolution service after collecting all the metadata, packaging it, and passing it to the invocation cloud function endpoint hosted by TransUnion.
+##### Create the service invocation procedure
+
+The `TransUnion_get_identities` stored procedure packages your configuration metadata and invokes the TransUnion Cloud Run function endpoint. To create this stored procedure, run the following SQL statement:
 
     -- create service invocation procedure
     CREATE OR REPLACE
       PROCEDURE
-        `<project_id>.<dataset_id>.TransUnion_get_identities`(metadata_table STRING, config_id STRING)
+        `PROJECT_ID.DATASET_ID.TransUnion_get_identities`(metadata_table STRING, config_id STRING)
           begin
             declare sql_query STRING;
     
@@ -138,16 +178,22 @@ Use the following procedure to call the TransUnion identity resolution service a
     
     SET base64_result = (SELECT to_base64(CAST(json_result AS bytes)));
     
-    SELECT `<project_id>.<dataset_id>.remote_call_TransUnion_er`(base64_result);
-    
+    SELECT
+      `PROJECT_ID.DATASET_ID.remote_call_TransUnion_er`(
+        base64_result);
     END;
+
+Replace the following:
+
+  - `  PROJECT_ID  ` : your Google Cloud project ID.
+  - `  DATASET_ID  ` : the ID of the dataset where you create the procedure and remote function.
 
 ##### Create the matching output table
 
-Run the following SQL script to create the matching output table. This is the standard output of the application, which includes match flags, scores, persistent individual IDs, and household IDs.
+The matching output table stores the entity resolution results from TransUnion, including match flags, linkage scores, persistent individual IDs, and household IDs. To create the matching output table, run the following SQL statement:
 
     -- create output table
-    CREATE TABLE `<project_id>.<dataset_id>.TransUnion_identity_output`(
+    CREATE TABLE `PROJECT_ID.DATASET_ID.TransUnion_identity_output`(
       batchid STRING,
       uniqueid STRING,
       ekey STRING,
@@ -169,54 +215,58 @@ Run the following SQL script to create the matching output table. This is the st
       devicelinkagescore STRING,
       lastprocessed STRING);
 
-##### Configure metadata
+Replace the following:
 
-Follow the implementation guide that TransUnion shared with you to map your input schema to the application schema. This metadata also configures the generation of collaboration IDs, which are shareable non-persistent identifiers that can be used in data clean rooms.
+  - `  PROJECT_ID  ` : your Google Cloud project ID.
+  - `  DATASET_ID  ` : the ID of the dataset where you create the matching output table.
 
-#### Grant read and write access
+##### Configure schema mapping metadata
 
-Obtain the service account ID of the Apache Spark connection from the TransUnion customer delivery team and grant it read and write access to the dataset containing the input and output tables. We recommend providing the service account ID with a [BigQuery Data Editor role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor) on the dataset.
+To map your input schema to the TransUnion application schema, follow the instructions in the implementation guide that TransUnion shared with you. This metadata also configures how the service generates collaboration IDs, which are shareable, non-persistent identifiers that you can use in [data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) .
 
-#### Invoke the application
+#### Grant dataset access to TransUnion
 
-You can invoke the application from within your environment by running the following script.
+After you create the required tables and stored procedure, grant TransUnion access to read your input data and write matching results. Obtain the Apache Spark connection service account ID from the TransUnion customer delivery team. Then, grant that service account the BigQuery Data Editor role ( `roles/bigquery.dataEditor` ) on the dataset that contains your input and output tables.
 
-> **Note:** You can use multiple input tables, as long as they are mapped to different metadata configurations.
+#### Run a TransUnion entity resolution job
 
-    call `<project_id>.<dataset_id>.TransUnion_get_identities`("<project_id>.<dataset_id>.TransUnion_er_metadata","1");
-    -- using metadata table, and 1 = config_id for the batch run
+After you configure your tables and grant dataset access, you can start an entity resolution batch run. To invoke the entity resolution service, call the `TransUnion_get_identities` stored procedure:
 
-#### Support
+    CALL `PROJECT_ID.DATASET_ID.TransUnion_get_identities`(
+      "PROJECT_ID.DATASET_ID.TransUnion_er_metadata",
+      "CONFIG_ID");
 
-For technical issues, contact [TransUnion Cloud Support](mailto:PDLtucloudappsupport@transunion.com) .
+Replace the following:
 
-#### Billing and usage
+  - `  PROJECT_ID  ` : your Google Cloud project ID.
+  - `  DATASET_ID  ` : the ID of the dataset that contains your metadata table and stored procedure.
+  - `  CONFIG_ID  ` : the configuration ID for the batch run, such as `"1"` .
 
-TransUnion tracks usage of the application and uses it for billing purposes. Active customers can contact their TransUnion delivery representative for more information.
+#### Get TransUnion support and billing information
 
-## Workflow for identity providers
+For assistance with technical issues or billing inquiries related to TruAudience Identity Resolution and Enrichment in BigQuery, contact TransUnion directly:
 
-The following sections show you how to configure entity resolution in BigQuery. For a visual representation of the complete setup, see [entity resolution architecture](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro#architecture) .
+  - **Technical support** : contact [TransUnion Cloud Support](mailto:PDLtucloudappsupport@transunion.com) for assistance with setup, schema mapping, or troubleshooting.
+  - **Billing** : TransUnion tracks service usage for billing purposes. Contact your TransUnion delivery representative for account and pricing details.
+
+## Configure entity resolution for identity providers
+
+As an identity provider, you can offer your entity resolution service to BigQuery end users. This architecture helps protect your intellectual property because you don't expose your proprietary identity graph or matching logic.
+
+To configure your service, you deploy an orchestrator endpoint, create a BigQuery remote function, grant the required roles, and share the remote function signature with your end users. For more information about the architecture, see [Entity resolution architecture](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro#architecture) .
 
 ### Before you begin
 
-1.  Create a [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) job or a [Cloud Run function](https://docs.cloud.google.com/functions/docs/concepts/overview#functions) to integrate with the remote function. Both options are suitable for this purpose.
+Before you configure your entity resolution service in BigQuery, ensure that you have the following:
 
-2.  Get the name of the service account that's associated with the Cloud Run or Cloud Run function:
-    
-    1.  In the Google Cloud console, go to the **Cloud Functions** page.
-    
-    2.  Click the function's name, and then click the **Details** tab.
-    
-    3.  In the **General Information** pane, find and record the service account name for the remote function.
-
-3.  Create a [remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function) .
-
-4.  Get end-user principals from the end user.
+  - An identity graph dataset and matching logic that are deployed in your Google Cloud project or in an external database.
+  - End-user principal identifiers, such as user, service account, or Google Group email addresses, that you obtained from your end users.
 
 ### Required roles
 
-To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles:
+To ensure that the identity provider's service account has the necessary permissions to run entity resolution jobs, ask your administrator to grant the following IAM roles to the identity provider's service account:
+
+> **Important:** You must grant these roles to the identity provider's service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - For the service account that's associated with your function to read and write to associated datasets and launch jobs:
       - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project
@@ -227,27 +277,47 @@ To get the permissions that you need to run entity resolution jobs, ask your adm
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the identity provider's service account the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-### Share entity resolution remote function
+### Set up the remote function endpoint
 
-Modify and share the following remote interface code with the end user. The end user needs this code to start the entity resolution job.
+To process entity resolution requests from end users, deploy an orchestrator endpoint and connect it to a BigQuery remote function:
 
-    `PARTNER_PROJECT_ID.DATASET_ID`.match`(LIST_OF_PARAMETERS)
+1.  To process matching requests from your remote function, create a [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) job or a [Cloud Run function](https://docs.cloud.google.com/functions/docs/concepts/overview) . You can use either option for your endpoint.
 
-Replace LIST\_OF\_PARAMETERS with the list of parameters that are passed to the remote function.
+2.  To find the service account email address that's associated with your Cloud Run job or Cloud Run function, complete these steps:
+    
+    1.  In the Google Cloud console, go to the **Cloud Functions** page.
+    
+    2.  To open the function details, click the name of your function, and then click the **Details** tab.
+    
+    3.  In the **General Information** pane, find and record the service account email address for the remote function.
 
-### Optional: Provide job metadata
+3.  In your control plane dataset, [create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create-a-remote-function) that connects to your Cloud Run job or Cloud Run function endpoint.
 
-You can optionally provide job metadata by using a separate remote function or by writing a new status table in the user's output dataset. Examples of metadata include job statuses and metrics.
+### Share the entity resolution remote function
 
-## Billing for identity providers
+After you create the remote function and grant the required roles to your end users, share the following remote function signature with them. End users call this remote function to start an entity resolution job.
 
-To streamline customer billing and onboarding, integrate your entity resolution service with the [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace) . This lets you set up a [pricing model](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas/select-pricing) based on the entity resolution job usage, with Google handling the billing for you. For more information, see [Offering software as a service (SaaS) products](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas) .
+    `PARTNER_PROJECT_ID.DATASET_ID.match`(LIST_OF_PARAMETERS)
+
+Replace the following:
+
+  - `  PARTNER_PROJECT_ID  ` : the Google Cloud project ID of the identity provider.
+  - `  DATASET_ID  ` : the ID of the dataset that contains the remote function.
+  - `  LIST_OF_PARAMETERS  ` : the list of parameters to pass to the remote function.
+
+### Optional: Provide entity resolution job metadata
+
+To provide job metadata to your end users, you can expose a separate remote function or write a job status table to the end user's output dataset. For example, you can report execution statuses such as `RUNNING` , `COMPLETED` , or `ERROR` , along with processing metrics.
+
+### Integrate with Cloud Marketplace for billing
+
+To manage customer billing and onboarding through Google, integrate your entity resolution service with [Cloud Marketplace](https://docs.cloud.google.com/marketplace) . This integration lets you configure a [pricing model](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas/select-pricing) based on entity resolution job usage while Google handles billing for your service. For more information, see [Offering software as a service (SaaS) products](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas) .
 
 ## What's next
 
   - Learn about [entity resolution in BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro) .
   - Learn how to [create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function) .
-  - Learn how to [create a connection to an external data source](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) .
+  - Learn how to [create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) .
   - For identity providers, learn how to [make your entity resolution service available on Google Cloud Marketplace](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas) .

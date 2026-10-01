@@ -127,6 +127,48 @@ As a BigQuery sharing subscriber, when you subscribe to a listing in a data exch
 </tbody>
 </table>
 
+## Update a listing
+
+When you update a listing—for example, to modify its restricted export policy—BigQuery sharing uses a background worker to propagate these changes to the associated linked datasets. If your Google Cloud project is protected by a VPC Service Controls perimeter with IP-based restrictions, the background worker originating from Google infrastructure might be blocked, preventing the linked dataset from synchronizing successfully.
+
+To let the background worker update the linked dataset, you must explicitly configure your ingress or egress rules to let the principal user or principal service account executing the API call bypass the IP-based restrictions.
+
+To modify the ingress policy on the subscriber project's perimeter, add an ingress rule that lets the calling principal access the `bigquery.googleapis.com` service from any source IP address ( `*` ):
+
+    ingressFrom:
+      sources:
+        - accessLevel: "*"
+      identities:
+        - "user:CALLING_USER_EMAIL"
+        - "serviceAccount:AUTOMATION_SA_EMAIL"
+    ingressTo:
+      resources:
+        - "projects/SUBSCRIBER_PROJECT_NUMBER"
+      operations:
+        - serviceName: "bigquery.googleapis.com"
+          methodSelectors:
+            - method: "*"
+
+Alternatively, to modify the egress policy on the publisher's perimeter, verify that the calling identity is explicitly added under the `identities` list in the egress rule directed to the subscriber project:
+
+    egressFrom:
+      identities:
+        - "user:CALLING_USER_EMAIL"
+        - "serviceAccount:AUTOMATION_SA_EMAIL"
+    egressTo:
+      resources:
+        - "projects/SUBSCRIBER_PROJECT_NUMBER"
+      operations:
+        - serviceName: "bigquery.googleapis.com"
+          methodSelectors:
+            - method: "*"
+
+Replace the following:
+
+  - `  CALLING_USER_EMAIL  ` : the email address of the user who runs the API call to update the listing. Include this identity if a human user is making the update.
+  - `  AUTOMATION_SA_EMAIL  ` : the email address of the service account that runs the API call to update the listing. Include this identity if an automated process or script makes the update.
+  - `  SUBSCRIBER_PROJECT_NUMBER  ` : the project number of the subscriber project that contains the linked dataset.
+
 ## Query tables in a linked dataset
 
 In the following diagram, the caller project and the project that contain the linked dataset are in different service perimeters:

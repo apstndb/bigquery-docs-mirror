@@ -10,9 +10,13 @@ data_source: docs.cloud.google.com
 
 As a BigQuery administrator, you can monitor jobs across your organization through an administrative jobs explorer in the Google Cloud console. The jobs explorer provides filters and sorting options to identify, compare, and troubleshoot problematic jobs. You don't need to write `INFORMATION_SCHEMA` queries to view job details, such as the owner, project, slot usage, duration, and more.
 
+To monitor capacity, slot commitments, and long-term reservation utilization across your organization, see [Monitor health and resource utilization](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
+
 With the jobs explorer, you can do the following:
 
   - **Filter and identify jobs.** Search for specific queries across your organization by [applying filters](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) based on criteria like job status, duration, owner, or slot usage.
+  - **Analyze timeline metrics.** Track job execution trends and concurrency over time with the [metric chart](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view-metric-chart) .
+  - **Aggregate jobs by resource.** [Group jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) by owner, project, or reservation to view summary statistics and drill down into filtered tables.
   - **Troubleshoot jobs.** Select individual jobs to view their query execution graphs, SQL text, and execution history on the [**Job details**](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view_job_details) page ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
   - **Compare performance.** [Compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to highlight significant metric differences and address potential performance issues.
   - **Get AI assistance.** [Use Gemini Code Assist directly from the jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#troubleshoot-with-ai) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to analyze job statistics or explain slow-running queries.
@@ -35,7 +39,6 @@ To get the permissions that you need to use the jobs explorer to monitor jobs, a
 
   - View jobs at the project level: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the project
   - View jobs at the organization level: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the organization
-  - Filter by reservations in your organization: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the organization
   - View job details: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the project where the queries were run
   - View system-level details: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the administration project
 
@@ -49,7 +52,6 @@ The following permissions are required to use the jobs explorer to monitor jobs:
 
   - View jobs at the project level: `bigquery.jobs.listAll` on the project
   - View jobs at the organization level: `bigquery.jobs.listAll` on the organization
-  - Filter by reservations in your organization: `bigquery.reservations.list` on the organization
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -65,25 +67,74 @@ To filter jobs for queries that are contained in the `INFORMATION_SCHEMA.JOBS*` 
 
 2.  In the navigation menu, click **Jobs explorer** .
 
-3.  From the **Location** list, select the location for which you want to view the jobs.
+3.  On the **Jobs explorer** page, in the **Location** field, select the location for which you want to view the jobs.
 
-4.  Apply optional **Filters** as needed:
+4.  In the **Filters** pane, apply optional filters, as needed. If this pane isn't visible, click insert\_chart **Show filters** .
+    
+    The following filters are available:
     
       - **Job scope** : filters jobs by their visibility level—for example, the current project, organization, and your jobs. You can choose to view jobs from the current project, across your entire organization, or only jobs that you initiated.
-      - **Status** : filters jobs by their current execution state—for example, completed, error, active, and queued. This helps you identify active or failed jobs.
-      - **Job category** : filters jobs by the type of operation performed, such as standard SQL queries or continuous queries used for real-time data processing.
-      - **Job creation reason** : filters jobs based on why BigQuery created them, such as when a query exceeds a timeout or produces results too large for a single response.
-      - **Job priority** : filters jobs by their execution priority, such as interactive or batch jobs.
-      - **Job ID** : filters for a specific job by its unique alphanumeric identifier.
-      - **Owner** : filters jobs by the email address of the user or service account that started the job.
-      - **Project ID** : filters jobs that ran in a specific project. This filter is only available when the **Job scope** is set to **Organization** .
+      - **Chart view** :
+          - **Finished jobs** : displays timeline data for completed queries, distinguishing between jobs that completed successfully and jobs that errored.
+          - **Concurrency** : displays timeline data for query concurrency, distinguishing between active jobs and queued jobs.
+      - **Group by** : groups displayed jobs by a specific resource, such as owner, project, or reservation. For more information, see [Group jobs by resource](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) .
+      - **Status** : filters jobs by their current execution state—for example, completed, error, active, and queued. Summary counts appear directly next to each faceted status filter option to indicate the number of jobs in that state.
+      - **Project ID** : filters jobs that ran in a specific project.
       - **Reservation ID** : filters jobs that used slots from a specific reservation. This helps you monitor how different workloads are consuming reserved capacity.
+      - **Owner** : filters jobs by the email address of the user or service account that started the job.
+      - **Job ID** : filters for a specific job by its unique alphanumeric identifier.
+      - **Query hash** : filters for jobs with a specific query hash. A query hash identifies the logic of a query, ignoring differences in comments, parameter values, UDFs, and literals, which helps you find all executions of the same query logic. This field appears for successful [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) queries that are not cache hits.
+      - **Labels** : filters jobs based on custom metadata labels that you or your organization have attached to them. This lets you categorize and track jobs by department or application.
+      - **Query insights** : filters jobs that BigQuery has identified as having specific performance issues, such as slot contention, memory shuffle capacity exceeded, and data input scale change.
       - **Slot time more than** : filters for jobs that consumed more than a specified amount of slot-milliseconds. This is a key metric for identifying resource-intensive queries.
       - **Duration more than** : filters for jobs that took longer than a specified amount of time to complete. Use this to find queries that are running slower than expected.
       - **Bytes processed more than** : filters for jobs that scanned more than a specified amount of data. This helps you identify queries that might be contributing to high data processing costs.
-      - **Query insights** : filters jobs that BigQuery has identified as having specific performance issues, such as slot contention, memory shuffle capacity exceeded, and data input scale change.
-      - **Query hash** : filters for jobs with a specific query hash. A query hash identifies the logic of a query, ignoring differences in comments, parameter values, UDFs, and literals, which helps you find all executions of the same query logic. This field appears for successful [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) queries that are not cache hits.
-      - **Labels** : filters jobs based on custom metadata labels that you or your organization have attached to them. This lets you categorize and track jobs by department or application.
+      - **Job category** : filters jobs by the type of operation performed, such as standard SQL queries or continuous queries used for real-time data processing.
+      - **Job creation reason** : filters jobs based on why BigQuery created them, such as when a query exceeds a timeout or produces results too large for a single response.
+      - **Job priority** : filters jobs by their execution priority, such as interactive or batch jobs.
+
+### View job timeline metrics
+
+The jobs explorer includes an interactive metric chart that displays timeline data for the queries that match your filter criteria. You can use this chart to evaluate workload patterns and identify sudden increases in completed, active, or queued jobs. For organization-wide historical concurrency trends across longer time windows, see [Metric timeline charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#metric-timeline-charts) .
+
+To configure the metrics chart in the jobs explorer, do the following:
+
+1.  Go to the **Jobs explorer** page.
+
+2.  Go to the **Filters** pane. If this pane isn't visible, click insert\_chart **Show filters** .
+
+3.  Select the metric you want to display in the chart:
+    
+      - **Finished jobs** : displays timeline data for completed queries, distinguishing between jobs that completed successfully and jobs that errored.
+      - **Concurrency** : displays timeline data for query concurrency, distinguishing between active jobs and queued jobs.
+
+### Group jobs by resource
+
+To aggregate job statistics and compare consumption across your organization, you can group jobs by owner, project, or reservation instead of viewing individual jobs in an unaggregated table.
+
+To group jobs, do the following:
+
+1.  Go to the **Jobs explorer** page.
+
+2.  Go to the **Filters** pane. If this pane isn't visible, click insert\_chart **Show filters** .
+
+3.  Click **Group by** and select one of the following options:
+    
+      - **None** (default): displays the unaggregated table of individual jobs.
+      - **Owner** : groups jobs by the email address of the user or service account that ran the job.
+      - **Project** : groups jobs by project ID.
+      - **Reservation** : groups jobs by reservation ID.
+
+When you set **Group by** to **Owner** , **Project** , or **Reservation** , BigQuery displays an aggregated view with summary panels for each resource. Each panel displays the following summary statistics:
+
+  - **Active jobs** : the number of running jobs.
+  - **Queued jobs** : the number of jobs waiting in the query queue.
+  - **Errored jobs** : the number of jobs that failed to complete.
+  - **Completed jobs** : the number of jobs that completed successfully.
+  - **Slot time** : the total slot-milliseconds consumed by jobs for that resource.
+  - **Bytes processed** : the total volume of data scanned by jobs for that resource.
+
+To inspect the individual jobs associated with a specific resource, click the panel for that resource to expand it and display a filtered table of its jobs.
 
 ## Troubleshoot job performance
 

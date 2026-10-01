@@ -50,7 +50,7 @@ Additionally, you must grant the following roles to the default Dataform service
   - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
     Follow [Grant or revoke multiple IAM roles using Google Cloud console](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#multiple-roles-console) to grant the Service Account User role to the default Dataform service agent on the custom service account.
 
-To enable metadata enrichment in Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ), you must enable the [Dataplex API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com) . Additionally, you must grant the following role on the project or on the `@bigquery` entry group to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
+To enable metadata enrichment in Knowledge Catalog, you must enable the [Dataplex API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com) . Additionally, you must grant the following role on the project or on the `@bigquery` entry group to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
 
   - [Dataplex Catalog Editor role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )  
     Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Dataplex Catalog Editor role to the custom service accounts or Google Accounts on the project or `@bigquery` entry group.

@@ -6701,7 +6701,7 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">query_runtime</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
-<td><p>Specifies whether the BigQuery query processor uses the <a href="https://docs.cloud.google.com/bigquery/docs/advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">query_runtime</code> value to <code dir="ltr" translate="no">advanced</code> to enable the advanced runtime before it's rolled out as the default runtime.</p>
+<td><p>Specifies whether the BigQuery query processor uses the <a href="https://docs.cloud.google.com/bigquery/docs/running-queries#advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">query_runtime</code> value to <code dir="ltr" translate="no">advanced</code> to enable the advanced runtime during preview. The advanced runtime is now automatically enabled.</p>
 <p>Example: <code dir="ltr" translate="no">`region-us.query_runtime` = 'advanced'</code> . Enables the advanced runtime.</p></td>
 </tr>
 <tr class="even">
@@ -6869,7 +6869,7 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">query_runtime</code></td>
 <td><code dir="ltr" translate="no">STRING</code></td>
-<td><p>Specifies whether the BigQuery query processor uses the <a href="https://docs.cloud.google.com/bigquery/docs/advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">query_runtime</code> value to <code dir="ltr" translate="no">advanced</code> to enable the advanced runtime before it's rolled out as the default runtime.</p>
+<td><p>Specifies whether the BigQuery query processor uses the <a href="https://docs.cloud.google.com/bigquery/docs/running-queries#advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">query_runtime</code> value to <code dir="ltr" translate="no">advanced</code> to enable the advanced runtime during preview. The advanced runtime is now automatically enabled.</p>
 <p>Example: <code dir="ltr" translate="no">`region-us.query_runtime` = 'advanced'</code> . Enables the advanced runtime.</p></td>
 </tr>
 <tr class="even">

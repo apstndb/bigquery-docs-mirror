@@ -1246,6 +1246,8 @@ Configure column-level security by creating data governance tags and attaching t
 
 For more information, see [Introduction to column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [Introduction to data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .
 
+To create and manage data governance tags in the Google Cloud console, you can use the [BigQuery Security center](https://docs.cloud.google.com/bigquery/docs/security-center-overview#manage-tags-taxonomies) .
+
 ### Before you begin with governance tags
 
 1.  [Install](https://docs.cloud.google.com/sdk/docs/install) the Google Cloud CLI.
@@ -1267,7 +1269,7 @@ To get the permissions that you need to control column access with data governan
   - Create data governance tags:
       - [Tag Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.tagAdmin) ( `roles/resourcemanager.tagAdmin` ) on the project or organization
       - [Organization Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.organizationViewer) ( `roles/resourcemanager.organizationViewer` ) on the organization
-  - Attach or remove tags to columns:
+  - Attach tags to or remove tags from columns:
       - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) on the table
       - [Tag User](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.tagUser) ( `roles/resourcemanager.tagUser` ) on the organization, project, or tag value
   - Create and manage data policies: [BigQuery Data Policy Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.admin) ( `roles/bigquerydatapolicy.admin` ) on the project
@@ -1283,6 +1285,25 @@ Create the data governance tag key and its values.
 #### Create a tag key
 
 To create a key for a data governance tag, set the `purpose` field to `DATA_GOVERNANCE` when you create the tag key. Setting this purpose categorizes the tag for column-level security or data masking and distinguishes it from general resource tags in BigQuery.
+
+### Console
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the BigQuery navigation menu, click **Governance** , and then click **Security center** .
+
+3.  Click the **Data governance tags** tab.
+
+4.  Click **Create** .
+
+5.  In the **Create tag key** pane, specify the tag key details:
+    
+      - In the **Data governance tags name** field, enter a name for the tag key.
+      - Optional: In the **Description** field, enter a description for the tag key.
+
+6.  Click **Create** .
+
+> **Note:** Data governance tags created in the BigQuery Security center are scoped to the active project. To create organization-scoped tag keys, use the gcloud CLI or the Resource Manager console.
 
 ### gcloud
 
@@ -1391,6 +1412,22 @@ Each Terraform configuration file must have its own directory (also called a *ro
 #### Create a tag value
 
 To add one or more values to a tag key, follow these steps.
+
+### Console
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the BigQuery navigation menu, click **Governance** , and then click **Security center** .
+
+3.  Click the **Data governance tags** tab.
+
+4.  In the list of tag keys, locate the tag key that you want to add a value to, click more\_vert **Actions** , and then click **Add tag values** .
+
+5.  In the **Add tag values** pane, enter a short name for the tag value.
+
+6.  Optional: In the **Description** field, enter a description.
+
+7.  Click **Save** .
 
 ### gcloud
 
@@ -1552,7 +1589,7 @@ Attach the data governance tags that you created to the BigQuery columns that yo
 
 #### Create a new table with a tagged column
 
-To attach data governance tags when creating a new table, use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement. Specify the tag by setting the `data_governance_tags` option on the column.
+To attach data governance tags when creating a table, use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement. Specify the tag by setting the `data_governance_tags` option on the column.
 
     CREATE TABLE PROJECT_ID.DATASET_ID.TABLE_ID (
       COLUMN_NAME INT64 OPTIONS (data_governance_tags=[("PROJECT_ID/TAG_KEY", "TAG_VALUE")])

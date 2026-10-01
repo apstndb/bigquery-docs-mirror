@@ -173,6 +173,10 @@ Steps contain the operations that each worker within a stage executes, presented
 | `JOIN`                  | Implements joins for clauses like `JOIN` , among others; includes the join type and possibly the join conditions.                                                                    |
 | `ANALYTIC_FUNCTION`     | An invocation of a window function (also known as an "analytic function").                                                                                                           |
 | `USER_DEFINED_FUNCTION` | An invocation to a user-defined function.                                                                                                                                            |
+| `UPDATE`                | Modifies existing rows in a target table for an `UPDATE` statement; includes the modified columns and the target table.                                                              |
+| `DELETE`                | Removes rows from a target table for a `DELETE` statement; includes the referenced columns and the target table.                                                                     |
+| `MERGE`                 | Modifies rows in a target table for a `MERGE` statement; includes the modified columns and the target table.                                                                         |
+| `EXPORT`                | Writes output columns to a destination table for data manipulation language (DML) statements or query result exports.                                                                |
 
 ## Interpret and optimize steps
 
@@ -315,6 +319,24 @@ To reduce the number of `COALESCE` steps, try the following:
   - **Data volume:** if you're dealing with very small datasets, `COALESCE` might not be a significant concern.
 
 Don't over-optimize. Premature optimization might make your queries more complex without yielding significant benefits.
+
+### `UPDATE` , `DELETE` , and `MERGE` steps
+
+The `UPDATE` , `DELETE` , and `MERGE` steps appear in stages that execute data manipulation language (DML) statements against a target table.
+
+The step details typically include the following substeps:
+
+  - **Columns:** the columns read from or written to the target table.
+  - **Target table ( `FROM` or `INTO` ):** the target table modified by the statement, using `FROM` for `UPDATE` and `DELETE` steps, and `INTO` for `MERGE` steps.
+
+### `EXPORT` step
+
+The `EXPORT` step writes output data to a destination table. This step commonly appears in the final stages of DML statements—such as the `INSERT` , `UPDATE` , `DELETE` , and `MERGE` statements—and in queries that materialize results to a destination table.
+
+The step details typically include the following substeps:
+
+  - **Output columns:** the list of variables written to the destination table.
+  - **Destination table ( `TO` ):** the destination table receiving the exported rows.
 
 ## Explanation for federated queries
 

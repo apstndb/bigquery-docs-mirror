@@ -36,6 +36,7 @@ Create and update `ObjectRef` values by using the following GoogleSQL functions:
 
   - [`OBJ.MAKE_REF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) : create an `ObjectRef` value that contains metadata for a Cloud Storage object.
   - [`OBJ.FETCH_METADATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objfetch_metadata) : fetch Cloud Storage metadata for an `ObjectRef` value that is partially populated with `uri` and `authorizer` values.
+  - [`OBJ.LIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objlist) : returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage.
 
 For more information, see [Work with ObjectRef values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) .
 
@@ -97,16 +98,17 @@ The following limitations apply to BigQuery multimodal data features:
   - You can't have more than 20 Cloud resource connections in the project and region where your query accesses object data as `ObjectRef` values.
   - You can reference `ObjectRef` values from at most five projects besides the project in which you run the query.
 
-## Costs
+## Pricing
 
-The following costs are applicable when using multimodal data:
+The following costs are incurred when you use multimodal data:
 
   - Storage of object metadata as `ObjectRef` values in standard tables contributes to the BigQuery storage cost for the table.
   - Queries run on `ObjectRef` values incur BigQuery compute costs.
   - New objects that you create from object transformations incur Cloud Storage costs.
   - New data that you create and persist in BigQuery incurs BigQuery storage costs.
-  - Use of generative AI functions incurs Gemini Enterprise Agent Platform costs.
-  - Use of BigQuery Python UDFs, and of multimodal DataFrames and object transformations methods in BigQuery DataFrames, incurs Python UDF costs.
+  - When you use generative AI functions, you incur Gemini Enterprise Agent Platform costs.
+  - When you use BigQuery Python UDFs and multimodal DataFrames and object transformation methods in BigQuery DataFrames, you incur Python UDF costs.
+  - `OBJ` functions such as `OBJ.LIST` and `OBJ.GET_READ_URL` only process metadata, not the underlying file bytes. You incur costs when you pass the returned object reference to a downstream AI function that reads the file contents; for example, `AI.GENERATE` or `AI.IF` .
 
 For more information, see the following pricing pages:
 

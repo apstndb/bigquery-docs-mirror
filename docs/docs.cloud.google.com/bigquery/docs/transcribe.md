@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Transcribe audio files with the ML.TRANSCRIBE function
 
-This document describes how to use the [`ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to transcribe audio files from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+This tutorial demonstrates how to transcribe audio files, such as customer service calls, podcasts, or recorded meetings, to extract text for downstream analytics, keyword search, or sentiment analysis.
+
+You will use the [`ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to transcribe audio files stored in an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 ## Supported locations
 
@@ -71,6 +73,17 @@ These predefined roles contain the permissions required to perform the tasks in 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
 
 ## Before you begin
+
+## Costs
+
+In this document, you use the following billable components of Google Cloud:
+
+  - [BigQuery](https://cloud.google.com/bigquery/pricing)
+  - [Speech-to-Text](https://cloud.google.com/speech-to-text/pricing)
+
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
+
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 ## Create a recognizer
 
@@ -460,7 +473,7 @@ Create a remote model with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.c
 
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+    REMOTE WITH CONNECTION {`PROJECT_ID.REGION.CONNECTION_ID`}
     OPTIONS (
       REMOTE_SERVICE_TYPE = 'CLOUD_AI_SPEECH_TO_TEXT_V2',
       SPEECH_RECOGNIZER = 'projects/PROJECT_NUMBER/locations/LOCATION/recognizers/RECOGNIZER_ID'
@@ -541,6 +554,62 @@ The following example transcribes the audio files represented by the `audio` tab
       TABLE `myproject.mydataset.audio`,
       recognition_config => ( JSON '{"language_codes": ["en-US" ],"model": "chirp","auto_decoding_config": {}}')
     );
+
+## Clean up
+
+To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
+
+### Delete the project
+
+### Console
+
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+
+In the Google Cloud console, go to the **Manage resources** page.
+
+In the project list, select the project that you want to delete, and then click **Delete** .
+
+In the dialog, type the project ID, and then click **Shut down** to delete the project.
+
+### gcloud
+
+> **Caution** : Deleting a project has the following effects:
+> 
+>   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+>   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+> 
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+
+Delete a Google Cloud project:
+
+    gcloud projects delete PROJECT_ID
+
+### Delete individual resources
+
+If you plan to keep the project you used for this tutorial, you can avoid incurring further charges by deleting the individual resources you created:
+
+1.  **Delete the dataset:** deleting the dataset also removes the remote model and the object table you created inside it.
+    
+      - In the Google Cloud console, go to the [BigQuery page](https://console.cloud.google.com/bigquery) .
+      - In the **Explorer** pane, expand your project and select the dataset you created.
+      - Click more\_vert **View actions** , and then click **Delete** .
+      - In the dialog, type `delete` , and then click **Delete** .
+
+2.  **Delete the connection:**
+    
+      - In the **Explorer** pane, expand your project name and click **Connections** .
+      - Click the more\_vert **View actions** icon next to the connection you created, and select **Delete** .
+      - In the dialog, click **Delete** to confirm.
+
+3.  **Delete the Speech-to-Text recognizer (if created):**
+    
+      - Go to the [Speech-to-Text Recognizers page](https://console.cloud.google.com/speech/recognizers/list) .
+      - Check the box next to the recognizer you created, and click **Delete** .
 
 ## What's next
 

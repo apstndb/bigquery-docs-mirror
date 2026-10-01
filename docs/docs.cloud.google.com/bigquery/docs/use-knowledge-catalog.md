@@ -27,9 +27,9 @@ Knowledge Catalog automatically discovers and indexes technical metadata from Bi
 
   - **Entries** : each BigQuery table or asset is represented as [an *entry*](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources) in the catalog, rather than the entire table; for example, `project.dataset.table` .
 
-  - **Data quality scorecard integration** : Knowledge Catalog provides a [data quality scorecard](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#data-quality-scorecard) for each entry in the catalog. In addition to built-in Knowledge Catalog data scans, assertion results from Dataform are a source for this scorecard ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+  - **Data quality scorecard integration** : Knowledge Catalog provides a [data quality scorecard](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#data-quality-scorecard) for each entry in the catalog. In addition to built-in Knowledge Catalog data scans, assertion results from Dataform are a source for this scorecard.
 
-  - **Automated metadata enrichment** : for tables and views created with Dataform, you can define semantic metadata directly in your code. This metadata is automatically synchronized to Knowledge Catalog upon successful completion of a pipeline action ( [Preview](https://cloud.google.com/products#product-launch-stages) ). The following aspect types are supported:
+  - **Automated metadata enrichment** : for tables and views created with Dataform, you can define semantic metadata directly in your code. This metadata is automatically synchronized to Knowledge Catalog upon successful completion of a pipeline action. The following aspect types are supported:
     
       - Overview: documentation and summary text for the entry.
       - Generic aspects: semantic metadata tags for technical details, such as table system and type information.

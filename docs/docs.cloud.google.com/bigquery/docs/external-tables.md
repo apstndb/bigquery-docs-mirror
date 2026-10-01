@@ -54,7 +54,7 @@ The following limitations apply to external tables:
   - BigQuery doesn't support the display of table storage statistics for external tables.
   - External tables don't support [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) .
   - BI Engine doesn't support queries to external tables.
-  - BigQuery doesn't support [Data Boost for Spanner](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#data_boost) for [reading Bigtable data from BigQuery](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) .
+  - BigQuery doesn't support [Data Boost](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#data_boost) for [reading Bigtable data from BigQuery](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) .
   - BigQuery doesn't support [time travel or fail-safe data retention windows](https://docs.cloud.google.com/bigquery/docs/time-travel) for external tables. However, for Apache Iceberg external tables, you can use the [`FOR SYSTEM_TIME AS OF` clause](https://docs.cloud.google.com/bigquery/docs/access-historical-data#query_data_at_a_point_in_time) to access snapshots that are retained in your Iceberg metadata.
   - All format specific limitations apply:
       - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)

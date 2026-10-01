@@ -14,6 +14,32 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 01, 2026
+
+Feature
+
+BigQuery pipelines provides support for automated metadata enrichment and Knowledge Catalog data quality scorecard integration. In addition, the Data Engineering Agent can proactively generate semantic metadata for your pipeline assets. For more information, see [Metadata enrichment and data quality scorecard integration](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#metadata-scorecard) . These features are [generally available](https://cloud.google.com/products#product-launch-stages) .
+
+## September 30, 2026
+
+Feature
+
+The BigQuery [Security center](https://docs.cloud.google.com/bigquery/docs/security-center-overview) is now available in the Google Cloud console. You can use the Security center to analyze your data security profile, create and manage row- and column-level security policies, and configure and manage data governance and policy tags. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+BigQuery jobs explorer layout and filtering improvements, including status counts in the filter bar, [resource grouping](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) , and [timeline metric charts](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view-metric-chart) , are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use the [`OBJ.LIST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objlist) to perform spontaneous discovery and analysis of unstructured data. The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage, and does not require you to create a persistent object table.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now view the [`UPDATE` , `DELETE` , `MERGE`](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#dml_steps) , and [`EXPORT`](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#export_step) execution steps in your query plans.
+
 ## September 29, 2026
 
 Feature

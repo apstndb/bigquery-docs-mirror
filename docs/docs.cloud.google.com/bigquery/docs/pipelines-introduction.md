@@ -29,7 +29,7 @@ When you trigger a pipeline run, BigQuery executes the actions in the order defi
 
 1.  Executes the compiled SQL in BigQuery.
 2.  Updates the action status in the execution log.
-3.  Upon successful completion of an action, Dataform automatically initiates a metadata sync to Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process updates Knowledge Catalog with the semantic metadata defined in your SQLX configuration. The sync happens asynchronously and utilizes a retry mechanism, ensuring that metadata updates don't impact your pipeline latency or lead to workflow failures if the Dataplex API is temporarily unavailable.
+3.  Upon successful completion of an action, Dataform automatically initiates a metadata sync to Knowledge Catalog. This enrichment process updates Knowledge Catalog with the semantic metadata defined in your SQLX configuration. The sync happens asynchronously and utilizes a retry mechanism, ensuring that metadata updates don't impact your pipeline latency or lead to workflow failures if the Dataplex API is temporarily unavailable.
 
 ## Capabilities
 

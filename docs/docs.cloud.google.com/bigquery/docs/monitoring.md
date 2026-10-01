@@ -128,9 +128,13 @@ You can find [example `INFORMATION_SCHEMA` queries on GitHub](https://github.com
 
 For more information, see [Troubleshoot BigQuery performance with these dashboards](https://cloud.google.com/blog/products/data-analytics/troubleshoot-bigquery-performance-with-these-dashboards) .
 
-If you have slot reservations, then in addition to writing your own query, you can use BigQuery Admin Resource Charts to view charts that display slot usage, job concurrency, and job run time. For more information, see [Monitor health, resource utilization, and jobs](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
+In addition to writing your own queries, you can use BigQuery monitoring tools in the Google Cloud console:
+
+  - **[Monitor health and resource utilization](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .** View operational health dashboards and resource charts that track slot usage, capacity, and job concurrency over time across your organization and reservations.
+  - **[Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .** Search, filter, and group individual query executions across your organization to inspect query execution graphs, identify top slot consumers, and troubleshoot problematic jobs.
 
 ## What's next
 
-  - Learn how to [monitor resource utilization and jobs](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
+  - Learn how to [monitor and filter jobs with the jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
+  - Learn how to [monitor health and resource utilization](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
   - Learn how to [create charts and alerts for BigQuery](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard) .

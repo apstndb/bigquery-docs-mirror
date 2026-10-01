@@ -48,7 +48,7 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### Console
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 
 2.  Click **Create taxonomy** .
 
@@ -89,7 +89,7 @@ You can create up to nine data policies for a policy tag. One of these policies 
 
 ### Console
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the name of the taxonomy to open.
 3.  Select a policy tag.
 4.  Click **Manage Data Policies** .
@@ -702,7 +702,7 @@ The `bigquery.dataPolicies.update` and `bigquery.dataPolicies.setIamPolicy` perm
 
 ### Console
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the name of the taxonomy to open.
 3.  Select a policy tag.
 4.  Click **Manage Data Policies** .
@@ -859,7 +859,7 @@ The user or service account that creates a data policy must have the `bigquery.d
 
 ### Console
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the name of the taxonomy to open.
 3.  Select a policy tag.
 4.  Click **Manage Data Policies** .

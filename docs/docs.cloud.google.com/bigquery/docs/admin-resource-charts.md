@@ -1,18 +1,20 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/admin-resource-charts
 uri: https://docs.cloud.google.com/bigquery/docs/admin-resource-charts
-title: Monitor health, resource utilization, and jobs
+title: Monitor health and resource utilization
 description: Describes how to configure dashboards that monitor operational health and resource utilization in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Monitor health, resource utilization, and jobs
+# Monitor health and resource utilization
 
 As a BigQuery administrator, you can monitor your organization's health, slots use, and jobs performance over time with operational health and resource utilization charts. BigQuery provides configurable charts to help you with the following:
 
   - **[Monitor operational health of BigQuery](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor-operational-health) .** BigQuery real-time operational health monitoring is a centralized monitoring system that lets you observe BigQuery usage across the organization in multiple locations.
 
   - **[View BigQuery resource utilization](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-resource-utilization) .** Use historical data to perform root-cause analysis, plan capacity, and diagnose performance changes.
+
+To monitor and troubleshoot individual query jobs or aggregate jobs by owner, project, or reservation, see [Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
 
 ## Before you begin
 
@@ -601,7 +603,9 @@ The following example gets the job details over a five day period:
 
 ## Troubleshoot slot contention
 
-Slot contention can happen when there aren't enough slots to run all of your jobs, causing performance issues. To troubleshoot slot contention issues, see the following steps and best practices.
+Slot contention can happen when there aren't enough slots to run all of your jobs, causing performance issues. To analyze whether performance degradation stems from workload increases or environment configuration changes, you can [compare two system intervals](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-two-system-intervals) across reservations and projects.
+
+To troubleshoot slot contention issues, see the following steps and best practices.
 
 If you have tried these best practices but are still experiencing job performance issues, you can [request support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 

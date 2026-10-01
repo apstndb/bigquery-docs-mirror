@@ -12,7 +12,7 @@ This document describes upcoming restrictions to BigQuery legacy SQL availabilit
 
 Migrating to GoogleSQL offers these benefits over legacy SQL:
 
-  - It can be more cost-effective, using the [BigQuery advanced runtime](https://docs.cloud.google.com/bigquery/docs/advanced-runtime) for better performance.
+  - It can be more cost-effective, using the [BigQuery advanced runtime](https://docs.cloud.google.com/bigquery/docs/running-queries#advanced-runtime) for better performance.
   - It lets you use features not supported by legacy SQL, such as [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) and [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statements, Common Table Expressions (CTEs), complex subqueries and join predicates, [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) , [search indexes](https://docs.cloud.google.com/bigquery/docs/search) , and [Generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
 
 ## How feature availability works

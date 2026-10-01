@@ -427,7 +427,7 @@ The editor validates your code and displays the validation status.
 
 > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
 
-1.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
+1.  Use the `metadata` key to specify information for Knowledge Catalog. This enrichment process supports the following metadata constructs:
 
 <!-- end list -->
 
@@ -497,7 +497,7 @@ The editor validates your code and displays the validation status.
 
 > **Note:** When you use JavaScript functions as values in the `config` block, you can't edit the JavaScript functions on the **Configuration** tab.
 
-1.  Use the `metadata` key to specify information for Knowledge Catalog ( [Preview](https://cloud.google.com/products#product-launch-stages) ). This enrichment process supports the following metadata constructs:
+1.  Use the `metadata` key to specify information for Knowledge Catalog. This enrichment process supports the following metadata constructs:
 
 <!-- end list -->
 

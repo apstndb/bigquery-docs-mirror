@@ -222,169 +222,37 @@ To create a standard table that contains the Cymbal pets product information, fo
 
 To create an object table ( `product_images` ) that contains the Cymbal pets product images, select one of the following options:
 
-``` 
-
-* { SQL }
-
-  Paste this command into the query editor, and then click
-  <span class="material-icons" aria-hidden="true">play_circle</span>
-  **Run**:
-
-  <pre class="lang-googlesql notranslate prettyprint devsite-click-to-copy">
-  CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
-    WITH CONNECTION `us.cymbal_conn`
-    OPTIONS (
-      object_metadata = 'SIMPLE',
-      uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png'],
-      max_staleness = INTERVAL 30 MINUTE,
-      metadata_cache_mode = AUTOMATIC);
-  </pre>
-
-  You receive a confirmation message similar to the following: `This
-  statement created a new table named product_images.`
-
-* { BigQuery DataFrames }
-
-       Before trying this sample, follow the BigQuery DataFrames
-    setup instructions in the BigQuery quickstart
-    using BigQuery DataFrames.
-    For more information, see the
-    BigQuery DataFrames reference documentation.
-  To authenticate to BigQuery, set up Application Default Credentials.
-    For more information, see Set
-    up ADC for a local development environment.
-   
-
-    
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-  
-  
-  
-    
-  
-
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  
-  
-  
-  
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-    
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-
-
-
-  
-
-  bbq.create_external_table(
-    "cymbal_pets.product_images",
-    replace=True,
-    connection_name="us.cymbal_conn",
-    options={
-        "object_metadata": "SIMPLE",
-        "uris": [
-            "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png"
-        ],
-    },
-)
-```
+### SQL
+
+Paste this command into the query editor, and then click play\_circle **Run** :
+
+    CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
+      WITH CONNECTION `us.cymbal_conn`
+      OPTIONS (
+        object_metadata = 'SIMPLE',
+        uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png'],
+        max_staleness = INTERVAL 30 MINUTE,
+        metadata_cache_mode = AUTOMATIC);
+
+You receive a confirmation message similar to the following: `This statement created a new table named product_images.`
+
+### BigQuery DataFrames
+
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    bbq.create_external_table(
+        "cymbal_pets.product_images",
+        replace=True,
+        connection_name="us.cymbal_conn",
+        options={
+            "object_metadata": "SIMPLE",
+            "uris": [
+                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png"
+            ],
+        },
+    )
 
     bbq.create_external_table(
         "cymbal_pets.product_images",

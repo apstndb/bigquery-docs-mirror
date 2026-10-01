@@ -10,6 +10,8 @@ data_source: docs.cloud.google.com
 
 This document describes how to manage jobs in BigQuery, including how to [view job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) , [list jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) , [cancel a job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) , [repeat a job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#repeat_jobs) , and [delete job metadata](https://docs.cloud.google.com/bigquery/docs/managing-jobs#delete_job_metadata) .
 
+To monitor, aggregate, and troubleshoot jobs across your organization, see [Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
+
 ## About BigQuery jobs
 
 Every time you [load](https://docs.cloud.google.com/bigquery/docs/loading-data) , [export](https://docs.cloud.google.com/bigquery/exporting-data-from-bigquery) , [query](https://docs.cloud.google.com/bigquery/docs/running-queries) , or [copy data](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) , BigQuery automatically creates, schedules, and runs a job that tracks the progress of the task.
@@ -876,3 +878,4 @@ There is no single-call method to repeat a job; if you want to repeat a specific
 ## What's next
 
   - Learn how to [run jobs programmatically](https://docs.cloud.google.com/bigquery/docs/running-jobs) .
+  - Learn how to [monitor and filter jobs with the jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .

@@ -533,6 +533,254 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
       end
     end
 
+## Dry run
+
+A dry run in BigQuery provides the following information:
+
+  - estimate of charges in [on-demand mode](https://cloud.google.com/bigquery/pricing#on_demand_pricing)
+  - validation of your query
+  - approximate bytes processed by your query in [capacity mode](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing)
+
+Dry runs don't use query slots, and you are not charged for performing a dry run. You can use the estimate returned by a dry run to calculate query costs in the [pricing calculator](https://cloud.google.com/products/calculator) .
+
+> **Note:** A dry run of a federated query that uses an external data source might report a lower bound of 0 bytes of data, even if rows are returned. This is because the amount of data processed from the external table can't be determined until the actual query completes. Running the federated query still incurs a cost for processing this data.
+
+> **Caution:** Dry runs on tables that are masked by row-level security always return 0 bytes to prevent side channel attacks. For these tables, you can't rely on dry runs to estimate query costs.
+
+### Perform a dry run
+
+To perform a dry run, do the following:
+
+### Console
+
+1.  Go to the BigQuery page.
+
+2.  Enter your query in the query editor.
+    
+    If the query is valid, then a check mark automatically appears along with the amount of data that the query will process. If the query is invalid, then an exclamation point appears along with an error message.
+
+### bq
+
+Enter a query like the following using the `--dry_run` flag.
+
+``` 
+bq query \
+--use_legacy_sql=false \
+--dry_run \
+'SELECT
+   COUNTRY,
+   AIRPORT,
+   IATA
+ FROM
+   `project_id`.dataset.airports
+ LIMIT
+   1000'
+ 
+```
+
+For a valid query, the command produces the following response:
+
+    Query successfully validated. Assuming the tables are not modified,
+    running this query will process 10918 bytes of data.
+
+> **Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
+
+### API
+
+To perform a dry run by using the API, submit a query job with `dryRun` set to `true` in the [JobConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) type.
+
+### Go
+
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+    import (
+     "context"
+     "fmt"
+     "io"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // queryDryRun demonstrates issuing a dry run query to validate query structure and
+    // provide an estimate of the bytes scanned.
+    func queryDryRun(w io.Writer, projectID string) error {
+     // projectID := "my-project-id"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     q := client.Query(`
+     SELECT
+         name,
+         COUNT(*) as name_count
+     FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
+     WHERE state = 'WA'
+     GROUP BY name`)
+     q.DryRun = true
+     // Location must match that of the dataset(s) referenced in the query.
+     q.Location = "US"
+    
+     job, err := q.Run(ctx)
+     if err != nil {
+         return err
+     }
+     // Dry run is not asynchronous, so get the latest status and statistics.
+     status := job.LastStatus()
+     if err := status.Err(); err != nil {
+         return err
+     }
+     fmt.Fprintf(w, "This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
+     return nil
+    }
+
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.JobStatistics;
+    import com.google.cloud.bigquery.QueryJobConfiguration;
+    
+    // Sample to run dry query on the table
+    public class QueryDryRun {
+    
+      public static void runQueryDryRun() {
+        String query =
+            "SELECT name, COUNT(*) as name_count "
+                + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+                + "WHERE state = 'WA' "
+                + "GROUP BY name";
+        queryDryRun(query);
+      }
+    
+      public static void queryDryRun(String query) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          QueryJobConfiguration queryConfig =
+              QueryJobConfiguration.newBuilder(query).setDryRun(true).setUseQueryCache(false).build();
+    
+          Job job = bigquery.create(JobInfo.of(queryConfig));
+          JobStatistics.QueryStatistics statistics = job.getStatistics();
+    
+          System.out.println(
+              "Query dry run performed successfully." + statistics.getTotalBytesProcessed());
+        } catch (BigQueryException e) {
+          System.out.println("Query not performed \n" + e.toString());
+        }
+      }
+    }
+
+### Node.js
+
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+    // Import the Google Cloud client library
+    const {BigQuery} = require('@google-cloud/bigquery');
+    const bigquery = new BigQuery();
+    
+    async function queryDryRun() {
+      // Runs a dry query of the U.S. given names dataset for the state of Texas.
+    
+      const query = `SELECT name
+        FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+        WHERE state = 'TX'
+        LIMIT 100`;
+    
+      // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+      const options = {
+        query: query,
+        // Location must match that of the dataset(s) referenced in the query.
+        location: 'US',
+        dryRun: true,
+      };
+    
+      // Run the query as a job
+      const [job] = await bigquery.createQueryJob(options);
+    
+      // Print the status and statistics
+      console.log('Status:');
+      console.log(job.metadata.status);
+      console.log('\nJob Statistics:');
+      console.log(job.metadata.statistics);
+    }
+
+### PHP
+
+Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+    use Google\Cloud\BigQuery\BigQueryClient;
+    
+    /** Uncomment and populate these variables in your code */
+    // $projectId = 'The Google project ID';
+    // $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
+    
+    // Construct a BigQuery client object.
+    $bigQuery = new BigQueryClient([
+        'projectId' => $projectId,
+    ]);
+    
+    // Set job configs
+    $jobConfig = $bigQuery->query($query);
+    $jobConfig->useQueryCache(false);
+    $jobConfig->dryRun(true);
+    
+    // Extract query results
+    $queryJob = $bigQuery->startJob($jobConfig);
+    $info = $queryJob->info();
+    
+    printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
+
+### Python
+
+Set the [QueryJobConfig.dry\_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `True` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
+
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+    from google.cloud import bigquery
+    
+    # Construct a BigQuery client object.
+    client = bigquery.Client()
+    
+    job_config = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
+    
+    # Start the query, passing in the extra configuration.
+    query_job = client.query(
+        (
+            "SELECT name, COUNT(*) as name_count "
+            "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+            "WHERE state = 'WA' "
+            "GROUP BY name"
+        ),
+        job_config=job_config,
+    )  # Make an API request.
+    
+    # A dry run query completes immediately.
+    print("This query will process {} bytes.".format(query_job.total_bytes_processed))
+
+## Troubleshoot query issues
+
+For information about resolving issues when you run queries, see [Troubleshoot queries](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .
+
 ## Run a batch query
 
 To run a batch query, select one of the following options:
@@ -1261,253 +1509,99 @@ To troubleshoot quota errors related to queries, see the [BigQuery Troubleshooti
 
 You can get information about queries as they are executing by using the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) or by querying the [`INFORMATION_SCHEMA.JOBS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
-## Dry run
+## Advanced runtime
 
-A dry run in BigQuery provides the following information:
+BigQuery advanced runtime is a set of performance enhancements designed to automatically accelerate analytical workloads without requiring user action or code changes. Queries take advantage of advanced runtime optimizations automatically when enhanced vectorization or short query optimizations are available.
 
-  - estimate of charges in [on-demand mode](https://cloud.google.com/bigquery/pricing#on_demand_pricing)
-  - validation of your query
-  - approximate bytes processed by your query in [capacity mode](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing)
+### Enhanced vectorization
 
-Dry runs don't use query slots, and you are not charged for performing a dry run. You can use the estimate returned by a dry run to calculate query costs in the [pricing calculator](https://cloud.google.com/products/calculator) .
+Vectorized execution is a query processing model that operates on columns of data in blocks that align with CPU cache size and uses single instruction, multiple data (SIMD) instructions. Enhanced vectorization extends the vectorized query execution in BigQuery to the following aspects of query processing:
 
-> **Note:** A dry run of a federated query that uses an external data source might report a lower bound of 0 bytes of data, even if rows are returned. This is because the amount of data processed from the external table can't be determined until the actual query completes. Running the federated query still incurs a cost for processing this data.
+  - By leveraging specialized data encodings within the Capacitor storage format, filter evaluation operations can be executed on the encoded data.
+  - Specialized encodings are propagated through the query plan, which allows more data to be processed while it's still encoded.
+  - By implementing expression folding to evaluate deterministic functions and constant expressions, BigQuery can simplify complex predicates into constant values.
 
-> **Caution:** Dry runs on tables that are masked by row-level security always return 0 bytes to prevent side channel attacks. For these tables, you can't rely on dry runs to estimate query costs.
+### Short query optimizations
 
-### Perform a dry run
+BigQuery typically executes queries in a distributed environment using a shuffle intermediate layer. Short query optimizations dynamically identify queries that can be run as a single stage, reducing latency and slot consumption. Specialized encodings can be used more effectively when a query is run in a single stage. These optimizations are most effective when used with [optional job creation mode](https://docs.cloud.google.com/bigquery/docs/running-queries#optional-job-creation) , which minimizes job startup, maintenance, and result retrieval latency.
 
-To perform a dry run, do the following:
+Eligibility for short query optimizations is dynamic and influenced by the following factors:
 
-### Console
+  - The predicted size of the data scan.
+  - The amount of data movement required.
+  - The selectivity of query filters.
+  - The type and physical layout of the data in storage.
+  - The overall query structure.
+  - The [historical statistics](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations) of past query executions.
 
-1.  Go to the BigQuery page.
+### Estimate the impact of the advanced runtime
 
-2.  Enter your query in the query editor.
-    
-    If the query is valid, then a check mark automatically appears along with the amount of data that the query will process. If the query is invalid, then an exclamation point appears along with an error message.
+To estimate the impact of the advanced runtime, you can use the following SQL query to identify project queries with the greatest estimated improvement to execution time:
 
-### bq
+    WITH
+      jobs AS (
+        SELECT
+          *,
+          query_info.query_hashes.normalized_literals AS query_hash,
+          TIMESTAMP_DIFF(end_time, start_time, MILLISECOND) AS elapsed_ms,
+          EXISTS(
+            SELECT 1
+            FROM UNNEST(JSON_QUERY_ARRAY(query_info.optimization_details.optimizations)) AS o
+            WHERE JSON_VALUE(o, '$.enhanced_vectorization') = 'applied'
+          ) AS has_advanced_runtime
+        FROM region-LOCATION.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+        WHERE EXTRACT(DATE FROM creation_time) > DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+      ),
+      most_recent_jobs_without_advanced_runtime AS (
+        SELECT *
+        FROM jobs
+        WHERE NOT has_advanced_runtime
+        QUALIFY ROW_NUMBER() OVER (PARTITION BY query_hash ORDER BY end_time DESC) = 1
+      )
+    SELECT
+      job.job_id,
+      100 * SAFE_DIVIDE(
+        original_job.elapsed_ms - job.elapsed_ms,
+        original_job.elapsed_ms) AS percent_execution_time_saved,
+      job.elapsed_ms AS new_elapsed_ms,
+      original_job.elapsed_ms AS original_elapsed_ms,
+    FROM jobs AS job
+    INNER JOIN most_recent_jobs_without_advanced_runtime AS original_job
+      USING (query_hash)
+    WHERE
+      job.has_advanced_runtime
+      AND original_job.end_time < job.start_time
+    ORDER BY percent_execution_time_saved DESC
+    LIMIT 10;
 
-Enter a query like the following using the `--dry_run` flag.
+> **Note:** You can only compare queries created on or after January 30, 2026, which is when the advanced runtime optimization indicators ( `enhanced_vectorization` and `short_query_optimization` ) became consistently available in the `INFORMATION_SCHEMA.JOBS` view.
 
-``` 
-bq query \
---use_legacy_sql=false \
---dry_run \
-'SELECT
-   COUNTRY,
-   AIRPORT,
-   IATA
- FROM
-   `project_id`.dataset.airports
- LIMIT
-   1000'
- 
-```
+Replace the following:
 
-For a valid query, the command produces the following response:
+  - `  LOCATION  ` : the location in which job performance should be measured
 
-    Query successfully validated. Assuming the tables are not modified,
-    running this query will process 10918 bytes of data.
+If the advanced runtime was applied, the results of this query may be similar to the following:
 
-> **Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
+    /*--------------+----------------------------+----------------+---------------------*
+     |    job_id    | percent_elapsed_time_saved | new_elapsed_ms | original_elapsed_ms |
+     +--------------+----------------------------+----------------+---------------------+
+     | sample_job1  |         45.38834951456311  |            225 |                 412 |
+     | sample_job2  |         45.19480519480519  |            211 |                 385 |
+     | sample_job3  |         33.246753246753244 |            257 |                 385 |
+     | sample_job4  |         29.28802588996764  |           1311 |                1854 |
+     | sample_job5  |         28.18181818181818  |           1027 |                1430 |
+     | sample_job6  |         25.804195804195807 |           1061 |                1430 |
+     | sample_job7  |         25.734265734265733 |           1062 |                1430 |
+     | sample_job8  |         25.454545454545453 |           1066 |                1430 |
+     | sample_job9  |         25.384615384615383 |           1067 |                1430 |
+     | sample_job10 |         25.034965034965033 |           1072 |                1430 |
+     *--------------+----------------------------+----------------+---------------------*/
 
-### API
+The results of this query are only an estimate of the advanced runtime's impact. Many factors can influence query performance, including but not limited to slot availability, change in data over time, view or UDF definitions, and differences in query parameter values.
 
-To perform a dry run by using the API, submit a query job with `dryRun` set to `true` in the [JobConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) type.
+If the results of this query are empty, then either no jobs have used advanced runtime, or all jobs were optimized more than 30 days ago.
 
-### Go
-
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // queryDryRun demonstrates issuing a dry run query to validate query structure and
-    // provide an estimate of the bytes scanned.
-    func queryDryRun(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(`
-     SELECT
-         name,
-         COUNT(*) as name_count
-     FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
-     WHERE state = 'WA'
-     GROUP BY name`)
-     q.DryRun = true
-     // Location must match that of the dataset(s) referenced in the query.
-     q.Location = "US"
-    
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     // Dry run is not asynchronous, so get the latest status and statistics.
-     status := job.LastStatus()
-     if err := status.Err(); err != nil {
-         return err
-     }
-     fmt.Fprintf(w, "This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
-     return nil
-    }
-
-### Java
-
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Job;
-    import com.google.cloud.bigquery.JobInfo;
-    import com.google.cloud.bigquery.JobStatistics;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    
-    // Sample to run dry query on the table
-    public class QueryDryRun {
-    
-      public static void runQueryDryRun() {
-        String query =
-            "SELECT name, COUNT(*) as name_count "
-                + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-                + "WHERE state = 'WA' "
-                + "GROUP BY name";
-        queryDryRun(query);
-      }
-    
-      public static void queryDryRun(String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query).setDryRun(true).setUseQueryCache(false).build();
-    
-          Job job = bigquery.create(JobInfo.of(queryConfig));
-          JobStatistics.QueryStatistics statistics = job.getStatistics();
-    
-          System.out.println(
-              "Query dry run performed successfully." + statistics.getTotalBytesProcessed());
-        } catch (BigQueryException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
-    }
-
-### Node.js
-
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryDryRun() {
-      // Runs a dry query of the U.S. given names dataset for the state of Texas.
-    
-      const query = `SELECT name
-        FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-        WHERE state = 'TX'
-        LIMIT 100`;
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
-      const options = {
-        query: query,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        dryRun: true,
-      };
-    
-      // Run the query as a job
-      const [job] = await bigquery.createQueryJob(options);
-    
-      // Print the status and statistics
-      console.log('Status:');
-      console.log(job.metadata.status);
-      console.log('\nJob Statistics:');
-      console.log(job.metadata.statistics);
-    }
-
-### PHP
-
-Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
-    
-    // Construct a BigQuery client object.
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    
-    // Set job configs
-    $jobConfig = $bigQuery->query($query);
-    $jobConfig->useQueryCache(false);
-    $jobConfig->dryRun(true);
-    
-    // Extract query results
-    $queryJob = $bigQuery->startJob($jobConfig);
-    $info = $queryJob->info();
-    
-    printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
-
-### Python
-
-Set the [QueryJobConfig.dry\_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `True` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
-
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    job_config = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
-    
-    # Start the query, passing in the extra configuration.
-    query_job = client.query(
-        (
-            "SELECT name, COUNT(*) as name_count "
-            "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-            "WHERE state = 'WA' "
-            "GROUP BY name"
-        ),
-        job_config=job_config,
-    )  # Make an API request.
-    
-    # A dry run query completes immediately.
-    print("This query will process {} bytes.".format(query_job.total_bytes_processed))
-
-## Troubleshoot query issues
-
-For information about resolving issues when you run queries, see [Troubleshoot queries](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .
+This query can be applied to other query performance metrics such as `total_slot_ms` and `total_bytes_billed` . For more information, see the schema for [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) .
 
 ## What's next
 

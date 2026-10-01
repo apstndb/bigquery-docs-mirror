@@ -20,6 +20,8 @@ You can view the project and reservation slot usage in the following ways:
 
   - **Google Cloud console.** The Google Cloud console includes charts that display slot usage. For more information, see [Use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
+  - **Jobs explorer.** You can use the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) to group jobs by reservation across your organization and view summary statistics, including slot time, active jobs, and queued jobs.
+
   - **Audit logs.** Use [audit logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) to view metrics about slot usage.
 
   - **The `Jobs` method.** Use the [`Jobs` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) to view metrics about slot usage for a job.

@@ -24,7 +24,7 @@ To enhance column-level access control, you can optionally use [dynamic data mas
 
 ## Before you begin
 
-1.  BigQuery is automatically enabled in new projects, but you might need to activate it in a preexisting project.
+1.  BigQuery is automatically enabled in new projects, but you might need to activate it in a pre-existing project.
     
     Enable the BigQuery API, if it is not already enabled.
     
@@ -51,7 +51,7 @@ The Data Catalog Policy Tag Admin role can create and manage data policy tags.
 
 To grant the Policy Tag Admin role, you must have the `resourcemanager.projects.setIamPolicy` permission on the project for which you want to grant the role. If you don't have the `resourcemanager.projects.setIamPolicy` permission, ask a Project Owner to either grant you the permission, or perform the following steps for you.
 
-1.  In the Google Cloud console, go to the IAM page.
+1.  In the Google Cloud console, go to the **IAM** page.
 
 2.  If the email address of the user to grant the role is in the list, select the email address and click edit **Edit** . The **Edit access** pane opens. Click **Add another role** .
     
@@ -69,7 +69,7 @@ The BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles can
 
 To grant either of these roles, you must have the `resourcemanager.projects.setIamPolicy` permission on the project for which you want to grant the role. If you don't have the `resourcemanager.projects.setIamPolicy` permission, ask a Project Owner to either grant you the permission, or perform the following steps for you.
 
-1.  In the Google Cloud console, go to the IAM page.
+1.  In the Google Cloud console, go to the **IAM** page.
 
 2.  If the email address of the user to grant the role is in the list, select the email address and click edit **Edit** . Then click **Add another role** .
     
@@ -108,7 +108,7 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### Console
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 
 2.  Click **Create taxonomy** .
 
@@ -137,7 +137,7 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### Console
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 
 2.  Click the name of the taxonomy that contains the relevant policy tags.
 
@@ -249,7 +249,7 @@ Follow these steps to create a data policy:
 
 To enforce access control, follow these steps:
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 
 2.  Click the taxonomy whose column-level access control you want to enforce.
 
@@ -719,8 +719,7 @@ Use this section to learn how to view, modify, and delete policy tags.
 
 To view the policy tags that you created for a taxonomy:
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
-
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the taxonomy whose policy tags you want to view. The **Taxonomies** page shows the policy tags in the taxonomy.
 
 ### View policy tags in schema
@@ -729,14 +728,10 @@ You can view policy tags applied to a table when you examine the table schema. Y
 
 ### View permissions on policy tags
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
-
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the name of the taxonomy that contains the relevant policy tags.
-
 3.  Select one or more policy tags.
-
 4.  If the **Info panel** is hidden, click **Show info panel** .
-
 5.  In the **Info panel** , you can see the roles and principals for the selected policy tags.
 
 ### Update permissions on policy tags
@@ -745,7 +740,7 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 
 ### Console
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 
 2.  Click the name of the taxonomy that contains the relevant policy tags.
 
@@ -836,7 +831,7 @@ When you delete a policy tag that has a [data policy](https://docs.cloud.google.
 
 To delete one or more policy tags in a taxonomy, follow these steps:
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the name of the taxonomy containing the tags to delete.
 3.  Click **Edit** .
 4.  Click delete next to the policy tags to delete.
@@ -845,7 +840,7 @@ To delete one or more policy tags in a taxonomy, follow these steps:
 
 To delete an entire taxonomy, follow these steps:
 
-1.  Open the **Policy tag taxonomies** page in the Google Cloud console.
+1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the name of the taxonomy containing the tags to delete.
 3.  Click **Delete Policy Tag Taxonomy** .
 4.  Type the taxonomy name and then click **Delete** .
@@ -940,7 +935,7 @@ You need either the [Fine-Grained Reader role](https://docs.cloud.google.com/big
 
 To troubleshoot this issue, confirm the following details:
 
-  - On the [**Policy tag taxonomy** page](https://console.cloud.google.com/bigquery/policy-tags) , confirm that the **Enforce access control** toggle is in the **On** position.
+  - On the [**Policy tag taxonomies** page](https://console.cloud.google.com/bigquery/security/secure/policy-tags) , confirm that the **Enforce access control** toggle is in the **On** position.
 
   - Ensure that your queries are not using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use `bq` command-line interface tool to test your queries, then you should use the `--nouse_cache flag` to disable the query cache. For example:
     

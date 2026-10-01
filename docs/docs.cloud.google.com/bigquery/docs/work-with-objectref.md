@@ -72,11 +72,11 @@ The `content_type` field in the `gcs_metadata` field from the `details` column i
 
 ## Create `ObjectRef` values
 
-You can create `ObjectRef` values by using [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , the [`OBJ.MAKE_REF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) , or [Cloud Storage Insights datasets](https://docs.cloud.google.com/storage/docs/insights/dataset-tables-and-schemas#object-schema) .
+You can create `ObjectRef` values by using [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , the [`OBJ.MAKE_REF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) , the [`OBJ.LIST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objlist) , or [Cloud Storage Insights datasets](https://docs.cloud.google.com/storage/docs/insights/dataset-tables-and-schemas#object-schema) .
 
 ### Use object tables
 
-Use an object table if you don't have URIs stored in a table and want to list all the objects from a Cloud Storage prefix. An object table stores the reference to an object in each row, and has a `ref` column that contains `ObjectRef` values. The following query uses the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) to create an object table:
+Use an object table if you don't have URIs stored in a table and want to persist a list of all the objects from a Cloud Storage prefix. An object table stores the reference to an object in each row, and has a `ref` column that contains `ObjectRef` values. The following query uses the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) to create an object table:
 
     CREATE EXTERNAL TABLE mydataset.images
     WITH CONNECTION `us.myconnection`
@@ -103,6 +103,25 @@ To modify the authorizers of an existing `ObjectRef` value, you can use the `OBJ
     SELECT *, OBJ.MAKE_REF(ref, authorizer=>"us.myconnection2") AS image_ref FROM mydataset.images;
 
 The `OBJ.MAKE_REF` function accepts a nullable authorizer to support [direct access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#direct-access) and [delegated access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#delegated-access) .
+
+### Use the `OBJ.LIST` function
+
+Use the [`OBJ.LIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objlist) function for spontaneous discovery. The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage. The Cloud Storage data can include documents, images, and audio.
+
+Using `OBJ.LIST` replaces the need to manually construct `ObjectRef` values in a persistent table. You can quickly add Cloud Storage objects into AI functions to build spontaneous ETL pipelines that handle converting unstructured data to structured data. If you require a persistent, self-updating table that continuously tracks new objects that arrive in a bucket over time, you should create a standard BigQuery object table instead.
+
+The following query uses the wildcard character (\*) to discover specific file types, and it uses the `AI.IF` function to filter unstructured data. This query lists only the PNG files that contain an image of a dog.
+
+    SELECT
+      uri,
+      content_type,
+      size
+    FROM
+      OBJ.LIST('gs://mybucket/images/*.png')
+    WHERE
+      AI.IF(('Does this image contain a dog?', ref))
+    ORDER BY
+      uri;
 
 ### Use Cloud Storage Insights datasets
 
