@@ -309,74 +309,74 @@ To learn more about working with reservation groups, see [Prioritize idle slots 
 
 ## Troubleshoot issues with reservations
 
-This section is intended to help troubleshoot common issues encountered while interacting with reservations, such as determining reasons for a reservation not being used for a BigQuery job, identifying unknown reservations or problems while adding slots.
+Use the following information to troubleshoot common issues with reservations, such as errors when adding slots, why a reservation isn't used for a BigQuery job, or unrecognized reservations.
 
 ### Unable to add more slots to the reservation size
 
-If you encounter errors like `Failed to allocate slots for reservation in the current system state` or `Failed to update reservation: Failed to allocate slots for reservation` while trying to add more slots to your reservation, this is usually a transient issue. To mitigate, do the following:
+If you encounter errors like `Failed to allocate slots for reservation in the current system state` or `Failed to update reservation: Failed to allocate slots for reservation` while trying to add more slots to your reservation, this is usually a transient issue. To mitigate the issue, do the following:
 
-  - Retry with a smaller number of slots
-  - If trying with a smaller number of slots fails, wait 15 minutes and retry the operation
+  - Retry with a smaller number of slots.
+  - If trying with a smaller number of slots fails, wait 15 minutes and retry the operation.
 
-If after retrying multiple times and waiting for 30 minutes you still receive the same error, [contact BigQuery support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+If after retrying multiple times and waiting for 30 minutes you still receive the same error, [contact Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 ### There is insufficient quota to complete this request
 
-If the error message states `There is insufficient quota to complete this request` , this means that the request exceeds the quota limit that is set for the project.
+If the error message states `There is insufficient quota to complete this request` , the request exceeds the quota limit that is set for the project.
 
-To resolve this error, do one of the following options:
+To resolve this error, do one of the following:
 
-1.  Add a smaller number of slots to the reservation so that the quota limit is not exceeded.
-2.  Request a quota increase in the corresponding region. See [Requesting a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
+  - Add a smaller number of slots to the reservation so that the request doesn't exceed the quota limit.
+  - Request a quota increase in the corresponding region. For more information, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
 
 ### Reservation not used by BigQuery to run a job
 
-There are multiple scenarios when a job might run using on-demand resources or a free shared slot pool instead of using the reservation that was created.
+There are multiple scenarios where a job might run using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) or a free shared slot pool instead of using the reservation that you created.
 
 #### Query and reservation are in different regions
 
-Reservations are regional resources. The query runs in the same location as any tables referenced in the query.
+Reservations are regional resources. A query runs in the same location as any tables referenced in the query.
 
-If the location of a table doesn't match the location of the reservation, the query runs using the shared slot pool and won't use the reservation.
+If the location of a table doesn't match the location of the reservation, the query doesn't use the reservation and instead runs using on-demand pricing (or the free shared slot pool for eligible batch load and export jobs).
 
 #### Querying BigQuery Omni tables
 
-When querying a BigQuery Omni table, make sure that the reservation is created in the same region as the table, not in a colocated region. If you create the reservation in the colocated BigQuery region, the query runs on-demand.
+When querying a BigQuery Omni table, make sure that you create the reservation in the same region as the table, not in a colocated region. If you create the reservation in the colocated BigQuery region, the query runs using on-demand pricing.
 
-#### The reservation was created but the project was not assigned to it
+#### The reservation was created, but the project wasn't assigned to it
 
-To use the slots that you purchased you must create an assignment that assigns the project to the specific reservation. Make sure that the project has a corresponding [assignment for the reservation](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
+To use the slots in a reservation, you must create an assignment that assigns the project, folder, or organization to the specific reservation. Make sure that the project has a corresponding [assignment for the reservation](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
 
 #### Job type mismatch
 
-Make sure to select the correct [job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) when creating an assignment, otherwise the jobs will run using the shared slot pool.
+Make sure to select the correct [job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) when creating an assignment; otherwise, the jobs don't use the reservation.
 
-For example, if you select `PIPELINE` as the job type, all query jobs will run on-demand. Change the assignment type to `QUERY` to make the query jobs run using the reservation.
+For example, if you select `PIPELINE` as the job type, all query jobs run using on-demand pricing. Change the assignment type to `QUERY` to make the query jobs run using the reservation.
 
 #### Multi-statement queries
 
-If you are running multi-statement queries, the parent job object won't have a reservation associated with it, even if the child jobs were run under a reservation.
+If you're running multi-statement queries, the parent job object doesn't have a reservation associated with it, even if the child jobs run under a reservation.
 
-To confirm whether the job was actually using a reservation, look at the child job metadata for clarification.
+To confirm whether the job actually used a reservation, check the child job metadata.
 
 #### Retrieving cached results
 
-When the query job retrieves cached results, the reservation field will be empty because no actual computation is being performed and results are fetched from the temporary table directly.
+When a query job retrieves cached results, the reservation field is empty because BigQuery performs no computation and fetches the results directly from the temporary table.
 
 #### Change data capture row modification operations
 
-If you have [change data capture (CDC) tables](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , BigQuery will apply pending row modifications within the `max_staleness` interval as background jobs which will use the `BACKGROUND` assignment type. If there are no `BACKGROUND` assignments, they will use on-demand pricing. Consider creating a `BACKGROUND` assignment for the project to avoid high on-demand costs. You can identify these jobs having the `queueworker_cdc_background_merge_coalesce` substring within the job identifier.
+If you have [change data capture (CDC) tables](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , BigQuery applies pending row modifications within the `max_staleness` interval as background jobs that use the `BACKGROUND` assignment type. If there are no `BACKGROUND` assignments, these jobs use on-demand pricing. Consider creating a `BACKGROUND` assignment for the project to avoid unexpected on-demand costs. You can identify these jobs by the `queueworker_cdc_background_merge_coalesce` substring in the job identifier.
 
 #### BigQuery ML model types that use external services
 
-If no reservation assignment with an `ML_EXTERNAL` job type is found in the project, the query job runs using on-demand pricing. The `QUERY` job type assignment can be only be used for BigQuery ML models that aren't external models or matrix factorization models. Read through the [Reservation Assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) documentation to learn more.
+If no reservation assignment with an `ML_EXTERNAL` job type is found in the project, external model creation jobs run using on-demand pricing. The `QUERY` job type assignment applies to standard BigQuery ML models and matrix factorization models (which require an Enterprise or Enterprise Plus edition reservation), whereas external models require an `ML_EXTERNAL` assignment. For more information, see [Assign slots to BigQuery workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) .
 
 ### Unrecognized reservations identified in the project
 
-There are reservations owned by BigQuery that represent a free shared slot pool used for certain operations in BigQuery:
+BigQuery owns reservations that represent a free shared slot pool for certain operations in BigQuery.
 
 #### `default-pipeline`
 
-By default, performing batch loading or batch exporting of data in BigQuery uses a shared free slot pool. If you inspect these load or extract jobs, the reservation used will be listed as `default-pipeline` .
+By default, batch loading or batch exporting of data in BigQuery uses a free shared slot pool. When you inspect these load or extract jobs, the reservation field shows `default-pipeline` .
 
-There are no charges for using the shared slot pool. If you want consistent predictable performance, consider purchasing a `PIPELINE` reservation.
+There are no charges for using the shared slot pool. If you want consistent, predictable performance, consider purchasing a `PIPELINE` reservation.

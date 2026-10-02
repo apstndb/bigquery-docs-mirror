@@ -8,15 +8,9 @@ data_source: docs.cloud.google.com
 
 # Chat with a graph
 
-> **Preview**
-> 
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
-
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-You can use [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) to ask questions about a graph. Agents can write SQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. If you have [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , then the agent can run GQL queries on your graph. If you use on-demand pricing, the agent can call the `GRAPH_EXPAND` function to run SQL queries on your graph.
+You can use [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) to ask questions about a graph. Agents can write SQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. Depending on your graph schema and the question that you ask, the agent queries a graph by using either Graph Query Language (GQL) or the [`GRAPH_EXPAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) table-valued function in SQL. GQL queries require a [BigQuery Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) reservation. In projects with on-demand pricing, GQL queries fail with an error. Queries that contain the `GRAPH_EXPAND` function can run using on-demand pricing, but the function doesn't support all types of graphs. For requirements and limitations, see [`GRAPH_EXPAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .
 
 Graphs encode the relationships between your tables. Providing a graph to an agent removes ambiguity about how your tables relate. This clarity reduces hallucinations and can improve the efficiency of your conversations.
 
@@ -29,11 +23,6 @@ For example, to try asking an agent about the publicly available Look Ecommerce 
 3.  In the **Sample agents by Google** section, click **The Look Graph** .
 
 4.  A conversation opens. You can enter questions about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph.
-
-## Limitations
-
-  - You can use at most one graph as a data source per agent or conversation.
-  - You can't combine tables and graphs as data sources.
 
 ## Chat with a graph
 

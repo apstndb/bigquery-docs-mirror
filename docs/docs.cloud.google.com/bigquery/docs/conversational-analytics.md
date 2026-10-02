@@ -32,7 +32,7 @@ Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.g
 
 Data agents consist of one or more knowledge sources, and a set of instructions specific to a use case for processing that data. When you create a data agent, you can configure it using the following options:
 
-  - Use *knowledge sources* such as tables, views, and UDFs with a data agent. You can also connect to borderless Lakehouse tables as sources. For more information, see [Query Lakehouse tables with natural language](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
+  - Use *knowledge sources* such as tables, views, graphs, and UDFs with a data agent. You can also connect to borderless Lakehouse tables as sources. For more information, see [Query Lakehouse tables with natural language](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
   - Provide custom table and field metadata to describe the data in the most appropriate way for the given use case.
   - Provide instructions for interpreting and querying the data, such as defining the following:
       - Synonyms and business terms for field names
@@ -131,19 +131,14 @@ Conversational analytics uses built-in SQL templates to help it return an accura
 
 ## Graph support
 
-Conversational analytics supports using a [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a data source. When you ask questions about your graph, the agent constructs SQL queries to answer them. Agents can use [descriptions and synonyms](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) that you define on your graph labels and properties to improve the quality of the results. Agents can also take advantage of [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to perform multi-level aggregation. If you have [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , then the agent can run GQL queries on your graph. If the response includes graph paths, then graph visualizations are provided.
+Conversational analytics supports using a [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a data source. When you ask questions about your graph, the agent constructs queries to answer them. Agents can use [descriptions and synonyms](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) that you define on your graph labels and properties to improve the quality of the results. Agents can also take advantage of [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to perform multi-level aggregation. If the response includes graph paths, then graph visualizations are provided.
 
-For example, you can use the `Look Graph` sample agent on the BigQuery on the [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions similar to the following about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph:
+Depending on your graph schema and the question that you ask, the agent queries a graph by using either Graph Query Language (GQL) or the [`GRAPH_EXPAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) table-valued function in SQL. GQL queries require a [BigQuery Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) reservation. In projects with on-demand pricing, GQL queries fail with an error. Queries that contain the `GRAPH_EXPAND` function can run using on-demand pricing, but the function doesn't support all types of graphs. For requirements and limitations, see [`GRAPH_EXPAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .
+
+For example, you can use the `Look Graph` sample agent on the BigQuery [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions similar to the following about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph:
 
   - `Which product is most popular among 25-year-olds?`
   - `Show me the connection between bow tie orders and distribution centers`
-
-### Limitations
-
-The following limitations apply when you use a graph as a data source:
-
-  - You can use at most one graph as a data source per agent or conversation.
-  - You can't combine tables and graphs as data sources.
 
 ## Security
 

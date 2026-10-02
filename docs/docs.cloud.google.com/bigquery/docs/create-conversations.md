@@ -96,7 +96,7 @@ You can create a conversation with the following data sources:
   - Table
   - View
   - Dataset ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) )
-  - Graph ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) )
+  - Graph
 
 ### Converse with a data source using the Agents page
 

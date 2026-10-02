@@ -605,33 +605,33 @@ The following example gets the job details over a five day period:
 
 Slot contention can happen when there aren't enough slots to run all of your jobs, causing performance issues. To analyze whether performance degradation stems from workload increases or environment configuration changes, you can [compare two system intervals](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-two-system-intervals) across reservations and projects.
 
-To troubleshoot slot contention issues, see the following steps and best practices.
+To troubleshoot slot contention issues, use the following steps and best practices.
 
-If you have tried these best practices but are still experiencing job performance issues, you can [request support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+If you've tried these best practices but are still experiencing job performance issues, you can [request support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 ### Job concurrency spikes
 
-Use the [Detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) to check for sudden surge in job runs where there are simultaneous slot usage spikes. This can indicate that there are too many jobs contending for slots limited by your reservation limit.
+Use the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) in the administrative resource charts to check for a sudden surge in job runs with simultaneous slot usage spikes. These spikes can indicate that too many jobs are contending for the slots available in your reservation.
 
-  - **Best practice** : Consider optimizing resource-intensive queries or your reservation's slot capacity. For more information about optimizing query performance, see [Optimize query computation](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) .
+**Best practice:** Consider optimizing resource-intensive queries or increasing your reservation's slot capacity. For more information about optimizing query performance, see [Optimize query computation](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) .
 
 ### High slot usage
 
-Use the [Detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) to check for increased job durations, especially if there are jobs that exceed your reservation's maximum capacity. Consistently high slot usage can indicate ongoing slot contention.
+Use the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) to check for increased job durations, especially if there are jobs that exceed your reservation's maximum capacity. Consistently high slot usage can indicate ongoing slot contention.
 
-  - **Best practice** : Check queries using the [jobs explorer's](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) slot contention filter to identify those consuming the most slots and optimize them.
+**Best practice:** Check queries using the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) slot contention filter to identify the queries that consume the most slots and optimize them.
 
 ### Lengthy job durations
 
-If jobs are taking significantly longer to complete, check the [Detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . High job concurrency and slot usage spikes can indicate slot contention.
+If jobs are taking significantly longer to complete, check the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . High job concurrency and slot usage spikes can indicate slot contention.
 
-  - **Best practice** : Isolate critical jobs by temporarily pausing less important jobs or reducing your overall job submission rate.
+**Best practice:** Isolate critical jobs by temporarily pausing less important jobs or reducing your overall job submission rate.
 
 ### Slot contention messages
 
 The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#insights-table) can display messages such as `There were NUMBER jobs detected with slot_contention in the reservation.` that indicate slot contention issues. Check the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to review details about the specific jobs flagged in these messages.
 
-  - **Best practice** : Optimize the identified queries or adjust your reservation's slot allocation.
+**Best practice:** Optimize the identified queries or adjust your reservation's slot allocation.
 
 > **Note:** For more information about why the actual utilization shown in these charts might differ from your quota usage, see [Understand slot metrics](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#understand_slot_metrics) .
 

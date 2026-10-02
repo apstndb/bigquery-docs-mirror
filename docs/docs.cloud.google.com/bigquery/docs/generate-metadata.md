@@ -42,7 +42,7 @@ For most of these databases you can also extract query logs.
 
 The `dwh-migration-dumper` tool queries system tables to gather data definition language (DDL) statements related to user and system databases. It does not query the contents of user databases. The tool saves the metadata information from the system tables as CSV files and then zips these files into a single package. You then upload this zip file to Cloud Storage when you upload your source files for translation or assessment.
 
-When using the query logs option, the `dwh-migration-dumper` tool queries system tables for DDL statements and query logs related to user and system databases. These are saved in CSV or yaml format to a subdirectory, and then packed into a zip package. At no point are the contents of user databases queried themselves. At this point, the BigQuery migration assessment requires individual CSV, YAML and text files for query logs so you should unzip all of these files from query logs zip file and upload them for assessment.
+When using the query logs option, the `dwh-migration-dumper` tool queries system tables for DDL statements and query logs related to user and system databases. These are saved in CSV or yaml format to a subdirectory, and then packed into a zip package. At no point are the contents of user databases queried themselves.
 
 The `dwh-migration-dumper` tool can run on Windows, macOS, and Linux.
 

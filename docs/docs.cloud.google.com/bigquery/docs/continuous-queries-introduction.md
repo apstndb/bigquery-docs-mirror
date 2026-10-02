@@ -108,6 +108,7 @@ Continuous queries support the following stateful operations:
 
   - [JOINs](https://docs.cloud.google.com/bigquery/docs/continuous-query-joins)
   - [Aggregations and windowing](https://docs.cloud.google.com/bigquery/docs/window-aggregations)
+  - [UNION ALL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#union)
 
 ## Authorization
 
@@ -131,7 +132,7 @@ Continuous queries are subject to the following limitations:
           - [`UNPIVOT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator)
           - [`TABLESAMPLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#tablesample_operator)
     
-      - Query [set operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators)
+      - Query [set operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators) except for `UNION ALL` .
     
       - The [`SELECT DISTINCT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_distinct)
     

@@ -14,6 +14,8 @@ Reservations allow you to assign a dedicated number of slots to a workload. For 
 
 ## Create reservations
 
+The following sections describe how to create a reservation.
+
 ### Required permissions
 
 To create a reservation, you need the following Identity and Access Management (IAM) permission:
@@ -394,23 +396,14 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
     Replace the following:
     
       - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-    
       - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. If you select a [BigQuery Omni location](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) , your edition option is limited to the Enterprise edition.
-    
       - `  RESERVATION_NAME  ` : the name of the reservation.The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
-    
       - `  NUMBER_OF_BASELINE_SLOTS  ` : the number baseline of slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `standard` edition option in the same reservation.
-    
       - `  EDITION  ` : the edition of the reservation. Assigning a reservation to an edition comes with feature and pricing changes. For more information, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
-    
       - `  IGNORE_IDLE_SLOTS  ` : whether the reservation uses [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) or not. The default value is `false` .
-    
       - `  MAX_NUMBER_OF_SLOTS  ` : the maximum number of slots the reservation can consume. This value must be configured with `scaling_mode` option.
-    
       - `  SCALING_MODE  ` : the scaling mode of the reservation. The options are `ALL_SLOTS` , `IDLE_SLOTS_ONLY` , or `AUTOSCALE_ONLY` . This value must be configured with the `max_slots` option. This value must be aligned with `ignore_idle_slots` option. For details, see [Reservation predictability](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) .
-    
       - `  MAX_SLOTS_PER_PROJECT  ` : the default limit on the slot consumption of queries running for each project assigned to the reservation.
-    
       - `  MAX_CONCURRENCY_PER_PROJECT  ` : the default limit on the number of simultaneous queries admitted for each project assigned to the reservation.
 
 3.  Click play\_circle **Run** .
@@ -603,13 +596,9 @@ To change the size of a reservation, use the [`ALTER RESERVATION SET OPTIONS` da
     Replace the following:
     
       - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-    
       - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `europe-west9` .
-    
       - `  RESERVATION_NAME  ` : the name of the reservation. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
-    
       - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation.
-    
       - `  NUMBER_OF_AUTOSCALING_SLOTS  ` : the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots.
 
 3.  Click play\_circle **Run** .
@@ -1225,14 +1214,26 @@ Replace the following:
 
 To learn more about reservation groups, see [Reservation groups](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#groups) .
 
-## Troubleshoot
+## Troubleshoot reservation management tasks
 
-You might encounter the following errors when creating or updating a reservation:
+You might encounter the following errors when creating or updating a reservation.
 
-  - Error: `Max reservation size can only be configured in multiples of 50, except when covered by excess commitments.`  
-    Error: `Baseline slots can only be configured in multiples of 50, except when covered by excess commitments.`  
-    Slots always autoscale to a multiple of 50. Scaling up is based on actual usage, and is rounded up to the nearest 50 slot increment. When there is no commitment or if the commitment cannot cover the increases, the baseline and autoscaling slots can only be increased in multiples of 50.
-    If `reservation size - baseline slots` isn't a multiple of 50, then the reservation can't scale up to the maximum reservation size, resulting in this error.
-    **Resolution:**
-      - Purchase more capacity commitments to cover the slot increases.
-      - Choose baseline and max slots that are increments of 50.
+### Reservation size or baseline slots must be a multiple of 50
+
+**Error message**
+
+  - `Max reservation size can only be configured in multiples of 50, except when covered by excess commitments.`
+  - `Baseline slots can only be configured in multiples of 50, except when covered by excess commitments.`
+
+**Cause**
+
+Slots always autoscale to a multiple of 50. BigQuery scales up slots based on actual usage and rounds up to the nearest 50-slot increment. When there's no commitment or if the commitment can't cover the increases, you can only increase the baseline and autoscaling slots in multiples of 50.
+
+If `baseline slots` or `max reservation size - baseline slots` isn't a multiple of 50 (and isn't covered by excess capacity commitments), then the reservation can't scale up to the maximum reservation size, resulting in this error.
+
+**Resolution**
+
+Do one of the following:
+
+  - Purchase more capacity commitments to cover the slot increases.
+  - Choose baseline and maximum slots that are increments of 50.

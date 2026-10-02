@@ -443,17 +443,17 @@ Note that these policies take precedence over the IAM roles, so even a user with
 
 For more information, see [Deny access to resources](https://docs.cloud.google.com/iam/docs/deny-access) .
 
-## Troubleshooting capacity commitments
+## Troubleshoot capacity commitments
 
-This section describes troubleshooting steps that you might find helpful if you run into problems using BigQuery Reservations.
+This section describes troubleshooting steps that you might find helpful if you run into issues with BigQuery capacity commitments.
 
 ### Purchased slots are pending
 
-Slots are subject to available capacity. When you purchase slot commitments and BigQuery allocates them, then the **Status** column shows a check mark. If BigQuery can't allocate the requested slots immediately, then the **Status** column remains pending. You might have to wait several hours for the slots to become available. If you need access to slots sooner, try the following:
+Slots are subject to available capacity. When you purchase slot commitments and BigQuery allocates them, the **Status** column shows a check mark. If BigQuery can't allocate the requested slots immediately, the **Status** column remains pending. You might have to wait several hours for the slots to become available. If you need access to slots sooner, try the following:
 
 1.  Delete the pending commitment.
 2.  Purchase a new commitment for a smaller number of slots. Depending on capacity, the smaller commitment might become active immediately.
 3.  Purchase the remaining slots as a separate commitment. These slots might show as pending in the **Status** column, but they generally become active within a few hours.
-4.  Optional: When both commitments are available, you can [merge](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#merging-commitments) them into a single commitment, as long as you purchased the same plan for both.
+4.  Optional: When both commitments become active, [merge](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#merging-commitments) them into a single commitment, provided that both commitments are in the same region and edition and have the same commitment plan.
 
-If a slot commitment fails or takes a long time to complete, consider using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) temporarily. With this solution, you might need to run critical queries on a different project that's not assigned to any reservations, or you might need to remove the project assignment altogether.
+If a slot commitment fails or takes a long time to complete, consider using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) temporarily. With this solution, you can run critical queries in a different project that isn't assigned to any reservations, [assign the project to `None`](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-project-to-none) , or remove the project assignment altogether.

@@ -661,7 +661,7 @@ The following script checks the slot usage not covered by commitments for a part
           capacity_commitment_slot_data
       ),
     
-      /* Add next_change_timestamp to the above data,
+      /* Add next_change_timestamp to the preceding data,
        which will be used when joining with reservation data. For example:
       +---------------------+-----------------------+---------------+
       |  change_timestamp   | next_change_timestamp | capacity_slot |
@@ -744,7 +744,7 @@ The following script checks the slot usage not covered by commitments for a part
       ),
     
       /*
-      Join the above, so that we will know the number for baseline not covered by commitments.
+      Join the preceding tables, so that we will know the number for baseline not covered by commitments.
       +---------------------+-----------------------+-------------------------+------------------------------------+
       |  change_timestamp   | next_change_timestamp | autoscale_current_slots | baseline_not_covered_by_commitment |
       +---------------------+-----------------------+-------------------------+------------------------------------+
@@ -819,16 +819,16 @@ The following script checks the slot usage not covered by commitments for a part
     FROM
       slot_seconds_data
 
-## Troubleshooting
+## Troubleshoot reservation monitoring
 
-This section describes how to resolve common issues when monitoring BigQuery reservations and slot usage.
+The following sections describe how to resolve common issues when monitoring BigQuery reservations and slot usage.
 
 ### Slot usage metrics don't match `INFORMATION_SCHEMA`
 
 If you encounter discrepancies between slot usage metrics in resource charts and `INFORMATION_SCHEMA` data, try the following:
 
   - **Reduce granularity.** Change the chart granularity to 1-second intervals instead of 1-hour intervals.
-  - **Align aggregation.** Ensure that you are using aggregation methods that align between resource charts and `INFORMATION_SCHEMA` data. For example, to better reflect peak usage in resource charts, change the metric aggregation to p99 or p90 consistently.
+  - **Align aggregation.** Make sure that you're using aggregation methods that align between resource charts and `INFORMATION_SCHEMA` data. For example, to better reflect peak usage in resource charts, change the metric aggregation to p99 or p90 consistently.
 
 ### Borrowed slots appear when idle slots are disabled
 
@@ -836,19 +836,19 @@ Your monitoring charts might show a non-zero value for `borrowed_slots` even if 
 
 These borrowed slots appear in the following cases:
 
-  - **Lending to other reservations:** A reservation with `ignore_idle_slots=true` can lend its unused baseline slots to other reservations in the same edition that *do* allow idle slot borrowing ( `ignore_idle_slots=false` ). If all reservations in an edition have `ignore_idle_slots=true` , then idle slots are not shared between them.
+  - **Lending to other reservations.** A reservation with `ignore_idle_slots=true` can lend its unused baseline slots to other reservations in the same administration project, region, and edition that *do* allow idle slot borrowing ( `ignore_idle_slots=false` ). If all reservations in an administration project, region, and edition have `ignore_idle_slots=true` , then idle slots aren't shared between them.
     
-    For example, assume Reservation A has 100 slots, 0 usage, and is configured with `ignore_idle_slots=true` . Reservation B is in the same edition and project, has 100 slots, needs 150 slots for its workload, and is configured with `ignore_idle_slots=false` . Reservation B can borrow 50 idle slots from Reservation A to meet its needs. When this occurs, monitoring charts report 50 `lent_slots` for Reservation A and 50 `borrowed_slots` for Reservation B.
+    For example, assume Reservation A has 100 slots, 0 usage, and is configured with `ignore_idle_slots=true` . Reservation B is in the same administration project, region, and edition, has 100 slots, needs 150 slots for its workload, and is configured with `ignore_idle_slots=false` . Reservation B can borrow 50 idle slots from Reservation A to meet its needs. When this occurs, monitoring charts report 50 `lent_slots` for Reservation A and 50 `borrowed_slots` for Reservation B.
 
-  - **Usage exceeding capacity:** If a reservation's slot usage temporarily exceeds its capacity (baseline + autoscaled slots), monitoring charts show this difference as `borrowed_slots` . This can occur even for reservations with `ignore_idle_slots=true` .
+  - **Usage exceeding capacity.** If a reservation's slot usage temporarily exceeds its capacity (baseline + autoscaled slots), monitoring charts show this difference as `borrowed_slots` . This behavior can occur even for reservations with `ignore_idle_slots=true` .
 
 Slot usage can occasionally exceed the sum of your baseline plus scaled slots. You aren't billed for slot usage that's greater than your baseline plus scaled slots.
 
-### Borrowed slots appear before reservation is fully utilized
+### Borrowed slots appear before a reservation is fully used
 
 Monitoring dashboards use sampled data, which might not accurately reflect the precise timing of slot usage within a sampling interval.
 
-For a more accurate analysis of slot usage, query columns related to idle slots, such as `borrowed_slots` and `lent_slots` columns in the [`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline#schema) .
+For a more accurate analysis of slot usage, query columns related to idle slots, such as the `borrowed_slots` and `lent_slots` columns in the [`INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline#schema) .
 
 ## What's next
 

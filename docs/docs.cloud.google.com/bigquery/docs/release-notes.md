@@ -16,6 +16,14 @@ To get the latest product updates delivered to you, add the URL of this page to 
 
 ## October 01, 2026
 
+Change
+
+An updated version of the [Simba JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#current_jdbc_driver) is now available.
+
+Feature
+
+[Chatting with graphs](https://docs.cloud.google.com/bigquery/docs/graph-chat) in [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) is now [generally available](https://cloud.google.com/products#product-launch-stages) . You can use a combination of multiple graphs, tables, views, and UDFs as data sources.
+
 Feature
 
 BigQuery pipelines provides support for automated metadata enrichment and Knowledge Catalog data quality scorecard integration. In addition, the Data Engineering Agent can proactively generate semantic metadata for your pipeline assets. For more information, see [Metadata enrichment and data quality scorecard integration](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#metadata-scorecard) . These features are [generally available](https://cloud.google.com/products#product-launch-stages) .

@@ -254,18 +254,19 @@ To see a list of previous driver versions, expand the following section:
 
 > **Note:** As an alternative to the Simba JDBC driver, consider using the [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
 
-1.  Download the [1.8.0.1001 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.0.1001.zip) .
+1.  Download the [1.8.1.1003 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.1.1003.zip) .
     
     By downloading the Simba JDBC driver for BigQuery, you agree to the applicable [Google Terms of Service](https://cloud.google.com/terms) . Sublicensing or OEM redistribution may require separate licensing.
 
-2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.8.0.1001.pdf) .
+2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.8.1.1003.pdf) .
 
-For information on feature changes and workflow updates, see [Simba Google BigQuery JDBC Data Connector Release Notes](https://storage.googleapis.com/simba-bq-release/jdbc/release-notes_1.8.0.1001.txt) .
+For information on feature changes and workflow updates, see [Simba Google BigQuery JDBC Data Connector Release Notes](https://storage.googleapis.com/simba-bq-release/jdbc/release-notes_1.8.1.1003.txt) .
 
 To see a list of previous driver versions, expand the following section:
 
 ### Previous Simba JDBC driver versions
 
+  - [1.8.0.1001](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.0.1001.zip)
   - [1.7.0.1001](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.7.0.1001.zip)
   - [1.6.5.1002](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.6.5.1002.zip)
   - [1.6.5.1001](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.6.5.1001.zip)

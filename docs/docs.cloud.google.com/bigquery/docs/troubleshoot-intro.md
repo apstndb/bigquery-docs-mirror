@@ -97,7 +97,7 @@ Diagnose access control failures, missing role assignments, and data governance 
 Resolve issues when workloads exceed BigQuery service limits or capacity allocations.
 
   - **[Troubleshoot quota and limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas) .** Identify adjustable versus non-adjustable quotas, handle concurrent query limits, and resolve API rate-limit errors.
-  - **[Troubleshoot issues with reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#troubleshoot_issues_with_reservations) .** Diagnose slot starvation, reservation assignment mismatches, and baseline capacity shortfalls.
+  - **[Troubleshoot BigQuery workload management](https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management) .** Diagnose slot starvation, reservation assignment mismatches, capacity commitment delays, slot contention, and reservation monitoring issues.
 
 ### Data ingestion, streaming, and transfers
 
